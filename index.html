@@ -3,94 +3,302 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tech News Daily — 2026-06-24</title>
+  <title>Tech News Daily — 2026-06-27</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
     <header>
       <h1>Tech News Daily</h1>
-      <div class="date">2026-06-24 (Wed)</div>
+      <div class="date">2026-06-27 (Fri)</div>
       <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
     </header>
 
+    <!-- 🔥 Top Stories -->
     <div class="section">
-      <div class="section-title">Top Stories</div>
+      <div class="section-title">🔥 Top Stories</div>
 
-      <div class="card highlight">
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/typescriptgo10typescript_70.html">TypeScript 7.0 RC — Go言語への移植で10倍高速化</a></h3>
+        </div>
+        <div class="summary">TypeScriptコンパイラをGo言語に移植した TypeScript 7.0 のリリース候補版が登場した。Microsoft は従来の自己ホスティング（TypeScript で書かれた TypeScript コンパイラ）からGo実装に切り替えることで、コンパイル速度を約10倍に高速化した。大規模プロジェクトでのビルド時間が劇的に短縮され、開発者体験が大幅に向上する。</div>
+        <div class="key-points">
+          <ul>
+            <li>コンパイル速度が従来比10倍に高速化（Go言語への完全移植）</li>
+            <li>既存のTypeScriptコードとの後方互換性は完全維持</li>
+            <li>VS Code の IntelliSense やエラー検出もGo版で高速化される見込み</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 TypeScript を使うすべてのプロジェクトで、ビルド待ち時間が劇的に短縮される。CI/CD パイプラインの高速化にも直結する。</div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 5 min read</span>
+          <span>Jun 24</span>
+        </div>
+      </div>
+
+      <div class="card featured">
         <div class="card-header">
           <span class="tag tag-ai">AI</span>
-          <h3><a href="https://cybernews.com/security/openai-gpt-5-5-cyber-model/">OpenAI、脆弱性発見・修正支援に特化した「GPT-5.5-Cyber」をリリース</a></h3>
+          <span class="content-type">💰 ビジネス</span>
+          <h3><a href="https://techcrunch.com/">Qualcomm、AIチップ企業 Modular を約40億ドルで買収</a></h3>
         </div>
-        <div class="summary">OpenAIは6月23日、ソフトウェア脆弱性の発見とパッチ適用支援に特化した新モデル「GPT-5.5-Cyber」をリリースした。同社は「脆弱性を発見・修正するための過去最強のモデル」と位置付けており、セキュリティエンジニアによる脆弱性解析や修正コード生成の効率化が期待される。</div>
-        <div class="meta">
-          <span>Cybernews</span>
-          <span>1 day ago</span>
+        <div class="summary">Qualcomm が AI チップソフトウェアスタートアップの Modular を全株式交換で約40億ドル（約6,000億円）で買収すると発表した。Modular は Mojo 言語の開発元として知られ、異なるプロセッサ上で AI モデルを効率的に実行するためのソフトウェアスタックを提供している。Qualcomm はこの買収により、モバイル・エッジデバイスでの AI 推論能力を大幅に強化する狙い。</div>
+        <div class="key-points">
+          <ul>
+            <li>買収額は約40億ドル（全株式交換）、Qualcomm 史上最大級のソフトウェア関連買収</li>
+            <li>Modular の Mojo 言語と MAX プラットフォームが Qualcomm のチップ向けに最適化される</li>
+            <li>エッジデバイスでの AI モデル実行の効率化が主目的</li>
+          </ul>
         </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-security">Security</span>
-          <h3><a href="https://thehackernews.com/2026/06/squidbleed-critical-memory-leak-cve-2026-47729.html">Squidプロキシに重大な脆弱性「Squidbleed」(CVE-2026-47729) が発見される</a></h3>
-        </div>
-        <div class="summary">Calif.ioの研究者が、広く使われているSquidプロキシサーバーにHeartbleedと類似したメモリリーク脆弱性「Squidbleed」を発見・公開した。影響を受けるシステムでは機密データが意図せず漏洩する恐れがあり、早急なパッチ適用が強く推奨されている。</div>
-        <div class="meta">
-          <span>The Hacker News</span>
-          <span>2 weeks ago</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-security">Security</span>
-          <h3><a href="https://techcrunch.com/2026/06/07/the-worst-hacks-and-breaches-of-2026-so-far/">航空宇宙・金融・大学など複数組織で6月23日に同時データ侵害が発生</a></h3>
-        </div>
-        <div class="summary">6月23日、航空宇宙企業AAC-Research、資産運用会社Belpointe、インドの大学BITS Pilaniなどで相次いでデータ侵害が確認された。2026年の主要攻撃トレンドである認証情報の窃取・フィッシング・ベンダーアクセス悪用が起点となっており、技術的脆弱性よりも「人的要素」の悪用が際立っている。</div>
+        <div class="why-it-matters">💡 Mojo言語ユーザーやエッジAI開発者にとって、Qualcommチップでの推論パフォーマンスが大幅に改善される可能性がある。</div>
         <div class="meta">
           <span>TechCrunch</span>
-          <span>1 day ago</span>
+          <span>⏱ 4 min read</span>
+          <span>Jun 25</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://cybersecuritynews.com/microsoft-patch-tuesday-june-2026/">Microsoft Patch Tuesday — 198件の脆弱性修正、ゼロデイ3件含む</a></h3>
+        </div>
+        <div class="summary">Microsoft は6月のPatch Tuesdayで198件のセキュリティ脆弱性を修正した。そのうち3件はゼロデイ脆弱性で、パッチ公開前に悪用が確認されていた。過去数年のPatch Tuesdayの中でも修正件数は最多クラスで、Windows、Office、Exchange、Azure など広範な製品が対象となっている。</div>
+        <div class="key-points">
+          <ul>
+            <li>修正件数198件は過去最多クラス、うちゼロデイ3件（パッチ前に悪用確認済み）</li>
+            <li>影響範囲: Windows, Office, Exchange, Azure, .NET など広範</li>
+            <li>CISA が即時適用を推奨、連邦機関には期限付き義務</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 Windows/Azure を使う開発・運用チームは、特にゼロデイ3件の影響範囲を確認し、優先的にパッチ適用すべき。</div>
+        <div class="meta">
+          <span>CybersecurityNews</span>
+          <span>⏱ 6 min read</span>
+          <span>Jun 9</span>
         </div>
       </div>
     </div>
 
+    <!-- ⚡ Dev & Engineering -->
     <div class="section">
-      <div class="section-title">Dev &amp; OSS</div>
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-oss">OSS</span>
-          <h3><a href="https://thenewstack.io/apache-iceberg-1-11-0-spark-4-1-flink-2-1/">Apache Iceberg 1.11.0リリース — Spark 4.1・Flink 2.1対応、テーブル暗号化機能を搭載</a></h3>
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/aws_lambda_microvms.html">AWS Lambda MicroVMs — サーバレスでステートフルな隔離実行環境</a></h3>
         </div>
-        <div class="summary">オープンソースのテーブルフォーマット「Apache Iceberg」がバージョン1.11.0をリリースした。Apache Spark 4.1とFlink 2.1のサポートが追加されたほか、Google KMS連携によるエンベロープ暗号化機能が組み込まれ、エンタープライズデータレイクのセキュリティが強化されている。</div>
+        <div class="summary">AWS が Lambda MicroVMs を発表。サーバレスの手軽さを保ちながら、ステートフルかつ隔離された実行環境を提供する新サービスで、従来のLambdaの制約（ステートレス、実行時間制限）を克服する。</div>
+        <div class="key-points">
+          <ul>
+            <li>Lambda の手軽さ（インフラ管理不要）+ EC2 級の隔離・永続性</li>
+            <li>ステートフル処理が可能になり、WebSocket やバックグラウンドジョブに対応</li>
+          </ul>
+        </div>
         <div class="meta">
-          <span>The New Stack</span>
-          <span>This week</span>
+          <span>Publickey</span>
+          <span>⏱ 4 min read</span>
+          <span>Jun 25</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
           <span class="tag tag-dev">Dev</span>
-          <h3><a href="https://news.ycombinator.com/front">Deno Desktopがローンチ — Hacker Newsのトレンド入りで注目を集める</a></h3>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/rustjavascriptrolldown10vite_80.html">Rolldown 1.0 リリース — Rust製JSバンドラ、Vite 8.0で正式採用</a></h3>
         </div>
-        <div class="summary">JavaScriptランタイム「Deno」の公式デスクトップアプリが正式にリリースされ、Hacker Newsのトップ記事として活発な議論を呼んでいる。Webアプリをネイティブデスクトップアプリとして手軽にパッケージ化できる点が評価され、Electronの代替として期待する声も上がっている。</div>
+        <div class="summary">Rust製の高速JavaScriptバンドラ「Rolldown」がバージョン1.0に到達し、次期ビルドツール Vite 8.0 で正式採用されることが発表された。Rollup互換のAPIを持ちながら、Rustによるネイティブ実装で大幅な高速化を実現している。</div>
+        <div class="key-points">
+          <ul>
+            <li>Rollup 互換 API で既存プロジェクトからの移行が容易</li>
+            <li>Vite 8.0 のデフォルトバンドラとして採用決定</li>
+          </ul>
+        </div>
         <div class="meta">
-          <span>Hacker News</span>
-          <span>2 days ago</span>
+          <span>Publickey</span>
+          <span>⏱ 3 min read</span>
+          <span>Jun 2</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-product">Product</span>
-          <h3><a href="https://www.cnbc.com/2026/06/04/database-startup-supabase-raises-500-million-10point5-billion-valuation.html">Supabaseが5億ドルを調達し評価額105億ドルに — バイブコーディング需要が牽引</a></h3>
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/wasi_03webassembly_component.html">WASI 0.3 正式版リリース — WebAssembly Component の非同期処理が共通基盤に</a></h3>
         </div>
-        <div class="summary">オープンソースのFirebase代替として知られるSupabaseが5億ドルの資金調達に成功し、評価額が105億ドルに達した。AI支援によるバイブコーディング(vibe-coding)ブームでデータベース需要が急増しており、Claude Codeがプラットフォーム上で最大のデータベース生成元となっていることも明らかになった。</div>
+        <div class="summary">ByteCode Alliance が WASI 0.3 の正式版をリリース。WebAssembly Component モデルに非同期処理のサポートが加わり、ランタイム間で統一された非同期 I/O が可能になった。</div>
+        <div class="key-points">
+          <ul>
+            <li>非同期処理（async/await）が WASI 標準として共通基盤化</li>
+            <li>Component Model により、異なる言語で書かれたモジュール間の相互運用が容易に</li>
+          </ul>
+        </div>
         <div class="meta">
-          <span>CNBC</span>
-          <span>20 days ago</span>
+          <span>Publickey</span>
+          <span>⏱ 3 min read</span>
+          <span>Jun 15</span>
         </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://www.developersdigest.tech/blog/ai-coding-tools-pricing-june-2026">GitHub Copilot 従量課金に移行 — シェア67%→51%に下落</a></h3>
+        </div>
+        <div class="summary">GitHub Copilot が6月1日より全プランで従量課金（AI Credits）に移行した。Pro は月$15分のクレジット、Pro+ は$70、Max は$200が含まれる。一方で Copilot のプロ開発者シェアは67%から51%に下落し、Cursor（18%）と Claude Code（10%）が急伸している。</div>
+        <div class="key-points">
+          <ul>
+            <li>Pro=$15/月クレジット、Pro+=$70、Max=$200の3段階</li>
+            <li>Copilot シェア 67%→51%、Cursor 18%、Claude Code 10%</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Developers Digest</span>
+          <span>⏱ 5 min read</span>
+          <span>Jun 1</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://thehackernews.com/2026/06/critical-splunk-enterprise-flaw-lets.html">Splunk Enterprise に重大脆弱性 — 未認証RCE、CVSS 9.8</a></h3>
+        </div>
+        <div class="summary">Splunk Enterprise に CVE-2026-20253（CVSS 9.8）が発見された。PostgreSQLサイドカーサービスのエンドポイントに認証が欠如しており、未認証ユーザーが任意のファイルを作成・切り詰め可能。CISA が既知の悪用脆弱性カタログに追加済み。</div>
+        <div class="key-points">
+          <ul>
+            <li>CVE-2026-20253、CVSS 9.8（Critical）、認証不要でリモートコード実行</li>
+            <li>CISA が連邦機関に 6/21 までの修正を義務付け</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>The Hacker News</span>
+          <span>⏱ 4 min read</span>
+          <span>Jun 20</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 🇯🇵 日本語テックコミュニティ -->
+    <div class="section">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/terurou/articles/eb9e7a4ca7b364">AI以後の受託システム開発はどうなっていくのか（2026年6月版）</a></h3>
+        </div>
+        <div class="summary">AI コーディングツールの急速な進化を受けて、受託開発の現場がどう変わるかを考察した記事。GitHub Copilot の実質値上げによる現場の混乱や、AI がコードを書く時代に人間のエンジニアが提供すべき価値の変化を論じている。</div>
+        <div class="key-points">
+          <ul>
+            <li>GitHub Copilot の料金プラン変更で現場が混乱している実態</li>
+            <li>AI 時代のエンジニアの価値は「設計判断」と「ドメイン知識」にシフト</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn (@terurou)</span>
+          <span>⏱ 8 min read</span>
+          <span>Jun 2026</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://zenn.dev/d0ne1s/articles/9422407b652a48">2026年6月時点でBestな開発環境を本気で考えた</a></h3>
+        </div>
+        <div class="summary">2026年6月時点での最適な開発環境構成を比較検証した記事。GPT系とClaude系がリリースのたびに過去最高を更新している中、エディタ・ターミナル・AI ツールの最適な組み合わせを実践的に評価している。</div>
+        <div class="key-points">
+          <ul>
+            <li>Cursor + Claude Code の併用が現時点のベストプラクティス</li>
+            <li>AI ツール選定はモデル性能よりワークフロー統合度で決まる</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn (@d0ne1s)</span>
+          <span>⏱ 10 min read</span>
+          <span>Jun 2026</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/cadp/articles/f8c5d9b8d1457e">大企業でAIコードエージェントを浸透させた「外から攻める」戦略</a></h3>
+        </div>
+        <div class="summary">大企業で AI コーディングエージェントの導入を成功させた実践的な戦略を紹介。トップダウンではなくボトムアップで、まず周辺ツール（テスト生成・ドキュメント作成）から導入し、成果を見せて本丸のコーディング業務に広げるアプローチが2万回再生を超える話題記事となった。</div>
+        <div class="key-points">
+          <ul>
+            <li>「中心から攻めない」戦略 — テスト生成・ドキュメントから開始し、成功体験を積む</li>
+            <li>2万回再生超えの Zenn 人気記事、エンタープライズ AI 導入の参考事例</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn (@cadp)</span>
+          <span>⏱ 12 min read</span>
+          <span>Jun 2026</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 🔗 Quick Links -->
+    <div class="section">
+      <div class="section-title">🔗 Quick Links</div>
+
+      <div class="quick-link">
+        <span class="tag tag-infra">Infra</span>
+        <a href="https://www.publickey1.jp/blog/26/windowslinuxwsl_containers.html">WSL containers 発表 — Windows上でLinuxコンテナの作成・実行が可能に</a>
+        <span class="quick-summary">— Microsoft Build 2026で発表された新機能</span>
+        <span class="meta">Publickey</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://www.publickey1.jp/blog/26/stack_overflowaistack_overflow_for_agents.html">Stack Overflow for Agents ベータ公開 — AIエージェント同士が技術情報を共有</a>
+        <span class="quick-summary">— Stack Overflow の新サービス</span>
+        <span class="meta">Publickey</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-infra">Infra</span>
+        <a href="https://www.publickey1.jp/blog/26/aws500mbpsaws_interconnect_-_multicloud.html">AWS Interconnect multicloud — 他クラウドとの500Mbps接続が無料に</a>
+        <span class="quick-summary">— マルチクラウド接続の無料枠が登場</span>
+        <span class="meta">Publickey</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://www.publickey1.jp/blog/26/cloudflareaicloudflare_ai_gateway.html">Cloudflare AI Gateway — 従業員・アプリごとにAI利用上限額を設定可能に</a>
+        <span class="quick-summary">— AI コスト管理の新機能</span>
+        <span class="meta">Cloudflare</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://www.publickey1.jp/blog/26/githubai_1.html">GitHub、AIによる雑なPR を抑制 — ユーザーあたりのPR数上限を設定可能に</a>
+        <span class="quick-summary">— AI 生成コードの品質管理機能</span>
+        <span class="meta">Publickey</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://opensource.googleblog.com/2026/">GLM-5.2 — 1Mコンテキスト、SWE-Bench ProでGPT-5.5を初めて超えたオープンウェイトモデル</a>
+        <span class="quick-summary">— Z.AI のオープンソースコーディングモデル</span>
+        <span class="meta">Z.AI</span>
       </div>
     </div>
 
