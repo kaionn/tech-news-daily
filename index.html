@@ -3,336 +3,106 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tech News Daily — 2026-06-26</title>
+  <title>Tech News Daily — 2026-06-27</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
     <header>
       <h1>Tech News Daily</h1>
-      <div class="date">2026-06-26 (Fri)</div>
+      <div class="date">2026-06-27 (Sat)</div>
       <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
     </header>
 
-    <!-- Section 1: Top Stories -->
     <div class="section">
-      <div class="section-title">🔥 Top Stories</div>
+      <div class="section-title">Top Stories</div>
 
-      <div class="card featured">
+      <div class="card highlight">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <h3><a href="https://techcrunch.com/category/artificial-intelligence/">OpenAI、Broadcom と共同開発のカスタム AI 推論チップ「Jalapeño」を発表 — Nvidia 依存脱却へ</a></h3>
+        </div>
+        <div class="summary">OpenAI が Broadcom と共同設計した独自 AI 推論チップ「Jalapeño」の計画を公表し、Google・Apple・SpaceX に続いて Nvidia への単一サプライヤー依存から脱却する動きを鮮明にした。AI インフラのカスタムシリコン競争が加速しており、データセンターコストと推論効率に大きな影響を与えると見られている。</div>
+        <div class="meta">
+          <span>TechCrunch</span>
+          <span>2 hours ago</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <h3><a href="https://aiflashreport.com/model-releases.html">Anthropic、Claude Fable 5 をリリース — 公開 LLM 史上最高ベンチマーク達成</a></h3>
+        </div>
+        <div class="summary">Anthropic が Mythos クラスのフロンティアモデル「Claude Fable 5」を公開し、主要コーディングベンチマークで最高スコアを記録した。Opus モデルの約 2 倍のコストながら、GitHub Copilot（Pro+/Max/Business/Enterprise）向けに 6 月 9 日より提供されている。</div>
+        <div class="meta">
+          <span>AI Flash Report</span>
+          <span>1 day ago</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <h3><a href="https://www.devflokers.com/blog/open-source-ai-roundup-june-2026">MiniMax M3 公開 — 100 万トークンコンテキストのフロンティア級オープンウェイト LLM</a></h3>
+        </div>
+        <div class="summary">MiniMax が公開したオープンウェイトモデル「M3」は、ソフトウェアエンジニアリング能力でフロンティアモデル相当の性能を発揮しながら、100 万トークンのコンテキストウィンドウを持つ初のオープンウェイト LLM となった。長大な文書処理や大規模コードベース解析での活用が期待される。</div>
+        <div class="meta">
+          <span>devFlokers</span>
+          <span>1 day ago</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Security &amp; Products</div>
+
+      <div class="card">
         <div class="card-header">
           <span class="tag tag-security">Security</span>
-          <span class="content-type">🔒 セキュリティ</span>
-          <h3><a href="https://thehackernews.com/search/label/Vulnerability">Cisco SD-WAN ゼロデイ CVE-2026-20245 が悪用中：2026年7件目の SD-WAN 脆弱性</a></h3>
+          <h3><a href="https://thehackernews.com/">CISA、Cisco UCM サーバーの脆弱性を KEV 追加 — 連邦機関に週末までのパッチ適用を義務付け</a></h3>
         </div>
-        <div class="summary">攻撃者が Cisco Catalyst SD-WAN の認証済みローカル権限昇格脆弱性 CVE-2026-20245 をゼロデイとして積極的に悪用し、標的デバイス上に不正 root アカウントを作成していることが明らかになった。CISA はこの脆弱性を既知悪用脆弱性（KEV）カタログに追加し、連邦機関に対して速やかなパッチ適用を義務付けた。同脆弱性は開示・修正前の数ヶ月間にわたり悪用されており、SD-WAN エッジデバイスを標的とした攻撃の深刻化を示している。</div>
-        <div class="key-points">
-          <ul>
-            <li>CVSS スコア 7.8、認証済みローカル攻撃者が任意コマンドを管理者権限で実行可能</li>
-            <li>2026年に入ってから Cisco SD-WAN で悪用が確認された脆弱性は本件で 7 件目</li>
-            <li>CISA KEV カタログに追加済み、連邦機関は期限内の修正が必須</li>
-          </ul>
-        </div>
-        <div class="why-it-matters">💡 SD-WAN を利用している組織は今すぐ Cisco のセキュリティアドバイザリを確認し、パッチを適用してください。</div>
+        <div class="summary">米国 CISA が Cisco Unified Communications Manager Server の脆弱性（CVSS 9.8 相当）を既知悪用脆弱性カタログに追加し、連邦機関に対して日曜日までのパッチ適用を義務付けた。攻撃者がすでにこの脆弱性を積極的に悪用しており、企業ネットワークでの迅速な対応が求められている。</div>
         <div class="meta">
-          <span>The Hacker News / CISA</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-06-26</span>
-        </div>
-      </div>
-
-      <div class="card featured">
-        <div class="card-header">
-          <span class="tag tag-ai">AI</span>
-          <span class="content-type">🔬 研究</span>
-          <h3><a href="https://www.morphllm.com/best-ai-coding-agents-2026">Claude Fable 5 が AIコーディングツールで首位：Terminal-Bench 2.1 で 83.1%、GPT-5.5 が 83.4% で僅差</a></h3>
-        </div>
-        <div class="summary">2026年6月の最新ベンチマーク結果によると、AI コーディングエージェントの分野では Claude Code on Fable 5（83.1%）と Codex CLI on GPT-5.5（83.4%）がほぼ同スコアで首位を争っている。GitHub Copilot Business（月額 39 ドル）は VS Code・JetBrains・Neovim のネイティブ統合で市場最多採用を維持しつつ、OpenAI と Anthropic の両モデルへのアクセスを提供し、タスクに応じてモデルを使い分けられるようになった。なお Anthropic は 6 月 12 日付で Fable 5 と Mythos 5 のエクスポートを停止している。</div>
-        <div class="key-points">
-          <ul>
-            <li>Terminal-Bench 2.1：Codex CLI/GPT-5.5 が 83.4%、Claude Code/Fable 5 が 83.1%、Claude Code/Opus 4.8 が 78.9%</li>
-            <li>GitHub Copilot Business は月額 39 ドルで GPT-5.4 と Claude の両モデルを提供</li>
-            <li>Fable 5・Mythos 5 は 2026 年 6 月 12 日よりエクスポート停止</li>
-          </ul>
-        </div>
-        <div class="why-it-matters">💡 AIコーディングツール選定では月額コストだけでなく、ベンチマーク上の強みと利用可能モデルの組み合わせを比較することが重要です。</div>
-        <div class="meta">
-          <span>MorphLLM / BuildMVPFast</span>
-          <span>⏱ 5 min read</span>
-          <span>2026-06-26</span>
-        </div>
-      </div>
-
-      <div class="card featured">
-        <div class="card-header">
-          <span class="tag tag-ai">AI</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://www.gartner.com/en/articles/top-technology-trends-2026">Gartner：2026年末までに企業アプリの 40% が AI エージェントと統合へ、ローコード市場は 445 億ドル規模に</a></h3>
-        </div>
-        <div class="summary">Gartner の最新予測では、2026 年末までに企業向けアプリケーションの 40% がタスク特化型 AI エージェントと統合されるという。現在 5% 未満であることを踏まえると、企業の AI 実装は急速に加速している。マルチエージェントシステムが複雑な業務タスクの自動化を担い、銀行・製造・医療などのセクターで具体的な導入事例が増加。ローコード/ノーコード開発プラットフォームの市場も 2026 年に 445 億ドルへ到達する見通しで、AI 補助開発と合わせて開発者の役割が大きく変容しつつある。</div>
-        <div class="key-points">
-          <ul>
-            <li>2026 年末までに企業アプリの 40% が AI エージェントと統合（現在は 5% 未満）</li>
-            <li>ローコード技術市場は 2026 年に 445 億ドル規模へ成長（Gartner 予測）</li>
-            <li>開発者の 84% がすでに AI ツールを日常業務で利用中または利用計画あり</li>
-          </ul>
-        </div>
-        <div class="why-it-matters">💡 エンタープライズ開発チームは AI エージェント統合を既存のロードマップに今すぐ組み込む段階に来ています。</div>
-        <div class="meta">
-          <span>Gartner</span>
-          <span>⏱ 6 min read</span>
-          <span>2026-06-26</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Section 2: Dev & Engineering -->
-    <div class="section">
-      <div class="section-title">⚡ Dev &amp; Engineering</div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-infra">Infra</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://www.infoq.com/news/2026/01/docker-kanvas-cloud-deployment/">Docker Kanvas が Helm・Kustomize に挑戦：Docker Compose を Kubernetes マニフェストへ自動変換</a></h3>
-        </div>
-        <div class="summary">Docker が新プラットフォーム「Kanvas」を発表。ローカル開発環境とクラウド本番環境のギャップを埋めることを目的とし、Docker Compose ファイルを Kubernetes アーティファクトへ自動変換する。Helm や Kustomize に代わるアプローチとして注目されており、DevOps チームの Kubernetes 移行コストを大幅に削減できる可能性がある。</div>
-        <div class="key-points">
-          <ul>
-            <li>Docker Compose → Kubernetes マニフェストの完全自動変換に対応</li>
-            <li>Helm および Kustomize が担ってきたクラウドデプロイ管理領域に参入</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>InfoQ</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-01</span>
+          <span>The Hacker News</span>
+          <span>today</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-frontend">Frontend</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://www.groovyweb.co/blog/vue-vs-react-comparison-2026">Vue 3.5 Vapor Mode：仮想 DOM をバイパスし DOM 操作を最大 36% 高速化</a></h3>
+          <span class="tag tag-security">Security</span>
+          <h3><a href="https://www.breachsense.com/breaches/">Polymarket、第三者ベンダー経由の悪意スクリプト注入で 300 万ドル被害 — 全額補償へ</a></h3>
         </div>
-        <div class="summary">2025 年中頃にリリースされた Vue 3.5 では、対象コンポーネントで仮想 DOM を完全にバイパスする「Vapor Mode」が導入された。DOM 操作ベンチマークで最大 36% の性能向上を実現しており、React 19.2 のプロダクション対応コンパイラと並んで 2026 年のフロントエンド界隈を牽引している。Vue は現在フロントエンドフレームワーク市場でシェア 18% を維持し 2 位をキープ。</div>
-        <div class="key-points">
-          <ul>
-            <li>Vapor Mode により DOM 操作ベンチマークで最大 36% の速度向上を達成</li>
-            <li>Vue のフロントエンド市場シェアは 18%、開発者利用率は約 45% で React に次ぐ 2 位</li>
-          </ul>
-        </div>
+        <div class="summary">分散型予測市場 Polymarket のフロントエンドに第三者ベンダーへの侵害を通じて悪意あるスクリプトが注入され、ユーザーが推定 300 万ドルの損失を被った。同社は被害者全員への全額補償を約束しており、サプライチェーン攻撃の深刻化を改めて示す事例となった。</div>
         <div class="meta">
-          <span>GroovyWeb / Coderio</span>
-          <span>⏱ 5 min read</span>
-          <span>2026-06</span>
+          <span>Breach Sense</span>
+          <span>1 day ago</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-oss">OSS</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://kotlinlang.org/">JetBrains が「Koog 1.0」をリリース：Kotlin・Java で AI エージェントを構築する OSS フレームワーク</a></h3>
+          <span class="tag tag-product">Product</span>
+          <h3><a href="https://techstartups.com/2026/06/24/top-tech-news-today-june-24-2026/">Uber、Autobrains × Nvidia Drive Hyperion でミュンヘンのロボタクシーテストを開始</a></h3>
         </div>
-        <div class="summary">JetBrains が Kotlin および Java 向けの AI エージェント構築フレームワーク「Koog 1.0」をオープンソースで公開した。LLM ベースのエージェントをタイプセーフな Kotlin で記述できるのが特徴で、増大するエンタープライズ向け AI エージェント需要に対応する。Python 主流のエージェントフレームワーク市場に JVM エコシステムからの選択肢が加わった形だ。</div>
-        <div class="key-points">
-          <ul>
-            <li>Koog 1.0 は Kotlin・Java 双方から利用可能な OSS AI エージェントフレームワーク</li>
-            <li>タイプセーフな API 設計で JVM エコシステムへのエージェント組み込みを容易化</li>
-          </ul>
-        </div>
+        <div class="summary">Uber がイスラエルの AI スタートアップ Autobrains および Nvidia の Drive Hyperion プラットフォームと連携し、ミュンヘンでロボタクシーの走行テストを開始すると発表した。欧州主要都市での自律走行タクシー展開に向けた重要なマイルストーンとなる。</div>
         <div class="meta">
-          <span>JetBrains / InfoQ</span>
-          <span>⏱ 3 min read</span>
-          <span>2026-06</span>
+          <span>Tech Startups</span>
+          <span>1 day ago</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://www.infoworld.com/article/4114529/python-starts-2026-with-a-bang.html">Python エコシステム加速：Astral 製「ty」型チェッカーが安定版に、Django 6 もリリース</a></h3>
+          <span class="tag tag-product">Product</span>
+          <h3><a href="https://www.darkreading.com/cyberattacks-data-breaches">Dragos、産業制御システム向け AI セキュリティアシスタント「EmberAI」を発表</a></h3>
         </div>
-        <div class="summary">uv の開発元 Astral が超高速 Python 型チェッカー「ty」の安定版をリリースし、誰でも試せる状態になった。同時に Django 6 のリリースや Python から C コードを生成する新手法の登場など、2026 年の Python エコシステムは活況を呈している。TypeScript が 2025 年 8 月に GitHub コントリビューター数で最多言語になったことを受け、Python コミュニティも型付けの標準化に一層注力している。</div>
-        <div class="key-points">
-          <ul>
-            <li>Astral 製の高速型チェッカー「ty」が安定版に到達、uv と同じ Rust 製で高速処理</li>
-            <li>Django 6 がリリース済み；Python から C コードを生成する新アプローチも登場</li>
-          </ul>
-        </div>
+        <div class="summary">OT セキュリティ企業 Dragos が、発電所・工場・重要インフラを守る運用技術チーム向けに AI アシスタント「EmberAI」をリリースした。産業システム固有の脅威インテリジェンスを活用し、セキュリティアナリストの調査・対応を効率化することを目的としている。</div>
         <div class="meta">
-          <span>InfoWorld</span>
-          <span>⏱ 4 min read</span>
-          <span>2026</span>
+          <span>Dark Reading</span>
+          <span>today</span>
         </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-oss">OSS</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://www.infoq.com/news/2026/05/cangjie-effect-handlers-adt/">Huawei の新言語「Cangjie」が OSS 化：ネイティブエフェクトハンドラと代数的データ型を搭載</a></h3>
-        </div>
-        <div class="summary">Huawei のプログラミング言語研究所が開発した新しいコンパイル型言語「Cangjie（倉頡）」がオープンソース化された。Java・Kotlin・Swift に相当するアプリ開発言語として位置付けられ、ネイティブのエフェクトハンドラと代数的データ型（ADT）を標準搭載するのが特徴。複数のバックエンドを持ち、6 つのプラットフォームをネイティブサポートする。</div>
-        <div class="key-points">
-          <ul>
-            <li>Linux・macOS・Windows・Android・iOS・HarmonyOS の 6 プラットフォームをネイティブサポート</li>
-            <li>ネイティブエフェクトハンドラと ADT を標準搭載した関数型寄りの設計</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>InfoQ</span>
-          <span>⏱ 5 min read</span>
-          <span>2026-05</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Section 3: Japanese Tech Community -->
-    <div class="section">
-      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-infra">Infra</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://www.publickey1.jp/blog/26/cloudflareaicloudflare_email_service.html">Cloudflare、AIエージェントがメール送受信できる「Cloudflare Email Service」をパブリックベータで公開</a></h3>
-        </div>
-        <div class="summary">Cloudflare がアプリケーションや AI エージェントによるメールの送受信を可能にする「Cloudflare Email Service」をパブリックベータで公開した。Cloudflare Workers と組み合わせることで、エッジ上でのメール処理パイプラインを低レイテンシで構築できるようになる。AI エージェントがメールを通じたコミュニケーション自動化に対応し、エージェント型ワークフローの実用範囲が大幅に拡大する。</div>
-        <div class="key-points">
-          <ul>
-            <li>Cloudflare Email Service がパブリックベータ公開、AI エージェントのメール連携が実現</li>
-            <li>Cloudflare Workers との統合でエッジ上のメール処理パイプラインを構築可能</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Publickey</span>
-          <span>⏱ 3 min read</span>
-          <span>2026-06</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-ai">AI</span>
-          <span class="content-type">👀 注目</span>
-          <h3><a href="https://zenn.dev/pppp303/articles/weekly_ai_20260607">週刊AI駆動開発（2026年06月07日号）：AI エージェント時代の開発ワークフロー変革</a></h3>
-        </div>
-        <div class="summary">Zenn で人気の「週刊AI駆動開発」シリーズ最新号が公開され、2026年6月第1週の AI 開発ツールに関するニュースをまとめている。Claude Code を中心としたマルチエージェント開発の実践例や、AI 補助によるコードレビュー自動化の事例が特集されており、日本の開発コミュニティにおける AI 浸透度の高さが伺える内容となっている。</div>
-        <div class="key-points">
-          <ul>
-            <li>Claude Code を活用したマルチエージェント開発の実践事例を詳細にレポート</li>
-            <li>はてなブックマーク 2026年1月ランキングでも Claude Code 関連記事が複数 TOP 入り</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Zenn</span>
-          <span>⏱ 5 min read</span>
-          <span>2026-06-07</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-ai">AI</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://zenn.dev/7788/articles/af11fbce6c3379">2026年のAIトレンド：推論モデルの時代から「実装の時代」へ（Zenn）</a></h3>
-        </div>
-        <div class="summary">Zenn に掲載された解説記事で、2026年の AI トレンドを「推論モデル競争から実装フェーズへの移行」と位置付けている。法律文書解析・科学的推論・複雑な数学問題など専門領域での性能が従来モデルを大きく上回るようになり、企業システムへの組み込みが加速している。エージェント AI は「新しいフロンティア」から「新しい基礎インフラ」へと変わりつつあるという論点が注目を集めた。</div>
-        <div class="key-points">
-          <ul>
-            <li>銀行・製造・医療など各業種で AI エージェントの具体的な導入事例が急増中</li>
-            <li>Gartner も 2026 年末までに企業アプリの 40% が AI エージェント統合と予測</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Zenn</span>
-          <span>⏱ 6 min read</span>
-          <span>2026-06</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
-          <span class="content-type">👀 注目</span>
-          <h3><a href="https://bookmark.hatenastaff.com/entry/2026/04/14/120232">はてブ注目：「Googleに課金するときどれ選べばいいんだよ問題・AI対応 2026年版」が話題に</a></h3>
-        </div>
-        <div class="summary">はてなブックマーク 2026年4月第2週のランキングで「Googleに課金するときどれ選べばいいんだよ問題・AI対応 2026年版」が大きな注目を集めた。Gemini・Workspace・Google One など多数のプランが乱立する中、AI 機能の利用を軸にした選び方ガイドとして、エンジニアや一般ユーザーから多くのブックマークが寄せられた。</div>
-        <div class="key-points">
-          <ul>
-            <li>はてなブックマーク 2026年4月第2週ランキングで上位入り、AI サービス選択の指標として注目</li>
-            <li>Gemini・Workspace・Google One のプラン選択基準を AI 利用の観点から整理した内容</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>はてなブックマーク</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-04</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Section 4: Quick Links -->
-    <div class="section">
-      <div class="section-title">🔗 Quick Links</div>
-
-      <div class="quick-link">
-        <span class="tag tag-dev">Dev</span>
-        <a href="https://www.syncfusion.com/blogs/post/frontend-development-trends">TypeScript、GitHub コントリビューター数で全言語 1 位に（2025年8月）</a>
-        <span class="quick-summary">— TypeScript が 2025 年 8 月に GitHub の全言語中でコントリビューター数が最多になり、プロフロントエンド開発の標準として完全に定着した。</span>
-        <span class="meta">Syncfusion</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-ai">AI</span>
-        <a href="https://www.buildmvpfast.com/articles/best-llms-2026-guide/coding-ai">GitHub Copilot Business（月 $39）が GPT-5.4 と Claude の両モデルへのアクセスを提供開始</a>
-        <span class="quick-summary">— Copilot Business プランがタスクに応じて OpenAI と Anthropic のモデルを切り替えられる機能を追加し、単一ツールでのマルチモデル利用が実現。</span>
-        <span class="meta">BuildMVPFast</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-infra">Infra</span>
-        <a href="https://llm-stats.com/ai-news">AWS と NVIDIA が 100 万 GPU 世界展開で提携、エージェント AI 向け基盤を強化</a>
-        <span class="quick-summary">— 史上最大規模の単一ベンダー GPU 展開として AWS-NVIDIA 提携が報告され、AI パイロットから本番環境への移行を支えるコンピューティング基盤が整備される。</span>
-        <span class="meta">LLM Stats</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-security">Security</span>
-        <a href="https://thehackernews.com/">Operation Endgame：Microsoft &amp; Europol が Amadey・StealC マルウェアのインフラを解体</a>
-        <span class="quick-summary">— 国際合同作戦により Amadey ローダーおよび StealC 情報窃取マルウェアの C2 インフラが壊滅し、数百万台規模の感染連鎖を阻止。</span>
-        <span class="meta">The Hacker News</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-security">Security</span>
-        <a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog">CISA：Ubiquity UniFi OS・Lantronix の脆弱性が積極的に悪用中</a>
-        <span class="quick-summary">— CISA が両製品の既知脆弱性に対する緊急警告を発出。UniFi OS ルーターおよび Lantronix シリアル変換サーバを使用している組織は即座のパッチ適用を推奨。</span>
-        <span class="meta">CISA</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-security">Security</span>
-        <a href="https://thehackernews.com/search/label/Vulnerability">「Mistic」バックドア：メモリ内実行・ファイルレス・自己削除機能搭載の高度マルウェア</a>
-        <span class="quick-summary">— 2026年4月から保険・教育・IT・専門サービス業を標的とした Mistic バックドアが発見。ディスク書き込みなしで動作し kill switch で証拠を自己消去する高度な設計。</span>
-        <span class="meta">The Hacker News</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-infra">Infra</span>
-        <a href="https://www.pulumi.com/blog/beyond-yaml-kubernetes-2026-automation-era/">Kubernetes + eBPF/Cilium：AI ワークロード対応の VM 統合とマイクロセグメンテーションが加速</a>
-        <span class="quick-summary">— Kubernetes ネットワーキングが eBPF と Cilium で刷新され、AI ワークロードと VMware 移行の両方を支える VM 統合アーキテクチャが普及しつつある。</span>
-        <span class="meta">Pulumi Blog</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-dev">Dev</span>
-        <a href="https://www.gartner.com/en/articles/top-technology-trends-2026">ローコード開発市場、2026年末に 445 億ドルへ拡大（Gartner 予測）</a>
-        <span class="quick-summary">— Gartner は 2026 年のローコード/ノーコードプラットフォーム市場を 445 億ドル規模と予測。非エンジニアによるアプリ開発が急拡大する。</span>
-        <span class="meta">Gartner</span>
       </div>
     </div>
 
