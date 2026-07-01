@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-06-30</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-06-30 (Tue)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+    </header>
+
+    <div class="section">
+      <div class="section-title">🔥 Top Stories</div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/nodejsdatetemporaltemporalchromeedgefirefoxnodejs.html">Node.js 26、「Temporal」API をデフォルト有効化 — Date オブジェクトの後継が全主要ランタイムへ</a></h3>
+        </div>
+        <div class="summary">Node.js 26 が、JavaScript の新しい日時処理 API「Temporal」をデフォルトで有効化した。30 年以上エンジニアを悩ませてきた `Date` オブジェクトの後継として TC39 が標準化を進めてきた Temporal は、タイムゾーン対応・イミュータブル設計・直感的な演算 API を提供する。Chrome・Edge・Firefox でもすでに利用可能となっており、Node.js 26 での有効化によりサーバーサイドでも標準日時処理として採用しやすくなった。moment.js や date-fns などの外部ライブラリからの移行が現実的な選択肢として浮上してきた。</div>
+        <div class="key-points">
+          <ul>
+            <li>Temporal が Chrome / Edge / Firefox / Node.js 26 の全主要ランタイムで標準利用可能に</li>
+            <li>`Date` と比較し、タイムゾーン変換・期間演算・ISO 8601 フォーマットが宣言的な API で操作可能</li>
+            <li>Node.js 26 は 2026 年 10 月に LTS 昇格予定（長期サポートは 2029 年 4 月まで）</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 moment.js・date-fns を使っているプロジェクトは、ネイティブ API への段階的移行を検討する好機だ。</div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-06-30</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/java_26hotspothttp3.html">「Java 26」正式リリース — HTTP/3 クライアント標準搭載、HotSpot 起動時間を短縮</a></h3>
+        </div>
+        <div class="summary">Oracle が Java 26（JDK 26）を正式リリースした。最大の目玉は HTTP/3（QUIC ベース）クライアントの標準 API への昇格で、外部ライブラリなしで HTTP/3 通信を実装できるようになる。また HotSpot JVM の Class Data Sharing（CDS）改善により起動時間が短縮され、サーバーレスや CLI ツールでの Java 採用を後押しする。6 ヶ月ごとのリリースサイクルに従う非 LTS 版で、次の LTS は Java 27（2026 年 9 月予定）となる。</div>
+        <div class="key-points">
+          <ul>
+            <li>HTTP/3（QUIC）クライアントが標準 Java API として正式昇格 — 外部ライブラリ不要に</li>
+            <li>HotSpot JVM の Class Data Sharing 改善で起動時間を短縮、サーバーレス利用に有利</li>
+            <li>非 LTS 版（次の LTS は Java 27、2026 年 9 月リリース予定）</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 Java で HTTP/3 を使う場合に外部ライブラリが不要になり、依存関係の削減とセキュリティ管理が楽になる。</div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-06-30</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/applemacoslinuxcontainer_machine10.html">Apple、macOS 向け Linux コンテナ統合「Container Machine」v1.0 リリース — WWDC26 発表</a></h3>
+        </div>
+        <div class="summary">Apple が WWDC26 にて macOS 上で Linux コンテナをネイティブに実行できる新機能「Container Machine」のバージョン 1.0 をリリースした。Docker Desktop のような追加仮想化レイヤーを介さず、macOS の Hypervisor.framework を直接活用するため、起動速度とメモリ効率が大幅に向上する。Apple Silicon（M 系チップ）に最適化されており、OCI コンテナイメージ仕様に準拠するためエコシステム互換性も高い。Mac 開発者にとって日常的なコンテナ操作の体験が根本から変わる可能性がある。</div>
+        <div class="key-points">
+          <ul>
+            <li>macOS の Hypervisor.framework を直接利用 — Docker Desktop 不要でネイティブ Linux コンテナを実行</li>
+            <li>Apple Silicon（M 系）に最適化済み、OCI コンテナイメージ仕様に準拠</li>
+            <li>WWDC26 で発表、macOS 次期バージョンへの統合が予定される</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 Mac で開発する場合、Docker Desktop を使わずに OCI コンテナを動かせるため、起動時間と RAM 消費の改善が期待できる。</div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-06-30</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://www.infoq.com/news/2026/01/docker-kanvas-cloud-deployment/">Docker Kanvas — Docker Compose を Kubernetes に自動変換、Helm/Kustomize に挑戦状</a></h3>
+        </div>
+        <div class="summary">Docker が新しいビジュアル管理プラットフォーム「Kanvas」を発表した。Docker Compose ファイルを Kubernetes マニフェストや Helm チャートに自動変換する機能を持ち、ローカル開発からクラウド本番環境へのギャップを埋めることを目指している。Helm や Kustomize といった既存ツールへの競合製品として位置づけられており、Kubernetes 移行の敷居を下げる可能性がある。</div>
+        <div class="key-points">
+          <ul>
+            <li>Docker Compose → Kubernetes YAML / Helm チャートへの自動変換機能を提供</li>
+            <li>Docker Desktop および Docker Hub の両方に統合、CLI とビジュアル UI で操作可能</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>InfoQ</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-01</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.infoq.com/news/2026/05/cangjie-effect-handlers-adt/">Huawei、新言語「Cangjie（仓颉）」をオープンソース化 — ADT とエフェクトハンドラを言語仕様に搭載</a></h3>
+        </div>
+        <div class="summary">Huawei の Programming Languages Lab が開発した新言語「Cangjie（CJ）」の詳細が公開された。代数的データ型（ADT）とエフェクトハンドラを言語レベルでネイティブサポートし、副作用の明示的な管理が可能。Java・Kotlin・Swift の代替として設計され、マシンコードにコンパイルされるため高いパフォーマンスを発揮する。</div>
+        <div class="key-points">
+          <ul>
+            <li>代数的データ型（ADT）とエフェクトハンドラをネイティブ言語仕様としてサポート</li>
+            <li>Linux / macOS / Windows / Android / iOS / HarmonyOS の 6 プラットフォームに対応</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>InfoQ</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-05</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://thehackernews.com/search/label/Vulnerability">libssh2 に重大脆弱性 CVE-2026-55200 — curl・Git・PHP に影響、PoC がすでに公開済み</a></h3>
+        </div>
+        <div class="summary">libssh2 ライブラリに重大なメモリ破壊脆弱性（CVE-2026-55200）が発見され、公開 PoC（概念実証コード）がすでに出回っている。悪意ある SSH サーバーに接続するだけでクライアント側でコードが実行される可能性があり、curl・Git・PHP・バックアップエージェント・ファームウェアアップデーターなど libssh2 を組み込む多数のソフトウェアが影響を受ける。</div>
+        <div class="key-points">
+          <ul>
+            <li>CVSS スコア Critical 相当、リモートコード実行（RCE）が可能で PoC がすでに公開済み</li>
+            <li>curl・Git・PHP・各種バックアップエージェント・ファームウェアアップデーターに影響</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>The Hacker News</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-06-30</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://www.buildmvpfast.com/articles/best-llms-2026-guide/coding-ai">Claude Code のコードの約 90% は Claude Code 自身が生成 — Anthropic が明らかに</a></h3>
+        </div>
+        <div class="summary">Anthropic のエンジニアが Claude Code（AI コーディングツール）を内部で本格採用した結果、Claude Code 自体のコードベースの約 90% が Claude Code によって生成されるようになったことが明らかになった。AI エージェントが数千ファイル規模のリポジトリ探索・複数ファイルリファクタリング・テスト生成を自律的にこなせる段階に達していることを示している。</div>
+        <div class="key-points">
+          <ul>
+            <li>Claude Code コードベースの〜90% が Claude Code 自身によって生成（Anthropic 公表）</li>
+            <li>大規模リポジトリ探索・複数ファイルリファクタリング・テスト自動生成を自律実行</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>LLM Stats</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-06-30</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/7aimicrosoft_ai_models.html">Microsoft Build 2026：自社開発 AI モデル「Microsoft AI Models」7 種を発表</a></h3>
+        </div>
+        <div class="summary">Microsoft が Build 2026 で自社開発の AI モデル群「Microsoft AI Models」を発表した。7 種類のモデルで構成され、Azure AI Foundry への統合と Microsoft 365 Copilot での活用が予定されている。OpenAI への依存を低減し、垂直統合型の AI スタックを構築する戦略の一環と見られている。</div>
+        <div class="key-points">
+          <ul>
+            <li>7 種類のモデル構成（マルチモーダル・コード生成・推論特化など用途別に設計）</li>
+            <li>Azure AI Foundry および Microsoft 365 Copilot に統合予定</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-06-30</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/cloudflareaicloudflare_ai_gateway.html">Cloudflare AI Gateway 新機能 — 従業員・アプリごとに AI 利用コストの月間上限を設定</a></h3>
+        </div>
+        <div class="summary">Cloudflare が AI Gateway の新機能として、従業員やアプリケーション単位で AI モデルへの月間支出上限を設定できる機能を発表した。OpenAI・Anthropic・Gemini など主要プロバイダーを横断してコストを一元管理でき、部門別の予算管理やリアルタイム監視が実現する。大規模な AI 導入時のコスト暴走リスクを組織レベルで制御できる実用的な機能として注目されている。</div>
+        <div class="key-points">
+          <ul>
+            <li>従業員・アプリ単位で AI モデルへの月間支出上限を設定（複数プロバイダーを横断管理）</li>
+            <li>OpenAI・Anthropic・Google Gemini など主要プロバイダーすべてに対応</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-06-30</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/aimicrosoft_execution_containers_mxc.html">Microsoft Execution Containers（MXC）— AI エージェント向けカスタマイズ可能サンドボックス発表</a></h3>
+        </div>
+        <div class="summary">Microsoft が Build 2026 で「Microsoft Execution Containers（MXC）」を発表した。AI エージェントが外部コードを安全に実行するためのカスタマイズ可能なサンドボックス環境で、Azure AI Foundry に統合される。エージェント型 AI が任意コードを実行する際のセキュリティリスクを組織レベルで制御できる仕組みだ。</div>
+        <div class="key-points">
+          <ul>
+            <li>AI エージェント用にカスタマイズ可能な分離コンテナ環境（Azure AI Foundry に統合）</li>
+            <li>Claude・GPT-4o など複数 LLM エージェントのコード実行を安全にサンドボックス化</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-06-30</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/7788/articles/af11fbce6c3379">Zenn 話題記事：2026 年の AI トレンド — 推論モデルの時代から「実装の時代」へ</a></h3>
+        </div>
+        <div class="summary">Zenn で注目を集める記事「2026 年のAIトレンド：推論モデルの時代から実装の時代へ」は、AI が研究・実験フェーズから企業の実業務への本格組み込みフェーズへ移行していることを解説する。テスト時推論（Inference-time Compute）の実運用定着や、銀行・製造・医療分野でのエージェント AI 本番導入が加速している状況を詳細に分析している。</div>
+        <div class="key-points">
+          <ul>
+            <li>テスト時推論（Inference-time Compute）が 2026 年には実運用で標準的な手法として定着</li>
+            <li>金融・製造・医療でのエージェント AI 本番導入が日本企業でも加速中</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 8 min read</span>
+          <span>2026-06-30</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://zenn.dev/events/zennfes-spring-2026">Zennfes Spring 2026 開催中 — 技術記事フェスティバル、Zenn 初のオフラインイベントも</a></h3>
+        </div>
+        <div class="summary">技術記事共有プラットフォーム「Zenn」が「Zennfes Spring 2026」を開催中だ。Zenn 初のオフラインイベントも含む技術記事投稿フェスティバルで、AI・Web 開発・インフラなど多分野の記事が集まっている。日本語技術コミュニティの情報共有が活性化する機会として、エンジニアの参加が呼びかけられている。</div>
+        <div class="key-points">
+          <ul>
+            <li>Zenn 初のオフラインイベントを開催（オンライン投稿フェスとの同時開催）</li>
+            <li>AI・Web 開発・インフラなど多分野の技術記事が集まる投稿コンテスト形式</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-06-30</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">🔗 Quick Links</div>
+
+      <div class="quick-link">
+        <span class="tag tag-frontend">Frontend</span>
+        <a href="https://www.groovyweb.co/blog/vue-vs-react-comparison-2026">Vue 3.5 Vapor Mode が DOM 操作を最大 36% 高速化 — Virtual DOM をバイパスする新コンパイル戦略</a>
+        <span class="quick-summary">— Vue 3.5 の Vapor Mode はコンパイル段階で VDOM を回避し、ベンチマークで最大 36% の DOM 操作高速化を実現する。</span>
+        <span class="meta">groovyweb.co</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-oss">OSS</span>
+        <a href="https://www.infoworld.com/article/4114529/python-starts-2026-with-a-bang.html">Python 2026: uv 製作チームによる超高速型チェッカー・Django 6・C コード生成ツールが登場</a>
+        <span class="quick-summary">— uv チームによる高速型チェッカー、Django 6 正式リリース、Python から C コードを生成できる新ツールなど 2026 年の Python エコシステムが活発化。</span>
+        <span class="meta">InfoWorld</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://thehackernews.com/search/label/Vulnerability">Dify（GitHub Stars 14.6 万）に 4 件の脆弱性 — 認証なしで他ユーザーの AI 会話が閲覧可能に</a>
+        <span class="quick-summary">— オープンソース AI ワークフロープラットフォーム Dify に 4 件の CVE が発見され、認証なしで他テナントの会話内容を読み取れる可能性が指摘された。</span>
+        <span class="meta">The Hacker News</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://www.buildmvpfast.com/articles/best-llms-2026-guide/coding-ai">GPT-5.5 が AI コーディングモデル首位 — Terminal-Bench 2.0 で 82.7%、SWE-Bench Pro で 58.6%</a>
+        <span class="quick-summary">— OpenAI の GPT-5.5 が長時間エージェント型コーディングで最高スコアを記録。Claude Opus 4.8 は推論精度で接戦を繰り広げる。</span>
+        <span class="meta">BuildMVPFast</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-infra">Infra</span>
+        <a href="https://geekssolutions.io/platform-engineering-future-devops-2026/">Platform Engineering — Gartner「2026 年に大企業の 80% が採用」、導入企業で展開速度 30〜50% 向上</a>
+        <span class="quick-summary">— Gartner が大企業の 80% が 2026 年末までに Platform Engineering を採用すると予測。内部開発者プラットフォーム導入企業はデプロイ速度が 30〜50% 向上する実績あり。</span>
+        <span class="meta">GeeksSolutions</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://thehackernews.com/">npm・Go パッケージを悪用したサプライチェーン攻撃 — VS Code タスク経由でインフォスティーラーを配布</a>
+        <span class="quick-summary">— 乗っ取られた npm パッケージ 2 件と Go パッケージ群が発見され、VS Code タスクに偽装して Python 製インフォスティーラーを配布していた。</span>
+        <span class="meta">The Hacker News</span>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="archive/" class="archive-link">Past issues</a>
+    </footer>
+  </div>
+</body>
+</html>
