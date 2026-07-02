@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-07-01</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-07-01 (Wed)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+    </header>
+
+    <!-- 🔥 Top Stories -->
+    <div class="section">
+      <div class="section-title">🔥 Top Stories</div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://developer.apple.com/news/">Apple、WebKit・カーネル等の脆弱性を修正する緊急セキュリティアップデートを一斉公開</a></h3>
+        </div>
+        <div class="summary">Appleは2026年7月、iOS・iPadOS・macOS・Safariを対象とした大規模な緊急セキュリティアップデートを公開した。WebKit・カーネル・WebRTC・Web Extensionsなど広範なコンポーネントにわたる脆弱性を修正しており、そのうち15件が「重大（Critical）」、67件が「高（High）」深刻度に分類される。特にWebKitの脆弱性は悪意あるWebページを閲覧するだけで攻撃が成立するゼロクリック型の危険性を持つ可能性があり、iPhone・iPad・Macを問わずすべてのAppleユーザーに対して早急なアップデート適用が推奨されている。</div>
+        <div class="key-points">
+          <ul>
+            <li>修正件数：重大（Critical）15件・高深刻度（High）67件の計82件以上</li>
+            <li>影響範囲：iPhone・iPad・Mac・Safari のすべてのユーザーに適用必須</li>
+            <li>WebKit・カーネル・WebRTC・Web Extensions の複数コンポーネントに脆弱性</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 AppleデバイスをiOS/iPadOS/macOS問わず使っているなら、今すぐ「設定 → 一般 → ソフトウェアアップデート」から最新版を適用すること。</div>
+        <div class="meta">
+          <span>Apple Developer</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07-01</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://thehackernews.com/search/label/Vulnerability">Langflow AI の未認証RCE脆弱性（CVE-2026-33017、CVSS 9.3）を攻撃者が積極的に悪用中</a></h3>
+        </div>
+        <div class="summary">AIアプリ開発プラットフォーム「Langflow」に存在するCVE-2026-33017（CVSS 9.3）の悪用が、攻撃者によって積極的に行われていることが確認された。この脆弱性は認証なしでリモートコード実行（RCE）を可能にするもので、インターネットに公開されたLangflowエンドポイントをスキャンし、企業ネットワークへの初期侵入口として悪用する手口が観測されている。AI導入が急速に進む企業環境において、AIツールのエンドポイントが攻撃者の新たな標的になりつつある実態が浮き彫りとなった。セルフホスト環境や社内デプロイでLangflowを利用しているチームへの影響が特に懸念される。</div>
+        <div class="key-points">
+          <ul>
+            <li>CVE-2026-33017、CVSSスコア9.3（Critical）—— 未認証でRCEが可能</li>
+            <li>公開されたAIアプリエンドポイントを標的にしたスキャン攻撃を観測</li>
+            <li>企業ネットワークへの初期侵入口として悪用する事例が報告されている</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 LangflowをDockerやオンプレでセルフホストしている場合は即座にパッチを適用し、エンドポイントをインターネットに直接公開しない構成に変更すること。</div>
+        <div class="meta">
+          <span>The Hacker News</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-06-30</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://llm-stats.com/leaderboards/best-ai-for-coding">AIコーディングベンチマーク最新版：Codex CLI 83.4% vs Claude Code 83.1%、フロンティア同士が接戦</a></h3>
+        </div>
+        <div class="summary">最新のTerminal-Bench 2.1によると、Codex CLI on GPT-5.5が83.4%でトップ、Claude Code on Fable 5が83.1%で僅差の2位となっている。コーディングインデックス総合スコアではClaude Fable 5が1位を維持しており、Claude Mythos PreviewとGPT-5.5との三つ巴の競争が続く状況だ。一方、オープンソース陣営ではLlama・Mistral・Qwen・DeepSeekが多くのベンチマークでプロプライエタリモデルに肩を並べ始めており、フリーで利用できるコーディングエージェント（OpenCode・Cline・Aider・Gemini CLIなど）も整備が進んでいる。AIコーディングツールの選択肢は質・価格ともに幅が広がり、用途別の使い分けが重要になってきた。</div>
+        <div class="key-points">
+          <ul>
+            <li>Terminal-Bench 2.1：Codex CLI 83.4%、Claude Code on Fable 5 83.1%、Claude Code on Opus 4.8 78.9%</li>
+            <li>Gemini CLI は個人Googleアカウントで60リクエスト/分・1,000件/日が無料で利用可能</li>
+            <li>API価格帯：$0.15/Mトークン（軽量モデル）〜 $60+/Mトークン（フロンティアモデル）</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 Claude Codeユーザーは Fable 5 バックエンドで最高の精度が得られる。コスト最優先なら Claude Haiku 4.5 か Gemini CLI の無料枠が有力な選択肢。</div>
+        <div class="meta">
+          <span>llm-stats.com</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-07-01</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ⚡ Dev & Engineering -->
+    <div class="section">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.infoworld.com/article/4114529/python-starts-2026-with-a-bang.html">Astral、Python超高速型チェッカー「ty」を安定版として公開 —— uv に続く革命的ツールへ</a></h3>
+        </div>
+        <div class="summary">uv で Python パッケージ管理に革命をもたらした Astral チームが、Python 型チェッカー「ty」を一般ユーザーが試用できる安定版としてリリースした。既存の mypy や pyright より桁違いの速度を目指しており、Python エコシステムにおける次の大型アップグレードとして期待が高まっている。同時期には Django 6 の公開や、Python から C コードを生成する新ツールなど、2026年は Python 周辺の整備が急速に進んでいる。</div>
+        <div class="key-points">
+          <ul>
+            <li>uv と同じ Astral チームが開発、mypy/pyright より大幅に高速な型検査を目指す</li>
+            <li>現在安定版として公開、全ユーザーが試用可能</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>InfoWorld</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-01</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.infoq.com/news/2026/05/cangjie-effect-handlers-adt/">Huawei、ADT とエフェクトハンドラを搭載したOSSコンパイル言語「Cangjie（CJ）」を発表</a></h3>
+        </div>
+        <div class="summary">Huawei のエジンバラ研究センターがオープンソースのコンパイル型言語「Cangjie（CJ）」を InfoQ で発表した。代数的データ型（ADT）とネイティブエフェクトハンドラを言語仕様に取り込み、Java・Kotlin・Swift の対抗として設計されている。ネイティブマシンコードへのコンパイルとマルチバックエンド対応が特徴で、Huawei エコシステム外のプラットフォームへも幅広く展開可能だ。</div>
+        <div class="key-points">
+          <ul>
+            <li>対応プラットフォーム：Linux・macOS・Windows・Android・iOS・HarmonyOS の6環境</li>
+            <li>代数的データ型（ADT）とネイティブエフェクトハンドラをサポート</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>InfoQ</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-05</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://www.infoq.com/news/2026/01/docker-kanvas-cloud-deployment/">Docker Kanvas — Docker Compose を Kubernetes 構成に自動変換、Helm・Kustomize に挑戦</a></h3>
+        </div>
+        <div class="summary">Docker が新プラットフォーム「Kanvas」を発表した。ローカルの Docker Compose ファイルを自動で Kubernetes アーティファクト（マニフェスト等）に変換する機能を持ち、既存の Helm や Kustomize に代わるローカル〜本番環境ブリッジとして位置づけられている。ローカル開発体験と本番クラウドの乖離を埋める公式ソリューションとして注目を集めている。</div>
+        <div class="key-points">
+          <ul>
+            <li>Docker Compose ファイルを Kubernetes マニフェストに自動変換</li>
+            <li>Helm・Kustomize に対抗する Docker 公式の K8s デプロイブリッジ</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>InfoQ</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-01</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://www.securityweek.com/">Progress Kemp LoadMaster に CVSS 9.8 の未認証RCE脆弱性（CVE-2026-8037）</a></h3>
+        </div>
+        <div class="summary">ロードバランサー製品「Progress Kemp LoadMaster」に重大脆弱性 CVE-2026-8037 が発見された。CVSS 9.8 と最大レベルに近い深刻度で、未認証の攻撃者が管理 API へ細工したリクエストを送るだけで root 権限による任意コマンド実行が可能となる。ZDI（Zero Day Initiative）が詳細を公開しており、公開環境での悪用が懸念される。</div>
+        <div class="key-points">
+          <ul>
+            <li>CVSSスコア 9.8（ZDI評価）、未認証でのroot権限RCEが可能</li>
+            <li>管理APIエンドポイントへの細工したリクエストのみで悪用可能</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>SecurityWeek</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-06</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://www.securityweek.com/">ServiceNow、2026年6月に発生した API セキュリティインシデントを開示</a></h3>
+        </div>
+        <div class="summary">ServiceNow が2026年6月に発生したセキュリティインシデントを公式に開示した。ホスト型カスタマーインスタンスで使用されている API エンドポイントに未認証アクセスを許す欠陥が攻撃者に悪用され、不正アクセスが発生したという。悪意ある活動は2026年6月2日から開始されたと報告されており、影響範囲の調査と対応が継続中だ。</div>
+        <div class="key-points">
+          <ul>
+            <li>不正アクセスは2026年6月2日に開始、ホスト型インスタンスのAPIが標的</li>
+            <li>未認証アクセスを許すAPI欠陥が根本原因と説明</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>SecurityWeek</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-06-30</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 🇯🇵 日本語テックコミュニティ -->
+    <div class="section">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/awsuae2.html">AWS、攻撃を受けた中東（UAE）リージョンの復旧に「さらに数か月」 — 約2か月ぶりに状況報告</a></h3>
+        </div>
+        <div class="summary">AWS が攻撃被害を受けた中東（UAE）リージョンについて、約2か月ぶりに公式な状況報告を行った。完全な復旧にはさらに数か月を要する見通しで、影響を受けた顧客に対しては段階的なサービス回復状況が説明されている。クラウドリージョンが地政学的リスクにさらされた事例として、業界全体のマルチリージョン・マルチクラウド戦略の議論が再燃している。</div>
+        <div class="key-points">
+          <ul>
+            <li>被攻撃から約2か月が経過、完全復旧まで「さらに数か月」かかる見通し</li>
+            <li>AWSが約2か月ぶりに公式な状況アップデートを実施</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-06-30</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://zenn.dev/ogazon/articles/0007-zennfes-spring2026">Zennfes Spring 2026 開催レポート — 初のオフラインイベントで「書くこと」の意義を問い直す</a></h3>
+        </div>
+        <div class="summary">技術記事共有コミュニティ「Zenn」が主催した「Zennfes Spring 2026」が開催され、初のオフラインイベントも併催された。AI 時代においても「自分の言葉で技術を書くこと」の意義が参加者の間で語り合われ、コミュニティ形成の重要性が再確認されたという。参加者によるレポート記事が多数 Zenn 上に投稿されている。</div>
+        <div class="key-points">
+          <ul>
+            <li>Zenn 初のオフラインイベントを Spring 2026 で実施</li>
+            <li>AI時代における技術記事執筆の意義とコミュニティ形成がメインテーマ</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-06</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://bookmark.hatenastaff.com/entry/2026/01/27/123137">はてブ技術ランキング：Claude Code で「AI部下10人」運用術が2026年1月の技術系1位に</a></h3>
+        </div>
+        <div class="summary">はてなブックマーク2026年1月の週間技術系ランキングで、Claude Code を使って「AI部下10人」体制を構築する活用術が技術カテゴリ1位を獲得した。Claude Code 活用記事が複数ランキング上位を占拠しており、AIコーディングツールの実用的な活用事例への関心が日本語技術コミュニティで急速に高まっていることが分かる。</div>
+        <div class="key-points">
+          <ul>
+            <li>「Claude Codeで『AI部下10人』を作ったら」が2026年1月の技術系はてブ週間1位</li>
+            <li>Claude Code 関連記事が複数ランクイン、AIワークフロー事例への需要が急増</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>はてなブックマーク</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-01</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/7788/articles/af11fbce6c3379">Zenn 人気記事「2026年のAIトレンド：推論モデルの時代から実装の時代へ」</a></h3>
+        </div>
+        <div class="summary">Zennの人気技術記事によると、推論モデル（Reasoning Models）技術は2026年に成熟し商用モデルの標準装備になりつつある。AIエージェントはもはや「新しいフロンティア」ではなく「新しい基礎インフラ」へとシフトしており、企業は人間・AIエージェント・ロボットの三者連携の実装を開始しているという分析が多数の支持を集めている。</div>
+        <div class="key-points">
+          <ul>
+            <li>推論モデル（Reasoning Models）が商用モデルの標準装備となり成熟段階へ</li>
+            <li>エージェントAIは「実験」から「基礎インフラ」へ、企業での実装が本格化</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-06</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 🔗 Quick Links -->
+    <div class="section">
+      <div class="section-title">🔗 Quick Links</div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://www.securityweek.com/">Microsoft Defender CVE-2026-33825 ゼロデイがパッチ前から野放しで悪用</a>
+        <span class="quick-summary">— 6月Patch Tuesdayで修正済みだが、ゼロデイ悪用期間中に対応が遅れた環境は要確認。</span>
+        <span class="meta">SecurityWeek</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://www.cisa.gov/news-events/bulletins/sb26-166">CISA、2026年6月8日週の脆弱性サマリー公開 — 多数の重大CVEへの対応を呼びかけ</a>
+        <span class="quick-summary">— 週次ブレティン形式で CVSS 高スコアの脆弱性をまとめてリスト化。</span>
+        <span class="meta">CISA.gov</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-infra">Infra</span>
+        <a href="https://www.pulumi.com/blog/beyond-yaml-kubernetes-2026-automation-era/">Pulumi ブログ「Beyond YAML in Kubernetes：2026年の自動化元年」</a>
+        <span class="quick-summary">— YAML を超えたプログラマブルな K8s 管理が2026年の標準になるという展望を解説。</span>
+        <span class="meta">Pulumi Blog</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-frontend">Frontend</span>
+        <a href="https://www.programming-helper.com/tech/vue-js-2026-frontend-framework-adoption-nuxt-python">Vue.js 2026：開発者の45%が採用、市場シェア19.2% でReactに次ぐ2位を維持</a>
+        <span class="quick-summary">— Vapor Modeで仮想DOM不要となりDOM操作ベンチマークで最大36%の高速化を達成。</span>
+        <span class="meta">Programming Helper</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://www.syncfusion.com/blogs/post/frontend-development-trends">TypeScript が GitHub 貢献者数で全言語1位に（2025年8月）</a>
+        <span class="quick-summary">— JavaScriptを抜きGitHub全言語中の貢献者数で首位を獲得した歴史的マイルストーン。</span>
+        <span class="meta">Syncfusion Blog</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://zenn.dev/acrosstudioblog/articles/4138c8ec633df8">Zenn 解説「2026年のWebアプリ開発の基本となる変化まとめ」</a>
+        <span class="quick-summary">— Next.js/Nuxt メタフレームワーク標準化、React Compiler 普及、TypeScript 必須化などを整理。</span>
+        <span class="meta">Zenn</span>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="archive/" class="archive-link">Past issues</a>
+    </footer>
+  </div>
+</body>
+</html>
