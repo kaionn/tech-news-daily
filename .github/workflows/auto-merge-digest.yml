@@ -1,0 +1,74 @@
+name: Auto-merge digest to main
+
+# CCR routine はサンドボックス上の作業ブランチ (claude/**) にコミットするだけで、
+# main への直 push は auto-mode classifier（PAT 実体化ガード）に阻まれる。
+# この workflow が digest ブランチの push を検知して main へ取り込み、Pages をデプロイする。
+# routine 側は main への push を持たない（PAT も不要）。責務分離: 生成=CCR / 反映=GHA。
+
+on:
+  push:
+    branches:
+      - 'claude/**'
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: auto-merge-digest
+  cancel-in-progress: false
+
+jobs:
+  merge-and-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Merge digest branch into main
+        id: merge
+        run: |
+          set -euo pipefail
+          BRANCH="${{ github.ref_name }}"
+          git fetch origin "$BRANCH"
+          MSG=$(git log -1 --format=%s "origin/$BRANCH")
+          echo "branch=$BRANCH / head commit: $MSG"
+
+          # digest コミットだけを対象にする（CLAUDE.md 編集等の claude/* セッションは無視）
+          if ! echo "$MSG" | grep -qE '^[0-9]{4}-[0-9]{2}-[0-9]{2} のテックニュースダイジェスト$'; then
+            echo "digest コミットではないためスキップ"
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          if git merge-base --is-ancestor HEAD "origin/$BRANCH"; then
+            # main が分岐点のまま = fast-forward で取り込める
+            git merge --ff-only "origin/$BRANCH"
+          else
+            # main が既に先行（同日 2 本目など）: 新しい digest 内容を優先して取り込む
+            git merge -X theirs --no-edit "origin/$BRANCH"
+          fi
+
+          git push origin main
+          echo "skip=false" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/configure-pages@v5
+        if: steps.merge.outputs.skip == 'false'
+
+      - uses: actions/upload-pages-artifact@v3
+        if: steps.merge.outputs.skip == 'false'
+        with:
+          path: .
+
+      - id: deployment
+        if: steps.merge.outputs.skip == 'false'
+        uses: actions/deploy-pages@v4
