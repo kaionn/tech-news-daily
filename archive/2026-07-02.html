@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-07-02</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-07-02 (Thu)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 21 articles</span>
+      <span>🏷 7 categories</span>
+      <span>📡 14 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item">
+        <span class="number-value">9.6</span>
+        <span class="number-label">Kemp LoadMaster CVSS</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">$2</span>
+        <span class="number-label">Sonnet 5 入力料金/1M tokens</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">77%</span>
+        <span class="number-label">Dropbox モノレポ圧縮率</span>
+      </div>
+    </div>
+
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
+
+      <div class="card featured deep-dive">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://thehackernews.com/2026/07/sharepoint-rce-cve-2026-45659-added-to.html">DEEP DIVE: SharePoint CVE-2026-45659 が CISA KEV 入り——連邦機関の修正期限は 7 月 4 日</a></h3>
+        </div>
+        <div class="summary">
+          Microsoft SharePoint Server に存在するリモートコード実行脆弱性 CVE-2026-45659（CVSS 8.8）が、CISA の「Known Exploited Vulnerabilities（KEV）カタログ」に 2026 年 7 月 1 日付で追加された。連邦民間行政機関（FCEB）には 7 月 4 日までの修正適用が BOD 22-01 に基づき義務付けられており、実質的に米独立記念日の連休前が期限となる。
+
+          この脆弱性は Untrusted Data のデシリアライズに起因し、攻撃にはサイト・メンバー（PR:L）以上の認証済みアカウントがあれば足りる——管理者権限は不要。攻撃者がネットワーク越しに SharePoint サーバーに到達できれば、任意コードを実行できる。Microsoft は 5 月の Patch Tuesday で SharePoint Server Subscription Edition・2019・Enterprise Server 2016 向けに修正を提供済みだが、パッチ未適用の組織が依然として多い。
+
+          同日、Zimbra Collaboration Suite（ZCS）の脆弱性も別途 KEV カタログに追加された。SharePoint（ドキュメント管理）と Zimbra（メール）のセット追加は、エンタープライズのコアコミュニケーション基盤を同時に狙う組織的なキャンペーンの兆候とも読める。SharePoint 侵害が成功した場合、機密文書・内部メール・認証情報へのアクセスが一気に危険にさらされる。影響バージョンを運用中の組織は、まずパッチ適用状況の棚卸しを今週中に実施すべきだ。
+        </div>
+        <div class="editorial">🧠 独立記念日連休前の「7 月 4 日期限」という CISA の設定は、攻撃が現実に差し迫っているという強いシグナルだ。セキュリティチームが手薄になる連休中に攻撃が集中するのは歴史が示している。SharePoint を社内基盤に使う組織は、今週末の on-call 体制を再確認する価値がある——「5 月にパッチを当てた」という前提を今一度検証してほしい。</div>
+        <div class="key-points">
+          <ul>
+            <li>CVE-2026-45659 CVSS 8.8——認証済みサイトメンバー権限のみで実行可能、管理者不要</li>
+            <li>FCEB 機関の修正期限: 2026 年 7 月 4 日（KEV 追加: 7 月 1 日）</li>
+            <li>同日 Zimbra ZCS の脆弱性も KEV 追加——SharePoint + メールの双方を狙う組織的攻撃の可能性</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 SharePoint を社内で運用しているなら、5 月 Patch Tuesday の適用状況を今日中に確認すること——連休前の 7 月 3 日（金）が事実上のデッドラインだ。</div>
+        <div class="meta">
+          <span>The Hacker News</span>
+          <span>⏱ 8 min read</span>
+          <span>2026-07-02</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.anthropic.com/news/claude-sonnet-5">Claude Sonnet 5 正式リリース——Opus 4.8 に迫る性能を $2/1M トークンで提供</a></h3>
+        </div>
+        <div class="summary">
+          Anthropic は 2026 年 6 月 30 日、エージェント向けミッドサイズモデル「Claude Sonnet 5」を正式リリースした。推論・ツール使用・ソフトウェアコーディングにおける agentic 性能で前モデル Sonnet 4.6 を大幅に上回り、大型モデル Opus 4.8 に匹敵する水準に到達。入力トークン料金は $2/100 万、出力は $10/100 万（2026 年 8 月 31 日までの期間限定）と競争力のある価格設定。Free・Pro プランのデフォルトモデルにも採用。幻覚率の低下と sycophancy 軽減を含む安全性改善も盛り込まれている。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>入力 $2/1M・出力 $10/1M トークン（〜2026 年 8 月 31 日、以降 $3/$15 に移行）</li>
+            <li>Free・Pro プランのデフォルトモデルに昇格、Max・Team・Enterprise でも利用可能</li>
+            <li>ブラウザ・ターミナル等ツール利用と長時間自律実行に特化した agentic 性能を強化</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Anthropic</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-06-30</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://thehackernews.com/2026/07/latest-progress-kemp-loadmaster-pre.html">Progress Kemp LoadMaster CVE-2026-8037（CVSS 9.6）——未認証 RCE の悪用が始動</a></h3>
+        </div>
+        <div class="summary">
+          Progress Kemp LoadMaster に存在する OS コマンドインジェクション脆弱性 CVE-2026-8037（CVSS 9.6）が 2026 年 6 月 29 日から悪用試行が観測されている。watchTowr Labs が同日にフルエクスプロイトチェーンを公開した直後に試行が急増した。認証なしで root 権限コマンドを実行できる深刻な脆弱性で、Progress は 6 月 4 日のアドバイザリ公開時点では「悪用なし」としていたが状況が一変した。escape_quotes() 関数の入力検証不備が根本原因。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>CVSS 9.6——認証不要（Pre-Auth）で root 実行可能、escape_quotes() の入力検証不備が根本原因</li>
+            <li>watchTowr Labs の PoC 公開（6 月 29 日）直後から悪用試行が観測</li>
+            <li>現在の観測では侵害成功は未確認だが、PoC 公開後の追従攻撃拡大が懸念される</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>The Hacker News</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-07-02</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://thehackernews.com/2026/07/citrix-patches-six-netscaler-flaws.html">Citrix、NetScaler の 6 件の脆弱性をパッチ——CVE-2026-8451 は「CitrixBleed 再来」と命名</a></h3>
+        </div>
+        <div class="summary">
+          Citrix が NetScaler ADC および NetScaler Gateway の 6 件の脆弱性を修正した。CVE-2026-8451（CVSS 8.8）は SAML IDP 設定時のメモリ過読みで、2023 年に大規模悪用された CitrixBleed（CVE-2023-4966）と酷似した設計上の欠陥から生じている。CVE-2026-8452 と CVE-2026-8655（ともに CVSS 8.8）は HTTP/2 Bomb を含む DoS 系脆弱性。watchTowr が CVE-2026-3055 調査中に偶然発見した。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>CVE-2026-8451（CVSS 8.8）: SAML IDP 構成時のメモリ過読み——CitrixBleed と同根の設計欠陥</li>
+            <li>修正版: NetScaler ADC/Gateway 14.1-72.61 および 13.1-63.18 以降</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>The Hacker News</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07-02</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://dropbox.tech/infrastructure/reducing-our-monorepo-size-to-improve-developer-velocity">Dropbox が GitHub と協力してバックエンドモノレポを 87GB → 20GB に圧縮</a></h3>
+        </div>
+        <div class="summary">
+          Dropbox が GitHub エンジニアリングチームとの協力のもと、バックエンドモノレポの Git リポジトリサイズを 87GB から 20GB へ約 77% 削減することに成功した。Git のデルタ圧縮ウィンドウ・深度パラメータを調整し、翻訳ファイルによるパックファイル肥大化の問題を解消。サーバー側 pack 処理は GitHub インフラ依存のため GitHub チームと直接連携してチューニングした。クローン時間が 1 時間超から 15 分未満に短縮され、CI パイプラインも高速化した。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>87GB → 20GB（約 77% 削減）——GitHub 100GB リポジトリ上限リスクも解消</li>
+            <li>クローン時間: 1 時間超 → 15 分未満、新規エンジニアのオンボーディングが大幅改善</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Dropbox Tech Blog</span>
+          <span>⏱ 7 min read</span>
+          <span>2026-04</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://openai.com/index/previewing-gpt-5-6-sol/">OpenAI が GPT-5.6 Sol / Terra / Luna を限定プレビュー公開——一般提供は数週間以内</a></h3>
+        </div>
+        <div class="summary">
+          OpenAI が 6 月 26 日、新しい 3 モデルファミリー GPT-5.6 を約 20 組織に限定プレビュー公開した。旗艦の Sol（$5/$30 per 1M tokens）はフロンティア推論と長時間エージェント作業向け、Terra（$2.50/$15）は GPT-5.5 同等性能で 2 倍低コスト、Luna（$1/$6）は最速・最安のモデル。Sol は Cerebras で最大 750 tokens/sec の超高速推論を 7 月に提供予定。一般公開は「数週間以内」としている。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>3 モデル: Sol（旗艦・$5/$30）、Terra（コスパ・$2.50/$15）、Luna（高速・$1/$6）per 1M tokens</li>
+            <li>Sol は Cerebras で 750 tokens/sec——フロンティア品質の超高速推論を 7 月提供予定</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>OpenAI</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-06-26</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-frontend">Frontend</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://developer.chrome.com/blog/chrome-at-io26">Chrome at Google IO 2026——15 の新ウェブプラットフォーム機能</a></h3>
+        </div>
+        <div class="summary">
+          Google IO 2026 で発表された Chrome の最新ウェブプラットフォーム強化まとめ。CSS Anchor Positioning・View Transitions Level 2・Speculation Rules の改善など Baseline 2026 API が大幅拡充。WebGPU Shader F16 の拡充でブラウザ内 AI 推論が高速化し、エッジでの LLM 実行に新たな可能性をもたらす。エージェント向け Web 能力の底上げが今回の主テーマ。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>CSS Anchor Positioning と View Transitions Level 2 が Baseline 2026 に到達</li>
+            <li>WebGPU Shader F16 拡充でブラウザ内 AI 推論（オンデバイス LLM 実行）が高速化</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Chrome for Developers</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-06</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-product">Product</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://www.macrumors.com/2026/06/09/apple-outlines-major-ai-and-developer-tool-updates/">Apple WWDC 2026——AI システム統合と開発者ツール大幅更新の全貌</a></h3>
+        </div>
+        <div class="summary">
+          WWDC 2026 で Apple が発表した主要 AI・開発者ツール更新のまとめ。AI 機能が OS レベルに統合され、Siri がアプリをまたいだ自律操作を実現。SwiftUI の刷新と Apple Intelligence の開発者 API が公開され、サードパーティアプリへの AI 組み込みが容易になった。別途 6 月 30 日には Apple Container Machine v1.0 とネイティブ Linux コンテナサポートもリリースされ、開発者の Mac 環境が大きく進化した。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>Apple Intelligence の開発者 API 公開——サードパーティアプリへの AI 機能統合が解禁</li>
+            <li>SwiftUI 刷新と Xcode AI 支援コーディング機能の強化を同時発表</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>MacRumors</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-06-09</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-product">Product</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/google_antigravityandroidaiandroid_knowledge_baseandroid_skills.html">Google Antigravity、Android アプリ開発に正式対応——AI エージェント向け Android Knowledge Base・Skills も公開</a></h3>
+        </div>
+        <div class="summary">
+          Google の AI コードエージェントフレームワーク「Antigravity」が Android アプリ開発に正式対応。AI エージェント向けの「Android Knowledge Base」と「Android Skills」が同時公開され、エージェントが Android 開発ツールチェーンに直接アクセスして自律的に開発タスクを実行できるようになった。Publickey が報じた。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>Android Knowledge Base と Android Skills の同時公開でエージェントの Android 開発対応を実現</li>
+            <li>AI エージェントが Kotlin/Java のビルド・テスト・デプロイを自律実行できる環境が整備</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-06</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/xaigrok_build.html">xAI、コーディングエージェント「Grok Build」ベータ公開——サブエージェントを並列実行可能</a></h3>
+        </div>
+        <div class="summary">
+          xAI がコーディングエージェント CLI「Grok Build」のベータを公開。最大 8 つのサブエージェントが独立した Git worktree で同一タスクに並列アプローチし、最良の結果を選ぶ独自アーキテクチャを採用。ソースコードは xAI サーバーに送信しないローカルファースト設計。SuperGrok（$30/月）以上で利用可能。Publickey が日本語で解説。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>8 並列サブエージェントが独立 Git worktree で同問題に競合アプローチ——最良結果を採用</li>
+            <li>ソースコードは xAI サーバー未送信のローカルファースト設計</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-06</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/7788/articles/af11fbce6c3379">2026 年の AI トレンド——推論モデルの時代から「実装の時代」へ</a></h3>
+        </div>
+        <div class="summary">
+          2026 年前半の AI 動向を分析した Zenn 記事。銀行顧客サービス・製造業プロセス最適化・医療診断補助などで AI エージェントの実装事例が急増し、「概念実証」から「本番稼働」へのシフトが明確になったと解説。Test-Time Reasoning（テスト時推論）が実運用レベルに到達し、AI と人間・ロボットの協働パターンが形成されつつあることを具体例とともに論じている。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>AI エージェントの「PoC → 本番」移行が 2026 年前半に加速——金融・製造・医療での実例が増加</li>
+            <li>Test-Time Reasoning が実運用レベルに到達し、精度と制御可能性の両立が現実的に</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 5 min read</span>
+          <span>2026</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/acrosstudioblog/articles/4138c8ec633df8">2026 年の WEB 開発の基本になる変化——AI 優先開発・メタフレームワーク標準化・TypeScript 必須化</a></h3>
+        </div>
+        <div class="summary">
+          2026 年の Web 開発が迎えた構造的変化を整理した Zenn 記事。AI 優先開発を導入したチームは機械的なコーディング作業時間を削減し、UX 設計・アーキテクチャ・制約定義に注力できるようになったとする。Next.js/Nuxt などのメタフレームワークが専門的 Web プロジェクトの標準的な出発点として定着し、TypeScript はエンドツーエンド型安全の基盤として必須ツール化しているという。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>AI 優先開発で開発者の注力点が「コーディング」から「設計・制約・UX」に移行</li>
+            <li>Next.js / Nuxt がプロ向け Web プロジェクトの標準スタートポイントとして定着</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 4 min read</span>
+          <span>2026</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://aws.amazon.com/blogs/opensource/introducing-strands-agents-an-open-source-ai-agents-sdk/">AWS Strands Agents SDK——数行のコードで本番エージェントを構築できる OSS フレームワーク</a></h3>
+        </div>
+        <div class="summary">
+          AWS のオープンソースエージェント SDK「Strands Agents」が累計 2,500 万ダウンロードを突破した。モデル駆動アプローチで数行のコードから本番向けマルチエージェント AI システムを構築でき、20 以上のプリビルトツールと数千の MCP サーバーに対応。Amazon Q Developer・AWS Glue・VPC Reachability Analyzer など AWS 社内でも本番利用中。Python と TypeScript をサポート。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>Python &amp; TypeScript 対応、MCP サーバー数千件と互換——モデル・クラウド不問の設計</li>
+            <li>Amazon Q Developer など AWS 社内製品で本番利用実績あり</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>AWS Open Source Blog</span>
+          <span>⏱ 4 min read</span>
+          <span>2026</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://docs.djangoproject.com/en/6.0/releases/6.0.6/">Django 6.0.6 リリース（2026 年 6 月）——Django 6 系の最新メンテナンスパッチ</a></h3>
+        </div>
+        <div class="summary">
+          Django 6.0.6 が 2026 年 6 月にリリース。Django 6.0 系（Python 3.12/3.13/3.14 対応）のメンテナンスリリースでバグ修正・セキュリティパッチを含む。Django 6.0 はバックグラウンドタスクフレームワーク・テンプレートパーシャル・ネイティブ CSP サポートを標準搭載し、2027 年 4 月 30 日までサポート（LTS は Django 5.2 系で 2028 年 4 月まで）。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>Django 6.0 系は 2027 年 4 月 30 日まで、LTS の Django 5.2 は 2028 年 4 月まで</li>
+            <li>Python 3.12/3.13/3.14 対応、Python 3.10/3.11 は Django 6 でサポート終了済み</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Django Project</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-06</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://x.ai/news/grok-build-cli">xAI Grok Build 公式発表——8 並列エージェント搭載のローカルファースト CLI コーディングツール</a></h3>
+        </div>
+        <div class="summary">
+          xAI が発表した「Grok Build」CLI の公式詳細。プログラミングコンテンツ重視のトレーニングと実際のプルリクエストに基づくポストトレーニングで構築した専用モデル grok-code-fast-1 を搭載。SWE-Bench Verified 70.8% を達成（Opus 4.8: 87.6%、GPT-5.5: 88.7%）。Grok 4 とは独立した専用コーディングモデル系列で、SuperGrok（$30/月）以上で利用可能。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>grok-code-fast-1: Grok 4 系とは別の専用コーディングモデル、SWE-Bench Verified 70.8%</li>
+            <li>8 並列 Git worktree で同問題に競合アプローチし最良解を採用する独自アーキテクチャ</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>xAI</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-05</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://cyberscoop.com/citrix-netscaler-flaw-cve-2026-8451-citrixbleed/">Citrix NetScaler CVE-2026-8451——watchTowr が「CitrixBleed 再来」と命名した背景</a>
+        <span class="quick-summary">— 2023 年の大規模悪用「CitrixBleed」と同じ設計欠陥から生じるメモリ過読みを watchTowr が CVE-2026-3055 調査中に偶然発見した経緯を解説。</span>
+        <span class="meta">CyberScoop</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://securityaffairs.com/189628/security/u-s-cisa-adds-microsoft-sharepoint-and-zimbra-flaws-to-its-known-exploited-vulnerabilities-catalog.html">CISA が SharePoint と Zimbra を同日 KEV 追加——標的型キャンペーンの兆候</a>
+        <span class="quick-summary">— ドキュメント管理（SharePoint）とメール（Zimbra）を同時標的にする組織的攻撃の可能性について Security Affairs が分析。</span>
+        <span class="meta">Security Affairs</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://venturebeat.com/technology/openai-unveils-gpt-5-6-sol-terra-and-luna-models-but-only-accessible-to-limited-preview-partners-for-now-per-us-gov">GPT-5.6 は米政府への事前共有を経て限定公開——OpenAI の新リリースプロセス</a>
+        <span class="quick-summary">— 国家安全保障上の懸念を踏まえ、OpenAI が新フロンティアモデルを政府機関に事前共有してから限定パートナーにリリースする新プロセスを採用した経緯。</span>
+        <span class="meta">VentureBeat</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://simonwillison.net/2026/Jun/30/claude-sonnet-5/">Simon Willison: Claude Sonnet 5 の技術的注目点チェックリスト</a>
+        <span class="quick-summary">— 独立ブロガーによる Sonnet 5 の新機能・制限・実際の使い勝手の実測レポート、幻覚率低下の検証を含む。</span>
+        <span class="meta">Simon Willison</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://labs.watchtowr.com/enterprise-tech-in-shell-out-progress-kemp-loadmaster-uninitialized-heap-to-pre-auth-rce-cve-2026-8037/">watchTowr Labs: Kemp LoadMaster の Uninitialized Heap → Pre-Auth RCE フルチェーン解析</a>
+        <span class="quick-summary">— escape_quotes() のコマンドインジェクションから未認証 root 実行までの完全な攻撃チェーンを公開した技術ブログ。</span>
+        <span class="meta">watchTowr Labs</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://www.infoq.com/news/2026/04/dropbox-reduces-git-optimization/">InfoQ: Dropbox と GitHub の協働——Git デルタ圧縮最適化でモノレポを 87GB から 20GB へ</a>
+        <span class="quick-summary">— 翻訳ファイルがパックファイルを肥大化させる Git の構造的問題と、Dropbox・GitHub エンジニアによる解決策の詳細。</span>
+        <span class="meta">InfoQ</span>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="archive/" class="archive-link">Past issues</a>
+    </footer>
+  </div>
+</body>
+</html>
