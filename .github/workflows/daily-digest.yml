@@ -43,8 +43,13 @@ jobs:
 
       - name: Commit and push digest
         id: commit
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
+          # claude-code-action が git 認証設定を自分のトークンで上書きしたまま終了する
+          # （push 時点で失効し Invalid username or token になる）ため、GITHUB_TOKEN に張り直す
+          git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
           if [ -z "$(git status --porcelain -- index.html archive/ feed.xml)" ]; then
             echo "::error::生成物に変更がない（生成失敗の可能性）"
             exit 1
