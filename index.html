@@ -16,9 +16,9 @@
     </header>
 
     <div class="stats-bar">
-      <span>📰 19 articles</span>
-      <span>🏷 7 categories</span>
-      <span>📡 11 sources</span>
+      <span>📰 20 articles</span>
+      <span>🏷 5 categories</span>
+      <span>📡 13 sources</span>
     </div>
 
     <nav class="toc">
@@ -31,16 +31,16 @@
 
     <div class="numbers-bar">
       <div class="number-item">
-        <span class="number-value">99%</span>
-        <span class="number-label">Bad Epoll の root 権限奪取成功率</span>
+        <span class="number-value">9.3</span>
+        <span class="number-label">PTC Windchill RCE の深刻度（CVSS）</span>
       </div>
       <div class="number-item">
-        <span class="number-value">1.6兆</span>
-        <span class="number-label">LongCat-2.0 のパラメータ数</span>
+        <span class="number-value">91</span>
+        <span class="number-label">Anubis ランサムウェアの被害組織数</span>
       </div>
       <div class="number-item">
-        <span class="number-value">$8.3B</span>
-        <span class="number-label">Together AI の新評価額</span>
+        <span class="number-value">$30B</span>
+        <span class="number-label">Anthropic の年間換算収益</span>
       </div>
     </div>
 
@@ -51,26 +51,24 @@
         <div class="card-header">
           <span class="tag tag-security">Security</span>
           <span class="content-type">🔒 セキュリティ</span>
-          <h3><a href="https://thehackernews.com/2026/07/new-bad-epoll-linux-kernel-flaw-lets.html">DEEP DIVE: 「Bad Epoll」Linux カーネル脆弱性——無権限ユーザーが 99% の確率で root 奪取、Android にも波及</a></h3>
+          <h3><a href="https://www.securityweek.com/first-ever-exploitation-of-ptc-windchill-vulnerability-discovered-in-the-wild/">DEEP DIVE: PTC Windchill/FlexPLM の RCE 脆弱性 CVE-2026-12569（CVSS 9.3）が初の実攻撃で悪用——CISA が異例の 3 日間対応を指令</a></h3>
         </div>
         <div class="summary">
-          研究者 Jaeyoung Chung 氏が発見した Linux カーネルの新たな use-after-free 脆弱性「Bad Epoll」（CVE-2026-46242）が公開された。epoll はプログラムが多数のファイルやネットワーク接続を同時に監視するための Linux 標準機能で、サーバー・ネットワークサービス・ブラウザの多くが利用している。カーネル内の 2 つの処理が同じ内部オブジェクトの解放処理を同時に行おうとすることで発生する競合状態が根本原因で、一方がメモリを解放している最中に、もう一方がそこに書き込みを続けてしまう。
-
-          攻撃者は失敗しても繰り返し試行するだけでよく、カーネルをクラッシュさせることなく、脆弱なマシンに対して約 99% の確率で root 権限の奪取に成功する。epoll は無効化できない Linux の基幹機能であるため、回避策は存在しない。影響範囲は Linux デスクトップ・サーバーに加え、Android デバイスにも及ぶ。興味深いことに、この不具合は 2023 年の epoll コード変更にまで遡る 2 つのバグのうちの 1 つで、もう一方の CVE-2026-43074 は Anthropic の AI モデル Mythos が先に発見しており、今回の Bad Epoll は Mythos が見逃した「もう一つのバグ」だった。上流の修正コミット（a6dc643c6931）は既に公開されており、各ディストリビューションは速やかに取り込むべきとされている。
+          製品ライフサイクル管理（PLM）ソフトウェア大手 PTC が提供する Windchill と FlexPLM に、信頼できないデータのデシリアライズに起因する深刻なリモートコード実行（RCE）脆弱性 CVE-2026-12569（CVSS 9.3）が存在することが明らかになった。PTC は 2026 年 6 月 17 日に脆弱性を警告し、翌 18 日には修正パッチをリリースすると同時に、実際の攻撃での悪用をすでに確認したと発表した。攻撃者は未パッチのインスタンスに対し JSP 形式の Web シェルを設置しており、Windchill・FlexPLM 史上初めて実環境での悪用が確認された事例となる。CISA は 6 月 25 日、本脆弱性を Known Exploited Vulnerabilities（KEV）カタログに追加し、Binding Operational Directive（BOD）26-04 に基づき連邦政府機関に対しわずか 3 日後の 6 月 28 日までの対応完了を義務付けた。PTC は 6 月 25 日以降、悪用活動の高まりを確認したとしており、被害拡大への警戒を強めている。Windchill・FlexPLM は自動車・航空宇宙・製造業など幅広い業界で製品設計データや部品構成情報を管理する基盤として使われており、侵害された場合の影響は知的財産の流出にとどまらずサプライチェーン全体に波及しうる。連邦機関以外の組織についても、CISA は速やかなパッチ適用と侵害兆候の確認を強く推奨している。
         </div>
-        <div class="editorial">🧠 AI モデルが同じコード領域から片方のバグだけを見つけて満足してしまった、という事実が示唆的だ。AI 支援の脆弱性診断は強力だが「見つけた1件で終わり」ではなく、同一パターンの周辺コードを人間が疑い続ける姿勢は当面手放せない。epoll という無効化不可能な基幹機能が舞台である以上、パッチ適用の遅れが即座に全社的リスクになる点も見過ごせない。</div>
+        <div class="editorial">🧠 わずか 3 日間という異例に短い対応期限は、CISA が本脆弱性の危険度をいかに深刻視しているかの表れだ。PLM という「製造業の設計図の心臓部」を狙う攻撃は金銭目的だけでなく産業スパイの匂いもする。PTC 製品を導入している製造業・自動車・航空宇宙系の企業は、今回のパッチ適用状況を経営層にまで報告する体制を整えるべきだろう。</div>
         <div class="key-points">
           <ul>
-            <li>CVE-2026-46242——use-after-free による root 権限奪取、成功率は約 99%</li>
-            <li>回避策なし（epoll は無効化不可）——Linux デスクトップ・サーバー・Android に影響</li>
-            <li>姉妹バグ CVE-2026-43074 は Anthropic の Mythos が発見済み、Bad Epoll は見逃されていた側</li>
+            <li>CVE-2026-12569（CVSS 9.3）——デシリアライズ起因の RCE、Windchill・FlexPLM 史上初の実攻撃での悪用</li>
+            <li>PTC が 6 月 17 日警告・18 日パッチ公開、攻撃者は JSP Web シェルを設置</li>
+            <li>CISA が 6 月 25 日 KEV 追加、BOD 26-04 に基づき連邦機関に 6 月 28 日までの対応を指令（実質 3 日間）</li>
           </ul>
         </div>
-        <div class="why-it-matters">💡 Linux サーバーや Android 向けビルドを運用しているなら、上流コミット a6dc643c6931 を含むカーネル更新を最優先で適用すべきだ。ディストリのパッチ提供状況を今日中に確認したい。</div>
+        <div class="why-it-matters">💡 PTC Windchill・FlexPLM を製造業の設計データ管理基盤として運用しているなら、パッチ適用状況を即座に確認し、侵入兆候（不審な JSP ファイル）の有無も合わせて調査すべきだ。</div>
         <div class="meta">
-          <span>The Hacker News</span>
-          <span>⏱ 8 min read</span>
-          <span>2026-07-03</span>
+          <span>SecurityWeek</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-06-25</span>
         </div>
       </div>
 
@@ -78,22 +76,21 @@
         <div class="card-header">
           <span class="tag tag-ai">AI</span>
           <span class="content-type">📦 リリース</span>
-          <h3><a href="https://venturebeat.com/technology/meituan-open-sources-longcat-2-0-the-1-6t-near-frontier-agentic-coding-model-thats-been-leading-openrouter-trained-entirely-on-chinese-chips">Meituan、1.6 兆パラメータの「LongCat-2.0」を OSS 公開——学習は全て中国製チップ、Nvidia 不使用</a></h3>
+          <h3><a href="https://huggingface.co/moonshotai/Kimi-K2.6">Moonshot AI が 1 兆パラメータのオープンウェイトモデル「Kimi K2.6」を公開——コーディング性能で GPT-5.5 に肉薄</a></h3>
         </div>
         <div class="summary">
-          中国の配送・生活サービス大手 Meituan が、1.6 兆パラメータ・コンテキスト長 100 万トークンの大規模言語モデル「LongCat-2.0」を MIT ライク・ライセンスでオープンソース公開した。5 万基超の中国製 ASIC からなるクラスタで完全学習された、この規模としては初のモデルとされ、Nvidia の GPU に依存せずに近フロンティア級 AI を実現できることを示した。性能は Google Gemini 3.1 Pro に匹敵するとされ、OpenRouter の利用ランキングでも上位を維持している。
+          中国 Moonshot AI が、1 兆パラメータ（アクティブ 320 億）の Mixture-of-Experts モデル「Kimi K2.6」を Modified MIT License でオープンウェイト公開した。26 万 2144 トークンのコンテキスト長を持ち、テキスト・画像・動画をネイティブに扱うマルチモーダル構成。SWE-Bench Pro で 58.6% を記録し GPT-5.5 と同水準、Humanity's Last Exam（ツール利用あり）では 54.0% で首位。最大 300 のサブエージェントを並列展開し 4,000 ステップの自律タスクをこなせる点も特徴で、API 利用コストは競合フロンティアモデル比で約 80% 安いという。
         </div>
         <div class="key-points">
           <ul>
-            <li>1.6 兆パラメータ・100 万トークンコンテキスト——5 万基超の中国製 ASIC のみで学習</li>
-            <li>MIT ライク・ライセンスで OSS 公開——OpenRouter 利用ランキング上位を継続</li>
-            <li>性能は Google Gemini 3.1 Pro 相当、GPT-5.5・Claude Sonnet 5 より低価格</li>
+            <li>1 兆パラメータ・アクティブ 320 億、26 万 2144 トークンのコンテキスト長でネイティブにマルチモーダル対応</li>
+            <li>SWE-Bench Pro で 58.6%（GPT-5.5 と同水準）、最大 300 サブエージェント並列で 4,000 ステップの自律タスクに対応</li>
           </ul>
         </div>
         <div class="meta">
-          <span>VentureBeat</span>
+          <span>Hugging Face</span>
           <span>⏱ 4 min read</span>
-          <span>2026-07-01</span>
+          <span>2026-04</span>
         </div>
       </div>
 
@@ -101,22 +98,21 @@
         <div class="card-header">
           <span class="tag tag-product">Product</span>
           <span class="content-type">💰 ビジネス</span>
-          <h3><a href="https://techcrunch.com/2026/07/01/neocloud-together-ai-raises-800m-leaps-to-8-3b-valuation/">Together AI、$800M 調達で評価額 $8.3B に倍増——Aramco Ventures がリード</a></h3>
+          <h3><a href="https://www.trendingtopics.eu/anthropic-overtakes-openai-in-revenue-hitting-30-billion-run-rate/">Anthropic、年間換算収益で OpenAI を逆転——$30B ランレートに到達</a></h3>
         </div>
         <div class="summary">
-          AI インフラ企業 Together AI が Series C で $800M を調達し、評価額は $8.3B に達した。約 16 カ月前の Series B（$305M、評価額 $3.3B）から倍増以上の伸び。ラウンドは Aramco Ventures が主導し、Vista Equity Partners・General Catalyst・Nvidia・Pegatron などが参加した。同社は DeepSeek・MiniMax・Kimi などオープンモデルを使い、企業が閉鎖系プロバイダーより低コストで AI ワークロードを学習・展開できるプラットフォームを提供している。累計調達額は $1.3B に到達した。
+          Anthropic の年間換算収益（ARR）が 2026 年 4 月時点で約 $30B に達し、2 月末時点で $25B だった OpenAI を上回ったと報じられた。フロンティア AI の挑戦者が収益で業界最大手を追い抜くのは今回が初めてとされる。背景には事業戦略の違いがあり、Anthropic はエンタープライズ向け導入を重視し、特にソフトウェア開発・業務自動化領域で Claude 系モデルの採用が急速に進んだことが成長を牽引した一方、OpenAI は ChatGPT を軸にした個人ユーザー向け展開を主軸としてきた。
         </div>
         <div class="key-points">
           <ul>
-            <li>Series C で $800M 調達、評価額 $8.3B——16 カ月前の $3.3B から倍増</li>
-            <li>Aramco Ventures がリード、Nvidia・Vista Equity Partners 等が参加</li>
-            <li>オープンモデル（DeepSeek/MiniMax/Kimi）活用の低コスト AI 基盤が強み</li>
+            <li>Anthropic の ARR は 2026 年 4 月時点で約 $30B——2 月末の OpenAI（$25B）を上回る</li>
+            <li>エンタープライズ・ソフトウェア開発領域での Claude 導入拡大が成長の主因</li>
           </ul>
         </div>
         <div class="meta">
-          <span>TechCrunch</span>
+          <span>Trending Topics</span>
           <span>⏱ 3 min read</span>
-          <span>2026-07-01</span>
+          <span>2026-07-03</span>
         </div>
       </div>
     </div>
@@ -128,43 +124,43 @@
         <div class="card-header">
           <span class="tag tag-frontend">Frontend</span>
           <span class="content-type">📦 リリース</span>
-          <h3><a href="https://astro.build/blog/astro-7/">Astro 7.0 リリース——Vite 8/Rolldown 採用、Rust 製コンパイラでビルド最大 61% 高速化</a></h3>
+          <h3><a href="https://nextjs.org/blog/next-16">Next.js 16 発表——Cache Components と AI 支援デバッグ向け DevTools MCP を搭載</a></h3>
         </div>
         <div class="summary">
-          静的サイトジェネレータ Astro のメジャーバージョン 7.0 がリリースされた。ビルドシステムが Vite 8 / Rolldown に移行し、.astro コンパイラは Rust で書き直され、Markdown/MDX 処理も Rust パイプライン化。新しいキューベースのレンダリングエンジンと合わせ、ビルド時間は最大 61% 短縮された。src/fetch.ts でリクエストパイプラインを制御できる Advanced Routing、ルートキャッシュの安定版化、Netlify/Vercel/Cloudflare 向け実験的 CDN キャッシュプロバイダーも追加。AI コーディングエージェント向けにバックグラウンド dev server 実行や構造化 JSON ログ出力にも対応した。
+          Next.js 16 が公開され、ルーティング・キャッシュ・開発体験に大幅な改善が加わった。目玉機能「Cache Components」は Partial Pre-Rendering（PPR）と use cache ディレクティブを組み合わせた新しいプログラミングモデルで、即時ページ遷移を実現する。あわせて Model Context Protocol（MCP）ベースの「Next.js DevTools MCP」が導入され、AI エージェントが開発中のアプリの挙動を診断・説明し、修正案を提示できるようになった。
         </div>
         <div class="key-points">
           <ul>
-            <li>Vite 8/Rolldown + Rust 製コンパイラ採用——ビルド時間最大 61% 短縮</li>
-            <li>src/fetch.ts による Advanced Routing、ルートキャッシュが安定版に</li>
+            <li>Cache Components——PPR と use cache による即時ナビゲーションの新モデル</li>
+            <li>Next.js DevTools MCP で AI エージェントがアプリの診断・修正提案を実行</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Astro Blog</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-06-22</span>
+          <span>Next.js Blog</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-06</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
           <span class="tag tag-frontend">Frontend</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://vite.dev/blog/announcing-vite8-1">Vite 8.1 リリース——実験的「Bundled Dev Mode」でdevサーバー起動が最大 15 倍高速化</a></h3>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://tanstack.com/blog/tanstack-open-source-awards-2026">TanStack Start が 2026 Open Source Awards で Breakthrough of the Year 受賞</a></h3>
         </div>
         <div class="summary">
-          Vite 8.1 が公開された。目玉は実験的な「Bundled Dev Mode」で、1 万コンポーネント規模の React アプリでの検証では dev サーバー起動が 15 倍、フルリロードが 10 倍高速化し、アプリ規模に関わらず即時 HMR を実現するという。WebAssembly/ECMAScript Module Integration Proposal に対応し、WASM を通常の JS モジュールとして import 可能に。Rust 製 CSS ツール Lightning CSS との連携も強化され、CSS ファイル内での外部 CSS import やプラグインによるファイル依存登録に対応、次期メジャーでの標準採用に向けた布石とされる。
+          アムステルダムで開催された JSNation / React Summit ウィーク内の「2026 Open Source Awards」で、フルスタック React フレームワーク TanStack Start が Breakthrough of the Year を受賞した。競争の激しいフルスタック React 領域において、TanStack Router の型安全なルートモデルを土台に、SSR・ストリーミング・サーバー関数・サーバールートをそのまま拡張する設計思想が評価された。同時に TanStack AI も AI Project of the Year を受賞している。
         </div>
         <div class="key-points">
           <ul>
-            <li>Bundled Dev Mode（実験的）——1 万コンポーネント規模で起動 15 倍・リロード 10 倍高速化</li>
-            <li>WASM の ESM Integration Proposal に対応、Lightning CSS 連携も強化</li>
+            <li>JSNation 主催・第 7 回 JavaScript Open Source Awards（2026 年 6 月 11 日）で受賞</li>
+            <li>TanStack Router の型安全なルートモデルに SSR・サーバー関数を統合する設計を評価</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Vite Blog</span>
+          <span>TanStack Blog</span>
           <span>⏱ 3 min read</span>
-          <span>2026-06-23</span>
+          <span>2026-06-11</span>
         </div>
       </div>
 
@@ -172,43 +168,43 @@
         <div class="card-header">
           <span class="tag tag-security">Security</span>
           <span class="content-type">🔒 セキュリティ</span>
-          <h3><a href="https://thehackernews.com/2026/07/google-disrupts-netnut-residential.html">Google、FBI と連携し住宅用プロキシ網「NetNut」を無力化——約 200 万台規模</a></h3>
+          <h3><a href="https://thehackernews.com/2026/07/ransomware-groups-turn-to-citrix-bleed.html">Anubis ランサムウェア、Citrix Bleed 2 悪用で 91 組織が被害——正規 RMM ツールで検知回避</a></h3>
         </div>
         <div class="summary">
-          Google が FBI などと連携し、一般家庭の機器を他者のトラフィック中継用に転用する最大級のネットワークの一つ「NetNut」を大幅に機能低下させたと発表した。利用可能なデバイスプールを数百万台規模で削減し、悪用可能な住宅用 IP の供給網に打撃を与えた。NetNut は約 200 万台の家庭用デバイスにまたがる規模だったとされる。
+          セキュリティ企業 Arctic Wolf が、ランサムウェアグループ Anubis による攻撃キャンペーンを分析した。攻撃者は NetScaler の認証前脆弱性「Citrix Bleed 2」（CVE-2025-5777）を悪用してセッショントークンを窃取し、多要素認証（MFA）を回避したうえで侵入。ScreenConnect・Zoho Assist・MeshAgent など正規のリモート管理ツールを悪用して通常の IT 活動に紛れ、暗号化に至るまで検知を逃れていた。これまでに 91 組織が被害を受けたと報告されている。
         </div>
         <div class="key-points">
           <ul>
-            <li>約 200 万台の家庭用デバイスからなる住宅用プロキシ網を機能低下——FBI 等と連携</li>
-            <li>悪用可能デバイスプールを数百万台規模で削減</li>
+            <li>CVE-2025-5777（Citrix Bleed 2）でセッショントークンを窃取し MFA を回避——被害組織は 91 件に到達</li>
+            <li>ScreenConnect・Zoho Assist・MeshAgent など正規 RMM ツールを悪用し検知を回避</li>
           </ul>
         </div>
         <div class="meta">
           <span>The Hacker News</span>
-          <span>⏱ 3 min read</span>
+          <span>⏱ 4 min read</span>
           <span>2026-07-02</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-infra">Infra</span>
-          <span class="content-type">👀 注目</span>
-          <h3><a href="https://www.linuxfoundation.org/press/linux-foundation-announces-intent-to-launch-agent-name-service-to-establish-trusted-identity-infrastructure-for-ai-agents">Linux Foundation、DNS ベースで AI エージェントに信頼済み ID を与える「Agent Name Service」設立へ</a></h3>
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://www.runzero.com/blog/fatfs-bugs/">組込み機器向けファイルシステム「FatFs」に未修正の脆弱性 7 件——防犯カメラやドローンにも影響</a></h3>
         </div>
         <div class="summary">
-          Linux Foundation が、既存の DNS インフラを基盤に AI エージェントの信頼済み ID・検証・発見を提供するオープン標準「Agent Name Service（ANS）」の設立意向を発表した。企業は自社が管理するドメインを通じてエージェント ID を公開でき、エージェントが誰を代表し、どんな権限を持ち、コードや稼働履歴が改ざんされていないかを検証可能にする。登録・更新・失効はすべて改ざん耐性のある追記型 Merkle ログに記録される。GoDaddy・Cloudflare・Salesforce・Cisco が支持を表明した。
+          セキュリティ企業 runZero が、USB ドライブや SD カードの FAT/exFAT 形式を扱う組込みファイルシステムライブラリ「FatFs」に 7 件の脆弱性を開示した。FatFs は防犯カメラ・ドローン・産業用コントローラ・ハードウェア暗号ウォレットなど、リアルタイム OS ベースの機器に広く組み込まれている。最も深刻な CVE-2026-6682（CVSS 7.6）は FAT32 マウント時の整数オーバーフローでメモリ破壊とコード実行につながる恐れがあり、ファームウェア更新経路からも到達可能という。上流の修正やセキュリティメーリングリストが存在しないため、影響を受ける製品側が対象かどうかを知る手段がないのが実情だ。
         </div>
         <div class="key-points">
           <ul>
-            <li>1 秒間 1 億件超のクエリを処理する既存 DNS インフラにエージェント ID を直接紐付け</li>
-            <li>登録・更新・失効を追記型 Merkle ログで改ざん耐性を確保、GoDaddy・Cloudflare 等が支持</li>
+            <li>最重要の CVE-2026-6682（CVSS 7.6）は FAT32 マウント時の整数オーバーフロー——メモリ破壊・コード実行の恐れ</li>
+            <li>上流修正・セキュリティメーリングリストともに存在せず、対象製品側は影響有無を知る術がない</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Linux Foundation</span>
+          <span>runZero</span>
           <span>⏱ 4 min read</span>
-          <span>2026-06-23</span>
+          <span>2026-07-03</span>
         </div>
       </div>
 
@@ -216,21 +212,21 @@
         <div class="card-header">
           <span class="tag tag-dev">Dev</span>
           <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://github.blog/changelog/2026-06-02-gain-insights-across-your-agent-sessions-with-chronicle/">GitHub Copilot「/chronicle」——セッション履歴を GitHub アカウントに同期し横断的に分析</a></h3>
+          <h3><a href="https://github.blog/changelog/2026-07-01-github-models-is-being-fully-retired-on-july-30-2026/">GitHub Models、7 月 30 日に完全終了——Azure AI Foundry への移行を GitHub が案内</a></h3>
         </div>
         <div class="summary">
-          GitHub Copilot のローカルセッションが GitHub アカウントに同期されるようになり、Copilot アプリ・github.com・VS Code・JetBrains のいずれからもアクセス可能になった。Copilot cloud agent・コードレビュー・アプリ・IDE 横断でセッションを集約する「/chronicle」コマンドは、履歴をスタンドアップ用サマリーや個人向けのヒント、カスタム指示に変換できる。セッションは既定で非公開、view-only 共有も可能。Business/Enterprise では管理者による同期の有効化が必要。
+          GitHub が無料の AI モデル検証環境「GitHub Models」を 2026 年 7 月 30 日をもって全面終了すると発表した。プレイグラウンド・モデルカタログ・推論 API・BYOK エンドポイントのすべてが対象で、Free・Team・Enterprise の全プランで猶予期間なく廃止される。移行に備え 7 月 16 日・23 日に短時間のサービス停止（ブラウンアウト）を予告済み。GitHub は移行先として Azure AI Foundry を、Copilot ワークフロー内での AI 活用には GitHub Copilot の継続利用を案内している。
         </div>
         <div class="key-points">
           <ul>
-            <li>Copilot cloud agent・コードレビュー・VS Code・JetBrains のセッションを横断集約</li>
-            <li>/chronicle でスタンドアップ要約・個人向けヒント・カスタム指示を自動生成</li>
+            <li>2026 年 7 月 30 日に全プラン対象で完全終了、7 月 16 日・23 日に予告済みブラウンアウトを実施</li>
+            <li>移行先として Azure AI Foundry を案内、猶予期間や個別延長はなし</li>
           </ul>
         </div>
         <div class="meta">
           <span>GitHub Changelog</span>
           <span>⏱ 2 min read</span>
-          <span>2026-06-02</span>
+          <span>2026-07-01</span>
         </div>
       </div>
     </div>
@@ -240,45 +236,67 @@
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://kakakakakku.hatenablog.com/entry/2026/06/29/100849">2026 年 4-6 月のプルリクエストを振り返る——四半期ごとの活動を定量化する習慣</a></h3>
+          <span class="tag tag-product">Product</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://ascii.jp/elem/000/004/415/4415932/">ソラコム、IoT 構築を支援する AI エージェント「SORACOM Agent」7 月 7 日提供開始——長期記憶で「社内の生き字引」に</a></h3>
         </div>
         <div class="summary">
-          個人ブログ「kakakakakku blog」で、2026 年 4〜6 月期に作成したプルリクエスト計 26 件を振り返る恒例の記事が公開された。四半期ごとに PR 件数や取り組んだプロジェクトを棚卸しし、自身の開発活動を定量的に可視化する習慣を継続している。同ブログでは年始・半期ごとにも振り返りを実施しており、継続的な記録が自己の技術的成長の把握に役立つとしている。
+          ソラコムが、IoT プロジェクトの企画からプロトタイピング、開発・運用までを伴走支援するマネージド AI エージェント「SORACOM Agent」を発表した。7 月 7 日から Technology Preview 版として提供を開始する。特徴は「自律性」と「長期記憶」で、ユーザーとの対話内容や仕様を長期間記憶し、継続的なプロジェクトに対応できる。例えば「社内のロボットの位置を教えて」と自然言語で依頼すると、連携する IoT カメラ「ソラカメ」など既存デバイスを駆使して調べて回答してくれる。
         </div>
         <div class="key-points">
           <ul>
-            <li>2026 年 4-6 月期のプルリクエスト作成数は計 26 件</li>
-            <li>四半期・半期・年次の複数粒度で振り返りを継続する習慣化の実践例</li>
+            <li>2026 年 7 月 7 日から Technology Preview 版として提供開始</li>
+            <li>「自律性」と「長期記憶」が特徴——IoT デバイスと連携し自然言語だけでシステム構築・運用が可能に</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Hatena Blog（kakakakakku）</span>
+          <span>ASCII.jp</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07-02</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://zenn.dev/tkou15/articles/agent-browser-ai-agent">agent-browser × AI エージェント——ブラウザ操作を自動化する新しいアプローチ</a></h3>
+        </div>
+        <div class="summary">
+          Zenn の記事では、AI エージェント向けに設計された Rust 製ブラウザ自動化 CLI ツール「agent-browser」が紹介されている。スクリーンショットやマルチモーダル LLM に頼らず、DOM 構造を直接解析して操作対象を特定する設計により、高速かつ低コストでの自動化を実現しているという。GitHub 上で 27,000 以上のスターを獲得しており、AI コーディングアシスタントのエコシステムで急速に注目を集めているツールの一つとして紹介されている。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>Rust 製ブラウザ自動化 CLI——DOM 構造を直接解析し、スクリーンショット不要で操作対象を特定</li>
+            <li>GitHub で 27,000 以上のスターを獲得</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
           <span>⏱ 3 min read</span>
-          <span>2026-06-29</span>
+          <span>2026-06</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
           <span class="tag tag-dev">Dev</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://www.publickey1.jp/blog/26/gitlabaigitproject_switch50.html">GitLab、AI エージェント向け次世代 Git 互換サービス「Project Switch」発表——最大 50 倍高速・トークン半減</a></h3>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/ryugotoo/articles/691c08f844a5e1">「Rust は生成 AI 時代の覇権言語になる説」</a></h3>
         </div>
         <div class="summary">
-          GitLab が「GitLab Transcend」イベントで、AI エージェント向けの次世代 Git 互換ソースコード管理サービス「Project Switch」を発表した。従来の Git 系サービスは人間が手動でコードを保存・更新する前提で作られていたが、多数の AI エージェントが並列でコードの複製・生成・更新を行う現在の負荷には耐えられなくなっていた。Project Switch は Git プロトコル互換を保ちながら compute と storage を分離する新アーキテクチャを採用し、ネットワークトラフィックを従来の 1/1000 に削減、トークン消費も半減させる新しいアクセスパターンを提供する。
+          Zenn に投稿された考察記事では、AI コーディングエージェントが実装の大部分を担うようになった現在、メモリ安全性と高いパフォーマンスを両立する Rust が今後さらに存在感を増すのではないかという説が展開されている。AI が生成したコードのレビューが人間の主な仕事になる時代には、コンパイラによる強い保証がある言語ほど安心して任せられるという観点から、Rust の採用拡大を予測している。
         </div>
         <div class="key-points">
           <ul>
-            <li>クローン速度最大 42 倍・書き込み速度最大 17 倍——AI エージェントのタスク全体は約 22 倍高速化</li>
-            <li>ネットワークトラフィックを 1/1000 に削減、トークン消費も半減</li>
+            <li>AI 生成コードのレビューが中心業務になる時代、コンパイラの強い保証を持つ言語が有利と主張</li>
+            <li>メモリ安全性とパフォーマンスの両立という Rust の特性が AI 時代に適合すると分析</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Publickey</span>
+          <span>Zenn</span>
           <span>⏱ 4 min read</span>
-          <span>2026-06-10</span>
+          <span>2026-06</span>
         </div>
       </div>
 
@@ -286,43 +304,21 @@
         <div class="card-header">
           <span class="tag tag-dev">Dev</span>
           <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://www.publickey1.jp/blog/26/vs_codeaiagent_window.html">VS Code、複数 AI エージェントを並行運用する新機能「Agent window」をプレビュー公開</a></h3>
+          <h3><a href="https://zenn.dev/knowledgework/articles/knip-with-ai-agent">AI エージェント × knip で無駄コードを簡単に掃除</a></h3>
         </div>
         <div class="summary">
-          VS Code 1.120 で、複数の AI エージェントを並行して扱いやすくする新機能「Agent window」のプレビューが公開された。現時点で Copilot CLI・Copilot Cloud・Claude 系エージェントに対応しており、それぞれのエージェントの作業状況を専用ウィンドウで俯瞰しながら切り替えて管理できる。複数エージェントを同時に走らせる開発スタイルが広がる中、IDE 側がその管理コストを吸収しようとする動きの一つ。
+          Zenn の記事では、JavaScript/TypeScript プロジェクトの未使用コードを検出する静的解析ツール「knip」と AI コーディングエージェントを組み合わせたワークフローが紹介されている。knip が機械的に検出した未使用のエクスポート・依存関係・ファイルを AI エージェントに渡し、安全性を確認させながら自動的に削除させる手順を解説。人手では後回しにされがちなコード掃除を、AI エージェントとの分業で継続的に回す実践例となっている。
         </div>
         <div class="key-points">
           <ul>
-            <li>VS Code 1.120 でプレビュー公開——Copilot CLI・Copilot Cloud・Claude 系に対応</li>
-            <li>複数エージェントの並行作業を専用ウィンドウで可視化・管理</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Publickey</span>
-          <span>⏱ 3 min read</span>
-          <span>2026-05</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://zenn.dev/mavericks/articles/bf49f1cf7cc7ab">AIエージェントに読ませるためのコード設計——ハルシネーションを防ぐリポジトリ構成の実践</a></h3>
-        </div>
-        <div class="summary">
-          Zenn で公開された記事では、AI エージェントが自律的にコードを読み書きする時代を見据え、AI のハルシネーションを防ぎ期待通りのコードを生成させるための「AI 向けコード設計・リポジトリ構成」の実践知が紹介されている。人間だけでなく AI エージェントが読むことを前提にファイル構成・命名・コメントを設計することで、AI の誤読や誤修正を減らせるという考え方を、具体的なディレクトリ構成例とともに解説している。
-        </div>
-        <div class="key-points">
-          <ul>
-            <li>AI エージェントを「読者」として想定したリポジトリ構成・命名規則を提案</li>
-            <li>具体的なディレクトリ構成例でハルシネーション抑制の実践方法を解説</li>
+            <li>knip の検出結果を AI エージェントに渡し、安全確認をしたうえで自動削除させるワークフローを提案</li>
+            <li>人手では放置されがちな未使用コードの掃除を継続的な分業タスクとして仕組み化</li>
           </ul>
         </div>
         <div class="meta">
           <span>Zenn</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-04-17</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-06</span>
         </div>
       </div>
     </div>
@@ -332,17 +328,17 @@
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-oss">OSS</span>
+          <span class="tag tag-ai">AI</span>
           <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://github.com/DietrichGebert/ponytail">GitHub トレンド「ponytail」——AI エージェントに書かせるコードを 54% 削減するスキル</a></h3>
+          <h3><a href="https://github.com/openai/codex-plugin-cc">OpenAI、Claude Code から Codex を呼び出せる公式プラグイン「codex-plugin-cc」を公開</a></h3>
         </div>
         <div class="summary">
-          「最高のコードとは書かれなかったコードだ」を掲げる OSS プロジェクト「ponytail」が GitHub トレンド入りしている。AI コーディングエージェントに「部屋で一番怠惰なシニアエンジニアのように考えさせる」スキルを与えるもので、実際の FastAPI + React リポジトリでの検証では、コード量 54%・トークン消費 22%・コスト 20% を削減しつつ、処理時間も 27% 短縮したという。MIT ライセンスで無料公開されており、Claude Code・Codex・Copilot CLI・Cursor・Gemini CLI など 14 種のエージェントに対応する。
+          OpenAI が、Claude Code のワークフロー内から Codex を呼び出してコードレビューやタスク委任を行える公式プラグイン「codex-plugin-cc」を GitHub で公開した。通常のコードレビューに加え、特定の設計判断やリスク領域に異議を唱えさせる「Adversarial Review」コマンドも搭載。利用には ChatGPT サブスクリプション（Free プラン含む）または OpenAI API キーが必要で、使用量は Codex の利用枠にカウントされる。
         </div>
         <div class="key-points">
           <ul>
-            <li>実測でコード量 54%・トークン消費 22%・コスト 20% 削減、処理時間 27% 短縮</li>
-            <li>MIT ライセンスで無料公開、Claude Code・Cursor など 14 エージェントに対応</li>
+            <li>Claude Code から /codex:review・/codex:adversarial-review などのコマンドで Codex を呼び出し可能</li>
+            <li>ChatGPT サブスクリプション（Free 含む）または API キーで利用可、Codex 利用枠を消費</li>
           </ul>
         </div>
         <div class="meta">
@@ -356,20 +352,43 @@
         <div class="card-header">
           <span class="tag tag-ai">AI</span>
           <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://github.com/headroomlabs-ai/headroom">「headroom」——ツール出力やログを AI に渡す前に圧縮しトークン消費を 60-95% 削減</a></h3>
+          <h3><a href="https://github.com/alibaba/page-agent">Alibaba、自然言語で Web UI を操作できる JavaScript 製「page-agent」を公開</a></h3>
         </div>
         <div class="summary">
-          AI エージェント向けのコンテキスト圧縮ツール「headroom」が GitHub で注目を集めている。ツール出力・ログ・ファイル・RAG チャンク・会話履歴を LLM に渡す前に圧縮し、トークン消費を 60〜95% 削減しつつ回答品質を維持するという。JSON・コード・ログ・diff・HTML など内容種別を自動判定して最適な圧縮器に振り分ける ContentRouter や、Python/JS/TS/Go/Rust/Java 対応の AST ベース CodeCompressor を搭載。ライブラリ・プロキシ・MCP サーバーいずれの形態でも利用でき、Apache 2.0 でオープンソース公開されている。
+          Alibaba が MIT ライセンスでオープンソース公開した「page-agent」は、ブラウザ拡張機能や外部の headless ブラウザを使わず、ページ内 JavaScript だけで完結する GUI エージェントライブラリ。スクリーンショットやマルチモーダル LLM を必要とせず、自社の Web アプリに組み込んで自然言語操作を実現できる点が特徴。OpenAI・Claude・DeepSeek・Qwen など任意の LLM を「Bring Your Own LLM」方式で接続可能で、操作前にユーザーへ確認を求める協調パネルも備える。
         </div>
         <div class="key-points">
           <ul>
-            <li>ツール出力・ログ・RAG チャンクの圧縮でトークン消費を 60〜95% 削減</li>
-            <li>Python/JS/TS/Go/Rust/Java 対応の AST ベース圧縮器を搭載、Apache 2.0 で公開</li>
+            <li>ブラウザ拡張・headless ブラウザ不要、ページ内 JavaScript のみで動作</li>
+            <li>OpenAI・Claude・DeepSeek・Qwen など任意の LLM を接続可能、683 コミット・18 リリースを重ねる</li>
           </ul>
         </div>
         <div class="meta">
           <span>GitHub</span>
           <span>⏱ 3 min read</span>
+          <span>2026-07</span>
+          <span class="engagement">⭐ 2,900</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://github.com/juliusbrussee/caveman">「洞窟人語」でトークン消費を削減する Claude Code スキル「caveman」が急上昇</a></h3>
+        </div>
+        <div class="summary">
+          GitHub トレンドで「caveman」というスキルが話題になっている。AI コーディングエージェントに冗長な言い回しを捨てさせ「洞窟人風」の簡潔な話し方をさせることで、コード・コマンド・エラーは一字一句正確に保ったまま、出力トークンを約 65% 削減できるという触れ込み。Claude Code をはじめ 30 種類以上のエージェントで動作し、/caveman コマンドまたは「洞窟人のように話して」という指示一つで有効化できる。GitHub トレンド 1 位・Hacker News 総合 1 位を記録し、スター数はまもなく 5,000 に達する勢いだという。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>出力トークンを約 65% 削減——コード・コマンド・エラーメッセージは正確さを維持</li>
+            <li>Claude Code など 30 種類以上のエージェントに対応、GitHub トレンド 1 位を記録</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 2 min read</span>
           <span>2026-07</span>
         </div>
       </div>
@@ -380,37 +399,37 @@
 
       <div class="quick-link">
         <span class="tag tag-security">Security</span>
-        <a href="https://thehackernews.com/2026/07/new-chocopoc-rat-targets-vulnerability.html">偽 PoC リポジトリに仕込まれた「ChocoPoC」RAT が脆弱性研究者を標的に</a>
-        <span class="quick-summary">— GitHub 上の偽 CVE 実証コードに情報窃取型トロイの木馬を仕込む手口。研究者がダウンロード・実行しがちな PoC リポジトリを悪用している。</span>
+        <a href="https://thehackernews.com/2026/07/new-avalon-malware-framework-packs.html">新型モジュラーマルウェア「Avalon」発見——ランサムウェア CrownX を内包し主要 EDR 製品を回避</a>
+        <span class="quick-summary">— 偽の法律文書メールを起点に ISO イメージ経由で侵入。Defender・CrowdStrike など複数の EDR 製品への回避機構を備える。</span>
         <span class="meta">The Hacker News</span>
       </div>
 
       <div class="quick-link">
         <span class="tag tag-security">Security</span>
-        <a href="https://thehackernews.com/2026/07/armored-likho-targets-government.html">新種の脅威アクター「Armored Likho」、ロシア・ブラジル・カザフスタンの政府機関と電力インフラを標的に</a>
-        <span class="quick-summary">— これまで未報告だったグループによる攻撃キャンペーン。政府機関と電力セクターを横断して狙う点が特徴。</span>
+        <a href="https://thehackernews.com/2026/06/airdrop-and-quick-share-flaws-let.html">AirDrop と Quick Share に脆弱性 6 件、50 億台の iPhone/Android に影響——30m 圏内から悪用可能</a>
+        <span class="quick-summary">— CISPA の研究者がプロトコルを解析し発見。フィッシングや Wi-Fi 接続なしにクラッシュや改ざんを引き起こせる。</span>
         <span class="meta">The Hacker News</span>
       </div>
 
       <div class="quick-link">
         <span class="tag tag-security">Security</span>
-        <a href="https://thehackernews.com/2026/07/toddycat-linked-umbrij-malware-abuses.html">ToddyCat 系マルウェア「Umbrij」、OAuth を悪用して企業 Gmail に不正アクセス</a>
-        <span class="quick-summary">— Google API 経由でメールへの潜伏アクセスを狙う新マルウェア。企業の Gmail 通信を主な標的としている。</span>
-        <span class="meta">The Hacker News</span>
+        <a href="https://snyk.io/blog/node-gyp-supply-chain-compromise-self-propagating-npm-worm-binding-gyp/">npm サプライチェーン攻撃「node-gyp」、57 パッケージに影響——認証情報を窃取し自己増殖</a>
+        <span class="quick-summary">— binding.gyp を悪用し npm install 時に自動実行。npm/GitHub/AWS などの認証情報を窃取し他のメンテナーアカウントにも拡散する。</span>
+        <span class="meta">Snyk</span>
       </div>
 
       <div class="quick-link">
         <span class="tag tag-security">Security</span>
-        <a href="https://thehackernews.com/2026/07/unpatched-flaws-disclosed-in-filesystem.html">組込み機器向けファイルシステム「FatFs」に未修正の脆弱性 7 件——防犯カメラやドローンにも影響</a>
-        <span class="quick-summary">— セキュリティ企業 runZero が開示。上流修正はまだなく、PoC ディスクイメージのみ公開されている状態。</span>
-        <span class="meta">The Hacker News</span>
+        <a href="https://www.nikkei.com/article/DGXZQOUC237WT0T20C26A6000000/">KDDI、ISP 向けメールシステムに不正アクセス——最大 1,422 万件のメールアドレス・パスワードが漏洩の恐れ</a>
+        <span class="quick-summary">— STNet・Nifty・BIGLOBE など提携 ISP 6 社が対象。総務省は 7 月 6 日までの調査報告を要請している。</span>
+        <span class="meta">日本経済新聞</span>
       </div>
 
       <div class="quick-link">
-        <span class="tag tag-product">Product</span>
-        <a href="https://techcrunch.com/2026/06/23/after-betting-the-firm-on-anthropic-menlo-ventures-raises-victorious-3b-fund/">Menlo Ventures、Anthropic 投資の成功を背景に新ファンド $3B を調達</a>
-        <span class="quick-summary">— Anthropic への早期投資が奏功し、VC としての存在感を高めた同社が新ファンドの組成に成功。</span>
-        <span class="meta">TechCrunch</span>
+        <span class="tag tag-security">Security</span>
+        <a href="https://thehackernews.com/2026/06/chrome-v8-zero-day-cve-2026-11645.html">Chrome に 2026 年 5 件目のゼロデイ CVE-2026-11645——V8 エンジンの境界外読み書きが実攻撃で悪用</a>
+        <span class="quick-summary">— CVSS 8.8。細工した HTML ページからサンドボックス内でのコード実行につながる恐れがあり、CISA も KEV に追加済み。</span>
+        <span class="meta">The Hacker News</span>
       </div>
     </div>
 
