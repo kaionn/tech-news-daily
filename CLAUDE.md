@@ -2,52 +2,38 @@
 
 ## プロジェクト概要
 
-tech-news-daily: 技術ニュースを毎日収集・整形し、GitHub Pages で公開する静的サイト。CCR routine (`trig_01LvUYkX4UXHkv8KDLsFH9eL`) が WebSearch → HTML 生成を毎日自動実行する。
+tech-news-daily: 技術ニュースを毎日収集・整形し、GitHub Pages で公開する静的サイト。GitHub Actions workflow `daily-digest.yml` が claude-code-action で WebSearch → HTML 生成 → main push → Pages デプロイを毎日自動実行する（2026-07-05 に CCR routine から全面移行）。
 
-## デプロイパイプライン（CCR → GHA auto-merge → Pages）
+## デプロイパイプライン（GHA daily-digest: 生成→push→Pages）
 
-CCR routine はサンドボックス上の作業ブランチ `claude/**` にコミットするだけで、**main へは直接 push しない**。`git push origin main` は PAT を実体化するため auto-mode classifier に阻まれる（＝以前サイトが数日更新されなかった真因）。責務を分離している:
+`.github/workflows/daily-digest.yml`（cron `8 21 * * *` = 06:08 JST、`workflow_dispatch` で手動実行可）が単一 workflow で完結する:
 
-1. **生成 (CCR)**: routine が `index.html` 等を作業ブランチにコミットする。CCR ハーネスがそのブランチをハーネス自身の認証で自動 push する（PAT 不要）。
-2. **反映 (GitHub Actions)**: `.github/workflows/auto-merge-digest.yml` が `claude/**` への push を検知し、head コミットが `YYYY-MM-DD のテックニュースダイジェスト` 形式のときだけ main へ取り込む（fast-forward、衝突時は新しい digest を `-X theirs` 優先）。
-3. **デプロイ**: 同 workflow が続けて Pages をデプロイする。`pages.yml`（`push: main` trigger）は `GITHUB_TOKEN` 由来の push では発火しないため、auto-merge 側で `configure-pages` → `upload-pages-artifact` → `deploy-pages` を自前実行している。
+1. **生成 (claude-code-action@v1)**: `prompts/daily-digest.md` の指示に従い Claude がファイルを生成・編集する。**Claude は git 操作を一切しない**（ファイル生成のみ）
+2. **反映 (workflow step)**: 生成物（`index.html` / `archive/` / `feed.xml`）に変更があり、`index.html` に当日日付が含まれることを検証してから `github-actions[bot]` 名義で `YYYY-MM-DD のテックニュースダイジェスト` として main へ commit/push する。変更ゼロ・日付不整合は run を fail させる（**失敗が必ず可視化される**のがこの構成の要）
+3. **デプロイ**: `GITHUB_TOKEN` push は `pages.yml` を発火させないため、同 workflow が `configure-pages` → `upload-pages-artifact` → `deploy-pages` を自前実行する
 
-routine prompt には main への push 手順・PAT を**入れない**（入れても classifier で死ぬだけ）。digest ブランチが放置されて main に届かなくなったら、まず auto-merge workflow の Run 失敗を疑う（`gh run list --workflow=auto-merge-digest.yml`）。手動復旧は `git merge --ff-only origin/claude/<branch>` → `git push origin main`。
+認証は repo secret `CLAUDE_CODE_OAUTH_TOKEN`（Pro/Max サブスクの OAuth トークン、ローカルで `claude setup-token` を実行して生成・失効時も同コマンドで再発行）。PAT は不要。
 
-### CCR push 失敗の切り分けとリカバリ
+稼働確認: `gh run list --workflow=daily-digest.yml`。失敗時は `gh run view <id> --log-failed`。手動リトライは `gh workflow run daily-digest.yml`。
 
-CCR ハーネスの作業ブランチ push は **Claude GitHub App が `kaionn/tech-news-daily` への Repository access 付きでインストールされていること**が前提。App が外れていると routine の生成・commit は正常完了するのに push だけがサイレントに失敗する（run ログの transcript は「The CCR harness will push the branch」で終わり、エラーは一切表示されない）。OAuth 再連携（Authorized GitHub Apps）と App インストール（Installed GitHub Apps）は**別管理**で、claude.ai で GitHub を再連携しても App のインストールは復活しない。claude.ai のコネクタ選択画面に本 repo が表示されない場合も同じ原因。
+### 旧構成（CCR routine、2026-07-05 停止）
 
-切り分け手順:
+旧構成は CCR routine (`trig_01LvUYkX4UXHkv8KDLsFH9eL`) が `claude/**` ブランチに commit → ハーネスが自動 push → `auto-merge-digest.yml` が main へ取り込む方式だった。2026-07-03 からハーネスの branch push が**サイレントに失敗**する障害（5 run 連続、routine 側は毎回正常完了・ログにエラーなし・Claude GitHub App 設定も正常）が続いたため GHA へ全面移行し、routine は claude.ai 側で pause した。障害は Anthropic に報告済み。`auto-merge-digest.yml` は routine を誤って再開した場合の受け皿として残置している。sandbox は `persist_session: false` のため push されなかった digest は復元不可（2026-07-03〜05 号は欠番）。
 
-1. GitHub イベント履歴で `claude/**` ブランチの CreateEvent 有無を確認（正常時は発火 6〜8 分後にブランチが作られる）
-2. `gh run list --workflow=auto-merge-digest.yml` で直近の workflow 実行を確認、0 件なら push 自体が未達
-3. https://github.com/settings/installations の Claude App → Repository access に本 repo が含まれるか確認する
+## HTML 構造と生成 prompt の同期
 
-sandbox は `persist_session: false` のため、push されなかった digest はセッション終了とともに消失し復元不可（例: 2026-07-03 号は `archive/2026-07-03.html` が欠番のまま）。欠番を埋めようとせず、次回 run の正常化（App 再インストール等）を優先する。どうしても当日分を埋めたい場合のみ、main 上で直接ダイジェストを新規生成して push する（auto-merge 経由不要）。
-
-## HTML 構造と CCR routine の同期
-
-`index.html` のセクション構成・CSS クラス・要素（stats-bar, toc, numbers-bar, editorial 等）を変更した場合、CCR routine (`trig_01LvUYkX4UXHkv8KDLsFH9eL`) の prompt も必ず更新する。routine はテンプレートとして `index.html` の構造を前提に毎日生成するため、HTML 構造と prompt が乖離すると生成結果が壊れる。
+`index.html` のセクション構成・CSS クラス・要素（stats-bar, toc, numbers-bar, editorial 等）を変更した場合、生成 prompt `prompts/daily-digest.md` も**同一コミットで**必ず更新する。prompt はテンプレートとして `index.html` の構造を前提に毎日生成するため、HTML 構造と prompt が乖離すると生成結果が壊れる。
 
 対象の対応表:
 
-| HTML 側の変更 | routine prompt 側の更新 |
+| HTML 側の変更 | prompt 側の更新 |
 |---|---|
 | 新セクション追加（例: Code & Tools） | prompt にセクション定義を追加 |
 | 新 CSS クラス追加（例: .deep-dive, .editorial） | prompt に該当クラスの使い方を記述 |
 | カード階層の変更 | prompt の出力フォーマット仕様を更新 |
 | feed.xml のエントリ形式変更 | prompt の feed.xml 生成部分を更新 |
 
-### routine prompt の更新手段
-
-prompt 更新は claude.ai の routine 編集画面（https://claude.ai/code/triggers/trig_01LvUYkX4UXHkv8KDLsFH9eL）からユーザーが手動で貼り替える。セッション側は新 prompt をファイルで用意して渡すところまで。
-
-現行の prompt (v4 以降) は main への push・PAT を含まない（デプロイは GHA auto-merge が担うため。上記「デプロイパイプライン」参照）。そのため RemoteTrigger 経由の更新も classifier に引っかからなくなったが、routine 編集は UI 手動貼り替えを既定の運用とする。
-
-### routine prompt に git config / commit author 指定を書かない
-
-CCR サンドボックスには commit author を `Claude <noreply@anthropic.com>` へ re-author させる組み込み hook があり、prompt 側の `git config user.name` 指定や「amend 禁止」の指示より hook が優先される（prompt では制御できない）。prompt は author 設定に一切触れず、ハーネス既定に任せる（v5 で `git config` 行を削除済み）。
+prompt は repo 内ファイルなので通常の Edit → commit → push で更新できる（旧 CCR 時代の「claude.ai UI で手動貼り替え」は不要になった）。prompt には git 操作を書かない — commit/push/検証は `daily-digest.yml` の責務で、Claude はファイル生成のみを担う。
 
 ## 日次コンテンツ生成ワークフロー
 
@@ -59,11 +45,11 @@ CCR サンドボックスには commit author を `Claude <noreply@anthropic.com
 4. `feed.xml` に新エントリを追加（Atom フィード）
 5. commit → push（GitHub Pages が自動デプロイ）
 
-CCR routine は 1-4 を作業ブランチ上で自動実行し、5 の main 反映＋デプロイは GHA auto-merge が担う（「デプロイパイプライン」参照）。手動更新時は自分で main に commit → push すれば `pages.yml` が直接デプロイする（手動 push は auto-merge を経由しない）。
+`daily-digest.yml` は 1-4 を Claude 生成で、5 を workflow step で自動実行する（「デプロイパイプライン」参照）。手動更新時は自分で main に commit → push すれば `pages.yml` が直接デプロイする。
 
 ## サイトアセット変更は push まで完了させる
 
-`index.html` / `style.css` / `feed.xml` を変更したら、同セッション内で必ず commit → push まで完了させる。CCR routine は毎朝 origin/main を前提に生成・push するため、ローカル未 push の変更は公開サイトに一切反映されないだけでなく、routine の日次 push とローカルが分岐して退行状態（旧フォーマットでの公開継続）を生む。「実装完了 = push 完了」であり、コミットせずセッションを終えることを禁止する。
+`index.html` / `style.css` / `feed.xml` を変更したら、同セッション内で必ず commit → push まで完了させる。日次 workflow は毎朝 origin/main を前提に生成・push するため、ローカル未 push の変更は公開サイトに一切反映されないだけでなく、日次 push とローカルが分岐して退行状態（旧フォーマットでの公開継続）を生む。「実装完了 = push 完了」であり、コミットせずセッションを終えることを禁止する。
 
 ## archive/ の整合性
 
@@ -79,9 +65,9 @@ CCR routine は 1-4 を作業ブランチ上で自動実行し、5 の main 反�
 3. 差分を突き合わせ、デッドリンクは git 履歴から HTML を復元（`git show <commit>:index.html`）、孤立ファイルは一覧に追記
 4. git コミット履歴が一次ソース。archive フォルダが壊れても各日の digest コミットから全て復元できる
 
-なお当日分（`index.html` のトップ）は、翌日 routine の「昨日分をアーカイブ」ステップで初めて `archive/YYYY-MM-DD.html` 化される。当日中は `archive/index.html` の当日リンクが 404 になるが、これは仕様通り（バグではない）。
+なお当日分（`index.html` のトップ）は、翌日 run の「昨日分をアーカイブ」ステップで初めて `archive/YYYY-MM-DD.html` 化される。当日中は `archive/index.html` の当日リンクが 404 になるが、これは仕様通り（バグではない）。
 
-routine の Step 7 self-review にはこの archive 整合チェックが含まれていないため、routine では自動修正されない。
+prompt の Step 7 self-review にはこの archive 整合チェックが含まれていないため、日次 run では自動修正されない。
 
 ## コミット前セルフチェック
 
@@ -131,7 +117,7 @@ AI, Dev, OSS, Security, Product, Infra, Frontend, Data
 
 ### リンク品質基準
 
-routine prompt と手動生成の両方で以下を厳守する:
+生成 prompt（`prompts/daily-digest.md`）と手動生成の両方で以下を厳守する:
 
 - 掲載 URL は一次ソースの記事直リンク必須（URL がパスを持つ個別記事であること）
 - トップページ URL（例: thehackernews.com）・まとめサイト・アグリゲーター URL は掲載禁止

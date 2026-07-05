@@ -1,0 +1,76 @@
+name: Daily digest (generate & deploy)
+
+# CCR routine のハーネス branch push 障害 (2026-07、5 run 連続サイレント失敗) を受けて、
+# 生成〜デプロイを GitHub Actions に全面移行した構成。
+# - 生成: claude-code-action が prompts/daily-digest.md に従いファイルを生成する（git 操作はしない）
+# - 反映: 本 workflow が main へ commit/push する（GITHUB_TOKEN、PAT 不要）
+# - デプロイ: GITHUB_TOKEN push は pages.yml を発火させないため、本 workflow が Pages まで実行する
+# 認証は CLAUDE_CODE_OAUTH_TOKEN（Pro/Max サブスク、`claude setup-token` で生成した repo secret）。
+
+on:
+  schedule:
+    - cron: '8 21 * * *' # 毎日 21:08 UTC = 06:08 JST（旧 CCR routine と同時刻）
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: daily-digest
+  cancel-in-progress: false
+
+jobs:
+  generate-and-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Generate digest with Claude Code
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: "Read prompts/daily-digest.md and follow its instructions exactly. The repository root is the current working directory."
+          claude_args: |
+            --model claude-sonnet-5
+            --allowedTools "WebSearch,WebFetch,Read,Write,Edit,Glob,Grep,Bash"
+
+      - name: Commit and push digest
+        id: commit
+        run: |
+          set -euo pipefail
+          if [ -z "$(git status --porcelain -- index.html archive/ feed.xml)" ]; then
+            echo "::error::生成物に変更がない（生成失敗の可能性）"
+            exit 1
+          fi
+          TODAY=$(date -u '+%Y-%m-%d')
+          # 最低限の生成品質ガード: index.html が今日の日付を持つこと
+          if ! grep -q "$TODAY" index.html; then
+            echo "::error::index.html に今日の日付 ($TODAY) が無い。生成不良として中断"
+            exit 1
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html archive/ feed.xml
+          git commit -m "${TODAY} のテックニュースダイジェスト"
+          git pull --rebase origin main
+          git push origin main
+          echo "pushed=true" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/configure-pages@v5
+        if: steps.commit.outputs.pushed == 'true'
+
+      - uses: actions/upload-pages-artifact@v3
+        if: steps.commit.outputs.pushed == 'true'
+        with:
+          path: .
+
+      - id: deployment
+        if: steps.commit.outputs.pushed == 'true'
+        uses: actions/deploy-pages@v4
