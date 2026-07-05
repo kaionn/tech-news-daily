@@ -3,6 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  workflow_dispatch: # Pages の一時エラー等で再デプロイしたい時の手動リトライ用
 
 permissions:
   contents: read
