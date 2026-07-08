@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tech News Daily — 2026-07-07</title>
+  <title>Tech News Daily — 2026-07-08</title>
   <link rel="stylesheet" href="style.css">
   <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="feed.xml">
 </head>
@@ -11,14 +11,14 @@
   <div class="container">
     <header>
       <h1>Tech News Daily</h1>
-      <div class="date">2026-07-07 (Tue)</div>
+      <div class="date">2026-07-08 (Wed)</div>
       <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
     </header>
 
     <div class="stats-bar">
-      <span>📰 20 articles</span>
-      <span>🏷 8 categories</span>
-      <span>📡 10 sources</span>
+      <span>📰 19 articles</span>
+      <span>🏷 7 categories</span>
+      <span>📡 12 sources</span>
     </div>
 
     <nav class="toc">
@@ -31,16 +31,16 @@
 
     <div class="numbers-bar">
       <div class="number-item">
-        <span class="number-value">10.0</span>
-        <span class="number-label">Adobe ColdFusion RCE（CVE-2026-48282）のCVSS深刻度</span>
+        <span class="number-value">15年</span>
+        <span class="number-label">Linuxカーネル「GhostLock」脆弱性の存在期間</span>
       </div>
       <div class="number-item">
-        <span class="number-value">295B</span>
-        <span class="number-label">Tencent「Hy3」のパラメータ数（Apache 2.0）</span>
+        <span class="number-value">97%</span>
+        <span class="number-label">GhostLock実働エクスプロイトの成功率</span>
       </div>
       <div class="number-item">
-        <span class="number-value">$2.5B</span>
-        <span class="number-label">Microsoft Frontier Companyへの投資額</span>
+        <span class="number-value">54%</span>
+        <span class="number-label">AIエージェントツール「ponytail」の平均コード削減率</span>
       </div>
     </div>
 
@@ -51,22 +51,45 @@
         <div class="card-header">
           <span class="tag tag-security">Security</span>
           <span class="content-type">🔒 セキュリティ</span>
-          <h3><a href="https://www.helpnetsecurity.com/2026/07/07/adobe-coldfusion-cve-2026-48282-exploitation-detected/">DEEP DIVE: Adobe ColdFusion に満点CVSS 10.0のRCE脆弱性CVE-2026-48282——パッチ公開からわずか2日で実悪用を検知</a></h3>
+          <h3><a href="https://thehackernews.com/2026/07/15-year-old-ghostlock-flaw-enables-root.html">DEEP DIVE: 15年物のLinuxカーネル脆弱性「GhostLock」、公開PoCで成功率97%のroot権限奪取が可能に</a></h3>
         </div>
         <div class="summary">
-          Adobeが提供するWebアプリケーションサーバー「ColdFusion」に、CVSS満点の10.0を記録する重大なパストラバーサル脆弱性CVE-2026-48282が発見された。脆弱性はIDEからColdFusionサーバーとやり取りするためのRemote Development Services（RDS）機能に存在し、認証を経ない遠隔攻撃者が細工したHTTPリクエストを送信するだけでファイルシステムをトラバースし、任意のコード実行に至ることができる。Adobeは6月30日、この脆弱性を含む計11件の重大な脆弱性を修正するパッチを公開したが、7月2日、セキュリティ企業watchTowrが技術解析を公開した直後、KEVIntelのハニーポットセンサーがすでに実際の悪用を検知した。攻撃者はWebサーバーから直接アクセスできる場所に悪意のあるファイルをアップロードし、現在のユーザー権限下で任意コードを実行してホスト侵害につなげる手口をとる。悪用にはRDSが有効化されていること、かつRDS認証が無効化されていることの2条件が必要で、いずれもデフォルトでは無効になっている。Shadowserver Foundationはインターネットに公開されたColdFusionサーバーを約750台把握しているが、そのうち脆弱なバージョンかつRDSが有効な台数は不明としている。管理者にはColdFusion 2025 Update 10またはColdFusion 2023 Update 21への更新が推奨されている。
+          Linuxカーネルのrtmutex（優先度継承ミューテックス）実装に、約15年前から存在する重大なUse-After-Free脆弱性「GhostLock」（CVE-2026-43499）が公開された。脆弱性はfutexサブシステム経由でrt_mutexコードに存在し、kernel/locking/rtmutex.cのremove_waiter()関数内でFUTEX_CMP_REQUEUE_PI操作中にタスクポインタが誤ってクリアされ、pi_blocked_onフィールドが誤ったタスクに対して解放されてしまう。特別な権限や特殊な設定、ネットワークアクセスは一切不要で、通常のスレッド操作を行うローカルのプログラムだけで攻撃が成立する。セキュリティ企業Nebulaは成功率97%を誇る実働ルート権限奪取エクスプロイトを構築し、コンテナからの脱出にも成功。GoogleのkernelCTFバグ報奨金プログラムを通じて92,337ドルの報奨金を獲得した。GhostLockは、Nebulaが「IonStack」と呼ぶ攻撃チェーンの後半部分でもあり、前半はFirefoxのサンドボックスを脱出するCVE-2026-10702が担う。上流では修正がLinux 7.1で取り込まれたが、その修正自体が新たなクラッシュ用脆弱性CVE-2026-53166を生んでおり、7月上旬時点でクリーンアップ作業が続いている。脆弱なコードは2011年以降ほぼすべての主要ディストリビューションにデフォルトで組み込まれており、影響範囲は極めて広い。
         </div>
-        <div class="editorial">🧠 パッチ公開から攻撃コード解析までわずか2日、実悪用の検知までさらに数時間という速さは、脆弱性情報の公開が攻撃者にとってのゴーサインになっている現実を改めて突きつける。RDSはデフォルト無効とはいえ、レガシーな開発環境ほど「昔有効にしたまま放置」されているリスクが高く、資産棚卸しの甘さがそのまま被弾につながる典型例だ。ColdFusionのような古参プラットフォームを運用する組織は、パッチ適用だけでなくRDSの設定監査を定期タスク化すべきだろう。</div>
+        <div class="editorial">🧠 15年間気づかれなかったUAFバグが、パッチ公開直後に成功率97%の実働エクスプロイトへ仕上げられるスピード感は、脆弱性発見から武器化までのリードタイムが年々短縮されている現実を象徴している。しかもFirefoxのサンドボックス脱出と組み合わせた「IonStack」チェーンは、悪意あるページを開くだけでroot権限まで到達しうることを意味し、従来の「ローカル特権昇格だから緊急度は中程度」という評価基準そのものを見直す必要があるだろう。修正パッチが新たなクラッシュ脆弱性を生んだ点も含め、rtmutex周りのコードは今後もさらなる監査が必要だ。</div>
         <div class="key-points">
           <ul>
-            <li>CVE-2026-48282（CVSS 10.0）——RDS機能のパストラバーサルにより認証不要でRCEが可能</li>
-            <li>Adobeが6月30日に他10件と合わせてパッチ公開、7月2日には実悪用をKEVIntelハニーポットが検知</li>
-            <li>Shadowserverは公開ColdFusionサーバー約750台を把握、修正版は2025 Update 10 / 2023 Update 21</li>
+            <li>CVE-2026-43499「GhostLock」（rtmutexのUse-After-Free）——ローカルの一般ユーザーがroot奪取・コンテナ脱出可能、公開PoCあり</li>
+            <li>Nebulaの実働エクスプロイトは成功率97%、GoogleのkernelCTFで92,337ドルの報奨金を獲得</li>
+            <li>FirefoxサンドボックスエスケープCVE-2026-10702と連結する攻撃チェーン「IonStack」の後半を構成、修正は上流Linux 7.1で公開済み</li>
           </ul>
         </div>
-        <div class="why-it-matters">💡 ColdFusionをインターネット公開環境で運用しているなら、RDSが有効になっていないか即座に確認し、/CFIDE/配下や公開ディレクトリへの不審なファイル設置がないか調査すべきだ。</div>
+        <div class="why-it-matters">💡 2011年以降のほぼ全主要Linuxディストリビューションが影響対象のため、公開PoCが出回った今、カーネルパッチの緊急適用とコンテナ環境の追加防御（seccomp/AppArmor等）を優先すべきだ。</div>
         <div class="meta">
-          <span>Help Net Security</span>
+          <span>The Hacker News</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-07-08</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://thehackernews.com/2026/07/rogue-agent-flaw-could-have-let.html">Google Dialogflow CXに「Rogue Agent」脆弱性——AIエージェント同士の分離不備で会話盗聴・データ窃取が可能に</a></h3>
+        </div>
+        <div class="summary">
+          GoogleのAIエージェント構築プラットフォーム「Dialogflow CX」に、セキュリティ企業Varonisが「Rogue Agent」と名付けた深刻な脆弱性が存在していたことが明らかになった。Code Block機能でPythonコードを実行できるエージェントは、同一Google Cloudプロジェクト内で共有されるGoogle管理のCloud Run環境で動作するが、その分離が不十分だったため、一つのエージェントへの編集権限を持つ攻撃者が他のエージェントを侵害できた。侵害されたエージェントでは会話の盗み見やユーザーデータの窃取、パスワード再入力を求める偽メッセージの送信が可能だった。Varonisは2025年11月にGoogleへ報告し、Googleは2026年6月に完全修正した。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>Code Block環境は同一プロジェクト内のエージェント間で分離が不十分、dialogflow.playbooks.update権限があれば他エージェントを侵害可能</li>
+            <li>Code Block環境は制限のない外部通信が可能で、VPC Service Controlsを回避してデータを外部サーバーへ送信できた</li>
+            <li>Varonisが2025年11月にGoogle VRP経由で報告、2026年4月に初期修正・6月に完全解決、CVE番号は付与されず</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>The Hacker News</span>
           <span>⏱ 4 min read</span>
           <span>2026-07-07</span>
         </div>
@@ -76,43 +99,22 @@
         <div class="card-header">
           <span class="tag tag-ai">AI</span>
           <span class="content-type">📦 リリース</span>
-          <h3><a href="https://www.marktechpost.com/2026/07/06/tencent-releases-hy3-open-295b-moe-model/">Tencent、アクティブ21BでGLM-5.2に迫る295B MoEモデル「Hy3」をApache 2.0でOSS公開</a></h3>
+          <h3><a href="https://www.techtimes.com/articles/319798/20260706/mistral-ai-targets-frontier-gap-open-weight-model-entering-july-early-access.htm">Mistral AI、フロンティア級オープンウェイトモデルの7月アーリーアクセスを発表——ARRは4億ドル突破</a></h3>
         </div>
         <div class="summary">
-          Tencent Hunyuanチームが、総パラメータ295B・アクティブ21BのスパースMixture-of-Expertsモデル「Hy3」をApache 2.0ライセンスでオープンウェイト公開した。256Kトークンのコンテキスト長を持ち、192エキスパート・top-8ルーティングの構成に加え、投機的デコードを高速化する38億パラメータのMulti-Token Predictionレイヤーを搭載する。SWE-Bench Verifiedで78.0、GPQA Diamondで90.4を記録し、アクティブパラメータが約2倍のGLM-5.2（SWE-Bench Verified 84.2）にコーディング性能では一歩譲るものの、270人による盲検評価ではGLM-5.1（2.51点）を上回る2.67点を獲得した。7月21日まではOpenRouter経由で無料試用できる。
+          Mistral AIが、今夏公開予定の新しいオープンウェイトモデルについて、7月からアーリーアクセスを開始すると発表した。新モデルは「fat but sparse」と評されるMixture-of-Expertsファミリーで、OpenAIやAnthropicが主導するクローズドモデル勢に対抗し、フロンティア性能とオープンウェイトの両立を狙う。Mistralの年間経常収益（ARR）はすでに4億ドルを突破しており、年内に10億ドル突破を見込む。フランスを拠点にEU管轄下で運営する同社は、オンプレミス展開が可能なオープンウェイト戦略を欧州のデータ主権ニーズに応える差別化要因として位置づけている。
         </div>
         <div class="key-points">
           <ul>
-            <li>総パラメータ295B・アクティブ21B、256Kコンテキスト、Apache 2.0ライセンスでオープンウェイト公開</li>
-            <li>SWE-Bench Verified 78.0・GPQA Diamond 90.4、270人の盲検評価でGLM-5.1（2.51点）を上回る2.67点を記録</li>
+            <li>「fat but sparse」構成のMixture-of-Expertsモデル、7月からアーリーアクセス開始、今夏中に正式公開予定</li>
+            <li>MistralのARRは4億ドル超、年内に10億ドル突破の見込み</li>
+            <li>オープンウェイト方針でEU域内のデータ主権ニーズに対応したオンプレミス展開を訴求</li>
           </ul>
         </div>
         <div class="meta">
-          <span>MarkTechPost</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-07-06</span>
-        </div>
-      </div>
-
-      <div class="card featured">
-        <div class="card-header">
-          <span class="tag tag-product">Product</span>
-          <span class="content-type">💰 ビジネス</span>
-          <h3><a href="https://techcrunch.com/2026/07/07/figma-acquires-team-behind-a-vibe-coding-app/">Figma、バイブコーディングツール「Bud」（旧Orchids）のチームを買収——デザインからコーディングへ布石</a></h3>
-        </div>
-        <div class="summary">
-          Figmaが、Y Combinator出身のバイブコーディング・AIエージェントプラットフォーム「Bud」（旧Orchids）のチームを買収したと発表した。BudはモバイルアプリやWebアプリ、Slack連携アプリなどを自然言語で作成できるエージェント型プラットフォームで、買収に伴いBud/Orchids自体は7月18日にサービスを終了し、ユーザーはそれまでにプロジェクトを移行する必要がある。Figmaは「Figma Make」でのWebアプリ生成やCodex・Claude Codeとの連携など、デザインからコーディング領域への拡張を進めており、今回の買収もその一環。Bud CEOのKevin Lu氏は「Figmaはアイデアが生まれ、形になる場所」とコメントしている。
-        </div>
-        <div class="key-points">
-          <ul>
-            <li>Y Combinator出身「Bud」（旧Orchids）チームを買収、7月18日にサービス終了・ユーザーはプロジェクト移行が必須</li>
-            <li>Figma MakeやCodex・Claude Code連携に続く、デザインからコーディング領域への布石</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>TechCrunch</span>
+          <span>Tech Times</span>
           <span>⏱ 3 min read</span>
-          <span>2026-07-07</span>
+          <span>2026-07-06</span>
         </div>
       </div>
     </div>
@@ -122,44 +124,22 @@
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-ai">AI</span>
-          <span class="content-type">💰 ビジネス</span>
-          <h3><a href="https://techcrunch.com/2026/07/02/microsoft-launches-its-own-ai-deployment-company-with-2-5-billion-commitment/">Microsoft、企業向けAI導入専門の新会社「Frontier Company」設立——$2.5B・6,000人体制で実装まで踏み込む</a></h3>
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://code.visualstudio.com/updates/v1_128">VS Code 1.128リリース——Copilot Visionが正式機能に、AgentsウィンドウでClaude Agent SDKベースのセッションも利用可能</a></h3>
         </div>
         <div class="summary">
-          Microsoftが、企業のAI導入を実現まで伴走する新事業体「Microsoft Frontier Company」を立ち上げた。$2.5Bの投資と6,000人のエンジニア・コンサルタントを投入し、ロンドン証券取引所グループやユニリーバ、Land O'Lakes、Accentureなどを早期顧客に迎える。Commercial Business CEOのJudson Althoff氏は「業界最大かつ最も成果志向のエンジニアリング組織になる」と述べている。
+          Visual Studio Code 1.128がリリースされ、画像やPDFをチャットに貼り付け・ドラッグ&amp;ドロップできる「Copilot Vision」が正式機能（GA）となった。またAgentsウィンドウでAnthropicのClaude Agent SDKを直接利用できる「Claude agent-hostセッション」が追加され、エディタ内でエージェント型コーディングが行えるようになった。
         </div>
         <div class="key-points">
           <ul>
-            <li>$2.5Bの投資・6,000人体制で、AI導入の設計から運用改善までを直接担う事業体を新設</li>
-            <li>ロンドン証券取引所グループ・ユニリーバ・Land O'Lakes・Accentureが早期顧客</li>
+            <li>Copilot Visionが正式機能に、画像・PDFの貼り付け/ドラッグ&amp;ドロップに対応</li>
+            <li>AgentsウィンドウにClaude Agent SDKベースの「Claude agent-host」セッションを追加</li>
           </ul>
         </div>
         <div class="meta">
-          <span>TechCrunch</span>
+          <span>Visual Studio Code</span>
           <span>⏱ 2 min read</span>
-          <span>2026-07-02</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-frontend">Frontend</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://svelte.dev/blog/whats-new-in-svelte-july-2026">Svelte、2026年7月のアップデートまとめを公開——SvelteKit設定をvite.config.jsに統合、Remote Functionsを強化</a></h3>
-        </div>
-        <div class="summary">
-          SvelteKit公式ブログが2026年7月分のアップデートをまとめて公開した。SvelteKit 2.62.0でsvelte.config.jsを使わずvite.config.js内に設定を直接書けるようになったほか、2.63.0では次期SvelteKit 3を見据えた実験的な環境変数の明示的な扱いが導入された。Remote Functionsも強化され、2.64.0でFileオブジェクトをFormData変換なしで直接扱えるようになり、2.65.0では他クエリを再取得できる機能が追加されている。
-        </div>
-        <div class="key-points">
-          <ul>
-            <li>SvelteKit 2.62.0でvite.config.js内へ設定を統合、svelte.config.js不要に</li>
-            <li>Remote Functionsが強化——2.64.0でFileオブジェクトの直接処理、2.65.0でクエリ間の再取得に対応</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Svelte Blog</span>
-          <span>⏱ 3 min read</span>
           <span>2026-07</span>
         </div>
       </div>
@@ -168,21 +148,43 @@
         <div class="card-header">
           <span class="tag tag-dev">Dev</span>
           <span class="content-type">📦 リリース</span>
-          <h3><a href="https://github.blog/changelog/2026-06-11-github-agentic-workflows-is-now-in-public-preview/">GitHub Agentic Workflowsがパブリックプレビューに——Markdownで書く自然言語オートメーションがGitHub Actions上で動作</a></h3>
+          <h3><a href="https://github.blog/changelog/2026-07-01-kimi-k2-7-is-now-available-in-github-copilot/">GitHub Copilot、初のオープンウェイトモデル「Kimi K2.7 Code」を正式提供開始</a></h3>
         </div>
         <div class="summary">
-          GitHubが、自然言語のMarkdownでリポジトリの自動化タスクを記述できる「GitHub Agentic Workflows」をパブリックプレビューに移行した。Issueのトリアージ・CI失敗の解析・ドキュメント更新などを、コーディングエージェントがMarkdownの指示から標準的なActions YAMLへコンパイルして実行する。既定で読み取り専用権限・サンドボックス実行の「Agent Workflow Firewall」・安全な出力検証を備え、既存のランナーグループや組織ポリシーとも統合できる。
+          GitHubが、Moonshot AIのオープンウェイトモデル「Kimi K2.7 Code」をCopilotのモデル選択肢として正式提供開始した。Copilotで選択可能な初のオープンウェイトモデルとなり、まずCopilot Pro/Pro+/Maxプランに展開、その後Business/Enterpriseにも拡大される。ホスティングはGitHubがMicrosoft Azure上で行い、従量課金制で提供される。
         </div>
         <div class="key-points">
           <ul>
-            <li>Markdownで自動化を記述しGitHub Actions YAMLへコンパイル、Issueトリアージやコード品質改善に活用可能</li>
-            <li>既定で読み取り専用権限・サンドボックス実行「Agent Workflow Firewall」・安全な出力検証を搭載</li>
+            <li>Copilotのモデルピッカーに追加された初のオープンウェイトモデル、Pro/Pro+/Maxから展開開始</li>
+            <li>Business/Enterpriseでは既定オフ、管理者がポリシー有効化が必要。7月7日にBusiness/Enterprise展開も発表</li>
           </ul>
         </div>
         <div class="meta">
           <span>GitHub Changelog</span>
           <span>⏱ 2 min read</span>
-          <span>2026-06-11</span>
+          <span>2026-07-01</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://nodejs.org/en/blog/release/v26.5.0">Node.js v26.5.0リリース——テキストファイルのESモジュールimportやBlobストリーミングを実験的サポート</a></h3>
+        </div>
+        <div class="summary">
+          Node.js v26.5.0がリリースされ、--experimental-import-textフラグ経由でテキストファイルをESモジュールとして直接importできる実験的機能が追加された。またBlob.prototype.textStream()でUTF-8ストリーミング読み取りに対応したほか、TLSのネゴシエートグループを量子耐性variantも含めて直接レポートできるようになった。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>--experimental-import-textでwith { type: 'text' }構文を使いテキストをESモジュールとしてimport可能に</li>
+            <li>Blob.prototype.textStream()追加、耐量子TLSグループのネゴシエーション結果も報告可能に</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Node.js Blog</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-07-08</span>
         </div>
       </div>
 
@@ -190,15 +192,15 @@
         <div class="card-header">
           <span class="tag tag-security">Security</span>
           <span class="content-type">🔒 セキュリティ</span>
-          <h3><a href="https://thehackernews.com/2026/07/threat-actors-probe-gitea-docker-flaw.html">Gitea Docker認証バイパスCVE-2026-20896、開示13日後に実悪用探索を確認——CVSS 9.8</a></h3>
+          <h3><a href="https://thehackernews.com/2026/07/ubiquiti-patches-critical-unifi-flaws.html">Ubiquiti、UniFi Connect/Talk/Access/Protect/OSにまたがるCVSS 10.0含む重大脆弱性群を修正</a></h3>
         </div>
         <div class="summary">
-          GiteaのDocker公式イメージに含まれる「X-WEBAUTH-USER」ヘッダーの検証不備CVE-2026-20896（CVSS 9.8）について、公開から13日後に実際の悪用探索が確認された。既定設定でREVERSE_PROXY_TRUSTED_PROXIES=*がハードコードされており、リバースプロキシ認証を有効にした構成では、任意のIPから送られた同ヘッダーだけでパスワードなしに任意ユーザーとして認証されてしまう。ProtonVPN経由のIPから最初の探索が検知されており、インターネットに公開されたGiteaインスタンスは約6,200台に上る。
+          Ubiquitiが、UniFi Connect・Talk・Access・Protect・OSにまたがる複数の重大脆弱性を修正した。最も深刻なCVE-2026-50746（CVSS 10.0）はUniFi Connectアプリのアクセス制御不備によるコマンドインジェクションで、ネットワークアクセスを持つ攻撃者がホスト機器上でコードを実行できる。ほかにもCVSS 9.9のSQLインジェクションやコマンドインジェクションが複数存在し、6件は低複雑度・ユーザー操作不要で悪用可能という。
         </div>
         <div class="key-points">
           <ul>
-            <li>REVERSE_PROXY_TRUSTED_PROXIES=*の既定値が原因、X-WEBAUTH-USERヘッダーだけで任意ユーザーになりすまし可能</li>
-            <li>公開13日後にProtonVPN経由での実悪用探索を検知、対象インスタンスは約6,200台、1.26.3で修正済み</li>
+            <li>CVE-2026-50746（CVSS 10.0）はUniFi Connect 3.4.16以前が対象、3.4.20以降で修正</li>
+            <li>UniFi Talk（CVE-2026-50747）・Access（CVE-2026-50748）でもCVSS 9.9のSQL/コマンドインジェクションを修正</li>
           </ul>
         </div>
         <div class="meta">
@@ -212,21 +214,21 @@
         <div class="card-header">
           <span class="tag tag-security">Security</span>
           <span class="content-type">🔒 セキュリティ</span>
-          <h3><a href="https://thehackernews.com/2026/07/suspected-china-aligned-hackers-exploit.html">中国系ハッカー集団「UNK_MassTraction」、Roundcube XSS/RCE連鎖で米加大学を標的に——初の中国発Roundcube悪用事例</a></h3>
+          <h3><a href="https://thehackernews.com/2026/07/debull-tooling-abuses-microsoft-device.html">フィッシングツール「DEBULL」がMicrosoft 365のデバイスコード認証フローを悪用——正規ログイン画面を使う手口</a></h3>
         </div>
         <div class="summary">
-          Proofpointが、中国と関連が疑われる脅威クラスター「UNK_MassTraction」による米国・カナダの大学を狙った攻撃キャンペーンを報告した。フィッシングメール経由でRoundcubeのXSS脆弱性CVE-2024-42009（CVSS 9.3）を悪用し認証情報・2FA・Cookieを窃取する「IceCube」ペイロードを配布したうえで、認証後RCE脆弱性CVE-2025-49113（CVSS 9.9）を突きPHP製Webシェル「SquareShell」やGo製RAT「VShell」を展開する。国家安全保障や天体物理学関連の研究者・管理者が標的とされた。
+          フィッシングツールキット「DEBULL」を使い、Microsoft 365のデバイスコード認証フローを悪用するフィッシングキャンペーンが6月末から7月初めにかけて観測された。コラボレーションツール風のおとりメールでユーザーを正規のMicrosoftデバイスログイン画面へ誘導し、バックグラウンドで攻撃者が生成したデバイスコードトークンをポーリングして窃取する手口。GraphSpyベースの侵害後ツールと組み合わせて使われているとみられる。
         </div>
         <div class="key-points">
           <ul>
-            <li>CVE-2024-42009（XSS）→CVE-2025-49113（認証後RCE）の連鎖で侵害、標的は米加大学の教職員</li>
-            <li>中国系グループによるRoundcube悪用としては初の事例、これまではロシア系グループが主流だった</li>
+            <li>2025年2月にMicrosoftが報告した「Storm-2372」キャンペーンと強い類似性、コラボ風の偽メッセージ/Teamsおとりを使用</li>
+            <li>DEBULLはPhaaS（Phishing-as-a-Service）とみられ、GraphSpy由来のM365/Entra侵害後ツールと連携</li>
           </ul>
         </div>
         <div class="meta">
           <span>The Hacker News</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-07</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-07</span>
         </div>
       </div>
     </div>
@@ -236,45 +238,45 @@
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-infra">Infra</span>
+          <span class="tag tag-data">Data</span>
           <span class="content-type">👀 注目</span>
-          <h3><a href="https://www.publickey1.jp/blog/26/dnsaiagent_name_serviceanslinux_foundation.html">Linux Foundation、DNSを基盤にAIエージェントへ信頼できる名前を与える「Agent Name Service（ANS）」立ち上げ意向を発表</a></h3>
+          <h3><a href="https://www.publickey1.jp/blog/26/googleipv650.html">GoogleユーザーのIPv6利用率がついに50%を突破——世界平均が日本の水準に追いつく</a></h3>
         </div>
         <div class="summary">
-          Linux Foundationが、既存のDNSインフラを拡張してAIエージェントに信頼できる識別子を与えるオープンソース標準「Agent Name Service（ANS）」の立ち上げ意向を発表した。DNSに加えDistributed Identity（DID）やLegal Entity Identifier（LEI）標準もサポートし、どの組織が作ったエージェントか、生成されたコードやログが本当にそのエージェント由来かを検証できるようにする。Cloudflare・Cisco・Salesforceが支持を表明している。
+          Google公式のIPv6統計ページで、GoogleサービスにおけるIPv6経由アクセス比率が2026年3月についに50%を突破していたことが明らかになった。GoogleはGoogle広告経由で収集した独自データに基づき算出しており、APNICなど他の調査手法とは母集団や重み付けが異なる点には注意が必要。日本国内では2024年時点で既に50%を超えていた。
         </div>
         <div class="key-points">
           <ul>
-            <li>DNS・DID・LEIを組み合わせ、インターネット規模で分散的なAIエージェントの身元検証基盤を構築</li>
-            <li>Cloudflare・Cisco・Salesforceが支持を表明、開発はgithub.com/agentnameserviceで進行</li>
+            <li>GoogleユーザーのIPv6利用率、2026年3月時点で世界全体で50%超え</li>
+            <li>日本は2024年時点で既に50%超えを達成しており、世界平均が追いついた形</li>
           </ul>
         </div>
         <div class="meta">
           <span>Publickey</span>
-          <span>⏱ 3 min read</span>
-          <span>2026-07-02</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-07-01</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
-          <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://www.publickey1.jp/blog/26/mcpenterprise-managed_authorizationemaextension.html">MCPに企業向け新機能「Enterprise-Managed Authorization（EMA）extension」が安定版に——IdP一元管理でアクセスを一括制御</a></h3>
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/awsuae2.html">AWS中東（UAE）リージョン、ドローン攻撃からの復旧なお数カ月——約2カ月ぶりに続報</a></h3>
         </div>
         <div class="summary">
-          Linux Foundationが管理するModel Context Protocol（MCP）に、企業のID管理を一元化する「Enterprise-Managed Authorization（EMA）extension」が安定版として登場した。従来はMCPサーバーごとに個別の接続許可が必要だったが、EMAではIdP（IDプロバイダー）がユーザーに代わって認証・認可を担い、一度のログインで許可されたMCPサーバーへ自動接続できる。監査ログも一元化される。現状IdPはOkta、クライアントはClaudeとVS Code、サーバーはAsana・Atlassian・Canva・Figma・Granola・Linearに対応し、Slack対応も予定されている。
+          AWSが、ドローン攻撃による深刻な被害を受けた中東（UAE）リージョンの復旧状況について、約2カ月ぶりに続報を報告した。復旧には依然として数カ月を要する見通しで、リージョンは現時点で顧客アプリケーションを安定運用できる状態にないという。AWSは利用可能なリソースの他リージョンへの移行と、リモートバックアップからの復元を強く推奨している。
         </div>
         <div class="key-points">
           <ul>
-            <li>IdP（現状Okta対応）がMCPサーバーへのアクセスを一元管理、ユーザーは一度のログインで済む</li>
-            <li>クライアントはClaude・VS Code、サーバーはAsana・Atlassian・Canva・Figma・Granola・Linearに対応、Slackも対応予定</li>
+            <li>2026年3月のドローン攻撃で3つのアベイラビリティゾーンのうち2つが機能不全に陥ったUAEリージョン、復旧にはなお数カ月</li>
+            <li>AWSは請求関連の運用を一時停止中、顧客には他リージョンへの移行と遠隔バックアップからの復元を推奨</li>
           </ul>
         </div>
         <div class="meta">
           <span>Publickey</span>
-          <span>⏱ 3 min read</span>
-          <span>2026-07-07</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-07</span>
         </div>
       </div>
 
@@ -282,15 +284,15 @@
         <div class="card-header">
           <span class="tag tag-ai">AI</span>
           <span class="content-type">📜 解説</span>
-          <h3><a href="https://zenn.dev/shintaroamaike/articles/58036e930bb7f3">「AIがソフトウェア開発を変える——2026年、エンジニアリングの自動化最前線」</a></h3>
+          <h3><a href="https://zenn.dev/cadp/articles/f8c5d9b8d1457e">【2万回再生・史上No.1】大企業でAIコードエージェントを浸透させた「外から攻める」戦略</a></h3>
         </div>
         <div class="summary">
-          Zennに投稿された分析記事では、設計・IaC生成・CI/CD自動化・テスト生成・ドキュメント作成・PRレビュー・デプロイまでの各工程がAIエージェントで自動化されつつあり、開発者の役割が「コード作成」から「判断と責任」へシフトしていると論じている。Anthropicは2026年1月以降わずか数ヶ月で74件のリリースを行い、現場では開発速度が3〜5倍に向上、レビュー時間は1/3〜1/2に短縮されたと報告されている。一方で要件定義やインシデント対応、経営判断は引き続き人間の領域として残ると指摘する。
+          Zennで2万回再生を記録した人気記事は、大企業にAIコードエージェントを浸透させるには社内トップダウンで正攻法に説得するのではなく、現場のエンジニアが「外から」小さな成功体験を積み上げて広める戦略が有効だったと報告する。トップダウンの導入プロジェクトが停滞しがちな一方、個人の生産性向上を起点にボトムアップで信頼を獲得するアプローチが効果的だったという。
         </div>
         <div class="key-points">
           <ul>
-            <li>Anthropicは2026年1月以降数ヶ月で74件のリリースを実施、要件から5分で高品質なアーキテクチャ図を生成できる例も</li>
-            <li>現場で開発速度3〜5倍・レビュー時間1/3〜1/2に短縮、一方で要件定義や経営判断は人間の領域として残存</li>
+            <li>2万回再生・Zennの人気記事ランキングでNo.1を記録、大企業へのAIコードエージェント浸透の実体験を紹介</li>
+            <li>トップダウンの号令より、現場発の小さな成功事例の積み重ねが組織全体への浸透を後押ししたと分析</li>
           </ul>
         </div>
         <div class="meta">
@@ -304,21 +306,21 @@
         <div class="card-header">
           <span class="tag tag-ai">AI</span>
           <span class="content-type">📜 解説</span>
-          <h3><a href="https://zenn.dev/chiku_dev/articles/7602829910d94f">「バズりツイートから考察する2026年のAIエージェントプロダクト開発」——完璧より「動くものを早く」</a></h3>
+          <h3><a href="https://zenn.dev/okamyuji/articles/ai-era-software-engineer-qualities-and-practice">「AI時代のソフトウェアエンジニアに求められる資質と実践」——価値の中心は「判断」と「検証」へ</a></h3>
         </div>
         <div class="summary">
-          Zennの考察記事では、現在のAIエージェント開発はプロンプトエンジニアリング・コンテキストエンジニアリング・ハーネスエンジニアリングと次々に新概念が登場する「カオス」な状況にあると指摘。ChatGPTがメモリを直接コンテキストへ含める方式を採る一方、Anthropicはリバースエンジニアリングの結果RAG採用が推測されるなど実装方針の分岐を紹介しつつ、「十分なリソースがあればLong ContextはRAGを平均性能で上回る」との研究を引用する。結論として、最初から完璧なアーキテクチャを狙うのではなく、PoC→要約導入→RAG検討という段階的改善が最も合理的だと主張している。
+          Zennに投稿された記事では、AI時代のソフトウェアエンジニアに求められるのは大量のコードを書く能力ではなく、目的を定義し、AIへ作業を委譲し、理解可能な単位で結果を検証し、ビジネス成果へつなげる力だと論じている。AIエージェントが実装の大部分を担うようになるほど、エンジニアの価値は「判断」と「検証」に移っていくと指摘する。
         </div>
         <div class="key-points">
           <ul>
-            <li>ChatGPTは直接コンテキスト格納、Anthropicはリバースエンジニアリングの結果RAG採用が推測されるなど実装方針が分岐</li>
-            <li>「十分なリソースがあればLong ContextはRAGを平均性能で上回る」との研究を引用し、段階的改善アプローチを提唱</li>
+            <li>目的定義・AIへの委譲・検証可能な単位への分解・ビジネス成果への接続という4つの実践を提唱</li>
+            <li>コード生成量ではなく「判断」と「検証」がAI時代のエンジニアの中心的価値になると指摘</li>
           </ul>
         </div>
         <div class="meta">
           <span>Zenn</span>
           <span>⏱ 3 min read</span>
-          <span>2026-07</span>
+          <span>2026-06</span>
         </div>
       </div>
     </div>
@@ -328,47 +330,46 @@
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-security">Security</span>
+          <span class="tag tag-dev">Dev</span>
           <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://github.com/usestrix/strix">自律型AIペネトレーションテストツール「Strix」が3.8万スター突破——実働PoCエクスプロイトで誤検知を排除</a></h3>
+          <h3><a href="https://github.com/DietrichGebert/ponytail">AIエージェントを「ものぐさなシニアエンジニア」化するツール「ponytail」が7.5万スター——平均54%のコード削減</a></h3>
         </div>
         <div class="summary">
-          オープンソースの自律型AIペネトレーションテストツール「Strix」がGitHubで3.8万スターを獲得した。マルチエージェント構成でOWASP Top 10（インジェクション、アクセス制御不備、XSS、SSRF、認証バイパスなど）を検出し、静的解析ではなく実際に動作するプルーフオブコンセプト（PoC）エクスプロイトで検証するため誤検知が少ない。GitHub Actions連携によるCI/CD組み込みや、修正パッチを自動でプルリクエストとして生成する機能も備え、OpenAI・Anthropic・Google・Ollamaなど任意のLLMプロバイダーを選択できる。
+          AIコーディングエージェントに「ものぐさなシニアエンジニア」のように振る舞わせるオープンソースツール「ponytail」がGitHubで7.5万スターを獲得した。YAGNI・標準ライブラリ・プラットフォーム機能・既存依存関係・ワンライナーの順で「本当に新しいコードが必要か」を確認する6段階の「怠惰のはしご」をエージェントに適用する。FastAPI+Reactのコードベースでのテストでは平均54%（最大94%）のコード削減を達成し、速度27%向上・コスト20%削減を実現しつつ安全性は維持されたという。
         </div>
         <div class="key-points">
           <ul>
-            <li>OWASP Top 10を実働PoCエクスプロイトで検証、静的スキャンより誤検知が少ない設計</li>
-            <li>Apache 2.0ライセンス、GitHub Actions連携で自動パッチ生成PRも可能、GitHubで3.8万スター</li>
+            <li>6段階の「怠惰のはしご」でAIエージェントの過剰実装を防止、12タスクのテストで平均54%（最大94%）のコード削減</li>
+            <li>Claude Code・Codex・Copilot CLIなど13以上のコーディングエージェントに対応、GitHubで7.5万スター獲得</li>
           </ul>
         </div>
         <div class="meta">
           <span>GitHub</span>
           <span>⏱ 2 min read</span>
           <span>2026-07</span>
-          <span class="engagement">⭐ 38,500</span>
+          <span class="engagement">⭐ 75,000</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
+          <span class="tag tag-infra">Infra</span>
           <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://github.com/DeusData/codebase-memory-mcp">コードベースを永続的なナレッジグラフ化するMCPサーバー「codebase-memory-mcp」——Linuxカーネル2,800万行を3分でインデックス</a></h3>
+          <h3><a href="https://www.docker.com/blog/docker-terraform-provider/">Docker、公式「Docker Terraform Provider」を発表——Docker Hubの設定をコードで宣言的に管理</a></h3>
         </div>
         <div class="summary">
-          158言語のtree-sitter文法とHybrid LSPによる型解決を組み合わせ、コードベースを永続的なナレッジグラフへ変換するMCPサーバー「codebase-memory-mcp」が公開された。Linuxカーネル（2,800万行・7.5万ファイル）を3分でインデックスし、構造クエリはサブミリ秒で応答。ファイル逐次探索と比べトークン消費を99.2%削減（約41.2万トークン→約3,400トークン）できるという。単一の静的バイナリで依存関係ゼロ、Claude CodeやCodex CLIなど11のコーディングエージェントに対応する。
+          Dockerが、Terraformのインフラストラクチャ・アズ・コードの手法でDocker Hub上のリポジトリやチーム、組織設定を管理できる公式「Docker Terraform Provider」を発表した。これまで手動やAPI経由で行っていたDocker Hub側の設定変更をコード化でき、バージョン管理やレビュープロセスに載せられるようになる。
         </div>
         <div class="key-points">
           <ul>
-            <li>Linuxカーネル（2,800万行）を3分でインデックス、構造クエリはサブミリ秒・トークン消費99.2%削減</li>
-            <li>158言語対応、単一静的バイナリで依存ゼロ、Claude Code・Codex CLIなど11エージェントに対応、GitHubで2.8万スター</li>
+            <li>Docker Hubのリポジトリ・チーム・組織設定をTerraformのコードで宣言的に管理可能に</li>
+            <li>既存のTerraformワークフローやCI/CDパイプラインにそのまま統合できる設計</li>
           </ul>
         </div>
         <div class="meta">
-          <span>GitHub</span>
+          <span>Docker Blog</span>
           <span>⏱ 2 min read</span>
           <span>2026-07</span>
-          <span class="engagement">⭐ 28,000</span>
         </div>
       </div>
     </div>
@@ -378,44 +379,37 @@
 
       <div class="quick-link">
         <span class="tag tag-security">Security</span>
-        <a href="https://thehackernews.com/2026/07/google-disrupts-netnut-residential.html">Google、200万台規模の住宅用プロキシ網「NetNut」を無力化——FBI・Lumenと連携</a>
-        <span class="quick-summary">— Google Threat Intelligence GroupがFBIやLumenと協力し、悪用可能な端末プールを大幅縮小。</span>
+        <a href="https://thehackernews.com/2026/07/the-verification-step-is-new-ato.html">パスキー普及率75%達成も、攻撃者の狙いは「検証ステップ」へシフト——FIDO Alliance調査</a>
+        <span class="quick-summary">— 世界の消費者の75%が少なくとも1つのアカウントでパスキーを有効化、攻撃者はパスワードリセット等の再認証フローを突く手口に移行中。</span>
         <span class="meta">The Hacker News</span>
       </div>
 
       <div class="quick-link">
-        <span class="tag tag-ai">AI</span>
-        <a href="https://techcrunch.com/2026/07/02/anthropic-is-discussing-a-new-custom-chip-with-samsung/">Anthropic、Samsungとカスタム半導体チップの協業を協議中</a>
-        <span class="quick-summary">— 自社モデル向け推論・学習インフラの強化を狙い、Samsungとの提携を模索していると報じられた。</span>
+        <span class="tag tag-infra">Infra</span>
+        <a href="https://techcrunch.com/2026/07/01/meta-like-spacex-looks-to-turn-excess-ai-compute-into-cash/">Meta、余剰AI計算資源を外販する新事業「Meta Compute」を計画——AWS・Azure・GCPと直接競合へ</a>
+        <span class="quick-summary">— 自社モデル「Muse Spark」等へのクエリ実行を外部開発者に課金する仕組みを検討中と報じられた。</span>
         <span class="meta">TechCrunch</span>
       </div>
 
       <div class="quick-link">
         <span class="tag tag-product">Product</span>
-        <a href="https://techcrunch.com/2026/07/06/if-you-use-google-youre-training-its-ai-heres-how-to-opt-out/">Googleのプライバシー設定、画像・ファイル・音声録画をAIモデル改善に利用——オプトアウト方法を解説</a>
-        <span class="quick-summary">— 既定で有効になっているため、Googleサービス利用者は設定画面から個別にオプトアウトする必要がある。</span>
-        <span class="meta">TechCrunch</span>
+        <a href="https://fortune.com/2026/06/24/exclusive-taktile-goldman-sachs-ai-bank-insurance-funding/">銀行・保険向けAI意思決定基盤のTaktile、Goldman Sachs主導のシリーズCで1.1億ドル調達</a>
+        <span class="quick-summary">— B2B与信審査の95%自動化などの実績を持つプラットフォームが、金融機関向けAI導入をさらに加速。</span>
+        <span class="meta">Fortune</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://thehackernews.com/2026/07/opera-gx-flaw-let-malicious-sites-auto.html">Opera GXに脆弱性、悪意あるサイトが訪問者に気づかれずModを自動インストールしデータ窃取可能</a>
+        <span class="quick-summary">— Operaは修正パッチを公開済み、ユーザーには最新版への更新が呼びかけられている。</span>
+        <span class="meta">The Hacker News</span>
       </div>
 
       <div class="quick-link">
         <span class="tag tag-oss">OSS</span>
-        <a href="https://devblogs.microsoft.com/azure-sdk/announcing-the-end-of-support-for-node-js-20-x-in-the-azure-sdk-for-javascript/">Azure SDK for JavaScript、7月9日でNode.js 20.xサポートを終了</a>
-        <span class="quick-summary">— Node.js 20は4月30日に公式EOLを迎えており、Azure SDKも追随して同ラインの重大バグ修正を打ち切る。</span>
-        <span class="meta">Microsoft Azure SDK Blog</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-ai">AI</span>
-        <a href="https://techcrunch.com/2026/07/02/mark-zuckerberg-tells-staff-that-ai-agents-havent-progressed-as-quickly-as-hed-hoped/">Zuckerberg氏、社内向けに「AIエージェントの進化は期待したほど速くない」と発言</a>
-        <span class="quick-summary">— Meta社内で、AIエージェントの実用化ペースが当初の想定を下回っているとの認識を共有したと報じられた。</span>
-        <span class="meta">TechCrunch</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-data">Data</span>
-        <a href="https://techcrunch.com/2026/07/06/us-investors-will-soon-get-access-to-sk-hynix-another-memory-maker-riding-the-ai-boom/">韓国SK Hynix、米国市場でIPOへ——AI需要で急伸するメモリ大手に米投資家がアクセス可能に</a>
-        <span class="quick-summary">— 約1,780万株を米国市場で売り出す計画で、AIブームに沸くメモリ半導体業界への投資機会が広がる。</span>
-        <span class="meta">TechCrunch</span>
+        <a href="https://hackernoon.com/mojo-programming-language-to-transition-to-open-source-model-by-modcon-26">AI推論言語「Mojo」、2026年秋のModCon '26でコンパイラをオープンソース化へ——Modularが方針表明</a>
+        <span class="quick-summary">— 現在は標準ライブラリのみOSSでコンパイラ本体は非公開、少人数体制での開発を優先してきたという。</span>
+        <span class="meta">HackerNoon</span>
       </div>
     </div>
 
