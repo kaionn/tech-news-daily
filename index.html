@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tech News Daily — 2026-07-09</title>
+  <title>Tech News Daily — 2026-07-10</title>
   <link rel="stylesheet" href="style.css">
   <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="feed.xml">
 </head>
@@ -11,13 +11,13 @@
   <div class="container">
     <header>
       <h1>Tech News Daily</h1>
-      <div class="date">2026-07-09 (Thu)</div>
+      <div class="date">2026-07-10 (Fri)</div>
       <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
     </header>
 
     <div class="stats-bar">
-      <span>📰 17 articles</span>
-      <span>🏷 7 categories</span>
+      <span>📰 21 articles</span>
+      <span>🏷 6 categories</span>
       <span>📡 13 sources</span>
     </div>
 
@@ -31,17 +31,28 @@
 
     <div class="numbers-bar">
       <div class="number-item">
-        <span class="number-value">9.2</span>
-        <span class="number-label">BeyondTrust認証バイパスCVE-2026-40138のCVSSスコア</span>
+        <span class="number-value">95%</span>
+        <span class="number-label">Claude Fable 5 の SWE-bench Verified スコア（7月8日時点）</span>
       </div>
       <div class="number-item">
-        <span class="number-value">35倍</span>
-        <span class="number-label">DNSリゾルバ修正で改善したZenn記事のクエリレイテンシ倍率</span>
+        <span class="number-value">7件</span>
+        <span class="number-label">Adobe が今回修正した CVSS 10.0 の重大脆弱性数</span>
       </div>
       <div class="number-item">
-        <span class="number-value">$40M</span>
-        <span class="number-label">AIエージェント訓練環境スタートアップBespoke LabsのシリーズA調達額</span>
+        <span class="number-value">65%</span>
+        <span class="number-label">2027年までに IDE を必須とみなさなくなると予測されるチームの割合（Gartner）</span>
       </div>
+    </div>
+
+    <div class="weekly-keywords">
+      <div class="section-title">📊 今週のキーワード</div>
+      <div class="keyword-chips">
+        <span class="keyword-chip">AIエージェント競争</span>
+        <span class="keyword-chip">セキュリティ警報</span>
+        <span class="keyword-chip">LLMコーディング</span>
+        <span class="keyword-chip">フロントエンド刷新</span>
+      </div>
+      <div class="keyword-summary">今週はLLMコーディングエージェントの競争が最高潮を迎え、GPT-5.6の一般公開とKimi K2.6の1兆パラメータOSS公開が重なった。セキュリティ面ではGhostLock（成功率97%のLinux脆弱性）やAdobeゼロデイなど重大CVEが連続し、npm v12のインストールスクリプトデフォルトブロックがサプライチェーン防衛の転換点として注目された。MicrosoftのFrontier Company設立やFigmaのBud買収など大型AI戦略投資も相次いだ一週間だった。</div>
     </div>
 
     <div class="section" id="top-stories">
@@ -50,69 +61,67 @@
       <div class="card featured deep-dive">
         <div class="card-header">
           <span class="tag tag-ai">AI</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://www.engadget.com/2210308/openai-rolls-out-gpt5-6-july-9/">DEEP DIVE: OpenAI、新モデルファミリー「GPT-5.6」を一般公開——政府事前審査を経た初の主要フロンティアモデル</a></h3>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://benchlm.ai/benchmarks/sweVerified">DEEP DIVE: AI コーディングベンチマーク2026年7月版 — Fable 5 が SWE-bench Verified 95% に到達</a></h3>
         </div>
-        <div class="summary">
-          OpenAIが新モデルファミリー「GPT-5.6」を7月9日、一般ユーザー向けに世界展開した。ラインナップはフロンティア級の推論と長時間の自律エージェント作業に特化した旗艦モデル「Sol」（$5/$30 per 1Mトークン）、旧世代GPT-5.5相当の性能を約半分のコストで提供する「Terra」（$2.50/$15）、最速・最安の「Luna」（$1/$6）の3モデル構成。6月26日に約20の組織へ限定プレビュー公開されて以降、米商務省AI基準革新センター（CAISI）による追加テストを経て、一般公開への移行が承認された。トランプ政権下では、フロンティアモデルの公開前に政府への事前共有を求める新たな審査プロセスが敷かれており、GPT-5.6はこのプロセスを経て世に出た最初の主要リリースの一つとなる。SolはCerebras上で最大750トークン/秒という超高速推論の提供も7月中に予定している。OpenAIは同時期にMeta・SpaceXAIなど競合各社も相次いで新モデルを投入する「主要リリース週」にあると報じられており、フロンティアモデル競争が一段と加速している。
-        </div>
-        <div class="editorial">🧠 「政府への事前共有→限定プレビュー→一般公開」という段階を踏んだリリースプロセスは、フロンティアモデルの公開が国家安全保障マターとして扱われる新常態を象徴している。Terraが旧フラッグシップ級の性能を半額で提供する価格破壊は、GPT-5.5時代のヘビーユーザーにとって実質的な値下げとなる一方、Sol・Terra・Lunaという3階層のラインナップ設計は、モデル選びのコストパフォーマンス比較というエンジニアの仕事を一段と複雑にしている。Meta・SpaceXAIが同時期に競合モデルを投入していることも踏まえると、しばらくは「毎週のようにベンチマーク表が塗り替わる」展開が続きそうだ。</div>
+        <div class="summary">2026年7月8日時点の最新SWE-bench Verifiedリーダーボード（BenchLM）では、AnthropicのClaude Fable 5が95.00%を記録した。同社最上位モデルのMythos 5は95.5%でトップに立つが、エンタープライズ向けの高コストモデルにとどまる。SWE-bench Verifiedは実際のGitHubリポジトリから抽出した問題を人手で精査したセット（2,294件）であり、自律的なPR修正能力を測る業界標準指標として定着している。Fable 5はSWE-bench Pro（より困難な実環境タスクセット）でも80.3%という業界最高スコアを記録しているが、これはAnthropic自社スキャフォールドを用いた自己申告値であり、独立検証機関による再現待ちの段階だ。価格面では、Fable 5が入力$10・出力$50（百万トークン単位）と最上位モデルにふさわしいプレミアム価格帯にある一方、Claude Sonnet 5（入力$3・出力$15）やDeepSeek V4-Pro、Kimi K2.7など「日常使い」レンジのモデルが92〜93%台で肉薄しており、コスト対性能の実務ROIは日々変動している。エージェント統合面でも、Cursor 1.0（Q1 2026 GA）・GitHub CopilotのAI Credits従量課金移行・Claude Code GAが重なり、AIコーディングアシスタントはついに「実験的ツール」から「本番インフラ」へ完全移行した。</div>
+        <div class="editorial">🧠 SWE-bench 95%という数値は印象的だが、実際の開発現場では「ベンチマーク最高スコアのモデルが最も生産的」とは限らない。レイテンシ・価格・IDEネイティブ統合の三角形で選択するのが2026年の現実的な判断基準だ。DeepSeekやKimiなどオープンウェイト系がフロンティアに肉薄している今、単一ベンダー依存を避けたマルチモデル戦略がチームの競争優位になりつつある。</div>
         <div class="key-points">
           <ul>
-            <li>「Sol」($5/$30)・「Terra」($2.50/$15)・「Luna」($1/$6)の3モデル構成、Terraは旧フラッグシップGPT-5.5相当の性能を約半分のコストで提供</li>
-            <li>6月26日の約20組織限定プレビューから、米商務省CAISIの追加テストを経て7月9日に一般公開</li>
-            <li>SolはCerebras上で最大750トークン/秒の超高速推論を7月中に提供予定</li>
+            <li>Claude Fable 5: SWE-bench Verified 95.00%、SWE-bench Pro 80.3%（Anthropic自社スキャフォールド報告値）— GPT-5.6は93.1%、DeepSeek V4-Proは92%台</li>
+            <li>価格比較: Fable 5 は$10/$50/M tokens、Sonnet 5 は$3/$15/M tokens — 性能差と価格差の乖離が拡大</li>
+            <li>Cursor 1.0（Q1 2026 GA）・Claude Code GA・GitHub Copilot AI Credits移行が同期し、エージェント本番時代が到来</li>
           </ul>
         </div>
-        <div class="why-it-matters">💡 Terra一本でGPT-5.5世代の主要ワークロードを賄えるコスト構造になったため、既存プロダクトのモデル選定を早めに見直すことでAPIコストを大きく圧縮できる可能性がある。</div>
+        <div class="why-it-matters">💡 フロンティアモデル間の性能差が縮まりつつある今、チームの採用基準はスコアではなくコスト・統合エコシステム・レイテンシの最適バランスへとシフトしている。</div>
         <div class="meta">
-          <span>Engadget</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-07-09</span>
+          <span>BenchLM</span>
+          <span>⏱ 8 min read</span>
+          <span>2026-07-08</span>
         </div>
       </div>
 
       <div class="card featured">
         <div class="card-header">
           <span class="tag tag-ai">AI</span>
-          <span class="content-type">🔒 セキュリティ</span>
-          <h3><a href="https://thehackernews.com/2026/07/writer-ai-flaw-could-let-agent-previews.html">Writer AIに「WriteOut」——プレビューリンクのクリックだけでテナント間セッション乗っ取りが可能な脆弱性</a></h3>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://blog.google/innovation-and-ai/technology/developers-tools/managed-agents-gemini-api/">Google Managed Agent API が大型アップデート — 長期タスク・リモート MCP・カスタム関数対応</a></h3>
         </div>
-        <div class="summary">
-          エンタープライズ向け生成AIプラットフォームWriterに、セキュリティ企業Sand Securityが「WriteOut」と名付けた重大なセッション分離不備の脆弱性が発見された。攻撃者が自分のアカウントでエージェントを作成しプレビューリンクを共有するだけで、リンクを開いた被害者のセッションCookieがサンドボックスプレビューに転送されてしまい、アカウント乗っ取りが成立する。プライベートなチャットやドキュメント、LLM認証情報などが窃取可能だったといい、Writerは責任開示を受けてセッションCookieをサンドボックスに転送しない設計へ修正した。
-        </div>
+        <div class="summary">2026年7月7日、GoogleはGemini API上のManaged Agentsに4つの主要機能を追加した：長期バックグラウンドタスク、リモートMCPサーバー統合、カスタム関数実行、資格情報管理の効率化だ。Managed Agent APIは単一APIコールで独立したLinux VMを起動し、ファイル管理・Webアクセス・コード実行を可能にするサーバーレスAIエージェント基盤。Gemini 3.5 FlashベースのAntigravityエージェントとGoogle AI Studioから利用可能で、パブリックプレビューとして公開中。特にリモートMCPサポートの追加により、社内ツールや独自データソースとの接続が一気に現実的になった。</div>
         <div class="key-points">
           <ul>
-            <li>攻撃はプレビューリンクを開かせるだけの「ワンクリック」型、被害者の権限次第では組織の管理者権限まで奪取可能</li>
-            <li>Writerのライブプレビュー機能（Writer Framework）がテナント分離を破っていたことが原因、責任開示を経て修正済み</li>
+            <li>7月7日アップデート: 長期バックグラウンドタスク対応、リモートMCPサーバー統合、カスタム関数実行を追加</li>
+            <li>Linux VMをサーバーレスで払い出し — ステートレス設計、ネットワーク無効化デフォルト、毎回クリーンな環境</li>
+            <li>Gemini 3.5 Flash搭載、Google AI StudioおよびInteractions API経由でパブリックプレビュー公開</li>
           </ul>
         </div>
+        <div class="why-it-matters">💡 リモートMCPサポートの追加により、社内ツールや独自データベースと連携したAIエージェントをゼロインフラで即日試験運用できる点が企業開発チームに直接刺さる。</div>
         <div class="meta">
-          <span>The Hacker News</span>
-          <span>⏱ 4 min read</span>
+          <span>Google Blog</span>
+          <span>⏱ 5 min read</span>
           <span>2026-07-07</span>
         </div>
       </div>
 
       <div class="card featured">
         <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://www.techtimes.com/articles/319890/20260708/npm-v12-ships-this-month-blocking-install-scripts-that-enabled-year-supply-chain-attacks.htm">npm v12、インストールスクリプトを既定でブロック——16年ぶりの大規模セキュリティ再設計</a></h3>
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://techcrunch.com/2026/07/07/the-worst-hacks-and-breaches-of-2026-so-far/">TechCrunch「2026年上半期の最悪ハック＆データ侵害」— 医療・行政・インフラが標的の中心</a></h3>
         </div>
-        <div class="summary">
-          npmの次期メジャーバージョンv12が7月中に公開され、パッケージインストール時のスクリプト自動実行やGit依存関係、リモートソースの取得が既定でブロックされるようになる。npm 16年の歴史における最大級のセキュリティ再設計で、AxiosやMastra AIを狙った北朝鮮系の攻撃など相次ぐサプライチェーン攻撃への直接的な対応とされる。
-        </div>
+        <div class="summary">TechCrunchが2026年7月7日に公開した上半期サイバーインシデントまとめによると、ランサムウェアグループと国家支援型APTが製薬・高等教育・行政・ゲーム・電力インフラを横断的に標的とした6ヶ月間だった。GhostLock（15年物Linuxカーネル脆弱性、成功率97%）の実悪用からAnubisランサムウェアによる91組織同時被害まで、AI支援型の自動攻撃が被害規模を急拡大させた。KDDIの1,223万件情報流出や、AIモデル訓練用GPUクラスタを新たな攻撃対象とするAI Compute Hijackingも上半期のトレンドとして確認されている。</div>
         <div class="key-points">
           <ul>
-            <li>インストールスクリプト・Git依存・リモートソース取得を既定でブロック、必要な場合は明示的なオプトインが必要に</li>
-            <li>2025年だけで約45万件の悪意あるOSSパッケージが公開され、ブロック済みパッケージ累計は123万件超（前年比75%増）</li>
+            <li>2026年H1はランサムウェアが「電力・医療・行政インフラ」へ重点移行 — 企業標的から社会基盤への拡大が顕著</li>
+            <li>AIモデル訓練GPUクラスタへの侵入（AI Compute Hijacking）が上半期後半に急増する新手口として浮上</li>
+            <li>KDDI 1,223万件、Anubis 91組織など日本含む大規模インシデントが相次いだ</li>
           </ul>
         </div>
+        <div class="why-it-matters">💡 AIインフラが攻撃対象に加わったことで、セキュリティチームはMLOpsパイプラインを含む新しい攻撃面をカバーする必要がある。</div>
         <div class="meta">
-          <span>Tech Times</span>
-          <span>⏱ 3 min read</span>
-          <span>2026-07-08</span>
+          <span>TechCrunch</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-07-07</span>
         </div>
       </div>
     </div>
@@ -122,23 +131,61 @@
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-frontend">Frontend</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://nextjs.org/blog/next-16-3-instant-navigations">Next.js 16.3プレビュー公開——「Instant Navigations」でSPA並みの即時遷移、Turbopackのメモリ最適化も強化</a></h3>
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://thehackernews.com/2026/07/adobe-patches-7-cvss-100-flaws-in.html">Adobe が ColdFusion と Campaign Classic の CVSS 10.0 を含む計7件の重大脆弱性を修正</a></h3>
         </div>
-        <div class="summary">
-          Next.js 16.3プレビューが公開され、SPA並みの即時ページ遷移を実現する「Instant Navigations」が導入された。&lt;Suspense&gt;でのストリーミングや'use cache'を使うルートは自動的に再利用可能な"シェル"が生成され、初回のみプリフェッチされることで遷移が瞬時になる。Turbopackも長時間の開発セッションでのメモリ使用量を抑えるキャッシュ退避機能などが強化された。
-        </div>
+        <div class="summary">AdobeはColdFusion（CVE-2026-48282ほか）とCampaign Classicに存在するCVSS 10.0の任意コード実行脆弱性を含む合計7件の重大フローを修正する緊急パッチをリリースした。ColdFusionのパストラバーサルRCEは発見から2日以内に実攻撃への悪用が確認されており、管理者は即時適用が必須の状況だ。Campaign Classicは認証バイパスを組み合わせたRCEシナリオが確認されている。</div>
         <div class="key-points">
           <ul>
-            <li>Instant Navigationsはconst instant = falseでルート単位のオプトアウトが可能</li>
-            <li>Turbopackはファイルシステム永続化キャッシュを活用したメモリ退避機能を追加、長時間devセッションのメモリ増大を抑制</li>
+            <li>CVSS 10.0 フロー計7件を1パッチで対処 — ColdFusion（パストラバーサルRCE）+ Campaign Classic（認証バイパス）</li>
+            <li>ColdFusion CVE-2026-48282は既に実攻撃で悪用中 — 公開から48時間以内にCISA KEVにも追加済み</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Next.js Blog</span>
-          <span>⏱ 2 min read</span>
-          <span>2026-06-29</span>
+          <span>The Hacker News</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07-10</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.postgresql.org/about/news/postgresql-19-beta-1-released-3313/">PostgreSQL 19 Beta 1 リリース — 並列 Autovacuum・I/O ワーカー自動スケール・SQL グラフクエリ</a></h3>
+        </div>
+        <div class="summary">PostgreSQL 19 Beta 1が2026年6月4日にリリースされ、本番評価データが揃ってきた。今バージョンの目玉は並列Autovacuum（autovacuum_max_parallel_workers設定で制御）とI/Oワーカー自動スケーリング（io_min_workers/io_max_workers）。さらにSQL/PGQ準拠のグラフクエリ対応と、ダウンタイムゼロで大規模テーブルを再構築するConcurrent REPACKが追加された。</div>
+        <div class="key-points">
+          <ul>
+            <li>並列Autovacuum: autovacuum_max_parallel_workers設定でインデックスバキューム工程を複数プロセスに分散 — 大テーブルの肥大化抑制が大幅改善</li>
+            <li>SQL/PGQグラフクエリ対応 — GraphQL/Cypherに依存せずRDB上でグラフ問い合わせが可能に</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>PostgreSQL.org</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-06-04</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://developers.googleblog.com/build-with-google-antigravity-our-new-agentic-development-platform/">Google Antigravity 2.0 + Android CLI 1.0 正式安定版 — エージェント型 Android 開発が本番フェーズへ</a></h3>
+        </div>
+        <div class="summary">GoogleはAntigravity開発プラットフォームを2.0にアップデートし、Android CLI（AIエージェント向け軽量Android開発インターフェース）をv1.0正式安定版としてリリースした。Android CLI v1.0はIDEを起動せずにAIエージェントがセマンティック解析・Composeプレビューレンダリング・UIテスト実行を行える設計で、Jetpack Compose移行やNavigation 3対応のOSSスキルファイルも公開されている。</div>
+        <div class="key-points">
+          <ul>
+            <li>Android CLI v1.0 GA: AIエージェントがAndroid Studio不要でCompose UIテスト・セマンティック解析を実行可能に</li>
+            <li>Antigravity 2.0 CLI: サブエージェントオーケストレーション + クロスプラットフォームターミナルサンドボックス保護</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Google Developers Blog</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-07-07</span>
         </div>
       </div>
 
@@ -146,65 +193,40 @@
         <div class="card-header">
           <span class="tag tag-security">Security</span>
           <span class="content-type">🔒 セキュリティ</span>
-          <h3><a href="https://thehackernews.com/2026/07/beyondtrust-patches-critical-auth.html">BeyondTrust、Remote Support/PRAの認証バイパス脆弱性CVE-2026-40138を修正——自己ホスト版への告知は数カ月遅れ</a></h3>
+          <h3><a href="https://thehackernews.com/2026/07/threatsday-ai-compute-hijacking-apple.html">AI コンピュート基盤を標的にする「AI Compute Hijacking」が急増、BlueHammer ランサムウェアも活発化</a></h3>
         </div>
-        <div class="summary">
-          BeyondTrustのRemote SupportおよびPrivileged Remote Access（PRA）に、CVSS 9.2の事前認証バイパス脆弱性CVE-2026-40138が存在していたことが明らかになった。特定の認証設定が有効な環境で、ネットワーク到達可能な攻撃者がアクセス制御を回避し、管理者権限を含む不正アクセスを獲得できる。SaaS版へは4月21日に無告知でパッチが適用済みだったが、自己ホスト版利用者への告知は7月7日までずれ込んだ。
-        </div>
+        <div class="summary">Hacker Newsの週次脅威ラウンドアップで報告されたAI Compute Hijackingは、企業GPUクラスタや機械学習トレーニングインフラへ侵入してLLMトレーニング演算リソースを仮想通貨マイニングや別LLMのファインチューニングに流用する新手口。同報告ではApple Email未修正脆弱性とBlueHammerランサムウェア新亜種による医療機関集中攻撃（2週間で14組織被害）も確認されている。</div>
         <div class="key-points">
           <ul>
-            <li>影響を受けるのはRemote Support/PRAの25.3.2以前、修正版は25.3.3以降または4月のセキュリティロールアップ適用</li>
-            <li>SaaS顧客には4月21日に無告知でパッチ済み、自己ホスト顧客への公表は7月7日と大幅に遅延</li>
+            <li>AI Compute Hijacking: GPU/TPUクラウドへの不正侵入でMLリソースを流用 — クリプトジャッキングの進化版として急増</li>
+            <li>BlueHammer ランサムウェアが医療機関・大学を集中攻撃 — 2週間で14組織が被害を報告</li>
           </ul>
         </div>
         <div class="meta">
           <span>The Hacker News</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07-10</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.com/usestrix/strix">usestrix/strix — AI 搭載オープンソースペネトレーションテストフレームワーク（GitHub 11.7k ⭐）</a></h3>
+        </div>
+        <div class="summary">strixはAIが脆弱性の発見・報告・修正提案までを自動化するオープンソースのペネトレーションテストフレームワーク。AIが対象システムのアタックサーフェスを走査し、CVSSベースの優先度付きレポートを自動生成する「AI pentest copilot」的なポジショニングで、GitHubスターが急増中（11.7k⭐）。</div>
+        <div class="key-points">
+          <ul>
+            <li>AIが攻撃面走査→CVSSスコア付きレポート自動生成→修正提案まで一貫実行</li>
+            <li>OSSのため組織固有のルールセット拡張が可能 — 内製ペネトレーションテストの自動化強化に向く</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span class="engagement">⭐ 11.7k</span>
           <span>⏱ 3 min read</span>
-          <span>2026-07-07</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-ai">AI</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://9to5mac.com/2026/07/07/anthropic-expanding-claude-cowork-to-mobile-and-web-details-here/">Anthropic、「Claude Cowork」をモバイル・Webへ拡大——リモートセッションでデバイスを跨いで作業継続</a></h3>
-        </div>
-        <div class="summary">
-          Anthropicが、リモートで動作するエージェント型ワークスペース「Claude Cowork」をモバイル・Webへ拡大した。セッションやファイルはClaudeアカウントに同期され、ノートPCを閉じても作業が継続する。まずMaxプランからベータ展開が始まった。
-        </div>
-        <div class="key-points">
-          <ul>
-            <li>Cowork（ベータ）はリモートセッションとして動作し、デバイスを跨いでチャット・プロジェクト・アーティファクトを共有</li>
-            <li>展開はMaxプランから先行開始、今後他プランへの拡大が見込まれる</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>9to5Mac</span>
-          <span>⏱ 2 min read</span>
-          <span>2026-07-07</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-ai">AI</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://openai.com/index/introducing-gpt-live/">OpenAI、フルデュプレックス音声モデル「GPT-Live-1」をChatGPT Voiceに展開——「聞きながら話す」自然な会話を実現</a></h3>
-        </div>
-        <div class="summary">
-          OpenAIが、聞くことと話すことを同時に行える全二重（フルデュプレックス）アーキテクチャの新音声モデル「GPT-Live」を発表し、ChatGPT Voiceへの展開を開始した。複雑な質問や深い推論が必要な場面では、裏側でフロンティアモデルへ処理を委譲し、結果を会話に自然に織り込む設計になっている。
-        </div>
-        <div class="key-points">
-          <ul>
-            <li>「GPT-Live-1」はGo/Plus/Proの既定モデルに、無料ユーザー向けには軽量版「GPT-Live-1 mini」を提供</li>
-            <li>5〜10分の会話比較テストでは、ターンテイキングや会話の自然さの評価で旧Advanced Voice Modeを大きく上回った</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>OpenAI</span>
-          <span>⏱ 2 min read</span>
-          <span>2026-07-08</span>
+          <span>2026-07</span>
         </div>
       </div>
     </div>
@@ -214,23 +236,41 @@
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-infra">Infra</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://zenn.dev/avaintelligence/articles/b7d4743a448485">「APIもDBも東京なのに、全クエリが太平洋横断していた話」——DNSリゾルバの所在地ズレでレイテンシ35倍</a></h3>
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/googledartflutter_agent_skillsdartflutterai.html">Google、Dart &amp; Flutter Agent Skills をリリース — AI エージェントに最新ベストプラクティスを提供</a></h3>
         </div>
-        <div class="summary">
-          Zennに投稿された記事では、東京リージョンにAPIもDBも配置しているにもかかわらず、全クエリが太平洋を横断してレイテンシが悪化していた事例を紹介している。原因はDNSリゾルバの所在地とアプリケーションの実行環境がズレていたことで、リージョン固定のダイレクトホストに接続先を変更したところ、SELECT 1クエリの応答が294msから8msへと約35倍高速化した。
-        </div>
+        <div class="summary">GoogleはAIエージェントがDartとFlutterの最新ベストプラクティスを活用できる「Dart &amp; Flutter Agent Skills」を公開した。Antigravity・Claude Code・GitHub Copilotなど主要AIコーディングエージェントが参照することで、Flutter 3.x UI実装やDart 3.x null safety対応、Riverpod状態管理などの推奨パターンに沿ったコード生成を実現する。Publickey経由で国内Flutter開発者コミュニティにも注目されている。</div>
         <div class="key-points">
           <ul>
-            <li>Fly.io東京環境でgeo-DNS型マネージドサービスを使う際、リゾルバの位置とアプリの位置がズレるケースがあると指摘</li>
-            <li>環境変数を1つ変更するだけでレイテンシが294ms→8msに改善、35倍の高速化を確認</li>
+            <li>Dart &amp; Flutter向けAgent Skillsファイル群を公開 — AIエージェントが参照してベストプラクティス準拠コードを生成</li>
+            <li>Google Antigravity / Claude Code / GitHub Copilotに対応 — 主要AIツール横断でFlutter開発品質が向上</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Zenn</span>
+          <span>Publickey</span>
           <span>⏱ 3 min read</span>
-          <span>2026-07</span>
+          <span>2026-07-09</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/2027ai65ide.html">ガートナー「2027年までにAIエージェントでコーディングするチームの65%がIDEを必須と思わなくなる」</a></h3>
+        </div>
+        <div class="summary">Gartnerは最新予測で、2027年までにAIエージェントを主要コーディング手段として採用したチームの65%がIDEを「不可欠なツール」とみなさなくなると発表した。ターミナルベースのAIコーディングエージェント（Claude Code、Codex CLI等）やブラウザ完結型開発環境の台頭が背景。「IDEが消える」のではなく「依存度が低下する」という解釈が適切で、VS CodeやJetBrainsは統合強化で応じている。</div>
+        <div class="key-points">
+          <ul>
+            <li>Gartner予測: 2027年時点でAIエージェント使用チームの65%がIDEを「必須ではない」と回答</li>
+            <li>Claude Code・Codex CLIなどターミナルAIエージェントの普及が直接の背景要因</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-09</span>
         </div>
       </div>
 
@@ -238,15 +278,13 @@
         <div class="card-header">
           <span class="tag tag-dev">Dev</span>
           <span class="content-type">📜 解説</span>
-          <h3><a href="https://zenn.dev/kenfdev/articles/1febc0052b0d71">「VS Code DevContainerを使わなくなった私の、LLMエージェント向け開発環境」</a></h3>
+          <h3><a href="https://zenn.dev/acrosstudioblog/articles/4138c8ec633df8">Zenn 人気記事「2026年 WEB 開発の基本になる変化」— TypeScript デフォルト・メタフレームワーク標準化</a></h3>
         </div>
-        <div class="summary">
-          Zennの記事では、LLMエージェントを使った開発でgit worktreeを多用するようになった結果、DevContainerと組み合わせるとコンテナ数が際限なく増えてしまう問題を報告している。プロジェクトごとに使い捨てる環境より、CLIやdotfiles、パスワードマネージャー連携などを積み込んだ安定的な個人用開発マシンの方がエージェント運用に向くと結論づけている。
-        </div>
+        <div class="summary">Zennで話題のこの解説記事は、2026年のWeb開発の大きな転換として「TypeScriptが業界デフォルトの基準線になった」「Next.js/Nuxt等のメタフレームワークが専門プロジェクトの出発点として定着した」の2点を核に解説している。純粋なJavaScript利用はレガシーアプローチとして認識され、SSR/エッジレンダリングがメタフレームワーク経由で主流選択肢となった背景をわかりやすくまとめている。</div>
         <div class="key-points">
           <ul>
-            <li>タスクごとにworktreeを切ってエージェントを並行実行するワークフローでは、DevContainerの多重生成が管理コストを増大させると指摘</li>
-            <li>個人の好みが強いCLI・dotfiles・認証情報連携はチーム標準のリポジトリ設定に含めるべきではないという主張</li>
+            <li>「純粋JavaScriptはレガシー」 — 2026年現在、TypeScriptはプロジェクト開始時の業界標準基準線に</li>
+            <li>SSR/エッジレンダリングがNext.js・Nuxt・SvelteKit経由で主流の選択肢に — 純CSRアーキテクチャは減少傾向</li>
           </ul>
         </div>
         <div class="meta">
@@ -259,22 +297,20 @@
       <div class="card">
         <div class="card-header">
           <span class="tag tag-ai">AI</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://zenn.dev/mkj/articles/cco-paper_20260531">「Claude codeと論文書いたら良い論文"は"できた」——7週間のClaude Code Orchestra運用記</a></h3>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/google_antigravityandroidaiandroid_knowledge_baseandroid_skills.html">Publickey: Google Antigravity が Android 開発に正式対応 — Android Knowledge Base・Skills も公開</a></h3>
         </div>
-        <div class="summary">
-          Zennに投稿された記事では、Claude Code Orchestraを使って7週間で学術論文を執筆した経験を報告している。「実験を回して結果を積む」フェーズではCLIエージェントが強力に機能し、AI以前なら2〜3カ月かかっていた作業量をこなせたという。一方で、結果から示唆を引き出す最も重要な工程は既存のオーケストレーションの工夫だけでは難しかったと振り返っている。
-        </div>
+        <div class="summary">Publickey速報によると、Google AntigravityがAndroidアプリ開発に正式対応し、「Android Knowledge Base」と「Android Skills」も合わせて公開された。Android CLI安定版リリースにより、AIエージェントがセマンティック解析・Jetpack Compose UIプレビューを自律実行可能になり、Jetpack Compose移行やNavigation 3対応など複雑ワークフローのOSSスキルファイルも提供されている。</div>
         <div class="key-points">
           <ul>
-            <li>7週間の実働期間でAI活用以前の2〜3カ月分に相当する実験・検証量を実施できたと報告</li>
-            <li>「結果に基づく示唆の抽出」という研究の核心部分は依然として人間の判断に依存すると指摘</li>
+            <li>Android CLI v1.0 stable: AIエージェントがAndroid Studio不要でCompose UIテストを実行</li>
+            <li>Android Skills: Jetpack Compose移行・Navigation 3移行など複雑APIのOSSスキルファイル公開</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Zenn</span>
+          <span>Publickey</span>
           <span>⏱ 3 min read</span>
-          <span>2026-05</span>
+          <span>2026-07-08</span>
         </div>
       </div>
     </div>
@@ -284,45 +320,62 @@
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
+          <span class="tag tag-frontend">Frontend</span>
           <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://gigazine.net/gsc_news/en/20260708-officecli/">AIエージェントがWord/Excel/PowerPointを直接操作できるOSSツール「OfficeCLI」</a></h3>
+          <h3><a href="https://glasskit.app/ui">GlassKit UI — Meta Ray-Ban Display 向け 44 React コンポーネント、OSS で公開</a></h3>
         </div>
-        <div class="summary">
-          AIエージェントがWord・Excel・PowerPointを直接読み書き・自動化できるOSSツール「OfficeCLI」が公開され、GIGAZINEが取り上げた。Office製品のインストールなしで動作するシングルバイナリで、.docx/.xlsx/.pptxをHTMLやPNGへ高精度でレンダリングできる内蔵エンジンを備える。
-        </div>
+        <div class="summary">GlassKit UIはMeta Ray-Ban Displayの600×600レンズ向けに最適化された44種のReactコンポーネントライブラリ。空間フォーカスエンジン、Neural Bandジェスチャー入力対応、DirectionArrow/Compass/Pinなどワールドアンカーコンポーネントを収録したOSSで、`@glasskit-ui/cli`でコンポーネントをプロジェクトに直接追加できる。デスクトップと実機Ray-Banで同一コードが動作する設計が特徴だ。</div>
         <div class="key-points">
           <ul>
-            <li>350以上のExcel関数を自動評価する数式・ピボットエンジンを内蔵、OOXMLネイティブのピボットテーブルにも対応</li>
-            <li>インストール時にClaude Code・Cursor・Windsurf・GitHub Copilotなど主要コーディングエージェントへofficecliスキルを自動導入</li>
+            <li>44 Reactコンポーネント: 空間フォーカスエンジン + Neural Band ジェスチャー + HUDコンポーネント一式を収録</li>
+            <li>デスクトップと Ray-Ban 実機でコード共有可能 — ウェアラブルUI開発サイクルを短縮</li>
           </ul>
         </div>
         <div class="meta">
-          <span>GIGAZINE</span>
+          <span>GlassKit</span>
           <span>⏱ 3 min read</span>
-          <span>2026-07-08</span>
+          <span>2026-07</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-data">Data</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://dev.to/alexmercedcoder/apache-data-lakehouse-weekly-july-1-to-july-8-2026-3non">Apache Iceberg、Rust実装0.10.0のリリース候補投票中——JVM専用からの脱却が加速</a></h3>
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.com/langchain-ai/openwiki">langchain-ai/openwiki — AI エージェント向けコードベースドキュメントを自動生成・維持する CLI（10.2k ⭐）</a></h3>
         </div>
-        <div class="summary">
-          Apache Icebergのエコシステムで、Rust実装0.10.0のリリース候補（RC2）の投票が7月1日に始まり、検証中に見つかった問題を受けてRC3の投票が7月8日までに行われた。IcebergはJVM専用プロジェクトからの脱却が進んでおり、Rust実装がDataFusion-Cometのネイティブスキャン処理を、C++実装がSIMD最適化された実行を支える構成へと多言語化が進んでいる。
-        </div>
+        <div class="summary">openWikiはコードベースをスキャンし、Claude Code・Cursor・GitHub Copilotなど主要AIエージェントが参照するMarkdown形式ドキュメントを自動生成・継続的に更新するCLIツール。`openwiki init`でリポジトリを解析して関数・モジュール・アーキテクチャの説明ファイルを生成し、差分ウォッチモードでPR merge後にも自動更新する。大規模コードベースでのAIエージェント活用精度を高める目的で設計されている。</div>
         <div class="key-points">
           <ul>
-            <li>PyIcebergはPyPIでの日次ダウンロード数が50万件を突破、Sparkを起動せずに本番運用するチームも増加</li>
-            <li>Iceberg 1.11のスキャンプランニングクライアントを実装したエンジン間（Spark/Snowflake/Trino/DuckDB/Flink）でポリシーの相互運用が確立しつつある</li>
+            <li>コードベース解析→Markdownドキュメント自動生成 — Claude Code・Cursor等のAIエージェントが参照する形式で出力</li>
+            <li>差分ウォッチモードで継続的にドキュメントを最新化 — PR merge後に自動更新可能</li>
           </ul>
         </div>
         <div class="meta">
-          <span>DEV Community</span>
-          <span>⏱ 3 min read</span>
-          <span>2026-07-08</span>
+          <span>GitHub</span>
+          <span class="engagement">⭐ 10.2k</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://blog.google/innovation-and-ai/technology/developers-tools/google-io-2026-developer-highlights/">Google Stitch — 自然言語・画像入力から高品質 UI デザインとフロントエンドコードを同時生成</a></h3>
+        </div>
+        <div class="summary">Google StitchはGoogle I/O 2026で発表された、自然言語記述またはスクリーンショット/デザイン画像からデスクトップ・モバイル双方対応のUIデザインとフロントエンドコードを同時生成するAIツール。長年の課題だったデザイナー↔エンジニア間のハンドオフコストを大幅に削減し、プロトタイプから実装コードへの直接変換を可能にする。現在はGoogle AI Studio経由でプレビュー利用可能。</div>
+        <div class="key-points">
+          <ul>
+            <li>自然言語 or 画像→UIデザイン+フロントエンドコードを同時生成 — デザイン・エンジニアリングの分断を解消</li>
+            <li>デスクトップ・モバイル両対応、Google AI Studio経由でプレビュー公開中</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Google Blog</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-05</span>
         </div>
       </div>
     </div>
@@ -331,43 +384,50 @@
       <div class="section-title">🔗 Quick Links</div>
 
       <div class="quick-link">
-        <span class="tag tag-security">Security</span>
-        <a href="https://gbhackers.com/npm-and-pypi-malware/">npmとPyPIに偽決済SDKを装うマルウェア17パッケージ、公開から6分で検知される</a>
-        <span class="quick-summary">— PaySafe・Skrill・Netellerを騙るパッケージが環境変数の認証情報を窃取しngrok経由で外部送信していた。</span>
-        <span class="meta">GBHackers</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-security">Security</span>
-        <a href="https://thehackernews.com/2026/07/microsoft-patches-rogueplanet-defender.html">Microsoft Defenderのゼロデイ「RoguePlanet」修正——検知エンジン自体がSYSTEM権限奪取の踏み台に</a>
-        <span class="quick-summary">— レースコンディションを突きSYSTEM権限のシェルを取得可能、Defenderを無効化しても回避できない設計だった。</span>
-        <span class="meta">The Hacker News</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-frontend">Frontend</span>
-        <a href="https://developer.mozilla.org/en-US/docs/Mozilla/Firefox/Releases/152">Firefox 152リリース、DevToolsのInspectorにHTMLコメント表示切替を追加</a>
-        <span class="quick-summary">— 設定パネルの新オプション「Show comments」でコメントノードの表示・非表示を切り替え可能に。</span>
-        <span class="meta">MDN</span>
-      </div>
-
-      <div class="quick-link">
         <span class="tag tag-infra">Infra</span>
-        <a href="https://groups.google.com/g/kubernetes-announce/c/HQUNakjaTN4">Kubernetes v1.35.2リリース、ビルド基盤をGo 1.25.7へ更新</a>
-        <span class="quick-summary">— 2月26日公開のv1.35.1に続くパッチ版、詳細はCHANGELOG-1.35.mdで確認できる。</span>
-        <span class="meta">Kubernetes</span>
+        <a href="https://www.publickey1.jp/blog/26/googleipv650.html">Google ユーザーの IPv6 利用率がついに 50% を超えたと判明</a>
+        <span class="quick-summary">— 2026年3月時点でGoogleのトラフィックにおけるIPv6比率が歴史的マイルストーンを達成</span>
+        <span class="meta">Publickey</span>
       </div>
 
       <div class="quick-link">
-        <span class="tag tag-product">Product</span>
-        <a href="https://www.axios.com/pro/enterprise-software-deals/2026/07/06/bespoke-labs-training-ai-agents">AIエージェント訓練用の「練習用世界」を作るBespoke Labsが4,000万ドルのシリーズA調達</a>
-        <span class="quick-summary">— 大規模コードベースやSlack・チケットまで模した環境でエージェントの長期タスク学習を支援、Wing VC主導。</span>
-        <span class="meta">Axios</span>
+        <span class="tag tag-ai">AI</span>
+        <a href="https://github.com/addyosmani/agent-skills">addyosmani/agent-skills が GitHub トレンド1位 — 今週 +6.9k ⭐ で急上昇</a>
+        <span class="quick-summary">— Addy Osmani（Google Chrome）によるAIエージェントスキル集、JavaScriptベースで79k ⭐ 到達</span>
+        <span class="meta">GitHub</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://developer.apple.com/news/?id=grx7lcto">Apple Developer サイトに新検索ツール + Figma/Sketch 向けデザインキット公開（7月7日）</a>
+        <span class="quick-summary">— Apple開発者ドキュメントの検索精度向上とデザインシステムのFigma/Sketch対応が同時アップデート</span>
+        <span class="meta">Apple Developer</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://www.cm-alliance.com/cybersecurity-blog/june-2026-biggest-cyber-attacks-data-breaches-ransomware-attacks">2026年6月サイバー攻撃まとめ — 製薬・教育・行政・ゲーム・公共インフラに集中</a>
+        <span class="quick-summary">— 6月は特に医療と高等教育機関へのランサムウェア攻撃が激化、被害規模が前月比拡大</span>
+        <span class="meta">CM Alliance</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://reports.weforum.org/docs/WEF_Global_Cybersecurity_Outlook_2026.pdf">WEF 2026 サイバーセキュリティ報告書: 87% が AI 関連脆弱性を最速成長リスクと回答</a>
+        <span class="quick-summary">— AI普及に伴うセキュリティリスクが最大の懸念事項としてサイバーセキュリティ業界全体で認識拡大</span>
+        <span class="meta">WEF</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://github.com/MadsLorentzen/ai-job-search">MadsLorentzen/ai-job-search — Claude Code ベースの AI 就活フレームワーク、今月 +4.1k ⭐</a>
+        <span class="quick-summary">— AIが応募書類作成から企業リサーチまで自動化するGitHubトレンド1位のフレームワーク</span>
+        <span class="meta">GitHub</span>
       </div>
     </div>
 
     <footer>
-      <p>Generated by Claude Code</p>
+      <p>Generated by Claude Code routine</p>
       <a href="archive/" class="archive-link">Past issues</a>
     </footer>
   </div>
