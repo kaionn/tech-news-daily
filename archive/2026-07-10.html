@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-07-10</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-07-10 (Fri)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 18 articles</span>
+      <span>🏷 8 categories</span>
+      <span>📡 14 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item">
+        <span class="number-value">11日</span>
+        <span class="number-label">BunがZigからRustへの完全移植に要した日数</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">$130M</span>
+        <span class="number-label">Prime IntellectのシリーズA調達額（評価額$1B）</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">$11B</span>
+        <span class="number-label">AIチップのSambaNovaが$1B調達後に到達した評価額</span>
+      </div>
+    </div>
+
+    <div class="weekly-keywords">
+      <div class="section-title">📊 今週のキーワード</div>
+      <div class="keyword-chips">
+        <span class="keyword-chip">AIエージェント基盤への大型出資</span>
+        <span class="keyword-chip">Rustへの大規模移植</span>
+        <span class="keyword-chip">OSSインフラの脆弱性連鎖</span>
+      </div>
+      <div class="keyword-summary">今週はPrime Intellect（$130M）、SambaNova（$1B）、そして自社AIエージェントに調達交渉そのものを担わせたLyzr（$100M）と、AIエージェント関連スタートアップへの大型資金流入が続いた一週間だった。同時にBunがClaude Fable 5を使いZigからRustへ11日間で完全移植を終えるなど、AIコーディングエージェントによる大規模言語移行の実例も目立った。一方でGitea・Langflow・U-Bootと、OSSインフラのサプライチェーン脆弱性が発見・悪用され続けている点は引き続き警戒が必要だ。</div>
+    </div>
+
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
+
+      <div class="card featured deep-dive">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://9to5mac.com/2026/07/09/openai-announcing-the-next-chapter-for-chatgpt-today-watch-here/">DEEP DIVE: OpenAI、Codexを新「ChatGPT」デスクトップアプリへ統合——Chat・Work・Codexが1つの窓に</a></h3>
+        </div>
+        <div class="summary">
+          OpenAIは7月9日、Mac・Windows向けのCodexアプリを新しい統合版ChatGPTデスクトップアプリへ統合したと発表した。ユーザーは同一アプリ内で通常のChat、企業向け「ChatGPT Work」、コーディング特化の「Codex」を切り替えて利用できるようになる。既存のCodexアプリ利用者は通常のアップデート手順でそのまま新アプリへ移行でき、進行中のCodexタスクやプロジェクトはすべて引き継がれる。旧世代のChatGPTデスクトップアプリは「ChatGPT Classic」に改称され、当面は並行提供される見込みだ。新アプリのCodexには、diff上でのインライン編集、サイドパネルでのプルリクエストレビュー、GPT-5.6により高速化されたComputer Use、複数リポジトリを横断するプロジェクト機能などが新たに追加された。今回の統合は、OpenAIが同時期に発表したエージェント型ワークスペース「ChatGPT Work」の展開や、GPT-5.6系モデルの一般公開といった一連の動きの一部であり、Chat・Work・Codexという3つの利用形態を1つの入口に集約することで、企業ユーザーが日常業務とコーディング作業を行き来する際の切り替えコストを下げる狙いがあるとみられる。無料プランを含む全プランでChat・Work・Codexが利用可能になる点も明かされている。
+        </div>
+        <div class="editorial">🧠 「アプリを統合する」という一見地味な変更は、実質的にはOpenAIがCodexを単体プロダクトではなく「ChatGPTの一機能」として位置づけ直したことを意味する。Anthropicが同時期にClaude Cowork・Claude Code・Bunの大規模Rust移植とエージェント活用の実績を積み上げているのに対し、OpenAIは「1つのアプリでChat・Work・Codexを行き来できる統合UX」で対抗する形だ。ただしCodexが独立ブランドとして目立ちにくくなることで、コーディング専業ツールとしての存在感が薄まるリスクもあり、開発者向けブランディングの観点では諸刃の剣になり得る。</div>
+        <div class="key-points">
+          <ul>
+            <li>7月9日付でMac・Windows向けCodexアプリを新ChatGPTデスクトップアプリへ統合、旧アプリは「ChatGPT Classic」に改称</li>
+            <li>新Codexはdiff上のインライン編集・サイドパネルPRレビュー・GPT-5.6駆動の高速Computer Use・複数リポジトリ横断プロジェクトに対応</li>
+            <li>Free・Plus・Pro含む全プランでChat・Work・Codexの3モードを1アプリ内から利用可能</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 CodexをCLIやIDE拡張ではなくChatGPTアプリ経由で使っているチームは、既存タスクやプロジェクトがそのまま引き継がれるため、アップデート後の切り替えで作業ロスは基本的に発生しない。</div>
+        <div class="meta">
+          <span>9to5Mac</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07-09</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://bun.com/blog/bun-in-rust">Bun、ZigからRustへの完全移植を11日間で完了——Claude Fable 5が100万行超を生成</a></h3>
+        </div>
+        <div class="summary">
+          Anthropicに買収されたBunチームが、JavaScriptランタイムBunのコードベースをZigからRustへ完全移植したと発表した。プレリリース版のClaude Fable 5を最大64インスタンス並列稼働させ、4つのgit worktreeにまたがって11日間（5月3日〜14日）で作業を完了。元のZigコードベース53万5,496行に対し、最終的な差分は100万9,272行に達し、コミット数は6,502件（マージ除く）。既存のテストスイートは1件もスキップ・削除せずに移行を完了させた。API利用料は入力51億トークン・出力6.9億トークン・キャッシュ読み込み720億トークンで、合計約16万5,000ドルと見積もられている。成果物であるBun v1.4.0のcanaryリリースは、各種ワークロードで2〜5%高速化し、2,000回の連続ビルド後のメモリ使用量が6,745MBから609MBへ大幅改善するなど、Zig版で頻発していたメモリリークも解消された。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>Claude Fable 5を最大64インスタンス並列稼働、11日間で53万行のZigコードを100万行超のRustコードへ移植、API費用は約16万5,000ドル</li>
+            <li>Bun v1.4.0 canaryは2〜5%高速化、2,000回連続ビルド後のメモリ使用量6,745MB→609MBに改善、バイナリサイズも約20%削減</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Bun Blog</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07-08</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-product">Product</span>
+          <span class="content-type">💰 ビジネス</span>
+          <h3><a href="https://techcrunch.com/2026/07/08/prime-intellect-raises-130m-series-a-to-help-enterprises-build-their-own-ai-agents/">Prime Intellect、企業向けAIエージェント訓練基盤で$130MのシリーズAを調達——評価額$1B</a></h3>
+        </div>
+        <div class="summary">
+          企業が自前のエージェント型AIシステムをフロンティア研究所に頼らず訓練できる基盤を提供するPrime Intellectが、Radical Ventures主導のシリーズAで1億3,000万ドルを調達し、評価額10億ドルに到達した。NVIDIA Ventures・Intel Capital・Dell Technologies Capital・Iconiqに加え、Perplexity創業者Aravind SrinivasやBox創業者Aaron Levieら著名創業者が個人投資家として名を連ねる。年間換算収益（ARR）は既に1億ドル規模に達しており、Ramp・Zapierなどがホスト版の顧客として利用中。Rampはスプレッドシート内の情報を検索するエージェントを同基盤で構築し、精度でフロンティアモデルを上回りつつ、より高速・低コストな運用を実現したという。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>Radical Ventures主導のシリーズAで$130M調達、評価額は$1Bに到達</li>
+            <li>ARRは既に約$100M規模、Ramp・Zapierなどがホスト版顧客としてエージェント訓練基盤を利用中</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>TechCrunch</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-08</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-data">Data</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://supabase.com/blog/multigres-v0-1-alpha">Supabase、PostgreSQLを水平スケールさせる「Multigres v0.1」アルファ版を公開</a></h3>
+        </div>
+        <div class="summary">
+          SupabaseがPostgres向けの「オペレーティングシステム」を謳う新プロジェクト「Multigres」のv0.1アルファ版を公開した。Vitess由来の水平スケーリングとHAをPostgresにもたらすことを目指し、2プロセス構成のコネクションプーリング、無改造のPostgresレプリケーション上に構築したコンセンサスベースのHA、pgBackRestによるバックアップオーケストレーション、Kubernetes operatorを備える。目玉機能であるシャーディングは今回未対応で、v0.1は単一シャード構成でのHA・プーリング検証を想定した段階。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>v0.1はシャーディング非対応の単一シャード構成、コンセンサスベースの自動フェイルオーバーとpgBackRest連携バックアップを検証可能</li>
+            <li>Apache 2.0ライセンスのGo実装、デプロイ用のKubernetes operatorも同時公開</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Supabase Blog</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-09</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://blog.calif.io/p/apple-internals-swift-in-the-kernel">Apple「KernelKit」判明——macOSカーネル拡張にEmbedded Swiftランタイムを静的リンク</a></h3>
+        </div>
+        <div class="summary">
+          Appleがカーネル内でSwiftコードを実行可能にする新フレームワーク「KernelKit」の存在が明らかになった。特定のカーネル拡張（kext）にEmbedded Swiftランタイムを静的リンクする仕組みで、現時点ではmacOS上のpthread・libm kext内に未参照のコンポーネントとして存在するのみ。Mach・BSD・IOKitといったカーネルのC/C++コア自体はまだ書き換えられておらず、Appleが実際のSwift製カーネルコンポーネントを投入する前段階として、まずインフラだけを先行配置している状況とみられる。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>Embedded SwiftランタイムはmacOSのpthread・libm kext内に確認されているが現状は未参照</li>
+            <li>Mach・BSD・IOKitのC/C++コアは維持されたまま、拡張層への段階的なSwift導入が進行中</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Calif.io</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-06-18</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://arxiv.org/abs/2606.00644">新ベンチマーク「EvoPolicyGym」、予算制約下でのLLMエージェントのポリシー改善能力を評価</a></h3>
+        </div>
+        <div class="summary">
+          7月2日にarXivへ投稿された論文「EvoPolicyGym」は、LLMエージェントが予算制約のもとで反復的に方策を改善していく能力を測る新ベンチマークを提案している。16種類のインタラクティブなテスト環境を用意し、エージェントに試行錯誤を繰り返させながら性能の推移を追跡する設計。現時点の評価ではGPT-5.5が全16環境で最高スコアを記録している。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>予算制約下でのポリシー反復改善能力を測る16種類のテスト環境を新設</li>
+            <li>公開時点の評価では全16環境でGPT-5.5がトップスコアを記録</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>arXiv</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-07-02</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-frontend">Frontend</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://svelte.dev/blog/whats-new-in-svelte-july-2026">Svelte、SvelteKitの設定をvite.config.js内に統合可能に——2026年7月のアップデート</a></h3>
+        </div>
+        <div class="summary">
+          Svelteの2026年7月アップデートで、SvelteKitプロジェクトの設定をvite.config.js内に直接記述できるようになり、svelte.config.jsを省略することが可能になった。将来的にSvelteKit 3で$env/*モジュールを置き換える予定の、明示的な環境変数機能のプレビューも初公開。言語ツールとsv CLIは、新しい{const ...}宣言タグに対応し、ツールチェーン全体が最新構文に追従した。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>vite.config.js内でSvelteKit設定を直接記述可能に、svelte.config.jsの省略が可能</li>
+            <li>$env/*を置き換える明示的な環境変数機能のプレビューが初登場、{const ...}宣言タグにも言語ツール・sv CLIが追従</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Svelte Blog</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-07</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-data">Data</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/postgresql_19ioautovacuum.html">PostgreSQL 19ベータ版が登場。I/Oワーカーの自動スケール、Autovacuumの改善など新機能</a></h3>
+        </div>
+        <div class="summary">
+          PostgreSQL 19のベータ版が公開された。非同期I/Oを担うI/Oワーカーがユーザー設定可能な最小・最大値の範囲で自動スケールするようになったほか、新設定autovacuum_max_parallel_workersによりAutovacuumがパラレルワーカーを利用可能に。バキューム対象テーブルの優先順位付けを行う新たなスコアリングシステムも導入された。このほかUPDATE/DELETEに対する時制クエリ向けの「FOR PORTION OF」句、集約なしでグルーピングできる「GROUP BY ALL」なども追加されている。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>I/Oワーカーが設定可能なmin/max範囲内で自動スケール、Autovacuumは新設定でパラレルワーカー対応に</li>
+            <li>時制クエリ向け「FOR PORTION OF」句や「GROUP BY ALL」など新SQL構文も追加</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-09</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://zenn.dev/cadp/articles/f8c5d9b8d1457e">【2万回再生・史上No.1】大企業でAIコードエージェントを浸透させた「外から攻める」戦略</a></h3>
+        </div>
+        <div class="summary">
+          8,000人規模の大企業でCursor・Claude Code・Codexといったコード生成エージェントの導入を推進した担当者が、社内啓蒙だけでは限界があると判断し、社外でのイベントやSNSでの話題化を先行させて社内へ逆輸入する「外から攻める」戦略を公開した。影響力のある人物へのDM文面や、伝播経路を設計するペルソナマトリクスなど再利用可能な具体的テクニックを紹介しており、結果としてCursorのアクティブユーザーは約1,000人に到達、Claude Code・Codexのエンタープライズ導入にもつながったという。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>社内啓蒙一辺倒から「社外で話題化→社内へ逆輸入」という戦略へ転換、Cursorアクティブユーザー約1,000人を達成</li>
+            <li>影響力のある人物へのDMテンプレートやペルソナ設計など再利用可能なテクニックを公開</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/xaigrok_build.html">xAIがコーディングエージェント「Grok Build」ベータ公開。サブエージェントを並列に実行可能</a></h3>
+        </div>
+        <div class="summary">
+          xAIが、プロフェッショナル向けのコーディングエージェント「Grok Build」の早期ベータ版を公開した。ターミナルネイティブなCLIで、複雑なタスク向けのプランモード、最大8つのサブエージェントをそれぞれ独立したgit worktree上で並列実行する機能、自動化向けのヘッドレスモードなどを備える。既存のプラグイン・フック・スキル・MCPサーバーにも標準対応する。現時点ではSuperGrok Heavy（月額300ドル）加入者限定での提供となっている。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>最大8つのサブエージェントを個別のgit worktreeで並列実行、プラグイン・フック・MCPサーバーに標準対応</li>
+            <li>提供は現状SuperGrok Heavy（月額$300）加入者限定のアーリーベータ</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-05-26</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/visual_studio_codegithub_copilot.html">Visual Studio Code、従量課金制になったGitHub Copilotの使用料を表示可能に</a></h3>
+        </div>
+        <div class="summary">
+          GitHub Copilotが2026年6月から、消費トークン数に応じて課金される従量課金制へ移行したのに合わせ、Visual Studio Code 1.125（6月17日リリース）でトークン消費量と現在の閾値に対する使用料をリアルタイム表示できるようになった。あらかじめ設定した上限に近づいた場合や到達した場合にはアラートも表示される。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>GitHub Copilotは2026年6月から従量課金制へ移行、VS Code 1.125（6月17日リリース）で対応</li>
+            <li>設定した閾値への接近・到達時にアラートを表示し、想定外の高額請求を防止</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-07-08</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.com/addyosmani/agent-skills">70以上のAIコーディングエージェントに導入できるスキル集「agent-skills」がGitHubトレンド入り</a></h3>
+        </div>
+        <div class="summary">
+          Googleのエンジニアとして知られるAddy Osmani氏が公開した「agent-skills」がGitHubトレンドで上位に浮上した。Claude Code・Cursor・Codex・GitHub Copilot・Clineなど70以上のAIコーディングエージェントにインストールできる「本番品質」のエンジニアリングスキル集で、各スキルは手順・検証ゲート・完了条件を備えたワークフローとして設計されている。エージェントが手順を省略しがちな言い訳を一覧化し、それぞれに反論を用意している点が特徴で、仕様確認・テスト・レビューといった工程の省略を防ぐ狙いがある。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>Claude Code・Cursor・Codex・Copilot・Clineなど70以上のエージェントにインストール可能</li>
+            <li>各スキルに検証ゲートと「エージェントがサボる際の言い訳」への反論集を内蔵し、手順省略を防止</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-07-10</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.modular.com/blog/modular-26-3-mojo-1-0-beta-max-video-gen-and-more">Modular、「Mojo 1.0」ベータ版を公開——専用サイトmojolang.orgも同時始動</a></h3>
+        </div>
+        <div class="summary">
+          ModularがMojo 1.0のベータ版（beta 1）を、Modular 26.3リリースの一部として公開し、専用ウェブサイトmojolang.orgも同時に立ち上げた。機能的にはほぼ完成形とされる今回のベータには、新しいキャプチャ構文による安全なクロージャ、トレイトの条件付き適合、GPUカーネル向けにメモリレイアウトをコンパイル時の型情報として扱う「TileTensor」などが含まれる。標準ライブラリは既にApache 2.0ライセンスでオープンソース化されているが、コンパイラ自体のOSS化は2026年秋に予定されている。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>安全なクロージャ・トレイトの条件付き適合・GPUカーネル向け「TileTensor」などを搭載した機能完成版ベータ</li>
+            <li>標準ライブラリは既にApache 2.0でOSS化済み、コンパイラのOSS化は2026年秋を予定</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Modular Blog</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-05</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
+
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://techcrunch.com/2026/07/08/sambanova-draws-1b-at-11b-valuation-in-series-f-first-close/">AIチップのSambaNovaが$1B調達、評価額$11Bに——JPMorganChaseの推論基盤としても採用</a>
+        <span class="quick-summary">— General Atlantic主導のシリーズFファーストクローズ、SN40L・SN50システムがJPMorganChaseのオンプレAI推論基盤に採用された。</span>
+        <span class="meta">TechCrunch</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://thehackernews.com/2026/07/six-new-u-boot-flaws-could-let.html">組込みブートローダU-Bootに新たな6件の脆弱性——2013年以来13年分のコードに影響</a>
+        <span class="quick-summary">— Binarlyが発見、うち2件は署名検証前の任意コード実行を許す重大なもの。修正済みだが7月の安定版には間に合わず、次版は10月まで待つ必要がある。</span>
+        <span class="meta">The Hacker News</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://www.csoonline.com/article/4185063/langflow-rce-under-active-attack-months-after-a-patch-was-shipped.html">Langflowの認証不要RCE脆弱性CVE-2026-5027、パッチ公開から数カ月後も実悪用が継続</a>
+        <span class="quick-summary">— 4月にv1.9.0で修正済みにもかかわらず、パストラバーサルを突く攻撃が今なお観測されている。</span>
+        <span class="meta">CSO Online</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://techcrunch.com/2026/07/09/an-ai-agent-startup-just-let-its-agent-run-its-100-million-fundraise/">AIエージェント開発のLyzr、自社エージェントに$100M調達ラウンドの交渉を任せて成立</a>
+        <span class="quick-summary">— 「SilvaClaw」が130人超の投資家対応から投資メモ作成までを担当、評価額は約$500Mに到達した。</span>
+        <span class="meta">TechCrunch</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-infra">Infra</span>
+        <a href="https://aws.amazon.com/blogs/aws/amazon-ec2-c9g-and-c9gd-instances-powered-by-aws-graviton5-processors-are-now-available/">AWS、Graviton5搭載のEC2 C9g/C9gdインスタンスを一般提供開始</a>
+        <span class="quick-summary">— 前世代Graviton4比で最大25%の性能向上、L3キャッシュは5倍、新設計「Nitro Isolation Engine」でVM分離も強化された。</span>
+        <span class="meta">AWS News Blog</span>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code</p>
+      <a href="archive/" class="archive-link">Past issues</a>
+    </footer>
+  </div>
+</body>
+</html>
