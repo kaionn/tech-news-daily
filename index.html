@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tech News Daily — 2026-07-13</title>
+  <title>Tech News Daily — 2026-07-14</title>
   <link rel="stylesheet" href="style.css">
   <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="feed.xml">
 </head>
@@ -11,14 +11,14 @@
   <div class="container">
     <header>
       <h1>Tech News Daily</h1>
-      <div class="date">2026-07-13 (Mon)</div>
+      <div class="date">2026-07-14 (Tue)</div>
       <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
     </header>
 
     <div class="stats-bar">
-      <span>📰 19 articles</span>
-      <span>🏷 6 categories</span>
-      <span>📡 16 sources</span>
+      <span>📰 20 articles</span>
+      <span>🏷 7 categories</span>
+      <span>📡 15 sources</span>
     </div>
 
     <nav class="toc">
@@ -31,16 +31,16 @@
 
     <div class="numbers-bar">
       <div class="number-item">
-        <span class="number-value">11社</span>
-        <span class="number-label">新標準「Agentic Resource Discovery」に賛同した参加企業数</span>
+        <span class="number-value">50MW+</span>
+        <span class="number-label">NY州がハイパースケールDC新設許可を一時停止する対象電力しきい値</span>
       </div>
       <div class="number-item">
-        <span class="number-value">$850B</span>
-        <span class="number-label">OpenAIが非公開IPO申請で目標とする評価額上限</span>
+        <span class="number-value">900+</span>
+        <span class="number-label">実悪用が続くOracle E-Business Suite脆弱性CVE-2026-46817の露出インスタンス数</span>
       </div>
       <div class="number-item">
-        <span class="number-value">890万人</span>
-        <span class="number-label">ローカルLLM実行ツール「Ollama」の月間利用開発者数</span>
+        <span class="number-value">2.4万</span>
+        <span class="number-label">セルフホストAI会議アシスタント「Meetily」のGitHubスター数（直近1週間で7,440増）</span>
       </div>
     </div>
 
@@ -51,46 +51,46 @@
         <div class="card-header">
           <span class="tag tag-infra">Infra</span>
           <span class="content-type">👀 注目</span>
-          <h3><a href="https://developers.googleblog.com/announcing-the-agentic-resource-discovery-specification/">DEEP DIVE: Google・Microsoft・Salesforceなど主要11社、AIエージェントがツールを自動発見する新標準「Agentic Resource Discovery（ARD）」を発表</a></h3>
+          <h3><a href="https://www.governor.ny.gov/news/first-statewide-moratorium-new-hyperscale-data-centers-launched-governor-kathy-hochul">DEEP DIVE: ニューヨーク州、全米初となるハイパースケールデータセンター新設の州レベルモラトリアムを発動</a></h3>
         </div>
         <div class="summary">
-          Googleは6月17日、Microsoft・Salesforce・Cisco・Databricks・GitHub・GoDaddy・Hugging Face・NVIDIA・ServiceNow・Snowflakeなど業界横断の11社と共同で、AIエージェントがツールやスキル・MCPサーバー・他のエージェントをWeb上で発見し検証するための新標準「Agentic Resource Discovery（ARD）」を発表した。ARDは「ai-catalog.json」というマニフェスト形式を用い、エージェントが中央集権的なレジストリに問い合わせることで、あるタスクに使える能力を検索できるようにする仕組み。従来はエージェントに個々のツールの場所を逐一教え込む必要があったが、ARDにより発見プロセス自体を標準化できる。既に2024年後半に登場したAnthropicのModel Context Protocol（MCP）やGoogleのAgent2Agentプロトコルを置き換えるものではなく、これらを補完する「発見レイヤー」として設計されている点が特徴。仕様はagenticresourcediscovery.orgで公開されており、企業のツール・データソースを横断的に安全に共有・接続できるようにする狙いがある。今回の連合にはAI基盤モデルを提供するOpenAIとAnthropicの名前がなく、既存のエンタープライズソフトウェア勢がAIエージェントの「接続インフラ」の主導権を握ろうとする動きとして注目されている。
+          ニューヨーク州のキャシー・ホークル知事は、50メガワット以上の電力を使う新規ハイパースケールデータセンターについて、州の環境許可発給を最長1年間停止する大統領令に署名した。全米の州レベルでは初となる包括的なモラトリアムで、電力料金を負担する一般利用者・環境・送電網・地域コミュニティを守るための規制枠組みを1年以内に整備する狙い。ニューヨーク州の系統運用機関（NYISO）の接続待ち行列には、合計約9,340メガワット規模・25件のデータセンター計画が滞留しており、急増するAI関連の電力需要が既存の送電網に重い負荷をかけている実態が背景にある。知事は同時に、州公益事業委員会（DPS）に対し、データセンター事業者に追加の電力料金を負担させるか自前で電源を確保させる「Energize NY」手続きの開始を指示したほか、今後の新設データセンターに一貫した基準を課すための環境影響評価書（GEIS）の策定も命じた。データセンター誘致を競う他州の動向にも影響を与える可能性がある。
         </div>
-        <div class="editorial">🧠 MCPが「エージェントとツールの対話方法」を、Agent2Agentが「エージェント同士の対話方法」を標準化したのに対し、ARDは「そもそもどのツールが存在するかをどう見つけるか」という発見レイヤーの空白を埋めようとする動きだ。ChatGPTやClaudeを擁するOpenAI・Anthropicが初期支持リストから外れている点は象徴的で、エンタープライズソフトウェア企業群が土台となる標準の主導権を握ることで、フロンティアモデル企業への依存度を下げようとする狙いが透けて見える。この標準が実際にどこまで採用されるかは、Anthropic・OpenAIが独自に対抗策を出すかどうかにも左右されそうだ。</div>
+        <div class="editorial">🧠 AI政策論の重心が「モデル性能」から「電力とインフラ」へ移りつつあることを象徴する動きだ。50メガワットという基準はハイパースケール案件のほぼ全てを止める設計であり、他州が追随すれば米国内でのAI基盤構築ペースそのものに影響しかねない。とはいえ自家発電契約や送電網増強投資を条件に許可を出す道も残されており、単純な「開発禁止」ではなく「負担の付け替え」を狙った制度設計である点には留意したい。</div>
         <div class="key-points">
           <ul>
-            <li>Google・Microsoft・Salesforce・Cisco・Databricks・GitHub・NVIDIA・ServiceNow・Snowflakeなど11社が支持を表明</li>
-            <li>ai-catalog.jsonマニフェストで中央レジストリからツール・スキル・MCPサーバー・他エージェントを発見可能に</li>
-            <li>MCP・Agent2Agentを置き換えず補完する「発見レイヤー」として設計、OpenAI・Anthropicは初期支持リストに不在</li>
+            <li>50MW以上の新設データセンターへの州環境許可発給を最長1年間停止、全米初の州レベルモラトリアム</li>
+            <li>NYISOの接続待ち行列に25件・計約9,340MW規模のデータセンター計画が滞留</li>
+            <li>「Energize NY」手続きでデータセンターに追加料金負担か自家発電を義務化、GEIS策定で許可基準を統一へ</li>
           </ul>
         </div>
-        <div class="why-it-matters">💡 複数ベンダーのMCPサーバーやエージェントを組み合わせて運用する開発者は、今後ツールの発見・カタログ化がARD準拠のマニフェストへ集約されていく可能性を見据えて設計しておくとよい。</div>
+        <div class="why-it-matters">💡 ニューヨーク州でのデータセンター新設を検討している事業者は、今後最長1年間は新規許可が下りない前提で計画を見直す必要がある。</div>
         <div class="meta">
-          <span>Google Developers Blog</span>
+          <span>New York Governor's Office</span>
           <span>⏱ 4 min read</span>
-          <span>2026-06-17</span>
+          <span>2026-07-14</span>
         </div>
       </div>
 
       <div class="card featured">
         <div class="card-header">
-          <span class="tag tag-ai">AI</span>
-          <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://the-decoder.com/claude-code-now-has-a-built-in-browser-that-lets-the-ai-read-click-and-type-on-external-websites/">Claude Code、デスクトップアプリに内蔵ブラウザを追加——AIがWebページの閲覧・操作まで自律的にこなす</a></h3>
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://www.bleepingcomputer.com/news/security/over-900-oracle-e-business-instances-exposed-to-ongoing-attacks/">Oracle E-Business Suiteの未認証RCE脆弱性CVE-2026-46817が実悪用——900件超のインスタンスがネット上に露出</a></h3>
         </div>
         <div class="summary">
-          Anthropicは7月10日、Claude Codeのデスクトップアプリにサンドボックス化された内蔵ブラウザを追加した。Claude Codeバージョン2.1.202〜2.1.206として展開され、AIがタブ形式のブラウザを自律的に操作し、ドキュメントやデザイン資料など外部サイトを開いて読み取り・クリック・フォーム入力までこなせるようになる。ローカル開発サーバのプレビューと同じ感覚で外部Webページを扱える点が特徴。既定ではセッション状態を保持しないステートレス設計で、サイトごとのアクセス許可は「今回のみ許可」「常に許可」「拒否」から選べ、設定画面からいつでも取り消せる。
+          Oracle E-Business SuiteのPaymentsモジュールに存在するCVSS 9.8の脆弱性CVE-2026-46817が、6月27日から実悪用されていることが判明した。File Transmissionコンポーネントの「ibytransmit」エンドポイントを突く攻撃で、認証不要のままOracle内部のJava関数を直接呼び出し、サーバー上の任意ファイルを読み取ることが可能。Oracleは5月のCritical Patch Updateで既に修正版を提供済みだったが、公開の実証コードが出回るより前に実攻撃が観測された。対象は12.2.3〜12.2.15。Shadowserverの調査では900件超のOracle E-Business Suiteインスタンスがインターネット上に露出したまま放置されている。
         </div>
         <div class="key-points">
           <ul>
-            <li>Claude Code 2.1.202〜2.1.206として展開、macOSはCmd+Shift+B、WindowsはCtrl+Shift+Bで起動</li>
-            <li>サイトごとのアクセス許可を選択・保存でき、既定でサンドボックス化・ステートレス。Pro/Maxユーザーは追加費用なしで利用可能</li>
+            <li>CVSS 9.8、ibytransmitエンドポイント経由で認証不要のリモートコード実行が可能</li>
+            <li>対象バージョンは12.2.3〜12.2.15、5月のCPUで修正済みだが900件超が未パッチのままネット露出</li>
           </ul>
         </div>
         <div class="meta">
-          <span>The Decoder</span>
+          <span>BleepingComputer</span>
           <span>⏱ 3 min read</span>
-          <span>2026-07-10</span>
+          <span>2026-07</span>
         </div>
       </div>
 
@@ -98,21 +98,21 @@
         <div class="card-header">
           <span class="tag tag-product">Product</span>
           <span class="content-type">💰 ビジネス</span>
-          <h3><a href="https://www.cnbc.com/2026/06/08/openai-confidentially-files-for-ipo-prepping-wall-street-for-ai-debut.html">OpenAI、Goldman SachsとMorgan Stanley主幹事で非公開IPO申請——2026年9月にも上場、評価額は最大$850B規模</a></h3>
+          <h3><a href="https://www.digitimes.com/news/a20260714VL218/nvidia-chips-taiwan.html">Nvidia、アジアのAIチップ承認バイヤーリストを半減——中国への迂回輸出を警戒し審査を強化</a></h3>
         </div>
         <div class="summary">
-          OpenAIがGoldman SachsとMorgan Stanleyを主幹事に、米証券取引委員会（SEC）へ非公開のIPO目論見書（S-1）を提出したことが6月8日に明らかになった。上場時期は2026年9月から11月頃を想定し、評価額は非公開市場での取引実績を踏まえ$730B〜$850B規模が目標とされる。アナリストの一部は上場初日の時価総額が$1兆を超える可能性もあるとみており、実現すれば米国史上有数の規模のテクノロジーIPOとなる。同時期にAnthropicも評価額$965Bで非公開IPO申請を済ませており、AI2社がほぼ同時期に上場を目指す異例の展開となっている。
+          Nvidiaは7月14日、アジア地域でAI向けチップの購入を認める顧客リストを半分以上削減したと明らかにした。5月31日に米商務省が示した新指針を受けた措置で、同指針は最終的な親会社が中国・マカオにある買い手について、子会社の所在地を問わず輸出ライセンスを必須とする内容。Nvidiaはシンガポール・マレーシア・日本など、過去に中国への迂回輸出の疑いが浮上したハブ地域を重点的に審査し、データセンター訪問・契約内容の確認・エンドユーザーへの聞き取りを強化した「ホワイトリスト」制の新たな承認プロセスを整備した。米商務省の支援も受けているという。
         </div>
         <div class="key-points">
           <ul>
-            <li>Goldman Sachs・Morgan Stanley主幹事で非公開S-1をSECへ提出、上場は2026年9月〜11月頃を想定</li>
-            <li>目標評価額は$730B〜$850B規模、アナリストは初日時価総額$1兆超えの可能性も指摘</li>
+            <li>5月31日の米商務省指針を受け、中国・マカオに親会社を持つ買い手は所在地を問わずライセンス必須に</li>
+            <li>シンガポール・マレーシア・日本など迂回輸出の疑いが浮上した拠点を重点審査、データセンター訪問や契約確認を強化</li>
           </ul>
         </div>
         <div class="meta">
-          <span>CNBC</span>
+          <span>DIGITIMES</span>
           <span>⏱ 3 min read</span>
-          <span>2026-06-08</span>
+          <span>2026-07-14</span>
         </div>
       </div>
     </div>
@@ -122,45 +122,23 @@
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://blog.rust-lang.org/2026/07/09/Rust-1.97.0/">Rust 1.97が安定版に——8年越しでv0シンボルマングリングが既定に、Cargoの警告制御も追加</a></h3>
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://thehackernews.com/2026/07/compromised-jscrambler-8140-npm-release.html">難読化ツールjscramblerのnpmパッケージが侵害——preinstallフックでRust製インフォスティーラーを実行</a></h3>
         </div>
         <div class="summary">
-          Rustの最新安定版1.97がリリースされた。目玉はシンボルマングリング方式の既定切り替えで、C++と共通のItanium ABIベースだった旧方式から、より表現力の高い「v0」方式が既定になった。安定版では旧方式に後戻りできず、必要な場合はnightlyでのみ利用可能。ほかCargoが警告の扱い（許容・表示のみ・ビルド失敗）を設定で制御できるようになったほか、リンカの出力メッセージが既定で表示されるようになるなど、ビルド時の可視性を高める変更が中心となっている。
+          7月11日、攻撃者が侵害したnpm公開クレデンシャルを使い、jscramblerパッケージの悪性バージョン5種（8.14.0〜8.20.0）を約3時間の間に連続公開した。いずれもpreinstallフックでクロスプラットフォーム対応のRust製インフォスティーラー「IronWorm」（Shai-Hulud系統）を自動実行し、クラウド認証情報・CIトークン・ブラウザのパスワード・暗号資産ウォレット・MCPサーバー認証情報を含むAIコーディングツールの設定まで窃取する。
         </div>
         <div class="key-points">
           <ul>
-            <li>v0シンボルマングリングが約8年越しで既定に、旧Itanium ABI方式はnightly限定に</li>
-            <li>Cargoの警告レベル制御・リンカメッセージの既定表示など、ビルド診断の可視性を強化</li>
+            <li>preinstallフックで自動実行されるためパッケージのインポートやCLI実行は不要、ダウンロード数は約1,500件</li>
+            <li>検知から約2時間でクリーンな8.22.0を公開、Shai-Hulud系統のRust製インフォスティーラー「IronWorm」と特定</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Rust Blog</span>
-          <span>⏱ 2 min read</span>
-          <span>2026-07-09</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://wordpress.org/news/2026/07/wordpress-7-0-1-maintenance-release/">WordPress 7.0.1メンテナンスリリース公開——Core 13件・Gutenberg 13件、計31件のバグを修正</a></h3>
-        </div>
-        <div class="summary">
-          WordPress 7.0.1が7月9日に公開された。7.0系の開発サイクル中に混入した、あるいは先送りされていた不具合の解消に特化したバグ修正のみのメンテナンスリリースで、Coreの13チケットとGutenberg（ブロックエディタ）の13件の修正を含む計31件のバグが解消された。ブロックエディタ・メール送信・クラシックテーマなど複数領域に影響する不具合が対象。7月1日にリリース候補版が公開され、複数回のバグスクラブセッションを経て正式版に至った。次期メジャーバージョンのWordPress 7.1は8月19日のWordCamp USでのリリースを予定しており、7月15日にはBeta 1が公開される見込み。
-        </div>
-        <div class="key-points">
-          <ul>
-            <li>Core 13件・Gutenberg 13件、計31件のバグ修正のみを含むメンテナンスリリース</li>
-            <li>次期メジャー版WordPress 7.1はBeta 1を7月15日、正式版を8月19日のWordCamp USで公開予定</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>WordPress News</span>
-          <span>⏱ 2 min read</span>
-          <span>2026-07-09</span>
+          <span>The Hacker News</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-11</span>
         </div>
       </div>
 
@@ -168,65 +146,87 @@
         <div class="card-header">
           <span class="tag tag-security">Security</span>
           <span class="content-type">🔒 セキュリティ</span>
-          <h3><a href="https://www.ibm.com/support/pages/security-bulletin-ibm-websphere-application-server-affected-remote-code-execution-vulnerability-cve-2026-11536">IBM WebSphere Application ServerにSOAP/JMXコネクタ経由のリモートコード実行脆弱性CVE-2026-11536</a></h3>
+          <h3><a href="https://www.bleepingcomputer.com/news/security/ubiquiti-warns-of-new-max-severity-unifi-os-vulnerability/">Ubiquiti、UniFiエコシステム横断で25件の脆弱性を公表——CVE-2026-50746はCVSS満点10.0</a></h3>
         </div>
         <div class="summary">
-          IBMはWebSphere Application Serverに存在するリモートコード実行（RCE）脆弱性CVE-2026-11536を公表した。SOAP/JMXコネクタの実装に起因する欠陥で、悪用に成功すると認証情報を持つ攻撃者が任意コードを実行できる可能性がある。対象はWebSphere Application Server 8.5系・9.0系で、恒久的な修正となるFix Pack 9.0.5.29以降の提供は2026年第3四半期を予定。同時期には管理コンソールのヘルプ機能に起因するクロスサイトスクリプティング（XSS）脆弱性（CVSS 9.3の2件を含む）やCSRF脆弱性も複数公表されている。
+          UbiquitiはSecurity Advisory Bulletin 066にて、UniFi OSおよびConnect・Talk・Access・Protect・Networkの各アプリにまたがる25件の脆弱性を一括公表した。最も深刻なCVE-2026-50746はUniFi Connect Application（3.4.16以前）のアクセス制御不備に起因し、認証不要かつネットワーク到達可能な攻撃者がコマンドインジェクションを実行できる。攻撃条件は低複雑度・権限不要・ユーザー操作不要とCVSS満点の10.0。
         </div>
         <div class="key-points">
           <ul>
-            <li>SOAP/JMXコネクタ経由のRCE脆弱性、恒久修正のFix Pack 9.0.5.29以降は2026年第3四半期提供予定</li>
-            <li>管理コンソールのヘルプ機能にCVSS 9.3のXSS脆弱性2件も同時に公表、対象はWebSphere 8.5系・9.0系</li>
+            <li>CVE-2026-50746はCVSS10.0、認証不要・ネットワーク到達可能な攻撃者がコマンドインジェクション可能</li>
+            <li>UniFi Connect・Talk・Access・Protect・Networkを横断して25件の脆弱性を公表、Connectは3.4.20以降へ更新必須</li>
           </ul>
         </div>
         <div class="meta">
-          <span>IBM Support</span>
+          <span>BleepingComputer</span>
           <span>⏱ 3 min read</span>
-          <span>2026-07</span>
+          <span>2026-07-02</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://github.blog/changelog/2026-07-10-codeql-2-26-0-adds-kotlin-2-4-0-support-and-ai-prompt-injection-detection/">GitHub、CodeQL 2.26.0を公開——Kotlin 2.4.0対応とAIエージェント向けプロンプトインジェクション検出を追加</a></h3>
+        </div>
+        <div class="summary">
+          GitHubのコード解析エンジンCodeQLの最新版2.26.0が公開された。目玉はJavaScript/TypeScript向けの新クエリで、未検証の入力がAIエージェントの「システム」指示に影響を与え、ツール利用・データアクセス・出力の挙動を操作されうるパターン（プロンプトインジェクション）を検出する。あわせてKotlin 2.4.0対応や、C#のRazor Pageハンドラのパラメータをリモートフローソースとして扱うSQLインジェクション検出精度の改善など、C#・Go・Python・Swift・GitHub Actions横断の解析改善も含まれる。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>JS/TS向けにシステムプロンプトインジェクション検出クエリを新設、AIエージェントのツール利用を狙う攻撃パターンを検知</li>
+            <li>Kotlin 2.4.0対応に加えC#・Go・Python・Swift・GitHub Actionsの解析精度も改善、GitHub code scanning利用者に自動配信</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub Changelog</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-07-10</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
           <span class="tag tag-infra">Infra</span>
-          <span class="content-type">💰 ビジネス</span>
-          <h3><a href="https://blog.cloudflare.com/voidzero-joins-cloudflare/">Cloudflare、Vite開発元のVoidZeroを買収——Vite・Vitest・Rolldown・OxcをCloudflareのエコシステムへ統合</a></h3>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://devblogs.microsoft.com/commandline/wsl-container-is-now-available-for-public-preview/">Microsoft、「WSL Containers」をパブリックプレビュー公開——Docker Desktop不要でWindows上にLinuxコンテナ</a></h3>
         </div>
         <div class="summary">
-          CloudflareはVue.js作者のEvan You氏が2023年に創業したVoidZero Inc.を買収したと発表した。VoidZeroが手掛けるビルドツールVite（週間ダウンロード1億件超）、テストランナーVitest、Rust製バンドラRolldown、ツールチェーンOxcを、Cloudflareの開発者プラットフォームへネイティブに統合する狙い。Vite・Vitest・Rolldown・Oxc・Vite+は引き続きオープンソース・MITライセンスで提供され、Evan You氏らVoidZeroチームがプロジェクトの主導を継続する。CloudflareはVite開発者・コントリビューターを支援するエコシステムファンドに100万ドルを拠出することも表明した。
+          MicrosoftはWindows Subsystem for Linux（WSL）上でLinuxコンテナをネイティブに構築・実行できる「WSL Containers」のパブリックプレビューを公開した。Dockerコマンドに近い形式のCLI「wslc.exe」（エイリアスcontainer.exe）と、C++/C#・WinRT向けAPIを提供し、開発者はDocker Desktopを別途インストールせずにLinuxコンテナを扱える。Windows-Linux間のファイル転送を高速化する新デフォルトファイルシステム「virtiofs」や、企業VPNとの互換性問題を解消する実験的ネットワークモード「consomme」も導入された。一般提供は2026年秋を予定。
         </div>
         <div class="key-points">
           <ul>
-            <li>Vite（週間DL1億件超）・Vitest・Rolldown・OxcをCloudflareの開発者プラットフォームへ統合</li>
-            <li>OSS・MITライセンスは維持、Evan You氏らが引き続き開発を主導。Cloudflareはエコシステムファンドに$1M拠出</li>
+            <li>Dockerコマンド互換のCLI「wslc.exe」とcontainer.exeエイリアスで、Docker Desktop不要のLinuxコンテナ運用が可能に</li>
+            <li>新ファイルシステムvirtiofsでWindows-Linux間のファイル転送を高速化、一般提供は2026年秋を予定</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Cloudflare Blog</span>
+          <span>Microsoft DevBlogs</span>
           <span>⏱ 3 min read</span>
-          <span>2026-06-04</span>
+          <span>2026-06-30</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-ai">AI</span>
-          <span class="content-type">💰 ビジネス</span>
-          <h3><a href="https://techcrunch.com/2026/07/09/popular-open-source-ai-developer-tool-ollama-raises-65m-grows-to-nearly-9m-users/">ローカルLLM実行ツール「Ollama」が$65MのシリーズBを調達——月間890万人の開発者が利用</a></h3>
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://developer.wordpress.org/news/2026/07/whats-new-for-developers-july-2026/">WordPress開発者向け7月まとめ——ブロックエディタがReact 19へ、Classic block非推奨化とWASM画像パイプライン導入</a></h3>
         </div>
         <div class="summary">
-          オープンソースのローカルLLM実行ツール「Ollama」が、Theory Ventures主導のシリーズBで6,500万ドルを調達した。Benchmark・8VC・Y Combinator・Pace Capitalなどが参加し、2023年の立ち上げから累計調達額は8,800万ドルに到達。月間利用開発者数は890万人を超え、Fortune 500企業の85%で利用されているという。コミュニティ製の連携機能は6万7,000件以上に達し、主要なモデル開発元・ハードウェアベンダーともパートナーシップを結んでいる。調達資金は製品とOSSコミュニティへの投資、クラウド計算基盤の拡張、採用強化に充てられる。
+          WordPress開発者ブログが7月分の開発者向けアップデートをまとめて公開した。次期メジャー版7.1の目玉として、Gutenberg 23.5でデスクトップ/タブレット/モバイル固定切り替えを廃止し自由リサイズ可能なビューポート別スタイル編集に対応、コアのブロックエディタをReact 18から19へアップグレード、レガシーなClassic blockの非推奨化を予定している。加えてWebAssembly（wasm-vips）ベースの画像処理パイプラインを導入し、Ultra HDR・HEIF（HEIC）・JPEG XLをネイティブサポートするほかGIFの動画変換機能も追加される。Beta 1は7月15日公開、正式版は8月19日のWordCamp USを予定。
         </div>
         <div class="key-points">
           <ul>
-            <li>Theory Ventures主導で$65M調達、2023年の立ち上げから累計調達額は$88Mに到達</li>
-            <li>月間利用開発者数890万人超、Fortune 500企業の85%で利用、コミュニティ連携機能6.7万件以上</li>
+            <li>ブロックエディタをReact 18から19へアップグレード、Classic blockは非推奨化を予定</li>
+            <li>wasm-vipsベースの画像パイプラインでUltra HDR・HEIF・JPEG XLをネイティブ対応、Beta 1は7月15日公開予定</li>
           </ul>
         </div>
         <div class="meta">
-          <span>TechCrunch</span>
+          <span>WordPress Developer Blog</span>
           <span>⏱ 3 min read</span>
-          <span>2026-07-09</span>
+          <span>2026-07</span>
         </div>
       </div>
     </div>
@@ -238,15 +238,15 @@
         <div class="card-header">
           <span class="tag tag-dev">Dev</span>
           <span class="content-type">📜 解説</span>
-          <h3><a href="https://zenn.dev/mkj/articles/56245f7a34539c">AIコーディングではコードではなく検証プロセスをレビューする</a></h3>
+          <h3><a href="https://zenn.dev/akino/articles/7a1fc7cc605cdb">Claude Codeをチーム開発で使う際のMCPスコープ設計ガイド</a></h3>
         </div>
         <div class="summary">
-          AIコーディングの品質を安定させるには、レビュー・テスト・指示文・設計を含めた開発プロセス全体の設計が必要だと説く記事。著者はコード実装とユニットテストだけでなく、デプロイやE2Eテストまでエージェントの責務に含め、「実装指示書＋E2Eテストレポート」による検証体制を構築している。AIコーディングは単にコードを書く速度を上げるものではなく、人間がどこを見るべきかを再定義するものだとし、レビューの要否を二値で考えるのではなく必要なレビュー水準をあらかじめ決めるべきだと提言する。
+          Claude Code・Cursor・ClineなどMCP対応のAIコーディングツールがチーム開発に普及する中、MCPサーバーへのアクセス権限をどう設計すべきかを論じる記事。プロジェクト単位・チーム単位・個人単位でMCPサーバーの利用範囲を分離し、機密情報へのアクセス権限を必要最小限に絞る設計パターンを提案している。
         </div>
         <div class="key-points">
           <ul>
-            <li>コード実装・ユニットテストに加えデプロイ・E2Eテストまでエージェントの責務に含める検証体制を提案</li>
-            <li>レビューの要否ではなく必要なレビュー水準を事前に設定する考え方を提言</li>
+            <li>プロジェクト・チーム・個人単位でMCPサーバーのアクセス範囲を分離する設計パターンを提案</li>
+            <li>機密情報へのアクセス権限を最小化し、チーム開発時の誤操作・情報漏洩リスクを低減</li>
           </ul>
         </div>
         <div class="meta">
@@ -258,67 +258,67 @@
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-data">Data</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://www.publickey1.jp/blog/26/google_cloudpostgresqlalloydb.html">Google Cloud、高速フェイルオーバー可能なPostgreSQL互換AlloyDBの新たなホットスタンバイ機能を提供</a></h3>
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/readyfor_blog/articles/09f2f5f5d285ec">パフォーマンス改善の勘所</a></h3>
         </div>
         <div class="summary">
-          Google CloudはPostgreSQL互換のマネージドデータベース「AlloyDB for PostgreSQL」に新たなホットスタンバイ機能を追加した。従来のスタンバイノードは待機状態で、フェイルオーバー時に起動してログを読み込みキャッチアップする必要があったが、新機能ではスタンバイノードが常時起動しアクティブノードの状態を継続的にレプリケートする。これによりフェイルオーバーに要する時間を大幅に短縮でき、典型的には30秒未満での切り替えが可能になった。スタンバイノードは継続的にログを再生しているためメモリキャッシュも常に最新に保たれ、フェイルオーバー直後から最適な速度でリクエストに応答できる。この機能はPostgreSQL 18互換の新規作成インスタンスに自動適用され、今後のバージョンにも展開予定。
+          Webアプリのパフォーマンス改善に取り組む際の考え方を整理した記事。闇雲な最適化を避け、まず計測してボトルネックを特定してから着手する重要性や、改善対象に優先順位をつける基準を具体例とともに解説している。
         </div>
         <div class="key-points">
           <ul>
-            <li>スタンバイノードを常時起動状態にし継続的にレプリケート、フェイルオーバーは典型的に30秒未満に短縮</li>
-            <li>PostgreSQL 18互換の新規AlloyDBインスタンスに自動適用、今後のバージョンにも展開予定</li>
+            <li>計測なしの最適化を避け、ボトルネック特定を起点とした改善プロセスを提唱</li>
+            <li>改善対象の優先順位づけの基準を具体例とともに提示</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Publickey</span>
+          <span>Zenn</span>
           <span>⏱ 3 min read</span>
-          <span>2026-06</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-infra">Infra</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://www.publickey1.jp/blog/26/aws500mbpsaws_interconnect_-_multicloud.html">AWS、他クラウドとの接続が500Mbpsまで無料に——「AWS Interconnect - multicloud」に新たな無料枠</a></h3>
-        </div>
-        <div class="summary">
-          AWSはマルチクラウド接続サービス「AWS Interconnect - multicloud」に、他クラウドプロバイダーとの接続が500Mbpsまで無料になる新しい無料枠を追加した。これまで専用線接続にはポート単位の固定費用がかかっていたが、新しい無料枠により低〜中程度の帯域幅であればコストをかけずにAWSとGoogle Cloud・Microsoft Azureなど他クラウド間のトラフィックをやり取りできるようになる。マルチクラウド構成を採る企業がクラウド間データ転送のコストを気にせず小規模なワークロードを試験導入しやすくなる。
-        </div>
-        <div class="key-points">
-          <ul>
-            <li>他クラウドプロバイダーとの接続が500Mbpsまで無料に、専用線のポート費用なしで小規模ワークロードを試験可能</li>
-            <li>Google Cloud・Microsoft Azureなど主要クラウドとの接続が対象</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Publickey</span>
-          <span>⏱ 2 min read</span>
-          <span>2026-06</span>
+          <span>2026-07</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
           <span class="tag tag-dev">Dev</span>
-          <span class="content-type">👀 注目</span>
-          <h3><a href="https://www.publickey1.jp/blog/26/vs_codeaiagent_window.html">VS Code、複数AIエージェントでの並行開発を容易にする新機能「Agent window」プレビュー公開</a></h3>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/ourly_tech_blog/articles/372ea7d1cb1eba">障害対応のリアル：初心者がハマった4つの落とし穴と学び</a></h3>
         </div>
         <div class="summary">
-          Visual Studio Codeに、複数のAIコーディングエージェントセッションを1つのウィンドウ内で管理・比較できる新機能「Agent window」のプレビューが公開された。異なるアプローチを試す複数のエージェントセッションを並べて表示し、進捗や差分を横断的に比較しながら、採用する実装を選べるようになる。ワークスペースを開かずにエージェントへ質問できる「クイックチャット」など、周辺機能とあわせてエージェント活用のワークフローを整備する狙いがある。
+          障害対応の初心者が陥りがちな4つの落とし穴——原因の決めつけ、情報共有不足、暫定対応と恒久対応の混同、事後振り返りの形骸化——を実体験ベースで解説する記事。障害対応を通じてユーザーとの信頼関係を築く視点もあわせて紹介している。
         </div>
         <div class="key-points">
           <ul>
-            <li>複数のAIエージェントセッションを1ウィンドウ内で並行管理・比較できる新UI</li>
-            <li>ワークスペース起動前に質問できる「クイックチャット」など周辺機能もあわせて整備</li>
+            <li>原因の決めつけ・情報共有不足など初心者が陥りがちな4つの落とし穴を実体験ベースで解説</li>
+            <li>暫定対応と恒久対応の混同を避け、事後振り返りを形骸化させない重要性を指摘</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Publickey</span>
-          <span>⏱ 2 min read</span>
+          <span>Zenn</span>
+          <span>⏱ 4 min read</span>
           <span>2026-07</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://aws.amazon.com/jp/blogs/news/weekly-genai-20260706/">週刊生成AI with AWS——KiroがClaude Sonnet 5に対応、AWS Summit Japan 2026の活用事例も</a></h3>
+        </div>
+        <div class="summary">
+          AWS Japanブログの週刊まとめ記事。AIコーディング環境「Kiro」がClaude Sonnet 5に対応したことや、AWS Summit Japan 2026のパートナーセッションで紹介された企業の生成AI活用事例など、直近1週間の生成AI関連アップデートをまとめて紹介している。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>AIコーディング環境「Kiro」がClaude Sonnet 5に対応</li>
+            <li>AWS Summit Japan 2026のパートナーセッションで企業の生成AI活用事例を紹介</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>AWS Japan Blog</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-13</span>
         </div>
       </div>
     </div>
@@ -328,43 +328,66 @@
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-security">Security</span>
+          <span class="tag tag-ai">AI</span>
           <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://github.com/perplexityai/bumblebee">Perplexity、開発者端末の依存関係を横断スキャンするOSSツール「Bumblebee」を公開——サプライチェーン侵害への露出を可視化</a></h3>
+          <h3><a href="https://github.com/Zackriya-Solutions/meetily">セルフホスト型AI会議アシスタント「Meetily」がGitHubトレンド1位に——完全ローカル処理で4倍速の文字起こし</a></h3>
         </div>
         <div class="summary">
-          Perplexity AIは、開発者端末上のパッケージ・拡張機能・開発ツールのメタデータを読み取り専用でスキャンし、既知のソフトウェアサプライチェーン侵害への露出を確認できるOSSツール「Bumblebee」を公開した。npm・pnpm・Yarn・Bun・PyPI・Go modules・RubyGems・Composerの8つのパッケージエコシステムに加え、MCPのホスト設定ファイルやVS Code・Cursor・Windsurf・VSCodiumの拡張機能、Chromium・Firefox系ブラウザ拡張までを対象にする。「何も実行しない」設計思想を掲げ、ロックファイルを直接読み取るのみでnpmやpip・bunコマンドを一切呼び出さず、攻撃の主要経路であるpostinstallスクリプトの実行も避ける。Go 1.25以上で書かれた単一の静的バイナリで、標準ライブラリ以外の依存を持たない。
+          プライバシー重視のセルフホスト型AI会議アシスタント「Meetily」がGitHubトレンド1位を獲得した。Rust製で、Parakeet/Whisperによる従来比4倍速のライブ文字起こし・話者分離・Ollamaによるローカル要約まで完結し、音声・トランスクリプト・APIキーが外部に送信されることはない。7月8日時点で1日約2,500スターを獲得する急伸を見せ、直近1週間で7,440スターを積み増した。
         </div>
         <div class="key-points">
           <ul>
-            <li>npm・PyPI・Go modules・RubyGemsなど8エコシステム＋MCP設定・エディタ拡張・ブラウザ拡張を横断スキャン</li>
-            <li>コマンドを一切実行しない読み取り専用設計でpostinstallスクリプトなどの攻撃経路を回避、Apache 2.0ライセンス</li>
+            <li>Rust製、Parakeet/Whisperで4倍速のライブ文字起こしと話者分離、Ollamaでローカル要約</li>
+            <li>macOS・Windows対応、音声・トランスクリプト・APIキーを外部送信しない100%ローカル処理設計</li>
           </ul>
         </div>
         <div class="meta">
           <span>GitHub</span>
           <span>⏱ 2 min read</span>
-          <span>2026-05</span>
+          <span>2026-07</span>
+          <span class="engagement">⭐ 23,853</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
+          <span class="tag tag-frontend">Frontend</span>
           <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://www.publickey1.jp/blog/26/net_skillsainet.html">マイクロソフトが「.NET Skills」公開——AIエージェントの.NET開発能力を拡張</a></h3>
+          <h3><a href="https://github.com/loveconnor/loveui">オープンソースReactコンポーネントライブラリ「LoveUI」公開——Tailwind CSSベースのプロダクトUI向けプリミティブ集</a></h3>
         </div>
         <div class="summary">
-          マイクロソフトは、AIコーディングエージェント向けにAgent Skills形式で.NET固有の知識を提供する「.NET Skills」を公開した。.NETのベストプラクティスやAPI知識、フレームワーク特有の実装パターンをスキルファイルとしてエージェントへ注入することで、.NETプロジェクトでのコード生成やリファクタリングの精度を高める狙いがある。Claude Code・GitHub Copilotなど、Agent Skills形式に対応するエージェントであれば導入可能。
+          プロダクトUI構築向けのオープンソースReactコンポーネントライブラリ「LoveUI」が公開された。Tailwind CSSベースのアクセシブルなプリミティブとコピー&amp;ペーストで使えるブロック集を提供し、レジストリに手を加えずにページ単位のセクションもそのままコピーできる。
         </div>
         <div class="key-points">
           <ul>
-            <li>Agent Skills形式で.NET固有のベストプラクティス・API知識をAIエージェントへ注入</li>
-            <li>Claude Code・GitHub CopilotなどAgent Skills対応エージェントへ導入可能</li>
+            <li>Tailwind CSSベースのアクセシブルなReactプリミティブとコピー&amp;ペースト対応ブロックを提供</li>
+            <li>インストールしたコンポーネントはアプリ内にそのまま配置され自由に編集・レビュー可能</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Publickey</span>
+          <span>GitHub</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-07</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-frontend">Frontend</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://glasskit.app/ui">Meta Ray-Ban Display向けオープンソースReact UIキット「GlassKit UI」公開</a></h3>
+        </div>
+        <div class="summary">
+          Meta Ray-Ban Displayアプリ向けのオープンソースReactコンポーネントライブラリ「GlassKit UI」が公開された。600×600ピクセルのレンズ表示にあわせて調整されたフォーカスエンジンやNeural Band入力対応の44種類のUIコンポーネントを提供し、npmからSDKを導入した後にCLIでコンポーネントを追加できる。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>600×600ピクセルのレンズ向けにチューニングされたフォーカスエンジン、Neural Band入力対応の44コンポーネントを提供</li>
+            <li>DirectionArrow・Compassなど空間アンカー型コンポーネントも用意、CLIでプロジェクトへ直接追加可能</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GlassKit</span>
           <span>⏱ 2 min read</span>
           <span>2026-07</span>
         </div>
@@ -375,38 +398,38 @@
       <div class="section-title">🔗 Quick Links</div>
 
       <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://techcrunch.com/2026/07/13/anthropic-starts-localizing-claude-pricing-for-india-its-biggest-market-after-the-us/">Anthropic、Claudeのインド向け現地通貨建て価格表示を開始——UPI決済は未対応</a>
+        <span class="quick-summary">— 米国に次ぐ最大市場インドで一部ユーザー向けにルピー建て価格表示を開始。決済はカードかApple/Google課金経由のまま。</span>
+        <span class="meta">TechCrunch</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://www.anthropic.com/news/redeploying-fable-5">Anthropic、Claude Fable 5の無料アクセス期間を7月19日まで再延長</a>
+        <span class="quick-summary">— 7月7日開始の1週間限定プロモーションから2度目の延長。OpenAIのSol系モデルリリース後の対抗策とみられる。</span>
+        <span class="meta">Anthropic</span>
+      </div>
+
+      <div class="quick-link">
         <span class="tag tag-security">Security</span>
-        <a href="https://www.cisa.gov/news-events/alerts/2026/07/07/cisa-adds-three-known-exploited-vulnerabilities-catalog">CISA、JoomShaper・Langflow・Joomlackのファイルアップロード／認可バイパス脆弱性3件をKEVカタログに追加</a>
-        <span class="quick-summary">— CVE-2026-48908・CVE-2026-55255・CVE-2026-56290が対象、いずれも実悪用を確認。米連邦機関には修正期限が設定されている。</span>
+        <a href="https://www.cisa.gov/news-events/alerts/2026/07/13/cisa-adds-one-known-exploited-vulnerability-catalog">CISA、16年前のCisco IOS CSRF脆弱性CVE-2008-4128をKEVカタログに追加——今も実悪用</a>
+        <span class="quick-summary">— 2008年公開の脆弱性が現在も攻撃に悪用されていることが判明、連邦機関には修正期限が設定されている。</span>
         <span class="meta">CISA</span>
       </div>
 
       <div class="quick-link">
-        <span class="tag tag-ai">AI</span>
-        <a href="https://www.techtimes.com/articles/320308/20260713/gemini-35-pro-targets-july-17-after-full-rebuild-every-spec-remains-unconfirmed.htm">Gemini 3.5 Pro、7月17日発売目標へ——ベースモデルを白紙化しゼロから再学習とのリーク情報</a>
-        <span class="quick-summary">— 200万トークンのコンテキストウィンドウやDeep Thinkモードが噂されるが、Google公式のモデルカード・価格ページは7月13日時点で未公開。リーク情報であり未確定。</span>
-        <span class="meta">Tech Times</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-product">Product</span>
-        <a href="https://supabase.com/blog/figma-make-support-for-supabase">Figma Make、Supabase連携でモックデータを実際のPostgreSQLデータベースへ——認証・ストレージもノーコードで追加可能に</a>
-        <span class="quick-summary">— プロトタイプ内のダミーデータをワンクリックで実データベースに置き換え、GitHub・Googleログインなどの認証もSupabase Auth経由で設定できる。</span>
-        <span class="meta">Supabase Blog</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-ai">AI</span>
-        <a href="https://github.blog/changelog/2026-06-30-claude-sonnet-5-is-generally-available-for-github-copilot/">GitHub Copilotで「Claude Sonnet 5」が主要IDE・CLI・モバイルまで横断的に一般提供</a>
-        <span class="quick-summary">— VS Code・Visual Studio・JetBrains・Xcode・EclipseからCLI、GitHub Mobileまで対応。Copilot Pro・Pro+・Max・Business・Enterpriseで利用可能。</span>
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://github.blog/changelog/2026-07-13-github-code-quality-license-estimate-in-public-preview/">GitHub Code Quality、ライセンス利用数の事前見積り機能をパブリックプレビュー公開</a>
+        <span class="quick-summary">— 導入前に必要なライセンス数を試算できる機能で、7月20日の一般提供開始に向けた準備を後押しする。</span>
         <span class="meta">GitHub Changelog</span>
       </div>
 
       <div class="quick-link">
-        <span class="tag tag-ai">AI</span>
-        <a href="https://www.apple.com/newsroom/2026/06/apple-aids-app-development-with-new-intelligence-frameworks-and-advanced-tools/">Apple、「Foundation Models」フレームワークを今夏中にオープンソース化予定——Swift APIでオンデバイス・サーバーモデルを横断利用</a>
-        <span class="quick-summary">— Claude・Geminiなど他社モデルも同一のSwift APIから呼び出し可能に。中小規模アプリはPrivate Cloud Compute経由で追加コストなしに次世代モデルへアクセスできる見込み。</span>
-        <span class="meta">Apple Newsroom</span>
+        <span class="tag tag-data">Data</span>
+        <a href="https://clickhouse.com/blog/pg_clickhouse-whats-new-june-2026">ClickHouse、PostgreSQL拡張「pg_clickhouse」v0.3.2公開——PostgreSQL 19 Beta1・TLS・正規表現に対応</a>
+        <span class="quick-summary">— PostgreSQLの新機能に追随したタプル・配列最適化に加え、CREATE SERVERにTLS接続用の新オプションを追加した。</span>
+        <span class="meta">ClickHouse Blog</span>
       </div>
     </div>
 
