@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-07-14</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="../feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-07-14 (Tue)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 20 articles</span>
+      <span>🏷 7 categories</span>
+      <span>📡 15 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item">
+        <span class="number-value">50MW+</span>
+        <span class="number-label">NY州がハイパースケールDC新設許可を一時停止する対象電力しきい値</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">900+</span>
+        <span class="number-label">実悪用が続くOracle E-Business Suite脆弱性CVE-2026-46817の露出インスタンス数</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">2.4万</span>
+        <span class="number-label">セルフホストAI会議アシスタント「Meetily」のGitHubスター数（直近1週間で7,440増）</span>
+      </div>
+    </div>
+
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
+
+      <div class="card featured deep-dive">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://www.governor.ny.gov/news/first-statewide-moratorium-new-hyperscale-data-centers-launched-governor-kathy-hochul">DEEP DIVE: ニューヨーク州、全米初となるハイパースケールデータセンター新設の州レベルモラトリアムを発動</a></h3>
+        </div>
+        <div class="summary">
+          ニューヨーク州のキャシー・ホークル知事は、50メガワット以上の電力を使う新規ハイパースケールデータセンターについて、州の環境許可発給を最長1年間停止する大統領令に署名した。全米の州レベルでは初となる包括的なモラトリアムで、電力料金を負担する一般利用者・環境・送電網・地域コミュニティを守るための規制枠組みを1年以内に整備する狙い。ニューヨーク州の系統運用機関（NYISO）の接続待ち行列には、合計約9,340メガワット規模・25件のデータセンター計画が滞留しており、急増するAI関連の電力需要が既存の送電網に重い負荷をかけている実態が背景にある。知事は同時に、州公益事業委員会（DPS）に対し、データセンター事業者に追加の電力料金を負担させるか自前で電源を確保させる「Energize NY」手続きの開始を指示したほか、今後の新設データセンターに一貫した基準を課すための環境影響評価書（GEIS）の策定も命じた。データセンター誘致を競う他州の動向にも影響を与える可能性がある。
+        </div>
+        <div class="editorial">🧠 AI政策論の重心が「モデル性能」から「電力とインフラ」へ移りつつあることを象徴する動きだ。50メガワットという基準はハイパースケール案件のほぼ全てを止める設計であり、他州が追随すれば米国内でのAI基盤構築ペースそのものに影響しかねない。とはいえ自家発電契約や送電網増強投資を条件に許可を出す道も残されており、単純な「開発禁止」ではなく「負担の付け替え」を狙った制度設計である点には留意したい。</div>
+        <div class="key-points">
+          <ul>
+            <li>50MW以上の新設データセンターへの州環境許可発給を最長1年間停止、全米初の州レベルモラトリアム</li>
+            <li>NYISOの接続待ち行列に25件・計約9,340MW規模のデータセンター計画が滞留</li>
+            <li>「Energize NY」手続きでデータセンターに追加料金負担か自家発電を義務化、GEIS策定で許可基準を統一へ</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 ニューヨーク州でのデータセンター新設を検討している事業者は、今後最長1年間は新規許可が下りない前提で計画を見直す必要がある。</div>
+        <div class="meta">
+          <span>New York Governor's Office</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07-14</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://www.bleepingcomputer.com/news/security/over-900-oracle-e-business-instances-exposed-to-ongoing-attacks/">Oracle E-Business Suiteの未認証RCE脆弱性CVE-2026-46817が実悪用——900件超のインスタンスがネット上に露出</a></h3>
+        </div>
+        <div class="summary">
+          Oracle E-Business SuiteのPaymentsモジュールに存在するCVSS 9.8の脆弱性CVE-2026-46817が、6月27日から実悪用されていることが判明した。File Transmissionコンポーネントの「ibytransmit」エンドポイントを突く攻撃で、認証不要のままOracle内部のJava関数を直接呼び出し、サーバー上の任意ファイルを読み取ることが可能。Oracleは5月のCritical Patch Updateで既に修正版を提供済みだったが、公開の実証コードが出回るより前に実攻撃が観測された。対象は12.2.3〜12.2.15。Shadowserverの調査では900件超のOracle E-Business Suiteインスタンスがインターネット上に露出したまま放置されている。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>CVSS 9.8、ibytransmitエンドポイント経由で認証不要のリモートコード実行が可能</li>
+            <li>対象バージョンは12.2.3〜12.2.15、5月のCPUで修正済みだが900件超が未パッチのままネット露出</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>BleepingComputer</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-product">Product</span>
+          <span class="content-type">💰 ビジネス</span>
+          <h3><a href="https://www.digitimes.com/news/a20260714VL218/nvidia-chips-taiwan.html">Nvidia、アジアのAIチップ承認バイヤーリストを半減——中国への迂回輸出を警戒し審査を強化</a></h3>
+        </div>
+        <div class="summary">
+          Nvidiaは7月14日、アジア地域でAI向けチップの購入を認める顧客リストを半分以上削減したと明らかにした。5月31日に米商務省が示した新指針を受けた措置で、同指針は最終的な親会社が中国・マカオにある買い手について、子会社の所在地を問わず輸出ライセンスを必須とする内容。Nvidiaはシンガポール・マレーシア・日本など、過去に中国への迂回輸出の疑いが浮上したハブ地域を重点的に審査し、データセンター訪問・契約内容の確認・エンドユーザーへの聞き取りを強化した「ホワイトリスト」制の新たな承認プロセスを整備した。米商務省の支援も受けているという。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>5月31日の米商務省指針を受け、中国・マカオに親会社を持つ買い手は所在地を問わずライセンス必須に</li>
+            <li>シンガポール・マレーシア・日本など迂回輸出の疑いが浮上した拠点を重点審査、データセンター訪問や契約確認を強化</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>DIGITIMES</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-14</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://thehackernews.com/2026/07/compromised-jscrambler-8140-npm-release.html">難読化ツールjscramblerのnpmパッケージが侵害——preinstallフックでRust製インフォスティーラーを実行</a></h3>
+        </div>
+        <div class="summary">
+          7月11日、攻撃者が侵害したnpm公開クレデンシャルを使い、jscramblerパッケージの悪性バージョン5種（8.14.0〜8.20.0）を約3時間の間に連続公開した。いずれもpreinstallフックでクロスプラットフォーム対応のRust製インフォスティーラー「IronWorm」（Shai-Hulud系統）を自動実行し、クラウド認証情報・CIトークン・ブラウザのパスワード・暗号資産ウォレット・MCPサーバー認証情報を含むAIコーディングツールの設定まで窃取する。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>preinstallフックで自動実行されるためパッケージのインポートやCLI実行は不要、ダウンロード数は約1,500件</li>
+            <li>検知から約2時間でクリーンな8.22.0を公開、Shai-Hulud系統のRust製インフォスティーラー「IronWorm」と特定</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>The Hacker News</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-11</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://www.bleepingcomputer.com/news/security/ubiquiti-warns-of-new-max-severity-unifi-os-vulnerability/">Ubiquiti、UniFiエコシステム横断で25件の脆弱性を公表——CVE-2026-50746はCVSS満点10.0</a></h3>
+        </div>
+        <div class="summary">
+          UbiquitiはSecurity Advisory Bulletin 066にて、UniFi OSおよびConnect・Talk・Access・Protect・Networkの各アプリにまたがる25件の脆弱性を一括公表した。最も深刻なCVE-2026-50746はUniFi Connect Application（3.4.16以前）のアクセス制御不備に起因し、認証不要かつネットワーク到達可能な攻撃者がコマンドインジェクションを実行できる。攻撃条件は低複雑度・権限不要・ユーザー操作不要とCVSS満点の10.0。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>CVE-2026-50746はCVSS10.0、認証不要・ネットワーク到達可能な攻撃者がコマンドインジェクション可能</li>
+            <li>UniFi Connect・Talk・Access・Protect・Networkを横断して25件の脆弱性を公表、Connectは3.4.20以降へ更新必須</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>BleepingComputer</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-02</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://github.blog/changelog/2026-07-10-codeql-2-26-0-adds-kotlin-2-4-0-support-and-ai-prompt-injection-detection/">GitHub、CodeQL 2.26.0を公開——Kotlin 2.4.0対応とAIエージェント向けプロンプトインジェクション検出を追加</a></h3>
+        </div>
+        <div class="summary">
+          GitHubのコード解析エンジンCodeQLの最新版2.26.0が公開された。目玉はJavaScript/TypeScript向けの新クエリで、未検証の入力がAIエージェントの「システム」指示に影響を与え、ツール利用・データアクセス・出力の挙動を操作されうるパターン（プロンプトインジェクション）を検出する。あわせてKotlin 2.4.0対応や、C#のRazor Pageハンドラのパラメータをリモートフローソースとして扱うSQLインジェクション検出精度の改善など、C#・Go・Python・Swift・GitHub Actions横断の解析改善も含まれる。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>JS/TS向けにシステムプロンプトインジェクション検出クエリを新設、AIエージェントのツール利用を狙う攻撃パターンを検知</li>
+            <li>Kotlin 2.4.0対応に加えC#・Go・Python・Swift・GitHub Actionsの解析精度も改善、GitHub code scanning利用者に自動配信</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub Changelog</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-07-10</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://devblogs.microsoft.com/commandline/wsl-container-is-now-available-for-public-preview/">Microsoft、「WSL Containers」をパブリックプレビュー公開——Docker Desktop不要でWindows上にLinuxコンテナ</a></h3>
+        </div>
+        <div class="summary">
+          MicrosoftはWindows Subsystem for Linux（WSL）上でLinuxコンテナをネイティブに構築・実行できる「WSL Containers」のパブリックプレビューを公開した。Dockerコマンドに近い形式のCLI「wslc.exe」（エイリアスcontainer.exe）と、C++/C#・WinRT向けAPIを提供し、開発者はDocker Desktopを別途インストールせずにLinuxコンテナを扱える。Windows-Linux間のファイル転送を高速化する新デフォルトファイルシステム「virtiofs」や、企業VPNとの互換性問題を解消する実験的ネットワークモード「consomme」も導入された。一般提供は2026年秋を予定。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>Dockerコマンド互換のCLI「wslc.exe」とcontainer.exeエイリアスで、Docker Desktop不要のLinuxコンテナ運用が可能に</li>
+            <li>新ファイルシステムvirtiofsでWindows-Linux間のファイル転送を高速化、一般提供は2026年秋を予定</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Microsoft DevBlogs</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-06-30</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://developer.wordpress.org/news/2026/07/whats-new-for-developers-july-2026/">WordPress開発者向け7月まとめ——ブロックエディタがReact 19へ、Classic block非推奨化とWASM画像パイプライン導入</a></h3>
+        </div>
+        <div class="summary">
+          WordPress開発者ブログが7月分の開発者向けアップデートをまとめて公開した。次期メジャー版7.1の目玉として、Gutenberg 23.5でデスクトップ/タブレット/モバイル固定切り替えを廃止し自由リサイズ可能なビューポート別スタイル編集に対応、コアのブロックエディタをReact 18から19へアップグレード、レガシーなClassic blockの非推奨化を予定している。加えてWebAssembly（wasm-vips）ベースの画像処理パイプラインを導入し、Ultra HDR・HEIF（HEIC）・JPEG XLをネイティブサポートするほかGIFの動画変換機能も追加される。Beta 1は7月15日公開、正式版は8月19日のWordCamp USを予定。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>ブロックエディタをReact 18から19へアップグレード、Classic blockは非推奨化を予定</li>
+            <li>wasm-vipsベースの画像パイプラインでUltra HDR・HEIF・JPEG XLをネイティブ対応、Beta 1は7月15日公開予定</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>WordPress Developer Blog</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/akino/articles/7a1fc7cc605cdb">Claude Codeをチーム開発で使う際のMCPスコープ設計ガイド</a></h3>
+        </div>
+        <div class="summary">
+          Claude Code・Cursor・ClineなどMCP対応のAIコーディングツールがチーム開発に普及する中、MCPサーバーへのアクセス権限をどう設計すべきかを論じる記事。プロジェクト単位・チーム単位・個人単位でMCPサーバーの利用範囲を分離し、機密情報へのアクセス権限を必要最小限に絞る設計パターンを提案している。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>プロジェクト・チーム・個人単位でMCPサーバーのアクセス範囲を分離する設計パターンを提案</li>
+            <li>機密情報へのアクセス権限を最小化し、チーム開発時の誤操作・情報漏洩リスクを低減</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/readyfor_blog/articles/09f2f5f5d285ec">パフォーマンス改善の勘所</a></h3>
+        </div>
+        <div class="summary">
+          Webアプリのパフォーマンス改善に取り組む際の考え方を整理した記事。闇雲な最適化を避け、まず計測してボトルネックを特定してから着手する重要性や、改善対象に優先順位をつける基準を具体例とともに解説している。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>計測なしの最適化を避け、ボトルネック特定を起点とした改善プロセスを提唱</li>
+            <li>改善対象の優先順位づけの基準を具体例とともに提示</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/ourly_tech_blog/articles/372ea7d1cb1eba">障害対応のリアル：初心者がハマった4つの落とし穴と学び</a></h3>
+        </div>
+        <div class="summary">
+          障害対応の初心者が陥りがちな4つの落とし穴——原因の決めつけ、情報共有不足、暫定対応と恒久対応の混同、事後振り返りの形骸化——を実体験ベースで解説する記事。障害対応を通じてユーザーとの信頼関係を築く視点もあわせて紹介している。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>原因の決めつけ・情報共有不足など初心者が陥りがちな4つの落とし穴を実体験ベースで解説</li>
+            <li>暫定対応と恒久対応の混同を避け、事後振り返りを形骸化させない重要性を指摘</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://aws.amazon.com/jp/blogs/news/weekly-genai-20260706/">週刊生成AI with AWS——KiroがClaude Sonnet 5に対応、AWS Summit Japan 2026の活用事例も</a></h3>
+        </div>
+        <div class="summary">
+          AWS Japanブログの週刊まとめ記事。AIコーディング環境「Kiro」がClaude Sonnet 5に対応したことや、AWS Summit Japan 2026のパートナーセッションで紹介された企業の生成AI活用事例など、直近1週間の生成AI関連アップデートをまとめて紹介している。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>AIコーディング環境「Kiro」がClaude Sonnet 5に対応</li>
+            <li>AWS Summit Japan 2026のパートナーセッションで企業の生成AI活用事例を紹介</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>AWS Japan Blog</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-13</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.com/Zackriya-Solutions/meetily">セルフホスト型AI会議アシスタント「Meetily」がGitHubトレンド1位に——完全ローカル処理で4倍速の文字起こし</a></h3>
+        </div>
+        <div class="summary">
+          プライバシー重視のセルフホスト型AI会議アシスタント「Meetily」がGitHubトレンド1位を獲得した。Rust製で、Parakeet/Whisperによる従来比4倍速のライブ文字起こし・話者分離・Ollamaによるローカル要約まで完結し、音声・トランスクリプト・APIキーが外部に送信されることはない。7月8日時点で1日約2,500スターを獲得する急伸を見せ、直近1週間で7,440スターを積み増した。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>Rust製、Parakeet/Whisperで4倍速のライブ文字起こしと話者分離、Ollamaでローカル要約</li>
+            <li>macOS・Windows対応、音声・トランスクリプト・APIキーを外部送信しない100%ローカル処理設計</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-07</span>
+          <span class="engagement">⭐ 23,853</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-frontend">Frontend</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.com/loveconnor/loveui">オープンソースReactコンポーネントライブラリ「LoveUI」公開——Tailwind CSSベースのプロダクトUI向けプリミティブ集</a></h3>
+        </div>
+        <div class="summary">
+          プロダクトUI構築向けのオープンソースReactコンポーネントライブラリ「LoveUI」が公開された。Tailwind CSSベースのアクセシブルなプリミティブとコピー&amp;ペーストで使えるブロック集を提供し、レジストリに手を加えずにページ単位のセクションもそのままコピーできる。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>Tailwind CSSベースのアクセシブルなReactプリミティブとコピー&amp;ペースト対応ブロックを提供</li>
+            <li>インストールしたコンポーネントはアプリ内にそのまま配置され自由に編集・レビュー可能</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-07</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-frontend">Frontend</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://glasskit.app/ui">Meta Ray-Ban Display向けオープンソースReact UIキット「GlassKit UI」公開</a></h3>
+        </div>
+        <div class="summary">
+          Meta Ray-Ban Displayアプリ向けのオープンソースReactコンポーネントライブラリ「GlassKit UI」が公開された。600×600ピクセルのレンズ表示にあわせて調整されたフォーカスエンジンやNeural Band入力対応の44種類のUIコンポーネントを提供し、npmからSDKを導入した後にCLIでコンポーネントを追加できる。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>600×600ピクセルのレンズ向けにチューニングされたフォーカスエンジン、Neural Band入力対応の44コンポーネントを提供</li>
+            <li>DirectionArrow・Compassなど空間アンカー型コンポーネントも用意、CLIでプロジェクトへ直接追加可能</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GlassKit</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-07</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://techcrunch.com/2026/07/13/anthropic-starts-localizing-claude-pricing-for-india-its-biggest-market-after-the-us/">Anthropic、Claudeのインド向け現地通貨建て価格表示を開始——UPI決済は未対応</a>
+        <span class="quick-summary">— 米国に次ぐ最大市場インドで一部ユーザー向けにルピー建て価格表示を開始。決済はカードかApple/Google課金経由のまま。</span>
+        <span class="meta">TechCrunch</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://www.anthropic.com/news/redeploying-fable-5">Anthropic、Claude Fable 5の無料アクセス期間を7月19日まで再延長</a>
+        <span class="quick-summary">— 7月7日開始の1週間限定プロモーションから2度目の延長。OpenAIのSol系モデルリリース後の対抗策とみられる。</span>
+        <span class="meta">Anthropic</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://www.cisa.gov/news-events/alerts/2026/07/13/cisa-adds-one-known-exploited-vulnerability-catalog">CISA、16年前のCisco IOS CSRF脆弱性CVE-2008-4128をKEVカタログに追加——今も実悪用</a>
+        <span class="quick-summary">— 2008年公開の脆弱性が現在も攻撃に悪用されていることが判明、連邦機関には修正期限が設定されている。</span>
+        <span class="meta">CISA</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://github.blog/changelog/2026-07-13-github-code-quality-license-estimate-in-public-preview/">GitHub Code Quality、ライセンス利用数の事前見積り機能をパブリックプレビュー公開</a>
+        <span class="quick-summary">— 導入前に必要なライセンス数を試算できる機能で、7月20日の一般提供開始に向けた準備を後押しする。</span>
+        <span class="meta">GitHub Changelog</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-data">Data</span>
+        <a href="https://clickhouse.com/blog/pg_clickhouse-whats-new-june-2026">ClickHouse、PostgreSQL拡張「pg_clickhouse」v0.3.2公開——PostgreSQL 19 Beta1・TLS・正規表現に対応</a>
+        <span class="quick-summary">— PostgreSQLの新機能に追随したタプル・配列最適化に加え、CREATE SERVERにTLS接続用の新オプションを追加した。</span>
+        <span class="meta">ClickHouse Blog</span>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code</p>
+      <a href="archive/" class="archive-link">Past issues</a>
+    </footer>
+  </div>
+</body>
+</html>
