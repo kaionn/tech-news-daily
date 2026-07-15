@@ -45,6 +45,7 @@ Also compute yesterday's date for archiving.
 YESTERDAY=$(date -u -d 'yesterday' '+%Y-%m-%d' 2>/dev/null || date -u -v-1d '+%Y-%m-%d')
 if [ -f index.html ] && [ ! -f "archive/${YESTERDAY}.html" ]; then
   cp index.html "archive/${YESTERDAY}.html"
+  sed -i 's|href="favicon|href="../favicon|g; s|href="apple-touch-icon|href="../apple-touch-icon|g; s|href="style.css"|href="../style.css"|; s|href="feed.xml"|href="../feed.xml"|' "archive/${YESTERDAY}.html"
 fi
 ```
 
@@ -59,6 +60,9 @@ Write a complete HTML file to `index.html` with this exact structure:
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tech News Daily — YYYY-MM-DD</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="favicon.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="stylesheet" href="style.css">
   <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="feed.xml">
 </head>
