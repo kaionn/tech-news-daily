@@ -389,13 +389,22 @@ footer a {
   body { padding: 1rem 0.75rem; }
   header h1 { font-size: 1.4rem; }
   .card { padding: 1rem; }
+  .card-header { flex-wrap: wrap; gap: 0.4rem; }
+  .card h3 { font-size: 0.95rem; width: 100%; }
+  .card .meta { flex-wrap: wrap; gap: 0.4rem; }
+  .card .summary { font-size: 0.85rem; }
   .quick-link { flex-wrap: wrap; }
   .quick-link .meta { margin-left: 0; width: 100%; margin-top: 0.25rem; }
-  .stats-bar { gap: 1rem; font-size: 0.75rem; }
-  .numbers-bar { gap: 1rem; }
+  .stats-bar { gap: 0.75rem; font-size: 0.72rem; }
+  .numbers-bar { flex-direction: column; align-items: center; gap: 1rem; }
+  .number-label { max-width: 240px; }
   .number-value { font-size: 1.25rem; }
-  .number-label { font-size: 0.65rem; }
+  .number-label { font-size: 0.7rem; }
   .toc { gap: 0.35rem; }
+  .toc a { font-size: 0.7rem; padding: 0.2rem 0.5rem; }
+  .editorial { font-size: 0.82rem; }
+  .why-it-matters { font-size: 0.82rem; }
+  .key-points li { font-size: 0.82rem; }
 }
 
 @media (prefers-color-scheme: dark) {
