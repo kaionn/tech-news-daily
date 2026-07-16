@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-07-15</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="../feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-07-15 (Wed)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 20 articles</span>
+      <span>🏷 6 categories</span>
+      <span>📡 13 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item">
+        <span class="number-value">622件</span>
+        <span class="number-label">Microsoftが7月Patch Tuesdayで修正した脆弱性数（過去最多）</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">54GB→4GB未満</span>
+        <span class="number-label">PrismMLが圧縮した270億パラメータAIモデルのサイズ</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">699万人</span>
+        <span class="number-label">自動車保険AssuranceAmericaの情報漏洩被害者数</span>
+      </div>
+    </div>
+
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
+
+      <div class="card featured deep-dive">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://thehackernews.com/2026/07/microsoft-patches-record-622-flaws.html">DEEP DIVE: Microsoftが7月Patch Tuesdayで過去最多622件の脆弱性を修正——SharePoint・AD FSの実悪用ゼロデイ2件を含む</a></h3>
+        </div>
+        <div class="summary">
+          Microsoftは7月のPatch Tuesdayで、自社CVEとして過去最多となる622件の脆弱性を修正した。6月の約200件から3倍以上に急増し、59件がCritical評価。公開時点でパッチが未提供だった「ゼロデイ」は3件で、うち2件は既に実攻撃で悪用が確認されている。ひとつはActive Directory Federation Services（AD FS）の権限昇格の欠陥CVE-2026-56155で、ローカル攻撃者が管理者権限まで昇格できる。もうひとつはSharePoint Serverの認証不要の権限昇格の欠陥CVE-2026-56164で、ネットワーク経由・低複雑度・ユーザー操作不要という深刻な攻撃条件を持ち、CISAは実悪用を確認して連邦機関に3日以内のパッチ適用を義務付けるKnown Exploited Vulnerabilities（KEV）カタログに追加した。もう1件のBitLocker権限バイパスCVE-2026-50661は、パッチ提供前に情報が公開されていた「公開先行型」ゼロデイ。対象はSharePoint Server Subscription Edition・SharePoint Server 2019・SharePoint Enterprise Server 2016など。Microsoftは今後、AIを使った脆弱性発見の高度化に伴い「セキュリティ更新の件数がさらに増える」と予告しており、複数モデルを組み合わせた自動スキャンシステム「MDASH」は5月のPatch Tuesdayだけで16件のバグを単独で発見したという。
+        </div>
+        <div class="editorial">🧠 修正件数の3倍増という数字は、パッチ運用チームの優先順位付けを根本から揺さぶる規模だ。AIによる脆弱性発見が「守る側」の武器である一方、修正リリースの速度が現場のトリアージ能力を上回れば、結局は「パッチはあるのに適用が追いつかない」状態を量産しかねない。SharePoint・AD FSという企業の認証基盤そのものが標的になっている点も見逃せず、単純な月次パッチ運用ではなく、露出資産の棚卸しと優先度付けの自動化が今後より重要になりそうだ。</div>
+        <div class="key-points">
+          <ul>
+            <li>622件のCVEを修正、Critical評価は59件、公開先行型ゼロデイ3件のうちAD FS・SharePointの2件は実悪用済み</li>
+            <li>SharePoint CVE-2026-56164は認証不要・ネットワーク到達可能・ユーザー操作不要で権限昇格が可能、CISAがKEVカタログに追加し連邦機関に3日以内の対応を義務付け</li>
+            <li>AI駆動の脆弱性スキャンシステム「MDASH」が5月単月で16件のバグを単独発見、今後も修正件数の増加が見込まれる</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 SharePoint Server・AD FSをオンプレミスで運用する組織は、通常のパッチ適用サイクルを待たず優先パッチ適用とAMSIフルモード有効化などの緩和策を即座に検討すべきだ。</div>
+        <div class="meta">
+          <span>The Hacker News</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07-15</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://www.bleepingcomputer.com/news/security/sonicwall-warns-of-sma1000-flaws-exploited-in-zero-day-attacks-patch-now/">SonicWall SMA1000に2件のゼロデイ脆弱性——CVSS10.0のSSRFと認証後コード注入を連鎖悪用され管理者権限を奪取</a></h3>
+        </div>
+        <div class="summary">
+          SonicWallは、SMA1000アプライアンスに存在する2件の脆弱性が実攻撃で悪用されていると警告した。CVE-2026-15409はWork Placeインターフェースの未認証SSRFでCVSS満点の10.0、CVE-2026-15410は管理コンソールの認証後コード注入（CVSS 7.2）。攻撃者はこの2つを連鎖させることで、未認証のままリモートから管理者権限でのOSコマンド実行が可能になる。対象はSMA1000シリーズの6210・7210・8200v。連邦機関はBOD 26-04に基づき7月17日までの対応が義務付けられている。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>CVE-2026-15409（CVSS10.0のSSRF）とCVE-2026-15410（認証後コード注入）を連鎖させ管理者権限でのコマンド実行が可能</li>
+            <li>ホットフィックス12.4.3-03453・12.5.0-02835で修正、CISAはKEVカタログに追加し連邦機関に7月17日までの対応を義務化</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>BleepingComputer</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-14</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://www.cnbc.com/amp/2026/07/14/apple-prismml-ai-compression-iphone.html">Apple、AIモデル圧縮スタートアップPrismMLと協議——270億パラメータモデルをiPhone単体で圧縮実行</a></h3>
+        </div>
+        <div class="summary">
+          AppleはAIモデルをiPhone上で直接動かせるレベルまで圧縮する技術を持つスタートアップPrismMLと協議していることが7月14日に報じられた。Caltech発でKhosla Venturesが支援するPrismMLは、Alibabaのオープンソース270億パラメータモデル「Qwen」を約54GBから4GB未満に圧縮し、メモリ使用量を10〜15分の1、処理速度を6〜8倍にする技術を持つという。iPhone 15以降であれば全パラメータをオンデバイスで動かせる。SiriのクラウドAI依存を減らし高速化・プライバシー向上につなげたいAppleにとって、メモリコスト増への対抗策としても注目される。CEOのBabak Hassibi氏は「協議は早期段階だが順調に進んでいる」と述べており、契約成立が確定したわけではない。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>27Bパラメータの「Qwen」モデルを54GBから4GB未満に圧縮、メモリ使用量10〜15分の1・処理速度6〜8倍を主張</li>
+            <li>iPhone 15以降で全パラメータをオンデバイス実行可能、Apple以外の企業とも協議中でPrismMLは2026年3月に$16.25Mのシード調達済み</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>CNBC</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-14</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://devblogs.microsoft.com/visualstudio/built-in-agent-skills-in-visual-studio/">Visual Studio 2026 7月アップデート公開——.NET/Azureチーム制作の「組み込みAgent Skills」を追加</a></h3>
+        </div>
+        <div class="summary">
+          Visual Studio 2026の7月アップデートで、.NET・Azureチームの専門家が作成した組み込みのAgent Skillsが追加された。ツールピッカーの「Built-in」カテゴリから参照でき、対応するワークロードがインストールされていれば、プロジェクト種別やタスク内容に応じてMicrosoft製の専門知識がエージェントに自動適用される。既定ではオフになっており、必要なスキルだけを選んで有効化できる。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>チャットウィンドウの専用パネルでワークスペース・ユーザープロファイル内の全Agent Skillsを一覧・編集可能に</li>
+            <li>組み込みスキルは既定オフ、.NET/Azureワークロード導入時にツールピッカーの「Built-in」カテゴリへ表示</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Visual Studio Blog</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-07-14</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://9to5linux.com/debian-13-6-trixie-released-with-124-bug-fixes-and-120-security-updates">Debian 13.6「Trixie」公開——UEFI Secure Boot CA刷新に対応、124件のバグ修正と120件のセキュリティ更新</a></h3>
+        </div>
+        <div class="summary">
+          Debian 13「Trixie」の6回目のポイントリリース13.6が公開された。目玉は2013年発行のUEFI Secure Boot CAが失効した問題への対応で、fwupdをupstream 2.0.20へ更新しSecure Boot CA・KEK・DBXデータベースを更新できるようにした。ライセンス上の制約からgeoip-databaseは2019年12月時点のバージョンへ差し戻された。apache2のuse-after-free・XSS・バッファオーバーフロー、curlのベアラートークン漏洩、qemuの20件超のセキュリティ修正など計120件のセキュリティ更新を含む。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>fwupd 2.0.20でUEFI Secure Boot CA・KEK・DBXの更新に対応、124件のバグ修正・120件のセキュリティ更新を収録</li>
+            <li>ライセンス制約でgeoip-databaseを2019年12月版へ差し戻し、apache2・curl・qemuなど主要パッケージの脆弱性を修正</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>9to5Linux</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-11</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.blog/changelog/2026-07-09-ask-copilot-for-a-repository-overview/">GitHub Copilot、初訪問リポジトリで「概要を教えて」と聞けるRepository Overview機能を追加</a></h3>
+        </div>
+        <div class="summary">
+          GitHub上でまだコントリビュートしたことのないリポジトリのトップページを訪れると、Copilotが概要生成を提案するようになった。「High-level overviewをください」を選ぶとCopilot Chatがリポジトリからコンテキストを収集し、目的・使用技術・コントリビューションガイドラインをまとめたサマリーを返す。github.comナビゲーションバーのCopilotアイコンからもいつでも呼び出せる。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>初見リポジトリのトップページ訪問時にCopilotが概要生成を自動提案</li>
+            <li>全Copilotプランで利用可能、ナビゲーションバーのCopilotアイコンからも随時呼び出し可能</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub Changelog</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-07-09</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://github.com/fastapi/fastapi/releases/tag/0.137.0">FastAPI 0.137.0公開——ルーター内部を刷新しAPIRouter/APIRouteインスタンスを維持、include_router後のルート追加に対応</a></h3>
+        </div>
+        <div class="summary">
+          FastAPI 0.137.0で、ルーター内部構造がリファクタリングされた。従来はinclude_router()で他ルーターのパスオペレーションを複製・再生成していたが、新方式では中間メタデータを持つ木構造でルーター間の包含関係を保持し、複製せずに反映する。これによりルーター包含後でもルートの追加が可能になり、APIRouterに.matches()・.handle()という新メソッドも追加された。一方でrouter.routesは単純なリストではなくなり、直接イテレートするロジックは影響を受ける破壊的変更となる。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>include_router()実行後もルート追加が反映されるようになり、サブルーターの柔軟な組み立てが可能に</li>
+            <li>router.routesは単純なAPIRouteのリストではなくなる破壊的変更、直接イテレートする既存コードは要修正</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-07</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://qiita.com/fuyunoki/items/5818688d20225aa8088a">Qiita「Claude Code、とりあえずこれ読んどけばOKなまとめ（2026年版）」がはてなブックマーク週間ランキング1位に</a></h3>
+        </div>
+        <div class="summary">
+          公式ドキュメントに加え現役エンジニアのブログやAnthropic社内事例までを参照し、実運用のノウハウをまとめたQiita記事。2026年現在npm経由のインストールは非推奨でネイティブインストーラーが推奨と紹介し、/initによるCLAUDE.md自動生成、レビュー指示は「正しさ・要件に影響する問題だけ報告して」と絞る工夫、Explore→Plan→Implement→Commitのフローで手戻りを減らすコツなどを解説する。7月6日〜12日のはてなブックマーク週間ランキングで1位を獲得した。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>2026年現在はネイティブインストーラーが推奨、npm経由のインストールは非推奨（Deprecated）扱い</li>
+            <li>Explore→Plan→Implement→Commitのフローで複数ファイルにまたがる変更の手戻りを削減</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://bookmark.hatenastaff.com/entry/2026/07/14/120034">はてなブックマーク開発ブログ、2026年7月第2週のブックマーク数ランキングを公開——Qiitaの「Claude Code」まとめ記事が1位</a></h3>
+        </div>
+        <div class="summary">
+          はてなブックマーク開発ブログが7月6日〜12日の週間ブックマーク数ランキングを公開した。1位はQiitaの「Claude Code、とりあえずこれ読んどけばOKなまとめ（2026年版）」、2位は「地雷店の避け方（基礎編）」、3位はDeNA南場智子会長のAI活用法を扱ったTogetterまとめだった。AI関連コンテンツが上位を占める傾向が続いている。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>1位はQiitaのClaude Codeまとめ記事、3位はDeNA南場智子会長のAI活用法を扱ったTogetterまとめ</li>
+            <li>週間ランキング上位をAI関連コンテンツが占める傾向が7月に入っても継続</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>はてなブックマーク開発ブログ</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-07-14</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/3ai.html">デジタル庁、ガバメントAI「源内」向けに国産LLM3モデルの試用を「さくらのクラウド」で開始</a></h3>
+        </div>
+        <div class="summary">
+          デジタル庁は国産クラウド「さくらのクラウド」上で、NTTデータ「tsuzumi 2」・富士通「Takane 32B」・Preferred Networks「PLaMo 2.0 Prime」の国産大規模言語モデル3種の試用を開始した。デジタル庁内および複数省庁向けにチャット機能を提供し、既存の海外製モデルとA/Bテストで比較評価する。日本語の語彙・表現や日本の文化・価値観に適合した国内開発LLMの活用が不可欠との考えから、8月までに実験環境を構築し9月〜11月に複数回の実験を実施する予定。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>NTTデータ「tsuzumi 2」・富士通「Takane 32B」・PFN「PLaMo 2.0 Prime」の3モデルが対象</li>
+            <li>8月までに実験環境構築、9月〜11月に複数回のA/Bテストで既存モデルと利用者評価を比較</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-07-14</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/google_cloudaicloud_run.html">Google Cloud、生成AIのコードを瞬時に隔離実行できる「Cloud Runサンドボックス」をパブリックプレビュー公開</a></h3>
+        </div>
+        <div class="summary">
+          Google Cloudは、信頼できないコードやAIエージェントのワークロードをミリ秒単位で起動する軽量な隔離実行環境「Cloud Runサンドボックス」をパブリックプレビュー公開した。既存のCloud Runサービスインスタンス内で近瞬時に生成でき、サンドボックスは環境変数へアクセスできずファイルシステムは読み取り専用で変更は一時メモリ上のオーバーレイに書き込まれ実行終了時に破棄される。既存の割当CPU・メモリ上で動作するため追加コストはかからない。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>1,000個のサンドボックスを平均500ミリ秒の遅延で起動・実行・停止した例を提示、フラグ1つで既存サービスに有効化可能</li>
+            <li>環境変数への非アクセス・読み取り専用ファイルシステム+一時メモリオーバーレイの3重のセキュリティ境界を実装</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-07-14</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.com/stablyai/orca">並列コーディングエージェント管理IDE「Orca」公開——Claude Code・Codexなど20種以上のCLIエージェントを横断オーケストレーション</a></h3>
+        </div>
+        <div class="summary">
+          複数のAIコーディングエージェントを並列実行するためのAgent Development Environment「Orca」が公開された。Claude Code・Codex CLI・OpenCode・Grok・GitHub Copilotなど20種類以上のCLIエージェントを、利用者自身のサブスクリプションのまま横断的に動かせる。各エージェントは専用のブランチと作業コピーを持ち、同じ課題に対して複数のエージェントを競合させずに並行実行できる。デスクトップ・モバイル両対応でYCの支援を受け、MITライセンスで公開されている。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>ターミナルで動くエージェントであれば原則対応、各エージェントに専用ブランチ・作業コピーを割り当て並行実行</li>
+            <li>GitHubスター12,500超、Y Combinator支援、MITライセンスでデスクトップ・モバイル対応</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-07</span>
+          <span class="engagement">⭐ 12,500</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.com/openinterpreter/openinterpreter">低コストモデル向けコーディングエージェント「Open Interpreter」公開——GLM・DeepSeek・Kimiなどオープンモデルに最適化したハーネスを提供</a></h3>
+        </div>
+        <div class="summary">
+          OpenAI Codexをフォークし、低コストなオープンモデルから最大限の性能を引き出すことに特化したターミナル向けコーディングエージェント「Open Interpreter」が公開された。/harnessコマンドでnative・claude-code・kimi-cli・qwen-code・deepseek-tui・swe-agentなどモデルに合わせたハーネスへ切り替えられ、macOS・Linux・Windowsのネイティブサンドボックス内でコマンドを実行する。エージェントブラウザやネイティブアプリ操作向けのQAスキルも同梱する。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>/harnessでnative・claude-code・kimi-cli・qwen-code・deepseek-tuiなど複数ハーネスに切り替え可能</li>
+            <li>macOS・Linux・Windows向けネイティブサンドボックスでコマンド実行、Web/ネイティブアプリ操作のQAスキルを同梱</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-07</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://github.com/openclaw/openclaw">自己ホスト型AIエージェント「OpenClaw」がGitHub史上最速でスター獲得——Reactを追い抜き最多スターのソフトウェアリポジトリに</a></h3>
+        </div>
+        <div class="summary">
+          2025年11月に「Clawdbot」として始動した自己ホスト型パーソナルAIエージェント「OpenClaw」が、公開24時間で9,000スター、5カ月足らずで346,000超のスターを獲得しReactを上回りGitHub上で最多スターのソフトウェアリポジトリとなった。WhatsApp・Telegram・Slack・Discordなど既存のメッセージアプリからチャット形式で操作でき、コマンド実行・ファイル管理・Webブラウジング・メール処理までこなす。Claude 4・GPT-4o・Gemini 2.0・DeepSeek V3など主要LLMに対応する。
+        </div>
+        <div class="key-points">
+          <ul>
+            <li>公開24時間で9,000スター、5カ月足らずで346,000超のスターを獲得しGitHub上で最多スターのリポジトリに</li>
+            <li>WhatsApp・Telegram・Slack・Discordなど多数のチャットアプリから操作可能、主要LLM横断対応</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-07</span>
+          <span class="engagement">⭐ 346,000</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
+
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://www.cnbc.com/2026/07/14/zipline-drone-delivery-tesla-uber-waymo-executives.html">Zipline、Tesla・Uber・Waymo出身の幹部3名を招聘——ドローン配送利用企業数が半年で13倍に拡大</a>
+        <span class="quick-summary">— 元Tesla財務VPのSendil Palani氏がCFOに、元WaymoのKevin Vosen氏がCLOに就任。累計配送数は250万件を突破し、30秒に1回のペースで配送を実施。</span>
+        <span class="meta">CNBC</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://meta.discourse.org/t/introducing-the-discourse-free-plan/407638">コミュニティプラットフォームDiscourse、無料プラン「Free」を正式提供開始</a>
+        <span class="quick-summary">— メンバー数・チャット無制限、スタッフ2席・月2万通のメール・5GBストレージを無償のdiscourse.groupドメインで利用可能に。</span>
+        <span class="meta">Discourse Meta</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://www.bleepingcomputer.com/news/security/assuranceamerica-data-breach-exposes-records-of-69-million-drivers/">自動車保険大手AssuranceAmerica、従業員アカウント侵害で699万人分の運転免許証番号等が流出</a>
+        <span class="quick-summary">— 3月16日に従業員の認証情報が窃取され翌日検知、フォレンジック調査完了は6月15日。2026年に判明した運転免許証情報流出としては米国最大規模。</span>
+        <span class="meta">BleepingComputer</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://nodejs.org/en/blog/release/v26.5.0">Node.js 26.5.0リリース——blob.textStream()実装やperf_hooksの計測改善など</a>
+        <span class="quick-summary">— ESM向け実験フラグ--experimental-import-textの追加やQUICのバージョンネゴシエーションパケット処理改善など、マイナー機能追加とバグ修正を多数収録。</span>
+        <span class="meta">Node.js Blog</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://github.blog/changelog/2026-07-14-github-copilot-in-visual-studio-june-update/">GitHub Copilot in Visual Studio、6月アップデート公開——PRの説明・変更ファイル・コメントをチャットに直接取り込み可能に</a>
+        <span class="quick-summary">— Gitリポジトリウィンドウでプルリクエストを右クリックし「Add to Copilot Chat」を選ぶだけで、PRの文脈をそのままチャットへ渡せる。</span>
+        <span class="meta">GitHub Changelog</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-infra">Infra</span>
+        <a href="https://techfundingnews.com/nscale-banks-900m-from-j-p-morgan-and-goldman-sachs-is-ai-infrastructure-debt-the-next-bubble/">AIインフラ企業Nscale、JPMorgan・Goldman Sachsなど12行超のシンジケートから$900Mの回転信用枠を調達</a>
+        <span class="quick-summary">— 2026年だけで4件目の大型資金調達。評価額$14.6BのNvidia・Dell出資のneocloud事業者で、米欧アジア太平洋のGPUデータセンター拡張に充てる。</span>
+        <span class="meta">Tech Funding News</span>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="archive/" class="archive-link">Past issues</a>
+    </footer>
+  </div>
+</body>
+</html>
