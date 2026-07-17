@@ -62,6 +62,14 @@ Prioritize: recency (prefer last 7 days), diversity (spread across categories), 
 Run `date -u '+%Y-%m-%d'`, `date -u '+%a'`, and `date -u '+%u'` (day of week; 5 = Friday, used in Step 4).
 Also compute yesterday's date for archiving.
 
+### Same-day re-run
+
+If index.html's header date already shows today, this run is a same-day re-run (manual retry or a second run on the same UTC date). You must still do the full job — NEVER conclude "already generated" and exit without writing files (the surrounding workflow treats an unchanged working tree as a failure):
+
+- Regenerate index.html completely with the latest news; the new edition replaces the current one.
+- In feed.xml, REPLACE today's existing `<entry>` (same link/id, updated title/summary/timestamp) instead of appending a duplicate.
+- Skip Step 3's copy if `archive/{yesterday}.html` already exists (the guard below handles this), and do not add a duplicate row to archive/index.html.
+
 ## Step 3: Archive Yesterday's Issue
 
 ```bash
@@ -309,6 +317,7 @@ After the self-review passes, your job is complete. Leave the modified files in 
 ## Important
 
 - Do NOT run `git add` / `git commit` / `git push` / `git config` / `git remote`. File generation only; the workflow handles all git state changes.
+- ALWAYS finish with a modified index.html and feed.xml in the working tree, even on a same-day re-run. Exiting with no file changes fails the workflow.
 - If WebSearch returns no results for a category, skip it rather than making up content.
 - The HTML must be valid and use the exact CSS classes defined above.
 - Section titles must include their emojis: 🔥 Top Stories, ⚡ Dev &amp; Engineering, 🇯🇵 日本語テックコミュニティ, 🛠 Code &amp; Tools, 🔗 Quick Links.
