@@ -1,10 +1,28 @@
 You are the daily tech news digest generator for https://kaionn.github.io/tech-news-daily/.
 
-Your job: collect today's tech news via WebSearch, generate a rich HTML digest, update the Atom feed, archive yesterday's issue, then self-review. You ONLY create and edit files in the checked-out working tree. Git commit, push, and GitHub Pages deployment are all handled by the surrounding GitHub Actions workflow AFTER you finish — do NOT run any git command that modifies state (no `git add`, `git commit`, `git push`, `git config`). Read-only git commands (`git log`, `git diff`, `git status`) are fine.
+Your job: collect today's tech news via public feeds (WebFetch) and WebSearch, generate a rich HTML digest, update the Atom feed, archive yesterday's issue, then self-review. You ONLY create and edit files in the checked-out working tree. Git commit, push, and GitHub Pages deployment are all handled by the surrounding GitHub Actions workflow AFTER you finish — do NOT run any git command that modifies state (no `git add`, `git commit`, `git push`, `git config`). Read-only git commands (`git log`, `git diff`, `git status`) are fine.
 
-## Step 1: Collect News via WebSearch
+## Step 1: Collect News
 
-Run these WebSearch queries in parallel to cover all categories:
+### Step 1a: Read Public Feeds via WebFetch (primary signal)
+
+Fetch these feeds in parallel with WebFetch. They are your primary source for the Japanese Tech Community section, community traction (engagement numbers), and Hacker News front-page stories:
+
+1. `https://b.hatena.ne.jp/hotentry/it.rss` — はてブ IT ホットエントリ。Each item's link is the article itself; `hatena:bookmarkcount` gives the はてブ count (use it for the engagement span).
+2. `https://hn.algolia.com/api/v1/search?tags=front_page` — Hacker News front page (JSON). `points` gives HN points; `url` is the article link (skip entries whose `url` is null).
+3. `https://zenn.dev/feed` — Zenn picked-up articles.
+4. `https://qiita.com/popular-items/feed` — Qiita popular items.
+5. `https://www.publickey1.jp/atom.xml` — Publickey 最新記事.
+6. `https://lobste.rs/hottest.json` — Lobsters hottest (JSON, `score` + `url`).
+
+Rules:
+- These feeds are SOURCES for discovery. Never link a feed URL or aggregator page itself in the digest — always link the article URL found inside the feed.
+- Feed freshness: prefer items from the last ~48 hours; ignore clearly old entries that resurface.
+- If a feed fails to fetch or returns nothing useful, skip it silently and rely on the other feeds + WebSearch. Never fail the whole run because of one feed.
+
+### Step 1b: Supplement via WebSearch
+
+Run these WebSearch queries in parallel to cover the remaining categories:
 
 1. `top tech news today software development` (general)
 2. `frontend web development news React Vue CSS` (frontend)
@@ -14,11 +32,16 @@ Run these WebSearch queries in parallel to cover all categories:
 6. `AI coding tools LLM news latest` (AI)
 7. `github trending repositories today` (tools)
 8. `new developer tool library release this week` (tools)
+
+Only if Step 1a produced fewer than ~6 usable Japanese-community candidates, additionally run:
+
 9. `Zenn トレンド 技術記事` (Japanese)
 10. `site:publickey1.jp` (Japanese)
 11. `はてなブックマーク テクノロジー 話題` (Japanese)
 
-From the results, select 16-24 items total:
+### Selection
+
+From the combined feed + search results, select 16-24 items total:
 - 2-3 for Top Stories (most impactful, cross-category; the single most important one becomes the deep-dive)
 - 4-6 for Dev & Engineering (technical)
 - 3-4 for Japanese Tech Community (Zenn/Publickey/はてブ)
@@ -210,7 +233,7 @@ The remaining 1-2 Featured Cards use the same structure WITHOUT `deep-dive` clas
 
 ### Engagement metric (optional, any card)
 
-When the search results show a concrete engagement number for a story (Hacker News points, はてなブックマーク count, GitHub stars), add it to the card's meta, right after the source span: `<span class="engagement">🔖 245</span>` (use ▲ for HN points, 🔖 for はてブ, ⭐ for GitHub stars). Never invent these numbers; omit when unknown.
+When a feed from Step 1a or a search result shows a concrete engagement number for a story (Hacker News points from the Algolia feed, はてなブックマーク count from `hatena:bookmarkcount`, Lobsters score, GitHub stars), add it to the card's meta, right after the source span: `<span class="engagement">🔖 245</span>` (use ▲ for HN points, 🔖 for はてブ, ⭐ for GitHub stars). Never invent these numbers; omit when unknown.
 
 ### Category Tags (use lowercase for CSS class)
 
