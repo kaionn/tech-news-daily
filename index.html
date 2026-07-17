@@ -19,9 +19,9 @@
     </header>
 
     <div class="stats-bar">
-      <span>📰 20 articles</span>
+      <span>📰 21 articles</span>
       <span>🏷 7 categories</span>
-      <span>📡 17 sources</span>
+      <span>📡 19 sources</span>
     </div>
 
     <nav class="toc">
@@ -34,27 +34,27 @@
 
     <div class="numbers-bar">
       <div class="number-item">
-        <span class="number-value">45兆</span>
-        <span class="number-label">Thinking MachinesがInklingの事前学習に使ったトークン数</span>
+        <span class="number-value">$2.5兆</span>
+        <span class="number-label">AWS Cost Explorerの表示バグで一部ユーザーに示された最大の誤り見積もり請求額</span>
       </div>
       <div class="number-item">
-        <span class="number-value">$265B</span>
-        <span class="number-label">TSMCのアリゾナ投資累計額（追加$100B含む）</span>
+        <span class="number-value">2.8兆</span>
+        <span class="number-label">Moonshot AIの新モデル「Kimi K3」のパラメータ数</span>
       </div>
       <div class="number-item">
-        <span class="number-value">382件</span>
-        <span class="number-label">Chrome 150で修正された脆弱性数（うち15件が最重要）</span>
+        <span class="number-value">1/50</span>
+        <span class="number-label">オープンウェイトモデルの推論コストが36ヶ月で下落した割合</span>
       </div>
     </div>
 
     <div class="weekly-keywords">
       <div class="section-title">📊 今週のキーワード</div>
       <div class="keyword-chips">
-        <span class="keyword-chip">AIエージェント基盤のサンドボックス化</span>
-        <span class="keyword-chip">オープンウェイトモデル群雄割拠</span>
-        <span class="keyword-chip">サプライチェーン攻撃対策</span>
+        <span class="keyword-chip">Apple vs OpenAI 訴訟</span>
+        <span class="keyword-chip">記録的パッチ・サプライチェーン攻撃</span>
+        <span class="keyword-chip">AIエージェント相互運用</span>
       </div>
-      <div class="keyword-summary">今週はGKE Agent SandboxやCloud Runサンドボックスなど「AIエージェントの実行環境をどう安全に隔離するか」が各クラウドベンダーの共通テーマになった。同時にThinking MachinesのInklingやxAIのGrok Build OSS化など新興ラボのオープン戦略が相次ぎ、モデル・エージェント双方で「オープン化」が加速した週でもある。一方でAsyncAPI npm侵害やnpm v12のインストールスクリプト既定ブロックなど、サプライチェーン攻撃への対策強化も継続的な話題となった。</div>
+      <div class="keyword-summary">今週はApple対OpenAIの営業秘密訴訟が、提訴から元従業員への証拠保全通知拡大へとエスカレートし、AI人材獲得競争の緊張が可視化された一週間だった。並行してMicrosoftの記録的Patch Tuesday（622件）やAsyncAPI・Gitea・RabbitMQなどサプライチェーン/認証まわりの脆弱性が相次ぎ、Claude Code⇄Codexのようなエージェント同士の相互運用も進展。オープンソースAIの推論コスト低下も続き、業界の主戦場は「モデル」から「導入・運用」へ移りつつある。</div>
     </div>
 
     <div class="section" id="top-stories">
@@ -62,64 +62,65 @@
 
       <div class="card featured deep-dive">
         <div class="card-header">
-          <span class="tag tag-ai">AI</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://thinkingmachines.ai/news/introducing-inkling/">DEEP DIVE: 元OpenAI CTO Mira Murati率いるThinking Machines、初のオープンウェイトモデル「Inkling」を公開——975Bパラメータ・コンテキスト100万トークン</a></h3>
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://techcrunch.com/2026/07/17/amazon-fixing-bug-that-billed-some-aws-customers-billions-of-dollars/">DEEP DIVE: AWS Cost Explorerの表示バグで一部ユーザーに数十億〜2.5兆ドル規模の誤った見積もり請求額——実際の課金には影響なし</a></h3>
         </div>
-        <div class="summary">Mira Murati氏が創業したThinking Machines Labが、創業から1年強を経て初のAIモデル「Inkling」をオープンウェイトで公開した。Inklingは975Bパラメータ（アクティブ41B）のMixture-of-Expertsモデルで、テキスト・画像・音声・動画を含む45兆トークンで事前学習され、最大100万トークンのコンテキストウィンドウとテキスト・画像・音声の入力に対応する。重みはHugging Faceで公開され、同社の学習カスタマイズ基盤「Tinker」上でもすぐにファインチューニング可能になっている。Artificial Analysis Intelligence Indexでは41点を記録し、米国発のオープンウェイトモデルとしては現状最高スコア。同時に、より軽量な「Inkling-Small」（アクティブ12B）のプレビューも公開され、低コスト・低レイテンシ用途をカバーする。同社自身「今日時点で最強のモデル（クローズド・オープン問わず）ではない」と認めつつ、OpenAIやGoogleが閉鎖的なフロンティアモデル戦略を強める中で、中国勢が独占しがちな「オープンで実用十分な大規模モデル」という領域に米国発の選択肢を投入した点が注目されている。</div>
-        <div class="editorial">🧠 「クローズドで最強を目指す」OpenAI・Anthropicと、「オープンで実用十分」を狙うThinking Machinesという戦略の分岐が明確になってきた。Inkling自体はベンチマークで最強ではないが、Tinkerとのセット提供によりファインチューニング前提のエコシステムを狙っているのが興味深く、今後は「素のモデル性能」より「カスタマイズのしやすさ」で差別化する動きが増えるかもしれない。</div>
+        <div class="summary">7月16日午後7時38分（太平洋時間）ごろから、AWSのコスト管理コンソール「Cost Explorer」で、実際の利用額とかけ離れた見積もり請求額が一部ユーザーのダッシュボードに表示される不具合が発生した。Redditには、直近の利用額がわずか0.19ドルだったユーザーに約25億ドルの見積もり請求が表示されたスクリーンショットが投稿され、他のユーザーからも12万6,000ドルから最大2.5兆ドルに及ぶ異常な見積もり額の報告が相次いだ。AWSは調査開始から約1時間半で原因を特定し、「見積もり請求計算サブシステム内の単価処理に関する問題」とだけ説明している。同社は表示された金額はあくまで見積もりの誤表示であり、実際の請求額・課金処理には一切影響していないと強調した上で、Cost Management Consoleのデータを遡って修正する作業を開始し、7月18日（土）正午（太平洋時間）までに全顧客で正しい金額に修正されるとした。今回の不具合はCost Explorerの見積もり表示機能に限定されたものだが、クラウド事業者内部の自動化された財務システムがどれほど広範囲かつ即座にユーザー体験へ影響を及ぼし得るかを改めて示した格好だ。</div>
+        <div class="editorial">🧠 数十億〜兆ドル単位の数字がダッシュボードに表示されても実際の課金に影響しない、という説明自体がクラウドの「見積もり」機能への信頼を揺るがしかねない。多くの顧客が誤表示に気づかずコスト管理の自動化ルールに反映していれば、意図しないリソース停止や予算超過アラートの誤爆が連鎖した可能性もある。単価計算という基礎的な部分でのバグがこれほどの規模で表出したのは、AWSの請求システムの複雑性の高さを物語っている。</div>
         <div class="key-points">
           <ul>
-            <li>975Bパラメータ・アクティブ41BのMoE構成、コンテキスト最大100万トークン、45兆トークンで事前学習</li>
-            <li>Artificial Analysis Intelligence Indexで41点を獲得し米国発オープンウェイトモデルとして最高スコア</li>
-            <li>軽量版「Inkling-Small」（アクティブ12B）も同時プレビュー公開、Tinker上で即ファインチューニング可能</li>
+            <li>7月16日午後7時38分（PDT）発生、直近利用額0.19ドルのユーザーに約25億ドルの見積もり請求が表示される事例も</li>
+            <li>他ユーザーからは12万6,000ドル〜最大2.5兆ドルの異常な見積もり額の報告、原因は「見積もり請求計算サブシステムの単価処理」の不具合</li>
+            <li>実際の課金・請求書には影響なし、Cost Management Consoleのデータは7月18日正午（PDT）までに全顧客で修正完了予定</li>
           </ul>
         </div>
-        <div class="why-it-matters">💡 オープンウェイトの大規模MoEモデルを自前でファインチューニングしたい開発者にとって、Qwen・DeepSeek一辺倒だった選択肢に米国発の有力な代替肢が加わったことになる。</div>
+        <div class="why-it-matters">💡 Cost ExplorerやBudgetsのアラートを自動化ルールに組み込んでいる場合、見積もり表示の異常値だけでコスト超過と誤認しリソースを止めてしまわないか、表示バグ発生時にはまず実際の請求書（Invoice）で数値を確認する習慣をつけておきたい。</div>
         <div class="meta">
-          <span>Thinking Machines Lab</span>
-          <span>⏱ 5 min read</span>
-          <span>2026-07-15</span>
+          <span>TechCrunch</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-17</span>
         </div>
       </div>
 
       <div class="card featured">
         <div class="card-header">
-          <span class="tag tag-infra">Infra</span>
-          <span class="content-type">💰 ビジネス</span>
-          <h3><a href="https://www.cnbc.com/2026/07/16/tsmc-second-quarter-profit-.html">TSMC、四半期純利益77%増の過去最高を記録——アリゾナへ追加$100B投資、累計$265Bに</a></h3>
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://simonwillison.net/2026/Jul/16/kimi-k3/">Moonshot AI、2.8兆パラメータの新モデル「Kimi K3」を発表——一部ベンチマークでClaude Opus 4.8・GPT-5.5を上回る</a></h3>
         </div>
-        <div class="summary">TSMCが第2四半期決算を発表し、純利益は前年同期比77.4%増の台湾ドル7,066億元（約$220億）と5四半期連続の過去最高を更新した。売上高は前年比36%増の$402億。CEOのC.C. Wei氏はアリゾナ州への追加投資として新たに$100Bを表明し、同州への累計投資額は$265Bに達する見込み。資金は2nm量産対応の新工場や先端パッケージング施設の建設に充てられる。2026年通期の設備投資見通しも$600億〜$640億へ上方修正した（従来$520億〜$560億）。AIデータセンター向け先端プロセッサ・パッケージング需要の高さが背景にある。</div>
+        <div class="summary">中国のMoonshot AIが、2.8兆パラメータの新モデル「Kimi K3」を7月16日に発表した。オープンウェイト版は7月27日までの公開が予告されている。Artificial AnalysisのEloスコアでは1547を記録し、Arena.aiのフロントエンドコードベンチマークでは首位。Claude Opus 4.8 maxやGPT-5.5 highを上回る場面が多い一方、Claude Fable 5やGPT-5.6 Solには依然として届いていない。価格は入力100万トークンあたり3ドル・出力15ドルで、前世代K2.6の0.95ドル/4ドルから大幅値上げとなったが、出力トークン数は21%削減されている。</div>
         <div class="key-points">
           <ul>
-            <li>純利益は前年同期比77.4%増、5四半期連続で過去最高を更新</li>
-            <li>アリゾナへの追加投資$100Bで累計投資額$265Bに、2nm量産・先端パッケージング施設に充当</li>
+            <li>前世代K2.6比で出力トークンを21%削減、価格は入力$3・出力$15/100万トークンに引き上げ</li>
+            <li>Artificial AnalysisでElo 1547を記録、Arena.aiのフロントエンドコードベンチマークで首位を獲得</li>
           </ul>
         </div>
         <div class="meta">
-          <span>CNBC</span>
+          <span>Simon Willison's Weblog</span>
           <span>⏱ 3 min read</span>
           <span>2026-07-16</span>
+          <span class="engagement">▲ 215</span>
         </div>
       </div>
 
       <div class="card featured">
         <div class="card-header">
-          <span class="tag tag-product">Product</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://www.techtimes.com/articles/320593/20260715/epic-google-jointly-withdraw-play-store-settlement-rival-android-app-stores-open-july-22.htm">Google PlayがEpicとの和解を撤回し訴訟終結へ——7月22日から米国でサードパーティ製Androidアプリストアを直接ホスト開始</a></h3>
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">💰 ビジネス</span>
+          <h3><a href="https://www.macrumors.com/2026/07/17/apple-sends-legal-letters-openai/">Apple、OpenAIへの提訴を拡大——元従業員約40人に証拠保全の法的通知</a></h3>
         </div>
-        <div class="summary">GoogleとEpic Gamesが、Google Play訴訟に関する既存の和解条件の変更申し立てを共同で取り下げたことで、米国連邦地裁の恒久的差止命令に基づく大改革が7月22日に実施されることになった。新設の「Play Catalog Access Program」により、サードパーティ製アプリストアがGoogle Playの全カタログにアクセスできるようになり、ユーザーはサイドロードという複雑な手順を経ずに、通常のアプリと同じ感覚でライバルストアをインストールできるようになる。米国内の開発者はデフォルトでオプトインとなり、明示的な拒否をしない限り自社アプリが対象カタログに含まれる。参加事業者は「セキュリティ・ポリシー審査」費用として年間$5,000を支払い、マルウェア混入率をインストール試行の1%未満に抑える義務を負う。</div>
+        <div class="summary">Appleは、営業秘密の不正利用を巡りOpenAIを提訴した訴訟に関連し、OpenAIに転職した元Apple従業員およそ40人に対し、関連する可能性のある文書や通信記録を保全するよう求める法的通知を送付したと報じられた。訴訟の対象はハードウェアエンジニアリングや製品開発分野の機密情報で、AppleはOpenAIが同社の元幹部Tang Tan氏・Chang Liu氏を含む主要エンジニアを採用し、独自の設計・製造プロセスなどの営業秘密を利用したと主張している。訴状によれば、Appleの元従業員400人以上が現在OpenAIに在籍しており、Appleは不正行為が当初の被告個人に留まらない可能性があるとみている。OpenAIは疑惑を否定している。</div>
         <div class="key-points">
           <ul>
-            <li>2023年12月の陪審評決・2024年10月の恒久的差止命令を経て、7月22日に米国限定で施行</li>
-            <li>参加事業者は年間$5,000のセキュリティ審査費用とマルウェア率1%未満の維持義務を負う</li>
+            <li>証拠保全の通知対象は元Apple従業員約40人、Appleの元従業員400人以上が現在OpenAIに在籍と訴状に記載</li>
+            <li>Appleは元幹部Tang Tan氏・Chang Liu氏らの採用を通じハードウェア設計・製造の営業秘密が利用されたと主張、OpenAIは疑惑を否定</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Tech Times</span>
-          <span>⏱ 3 min read</span>
-          <span>2026-07-15</span>
+          <span>MacRumors</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-07-17</span>
         </div>
       </div>
     </div>
@@ -130,79 +131,59 @@
       <div class="card">
         <div class="card-header">
           <span class="tag tag-infra">Infra</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://cloud.google.com/blog/products/containers-kubernetes/bringing-you-agent-sandbox-on-gke-and-agent-substrate">GKE Agent Sandboxが一般提供開始——AIエージェント向けの隔離実行基盤、新プロジェクト「Agent Substrate」も始動</a></h3>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://www.theregister.com/off-prem/2026/07/16/aws-cloudfront-outage-serves-errors-instead-of-websites/5272421">AWS CloudFront、VPC Origins設定の不具合で3時間半のグローバル障害——Hugging Face・英ナショナルロッタリーなど影響</a></h3>
         </div>
-        <div class="summary">Google CloudはKubernetes上でAIエージェントワークロード向けに構築したクラウドネイティブ実行環境「GKE Agent Sandbox」を一般提供開始した。gVisorとデフォルト拒否のネットワークポリシーをネイティブサポートし、Pod Snapshotsと連携してアイドル中のエージェントを数秒で一時停止・再開できる。Axionプロセッサ上ではハイパースケーラー各社と比べ最大30%良好な価格性能比を実現するという。同時に、エージェント基盤密度を追求する新オープンソースプロジェクト「Agent Substrate」も発表された。</div>
+        <div class="summary">7月16日午前9時45分（UTC）ごろ、AWS CloudFrontでVPC Origins機能を使う顧客向けに5xxエラーが多発する障害が発生した。原因はプライベートVPCオリジンへの接続を管理するフリート内部の制約に達し、ネットワークプロセッサへのルーティング設定配信システムが更新データを正しく読み込めなくなったため。障害はUTC7時45分から11時18分までの約3時間半続き、Hugging FaceやイギリスのNational Lotteryなど複数のサービスに影響が及んだ。</div>
         <div class="key-points">
           <ul>
-            <li>gVisorとデフォルト拒否ネットワークポリシーをネイティブ対応、Pod Snapshotsで数秒のアイドル復帰を実現</li>
-            <li>Axionプロセッサ上で他社ハイパースケーラー比最大30%良好な価格性能比、新OSSプロジェクト「Agent Substrate」も同時始動</li>
+            <li>障害はUTC7:45〜11:18の約3時間半、VPC Origins以外のオリジンタイプの利用者には影響なし</li>
+            <li>Hugging Face・英国National Lotteryなど複数サービスが接続不能に、AWSは他オリジンタイプへの一時切替を回避策として推奨</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Google Cloud Blog</span>
-          <span>⏱ 3 min read</span>
-          <span>2026-07</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-frontend">Frontend</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://nextjs.org/blog/next-16-3-turbopack">Next.js 16.3のTurbopackが開発時メモリ最大90%削減、永続ビルドキャッシュとRust製React Compilerを搭載</a></h3>
-        </div>
-        <div class="summary">Next.js 16.3でTurbopackのパフォーマンス改善がまとまって投入された。設定変更なしで開発時のメモリ使用量を最大90%削減し、永続ビルドキャッシュにより本番ビルドは最大5.5倍高速化。CIでは`.next`ディレクトリをキャッシュとして引き継ぐことでさらに高速化できる。Reactチームが公開したRust製React Compilerネイティブ移植版もTurbopackに統合され、v0のような大規模Reactアプリでのコンパイル時間が20〜50%短縮される見込み。Vite互換の`import.meta.glob` APIやローカルPostCSS設定解決にも対応した。</div>
-        <div class="key-points">
-          <ul>
-            <li>開発時メモリ使用量を設定変更なしで最大90%削減、永続ビルドキャッシュで本番ビルド最大5.5倍高速化</li>
-            <li>Rust製React Compilerネイティブ版をTurbopackに統合しコンパイル時間20〜50%短縮、Vite互換import.meta.globにも対応</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Next.js Blog</span>
-          <span>⏱ 3 min read</span>
-          <span>2026-06-29</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-security">Security</span>
-          <span class="content-type">🔒 セキュリティ</span>
-          <h3><a href="https://thehackernews.com/2026/07/firefox-chrome-adobe-and-vmware-updates.html">Chrome 150が382件の脆弱性を一括修正（うち重要度最高15件）、Firefox 152・Adobe・VMwareも同時パッチ</a></h3>
-        </div>
-        <div class="summary">Googleは安定版Chrome 150（150.0.7871.124/.125）をリリースし、382件の脆弱性を修正した。うち15件は最重要度に分類され、Extensionsでの解放済みメモリ使用（CVE-2026-13774）、GPUでの同種の欠陥（CVE-2026-13775）、ANGLEでのUse-After-Free（CVE-2026-14398）などが含まれる。修正のうち358件はGoogle自身が発見したもの。同時期にMozilla Firefox 152・Adobe・VMware製品でも重要な脆弱性パッチが公開された。現時点でCISAの既知脆弱性カタログに掲載された悪用実績はないが、両社は速やかな適用を推奨している。</div>
-        <div class="key-points">
-          <ul>
-            <li>Chrome 150は382件の脆弱性を修正、うち15件が最重要度（Extensions・GPU・ANGLEのUAFなど）</li>
-            <li>修正358件はGoogle社内発見、Firefox 152・Adobe・VMwareも同時期に重要パッチをリリース</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>The Hacker News</span>
-          <span>⏱ 3 min read</span>
+          <span>The Register</span>
+          <span>⏱ 2 min read</span>
           <span>2026-07-16</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-security">Security</span>
-          <span class="content-type">🔒 セキュリティ</span>
-          <h3><a href="https://www.netservicesgroup.com/msrc-blog-alerts/cve-2026-33814-infinite-loop-in-http-2-transport-when-given-bad-settings_max_frame_size-in-net-http-internal-http2-in-golang-org-x-net/">Go標準ライブラリ系golang.org/x/netにHTTP/2無限ループ脆弱性——不正なSETTINGS_MAX_FRAME_SIZEでDoSに（CVSS7.5）</a></h3>
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.phoronix.com/news/Linux-7.2-rc3-Released">Linux 7.2-rc3公開——Ultra RISC-V既定設定追加、GPU・ネットワーク中心の安定化フェーズへ</a></h3>
         </div>
-        <div class="summary">golang.org/x/net/http2のHTTP/2トランスポート実装に、SETTINGSフレーム処理時の脆弱性CVE-2026-33814が発見された。値0のSETTINGS_MAX_FRAME_SIZEを受け取ると、トランスポートがCONTINUATIONフレームを書き続ける無限ループに陥り、サービス拒否（DoS）を引き起こす。CVSS基本値は7.5。golang.org/x/netはKubernetesクライアントやクラウドサービスの多くのGo製バックエンドで広く利用されている共通ライブラリであり、影響範囲は特定のプロダクトに限らない。</div>
+        <div class="summary">Linus Torvaldsは7月12日、Linuxカーネル7.2の3回目のリリース候補（rc3）を公開した。Torvalds氏は「新しい通常運転」と表現し、特に不穏な変更は見当たらないとコメント。変更の約半数はドライバ関連で、GPU・ネットワーク周りが中心。Ultra RISC-VをRISC-Vの既定カーネル設定に追加したほか、SEGA Dreamcast向けドライバ修正や、マルチGPU環境向けディスプレイ検出の改善も含まれる。安定版7.2は8月にリリース予定。</div>
         <div class="key-points">
           <ul>
-            <li>不正なSETTINGS_MAX_FRAME_SIZE（値0）を受信するとCONTINUATIONフレームの無限ループに陥りDoSが発生、CVSS7.5</li>
-            <li>golang.org/x/net/http2はGo製の多くのクラウド基盤・APIクライアントで共通利用されており影響範囲が広い</li>
+            <li>変更の約半数がドライバ関連、Ultra RISC-VをRISC-Vの既定カーネル設定へ追加</li>
+            <li>安定版Linux 7.2は8月リリース予定、Nick Desaulniers氏のLLVM Linux開発復帰も明記</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Network Services Group</span>
+          <span>Phoronix</span>
           <span>⏱ 2 min read</span>
+          <span>2026-07-12</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://rtfeldman.com/rust-to-zig">関数型言語Rocのコンパイラ、RustからZigへ完全移植——487日でメモリ破損バグが21件→10件に減少</a></h3>
+        </div>
+        <div class="summary">関数型プログラミング言語Rocの開発チームが、コンパイラをRust（30万行）からZig（新機能込みで約45万行）へ487日かけて完全移植し、機能面での同等性を達成したと報告した。移植の主な動機はビルド速度（Zigのインクリメンタルビルドは35ミリ秒、Rust 1.85では10秒）と、アリーナアロケータなど細粒度のメモリ管理をZigのエコシステムが前提としている点。意外にも実運用でのメモリ破損バグはRust版の21件からZig版では10件に減少し、残る2件もエラー表示処理内に限られるという。</div>
+        <div class="key-points">
+          <ul>
+            <li>ビルド時間はZigのインクリメンタル機能で35ミリ秒、Rust 1.85では10秒だった</li>
+            <li>実運用でのメモリ破損バグはRust版21件からZig版10件に減少、総バグ報告数も2,596件から431件に減少</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>rtfeldman.com</span>
+          <span>⏱ 3 min read</span>
           <span>2026-07</span>
         </div>
       </div>
@@ -210,20 +191,40 @@
       <div class="card">
         <div class="card-header">
           <span class="tag tag-data">Data</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://www.infoworld.com/article/4191046/mongodb-embeds-reranking-into-atlas-as-enterprises-look-to-simplify-ai-stacks-for-scale.html">MongoDB、Voyage AI採用の「Native Reranking」をAtlasにパブリックプレビュー投入——検索精度を最大30%改善</a></h3>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://stateofopensource.ai/">年次レポート「State of Open Source AI」——推論コストは36ヶ月で1/50に、OpenRouter流通の過半数がオープンウェイトモデルに</a></h3>
         </div>
-        <div class="summary">MongoDBはAtlasの集約パイプライン内で動作する「Native Reranking」をパブリックプレビューで公開した。買収したVoyage AIのリランキングモデルを使い、初期検索結果をパイプライン内で並べ替えることで、外部API呼び出しや追加レイテンシなしに検索結果の関連度を最大30%改善できるという。処理をデータベース内に閉じることで、サードパーティサービスへのラウンドトリップに伴うセキュリティ・性能上のペナルティを回避する狙い。</div>
+        <div class="summary">「State of Open Source AI」V1.0レポートが、オープンウェイトモデルの推論コストが36ヶ月でGPT-4相当100万トークンあたり20ドルから0.40ドルへと1/50に下落したと報告した。OpenRouter経由のトークン流通でもオープンウェイトモデルのシェアは2026年半ばまでに50%を超え、上位5モデルはすべてオープンウェイト系という。一方で本番投入率は開発者の79%がオープンモデルを利用するのに対し実運用到達率は51%にとどまり（クローズドモデルは63%）、インフラコストやセキュリティ・コンプライアンスがボトルネックとされる。</div>
         <div class="key-points">
           <ul>
-            <li>Atlas集約パイプライン内でVoyage AIのリランキングモデルを直接実行し、検索関連度を最大30%改善</li>
-            <li>外部API呼び出し不要でレイテンシを増やさず、サードパーティ連携に伴うセキュリティリスクも回避</li>
+            <li>推論コストは3年でGPT-4相当100万トークンあたり20ドル→0.40ドルの1/50に下落</li>
+            <li>OpenRouterのトークン流通の50%超がオープンウェイトモデルに、MCPは月間9,700万DL・アクティブサーバー1万超に到達</li>
           </ul>
         </div>
         <div class="meta">
-          <span>InfoWorld</span>
-          <span>⏱ 2 min read</span>
+          <span>State of Open Source AI</span>
+          <span>⏱ 3 min read</span>
           <span>2026-07</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://jvns.ca/blog/2026/07/17/learning-about-running-sqlite/">SQLiteを本番運用して学んだこと——ANALYZE一発で検索クエリが5秒→約0.05秒に高速化</a></h3>
+        </div>
+        <div class="summary">著名なブログ「Julia Evans（jvns.ca）」が、SQLiteを本番運用する中で得た実践的な知見を公開した。約4,000行のテーブルに対する全文検索クエリが、ANALYZEコマンド実行後に5秒から約0.05秒まで高速化した事例を紹介。単一ライター制約により、5秒を超えるクリーンアップ処理があると同時書き込みのワーカーがタイムアウトでクラッシュする問題も報告し、削除処理を小分けにバッチ化する対処法を解説している。</div>
+        <div class="key-points">
+          <ul>
+            <li>ANALYZE実行でクエリプランナーの統計情報が更新され、4,000行のテーブルの全文検索が5秒→約0.05秒に高速化</li>
+            <li>5秒を超える削除処理は同時書き込みのタイムアウトを誘発、バックアップはResticのVACUUM INTO+gzip、またはLitestreamのretention:400hで運用</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>jvns.ca</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-07-17</span>
         </div>
       </div>
     </div>
@@ -234,80 +235,82 @@
       <div class="card">
         <div class="card-header">
           <span class="tag tag-ai">AI</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://www.publickey1.jp/blog/26/3ai.html">デジタル庁、ガバメントAI「源内」向けに国産LLM3種（tsuzumi 2・Takane 32B・PLaMo 2.0 Prime）を「さくらのクラウド」で試用開始</a></h3>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/loglass/articles/6aa18c80496ec6">AIに「レビューして」はもう古い？「敵対的検証」のすすめ</a></h3>
         </div>
-        <div class="summary">デジタル庁は、政府のAI基盤「源内」で試用する国産AIモデルのうちNTTデータ「tsuzumi 2」、富士通「Takane 32B」、Preferred Networks「PLaMo 2.0 Prime」の3モデルについて、さくらインターネットの国産クラウド「さくらのクラウド」上で稼働させることを発表した。政府がガバメントクラウド上でさくらのクラウドを利用するのは今回が初めて。デジタル庁内および複数省庁向けにチャット機能を提供し、既存モデルとのA/Bテストで評価する実証実験を9月から11月にかけて実施する計画。</div>
+        <div class="summary">AIエージェントに単に「レビューして」と頼むのではなく、「この主張を反証してみよ」という懐疑的な指示に切り替える「敵対的検証」の手法を紹介する記事。検証エージェントを生成コンテキストから切り離し事前情報に引っ張られないようにする「フレッシュコンテキスト分離」や、事実確認では外部情報源を必ず参照させる「一次情報への接地」など具体的な技術を解説。実例として記事アウトラインを3つの懐疑的サブエージェントに検証させたところ、「1つの観察結果を全環境に一般化すべきでない」といった根拠付きの指摘を得られたという。</div>
         <div class="key-points">
           <ul>
-            <li>tsuzumi 2・Takane 32B・PLaMo 2.0 Primeの国産3モデルをさくらのクラウド上で試用、政府ガバメントクラウド利用は初</li>
-            <li>全府省庁向けチャット機能でA/Bテストを実施、実証実験は9月〜11月に複数回実施予定</li>
+            <li>検証エージェントを生成コンテキストから独立させる「フレッシュコンテキスト分離」と、事実確認は外部情報源を参照させる「一次情報への接地」が核となる技術</li>
+            <li>各指摘に重大度（高・中・低）と根拠を付与し人間が判断しやすい構造化出力にする一方、最終判断は人間が下すべきという注意点も強調</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Publickey</span>
-          <span>⏱ 2 min read</span>
-          <span>2026-07-10</span>
+          <span>Zenn</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-16</span>
+          <span class="engagement">🔖 201</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-infra">Infra</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://www.publickey1.jp/blog/26/google_cloudaicloud_run.html">Google Cloud、生成AIのコードを瞬時に隔離実行できる「Cloud Runサンドボックス」をパブリックプレビュー公開</a></h3>
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/net_8net_911.html">.NET 8と.NET 9、2026年11月10日でサポート終了——マイクロソフトが警告し.NET 10への移行を推奨</a></h3>
         </div>
-        <div class="summary">Google Cloudは、生成AIが出力した信頼できないコードを安全に隔離して実行できる軽量な実行境界「Cloud Runサンドボックス」をパブリックプレビューとして公開した。既存のCloud Runサービスインスタンス内に即座に生成でき、サービスの環境変数やGoogle Cloudメタデータサーバへのアクセス権を持たず、ネットワークアウトバウンドもデフォルトで拒否される。実行中インスタンスのリソースを共有するため追加費用は発生しない。次期Agent Development KitおよびComputeSDKでの対応も予定されている。</div>
+        <div class="summary">マイクロソフトは、LTS版の.NET 8（2023年11月リリース）とSTS版の.NET 9（2024年11月リリース）が2026年11月10日にサポート終了となることを改めて警告した。サポート終了後もアプリケーション自体は動作し続けるが、セキュリティパッチやバグ修正の提供は打ち切られる。移行先としては2025年11月にリリースされた最新LTS版の.NET 10が推奨されている。</div>
         <div class="key-points">
           <ul>
-            <li>サンドボックスは環境変数・メタデータサーバへのアクセス不可、ネットワークアウトバウンドはデフォルト拒否</li>
-            <li>既存Cloud Runインスタンスのリソースを共有するため追加費用なし、次期Agent Development Kit等で正式対応予定</li>
+            <li>.NET 8（LTS・3年サポート）と.NET 9（STS・2年サポート）がともに2026年11月10日でサポート終了</li>
+            <li>移行先は2025年11月リリースの.NET 10、以降2年おきに新たなLTS版が登場するサイクル</li>
           </ul>
         </div>
         <div class="meta">
           <span>Publickey</span>
           <span>⏱ 2 min read</span>
-          <span>2026-07-14</span>
+          <span>2026-07-16</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://gihyo.jp/article/2026/07/vscode-drawio-extension-inline-editing">VS Code拡張機能「Draw.io Integration」、Markdownプレビュー上でのインライン図編集をプレリリース版で提供</a></h3>
+        </div>
+        <div class="summary">VS Code拡張機能「Draw.io Integration」のプレリリース版1.9.260714020で、Markdownプレビュー上に埋め込んだ図をそのままインライン編集できる新機能が追加された。「Markdown with Diagrams (Experimental)」という新エディタモードにより、drawioコードフェンスやHTMLコメントで囲んだXML、リンクされた.drawio.svg/.pngファイルを直接編集できる。</div>
+        <div class="key-points">
+          <ul>
+            <li>プレリリース版1.9.260714020で対応、安定版1.9.0にはまだ未搭載</li>
+            <li>CodeLensから「Edit Diagram」「Preview」「Inline Edit」「Lock」を切り替え可能、draw.ioのAI支援作図ワークフローの一部として位置付け</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>gihyo.jp</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-07-16</span>
+          <span class="engagement">🔖 49</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
           <span class="tag tag-ai">AI</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://zenn.dev/chiku_dev/articles/7602829910d94f">バズりツイートから考察する2026年のAIエージェントプロダクト開発——「幅」と「深さ」の自律化をどう設計するか</a></h3>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://zenn.dev/uhyo/articles/react-profession-bench-12">頂上決戦！effort=max同士の対決でGPT-5.6はClaudeに勝てるのか（React習熟度ベンチマーク）</a></h3>
         </div>
-        <div class="summary">SNSで話題になった投稿を切り口に、2026年のAIエージェントプロダクト開発で議論されているタスク分解・配線の「幅」の設計と、個々のタスク遂行の「深さ」の自律化という2軸を整理した記事。Claude CodeやRoo Codeなど既存のコーディングエージェントを題材に、エージェント側とタスク側それぞれの設計判断がプロダクトの使い勝手にどう影響するかを解説している。</div>
+        <div class="summary">独自ベンチマーク「React Profession Bench」で、OpenAI GPT-5.6の3グレード（Sol・Terra・Luna）とClaude Opus 4.8・Fable 5をeffort=max設定で比較検証。状態設計・エフェクト衛生・コンポーネント設計・TypeScript品質・パフォーマンス配慮・アクセシビリティの6項目、13仕様×3回（n=3）で採点した結果、Claude Fable 5が86.67点で首位、GPT-5.6 Solが80.18点で続いた。最大出力を投じてもGPT-5.6のコンポーネント設計の弱さは解消されず、React 19の並行API採用率もClaudeに劣った。</div>
         <div class="key-points">
           <ul>
-            <li>タスク分解・配線の「幅」設計とタスク遂行の「深さ」の自律化という2軸でエージェントプロダクトを整理</li>
-            <li>Claude Code・Roo Codeなど実在のコーディングエージェントを題材に設計判断の違いを具体的に解説</li>
+            <li>総合スコアはClaude Fable 5が86.67点、Claude Opus 4.8が84.03点、GPT-5.6 Solが80.18点で最高</li>
+            <li>GPT-5.6はuseMemoなど旧来手法の採用率60〜69%と高く、React 19のuseTransition等の採用ではClaude（useMemo採用率19〜34%）に劣る</li>
           </ul>
         </div>
         <div class="meta">
           <span>Zenn</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-07</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-security">Security</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://gihyo.jp/magazine/SD/archive/2026/202607">Software Design 2026年7月号発売——特集「セキュリティバイデザイン入門」「教養としての現代インフラ AIデータセンター基礎講座」</a></h3>
-        </div>
-        <div class="summary">技術評論社の月刊誌「Software Design」2026年7月号が発売された。第1特集「セキュリティバイデザイン入門」は、脆弱性を生まない設計技法とコーディングの考え方を解説し、第2特集「教養としての現代インフラ AIデータセンター基礎講座」ではAIブームを支えるデータセンターの基礎知識を扱う。B5判176ページ、価格1,562円。</div>
-        <div class="key-points">
-          <ul>
-            <li>第1特集は脆弱性を生まない設計・コーディング技法を扱う「セキュリティバイデザイン入門」</li>
-            <li>第2特集はAIデータセンターの基礎を扱う「教養としての現代インフラ」、B5判176ページ・1,562円で発売</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>gihyo.jp</span>
-          <span>⏱ 2 min read</span>
-          <span>2026-07-17</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-16</span>
         </div>
       </div>
     </div>
@@ -317,61 +320,62 @@
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-ai">AI</span>
-          <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://tech-noisy.com/2026/07/16/grok-build-apache-2-0-source-code-released/">xAIのコーディングエージェント「Grok Build」がApache 2.0でOSS化、84万行超のRustコードを公開</a></h3>
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://opensource.microsoft.com/blog/2026/07/16/microsoft-comic-chat-is-now-open-source/">Microsoft、1996年の名物IRCチャットソフト「Comic Chat」をオープンソース化——Comic Sansフォント誕生の舞台にも</a></h3>
         </div>
-        <div class="summary">xAIは自社製コーディングエージェント「Grok Build」のソースコードをApache License 2.0で公開した。エージェントランタイム・ツール実装・TUI・ワークスペース管理を含む84万4,530行のRustコードが対象で、公開に合わせて全ユーザーの利用上限もリセットされた。5月のベータ公開当初はコードベースや認証情報をSpaceXAIのサーバへ送信するデータアップロード機能がデフォルト有効だったが、7月12日にこの機能は無効化され、過去にアップロードされたコーディングデータも削除されたという経緯がある。最大8つのサブエージェントを個別のGit worktreeで並列実行できる点が特徴。</div>
+        <div class="summary">Microsoftは7月16日、1996年にInternet Explorer 3やWindows 98にも同梱されていたIRCチャットクライアント「Comic Chat」のソースコードをGitHub（microsoft/comic-chat）で公開した。Visual C++ 4.0とMFCで構築され24言語にローカライズされていた本ソフトは、会話内容を自動でコマ割り漫画に変換し参加者をイラストキャラクターとして表示する独自UIで知られる。書体「Comic Sans」が最初に実用採用されたソフトとしても知られ、今回の公開にはAIを使った現代のVisual Studio・IRCサーバーへの対応実験も含まれている。</div>
         <div class="key-points">
           <ul>
-            <li>エージェントランタイム・TUI等を含む84万4,530行のRustコードをApache 2.0で公開、利用上限も同時リセット</li>
-            <li>5月のベータ版はコード・認証情報の無断アップロードがデフォルト有効だったが7月12日に無効化・データ削除済み</li>
+            <li>1996年発表、Visual C++ 4.0・MFC製で24言語にローカライズ、GitHub「microsoft/comic-chat」でソース公開</li>
+            <li>Comic Sansフォントが初めて実用化されたソフトとしても知られ、AIによるモダナイズ実験コードも同梱</li>
           </ul>
         </div>
         <div class="meta">
-          <span>tech-noisy.com</span>
-          <span>⏱ 3 min read</span>
+          <span>Microsoft Open Source Blog</span>
+          <span>⏱ 2 min read</span>
           <span>2026-07-16</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-ai">AI</span>
-          <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://techcrunch.com/2026/07/08/hot-french-startup-zml-releases-free-product-to-speed-inference-across-lots-of-ai-chips/">パリ発ZML、Nvidia・AMD・Google TPU・Apple・Intel横断で動く無償推論サーバ「LLMD」を公開</a></h3>
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://freyaui.dev/posts/0.4">Rust製GUIライブラリ「Freya」v0.4——Dioxus依存を排除した完全書き直しで45種類超の組み込みコンポーネントを搭載</a></h3>
         </div>
-        <div class="summary">Yann LeCun氏やHugging Face共同創業者らが支援するパリのスタートアップZMLが、複数のAIチップベンダーを横断して動く高性能推論サーバ「LLMD」のアルファ版を無償公開した。Gemma・Llama・Ministral・Mistral・QwenなどのモデルをOpenAI互換APIで提供し、連続バッチング・ページドアテンション・シャーディングに対応する。テンソル並列推論を全プラットフォームでサポートし、複数デバイスへのモデル自動分割と通信処理も透過的に行う。特定チップベンダーへの依存を減らし、企業がAIインフラの選択肢を広げられるようにする狙い。</div>
+        <div class="summary">Rust製クロスプラットフォームGUIライブラリ「Freya」がv0.4を公開した。これまで依存していたDioxusを排し、独自のリアクティブ・コンポーネントモデルを一から構築。従来の文字列ベースの`rsx!()`マクロを廃し、`width(Size::fill())`のような型付きビルダーパターンを採用してIDE補完とコンパイル時エラー検出を強化した。Button・Table・ColorPicker・MarkdownViewerなど45種類超の組み込みコンポーネント、マルチウィンドウ、システムトレイ、ターミナルエミュレータ組み込みなどを新たにサポートする。</div>
         <div class="key-points">
           <ul>
-            <li>Nvidia・AMD・Google TPU・Apple Metal・Intel Arcを横断し、OpenAI互換APIでGemma・Llama・Mistral等を提供</li>
-            <li>テンソル並列推論と複数デバイスへの自動シャーディングに対応、無償提供だがオープンソースではない</li>
+            <li>Dioxus依存を排除し独自モデルへ完全書き直し、45種類超の組み込みコンポーネントとホットリロードに対応</li>
+            <li>OpenGL/Vulkan/Metal/ソフトウェアの複数レンダリングバックエンドとAndroid実験的サポートを追加</li>
           </ul>
         </div>
         <div class="meta">
-          <span>TechCrunch</span>
+          <span>freyaui.dev</span>
           <span>⏱ 2 min read</span>
-          <span>2026-07-08</span>
+          <span>2026-07</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-security">Security</span>
+          <span class="tag tag-ai">AI</span>
           <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://github.com/usestrix/strix">オープンソースAIペネトレーションテストツール「Strix」、GitHubトレンドで今月急上昇</a></h3>
+          <h3><a href="https://github.com/Nutlope/hallmark">Claude Code・Cursor・Codex向け「脱AI臭」デザインスキル「Hallmark」がGitHubトレンド入り、11.9kスター獲得</a></h3>
         </div>
-        <div class="summary">アプリケーションの脆弱性を発見・修正するオープンソースのAIペネトレーションテストツール「Strix」が、今月GitHubトレンドで急速にスターを伸ばしている。AIエージェントが自動でアプリケーションを分析し脆弱性を発見する手法を取り入れており、AIエージェント関連ツールがトレンド上位を占める中で、セキュリティ特化型ツールとして存在感を示している。</div>
+        <div class="summary">AIコーディングエージェント向けに「AIっぽくない」Webデザインを生成するスキル「Hallmark」がGitHubトレンドで注目を集め、11.9kスターを獲得した。20種類のテーマと4つの動作モード（build・audit・redesign・study）を備え、「57個のスロップ検出ゲート」と自己批評ステップによって、テンプレート的なAI生成デザインパターンを避ける仕組みを提供する。MITライセンスで公開されている。</div>
         <div class="key-points">
           <ul>
-            <li>AIエージェントによる自動脆弱性発見・修正を特徴とするオープンソースのペネトレーションテストツール</li>
-            <li>今月のGitHubトレンドで急上昇、AI駆動のセキュリティツールとして注目を集める</li>
+            <li>20種類のテーマ・4動作モード（build/audit/redesign/study）を提供、MITライセンスで公開</li>
+            <li>「57個のスロップ検出ゲート」と生成前の自己批評ステップでAI特有のテンプレ的デザインを回避</li>
           </ul>
         </div>
         <div class="meta">
           <span>GitHub</span>
           <span>⏱ 2 min read</span>
           <span>2026-07</span>
+          <span class="engagement">⭐ 11.9k</span>
         </div>
       </div>
     </div>
@@ -380,38 +384,45 @@
       <div class="section-title">🔗 Quick Links</div>
 
       <div class="quick-link">
-        <span class="tag tag-ai">AI</span>
-        <a href="https://www.techtimes.com/articles/320160/20260711/tencent-lead-2b-manus-buyback-beijing-treats-agentic-ai-sovereign-asset.htm">Tencent、AIエージェントスタートアップManusの筆頭株主に——Meta買収を中国当局が覆し$2Bで買い戻し</a>
-        <span class="quick-summary">— 中国政府がエージェント型AIを戦略資産と位置付け、Tencent主導でMeta保有分を同一評価額$2Bで買い戻す交渉が進行中。</span>
-        <span class="meta">Tech Times</span>
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://mort.coffee/home/sqlite-editions/">SQLiteにもRustのeditionのような後方互換の安全策を——外部キー・WAL既定オフの見直しを提案</a>
+        <span class="quick-summary">— 外部キー制約・厳密な型・WALモードなど安全なデフォルトを1つのpragmaでまとめて有効化する案を提示。</span>
+        <span class="meta">mort.coffee</span>
       </div>
 
       <div class="quick-link">
-        <span class="tag tag-product">Product</span>
-        <a href="https://techcrunch.com/2026/07/15/daniel-eks-body-scanning-startup-neko-health-raises-another-700m/">Spotify創業者Daniel Ek氏の body-scanningスタートアップNeko Health、$700Mを調達し評価額$7Bに</a>
-        <span class="quick-summary">— Lightspeed Venture Partners主導、Mark Zuckerberg氏ら著名人も個人投資家として参加し米国進出を加速。</span>
-        <span class="meta">TechCrunch</span>
+        <span class="tag tag-frontend">Frontend</span>
+        <a href="https://www.publickey1.jp/blog/26/javascriptspreadjs.html">リアルタイム共同編集が可能なJS表計算コンポーネント「SpreadJS」新バージョン、メシウスがリリース</a>
+        <span class="quick-summary">— 複数ユーザーによる同時編集・共同作業に対応した最新版を公開。</span>
+        <span class="meta">Publickey</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-oss">OSS</span>
+        <a href="https://forgejo.org/2026-07-release-v16-0/">自己ホスト型Gitフォージ「Forgejo」v16.0公開——複数行コメントやWebhook強化など</a>
+        <span class="quick-summary">— Shift+クリックでの複数行レビューコメントやJWTベース認証連携「Authorized Integrations」などを追加。</span>
+        <span class="meta">forgejo.org</span>
       </div>
 
       <div class="quick-link">
         <span class="tag tag-security">Security</span>
-        <a href="https://www.militarytimes.com/pay-benefits/military-benefits/health-care/2026/07/13/nearly-12000-military-tricare-beneficiaries-warned-of-data-breach/">TriWest Healthcare Allianceで情報漏えい、TRICARE受給者約1.2万人に通知——一部でSSN流出も</a>
-        <span class="quick-summary">— 4月16日の不正アクセスを7月2日付で通知、氏名・DoD給付番号・郵便番号のほか5件未満でSSN・住所・生年月日も流出。</span>
-        <span class="meta">Military Times</span>
+        <a href="https://blog.zksecurity.xyz/posts/openvm-bugs/">AI監査ツール「zkao」、ゼロ知識VM「OpenVM」から重大な暗号バグを発見——CVE-2026-46669</a>
+        <span class="quick-summary">— ペアリング検証の欠陥がBLS12-381・BN254両曲線に影響、OpenVM 1.6.0で修正済み。</span>
+        <span class="meta">zkSecurity Blog</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://honeypotlive.cc/">SSHハニーポットに群がるボットの挙動をリアルタイム観察できるダッシュボード「Honeypot Live」</a>
+        <span class="quick-summary">— 攻撃元IP・試行されたユーザー名やパスワード・実行コマンドを可視化し、脅威インテリジェンス教育に活用できる。</span>
+        <span class="meta">honeypotlive.cc</span>
       </div>
 
       <div class="quick-link">
         <span class="tag tag-dev">Dev</span>
-        <a href="https://github.blog/changelog/2026-07-08-github-copilot-in-visual-studio-code-june-2026-releases/">GitHub Copilot、VS Code向け2026年6月分アップデートをまとめて公開——並列セッションやコスト可視化を強化</a>
-        <span class="quick-summary">— 統合ブラウザの強化・Marketplaceでのモデル発見機能・Autopilotの挙動改善なども同時収録。</span>
-        <span class="meta">GitHub Changelog</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-ai">AI</span>
-        <a href="https://siliconangle.com/2026/07/07/report-chinas-deepseek-follows-openai-developing-custom-inference-chips/">DeepSeek、OpenAIに続き自社推論チップの開発に着手——Nvidia・Huawei双方への依存低減が狙い</a>
-        <span class="quick-summary">— チップ設計・ファウンドリ・メモリ各社と協議中も現時点では試作前の初期段階、経験豊富なチップ設計者の採用も進める。</span>
-        <span class="meta">SiliconANGLE</span>
+        <a href="https://goliath32.com/blog/z80.html">Zilog Z80プロセッサ、発売50周年——IntelがIBM PCにZ80を選ばなかった思わぬ理由</a>
+        <span class="quick-summary">— IntelでのFederico Faggin氏の不満から生まれ、8080互換を保ちつつ単一5V電源で動作、Game BoyのCPUにも派生した。</span>
+        <span class="meta">goliath32.com</span>
       </div>
     </div>
 
