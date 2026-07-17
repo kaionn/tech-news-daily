@@ -40,6 +40,7 @@ jobs:
           claude_args: |
             --model claude-sonnet-5
             --allowedTools "WebSearch,WebFetch,Read,Write,Edit,Glob,Grep,Bash"
+            --disallowedTools "Bash(git add:*),Bash(git commit:*),Bash(git push:*),Bash(git config:*),Bash(git remote:*),Bash(git reset:*),Bash(git rebase:*)"
 
       - name: Commit and push digest
         id: commit
@@ -51,7 +52,13 @@ jobs:
           # （push 時点で失効し Invalid username or token になる）ため、GITHUB_TOKEN に張り直す
           git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
           if [ -z "$(git status --porcelain -- index.html archive/ feed.xml)" ]; then
-            echo "::error::生成物に変更がない（生成失敗の可能性）"
+            # 2026-07-16/17: Claude Code bump で Claude が自分で commit/push する事故が発生
+            # （--disallowedTools で対策済み）。再発時に原因を区別できるようにしておく
+            if git log -1 --format='%an' | grep -qi claude; then
+              echo "::error::Claude が生成物を自分で commit している（禁止ガード突破）。直前コミット: $(git log -1 --oneline)"
+            else
+              echo "::error::生成物に変更がない（生成失敗の可能性）"
+            fi
             exit 1
           fi
           TODAY=$(date -u '+%Y-%m-%d')

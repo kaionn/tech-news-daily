@@ -268,9 +268,9 @@ Read the current archive/index.html. Add a new card entry at the top of the Past
 </div>
 ```
 
-## Step 7: Self-Review (MANDATORY, before commit)
+## Step 7: Self-Review (MANDATORY, final step)
 
-Re-read the generated index.html and feed.xml, and verify every point. Fix all violations before committing:
+Re-read the generated index.html and feed.xml, and verify every point. Fix all violations before finishing (remember: you never run git — see Step 8):
 
 1. LINKS: every `<a href>` in a card or quick-link points to a specific article page (URL has a meaningful path). No top pages, no section pages, no aggregator roundup pages. Fix or drop violators (if dropping changes item counts, update the stats-bar).
 2. DATE: `<title>`, header `.date`, and feed.xml newest entry all show today's date.

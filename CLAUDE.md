@@ -16,6 +16,12 @@ tech-news-daily: 技術ニュースを毎日収集・整形し、GitHub Pages �
 
 稼働確認: `gh run list --workflow=daily-digest.yml`。失敗時は `gh run view <id> --log-failed`。手動リトライは `gh workflow run daily-digest.yml`。
 
+### Claude の git 操作はツール層で禁止（2026-07-17 対策）
+
+2026-07-16/17 の 2 run で、action@v1 の実体更新（Claude Code 2.1.211 へ bump）を境に、Claude が prompt の禁止記述を無視して自分で `git commit` + `git push` するようになった（`claude[bot]` 名義の unsigned ローカルコミット）。その結果 workflow の commit step が clean tree を見て「生成物に変更がない」で fail した（サイト自体は claude[bot] push が `pages.yml` を発火させたためデプロイされていた）。
+
+対策として `claude_args` に `--disallowedTools "Bash(git add:*),Bash(git commit:*),..."` を追加し、prompt 頼みでなくツール層で git 書き込み系を物理的に拒否する。workflow / prompt を変更する際もこのガードを外さないこと。commit step は「Claude が commit 済み」と「本当に生成失敗」をエラーメッセージで区別する。
+
 ### 旧構成（CCR routine、2026-07-05 停止）
 
 旧構成は CCR routine (`trig_01LvUYkX4UXHkv8KDLsFH9eL`) が `claude/**` ブランチに commit → ハーネスが自動 push → `auto-merge-digest.yml` が main へ取り込む方式だった。2026-07-03 からハーネスの branch push が**サイレントに失敗**する障害（5 run 連続、routine 側は毎回正常完了・ログにエラーなし・Claude GitHub App 設定も正常）が続いたため GHA へ全面移行し、routine は claude.ai 側で pause した。障害は Anthropic に報告済み。`auto-merge-digest.yml` は routine を誤って再開した場合の受け皿として残置している。sandbox は `persist_session: false` のため push されなかった digest は復元不可（2026-07-03〜05 号は欠番）。
