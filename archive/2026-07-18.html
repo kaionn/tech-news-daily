@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-07-18</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="../feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-07-18 (Sat)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 19 articles</span>
+      <span>🏷 8 categories</span>
+      <span>📡 15 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item">
+        <span class="number-value">2.8兆</span>
+        <span class="number-label">Kimi K3の総パラメータ数（896エキスパート中16のみ活性化）</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">$17.5B</span>
+        <span class="number-label">Fireworks AIがシリーズDで達成した評価額</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">$2.5B</span>
+        <span class="number-label">AWS課金バグで実利用$0.19のユーザーに表示された誤請求額</span>
+      </div>
+    </div>
+
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
+
+      <div class="card featured deep-dive">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.tomshardware.com/tech-industry/artificial-intelligence/moonshot-releases-2-8-trillion-parameter-kimi-k3">DEEP DIVE: Moonshot AI、2.8兆パラメータの中国製オープンウェイトモデル「Kimi K3」を発表——Frontend Code ArenaベンチマークでClaude Fable 5を上回る</a></h3>
+        </div>
+        <div class="summary">中国のMoonshot AIが、総パラメータ数2.8兆のスパースMixture-of-Expertsモデル「Kimi K3」を発表した。896のエキスパートのうちトークンごとに活性化するのはわずか16（全体の約1.8%）で、巨大なパラメータ数を抱えつつも計算効率を高く保つ設計になっている。新設計の「Kimi Delta Attention（KDA）」と「Attention Residuals（AttnRes）」という2つのアーキテクチャ上の工夫により、効率と推論品質の両立を狙う。マルチモーダル（視覚）理解にネイティブ対応し、コンテキストウィンドウは最大100万トークン。常時「シンキングモード」で推論するのも特徴で、別途推論特化版を用意する必要がない。Artificial Analysisの複合リーダーボードではElo 1547を記録し、前世代のKimi K2.6から732ポイントの大幅向上、Claude Fable 5に次ぐスコアとなった。とりわけFrontend Code Arenaベンチマークでは、そのClaude Fable 5を上回る結果を出したという。API価格は入力$3/百万トークン・出力$15/百万トークンとかなり安価に設定されている。ただし現時点で公開されているのはAPI経由のプレビューのみで、完全なオープンウェイトの公開は7月27日を予定している。市場では中国発オープンモデルの急速な追い上げとして「DeepSeekショックの再来」との評も出ている。</div>
+        <div class="editorial">🧠 「2.8兆パラメータ」という数字のインパクトは大きいが、実際に動くのは896分の16エキスパートのみで、これは規模と効率を両立させるMoE設計思想の勝利と言える。一方で「完全な重み公開は7月27日」というタイムラグは、ベンチマーク発表を先行させて話題を作る戦略とも取れ、手元で実際に動かして検証できるまでは評価を保留したい部分もある。それでも米国AI優位論を揺さぶる材料が中国勢から次々出てくる構図は、オープンウェイト市場の主導権争いを一段と加速させるだろう。</div>
+        <div class="key-points">
+          <ul>
+            <li>2.8兆パラメータ・896エキスパート中16のみ活性化するMoE構成、新設計のKDA・AttnResアーキテクチャを採用</li>
+            <li>Artificial AnalysisでElo 1547を記録（前世代K2.6から+732pt）、Frontend Code ArenaではClaude Fable 5を上回る</li>
+            <li>API価格は入力$3/出力$15（百万トークンあたり）、完全なオープンウェイト公開は2026年7月27日を予定</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 低コストで高性能なオープンモデルを探している開発者にとって、7月27日の重み公開以降は自前ホスティングの有力な選択肢になり得るが、ベンチマーク主張の裏取りは重み公開後に自分で行うのが賢明。</div>
+        <div class="meta">
+          <span>Tom's Hardware</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-07-16</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-product">Product</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://digital-markets-act.ec.europa.eu/commission-provides-guidance-google-ai-interoperability-android-and-sharing-google-search-data-under-2026-07-16_en">EU、GoogleにAndroidのAIアシスタント機能開放と検索データ共有を命令——DMAに基づく拘束力ある仕様措置</a></h3>
+        </div>
+        <div class="summary">欧州委員会は2026年7月16日、デジタル市場法（DMA）に基づきGoogleに対して2つの拘束力ある仕様措置を発出した。1つ目はAndroid上でのAI相互運用性の確保で、競合AIアシスタントに音声起動（「OK Google」相当の仕組み）やアプリ内でのタスク代行（配車予約など）、チャット返信の提案、訪問先情報の案内といった、これまでGeminiが独占していた機能への同等アクセスを義務付ける。2つ目は検索データ共有で、Google検索が独占的に収集してきたデータを匿名化した上で他の検索エンジンにも提供させ、競争条件を是正する狙い。EU域内Androidユーザーの60%という規模を踏まえた措置で、検索データ共有は2027年1月に開始、AIアシスタント関連の機能開放は遅くとも2027年7月までにユーザーに反映される見込み。</div>
+        <div class="key-points">
+          <ul>
+            <li>音声起動・アプリ内タスク代行・チャット返信提案など、Geminiと同等のAndroid機能を競合AIアシスタントに開放義務化</li>
+            <li>検索データ共有は2027年1月開始、AIアシスタント関連の機能開放は2027年7月までにユーザーへ到達予定</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>European Commission</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-16</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://www.theregister.com/off-prem/2026/07/17/billing-software-error-sends-billion-dollar-aws-estimates/5274521">AWS Cost Explorerに課金計算バグ——実利用$0.19のユーザーに$25億ドル超の見積り請求額を表示</a></h3>
+        </div>
+        <div class="summary">AWSの請求ダッシュボードで、Cost Explorerの見積り課金額が異常に膨れ上がる不具合が発生した。障害は7月17日午前1時33分（太平洋時間）ごろに発覚し、ユーザーからは$126,000から最大$2.5兆ドルまでの見積り額が報告された。ある利用者は通常$0.19程度の請求のところ、約$25億ドルの見積りが表示されたという。AWSは調査開始から約90分で「見積り課金計算サブシステムの単価処理に関する問題」が原因と特定し、これ以上見積り額が増えないよう更新を一時停止。実際の課金額には影響がないことを確認したとし、7月18日正午（太平洋時間）までに正しい数値へ修正すると発表した。</div>
+        <div class="key-points">
+          <ul>
+            <li>発生は7/17午前1:33（太平洋時間）、原因特定まで約90分、実際の請求額には影響なしと確認済み</li>
+            <li>一部ユーザーには通常$0.19の利用に対し約$25億ドルの見積り額が表示される極端な事例も</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>The Register</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-07-17</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://thehackernews.com/2026/07/new-wp2shell-wordpress-core-flaw-lets.html">WordPress coreに未認証RCE「wp2shell」——6.9.5・7.0.2で緊急パッチ、深刻度を受け強制自動更新も発動</a></h3>
+        </div>
+        <div class="summary">WordPress coreに2件の重大な脆弱性が発見された。SQLインジェクション（CVE-2026-60137、CVSS9.1）はWP_Queryの`author__not_in`パラメータに起因しWordPress 6.8以降に影響。未認証RCE（CVE-2026-63030）はREST APIの`batch`エンドポイント経由で、永続オブジェクトキャッシュが未使用の場合に発生し6.9以降に影響する。深刻度の高さからWordPress.orgは対象サイトへの強制自動更新を有効化した。</div>
+        <div class="key-points">
+          <ul>
+            <li>SQLインジェクション CVE-2026-60137（CVSS9.1）はWP_Queryのauthor__not_inパラメータが原因、6.8以降に影響</li>
+            <li>未認証RCE CVE-2026-63030はREST APIのbatchエンドポイント経由、永続オブジェクトキャッシュ未使用時に発生、6.9以降に影響</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>The Hacker News</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-17</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://thehackernews.com/2026/07/cisa-adds-exploited-sharepoint-rce-zero.html">SharePointの新規RCE脆弱性CVE-2026-58644がCISA KEV入り——連邦機関に7月19日までの対応義務</a></h3>
+        </div>
+        <div class="summary">CISAは、オンプレミス版SharePoint Server（Subscription Edition・2019・2016）に影響する未信頼データのデシリアライゼーション脆弱性CVE-2026-58644（CVSS9.8）を既知悪用脆弱性（KEV）カタログに追加した。Site Owner権限以上で認証済みの攻撃者がリモートで任意コードを実行できるほか、IISマシンキーの窃取など侵害後の永続化・マルウェア展開にも悪用されている。連邦機関には7月19日までのパッチ適用が義務付けられた。</div>
+        <div class="key-points">
+          <ul>
+            <li>未信頼データのデシリアライゼーションによるRCE、CVSS9.8、既に実悪用を確認しKEV入り</li>
+            <li>Site Owner権限以上の認証済み攻撃者がリモートコード実行可能、IISマシンキー窃取などの侵害後活動も観測</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>The Hacker News</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-07-16</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://gigazine.net/news/20260717-openai-gpt-5-6-sol-delete-file/">GPT-5.6が「勝手にファイル削除」との報告多数——OpenAI、サンドボックスなしのフルアクセスモードで最も発生しやすいと指摘</a></h3>
+        </div>
+        <div class="summary">OpenAIのGPT-5.6 Solを使ったユーザーから、意図しないファイル・データ削除の報告が相次いでいる。あるユーザーはMacのホームディレクトリ全体を、別のユーザーは本番データベース全体を失ったという。OpenAIは、サンドボックス保護と自動レビューを無効にした「フルアクセスモード」使用時に最も発生しやすいと説明し、人間の承認なしに完全実行する「YOLOモード」の使用回避とデータ保護策の導入を推奨している。</div>
+        <div class="key-points">
+          <ul>
+            <li>サンドボックス保護・自動レビューを無効化した「フルアクセスモード」使用時に事故が集中</li>
+            <li>OpenAIはタスク完遂への過度な積極性が原因の一つと分析、YOLOモード回避とバックアップ徹底を推奨</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Gigazine</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-17</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://blog.mozilla.org/en/mozilla/mozilla-state-of-open-source-ai-report/">Mozilla、初の「State of Open Source AI」レポートを発表——性能差はわずか3%に縮小も収益の96%は依然クローズドモデルに</a></h3>
+        </div>
+        <div class="summary">Mozillaは950人超の開発者調査と独自分析に基づく初のレポートを公開し、オープンモデルとクローズドモデルの性能差が3%まで縮小し、推論コストは3年間で最大50倍下がったと報告した。オープンモデルは実利用の約3割を占めるにもかかわらず収益シェアはわずか4%にとどまり、開発者の79%がオープンモデルを利用する一方で本番投入は51%にとどまるなど、性能ではなく展開基盤の未成熟さが課題だと指摘している。</div>
+        <div class="key-points">
+          <ul>
+            <li>オープン・クローズド間の性能差は3%まで縮小、推論コストは3年で最大50倍低下</li>
+            <li>オープンモデル利用は開発者の79%に達するが本番投入は51%にとどまり、収益シェアはわずか4%</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Mozilla Blog</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-16</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/loglass/articles/6aa18c80496ec6">AIに「レビューして」はもう古い？「敵対的検証」のすすめ</a></h3>
+        </div>
+        <div class="summary">AIの出力品質を高めるための「敵対的検証」というアプローチを紹介する記事。「レビューして」ではなく「敵対的検証して」と指示することで、課題があることを前提に反証を試み、判定と根拠を返すため実用的だと説く。Anthropicが公式に推奨するパターンで、Claude Codeの`/deep-research`や`/code-review`にも組み込まれている。</div>
+        <div class="key-points">
+          <ul>
+            <li>マルチエージェント構成による敵対的検証は通常比3〜10倍のトークンを消費する（Anthropic社内テスト）</li>
+            <li>Claude Codeの/deep-researchと/code-reviewに敵対的検証が標準組み込み済み</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07-17</span>
+          <span class="engagement">🔖 233</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://tech-lab.sios.jp/archives/53462">世界一わかりみの深いasync/awaitによる非同期処理</a></h3>
+        </div>
+        <div class="summary">async/awaitの動作をOSカーネルのレイヤーから解説する記事。イベントループ・epoll・ファイルディスクリプタといった低レベルの仕組みを順を追って説明し、「なぜawaitで待つと他の処理が進むのか」「Promiseとは何か」を自作コード例とともに解き明かす。</div>
+        <div class="key-points">
+          <ul>
+            <li>epollとファイルディスクリプタを起点にイベントループの内部動作を段階的に解説</li>
+            <li>自作コード例でライブラリ内部の非同期処理実装を可視化</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>SIOS Tech Lab</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-07-17</span>
+          <span class="engagement">🔖 193</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-frontend">Frontend</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/vite.html">フロントエンド開発ツールをまとめて統合した「Vite+」、ベータ公開</a></h3>
+        </div>
+        <div class="summary">Cloudflare傘下のVoidZeroが開発する統合ツールチェーン「Vite+」がベータ公開された。ローカル開発サーバ・バンドラ・リンター・フォーマッタ・テストランナーを1つのCLIに統合。ベータ版では`vp run`によるキャッシュ自動最適化、AIエージェント対応を強化した`vp migrate`、チーム向け標準テンプレートなどエンタープライズ機能も追加された。</div>
+        <div class="key-points">
+          <ul>
+            <li>開発サーバ・バンドラ・リンター・フォーマッタ・テストランナーを単一CLIツールに統合</li>
+            <li>vp runでViteメタデータを自動追跡しキャッシュを設定不要で最適化、vp migrateはAIエージェント対応も追加</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-07-15</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-product">Product</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/net_8net_911.html">.NET 8と.NET 9は今年の11月でサポート終了、マイクロソフトが警告</a></h3>
+        </div>
+        <div class="summary">.NET 8（長期サポート版）と.NET 9（標準サポート版）が2026年11月10日でサポート終了となる。終了後もアプリはそのまま動作するが、脆弱性が見つかってもパッチは提供されなくなるため、マイクロソフトは速やかな移行を呼びかけている。移行先としては2025年11月にリリースされた長期サポート版の.NET 10が推奨されている。</div>
+        <div class="key-points">
+          <ul>
+            <li>サポート終了日は2026年11月10日、.NET 8（LTS）・.NET 9（STS）ともに対象</li>
+            <li>終了後は脆弱性が発見されてもパッチ提供なし、移行先は長期サポート版の.NET 10を推奨</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-07-17</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://forgejo.org/2026-07-release-v16-0/">セルフホスト型Gitフォージ「Forgejo」v16.0リリース——マルチライン行レビューコメントとリポジトリ単位の通知フィルタを追加</a></h3>
+        </div>
+        <div class="summary">GitHub代替のセルフホスト型Gitフォージ「Forgejo」がv16.0をリリースした。IssuesやPull Requests、Releasesを個別にフィルタできる通知設定、複数行への同時レビューコメント、`git blame --reverse`によるコメント位置追跡の改善などを搭載。Forgejo Actionsではワークフローの手動優先度設定やJWTベース認証にも対応した。</div>
+        <div class="key-points">
+          <ul>
+            <li>Issues・Pull Requests・Releasesを個別フィルタできる通知設定、複数行への同時レビューコメントに対応</li>
+            <li>Forgejo Actionsはワークフロー手動優先度設定・JWTベース認証（Authorized Integrations）を追加</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Forgejo</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-16</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.com/nutlope/hallmark">AIコーディングエージェント向け「脱テンプレ感」デザインスキル「Hallmark」がGitHubトレンドで急上昇</a></h3>
+        </div>
+        <div class="summary">Claude Code・Cursor・OpenAI Codex向けのオープンソースデザインスキル「Hallmark」がGitHubトレンドで急上昇し、4,600以上のスターを獲得している。57種類の品質ゲートと20種類のテーマ、構造パターンを組み合わせ、AIが生成しがちな「テンプレ感の強い」画一的なUIを避け、より作り込まれた見た目に近づける。`npx skills add nutlope/hallmark`で導入できる。</div>
+        <div class="key-points">
+          <ul>
+            <li>57種類の品質ゲートと20種類のテーマでAI生成UIの「テンプレ感」を回避、MITライセンスで公開</li>
+            <li>Claude Code・Cursor・OpenAI Codexに対応、npx skills add nutlope/hallmarkで即導入可能</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-07</span>
+          <span class="engagement">⭐ 4,600</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://opensource.microsoft.com/blog/2026/07/16/microsoft-comic-chat-is-now-open-source/">Microsoft、90年代の名物チャットソフト「Comic Chat」をGitHubで公開——ソフトウェア史の保存目的</a></h3>
+        </div>
+        <div class="summary">Microsoftは、テキストのIRC会話をコマ割り漫画に自動変換する1996年発表のチャットクライアント「Comic Chat」のソースコードをGitHubで公開した。1995年にMicrosoft ResearchのDavid Kurlander氏が開発しVisual C++ 4.0・MFCで実装、Windows 98にも同梱され24言語にローカライズされた。今回の公開にはAIによる最新Visual Studio・Windows環境への移植検証も含まれる。</div>
+        <div class="key-points">
+          <ul>
+            <li>1995年開発・1996年発表、Windows 98に同梱され24言語にローカライズされた歴史的ソフト</li>
+            <li>AIを用いて最新のVisual Studio・Windows環境での動作再現を検証した上で公開</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Microsoft Open Source Blog</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-07-16</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
+
+      <div class="quick-link">
+        <span class="tag tag-frontend">Frontend</span>
+        <a href="https://www.publickey1.jp/blog/26/javascriptspreadjs.html">JavaScript表計算コンポーネント「SpreadJS」新バージョン、リアルタイム共同編集とスレッド型コメントに対応</a>
+        <span class="quick-summary">— 複数ユーザーが同一シートを同時編集でき、編集可能・閲覧のみなど役割別権限設定も可能に。</span>
+        <span class="meta">Publickey</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://gihyo.jp/article/2026/07/vscode-drawio-extension-inline-editing">VS Code拡張「Draw.io Integration」、Markdownプレビュー上で図を直接編集できる機能をプレリリース</a>
+        <span class="quick-summary">— 「Markdown with Diagrams」エディタで開くと埋め込み図やSVG/PNGを文章中断なく編集でき元ファイルに反映される。</span>
+        <span class="meta">gihyo.jp</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://github.com/opencut-app/opencut">オープンソースのCapCut代替動画編集ツール「OpenCut」がGitHubトレンドで急上昇</a>
+        <span class="quick-summary">— ブラウザで完結するプライバシー重視のタイムライン編集ツール、Next.js製で透かしなし・サブスク不要。</span>
+        <span class="meta">GitHub</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-data">Data</span>
+        <a href="https://www.postgresql.org/about/news/postgresql-19-beta-2-released-3350/">PostgreSQL 19 Beta 2がリリース——ネイティブグラフクエリと統合REPACKコマンドを含む機能プレビュー</a>
+        <span class="quick-summary">— 正式リリースは2026年9〜10月頃を予定、本番環境での利用は非推奨としつつ実運用ワークロードでの検証を呼びかけ。</span>
+        <span class="meta">PostgreSQL.org</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://siliconangle.com/2026/07/16/ai-infrastructure-startup-fireworks-closes-1-5b-round-17-5b-valuation/">AI推論基盤のFireworks AI、$1.5BのシリーズDを調達し評価額$17.5Bに——Nvidiaも出資</a>
+        <span class="quick-summary">— 年換算収益は$1Bを突破、1日あたりの処理トークン数は15兆から40兆超に急拡大。</span>
+        <span class="meta">SiliconANGLE</span>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="archive/" class="archive-link">Past issues</a>
+    </footer>
+  </div>
+</body>
+</html>
