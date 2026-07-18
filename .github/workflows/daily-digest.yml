@@ -61,7 +61,9 @@ jobs:
             fi
             exit 1
           fi
-          TODAY=$(date -u '+%Y-%m-%d')
+          # サイトは JST 基準の日刊。cron の 21:00 UTC 発火時点では UTC 日付がまだ前日のため、
+          # date -u を使うと前日ラベルの号が生成される（2026-07-18 に実発生）。必ず JST で計算する
+          TODAY=$(TZ=Asia/Tokyo date '+%Y-%m-%d')
           # 最低限の生成品質ガード: index.html が今日の日付を持つこと
           if ! grep -q "$TODAY" index.html; then
             echo "::error::index.html に今日の日付 ($TODAY) が無い。生成不良として中断"

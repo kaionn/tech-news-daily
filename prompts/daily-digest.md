@@ -59,12 +59,14 @@ Prioritize: recency (prefer last 7 days), diversity (spread across categories), 
 
 ## Step 2: Determine Today's Date
 
-Run `date -u '+%Y-%m-%d'`, `date -u '+%a'`, and `date -u '+%u'` (day of week; 5 = Friday, used in Step 4).
+The site is a JST (Asia/Tokyo) daily. NEVER use `date -u` — the scheduled run fires at 21:00 UTC, when the UTC date is still yesterday in JST, which mislabels the whole issue.
+
+Run `TZ=Asia/Tokyo date '+%Y-%m-%d'`, `TZ=Asia/Tokyo date '+%a'`, and `TZ=Asia/Tokyo date '+%u'` (day of week; 5 = Friday, used in Step 4).
 Also compute yesterday's date for archiving.
 
 ### Same-day re-run
 
-If index.html's header date already shows today, this run is a same-day re-run (manual retry or a second run on the same UTC date). You must still do the full job — NEVER conclude "already generated" and exit without writing files (the surrounding workflow treats an unchanged working tree as a failure):
+If index.html's header date already shows today, this run is a same-day re-run (manual retry or a second run on the same JST date). You must still do the full job — NEVER conclude "already generated" and exit without writing files (the surrounding workflow treats an unchanged working tree as a failure):
 
 - Regenerate index.html completely with the latest news; the new edition replaces the current one.
 - In feed.xml, REPLACE today's existing `<entry>` (same link/id, updated title/summary/timestamp) instead of appending a duplicate.
@@ -73,7 +75,7 @@ If index.html's header date already shows today, this run is a same-day re-run (
 ## Step 3: Archive Yesterday's Issue
 
 ```bash
-YESTERDAY=$(date -u -d 'yesterday' '+%Y-%m-%d' 2>/dev/null || date -u -v-1d '+%Y-%m-%d')
+YESTERDAY=$(TZ=Asia/Tokyo date -d 'yesterday' '+%Y-%m-%d' 2>/dev/null || TZ=Asia/Tokyo date -v-1d '+%Y-%m-%d')
 if [ -f index.html ] && [ ! -f "archive/${YESTERDAY}.html" ]; then
   cp index.html "archive/${YESTERDAY}.html"
   sed -i 's|href="favicon|href="../favicon|g; s|href="apple-touch-icon|href="../apple-touch-icon|g; s|href="style.css"|href="../style.css"|; s|href="feed.xml"|href="../feed.xml"|' "archive/${YESTERDAY}.html"
@@ -127,7 +129,7 @@ Write a complete HTML file to `index.html` with this exact structure:
       <!-- 2-3 number-items total -->
     </div>
 
-    <!-- weekly-keywords block: FRIDAY ONLY (date -u '+%u' == 5) -->
+    <!-- weekly-keywords block: FRIDAY ONLY (TZ=Asia/Tokyo date '+%u' == 5) -->
 
     <!-- 5 sections here -->
 
@@ -145,7 +147,7 @@ numbers-bar: the 2-3 most striking numbers from today's articles (funding amount
 
 ### Friday only: 今週のキーワード
 
-If `date -u '+%u'` is 5, insert this block between numbers-bar and Top Stories:
+If `TZ=Asia/Tokyo date '+%u'` is 5, insert this block between numbers-bar and Top Stories:
 
 ```html
 <div class="weekly-keywords">
