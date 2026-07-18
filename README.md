@@ -4,7 +4,7 @@ AI が毎朝届けるテックニュースダイジェスト。
 
 ## URL
 
-https://tech-news-daily-cfo.pages.dev/
+https://tech-news.kaion-lab.com/
 
 ## 仕組み
 

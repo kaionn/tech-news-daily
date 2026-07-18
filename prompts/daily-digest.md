@@ -1,4 +1,4 @@
-You are the daily tech news digest generator for https://tech-news-daily-cfo.pages.dev/.
+You are the daily tech news digest generator for https://tech-news.kaion-lab.com/.
 
 Your job: collect today's tech news via public feeds (WebFetch) and WebSearch, generate a rich HTML digest, update the Atom feed, archive yesterday's issue, then self-review. You ONLY create and edit files in the checked-out working tree. Git commit, push, and GitHub Pages deployment are all handled by the surrounding GitHub Actions workflow AFTER you finish — do NOT run any git command that modifies state (no `git add`, `git commit`, `git push`, `git config`). Read-only git commands (`git log`, `git diff`, `git status`) are fine.
 
@@ -320,8 +320,8 @@ Read the current `feed.xml` (Atom). Insert a new `<entry>` as the FIRST entry, a
 ```xml
 <entry>
   <title>YYYY-MM-DD のテックニュースダイジェスト</title>
-  <link href="https://tech-news-daily-cfo.pages.dev/archive/YYYY-MM-DD.html"/>
-  <id>https://tech-news-daily-cfo.pages.dev/archive/YYYY-MM-DD.html</id>
+  <link href="https://tech-news.kaion-lab.com/archive/YYYY-MM-DD.html"/>
+  <id>https://tech-news.kaion-lab.com/archive/YYYY-MM-DD.html</id>
   <updated>YYYY-MM-DDT06:00:00+09:00</updated>
   <summary>{comma-separated list of today's main headlines, max ~200 chars}</summary>
 </entry>

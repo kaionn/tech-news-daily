@@ -2,7 +2,7 @@
 
 ## プロジェクト概要
 
-tech-news-daily: 技術ニュースを毎日収集・整形し、Cloudflare Pages で公開する静的サイト（https://tech-news-daily-cfo.pages.dev/ ）。GitHub Actions workflow `daily-digest.yml` が claude-code-action で WebSearch → HTML 生成 → main push → Cloudflare Pages デプロイを毎日自動実行する（2026-07-05 に CCR routine から全面移行、2026-07-18 に GitHub Pages から Cloudflare Pages へ移行）。
+tech-news-daily: 技術ニュースを毎日収集・整形し、Cloudflare Pages で公開する静的サイト（https://tech-news.kaion-lab.com/ ）。GitHub Actions workflow `daily-digest.yml` が claude-code-action で WebSearch → HTML 生成 → main push → Cloudflare Pages デプロイを毎日自動実行する（2026-07-05 に CCR routine から全面移行、2026-07-18 に GitHub Pages から Cloudflare Pages へ移行し、同日カスタムドメイン tech-news.kaion-lab.com を割り当て。旧 https://tech-news-daily-cfo.pages.dev/ も併存して有効なまま）。
 
 ## デプロイパイプライン（GHA daily-digest: 生成→push→Cloudflare Pages）
 
