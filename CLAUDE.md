@@ -2,17 +2,17 @@
 
 ## プロジェクト概要
 
-tech-news-daily: 技術ニュースを毎日収集・整形し、GitHub Pages で公開する静的サイト。GitHub Actions workflow `daily-digest.yml` が claude-code-action で WebSearch → HTML 生成 → main push → Pages デプロイを毎日自動実行する（2026-07-05 に CCR routine から全面移行）。
+tech-news-daily: 技術ニュースを毎日収集・整形し、Cloudflare Pages で公開する静的サイト（https://tech-news-daily-cfo.pages.dev/ ）。GitHub Actions workflow `daily-digest.yml` が claude-code-action で WebSearch → HTML 生成 → main push → Cloudflare Pages デプロイを毎日自動実行する（2026-07-05 に CCR routine から全面移行、2026-07-18 に GitHub Pages から Cloudflare Pages へ移行）。
 
-## デプロイパイプライン（GHA daily-digest: 生成→push→Pages）
+## デプロイパイプライン（GHA daily-digest: 生成→push→Cloudflare Pages）
 
 `.github/workflows/daily-digest.yml`（cron `8 21 * * *` = 06:08 JST、`workflow_dispatch` で手動実行可）が単一 workflow で完結する:
 
 1. **生成 (claude-code-action@v1)**: `prompts/daily-digest.md` の指示に従い Claude がファイルを生成・編集する。**Claude は git 操作を一切しない**（ファイル生成のみ）
 2. **反映 (workflow step)**: 生成物（`index.html` / `archive/` / `feed.xml`）に変更があり、`index.html` に当日日付が含まれることを検証してから `github-actions[bot]` 名義で `YYYY-MM-DD のテックニュースダイジェスト` として main へ commit/push する。変更ゼロ・日付不整合は run を fail させる（**失敗が必ず可視化される**のがこの構成の要）
-3. **デプロイ**: `GITHUB_TOKEN` push は `pages.yml` を発火させないため、同 workflow が `configure-pages` → `upload-pages-artifact` → `deploy-pages` を自前実行する
+3. **デプロイ**: `GITHUB_TOKEN` push は `deploy-site.yml` を発火させないため、同 workflow が `wrangler pages deploy` を自前実行する（`git archive HEAD` のクリーンコピーから deploy し、untracked ファイルの公開事故を防ぐ）
 
-認証は repo secret `CLAUDE_CODE_OAUTH_TOKEN`（Pro/Max サブスクの OAuth トークン、ローカルで `claude setup-token` を実行して生成・失効時も同コマンドで再発行）。PAT は不要。
+認証は repo secret `CLAUDE_CODE_OAUTH_TOKEN`（Pro/Max サブスクの OAuth トークン、ローカルで `claude setup-token` を実行して生成・失効時も同コマンドで再発行）と、Cloudflare デプロイ用の `CLOUDFLARE_API_TOKEN` / `CLOUDFLARE_ACCOUNT_ID`（tech-learning-daily と同一の値）。PAT は不要。
 
 稼働確認: `gh run list --workflow=daily-digest.yml`。失敗時は `gh run view <id> --log-failed`。手動リトライは `gh workflow run daily-digest.yml`。
 
@@ -49,9 +49,9 @@ prompt は repo 内ファイルなので通常の Edit → commit → push で�
 2. `archive/index.html` に新エントリを追加
 3. `index.html` を新フォーマットで生成
 4. `feed.xml` に新エントリを追加（Atom フィード）
-5. commit → push（GitHub Pages が自動デプロイ）
+5. commit → push（`deploy-site.yml` が Cloudflare Pages へ自動デプロイ）
 
-`daily-digest.yml` は 1-4 を Claude 生成で、5 を workflow step で自動実行する（「デプロイパイプライン」参照）。手動更新時は自分で main に commit → push すれば `pages.yml` が直接デプロイする。
+`daily-digest.yml` は 1-4 を Claude 生成で、5 を workflow step で自動実行する（「デプロイパイプライン」参照）。手動更新時は自分で main に commit → push すれば `deploy-site.yml`（サイトアセットの paths フィルタ付き）がデプロイする。
 
 ## サイトアセット変更は push まで完了させる
 

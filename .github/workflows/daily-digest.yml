@@ -4,7 +4,7 @@ name: Daily digest (generate & deploy)
 # 生成〜デプロイを GitHub Actions に全面移行した構成。
 # - 生成: claude-code-action が prompts/daily-digest.md に従いファイルを生成する（git 操作はしない）
 # - 反映: 本 workflow が main へ commit/push する（GITHUB_TOKEN、PAT 不要）
-# - デプロイ: GITHUB_TOKEN push は pages.yml を発火させないため、本 workflow が Pages まで実行する
+# - デプロイ: GITHUB_TOKEN push は deploy-site.yml を発火させないため、本 workflow が Cloudflare Pages への wrangler deploy まで実行する
 # 認証は CLAUDE_CODE_OAUTH_TOKEN（Pro/Max サブスク、`claude setup-token` で生成した repo secret）。
 
 on:
@@ -14,8 +14,6 @@ on:
 
 permissions:
   contents: write
-  pages: write
-  id-token: write
 
 concurrency:
   group: daily-digest
@@ -24,9 +22,6 @@ concurrency:
 jobs:
   generate-and-deploy:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -77,14 +72,14 @@ jobs:
           git push origin main
           echo "pushed=true" >> "$GITHUB_OUTPUT"
 
-      - uses: actions/configure-pages@v5
+      - name: Deploy to Cloudflare Pages
         if: steps.commit.outputs.pushed == 'true'
-
-      - uses: actions/upload-pages-artifact@v3
-        if: steps.commit.outputs.pushed == 'true'
-        with:
-          path: .
-
-      - id: deployment
-        if: steps.commit.outputs.pushed == 'true'
-        uses: actions/deploy-pages@v4
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          set -euo pipefail
+          # git 追跡ファイルのみのクリーンコピーから deploy（untracked 混入防止）
+          CLEAN=$(mktemp -d)
+          git archive HEAD | tar -x -C "$CLEAN"
+          npx --yes wrangler@4 pages deploy "$CLEAN" --project-name=tech-news-daily --branch=main
