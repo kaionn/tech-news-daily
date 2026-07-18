@@ -274,6 +274,45 @@ When a feed from Step 1a or a search result shows a concrete engagement number f
 - Ensure category diversity: at least 4 different tag types across all items
 - Reading time: estimate based on original article length
 
+### Writing Quality Rules
+
+サマリー・editorial・key-points の文章品質を担保するルール。
+
+#### LLM 空句の禁止
+
+次の言い回しは中身がなく「ちゃんと書いている感」だけを付ける。使わない。
+
+- 空虚な形容：「不可欠」「核心的」「鍵となる」「根本的な」「多角的」「包括的」「総合的」（何がどう重要かを書かず強調だけする）
+- 空虚な動詞：「掘り下げる」「深掘りする」「言語化する」（何をどう書いたか示さず終わる）
+- 空虚な強調：「非常に」「極めて」「大いに」「画期的な」「革新的な」
+- 予告と総括：「重要なのは〜である」「まとめると」「要するに」（直前の言い換えだけのとき）
+
+代わりに、具体の事実・数値・比較で語る。
+
+#### 冗長の排除
+
+- 同じ主張を言い換えて繰り返さない。summary と key-points で同じ情報を二度書かない
+- 読者が自力で補える中間段階の説明は書かない
+- 接続や評価のためだけの文（「それ自体はよいことである」等）を置かない
+
+#### 因果と機構の記述
+
+- 「AだとBになる」とだけ書いて理由を省略しない。機構を一文で示す
+- key-points では「何が変わった」だけでなく「なぜ・どう変わった」を含める
+- 悪い例：「パフォーマンスが向上した」→ 良い例：「JIT コンパイラの最適化パスを追加し、起動時間が 40% 短縮」
+
+#### 断定と推量の峻別
+
+- 確認済みの事実は断定する。未確認の情報を断定調で書かない
+- 「〜と見られる」「〜の可能性がある」は、根拠なく主張を弱めている場合だけ削る。本当に未確定なら不確実性を保つ
+- editorial では推測と事実を明示的に区別する（「実測では〜」「未検証だが〜」）
+
+#### deep-dive と editorial の文体
+
+- deep-dive summary（200-250 words）では、事実の羅列にしない。背景→事象→技術詳細→影響の流れで、読者の理解が段階的に深まる構成にする
+- editorial では断定だけで押し切らない。事実に基づく判断と、その判断の留保・限界を交互に置く（「〜である。ただし〜の点は未知数だ」）
+- 転回点（「しかし」「一方で」）の前後で視点の距離を変える。具体に寄った記述のあとに一段引いた意味づけを置く
+
 ## Step 5: Update feed.xml
 
 Read the current `feed.xml` (Atom). Insert a new `<entry>` as the FIRST entry, and update the feed-level `<updated>` timestamp to match. Entry format:
