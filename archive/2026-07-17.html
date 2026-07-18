@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-07-17</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="../feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-07-17 (Fri)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 20 articles</span>
+      <span>🏷 7 categories</span>
+      <span>📡 17 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item">
+        <span class="number-value">45兆</span>
+        <span class="number-label">Thinking MachinesがInklingの事前学習に使ったトークン数</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">$265B</span>
+        <span class="number-label">TSMCのアリゾナ投資累計額（追加$100B含む）</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">382件</span>
+        <span class="number-label">Chrome 150で修正された脆弱性数（うち15件が最重要）</span>
+      </div>
+    </div>
+
+    <div class="weekly-keywords">
+      <div class="section-title">📊 今週のキーワード</div>
+      <div class="keyword-chips">
+        <span class="keyword-chip">AIエージェント基盤のサンドボックス化</span>
+        <span class="keyword-chip">オープンウェイトモデル群雄割拠</span>
+        <span class="keyword-chip">サプライチェーン攻撃対策</span>
+      </div>
+      <div class="keyword-summary">今週はGKE Agent SandboxやCloud Runサンドボックスなど「AIエージェントの実行環境をどう安全に隔離するか」が各クラウドベンダーの共通テーマになった。同時にThinking MachinesのInklingやxAIのGrok Build OSS化など新興ラボのオープン戦略が相次ぎ、モデル・エージェント双方で「オープン化」が加速した週でもある。一方でAsyncAPI npm侵害やnpm v12のインストールスクリプト既定ブロックなど、サプライチェーン攻撃への対策強化も継続的な話題となった。</div>
+    </div>
+
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
+
+      <div class="card featured deep-dive">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://thinkingmachines.ai/news/introducing-inkling/">DEEP DIVE: 元OpenAI CTO Mira Murati率いるThinking Machines、初のオープンウェイトモデル「Inkling」を公開——975Bパラメータ・コンテキスト100万トークン</a></h3>
+        </div>
+        <div class="summary">Mira Murati氏が創業したThinking Machines Labが、創業から1年強を経て初のAIモデル「Inkling」をオープンウェイトで公開した。Inklingは975Bパラメータ（アクティブ41B）のMixture-of-Expertsモデルで、テキスト・画像・音声・動画を含む45兆トークンで事前学習され、最大100万トークンのコンテキストウィンドウとテキスト・画像・音声の入力に対応する。重みはHugging Faceで公開され、同社の学習カスタマイズ基盤「Tinker」上でもすぐにファインチューニング可能になっている。Artificial Analysis Intelligence Indexでは41点を記録し、米国発のオープンウェイトモデルとしては現状最高スコア。同時に、より軽量な「Inkling-Small」（アクティブ12B）のプレビューも公開され、低コスト・低レイテンシ用途をカバーする。同社自身「今日時点で最強のモデル（クローズド・オープン問わず）ではない」と認めつつ、OpenAIやGoogleが閉鎖的なフロンティアモデル戦略を強める中で、中国勢が独占しがちな「オープンで実用十分な大規模モデル」という領域に米国発の選択肢を投入した点が注目されている。</div>
+        <div class="editorial">🧠 「クローズドで最強を目指す」OpenAI・Anthropicと、「オープンで実用十分」を狙うThinking Machinesという戦略の分岐が明確になってきた。Inkling自体はベンチマークで最強ではないが、Tinkerとのセット提供によりファインチューニング前提のエコシステムを狙っているのが興味深く、今後は「素のモデル性能」より「カスタマイズのしやすさ」で差別化する動きが増えるかもしれない。</div>
+        <div class="key-points">
+          <ul>
+            <li>975Bパラメータ・アクティブ41BのMoE構成、コンテキスト最大100万トークン、45兆トークンで事前学習</li>
+            <li>Artificial Analysis Intelligence Indexで41点を獲得し米国発オープンウェイトモデルとして最高スコア</li>
+            <li>軽量版「Inkling-Small」（アクティブ12B）も同時プレビュー公開、Tinker上で即ファインチューニング可能</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 オープンウェイトの大規模MoEモデルを自前でファインチューニングしたい開発者にとって、Qwen・DeepSeek一辺倒だった選択肢に米国発の有力な代替肢が加わったことになる。</div>
+        <div class="meta">
+          <span>Thinking Machines Lab</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-07-15</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">💰 ビジネス</span>
+          <h3><a href="https://www.cnbc.com/2026/07/16/tsmc-second-quarter-profit-.html">TSMC、四半期純利益77%増の過去最高を記録——アリゾナへ追加$100B投資、累計$265Bに</a></h3>
+        </div>
+        <div class="summary">TSMCが第2四半期決算を発表し、純利益は前年同期比77.4%増の台湾ドル7,066億元（約$220億）と5四半期連続の過去最高を更新した。売上高は前年比36%増の$402億。CEOのC.C. Wei氏はアリゾナ州への追加投資として新たに$100Bを表明し、同州への累計投資額は$265Bに達する見込み。資金は2nm量産対応の新工場や先端パッケージング施設の建設に充てられる。2026年通期の設備投資見通しも$600億〜$640億へ上方修正した（従来$520億〜$560億）。AIデータセンター向け先端プロセッサ・パッケージング需要の高さが背景にある。</div>
+        <div class="key-points">
+          <ul>
+            <li>純利益は前年同期比77.4%増、5四半期連続で過去最高を更新</li>
+            <li>アリゾナへの追加投資$100Bで累計投資額$265Bに、2nm量産・先端パッケージング施設に充当</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>CNBC</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-16</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-product">Product</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.techtimes.com/articles/320593/20260715/epic-google-jointly-withdraw-play-store-settlement-rival-android-app-stores-open-july-22.htm">Google PlayがEpicとの和解を撤回し訴訟終結へ——7月22日から米国でサードパーティ製Androidアプリストアを直接ホスト開始</a></h3>
+        </div>
+        <div class="summary">GoogleとEpic Gamesが、Google Play訴訟に関する既存の和解条件の変更申し立てを共同で取り下げたことで、米国連邦地裁の恒久的差止命令に基づく大改革が7月22日に実施されることになった。新設の「Play Catalog Access Program」により、サードパーティ製アプリストアがGoogle Playの全カタログにアクセスできるようになり、ユーザーはサイドロードという複雑な手順を経ずに、通常のアプリと同じ感覚でライバルストアをインストールできるようになる。米国内の開発者はデフォルトでオプトインとなり、明示的な拒否をしない限り自社アプリが対象カタログに含まれる。参加事業者は「セキュリティ・ポリシー審査」費用として年間$5,000を支払い、マルウェア混入率をインストール試行の1%未満に抑える義務を負う。</div>
+        <div class="key-points">
+          <ul>
+            <li>2023年12月の陪審評決・2024年10月の恒久的差止命令を経て、7月22日に米国限定で施行</li>
+            <li>参加事業者は年間$5,000のセキュリティ審査費用とマルウェア率1%未満の維持義務を負う</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Tech Times</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-15</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://cloud.google.com/blog/products/containers-kubernetes/bringing-you-agent-sandbox-on-gke-and-agent-substrate">GKE Agent Sandboxが一般提供開始——AIエージェント向けの隔離実行基盤、新プロジェクト「Agent Substrate」も始動</a></h3>
+        </div>
+        <div class="summary">Google CloudはKubernetes上でAIエージェントワークロード向けに構築したクラウドネイティブ実行環境「GKE Agent Sandbox」を一般提供開始した。gVisorとデフォルト拒否のネットワークポリシーをネイティブサポートし、Pod Snapshotsと連携してアイドル中のエージェントを数秒で一時停止・再開できる。Axionプロセッサ上ではハイパースケーラー各社と比べ最大30%良好な価格性能比を実現するという。同時に、エージェント基盤密度を追求する新オープンソースプロジェクト「Agent Substrate」も発表された。</div>
+        <div class="key-points">
+          <ul>
+            <li>gVisorとデフォルト拒否ネットワークポリシーをネイティブ対応、Pod Snapshotsで数秒のアイドル復帰を実現</li>
+            <li>Axionプロセッサ上で他社ハイパースケーラー比最大30%良好な価格性能比、新OSSプロジェクト「Agent Substrate」も同時始動</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Google Cloud Blog</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-frontend">Frontend</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://nextjs.org/blog/next-16-3-turbopack">Next.js 16.3のTurbopackが開発時メモリ最大90%削減、永続ビルドキャッシュとRust製React Compilerを搭載</a></h3>
+        </div>
+        <div class="summary">Next.js 16.3でTurbopackのパフォーマンス改善がまとまって投入された。設定変更なしで開発時のメモリ使用量を最大90%削減し、永続ビルドキャッシュにより本番ビルドは最大5.5倍高速化。CIでは`.next`ディレクトリをキャッシュとして引き継ぐことでさらに高速化できる。Reactチームが公開したRust製React Compilerネイティブ移植版もTurbopackに統合され、v0のような大規模Reactアプリでのコンパイル時間が20〜50%短縮される見込み。Vite互換の`import.meta.glob` APIやローカルPostCSS設定解決にも対応した。</div>
+        <div class="key-points">
+          <ul>
+            <li>開発時メモリ使用量を設定変更なしで最大90%削減、永続ビルドキャッシュで本番ビルド最大5.5倍高速化</li>
+            <li>Rust製React Compilerネイティブ版をTurbopackに統合しコンパイル時間20〜50%短縮、Vite互換import.meta.globにも対応</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Next.js Blog</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-06-29</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://thehackernews.com/2026/07/firefox-chrome-adobe-and-vmware-updates.html">Chrome 150が382件の脆弱性を一括修正（うち重要度最高15件）、Firefox 152・Adobe・VMwareも同時パッチ</a></h3>
+        </div>
+        <div class="summary">Googleは安定版Chrome 150（150.0.7871.124/.125）をリリースし、382件の脆弱性を修正した。うち15件は最重要度に分類され、Extensionsでの解放済みメモリ使用（CVE-2026-13774）、GPUでの同種の欠陥（CVE-2026-13775）、ANGLEでのUse-After-Free（CVE-2026-14398）などが含まれる。修正のうち358件はGoogle自身が発見したもの。同時期にMozilla Firefox 152・Adobe・VMware製品でも重要な脆弱性パッチが公開された。現時点でCISAの既知脆弱性カタログに掲載された悪用実績はないが、両社は速やかな適用を推奨している。</div>
+        <div class="key-points">
+          <ul>
+            <li>Chrome 150は382件の脆弱性を修正、うち15件が最重要度（Extensions・GPU・ANGLEのUAFなど）</li>
+            <li>修正358件はGoogle社内発見、Firefox 152・Adobe・VMwareも同時期に重要パッチをリリース</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>The Hacker News</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-16</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://www.netservicesgroup.com/msrc-blog-alerts/cve-2026-33814-infinite-loop-in-http-2-transport-when-given-bad-settings_max_frame_size-in-net-http-internal-http2-in-golang-org-x-net/">Go標準ライブラリ系golang.org/x/netにHTTP/2無限ループ脆弱性——不正なSETTINGS_MAX_FRAME_SIZEでDoSに（CVSS7.5）</a></h3>
+        </div>
+        <div class="summary">golang.org/x/net/http2のHTTP/2トランスポート実装に、SETTINGSフレーム処理時の脆弱性CVE-2026-33814が発見された。値0のSETTINGS_MAX_FRAME_SIZEを受け取ると、トランスポートがCONTINUATIONフレームを書き続ける無限ループに陥り、サービス拒否（DoS）を引き起こす。CVSS基本値は7.5。golang.org/x/netはKubernetesクライアントやクラウドサービスの多くのGo製バックエンドで広く利用されている共通ライブラリであり、影響範囲は特定のプロダクトに限らない。</div>
+        <div class="key-points">
+          <ul>
+            <li>不正なSETTINGS_MAX_FRAME_SIZE（値0）を受信するとCONTINUATIONフレームの無限ループに陥りDoSが発生、CVSS7.5</li>
+            <li>golang.org/x/net/http2はGo製の多くのクラウド基盤・APIクライアントで共通利用されており影響範囲が広い</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Network Services Group</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-07</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-data">Data</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.infoworld.com/article/4191046/mongodb-embeds-reranking-into-atlas-as-enterprises-look-to-simplify-ai-stacks-for-scale.html">MongoDB、Voyage AI採用の「Native Reranking」をAtlasにパブリックプレビュー投入——検索精度を最大30%改善</a></h3>
+        </div>
+        <div class="summary">MongoDBはAtlasの集約パイプライン内で動作する「Native Reranking」をパブリックプレビューで公開した。買収したVoyage AIのリランキングモデルを使い、初期検索結果をパイプライン内で並べ替えることで、外部API呼び出しや追加レイテンシなしに検索結果の関連度を最大30%改善できるという。処理をデータベース内に閉じることで、サードパーティサービスへのラウンドトリップに伴うセキュリティ・性能上のペナルティを回避する狙い。</div>
+        <div class="key-points">
+          <ul>
+            <li>Atlas集約パイプライン内でVoyage AIのリランキングモデルを直接実行し、検索関連度を最大30%改善</li>
+            <li>外部API呼び出し不要でレイテンシを増やさず、サードパーティ連携に伴うセキュリティリスクも回避</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>InfoWorld</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-07</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/3ai.html">デジタル庁、ガバメントAI「源内」向けに国産LLM3種（tsuzumi 2・Takane 32B・PLaMo 2.0 Prime）を「さくらのクラウド」で試用開始</a></h3>
+        </div>
+        <div class="summary">デジタル庁は、政府のAI基盤「源内」で試用する国産AIモデルのうちNTTデータ「tsuzumi 2」、富士通「Takane 32B」、Preferred Networks「PLaMo 2.0 Prime」の3モデルについて、さくらインターネットの国産クラウド「さくらのクラウド」上で稼働させることを発表した。政府がガバメントクラウド上でさくらのクラウドを利用するのは今回が初めて。デジタル庁内および複数省庁向けにチャット機能を提供し、既存モデルとのA/Bテストで評価する実証実験を9月から11月にかけて実施する計画。</div>
+        <div class="key-points">
+          <ul>
+            <li>tsuzumi 2・Takane 32B・PLaMo 2.0 Primeの国産3モデルをさくらのクラウド上で試用、政府ガバメントクラウド利用は初</li>
+            <li>全府省庁向けチャット機能でA/Bテストを実施、実証実験は9月〜11月に複数回実施予定</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-07-10</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/google_cloudaicloud_run.html">Google Cloud、生成AIのコードを瞬時に隔離実行できる「Cloud Runサンドボックス」をパブリックプレビュー公開</a></h3>
+        </div>
+        <div class="summary">Google Cloudは、生成AIが出力した信頼できないコードを安全に隔離して実行できる軽量な実行境界「Cloud Runサンドボックス」をパブリックプレビューとして公開した。既存のCloud Runサービスインスタンス内に即座に生成でき、サービスの環境変数やGoogle Cloudメタデータサーバへのアクセス権を持たず、ネットワークアウトバウンドもデフォルトで拒否される。実行中インスタンスのリソースを共有するため追加費用は発生しない。次期Agent Development KitおよびComputeSDKでの対応も予定されている。</div>
+        <div class="key-points">
+          <ul>
+            <li>サンドボックスは環境変数・メタデータサーバへのアクセス不可、ネットワークアウトバウンドはデフォルト拒否</li>
+            <li>既存Cloud Runインスタンスのリソースを共有するため追加費用なし、次期Agent Development Kit等で正式対応予定</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-07-14</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/chiku_dev/articles/7602829910d94f">バズりツイートから考察する2026年のAIエージェントプロダクト開発——「幅」と「深さ」の自律化をどう設計するか</a></h3>
+        </div>
+        <div class="summary">SNSで話題になった投稿を切り口に、2026年のAIエージェントプロダクト開発で議論されているタスク分解・配線の「幅」の設計と、個々のタスク遂行の「深さ」の自律化という2軸を整理した記事。Claude CodeやRoo Codeなど既存のコーディングエージェントを題材に、エージェント側とタスク側それぞれの設計判断がプロダクトの使い勝手にどう影響するかを解説している。</div>
+        <div class="key-points">
+          <ul>
+            <li>タスク分解・配線の「幅」設計とタスク遂行の「深さ」の自律化という2軸でエージェントプロダクトを整理</li>
+            <li>Claude Code・Roo Codeなど実在のコーディングエージェントを題材に設計判断の違いを具体的に解説</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://gihyo.jp/magazine/SD/archive/2026/202607">Software Design 2026年7月号発売——特集「セキュリティバイデザイン入門」「教養としての現代インフラ AIデータセンター基礎講座」</a></h3>
+        </div>
+        <div class="summary">技術評論社の月刊誌「Software Design」2026年7月号が発売された。第1特集「セキュリティバイデザイン入門」は、脆弱性を生まない設計技法とコーディングの考え方を解説し、第2特集「教養としての現代インフラ AIデータセンター基礎講座」ではAIブームを支えるデータセンターの基礎知識を扱う。B5判176ページ、価格1,562円。</div>
+        <div class="key-points">
+          <ul>
+            <li>第1特集は脆弱性を生まない設計・コーディング技法を扱う「セキュリティバイデザイン入門」</li>
+            <li>第2特集はAIデータセンターの基礎を扱う「教養としての現代インフラ」、B5判176ページ・1,562円で発売</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>gihyo.jp</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-07-17</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://tech-noisy.com/2026/07/16/grok-build-apache-2-0-source-code-released/">xAIのコーディングエージェント「Grok Build」がApache 2.0でOSS化、84万行超のRustコードを公開</a></h3>
+        </div>
+        <div class="summary">xAIは自社製コーディングエージェント「Grok Build」のソースコードをApache License 2.0で公開した。エージェントランタイム・ツール実装・TUI・ワークスペース管理を含む84万4,530行のRustコードが対象で、公開に合わせて全ユーザーの利用上限もリセットされた。5月のベータ公開当初はコードベースや認証情報をSpaceXAIのサーバへ送信するデータアップロード機能がデフォルト有効だったが、7月12日にこの機能は無効化され、過去にアップロードされたコーディングデータも削除されたという経緯がある。最大8つのサブエージェントを個別のGit worktreeで並列実行できる点が特徴。</div>
+        <div class="key-points">
+          <ul>
+            <li>エージェントランタイム・TUI等を含む84万4,530行のRustコードをApache 2.0で公開、利用上限も同時リセット</li>
+            <li>5月のベータ版はコード・認証情報の無断アップロードがデフォルト有効だったが7月12日に無効化・データ削除済み</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>tech-noisy.com</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-16</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://techcrunch.com/2026/07/08/hot-french-startup-zml-releases-free-product-to-speed-inference-across-lots-of-ai-chips/">パリ発ZML、Nvidia・AMD・Google TPU・Apple・Intel横断で動く無償推論サーバ「LLMD」を公開</a></h3>
+        </div>
+        <div class="summary">Yann LeCun氏やHugging Face共同創業者らが支援するパリのスタートアップZMLが、複数のAIチップベンダーを横断して動く高性能推論サーバ「LLMD」のアルファ版を無償公開した。Gemma・Llama・Ministral・Mistral・QwenなどのモデルをOpenAI互換APIで提供し、連続バッチング・ページドアテンション・シャーディングに対応する。テンソル並列推論を全プラットフォームでサポートし、複数デバイスへのモデル自動分割と通信処理も透過的に行う。特定チップベンダーへの依存を減らし、企業がAIインフラの選択肢を広げられるようにする狙い。</div>
+        <div class="key-points">
+          <ul>
+            <li>Nvidia・AMD・Google TPU・Apple Metal・Intel Arcを横断し、OpenAI互換APIでGemma・Llama・Mistral等を提供</li>
+            <li>テンソル並列推論と複数デバイスへの自動シャーディングに対応、無償提供だがオープンソースではない</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>TechCrunch</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-07-08</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.com/usestrix/strix">オープンソースAIペネトレーションテストツール「Strix」、GitHubトレンドで今月急上昇</a></h3>
+        </div>
+        <div class="summary">アプリケーションの脆弱性を発見・修正するオープンソースのAIペネトレーションテストツール「Strix」が、今月GitHubトレンドで急速にスターを伸ばしている。AIエージェントが自動でアプリケーションを分析し脆弱性を発見する手法を取り入れており、AIエージェント関連ツールがトレンド上位を占める中で、セキュリティ特化型ツールとして存在感を示している。</div>
+        <div class="key-points">
+          <ul>
+            <li>AIエージェントによる自動脆弱性発見・修正を特徴とするオープンソースのペネトレーションテストツール</li>
+            <li>今月のGitHubトレンドで急上昇、AI駆動のセキュリティツールとして注目を集める</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-07</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://www.techtimes.com/articles/320160/20260711/tencent-lead-2b-manus-buyback-beijing-treats-agentic-ai-sovereign-asset.htm">Tencent、AIエージェントスタートアップManusの筆頭株主に——Meta買収を中国当局が覆し$2Bで買い戻し</a>
+        <span class="quick-summary">— 中国政府がエージェント型AIを戦略資産と位置付け、Tencent主導でMeta保有分を同一評価額$2Bで買い戻す交渉が進行中。</span>
+        <span class="meta">Tech Times</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://techcrunch.com/2026/07/15/daniel-eks-body-scanning-startup-neko-health-raises-another-700m/">Spotify創業者Daniel Ek氏の body-scanningスタートアップNeko Health、$700Mを調達し評価額$7Bに</a>
+        <span class="quick-summary">— Lightspeed Venture Partners主導、Mark Zuckerberg氏ら著名人も個人投資家として参加し米国進出を加速。</span>
+        <span class="meta">TechCrunch</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://www.militarytimes.com/pay-benefits/military-benefits/health-care/2026/07/13/nearly-12000-military-tricare-beneficiaries-warned-of-data-breach/">TriWest Healthcare Allianceで情報漏えい、TRICARE受給者約1.2万人に通知——一部でSSN流出も</a>
+        <span class="quick-summary">— 4月16日の不正アクセスを7月2日付で通知、氏名・DoD給付番号・郵便番号のほか5件未満でSSN・住所・生年月日も流出。</span>
+        <span class="meta">Military Times</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://github.blog/changelog/2026-07-08-github-copilot-in-visual-studio-code-june-2026-releases/">GitHub Copilot、VS Code向け2026年6月分アップデートをまとめて公開——並列セッションやコスト可視化を強化</a>
+        <span class="quick-summary">— 統合ブラウザの強化・Marketplaceでのモデル発見機能・Autopilotの挙動改善なども同時収録。</span>
+        <span class="meta">GitHub Changelog</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://siliconangle.com/2026/07/07/report-chinas-deepseek-follows-openai-developing-custom-inference-chips/">DeepSeek、OpenAIに続き自社推論チップの開発に着手——Nvidia・Huawei双方への依存低減が狙い</a>
+        <span class="quick-summary">— チップ設計・ファウンドリ・メモリ各社と協議中も現時点では試作前の初期段階、経験豊富なチップ設計者の採用も進める。</span>
+        <span class="meta">SiliconANGLE</span>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="archive/" class="archive-link">Past issues</a>
+    </footer>
+  </div>
+</body>
+</html>
