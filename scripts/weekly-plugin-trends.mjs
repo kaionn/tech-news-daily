@@ -153,6 +153,126 @@ async function collectAll(watchlist, token) {
   return results;
 }
 
+// ---- discover (今週の新顔: GitHub Search で急上昇リポジトリを機械抽出) -----------
+
+const DISCOVER_QUERIES = ['topic:ai', 'topic:llm', 'topic:mcp', 'claude in:name,description', 'ai agent in:name,description'];
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function daysAgoDateStr(days) {
+  return new Date(Date.now() - days * 24 * 3600 * 1000).toISOString().slice(0, 10);
+}
+
+async function fetchGithubSearchQuery(query, createdAfter, token) {
+  const q = `${query} created:>=${createdAfter} stars:>=300`;
+  const url = `https://api.github.com/search/repositories?q=${encodeURIComponent(q)}&sort=stars&order=desc&per_page=30`;
+  const headers = { 'User-Agent': 'tech-news-daily-weekly-plugin-trends', Accept: 'application/vnd.github+json' };
+  if (token) headers.Authorization = `Bearer ${token}`;
+  const res = await fetch(url, { headers });
+  if (!res.ok) throw new Error(`GitHub Search API ${res.status} for query "${query}"`);
+  const json = await res.json();
+  return json.items || [];
+}
+
+async function searchCandidates(token) {
+  const createdAfter = daysAgoDateStr(60);
+  const results = [];
+  for (const q of DISCOVER_QUERIES) {
+    try {
+      results.push(...(await fetchGithubSearchQuery(q, createdAfter, token)));
+    } catch (err) {
+      console.warn(`[discover] query "${q}" failed: ${err.message}`);
+    }
+    await sleep(1000);
+  }
+  return results;
+}
+
+function dedupeByFullName(repos) {
+  const map = new Map();
+  for (const r of repos) if (!map.has(r.full_name)) map.set(r.full_name, r);
+  return [...map.values()];
+}
+
+function excludeKnown(repos, watchlist, featured) {
+  const watchlistRepos = new Set(watchlist.items.map((w) => w.github).filter(Boolean));
+  const featuredRepos = new Set((featured.featured || []).map((f) => f.full_name));
+  return repos.filter((r) => !watchlistRepos.has(r.full_name) && !featuredRepos.has(r.full_name));
+}
+
+async function loadFeatured(dataDir) {
+  const p = path.join(dataDir, 'featured.json');
+  if (!existsSync(p)) return { featured: [] };
+  return loadJson(p);
+}
+
+async function loadPreviousPool(dataDir, week) {
+  const dir = path.join(dataDir, 'rising');
+  if (!existsSync(dir)) return null;
+  const files = (await readdir(dir))
+    .filter((f) => f.startsWith('pool-') && f.endsWith('.json') && f !== `pool-${week}.json`)
+    .sort();
+  if (files.length === 0) return null;
+  return loadJson(path.join(dir, files[files.length - 1]));
+}
+
+function weeksSinceCreated(createdAt) {
+  const weeks = (Date.now() - new Date(createdAt).getTime()) / (7 * 24 * 3600 * 1000);
+  return Math.max(1, weeks);
+}
+
+function computeWeeklyDelta(repo, prevPool) {
+  const prevEntry = prevPool ? prevPool.items.find((p) => p.full_name === repo.full_name) : null;
+  if (prevEntry) {
+    return { weekly_delta: repo.stargazers_count - prevEntry.stars, weekly_delta_estimated: false };
+  }
+  const pace = repo.stargazers_count / weeksSinceCreated(repo.created_at);
+  return { weekly_delta: Math.round(pace), weekly_delta_estimated: true };
+}
+
+function buildRisingItem(repo, prevPool) {
+  const { weekly_delta, weekly_delta_estimated } = computeWeeklyDelta(repo, prevPool);
+  return {
+    full_name: repo.full_name,
+    name: repo.name,
+    url: repo.html_url,
+    description: repo.description || '',
+    language: repo.language ?? null,
+    topics: repo.topics || [],
+    created_at: repo.created_at,
+    stars: repo.stargazers_count,
+    weekly_delta,
+    weekly_delta_estimated,
+    blurb_ja: null,
+  };
+}
+
+async function discover(dataDir, week, token) {
+  const risingDir = path.join(dataDir, 'rising');
+  await mkdir(risingDir, { recursive: true });
+
+  const deduped = dedupeByFullName(await searchCandidates(token));
+  const pool = { week, generated_at: new Date().toISOString(), items: deduped.map((r) => ({ full_name: r.full_name, stars: r.stargazers_count })) };
+  await writeFile(path.join(risingDir, `pool-${week}.json`), `${JSON.stringify(pool, null, 2)}\n`);
+
+  const prevPool = await loadPreviousPool(dataDir, week);
+  const watchlist = await loadWatchlist(dataDir);
+  const featured = await loadFeatured(dataDir);
+  const candidates = excludeKnown(deduped, watchlist, featured);
+
+  const items = candidates
+    .map((repo) => buildRisingItem(repo, prevPool))
+    .sort((a, b) => b.weekly_delta - a.weekly_delta)
+    .slice(0, 10);
+
+  await writeFile(path.join(risingDir, `${week}.json`), `${JSON.stringify({ week, generated_at: new Date().toISOString(), items }, null, 2)}\n`);
+
+  featured.featured = [...(featured.featured || []), ...items.map((i) => ({ full_name: i.full_name, week }))];
+  await writeFile(path.join(dataDir, 'featured.json'), `${JSON.stringify(featured, null, 2)}\n`);
+}
+
 // ---- trend computation -------------------------------------------------------
 
 function findItem(items, id) {
@@ -662,6 +782,7 @@ async function main() {
     const items = await collectAll(watchlist, process.env.GITHUB_TOKEN);
     const snapshot = { week, collected_at: new Date().toISOString(), items };
     await writeFile(path.join(snapshotsDir, `${week}.json`), `${JSON.stringify(snapshot, null, 2)}\n`);
+    await discover(dataDir, week, process.env.GITHUB_TOKEN);
   }
 
   const snapshots = await loadAllSnapshots(snapshotsDir);
