@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 // Weekly plugin trends: collect GitHub stars + npm weekly downloads for a fixed
-// watchlist, snapshot them per ISO week (JST), diff against the previous
-// snapshot, and render the result to data/plugins/trends.json + trends.html.
-// No dependencies (Node 20+ built-in fetch only). See tmp/context.md for design.
+// watchlist, snapshot them per ISO week (JST), diff against history, and
+// render trends.html in the approved v4 layout (tmp/mock-trends.html is the
+// canonical structure/CSS source). No dependencies (Node 20+ built-in fetch
+// only). See tmp/context.md for design background.
 
 import { readFile, writeFile, mkdir, readdir } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
@@ -20,8 +21,17 @@ const CATEGORY_TITLE = {
   'ai-tool': 'AI コーディング CLI / 拡張',
 };
 const CATEGORY_BADGE = { 'claude-code': 'Claude Code', mcp: 'MCP', 'ai-tool': 'CLI' };
+const LANGUAGE_TAG_CLASS = {
+  Python: 'tag-python',
+  TypeScript: 'tag-ts',
+  JavaScript: 'tag-js',
+  Go: 'tag-go',
+  Rust: 'tag-rust',
+  Ruby: 'tag-ruby',
+};
+const LANGUAGE_TAG_LABEL = { TypeScript: 'TS' };
 
-// ---- args ----------------------------------------------------------------
+// ---- args --------------------------------------------------------------------
 
 function parseArgs(argv) {
   const args = { renderOnly: false, dataDir: null, out: null };
@@ -34,7 +44,7 @@ function parseArgs(argv) {
   return args;
 }
 
-// ---- date / week -----------------------------------------------------------
+// ---- date / week ---------------------------------------------------------------
 
 function jstNow() {
   // Shift to JST wall-clock time, then read back with UTC getters so the
@@ -84,15 +94,21 @@ async function loadAllSnapshots(snapshotsDir) {
   return snapshots.sort((a, b) => a.week.localeCompare(b.week));
 }
 
+async function loadRising(dataDir, week) {
+  const p = path.join(dataDir, 'rising', `${week}.json`);
+  if (!existsSync(p)) return null;
+  return loadJson(p);
+}
+
 // ---- collect -----------------------------------------------------------------
 
-async function fetchGithubStars(repo, token) {
+async function fetchGithubRepo(repo, token) {
   const headers = { 'User-Agent': 'tech-news-daily-weekly-plugin-trends' };
   if (token) headers.Authorization = `Bearer ${token}`;
   const res = await fetch(`https://api.github.com/repos/${repo}`, { headers });
   if (!res.ok) throw new Error(`GitHub API ${res.status} for ${repo}`);
   const json = await res.json();
-  return json.stargazers_count;
+  return { stars: json.stargazers_count, language: json.language ?? null };
 }
 
 async function fetchNpmDownloads(pkg) {
@@ -104,10 +120,13 @@ async function fetchNpmDownloads(pkg) {
 
 async function collectItem(item, token) {
   let stars = null;
+  let language = null;
   let npmWeeklyDownloads = null;
   if (item.github) {
     try {
-      stars = await fetchGithubStars(item.github, token);
+      const repo = await fetchGithubRepo(item.github, token);
+      stars = repo.stars;
+      language = repo.language;
     } catch (err) {
       console.warn(`[collect] ${item.id}: github fetch failed: ${err.message}`);
     }
@@ -119,7 +138,7 @@ async function collectItem(item, token) {
       console.warn(`[collect] ${item.id}: npm fetch failed: ${err.message}`);
     }
   }
-  return { id: item.id, stars, npm_weekly_downloads: npmWeeklyDownloads };
+  return { id: item.id, stars, npm_weekly_downloads: npmWeeklyDownloads, language };
 }
 
 async function collectAll(watchlist, token) {
@@ -175,12 +194,28 @@ function computeStreak(historySnapshots, id) {
   return streak;
 }
 
+function buildHistory(historySnapshots, id) {
+  return historySnapshots.map((s) => {
+    const entry = findItem(s.items, id);
+    return {
+      week: s.week,
+      stars: entry ? entry.stars ?? null : null,
+      npm_weekly_downloads: entry ? entry.npm_weekly_downloads ?? null : null,
+    };
+  });
+}
+
+function seriesFromHistory(history, key) {
+  return history.map((h) => h[key]);
+}
+
 function buildItemTrend(w, sorted, historySnapshots) {
   const latest = sorted[sorted.length - 1];
   const prev = sorted.length > 1 ? sorted[sorted.length - 2] : null;
   const curEntry = findItem(latest.items, w.id);
   const stars = curEntry ? curEntry.stars : null;
   const npm = curEntry ? curEntry.npm_weekly_downloads : null;
+  const language = curEntry ? curEntry.language ?? null : null;
   const prevEntry = prev ? findItem(prev.items, w.id) : null;
   const starsPrev = prevEntry ? prevEntry.stars : null;
   const npmPrev = prevEntry ? prevEntry.npm_weekly_downloads : null;
@@ -194,6 +229,7 @@ function buildItemTrend(w, sorted, historySnapshots) {
     github: w.github,
     npm: w.npm,
     description: w.description,
+    language,
     stars,
     stars_prev: starsPrev,
     stars_delta: computeDelta(stars, starsPrev),
@@ -202,8 +238,7 @@ function buildItemTrend(w, sorted, historySnapshots) {
     npm_prev: npmPrev,
     npm_delta: computeDelta(npm, npmPrev),
     npm_pct: computePct(npm, npmPrev),
-    stars_history: historySnapshots.map((s) => (findItem(s.items, w.id) || {}).stars ?? null),
-    npm_history: historySnapshots.map((s) => (findItem(s.items, w.id) || {}).npm_weekly_downloads ?? null),
+    history: buildHistory(historySnapshots, w.id),
     streak: computeStreak(historySnapshots, w.id),
     is_new: isNew,
   };
@@ -237,6 +272,12 @@ function pickTop5(items) {
   return ranked.slice(0, 5);
 }
 
+function classifyTrend(item) {
+  const rp = maxIgnoreNull(item.stars_pct, item.npm_pct);
+  if (rp === null || rp === 0) return 'flat';
+  return rp > 0 ? 'up' : 'down';
+}
+
 // ---- html rendering: primitives ----------------------------------------------
 
 function escapeHtml(str) {
@@ -247,10 +288,28 @@ function formatNumber(n) {
   return n === null || n === undefined ? '—' : n.toLocaleString('en-US');
 }
 
-function sparklinePoints(history) {
-  const valid = history.map((v, i) => ({ v, i })).filter((p) => p.v !== null && p.v !== undefined);
+function languageTagClass(lang) {
+  return LANGUAGE_TAG_CLASS[lang] || 'tag-cat';
+}
+
+function languageTagLabel(lang) {
+  return LANGUAGE_TAG_LABEL[lang] || lang;
+}
+
+function renderLanguageTag(lang) {
+  if (!lang) return '';
+  return ` <span class="tag ${languageTagClass(lang)}">${escapeHtml(languageTagLabel(lang))}</span>`;
+}
+
+function renderCategoryTag(category) {
+  const label = CATEGORY_BADGE[category] || category;
+  return `<span class="tag tag-cat">${escapeHtml(label)}</span>`;
+}
+
+function sparklinePoints(series) {
+  const valid = series.map((v, i) => ({ v, i })).filter((p) => p.v !== null && p.v !== undefined);
   if (valid.length < 2) return null;
-  const n = history.length;
+  const n = series.length;
   const xStep = n > 1 ? 88 / (n - 1) : 0;
   const values = valid.map((p) => p.v);
   const min = Math.min(...values);
@@ -261,22 +320,29 @@ function sparklinePoints(history) {
   return valid.map((p) => `${(p.i * xStep).toFixed(1)},${yFor(p.v).toFixed(1)}`).join(' ');
 }
 
-function renderSparkline(history, { withFill = false } = {}) {
-  const pts = sparklinePoints(history);
+function renderSparkline(series, { withFill = false } = {}) {
+  const pts = sparklinePoints(series);
   if (!pts) return '';
   const height = withFill ? 30 : 26;
   const fillPart = withFill ? `<polygon class="fill" points="${pts} 88,30 0,30"/>` : '';
   return `<svg class="sparkline" width="88" height="${height}" viewBox="0 0 88 30">${fillPart}<polyline points="${pts}"/></svg>`;
 }
 
-function barWidth(pct, maxAbs) {
-  if (pct === null || maxAbs === 0) return 0;
-  return Math.min(100, (Math.abs(pct) / maxAbs) * 100);
+function relativeBarWidth(value, maxAbs) {
+  if (value === null || value === undefined || !maxAbs) return 0;
+  return Math.min(100, (Math.abs(value) / maxAbs) * 100);
+}
+
+function deltaLabelAndClass(delta, pct) {
+  const arrow = delta > 0 ? '▲' : delta < 0 ? '▼' : '→';
+  const cls = delta > 0 ? 'up' : delta < 0 ? 'down' : 'flat';
+  const sign = delta > 0 ? '+' : '';
+  return { label: `${arrow} ${sign}${formatNumber(delta)} (${sign}${pct.toFixed(1)}%)`, cls };
 }
 
 // ---- html rendering: metric block --------------------------------------------
 
-function renderMetric(label, glyph, { value, prev, delta, pct, isNew, unavailable, maxAbsPct }) {
+function renderMetric({ label, glyph, value, isNew, unavailable, deltaInfo, barValue, barMax }) {
   const labelHtml = `<div class="label">${glyph} ${label}</div>`;
   if (unavailable) {
     return `<div class="metric">${labelHtml}<div class="value">—</div><div class="delta flat">npm 未公開</div></div>`;
@@ -284,41 +350,48 @@ function renderMetric(label, glyph, { value, prev, delta, pct, isNew, unavailabl
   if (value === null || value === undefined) {
     return `<div class="metric">${labelHtml}<div class="value">—</div><div class="delta flat">取得失敗</div></div>`;
   }
-  if (isNew || prev === null || prev === undefined) {
+  if (isNew) {
     return `<div class="metric">${labelHtml}<div class="value">${formatNumber(value)}</div><div class="delta flat">— 初回計測</div></div>`;
   }
-  const arrow = delta > 0 ? '▲' : delta < 0 ? '▼' : '→';
-  const cls = delta > 0 ? 'up' : delta < 0 ? 'down' : 'flat';
-  const sign = delta > 0 ? '+' : '';
-  const width = barWidth(pct, maxAbsPct);
-  const barCls = delta < 0 ? ' neg' : '';
-  return `<div class="metric">${labelHtml}<div class="value">${formatNumber(value)}</div><div class="delta ${cls}">${arrow} ${sign}${formatNumber(delta)} (${sign}${pct.toFixed(1)}%)</div><div class="delta-bar${barCls}"><span style="width:${width}%"></span></div></div>`;
+  const barCls = barValue < 0 ? ' neg' : '';
+  const width = relativeBarWidth(barValue, barMax);
+  return `<div class="metric">${labelHtml}<div class="value">${formatNumber(value)}</div><div class="delta ${deltaInfo.cls}">${deltaInfo.label}</div><div class="delta-bar${barCls}"><span style="width:${width}%"></span></div></div>`;
 }
 
-function renderToolCard(item, maxAbs) {
+function renderToolCard(item, sectionMaxAbs) {
   const newBadge = item.is_new ? ' <span class="new-badge">NEW</span>' : '';
-  const headHistory = item.stars_history.some((v) => v !== null) ? item.stars_history : item.npm_history;
-  const headSpark = renderSparkline(headHistory, { withFill: false });
-  const starsMetric = renderMetric('Stars', '⭐', {
+  const langTag = renderLanguageTag(item.language);
+  const starsSeries = seriesFromHistory(item.history, 'stars');
+  const npmSeries = seriesFromHistory(item.history, 'npm_weekly_downloads');
+  const headSpark = renderSparkline(starsSeries.some((v) => v !== null) ? starsSeries : npmSeries, { withFill: false });
+  const starsIsNew = item.is_new || item.stars_prev === null || item.stars_prev === undefined;
+  const npmIsNew = item.is_new || item.npm_prev === null || item.npm_prev === undefined;
+  const starsGuard = item.stars !== null && item.stars !== undefined && !starsIsNew;
+  const npmGuard = item.npm && item.npm_weekly_downloads !== null && item.npm_weekly_downloads !== undefined && !npmIsNew;
+
+  const starsMetric = renderMetric({
+    label: 'Stars',
+    glyph: '⭐',
     value: item.stars,
-    prev: item.stars_prev,
-    delta: item.stars_delta,
-    pct: item.stars_pct,
-    isNew: item.is_new,
+    isNew: starsIsNew,
     unavailable: false,
-    maxAbsPct: maxAbs.stars,
+    deltaInfo: starsGuard ? deltaLabelAndClass(item.stars_delta, item.stars_pct) : null,
+    barValue: item.stars_pct,
+    barMax: sectionMaxAbs.stars,
   });
-  const npmMetric = renderMetric('npm DL/週', '📦', {
+  const npmMetric = renderMetric({
+    label: 'npm DL/週',
+    glyph: '📦',
     value: item.npm_weekly_downloads,
-    prev: item.npm_prev,
-    delta: item.npm_delta,
-    pct: item.npm_pct,
-    isNew: item.is_new,
+    isNew: npmIsNew,
     unavailable: !item.npm,
-    maxAbsPct: maxAbs.npm,
+    deltaInfo: npmGuard ? deltaLabelAndClass(item.npm_delta, item.npm_pct) : null,
+    barValue: item.npm_pct,
+    barMax: sectionMaxAbs.npm,
   });
+
   return `  <div class="tool-card">
-    <div class="tool-head"><a href="${item.url}">${escapeHtml(item.name)}</a>${newBadge}
+    <div class="tool-head"><a href="${item.url}">${escapeHtml(item.name)}</a>${newBadge}${langTag}
       <span class="spacer"></span>
       ${headSpark}
     </div>
@@ -330,33 +403,43 @@ function renderToolCard(item, maxAbs) {
   </div>`;
 }
 
-function renderCategorySection(category, items, maxAbs) {
+function computeSectionMaxAbs(items) {
+  const starsPcts = items.map((i) => i.stars_pct).filter((v) => v !== null && v !== undefined);
+  const npmPcts = items.map((i) => i.npm_pct).filter((v) => v !== null && v !== undefined);
+  const maxAbs = (arr) => (arr.length === 0 ? 0 : Math.max(...arr.map(Math.abs)));
+  return { stars: maxAbs(starsPcts), npm: maxAbs(npmPcts) };
+}
+
+function renderCategorySection(category, items) {
   const catItems = items.filter((i) => i.category === category);
   if (catItems.length === 0) return '';
-  const cards = catItems.map((i) => renderToolCard(i, maxAbs)).join('\n\n');
+  const sectionMaxAbs = computeSectionMaxAbs(catItems);
+  const cards = catItems.map((i) => renderToolCard(i, sectionMaxAbs)).join('\n\n');
   return `<div class="section">
   <div class="section-title">${escapeHtml(CATEGORY_TITLE[category])}</div>
 ${cards}
 </div>`;
 }
 
-// ---- html rendering: top5 + summary -------------------------------------------
+// ---- html rendering: top5 -------------------------------------------------------
 
 function renderRankCard(rank, entry) {
   const { item, metric, pct } = entry;
-  const history = metric === 'stars' ? item.stars_history : item.npm_history;
-  const spark = renderSparkline(history, { withFill: true });
+  const series = metric === 'stars' ? seriesFromHistory(item.history, 'stars') : seriesFromHistory(item.history, 'npm_weekly_downloads');
+  const spark = renderSparkline(series, { withFill: true });
   const delta = metric === 'stars' ? item.stars_delta : item.npm_delta;
   const value = metric === 'stars' ? item.stars : item.npm_weekly_downloads;
   const glyph = metric === 'stars' ? '⭐' : '📦';
   const suffix = metric === 'stars' ? '' : ' DL/週';
   const sign = delta > 0 ? '+' : '';
   const pctSign = pct > 0 ? '+' : '';
+  const catTag = renderCategoryTag(item.category);
+  const langTag = renderLanguageTag(item.language);
   return `    <div class="rank-card">
       <span class="rank-num">${rank}</span>
       ${spark}
       <div class="rank-body">
-        <div class="rank-name">${escapeHtml(item.name)} <span class="cat">${CATEGORY_BADGE[item.category]}</span></div>
+        <div class="rank-name">${escapeHtml(item.name)} ${catTag}${langTag}</div>
         <div class="rank-desc">${escapeHtml(item.description)}</div>
       </div>
       <div class="rank-metric"><div class="rank-delta">${pctSign}${pct.toFixed(1)}%</div><div class="rank-sub">${glyph} ${sign}${formatNumber(delta)} → ${formatNumber(value)}${suffix}</div></div>
@@ -367,20 +450,63 @@ function renderTop5Section(top5) {
   if (top5.length === 0) return '';
   const cards = top5.map((entry, idx) => renderRankCard(idx + 1, entry)).join('\n');
   return `<div class="section">
-  <div class="section-title">🚀 今週の急上昇 TOP 5</div>
+  <div class="section-title">🚀 今週の急上昇 TOP 5（ウォッチリスト内）</div>
+  <p class="section-desc">週間伸び率（stars と npm DL の大きい方）で全カテゴリ横断ランキング。折れ線は過去 8 週の推移。</p>
   <div class="rank-list">
 ${cards}
   </div>
 </div>`;
 }
 
-function classifyTrend(item) {
-  const rp = maxIgnoreNull(item.stars_pct, item.npm_pct);
-  if (rp === null || rp === 0) return 'flat';
-  return rp > 0 ? 'up' : 'down';
+// ---- html rendering: rising (今週の新顔) ----------------------------------------
+
+function risingPct(item) {
+  if (item.weekly_delta_estimated) return null;
+  const prevStars = item.stars - item.weekly_delta;
+  if (!prevStars || prevStars <= 0) return null;
+  return Math.round((item.weekly_delta / prevStars) * 1000) / 10;
 }
 
-function buildWeekSummary(trends, top5, isFirstWeek) {
+function renderRisingCard(item, maxDelta) {
+  const langTag = renderLanguageTag(item.language);
+  const desc = item.blurb_ja || item.description || '';
+  const pct = risingPct(item);
+  const pctText = pct !== null ? ` (+${pct.toFixed(0)}%)` : '';
+  const badgeText = item.weekly_delta_estimated
+    ? `🔥 約 +${formatNumber(item.weekly_delta)} stars/週 (平均)`
+    : `🔥 +${formatNumber(item.weekly_delta)} stars / 週${pctText}`;
+  const metricDeltaText = item.weekly_delta_estimated
+    ? `▲ 約 +${formatNumber(item.weekly_delta)}/週 (平均)`
+    : `▲ +${formatNumber(item.weekly_delta)}${pctText}`;
+  const width = relativeBarWidth(item.weekly_delta, maxDelta);
+  const created = item.created_at ? String(item.created_at).slice(0, 10) : '—';
+  return `  <div class="tool-card">
+    <div class="tool-head"><a href="${item.url}">${escapeHtml(item.full_name)}</a> <span class="new-badge">NEW</span> <span class="tag tag-cat">AI</span>${langTag}
+      <span class="spacer"></span>
+      <span class="delta-badge">${badgeText}</span>
+    </div>
+    <p class="tool-desc">${escapeHtml(desc)}</p>
+    <div class="tool-metrics">
+      <div class="metric"><div class="label">⭐ Stars</div><div class="value">${formatNumber(item.stars)}</div><div class="delta up">${metricDeltaText}</div><div class="delta-bar"><span style="width:${width}%"></span></div></div>
+      <div class="metric"><div class="label">📅 Created</div><div class="value" style="font-size:.85rem">${escapeHtml(created)}</div></div>
+    </div>
+  </div>`;
+}
+
+function renderRisingSection(rising) {
+  if (!rising || !Array.isArray(rising.items) || rising.items.length === 0) return '';
+  const maxDelta = Math.max(...rising.items.map((i) => Math.abs(i.weekly_delta || 0)), 0);
+  const cards = rising.items.map((i) => renderRisingCard(i, maxDelta)).join('\n\n');
+  return `<div class="section">
+  <div class="section-title">🔭 今週の新顔（GitHub 発掘）</div>
+  <p class="section-desc">ウォッチリスト外から GitHub Search で機械抽出した急上昇リポジトリ（直近 60 日以内に誕生・週間伸び順・再掲なし）。紹介文は AI 生成（生成失敗時は GitHub の説明文をそのまま表示）。</p>
+${cards}
+</div>`;
+}
+
+// ---- html rendering: week summary ------------------------------------------------
+
+function buildWeekSummary(trends, top5, isFirstWeek, rising) {
   const total = trends.items.length;
   if (isFirstWeek) {
     return `<strong>今週の概況:</strong> 追跡 ${total} ツール中 全 ${total} が初回計測。前週比は来週から表示される。`;
@@ -394,25 +520,22 @@ function buildWeekSummary(trends, top5, isFirstWeek) {
     const streakClause = top.item.streak >= 2 ? `で ${top.item.streak} 週連続の上昇` : '';
     text += `最大の伸びは <strong>${escapeHtml(top.item.name)}</strong>（${metricLabel} +${top.pct.toFixed(1)}%）${streakClause}。`;
   }
+  if (rising && Array.isArray(rising.items) && rising.items.length > 0) {
+    const best = rising.items.reduce((a, b) => (Math.abs(b.weekly_delta || 0) > Math.abs(a.weekly_delta || 0) ? b : a));
+    text += `新顔発掘では <strong>${escapeHtml(best.name || best.full_name)}</strong> が週間 +${formatNumber(best.weekly_delta)} stars で最大の伸び。`;
+  }
   return `<strong>今週の概況:</strong> ${text}`;
 }
 
 // ---- html rendering: page -------------------------------------------------------
 
-function computeMaxAbsPct(items) {
-  const starsPcts = items.map((i) => i.stars_pct).filter((v) => v !== null);
-  const npmPcts = items.map((i) => i.npm_pct).filter((v) => v !== null);
-  const maxAbs = (arr) => (arr.length === 0 ? 0 : Math.max(...arr.map(Math.abs)));
-  return { stars: maxAbs(starsPcts), npm: maxAbs(npmPcts) };
-}
-
-function renderTrendsHtml(trends) {
+function renderTrendsHtml(trends, rising) {
   const isFirstWeek = trends.weeks_available <= 1;
   const top5 = isFirstWeek ? [] : pickTop5(trends.items);
-  const maxAbs = computeMaxAbsPct(trends.items);
-  const summary = buildWeekSummary(trends, top5, isFirstWeek);
+  const summary = buildWeekSummary(trends, top5, isFirstWeek, rising);
   const top5Html = renderTop5Section(top5);
-  const categorySections = CATEGORY_ORDER.map((c) => renderCategorySection(c, trends.items, maxAbs))
+  const risingHtml = renderRisingSection(rising);
+  const categorySections = CATEGORY_ORDER.map((c) => renderCategorySection(c, trends.items))
     .filter(Boolean)
     .join('\n\n');
   const weeksShown = Math.min(trends.weeks_available, 8);
@@ -434,7 +557,7 @@ header{text-align:center;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:
 header h1{font-size:1.75rem;font-weight:700;letter-spacing:-.02em}
 header .date{color:var(--text-muted);font-size:.9rem;margin-top:.25rem}
 header .tagline{color:var(--text-secondary);font-size:.95rem;margin-top:.5rem}
-.site-nav{display:flex;justify-content:center;gap:.5rem;margin-top:.75rem}
+.site-nav{display:flex;justify-content:center;gap:.5rem;margin-top:.75rem;flex-wrap:wrap}
 .site-nav a{display:inline-block;padding:.25rem .6rem;font-size:.75rem;font-weight:600;color:var(--text-muted);text-decoration:none;border:1px solid var(--border);border-radius:9999px}
 .site-nav a:hover,.site-nav a.active{color:var(--primary-500);border-color:var(--primary-500)}
 .week-summary{background:linear-gradient(135deg,var(--primary-50),#f5f0ff);border-left:4px solid var(--primary-500);border-radius:var(--radius-lg);padding:1.1rem 1.25rem;margin-bottom:2rem;font-size:.92rem;color:var(--text-secondary);line-height:1.8}
@@ -442,12 +565,12 @@ header .tagline{color:var(--text-secondary);font-size:.95rem;margin-top:.5rem}
 .section{margin-bottom:2.25rem}
 .section-title{font-size:.8rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:.4rem;display:flex;align-items:center;gap:.5rem}
 .section-title::after{content:"";flex:1;height:1px;background:var(--border)}
+.section-desc{font-size:.85rem;color:var(--text-secondary);margin-bottom:.9rem;line-height:1.7}
 .rank-list{display:flex;flex-direction:column;gap:.5rem}
 .rank-card{display:flex;align-items:center;gap:.9rem;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:.8rem 1rem}
 .rank-num{font-size:1.3rem;font-weight:800;color:var(--primary-600);width:1.6rem;text-align:center;flex-shrink:0;letter-spacing:-.02em}
 .rank-body{flex:1;min-width:0}
 .rank-name{font-weight:700;font-size:.95rem}
-.rank-name .cat{font-size:.65rem;font-weight:700;color:var(--accent-ai);background:#f3e8ff;padding:.05rem .45rem;border-radius:9999px;margin-left:.4rem;vertical-align:middle;text-transform:uppercase}
 .rank-desc{font-size:.8rem;color:var(--text-muted);line-height:1.5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .rank-metric{text-align:right;flex-shrink:0}
 .rank-delta{font-size:1.05rem;font-weight:800;color:var(--up)}
@@ -456,7 +579,7 @@ header .tagline{color:var(--text-secondary);font-size:.95rem;margin-top:.5rem}
 .sparkline polyline{fill:none;stroke:var(--spark);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .sparkline .fill{fill:url(#sg);stroke:none;opacity:.35}
 .tool-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1rem 1.1rem;margin-bottom:.6rem}
-.tool-head{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap}
+.tool-head{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
 .tool-head a{font-weight:700;font-size:.98rem;color:var(--text-primary);text-decoration:none}
 .tool-head a:hover{color:var(--primary-500)}
 .new-badge{font-size:.65rem;font-weight:700;color:var(--accent-ai);background:#f3e8ff;padding:.05rem .45rem;border-radius:9999px}
@@ -471,10 +594,19 @@ header .tagline{color:var(--text-secondary);font-size:.95rem;margin-top:.5rem}
 .delta-bar{height:4px;border-radius:2px;background:var(--border);margin-top:.3rem;overflow:hidden;width:110px}
 .delta-bar span{display:block;height:100%;background:var(--up);border-radius:2px}
 .delta-bar.neg span{background:var(--down)}
+.tag{display:inline-block;font-size:.65rem;font-weight:700;padding:.05rem .45rem;border-radius:9999px;text-transform:uppercase;letter-spacing:.04em;vertical-align:middle}
+.tag-cat{background:#f3e8ff;color:var(--accent-ai)}
+.tag-python{background:#eef2ff;color:#4f46e5}
+.tag-ts{background:#f0f5ff;color:#2563eb}
+.tag-js{background:#fefce8;color:#a16207}
+.tag-go{background:#ecfeff;color:#0891b2}
+.tag-rust{background:#fff7ed;color:#c2410c}
+.tag-ruby{background:#fef2f2;color:#dc2626}
+.delta-badge{display:inline-block;font-size:.75rem;font-weight:700;white-space:nowrap;padding:.12rem .55rem;border-radius:9999px;background:#ecfdf5;color:var(--up)}
 footer{text-align:center;margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border);color:var(--text-muted);font-size:.8rem}
 footer a{color:var(--primary-500);text-decoration:none}
 @media(max-width:600px){body{padding:1rem .75rem}header h1{font-size:1.4rem}.rank-desc{white-space:normal}.rank-card{flex-wrap:wrap}.tool-metrics{gap:.9rem}}
-@media(prefers-color-scheme:dark){:root{--bg:#0f0f1a;--surface:#1a1a2e;--text-primary:#e4e4ec;--text-secondary:#a0a0b8;--text-muted:#6b6b80;--border:#2a2a3e;--primary-50:#1a1a3e;--primary-600:#5b8af5;--primary-500:#6b9af5;--up:#34d399;--down:#f87171;--spark:#6b9af5}.week-summary{background:linear-gradient(135deg,#1a1a3e,#1f1a3e)}.new-badge,.rank-name .cat{background:#2d1b69}}
+@media(prefers-color-scheme:dark){:root{--bg:#0f0f1a;--surface:#1a1a2e;--text-primary:#e4e4ec;--text-secondary:#a0a0b8;--text-muted:#6b6b80;--border:#2a2a3e;--primary-50:#1a1a3e;--primary-600:#5b8af5;--primary-500:#6b9af5;--up:#34d399;--down:#f87171;--spark:#6b9af5}.week-summary{background:linear-gradient(135deg,#1a1a3e,#1f1a3e)}.new-badge,.tag-cat{background:#2d1b69}.delta-badge{background:#0a3d2a}.tag-python{background:#1a1a4d}.tag-ts{background:#0a1a3d}.tag-js{background:#3d2f0a}.tag-go{background:#0a2d3d}.tag-rust{background:#3d200a}.tag-ruby{background:#3d0a0a}}
 </style>
 </head>
 <body>
@@ -488,6 +620,7 @@ footer a{color:var(--primary-500);text-decoration:none}
   <nav class="site-nav">
     <a href="./">📰 日刊ダイジェスト</a>
     <a href="#" class="active">🔌 プラグイントレンド</a>
+    <a href="ai-trends.html">🧠 AI プロダクト動向</a>
   </nav>
 </header>
 
@@ -498,10 +631,12 @@ footer a{color:var(--primary-500);text-decoration:none}
 
 ${top5Html}
 
+${risingHtml}
+
 ${categorySections}
 
 <footer>
-  <p>データ: GitHub API / npm downloads API から毎週月曜 07:00 に自動収集。数値・推移・概況文はすべてスナップショットからの決定論生成（LLM 非経由）</p>
+  <p>データ: GitHub API / npm downloads API から毎週月曜 07:00 に自動収集。数値・推移・概況文はすべてスナップショットからの決定論生成（LLM 非経由）。「今週の新顔」の紹介文のみ AI 生成（失敗時は GitHub 説明文で代替）</p>
   <p style="margin-top:.5rem"><a href="https://github.com/kaionn/tech-news-daily/tree/main/data/plugins">📊 生データ (data/plugins/)</a> · <a href="./">📰 日刊ダイジェストに戻る</a></p>
 </footer>
 </div>
@@ -539,8 +674,9 @@ async function main() {
   }
 
   const trends = buildTrends(watchlist, snapshots);
+  const rising = await loadRising(dataDir, trends.latest_week);
   await writeFile(trendsPath, `${JSON.stringify(trends, null, 2)}\n`);
-  await writeFile(outPath, renderTrendsHtml(trends));
+  await writeFile(outPath, renderTrendsHtml(trends, rising));
   console.log(`[weekly-plugin-trends] wrote ${trendsPath} and ${outPath} for ${trends.latest_week}`);
 }
 
