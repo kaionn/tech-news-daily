@@ -108,6 +108,7 @@ Write a complete HTML file to `index.html` with this exact structure:
       <nav class="site-nav">
         <a href="./" class="active">📰 日刊ダイジェスト</a>
         <a href="trends.html">🔌 週次プラグイントレンド</a>
+        <a href="ai-trends.html">🧠 AI プロダクト動向</a>
       </nav>
     </header>
 
@@ -146,7 +147,7 @@ Write a complete HTML file to `index.html` with this exact structure:
 </html>
 ```
 
-The header's `site-nav` block must always be present exactly as shown. It is static cross-page navigation (daily digest ⇄ weekly plugin trends) — not anchors, never changes day to day, and must not be removed or reworded.
+The header's `site-nav` block must always be present exactly as shown. It is static cross-page navigation (daily digest ⇄ weekly plugin trends ⇄ AI product trends) — not anchors, never changes day to day, and must not be removed or reworded.
 
 stats-bar values: count of all items, count of distinct category tags used, count of distinct sources.
 numbers-bar: the 2-3 most striking numbers from today's articles (funding amounts, speedups, CVE counts). Each number MUST appear in one of today's articles — never invent numbers.
@@ -352,7 +353,7 @@ Re-read the generated index.html and feed.xml, and verify every point. Fix all v
 
 1. LINKS: every `<a href>` in a card or quick-link points to a specific article page (URL has a meaningful path). No top pages, no section pages, no aggregator roundup pages. Fix or drop violators (if dropping changes item counts, update the stats-bar).
 2. DATE: `<title>`, header `.date`, and feed.xml newest entry all show today's date.
-3. STRUCTURE: all 5 sections present with correct ids and emoji titles; stats-bar / toc (section anchors only) / header site-nav (with the trends.html link) / numbers-bar present; first Top Story has `deep-dive` class + `editorial`; only CSS classes defined above are used.
+3. STRUCTURE: all 5 sections present with correct ids and emoji titles; stats-bar / toc (section anchors only) / header site-nav (with the trends.html and ai-trends.html links) / numbers-bar present; first Top Story has `deep-dive` class + `editorial`; only CSS classes defined above are used.
 4. NUMBERS: every number in numbers-bar (and key-points) appears in an actual collected article. Nothing invented.
 5. FEED: feed.xml is well-formed XML (`python3 -c "import xml.dom.minidom,sys;xml.dom.minidom.parse('feed.xml')"` must exit 0).
 6. DIVERSITY: at least 4 distinct tag types across all items.

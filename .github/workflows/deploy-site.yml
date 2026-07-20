@@ -13,6 +13,9 @@ on:
       - style.css
       - feed.xml
       - trends.html
+      - ai-trends.html
+      - 'ai-trends/**'
+      - 'data/**'
   workflow_dispatch: # 一時エラー等で再デプロイしたい時の手動リトライ用
 
 permissions:
