@@ -12,6 +12,7 @@ on:
       - 'archive/**'
       - style.css
       - feed.xml
+      - trends.html
   workflow_dispatch: # 一時エラー等で再デプロイしたい時の手動リトライ用
 
 permissions:
