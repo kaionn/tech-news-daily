@@ -14,7 +14,7 @@ header{text-align:center;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:
 header h1{font-size:1.75rem;font-weight:700;letter-spacing:-.02em}
 header .date{color:var(--text-muted);font-size:.9rem;margin-top:.25rem}
 header .tagline{color:var(--text-secondary);font-size:.95rem;margin-top:.5rem}
-.site-nav{display:flex;justify-content:center;gap:.5rem;margin-top:.75rem}
+.site-nav{display:flex;justify-content:center;gap:.5rem;margin-top:.75rem;flex-wrap:wrap}
 .site-nav a{display:inline-block;padding:.25rem .6rem;font-size:.75rem;font-weight:600;color:var(--text-muted);text-decoration:none;border:1px solid var(--border);border-radius:9999px}
 .site-nav a:hover,.site-nav a.active{color:var(--primary-500);border-color:var(--primary-500)}
 .week-summary{background:linear-gradient(135deg,var(--primary-50),#f5f0ff);border-left:4px solid var(--primary-500);border-radius:var(--radius-lg);padding:1.1rem 1.25rem;margin-bottom:2rem;font-size:.92rem;color:var(--text-secondary);line-height:1.8}
@@ -22,12 +22,12 @@ header .tagline{color:var(--text-secondary);font-size:.95rem;margin-top:.5rem}
 .section{margin-bottom:2.25rem}
 .section-title{font-size:.8rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:.4rem;display:flex;align-items:center;gap:.5rem}
 .section-title::after{content:"";flex:1;height:1px;background:var(--border)}
+.section-desc{font-size:.85rem;color:var(--text-secondary);margin-bottom:.9rem;line-height:1.7}
 .rank-list{display:flex;flex-direction:column;gap:.5rem}
 .rank-card{display:flex;align-items:center;gap:.9rem;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:.8rem 1rem}
 .rank-num{font-size:1.3rem;font-weight:800;color:var(--primary-600);width:1.6rem;text-align:center;flex-shrink:0;letter-spacing:-.02em}
 .rank-body{flex:1;min-width:0}
 .rank-name{font-weight:700;font-size:.95rem}
-.rank-name .cat{font-size:.65rem;font-weight:700;color:var(--accent-ai);background:#f3e8ff;padding:.05rem .45rem;border-radius:9999px;margin-left:.4rem;vertical-align:middle;text-transform:uppercase}
 .rank-desc{font-size:.8rem;color:var(--text-muted);line-height:1.5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .rank-metric{text-align:right;flex-shrink:0}
 .rank-delta{font-size:1.05rem;font-weight:800;color:var(--up)}
@@ -36,7 +36,7 @@ header .tagline{color:var(--text-secondary);font-size:.95rem;margin-top:.5rem}
 .sparkline polyline{fill:none;stroke:var(--spark);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .sparkline .fill{fill:url(#sg);stroke:none;opacity:.35}
 .tool-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1rem 1.1rem;margin-bottom:.6rem}
-.tool-head{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap}
+.tool-head{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
 .tool-head a{font-weight:700;font-size:.98rem;color:var(--text-primary);text-decoration:none}
 .tool-head a:hover{color:var(--primary-500)}
 .new-badge{font-size:.65rem;font-weight:700;color:var(--accent-ai);background:#f3e8ff;padding:.05rem .45rem;border-radius:9999px}
@@ -51,10 +51,19 @@ header .tagline{color:var(--text-secondary);font-size:.95rem;margin-top:.5rem}
 .delta-bar{height:4px;border-radius:2px;background:var(--border);margin-top:.3rem;overflow:hidden;width:110px}
 .delta-bar span{display:block;height:100%;background:var(--up);border-radius:2px}
 .delta-bar.neg span{background:var(--down)}
+.tag{display:inline-block;font-size:.65rem;font-weight:700;padding:.05rem .45rem;border-radius:9999px;text-transform:uppercase;letter-spacing:.04em;vertical-align:middle}
+.tag-cat{background:#f3e8ff;color:var(--accent-ai)}
+.tag-python{background:#eef2ff;color:#4f46e5}
+.tag-ts{background:#f0f5ff;color:#2563eb}
+.tag-js{background:#fefce8;color:#a16207}
+.tag-go{background:#ecfeff;color:#0891b2}
+.tag-rust{background:#fff7ed;color:#c2410c}
+.tag-ruby{background:#fef2f2;color:#dc2626}
+.delta-badge{display:inline-block;font-size:.75rem;font-weight:700;white-space:nowrap;padding:.12rem .55rem;border-radius:9999px;background:#ecfdf5;color:var(--up)}
 footer{text-align:center;margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border);color:var(--text-muted);font-size:.8rem}
 footer a{color:var(--primary-500);text-decoration:none}
 @media(max-width:600px){body{padding:1rem .75rem}header h1{font-size:1.4rem}.rank-desc{white-space:normal}.rank-card{flex-wrap:wrap}.tool-metrics{gap:.9rem}}
-@media(prefers-color-scheme:dark){:root{--bg:#0f0f1a;--surface:#1a1a2e;--text-primary:#e4e4ec;--text-secondary:#a0a0b8;--text-muted:#6b6b80;--border:#2a2a3e;--primary-50:#1a1a3e;--primary-600:#5b8af5;--primary-500:#6b9af5;--up:#34d399;--down:#f87171;--spark:#6b9af5}.week-summary{background:linear-gradient(135deg,#1a1a3e,#1f1a3e)}.new-badge,.rank-name .cat{background:#2d1b69}}
+@media(prefers-color-scheme:dark){:root{--bg:#0f0f1a;--surface:#1a1a2e;--text-primary:#e4e4ec;--text-secondary:#a0a0b8;--text-muted:#6b6b80;--border:#2a2a3e;--primary-50:#1a1a3e;--primary-600:#5b8af5;--primary-500:#6b9af5;--up:#34d399;--down:#f87171;--spark:#6b9af5}.week-summary{background:linear-gradient(135deg,#1a1a3e,#1f1a3e)}.new-badge,.tag-cat{background:#2d1b69}.delta-badge{background:#0a3d2a}.tag-python{background:#1a1a4d}.tag-ts{background:#0a1a3d}.tag-js{background:#3d2f0a}.tag-go{background:#0a2d3d}.tag-rust{background:#3d200a}.tag-ruby{background:#3d0a0a}}
 </style>
 </head>
 <body>
@@ -68,6 +77,7 @@ footer a{color:var(--primary-500);text-decoration:none}
   <nav class="site-nav">
     <a href="./">📰 日刊ダイジェスト</a>
     <a href="#" class="active">🔌 プラグイントレンド</a>
+    <a href="ai-trends.html">🧠 AI プロダクト動向</a>
   </nav>
 </header>
 
@@ -75,6 +85,8 @@ footer a{color:var(--primary-500);text-decoration:none}
   <strong>今週の概況:</strong> 追跡 16 ツール中 全 16 が初回計測。前週比は来週から表示される。
   <span style="font-size:.75rem;color:var(--text-muted);display:block;margin-top:.4rem">※ この概況文はスナップショット数値からテンプレートで自動生成（LLM 非経由）</span>
 </div>
+
+
 
 
 
@@ -280,7 +292,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 </div>
 
 <footer>
-  <p>データ: GitHub API / npm downloads API から毎週月曜 07:00 に自動収集。数値・推移・概況文はすべてスナップショットからの決定論生成（LLM 非経由）</p>
+  <p>データ: GitHub API / npm downloads API から毎週月曜 07:00 に自動収集。数値・推移・概況文はすべてスナップショットからの決定論生成（LLM 非経由）。「今週の新顔」の紹介文のみ AI 生成（失敗時は GitHub 説明文で代替）</p>
   <p style="margin-top:.5rem"><a href="https://github.com/kaionn/tech-news-daily/tree/main/data/plugins">📊 生データ (data/plugins/)</a> · <a href="./">📰 日刊ダイジェストに戻る</a></p>
 </footer>
 </div>

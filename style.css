@@ -438,3 +438,29 @@ footer a {
   .editorial { background: #141a2e; }
   .keyword-chip { background: #1a1a3e; }
 }
+
+.site-nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.site-nav a {
+  display: inline-block;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-decoration: none;
+  border: 1px solid var(--border);
+  border-radius: 9999px;
+  transition: all 0.15s ease;
+}
+
+.site-nav a:hover,
+.site-nav a.active {
+  color: var(--primary-500);
+  border-color: var(--primary-500);
+}
