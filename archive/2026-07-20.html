@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-07-20</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="../feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-07-20 (Mon)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+      <nav class="site-nav">
+        <a href="./" class="active">📰 日刊ダイジェスト</a>
+        <a href="trends.html">🔌 週次プラグイントレンド</a>
+        <a href="ai-trends.html">🧠 AI プロダクト動向</a>
+      </nav>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 21 articles</span>
+      <span>🏷 7 categories</span>
+      <span>📡 16 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item">
+        <span class="number-value">$25</span>
+        <span class="number-label">AIが50万ドル相当のWordPress RCE脆弱性を発見するのに要した費用</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">17,000+</span>
+        <span class="number-label">Hugging Face侵害で攻撃AIエージェントが記録した行動数</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">2.4兆</span>
+        <span class="number-label">Alibaba「Qwen3.8」のパラメータ数、Qwen初の1兆超マルチモーダルモデル</span>
+      </div>
+    </div>
+
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
+
+      <div class="card featured deep-dive">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://huggingface.co/blog/security-incident-july-2026">DEEP DIVE: Hugging Faceが自律型AIエージェントに侵入され、フォレンジック分析には西側モデルが拒否したため中国製「GLM 5.2」を採用</a></h3>
+        </div>
+        <div class="summary">世界最大のAIモデル・データセット共有プラットフォームHugging Faceが、自律型AIエージェントによる侵入を受けたと公表した。侵入経路はデータセット処理パイプラインの2つのコード実行経路——リモートコード実行を許すデータセットローダーと、データセット設定ファイルのテンプレートインジェクション——を悪用したもので、処理ワーカー上でコードを実行された後、ノードレベルの権限まで昇格され、認証情報を奪取して複数の内部クラスタへ週末をまたいで横展開された。攻撃者は使い捨てのサンドボックス群にまたがる自律エージェントフレームワークを展開し、公開サービス上に自己移動するC2基盤を構築していたという。公開中のモデル・データセット・Spacesへの改ざんは確認されなかったが、一部の内部データセットと複数のサービス用認証情報への不正アクセスが確認された。フォレンジック対応では、記録された1万7000件超の攻撃アクションログをAIエージェントで解析して時系列とIOC（侵害指標）を再構築したが、ここで問題が生じた。実際の攻撃コマンドやエクスプロイトコード、C2の痕跡を含む解析依頼を、API経由の西側フロンティアモデルが安全ガードレールに阻まれて軒並み拒否したのだ。同社は自社インフラ上でオープンウェイトモデルのGLM 5.2を動かすことで、ガードレールによる拒否を回避しつつ、機密性の高い認証情報データを外部に一切送信せずに解析を完遂した。事後対応として脆弱なコード実行経路の遮断、侵害ノードの再構築、認証情報の全面ローテーション、クラスタのアドミッション制御強化、外部フォレンジック専門家の起用を実施している。</div>
+        <div class="editorial">🧠 侵入経路そのものは「データパイプラインにコード実行の穴があった」という比較的よくある構図だが、この一件の本当の論点は事後対応の方にある。実攻撃ペイロードを分析させようとしただけで西側フロンティアモデルの安全機構が発動し防御側の手を縛ったという事実は、ガードレール設計が「攻撃には使わせない」ことと「防御にも使いにくくする」ことを同時にやってしまっている証拠だ。オープンウェイトモデルを自社インフラで動かす選択は、データ主権の観点だけでなく、まさにこの種の防御ユースケースで西側クローズドモデルが機能不全に陥るという新しいリスクへの実務的な回避策として読める。ただしGLM 5.2側にガードレールが薄いことの副作用——悪用耐性の低さ——とのトレードオフは、この記事だけでは検証しようがない。</div>
+        <div class="key-points">
+          <ul>
+            <li>データセットローダーのリモートコード実行とデータセット設定のテンプレートインジェクションという2経路を悪用し処理ワーカーで初期実行、ノード権限昇格後に週末をまたぎ複数内部クラスタへ横展開</li>
+            <li>フォレンジック解析対象は1万7000件超の攻撃アクションログ、公開モデル・データセット・Spacesへの改ざんは確認されず、内部データセットと一部サービス認証情報のみ不正アクセスを確認</li>
+            <li>実攻撃ペイロードの分析依頼を西側API経由フロンティアモデルは安全ガードレールで拒否、自社ホストのオープンウェイトモデルGLM 5.2に切り替えて解析を完遂</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 AIプラットフォームを運用する開発者は、データセット/モデルローダーのコード実行経路を信頼境界として扱い、インシデント対応用に安全ガードレールで拒否されない自社ホスト型モデルの選択肢を事前に用意しておく価値がある。</div>
+        <div class="meta">
+          <span>Hugging Face Blog</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-07-20</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://slcyber.io/research-center/exploit-brokers-pay-500000-for-a-wordpress-rce-i-found-one-with-gpt5-6/">エクスプロイトブローカーが50万ドルで買うWordPress RCEを、セキュリティ研究者がGPT-5.6と25ドルで発見</a></h3>
+        </div>
+        <div class="summary">Searchlight Cyberの研究者が、GPT-5.6 Sol Ultraに最大4体のエージェントを並列実行させ、インターネット検索やチェンジログ照合を禁じた「一から発見させる」制約のもとでWordPressの未認証事前RCEを探索させた。API利用料約25ドル・作業時間10時間強で、バッチAPIの検証と実行が別ループで走る実装の隙を突く手法を発見。不正なリクエストで検証配列と実行対象がズレる「デシンク」を起こし、`author__not_in`パラメータへのSQLインジェクション、投稿キャッシュの汚染、oembedキャッシュ経由の永続化、権限昇格フックの誘発という計6段階のガジェットを連結してRCEに到達した。全体でHTTPリクエストはわずか2本。5億台超のWordPress設置環境が対象になりうる規模で、同種の脆弱性はエクスプロイトブローカー市場で50万ドルの値がつくという。</div>
+        <div class="key-points">
+          <ul>
+            <li>バッチAPIの検証ループと実行ループの不整合を突く「デシンク」で`author__not_in`パラメータへの生SQL注入を可能にし、投稿キャッシュ汚染→oembedキャッシュ永続化→権限昇格フック誘発と6段階のガジェットを連結</li>
+            <li>API利用料約25ドル・作業時間10時間強・最終ペイロードはHTTPリクエスト2本のみ、対象は5億台超のWordPress設置環境</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Searchlight Cyber</span>
+          <span>⏱ 7 min read</span>
+          <span>2026-07-19</span>
+          <span class="engagement">▲ 253</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://simonwillison.net/2026/Jul/19/claude-code-in-bun-in-rust/">Claude CodeがひっそりとBunのRust書き換え版に切り替わっていたことをバイナリ解析で確認</a></h3>
+        </div>
+        <div class="summary">Simon WillisonがClaude Code v2.1.181（6月17日リリース）を調査し、Bunプロジェクトの開発者Jarred Sumnerが主張していた「Rust版Bunの採用」を技術的に裏付けた。ローカルのclaudeバイナリに対し`strings ~/.local/bin/claude | grep -m1 'Bun v1'`を実行するとBun v1.4.0（macOS arm64、公開canary版より新しい未公開バージョン）が検出され、Rustのファイル拡張子でgrepすると`src/runtime/bake/dev_server/mod.rs`から始まる563個のRustソースファイル名が埋め込まれていることも確認できた。当時の最新公開版Bunはv1.3.14（5月12日）であり、Claude Codeは公開版より先行してRust移植版を本番投入していたことになる。Linux環境では起動時間が約10%改善したとも報告されている。</div>
+        <div class="key-points">
+          <ul>
+            <li>`strings`コマンドでバイナリ内にBun v1.4.0（公開canary版より新しい未公開バージョン）を検出、Rust拡張子grepで563個の埋め込みRustソースファイル名を確認</li>
+            <li>当時の最新公開Bunはv1.3.14（5月12日）で、Claude Codeは未公開のRust移植版を先行本番投入、Linuxで起動時間が約10%改善</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Simon Willison's Blog</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07-19</span>
+          <span class="engagement">▲ 571</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://www.theregister.com/columnists/2026/07/20/airbus-takes-flight-from-aws-what-happens-next-is-critical/5274109">Airbus、ERP・CRM・製造システムなど約900アプリをAWSから仏Scalewayへ移行——デジタル主権を理由に70の基幹システムを優先</a></h3>
+        </div>
+        <div class="summary">航空機メーカーAirbusが、AWS上で稼働するERP・CRM・製造管理システムなど約900アプリケーションをフランスのクラウド事業者Scalewayへ移行すると発表した。うち70の基幹システムを優先移行の対象とする。背景には「米国クラウド事業者も米国政府からのアクセスを受けうる対象になった」という安全保障上の懸念があり、規制対応の建前ではなく実質的な商業判断だと指摘されている。一方でサプライチェーン管理システムは移行対象に含まれておらず、世界18000社に及ぶサプライヤーの大半がMicrosoft系システムを使っている実態や、AI統合戦略が発表に含まれていない点が課題として残る。</div>
+        <div class="key-points">
+          <ul>
+            <li>ERP・CRM・製造システムなど約900アプリのうち70の基幹システムを優先移行、移行先は仏Scaleway</li>
+            <li>サプライチェーン管理システムは対象外、世界18000社のサプライヤーの大半はMicrosoft系システム利用でAI統合戦略も未発表</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>The Register</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-07-20</span>
+          <span class="engagement">▲ 151</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://the-decoder.com/alibabas-qwen-takes-on-kimi-k3-with-open-weight-qwen-3-8-says-model-is-second-only-to-fable-5/">Alibaba、2.4兆パラメータのマルチモーダルモデル「Qwen3.8」プレビュー公開——Kimi K3の勢いに対抗し「Fable 5に次ぐ性能」と主張</a></h3>
+        </div>
+        <div class="summary">Alibabaが、テキスト・画像・動画・文書を処理できる同社初の1兆パラメータ超マルチモーダルモデル「Qwen3.8」（2.4兆パラメータ）のプレビューを公開した。従来の最上位モデルQwen3.7-Maxを上回るコーディング・フルスタック開発・データ分析・オフィス業務性能を狙う。Qwen3.8-Max-PreviewはToken Plan・Coder・CoderWork経由で通常価格の10%で利用でき、OpenAI・Anthropic互換APIにも対応する。オープンウェイト版は「近日中」を約束するのみで日付は未確定、ベンチマーク結果も未公開。Moonshot AIのKimi K3が月間経常収益3億ドルに到達し6か月以内のIPOを準備する中、そのオープンウェイト戦略への対抗という市場文脈で語られている。</div>
+        <div class="key-points">
+          <ul>
+            <li>2.4兆パラメータでQwen初の1兆超マルチモーダルモデル、Token Plan等経由で通常価格の10%でプレビュー提供、OpenAI/Anthropic互換API対応</li>
+            <li>オープンウェイト版は日付未定、ベンチマーク未公開。Kimi K3（月間経常収益3億ドル、6か月以内IPO準備）への対抗という位置付け</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>The Decoder</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07-19</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://robotics.xiaomi.com/xiaomi-robotics-1.html">Xiaomi、LLM流のスケーリング則をロボット操作に適用した基盤モデル「Xiaomi-Robotics-1」公開——10時間のデモから新規タスク成功率75%</a></h3>
+        </div>
+        <div class="summary">Xiaomiが、大規模言語モデルのスケーリング手法を踏襲したロボット操作向け基盤モデル「Xiaomi-Robotics-1」を公開した。1700シナリオ超・10万時間分の操作動画で状態遷移を自動注釈しながら事前学習し、家庭環境で収集した7200時間超の実機データで事後学習することで、実機ハードウェアと自然言語指示に整合させる。新規タスクは10時間未満のデモで成功率75%、40時間未満で85%に達し、RoboCasaで74.5%、VLABenchで59.1%とシミュレーションベンチマークでも高スコアを記録。ソファの片付けや戸棚整理、電話梱包や洗濯物の積み込みといった複合タスクを少量データから学習できる。</div>
+        <div class="key-points">
+          <ul>
+            <li>1700シナリオ超・10万時間の動画事前学習＋家庭環境7200時間超の実機データで事後学習、新規タスクは10時間未満のデモで成功率75%・40時間未満で85%</li>
+            <li>RoboCasa 74.5%・VLABench 59.1%などシミュレーションベンチマークで高スコア、モデル規模と事前学習データ量に比例した性能向上を確認</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Xiaomi Robotics</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07-18</span>
+          <span class="engagement">▲ 323</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-product">Product</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://chipweinberger.com/articles/20260719-hardware-is-not-so-hard">ピアノ用MIDIレコーダーを2500台売った個人開発者、「ハードウェアは自分で難しくしているだけ」——粗利70%超・4日で500台無改修組立</a></h3>
+        </div>
+        <div class="summary">ソフトウェアエンジニアのChip Weinbergerが、ピアノの演奏を自動録音するハードウェア製品「Jamcorder」を開発し、ファームウェア・アプリ・製造ツールを合わせ約20万行のコードを3年以上かけて書き上げ、これまでに2500台超を販売した。USB-C端子・電源ボタン・環境光センサーといった機能をあえて削り、ユニーク部品25点・ネジ1本での組立という単純設計にしたことで、最初の500台を4日間・仕様変更ゼロで手組みできたという。粗利70%超を目標に、簡素なBOM・中国製造パートナー・小規模運営・模倣対策・自社QA・コンパクト梱包という10の教訓を挙げている。</div>
+        <div class="key-points">
+          <ul>
+            <li>ファームウェア・アプリ・製造ツール合計約20万行、3年以上開発しこれまで2500台超を販売、粗利70%超が目標</li>
+            <li>ユニーク部品25点・ネジ1本の単純設計で最初の500台を4日間・仕様変更ゼロで手組み、USB-C等の機能をあえて排除して複雑さを回避</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>chipweinberger.com</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-07-19</span>
+          <span class="engagement">▲ 520</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-frontend">Frontend</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/uhyo/articles/async-react-action-queue">React 19の`useActionState`はアクションを自動でキュー化する——連打しても壊れないUIの作り方</a></h3>
+        </div>
+        <div class="summary">React 19の`useActionState`フックが、非同期処理を伴うアクションをどのように扱うかを解説する記事。`useReducer`と異なり非同期関数を受け付け、ユーザーが連続してアクションをトリガーしても並列実行せず自動的にキューに積んで順番に処理する点が核心だという。ユーザー操作をブロックしないUXを実現するため、`useOptimistic`と組み合わせた買い物カートの実装例では、連打した「カートに追加」ボタンがリクエストを裏側で静かにキューイングしつつ、即座に半透明表示で楽観的更新を見せる。</div>
+        <div class="key-points">
+          <ul>
+            <li>`useActionState`はアクションを並列実行せず自動でキュー化し順番に処理、開発者が独自のキュー機構を実装する必要がなくなる</li>
+            <li>`useOptimistic`と組み合わせることで、連打時もリクエストは裏側でキューイングしつつ即座に半透明表示の楽観的更新を見せられる</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-07-20</span>
+          <span class="engagement">🔖 41</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://ascii.jp/elem/000/004/420/4420739/">AIがBlenderを勝手に操作、日本語の指示だけで3Dモデリング——MCP経由でClaude Fable 5・GPT-5.6 Solが環境構築から自動対応</a></h3>
+        </div>
+        <div class="summary">Model Context Protocol（MCP）経由でLLMとBlenderを接続することで、Claude Fable 5やGPT-5.6 SolといったAIがBlenderを自動操作し3Dモデリングを行えるようになったことを紹介する記事。4月公開の新しいBlender MCPコネクタで機能が拡張され、ユーザーは日本語でClaude Codeに指示するだけで、環境構築から複雑なモデリング作業までAIが担う。推奨ワークフローは、まずAI画像生成ツールで参考画像を作り、Blender上で簡易モデルを作らせたのち、段階的な指示で詳細を追加していく流れ。夏の部屋のシーンやダンス、ロボットバトルといった作例を通じ、非専門家でも3D制作に取り組める可能性を示している。</div>
+        <div class="key-points">
+          <ul>
+            <li>4月公開の新Blender MCPコネクタでLLMとBlenderが接続され、日本語指示だけで環境構築から複雑なモデリングまでAIが自動対応</li>
+            <li>推奨フローは参考画像生成→簡易モデル作成→段階的な詳細追加、アニメーションの絵コンテやプレビズ映像への応用も想定</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>ASCII.jp</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07-19</span>
+          <span class="engagement">🔖 258</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://zenn.dev/tkou15/articles/bonsai-1bit-llm-guide">1.15GBで動く8Bモデル「Bonsai」活用ガイド——重み+1/-1の1-bit LLMをGPUなしでCPU実測11〜12トークン/秒</a></h3>
+        </div>
+        <div class="summary">Caltech発スタートアップPrismMLが2026年3月に発表した1-bit LLMファミリー「Bonsai」の活用法を紹介する記事。埋め込み層からLMヘッドまでネットワーク全体を+1/-1の1-bit重みでスクラッチ学習しており、8Bモデルはファイルサイズわずか1.15GB・必要メモリ約1.5GBで、GPUなしでもCPU単独で11〜12トークン/秒の実用速度を出せる。MMLU-Rで65.7、主要ベンチマーク平均70.5と、同クラスのフル精度モデル比で約1/14のサイズながら競合する性能を示す。OpenAI互換APIでアプリに組み込め、ローカルチャットや要約、機密文書のオンプレ処理に向くが、コーディングエージェント用途では現状力不足だという。</div>
+        <div class="key-points">
+          <ul>
+            <li>8Bモデルがファイルサイズ1.15GB・必要メモリ約1.5GBで、GPUなしCPU単独で11〜12トークン/秒、同クラスモデル比で約1/14のサイズ</li>
+            <li>MMLU-Rで65.7・主要ベンチマーク平均70.5、OpenAI互換APIで組み込み可能だがコーディングエージェント用途は力不足</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07-19</span>
+          <span class="engagement">🔖 40</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://qiita.com/eureka_/items/6bb207fa1da4add1f61b">AWS CloudFront「VPC Origins」障害まとめ——セキュリティ強化のため新機能を使った利用者だけが4時間35分の影響を受けた皮肉</a></h3>
+        </div>
+        <div class="summary">2026年7月16日16:45〜21:20（日本時間、約4時間35分）に発生したAmazon CloudFrontの障害をまとめた記事。影響を受けたのはPayPay・note・ニコニコ生放送など「VPC Origins」機能の利用者のみで、AWSの説明によればPrivate VPC Originsへの接続を管理するフリートの内部制約が根本原因となり、専用接続基盤でルーティング構成の配布に失敗し5xxエラーが増加した。S3やインターネット向けALBなど従来型オリジンは別経路を使うため影響を受けず、セキュリティを高めるために新機能を採用したシステムだけが被害を受ける結果となった。</div>
+        <div class="key-points">
+          <ul>
+            <li>2026年7月16日16:45〜21:20（JST）の約4時間35分、原因はPrivate VPC Origins接続を管理するフリートの内部制約によるルーティング構成配布の失敗</li>
+            <li>PayPay・note・ニコニコ生放送などVPC Origins利用者のみ影響、S3やインターネット向けALBなど従来型オリジンは別経路のため無事</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-19</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.com/Saivineeth147/lora-speedrun">LoRAファインチューニングの速さを競う公開リーダーボード「LoRA Speedrun」——ベースライン12分を6分に短縮しつつ精度も向上した記録が首位</a></h3>
+        </div>
+        <div class="summary">固定タスク・固定ハードウェアでLoRAファインチューニング手法の実行時間を競う公開ベンチマーク「LoRA Speedrun」が公開された。Track 1はQwen2.5-1.5BをGSM8Kで正解率57%以上、Track 2はSmolLM2-1.7BをSQuADで75.5%以上に到達させる課題で、アダプタのみ学習・パラメータ数3000万以下という制約のもとMLA L40S上で新規シード3回の自動検証を行う。現在の首位記録はTrack 1でベースラインの12分を約6分まで短縮しつつ正解率61.1%まで向上させており、ベースライン比約49%高速化と性能向上を両立している。</div>
+        <div class="key-points">
+          <ul>
+            <li>Track 1（Qwen2.5-1.5B、GSM8K正解率57%以上）・Track 2（SmolLM2-1.7B、SQuAD75.5%以上）をModal L40S上で新規シード3回の自動検証</li>
+            <li>Track 1の現首位はベースライン12分を約6分に短縮しつつ正解率61.1%まで向上、ベースライン比約49%高速化</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-19</span>
+          <span class="engagement">▲ 109</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-product">Product</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://orionbrowser.com/">Kagi製ブラウザ「Orion」、ネイティブWebKitエンジンでSafari/Chrome/Firefox拡張機能を横断対応——Linux版がベータ、Windows版はアルファ開発中</a></h3>
+        </div>
+        <div class="summary">検索エンジンKagiが開発するブラウザ「Orion」は、Chromiumを使わないネイティブWebKitエンジンをベースに、広告ブロックとトラッキング防止をゼロテレメトリで組み込んでいる。Safari・Chrome・Firefox向け拡張機能をそのまま利用でき、厳選された20種の拡張機能セットも用意する。macOS版は5年の開発期間を経たフラッグシップ版、iOS/iPadOS版は400万ユーザーの実績があり、Linux版はベータ、Windows版はアルファ開発中。広告や第三者取引を一切排さず、サブスクリプションまたは買い切りライセンスの100%ユーザー課金モデルで運営される。</div>
+        <div class="key-points">
+          <ul>
+            <li>Chromium非依存のネイティブWebKitエンジンでSafari/Chrome/Firefox拡張機能を横断利用可能、ゼロテレメトリで広告ブロック・トラッキング防止を標準搭載</li>
+            <li>macOS版は開発5年のフラッグシップ、iOS/iPadOS版は400万ユーザー実績、Linux版はベータ・Windows版はアルファ開発中</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Orion Browser</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-19</span>
+          <span class="engagement">▲ 254</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.com/hgaiser/moonshine">Rust製ヘッドレスゲームストリーミングサーバー「Moonshine」——GPUエンコードでMoonlightクライアントへ低遅延配信、ホストデスクトップは触らせない</a></h3>
+        </div>
+        <div class="summary">PC上のゲームをMoonlightクライアント経由で任意のデバイスへストリーミングできる、Rust製（コードベースの99.5%）のヘッドレスストリーミングサーバー「Moonshine」が公開された。ストリーミングセッションを独立したコンポジタ上に隔離し、ホストのデスクトップ環境を邪魔しない設計で、モニタなしのヘッドレスサーバーでも動作する。NVIDIA RTX・AMD RDNA2以降・Intel ArcのVulkanビデオエンコードを利用してH.264/H.265/AV1のハードウェアエンコードとHDR 10bitストリーミングに対応し、マウス・キーボード・ハプティクス対応ゲームパッドの入力もサポートする。</div>
+        <div class="key-points">
+          <ul>
+            <li>ストリーミングセッションを独立コンポジタに隔離しホストデスクトップを邪魔せず、モニタなしのヘッドレスサーバーでも動作</li>
+            <li>NVIDIA RTX/AMD RDNA2以降/Intel ArcのVulkanエンコードでH.264/H.265/AV1とHDR 10bitに対応、Moonlight v6.0.0以降が必要</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-19</span>
+          <span class="engagement">▲ 264</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://wren.wtf/shower-thoughts/stop-using-opencode/">「OpenCodeを使うのをやめろ」——ローカル実行を根本的に危険にする権限設計の欠陥とプロンプトキャッシュの非効率を指摘</a>
+        <span class="quick-summary">— 破損したコンテキスト管理や、悪意あるコード実行を防げない権限システムを具体的に列挙。</span>
+        <span class="meta">wren.wtf</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-oss">OSS</span>
+        <a href="https://tangled.org/gleam.run/gleam">型安全言語Gleam、分散型フォージ「Tangled」にソースコードをミラー——DIDベースのリポジトリアクセスに対応</a>
+        <span class="quick-summary">— コンパイラ・言語サーバー・フォーマッタなど複数モジュール構成、活発な開発が継続中。</span>
+        <span class="meta">Tangled</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://zenn.dev/uhyo/articles/import-lint-intro">import専門の高速Rust製リンター「ImportLint」——ESLintプラグイン版の100倍速、150万行を1〜2秒で処理</a>
+        <span class="quick-summary">— パッケージ境界をglobパターンで定義し、index.ts経由の公開インターフェース以外からの越境importを検出。</span>
+        <span class="meta">Zenn</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://techcrunch.com/2026/07/13/video-generation-startup-pixverse-raises-439m-valuation-soars-past-2b/">AI動画生成のPixVerse、Alibaba参加のシリーズC拡張で4億3900万ドル調達——評価額20億ドル超、登録ユーザー1億5000万人超</a>
+        <span class="quick-summary">— シンガポール拠点、4K出力対応の動画生成モデルをコンシューマー・企業向けに提供。</span>
+        <span class="meta">TechCrunch</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://www.fiercebiotech.com/biotech/chai-brews-400m-series-c-fuel-ai-used-lilly-novartis-and-pfizer">AI創薬のChai Discovery、シリーズCで4億ドル調達——評価額38億ドル、Eli Lilly・Novartis・Pfizerが分子設計モデルを実利用</a>
+        <span class="quick-summary">— 分子間相互作用を予測するAIモデルを開発、大手製薬企業の創薬プロセスに組み込まれている。</span>
+        <span class="meta">FierceBiotech</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://zenn.dev/asoventure/articles/2026-07-19-gsc-api-seo-automation">Google Search Console APIで低順位ページを検出しGemini APIで自動リライト——1人運用で複数AIメディアサイトのSEO改善を回す仕組み</a>
+        <span class="quick-summary">— Next.js公開とIndexNow通知を組み合わせ、検索エンジンへの再インデックス依頼まで自動化。</span>
+        <span class="meta">Zenn</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://qiita.com/jiis-sasaki/items/178a8b20280df919d6a0">nginx/Apache/PHP/WordPress対応、バージョン情報の露出を防ぐサーバー設定まとめ——「補助的な一枚」に過ぎず更新こそ最優先と強調</a>
+        <span class="quick-summary">— レスポンスヘッダやHTMLメタタグからバージョン番号を非表示にする具体設定を紹介。</span>
+        <span class="meta">Qiita</span>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="archive/" class="archive-link">Past issues</a>
+    </footer>
+  </div>
+</body>
+</html>
