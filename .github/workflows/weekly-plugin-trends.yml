@@ -12,6 +12,7 @@ on:
 
 permissions:
   contents: write
+  id-token: write # claude-code-action@v1 の GitHub トークン OIDC 交換に必須（46cabc2 の自傷を繰り返さない。GitHub Pages 用ではない）
 
 concurrency:
   group: weekly-plugin-trends
@@ -25,10 +26,24 @@ jobs:
         with:
           ref: main
 
-      - name: Collect trends
+      - name: Collect trends (GitHub stars / npm downloads / discover)
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: node scripts/weekly-plugin-trends.mjs
+
+      - name: Generate rising blurbs with Claude Code
+        continue-on-error: true # 紹介文生成の失敗で run 全体を落とさない（renderer は description にフォールバックする）
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: "Read prompts/weekly-trends-blurbs.md and follow its instructions exactly. The repository root is the current working directory."
+          claude_args: |
+            --model claude-sonnet-5
+            --allowedTools "WebFetch,Read,Write,Edit,Glob,Grep,Bash"
+            --disallowedTools "Bash(git add:*),Bash(git commit:*),Bash(git push:*),Bash(git config:*),Bash(git remote:*),Bash(git reset:*),Bash(git rebase:*)"
+
+      - name: Re-render trends.html with blurbs
+        run: node scripts/weekly-plugin-trends.mjs --render-only
 
       - name: Commit and push trends
         id: commit
@@ -36,6 +51,9 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
+          # claude-code-action が git 認証設定を自分のトークンで上書きしたまま終了する
+          # （push 時点で失効し Invalid username or token になる）ため、GITHUB_TOKEN に張り直す
+          git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
           if [ -z "$(git status --porcelain -- data/ trends.html)" ]; then
             echo "::error::生成物に変更がない"
             exit 1
