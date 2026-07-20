@@ -155,7 +155,7 @@ function renderHeader(issue, minutes, fromIsLatest) {
   <p class="tagline">実プロダクトのアーキテクチャ・使用例から AI 開発の現在地を毎週 1 テーマ深掘り</p>
   <nav class="site-nav">
     <a href="${indexHref}">📰 日刊ダイジェスト</a>
-    <a href="${trendsHref}">🔌 プラグイントレンド</a>
+    <a href="${trendsHref}">🔌 週次プラグイントレンド</a>
     <a href="${selfHref}" class="active">🧠 AI プロダクト動向</a>
   </nav>
 </header>`;
