@@ -1,0 +1,60 @@
+name: Weekly plugin trends (collect & deploy)
+
+# 日次 run (daily-digest.yml) とは疎結合な独立 workflow。
+# data/plugins/*.json を一次ソースとして GitHub stars / npm 週間 DL を収集し、
+# trends.html を決定論的に生成する（LLM は使わない）。
+# 撤退したい場合は本 workflow を disable するだけで良く、日次 run には一切影響しない。
+
+on:
+  schedule:
+    - cron: '0 22 * * 0' # 毎週月曜 07:00 JST
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: weekly-plugin-trends
+  cancel-in-progress: false
+
+jobs:
+  collect-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Collect trends
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/weekly-plugin-trends.mjs
+
+      - name: Commit and push trends
+        id: commit
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          if [ -z "$(git status --porcelain -- data/ trends.html)" ]; then
+            echo "::error::生成物に変更がない"
+            exit 1
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/ trends.html
+          git commit -m "$(TZ=Asia/Tokyo date '+%Y-%m-%d') の週次プラグイントレンド"
+          git pull --rebase origin main
+          git push origin main
+          echo "pushed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Deploy to Cloudflare Pages
+        if: steps.commit.outputs.pushed == 'true'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          set -euo pipefail
+          CLEAN=$(mktemp -d)
+          git archive HEAD | tar -x -C "$CLEAN"
+          npx --yes wrangler@4 pages deploy "$CLEAN" --project-name=tech-news-daily --branch=main
