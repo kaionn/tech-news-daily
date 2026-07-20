@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-20T12:39:22.848Z",
+  "generated_at": "2026-07-20T12:51:48.615Z",
   "latest_week": "2026-W30",
   "weeks_available": 1,
   "items": [
@@ -11,8 +11,8 @@
       "github": "anthropics/claude-code",
       "npm": "@anthropic-ai/claude-code",
       "description": "Anthropic 公式のターミナル AI コーディングエージェント。plugin / Skill 機構で拡張できる",
-      "language": null,
-      "stars": 138416,
+      "language": "Python",
+      "stars": 138418,
       "stars_prev": null,
       "stars_delta": null,
       "stars_pct": null,
@@ -23,7 +23,7 @@
       "history": [
         {
           "week": "2026-W30",
-          "stars": 138416,
+          "stars": 138418,
           "npm_weekly_downloads": 11506892
         }
       ],
@@ -38,8 +38,8 @@
       "github": "ccusage/ccusage",
       "npm": "ccusage",
       "description": "Claude Code のトークン使用量・コストをローカルの JSONL から集計する CLI",
-      "language": null,
-      "stars": 17319,
+      "language": "Rust",
+      "stars": 17322,
       "stars_prev": null,
       "stars_delta": null,
       "stars_pct": null,
@@ -50,7 +50,7 @@
       "history": [
         {
           "week": "2026-W30",
-          "stars": 17319,
+          "stars": 17322,
           "npm_weekly_downloads": 88084
         }
       ],
@@ -65,7 +65,7 @@
       "github": "musistudio/claude-code-router",
       "npm": "@musistudio/claude-code-router",
       "description": "Claude Code のリクエストを他モデルへルーティングするプロキシ",
-      "language": null,
+      "language": "TypeScript",
       "stars": 35944,
       "stars_prev": null,
       "stars_delta": null,
@@ -92,8 +92,8 @@
       "github": "modelcontextprotocol/servers",
       "npm": null,
       "description": "MCP 公式リファレンスサーバー集。エコシステムの定点",
-      "language": null,
-      "stars": 88664,
+      "language": "TypeScript",
+      "stars": 88665,
       "stars_prev": null,
       "stars_delta": null,
       "stars_pct": null,
@@ -104,7 +104,7 @@
       "history": [
         {
           "week": "2026-W30",
-          "stars": 88664,
+          "stars": 88665,
           "npm_weekly_downloads": null
         }
       ],
@@ -119,8 +119,8 @@
       "github": "modelcontextprotocol/typescript-sdk",
       "npm": "@modelcontextprotocol/sdk",
       "description": "MCP の公式 TypeScript SDK。サーバー・クライアント実装の土台",
-      "language": null,
-      "stars": 12899,
+      "language": "TypeScript",
+      "stars": 12900,
       "stars_prev": null,
       "stars_delta": null,
       "stars_pct": null,
@@ -131,7 +131,7 @@
       "history": [
         {
           "week": "2026-W30",
-          "stars": 12899,
+          "stars": 12900,
           "npm_weekly_downloads": 43340138
         }
       ],
@@ -146,7 +146,7 @@
       "github": "github/github-mcp-server",
       "npm": null,
       "description": "GitHub 公式の MCP サーバー（Go 実装）",
-      "language": null,
+      "language": "Go",
       "stars": 31573,
       "stars_prev": null,
       "stars_delta": null,
@@ -173,8 +173,8 @@
       "github": "microsoft/playwright-mcp",
       "npm": "@playwright/mcp",
       "description": "Playwright をエージェントから操作するブラウザ自動化 MCP サーバー",
-      "language": null,
-      "stars": 35283,
+      "language": "TypeScript",
+      "stars": 35286,
       "stars_prev": null,
       "stars_delta": null,
       "stars_pct": null,
@@ -185,7 +185,7 @@
       "history": [
         {
           "week": "2026-W30",
-          "stars": 35283,
+          "stars": 35286,
           "npm_weekly_downloads": 6361565
         }
       ],
@@ -200,7 +200,7 @@
       "github": "upstash/context7",
       "npm": "@upstash/context7-mcp",
       "description": "ライブラリの最新ドキュメントを LLM に供給する MCP サーバー",
-      "language": null,
+      "language": "TypeScript",
       "stars": 59468,
       "stars_prev": null,
       "stars_delta": null,
@@ -227,7 +227,7 @@
       "github": "cline/cline",
       "npm": null,
       "description": "VS Code 上で動くオープンソースの自律コーディングエージェント拡張",
-      "language": null,
+      "language": "TypeScript",
       "stars": 64833,
       "stars_prev": null,
       "stars_delta": null,
@@ -254,7 +254,7 @@
       "github": "RooCodeInc/Roo-Code",
       "npm": null,
       "description": "Cline 派生の VS Code AI エージェント拡張",
-      "language": null,
+      "language": "TypeScript",
       "stars": 24358,
       "stars_prev": null,
       "stars_delta": null,
@@ -281,8 +281,8 @@
       "github": "continuedev/continue",
       "npm": null,
       "description": "オープンソースの IDE AI アシスタント（VS Code / JetBrains）",
-      "language": null,
-      "stars": 34982,
+      "language": "TypeScript",
+      "stars": 34983,
       "stars_prev": null,
       "stars_delta": null,
       "stars_pct": null,
@@ -293,7 +293,7 @@
       "history": [
         {
           "week": "2026-W30",
-          "stars": 34982,
+          "stars": 34983,
           "npm_weekly_downloads": null
         }
       ],
@@ -308,7 +308,7 @@
       "github": "Aider-AI/aider",
       "npm": null,
       "description": "ターミナルで動くペアプログラミング AI（Python 製・PyPI 配布）",
-      "language": null,
+      "language": "Python",
       "stars": 47536,
       "stars_prev": null,
       "stars_delta": null,
@@ -335,8 +335,8 @@
       "github": "openai/codex",
       "npm": "@openai/codex",
       "description": "OpenAI のターミナルコーディングエージェント",
-      "language": null,
-      "stars": 99934,
+      "language": "Rust",
+      "stars": 99943,
       "stars_prev": null,
       "stars_delta": null,
       "stars_pct": null,
@@ -347,7 +347,7 @@
       "history": [
         {
           "week": "2026-W30",
-          "stars": 99934,
+          "stars": 99943,
           "npm_weekly_downloads": 15974279
         }
       ],
@@ -362,8 +362,8 @@
       "github": "google-gemini/gemini-cli",
       "npm": "@google/gemini-cli",
       "description": "Google 公式のターミナル AI エージェント",
-      "language": null,
-      "stars": 106083,
+      "language": "TypeScript",
+      "stars": 106086,
       "stars_prev": null,
       "stars_delta": null,
       "stars_pct": null,
@@ -374,7 +374,7 @@
       "history": [
         {
           "week": "2026-W30",
-          "stars": 106083,
+          "stars": 106086,
           "npm_weekly_downloads": 488119
         }
       ],
@@ -389,8 +389,8 @@
       "github": "anomalyco/opencode",
       "npm": "opencode-ai",
       "description": "ターミナル特化のオープンソース AI コーディングエージェント。プロバイダー非依存",
-      "language": null,
-      "stars": 187728,
+      "language": "TypeScript",
+      "stars": 187734,
       "stars_prev": null,
       "stars_delta": null,
       "stars_pct": null,
@@ -401,7 +401,7 @@
       "history": [
         {
           "week": "2026-W30",
-          "stars": 187728,
+          "stars": 187734,
           "npm_weekly_downloads": 2088482
         }
       ],
@@ -416,8 +416,8 @@
       "github": "OpenHands/OpenHands",
       "npm": null,
       "description": "自律ソフトウェア開発エージェントのプラットフォーム（Python 製）",
-      "language": null,
-      "stars": 81388,
+      "language": "Python",
+      "stars": 81389,
       "stars_prev": null,
       "stars_delta": null,
       "stars_pct": null,
@@ -428,7 +428,7 @@
       "history": [
         {
           "week": "2026-W30",
-          "stars": 81388,
+          "stars": 81389,
           "npm_weekly_downloads": null
         }
       ],
