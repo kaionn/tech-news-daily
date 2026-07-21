@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-07-21</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="../feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-07-21 (Tue)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+      <nav class="site-nav">
+        <a href="./" class="active">📰 日刊ダイジェスト</a>
+        <a href="trends.html">🔌 週次プラグイントレンド</a>
+        <a href="ai-trends.html">🧠 AI プロダクト動向</a>
+      </nav>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 20 articles</span>
+      <span>🏷 8 categories</span>
+      <span>📡 18 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item">
+        <span class="number-value">80%</span>
+        <span class="number-label">スタートアップが中国製AIモデルを使っている確率（a16zパートナー談）</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">574,661</span>
+        <span class="number-label">SleeperGemが乗っ取ったFastlaneプラグインの累計ダウンロード数</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">87%</span>
+        <span class="number-label">CursorのOpus+Composerハイブリッドが実現したコスト削減率（$10,565→$1,339）</span>
+      </div>
+    </div>
+
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
+
+      <div class="card featured deep-dive">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://news.risky.biz/risky-bulletin-hacker-wipes-romanias-entire-land-registry-database/">DEEP DIVE: 身代金交渉決裂の末、ルーマニア国立地籍局のデータベースが完全消去——公証業務が1週間停止</a></h3>
+        </div>
+        <div class="summary">ルーマニアの不動産登記を管轄する国立地籍局（ANCPI）が、身代金要求の交渉が決裂した末にデータベースを完全に消去される攻撃を受けた。攻撃者は「ByteToBreach」を名乗り、セキュリティ企業KELAの分析によりアルジェリア・オラン在住のZakaria Mahdjoub容疑者と特定されている。同容疑者はスウェーデンの電子政府ポータルなど複数の政府機関への侵入歴を持つ人物だという。侵入は2026年7月14日にデータ削除が始まったことで表面化し、翌15日には盗まれた従業員の認証情報・内部文書・ネットワーク構成情報がハッキングフォーラムで売りに出された。被害はデータベース本体だけでなく公式アプリ・ウェブサイト・メールサーバーにも及び、公式システムは1週間にわたり停止した。この間、公証人は不動産取引を登記できず、市民は所有権証明や地籍情報を取得できない状態が続いた。ANCPIはウェブサイトを復旧させた上で「ネットワーク全体をゼロから再構築している」と発表しており、オフラインバックアップを保持していたことが壊滅的なデータ喪失を免れた要因とみられる。</div>
+        <div class="editorial">🧠 ByteToBreachが氏名まで特定されている点は他の国家インフラ攻撃と一線を画すが、動機は愛国主義でも諜報でもなく身代金交渉の決裂という即物的なものだった。注目すべきは、被害が壊滅的にならなかった理由がANCPIの高度な防御設計ではなく「オフラインバックアップを取っていた」という基本的な運用慣行に過ぎなかったことだ。同種のバックアップ体制を持たない政府機関であれば、同じ攻撃で不動産の権利関係そのものが失われかねない。ゼロからのネットワーク再構築を進めるとANCPIは述べているが、再侵入を防げる保証がどこにあるのかは今回の発表だけでは検証しようがない。</div>
+        <div class="key-points">
+          <ul>
+            <li>攻撃者はByteToBreachを名乗り、KELAの分析でアルジェリア・オランのZakaria Mahdjoub容疑者と特定。スウェーデン電子政府ポータルなど複数政府機関への侵入歴あり</li>
+            <li>2026年7月14日にデータ削除開始、翌15日には従業員認証情報・内部文書・ネットワーク構成情報がハッキングフォーラムで売りに出され、公式システムは1週間停止</li>
+            <li>データベース以外にメールサーバーも被害、ANCPIはネットワーク全体の再構築を発表。オフラインバックアップの保持が壊滅的データ喪失を回避した要因</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 政府機関や重要インフラを運用する開発者は、身代金交渉の決裂が「データ完全消去」という最終手段に直結し得ることを踏まえ、オフラインかつ復元検証済みのバックアップを平時から用意しておく必要がある。</div>
+        <div class="meta">
+          <span>Risky.biz</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-07-20</span>
+          <span class="engagement">▲ 516</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://werd.io/american-ai-is-locked-down-and-proprietary-its-losing/">「米国の閉鎖的AI戦略は負けつつある」——スタートアップの8割が中国製モデルを使用と指摘する論考</a></h3>
+        </div>
+        <div class="summary">ブロガーのBen Werdmullerが、米国の閉鎖的・独占的なAI開発戦略が中国の「オープンウェイト戦略」に負けつつあると論じた。根拠として、a16zパートナーMartin Casadoの発言「スタートアップの8割が何らかの中国製モデルを使っている可能性が高い」を引用し、AlibabaのQwenやMoonshotのKimi K3がOpenAI・Anthropic比で「桁違いに低いコスト」で匹敵する性能を主張している状況を挙げる。AIモデルに技術的な参入障壁がほぼ存在しない以上、オープン戦略はエコシステム全体の採用を通じて優位に立つとWerdmullerは主張し、現在の米国のAI支出（経済の主要な牽引役）がこのままでは失速しかねないとして、公共AI基盤や連合型サービス、オープン研究への支援転換を提言している。</div>
+        <div class="key-points">
+          <ul>
+            <li>a16zパートナーMartin Casado発言「スタートアップの8割が中国製モデルを使用している可能性」を根拠に、オープンウェイト戦略の実質的な市場浸透を指摘</li>
+            <li>AlibabaのQwenやMoonshotのKimi K3がOpenAI・Anthropic比で低コストながら匹敵する性能を主張、AIモデルには技術的参入障壁がほぼ存在しないため公開戦略が優位とWerdmullerは論じる</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>werd.io</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07-19</span>
+          <span class="engagement">▲ 788</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-data">Data</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://xenaproject.wordpress.com/2026/07/20/human-mathematicians-are-being-outcounterexampled/">AIが人間より先に数学の反例を発見する時代に——エルデシュの単位距離予想を120万行のLeanコードで否定</a></h3>
+        </div>
+        <div class="summary">数十年来未解決だった数学予想に対する反例を、AIが人間より先に発見する事例が相次いでいる。OpenAIのSolはエルデシュの単位距離予想をGolod–Shafarevich定理を用いて否定し、3週間で120万行のLeanコードとして形式証明した。同じくSolはグロタンディークの有限平坦群スキーム予想（60年来の未解決問題）への反例も1076行のLeanファイルで発見。AnthropicのClaude Fableは100年来のヤコビアン予想を否定する反例を自動形式化し、別のPhD学生は保型性持ち上げ定理の証明に約2週間で25万行のLeanコードを生成した。いずれも非形式的な議論ではなくLeanによる形式検証を経ている点が共通する。</div>
+        <div class="key-points">
+          <ul>
+            <li>OpenAIのSolがエルデシュの単位距離予想をGolod–Shafarevich定理で否定、3週間で120万行のLeanコードとして形式証明。60年来のグロタンディーク有限平坦群スキーム予想への反例も1076行のLeanファイルで発見</li>
+            <li>AnthropicのClaude Fableが100年来のヤコビアン予想の反例を自動形式化、PhD学生は保型性持ち上げ定理の証明に約2週間で25万行のLeanコードを生成</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>xenaproject.wordpress.com</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07-20</span>
+          <span class="engagement">▲ 92</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://www.aikido.dev/blog/sleepergem-rubygems-supply-chain-attack">RubyGemsで休眠メンテナーアカウント乗っ取りのサプライチェーン攻撃「SleeperGem」——57万件超ダウンロードのgemも標的に</a></h3>
+        </div>
+        <div class="summary">RubyGemsで、長期間活動のなかった正規メンテナーアカウントを乗っ取る形のサプライチェーン攻撃「SleeperGem」が発覚した。新規パッケージgit_credential_managerや既存のDendreo、574,661ダウンロード実績を持つfastlane-plugin-run_tests_firebase_testlabなど複数gemが乗っ取られ、公開Forgejoインスタンスからバイナリを取得するドロッパーが仕込まれた。CI環境では実行をスキップし開発者端末のみを狙う設計になっている。</div>
+        <div class="key-points">
+          <ul>
+            <li>git_credential_manager（新規、4バージョン）、Dendreo（2017年からの既存パッケージに2バージョン追加）、574,661ダウンロード実績のfastlane-plugin-run_tests_firebase_testlabなど複数gemを乗っ取り</li>
+            <li>公開Forgejoインスタンス（git.disroot.org）からバイナリを取得するドロッパーを仕込み、SSL検証無効化・出力抑制など版を追うごとに手口を洗練、CI環境では実行をスキップし開発者端末のみを標的化</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>aikido.dev</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07-19</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://cursor.com/blog/agent-swarm-model-economics">Cursor、プランナー×ワーカー階層の「エージェントスワーム」でSQLite再実装実験——コスト87%減で満点通過</a></h3>
+        </div>
+        <div class="summary">Cursorの研究チームが、プランナーとワーカーを階層化した「エージェントスワーム」構成で、SQLiteをRustで再実装させる実験を実施。Opus 4.8をプランナー、Composer 2.5をワーカーに使う組み合わせは、GPT-5.5単独運用の10,565ドルに対しわずか1,339ドル（約87%減）でテスト100%通過を達成した。独自のバージョン管理層により秒間1,000コミットの処理も可能にしている。</div>
+        <div class="key-points">
+          <ul>
+            <li>Opus 4.8（プランナー）+Composer 2.5（ワーカー）の組み合わせがテスト100%通過を1,339ドルで達成、GPT-5.5単独運用の10,565ドルよりコスト87%減</li>
+            <li>独自バージョン管理層で秒間1,000コミットを処理（旧スワームは時間あたり1,000コミット）、マージコンフリクトも旧実装の7万件超から1,000件未満に激減</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Cursor Blog</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-07-19</span>
+          <span class="engagement">▲ 64</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://etbe.coker.com.au/2026/07/19/ecc-ddr5/">「DDR5は全てEC8」は間違い——サブチャンネル40ビットの完全ECCと36ビットの簡略版が混在する実態を検証</a></h3>
+        </div>
+        <div class="summary">DDR5メモリのオンダイECCについて、実装のばらつきを検証した記事。DDR5規格は128ビットあたり8ビットの誤り訂正符号を義務付けるが、サブチャンネルあたり40ビットの完全なハミング保護を持つEC8 DIMMと、36ビットで簡略化されたEC4 DIMMが混在しており、業界が謳う「DDR5 RDIMMは全てEC8」という説明は実態と異なることが判明した。MozillaのFirefoxクラッシュの15%はRAMのハードウェアエラーに起因するという報告も紹介している。</div>
+        <div class="key-points">
+          <ul>
+            <li>DDR5はサブチャンネルあたり128ビット中8ビットの誤り訂正を規定するが、完全なハミング保護のEC8（40ビット）と簡略化されたEC4（36ビット）が混在、「DDR5は全てEC8」という業界説明は不正確</li>
+            <li>Mozilla技術者によればFirefoxクラッシュの15%がRAMハードウェアエラー起因、著者は自身の環境で約5時間に1回のメモリ破損を確認したとして、重要データを扱う機器へのECC義務化を提言</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>etbe.coker.com.au</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07-19</span>
+          <span class="engagement">▲ 108</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://var0.xyz/posts/perfection-is-not-over-engineering.html">「完璧」と「過剰設計」を混同するな——要件さえ明確なら唯一の最適解に収束するという主張</a></h3>
+        </div>
+        <div class="summary">「完璧」と「過剰設計」を混同すべきでないと論じるエッセイ。過剰設計とは要件定義を誤ったまま実装だけ丁寧に仕上げることであり、要件と制約が明確であれば唯一の最適解に収束するため完璧な設計は十分に達成可能だと主張する。3人のエンジニアが5つのマイクロサービスでデータ整合性（外部キー制約）を犠牲にした事例を挙げ、実際には直面していなかったスケーリング問題のために独立デプロイを選んだ判断を批判している。</div>
+        <div class="key-points">
+          <ul>
+            <li>過剰設計の本質は「要件定義の誤り」であり、要件と制約さえ明確なら唯一の最適解に収束するため「完璧」は達成可能と主張</li>
+            <li>3人のエンジニアが5つのマイクロサービスに分割し外部キー制約によるデータ整合性を犠牲にした事例を提示、実際には直面していないスケーリング・オーナーシップ問題のための分割だったと指摘</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>var0.xyz</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07-18</span>
+          <span class="engagement">▲ 162</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://1day.dev/posts/linux-kernel-0day.html">Linuxカーネルのネットワークスケジューラに2.5年放置のUAF——4段階チェーンで物理メモリ任意読み書きに到達</a></h3>
+        </div>
+        <div class="summary">Linuxカーネルのネットワークスケジューラ（RED）に、2024年1月の導入から2.5年間放置されていたuse-after-free脆弱性が発見された。`tcf_qevent_handle()`が`tcf_classify()`の`TC_ACT_CONSUMED`応答を処理し損ね、解放済みバッファへの参照が残る不具合が原因。研究者はスラブUAF→ページUAF→ページテーブルエントリ破壊→物理メモリの任意読み書きという4段階の攻撃チェーンを構築し、非特権ユーザー名前空間からroot権限奪取が可能なことを示した。CVE番号は本稿執筆時点で未割当。</div>
+        <div class="key-points">
+          <ul>
+            <li>`tcf_qevent_handle()`が`TC_ACT_CONSUMED`応答時にバッファを誤って呼び出し元に返す不具合が原因、2024年1月導入から2.5年間未発見のままだった</li>
+            <li>スラブUAF→ページUAF→ページテーブルエントリ破壊→物理メモリ任意読み書きの4段階チェーンを構築、非特権ユーザー名前空間のみで完全なカーネルメモリ操作とroot権限奪取が可能</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>1day.dev</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-07-19</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://harukasan.dev/posts/diary/20260720-illuminating-the-technology-of-illumination-using-ruby">PicoRubyで舞台照明を制御——DMX512プロトコルをDMAでノンブロッキング送信するオリジナルgemを自作</a></h3>
+        </div>
+        <div class="summary">PicoRuby上で舞台照明を制御する自作コンピュータ「Harucom」を作った実践記。GPIO制御によるLED点灯からPWM調光を経て、DMX512プロトコルによる512chの制御信号をUART経由（250kbps、8N2、RS485差動伝送）で送信するオリジナルgem「picoruby-dmx」をDMAで実装し、ノンブロッキングで約40fpsの送信を実現した。最終的にはオーケストラ演奏に合わせた照明シーケンスの同期演出まで実現している。</div>
+        <div class="key-points">
+          <ul>
+            <li>UART 250kbps・8N2・RS485差動伝送でDMX512の512ch制御信号を送信するオリジナルgem「picoruby-dmx」をDMAで実装、ノンブロッキングで約40fpsを実現</li>
+            <li>BREAK信号は最低88マイクロ秒のLOW、ムービングライトは13chモードで1chと14chの両方にアドレス、軽量音声コーデックQOAはC言語400行で実装</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>harukasan.dev</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07-20</span>
+          <span class="engagement">🔖 14</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://forbesjapan.com/articles/detail/101067">Anthropic社員がロンドンで語ったClaude活用術——議事録を渡すだけで会議1回につきPR2〜3件を生成</a></h3>
+        </div>
+        <div class="summary">Anthropic Claude Codeチームに所属するDaisy Hallman氏がロンドンでの講演で語った、Claudeをチャットボットではなく協働エージェントとして使うためのコツを紹介する記事。Slackやメール、ダッシュボードなど普段使うツールすべてにClaudeを接続し「ツールを切り替えたりコピペした瞬間」を情報格差のシグナルとして潰していく手法や、会議直後に議事録を渡し「すぐ着手できるタスクは何か」を問うことで会議1回につきプルリクエスト2〜3件を生み出す運用を挙げている。</div>
+        <div class="key-points">
+          <ul>
+            <li>Slack・メール・ダッシュボードなど普段使う情報源すべてにClaudeを接続、ツール切り替えやコピペが発生した瞬間を「情報格差」のシグナルとして解消する運用を推奨</li>
+            <li>会議直後に議事録を渡し「すぐ着手できる作業」を問う運用で、会議1回あたりプルリクエスト2〜3件を生成できたと報告</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Forbes JAPAN</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07-19</span>
+          <span class="engagement">🔖 360</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://qiita.com/Asahi_tech_dev/items/5a3c6420cb0b2fa0e823">「仕様は開発者の頭の中にも残っていない」——AI時代のドキュメント駆動開発、3段階ワークフローを提案</a></h3>
+        </div>
+        <div class="summary">AI時代のドキュメント駆動開発を提案する記事。仕様は開発者の頭の中にすら残っていないという前提に立ち、docsディレクトリへの粗い構想メモ→AIによる構造化された仕様書（product.md）への整形→FE/DB/UI/BEの設計書作成という3段階のワークフローを提示する。Gitによるバージョン管理でオンボーディングを強化できる一方、ドキュメントと実装が乖離するリスクや、要件が固まらない探索的プロジェクトには不向きな点も指摘している。</div>
+        <div class="key-points">
+          <ul>
+            <li>docsディレクトリへの粗い構想メモ→AIによる構造化された仕様書（product.md）への整形→FE/DB/UI/BE設計書作成という3段階ワークフローを提示</li>
+            <li>Git管理によるオンボーディング強化・影響分析の容易化が利点だが、ドキュメントと実装が乖離するリスクと、要件未確定の探索的プロジェクトには不向きな点を課題として明記</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07-19</span>
+          <span class="engagement">🔖 33</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://zenn.dev/mrmtsntr/articles/artgraph-spec-code-drift">仕様・コード・テストのズレをハッシュで決定的に検出するCLIツール「artgraph」を自作</a></h3>
+        </div>
+        <div class="summary">仕様駆動開発（SDD）における仕様書・ドキュメント・コード・テストの乖離をLLMを使わず決定的に検出するCLIツール「artgraph」を公開した記事。仕様書からFR-001のような要件IDを抽出し、コードの`@impl FR-001`コメントやテスト名の`[FR-001]`タグと突き合わせてハッシュを生成、`.trace.lock`ファイルに承認済み状態を記録して差分を検知する。Claude CodeのStop Hookに組み込むことでAIエージェントの作業完了時に自動チェックできる。</div>
+        <div class="key-points">
+          <ul>
+            <li>仕様・ドキュメント・コード（AST解析によるシンボル単位）・テストの4層をハッシュで突き合わせ、LLMを使わずバイト単位で再現可能な決定的判定を実現</li>
+            <li>`.trace.lock`ファイルに承認済み状態を記録し差分を検知、Claude CodeのStop Hookに自動組み込みでAIエージェントの作業完了時にドリフトを検出</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07-19</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.phoronix.com/news/Firefox-153-Downloads">Firefox 153リリース——Linux向けにベンダー横断のVulkanビデオデコード対応、JPEG-XLも実験サポートに追加</a></h3>
+        </div>
+        <div class="summary">Firefox 153がリリースされ、LinuxでNVIDIA公式サポートがなく実質手薄だったVA-APIに代わり、ベンダー横断・プラットフォーム横断のVulkanビデオデコードに対応した。JPEG-XL画像フォーマットもFirefox Labs経由でオプトイン可能な実験的サポートとして追加。PDF機能の強化やWindows向けHDR動画再生対応も含まれ、今回のバージョンは長期サポート版（ESR）にも指定されている。</div>
+        <div class="key-points">
+          <ul>
+            <li>Linux向けにNVIDIA非公式対応で手薄だったVA-APIに代わり、ベンダー・プラットフォーム横断のVulkanビデオデコードに対応</li>
+            <li>JPEG-XL画像フォーマットをFirefox Labs経由でオプトイン実験サポートとして追加、Windows向けHDR動画再生・PDF機能強化も同時搭載、本バージョンはESR指定</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Phoronix</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-20</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.com/simoarpe/ziggity">lazygit相当の機能を持つZig製ターミナルGit UI「Ziggity」——libgit2不使用でgitサブプロセスを直接呼び出す設計</a></h3>
+        </div>
+        <div class="summary">lazygitに着想を得た、Zig製の高速なターミナルGit UI「Ziggity」が公開された。コードベースの99%がZigで書かれ、外部依存なしにlibvaxisでUIを構築、libgit2を使わずgitサブプロセスを直接呼び出す設計。ハンク・行単位のステージング、プランエディタ付きインタラクティブリベース、グラフ表示付きコミット履歴、GPG署名検証など、lazygit相当の機能を一通り備える。</div>
+        <div class="key-points">
+          <ul>
+            <li>コードベース99%がZig製、libgit2を使わずgitサブプロセスを直接呼び出し、libvaxisでUIを構築という外部依存最小の設計</li>
+            <li>ハンク・行単位のステージング、プランエディタ付きインタラクティブリベース、GPG署名検証付きコミット履歴表示など、lazygit相当の機能を搭載</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-19</span>
+          <span class="engagement">⭐ 77</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://blaizzy.github.io/nativ/">Apple Silicon Mac上でAIモデルをフルローカル実行するOSSアプリ「Nativ」——コード・テレメトリまで全てMITライセンス公開</a></h3>
+        </div>
+        <div class="summary">Apple SiliconのMac上でクラウド接続もアカウント登録も不要にAIモデルをローカル実行できるオープンソースアプリ「Nativ」が公開された。Google Gemma 4 E2B（10.28GB、視覚・音声対応）、Cohere North Mini Code（19.38GB、コーディング特化）、Liquid AI LFM2.5-VL 1.6B（3.20GB、視覚・言語対応）の3モデルに対応し、トークン/秒・メモリ使用量・サーマル状態などの実行時テレメトリを表示する。コード・モデルローダー・テレメトリ表示まで全てMITライセンスで公開されている。</div>
+        <div class="key-points">
+          <ul>
+            <li>Google Gemma 4 E2B（10.28GB）・Cohere North Mini Code（19.38GB）・Liquid AI LFM2.5-VL 1.6B（3.20GB）の3モデルに対応、トークン/秒・メモリ・サーマル状態のテレメトリを表示</li>
+            <li>Claude CodeなどコーディングエージェントとのAPI統合に対応、モデルローダーからテレメトリ表示まで全コードをMITライセンスで公開しペイウォール・学習データ収集なしを明記</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-19</span>
+          <span class="engagement">▲ 104</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
+
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://www.kimi.com/products/kimi-work">Moonshot AI、ナレッジワーカー向けデスクトップAIエージェント「Kimi Work」を公開——ローカルファイルアクセスと24時間稼働のCronエンジンを搭載</a>
+        <span class="quick-summary">— 複数の専門エージェントが連携する「Agent Swarm」機能でリサーチ結果をPowerPoint・Excelに自動変換、Windows/macOS（Apple Silicon）向けに配布。</span>
+        <span class="meta">Kimi.com</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-frontend">Frontend</span>
+        <a href="https://jelly-ui.com/">ゼロ依存・40種のカスタム要素でHTMLフォームに「ぷるぷる」した物理挙動を与えるWeb Componentsライブラリ「Jelly UI」</a>
+        <span class="quick-summary">— scriptタグ1本で導入可能、ダークモード・RTL・WCAG AA準拠のカラートークンを標準搭載しMITライセンスで公開。</span>
+        <span class="meta">jelly-ui.com</span>
+        <span class="engagement">▲ 230</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://github.com/loopgain-ai/loopgain">AIエージェントループの停止判定を制御理論のバルクハウゼン基準で自動化するPythonライブラリ「LoopGain」</a>
+        <span class="quick-summary">— 収束・停滞・振動・発散など5状態を分類し誤差最小の反復を返す「ベストソーファー・ロールバック」を実装、固定回数指定より約15倍高速でAPIコストを92.8%削減。LangGraph・CrewAI・Claude Agent SDK等に対応。</span>
+        <span class="meta">GitHub</span>
+        <span class="engagement">⭐ 76</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://developers.google.com/maps/architecture/grounding-with-maps-mcp?hl=ja">Google、AIエージェントに地理空間コンテキストを与えるMCPサービス「Maps Grounding Lite」——場所検索・天気照会・経路計算の3ツールを標準化</a>
+        <span class="quick-summary">— エージェントが独自に地名IDを生成するとハルシネーションの原因になるため、検索ツールが返したIDのみを使うことをベストプラクティスとして明記。</span>
+        <span class="meta">Google for Developers</span>
+        <span class="engagement">🔖 27</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-data">Data</span>
+        <a href="https://unslop.run/blog/measuring-ai-writing-on-arxiv">arXiv論文12,750本を分析——コンピュータサイエンス分野の直近12カ月平均65%がAI検出シグナルを示す一方、数学分野はわずか0.7%</a>
+        <span class="quick-summary">— 数式中心の数学論文は検出器の学習分布から外れるため過小評価の可能性があると著者自身が留保を明記。</span>
+        <span class="meta">unslop.run</span>
+        <span class="engagement">▲ 177</span>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="archive/" class="archive-link">Past issues</a>
+    </footer>
+  </div>
+</body>
+</html>
