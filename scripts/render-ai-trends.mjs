@@ -164,6 +164,7 @@ function renderHeader(issue, minutes, fromIsLatest) {
   const indexHref = fromIsLatest ? './' : '../';
   const trendsHref = fromIsLatest ? 'trends.html' : '../trends.html';
   const selfHref = fromIsLatest ? '#' : '../ai-trends.html';
+  const dailyArchiveHref = fromIsLatest ? 'archive/' : '../archive/';
   const label = dateLabel(issue.generated_at);
   // 日付キーの号は発行日そのものなので generated_at の日付を重ねて表示しない
   const dateLine = DATE_KEY_RE.test(issue.week)
@@ -179,6 +180,7 @@ function renderHeader(issue, minutes, fromIsLatest) {
     <a href="${indexHref}">📰 日刊ダイジェスト</a>
     <a href="${trendsHref}">🔌 週次プラグイントレンド</a>
     <a href="${selfHref}" class="active">🧠 AI プロダクト動向</a>
+    <a href="${dailyArchiveHref}">🗂 アーカイブ</a>
   </nav>
 </header>`;
 }
@@ -390,6 +392,7 @@ ${PAGE_STYLE}
     <a href="./">📰 日刊ダイジェスト</a>
     <a href="trends.html">🔌 プラグイントレンド</a>
     <a href="#" class="active">🧠 AI プロダクト動向</a>
+    <a href="archive/">🗂 アーカイブ</a>
   </nav>
 </header>
 <div class="section">

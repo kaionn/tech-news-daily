@@ -67,16 +67,17 @@ footer a{color:var(--primary-500);text-decoration:none}
 <header>
   <h1>🧠 AI プロダクト動向</h1>
   <p class="date">2026-W30（2026-07-25 発行 · 読了 6 分）</p>
-  <p class="tagline">実プロダクトのアーキテクチャ・使用例から AI 開発の現在地を毎週 1 テーマ深掘り</p>
+  <p class="tagline">実プロダクトのアーキテクチャ・使用例から AI 開発の現在地を週 3 回・1 号 1 テーマで深掘り</p>
   <nav class="site-nav">
     <a href="../">📰 日刊ダイジェスト</a>
     <a href="../trends.html">🔌 週次プラグイントレンド</a>
     <a href="../ai-trends.html" class="active">🧠 AI プロダクト動向</a>
+    <a href="../archive/">🗂 アーカイブ</a>
   </nav>
 </header>
 
 <div class="theme-hero">
-  <span class="kicker">今週のテーマ <span class="tag tag-ai" style="margin-left:.4rem">EVAL-OBSERVABILITY</span></span>
+  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">EVAL-OBSERVABILITY</span></span>
   <h2>エージェントの評価・観測性 — 「良さそう」を数値にする前に何を測らないかを決める</h2>
   <p class="lede">エージェントが長時間・多ステップのタスクをこなすようになるにつれ、「動いているように見える」と「実際に壊れていない」の差が広がっている。Anthropic 自身が自社のエージェント製品で6週間気づけなかった品質劣化を公表し、OpenAI と Cognition はそれぞれ評価の型と測定軸の絞り方を公式に説明した。3社の記事を並べると、エージェントの評価・観測性が「テストを書く」次元の話ではなく「何を測り、何を意図的に測らないか」を先に決める設計行為になっていることが見えてくる。</p>
 </div>
@@ -137,7 +138,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 </div>
 
 <div class="section">
-  <div class="section-title">🔗 今週の動向ピックアップ</div>
+  <div class="section-title">🔗 今号の動向ピックアップ</div>
   <div class="quick-link"><a href="https://www.anthropic.com/engineering/harness-design-long-running-apps">Anthropic、長時間タスク開発における Planner / Generator / Evaluator の3エージェント構成を公開</a><span class="quick-summary">2026年3月24日公開の記事で、Evaluator エージェントが Playwright MCP で実際にアプリを操作し、事前に合意した完了基準に照らして Generator の成果を採点する構成を解説する。自己評価をエージェント自身の役割として組み込む設計は、本文で扱った『測る軸を先に決める』の実装例として読める。</span></div>
   <div class="quick-link"><a href="https://www.langchain.com/state-of-agent-engineering">LangChain「State of Agent Engineering」、オフライン eval 導入率52.4%を報告</a><span class="quick-summary">2026年6月12日公開の調査レポートで、オフライン eval を導入している組織が52.4%、オンライン eval は37.3%（本番運用組織では44.8%）にとどまると報告する。本文セクション1で触れた『eval を書いていても検知できない』構造は、そもそも半数近くの組織がオフライン eval すら回していないという前提の上にある。</span></div>
   <div class="quick-link"><a href="https://langfuse.com/blog/2026-02-26-evaluate-ai-agent-skills">Langfuse、エージェントスキル評価でCLIエラー率を25%からゼロへ改善した事例を公開</a><span class="quick-summary">2026年2月26日公開の記事で、スキル評価をプロンプト評価と同様に入力定義・トレース取得・スコアリングの反復として扱い、Langfuse CLI のエラー率を25%からゼロまで下げた具体例を報告する。本文で扱った OpenAI の『プロンプト→トレース→チェック→スコア』の型を別ベンダーの実装で裏付ける一例。</span></div>
@@ -146,7 +147,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 
 
 <footer>
-  <p>毎週土曜 07:00 発行。一次ソースは <a href="../data/ai-trends/2026-W30.json">data/ai-trends/2026-W30.json</a>（このページは JSON からの生成物）</p>
+  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="../data/ai-trends/2026-W30.json">data/ai-trends/2026-W30.json</a>（このページは JSON からの生成物）</p>
   <p style="margin-top:.5rem"><a href="../">📰 日刊ダイジェストに戻る</a></p>
 </footer>
 </div>
