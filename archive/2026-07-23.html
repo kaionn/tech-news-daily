@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-07-23</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="../feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-07-23 (Thu)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+      <nav class="site-nav">
+        <a href="./" class="active">📰 日刊ダイジェスト</a>
+        <a href="trends.html">🔌 週次プラグイントレンド</a>
+        <a href="ai-trends.html">🧠 AI プロダクト動向</a>
+      </nav>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 19 articles</span>
+      <span>🏷 7 categories</span>
+      <span>📡 14 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item">
+        <span class="number-value">1,268倍</span>
+        <span class="number-label">GigaTokenのHuggingFace Tokenizers比最大高速化率</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">1,640万台</span>
+        <span class="number-label">RefluXFS脆弱性の影響を受け得るシステム数（Qualys試算）</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">60%</span>
+        <span class="number-label">2029年までに少人数SWEチームを本格展開する組織の割合（Gartner予測）</span>
+      </div>
+    </div>
+
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
+
+      <div class="card featured deep-dive">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://blog.qualys.com/vulnerabilities-threat-research/2026/07/22/refluxfs-a-linux-kernel-local-privilege-escalation-to-root-in-xfs-cve-2026-64600">DEEP DIVE: LinuxカーネルXFSに競合状態の脆弱性「RefluXFS」——ローカル非特権ユーザーがroot奪取、影響範囲は最大1,640万台</a></h3>
+        </div>
+        <div class="summary">Qualysは、LinuxカーネルのXFSファイルシステムに存在するローカル権限昇格の脆弱性「RefluXFS」（CVE-2026-64600）を公表した。reflink機能（reflink=1）を有効化したXFSでは、同一ファイルへの複製参照によって物理領域を節約できるが、この仕組みのコピーオンライト（CoW）処理に競合状態が潜んでいた。具体的には、2つのO_DIRECT書き込みが同一のreflinkされたファイルに対して同時に発生した場合、片方の書き込みがトランザクションログの空き待ちでinodeロックを一時的に解放する。この隙にもう一方の書き込みが自身のCoWサイクルを完了させてしまい、先に処理を開始していた側は既に古くなった物理ブロックアドレスを参照したまま処理を継続する。この不整合を突くことで、ローカルの非特権ユーザーが書き込み可能なディレクトリと読み取り可能な対象ファイル（典型的にはroot所有の設定ファイルやSUIDバイナリ）を用意するだけで、特別な権限やケーパビリティなしに任意のroot所有ファイルへ書き込みができる。Qualysは実際にRHEL 10.2上で非特権ユーザーが/etc/passwdのパスワード保護を剥がしてroot化する様子を動画で実証した。影響はLinuxカーネル4.11（2017年頃導入）以降の全バージョンに及び、RHEL・CentOS Stream・Oracle Linux・Rocky・AlmaLinux・CloudLinuxの8/9/10系、Amazon Linux 2023以降、Fedora Server 31以降が該当する。Qualysの資産管理データに基づく試算では、世界で最大1,640万台のシステムが影響を受け得るとしている。</div>
+        <div class="editorial">🧠 2017年から9年近く存在し続けた欠陥が、reflinkという地味な最適化機能の組み合わせから見つかった点は典型的な「枯れた機能同士の相互作用」バグの怖さを物語る。実測PoCまで公開されている以上、reflink=1を使う本番環境は検知シグネチャの整備を待たずパッチ適用を最優先すべきだ。ただし1,640万台という数字はQualys自身の資産管理顧客ベースからの試算であり、実際にreflinkを有効化した状態で稼働している台数がどれだけ含まれるかは示されておらず、実害の規模はこの数字より小さい可能性がある。</div>
+        <div class="key-points">
+          <ul>
+            <li>reflink=1を有効化したXFSで2つの並行O_DIRECT書き込みが競合し、片方がinodeロック解放中にもう一方がCoWサイクルを完了、古い物理ブロックアドレスの参照が残留する構造的欠陥</li>
+            <li>影響はLinuxカーネル4.11（2017年頃）以降の全バージョン。RHEL/CentOS Stream/Oracle Linux/Rocky/AlmaLinux/CloudLinuxの8・9・10系、Amazon Linux 2023以降、Fedora Server 31以降が該当</li>
+            <li>RHEL 10.2上で非特権ユーザーが/etc/passwdを書き換えてroot化するPoC動画が公開済み。Qualysの試算では世界最大1,640万台のシステムが影響を受け得る</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 reflink有効化のXFSを本番運用しているなら、特別な権限も特殊なツールも不要で再現できる以上、ベンダー提供の修正カーネルへの適用をパッチサイクルの最優先項目に格上げすべきだ。</div>
+        <div class="meta">
+          <span>Qualys</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-07-22</span>
+          <span class="engagement">▲ 7</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://blog.pypi.org/posts/2026-07-22-releases-now-reject-new-files-after-14-days/">PyPI、公開から14日を過ぎたリリースへの新規ファイルアップロードを自動拒否——認証情報侵害による既存リリース汚染を封じる</a></h3>
+        </div>
+        <div class="summary">Python公式パッケージリポジトリPyPIが、公開後14日を経過したリリースへの新規ファイルアップロードを自動的に拒否するポリシーを導入した。狙いは、侵害された公開用認証情報を使って既に安定運用されているリリースに後からファイルを追加し汚染する攻撃を封じることにある。運営チームは「これまで悪用されなかったのは攻撃者がその手口の存在に気づいていなかっただけで、技術的な障壁があったわけではない」と説明する。導入の背景には2026年のLiteLLMとTelnyxがGitHub Actionsの依存関係を介した「mutable reference」の脆弱性で侵害された事例がある。事前調査では上位1万5000パッケージのうちPython 3.14対応wheelを公開2週間後に追加公開していたのはわずか56件で、通常のワークフローへの影響は限定的と判断された。</div>
+        <div class="key-points">
+          <ul>
+            <li>公開から14日を過ぎたリリースへのファイル追加を自動拒否するポリシーを7月8日にマージ、即座に強制適用を開始</li>
+            <li>動機はLiteLLM・TelnyxがGitHub Actions依存関係経由の「mutable reference」脆弱性で侵害された2026年の事例。侵害された認証情報で安定版リリースを後から汚染する攻撃を防ぐ狙い</li>
+            <li>事前調査では上位1万5000パッケージ中、公開2週間後に新規wheelを追加していたのはわずか56件。新しいPythonバージョン対応を追加する場合は新バージョンのリリースが必須になる</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 CIで「同じバージョンに対応プラットフォーム用wheelを後から追い足す」運用をしているプロジェクトは、14日を過ぎると失敗するようになるため、リリースフローを新バージョン発行前提に見直す必要がある。</div>
+        <div class="meta">
+          <span>PyPI Blog</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-22</span>
+          <span class="engagement">▲ 15</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://github.com/marcelroed/gigatoken/">既存トークナイザーを丸ごと置き換える「GigaToken」公開——HuggingFace Tokenizers比で最大1,268倍のスループット</a></h3>
+        </div>
+        <div class="summary">LLM向けテキストトークナイズを高速化するRust製ライブラリ「GigaToken」が公開された。SIMDを使ったプリトークナイズの最適化、プリトークンマッピングのキャッシュ、Rustによるファイル直接処理でPythonオーバーヘッドを最小化する設計により、HuggingFace TokenizersのGPT-2処理と比較しApple M4 Max上で最大1,268倍、tiktokenと比較しAMD EPYC上で最大681倍のスループットを達成した。ハイエンドサーバーで24.5GB/秒、コンシューマー機でも8.8GB/秒を記録し、この速度ならCommon Crawl全体を理論上約6.5時間でトークナイズできる計算になる。HuggingFace/tiktoken互換APIとネイティブAPIの両方を提供し、x86・ARM双方に対応する。</div>
+        <div class="key-points">
+          <ul>
+            <li>HuggingFace Tokenizers比で最大1,268倍（Apple M4 Max・GPT-2）、tiktoken比で最大681倍（AMD EPYC・GPT-2）のスループットを実測</li>
+            <li>ハイエンドサーバーで24.5GB/秒、コンシューマー機でも8.8GB/秒のスループットを記録。理論上はCommon Crawl全体を約6.5時間でトークナイズできる計算</li>
+            <li>SIMDによるプリトークナイズ最適化・プリトークンマッピングのキャッシュ・Rust直接ファイル処理でPythonオーバーヘッドを最小化。HuggingFace/tiktoken互換APIとネイティブAPIの両方を提供</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 既存パイプラインのトークナイザーをHuggingFace/tiktoken互換APIのまま差し替えられるため、大規模コーパスの前処理がボトルネックになっているチームはコード変更なしで導入を検討する価値がある。</div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-22</span>
+          <span class="engagement">▲ 271</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-frontend">Frontend</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/vite.html">VoidZero、開発サーバー・バンドラー・リンター・テストランナーを1つのCLIに統合した「Vite+」をベータ公開</a></h3>
+        </div>
+        <div class="summary">Cloudflareが2026年6月に買収したVoidZeroが、Viteをベースにした統合開発ツールチェーン「Vite+」のベータ版を公開した。開発サーバー・バンドラー・リンター・フォーマッター・テストランナーを単一のCLIから利用できる。ベータ版では、Viteのメタデータでファイル変更を自動追跡しキャッシュを最適化する「vp run」、他環境からの移行時にAIエージェント向けプロンプトを生成する「vp migrate」の強化、組織向けテンプレートやプロキシ対応HTTPなどエンタープライズ機能が追加された。</div>
+        <div class="key-points">
+          <ul>
+            <li>「vp run」はViteのメタデータでファイル変更を自動追跡し手動設定なしでインテリジェントなキャッシュを実現、「vp migrate」は他環境からの移行時によりAIエージェント向けプロンプト生成に対応</li>
+            <li>組織テンプレートによるチーム標準化、プロキシ・カスタムCA対応HTTPによる企業ファイアウォール互換性など、エンタープライズ向け機能を拡充</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-21</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/net_8net_911.html">.NET 8と.NET 9、11月10日でサポート終了——マイクロソフトが早期の.NET 10移行を呼びかけ</a></h3>
+        </div>
+        <div class="summary">マイクロソフトが、2023年11月リリースの長期サポート版.NET 8と、2024年11月リリースの標準サポート版.NET 9について、いずれも2026年11月10日でサポートを終了すると発表した。サポート終了後もアプリケーション自体は動作を続けるが、セキュリティパッチやバグ修正は提供されなくなり、新たに見つかる脆弱性は放置されたままになる。移行先として2025年11月リリースの長期サポート版.NET 10が推奨されており、11月には.NET 11のリリースも控える。</div>
+        <div class="key-points">
+          <ul>
+            <li>.NET 8（3年サポートのLTS版）・.NET 9（2年サポートの標準版）とも2026年11月10日でサポート終了。終了後はセキュリティパッチ・バグ修正が提供されなくなる</li>
+            <li>移行先として長期サポート版の.NET 10を推奨。同じく11月に.NET 11のリリースも予定されているが、サポート期間の観点からLTS版の.NET 10が優先候補</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-07-21</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-product">Product</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/jiraaiclaudecopilotai.html">Atlassian、Jiraに要件定義自動作成とAIエージェントへのタスク自動割当を追加——Claude Code・Cursor・Copilotを横断</a></h3>
+        </div>
+        <div class="summary">Atlassianが、開発したいソフトウェアの内容を記述するだけで仕様書を自動生成する「Jira Planner」機能をJiraに追加した。既存コードベース・Jiraの履歴・Confluenceのナレッジを踏まえて構造化された要件定義をConfluenceに生成し、そこから作業項目を洗い出してClaude Code・Cursor・GitHub Copilot（OpenAI Codex対応も準備中）や内蔵の「Jira Coding Agent」へタスクを割り当てられる。バグ修正・脆弱性パッチ・テスト生成・ドキュメント更新といった定型作業を自動化ルールでAIエージェントに振り分け、進捗状況を表示しPRのレビュー準備が整うとエンジニアに通知する。</div>
+        <div class="key-points">
+          <ul>
+            <li>「Jira Planner」が既存コードベース・Jira履歴・Confluenceナレッジを踏まえた要件定義を自動生成しConfluenceに保存、人間・AI双方が参照可能</li>
+            <li>Claude Code・Cursor・GitHub Copilot（OpenAI Codex対応準備中）や内蔵「Jira Coding Agent」へタスクを割当可能。プロジェクトコンテキストを維持したままツールを横断できる点が特徴</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-22</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-product">Product</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/202960.html">Gartner、2029年までに組織の60%が少人数ソフトウェア開発チームを本格展開すると予測——若手採用の縮小には警鐘</a></h3>
+        </div>
+        <div class="summary">調査会社Gartnerが、AIが定型的なエンジニアリング作業を担えるようになるにつれ、2029年までに組織の60%が少人数のソフトウェア開発チームを本格的に展開すると予測した。現在のチーム規模は4〜5人が典型的だが、2〜3人で機能するケースも出てきているという。少人数チームのメンバーにはビジネス目標の理解からプロダクト設計、AIエージェントの監督まで幅広い高度なスキルが求められる。一方でGartnerのアナリストAliyah Camacho氏は、若手採用を絞ることは知識継承の断絶や社内人材パイプラインの先細り、採用選択肢を高コストな即戦力人材に限定するリスクを招くと警鐘を鳴らしている。</div>
+        <div class="key-points">
+          <ul>
+            <li>現在のチーム規模は典型的に4〜5人だが、AIが定型作業を担うことで2〜3人でも機能するケースが増加。2029年までに組織の60%が少人数チームを本格展開すると予測</li>
+            <li>少人数チームにはビジネス理解・プロダクト設計・AIエージェント監督まで幅広いスキルが必須。一方で若手採用の縮小は知識継承の断絶や人材パイプラインの先細りを招くとGartnerは警告</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-21</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-frontend">Frontend</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/cybozu_frontend/articles/opentelemetry-browser-frontend">フロントエンドに広がるOpenTelemetry——Browser SDKの現在地、Session Replayとソースマップ復元は未解決</a></h3>
+        </div>
+        <div class="summary">SentryやDatadogといった監視ツール独自のSDKへの依存を減らす狙いで標準化が進む「OpenTelemetry Browser SDK」の現状を整理する記事。ナビゲーション/リソースタイミング、ユーザー操作、Web Vitals、未捕捉例外・Promise rejection、console APIの計装に対応するが、安定版ステータスに達しているのは`@opentelemetry/sdk-trace-web`のみで大半のパッケージは実験段階。ソースマップ復元の標準機能はなく、Session Replayもrrwebに依存したままベンダー非依存な統合方針は未整理と指摘する。</div>
+        <div class="key-points">
+          <ul>
+            <li>ナビゲーション/リソースタイミング・ユーザー操作・Web Vitals・未捕捉例外/Promise rejection・console APIの計装に対応するが、大半のパッケージは実験段階でAPI変更の可能性がある</li>
+            <li>ソースマップによるエラースタック復元の標準機能が存在せず外部ツール（Honeycombのsymbolicator等）が必要。Session ReplayもrrwebなどベンダーSDKに依存したままで統合方針が未確立</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07-21</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-frontend">Frontend</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://qiita.com/t-kurasawa/items/df29e251165c3ad91487">shadcn/ui、新規プロジェクトのデフォルトをRadix UIからBase UIへ切り替え——週間600万ダウンロード・専任7人体制が決め手</a></h3>
+        </div>
+        <div class="summary">2023年1月の登場以来Radix UIを基盤としてきたshadcn/uiが、`npx shadcn init`で新規作成するプロジェクトのデフォルトをBase UIに切り替えた。Base UIはv1.6.0に到達し週間600万ダウンロードを記録、公式切り替え前の時点で新規プロジェクトの選択率はすでにRadix UIの2倍に達していた。専任7人体制で継続的にコンポーネントを追加するBase UIに対し、Radix UIの開発体制はWorkOSへ移管されている。既存のRadix UIプロジェクトへの影響はゼロで、`shadcn init -b radix`でRadix UIを明示指定することも可能。</div>
+        <div class="key-points">
+          <ul>
+            <li>Base UIはv1.6.0・週間600万ダウンロードに到達し、公式切り替え前から新規プロジェクトの選択率がRadix UIの2倍。開発体制もBase UIは専任7人体制、Radix UIはWorkOSへ移管</li>
+            <li>既存プロジェクトへの影響はゼロで両ライブラリとも更新継続。移行はコード自動変換ではなくAIコーディングエージェント向け「スキル」で支援し、36コンポーネント超の実移行が約25分で完了した実例がある</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07-22</span>
+          <span class="engagement">🔖 8</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://www.itmedia.co.jp/news/articles/2607/22/news103.html">1年越しで公表されたFeliCaの脆弱性——2017年以前製造の一部ICチップが対象、悪用には物理的なカードへのアクセスが必要</a></h3>
+        </div>
+        <div class="summary">ソニーのFeliCa技術に存在する脆弱性（CVE-2026-59776）が、Japan Vulnerability Notes経由で7月21日に公表された。発見は2025年7月24日、IPAへの届け出は同年8月28日で、公表まで約1年を要した。2017年以前に製造された一部ICチップが対象で、特定条件下でカードデータへの不正アクセスが可能になる。ただし非接触での遠隔攻撃はできず、物理的にカードへアクセスする必要がある。CVSSスコアはv4.0で7.0、v3.0で6.8。SuicaやEdy、nanaco、WAON、QUICPayなど同技術を使うサービスが対象となり得るが、ソニー・JR東日本は実際の被害は確認されていないとしている。</div>
+        <div class="key-points">
+          <ul>
+            <li>CVE-2026-59776。発見は2025年7月24日、IPA届け出は同年8月28日、JVN公表は2026年7月21日と約1年のタイムラグ。CVSSはv4.0で7.0・v3.0で6.8</li>
+            <li>2017年以前製造の一部ICチップが対象。悪用には物理的なカードアクセスが必須で非接触の遠隔攻撃は不可。Suica・Edy・nanaco・WAON・QUICPay等が対象になり得るが実被害は未確認</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>ITmedia</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-21</span>
+          <span class="engagement">🔖 30</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://gigazine.net/news/20260722-qwen-sensitive-keyword/">AlibabaのQwen公式サイト、HTMLメタタグに「hentai」など不適切キーワードが多数混入していることが発覚</a></h3>
+        </div>
+        <div class="summary">Alibabaの画像生成モデル「Qwen-Image-3.0」発表ページを含むQwen公式サイトのHTMLメタタグに、検索エンジン向けの不適切なキーワードが多数埋め込まれていることが判明した。Qwen-Image-3.0の発表ページだけで「hentai」が35件、「nude」が20件検出されたほか、成人向けサイトのドメインも埋め込まれていた。Qwen-Image-3.0自体は写真的表現やインフォグラフィック生成を狙った通常の画像生成モデルで、アダルトコンテンツとは無関係。原因が自動生成システムによるものか意図的な挿入かは不明で、Alibaba・Qwenチームからの説明は本稿時点で出ていない。</div>
+        <div class="key-points">
+          <ul>
+            <li>Qwen-Image-3.0発表ページのメタタグから「hentai」35件・「nude」20件を検出、成人向けサイトのドメインも埋め込まれていた。同様のキーワードはQwen公式サイト全体にも点在</li>
+            <li>Qwen-Image-3.0自体は写真的表現・インフォグラフィック生成向けの通常モデルでアダルト用途ではない。混入原因はAlibaba・Qwenチームから説明されておらず不明</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Gigazine</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-07-22</span>
+          <span class="engagement">🔖 34</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/3ai.html">さくらのクラウド、国産LLM3種の試用環境を提供開始——デジタル庁「源内」向けにtsuzumi 2・Takane 32B・PLaMo 2.0 Primeを評価</a></h3>
+        </div>
+        <div class="summary">さくらインターネットが、デジタル庁の行政向けAI「源内」への採用検討のため、国産大規模言語モデル3種（NTTデータ「tsuzumi 2」、富士通「Takane 32B」、Preferred Networks「PLaMo 2.0 Prime」）の試用環境をさくらのクラウド上に構築した。2026年3月の公募で選定された全7モデルのうち今回3社が参加し、ユーザーがランダムに異なるモデルの回答を受け取り好みを選ぶA/Bテスト方式で、源内に既に導入済みのAWS Nova LiteとAnthropic Claude系3モデルを含む既存4モデルとの品質比較を行う。8月までに実験環境を構築し、9〜11月にかけて複数回の実験を予定している。</div>
+        <div class="key-points">
+          <ul>
+            <li>2026年3月の公募で選定された全7モデルのうち3社（NTTデータ・富士通・Preferred Networks）が参加、ユーザーがランダムに異なるモデルの回答を比較選択するA/Bテスト方式で評価</li>
+            <li>源内に既存導入済みのAWS Nova Lite・Anthropic Claude系3モデルとの品質比較が目的。8月までに実験環境を構築し9〜11月に複数回の実験を実施予定</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-20</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/javascriptspreadjs.html">Mescius、JavaScript表計算コンポーネント「SpreadJS」最新版でリアルタイム共同編集に対応——スレッド型コメント・権限制御も追加</a></h3>
+        </div>
+        <div class="summary">Mescius（旧GrapeCity）が、Excel相当の機能をブラウザ上で実現するJavaScript表計算コンポーネント「SpreadJS」の最新版「V19.1J」をリリースした。目玉はリアルタイム共同編集機能で、複数の遠隔ユーザーが同一シートに同時アクセスし、ファイル転送や更新確認の待ち時間なしにデータ入力・確認・修正を並行して行える。シート上で直接やり取りできるスレッド型コメント機能や、担当者ごとに「編集可」「閲覧のみ」を割り当てる権限制御も追加された。</div>
+        <div class="key-points">
+          <ul>
+            <li>リアルタイム共同編集により複数の遠隔ユーザーが同一シートへ同時アクセス可能になり、ファイル転送・更新確認の待ち時間を排除</li>
+            <li>シート上で直接やり取りできるスレッド型コメント機能、担当者ごとに編集可否を割り当てる権限制御を追加。開発ライセンスは22万円、頒布ライセンスは1ドメイン66万円から</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-23</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://sakana.ai/fugu-cyber-release/">Sakana AI、サイバーセキュリティ特化のマルチエージェント編成モデル「Fugu-Cyber」を公開——脆弱性解析ベンチマークで86.9%</a></h3>
+        </div>
+        <div class="summary">Sakana AIが、サイバーセキュリティ防御に特化したオーケストレーションモデル「Fugu-Cyber」を公開した。単一ベンダーのモデルに依存するのではなく、専門特化した複数のエージェントを動的に編成して複雑な多段階タスクに対応するマルチエージェント方式を採用し、単一のAPIエンドポイントの裏側で連携させる。複雑なコードベースから実際の脆弱性を特定する能力と、生の脅威インテリジェンスを実行可能な検知ルールへ変換する能力を持つ。Sakana AIは、単体モデルの提供だけでは実運用時に誤検知が避けられず、人間の専門知識や検証ワークフロー、既存システムとの統合が不可欠だと強調している。</div>
+        <div class="key-points">
+          <ul>
+            <li>複雑なコードベースの脆弱性解析ベンチマーク「CyberGym」で86.9%、脅威インテリジェンスの検知ルール変換ベンチマーク「CTI-REALM」で72.1%を記録し、GPT-5.5-CyberやMythos-Previewなど競合のセキュリティ特化モデルに匹敵する性能</li>
+            <li>単一モデルではなく専門特化エージェント群を動的に編成するマルチエージェント方式を採用、単一APIエンドポイントの裏側で連携させる設計。単体モデル提供だけでは実運用の誤検知を避けられないと位置付ける</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Sakana AI</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-21</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
+
+      <div class="quick-link">
+        <span class="tag tag-data">Data</span>
+        <a href="https://hatchet.run/blog/postgres-survival-guide">スタートアップのためのPostgres延命ガイド——autovacuum設定を放置するとトランザクションID周回で本番停止する</a>
+        <span class="quick-summary">— クエリのバッチ化で約10倍のスループット向上、CREATE INDEX CONCURRENTLYの徹底などスケール時に効く実践知見をまとめている。</span>
+        <span class="meta">Hatchet</span>
+        <span class="engagement">▲ 272</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://mitchellh.com/writing/everyone-should-know-simd">「SIMDは全開発者が知っておくべき」——Ghostty実装では12行の追加コードでARM NEON最大4倍・AVX-512最大16倍を実測</a>
+        <span class="quick-summary">— ブロードキャスト・ループ・並列演算・リダクション・端数処理という5段階のパターンさえ覚えれば特別な知識がなくても書けると説く。</span>
+        <span class="meta">mitchellh.com</span>
+        <span class="engagement">▲ 151</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://nesbitt.io/2026/07/21/end-of-options.html">Gitの`--end-of-options`、未検証な参照名を安全に渡す手段——実装しているパッケージマネージャーはGoだけ</a>
+        <span class="quick-summary">— Gitは`--`をリビジョンとパスの区切りに転用済みのためオプション終端に使えず、17個中Go製パッケージマネージャーのみがこのフラグに対応している。</span>
+        <span class="meta">nesbitt.io</span>
+        <span class="engagement">▲ 65</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-oss">OSS</span>
+        <a href="https://system76.com/blog/post/cosmic-de-first-seven-months">System76のCOSMICデスクトップ環境、公開7ヶ月でフロストガラス効果・ゲーム改善・純正アプリ群を追加</a>
+        <span class="quick-summary">— システムモニターやファイラー、ターミナルなど純正アプリの機能拡充に加え、Steam Big Picture対応などLinuxゲーミングの課題にも取り組んでいる。</span>
+        <span class="meta">System76</span>
+        <span class="engagement">▲ 27</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://dylancastillo.co/posts/pelicanmaxxing.html">AIラボは「ペリカン自転車ベンチマーク」に最適化しているのか——7モデル・1,008枚のSVGを検証した結果「証拠は乏しい」</a>
+        <span class="quick-summary">— 動物8種×乗り物6種のグリッドで統計的に補正した結果、ペリカン・自転車の組み合わせで有意に高いスコアを出したラボは見つからなかった。</span>
+        <span class="meta">dylancastillo.co</span>
+        <span class="engagement">▲ 271</span>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="archive/" class="archive-link">Past issues</a>
+    </footer>
+  </div>
+</body>
+</html>
