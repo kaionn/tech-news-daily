@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>週次プラグイントレンド | Tech News Daily（モック v4 = v2 + 新顔発掘 + タグ）</title>
+<style>
+:root{--primary-600:#2250df;--primary-500:#2b70ef;--primary-50:#f0f5ff;--radius-lg:.75rem;--text-base:1.125rem;--bg:#fafafa;--surface:#fff;--text-primary:#1a1a2e;--text-secondary:#555570;--text-muted:#8888a0;--border:#e4e4ec;--accent-ai:#7c3aed;--up:#059669;--down:#dc2626;--spark:#2b70ef}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif;background:var(--bg);color:var(--text-primary);font-size:var(--text-base);line-height:1.8;padding:2rem 1rem}
+.container{max-width:720px;margin:0 auto}
+header{text-align:center;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border)}
+header h1{font-size:1.75rem;font-weight:700;letter-spacing:-.02em}
+header .date{color:var(--text-muted);font-size:.9rem;margin-top:.25rem}
+header .tagline{color:var(--text-secondary);font-size:.95rem;margin-top:.5rem}
+.site-nav{display:flex;justify-content:center;gap:.5rem;margin-top:.75rem;flex-wrap:wrap}
+.site-nav a{display:inline-block;padding:.25rem .6rem;font-size:.75rem;font-weight:600;color:var(--text-muted);text-decoration:none;border:1px solid var(--border);border-radius:9999px}
+.site-nav a:hover,.site-nav a.active{color:var(--primary-500);border-color:var(--primary-500)}
+.mock-banner{background:#fffbeb;border:1px dashed #d97706;color:#92400e;border-radius:.5rem;padding:.5rem .75rem;font-size:.8rem;text-align:center;margin-bottom:1.5rem}
+.week-summary{background:linear-gradient(135deg,var(--primary-50),#f5f0ff);border-left:4px solid var(--primary-500);border-radius:var(--radius-lg);padding:1.1rem 1.25rem;margin-bottom:2rem;font-size:.92rem;color:var(--text-secondary);line-height:1.8}
+.week-summary strong{color:var(--text-primary)}
+.section{margin-bottom:2.25rem}
+.section-title{font-size:.8rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:.4rem;display:flex;align-items:center;gap:.5rem}
+.section-title::after{content:"";flex:1;height:1px;background:var(--border)}
+.section-desc{font-size:.85rem;color:var(--text-secondary);margin-bottom:.9rem;line-height:1.7}
+.rank-list{display:flex;flex-direction:column;gap:.5rem}
+.rank-card{display:flex;align-items:center;gap:.9rem;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:.8rem 1rem}
+.rank-num{font-size:1.3rem;font-weight:800;color:var(--primary-600);width:1.6rem;text-align:center;flex-shrink:0;letter-spacing:-.02em}
+.rank-body{flex:1;min-width:0}
+.rank-name{font-weight:700;font-size:.95rem}
+.rank-desc{font-size:.8rem;color:var(--text-muted);line-height:1.5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rank-metric{text-align:right;flex-shrink:0}
+.rank-delta{font-size:1.05rem;font-weight:800;color:var(--up)}
+.rank-sub{font-size:.72rem;color:var(--text-muted)}
+.sparkline{flex-shrink:0}
+.sparkline polyline{fill:none;stroke:var(--spark);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.sparkline .fill{fill:url(#sg);stroke:none;opacity:.35}
+.tool-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1rem 1.1rem;margin-bottom:.6rem}
+.tool-head{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+.tool-head a{font-weight:700;font-size:.98rem;color:var(--text-primary);text-decoration:none}
+.tool-head a:hover{color:var(--primary-500)}
+.new-badge{font-size:.65rem;font-weight:700;color:var(--accent-ai);background:#f3e8ff;padding:.05rem .45rem;border-radius:9999px}
+.tool-head .spacer{margin-left:auto}
+.tool-desc{font-size:.85rem;color:var(--text-secondary);line-height:1.7;margin-top:.25rem}
+.tool-metrics{display:flex;gap:1.25rem;margin-top:.6rem;flex-wrap:wrap;align-items:center}
+.metric{min-width:110px}
+.metric .label{font-size:.68rem;text-transform:uppercase;letter-spacing:.05em;color:var(--text-muted)}
+.metric .value{font-size:1rem;font-weight:700;font-variant-numeric:tabular-nums}
+.metric .delta{font-size:.78rem;font-weight:700}
+.up{color:var(--up)}.down{color:var(--down)}.flat{color:var(--text-muted)}
+.delta-bar{height:4px;border-radius:2px;background:var(--border);margin-top:.3rem;overflow:hidden;width:110px}
+.delta-bar span{display:block;height:100%;background:var(--up);border-radius:2px}
+.delta-bar.neg span{background:var(--down)}
+/* タグ（v4 追加: ドメイン + 言語。GitHub language / topics + watchlist から決定論生成） */
+.tag{display:inline-block;font-size:.65rem;font-weight:700;padding:.05rem .45rem;border-radius:9999px;text-transform:uppercase;letter-spacing:.04em;vertical-align:middle}
+.tag-cat{background:#f3e8ff;color:var(--accent-ai)}
+.tag-python{background:#eef2ff;color:#4f46e5}
+.tag-ts{background:#f0f5ff;color:#2563eb}
+.tag-go{background:#ecfeff;color:#0891b2}
+.tag-rust{background:#fff7ed;color:#c2410c}
+.tag-rails{background:#fef2f2;color:#dc2626}
+.tag-aws{background:#fffbeb;color:#d97706}
+/* 新顔発掘カード（v4 追加: LLM 紹介文 + 伸びバッジ） */
+.delta-badge{display:inline-block;font-size:.75rem;font-weight:700;white-space:nowrap;padding:.12rem .55rem;border-radius:9999px;background:#ecfdf5;color:var(--up)}
+footer{text-align:center;margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border);color:var(--text-muted);font-size:.8rem}
+footer a{color:var(--primary-500);text-decoration:none}
+@media(max-width:600px){body{padding:1rem .75rem}header h1{font-size:1.4rem}.rank-desc{white-space:normal}.rank-card{flex-wrap:wrap}.tool-metrics{gap:.9rem}}
+@media(prefers-color-scheme:dark){:root{--bg:#0f0f1a;--surface:#1a1a2e;--text-primary:#e4e4ec;--text-secondary:#a0a0b8;--text-muted:#6b6b80;--border:#2a2a3e;--primary-50:#1a1a3e;--primary-600:#5b8af5;--primary-500:#6b9af5;--up:#34d399;--down:#f87171;--spark:#6b9af5}.week-summary{background:linear-gradient(135deg,#1a1a3e,#1f1a3e)}.new-badge,.tag-cat{background:#2d1b69}.mock-banner{background:#2a2510;border-color:#92400e;color:#d97706}.delta-badge{background:#0a3d2a}.tag-python{background:#1a1a4d}.tag-ts{background:#0a1a3d}.tag-go{background:#0a2d3d}.tag-rust{background:#3d200a}.tag-rails{background:#3d0a0a}.tag-aws{background:#3d2a0a}}
+</style>
+</head>
+<body>
+<div class="container">
+<svg width="0" height="0" style="position:absolute"><defs><linearGradient id="sg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2b70ef" stop-opacity=".5"/><stop offset="100%" stop-color="#2b70ef" stop-opacity="0"/></linearGradient></defs></svg>
+
+<header>
+  <h1>🔌 週次プラグイントレンド</h1>
+  <p class="date">2026-W30（2026-07-20 収集 · 8 週分の推移を表示）</p>
+  <p class="tagline">AI コーディング系ツールの GitHub stars / npm 週間ダウンロードを毎週定点観測</p>
+  <nav class="site-nav">
+    <a href="#">📰 日刊ダイジェスト</a>
+    <a href="#" class="active">🔌 プラグイントレンド</a>
+    <a href="#">🧠 AI プロダクト動向</a>
+  </nav>
+</header>
+
+<div class="mock-banner">⚠ モック v4 = 承認済み v2 に「🔭 今週の新顔」セクションとタグを統合したマージ版。数値はダミー</div>
+
+<div class="week-summary">
+  <strong>今週の概況:</strong> 追跡 16 ツール中 <strong>13 が上昇・2 が横ばい・1 が下落</strong>。最大の伸びは <strong>opencode</strong>（stars +8.3%）で 3 週連続の急伸。npm ダウンロードでは <strong>ccusage</strong> が +18.2% と加速。新顔発掘では <strong>Graphify</strong> が週間 +5,120 stars で最大の伸び。
+  <span style="font-size:.75rem;color:var(--text-muted);display:block;margin-top:.4rem">※ この概況文はスナップショット数値からテンプレートで自動生成（LLM 非経由）</span>
+</div>
+
+<div class="section">
+  <div class="section-title">🚀 今週の急上昇 TOP 5（ウォッチリスト内）</div>
+  <p class="section-desc">週間伸び率（stars と npm DL の大きい方）で全カテゴリ横断ランキング。折れ線は過去 8 週の推移。</p>
+  <div class="rank-list">
+    <div class="rank-card">
+      <span class="rank-num">1</span>
+      <svg class="sparkline" width="88" height="30" viewBox="0 0 88 30"><polygon class="fill" points="0,26 12,25 24,24 36,22 48,19 60,14 72,8 88,2 88,30 0,30"/><polyline points="0,26 12,25 24,24 36,22 48,19 60,14 72,8 88,2"/></svg>
+      <div class="rank-body">
+        <div class="rank-name">opencode <span class="tag tag-cat">CLI</span> <span class="tag tag-go">Go</span></div>
+        <div class="rank-desc">ターミナル特化のオープンソース AI コーディングエージェント</div>
+      </div>
+      <div class="rank-metric"><div class="rank-delta">+8.3%</div><div class="rank-sub">⭐ +1,842 → 24,110</div></div>
+    </div>
+    <div class="rank-card">
+      <span class="rank-num">2</span>
+      <svg class="sparkline" width="88" height="30" viewBox="0 0 88 30"><polygon class="fill" points="0,24 12,23 24,23 36,21 48,20 60,16 72,10 88,3 88,30 0,30"/><polyline points="0,24 12,23 24,23 36,21 48,20 60,16 72,10 88,3"/></svg>
+      <div class="rank-body">
+        <div class="rank-name">ccusage <span class="tag tag-cat">Claude Code</span> <span class="tag tag-ts">TS</span></div>
+        <div class="rank-desc">Claude Code のトークン使用量・コストを CLI で可視化</div>
+      </div>
+      <div class="rank-metric"><div class="rank-delta">+18.2%</div><div class="rank-sub">📦 +14,850 → 96,410 DL/週</div></div>
+    </div>
+    <div class="rank-card">
+      <span class="rank-num">3</span>
+      <svg class="sparkline" width="88" height="30" viewBox="0 0 88 30"><polygon class="fill" points="0,22 12,21 24,19 36,18 48,15 60,13 72,9 88,5 88,30 0,30"/><polyline points="0,22 12,21 24,19 36,18 48,15 60,13 72,9 88,5"/></svg>
+      <div class="rank-body">
+        <div class="rank-name">playwright-mcp <span class="tag tag-cat">MCP</span> <span class="tag tag-ts">TS</span></div>
+        <div class="rank-desc">Playwright をエージェントから操作するブラウザ自動化 MCP</div>
+      </div>
+      <div class="rank-metric"><div class="rank-delta">+3.2%</div><div class="rank-sub">⭐ +402 → 12,930</div></div>
+    </div>
+    <div class="rank-card">
+      <span class="rank-num">4</span>
+      <svg class="sparkline" width="88" height="30" viewBox="0 0 88 30"><polygon class="fill" points="0,20 12,19 24,18 36,17 48,16 60,13 72,10 88,6 88,30 0,30"/><polyline points="0,20 12,19 24,18 36,17 48,16 60,13 72,10 88,6"/></svg>
+      <div class="rank-body">
+        <div class="rank-name">claude-code <span class="tag tag-cat">Claude Code</span> <span class="tag tag-ts">TS</span></div>
+        <div class="rank-desc">Anthropic 公式のターミナル AI コーディングエージェント</div>
+      </div>
+      <div class="rank-metric"><div class="rank-delta">+3.0%</div><div class="rank-sub">⭐ +912 → 31,204</div></div>
+    </div>
+    <div class="rank-card">
+      <span class="rank-num">5</span>
+      <svg class="sparkline" width="88" height="30" viewBox="0 0 88 30"><polygon class="fill" points="0,18 12,18 24,17 36,16 48,15 60,14 72,11 88,8 88,30 0,30"/><polyline points="0,18 12,18 24,17 36,16 48,15 60,14 72,11 88,8"/></svg>
+      <div class="rank-body">
+        <div class="rank-name">modelcontextprotocol/servers <span class="tag tag-cat">MCP</span> <span class="tag tag-python">Python</span></div>
+        <div class="rank-desc">公式リファレンス MCP サーバー集。エコシステムの定点</div>
+      </div>
+      <div class="rank-metric"><div class="rank-delta">+2.2%</div><div class="rank-sub">⭐ +1,120 → 52,440</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">🔭 今週の新顔（GitHub 発掘）</div>
+  <p class="section-desc">ウォッチリスト外から GitHub Search で機械抽出した急上昇リポジトリ（直近 60 日以内に誕生・週間伸び順・再掲なし）。紹介文は AI 生成（生成失敗時は GitHub の説明文をそのまま表示）。</p>
+
+  <div class="tool-card">
+    <div class="tool-head"><a href="#">Graphify-Labs/graphify</a> <span class="new-badge">NEW</span> <span class="tag tag-cat">AI</span> <span class="tag tag-python">Python</span>
+      <span class="spacer"></span>
+      <span class="delta-badge">🔥 +5,120 stars / 週 (+166%)</span>
+    </div>
+    <p class="tool-desc">コード・ドキュメント・画像までリポジトリの中身を丸ごと知識グラフ化するツール。grep でファイルを探す代わりに「この認証処理はどこから呼ばれている？」のように、プロジェクト全体の関係性を辿りながら自然言語で質問できる。Claude Code や Cursor の MCP サーバーとして接続する使い方が README の筆頭に来ているのが今の伸びを説明している。</p>
+    <div class="tool-metrics">
+      <div class="metric"><div class="label">⭐ Stars</div><div class="value">8,214</div><div class="delta up">▲ +5,120 (+166%)</div><div class="delta-bar"><span style="width:100%"></span></div></div>
+      <div class="metric"><div class="label">📅 Created</div><div class="value" style="font-size:.85rem">2026-06-28</div></div>
+    </div>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-head"><a href="#">Nutlope/hallmark</a> <span class="new-badge">NEW</span> <span class="tag tag-cat">AI</span> <span class="tag tag-ts">TS</span>
+      <span class="spacer"></span>
+      <span class="delta-badge">🔥 +4,388 stars / 週 (+173%)</span>
+    </div>
+    <p class="tool-desc">Claude Code・Cursor・Codex で量産されがちな「AI 臭い」デザイン（紫グラデ・カード羅列・絵文字見出し）を防ぐスキル集。配色・タイポグラフィ・レイアウトの矯正ルールをエージェントに読ませるだけで生成 UI の見た目が一段階上がる。skills 文化の広がりと噛み合い、デザイナー不在の個人開発層に広がっている。</p>
+    <div class="tool-metrics">
+      <div class="metric"><div class="label">⭐ Stars</div><div class="value">6,930</div><div class="delta up">▲ +4,388 (+173%)</div><div class="delta-bar"><span style="width:86%"></span></div></div>
+      <div class="metric"><div class="label">📅 Created</div><div class="value" style="font-size:.85rem">2026-07-02</div></div>
+    </div>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-head"><a href="#">stablyai/orca</a> <span class="new-badge">NEW</span> <span class="tag tag-cat">AI</span> <span class="tag tag-ts">TS</span>
+      <span class="spacer"></span>
+      <span class="delta-badge">🔥 +3,904 stars / 週 (+259%)</span>
+    </div>
+    <p class="tool-desc">Claude Code や Codex など複数のコーディングエージェントを worktree 分離で並列実行し、1 画面で束ねる開発環境。各エージェントの進捗・diff・承認待ちをデスクトップとモバイルの両方から確認・操作できる。「エージェントを待つ時間」を通勤中の承認作業に変える発想が受けており、今週の伸び率 +259% は新顔枠の最大。</p>
+    <div class="tool-metrics">
+      <div class="metric"><div class="label">⭐ Stars</div><div class="value">5,411</div><div class="delta up">▲ +3,904 (+259%)</div><div class="delta-bar"><span style="width:76%"></span></div></div>
+      <div class="metric"><div class="label">📅 Created</div><div class="value" style="font-size:.85rem">2026-06-15</div></div>
+    </div>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-head"><a href="#">iOfficeAI/OfficeCLI</a> <span class="new-badge">NEW</span> <span class="tag tag-cat">AI</span> <span class="tag tag-go">Go</span>
+      <span class="spacer"></span>
+      <span class="delta-badge">🔥 +2,470 stars / 週 (+208%)</span>
+    </div>
+    <p class="tool-desc">Collection of CLI tools that lets AI agents read, write and edit Word, Excel and PowerPoint files without Office installed.（AI 紹介文の生成に失敗した項目は、このように GitHub の英語 description にフォールバック表示される — run 自体は落とさない）</p>
+    <div class="tool-metrics">
+      <div class="metric"><div class="label">⭐ Stars</div><div class="value">3,655</div><div class="delta up">▲ +2,470 (+208%)</div><div class="delta-bar"><span style="width:48%"></span></div></div>
+      <div class="metric"><div class="label">📅 Created</div><div class="value" style="font-size:.85rem">2026-06-20</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Claude Code エコシステム</div>
+  <div class="tool-card">
+    <div class="tool-head"><a href="#">anthropics/claude-code</a> <span class="tag tag-ts">TS</span>
+      <span class="spacer"></span>
+      <svg class="sparkline" width="88" height="26" viewBox="0 0 88 30"><polyline points="0,20 12,19 24,18 36,17 48,16 60,13 72,10 88,6"/></svg>
+    </div>
+    <p class="tool-desc">Anthropic 公式のターミナル AI コーディングエージェント。plugin / Skill 機構が拡張エコシステムの土台になりつつある。</p>
+    <div class="tool-metrics">
+      <div class="metric"><div class="label">⭐ Stars</div><div class="value">31,204</div><div class="delta up">▲ +912 (+3.0%)</div><div class="delta-bar"><span style="width:36%"></span></div></div>
+      <div class="metric"><div class="label">📦 npm DL/週</div><div class="value">842,331</div><div class="delta up">▲ +6.4%</div><div class="delta-bar"><span style="width:42%"></span></div></div>
+    </div>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-head"><a href="#">ccusage/ccusage</a> <span class="tag tag-ts">TS</span>
+      <span class="spacer"></span>
+      <svg class="sparkline" width="88" height="26" viewBox="0 0 88 30"><polyline points="0,24 12,23 24,23 36,21 48,20 60,16 72,10 88,3"/></svg>
+    </div>
+    <p class="tool-desc">Claude Code のトークン使用量とコストをローカルの JSONL から集計する CLI。</p>
+    <div class="tool-metrics">
+      <div class="metric"><div class="label">⭐ Stars</div><div class="value">5,882</div><div class="delta up">▲ +341 (+6.2%)</div><div class="delta-bar"><span style="width:62%"></span></div></div>
+      <div class="metric"><div class="label">📦 npm DL/週</div><div class="value">96,410</div><div class="delta up">▲ +18.2%</div><div class="delta-bar"><span style="width:100%"></span></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">MCP サーバー / SDK</div>
+  <div class="tool-card">
+    <div class="tool-head"><a href="#">upstash/context7</a> <span class="new-badge">NEW</span> <span class="tag tag-ts">TS</span>
+      <span class="spacer"></span>
+      <svg class="sparkline" width="88" height="26" viewBox="0 0 88 30"><polyline points="72,14 88,10"/></svg>
+    </div>
+    <p class="tool-desc">ライブラリの最新ドキュメントを LLM に供給する MCP サーバー。今週からウォッチリストに追加したため、前週比は来週から表示される。</p>
+    <div class="tool-metrics">
+      <div class="metric"><div class="label">⭐ Stars</div><div class="value">18,340</div><div class="delta flat">— 初回計測</div></div>
+      <div class="metric"><div class="label">📦 npm DL/週</div><div class="value">88,102</div><div class="delta flat">— 初回計測</div></div>
+    </div>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-head"><a href="#">microsoft/playwright-mcp</a> <span class="tag tag-ts">TS</span>
+      <span class="spacer"></span>
+      <svg class="sparkline" width="88" height="26" viewBox="0 0 88 30"><polyline points="0,22 12,21 24,19 36,18 48,15 60,13 72,9 88,5"/></svg>
+    </div>
+    <p class="tool-desc">Playwright ベースのブラウザ自動化 MCP サーバー。</p>
+    <div class="tool-metrics">
+      <div class="metric"><div class="label">⭐ Stars</div><div class="value">12,930</div><div class="delta up">▲ +402 (+3.2%)</div><div class="delta-bar"><span style="width:38%"></span></div></div>
+      <div class="metric"><div class="label">📦 npm DL/週</div><div class="value">310,220</div><div class="delta down">▼ -2.3%</div><div class="delta-bar neg"><span style="width:14%"></span></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">AI コーディング CLI / 拡張</div>
+  <div class="tool-card">
+    <div class="tool-head"><a href="#">anomalyco/opencode</a> <span class="tag tag-go">Go</span>
+      <span class="spacer"></span>
+      <svg class="sparkline" width="88" height="26" viewBox="0 0 88 30"><polyline points="0,26 12,25 24,24 36,22 48,19 60,14 72,8 88,2"/></svg>
+    </div>
+    <p class="tool-desc">ターミナル特化のオープンソース AI エージェント。プロバイダー非依存が武器。</p>
+    <div class="tool-metrics">
+      <div class="metric"><div class="label">⭐ Stars</div><div class="value">24,110</div><div class="delta up">▲ +1,842 (+8.3%)</div><div class="delta-bar"><span style="width:83%"></span></div></div>
+      <div class="metric"><div class="label">📦 npm DL/週</div><div class="value">52,003</div><div class="delta up">▲ +14.9%</div><div class="delta-bar"><span style="width:82%"></span></div></div>
+    </div>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-head"><a href="#">google-gemini/gemini-cli</a> <span class="tag tag-ts">TS</span>
+      <span class="spacer"></span>
+      <svg class="sparkline" width="88" height="26" viewBox="0 0 88 30"><polyline points="0,16 12,15 24,15 36,14 48,13 60,12 72,11 88,9"/></svg>
+    </div>
+    <p class="tool-desc">Google 公式のターミナルエージェント。無料枠の広さで最大の star 数を維持。</p>
+    <div class="tool-metrics">
+      <div class="metric"><div class="label">⭐ Stars</div><div class="value">68,010</div><div class="delta up">▲ +834 (+1.2%)</div><div class="delta-bar"><span style="width:15%"></span></div></div>
+      <div class="metric"><div class="label">📦 npm DL/週</div><div class="value">402,118</div><div class="delta up">▲ +3.8%</div><div class="delta-bar"><span style="width:25%"></span></div></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>データ: GitHub API / npm downloads API から毎週月曜 07:00 に自動収集。数値・推移・概況文はスナップショットからの決定論生成。「今週の新顔」の紹介文のみ AI 生成（失敗時は GitHub 説明文で代替）</p>
+  <p style="margin-top:.5rem"><a href="#">📊 生データ (data/plugins/)</a> · <a href="#">📰 日刊ダイジェストに戻る</a></p>
+</footer>
+</div>
+</body>
+</html>

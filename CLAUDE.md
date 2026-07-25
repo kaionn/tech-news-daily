@@ -26,6 +26,15 @@ tech-news-daily: 技術ニュースを毎日収集・整形し、Cloudflare Page
 
 旧構成は CCR routine が `claude/**` ブランチへ commit → ハーネス自動 push → `auto-merge-digest.yml` で main 取り込みだったが、branch push がサイレント失敗する障害（5 run 連続）が続き GHA へ全面移行した。`auto-merge-digest.yml` は routine 誤再開時の受け皿として残置。
 
+## GHA 実行時の参照スコープ（prompt 管理）
+
+claude-code-action の日次生成はローカルの `~/.claude/`（Skill・rules・commands）にアクセスできない。生成が参照できるのは repo 内の 2 ファイルのみ:
+
+- `CLAUDE.md`: 全セッション（ローカル + GHA）に適用する普遍ルール
+- `prompts/daily-digest.md`: 日次生成のみに適用するコンテンツ品質ルール
+
+ルールを足すときはこのスコープで書き分ける（daily 限定ルールを CLAUDE.md に書くと全セッションのトークンコストになる）。
+
 ## HTML 構造と生成 prompt の同期
 
 `index.html` のセクション構成・CSS クラス・要素（stats-bar, toc, numbers-bar, editorial 等）を変更した場合、生成 prompt `prompts/daily-digest.md` も**同一コミットで**必ず更新する。prompt はテンプレートとして `index.html` の構造を前提に毎日生成するため、HTML 構造と prompt が乖離すると生成結果が壊れる。
