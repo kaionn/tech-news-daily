@@ -741,6 +741,7 @@ footer a{color:var(--primary-500);text-decoration:none}
     <a href="./">📰 日刊ダイジェスト</a>
     <a href="#" class="active">🔌 週次プラグイントレンド</a>
     <a href="ai-trends.html">🧠 AI プロダクト動向</a>
+    <a href="archive/">🗂 アーカイブ</a>
   </nav>
 </header>
 
