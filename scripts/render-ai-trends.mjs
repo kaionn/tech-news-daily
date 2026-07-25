@@ -1,10 +1,11 @@
 #!/usr/bin/env node
-// Weekly AI product trends renderer: reads data/ai-trends/*.json (LLM-authored
-// theme deep-dive JSON, one file per ISO week) and deterministically renders
-// ai-trends.html (latest issue) plus ai-trends/{week}.html (each issue's
-// permalink). No LLM calls here. tmp/mock-ai-trends.html is the canonical
-// layout/CSS. See ~/.claude/plans/tech-news-daily/ai-product-trends-weekly.md
-// for design background.
+// AI product trends renderer: reads data/ai-trends/*.json (LLM-authored
+// theme deep-dive JSON, one file per issue — date-keyed YYYY-MM-DD since the
+// 週3回 schedule; ISO-week-keyed YYYY-Www files from the weekly era are still
+// rendered as-is) and deterministically renders ai-trends.html (latest issue)
+// plus ai-trends/{key}.html (each issue's permalink). No LLM calls here.
+// tmp/mock-ai-trends.html is the canonical layout/CSS. See
+// ~/.claude/plans/tech-news-daily/ai-product-trends-weekly.md for design background.
 
 import { readFile, writeFile, mkdir, readdir } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
@@ -13,7 +14,21 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const DEFAULT_DATA_DIR = path.join(ROOT, 'data/ai-trends');
-const ISSUE_FILENAME_RE = /^(\d{4}-W\d{2})\.json$/;
+const ISSUE_FILENAME_RE = /^(\d{4}-W\d{2}|\d{4}-\d{2}-\d{2})\.json$/;
+const DATE_KEY_RE = /^\d{4}-\d{2}-\d{2}$/;
+
+// 旧週次キー (2026-W30) と日付キー (2026-07-28) は素の文字列比較だと
+// "W" > 数字で週キーが常に後ろへ来てしまうため、週キーはその ISO 週の
+// 月曜日の日付に正規化してから比較する。
+function issueSortKey(key) {
+  const m = /^(\d{4})-W(\d{2})$/.exec(key);
+  if (!m) return key;
+  const jan4 = new Date(Date.UTC(Number(m[1]), 0, 4));
+  const isoDay = jan4.getUTCDay() || 7;
+  const monday = new Date(jan4);
+  monday.setUTCDate(jan4.getUTCDate() - isoDay + 1 + (Number(m[2]) - 1) * 7);
+  return monday.toISOString().slice(0, 10);
+}
 
 // ---- args --------------------------------------------------------------------
 
@@ -90,8 +105,10 @@ function sanitizeIssue(raw, fallbackWeek, warn) {
   const tldr = Array.isArray(theme.tldr) ? theme.tldr.filter((t) => typeof t === 'string' && t.trim()) : [];
   const quickPicks = (Array.isArray(raw.quick_picks) ? raw.quick_picks : []).map((q) => sanitizeQuickPick(q, warn)).filter(Boolean);
 
+  // week = 号キー。日付キー時代の JSON は `issue` フィールド、週次時代は `week` フィールドに入っている
+  const key = [raw.issue, raw.week].find((v) => typeof v === 'string' && v) || fallbackWeek;
   return {
-    week: typeof raw.week === 'string' && raw.week ? raw.week : fallbackWeek,
+    week: key,
     generated_at: typeof raw.generated_at === 'string' ? raw.generated_at : null,
     theme: {
       title: theme.title.trim(),
@@ -126,7 +143,7 @@ async function loadAllIssues(dataDir) {
     }
     issues.push(issue);
   }
-  return issues.sort((a, b) => a.week.localeCompare(b.week));
+  return issues.sort((a, b) => issueSortKey(a.week).localeCompare(issueSortKey(b.week)));
 }
 
 // ---- reading time ---------------------------------------------------------------
@@ -148,11 +165,16 @@ function renderHeader(issue, minutes, fromIsLatest) {
   const trendsHref = fromIsLatest ? 'trends.html' : '../trends.html';
   const selfHref = fromIsLatest ? '#' : '../ai-trends.html';
   const label = dateLabel(issue.generated_at);
-  const dateLine = label ? `${issue.week}（${label} 発行 · 読了 ${minutes} 分）` : `${issue.week}（読了 ${minutes} 分）`;
+  // 日付キーの号は発行日そのものなので generated_at の日付を重ねて表示しない
+  const dateLine = DATE_KEY_RE.test(issue.week)
+    ? `${issue.week} 発行（読了 ${minutes} 分）`
+    : label
+      ? `${issue.week}（${label} 発行 · 読了 ${minutes} 分）`
+      : `${issue.week}（読了 ${minutes} 分）`;
   return `<header>
   <h1>🧠 AI プロダクト動向</h1>
   <p class="date">${escapeHtml(dateLine)}</p>
-  <p class="tagline">実プロダクトのアーキテクチャ・使用例から AI 開発の現在地を毎週 1 テーマ深掘り</p>
+  <p class="tagline">実プロダクトのアーキテクチャ・使用例から AI 開発の現在地を週 3 回・1 号 1 テーマで深掘り</p>
   <nav class="site-nav">
     <a href="${indexHref}">📰 日刊ダイジェスト</a>
     <a href="${trendsHref}">🔌 週次プラグイントレンド</a>
@@ -166,7 +188,7 @@ function renderHero(issue) {
   const catTag = catLabel ? ` <span class="tag tag-ai" style="margin-left:.4rem">${catLabel}</span>` : '';
   const lede = issue.theme.lede ? `\n  <p class="lede">${escapeHtml(issue.theme.lede)}</p>` : '';
   return `<div class="theme-hero">
-  <span class="kicker">今週のテーマ${catTag}</span>
+  <span class="kicker">今号のテーマ${catTag}</span>
   <h2>${escapeHtml(issue.theme.title)}</h2>${lede}
 </div>`;
 }
@@ -217,7 +239,7 @@ function renderQuickPicks(picks) {
     .map((p) => `  <div class="quick-link"><a href="${p.url}">${escapeHtml(p.title)}</a><span class="quick-summary">${escapeHtml(p.summary)}</span></div>`)
     .join('\n');
   return `<div class="section">
-  <div class="section-title">🔗 今週の動向ピックアップ</div>
+  <div class="section-title">🔗 今号の動向ピックアップ</div>
 ${items}
 </div>`;
 }
@@ -247,7 +269,7 @@ function renderFooter(issue, fromIsLatest) {
   const dataHref = fromIsLatest ? `data/ai-trends/${issue.week}.json` : `../data/ai-trends/${issue.week}.json`;
   const indexHref = fromIsLatest ? './' : '../';
   return `<footer>
-  <p>毎週土曜 07:00 発行。一次ソースは <a href="${dataHref}">data/ai-trends/${issue.week}.json</a>（このページは JSON からの生成物）</p>
+  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="${dataHref}">data/ai-trends/${issue.week}.json</a>（このページは JSON からの生成物）</p>
   <p style="margin-top:.5rem"><a href="${indexHref}">📰 日刊ダイジェストに戻る</a></p>
 </footer>`;
 }
@@ -363,7 +385,7 @@ ${PAGE_STYLE}
 <div class="container">
 <header>
   <h1>🧠 AI プロダクト動向</h1>
-  <p class="tagline">実プロダクトのアーキテクチャ・使用例から AI 開発の現在地を毎週 1 テーマ深掘り</p>
+  <p class="tagline">実プロダクトのアーキテクチャ・使用例から AI 開発の現在地を週 3 回・1 号 1 テーマで深掘り</p>
   <nav class="site-nav">
     <a href="./">📰 日刊ダイジェスト</a>
     <a href="trends.html">🔌 プラグイントレンド</a>
@@ -372,7 +394,7 @@ ${PAGE_STYLE}
 </header>
 <div class="section">
   <div class="section-title">準備中</div>
-  <p style="color:var(--text-secondary);font-size:.92rem">最初の号は次回の週次 run（毎週土曜 07:00 JST）で公開されます。</p>
+  <p style="color:var(--text-secondary);font-size:.92rem">最初の号は次回の定期 run（毎週火・木・土 07:00 JST）で公開されます。</p>
 </div>
 <footer>
   <p style="margin-top:.5rem"><a href="./">📰 日刊ダイジェストに戻る</a></p>

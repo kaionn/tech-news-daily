@@ -38,6 +38,18 @@ jobs:
             --allowedTools "WebSearch,WebFetch,Read,Write,Edit,Glob,Grep,Bash"
             --disallowedTools "Bash(git add:*),Bash(git commit:*),Bash(git push:*),Bash(git config:*),Bash(git remote:*),Bash(git reset:*),Bash(git rebase:*)"
 
+      # 2026-07-23/24 の schedule run が 4 turns / 10 turns で「正常完了」しながら
+      # 生成物を書かずに落ちた（同条件の手動 run は 111 turns で成功）。job ログには
+      # init と result しか残らず中間 turn を追えなかったため、実行ログを退避する。
+      - name: Upload Claude execution log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: claude-execution-output-${{ github.run_id }}
+          path: ${{ runner.temp }}/claude-execution-output.json
+          retention-days: 14
+          if-no-files-found: warn
+
       - name: Commit and push digest
         id: commit
         env:

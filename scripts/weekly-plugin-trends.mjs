@@ -736,7 +736,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 <header>
   <h1>🔌 週次プラグイントレンド</h1>
   <p class="date">${dateLine}</p>
-  <p class="tagline">AI コーディング系ツールの GitHub stars / npm 週間ダウンロードを毎週定点観測</p>
+  <p class="tagline">AI コーディング系ツールの GitHub stars / npm 週間ダウンロードを週 3 回定点観測</p>
   <nav class="site-nav">
     <a href="./">📰 日刊ダイジェスト</a>
     <a href="#" class="active">🔌 週次プラグイントレンド</a>
@@ -756,7 +756,7 @@ ${risingHtml}
 ${categorySections}
 
 <footer>
-  <p>データ: GitHub API / npm downloads API から毎週月曜 07:00 に自動収集。数値・推移・概況文はすべてスナップショットからの決定論生成（LLM 非経由）。「今週の新顔」の紹介文のみ AI 生成（失敗時は GitHub 説明文で代替）</p>
+  <p>データ: GitHub API / npm downloads API から毎週月・水・金 07:00 に自動収集（前週比は週次スナップショット基準、週内の run は数値を最新化）。数値・推移・概況文はすべてスナップショットからの決定論生成（LLM 非経由）。「今週の新顔」の紹介文のみ AI 生成（失敗時は GitHub 説明文で代替）</p>
   <p style="margin-top:.5rem"><a href="https://github.com/kaionn/tech-news-daily/tree/main/data/plugins">📊 生データ (data/plugins/)</a> · <a href="./">📰 日刊ダイジェストに戻る</a></p>
 </footer>
 </div>

@@ -1,13 +1,14 @@
-name: Weekly AI product trends (generate & deploy)
+name: AI product trends (generate & deploy)
 
-# 日次 run (daily-digest.yml) ・週次プラグイントレンド (weekly-plugin-trends.yml) とは疎結合な独立 workflow。
-# claude-code-action は data/ai-trends/{WEEK}.json のみを生成し（HTML は書かない）、
-# scripts/render-ai-trends.mjs が決定論的に ai-trends.html / ai-trends/{week}.html を再生成する。
+# 日次 run (daily-digest.yml) ・プラグイントレンド (weekly-plugin-trends.yml) とは疎結合な独立 workflow。
+# claude-code-action は data/ai-trends/{ISSUE}.json のみを生成し（HTML は書かない）、
+# scripts/render-ai-trends.mjs が決定論的に ai-trends.html / ai-trends/{issue}.html を再生成する。
+# 号キーは実行日の日付（YYYY-MM-DD）。旧・週次時代の {YYYY-Www}.json も renderer がそのまま扱う。
 # 撤退したい場合は本 workflow を disable するだけで良く、日次 run・プラグイントレンド run には一切影響しない。
 
 on:
   schedule:
-    - cron: '0 22 * * 5' # 毎週土曜 07:00 JST
+    - cron: '0 22 * * 1,3,5' # 毎週火・木・土 07:00 JST（プラグイントレンドの月・水・金と交互）
   workflow_dispatch:
 
 permissions:
@@ -26,19 +27,19 @@ jobs:
         with:
           ref: main
 
-      - name: Compute this week's ISO week (JST)
-        id: week
+      - name: Compute issue date (JST)
+        id: issue
         run: |
-          WEEK=$(TZ=Asia/Tokyo date '+%G-W%V')
-          echo "week=$WEEK" >> "$GITHUB_OUTPUT"
+          ISSUE=$(TZ=Asia/Tokyo date '+%F')
+          echo "issue=$ISSUE" >> "$GITHUB_OUTPUT"
 
       - name: Generate theme JSON with Claude Code
         uses: anthropics/claude-code-action@v1
         env:
-          WEEK: ${{ steps.week.outputs.week }}
+          ISSUE: ${{ steps.issue.outputs.issue }}
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          prompt: "Read prompts/weekly-ai-trends.md and follow its instructions exactly. The repository root is the current working directory. The WEEK environment variable is already set to this week's ISO week."
+          prompt: "Read prompts/weekly-ai-trends.md and follow its instructions exactly. The repository root is the current working directory. The ISSUE environment variable is already set to today's issue date."
           claude_args: |
             --model claude-sonnet-5
             --allowedTools "WebSearch,WebFetch,Read,Write,Edit,Glob,Grep,Bash"
@@ -46,15 +47,15 @@ jobs:
 
       - name: Validate generated JSON
         env:
-          WEEK: ${{ steps.week.outputs.week }}
+          ISSUE: ${{ steps.issue.outputs.issue }}
         run: |
           set -euo pipefail
-          FILE="data/ai-trends/${WEEK}.json"
+          FILE="data/ai-trends/${ISSUE}.json"
           if [ ! -f "$FILE" ]; then
             echo "::error::$FILE が生成されていない"
             exit 1
           fi
-          jq -e --arg week "$WEEK" '.week == $week' "$FILE" > /dev/null || { echo "::error::week フィールドが $WEEK と一致しない"; exit 1; }
+          jq -e --arg issue "$ISSUE" '.issue == $issue' "$FILE" > /dev/null || { echo "::error::issue フィールドが $ISSUE と一致しない"; exit 1; }
           jq -e '.theme.title | length > 0' "$FILE" > /dev/null || { echo "::error::theme.title が空"; exit 1; }
           jq -e '.theme.sections | length > 0' "$FILE" > /dev/null || { echo "::error::theme.sections が空"; exit 1; }
           BAD_URLS=$(jq -r '
@@ -74,7 +75,7 @@ jobs:
         id: commit
         env:
           GITHUB_TOKEN: ${{ github.token }}
-          WEEK: ${{ steps.week.outputs.week }}
+          ISSUE: ${{ steps.issue.outputs.issue }}
         run: |
           set -euo pipefail
           # claude-code-action が git 認証設定を自分のトークンで上書きしたまま終了する
@@ -87,7 +88,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/ai-trends/ ai-trends.html ai-trends/
-          git commit -m "$(TZ=Asia/Tokyo date '+%Y-%m-%d') の AI プロダクト動向 (${WEEK})"
+          git commit -m "${ISSUE} の AI プロダクト動向"
           git pull --rebase origin main
           git push origin main
           echo "pushed=true" >> "$GITHUB_OUTPUT"

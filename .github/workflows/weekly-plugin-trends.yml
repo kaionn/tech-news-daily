@@ -7,7 +7,7 @@ name: Weekly plugin trends (collect & deploy)
 
 on:
   schedule:
-    - cron: '0 22 * * 0' # 毎週月曜 07:00 JST
+    - cron: '0 22 * * 0,2,4' # 毎週月・水・金 07:00 JST（週内の再実行は同週スナップショットの refresh として機能する）
   workflow_dispatch:
 
 permissions:
