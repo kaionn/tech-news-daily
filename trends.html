@@ -72,7 +72,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 
 <header>
   <h1>🔌 週次プラグイントレンド</h1>
-  <p class="date">2026-W30（2026-07-25 収集 · 1 週分の推移を表示）</p>
+  <p class="date">2026-W31（2026-07-27 収集 · 2 週分の推移を表示）</p>
   <p class="tagline">AI コーディング系ツールの GitHub stars / npm 週間ダウンロードを週 3 回定点観測</p>
   <nav class="site-nav">
     <a href="./">📰 日刊ダイジェスト</a>
@@ -83,132 +83,182 @@ footer a{color:var(--primary-500);text-decoration:none}
 </header>
 
 <div class="week-summary">
-  <strong>今週の概況:</strong> 追跡 16 ツール中 全 16 が初回計測。前週比は来週から表示される。
+  <strong>今週の概況:</strong> 追跡 16 ツール中 <strong>15 が上昇・1 が横ばい/計測不能・0 が下落</strong>。最大の伸びは <strong>ccusage</strong>（npm DL +35.4%）。新顔発掘では <strong>opencodex</strong> が週間 +4,186 stars で最大の伸び。
   <span style="font-size:.75rem;color:var(--text-muted);display:block;margin-top:.4rem">※ この概況文はスナップショット数値からテンプレートで自動生成（LLM 非経由）</span>
 </div>
 
-
+<div class="section">
+  <div class="section-title">🚀 今週の急上昇 TOP 5（ウォッチリスト内）</div>
+  <p class="section-desc">週間伸び率（stars と npm DL の大きい方）で全カテゴリ横断ランキング。折れ線は過去 8 週の推移。</p>
+  <div class="rank-list">
+    <div class="rank-card">
+      <span class="rank-num">1</span>
+      <svg class="sparkline" width="88" height="30" viewBox="0 0 88 30"><polygon class="fill" points="0.0,28.0 88.0,2.0 88,30 0,30"/><polyline points="0.0,28.0 88.0,2.0"/></svg>
+      <div class="rank-body">
+        <div class="rank-name">ccusage <span class="tag tag-cat">Claude Code</span> <span class="tag tag-rust">Rust</span></div>
+        <div class="rank-desc">Claude Code のトークン使用量・コストをローカルの JSONL から集計する CLI</div>
+      </div>
+      <div class="rank-metric"><div class="rank-delta">+35.4%</div><div class="rank-sub">📦 +31,192 → 119,276 DL/週</div></div>
+    </div>
+    <div class="rank-card">
+      <span class="rank-num">2</span>
+      <svg class="sparkline" width="88" height="30" viewBox="0 0 88 30"><polygon class="fill" points="0.0,28.0 88.0,2.0 88,30 0,30"/><polyline points="0.0,28.0 88.0,2.0"/></svg>
+      <div class="rank-body">
+        <div class="rank-name">gemini-cli <span class="tag tag-cat">CLI</span> <span class="tag tag-ts">TS</span></div>
+        <div class="rank-desc">Google 公式のターミナル AI エージェント</div>
+      </div>
+      <div class="rank-metric"><div class="rank-delta">+16.3%</div><div class="rank-sub">📦 +79,447 → 567,566 DL/週</div></div>
+    </div>
+    <div class="rank-card">
+      <span class="rank-num">3</span>
+      <svg class="sparkline" width="88" height="30" viewBox="0 0 88 30"><polygon class="fill" points="0.0,28.0 88.0,2.0 88,30 0,30"/><polyline points="0.0,28.0 88.0,2.0"/></svg>
+      <div class="rank-body">
+        <div class="rank-name">claude-code-router <span class="tag tag-cat">Claude Code</span> <span class="tag tag-js">JavaScript</span></div>
+        <div class="rank-desc">Claude Code のリクエストを他モデルへルーティングするプロキシ</div>
+      </div>
+      <div class="rank-metric"><div class="rank-delta">+6.2%</div><div class="rank-sub">📦 +10,166 → 174,812 DL/週</div></div>
+    </div>
+    <div class="rank-card">
+      <span class="rank-num">4</span>
+      <svg class="sparkline" width="88" height="30" viewBox="0 0 88 30"><polygon class="fill" points="0.0,28.0 88.0,2.0 88,30 0,30"/><polyline points="0.0,28.0 88.0,2.0"/></svg>
+      <div class="rank-body">
+        <div class="rank-name">MCP TypeScript SDK <span class="tag tag-cat">MCP</span> <span class="tag tag-ts">TS</span></div>
+        <div class="rank-desc">MCP の公式 TypeScript SDK。サーバー・クライアント実装の土台</div>
+      </div>
+      <div class="rank-metric"><div class="rank-delta">+5.0%</div><div class="rank-sub">📦 +2,179,891 → 45,520,029 DL/週</div></div>
+    </div>
+    <div class="rank-card">
+      <span class="rank-num">5</span>
+      <svg class="sparkline" width="88" height="30" viewBox="0 0 88 30"><polygon class="fill" points="0.0,28.0 88.0,2.0 88,30 0,30"/><polyline points="0.0,28.0 88.0,2.0"/></svg>
+      <div class="rank-body">
+        <div class="rank-name">codex <span class="tag tag-cat">CLI</span> <span class="tag tag-rust">Rust</span></div>
+        <div class="rank-desc">OpenAI のターミナルコーディングエージェント</div>
+      </div>
+      <div class="rank-metric"><div class="rank-delta">+1.7%</div><div class="rank-sub">⭐ +1,688 → 101,631</div></div>
+    </div>
+  </div>
+</div>
 
 <div class="section">
   <div class="section-title">🔭 今週の新顔（GitHub 発掘）</div>
   <p class="section-desc">ウォッチリスト外から GitHub Search で機械抽出した急上昇リポジトリ（直近 60 日以内に誕生・週間伸び順・再掲なし）。紹介文は AI 生成（生成失敗時は GitHub の説明文をそのまま表示）。</p>
   <div class="tool-card">
-    <div class="tool-head"><a href="https://github.com/DietrichGebert/ponytail">DietrichGebert/ponytail</a> <span class="new-badge">NEW</span> <span class="tag tag-cat">AI</span> <span class="tag tag-js">JavaScript</span>
+    <div class="tool-head"><a href="https://github.com/lidge-jun/opencodex">lidge-jun/opencodex</a> <span class="new-badge">NEW</span> <span class="tag tag-cat">AI</span> <span class="tag tag-ts">TS</span>
       <span class="spacer"></span>
-      <span class="delta-badge">🔥 約 +15,711 stars/週 (平均)</span>
+      <span class="delta-badge">🔥 +4,186 stars / 週 (+533%)</span>
     </div>
-    <p class="tool-desc">肥大化しがちなAIエージェントの出力を、口数の少ないベテランエンジニアのように削ぎ落とすスキルで、Claude CodeやCursorなど20種類のエージェントにそのまま組み込める。日付ピッカーを頼むとライブラリを追加してラッパーやスタイルシートまで書き始めるエージェントに対し、安全チェックは保ったまま最小限の実装に絞らせる設計が特徴。実際のFastAPI+Reactリポジトリで検証したベンチマークでは平均54%(最大94%)のコード削減と27%の高速化を計測しており、既存のコーディングエージェント環境にそのまま乗せられる手軽さが伸びを支えている。</p>
+    <p class="tool-desc">Codex CLI/App/SDK や Claude Code 経由で使うモデルを、Claude・Gemini・Grok・DeepSeek・Ollama など好きな LLM に差し替えられるプロキシツール。`ocx start` の一発起動でローカルにプロキシとダッシュボードが立ち上がり、Claude Code のモデルピッカーや Codex のクライアント UI はそのままに、裏で動くモデルだけを入れ替えられるのが特徴。Claude Desktop の Opus セッションから別モデルのサブエージェントへタスクを渡すデモも README に載っており、単一プロバイダに縛られず複数モデルを併用したいニーズに応えている。</p>
     <div class="tool-metrics">
-      <div class="metric"><div class="label">⭐ Stars</div><div class="value">86,406</div><div class="delta up">▲ 約 +15,711/週 (平均)</div><div class="delta-bar"><span style="width:100%"></span></div></div>
-      <div class="metric"><div class="label">📅 Created</div><div class="value" style="font-size:.85rem">2026-06-12</div></div>
+      <div class="metric"><div class="label">⭐ Stars</div><div class="value">4,972</div><div class="delta up">▲ +4,186 (+533%)</div><div class="delta-bar"><span style="width:100%"></span></div></div>
+      <div class="metric"><div class="label">📅 Created</div><div class="value" style="font-size:.85rem">2026-06-18</div></div>
     </div>
   </div>
 
   <div class="tool-card">
-    <div class="tool-head"><a href="https://github.com/langchain-ai/openwiki">langchain-ai/openwiki</a> <span class="new-badge">NEW</span> <span class="tag tag-cat">AI</span> <span class="tag tag-ts">TS</span>
+    <div class="tool-head"><a href="https://github.com/Vincentwei1021/video-shotcraft">Vincentwei1021/video-shotcraft</a> <span class="new-badge">NEW</span> <span class="tag tag-cat">AI</span> <span class="tag tag-ts">TS</span>
       <span class="spacer"></span>
-      <span class="delta-badge">🔥 約 +3,194 stars/週 (平均)</span>
+      <span class="delta-badge">🔥 約 +1,775 stars/週 (平均)</span>
     </div>
-    <p class="tool-desc">コードベースにAIエージェント向けのドキュメント(wiki)を生成・維持するCLIツールで、LangChainチームが開発している。リポジトリを解析してエージェントが参照しやすい説明を書く「コードモード」と、ローカルファイルやGmail、Notion、X/Twitterなど複数ソースを取り込んで個人用の知識wikiを構築する「パーソナルモード」の2種類を持つのが特徴。GitHub Actions・GitLab CI・Bitbucket Pipelinesにそのまま組み込めるワークフロー例が用意されており、コードが変わるたびにドキュメント更新PRを自動で出せる仕組みが、AI生成ドキュメントにありがちな陳腐化という課題への解として支持を集めている。</p>
+    <p class="tool-desc">Claude Code や Codex を映像制作スタジオ化する Agent Skill で、製品紹介やデモ動画を Remotion 上でストーリーボードから撮影・アニメーション・サウンドデザインまで一括生成する。106 種類のショットレシピカードと 161 種のモーションプレビューをギャラリーで検索・比較しながら選べる点が、単なるテンプレート集と一線を画す。リポジトリのリンクを渡すだけでエージェントがスキルをインストールできる `npx skills add` 方式を採用しており、Agent Skills の普及に乗って導入障壁の低さが伸びを後押ししている。</p>
     <div class="tool-metrics">
-      <div class="metric"><div class="label">⭐ Stars</div><div class="value">12,567</div><div class="delta up">▲ 約 +3,194/週 (平均)</div><div class="delta-bar"><span style="width:20.329705302017693%"></span></div></div>
-      <div class="metric"><div class="label">📅 Created</div><div class="value" style="font-size:.85rem">2026-06-22</div></div>
+      <div class="metric"><div class="label">⭐ Stars</div><div class="value">1,894</div><div class="delta up">▲ 約 +1,775/週 (平均)</div><div class="delta-bar"><span style="width:42.403248924988056%"></span></div></div>
+      <div class="metric"><div class="label">📅 Created</div><div class="value" style="font-size:.85rem">2026-07-19</div></div>
     </div>
   </div>
 
   <div class="tool-card">
-    <div class="tool-head"><a href="https://github.com/XiaomiMiMo/MiMo-Code">XiaomiMiMo/MiMo-Code</a> <span class="new-badge">NEW</span> <span class="tag tag-cat">AI</span> <span class="tag tag-ts">TS</span>
+    <div class="tool-head"><a href="https://github.com/MIgHTy-alIeN/MEV-Arbitrage-Bot">MIgHTy-alIeN/MEV-Arbitrage-Bot</a> <span class="new-badge">NEW</span> <span class="tag tag-cat">AI</span> <span class="tag tag-cat">Solidity</span>
       <span class="spacer"></span>
-      <span class="delta-badge">🔥 約 +2,141 stars/週 (平均)</span>
+      <span class="delta-badge">🔥 約 +1,114 stars/週 (平均)</span>
     </div>
-    <p class="tool-desc">Xiaomiが開発するターミナル常駐型のAIコーディングアシスタントで、コードの読み書きやコマンド実行、Git操作に加えて、セッションをまたいでプロジェクトの理解を保持し続ける永続的メモリー機構を備える。他の主要LLMプロバイダのAPIにも接続できるが、期間限定で無料の「MiMo Auto」チャンネルを使えば認証設定なしにすぐ使い始められる。Claude Codeの認証情報をそのままインポートして乗り換えられる導線を用意している点が、既存ユーザーの試用ハードルを下げ、伸びを後押ししていると考えられる。</p>
+    <p class="tool-desc">An arbitrage bot is a smart contract connected to an external automation script that controls its operation.</p>
     <div class="tool-metrics">
-      <div class="metric"><div class="label">⭐ Stars</div><div class="value">12,245</div><div class="delta up">▲ 約 +2,141/週 (平均)</div><div class="delta-bar"><span style="width:13.627394818916683%"></span></div></div>
+      <div class="metric"><div class="label">⭐ Stars</div><div class="value">1,520</div><div class="delta up">▲ 約 +1,114/週 (平均)</div><div class="delta-bar"><span style="width:26.61251791686574%"></span></div></div>
+      <div class="metric"><div class="label">📅 Created</div><div class="value" style="font-size:.85rem">2026-07-17</div></div>
+    </div>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-head"><a href="https://github.com/Jakubantalik/thinking-orbs">Jakubantalik/thinking-orbs</a> <span class="new-badge">NEW</span> <span class="tag tag-cat">AI</span> <span class="tag tag-ts">TS</span>
+      <span class="spacer"></span>
+      <span class="delta-badge">🔥 約 +1,093 stars/週 (平均)</span>
+    </div>
+    <p class="tool-desc">AI・エージェント UI 向けに、待機中の状態を表す 6 種類のアニメーション付きローディングインジケーターを提供するライブラリ。WebGL を使わずプレーンな 2D canvas だけで描画し、working・searching・solving など状態ごとに異なる動きを手動チューニングしているのが、汎用スピナー止まりの既存コンポーネントとの違い。ホストプロジェクトの `data-theme` 属性や OS 設定から自動でダーク/ライトを切り替え、画面外に出ると自動停止するなど、チャット系プロダクトへの組み込みやすさを意識した設計になっている。</p>
+    <div class="tool-metrics">
+      <div class="metric"><div class="label">⭐ Stars</div><div class="value">1,093</div><div class="delta up">▲ 約 +1,093/週 (平均)</div><div class="delta-bar"><span style="width:26.110845676063065%"></span></div></div>
+      <div class="metric"><div class="label">📅 Created</div><div class="value" style="font-size:.85rem">2026-07-21</div></div>
+    </div>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-head"><a href="https://github.com/penecho/penecho">penecho/penecho</a> <span class="new-badge">NEW</span> <span class="tag tag-cat">AI</span> <span class="tag tag-js">JavaScript</span>
+      <span class="spacer"></span>
+      <span class="delta-badge">🔥 約 +954 stars/週 (平均)</span>
+    </div>
+    <p class="tool-desc">手書き・数式・図形・空間的な文脈をチャットボックスの外に持ち出し、AI との対話に組み込める共有キャンバスツール。Moonshot AI の「Kimi Open Source Friends」プログラムの公式メンバーとなっており、API クレジットの提供を受けつつ手書きや図形認識に強い Kimi K3 を推奨モデルの一つに位置付けている。詳細な伸びの要因は明記されていないが、この Kimi 側の後押しと Discord コミュニティでの発信が採用の広がりに寄与していると考えられる。</p>
+    <div class="tool-metrics">
+      <div class="metric"><div class="label">⭐ Stars</div><div class="value">1,682</div><div class="delta up">▲ 約 +954/週 (平均)</div><div class="delta-bar"><span style="width:22.790253225035833%"></span></div></div>
+      <div class="metric"><div class="label">📅 Created</div><div class="value" style="font-size:.85rem">2026-07-14</div></div>
+    </div>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-head"><a href="https://github.com/op7418/guizang-social-card-skill">op7418/guizang-social-card-skill</a> <span class="new-badge">NEW</span> <span class="tag tag-cat">AI</span> <span class="tag tag-cat">HTML</span>
+      <span class="spacer"></span>
+      <span class="delta-badge">🔥 +348 stars / 週 (+7%)</span>
+    </div>
+    <p class="tool-desc">記事・スクリーンショット・製品ノート・動画などを渡すと、小红书(Rednote)向けの図文カルーセルや公众号の 21:9+1:1 カバー対を生成する Claude Code / Codex 向け Skill。電子雑誌ふうの「Editorial」と余白の少ない「Swiss」という 2 つの視覚システムを 1 つのワークフローで共有しており、静止画に加えて Live Photo 動画カードまで同じ流れで作れるのが特徴。同作者の guizang-ppt-skill(横型プレゼン向け)の姉妹プロジェクトとして役割を分担しており、既存ユーザー層を引き継げる位置づけが採用を後押ししている。</p>
+    <div class="tool-metrics">
+      <div class="metric"><div class="label">⭐ Stars</div><div class="value">5,572</div><div class="delta up">▲ +348 (+7%)</div><div class="delta-bar"><span style="width:8.313425704730053%"></span></div></div>
+      <div class="metric"><div class="label">📅 Created</div><div class="value" style="font-size:.85rem">2026-05-27</div></div>
+    </div>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-head"><a href="https://github.com/icebird1998/drawio-scientific-illustrator">icebird1998/drawio-scientific-illustrator</a> <span class="new-badge">NEW</span> <span class="tag tag-cat">AI</span> <span class="tag tag-js">JavaScript</span>
+      <span class="spacer"></span>
+      <span class="delta-badge">🔥 約 +341 stars/週 (平均)</span>
+    </div>
+    <p class="tool-desc">draw.io デスクトップ版の実際のキャンバス上で、AI エージェントに科学図解を一手順ずつ描かせる Codex プラグイン。ローカルの MCP サーバー経由で draw.io 自身のグラフ API を呼び出す方式のため、OS のマウス・キーボードを自動操作したり先に XML を作ってから開いたりする手法ではなく、図形・ラベル・矢印が実際に画面上で組み上がっていく様子をそのまま確認できる。エクスポート専用の MCP サーバーも同梱し、描画完了後に PNG・SVG・PDF などへの書き出しまで一つのプラグインで完結する。</p>
+    <div class="tool-metrics">
+      <div class="metric"><div class="label">⭐ Stars</div><div class="value">704</div><div class="delta up">▲ 約 +341/週 (平均)</div><div class="delta-bar"><span style="width:8.146201624462494%"></span></div></div>
+      <div class="metric"><div class="label">📅 Created</div><div class="value" style="font-size:.85rem">2026-07-12</div></div>
+    </div>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-head"><a href="https://github.com/0xsline/OpenChatCut">0xsline/OpenChatCut</a> <span class="new-badge">NEW</span> <span class="tag tag-cat">AI</span> <span class="tag tag-ts">TS</span>
+      <span class="spacer"></span>
+      <span class="delta-badge">🔥 約 +312 stars/週 (平均)</span>
+    </div>
+    <p class="tool-desc">ChatCut のオープンソース代替として、Codex・Claude Code・内蔵エージェントに実際の動画プロジェクトを読み書き・編集・書き出しさせられるローカルファーストの動画編集ツール。生成結果を使い切りのレンダリング済み動画で終わらせず、マルチトラックタイムライン上でその後も編集可能な状態に保つ点が、他のエージェント向け動画生成ツールとの違い。Agent Skills と MCP 連携でタイムラインをエージェントから直接操作できるようにしており、Remotion ベースの動画編集エージェントが同時期に複数登場する中で Product Hunt 掲載も伸びに寄与している。</p>
+    <div class="tool-metrics">
+      <div class="metric"><div class="label">⭐ Stars</div><div class="value">528</div><div class="delta up">▲ 約 +312/週 (平均)</div><div class="delta-bar"><span style="width:7.453416149068323%"></span></div></div>
+      <div class="metric"><div class="label">📅 Created</div><div class="value" style="font-size:.85rem">2026-07-15</div></div>
+    </div>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-head"><a href="https://github.com/chuspeeism/dashi-ppt-skill">chuspeeism/dashi-ppt-skill</a> <span class="new-badge">NEW</span> <span class="tag tag-cat">AI</span> <span class="tag tag-js">JavaScript</span>
+      <span class="spacer"></span>
+      <span class="delta-badge">🔥 +312 stars / 週 (+8%)</span>
+    </div>
+    <p class="tool-desc">文書を渡すとブラウザ上で各ページに編集コンソール付きの PPT を生成し、気に入らない箇所はブラウザ内でそのまま調整して実際に編集可能な PPTX として書き出せる Agent Skill。12 種類の視覚テーマ・1020 種のレイアウトページ・8576 個の調整可能コントロールという物量と、Claude Code や Codex だけでなく豆包・Marvis・Workbuddy など複数のエージェント基盤に対応している対応範囲の広さが、単一プラットフォーム向けスキルとの違いになっている。</p>
+    <div class="tool-metrics">
+      <div class="metric"><div class="label">⭐ Stars</div><div class="value">4,222</div><div class="delta up">▲ +312 (+8%)</div><div class="delta-bar"><span style="width:7.453416149068323%"></span></div></div>
       <div class="metric"><div class="label">📅 Created</div><div class="value" style="font-size:.85rem">2026-06-10</div></div>
     </div>
   </div>
 
   <div class="tool-card">
-    <div class="tool-head"><a href="https://github.com/elder-plinius/T3MP3ST">elder-plinius/T3MP3ST</a> <span class="new-badge">NEW</span> <span class="tag tag-cat">AI</span> <span class="tag tag-ts">TS</span>
+    <div class="tool-head"><a href="https://github.com/Intuition-Lab/personal-model">Intuition-Lab/personal-model</a> <span class="new-badge">NEW</span> <span class="tag tag-cat">AI</span> <span class="tag tag-python">Python</span>
       <span class="spacer"></span>
-      <span class="delta-badge">🔥 約 +1,976 stars/週 (平均)</span>
+      <span class="delta-badge">🔥 +307 stars / 週 (+34%)</span>
     </div>
-    <p class="tool-desc">すでに使っているClaude CodeやCodexなどのAIコーディングエージェントに攻撃能力を付与し、認可済みターゲットに対して偵察・攻撃・報告のキルチェーンをブラウザの「War Room」やCLIから自動実行するオフェンシブセキュリティ向けマルチエージェント基盤。Ollama・LM Studio・vLLMでのフルオフライン実行にも対応し、新規APIキーやクラウド契約なしで完結する設計が特徴。README中の数値を`npm run verify-claims`一発で再計算できる形で公開し、XBOWの104問ベンチマークで自己申告の85%を上回る90.1% pass@1を示すなど、再現性を前面に出した検証姿勢が採用を後押ししている。</p>
+    <p class="tool-desc">macOS 上でユーザーの許可を得て記録した活動データから「HUMAN.md」に相当する個人モデルを構築し、Codex や Claude Code など MCP 対応クライアントに根拠付きの文脈情報を渡して作業を引き継がせるツール。観察された事実を Point → Line → Face → Volume → Root の階層で積み上げ、新しい証拠が出るたびに以前の推論を強化・修正・上書きできる構造になっているのが、単なる会話履歴の要約と異なる点。ローカル実行・データはユーザー管理という前提を保ちながら公式 MCP Registry にも登録されており、エージェントに永続的な個人文脈を持たせたいという需要の高まりが採用を後押ししている。</p>
     <div class="tool-metrics">
-      <div class="metric"><div class="label">⭐ Stars</div><div class="value">5,022</div><div class="delta up">▲ 約 +1,976/週 (平均)</div><div class="delta-bar"><span style="width:12.577175227547578%"></span></div></div>
-      <div class="metric"><div class="label">📅 Created</div><div class="value" style="font-size:.85rem">2026-07-02</div></div>
-    </div>
-  </div>
-
-  <div class="tool-card">
-    <div class="tool-head"><a href="https://github.com/cobusgreyling/loop-engineering">cobusgreyling/loop-engineering</a> <span class="new-badge">NEW</span> <span class="tag tag-cat">AI</span> <span class="tag tag-js">JavaScript</span>
-      <span class="spacer"></span>
-      <span class="delta-badge">🔥 約 +1,487 stars/週 (平均)</span>
-    </div>
-    <p class="tool-desc">AIコーディングエージェントに一回きりのプロンプトを与えるのではなく、繰り返し実行される「ループ」そのものを設計対象として扱うCLIツール群。`loop-init`でスキルや状態管理・予算管理用のファイルを雛形生成すると、その場で「Loop Ready」スコアと次に打つべきループコマンドが提示される点が、抽象論に留まらず定量評価を伴う実践ツールとしての差別化になっている。loop-audit・loop-cost・loop-syncなど機能ごとに分かれた小さなCLIをclaude/codex/opencodeいずれの実行環境にも切り替えて使える設計で、Addy OsmaniやBoris Chernyが言及した「loop engineering」という概念の具体的な実装として注目を集めている。</p>
-    <div class="tool-metrics">
-      <div class="metric"><div class="label">⭐ Stars</div><div class="value">8,764</div><div class="delta up">▲ 約 +1,487/週 (平均)</div><div class="delta-bar"><span style="width:9.464706256762778%"></span></div></div>
-      <div class="metric"><div class="label">📅 Created</div><div class="value" style="font-size:.85rem">2026-06-09</div></div>
-    </div>
-  </div>
-
-  <div class="tool-card">
-    <div class="tool-head"><a href="https://github.com/omnigent-ai/omnigent">omnigent-ai/omnigent</a> <span class="new-badge">NEW</span> <span class="tag tag-cat">AI</span> <span class="tag tag-python">Python</span>
-      <span class="spacer"></span>
-      <span class="delta-badge">🔥 約 +1,351 stars/週 (平均)</span>
-    </div>
-    <p class="tool-desc">Claude Code・Codex・Cursor・OpenCode・Hermesなど複数のAIコーディングエージェントの実行基盤を切り替えたり、同じセッション内で混在させたりできるオーケストレーション層を提供するオープンソースのメタハーネス。セッションは端末・ブラウザ・スマートフォン・デスクトップアプリの間で同期され、リスクの高い操作の前に承認を挟む、支出上限を設ける、使えるツールを制限するといったポリシーでエージェントを統制できる点が特徴。Modal・Daytona・E2B・Kubernetesなど多数のクラウドサンドボックスプロバイダーに対応し、ノートPCなしでエージェントを走らせたいチーム向けの選択肢として支持を広げている。</p>
-    <div class="tool-metrics">
-      <div class="metric"><div class="label">⭐ Stars</div><div class="value">7,529</div><div class="delta up">▲ 約 +1,351/週 (平均)</div><div class="delta-bar"><span style="width:8.59907071478582%"></span></div></div>
-      <div class="metric"><div class="label">📅 Created</div><div class="value" style="font-size:.85rem">2026-06-11</div></div>
-    </div>
-  </div>
-
-  <div class="tool-card">
-    <div class="tool-head"><a href="https://github.com/synthetic-sciences/openscience">synthetic-sciences/openscience</a> <span class="new-badge">NEW</span> <span class="tag tag-cat">AI</span> <span class="tag tag-ts">TS</span>
-      <span class="spacer"></span>
-      <span class="delta-badge">🔥 約 +1,086 stars/週 (平均)</span>
-    </div>
-    <p class="tool-desc">研究者が目標を与えると、文献調査・仮説立案・コード作成・実験実行・論文執筆までの研究サイクルをブラウザ上のワークスペースで一気通貫にこなすAIエージェント型ワークベンチ。生物学・物理学・機械学習それぞれの専門エージェントと批評・文献レビュー用のサブエージェントを備え、UniProtやPDB、arXiv、Semantic Scholarなど約30の科学データベースをエージェントが直接クエリできるツールとして統合している点が、汎用コーディングエージェントとの違いになっている。Anthropic・OpenAI・Googleなど任意のプロバイダの自前APIキーで動き、アカウント登録も不要という間口の広さが、研究分野特化のエージェントを試したい層への浸透を後押ししていると見られる。</p>
-    <div class="tool-metrics">
-      <div class="metric"><div class="label">⭐ Stars</div><div class="value">2,622</div><div class="delta up">▲ 約 +1,086/週 (平均)</div><div class="delta-bar"><span style="width:6.9123544013748335%"></span></div></div>
-      <div class="metric"><div class="label">📅 Created</div><div class="value" style="font-size:.85rem">2026-07-03</div></div>
-    </div>
-  </div>
-
-  <div class="tool-card">
-    <div class="tool-head"><a href="https://github.com/oomol-lab/open-connector">oomol-lab/open-connector</a> <span class="new-badge">NEW</span> <span class="tag tag-cat">AI</span> <span class="tag tag-ts">TS</span>
-      <span class="spacer"></span>
-      <span class="delta-badge">🔥 約 +1,005 stars/週 (平均)</span>
-    </div>
-    <p class="tool-desc">GitHubやGmail、Notion、Slackなど1000以上のSaaSサービスへの認証情報をエージェントのプロセスに直接渡さず、ゲートウェイ側で管理・仲介するオープンソースのコネクタ基盤。1万件超の実行可能なActionをSDK・CLI・MCP・HTTP/OpenAPIのいずれからも同じID・スキーマで呼び出せ、資格情報やスコープ、実行ログを検査可能な形でランタイム内に保持する設計になっている。README自身が商用の同種サービスComposioの代替として名乗りを上げており、ローカル・Fly.io・Cloudflare Workersなど複数のホスティング先を自前で選べる自己ホスト志向が、ベンダーロックインを避けたいチームからの支持を集めていると考えられる。</p>
-    <div class="tool-metrics">
-      <div class="metric"><div class="label">⭐ Stars</div><div class="value">3,027</div><div class="delta up">▲ 約 +1,005/週 (平均)</div><div class="delta-bar"><span style="width:6.396792056520908%"></span></div></div>
-      <div class="metric"><div class="label">📅 Created</div><div class="value" style="font-size:.85rem">2026-06-29</div></div>
-    </div>
-  </div>
-
-  <div class="tool-card">
-    <div class="tool-head"><a href="https://github.com/StarTrail-org/PixelRAG">StarTrail-org/PixelRAG</a> <span class="new-badge">NEW</span> <span class="tag tag-cat">AI</span> <span class="tag tag-python">Python</span>
-      <span class="spacer"></span>
-      <span class="delta-badge">🔥 約 +928 stars/週 (平均)</span>
-    </div>
-    <p class="tool-desc">Webページやドキュメントをテキストとしてパースする代わりに、スクリーンショット画像そのものを検索対象にする視覚的RAG(検索拡張生成)の実装。UC BerkeleyのSkyLab/BAIR発の論文「PixelRAG: Web Screenshots Beat Text for Retrieval-Augmented Generation」の公式コードで、テキスト抽出時に失われるレイアウトや図表の情報を保持したまま類似度検索できるのが特徴。828万件のWikipediaページを事前インデックス化したホスティング済みAPIを無料・無登録で叩けるうえ、テキストだけでなく画像そのものをクエリにもできるため、セットアップなしで試せる手軽さが伸びを支えている。</p>
-    <div class="tool-metrics">
-      <div class="metric"><div class="label">⭐ Stars</div><div class="value">6,927</div><div class="delta up">▲ 約 +928/週 (平均)</div><div class="delta-bar"><span style="width:5.90668958054866%"></span></div></div>
-      <div class="metric"><div class="label">📅 Created</div><div class="value" style="font-size:.85rem">2026-05-29</div></div>
-    </div>
-  </div>
-
-  <div class="tool-card">
-    <div class="tool-head"><a href="https://github.com/Sahir619/fable-method">Sahir619/fable-method</a> <span class="new-badge">NEW</span> <span class="tag tag-cat">AI</span> <span class="tag tag-python">Python</span>
-      <span class="spacer"></span>
-      <span class="delta-badge">🔥 約 +898 stars/週 (平均)</span>
-    </div>
-    <p class="tool-desc">サブスクリプションから削除される直前のClaude Fable 5が実際にどう問題を解いていたかを、他のモデルでも実行できるスキル群として書き起こしたプロジェクト。「作業前に依頼の種類を分類する」「検証方法を名付けたうえで完了条件を定義する」「一次情報から並行して証拠を集める」といった、抽象的な心構えではなく順序と閾値を伴う具体的な手順として定義している点が、単に『注意深く確認せよ』とだけ書く一般的なagent instructionsとの違いになっている。15ラウンド・260件以上のエージェント実行とブラインドのLLM審査で主張を裏付けており、Haikuが仕様とテストの矛盾を黙って『修正』せず提起できた割合が手法なしで4回中0回、手法ありで4回中4回になったという具体的な検証結果を公開している。</p>
-    <div class="tool-metrics">
-      <div class="metric"><div class="label">⭐ Stars</div><div class="value">1,744</div><div class="delta up">▲ 約 +898/週 (平均)</div><div class="delta-bar"><span style="width:5.715740563936095%"></span></div></div>
-      <div class="metric"><div class="label">📅 Created</div><div class="value" style="font-size:.85rem">2026-07-06</div></div>
+      <div class="metric"><div class="label">⭐ Stars</div><div class="value">1,214</div><div class="delta up">▲ +307 (+34%)</div><div class="delta-bar"><span style="width:7.3339703774486384%"></span></div></div>
+      <div class="metric"><div class="label">📅 Created</div><div class="value" style="font-size:.85rem">2026-07-10</div></div>
     </div>
   </div>
 </div>
@@ -218,36 +268,36 @@ footer a{color:var(--primary-500);text-decoration:none}
   <div class="tool-card">
     <div class="tool-head"><a href="https://github.com/anthropics/claude-code">claude-code</a> <span class="tag tag-python">Python</span>
       <span class="spacer"></span>
-      
+      <svg class="sparkline" width="88" height="26" viewBox="0 0 88 30"><polyline points="0.0,28.0 88.0,2.0"/></svg>
     </div>
     <p class="tool-desc">Anthropic 公式のターミナル AI コーディングエージェント。plugin / Skill 機構で拡張できる</p>
     <div class="tool-metrics">
-      <div class="metric"><div class="label">⭐ Stars</div><div class="value">138,418</div><div class="delta flat">— 初回計測</div></div>
-      <div class="metric"><div class="label">📦 npm DL/週</div><div class="value">11,506,892</div><div class="delta flat">— 初回計測</div></div>
+      <div class="metric"><div class="label">⭐ Stars</div><div class="value">139,189</div><div class="delta up">▲ +771 (+0.6%)</div><div class="delta-bar"><span style="width:66.66666666666666%"></span></div></div>
+      <div class="metric"><div class="label">📦 npm DL/週</div><div class="value">10,760,218</div><div class="delta down">▼ -746,674 (-6.5%)</div><div class="delta-bar neg"><span style="width:18.361581920903955%"></span></div></div>
     </div>
   </div>
 
   <div class="tool-card">
     <div class="tool-head"><a href="https://github.com/ccusage/ccusage">ccusage</a> <span class="tag tag-rust">Rust</span>
       <span class="spacer"></span>
-      
+      <svg class="sparkline" width="88" height="26" viewBox="0 0 88 30"><polyline points="0.0,28.0 88.0,2.0"/></svg>
     </div>
     <p class="tool-desc">Claude Code のトークン使用量・コストをローカルの JSONL から集計する CLI</p>
     <div class="tool-metrics">
-      <div class="metric"><div class="label">⭐ Stars</div><div class="value">17,322</div><div class="delta flat">— 初回計測</div></div>
-      <div class="metric"><div class="label">📦 npm DL/週</div><div class="value">88,084</div><div class="delta flat">— 初回計測</div></div>
+      <div class="metric"><div class="label">⭐ Stars</div><div class="value">17,480</div><div class="delta up">▲ +158 (+0.9%)</div><div class="delta-bar"><span style="width:100%"></span></div></div>
+      <div class="metric"><div class="label">📦 npm DL/週</div><div class="value">119,276</div><div class="delta up">▲ +31,192 (+35.4%)</div><div class="delta-bar"><span style="width:100%"></span></div></div>
     </div>
   </div>
 
   <div class="tool-card">
-    <div class="tool-head"><a href="https://github.com/musistudio/claude-code-router">claude-code-router</a> <span class="tag tag-ts">TS</span>
+    <div class="tool-head"><a href="https://github.com/musistudio/claude-code-router">claude-code-router</a> <span class="tag tag-js">JavaScript</span>
       <span class="spacer"></span>
-      
+      <svg class="sparkline" width="88" height="26" viewBox="0 0 88 30"><polyline points="0.0,28.0 88.0,2.0"/></svg>
     </div>
     <p class="tool-desc">Claude Code のリクエストを他モデルへルーティングするプロキシ</p>
     <div class="tool-metrics">
-      <div class="metric"><div class="label">⭐ Stars</div><div class="value">35,944</div><div class="delta flat">— 初回計測</div></div>
-      <div class="metric"><div class="label">📦 npm DL/週</div><div class="value">164,646</div><div class="delta flat">— 初回計測</div></div>
+      <div class="metric"><div class="label">⭐ Stars</div><div class="value">36,189</div><div class="delta up">▲ +245 (+0.7%)</div><div class="delta-bar"><span style="width:77.77777777777777%"></span></div></div>
+      <div class="metric"><div class="label">📦 npm DL/週</div><div class="value">174,812</div><div class="delta up">▲ +10,166 (+6.2%)</div><div class="delta-bar"><span style="width:17.51412429378531%"></span></div></div>
     </div>
   </div>
 </div>
@@ -257,11 +307,11 @@ footer a{color:var(--primary-500);text-decoration:none}
   <div class="tool-card">
     <div class="tool-head"><a href="https://github.com/modelcontextprotocol/servers">modelcontextprotocol/servers</a> <span class="tag tag-ts">TS</span>
       <span class="spacer"></span>
-      
+      <svg class="sparkline" width="88" height="26" viewBox="0 0 88 30"><polyline points="0.0,28.0 88.0,2.0"/></svg>
     </div>
     <p class="tool-desc">MCP 公式リファレンスサーバー集。エコシステムの定点</p>
     <div class="tool-metrics">
-      <div class="metric"><div class="label">⭐ Stars</div><div class="value">88,665</div><div class="delta flat">— 初回計測</div></div>
+      <div class="metric"><div class="label">⭐ Stars</div><div class="value">88,917</div><div class="delta up">▲ +252 (+0.3%)</div><div class="delta-bar"><span style="width:42.85714285714286%"></span></div></div>
       <div class="metric"><div class="label">📦 npm DL/週</div><div class="value">—</div><div class="delta flat">npm 未公開</div></div>
     </div>
   </div>
@@ -269,23 +319,23 @@ footer a{color:var(--primary-500);text-decoration:none}
   <div class="tool-card">
     <div class="tool-head"><a href="https://github.com/modelcontextprotocol/typescript-sdk">MCP TypeScript SDK</a> <span class="tag tag-ts">TS</span>
       <span class="spacer"></span>
-      
+      <svg class="sparkline" width="88" height="26" viewBox="0 0 88 30"><polyline points="0.0,28.0 88.0,2.0"/></svg>
     </div>
     <p class="tool-desc">MCP の公式 TypeScript SDK。サーバー・クライアント実装の土台</p>
     <div class="tool-metrics">
-      <div class="metric"><div class="label">⭐ Stars</div><div class="value">12,900</div><div class="delta flat">— 初回計測</div></div>
-      <div class="metric"><div class="label">📦 npm DL/週</div><div class="value">43,340,138</div><div class="delta flat">— 初回計測</div></div>
+      <div class="metric"><div class="label">⭐ Stars</div><div class="value">12,952</div><div class="delta up">▲ +52 (+0.4%)</div><div class="delta-bar"><span style="width:57.14285714285715%"></span></div></div>
+      <div class="metric"><div class="label">📦 npm DL/週</div><div class="value">45,520,029</div><div class="delta up">▲ +2,179,891 (+5.0%)</div><div class="delta-bar"><span style="width:35.97122302158273%"></span></div></div>
     </div>
   </div>
 
   <div class="tool-card">
     <div class="tool-head"><a href="https://github.com/github/github-mcp-server">github-mcp-server</a> <span class="tag tag-go">Go</span>
       <span class="spacer"></span>
-      
+      <svg class="sparkline" width="88" height="26" viewBox="0 0 88 30"><polyline points="0.0,28.0 88.0,2.0"/></svg>
     </div>
     <p class="tool-desc">GitHub 公式の MCP サーバー（Go 実装）</p>
     <div class="tool-metrics">
-      <div class="metric"><div class="label">⭐ Stars</div><div class="value">31,573</div><div class="delta flat">— 初回計測</div></div>
+      <div class="metric"><div class="label">⭐ Stars</div><div class="value">31,739</div><div class="delta up">▲ +166 (+0.5%)</div><div class="delta-bar"><span style="width:71.42857142857143%"></span></div></div>
       <div class="metric"><div class="label">📦 npm DL/週</div><div class="value">—</div><div class="delta flat">npm 未公開</div></div>
     </div>
   </div>
@@ -293,24 +343,24 @@ footer a{color:var(--primary-500);text-decoration:none}
   <div class="tool-card">
     <div class="tool-head"><a href="https://github.com/microsoft/playwright-mcp">playwright-mcp</a> <span class="tag tag-ts">TS</span>
       <span class="spacer"></span>
-      
+      <svg class="sparkline" width="88" height="26" viewBox="0 0 88 30"><polyline points="0.0,28.0 88.0,2.0"/></svg>
     </div>
     <p class="tool-desc">Playwright をエージェントから操作するブラウザ自動化 MCP サーバー</p>
     <div class="tool-metrics">
-      <div class="metric"><div class="label">⭐ Stars</div><div class="value">35,286</div><div class="delta flat">— 初回計測</div></div>
-      <div class="metric"><div class="label">📦 npm DL/週</div><div class="value">6,361,565</div><div class="delta flat">— 初回計測</div></div>
+      <div class="metric"><div class="label">⭐ Stars</div><div class="value">35,519</div><div class="delta up">▲ +233 (+0.7%)</div><div class="delta-bar"><span style="width:100%"></span></div></div>
+      <div class="metric"><div class="label">📦 npm DL/週</div><div class="value">6,397,156</div><div class="delta up">▲ +35,591 (+0.6%)</div><div class="delta-bar"><span style="width:4.316546762589928%"></span></div></div>
     </div>
   </div>
 
   <div class="tool-card">
     <div class="tool-head"><a href="https://github.com/upstash/context7">context7</a> <span class="tag tag-ts">TS</span>
       <span class="spacer"></span>
-      
+      <svg class="sparkline" width="88" height="26" viewBox="0 0 88 30"><polyline points="0.0,28.0 88.0,2.0"/></svg>
     </div>
     <p class="tool-desc">ライブラリの最新ドキュメントを LLM に供給する MCP サーバー</p>
     <div class="tool-metrics">
-      <div class="metric"><div class="label">⭐ Stars</div><div class="value">59,468</div><div class="delta flat">— 初回計測</div></div>
-      <div class="metric"><div class="label">📦 npm DL/週</div><div class="value">979,962</div><div class="delta flat">— 初回計測</div></div>
+      <div class="metric"><div class="label">⭐ Stars</div><div class="value">59,792</div><div class="delta up">▲ +324 (+0.5%)</div><div class="delta-bar"><span style="width:71.42857142857143%"></span></div></div>
+      <div class="metric"><div class="label">📦 npm DL/週</div><div class="value">844,117</div><div class="delta down">▼ -135,845 (-13.9%)</div><div class="delta-bar neg"><span style="width:100%"></span></div></div>
     </div>
   </div>
 </div>
@@ -320,11 +370,11 @@ footer a{color:var(--primary-500);text-decoration:none}
   <div class="tool-card">
     <div class="tool-head"><a href="https://github.com/cline/cline">cline</a> <span class="tag tag-ts">TS</span>
       <span class="spacer"></span>
-      
+      <svg class="sparkline" width="88" height="26" viewBox="0 0 88 30"><polyline points="0.0,28.0 88.0,2.0"/></svg>
     </div>
     <p class="tool-desc">VS Code 上で動くオープンソースの自律コーディングエージェント拡張</p>
     <div class="tool-metrics">
-      <div class="metric"><div class="label">⭐ Stars</div><div class="value">64,833</div><div class="delta flat">— 初回計測</div></div>
+      <div class="metric"><div class="label">⭐ Stars</div><div class="value">65,084</div><div class="delta up">▲ +251 (+0.4%)</div><div class="delta-bar"><span style="width:23.529411764705884%"></span></div></div>
       <div class="metric"><div class="label">📦 npm DL/週</div><div class="value">—</div><div class="delta flat">npm 未公開</div></div>
     </div>
   </div>
@@ -332,11 +382,11 @@ footer a{color:var(--primary-500);text-decoration:none}
   <div class="tool-card">
     <div class="tool-head"><a href="https://github.com/RooCodeInc/Roo-Code">Roo Code</a> <span class="tag tag-ts">TS</span>
       <span class="spacer"></span>
-      
+      <svg class="sparkline" width="88" height="26" viewBox="0 0 88 30"><polyline points="0.0,28.0 88.0,2.0"/></svg>
     </div>
     <p class="tool-desc">Cline 派生の VS Code AI エージェント拡張</p>
     <div class="tool-metrics">
-      <div class="metric"><div class="label">⭐ Stars</div><div class="value">24,358</div><div class="delta flat">— 初回計測</div></div>
+      <div class="metric"><div class="label">⭐ Stars</div><div class="value">24,365</div><div class="delta up">▲ +7 (+0.0%)</div><div class="delta-bar"><span style="width:0%"></span></div></div>
       <div class="metric"><div class="label">📦 npm DL/週</div><div class="value">—</div><div class="delta flat">npm 未公開</div></div>
     </div>
   </div>
@@ -344,11 +394,11 @@ footer a{color:var(--primary-500);text-decoration:none}
   <div class="tool-card">
     <div class="tool-head"><a href="https://github.com/continuedev/continue">continue</a> <span class="tag tag-ts">TS</span>
       <span class="spacer"></span>
-      
+      <svg class="sparkline" width="88" height="26" viewBox="0 0 88 30"><polyline points="0.0,28.0 88.0,2.0"/></svg>
     </div>
     <p class="tool-desc">オープンソースの IDE AI アシスタント（VS Code / JetBrains）</p>
     <div class="tool-metrics">
-      <div class="metric"><div class="label">⭐ Stars</div><div class="value">34,983</div><div class="delta flat">— 初回計測</div></div>
+      <div class="metric"><div class="label">⭐ Stars</div><div class="value">35,123</div><div class="delta up">▲ +140 (+0.4%)</div><div class="delta-bar"><span style="width:23.529411764705884%"></span></div></div>
       <div class="metric"><div class="label">📦 npm DL/週</div><div class="value">—</div><div class="delta flat">npm 未公開</div></div>
     </div>
   </div>
@@ -356,11 +406,11 @@ footer a{color:var(--primary-500);text-decoration:none}
   <div class="tool-card">
     <div class="tool-head"><a href="https://github.com/Aider-AI/aider">aider</a> <span class="tag tag-python">Python</span>
       <span class="spacer"></span>
-      
+      <svg class="sparkline" width="88" height="26" viewBox="0 0 88 30"><polyline points="0.0,28.0 88.0,2.0"/></svg>
     </div>
     <p class="tool-desc">ターミナルで動くペアプログラミング AI（Python 製・PyPI 配布）</p>
     <div class="tool-metrics">
-      <div class="metric"><div class="label">⭐ Stars</div><div class="value">47,536</div><div class="delta flat">— 初回計測</div></div>
+      <div class="metric"><div class="label">⭐ Stars</div><div class="value">47,715</div><div class="delta up">▲ +179 (+0.4%)</div><div class="delta-bar"><span style="width:23.529411764705884%"></span></div></div>
       <div class="metric"><div class="label">📦 npm DL/週</div><div class="value">—</div><div class="delta flat">npm 未公開</div></div>
     </div>
   </div>
@@ -368,47 +418,47 @@ footer a{color:var(--primary-500);text-decoration:none}
   <div class="tool-card">
     <div class="tool-head"><a href="https://github.com/openai/codex">codex</a> <span class="tag tag-rust">Rust</span>
       <span class="spacer"></span>
-      
+      <svg class="sparkline" width="88" height="26" viewBox="0 0 88 30"><polyline points="0.0,28.0 88.0,2.0"/></svg>
     </div>
     <p class="tool-desc">OpenAI のターミナルコーディングエージェント</p>
     <div class="tool-metrics">
-      <div class="metric"><div class="label">⭐ Stars</div><div class="value">99,943</div><div class="delta flat">— 初回計測</div></div>
-      <div class="metric"><div class="label">📦 npm DL/週</div><div class="value">15,974,279</div><div class="delta flat">— 初回計測</div></div>
+      <div class="metric"><div class="label">⭐ Stars</div><div class="value">101,631</div><div class="delta up">▲ +1,688 (+1.7%)</div><div class="delta-bar"><span style="width:100%"></span></div></div>
+      <div class="metric"><div class="label">📦 npm DL/週</div><div class="value">15,226,164</div><div class="delta down">▼ -748,115 (-4.7%)</div><div class="delta-bar neg"><span style="width:28.834355828220858%"></span></div></div>
     </div>
   </div>
 
   <div class="tool-card">
     <div class="tool-head"><a href="https://github.com/google-gemini/gemini-cli">gemini-cli</a> <span class="tag tag-ts">TS</span>
       <span class="spacer"></span>
-      
+      <svg class="sparkline" width="88" height="26" viewBox="0 0 88 30"><polyline points="0.0,28.0 88.0,2.0"/></svg>
     </div>
     <p class="tool-desc">Google 公式のターミナル AI エージェント</p>
     <div class="tool-metrics">
-      <div class="metric"><div class="label">⭐ Stars</div><div class="value">106,086</div><div class="delta flat">— 初回計測</div></div>
-      <div class="metric"><div class="label">📦 npm DL/週</div><div class="value">488,119</div><div class="delta flat">— 初回計測</div></div>
+      <div class="metric"><div class="label">⭐ Stars</div><div class="value">106,203</div><div class="delta up">▲ +117 (+0.1%)</div><div class="delta-bar"><span style="width:5.882352941176471%"></span></div></div>
+      <div class="metric"><div class="label">📦 npm DL/週</div><div class="value">567,566</div><div class="delta up">▲ +79,447 (+16.3%)</div><div class="delta-bar"><span style="width:100%"></span></div></div>
     </div>
   </div>
 
   <div class="tool-card">
     <div class="tool-head"><a href="https://github.com/anomalyco/opencode">opencode</a> <span class="tag tag-ts">TS</span>
       <span class="spacer"></span>
-      
+      <svg class="sparkline" width="88" height="26" viewBox="0 0 88 30"><polyline points="0.0,28.0 88.0,2.0"/></svg>
     </div>
     <p class="tool-desc">ターミナル特化のオープンソース AI コーディングエージェント。プロバイダー非依存</p>
     <div class="tool-metrics">
-      <div class="metric"><div class="label">⭐ Stars</div><div class="value">187,734</div><div class="delta flat">— 初回計測</div></div>
-      <div class="metric"><div class="label">📦 npm DL/週</div><div class="value">2,088,482</div><div class="delta flat">— 初回計測</div></div>
+      <div class="metric"><div class="label">⭐ Stars</div><div class="value">189,918</div><div class="delta up">▲ +2,184 (+1.2%)</div><div class="delta-bar"><span style="width:70.58823529411765%"></span></div></div>
+      <div class="metric"><div class="label">📦 npm DL/週</div><div class="value">1,770,265</div><div class="delta down">▼ -318,217 (-15.2%)</div><div class="delta-bar neg"><span style="width:93.25153374233128%"></span></div></div>
     </div>
   </div>
 
   <div class="tool-card">
     <div class="tool-head"><a href="https://github.com/OpenHands/OpenHands">OpenHands</a> <span class="tag tag-python">Python</span>
       <span class="spacer"></span>
-      
+      <svg class="sparkline" width="88" height="26" viewBox="0 0 88 30"><polyline points="0.0,28.0 88.0,2.0"/></svg>
     </div>
     <p class="tool-desc">自律ソフトウェア開発エージェントのプラットフォーム（Python 製）</p>
     <div class="tool-metrics">
-      <div class="metric"><div class="label">⭐ Stars</div><div class="value">81,389</div><div class="delta flat">— 初回計測</div></div>
+      <div class="metric"><div class="label">⭐ Stars</div><div class="value">82,186</div><div class="delta up">▲ +797 (+1.0%)</div><div class="delta-bar"><span style="width:58.82352941176471%"></span></div></div>
       <div class="metric"><div class="label">📦 npm DL/週</div><div class="value">—</div><div class="delta flat">npm 未公開</div></div>
     </div>
   </div>
