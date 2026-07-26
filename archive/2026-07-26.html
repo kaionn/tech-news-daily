@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-07-26</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="../feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-07-26 (Sun)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+      <nav class="site-nav">
+        <a href="../" class="active">📰 日刊ダイジェスト</a>
+        <a href="../trends.html">🔌 週次プラグイントレンド</a>
+        <a href="../ai-trends.html">🧠 AI プロダクト動向</a>
+        <a href="./">🗂 アーカイブ</a>
+      </nav>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 20 articles</span>
+      <span>🏷 7 categories</span>
+      <span>📡 14 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item">
+        <span class="number-value">$69,875</span>
+        <span class="number-label">2bit量子化Kimi K2.7 CodeがMac Studioで稼いだ額</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">CVSS 10</span>
+        <span class="number-label">n8nの任意ファイル読み取り脆弱性の深刻度</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">26.1%</span>
+        <span class="number-label">脆弱性を含むAIエージェントSkillsの割合（SkillSpector調査）</span>
+      </div>
+    </div>
+
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
+
+      <div class="card featured deep-dive">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://thehackernews.com/2026/07/critical-sharepoint-rce-cve-2026-50522.html">DEEP DIVE: SharePointのCVSS 9.8 RCE、マシンキー窃取で実悪用——CISA是正期限は昨日</a></h3>
+        </div>
+        <div class="summary">SharePointのオンプレミス版（Subscription Edition・2019・2016全て）に、信頼できないデータのデシリアライズに起因するリモートコード実行の脆弱性CVE-2026-50522が存在する。CVSSスコアは9.8で、Site Owner権限を持つ認証済みユーザーが任意のコードをサーバーに注入・実行できてしまう。7月のMicrosoft Patch Tuesdayでパッチが公開されたが、DEVCORE所属の研究者splitline氏が詳細な検証コードを公開したことで状況が悪化し、実際の悪用が確認された。攻撃者はこの脆弱性を使ってSharePointサーバーのマシンキー（ASP.NET暗号化・署名鍵）をわずか1回のリクエストで窃取する手口を確立しており、この鍵さえ盗めればパッチ適用後もその鍵を使った偽造リクエストで永続的にアクセスし続けられる。つまりパッチを当てるだけでは不十分で、鍵自体をローテーションしない限り侵害状態が継続する。CISAは7月22日にこの脆弱性を既知悪用脆弱性（KEV）カタログへ追加し、連邦機関に7月25日までの対応を義務付けたが、この期限はすでに過ぎている。オンプレミスSharePointを運用する組織全般が対象で、マシンキーの窃取という性質上、パッチ適用の有無だけでは侵害の有無を判断できない点が実務上の最大の課題だ。</div>
+        <div class="editorial">🧠 マシンキーを盗まれた後にパッチを当てても、盗まれた鍵自体は無効化されないため、パッチ適用と鍵ローテーションの両方を実施しない限り「パッチ済みなのに侵害されたまま」という状態が続く。実務ではパッチ適用ログよりも鍵ローテーション実施ログの方が重要な指標になるだろう。ただし鍵ローテーションの徹底度合いは組織ごとにばらつきが大きく、この脆弱性の実害がどこまで広がっているかは今後の観測を待つ必要がある。</div>
+        <div class="key-points">
+          <ul>
+            <li>CVSS 9.8、Site Owner権限を持つ認証済みユーザーがデシリアライズ経由で任意コードを実行可能</li>
+            <li>攻撃者は1回のリクエストでSharePointサーバーのマシンキーを窃取、パッチ適用後もこの鍵で偽造リクエストを継続できる</li>
+            <li>CISAは7月22日にKEVカタログへ追加し連邦機関に7月25日までの対応を義務付けたが、期限は既に経過</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 オンプレミスSharePointを運用しているなら、パッチ適用だけでなくASP.NETマシンキーのローテーションまで完了させないと侵害状態が続く。</div>
+        <div class="meta">
+          <span>The Hacker News</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-07-25</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://www.securityweek.com/critical-vulnerability-exposes-n8n-instances-to-takeover-attacks/">ワークフロー自動化n8nにCVSS満点10のファイル読み取り脆弱性、悪用の技術詳細公開で警戒強まる</a></h3>
+        </div>
+        <div class="summary">Docker上で1億回超プルされているワークフロー自動化基盤n8nに、CVSS満点10のCVE-2026-21858が存在する。フォームベースのワークフローが持つファイルコピー機能がcontent-typeを検証しないため、filepathパラメータを細工するとアップロードされたファイルの代わりにサーバー上の任意のローカルファイルを読み取れてしまう。修正は2025年11月18日リリースのv1.121.0で既に配布済みだが、セキュリティ企業Cyeraが悪用の技術的詳細を公開したことで、未パッチのインターネット公開インスタンスへの攻撃リスクが改めて高まっている。</div>
+        <div class="key-points">
+          <ul>
+            <li>content-type未検証のファイルコピー処理をfilepathパラメータの細工で悪用し、任意のローカルファイルを読み取り可能。CVSSは満点の10</li>
+            <li>修正版v1.121.0は2025年11月18日提供済みだが、Cyeraの技術詳細公開で未パッチのWebhook・フォームエンドポイント公開インスタンスのリスクが再燃</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>SecurityWeek</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07-24</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://www.debian.org/vote/2026/vote_002">Debianが「LLM生成コード全面禁止」の決議案を審議入り、対抗案と二択の投票へ</a></h3>
+        </div>
+        <div class="summary">Debianプロジェクトで7月22日に提出された一般決議案が7月24日から公式討議期間に入った。提案Aはソースパッケージ・公式Web資産・ドキュメント・翻訳・プロジェクト内コミュニケーションを含む全領域で、LLM生成・LLM支援コードの直接的な貢献を著作権・品質・コミュニティ・倫理の観点から明示的に拒否する内容。対抗する提案Bは、投稿者が利用を宣言し著作権フリーであることを保証し責任を負う限りAI利用コードを許容する内容で、両案が投票にかけられる見通しだ。2026年2〜3月の前回討議では投票自体が見送られ、ケースバイケースの運用が続いていた。</div>
+        <div class="key-points">
+          <ul>
+            <li>提案Aの適用範囲はソースパッケージ・公式Web資産・ドキュメント・翻訳・プロジェクト内コミュニケーションまで全域に及ぶ</li>
+            <li>提案Bは利用宣言・著作権フリー保証・責任負担の3条件付きでAI利用コードを許容。2〜3月の前回討議は投票見送りで終わっていた</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Debian.org</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07-24</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://pytorch.org/blog/bringing-pytorch-monarch-to-amd-gpus-single-controller-distributed-training-on-rocm/">PyTorch MonarchがAMD GPU/ROCmに対応、単一コントローラでのフォールトトレラント分散学習を拡張</a></h3>
+        </div>
+        <div class="summary">単一のPythonプログラムからGPUクラスタ全体をアクター方式で制御する分散フレームワークPyTorch Monarchが、CUDA限定からAMD Instinct/ROCmエコシステムに対応範囲を広げた。hipify_torchでCUDA C++をHIPへ変換しNCCL相当のRCCLに接続、CUDA Driver API呼び出しをHIPへ自動振り分けするrocm_compatモジュールも新設した。</div>
+        <div class="key-points">
+          <ul>
+            <li>SLURM上の16ノード・MI300 GPU128基構成で、180秒ごとにRCCL障害を注入しても学習継続を確認</li>
+            <li>Kubernetes上の32ノード・MI355 GPU256基構成でLlama 3 8Bのlossが12から4へ収束、ROCm 7.0以降でテスト1,171件が全てパス</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>PyTorch Blog</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07-24</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://qiita.com/viva_tweet_x/items/3ff94aa7a63392e56d20">MCPサーバーのGET /mcpが200を返しただけで、Cloudflare無料枠10万リクエストが7時間で溶けた</a></h3>
+        </div>
+        <div class="summary">公開したMCPサーバーが、GETリクエストに対してMCP Streamable HTTP仕様上あるべき405やtext/event-streamではなく200とJSONを返していた。クライアントはストリームが開いていない200応答を切断と解釈し、約0.2秒間隔で即座に再接続し続けるループに陥った。ステータスコードは常に0%エラーのままで詳細ログも無効だったため異常に気付けず、無料枠10万リクエスト/日を7時間で使い切って初めて91%到達の警告で発覚した。</div>
+        <div class="key-points">
+          <ul>
+            <li>GET /mcpへの誤った200応答が、クライアント側で約0.2秒間隔の無限再接続ループを誘発</li>
+            <li>405 Method Not Allowedを返す修正後、リクエスト量は修正前の約1/1000に低下</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07-24</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://kitsumed.github.io/blog/posts/android-may-soon-restrict-on-device-adb/">Androidが端末上ADBの制限を検討、Shizuku・libadb系ツールに影響の可能性</a></h3>
+        </div>
+        <div class="summary">Android上で動作しADBコマンドを発行するShizukuやlibadbベースのツール群が、将来のAndroidバージョンで想定されている端末上ADB利用制限の影響を受ける可能性があると報告された。これらのツールはUSB経由でPCから発行するADBコマンドを、ルート化やPC接続なしに端末単体で実行できるようにする仕組みで、開発者向けデバッグや上級者向けツールの基盤になっている。</div>
+        <div class="key-points">
+          <ul>
+            <li>Shizuku・libadbなど端末単体でのADB実行に依存するツール群が影響対象になる可能性</li>
+            <li>Hacker Newsフロントページで825ポイントを獲得し、開発者コミュニティで広く議論</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>kitsumed.github.io</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-25</span>
+          <span class="engagement">▲ 825</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://gbhackers.com/sap-july-2026-patch-day-fixes-vulnerabilities/">SAP、7月Patch DayでNetWeaver ABAPのCVSS 9.9含む重大脆弱性4件を修正</a></h3>
+        </div>
+        <div class="summary">SAPは7月14日、新規セキュリティノート16件とGitHubセキュリティアドバイザリ1件、既存ノートの更新3件を公開した。うち緊急度Criticalは4件。最も深刻なのはNetWeaver ABAPカーネルのメモリ破損CVE-2026-44747（CVSS 9.9）で、低権限の攻撃者が遠隔から機密性・完全性・可用性を侵害できる。AppRouter 20.10未満のHTTPリクエストスマグリングCVE-2026-27690（CVSS 9.1）は認証不要で遠隔攻撃可能だ。</div>
+        <div class="key-points">
+          <ul>
+            <li>NetWeaver ABAPカーネルのメモリ破損CVE-2026-44747はCVSS 9.9、低権限アカウントからの遠隔攻撃が可能</li>
+            <li>AppRouter 20.10未満のリクエストスマグリングCVE-2026-27690は認証不要でCVSS 9.1、Critical計4件・High 6件を含む20件を公開</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GBHackers</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07-14</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://zenn.dev/hellohazime/articles/kimi_k27_code_swelancer_local">2bit量子化Kimi K2.7 CodeをMac Studio単体で走らせ、SWE-Lancerで$69,875を稼がせた</a></h3>
+        </div>
+        <div class="summary">M3 Ultra・512GB RAMのMac Studio1台に約341GBの2bit量子化GGUF版Kimi K2.7 Code（UD-Q2_K_XL）を載せ、実務タスク型ベンチマークSWE-Lancer（IC SWE Diamond）198問を6月中の13日間・308時間34分かけて解かせた結果、93問正解（成功率47.0%）で獲得賞金$189,300中$69,875を稼いだ。初回はツール呼び出し構文で訓練されたモデルにコードブロック出力を期待する実装のままで正解率3.85%に沈み、ネイティブfunction callingを使う実装に直してから成績が改善した。198問中109問が900秒のレスポンスタイムアウトに達し、うち75問はタイムアウトでゼロ点になっており、制約を外せばさらに上振れする余地がある。</div>
+        <div class="key-points">
+          <ul>
+            <li>UD-Q2_K_XL（約341GB）をMac Studio M3 Ultra/512GB RAM 1台で駆動、198問中93問正解（47.0%）で$69,875獲得</li>
+            <li>実装をツールコール前提からネイティブfunction callingに変更して正解率3.85%から大幅改善</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-07-24</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://zenn.dev/mattn/articles/cace8c5a00b9cc">Rustに書き直さずCをメモリ安全にするFil-Cを実際に試す、オーバーヘッドは処理内容で1.05〜2.27倍</a></h3>
+        </div>
+        <div class="summary">clang 20.1.8ベースのメモリ安全Cコンパイラ「Fil-C」を、スタックバッファオーバーフロー・use-after-free・ポインタメタデータ検査の3パターンで検証した。ポインタにInvisiCapsという不可視の境界・権限メタデータを付与し、解放済みオブジェクトを即時回収せずマークするFUGCという並行GCでuse-after-freeを防ぐ仕組みで、strcpyの範囲外書き込みは発生位置付きで検出、解放後アクセスもcapabilityが「free」状態として検出された。gcc基準1.0に対し、数値計算中心のmandelで1.05倍、配列アクセス中心のsieveで2.27倍、確保中心のbtreeで1.10倍のオーバーヘッドで、境界チェックの負荷が最も重い一方、GCが確保中心の処理には有利に働く場面もあった。</div>
+        <div class="key-points">
+          <ul>
+            <li>gcc基準1.0倍に対しmandel 1.05倍・sieve 2.27倍・btree 1.10倍。配列境界チェックの負荷が最も重い</li>
+            <li>Linux x86_64限定で、既存バイナリとのリンクは不可。依存ライブラリは全てFil-C向けに再コンパイルが必要</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-07-22</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://zenn.dev/singularity/articles/diy-terminal-500-commits">Claude Codeを6並列で回すため自作したブラウザ型ターミナル「MulmoTerminal」、1日500コミット超えの内側</a></h3>
+        </div>
+        <div class="summary">Ghostty上でClaude Codeのセッションを5〜6並列に増やしたところ、どれが完了しどれが待機中か目視で追えなくなったことをきっかけに、著者はxterm.js・tmux・WebSocketを組み合わせたブラウザ型ターミナル「MulmoTerminal」を自作した。各セッションの進行状況・元の指示内容・待機/実行中の状態を色分け表示し、iOS向けWeb PushでAIエージェントからの呼び出しを通知する仕組みも備える。結果として6エージェントがそれぞれ小刻みにコミットを重ねる運用になり、1日のコミット数が500件を超えた。著者の役割自体も「コードを書く」から「差分をレビューして承認する」に変わり、次のボトルネックはGitHubのマージ・CI待ち時間に移ったという。</div>
+        <div class="key-points">
+          <ul>
+            <li>xterm.js・tmux・WebSocket・Web Push APIでClaude Codeの並列セッションを可視化し、進行状況を色分け表示</li>
+            <li>6エージェントが小刻みにコミットを重ねる運用で1日500コミット超えを記録。著者の役割は実装からレビュー承認へ移行</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07-25</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/green_tea/articles/e39e3726a449c9">Claude Codeを2時間おきに自動実行する「Loop Engineering」で、勤務中にVS Code拡張を7サイクル育てる</a></h3>
+        </div>
+        <div class="summary">人間がプロンプトを毎回入力する代わりに、`/loop 2h /evolve`コマンドでClaude Codeを2時間おきに自動起動し、実装・テスト・コードレビュー・ドキュメント更新・commitまでを1サイクルとして自律的に回す運用を「Loop Engineering」と呼んでいる。対象はMermaid図のリアルタイムプレビューやPNG書き出し、約36言語のシンタックスハイライトを備えたVS Code向けMarkdown WYSIWYGエディタ拡張。著者が本業に就いている1営業日で7サイクルが完了し、タスクリストのライブ入力・引用ブロックのネスト・文字数表示・目次生成などの機能がおよそ2時間おきのcommitとして積み上がった。</div>
+        <div class="key-points">
+          <ul>
+            <li>`/loop 2h /evolve`でClaude Codeを2時間間隔で自動起動、1サイクルに実装・テスト・レビュー・commitまで含む</li>
+            <li>著者が本業に就いている1営業日で7サイクル完了、対象はMermaidプレビュー・約36言語ハイライト対応のMarkdown WYSIWYG拡張</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07-25</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.com/NVIDIA/SkillSpector">NVIDIAがAIエージェントSkillのセキュリティスキャナ「SkillSpector」公開、68種のパターンで脆弱性検出</a></h3>
+        </div>
+        <div class="summary">Claude Code・Codex CLI・Gemini CLIなどが使うAIエージェント向けSkillを事前にスキャンし、インストール前に脆弱性を検出するツール「SkillSpector」が公開された。プロンプトインジェクション・データ持ち出し・サプライチェーン・危険なコード実行・MCPの権限侵害など17カテゴリ68種のパターンを、正規表現・AST解析・YARAシグネチャによる静的解析とLLMによる意味的評価の2段階パイプラインで検出する。NVIDIA自身の調査では、対象Skillの26.1%に何らかの脆弱性が含まれ、5.2%は悪意ある意図が疑われると報告している。</div>
+        <div class="key-points">
+          <ul>
+            <li>プロンプトインジェクション・データ持ち出し・サプライチェーン・MCP権限侵害など17カテゴリ68種のパターンを静的解析+LLM評価の2段階で検出</li>
+            <li>NVIDIAの調査でSkillの26.1%に脆弱性、5.2%に悪意ある意図の疑いを確認。Python/JavaScript/SKILL.md対応、v2.0.0</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-24</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-frontend">Frontend</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://azukiazusa.dev/blog/html-in-canvas-component-library-canvasui/">HTML-in-Canvas APIでWebGLエフェクトとDOM操作性を両立する「Canvas UI」</a></h3>
+        </div>
+        <div class="summary">HTML-in-Canvas APIは、HTMLコンテンツをDOMとして保持したままWebGLエフェクトを重ねられる実験的APIで、ポインタ・キーボード操作やアクセシビリティツリーへの参加を保ったまま見た目だけをシェーダーで加工できる。Canvas UIはこのAPI上に構築されたコンポーネントライブラリで、雨滴が伝うDroplets、六角格子で遠近変形するHexFloat、カーソル追従レンズのGlass、カーソル周囲がガラスのように割れるShatterなどを用意し、React/Vue/Solid/Svelte向けにshadcn/uiのレジストリ経由でソースコードとして配布する。</div>
+        <div class="key-points">
+          <ul>
+            <li>React/Vue/Solid/Svelte対応、shadcn/uiレジストリ経由でnpmパッケージではなくソースコードとして配布</li>
+            <li>HTML-in-Canvas API自体はChrome 148〜150のOrigin Trialで、未対応ブラウザは通常HTML表示にフォールバック</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>azukiazusa.dev</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-24</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://qiita.com/jqit-yukiono/items/21c54529410ba960c388">JenkinsからGitHub Copilot CLIを叩いてPRを自動レビュー、E2BIGとプロンプトインジェクションと戦う</a></h3>
+        </div>
+        <div class="summary">Jenkinsパイプラインから GitHub Copilot CLIを呼び出し、PRの差分を自動レビューする仕組みを構築する過程で、diffが巨大になった際のE2BIG（引数リスト長すぎ）エラーや、PR本文・コミットメッセージに紛れ込む悪意あるプロンプトインジェクション対策に直面した経験を共有している。</div>
+        <div class="key-points">
+          <ul>
+            <li>diff肥大化によるE2BIGエラーへの対処と、PR本文経由のプロンプトインジェクション対策を実装</li>
+            <li>Jenkinsパイプライン上でGitHub Copilot CLIをレビュー用途に組み込む具体構成を公開</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07-25</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
+
+      <div class="quick-link">
+        <span class="tag tag-oss">OSS</span>
+        <a href="https://supakeen.com/weblog/the-fedora-45-sausage-factory/">The Fedora 45 Sausage Factory</a>
+        <span class="quick-summary">— Fedora 45リリースに向けた意思決定プロセスの舞台裏を、パッケージメンテナ視点で振り返る。</span>
+        <span class="meta">supakeen.com</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://azukiazusa.dev/blog/hermes-agent-slack-workflow/">Hermes AgentとSlackで設計し、LinearのチケットからDraft PRまで自動生成するワークフロー</a>
+        <span class="quick-summary">— SlackでのAIエージェントとの設計対話からLinearチケット起票、Draft PR作成までを一連の流れで検証。</span>
+        <span class="meta">azukiazusa.dev</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://radicle.network/nodes/rosa.radicle.network/rad%3Az2v9tRJz1oknFAqCSY5W5c76nVvm6">分散型メッセージングBitchatがRadicleネットワークに登場</a>
+        <span class="quick-summary">— GitHub不要のP2Pコード共有プラットフォームRadicle上でBitchatのリポジトリが公開・追跡可能に。</span>
+        <span class="meta">Radicle Network</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://www.theguardian.com/us-news/ng-interactive/2026/jul/25/flock-surveillance-cameras">Flock監視カメラを無力化する自警運動が拡大</a>
+        <span class="quick-summary">— 自動ナンバープレート認識カメラ網Flockに対し、機材を物理的に無力化する市民運動が米国各地で広がっている。</span>
+        <span class="meta">The Guardian</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://qiita.com/vivinko/items/7300b32de1d127acc421">Claude Code・Codexに動作確認まで自走させる</a>
+        <span class="quick-summary">— 実装後の動作確認まで含めてAIコーディングエージェントに委ねる運用フローの構成を紹介。</span>
+        <span class="meta">Qiita</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://tangled.org/oppi.li/stinkpot">stinkpot: SQLiteでシェル履歴を管理するツール</a>
+        <span class="quick-summary">— bashやzshの履歴ファイルをSQLiteに置き換え、構造化クエリでの検索・分析を可能にする。</span>
+        <span class="meta">Tangled</span>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="./" class="archive-link">🗂 過去のダイジェスト</a>
+    </footer>
+  </div>
+</body>
+</html>
