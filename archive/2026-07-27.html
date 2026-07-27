@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-07-27</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="../feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-07-27 (Mon)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+      <nav class="site-nav">
+        <a href="../" class="active">📰 日刊ダイジェスト</a>
+        <a href="../trends.html">🔌 週次プラグイントレンド</a>
+        <a href="../ai-trends.html">🧠 AI プロダクト動向</a>
+        <a href="./">🗂 アーカイブ</a>
+      </nav>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 19 articles</span>
+      <span>🏷 7 categories</span>
+      <span>📡 12 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item">
+        <span class="number-value">500,000</span>
+        <span class="number-label">Claude Coworkのサンドボックス脱出欠陥が影響したmacOSユーザー数</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">93%</span>
+        <span class="number-label">FLUX 3 VideoがLuma Ray 3.2に対して得た選好率</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">90%</span>
+        <span class="number-label">Unity 7でのシェーダービルド高速化率</span>
+      </div>
+    </div>
+
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
+
+      <div class="card featured deep-dive">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://thehackernews.com/2026/07/claude-cowork-flaw-could-let-ai-agent.html">DEEP DIVE: Claude Coworkに「SharedRoot」サンドボックス脱出、macOS 50万ユーザーが影響</a></h3>
+        </div>
+        <div class="summary">Anthropicのデスクトップエージェント「Claude Cowork」は、macOS上でLinux仮想マシンを起動し、ユーザーが指定したフォルダをVMに接続してタスクを実行する。ホストとVMの分離が安全性の前提だったが、研究者は「SharedRoot」と名付けた脱出手法を実証した。VMにはホストのルートファイルシステム全体が/mnt/.virtiofs-rootとして書き込み可能な状態でマウントされており、本来はゲスト内のrootユーザーのみアクセスできる設計だった。調査チームは、フォルダをひとつ接続した新規セッションで短いメッセージを1通送っただけで、エージェントがゲストroot権限を取得し、接続していないフォルダも含めホスト全体のファイルを読み書きできることを確認した。脱出には、Linuxカーネルのトラフィック制御サブシステムact_peditを非特権ユーザー名前空間から読み込み、権限昇格の脆弱性CVE-2026-46331(通称pedit COW)を突く手法が使われた。ゲストroot権限を得た時点で、ホストのSSH鍵やAWS認証情報、ブラウザデータへのアクセスが可能になる。パッチ適用前の時点でローカル実行のCoworkセッションを使うmacOSユーザー約50万人が影響を受けたとされる。Anthropicは今回の報告を「informative」として修正なしでクローズしたが、最新版のCoworkはデフォルトでクラウド実行に切り替わっており、この経路は実質的に塞がれている。ローカル実行を選ぶユーザーは引き続き影響を受ける。</div>
+        <div class="editorial">🧠 Anthropicが「informative」としてパッチを見送った判断は、デフォルトのクラウド実行分離を安全策とみなした結果だろう。ただし、ローカル実行を選び続ける個人開発者やオフライン運用が必要な企業にとっては、CVE番号こそ付いたが実質未修正の脆弱性が残ったままだ。VirtioFSのホストルート共有マウントという設計自体を見直さない限り、同種の脱出経路が別のカーネル脆弱性で再発する可能性は高い。</div>
+        <div class="key-points">
+          <ul>
+            <li>ゲスト側の非特権ユーザー名前空間からLinuxカーネルのact_peditを読み込み、CVE-2026-46331(pedit COW)でゲストroot権限を奪取</li>
+            <li>ホストの/全体が/mnt/.virtiofs-rootとして書き込み可能でマウントされており、接続したフォルダ外のファイルにも到達可能</li>
+            <li>パッチ適用前のローカル実行ユーザー約50万人が対象、Anthropicは修正なしで「informative」としてクローズ</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 macOSでCoworkをローカル実行している場合は、最新版へのアップデートでクラウド実行に切り替えるか、信頼できないフォルダを接続しない運用にすべきだ。</div>
+        <div class="meta">
+          <span>The Hacker News</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-07-23</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/mcp728mcpgithub_mcp.html">MCP仕様が7月28日にステートレス接続へ、GitHub MCPサーバが早くも対応</a></h3>
+        </div>
+        <div class="summary">Model Context Protocol(MCP)の次期仕様「2026-07-28」では、初期化ハンドシェイクとMcp-Session-Idヘッダによるセッション管理が廃止され、ステートレスな通信に変わる。クライアントのリクエストがどのサーバインスタンスに届いても処理できるようになるため、複数サーバを並べたロードバランサー構成の運用が容易になる。GitHubは同日付で次期MCPサーバをリリース予定で、セッションIDの読み書きにともなうデータベース操作が不要になり、接続がより高速でシンプルになるという。Tier 1 SDKは後方互換性を維持する。</div>
+        <div class="key-points">
+          <ul>
+            <li>新仕様2026-07-28で初期化ハンドシェイクとMcp-Session-Idヘッダによるセッション管理を廃止</li>
+            <li>GitHub MCPサーバは同日リリース予定、セッションID管理用のDB操作が不要になり接続を高速化</li>
+            <li>Tier 1 SDKは後方互換性を維持、既存クライアントの移行負担を抑える設計</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 MCPサーバを複数台構成でロードバランスしている場合、セッション親和性(sticky session)の設定が不要になり、インフラ構成をシンプル化できる。</div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-27</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://bfl.ai/blog/flux-3">Black Forest Labs、画像・動画・音声・行動予測を統合した「FLUX 3」を発表、動画生成はアーリーアクセス公開</a></h3>
+        </div>
+        <div class="summary">Black Forest Labsが、画像・動画・音声・アクション予測を単一アーキテクチャで扱うマルチモーダルモデル「FLUX 3」を発表し、動画生成機能「FLUX 3 Video」をアーリーアクセス公開した。テキストや画像、キーフレーム、参照クリップを起点に、ネイティブ音声付きで最長20秒の動画を1回の生成で作成でき、登場人物などの主要要素を新しいシーンへ引き継ぐことや、複数言語の台詞生成、クリップを連結した複数ショットの長尺化にも対応する。予備評価ではRunway Gen-4.5比77%、Luma Ray 3.2比93%の選好率で優位に立ったという。画像生成版「FLUX 3 Image」は数週間以内に追加予定で、高速版とオープンウェイト版も年内に公開するとしている。</div>
+        <div class="key-points">
+          <ul>
+            <li>テキスト・画像・動画・音声・アクション予測を単一アーキテクチャで学習、ネイティブ音声付き最長20秒動画を1回の生成で出力</li>
+            <li>予備評価でRunway Gen-4.5比77%、Luma Ray 3.2比93%の選好率、Seedance 2.0・Gemini Omni Flash比でも52%の優位</li>
+            <li>現在アーリーアクセス公開中はFLUX 3 Video/Actionのみ、Image版は数週間以内、高速版・オープンウェイト版は年内公開予定</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 ロボティクス向けのアクション予測まで同一モデルで扱う設計のため、動画生成ツールとしてだけでなく物理エージェント開発の基盤としても注目に値する。</div>
+        <div class="meta">
+          <span>Black Forest Labs</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07-23</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://www.bleepingcomputer.com/news/security/hackers-exploit-critical-auth-bypass-in-gitea-docker-image/">Gitea公式Dockerイメージの認証バイパス脆弱性、公開13日で実悪用が確認</a></h3>
+        </div>
+        <div class="summary">Gitea公式Dockerイメージ(1.26.2以前、デフォルト設定)に認証バイパスの脆弱性CVE-2026-20896が見つかった。イメージは環境変数REVERSE_PROXY_TRUSTED_PROXIES=*を既定値としており、任意の送信元からのX-WEBAUTH-USERヘッダーを信用してしまうため、未認証の攻撃者が管理者を含む任意のユーザーになりすませる。研究者Michael Clark氏は、修正版公開から13日後にProtonVPN経由の悪用試行を検出したと報告した。</div>
+        <div class="key-points">
+          <ul>
+            <li>REVERSE_PROXY_TRUSTED_PROXIES=*が既定値のため、任意送信元のX-WEBAUTH-USERヘッダーを信用してしまう</li>
+            <li>修正版1.26.3/1.26.4公開後13日で実悪用を確認、対象は公開インスタンス約6,200件</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>BleepingComputer</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-10</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://www.bleepingcomputer.com/news/security/hollowbyte-ddos-flaw-bloats-openssl-server-memory-with-11-byte-payload/">OpenSSLの「HollowByte」、わずか11バイトでサーバーメモリを枯渇させるDoS欠陥</a></h3>
+        </div>
+        <div class="summary">TLSハンドシェイクのメッセージヘッダーは後続データのサイズを申告するが、脆弱なOpenSSLはそのサイズ分のメモリを実データ到着前に確保していた。攻撃者は11バイトの偽ヘッダーだけを送り、確保させたメモリを使わず接続を切ることでヒープを断片化させ、接続を繰り返すことでメモリを枯渇させられる。修正はバッファを実データの到着に応じて段階的に拡張する方式に変更し、OpenSSLはこれをCVE番号なしの「hardening fix」として静かに取り込んだ。</div>
+        <div class="key-points">
+          <ul>
+            <li>11バイトの偽ヘッダーで最大131KBのバッファ確保をトリガーでき、接続を繰り返すことでヒープを断片化</li>
+            <li>修正版はOpenSSL 4.0.1/3.6.3/3.5.7/3.4.6/3.0.21、CVE番号は付与されず「hardening fix」扱い</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>BleepingComputer</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-17</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://pkg.go.dev/golang.org/x/tools/go/analysis">Goチーム製の静的解析フレームワークgo/analysis、v0.48.0で6,564パッケージが依存</a></h3>
+        </div>
+        <div class="summary">golang.org/x/tools/go/analysisは、静的解析ロジックとドライバプログラムの間のインターフェースを定義するフレームワークだ。Analyzerが1パッケージずつ検査し、下位パッケージの解析結果をFactとしてgobでシリアライズして上位パッケージへ引き継げるため、vetやIDE、ビルドシステムなど異なるドライバから同じチェッカーを再利用できる。passes/配下にはprintfやnilness、copylockなど約60個の組み込みAnalyzerが同梱される。</div>
+        <div class="key-points">
+          <ul>
+            <li>最新版v0.48.0は2026年7月9日公開、6,564パッケージから依存されるデファクト標準</li>
+            <li>AnalyzerはRequiresフィールドで依存する他のAnalyzerを宣言でき、解析結果をFact型で下位から上位へ受け渡す</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>pkg.go.dev</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-09</span>
+          <span class="engagement">▲ 162</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://jvns.ca/blog/2026/07/21/more-nice-django-things/">jvns.ca、Djangoの気に入っている機能を再整理——querystringフィルタとテンプレートキャッシュ</a></h3>
+        </div>
+        <div class="summary">Julia Evans氏が、日常的に使っているDjangoの機能をまとめた。.approved()や.future()のような再利用可能なQuerySetメソッドをチェーンして読みやすいクエリを組み立てられる点、querystringテンプレートフィルタで既存URLの一部パラメータだけを差し替えたリンクを生成できる点を挙げる。テンプレートキャッシュを有効化したところ、サイトは秒間約12リクエストを処理できるようになったという。一方でクラスベースビューの継承は扱いづらく、関数ベースビューを好むと述べている。</div>
+        <div class="key-points">
+          <ul>
+            <li>querystringテンプレートフィルタで、既存URLの一部パラメータだけを差し替えたリンクを生成できる</li>
+            <li>テンプレートキャッシュ有効化後、秒間約12リクエストを処理できる性能に到達</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>jvns.ca</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07-21</span>
+          <span class="engagement">▲ 108</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/u1/articles/claude5-rules-collapse-and-fix">Opus 5でシステムプロンプトが8割削減、「思考が浅い」問題への対策</a></h3>
+        </div>
+        <div class="summary">Claude 5世代のOpus 5では、システムプロンプトの分量が旧世代から約80%削減され、応答形式の規定がモデルの既定動作に委ねられた。この変更により、「十分な情報が揃ったら動け」という方針が即座の作業着手を助長し、「網羅より推奨を」という指針が評価軸の省略につながり、体感としての思考の浅さが生じているという。著者は対策として、本体プロンプトと衝突する指示は原文を引用して優先順位を明示すること、禁止形の指示を望ましい行動の記述に書き換えること、行動直前のターンに短い指示を差し込むことの3点を提案する。</div>
+        <div class="key-points">
+          <ul>
+            <li>Opus 5でシステムプロンプトが旧世代比で約80%削減、応答形式の規定がモデル既定の動作任せに</li>
+            <li>対策は「本体原文の名指し引用での上書き」「禁止形→推奨形への書き換え」「行動直前ターンへの短い指示注入」の3点</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-07-26</span>
+          <span class="engagement">🔖 275</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://zenn.dev/munenick/articles/b507a9848b6fdd">放置していたK8s環境がReact2Shellで侵害、121日残存したリバースシェルも発見</a></h3>
+        </div>
+        <div class="summary">著者が個人運用していた古いKubernetesクラスタが、Next.js 15.1.0/15.3.3のReact Server Components処理を悪用する認証不要のコード実行脆弱性「React2Shell」経由で複数回侵害されていた。CPUを占有するマルウェアと5,500超のゾンビプロセス、帯域を収益化するTraffMonetizerとリモート操作ツールGlobal Socket、さらに121日間残存していたリバースシェルが同居していた。発覚のきっかけは同じワーカー上のゲームサーバーのラグ報告で、その時点でCPU使用率は約90%、プロセス数は6,691に達していた。</div>
+        <div class="key-points">
+          <ul>
+            <li>認証不要のReact Server Components処理を突く「React2Shell」でNext.js 15.1.0/15.3.3が侵害された</li>
+            <li>侵害後121日間残存したリバースシェルを含む3系統のワークロードが同居、発覚時CPU使用率は約90%</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07-25</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/unity_7mononet_coreclr.html">「Unity 7」発表、ランタイムがMonoから.NET CoreCLRへ移行しシェーダービルドが90%高速化</a></h3>
+        </div>
+        <div class="summary">ゲームエンジンUnityの次期バージョン「Unity 7」が発表された。従来の実行基盤だったMono(.NET Frameworkのオープンソース実装)から、マイクロソフトが開発する.NET CoreCLRへ移行する。この変更によりプレイモードの起動がほぼ瞬時になり、シェーダーのビルド速度は90%高速化する。あわせてMCP経由のAIエージェント統合や、リアルタイムのグローバルイルミネーションといった新しいレンダリング機能も導入される。</div>
+        <div class="key-points">
+          <ul>
+            <li>実行基盤をMonoから.NET CoreCLRへ移行、プレイモード起動がほぼ瞬時に、シェーダービルドは90%高速化</li>
+            <li>MCP経由のAIエージェント統合とリアルタイムグローバルイルミネーションを新規搭載</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-27</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://www.sbbit.jp/article/cont1/186262">ニチレイ物流システムがランサムウェア攻撃から10日で全面復旧</a></h3>
+        </div>
+        <div class="summary">ニチレイの物流システムが、ロシア系ランサムウェア集団「RansomHouse」による二重恐喝型攻撃を受けた。システムを暗号化して業務を妨害しつつ、窃取データの公開をちらつかせる手口だったが、約10日間で全面復旧を果たした。アサヒやアスクルなど過去の同種被害が復旧に数か月から半年を要したのと比べ、異例の早さだという。</div>
+        <div class="key-points">
+          <ul>
+            <li>攻撃主体はロシア系ランサムウェア集団RansomHouse、二重恐喝型の手口</li>
+            <li>過去の同種被害(アサヒ、アスクル)が数か月〜半年を要したのに対し、約10日間で全面復旧</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>SBbit</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-26</span>
+          <span class="engagement">🔖 199</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://code.visualstudio.com/updates/v1_130">VS Code 1.130公開、AIエージェント専用プロセス「Agent Host」でマルチウィンドウ接続に対応</a></h3>
+        </div>
+        <div class="summary">VS Code 1.130では、Copilot・Claude・Codexなどのエージェントハーネスを動かす専用プロセス「Agent Host」が導入され、同一セッションを複数のVS Codeウィンドウから接続できるようになった。エージェントのツール呼び出しをモデル自身にリスク評価させ、承認要否を判断させる「Assisted Tool Approvals」も新設。Agentsウィンドウではファイル単位の差分統計と複数ファイル差分のコンパクト表示が加わり、これまでCopilot限定だったworktreeサポートがClaude・Codexにも拡張された。</div>
+        <div class="key-points">
+          <ul>
+            <li>Agent Hostプロセスにより、同一エージェントセッションを複数のVS Codeウィンドウから接続可能に</li>
+            <li>worktreeサポートがCopilot限定からClaude・Codexハーネスにも拡張</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>VS Code Blog</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-22</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-frontend">Frontend</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/akari1106/articles/ea85f0a245bb8b">Astroで日英ブログを作って分かった5つの実装パターン</a></h3>
+        </div>
+        <div class="summary">Zodスキーマでフロントマターに型を付与しビルド時エラーで不備を検出するContent Collections設計、Zenn/Dev.to独自記法をMarkdownへ統一する変換パイプライン、satori+resvgによるビルド時OGP画像生成、Tailwindのトークン再定義によるダークモード対応、inert属性やIntersectionObserverを使った素のJSでのアイランド実装という5パターンを紹介する。共通するのは「ビルド時にできることはビルド時にやる」という設計思想で、クライアントJSを最小化している。</div>
+        <div class="key-points">
+          <ul>
+            <li>Zodスキーマでフロントマターの不備をビルド時コンパイルエラーとして検出</li>
+            <li>satori+resvgでビルド時にOGP画像をJSXから生成、Google Fontsのサブセット化でビルド負荷を削減</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07-23</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://www.theregister.com/software/2026/07/07/new-tool-gives-clis-a-warm-and-gui-feeling-instead/5267798">任意のCLIをGUI化する「Instagui」公開、--helpの出力をClaudeが解析しローカルWeb UIを生成</a></h3>
+        </div>
+        <div class="summary">ヨルダンのエンジニアOmar Soutari氏が公開したInstaguiは、任意のCLIツールの--help出力を読み取り、Claudeへの呼び出しでJSONスキーマを生成、ローカルホストのWeb UIとしてレンダリングするOSSツールだ。生成コマンドはシェルを経由せず引数配列で実行するためインジェクションを防ぎ、サーバーはlocalhostのみにバインドする。ffmpeg・yt-dlp・pandoc向けの検証済みスキーマを同梱し、生成したスキーマはキャッシュされ再利用できる。</div>
+        <div class="key-points">
+          <ul>
+            <li>対象言語を問わず--help出力の解析だけでGUIを生成、ソースコード側の変更は不要</li>
+            <li>コマンド実行は引数配列経由でシェルを使わず、サーバーはlocalhost限定でバインド</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>The Register</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-07</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
+
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://www.publickey1.jp/blog/26/aianthropicmicrosoft_365okta.html">企業のAIツール成長率、4年間でAnthropicが突出しトップに——Okta調査</a>
+        <span class="quick-summary">— 2022年6月からの4年間の成長率でAnthropicが2位OpenAIを大きく引き離す一方、アカウント数の最多は依然Microsoft 365。</span>
+        <span class="meta">Publickey</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-data">Data</span>
+        <a href="https://qiita.com/sukimaengineer/items/207bf475d3bf2757afe6">2兆パラメータ級LLMが「100GBライン」を割るのは2027年半ば〜2028年初頭と試算</a>
+        <span class="quick-summary">— 量子化・能力密度向上・KVキャッシュ圧縮の3レバーから、性能維持のままモデルサイズが縮む半減期を約4.3ヶ月と算出。</span>
+        <span class="meta">Qiita</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://noyb.eu/en/new-browser-signal-could-make-cookie-banners-obsolete">Cookie同意バナー廃止のEU提案、Google陣営のロビイングで理事会案から一時後退</a>
+        <span class="quick-summary">— ブラウザ単位のプライバシー信号でバナーを代替する提案が土壇場で削除、欧州議会の採決が最後の機会として残る。</span>
+        <span class="meta">noyb.eu</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://qiita.com/umekikazuya/items/5fa8a38049328e301cb4">miseのbootstrap機能でmacOS設定をTOMLでコード管理</a>
+        <span class="quick-summary">— Finder・Dock・トラックパッド等の設定を~/.config/mise/config.tomlに記述し、mise bootstrap macos defaults applyで反映。</span>
+        <span class="meta">Qiita</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://qiita.com/inamuu/items/8439fcee712184740608">生成AIによる定型業務自動化、全権委譲せず職務分離と最小権限で設計する考え方</a>
+        <span class="quick-summary">— 職務分離・最小権限の原則・Human-in-the-loop・Capability-based Securityの4概念で、AI提案を人間が確認してから実行する運用を提示。</span>
+        <span class="meta">Qiita</span>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="./" class="archive-link">🗂 過去のダイジェスト</a>
+    </footer>
+  </div>
+</body>
+</html>
