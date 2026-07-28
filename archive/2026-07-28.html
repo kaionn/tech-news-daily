@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-07-28</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="../feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-07-28 (Tue)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+      <nav class="site-nav">
+        <a href="../" class="active">📰 日刊ダイジェスト</a>
+        <a href="../trends.html">🔌 週次プラグイントレンド</a>
+        <a href="../ai-trends.html">🧠 AI プロダクト動向</a>
+        <a href="./">🗂 アーカイブ</a>
+      </nav>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 20 articles</span>
+      <span>🏷 6 categories</span>
+      <span>📡 15 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item">
+        <span class="number-value">2.8兆</span>
+        <span class="number-label">Kimi-K3の総パラメータ数（活性化104億）</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">748,000</span>
+        <span class="number-label">Volvo/Eicherの脆弱性で影響を受けた顧客数</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">2,475</span>
+        <span class="number-label">Bunの Rust書き換えで未マージのまま残るPR数</span>
+      </div>
+    </div>
+
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
+
+      <div class="card featured deep-dive">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://huggingface.co/moonshotai/Kimi-K3">DEEP DIVE: Moonshot AI、2.8兆パラメータのオープンウェイトモデル「Kimi-K3」を公開</a></h3>
+        </div>
+        <div class="summary">Moonshot AIは中国発のAI企業で、これまでKimiシリーズのモデルを段階的に大規模化してきた。7月27日、その最新版として「Kimi-K3」をHugging Face上でオープンウェイト公開した。総パラメータ数は2.8兆、うち1トークンあたりに活性化するのは104億パラメータで、896個のエキスパートから16個を選択的に呼び出すMixture-of-Expertsアーキテクチャを採用する。93層のネットワークには独自のアテンション機構Kimi Delta AttentionとGated MLAを組み合わせ、コンテキスト長は100万トークンに達する。画像理解にはMoonViT-V2という専用エンコーダを内蔵し、テキストだけでなく画像入力にもネイティブ対応するマルチモーダル設計になっている。ベンチマークでは、推論性能を測るGPQA Diamondで93.5点、コーディング能力を測るTerminal-Bench 2.1で88.3点、エージェント的なウェブ探索タスクを評価するBrowseCompで91.2点、視覚理解のMMVUで82.1点を記録した。開発陣は前世代モデルと比較して「スケーリング効率が2.5倍に向上した」と主張し、本モデルを「世界初のオープンな3兆パラメータ級モデル」と位置づけている。ライセンスはKimi K3 Licenseという独自条項で、研究・商用の両方でウェイトとコードが利用可能とされる。</div>
+        <div class="editorial">🧠 実測ベンチマーク4種の数字は具体的で、Terminal-Bench 2.1の88.3点はコーディングエージェント用途として実用域にある。ただし「スケーリング効率2.5倍」や「世界初の3兆パラメータ級」といった比較優位の主張は開発元の発表に基づくもので、第三者による再現評価はまだない。896エキスパート中16個だけを呼び出す設計は推論コストを抑える一方、実運用でのレイテンシやAPI提供時の価格がどう出るかは未知数だ。</div>
+        <div class="key-points">
+          <ul>
+            <li>総パラメータ2.8兆のうち活性化は104億、896エキスパートから16個を選択するMoEアーキテクチャ、コンテキスト長は100万トークン</li>
+            <li>Terminal-Bench 2.1で88.3点、GPQA Diamondで93.5点、BrowseCompで91.2点、MMVUで82.1点を記録</li>
+            <li>MoonViT-V2エンコーダによるネイティブ画像理解を搭載、独自ライセンスKimi K3 Licenseでウェイト・コードを公開</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 1Mトークンのコンテキストと2.8兆パラメータ級の推論力をオープンウェイトで使えるため、自前でホストして大規模コード解析やエージェント基盤を構築したい開発者には有力な選択肢になる。</div>
+        <div class="meta">
+          <span>Hugging Face</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-07-27</span>
+          <span class="engagement">▲ 1266</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://eaton-works.com/2026/07/27/my-eicher-hack/">Volvo/Eicherのフリート管理基盤に未認証API、74.8万顧客・67.6万台の車両情報が露出</a></h3>
+        </div>
+        <div class="summary">研究者が調査したVolvo・Eicherグループのフリート管理プラットフォームでは、/cepauthmgr/user/という未認証で到達可能なエンドポイントから内部APIを列挙でき、そこから顧客・車両の全リストや2021年以降に発行された250万件のOTP、7.6万件のAadhaarカード・運転免許証データにアクセスできた。OTPやパスワードリセットAPIを使えばアカウント乗っ取りも可能で、他人の車両を遠隔操作できる状態だったという。研究者は2025年11月3日に報告し、主要な脆弱性は同月20日に修正されたが、その後追加報告した問題への応答はなく、詳細は7月27日に公開された。</div>
+        <div class="key-points">
+          <ul>
+            <li>未認証エンドポイント/cepauthmgr/user/からAPIを列挙でき、74.8万顧客・67.6万台の車両情報に到達可能</li>
+            <li>2021年以降発行の250万件のOTPと7.6万件のAadhaarカード・運転免許証データが閲覧可能な状態だった</li>
+            <li>2025年11月3日に報告、主要な脆弱性は同20日に修正されたが追加報告分は未対応のまま7月27日に公開</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 フリート管理SaaSを導入している事業者は、ベンダーの認証設計を信頼するだけでなく、自社アカウントのOTP発行履歴や権限範囲を定期的に監査する必要がある。</div>
+        <div class="meta">
+          <span>eaton-works.com</span>
+          <span>⏱ 7 min read</span>
+          <span>2026-07-27</span>
+          <span class="engagement">▲ 107</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://lockwood.dev/ai/2026/07/27/how-is-the-bun-rewrite-in-rust-going.html">「Bunの Rust書き換えは11日で完了」のはずが、11週間後も未マージPRが2,475件</a></h3>
+        </div>
+        <div class="summary">BunチームとAnthropicは5月、Rust版Bunの書き換えを5月3日から14日までの11日間、Claude API利用料16.5万ドルで完了したと発表していた。しかし7月27日時点の調査では、mainへのマージから11週間が経過してもリリースタグは1つも切られておらず、Claude生成コードを送る「robobun」名義のオープンPRは2,475件に達する。現在のマージ速度(1件あたり平均40分)のままでは、残りを処理し終えるのに86日間ノンストップでCIを回し続ける計算になる。著者は16.5万ドルという数字にBuildkiteのインフラ費用やAnthropic社員の直接関与、公開後も続くAPI利用料が含まれていない点も指摘する。</div>
+        <div class="key-points">
+          <ul>
+            <li>公式発表は5月3日〜14日の11日間・Claude API利用料16.5万ドルで完了としていたが、7月27日時点でリリースタグは1つも存在しない</li>
+            <li>「robobun」名義のClaude生成PRが2,475件未マージで残存、現在のマージ速度(1件平均40分)では処理完了に86日間かかる計算</li>
+            <li>16.5万ドルという公表コストにはBuildkiteインフラ費用やAnthropic社員の直接関与、公開後も継続するAPI利用料が含まれていないと著者は指摘</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 「AIによる書き換えがX日で完了」という発表は、マージ後の安定化コストを含んでいないことがある。同種の発表を評価する際は、リリースタグやCI状況など検証可能な指標で裏付けを確認すべきだ。</div>
+        <div class="meta">
+          <span>lockwood.dev</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-07-27</span>
+          <span class="engagement">▲ 419</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://microsoft.ai/news/introducing-mai-cyber-1-flash-inside-mdash/">Microsoft、脆弱性発見特化の軽量モデル「MAI-Cyber-1-Flash」を発表、CyberGymで96%達成</a></h3>
+        </div>
+        <div class="summary">MicrosoftはMAI-Thinking-1系譜から派生した、コード脆弱性の発見に特化した軽量モデル「MAI-Cyber-1-Flash」を発表した。100以上のエージェントと複数の主要モデルを組み合わせて脆弱性を発見・検証・修復する自社基盤MDASHに統合すると、業界標準ベンチマークCyberGymで95.95%(競合Mythosに対して+12ポイント)を達成し、従来の大型モデルのみの構成に比べてコストを50%削減できるという。日常的なタスクの約9割を軽量モデルが処理し、残る1割の複雑な事案だけ上位モデルに回す設計になっている。</div>
+        <div class="key-points">
+          <ul>
+            <li>CyberGymベンチマークでMDASH+MAI-Cyber-1-Flashの組み合わせが95.95%を達成、競合Mythosに対し+12ポイント</li>
+            <li>大型モデルのみの旧構成比でコストを50%削減、日常タスクの約9割を軽量モデルで処理し複雑な1割だけ上位モデルに回す</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Microsoft AI</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-27</span>
+          <span class="engagement">▲ 197</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/net_mauiiosandoridmonocoreclrnet_11_preview_6.html">.NET MAUIのiOS/AndroidランタイムがCoreCLRへ移行、.NET 11 Preview 6公開（続報）</a></h3>
+        </div>
+        <div class="summary">.NET MAUIは従来、WindowsとMacがCoreCLR、iOS/AndroidはMonoという構成だったが、7月24日公開の.NET 11 Preview 6でモバイル側もCoreCLRに統一された。iOSとMac Catalystでは性能改善が見込まれる一方、Androidは起動時間・アプリサイズとも変動幅が約10%に留まるという。マイクロソフトは開発者に対し、この移行による互換性を実機で検証するよう呼びかけている。.NET 11の正式リリースは今秋を予定し、以降Monoが残るのはBlazor WebAssembly実装のみになる。</div>
+        <div class="key-points">
+          <ul>
+            <li>7月24日公開の.NET 11 Preview 6で、iOS/Android向けMAUIランタイムがMonoからCoreCLRへ完全移行</li>
+            <li>iOS/Mac Catalystは性能改善が見込まれる一方Androidの変動は約10%、正式版.NET 11は今秋リリース予定</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-23</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://writings.stephenwolfram.com/2026/07/towards-a-theory-of-bugs-the-ruliology-of-the-unexpected/">Stephen Wolfram、「バグの理論」試論を公開——計算不可能性としてのバグ</a></h3>
+        </div>
+        <div class="summary">Stephen WolframはA New Kind of Scienceの枠組みを使い、ソフトウェアのバグを形式的に捉え直すエッセイを公開した。プログラムをルールベースの計算システムとみなすと、「意図した挙動」と「実際の挙動」の乖離は、しばしば計算不可能性(実行してみるまで結果を予測できない性質)に起因すると論じる。単純なルールから複雑で予測不能な挙動が生まれる「計算的還元不可能性」の概念を援用し、バグの完全な事前検出が原理的に不可能なケースがあることを指摘する。</div>
+        <div class="key-points">
+          <ul>
+            <li>計算的還元不可能性の概念を使い、一部のバグは実行前の静的検証では原理的に検出できないと論じる</li>
+            <li>A New Kind of Scienceの枠組みでプログラムをルールベース計算システムとして再定式化</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Stephen Wolfram</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-07-27</span>
+          <span class="engagement">▲ 59</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-product">Product</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://www.techdirt.com/2026/07/27/judge-rejects-googles-attempt-to-dmca-its-way-out-of-being-scraped/">Googleの対SerpAPI DMCA訴訟、米連邦地裁が棄却——「検索結果の大半は著作物ではない」</a></h3>
+        </div>
+        <div class="summary">GoogleはCAPTCHA型の対策システム「SearchGuard」を回避してGoogle検索結果をスクレイピングしたとして、SerpAPIをDMCA第1201条(アクセス制御回避禁止)違反で提訴していた。連邦地裁は請求を棄却し、「検索結果の大半に著作物が含まれない以上、SearchGuardが著作権法上の著作物へのアクセスを実効的に制御しているとは言えない」と判断した。SerpAPI経由のデータはPerplexityなどAI企業にも利用されていた。Googleはナレッジパネル内のライセンス画像など、著作物性が明確な部分に限定した狭い訴えなら再提出できる余地が残る。</div>
+        <div class="key-points">
+          <ul>
+            <li>DMCA第1201条によるGoogleの請求を連邦地裁が棄却、「検索結果の大半は著作物を含まない」ため実効的アクセス制御に当たらないと判断</li>
+            <li>Googleはナレッジパネルのライセンス画像など著作物性が明確な部分に限定すれば再提訴の余地が残る</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Techdirt</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07-27</span>
+          <span class="engagement">▲ 170</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://www.itmedia.co.jp/aiplus/article/2607/27/2000000223/">MIXI、2026年度新卒エンジニア向け研修資料・動画を無料公開</a></h3>
+        </div>
+        <div class="summary">MIXIは2026年度新卒エンジニア向けの研修資料と動画を7月27日に無料公開した。Git・コンテナ技術・セキュリティ・モバイル開発・データ活用など12科目に加え、大規模言語モデルやAIエージェントの実践活用を扱う2日間のAI研修枠を新設した。CTOの吉野氏は、コーディング力だけでなくAI活用による開発速度の向上とビジネス成果への貢献が今のエンジニアに求められると述べている。</div>
+        <div class="key-points">
+          <ul>
+            <li>Git・コンテナ・セキュリティ・モバイル開発など12科目に加え、LLM/AIエージェントを扱う2日間のAI研修枠を新設</li>
+            <li>全教材を無償公開、業界全体の技術力向上と次世代エンジニア育成への貢献を目的に掲げる</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>ITmedia</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07-27</span>
+          <span class="engagement">🔖 190</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://zenn.dev/uhyo/articles/react-profession-bench-14">Opus 5、React習熟度ベンチマーク第14回でFable 5を上回る90.28点</a></h3>
+        </div>
+        <div class="summary">13種類のReact実装課題でAIモデルの習熟度を測る非公式ベンチマーク第14回で、Claude Opus 5(max effort)が90.28点を記録し、初めて90点台に到達した。Fable 5(max effort)の86.67点を、Opus 5はhigh effort設定の87.00点だけで上回っている。一方でeffort設定を上げた際の伸びは鈍化しており、前世代モデルのhigh→max平均+4.65〜5.34点に対し、Opus 5は+3.28点にとどまった。</div>
+        <div class="key-points">
+          <ul>
+            <li>Opus 5(max effort)が90.28点で初めて90点台に到達、high effort(87.00点)だけでFable 5のmax effort(86.67点)を上回る</li>
+            <li>アクセシビリティやコンポーネント設計は高評価な一方、Concurrent機能などモダンなReact APIより手動メモ化に頼る傾向が残る</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-07-27</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://qiita.com/clar_biz/items/ae903765f0d5caf5821d">Claude Codeのサブエージェント運用、効いたのは「賢い指示」より「失敗のカタログ化」</a></h3>
+        </div>
+        <div class="summary">著者はClaude Codeのサブエージェント運用で、凝ったプロンプト設計よりも「症状→誤った直感→正しい打ち手」の形式で過去の失敗を記録し、次の委任プロンプトへ機械的に混ぜ込む仕組みの方が効果的だったと報告する。完了済みタスクへの重複割り当てや、外部プラットフォーム向け仕様を満たさない画像アセットの生成など、実際に起きた失敗をパターン化して再発を防いでいる。</div>
+        <div class="key-points">
+          <ul>
+            <li>「症状→誤った直感→正しい打ち手」形式で失敗を記録し、委任プロンプトに機械的に混ぜ込む運用でサブエージェントの再発ミスを削減</li>
+            <li>完了タスクへの重複割り当てや外部仕様未確認の画像生成など、実際に起きた3件の失敗例を具体的にカタログ化</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07-27</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://zenn.dev/nekogakure/articles/50e3f441b6c1f3">複数Gitリポジトリの状態を丸ごとスナップショットするRust製ツール「mws」</a></h3>
+        </div>
+        <div class="summary">複数のGitリポジトリに分割されたプロジェクト(著者が開発する自作OS「mochiOS」など)では、1つのリポジトリを差し戻しても全体が動く状態には戻らない。著者はRustで「mws」を開発し、Google製repoツールの.repo/manifest.xmlと連携して各リポジトリのpost-commitフックからコミットハッシュだけを軽量記録、mws restoreで全リポジトリを過去の動作状態へ一括復元できるようにした。</div>
+        <div class="key-points">
+          <ul>
+            <li>Google製repoツールと連携し、コミット時にpost-commitフックで全リポジトリのコミットハッシュを自動記録</li>
+            <li>mws restoreで複数リポジトリを過去のスナップショットへ一括復元、未コミット変更がある場合はスナップショットをスキップ</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07-27</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/verceltypescriptcscriptc.html">Vercel、TypeScriptをCへ変換してネイティブバイナリ化する「scriptc」をOSS公開</a></h3>
+        </div>
+        <div class="summary">Vercelは、TypeScriptを型付き中間表現を経てC言語へ変換し、clangでネイティブバイナリへコンパイルするOSSツール「scriptc」を公開した。fs・path・crypto・http/httpsなどNode.js API相当の機能を実装し、npm依存関係もNode.jsと同じ解決アルゴリズムでバイナリに埋め込む。Node.jsで60〜100MBになるアプリケーションが170〜200KBの静的バイナリに収まり、Apple Silicon上での起動は2.4ミリ秒未満(Node.jsは47ミリ秒)としている。</div>
+        <div class="key-points">
+          <ul>
+            <li>Node.jsで60〜100MBのアプリがscriptcでは170〜200KBの静的バイナリに、JSエンジンを埋め込む場合でも約3MBに収まる</li>
+            <li>Apple Silicon上での起動時間はNode.jsの47ミリ秒に対しscriptcは2.4ミリ秒未満</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-27</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://blog.shibayu36.org/entry/2026/07/27/163000">Claude Code ActionのSkillをリポジトリにコミットせず実行時にインストールする方法</a></h3>
+        </div>
+        <div class="summary">CI専用のSkillを利用側リポジトリへ毎回コミットしたくないという課題に対し、著者はワークフロー内でgh skill installコマンドを実行し、実行時に別リポジトリからSkillを取り込む方法を紹介する。Claude Code Actionは.claude/をベースブランチの内容で上書きするため、Skillのスコープはprojectではなくuserを指定する必要がある点が要注意だという。</div>
+        <div class="key-points">
+          <ul>
+            <li>gh skill installをワークフローステップ内で実行し、CI専用Skillをリポジトリにコミットせず実行時に取得</li>
+            <li>Claude Code Actionが.claude/をベースブランチ内容で上書きするため、Skillは--scope userで導入する必要がある</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>shibayu36.org</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-27</span>
+          <span class="engagement">🔖 7</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://usefeyn.com/blog/feynobg/">BiRefNetを拡張した背景除去モデル「FeyNoBg」、8ベンチマーク中4つで最高S-measureを記録</a></h3>
+        </div>
+        <div class="summary">背景除去モデル「FeyNoBg」は、既存のBiRefNet(2.22億パラメータ)を2.63億パラメータへ拡張し、前景分離と髪や毛皮などの境界精度を両立させる設計にした。10種のデータソースから集めた26,100枚の画像で学習し、8つのベンチマークのうち4つで最高のS-measureスコアを記録、残りも最上位から2%以内に収まるという。モデルと学習ライブラリ「NoBg」はいずれもオープンソースで、Hugging FaceとGitHubで公開されている。</div>
+        <div class="key-points">
+          <ul>
+            <li>BiRefNet(2.22億パラメータ)を2.63億パラメータへ拡張し、8ベンチマーク中4つで最高S-measureを記録</li>
+            <li>10ソース・26,100枚の画像で学習、モデルと学習ライブラリ「NoBg」をともにオープンソースで公開</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>usefeyn.com</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-27</span>
+          <span class="engagement">▲ 66</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
+
+      <div class="quick-link">
+        <span class="tag tag-infra">Infra</span>
+        <a href="https://code.videolan.org/videolan/vlc-unity">VLC for Unityがようやく Linux 対応、VideoLANが公式マージリクエストを公開</a>
+        <span class="quick-summary">— Unity上で動画再生を可能にするVLC for UnityプラグインがLinuxサポートを追加。</span>
+        <span class="meta">VideoLAN</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-oss">OSS</span>
+        <a href="https://github.com/libsm64/libsm64">「Mario 64」のゲームロジックをライブラリ化したlibsm64、外部ゲームエンジンから利用可能に</a>
+        <span class="quick-summary">— スーパーマリオ64のコード解析から抽出した物理・アニメーションロジックを、任意のゲームエンジンに組み込めるCライブラリとして公開。</span>
+        <span class="meta">GitHub</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://gregoryszorc.com/docs/python-build-standalone/main/">あらゆる環境に持ち運べる自己完結型Pythonディストリビューション、python-build-standalone</a>
+        <span class="quick-summary">— ランタイム依存を最小化しCPU命令セットを絞り込んだPythonビルドを提供、PyOxidizer等の下敷きとしても利用される。</span>
+        <span class="meta">gregoryszorc.com</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://qiita.com/nakatada-lab/items/9f45910262d238964997">RTX 3090(24GB)で7Bモデルの学習を成立させた8つの落とし穴と対策</a>
+        <span class="quick-summary">— DataLoaderのボトルネックを解消しtorch.from_numpy()に切り替えるだけでスループットが80から1,770 tok/sへ改善。</span>
+        <span class="meta">Qiita</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://qiita.com/tamashiro_nobuyuki/items/602e632ed24243cbb97c">Claude Code、Opus 4.8・Sonnet 5・Haiku 4.5のトークン消費量を実セッションログで比較</a>
+        <span class="quick-summary">— 知識質問ではSonnet 5が最多、ファイル操作タスクではOpus 4.8が最多消費と、タスク種別で消費傾向が逆転することを確認。</span>
+        <span class="meta">Qiita</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://qiita.com/satoshi-sugiyama/items/467e10f4af6ff5cb84d5">Gemini 3.5 Flash搭載のAntigravity CLI、アーキテクチャ設計対決でNRIアーキテクトに80対76で勝利</a>
+        <span class="quick-summary">— Google Cloud上の設計案をClaude(Sonnet 5)が審査、低コストな標準構成を選んだAntigravity CLI案が僅差で上回った。</span>
+        <span class="meta">Qiita</span>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="./" class="archive-link">🗂 過去のダイジェスト</a>
+    </footer>
+  </div>
+</body>
+</html>
