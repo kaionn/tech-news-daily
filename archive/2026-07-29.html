@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-07-29</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="../feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-07-29 (Wed)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+      <nav class="site-nav">
+        <a href="../" class="active">📰 日刊ダイジェスト</a>
+        <a href="../trends.html">🔌 週次プラグイントレンド</a>
+        <a href="../ai-trends.html">🧠 AI プロダクト動向</a>
+        <a href="./">🗂 アーカイブ</a>
+      </nav>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 21 articles</span>
+      <span>🏷 7 categories</span>
+      <span>📡 16 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item">
+        <span class="number-value">200-800倍</span>
+        <span class="number-label">ClaudeによるAES(7ラウンド)攻撃の高速化</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">9.8</span>
+        <span class="number-label">TeamCity未認証RCEのCVSSスコア</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">68.4%</span>
+        <span class="number-label">DMARC未強制ドメインの割合(67,336件調査)</span>
+      </div>
+    </div>
+
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
+
+      <div class="card featured deep-dive">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">DEEP DIVE: Anthropic、Claudeによる暗号解読研究を公開——AES(7ラウンド)攻撃を200〜800倍高速化</a></h3>
+        </div>
+        <div class="summary">Anthropicは7月28日、自社モデル「Claude Mythos Preview」を使った暗号解読研究の成果を公開した。対象は2つの暗号系で、ひとつは耐量子暗号の候補方式HAWKに対する新しい鍵回復攻撃、もうひとつは10ラウンド版AES-128を7ラウンドに縮小した変種への攻撃である。HAWKでは60時間の計算とAPI利用料約10万ドルをかけ、HAWK-256の実効的な鍵強度を2^64から2^38相当まで引き下げる攻撃を発見した。ただしHAWKはまだ標準化前の候補方式であり、実運用に投入された暗号ではない。AES-7ラウンド攻撃では、Claudeがほぼ自律的に「メビウス橋」と呼ばれる指紋照合アルゴリズムを考案し、3日間で数億トークンを生成、人間からの実質的な指示はわずか3回のプロンプトにとどまった。攻撃速度は既知の最良手法に対して200倍から800倍向上したという。研究チームは学術機関と共同で、LLMの暗号解読能力を測る標準ベンチマーク「CryptanalysisBench」も開発した。人間の研究者2名がAES-7ラウンド攻撃の正しさを検証するのに約1カ月を要しており、AIが発見を加速する一方で検証コストは依然として重いことも示している。LEA(13ラウンド)やSerpent-128(6ラウンド)への実用的な攻撃も予備的に確認されており、Salsa20・Poseidon・SHA-1への適用は継続中とされる。</div>
+        <div class="editorial">🧠 AES-7ラウンドへの200〜800倍という数字は明確だが、対象は10ラウンドの本番AES-128ではなく研究用の縮小版であり、直ちに実運用の暗号が破られるわけではない。それでも「メビウス橋」のような新手法をAIがほぼ自律的に考案した点は見過ごせない。一方でHAWKの鍵強度低下は候補方式内の話に留まり、標準化前に脆弱性が見つかったこと自体はむしろ健全な結果とも言える。検証に人間の研究者が1カ月を要した事実は、AIによる発見の速さと、それを裏付ける検証コストの非対称性を示している。</div>
+        <div class="key-points">
+          <ul>
+            <li>HAWK-256への鍵回復攻撃で実効的な鍵強度を2^64から2^38相当へ低下、60時間・API費用約10万ドルで発見(HAWKは標準化前の候補方式)</li>
+            <li>AES-7ラウンド変種への攻撃は「メビウス橋」指紋アルゴリズムにより既知最良手法比200〜800倍高速化、3日間・実質3プロンプトでほぼ自律的に発見</li>
+            <li>学術機関と共同でLLM暗号解読ベンチマーク「CryptanalysisBench」を開発、LEA(13ラウンド)・Serpent-128(6ラウンド)への攻撃も予備確認</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 AI支援の暗号解読が実用速度に達しつつあるため、縮小ラウンド版で実証された手法が将来フルラウンドの実装や関連プリミティブに転用されないか、暗号設計者は継続的な監視が必要になる。</div>
+        <div class="meta">
+          <span>Anthropic</span>
+          <span>⏱ 7 min read</span>
+          <span>2026-07-28</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/google_cloudaicodemender.html">Google Cloud、脆弱性の検出からサンドボックス検証・修正まで自律実行するAIエージェント「CodeMender」プレビュー公開</a></h3>
+        </div>
+        <div class="summary">Google CloudはAIエージェントがコードベースの脆弱性を自律的に検出し、サンドボックス内で実際にエクスプロイトを再現して実害を検証したうえで修正パッチまで生成する「CodeMender」のプレビューを公開した。対応言語はC/C++・Go・Java・Python・Ruby・Rust・TypeScriptの7つで、メモリ破壊やインジェクション、暗号実装の欠陥など静的解析ツールが見落としやすい問題を対象にする。生成した修正案は別のAI評価者が既存機能を壊していないか確認したうえで、開発者にはコードとしてレビュー用に提示される。CI/CDパイプラインやVS Code、CLIから呼び出せるほか、組織のコーディング規約に適応する設計になっている。</div>
+        <div class="key-points">
+          <ul>
+            <li>C/C++・Go・Java・Python・Ruby・Rust・TypeScriptの7言語に対応、サンドボックスでエクスプロイトを実行し脆弱性の実害を検証してから修正を生成</li>
+            <li>生成した修正パッチは別のAI評価者が既存機能への影響をチェック、CI/CD・VS Code・CLI・Antigravityから呼び出し可能</li>
+            <li>組織のコーディング規約に適応する設計で、修正案は自動適用ではなく開発者レビュー用のdiffとして提示</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 静的解析で見逃されがちな脆弱性をエージェントが自律的に検出・実害検証・修正まで行うため、CI導入すればレビュー前の一次フィルタとして開発フローに組み込める可能性がある。</div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-28</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://blog.jetbrains.com/teamcity/2026/07/cve-2026-63077/">JetBrains、TeamCity On-Premisesの未認証RCE(CVSS 9.8)を修正——エージェントポーリングの安全でないデシリアライズが原因</a></h3>
+        </div>
+        <div class="summary">JetBrainsは7月27日、TeamCity On-Premisesの全バージョンに影響する未認証のリモートコード実行脆弱性CVE-2026-63077を公開し修正版を提供した。原因はエージェントポーリングプロトコルにおける安全でないデシリアライズで、HTTP(S)でサーバーに到達できる攻撃者が認証を経ずに任意のOSコマンドを実行できる。CVSS v3.1のスコアは満点に近い9.8。研究者Antoni Tremblay氏が7月10日に非公開で報告し、責任ある開示の合意に基づき修正版公開後の7月27日にアドバイザリが公開された。2025.11.7と2026.1.3で修正済みで、アップグレードできない環境向けにセキュリティパッチプラグインも提供される。TeamCity Cloudの利用者は対応不要。</div>
+        <div class="key-points">
+          <ul>
+            <li>エージェントポーリングプロトコルの安全でないデシリアライズが原因、認証不要でOSコマンドを実行可能、CVSS v3.1で9.8</li>
+            <li>2025.11.7・2026.1.3で修正、アップグレード不可の環境向けにセキュリティパッチプラグインを提供、TeamCity Cloudは対応不要</li>
+            <li>研究者Antoni Tremblay氏が7月10日に非公開で報告、責任ある開示の合意に基づき修正版公開後の7月27日にアドバイザリを公開</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 TeamCity On-Premisesを運用している組織は、パッチ適用の可否にかかわらずエージェントポーリングのアクセスログを確認し、7月10日以降の不審なOSコマンド実行の痕跡がないか点検すべきだ。</div>
+        <div class="meta">
+          <span>JetBrains Blog</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-27</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://mlugg.co.uk/posts/incremental-compilation-internals/">Zigのインクリメンタルコンパイル内部実装、4段階パイプラインで再ビルドを50〜70msに</a></h3>
+        </div>
+        <div class="summary">Zig開発者のmlugg氏は、インクリメンタルコンパイルの内部実装を解説する記事を公開した。ファイル単位でのZIRキャッシュ、変更の影響範囲だけを再解析する依存関係追跡、関数ごとに独立実行できるコード生成、バイナリを直接メモリマップして関数コードを再配置する`MappedFile`という4段階のパイプラインで構成される。コンパイラ自身のコードベースを対象にした計測では、初回ビルドが約5秒に対し、変更後の再ビルドは50〜70msに収まるという。</div>
+        <div class="key-points">
+          <ul>
+            <li>ファイル単位のZIRキャッシュはコンパイラ全体で約920ms、依存関係追跡により変更の影響範囲だけを再解析</li>
+            <li>`MappedFile`がバイナリを直接メモリマップし関数コードを再配置、Fizzyの再ビルドは初回約5秒から50〜70msへ短縮</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>mlugg.co.uk</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-07-27</span>
+          <span class="engagement">▲ 152</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://github.com/astral-sh/uv/releases/tag/0.12.0">Pythonパッケージマネージャー uv 0.12.0公開、初期化構成の既定をパッケージ形式に変更</a></h3>
+        </div>
+        <div class="summary">Pythonパッケージマネージャーuvの0.12.0が7月28日に公開された。`uv init`で作成するプロジェクトは既定でsrc/レイアウトと`uv_build`によるパッケージ構成になり、生スクリプト形式は使われなくなる。セキュリティ面では、Python.exeなど大文字小文字違いを含む実行ファイルを置き換えうるホイールや、bzip2・LZMAなど非対応の圧縮形式を拒否する。requirements.txtの`--require-hashes`指定も、これまでの警告表示から強制適用に変わった。</div>
+        <div class="key-points">
+          <ul>
+            <li>`uv init`の既定構成がsrc/レイアウト+uv_buildのパッケージ形式に変更、生スクリプト形式から移行</li>
+            <li>Python.exe等を置き換えうる悪意あるホイールを拒否、requirements.txtの`--require-hashes`は警告から強制適用へ</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-07-28</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://ciphercue.com/blog/dmarc-enforcement-gap-rua-fragmentation-2026">DMARC公開から14年、67,336ドメイン調査で68.4%が未強制設定のまま</a></h3>
+        </div>
+        <div class="summary">セキュリティ企業ciphercueは、67,336ドメインを調査しDMARCの強制設定率を分析した記事を公開した。DMARCは2012年から利用可能だが、68.4%のドメインがレコード未設定か強制力のない設定のままだった。内訳はレコード自体がない45.1%、監視のみのp=noneが23.3%、緩やかな強制のp=quarantineが15.2%で、完全強制のp=rejectは16.3%にとどまる。原因として、集約レポートに列挙される送信元IPやハッシュ化されたメールボックス名を「実在する正規の送信者」に突合する作業が後回しにされ続ける構造的な問題を指摘している。</div>
+        <div class="key-points">
+          <ul>
+            <li>67,336ドメイン調査で68.4%がDMARC未設定または非強制、レコード自体の欠如が45.1%を占める</li>
+            <li>強制力ゼロのp=noneが23.3%に対し完全強制のp=rejectは16.3%、集約レポートの送信元突合作業が移行の障壁と指摘</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>ciphercue.com</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07-28</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://naveensrinivasan.com/posts/2026-07-22-how-do-i-profile-ebpf-code/">eBPFのオーバーヘッドをperfで定量測定する方法、フレームグラフでボトルネックを特定</a></h3>
+        </div>
+        <div class="summary">著者はeBPFプログラムがカーネル空間の処理に与えるオーバーヘッドを定量的に測定する手順を解説する。`net.core.bpf_jit_kallsyms=1`を設定してperfにシンボル名を表示させ、ファイルオープン処理を繰り返すC製の計測ハーネスで`clock_gettime`によるベースラインを取得したうえで、`perf -g --call-graph fp -e cycles:k -F 997`によりカーネル空間のコールスタックを997Hzでサンプリングする。フレームグラフ化した結果、`bpf_lsm_file_open`内の`bpf_probe_read_kernel`呼び出しがボトルネックであることを特定できたという。</div>
+        <div class="key-points">
+          <ul>
+            <li>`bpf_jit_enable`と`bpf_jit_kallsyms`を有効化しperfでシンボル名を解決、`-F 997`で周期パターンを避けたサンプリング</li>
+            <li>フレームグラフ解析で`bpf_lsm_file_open`内の`bpf_probe_read_kernel`呼び出しがボトルネックと判明</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>naveensrinivasan.com</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07-22</span>
+          <span class="engagement">▲ 99</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://blogs.kde.org/2026/07/28/making-kio-copy-many-files-fast/">KDEのKIO、5,000ファイルのコピー時間を1,616msから88msへ短縮——ソケット越しの逐次同期を排除</a></h3>
+        </div>
+        <div class="summary">KDEのファイル操作フレームワークKIOは、大量の小ファイルコピーが極端に遅いという2014年来の課題を抱えていた(300万ファイルのコピーにrsyncの20分に対し5〜10時間)。開発チームはワーカーを別プロセスからアプリ内スレッドへ移し、さらにスレッド・アプリ間のソケット通信をインメモリ転送に置き換えた。4KBファイル5,000個のコピーは、KIO 6.28.0の1,616msからソケット排除後の6.29-devで396ms、検討中のバッチコピー適用後は88msまで縮み、`cp -r`の81msにほぼ並んだ。</div>
+        <div class="key-points">
+          <ul>
+            <li>5,000ファイル(4KB)のコピーがKIO 6.28.0で1,616ms、ソケット通信をインメモリ転送に置き換えた6.29-devで396msに</li>
+            <li>検討中のバッチコピー機能を適用すると88msまで短縮、約18倍の高速化で`cp -r`の81msに匹敵</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>KDE Blogs</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-28</span>
+          <span class="engagement">▲ 13</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-data">Data</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://qiita.com/shirok/items/6a2a3e6992ab0eb93d7a">Oracle DatabaseのAI Readyスコアを0.22から0.97へ改善した実践記録</a></h3>
+        </div>
+        <div class="summary">Qiitaで公開された記事は、Oracle Databaseの「AI Readyスコア」を0.22から0.97へ引き上げた実践記録である。oracle-ai-ready-data Skillは、テーブル・カラムへのコメント付与、主キー・外部キーの設定、更新日時や参照元を示すカラムの追加など6つの観点でスコアを算出する。全8テーブル・68カラムへコメントを追加し、8件の主キーと5件の外部キーをENABLE VALIDATEで設定した結果、Contextual(文脈)は0.00から1.00、Correlated(関連性)は0.00から0.83まで改善した。改善後のスキーマではOracle Select AI機能がビジネス用語のコメントから適切なテーブルを選び、外部キー関係に基づく正しいJOINを生成できたという。</div>
+        <div class="key-points">
+          <ul>
+            <li>6つの評価観点のうちContextual(文脈)が0.00→1.00、Correlated(関連性)が0.00→0.83に改善、全体で0.22→0.97を達成</li>
+            <li>全8テーブル・68カラムへのコメント付与と8主キー・5外部キーの設定が主な改善策、Select AIが正しいJOINを生成できるようになった</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07-28</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://speakerdeck.com/aki_iinuma/why-building-and-delivering-value-diverge">CEDEC 2026登壇資料「作ることと価値を届けることの乖離」、KPIチェーンで橋渡しを提案</a></h3>
+        </div>
+        <div class="summary">CEDEC 2026の招待講演で、ソニー・ユニクロ・マクドナルド・CADDIで製品開発に携わってきた飯沼あき氏が、「予定通り作れているのに価値が生まれない」という組織のズレを取り上げた。作業完了を成功とする「アウトプット思考」と、ユーザーの行動変化を成功とする「価値思考」が同じ組織内で異なる時間軸・確実性で評価されるため、確認しやすいアウトプット指標に依存しがちだと指摘する。解決策として、機能追加ではなくユーザー行動の変化を起点に実験を設計すること、進捗報告より先に「最近、誰の何が変わったか」を問う対話構成にすること、先行指標・中間指標・遅行指標の3層でKPIを鎖状につなぐことを提案した。</div>
+        <div class="key-points">
+          <ul>
+            <li>「作ること」は価値創出の手段に過ぎないが、確認しやすいアウトプット指標(予定通りの完了)に組織の評価が偏りがちだと指摘</li>
+            <li>先行・中間・遅行の3層KPIチェーンや「誰の何が変わったか」から始める対話構成など、行動変化を起点にした橋渡し策を提案</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Speaker Deck</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-27</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-data">Data</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://gigazine.net/news/20260728-pgsimcity-postgresql/">PostgreSQLの内部構造をSimCity風3D都市として可視化する「PGSimCity」</a></h3>
+        </div>
+        <div class="summary">PostgreSQLの内部動作をSimCity風の3D都市として可視化するWebツール「PGSimCity」が公開された。クライアント接続がPostmasterへ届き各バックエンドプロセスに振り分けられる様子や、SQL文がParser・Rewriter・Planner・Executorを経て処理される流れ、8KiB単位のページをキャッシュするshared_buffersを広場のタイルとして表現するなど、抽象的な内部構造を空間的に配置する。WAL書き込みやMVCCで生じるデッドタプル、autovacuumによる回収、レプリケーション遅延といった、性能問題の原因になりやすい要素も同じ都市の中で表現している。</div>
+        <div class="key-points">
+          <ul>
+            <li>接続処理・クエリ処理(Parser→Rewriter→Planner→Executor)・shared_buffersのキャッシュ動作を3D都市の区画として可視化</li>
+            <li>MVCCのデッドタプル発生とautovacuumによる回収、レプリケーション遅延など性能問題の原因になる要素も表現</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Gigazine</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-28</span>
+          <span class="engagement">🔖 199</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://github.com/nttr-tech/winui4k">NTTレゾナント、KotlinやJavaからネイティブWinUIを直接呼び出すOSSライブラリ「WinUI4K」公開</a></h3>
+        </div>
+        <div class="summary">NTTレゾナントは、KotlinやJavaからC#やVisual Studioを介さずWindows 11のネイティブGUIフレームワークWinUIを直接呼び出せるOSSライブラリ「WinUI4K」を公開した。JVMのForeign Function Interfaceを使いWinRTのABIを直接呼び出す仕組みで、Panama(Java 22以降)・JNA・JNRの3種のFFIバックエンドに対応し、x64・x86・ARM64をサポートする。ボタンやテキストフィールド、WebView2統合を含む60種類以上のGUIコントロールを備え、Kotlinコルーチンによる非同期処理やOSレベルのスクリーンリーダーによるアクセシビリティにも対応する。ライセンスはApache License 2.0。</div>
+        <div class="key-points">
+          <ul>
+            <li>JVMのFFIでWinRT ABIを直接呼び出し、Panama・JNA・JNRの3バックエンドとx64・x86・ARM64に対応</li>
+            <li>WebView2統合を含む60種類以上のGUIコントロールとKotlinコルーチン対応、Apache License 2.0でOSS公開</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-28</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.com/openai/codex-security">OpenAI、コードベースの脆弱性を検証・修正するCLI/SDK「Codex Security」をOSS公開</a></h3>
+        </div>
+        <div class="summary">OpenAIは、コードベースの脆弱性を検出・検証・修正するCLIとTypeScript SDK「Codex Security」をオープンソースで公開した。スキャン結果はSARIF・CSV・JSONで出力でき、Dockerによる一括スキャンや、脅威モデル・アーキテクチャ文書などのカスタムナレッジベースの読み込みにも対応する。pre-commitフックでの利用や、過去のスキャン履歴を比較する再実行機能も備える。動作にはNode.js 22以上とPython 3.10以上が必要で、認証はOpenAI APIキーまたはデバイス認証で行う。ライセンスはApache-2.0。</div>
+        <div class="key-points">
+          <ul>
+            <li>スキャン結果をSARIF・CSV・JSONで出力、Docker一括スキャンやgitフック統合、過去スキャンとの比較機能を搭載</li>
+            <li>Node.js 22以上・Python 3.10以上が必要、「自身が所有または明示的な許可があるリポジトリのみ」対象と明記しApache-2.0で公開</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-27</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-product">Product</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://tajd.github.io/projektor/">AIコーディングエージェント専用の課題管理・Wiki「Projektor」、MCPサーバーを主要インターフェースに設計</a></h3>
+        </div>
+        <div class="summary">AIコーディングエージェント向けに設計された課題管理・Wikiツール「Projektor」が公開された。人間向けUIにMCPを後付けするのではなく、MCPサーバー自体を主要なインターフェースとする設計で、エージェントが課題登録やスプリント計画、Wiki検索を直接実行できる。複数エージェントが競合なく並行作業できるよう、エージェントレジストリとファイルclaimの仕組みを内蔵する。単一のCloudflare Worker上でD1・KV・R2のみを使って動作するサーバーレス構成で、コンテナなしに数分でセルフホストできるという。</div>
+        <div class="key-points">
+          <ul>
+            <li>MCPサーバーを人間向けUIの後付けではなく主要インターフェースとして設計、エージェントが課題登録・スプリント計画を直接実行</li>
+            <li>Cloudflare WorkerとD1・KV・R2のみで動くサーバーレス構成、コンテナなしで数分でセルフホスト可能</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub Pages</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-28</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-data">Data</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.com/reflex-dev/xy">Reflex製の可視化ライブラリ「XY」、1億点を0.081秒で描画——RustコアでMatplotlib比165倍</a></h3>
+        </div>
+        <div class="summary">Reflex開発元が公開したPython向け可視化ライブラリ「XY」は、Rustコアによる密度サーフェス計算で最大100億点規模のデータセットを扱える。個々のマーカーを描画する代わりに解像度に応じた画面表示分だけを計算する方式で、1億点の描画がXYで0.081秒に対しMatplotlibは13.4秒、Plotlyは5000万点の時点で描画が完了しなかったという。パン・ズーム・ホバー・選択などのインタラクションでも詳細データにフルアクセスでき、HTML・PNG・SVG・PDFへの出力やReflexアプリへのネイティブ組み込みにも対応する。ライセンスはApache-2.0で、現在はアルファ版。</div>
+        <div class="key-points">
+          <ul>
+            <li>1億点の描画がXYで0.081秒、Matplotlibは13.4秒、Plotlyは5000万点で描画未完了という性能差</li>
+            <li>解像度に応じた画面表示分のみを計算する密度サーフェス方式をRustコアで実装、Apache-2.0でアルファ公開中</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-27</span>
+          <span class="engagement">⭐ 220</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
+
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://gigazine.net/news/20260728-x-money/">X Money、米国のX Premium会員向けに正式ローンチ</a>
+        <span class="quick-summary">— 送金無料・年利最大6%・購入時3%キャッシュバックのデビットカード一体型金融サービス。</span>
+        <span class="meta">Gigazine</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-oss">OSS</span>
+        <a href="https://github.com/permissionlesstech/bitchat">分散型メッセージアプリ「bitchat」がGitHubトレンド首位、スター3.3万超</a>
+        <span class="quick-summary">— Bluetoothメッシュ(オフライン)とNostrリレー網(オンライン)を組み合わせたサーバーレス設計。</span>
+        <span class="meta">GitHub</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-frontend">Frontend</span>
+        <a href="https://blog.nightly.mozilla.org/2026/07/27/new-firefox-design/">Firefox Nightlyに新デザイン先行公開</a>
+        <span class="quick-summary">— 柔らかいタブ形状と暖色パレットに刷新、ユーザー要望でコンパクトモードも復活。</span>
+        <span class="meta">Mozilla Nightly Blog</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-frontend">Frontend</span>
+        <a href="https://azukiazusa.dev/blog/focusgroup-html-attribute/">HTML `focusgroup` 属性、ツールバーの矢印キー操作をJSなしで実装可能に</a>
+        <span class="quick-summary">— Chrome 150で利用可能、roving tabindexの実装をブラウザに任せられる。</span>
+        <span class="meta">azukiazusa.dev</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://pc.watch.impress.co.jp/docs/news/2128607.html">独自5nmプロセッサ搭載ミニPC「Acrab Agent Box」、DGX Sparkの5分の1価格で1000億パラメータ級モデルを推論</a>
+        <span class="quick-summary">— 専用プロセッサ「Gelix One」が700TOPSの性能を半分の消費電力で実現。</span>
+        <span class="meta">PC Watch</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-oss">OSS</span>
+        <a href="https://sbcl.org/all-news.html?2.6.7">Common Lisp処理系SBCL 2.6.7公開</a>
+        <span class="quick-summary">— ARM64のSB-SIMD対応とx86-64向けAVX512命令サポートを追加。</span>
+        <span class="meta">SBCL.org</span>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="./" class="archive-link">🗂 過去のダイジェスト</a>
+    </footer>
+  </div>
+</body>
+</html>
