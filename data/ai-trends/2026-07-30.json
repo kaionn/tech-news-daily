@@ -1,0 +1,74 @@
+{
+  "issue": "2026-07-30",
+  "generated_at": "2026-07-30T07:00:00+09:00",
+  "theme": {
+    "title": "マルチエージェント協調 — 「書き込みを一本化する」が唯一の合意点になった理由",
+    "category": "multi-agent-coordination",
+    "lede": "2025年半ばに Cognition が「マルチエージェントを作るな」と公式ブログで警鐘を鳴らし、直後に Anthropic が自社のマルチエージェント研究システムは単一エージェントを研究評価で90.2%上回ったと発表して、業界は一年以上意見が割れたままだった。その Cognition が2026年4月、態度を転換し「実際に機能する構成」を具体的な数値付きで公開したことで、対立点はようやく一つの合意——書き込みは一本化し、複数のエージェントは判断材料だけを増やす——に収束しつつある。",
+    "tldr": [
+      "Cognition は2025年、複数エージェントの並行書き込みが矛盾した判断を生むとして「マルチエージェントを作るな」と主張したが、2026年4月に態度を転換し「書き込みは一本化し、エージェントは行動ではなく知性を提供する」構成に絞って実例を公開した",
+      "Anthropic の公式ブログは、リサーチエージェントが並列に情報収集する『読む』タスクでは複数エージェント構成が単一エージェントを研究評価で90.2%上回ったが、最終レポートの統合は単一のCitationAgentに一本化していると明記している",
+      "LangChain の分析は『読むタスクは並列化しやすく、書くタスクは競合する判断が致命的になりやすい』という一線が、マルチエージェント構成が機能するかどうかを分けると整理している"
+    ],
+    "sections": [
+      {
+        "heading": "『複数エージェントに書かせるな』という警告が最初に出た理由",
+        "body_html": "<p>Cognition が2025年に公式ブログで示した主張は、複数のエージェントに同じタスクを分担させると、各エージェントがそれぞれ異なる暗黙の判断（コードのスタイル、実装方針、命名規則など）を下し、その食い違いが最終成果物に矛盾として残るというものだった。特にコーディングのような「書く」タスクでは、あるエージェントの変更が別のエージェントの前提を壊しても、両者は互いの意思決定の全体像を共有していないため、統合時に初めて破綻が発覚する。</p><p>LangChain はこの現象を「読む（reading）」タスクと「書く（writing）」タスクの違いとして一般化した。read action は互いに独立した部分結果を返すだけなので並列化しやすいが、write action は複数の変更が同じ状態に競合して書き込まれるため統合時の判断が難しい。Anthropic 自身の実装でもリサーチ（読む）は並列化する一方、レポートの統合（書く）は単一エージェントに戻している、と LangChain は指摘している。</p>",
+        "examples": [
+          {
+            "product": "Cognition（公式ブログ, Don't Build Multi-Agents）",
+            "approach": "複数エージェントへの分担はコンテキストの断片化と暗黙の判断の食い違いを生むため避けるべきだと主張",
+            "detail": "特にコード生成のような「書く」タスクでの分担が、統合時に矛盾したコードとして表面化する事例を根拠に挙げている",
+            "source_url": "https://cognition.com/blog/dont-build-multi-agents"
+          },
+          {
+            "product": "LangChain（公式ブログ, How and when to build multi-agent systems）",
+            "approach": "「read action は write action より本質的に並列化しやすい」という原則でマルチエージェントの向き不向きを整理",
+            "detail": "Anthropic のリサーチシステムが reading（並列）と writing＝レポート統合（単一エージェント）を明確に分けている点を、この原則の実例として引用している",
+            "source_url": "https://www.langchain.com/blog/how-and-when-to-build-multi-agent-systems"
+          }
+        ],
+        "takeaway": "着手前に、そのタスクが「読む」中心か「書く」中心かを判定する。書く工程が複数箇所で競合しうるなら、複数エージェントに同時に書かせず、書き込みは1エージェントに絞る。"
+      },
+      {
+        "heading": "Anthropic のリサーチシステムは『読む』だけを並列化していた",
+        "body_html": "<p>Anthropic 公式ブログが解説する Claude の Research 機能は、リード役の LeadResearcher が調査戦略を立て、3〜5体のサブエージェントを並列に立ち上げ、各サブエージェントがさらに3つ以上のツール呼び出しを並列実行する二段構えの並列化を採る。この構成により、Claude Opus 4 をリードエージェントに、Claude Sonnet 4 をサブエージェントに使ったマルチエージェント構成が、社内のリサーチ評価で単一エージェント構成を90.2%上回ったと報告している。複数の独立した方向性を同時に追う「breadth-first」なクエリほど効果が大きい。</p><p>一方で、集めた情報の統合は並列化していない。各サブエージェントの調査結果は LeadResearcher に集約され、最終的な引用処理も <code>CitationAgent</code> という単一のエージェントが担当する。エラー処理も「書き込みの一本化」と同じ思想で、エラー発生時は最初からやり直さずエージェントが中断した地点から再開できる仕組みを構築し、ツール呼び出しが失敗した際はモデル自身にそれを伝えて適応させている。</p>",
+        "examples": [
+          {
+            "product": "Claude Research（Anthropic 公式エンジニアリングブログ）",
+            "approach": "リードエージェントがサブエージェントを並列生成して情報収集のみ並列化し、統合は単一エージェントに一本化",
+            "detail": "「a multi-agent system with Claude Opus 4 as the lead agent and Claude Sonnet 4 subagents outperformed single-agent Claude Opus 4 by 90.2% on our internal research eval」と報告。エラー時は最初から再実行せず中断地点から再開する設計も明記している",
+            "source_url": "https://www.anthropic.com/engineering/built-multi-agent-research-system"
+          }
+        ],
+        "takeaway": "並列化していいのは情報収集などの読むフェーズまでと割り切る。要約・レポート化・最終成果物の生成は単一エージェントに一本化し、失敗時は再実行ではなく中断地点からの再開を用意する。"
+      },
+      {
+        "heading": "Cognition の転換 — 知性は複数、書き込みは一本",
+        "body_html": "<p>Cognition は2026年4月、自社の主張を修正し、「マルチエージェントが今日うまく機能するのは、書き込みが一本化されたままで、追加のエージェントが行動ではなく知性を提供する場合だ」という原則を公式ブログで示した。具体例として、Devin と Devin Review が互いにイテレーションする Code-Review Loop（レビュー役は前工程の文脈を持たないクリーンな状態で臨み、1PRあたり平均2件のバグを検出、うち約58%が重大なもの）、能力の劣る主エージェントが難所だけ上位モデルを呼び出す Smart Friend パターン、マネージャー役の Devin が子 Devin を立ち上げ内部 MCP 経由で進捗を調整する Hierarchical Delegation の3パターンを挙げる。</p><p>3パターンいずれも、実際にファイルやプルリクエストへ書き込む権限は常に1エージェントに残り、他のエージェントはレビュー・助言・タスク分解という「行動しない知性」の役割に限定される。Cognition はこの転換の背景として、モデル自体の能力向上とエンタープライズでの利用が半年で約8倍に伸びたことを挙げており、以前は理論上正しくても実装コストに見合わなかった構成が、今は実運用で回るようになったと説明している。</p>",
+        "examples": [
+          {
+            "product": "Devin / Devin Review（Cognition 公式ブログ, Multi-Agents: What's Actually Working）",
+            "approach": "書き込みを1エージェントに一本化し、他のエージェントはレビュー・エスカレーション・タスク分解に限定する3パターンを実例付きで公開",
+            "detail": "「multi-agent systems work best today when writes stay single-threaded and the additional agents contribute intelligence rather than actions」と明記し、Devin Review が1PRあたり平均2件（うち58%が重大）のバグを検出したと報告している",
+            "source_url": "https://cognition.com/blog/multi-agents-working"
+          }
+        ],
+        "takeaway": "多エージェント構成を組むなら役割を「提案」「レビュー」「エスカレーション先」「タスク分解」に限定し、実際に状態を変更する書き込み権限は常に1エージェントだけに残す。"
+      }
+    ]
+  },
+  "editorial": "この一年の対立は「マルチエージェントを使うべきか」ではなく「何を並列化していいか」の解像度の違いだったと分かる。Anthropic は読むフェーズだけを、Cognition は行動ではなく知性の提供だけを並列化し、書き込みという一点だけは一貫して一本化している。次にマルチエージェント構成を検討する際は、まず「このタスクで複数箇所が同時に状態を変更しうるか」を問うところから始めるとよい。",
+  "quick_picks": [
+    {
+      "title": "OpenAI Agents SDK の handoff、複数エージェントを並列ではなく『順番に制御を渡す』設計として定義",
+      "summary": "公式ドキュメントは handoff を「1つの run 内に留まる」制御の逐次委譲と定義し、委譲を受けたエージェントが会話履歴を引き継いで単独で応答を担当する仕組みだと説明する。本文で扱った『書き込みは1エージェントに一本化する』という原則を、フレームワークの標準機能として体現した実装例。",
+      "url": "https://openai.github.io/openai-agents-python/handoffs/"
+    },
+    {
+      "title": "Google Cloud、A2A プロトコルに150以上の組織が参加し異なるベンダーのエージェント間委任が実運用に入ったと報告",
+      "summary": "2025年7月31日公開の記事で、Adobe・ServiceNow・S&P Global などが A2A で自社エージェント同士のタスク委任を実装し、Tyson Foods や Gordon Food Service が製品データ共有に使っていると報告する。本文で扱った『協調』は同一ベンダー内の話だが、この記事は異なるベンダーのエージェント間でも同じ委任構造が標準化されつつあることを示す。",
+      "url": "https://cloud.google.com/blog/products/ai-machine-learning/agent2agent-protocol-is-getting-an-upgrade"
+    }
+  ]
+}
