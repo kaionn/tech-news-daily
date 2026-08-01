@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-08-01</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="../feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-08-01 (Sat)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+      <nav class="site-nav">
+        <a href="../" class="active">📰 日刊ダイジェスト</a>
+        <a href="../trends.html">🔌 週次プラグイントレンド</a>
+        <a href="../ai-trends.html">🧠 AI プロダクト動向</a>
+        <a href="./">🗂 アーカイブ</a>
+      </nav>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 21 articles</span>
+      <span>🏷 8 categories</span>
+      <span>📡 13 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item">
+        <span class="number-value">1M</span>
+        <span class="number-label">DeepSeek-V4-Flashのコンテキスト長(トークン)</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">181台</span>
+        <span class="number-label">Hugging Face侵入で不正登録されたTailscaleノード数</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">19.27%</span>
+        <span class="number-label">OpenAI新音声認識モデルの誤認識率(旧モデル40.37%から改善)</span>
+      </div>
+    </div>
+
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
+
+      <div class="card featured deep-dive">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://artificialanalysis.ai/models/deepseek-v4-flash">DEEP DIVE: DeepSeek-V4-Flash「0731」が公開ベータへ、キャッシュヒット価格は通常比98%引きでArtificial Analysis指数は101モデル中3位</a></h3>
+        </div>
+        <div class="summary">DeepSeekは7月31日、コーディング・エージェント向け軽量モデル「DeepSeek-V4-Flash」の0731版を公開ベータとしてAPI提供を開始した。同社は7月中旬にV4-Pro-Previewを公開して以降、より安価に使えるFlash系統の整備を進めており、今回のアップデートはアーキテクチャやパラメータ数を変えず、Terminal Bench・NL2Repo・Cybergym・DeepSWEなど複数のエージェント系ベンチマークに絞って再学習を行ったものだ。DeepSeek自身の計測ではTerminal-Bench 2.1で82.7点、Cybergymで76.7点を記録し、いずれもV4-Pro-Previewを上回ったとしている。第三者評価のArtificial Analysis Intelligence Indexでは50点を獲得し、比較対象101モデル中3位、中央値25点を大きく上回る結果となった。モデルはMoE構成で総パラメータ284B・アクティブ13B、コンテキスト長は1Mトークンを維持する。価格は入力$0.14・出力$0.28(100万トークンあたり)で、特筆すべきはキャッシュヒット時の価格が$0.003と通常の98%引きに設定されている点で、同価格帯モデル中で最安クラスに位置づけられる。OpenAI Responses API形式へのネイティブ対応も追加され、Codex向けの設定が用意された。なお、V4-Proおよびアプリ・Web版のモデルは今回の更新の対象外で、V4-Proの正式版は別途公開が予定されている。Hacker Newsでは公式changelogとArtificial Analysisの分析記事がそれぞれ600点超・500点近いポイントを集めた。</div>
+        <div class="editorial">🧠 アーキテクチャを変えずベンチマーク特化の再学習だけでTerminal-Bench上位に食い込んだ点は、事前学習コストをかけずにエージェント性能を底上げする現実的な戦略として評価できる。ただしキャッシュヒット98%引きという価格設計は、同一プロンプトを反復実行するエージェントワークロードでこそ効くものであり、単発の対話用途では通常価格に近い体感になる可能性が高い。V4-Proの正式版が別途控えている以上、今回のFlash更新は本命モデル投入前の中継ぎという位置づけで見ておいたほうがよいだろう。</div>
+        <div class="key-points">
+          <ul>
+            <li>Terminal Bench 2.1で82.7点・Cybergymで76.7点を記録しV4-Pro-Previewを上回る、DeepSWEは54.4点</li>
+            <li>Artificial Analysis Intelligence Indexで50点(101モデル中3位、中央値25点)、コンテキスト長1M、MoE構成で総パラメータ284B・アクティブ13B</li>
+            <li>価格は入力$0.14・出力$0.28(100万トークンあたり)、キャッシュヒット時は$0.003で通常比98%引き、Responses API形式にネイティブ対応しCodex向け設定も追加</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 エージェント用途で同一コンテキストを反復利用する場合、DeepSeek-V4-Flashのキャッシュ価格は主要モデル中でも突出して安く、Codex系ツールと組み合わせたコスト最適化を検討する価値がある。</div>
+        <div class="meta">
+          <span>Artificial Analysis</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-07-31</span>
+          <span class="engagement">▲ 497</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://tailscale.com/blog/hugging-face-intrusion">Tailscaleが総括、Hugging Face本番侵入は自社VPNの脆弱性ではなく盗まれた再利用可能キーが181台の不正ノード登録に悪用されたと判明</a></h3>
+        </div>
+        <div class="summary">Tailscaleは、7月に発覚したHugging Face本番環境への侵入事件について自社の役割を検証する記事を公開した。同社の調査では、Tailscale自体に脆弱性はなく、侵入者はHugging Faceの本番シークレットストア(136件の認証情報を保持)から漏洩した再利用可能な認証キーを悪用し、181台の不正ノードをtailnetに登録してCIノード相当のアクセス権限を得ていたことが判明した。侵入者はログを残さないよう`--no-logs-no-support`フラグを付けてTailscaleを実行しており、追跡の隠蔽を図っていた。</div>
+        <div class="key-points">
+          <ul>
+            <li>本番シークレットストアの136件の認証情報から漏洩した再利用可能キーを使い、181台の不正ノードをtailnetへ登録</li>
+            <li>侵入者は`--no-logs-no-support`フラグでログ抑制を試行、Tailscaleは再発防止策としてワークロードアイデンティティ連携への移行とTailnet Lockの導入を推奨</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Tailscale Blog</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-07-31</span>
+          <span class="engagement">▲ 250</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.com/yc-software/qm">スタートアップ向け「マルチプレイヤーAIエージェント基盤」qmが公開、Slack・Web両方から同一IDで個人/共有スコープを使い分け</a></h3>
+        </div>
+        <div class="summary">yc-softwareが公開したqmは、スタートアップ向けの「マルチプレイヤー・エージェントハーネス」で、社員が個人スコープで独立してAIエージェントと作業しつつ、共有チャンネルやプロジェクトではSlackとWebの両インターフェースを同一IDで横断利用できる。TypeScript/Node.js製でHTTPにFastify、SlackにBoltを採用し、PostgreSQLで永続化するヘッドレスコアの上に、スコープごとのサンドボックスでツール実行を隔離する構成。Pi・OpenCode・Codex・Claude Codeなど複数モデルに対応し、管理者はセキュリティ姿勢や利用可能モデルを一括制御できる。</div>
+        <div class="key-points">
+          <ul>
+            <li>個人/共有スコープでメモリ・ファイル・権限を分離し、Slack・Web双方を同一アイデンティティで横断利用可能</li>
+            <li>Pi・OpenCode・Codex・Claude Codeなど複数モデルに対応、crons/watchesによるバックグラウンドジョブ実行や監査証跡も備える</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-31</span>
+          <span class="engagement">▲ 296</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://github.com/golang/go/issues/80590">Go 1.28に向けコレクション型のジェネリック標準ライブラリ提案、container/hash.Map・container/ordered.Map・heap/v2など6パッケージを追加</a></h3>
+        </div>
+        <div class="summary">Go Collectionsワーキンググループは、Go 1.18のジェネリクスと1.23のイテレータを土台に、標準ライブラリへコレクション型を追加する提案をGo 1.28マイルストーンで進めている。ハッシュベースの`container/hash.Map`・`container/hash.Set`、比較可能な要素向け`container/set.Set`、平衡二分木による`container/ordered.Map`、既存の非ジェネリックheapを置き換える`container/heap/v2`などが含まれる。</div>
+        <div class="key-points">
+          <ul>
+            <li>非比較可能キーに対応するカスタムハッシュ関数用の`hash/maphash.Hasher`はGo 1.27で先行リリース済み</li>
+            <li>変更操作はコレクションのサイズが変化したかを返す設計方針を採用、公開インターフェースは経験蓄積まで非公開の制約インターフェースで運用</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-31</span>
+          <span class="engagement">▲ 77</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://nnethercote.github.io/2026/07/31/how-to-speed-up-the-rust-compiler-in-july-2026.html">Rustコンパイラ、2025年12月から半年で平均ビルド時間5.59%短縮——rustdocは28%減、新トレイトソルバーは27秒から1秒未満に</a></h3>
+        </div>
+        <div class="summary">Rustパフォーマンスチームは2025年12月から2026年7月までの改善をまとめ、コンパイラ全体の平均ウォールタイムが5.59%短縮したと報告した。改善の半分はrustdocの最適化によるもので、impl処理の見直しとPGOトレーニングセット強化でrustdocベンチマーク全体が28%減少。新トレイトソルバーはあるベンチマークで27秒から1秒未満へ、memcpy最適化で問題のあったクレートは40%短縮した。</div>
+        <div class="key-points">
+          <ul>
+            <li>rustdocはimpl処理最適化とPGOトレーニングセット強化(2.85%減)、implソート最適化(一部6%超減)を積み上げ全体28%減</li>
+            <li>Clippyは仮想ディスパッチ最適化でno-opメソッド呼び出しを排除しランタイム10〜30%減、分岐予測ミスは20〜80%減少</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>nnethercote.github.io</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07-31</span>
+          <span class="engagement">▲ 74</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://servo.org/blog/2026/07/31/june-in-servo/">ブラウザエンジンServo 0.4.0公開、月間558コミットの過去最多を記録——メディアクエリ対応拡充とBoxFragmentメモリ17%減</a></h3>
+        </div>
+        <div class="summary">Rust製ブラウザエンジンServoの月次報告によると、6月は過去最多となる558コミットを記録した(4月534件・5月391件から増加)。`(device-width)`や`(pointer)`など主要メディアクエリ、SharedWorker等のDOM API、CSSの`attr()`関数などを新規実装。BoxFragmentのメモリ使用量を288バイトから240バイトへ17%削減し、2Dキャンバスの消費電力も23%低減した。</div>
+        <div class="key-points">
+          <ul>
+            <li>lichess.orgのレイアウト精度やZulip・Speedtestの可変フォント表示が改善、ファジングで16件のクラッシュバグを修正</li>
+            <li>SpiderMonkeyを更新し複数CVEに対応、RSA演算を定数時間実装に変更してタイミング攻撃耐性を強化</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Servo Blog</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07-31</span>
+          <span class="engagement">▲ 58</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://andre.arko.net/2026/07/30/ruby-centrals-destructive-legacy/">元RubyGemsメンテナがRuby Central批判——「敵対的買収」から10カ月でOSS貢献者9/10人が離脱、RailsConfは廃止</a></h3>
+        </div>
+        <div class="summary">元Bundler/RubyGemsメンテナのAndré Arko氏は、Ruby CentralによるRubyGems・Bundler・RubyGems.orgの運営権掌握から約10カ月の経緯を批判するブログを公開した。RubyGems.org運用担当7人中6人、フルタイム開発者3人中2人、理事7人中5人、歴代Executive Director全3人を含む主要貢献者10人中9人が離脱し、RailsConfは終了、RubyConfも大幅縮小したという。</div>
+        <div class="key-points">
+          <ul>
+            <li>Ruby Centralは「セキュリティ向上」を掌握の理由に挙げたが、Arko氏は必要な専門人材をむしろ失ったと反論</li>
+            <li>Sidekiqは恒久的にスポンサーを撤退、Shopifyも9カ月離脱後に最近復帰。BundlerとRubyGemsの管理権はMatz氏へ移管された</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>andre.arko.net</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07-30</span>
+          <span class="engagement">▲ 37</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://manifest.build/blog/why-we-deprecated-our-llm-router/">Manifest、自社LLMルーターを廃止——7,000ユーザーの実運用で判明した「キャッシュの方がルーティングより効く」という誤算</a></h3>
+        </div>
+        <div class="summary">スタートアップ向けバックエンド基盤Manifestは、3月に投入した自社LLMルーターを6月に廃止したと公表した。7,000ユーザーの実運用データから、プロンプト単体ではツール呼び出しやWeb検索など実行時に判明する複雑さを予測できずルーティング判断が不安定になること、単一モデルへの固定によるキャッシュ再利用(未キャッシュ比75〜90%安価)の方がコスト削減に効くことが分かったという。</div>
+        <div class="key-points">
+          <ul>
+            <li>セッション途中のモデル切替は作業品質を低下させ、複雑さの誤検知が頻発——ルーティングの不確実性を管理するコストが節約額を上回った</li>
+            <li>結論として、動的ルーティングより特性を理解した上で単一モデルを意図的に選ぶ運用の方が大半のユースケースで優位と判断</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Manifest Blog</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-31</span>
+          <span class="engagement">▲ 65</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://forest.watch.impress.co.jp/docs/news/2129478.html">日本仮想化技術がWSL構築ガイドを無料公開、Think ITの連載29回分を215ページに再構成しUbuntu 26.04 LTS対応</a></h3>
+        </div>
+        <div class="summary">日本仮想化技術は7月29日、「WindowsユーザーのためのWSLで始めるLinux環境構築術」と題した無料PDFガイドを公開した。技術誌Think ITで連載していた記事29回分を、構成・内容・文章すべて見直した上で215ページに再編集したもので、基礎知識・開発環境構築・活用編の3部構成。Ubuntu 26.04 LTSに対応させ、ファイルサイズは34.9MB。</div>
+        <div class="key-points">
+          <ul>
+            <li>連載時とは別に構成・内容・文章を全面的に見直し、体系的に学べる形へ再編集</li>
+            <li>Ubuntu 26.04 LTS向けに内容を更新、基礎知識編・開発環境構築編・WSL活用編の3部構成・215ページ</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Impress Watch</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-07-29</span>
+          <span class="engagement">🔖 120</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://zenn.dev/explaza/articles/20f7f41cff8428">Claude CodeとCodexの設定ファイルをCLIツール「agents-sync」で同期、symlinkと差分変換を使い分けフォーマット差を吸収</a></h3>
+        </div>
+        <div class="summary">同一プロジェクトでClaude CodeとCodexを併用すると設定変更が片方にしか反映されない問題に対し、開発者はCLIツール「agents-sync」を公開した。AGENTS.mdなど同一フォーマットのファイルはsymlinkで一本化し、`.mcp.json`とCodexのTOML設定のように形式が異なるファイルは中間表現に変換して比較し、フィンガープリントで新しい方を判定して同期する。</div>
+        <div class="key-points">
+          <ul>
+            <li>SKILLSのみ・MCPのみなど同期対象を選択可能。ClaudeとOpenAIでプロンプト指針が異なるため全項目一律同期はしない設計</li>
+            <li>セットアップ後はfswatchとlaunchdでファイル変更を監視し自動同期、対象は`.claude/skills`・`.codex/rules`等</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-31</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://qiita.com/sumomoo/items/8bbe719ed4de1a36def9">AIの制約は演算力でなく電力と冷却——SpaceXの軌道上データセンター構想、翼幅70mの衛星が2027年後半に実験打ち上げ</a></h3>
+        </div>
+        <div class="summary">Qiitaに投稿された記事は、AI開発の実質的なボトルネックが知能そのものではなく電力供給と排熱という物理インフラにあると論じ、SpaceXが進める軌道上データセンター構想をその解決策の一例として紹介する。構想中の衛星「AI1」は翼幅約70mとボーイング747-8を上回り、太陽光発電で平均120kW・最大150kWを発電、2027年後半の実験機打ち上げを計画する。長期的には高度500〜2,000kmの軌道に最大100万基を配置する構想だという。</div>
+        <div class="key-points">
+          <ul>
+            <li>地上のデータセンターは広大な土地・大量の電力と冷却水を確保できる都市圏に集中せざるを得ず、拡張余地には物理的な上限がある</li>
+            <li>Googleがすでに大規模な計算契約をSpaceXと締結したとされ、構想は技術実証段階から事業段階へ移行しつつあると記事は指摘</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-31</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://qiita.com/ntaka329/items/bfd8535d8f64a9ecd0fb">「パスキー対応できますか」と聞かれたら——RP ID変更で登録済みパスキーが全て無効化される等、後戻りできない設計判断を先に潰す</a></h3>
+        </div>
+        <div class="summary">パスキー導入を検討する組織向けの実装ガイド記事は、後から変更するとやり直しコストが高い3つの設計判断を先に固めるべきだと説く。対象が従業員か一般消費者か、ドメイン(RP ID)の選定、パスワード完全代替か第二要素かの3点で、特にRP IDは変更すると登録済みパスキーが全て無効化されるため一時コードのような後戻りの余地がない。</div>
+        <div class="key-points">
+          <ul>
+            <li>Keycloak 26.6.3はメールワンタイムコードやデバイス束縛パスキーの強制に独自開発が必要な一方、AWS CognitoはMFAとパスワードレスが排他的でKeycloakと運用モデルが異なる</li>
+            <li>NIST SP 800-63B-4準拠のリカバリには複数要素の確認が必要で、メール一時コード単体では不十分と明記</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07-31</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://zenn.dev/test_myname/articles/gpt-5-6-blender-mcp-modeling">GPT-5.6とBlender MCPで3Dモデリングを自動化、6役割のマルチエージェント構成で4時間26分・19サイクルかけてアンティーク鍵を再現</a></h3>
+        </div>
+        <div class="summary">個人開発者が、GPT-5.6とBlenderのModel Context Protocol連携で3Dモデルを自動生成する実験を公開した。単一の複雑な指示ではなく、Coordinator・Visual Analyst・Planner・Blender Modeler・Visual Reviewer・Geometry Inspectorの6役割に分けたマルチエージェント構成とし、9段階のモデリングworkflowをSkillとして定義。参照画像から装飾的な鍵の3Dモデルを生成させたところ、4時間26分・19回の修正評価サイクルを経て33オブジェクト・18,160三角形のモデルが完成した。</div>
+        <div class="key-points">
+          <ul>
+            <li>最終モデルはFBX再インポート検証をPASSしたが、円形にすべき軸が四角形のまま残る不具合が発生——原因はシステム障害でなく検査基準の未指定と分析</li>
+            <li>YAML形式で各イテレーションの変更・判断を記録する構造化ログを併用し、エージェント間の意思決定を追跡可能にした</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07-31</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-product">Product</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://zenn.dev/dxclab/articles/bdc3935d10706c">拡張機能なしでCopilot Chatの会話をMarkdown保存、ブックマークレット1行でARIAラベルから抽出しローカルへダウンロード</a></h3>
+        </div>
+        <div class="summary">Microsoft 365のCopilot Chatは会話をエクスポートする標準機能を持たないため、著者はインストール不要のブックマークレットで解決する方法を公開した。「You said:」「Copilot said:」というARIAラベルとDOM構造から発言を抽出し、可変スクロール(画面外コンテンツが未レンダリングになる仕組み)に対応するため自動スクロールを挟んでから抽出、末尾の提案プロンプトを除去して`.md`ファイルとしてダウンロードする。</div>
+        <div class="key-points">
+          <ul>
+            <li>クラス名はUI更新で変わりやすいためARIAラベルとDOM構造を頼りに抽出し、拡張機能のインストールや管理者権限を不要にした</li>
+            <li>長い会話では自動スクロールが末尾を取りこぼす場合があるため、実行前に手動で会話終端までスクロールすることを推奨</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-07-31</span>
+          <span class="engagement">🔖 60</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://secretspec.dev/blog/where-env-went-wrong/">「.envはそもそも秘密情報管理用に設計されていない」、SecretSpecがTOML宣言とスコープ制御で3つの関心を分離</a></h3>
+        </div>
+        <div class="summary">SecretSpecの解説記事は、環境変数はプロセスへ文字列を渡す仕組みに過ぎず、機密度やスコープといったメタデータを表現できないと指摘する。`.env.production`等の乱立、パーサーごとに異なる独自フォーマット、ignoreしてもバックアップやチャットログ経由で漏れるリスク、公式仕様の不在といった問題を列挙し、必要な秘密情報の宣言・保管場所・受け渡し方法の3つを分離するTOMLベースの仕様を提案する。</div>
+        <div class="key-points">
+          <ul>
+            <li>`"false"`という文字列がコード上でtruthyに評価されるなど、型情報を持たない環境変数特有の落とし穴を指摘</li>
+            <li>プロバイダに依存しない保管場所定義と、サービスごとに必要な秘密情報だけを渡すスコープ制御を提案の柱に据える</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>secretspec.dev</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07-31</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://pc.watch.impress.co.jp/docs/news/2129506.html">OpenAIが新音声認識モデル「GPT-Live-Transcribe」「GPT-Transcribe」を投入、22言語ベンチマークで誤認識率を40.37%から19.27%まで半減</a>
+        <span class="quick-summary">— 発話前にキーワードや会話履歴を文脈として渡せる仕組みにより、専門用語・固有名詞・雑音下での認識精度も向上。</span>
+        <span class="meta">Impress Watch</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-infra">Infra</span>
+        <a href="https://www.publickey1.jp/blog/26/awsawsaws.html">AWSが7月28日、アカウント登録・クレカ不要で実サービスを最大8時間無料利用できるオンラインワークショップ用サンドボックスを開始</a>
+        <span class="quick-summary">— 利用は週1回まで・毎週日曜にリセット、対応ワークショップは現在一部のみで今後拡大予定。</span>
+        <span class="meta">Publickey</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://qiita.com/Syoitu/items/ff38655fed51a2920910">LLM Wikiツール「OpenWiki」はコード取り込み時に一度だけ解析してMarkdownへ要約保存する方式でRAGの反復検索コストを回避</a>
+        <span class="quick-summary">— Claude Sonnet 5利用時の初期セットアップ費用は約1.50ドル、ソース100件超では検索ツールとの併用が必要と著者は補足。</span>
+        <span class="meta">Qiita</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://zenn.dev/nabewata/articles/8cef1bd4cbae3f">プロトタイプは見た目8割・実装1%という「見えない90%」ギャップを、PoCと本番要件を15項目超で比較する表で先回りして提示すべきと説くエンジニア論</a>
+        <span class="quick-summary">— テストカバレッジや監視ダッシュボードを定期共有し、画面に映らない進捗を可視化することも提案している。</span>
+        <span class="meta">Zenn</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-frontend">Frontend</span>
+        <a href="https://zenn.dev/pksha/articles/6cdf19e5fe8065">Rich Hickeyの「Simple Made Easy」をUI設計に適用、Excelのセル汎用性を例に「Easy」の積み重ねが概念の絡み合いを招くと指摘し6原則を提示</a>
+        <span class="quick-summary">— Notionブロックの多機能化やURLと状態の乖離など、5つの典型的な絡み合いパターンを具体例とともに整理。</span>
+        <span class="meta">Zenn</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-data">Data</span>
+        <a href="https://semyonsinchenko.github.io/ssinchenko/post/datafusion-graphs-cc-2/">Pregelパラダイムをjoin/aggregateで実装し、10億エッジ規模のPageRankを5GBメモリ・約30分、19.6億エッジのWCCを10GBメモリ・約40分でラップトップ処理</a>
+        <span class="quick-summary">— 分散処理系のSparkを使わず、バルクスキャン中心の設計とDataFusionのソートマージ結合でメモリ使用量を抑制。</span>
+        <span class="meta">Semyon Sinchenko Blog</span>
+        <span class="engagement">▲ 81</span>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="./" class="archive-link">🗂 過去のダイジェスト</a>
+    </footer>
+  </div>
+</body>
+</html>

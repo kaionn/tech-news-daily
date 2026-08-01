@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tech News Daily — 2026-08-01</title>
+  <title>Tech News Daily — 2026-08-02</title>
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
   <link rel="icon" type="image/png" sizes="192x192" href="favicon.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -14,7 +14,7 @@
   <div class="container">
     <header>
       <h1>Tech News Daily</h1>
-      <div class="date">2026-08-01 (Sat)</div>
+      <div class="date">2026-08-02 (Sun)</div>
       <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
       <nav class="site-nav">
         <a href="./" class="active">📰 日刊ダイジェスト</a>
@@ -25,9 +25,9 @@
     </header>
 
     <div class="stats-bar">
-      <span>📰 21 articles</span>
-      <span>🏷 8 categories</span>
-      <span>📡 13 sources</span>
+      <span>📰 20 articles</span>
+      <span>🏷 6 categories</span>
+      <span>📡 16 sources</span>
     </div>
 
     <nav class="toc">
@@ -40,16 +40,16 @@
 
     <div class="numbers-bar">
       <div class="number-item">
-        <span class="number-value">1M</span>
-        <span class="number-label">DeepSeek-V4-Flashのコンテキスト長(トークン)</span>
+        <span class="number-value">1時間</span>
+        <span class="number-label">Leanカーネルの重大バグ、発見から修正までの時間</span>
       </div>
       <div class="number-item">
-        <span class="number-value">181台</span>
-        <span class="number-label">Hugging Face侵入で不正登録されたTailscaleノード数</span>
+        <span class="number-value">2.4ms</span>
+        <span class="number-label">scriptcのアプリ起動時間(Node.js版は47ms)</span>
       </div>
       <div class="number-item">
-        <span class="number-value">19.27%</span>
-        <span class="number-label">OpenAI新音声認識モデルの誤認識率(旧モデル40.37%から改善)</span>
+        <span class="number-value">1/4</span>
+        <span class="number-label">NamespaceでのCI費用(GitHubホストランナー比)</span>
       </div>
     </div>
 
@@ -58,25 +58,25 @@
 
       <div class="card featured deep-dive">
         <div class="card-header">
-          <span class="tag tag-ai">AI</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://artificialanalysis.ai/models/deepseek-v4-flash">DEEP DIVE: DeepSeek-V4-Flash「0731」が公開ベータへ、キャッシュヒット価格は通常比98%引きでArtificial Analysis指数は101モデル中3位</a></h3>
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://leodemoura.github.io/blog/2026-8-1-postmortem-for-kernel-soundness-bug-14576/">DEEP DIVE: AIが「コラッツ予想を反証」と発表するも実体は定理証明系Leanのカーネルバグ——幽霊パラメータが型検査をすり抜けFalseを証明、独立検証器の欠陥も併発し1時間で修正</a></h3>
         </div>
-        <div class="summary">DeepSeekは7月31日、コーディング・エージェント向け軽量モデル「DeepSeek-V4-Flash」の0731版を公開ベータとしてAPI提供を開始した。同社は7月中旬にV4-Pro-Previewを公開して以降、より安価に使えるFlash系統の整備を進めており、今回のアップデートはアーキテクチャやパラメータ数を変えず、Terminal Bench・NL2Repo・Cybergym・DeepSWEなど複数のエージェント系ベンチマークに絞って再学習を行ったものだ。DeepSeek自身の計測ではTerminal-Bench 2.1で82.7点、Cybergymで76.7点を記録し、いずれもV4-Pro-Previewを上回ったとしている。第三者評価のArtificial Analysis Intelligence Indexでは50点を獲得し、比較対象101モデル中3位、中央値25点を大きく上回る結果となった。モデルはMoE構成で総パラメータ284B・アクティブ13B、コンテキスト長は1Mトークンを維持する。価格は入力$0.14・出力$0.28(100万トークンあたり)で、特筆すべきはキャッシュヒット時の価格が$0.003と通常の98%引きに設定されている点で、同価格帯モデル中で最安クラスに位置づけられる。OpenAI Responses API形式へのネイティブ対応も追加され、Codex向けの設定が用意された。なお、V4-Proおよびアプリ・Web版のモデルは今回の更新の対象外で、V4-Proの正式版は別途公開が予定されている。Hacker Newsでは公式changelogとArtificial Analysisの分析記事がそれぞれ600点超・500点近いポイントを集めた。</div>
-        <div class="editorial">🧠 アーキテクチャを変えずベンチマーク特化の再学習だけでTerminal-Bench上位に食い込んだ点は、事前学習コストをかけずにエージェント性能を底上げする現実的な戦略として評価できる。ただしキャッシュヒット98%引きという価格設計は、同一プロンプトを反復実行するエージェントワークロードでこそ効くものであり、単発の対話用途では通常価格に近い体感になる可能性が高い。V4-Proの正式版が別途控えている以上、今回のFlash更新は本命モデル投入前の中継ぎという位置づけで見ておいたほうがよいだろう。</div>
+        <div class="summary">数学の未解決問題コラッツ予想を巡り、7月25日にRamana Kumar氏がAI支援による「反証」を公開したことが発端となった。3日後、Kiran Gopinathan氏がこの反証を検証したところ、証明全体を最小限のFalse証明にまで還元できることを発見し、定理証明系LeanのカーネルにIssue #14576として報告した。原因は、コンストラクタで実際には使われない「幽霊パラメータ」を持つ入れ子の帰納型をカーネルが処理する際、型検査の過程でこのパラメータの情報が失われ、本来型の合わない引数が検証をすり抜けてしまうという実装上のバグだった。開発チームは、これはLeanの基礎となるメタ理論そのものに欠陥があるわけではなく、あくまで実装レベルの見落としだと強調している。さらに調査の過程で、独立実装のRust製検証器nanodaも、射影ノードの型名を検証していないという別の欠陥を抱えており、同じ攻撃を素通りさせてしまうことが判明した。カーネルとnanodaの両方を修正して初めて、この攻撃経路は完全に塞がれたことになる。開発チームは報告からわずか1時間で修正版をデプロイし、その後AI支援によるセキュリティ解析を追加で実施した結果、無関係な脆弱性を5件発見・修正するという副産物も得た。今後の再発防止として回帰テストを追加し、nanodaを比較ツールとしてCIに組み込んだ。</div>
+        <div class="editorial">🧠 この件が示すのは、「AIが数学の未解決問題を解いた」という主張は反証されるまでの検証コストも含めて評価すべきだという当たり前の教訓だ。もっとも、カーネルバグを1時間で塞ぎ独立検証器の欠陥まで芋づる式に発見できたのは、形式検証コミュニティの対応の速さとして評価してよい。一方で、AI支援のセキュリティ解析が「たまたま」5件の追加脆弱性を発見したという経緯は、裏を返せば通常運用ではこれらが長期間見過ごされていた可能性を示しており、恒常的なAI支援監査の仕組み化が今後の課題として残る。</div>
         <div class="key-points">
           <ul>
-            <li>Terminal Bench 2.1で82.7点・Cybergymで76.7点を記録しV4-Pro-Previewを上回る、DeepSWEは54.4点</li>
-            <li>Artificial Analysis Intelligence Indexで50点(101モデル中3位、中央値25点)、コンテキスト長1M、MoE構成で総パラメータ284B・アクティブ13B</li>
-            <li>価格は入力$0.14・出力$0.28(100万トークンあたり)、キャッシュヒット時は$0.003で通常比98%引き、Responses API形式にネイティブ対応しCodex向け設定も追加</li>
+            <li>幽霊パラメータを持つ入れ子の帰納型で型検査時に情報が消失し、型の合わない引数が検証をすり抜けてFalseを証明できる実装バグ、Leanのメタ理論自体には欠陥なし</li>
+            <li>独立実装のRust製検証器nanodaも射影ノードの型名検証を欠いており同一攻撃が通過、カーネルとnanoda双方の修正で初めて安全性を確保</li>
+            <li>報告から1時間で修正版をデプロイ、追加のAI支援セキュリティ解析で無関係な脆弱性5件も発見・修正し回帰テストとnanoda連携を追加</li>
           </ul>
         </div>
-        <div class="why-it-matters">💡 エージェント用途で同一コンテキストを反復利用する場合、DeepSeek-V4-Flashのキャッシュ価格は主要モデル中でも突出して安く、Codex系ツールと組み合わせたコスト最適化を検討する価値がある。</div>
+        <div class="why-it-matters">💡 形式検証システムや定理証明系を信頼の基盤として使っている開発者は、カーネル自体にもバグが入り込みうるという前提に立ち、独立実装による相互検証(今回のnanodaのような)を組み込む価値がある。</div>
         <div class="meta">
-          <span>Artificial Analysis</span>
-          <span>⏱ 6 min read</span>
-          <span>2026-07-31</span>
-          <span class="engagement">▲ 497</span>
+          <span>leodemoura.github.io</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-08-01</span>
+          <span class="engagement">▲ 82</span>
         </div>
       </div>
 
@@ -84,41 +84,39 @@
         <div class="card-header">
           <span class="tag tag-security">Security</span>
           <span class="content-type">🔒 セキュリティ</span>
-          <h3><a href="https://tailscale.com/blog/hugging-face-intrusion">Tailscaleが総括、Hugging Face本番侵入は自社VPNの脆弱性ではなく盗まれた再利用可能キーが181台の不正ノード登録に悪用されたと判明</a></h3>
+          <h3><a href="https://thehackernews.com/2026/07/cisco-fmc-zero-day-actively-exploited.html">Cisco Secure Firewall Management Centerに固定認証情報の脆弱性、ゼロデイで実悪用——CVE-2026-20316はCVSS 5.3ながら他の脆弱性と連鎖し権限昇格に利用可能</a></h3>
         </div>
-        <div class="summary">Tailscaleは、7月に発覚したHugging Face本番環境への侵入事件について自社の役割を検証する記事を公開した。同社の調査では、Tailscale自体に脆弱性はなく、侵入者はHugging Faceの本番シークレットストア(136件の認証情報を保持)から漏洩した再利用可能な認証キーを悪用し、181台の不正ノードをtailnetに登録してCIノード相当のアクセス権限を得ていたことが判明した。侵入者はログを残さないよう`--no-logs-no-support`フラグを付けてTailscaleを実行しており、追跡の隠蔽を図っていた。</div>
+        <div class="summary">Cisco Secure FMC(Firewall Management Center)ソフトウェアに、低権限アカウント用の固定認証情報が組み込まれていた脆弱性CVE-2026-20316が、パッチ公開前からゼロデイで悪用されていたことが判明した。認証されていない遠隔の攻撃者がこの固定認証情報でログインし、当該アカウントがアクセスできる範囲の機微情報を取得できる。CVSSスコアは5.3だが、他のFMC脆弱性と組み合わせることで権限昇格につながるためCiscoはHigh(重大)に格上げしている。脆弱性はHorizon3.aiのJimi Sebree氏が報告し、CISAはKnown Exploited Vulnerabilitiesカタログに追加した。</div>
         <div class="key-points">
           <ul>
-            <li>本番シークレットストアの136件の認証情報から漏洩した再利用可能キーを使い、181台の不正ノードをtailnetへ登録</li>
-            <li>侵入者は`--no-logs-no-support`フラグでログ抑制を試行、Tailscaleは再発防止策としてワークロードアイデンティティ連携への移行とTailnet Lockの導入を推奨</li>
+            <li>固定認証情報は低権限アカウント向けだが、他のFMC脆弱性と連鎖させることで権限昇格に利用可能なためCVSS 5.3にもかかわらずHigh認定</li>
+            <li>影響対象はSecure FMCリリース7.0・7.2・7.4・7.6・7.7・10.0の6系統、Cloud-Delivered FMCやASA Softwareには影響なし</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Tailscale Blog</span>
-          <span>⏱ 5 min read</span>
-          <span>2026-07-31</span>
-          <span class="engagement">▲ 250</span>
+          <span>The Hacker News</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-30</span>
         </div>
       </div>
 
       <div class="card featured">
         <div class="card-header">
-          <span class="tag tag-ai">AI</span>
+          <span class="tag tag-oss">OSS</span>
           <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://github.com/yc-software/qm">スタートアップ向け「マルチプレイヤーAIエージェント基盤」qmが公開、Slack・Web両方から同一IDで個人/共有スコープを使い分け</a></h3>
+          <h3><a href="https://www.publickey1.jp/blog/26/verceltypescriptcscriptc.html">Vercel、TypeScriptをC言語経由でネイティブバイナリにコンパイルする「scriptc」をオープンソース公開——起動時間はNode.jsの47msから2.4ミリ秒未満に短縮</a></h3>
         </div>
-        <div class="summary">yc-softwareが公開したqmは、スタートアップ向けの「マルチプレイヤー・エージェントハーネス」で、社員が個人スコープで独立してAIエージェントと作業しつつ、共有チャンネルやプロジェクトではSlackとWebの両インターフェースを同一IDで横断利用できる。TypeScript/Node.js製でHTTPにFastify、SlackにBoltを採用し、PostgreSQLで永続化するヘッドレスコアの上に、スコープごとのサンドボックスでツール実行を隔離する構成。Pi・OpenCode・Codex・Claude Codeなど複数モデルに対応し、管理者はセキュリティ姿勢や利用可能モデルを一括制御できる。</div>
+        <div class="summary">Vercelは、TypeScriptコードをNode.jsなどのJavaScriptランタイムに依存しないネイティブ実行ファイルへ変換するコンパイラ「scriptc」をオープンソースで公開した。TypeScriptを型付き中間表現(IR)に変換し、それをC言語コードへ変換した上でclangでコンパイルするという3段階方式を採用する。fs・path・process・crypto・http/httpsなど主要なNode API相当の機能を実装し、npm依存関係もビルド時に解決してJavaScriptコードを埋め込める。動的なコード実行が必要な場合はquickjs-ng(620KB以下)を追加できるオプションも用意する。</div>
         <div class="key-points">
           <ul>
-            <li>個人/共有スコープでメモリ・ファイル・権限を分離し、Slack・Web双方を同一アイデンティティで横断利用可能</li>
-            <li>Pi・OpenCode・Codex・Claude Codeなど複数モデルに対応、crons/watchesによるバックグラウンドジョブ実行や監査証跡も備える</li>
+            <li>Node.js上で60〜100MBを消費するアプリが、静的バイナリでは170〜200KB(組み込みランタイム利用時でも約3MB)まで圧縮</li>
+            <li>Apple Silicon Mac上での起動時間はNode.jsの約47msに対しscriptcは2.4ミリ秒未満、GitHubとscriptc.devで公開中</li>
           </ul>
         </div>
         <div class="meta">
-          <span>GitHub</span>
+          <span>Publickey</span>
           <span>⏱ 3 min read</span>
-          <span>2026-07-31</span>
-          <span class="engagement">▲ 296</span>
+          <span>2026-07-27</span>
         </div>
       </div>
     </div>
@@ -129,42 +127,42 @@
       <div class="card">
         <div class="card-header">
           <span class="tag tag-dev">Dev</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://github.com/golang/go/issues/80590">Go 1.28に向けコレクション型のジェネリック標準ライブラリ提案、container/hash.Map・container/ordered.Map・heap/v2など6パッケージを追加</a></h3>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://github.com/BurntSushi/ripgrep/issues/3494">ripgrepのmuslビルドがopendir呼び出し中にセグフォルト、1.8Mファイル・20GB規模の巨大ツリーとx86_64-unknown-linux-musl向けバイナリで再現——OpenAI Codex同梱版にも影響か</a></h3>
         </div>
-        <div class="summary">Go Collectionsワーキンググループは、Go 1.18のジェネリクスと1.23のイテレータを土台に、標準ライブラリへコレクション型を追加する提案をGo 1.28マイルストーンで進めている。ハッシュベースの`container/hash.Map`・`container/hash.Set`、比較可能な要素向け`container/set.Set`、平衡二分木による`container/ordered.Map`、既存の非ジェネリックheapを置き換える`container/heap/v2`などが含まれる。</div>
+        <div class="summary">ripgrepのGitHub Issueに、x86_64-unknown-linux-musl向けにビルドされたバイナリが、約180万ファイル・20GB規模の巨大なディレクトリツリーを高い並行度で走査中にセグメンテーション違反を起こすという報告が上がった。原因はmuslのメモリアロケータ`mallocng`内で、`opendir`が呼び出す`calloc`のヒープメタデータ整合性チェックが失敗すること。OpenAI Codexに同梱されているripgrepバイナリでも同様の現象が報告されている。</div>
         <div class="key-points">
           <ul>
-            <li>非比較可能キーに対応するカスタムハッシュ関数用の`hash/maphash.Hasher`はGo 1.27で先行リリース済み</li>
-            <li>変更操作はコレクションのサイズが変化したかを返す設計方針を採用、公開インターフェースは経験蓄積まで非公開の制約インターフェースで運用</li>
+            <li>報告者は24コア・大容量RAM環境で数分以内に再現するテストスクリプトとコアダンプを提供、Issueは未対応のままオープン中</li>
+            <li>muslのmallocngアロケータ特有の問題で、glibcビルドでは再現しないとみられる</li>
           </ul>
         </div>
         <div class="meta">
           <span>GitHub</span>
           <span>⏱ 3 min read</span>
           <span>2026-07-31</span>
-          <span class="engagement">▲ 77</span>
+          <span class="engagement">▲ 229</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://nnethercote.github.io/2026/07/31/how-to-speed-up-the-rust-compiler-in-july-2026.html">Rustコンパイラ、2025年12月から半年で平均ビルド時間5.59%短縮——rustdocは28%減、新トレイトソルバーは27秒から1秒未満に</a></h3>
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://warez.sl0p.foo/apple-screensharing-rce/">macOS「画面共有」デーモンに認証不要のリモートコード実行、SRP認証のフレーム長検証ミスで攻撃者はcrontab注入により60秒でroot権限を取得——26.6で修正済み</a></h3>
         </div>
-        <div class="summary">Rustパフォーマンスチームは2025年12月から2026年7月までの改善をまとめ、コンパイラ全体の平均ウォールタイムが5.59%短縮したと報告した。改善の半分はrustdocの最適化によるもので、impl処理の見直しとPGOトレーニングセット強化でrustdocベンチマーク全体が28%減少。新トレイトソルバーはあるベンチマークで27秒から1秒未満へ、memcpy最適化で問題のあったクレートは40%短縮した。</div>
+        <div class="summary">macOSの画面共有機能を提供するデーモン`screensharingd`(macOS 26.5以前)に、認証をバイパスして遠隔からroot権限でコードを実行できる脆弱性が見つかった。原因は、SRP認証フレームの長さ検証に32,768バイト以上の値を渡すと、直前の4バイト読み取りの「成功」ステータスがそのまま使い回され、本来返すべきエラーコードの代わりになってしまう実装ミス。この結果、認証ステートマシンは暗号学的な検証を一切経ずに接続を「認証済み」と誤認する。資格情報なしの単一のネットワーク接続だけで攻撃が成立し、ファイル書き込みプリミティブを連鎖させてcrontabにリバースシェルを仕込むことで60秒以内にroot権限を奪取できるという。</div>
         <div class="key-points">
           <ul>
-            <li>rustdocはimpl処理最適化とPGOトレーニングセット強化(2.85%減)、implソート最適化(一部6%超減)を積み上げ全体28%減</li>
-            <li>Clippyは仮想ディスパッチ最適化でno-opメソッド呼び出しを排除しランタイム10〜30%減、分岐予測ミスは20〜80%減少</li>
+            <li>security type 36の実装でSRPフレーム長検証時に発生、修正はエラー伝播を正しく行うよう変更した2026年7月27日リリースのmacOS 26.6</li>
+            <li>資格情報不要・単一接続のみで成立する攻撃難度の低さが特徴、画面共有が有効な環境の多くはデフォルト設定のまま影響を受ける</li>
           </ul>
         </div>
         <div class="meta">
-          <span>nnethercote.github.io</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-07-31</span>
-          <span class="engagement">▲ 74</span>
+          <span>warez.sl0p.foo</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-28</span>
+          <span class="engagement">▲ 7</span>
         </div>
       </div>
 
@@ -172,41 +170,41 @@
         <div class="card-header">
           <span class="tag tag-oss">OSS</span>
           <span class="content-type">📦 リリース</span>
-          <h3><a href="https://servo.org/blog/2026/07/31/june-in-servo/">ブラウザエンジンServo 0.4.0公開、月間558コミットの過去最多を記録——メディアクエリ対応拡充とBoxFragmentメモリ17%減</a></h3>
+          <h3><a href="https://blog.netbsd.org/tnf/entry/netbsd_11_0_released">NetBSD 11.0がリリース、サードパーティ安定版待ちで延期を重ねつつ未修正セキュリティ問題3件を公開のまま出荷——11.1で2カ月以内に対応予定</a></h3>
         </div>
-        <div class="summary">Rust製ブラウザエンジンServoの月次報告によると、6月は過去最多となる558コミットを記録した(4月534件・5月391件から増加)。`(device-width)`や`(pointer)`など主要メディアクエリ、SharedWorker等のDOM API、CSSの`attr()`関数などを新規実装。BoxFragmentのメモリ使用量を288バイトから240バイトへ17%削減し、2Dキャンバスの消費電力も23%低減した。</div>
+        <div class="summary">NetBSDプロジェクトは8月1日、NetBSD 11.0を正式リリースした。プロジェクトは「サードパーティコンポーネントの安定版リリースを待っていたため、今回のリリースはかなり遅延した」と説明している。amd64向けなど複数アーキテクチャ用にCD-ROMイメージ(700MB未満)とDVD版、USBメディア向けの.imgファイルを提供し、ARM系デバイス利用者にはarmbsd.orgが提供する事前設定済みU-Bootイメージの利用を案内する。延期を重ねるより透明性を優先し、hdaudio・ipfilter・パケットフィルタに関わる未修正のセキュリティ問題3件を公開した状態で出荷を決断した。</div>
         <div class="key-points">
           <ul>
-            <li>lichess.orgのレイアウト精度やZulip・Speedtestの可変フォント表示が改善、ファジングで16件のクラッシュバグを修正</li>
-            <li>SpiderMonkeyを更新し複数CVEに対応、RSA演算を定数時間実装に変更してタイミング攻撃耐性を強化</li>
+            <li>hdaudio・ipfilter・パケットフィルタの3件はデフォルトカーネルに含まれない、または容易な回避策があるとして11.1(2カ月以内予定)へ修正を先送り</li>
+            <li>AI支援ツールによる脆弱性発見の増加でセキュリティ対応の負荷が拡大している状況を踏まえ、リリースプロセスの簡素化にも言及</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Servo Blog</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-07-31</span>
-          <span class="engagement">▲ 58</span>
+          <span>NetBSD Blog</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-08-01</span>
+          <span class="engagement">▲ 152</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
           <span class="tag tag-oss">OSS</span>
-          <span class="content-type">👀 注目</span>
-          <h3><a href="https://andre.arko.net/2026/07/30/ruby-centrals-destructive-legacy/">元RubyGemsメンテナがRuby Central批判——「敵対的買収」から10カ月でOSS貢献者9/10人が離脱、RailsConfは廃止</a></h3>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://lwn.net/Articles/1086489/">Arch Linux、AURのパッケージ「養子縁組」機能を無効化——6月の対策後も再燃した悪意ある引き取りでTor経由のRAT配布が継続</a></h3>
         </div>
-        <div class="summary">元Bundler/RubyGemsメンテナのAndré Arko氏は、Ruby CentralによるRubyGems・Bundler・RubyGems.orgの運営権掌握から約10カ月の経緯を批判するブログを公開した。RubyGems.org運用担当7人中6人、フルタイム開発者3人中2人、理事7人中5人、歴代Executive Director全3人を含む主要貢献者10人中9人が離脱し、RailsConfは終了、RubyConfも大幅縮小したという。</div>
+        <div class="summary">Arch Linuxは7月31日、AUR(Arch User Repository)でメンテナ不在のパッケージを引き取る「adoption」機能を無効化した。6月に発生した最初のマルウェア混入キャンペーンを受けて新規アカウント登録を一時停止したが、7月13日に一部制限付きで登録を再開したところ、放置されたパッケージを新規アカウントが引き取り、後続コミットで悪意あるコードを混入させる攻撃が再燃。仕込まれたペイロードはTorネットワーク経由でコマンドを受け取り、幅広いユーザーデータのアップロードを試みるリモートアクセス型トロイの木馬(RAT)だったという。</div>
         <div class="key-points">
           <ul>
-            <li>Ruby Centralは「セキュリティ向上」を掌握の理由に挙げたが、Arko氏は必要な専門人材をむしろ失ったと反論</li>
-            <li>Sidekiqは恒久的にスポンサーを撤退、Shopifyも9カ月離脱後に最近復帰。BundlerとRubyGemsの管理権はMatz氏へ移管された</li>
+            <li>6月の登録停止措置は不十分と判明し、7月31日時点でadoption機能自体を無効化する追加対応に踏み切った</li>
+            <li>対象パッケージの具体的な件数は公表されていないが、公式は「多数のパッケージ」への影響を認めている</li>
           </ul>
         </div>
         <div class="meta">
-          <span>andre.arko.net</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-07-30</span>
-          <span class="engagement">▲ 37</span>
+          <span>LWN.net</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-07-31</span>
+          <span class="engagement">▲ 29</span>
         </div>
       </div>
 
@@ -214,20 +212,19 @@
         <div class="card-header">
           <span class="tag tag-infra">Infra</span>
           <span class="content-type">📜 解説</span>
-          <h3><a href="https://manifest.build/blog/why-we-deprecated-our-llm-router/">Manifest、自社LLMルーターを廃止——7,000ユーザーの実運用で判明した「キャッシュの方がルーティングより効く」という誤算</a></h3>
+          <h3><a href="https://zenn.dev/aircloset/articles/6b47018589df0f">GitHub Hostedランナーから「Namespace」へ移行しCI費用を4分の1に削減、2〜4vCPU化で実行時間も59%短縮——2.5カ月で32件発生していたインストールハングも解消</a></h3>
         </div>
-        <div class="summary">スタートアップ向けバックエンド基盤Manifestは、3月に投入した自社LLMルーターを6月に廃止したと公表した。7,000ユーザーの実運用データから、プロンプト単体ではツール呼び出しやWeb検索など実行時に判明する複雑さを予測できずルーティング判断が不安定になること、単一モデルへの固定によるキャッシュ再利用(未キャッシュ比75〜90%安価)の方がコスト削減に効くことが分かったという。</div>
+        <div class="summary">aircloset開発チームは、GitHub HostedランナーからサードパーティCIサービス「Namespace」へ切り替えた結果を報告した。Namespaceの分あたり課金はGitHubの0.006〜0.012ドルに対し0.004ドルと安く、実行環境を2コアから4vCPUへ引き上げたことで実行時間も59%短縮したという。さらに、切り替え前の2.5カ月間で32件発生していたインストールハングなどの信頼性問題も解消した。</div>
         <div class="key-points">
           <ul>
-            <li>セッション途中のモデル切替は作業品質を低下させ、複雑さの誤検知が頻発——ルーティングの不確実性を管理するコストが節約額を上回った</li>
-            <li>結論として、動的ルーティングより特性を理解した上で単一モデルを意図的に選ぶ運用の方が大半のユースケースで優位と判断</li>
+            <li>Namespaceの分あたり課金はGitHubの0.006〜0.012ドルに対し0.004ドルで、CI費用全体は約4分の1まで低減</li>
+            <li>2コアから4vCPUへの構成変更で実行時間が59%短縮、切り替え前2.5カ月間で32件発生していたインストールハングも解消</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Manifest Blog</span>
+          <span>Zenn</span>
           <span>⏱ 3 min read</span>
           <span>2026-07-31</span>
-          <span class="engagement">▲ 65</span>
         </div>
       </div>
     </div>
@@ -238,41 +235,63 @@
       <div class="card">
         <div class="card-header">
           <span class="tag tag-dev">Dev</span>
-          <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://forest.watch.impress.co.jp/docs/news/2129478.html">日本仮想化技術がWSL構築ガイドを無料公開、Think ITの連載29回分を215ページに再構成しUbuntu 26.04 LTS対応</a></h3>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://dev.classmethod.jp/articles/playwright-e2e-test-architecture-patterns/">業務システムのPlaywright E2Eテスト、5つのパターンでアーキテクチャ設計——画面オブジェクト+Fluentチェーンとロケータ関数辞書でポップアップウィンドウの競合を解消</a></h3>
         </div>
-        <div class="summary">日本仮想化技術は7月29日、「WindowsユーザーのためのWSLで始めるLinux環境構築術」と題した無料PDFガイドを公開した。技術誌Think ITで連載していた記事29回分を、構成・内容・文章すべて見直した上で215ページに再編集したもので、基礎知識・開発環境構築・活用編の3部構成。Ubuntu 26.04 LTSに対応させ、ファイルサイズは34.9MB。</div>
+        <div class="summary">クラスメソッドのブログ記事は、複雑な画面遷移を伴うB2Bポータル向けにPlaywright E2Eテストを設計するための5パターンを紹介する。画面オブジェクトの各メソッドが`Promise&lt;ScreenObject&gt;`を返す「Fluentチェーン」で、テストコードが仕様書のように読めるようにする。メソッド名はUIラベルの言語に合わせて日本語にし、インフラ層のメソッドのみ英語に保つことで脳内翻訳を排除する。ロケータは`(page: Page) =&gt; locator`という関数として辞書化し、複数のページコンテキストに対応できるようにする。ポップアップウィンドウは「先にリスナーを登録してからクリックする」設計でレースコンディションを防ぎ、環境切り替えは文字列リテラルのUnion型で型安全にする。</div>
         <div class="key-points">
           <ul>
-            <li>連載時とは別に構成・内容・文章を全面的に見直し、体系的に学べる形へ再編集</li>
-            <li>Ubuntu 26.04 LTS向けに内容を更新、基礎知識編・開発環境構築編・WSL活用編の3部構成・215ページ</li>
+            <li>`waitForEvent("popup")`のロジックをファクトリメソッドに閉じ込め、リスナー登録とクリックの順序を保証してポップアップ捕捉失敗を防止</li>
+            <li>環境指定は`env: "stg-1" | "stg-2"`のようなUnion型で表現し、typoによる環境間違いをコンパイル時に検出</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Impress Watch</span>
-          <span>⏱ 2 min read</span>
-          <span>2026-07-29</span>
-          <span class="engagement">🔖 120</span>
+          <span>Classmethod</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07-31</span>
+          <span class="engagement">🔖 103</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
-          <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://zenn.dev/explaza/articles/20f7f41cff8428">Claude CodeとCodexの設定ファイルをCLIツール「agents-sync」で同期、symlinkと差分変換を使い分けフォーマット差を吸収</a></h3>
+          <span class="tag tag-frontend">Frontend</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/cybozu_frontend/articles/web-streams-api-guide">Web Streams API入門、ReadableStream・TransformStream・WritableStreamの3種でLLMの逐次応答表示や大容量JSONLインポートをメモリ効率よく処理</a></h3>
         </div>
-        <div class="summary">同一プロジェクトでClaude CodeとCodexを併用すると設定変更が片方にしか反映されない問題に対し、開発者はCLIツール「agents-sync」を公開した。AGENTS.mdなど同一フォーマットのファイルはsymlinkで一本化し、`.mcp.json`とCodexのTOML設定のように形式が異なるファイルは中間表現に変換して比較し、フィンガープリントで新しい方を判定して同期する。</div>
+        <div class="summary">cybozu frontendチームによるWeb Streams API解説記事は、データ入出力を逐次的に扱うための3つのストリームオブジェクト——データ源のReadableStream・変換のTransformStream・出力先のWritableStream——を、pipeThrough/pipeToで連結する方法を解説する。ダウンストリームの処理能力に応じて自動的に流量を調整する「バックプレッシャー」がメモリオーバーフローを防ぐ仕組みも説明。実例として、大容量JSONLデータをレスポンス全体をメモリに展開せず1行ずつパースしてDBレコードに変換する処理や、LLMの生成結果を1文字ずつ逐次表示する処理をLineSplitterStream・JsonParserStreamという自作TransformStreamで実装している。</div>
         <div class="key-points">
           <ul>
-            <li>SKILLSのみ・MCPのみなど同期対象を選択可能。ClaudeとOpenAIでプロンプト指針が異なるため全項目一律同期はしない設計</li>
-            <li>セットアップ後はfswatchとlaunchdでファイル変更を監視し自動同期、対象は`.claude/skills`・`.codex/rules`等</li>
+            <li>ReadableStreamの非同期イテレーションはChrome/Edge 124+・Firefox 110+・Safari 27(2026)で利用可能、`ReadableStream.from()`はFirefox 117+のみでChrome/Safariは未対応</li>
+            <li>Node.jsはv21でWeb Streams APIを安定化、v24で`toWeb`/`fromWeb`変換メソッドも安定版に</li>
           </ul>
         </div>
         <div class="meta">
           <span>Zenn</span>
           <span>⏱ 3 min read</span>
           <span>2026-07-31</span>
+          <span class="engagement">🔖 27</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://blog.jxck.io/entries/2026-07-31/cfp-over-conference.html">「カンファレンス生態系の変化とCFPの功罪」、書類選考だけで登壇者を選ぶ仕組みが会場での実演力を測れず「CFP巧者」を量産していると指摘</a></h3>
+        </div>
+        <div class="summary">著名なWeb技術者jxck氏のブログ記事は、コロナ禍以降のカンファレンスがコミュニティ主導から一発勝負の見世物興行的な形へ変質していると論じる。かつては草の根の勉強会が登壇者を育て、その集積としてカンファレンスが生まれていたが、現在はCFP(Call for Proposals)のみで独立に立ち上げられるカンファレンスが増え、質とコミュニティ形成の両方が損なわれているという。「書類だけで歌い手を選ぶのは自己紹介文だけで歌手を選ぶようなもの」と評し、実際の発表力は書類選考では分からないと指摘する。さらに、応募から登壇まで半年の期間があるため扱うツールが陳腐化したり登壇者の状況が変わったりして熱量を保てなくなるタイムラグの問題や、AI生成の応募書類が増えて「CFP選考自体の競技化」が進んでいる点も挙げる。</div>
+        <div class="key-points">
+          <ul>
+            <li>キュレーター主導の指名制を組み合わせ、草の根勉強会を登壇者育成のパイプラインとして維持することを解決策として提案</li>
+            <li>応募から登壇まで約半年のタイムラグが、扱う技術の陳腐化や登壇者のモチベーション維持を難しくしていると指摘</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>blog.jxck.io</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07-31</span>
+          <span class="engagement">🔖 104</span>
         </div>
       </div>
 
@@ -280,37 +299,17 @@
         <div class="card-header">
           <span class="tag tag-ai">AI</span>
           <span class="content-type">📜 解説</span>
-          <h3><a href="https://qiita.com/sumomoo/items/8bbe719ed4de1a36def9">AIの制約は演算力でなく電力と冷却——SpaceXの軌道上データセンター構想、翼幅70mの衛星が2027年後半に実験打ち上げ</a></h3>
+          <h3><a href="https://zenn.dev/dinii/articles/4aafd4c4fda4d2">月間PR数が600〜800件から3,100件超まで4倍増でも、AIレビューをローカル・スケジュール実行・CIの3経路に分散しサブスク課金へ「相乗り」させてコスト増を回避</a></h3>
         </div>
-        <div class="summary">Qiitaに投稿された記事は、AI開発の実質的なボトルネックが知能そのものではなく電力供給と排熱という物理インフラにあると論じ、SpaceXが進める軌道上データセンター構想をその解決策の一例として紹介する。構想中の衛星「AI1」は翼幅約70mとボーイング747-8を上回り、太陽光発電で平均120kW・最大150kWを発電、2027年後半の実験機打ち上げを計画する。長期的には高度500〜2,000kmの軌道に最大100万基を配置する構想だという。</div>
+        <div class="summary">diniiは、1年でPR数が月600〜800件から3,100件超まで4倍に増加した一方、AIレビューをCI上だけで実行し続けるとPR1件あたり2〜4ドルかかり月額が数千ドル規模に膨らみかねない状況に直面した。同社はAIレビューをやめる代わりに、実行環境を3つに分散させた。開発者手元での実行はエンジニア個人のClaude Maxサブスクリプションを利用し、夜間はスケジュールされたクラウドタスクとして各エンジニアのサブスクルーチン予算内で実行、CIは他の経路でレビュー済みでないPRの最終チェックとしてのみ従量課金で使う設計だ。推論ロジックをエージェント側に残しサブスク課金を維持するため、Cloud Run上にMCPサーバーを「コネクタ」として配置している。</div>
         <div class="key-points">
           <ul>
-            <li>地上のデータセンターは広大な土地・大量の電力と冷却水を確保できる都市圏に集中せざるを得ず、拡張余地には物理的な上限がある</li>
-            <li>Googleがすでに大規模な計算契約をSpaceXと締結したとされ、構想は技術実証段階から事業段階へ移行しつつあると記事は指摘</li>
+            <li>従量課金のCIレビューは1件あたり2〜4ドルかかる一方、主要な実行経路を固定費のサブスクリプションへ移すことでコスト増加を回避——現状のROIは0.73倍でまだ黒字化はしていない</li>
+            <li>ローカル実行利用率は約43%(目標70%)、自動承認率は全体28%・判定成功時84%</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Qiita</span>
-          <span>⏱ 3 min read</span>
-          <span>2026-07-31</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-security">Security</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://qiita.com/ntaka329/items/bfd8535d8f64a9ecd0fb">「パスキー対応できますか」と聞かれたら——RP ID変更で登録済みパスキーが全て無効化される等、後戻りできない設計判断を先に潰す</a></h3>
-        </div>
-        <div class="summary">パスキー導入を検討する組織向けの実装ガイド記事は、後から変更するとやり直しコストが高い3つの設計判断を先に固めるべきだと説く。対象が従業員か一般消費者か、ドメイン(RP ID)の選定、パスワード完全代替か第二要素かの3点で、特にRP IDは変更すると登録済みパスキーが全て無効化されるため一時コードのような後戻りの余地がない。</div>
-        <div class="key-points">
-          <ul>
-            <li>Keycloak 26.6.3はメールワンタイムコードやデバイス束縛パスキーの強制に独自開発が必要な一方、AWS CognitoはMFAとパスワードレスが排他的でKeycloakと運用モデルが異なる</li>
-            <li>NIST SP 800-63B-4準拠のリカバリには複数要素の確認が必要で、メール一時コード単体では不十分と明記</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Qiita</span>
+          <span>Zenn</span>
           <span>⏱ 4 min read</span>
           <span>2026-07-31</span>
         </div>
@@ -322,62 +321,64 @@
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-ai">AI</span>
+          <span class="tag tag-dev">Dev</span>
           <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://zenn.dev/test_myname/articles/gpt-5-6-blender-mcp-modeling">GPT-5.6とBlender MCPで3Dモデリングを自動化、6役割のマルチエージェント構成で4時間26分・19サイクルかけてアンティーク鍵を再現</a></h3>
+          <h3><a href="https://kaisel.dev/">Flutter向けルーター「Kaisel」公開、文字列パスもコード生成も使わずDart 3のsealedクラスでルートを値として表現——go_router・auto_routeからの移行ガイドも用意</a></h3>
         </div>
-        <div class="summary">個人開発者が、GPT-5.6とBlenderのModel Context Protocol連携で3Dモデルを自動生成する実験を公開した。単一の複雑な指示ではなく、Coordinator・Visual Analyst・Planner・Blender Modeler・Visual Reviewer・Geometry Inspectorの6役割に分けたマルチエージェント構成とし、9段階のモデリングworkflowをSkillとして定義。参照画像から装飾的な鍵の3Dモデルを生成させたところ、4時間26分・19回の修正評価サイクルを経て33オブジェクト・18,160三角形のモデルが完成した。</div>
+        <div class="summary">Kaiselは、Flutterアプリのナビゲーションを「値としてのルート」で表現する新しいルーティングライブラリだ。文字列パスの代わりにsealedなDartクラスでルートを定義するため、新しいルートを追加すると更新が必要な箇所をコンパイラが網羅的に検出できる。ナビゲーション履歴は単純な`List`として表現され、push・pop・set操作はリスト操作と同じ感覚で扱えるためウィジェットなしでテスト可能で、アプリ再起動をまたいで復元もできる。単一の`NavigatorObserver`登録でタブ切り替えやアダプティブレイアウトの変更を含む全ナビゲーションイベントを捕捉できる点も特徴。</div>
         <div class="key-points">
           <ul>
-            <li>最終モデルはFBX再インポート検証をPASSしたが、円形にすべき軸が四角形のまま残る不具合が発生——原因はシステム障害でなく検査基準の未指定と分析</li>
-            <li>YAML形式で各イテレーションの変更・判断を記録する構造化ログを併用し、エージェント間の意思決定を追跡可能にした</li>
+            <li>ビルドランナーや生成ファイルを一切必要とせず、ルートはすべて手書きのプレーンなDartクラス</li>
+            <li>go_router・auto_route・標準Navigatorからの移行ガイドを公式に用意し、型安全性とコンパイラのフィードバックを重視する設計思想を明示</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Zenn</span>
-          <span>⏱ 4 min read</span>
+          <span>kaisel.dev</span>
+          <span>⏱ 3 min read</span>
           <span>2026-07-31</span>
+          <span class="engagement">▲ 45</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-product">Product</span>
-          <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://zenn.dev/dxclab/articles/bdc3935d10706c">拡張機能なしでCopilot Chatの会話をMarkdown保存、ブックマークレット1行でARIAラベルから抽出しローカルへダウンロード</a></h3>
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://github.com/rails/solid_queue/releases/tag/v1.6.0">Rails製ジョブキュー「Solid Queue」1.6.0、スレッドプールに代わるファイバー実行モードを追加——LLM呼び出しなどI/Oバウンドな処理向けに1リアクタースレッドで大量ファイバーを実行</a></h3>
         </div>
-        <div class="summary">Microsoft 365のCopilot Chatは会話をエクスポートする標準機能を持たないため、著者はインストール不要のブックマークレットで解決する方法を公開した。「You said:」「Copilot said:」というARIAラベルとDOM構造から発言を抽出し、可変スクロール(画面外コンテンツが未レンダリングになる仕組み)に対応するため自動スクロールを挟んでから抽出、末尾の提案プロンプトを除去して`.md`ファイルとしてダウンロードする。</div>
+        <div class="summary">RailsのバックグラウンドジョブライブラリSolid Queueがv1.6.0をリリースした。目玉機能は、ワーカーごとに複数スレッドを立ち上げる従来方式に代わり、単一のリアクタースレッド上で多数のファイバーを実行する「ファイバー実行モード」。Asyncジェムを利用し、Railsのfiber isolationを有効化した上で`fibers: 100`のようにワーカー設定でファイバー数を指定する。リリースノートは「LLM呼び出しを含むI/Oバウンドなワークロード」で特に有効だとしており、スレッドよりも軽量なリソースオーバーヘッドで並行処理を実現できるとしている。</div>
         <div class="key-points">
           <ul>
-            <li>クラス名はUI更新で変わりやすいためARIAラベルとDOM構造を頼りに抽出し、拡張機能のインストールや管理者権限を不要にした</li>
-            <li>長い会話では自動スクロールが末尾を取りこぼす場合があるため、実行前に手動で会話終端までスクロールすることを推奨</li>
+            <li>設定例は`queues: "api*"`に対し`fibers: 100`・`polling_interval: 0.05`のように指定し、スレッドプールと切り替え可能</li>
+            <li>コア機能はコントリビューターの@crmneが実装、他に初回コントリビューター2名が参加。パフォーマンスベンチマークはリリースノートに未掲載</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Zenn</span>
+          <span>GitHub</span>
           <span>⏱ 2 min read</span>
           <span>2026-07-31</span>
-          <span class="engagement">🔖 60</span>
+          <span class="engagement">▲ 88</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://secretspec.dev/blog/where-env-went-wrong/">「.envはそもそも秘密情報管理用に設計されていない」、SecretSpecがTOML宣言とスコープ制御で3つの関心を分離</a></h3>
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://casualhacks.net/blog/2026-07-27-why-i-forked-rand.html">Rustの`rand`クレートを再設計したフォーク「urandom」公開、複数トレイトに分散したAPIを単一の`Random`構造体に統合——浮動小数点生成はXoshiroの高速パスで31%高速化</a></h3>
         </div>
-        <div class="summary">SecretSpecの解説記事は、環境変数はプロセスへ文字列を渡す仕組みに過ぎず、機密度やスコープといったメタデータを表現できないと指摘する。`.env.production`等の乱立、パーサーごとに異なる独自フォーマット、ignoreしてもバックアップやチャットログ経由で漏れるリスク、公式仕様の不在といった問題を列挙し、必要な秘密情報の宣言・保管場所・受け渡し方法の3つを分離するTOMLベースの仕様を提案する。</div>
+        <div class="summary">開発者は、Rustの標準的な乱数クレート`rand`が抱える発見しにくさへの不満から、フォーク版`urandom`を公開した。`rand`では`RngExt`・`SliceRandom`・`IndexedRandom`など複数のトレイトに機能が分散しており、どのトレイトがどのメソッドを提供するか事前に知らないとエディタの補完も役に立たなかったという。urandomでは全ての高階メソッドを単一の`Random`ラッパー構造体に集約し、任意のカスタム乱数生成器を許可しない「封印されたRNGトレイト」を採用。「エントロピー源を選べることの方が、新しいPRNGを実装できることより有用だ」という判断から、カスタマイズ性よりも発見しやすさとパフォーマンスを優先する設計とした。</div>
         <div class="key-points">
           <ul>
-            <li>`"false"`という文字列がコード上でtruthyに評価されるなど、型情報を持たない環境変数特有の落とし穴を指摘</li>
-            <li>プロバイダに依存しない保管場所定義と、サービスごとに必要な秘密情報だけを渡すスコープ制御を提案の柱に据える</li>
+            <li>`next_f32`・`next_f64`でXoshiroの高速な出力パスを活用し、フルワード長でない浮動小数点生成のスループットを31%向上</li>
+            <li>一様サンプリングはLemire 2018のunbiased multiply-and-reject方式に統一し、アーキテクチャをまたいだ出力の再現性もSemVer互換範囲で保証</li>
           </ul>
         </div>
         <div class="meta">
-          <span>secretspec.dev</span>
+          <span>casualhacks.net</span>
           <span>⏱ 4 min read</span>
-          <span>2026-07-31</span>
+          <span>2026-07-27</span>
+          <span class="engagement">▲ 64</span>
         </div>
       </div>
     </div>
@@ -386,46 +387,39 @@
       <div class="section-title">🔗 Quick Links</div>
 
       <div class="quick-link">
-        <span class="tag tag-ai">AI</span>
-        <a href="https://pc.watch.impress.co.jp/docs/news/2129506.html">OpenAIが新音声認識モデル「GPT-Live-Transcribe」「GPT-Transcribe」を投入、22言語ベンチマークで誤認識率を40.37%から19.27%まで半減</a>
-        <span class="quick-summary">— 発話前にキーワードや会話履歴を文脈として渡せる仕組みにより、専門用語・固有名詞・雑音下での認識精度も向上。</span>
-        <span class="meta">Impress Watch</span>
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://brandur.org/fragments/pgtestdb">pgtestdbはPostgreSQLのテンプレートDB機能でヒープ・インデックス・カタログファイルを8kBページ単位で複製し、マイグレーション再実行より高速にテスト用DBを用意</a>
+        <span class="quick-summary">— スキーマ分離方式と同程度の性能を保ちつつ、毎回のマイグレーション実行コストを回避する設計。</span>
+        <span class="meta">brandur.org</span>
       </div>
 
       <div class="quick-link">
-        <span class="tag tag-infra">Infra</span>
-        <a href="https://www.publickey1.jp/blog/26/awsawsaws.html">AWSが7月28日、アカウント登録・クレカ不要で実サービスを最大8時間無料利用できるオンラインワークショップ用サンドボックスを開始</a>
-        <span class="quick-summary">— 利用は週1回まで・毎週日曜にリセット、対応ワークショップは現在一部のみで今後拡大予定。</span>
-        <span class="meta">Publickey</span>
+        <span class="tag tag-frontend">Frontend</span>
+        <a href="https://developer.chrome.com/blog/email-verification-protocol-origin-trial">Chromeがメールプロバイダと直接連携してアドレス所有権を検証する「Email Verification Protocol」のオリジントライアルを開始、ワンタイムパスワード不要でGmailが対応済み</a>
+        <span class="quick-summary">— 外部サイトへの遷移が離脱率を高めるOTP・マジックリンク方式の課題を解消する狙い。</span>
+        <span class="meta">Chrome for Developers</span>
       </div>
 
       <div class="quick-link">
         <span class="tag tag-dev">Dev</span>
-        <a href="https://qiita.com/Syoitu/items/ff38655fed51a2920910">LLM Wikiツール「OpenWiki」はコード取り込み時に一度だけ解析してMarkdownへ要約保存する方式でRAGの反復検索コストを回避</a>
-        <span class="quick-summary">— Claude Sonnet 5利用時の初期セットアップ費用は約1.50ドル、ソース100件超では検索ツールとの併用が必要と著者は補足。</span>
+        <a href="https://zenn.dev/shunsuke_suzuki/articles/make-cli-ai-friendly">CLIをAIエージェント向けに設計するコツとして、`docs list`/`docs show`の組み込みドキュメントコマンド実装とヘルプ・エラーメッセージへのエージェント向け実行指示の明記を紹介</a>
+        <span class="quick-summary">— Web取得に頼らずCLI自身からバージョン整合したドキュメントを取得させる設計を提案。</span>
+        <span class="meta">Zenn</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://qiita.com/jqit_suwa/items/cea574550613de33a114">CLAUDE.mdは21セクションの網羅型か8行の簡潔型かを公式ドキュメントで検証、Anthropic自身が簡潔さを推奨しており「CRITICAL:」等の強調表現は現行モデルで逆効果と判明</a>
+        <span class="quick-summary">— 長いファイルは1指示あたりの相対的な重みが下がり、トークンコストも毎リクエスト増加すると指摘。</span>
         <span class="meta">Qiita</span>
       </div>
 
       <div class="quick-link">
         <span class="tag tag-ai">AI</span>
-        <a href="https://zenn.dev/nabewata/articles/8cef1bd4cbae3f">プロトタイプは見た目8割・実装1%という「見えない90%」ギャップを、PoCと本番要件を15項目超で比較する表で先回りして提示すべきと説くエンジニア論</a>
-        <span class="quick-summary">— テストカバレッジや監視ダッシュボードを定期共有し、画面に映らない進捗を可視化することも提案している。</span>
-        <span class="meta">Zenn</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-frontend">Frontend</span>
-        <a href="https://zenn.dev/pksha/articles/6cdf19e5fe8065">Rich Hickeyの「Simple Made Easy」をUI設計に適用、Excelのセル汎用性を例に「Easy」の積み重ねが概念の絡み合いを招くと指摘し6原則を提示</a>
-        <span class="quick-summary">— Notionブロックの多機能化やURLと状態の乖離など、5つの典型的な絡み合いパターンを具体例とともに整理。</span>
-        <span class="meta">Zenn</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-data">Data</span>
-        <a href="https://semyonsinchenko.github.io/ssinchenko/post/datafusion-graphs-cc-2/">Pregelパラダイムをjoin/aggregateで実装し、10億エッジ規模のPageRankを5GBメモリ・約30分、19.6億エッジのWCCを10GBメモリ・約40分でラップトップ処理</a>
-        <span class="quick-summary">— 分散処理系のSparkを使わず、バルクスキャン中心の設計とDataFusionのソートマージ結合でメモリ使用量を抑制。</span>
-        <span class="meta">Semyon Sinchenko Blog</span>
-        <span class="engagement">▲ 81</span>
+        <a href="https://alexiglad.github.io/blog/2026/explorative_modeling/">「Explorative Modeling」、学習時にK個の候補を生成し正解に最も近いものだけで損失計算することで生成モデルの多峰分布平均化問題を回避しサンプル効率を最大6.2倍改善</a>
+        <span class="quick-summary">— パラメータ数・データ量に続く新たな事前学習の軸として位置づけ、学習と推論のプロセスが完全に一致する利点も提示。</span>
+        <span class="meta">alexiglad.github.io</span>
+        <span class="engagement">▲ 61</span>
       </div>
     </div>
 
