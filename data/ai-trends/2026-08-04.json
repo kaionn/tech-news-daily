@@ -1,0 +1,80 @@
+{
+  "issue": "2026-08-04",
+  "generated_at": "2026-08-04T07:00:00+09:00",
+  "theme": {
+    "title": "ワークフロー型 vs エージェント型 — 複雑さを足す前に何を確かめるか",
+    "category": "workflow-vs-agent",
+    "lede": "「とりあえずエージェント化」が合言葉のようになる一方で、Shopify や Ramp は複雑化したエージェント基盤を単一のエージェントループへ戻す判断を公表している。Anthropic 自身も、workflow と agent を『処理経路を誰が決めるか』という一点で二分し、まず単純な方から試すよう明言済みだ。流行りの構成を輸入する前に、自分のタスクがどちらの条件に当てはまるかを確認する動きが今週の複数の一次情報に共通していた。",
+    "tldr": [
+      "Anthropic は「経路を誰が決めるか」で workflow と agent を定義し、単純な方から試すべきだと明言している。",
+      "Shopify Sidekick と Ramp Research は、複雑化する前にまず単一のエージェントループへ収束させた。",
+      "並列読み取りが効く調査タスクだけがオーケストレーター型多エージェントで得をする、という条件が絞られてきた。"
+    ],
+    "sections": [
+      {
+        "heading": "処理経路を「誰が決めるか」で分ける",
+        "body_html": "<p>Anthropic は自社の設計指針で、workflow を「LLM とツールが事前に定義されたコードパスに沿って呼び出される構成」、agent を「LLM が自らの処理とツール利用を動的に制御する構成」と定義している。前者には prompt chaining（逐次分解＋検証ゲート）、routing（分類して専門処理へ振り分け）、parallelization（並列実行と多数決）、orchestrator-workers（中心の LLM が動的に分解・委譲）、evaluator-optimizer（フィードバックによる反復改善）という 5 つの具体パターンが並ぶ。</p><p>この切り分けが実務で効くのは、判断基準が「流行っているかどうか」ではなく「手順を事前に書き切れるかどうか」という一点に絞られているからだ。書き切れるタスクに agent を充てても、コストと遅延を払って再現性を失うだけの結果になる。</p>",
+        "examples": [
+          {
+            "product": "Anthropic の設計指針（Building Effective Agents）",
+            "approach": "処理経路の決定権が『開発者』か『LLM自身』かで workflow と agent を二分し、5 つの具体パターンに整理",
+            "detail": "多くの企業が採用ガイドとして参照する一次資料で、その後の Shopify・Ramp などの実装判断の前提になっている",
+            "source_url": "https://www.anthropic.com/research/building-effective-agents"
+          }
+        ],
+        "takeaway": "設計に着手する前に『このタスクの手順は事前に書き切れるか』を自問し、書き切れるなら workflow、書き切れないなら agent、という一問で最初の分岐を決める。"
+      },
+      {
+        "heading": "単一エージェントループを選ぶ理由",
+        "body_html": "<p>Shopify の Sidekick チームはツール数が 20 から 50 以上に増える過程で、システムプロンプトへ指示を積み上げる方式が破綻したため、必要な指示をツールの結果と一緒にその場で渡す JIT（Just-In-Time）instructions へ切り替えた。同時にマルチエージェント化は見送り、単一のエージェントループ（入力→判断→実行→フィードバック）のまま複雑なマーチャント業務に対応させている。Ramp が社内向けに作った agentic データアナリスト「Ramp Research」も同様に単一エージェント構成で、<code>inspect column values, branch, and backtrack</code> という人間のアナリストに近い探索的なツール利用を LLM 自身に判断させている。</p><p>両社に共通するのは、複雑さは実証されてから足すという順序だ。マルチエージェント化やオーケストレーション層の追加は、単一エージェントで頭打ちになったことを確認してからの手当てであり、最初から選ぶものではない。</p>",
+        "examples": [
+          {
+            "product": "Shopify Sidekick",
+            "approach": "マルチエージェント化を見送り単一のエージェントループに統一、JIT instructions でシステムプロンプト肥大化を回避",
+            "detail": "ツール数が 20→50+ に増える過程で『指示過多』問題が起き、その解決策として一次情報で報告されている",
+            "source_url": "https://shopify.engineering/building-production-ready-agentic-systems"
+          },
+          {
+            "product": "Ramp Research（社内向け agentic データアナリスト）",
+            "approach": "単一エージェントに列の中身を調べる・分岐する・後戻りするツールを与え、人間アナリストの探索手順を LLM に代行させる",
+            "detail": "オーケストレーション層を足さず、単一エージェントの推論能力向上で対応した具体例",
+            "source_url": "https://engineering.ramp.com/post/meet-ramp-research"
+          }
+        ],
+        "takeaway": "ツールが増えて『指示過多』が起きたら、まずマルチエージェント化ではなく JIT instructions などコンテキスト設計の見直しを疑う。"
+      },
+      {
+        "heading": "オーケストレーター型・ハイブリッド型が効く場面",
+        "body_html": "<p>一方で Anthropic 自身の Research 機能は、Lead Researcher が調査計画を立て、3〜5 体のサブエージェントを並列に立てて Web 検索を分担させるオーケストレーター・ワーカー構成を採っており、複雑な調査クエリで所要時間を最大 90% 短縮したと報告している。これは『読み取りが並列化できる、探索的で開放的なタスク』という条件が揃った場合の話であり、前節の単一エージェント推奨と矛盾しない。</p><p>顧客対応のような書き込みを伴う業務では、むしろ workflow と agent を組み合わせるほうが安定する。Intercom の Fin はメール対応において RAG ベースのエージェントが自律的に応答を組み立てつつ、ワークフロー側のトリガーで起動し、対応しきれない場合は人間のサポート担当へエスカレーションする設計を取っている。</p>",
+        "examples": [
+          {
+            "product": "Anthropic Research（Claude の調査機能）",
+            "approach": "Lead Researcher が計画を立て 3〜5 体のサブエージェントに Web 検索を並列委譲するオーケストレーター・ワーカー構成",
+            "detail": "読み取り中心で並列化しやすい調査タスクに限定してマルチエージェント化が効いた一次資料の実例",
+            "source_url": "https://www.anthropic.com/engineering/multi-agent-research-system"
+          },
+          {
+            "product": "Intercom Fin（メール対応）",
+            "approach": "ワークフローのトリガーでエージェントを起動し、RAG で自律応答しつつ対応不能時は人間へエスカレーション",
+            "detail": "書き込み（顧客への回答）を伴う業務で全自律化を避け、ワークフローと人間を安全弁として残した例",
+            "source_url": "https://www.intercom.com/blog/fin-over-email-how-we-built/"
+          }
+        ],
+        "takeaway": "並列化できる読み取り中心タスクはオーケストレーター型で攻め、顧客対応など書き込みを伴うタスクは workflow のトリガー＋agent＋人間エスカレーションのハイブリッドで守る、とタスクの性質で使い分ける。"
+      }
+    ]
+  },
+  "editorial": "「workflow か agent か」は思想対立ではなく、タスクの手順を事前に書き切れるか・書き込みを伴うかという 2 つの条件でほぼ機械的に決まる話になってきた。マルチエージェントも同様で、Anthropic の調査機能のように読み取りが並列化できる場合にだけ効き、Shopify や Ramp が扱う書き込みを伴う業務では単一エージェントか workflow とのハイブリッドに落ち着く。流行りの構成を輸入するのではなく、自分のタスクがどちらの条件に当てはまるかを先に確認したい。",
+  "quick_picks": [
+    {
+      "title": "Ramp が自前のバックグラウンドコーディングエージェント「Inspect」を作った理由",
+      "summary": "既存の汎用エージェントではなく自社基盤に特化した検証ループ付きエージェントを内製した経緯を解説している。『エージェントに裁量を持たせつつ人間中心のワークフローに組み込む』という判断は、本号の workflow×agent ハイブリッド設計と同じ発想。",
+      "url": "https://engineering.ramp.com/post/why-we-built-our-background-agent"
+    },
+    {
+      "title": "Cognition、マルチエージェントに対する立場を修正",
+      "summary": "コーディングエージェント Devin の開発元が『書き込みは単一スレッドに保ち、追加のエージェントは判断材料だけを提供する』という限定的な形でのマルチエージェント活用に転じたと報告している。単一エージェント推奨とオーケストレーター型許容の境界線を考える上で参考になる一次情報。",
+      "url": "https://cognition.com/blog/multi-agents-working"
+    }
+  ]
+}
