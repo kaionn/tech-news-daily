@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-08-05</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="../feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-08-05 (Wed)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+      <nav class="site-nav">
+        <a href="../" class="active">📰 日刊ダイジェスト</a>
+        <a href="../trends.html">🔌 週次プラグイントレンド</a>
+        <a href="../ai-trends.html">🧠 AI プロダクト動向</a>
+        <a href="./">🗂 アーカイブ</a>
+      </nav>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 23 articles</span>
+      <span>🏷 6 categories</span>
+      <span>📡 16 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item">
+        <span class="number-value">434件</span>
+        <span class="number-label">npm供給チェーン攻撃Shai-Huludで二次感染したパッケージ数</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">137件/日</span>
+        <span class="number-label">2025年に新規公開されたCVEの1日あたり平均件数</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">最大68%</span>
+        <span class="number-label">JetBrains ContextによるAIエージェントのターン数削減率</span>
+      </div>
+    </div>
+
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
+
+      <div class="card featured deep-dive">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://www.aikido.dev/blog/keyv-and-friends-compromised-in-npm-supply-chain-attack">DEEP DIVE: npmの人気パッケージ「keyv」ほか11個が乗っ取られ「Shai-Hulud」ワームが拡散——434パッケージ・月間20億インストール超に感染、GitHub Actions署名済みの偽リリースで検知回避</a></h3>
+        </div>
+        <div class="summary">npmエコシステムでは過去にもワーム型のサプライチェーン攻撃「Shai-Hulud」が確認されているが、8月4日、その新しい波が発生した。攻撃者はkeyvなど関連11パッケージを保守する著名メンテナのGitHubアカウントを乗っ取り、main branchへ直接コードを push した上で新バージョンを公開した。GitHub Actionsの正規署名が付いていたため、汚染版は正規リリースと見分けがつかなかった。マルウェアは2段構成で、preinstallフックで自動起動するドロッパーsetup.mjsがBunランタイムを取得して本体を実行し、728KBの難読化された資格情報窃取スクリプトMath_Symbol.jsが約200個のglobパターンでnpmトークン・GitHubトークン・AWS認証情報・Kubernetesサービスアカウントトークン・HashiCorp Vault認証情報・Stripe/SlackのAPIキー・SSH鍵・Docker/Terraformの設定ファイルを走査する。盗まれたnpmトークンで感染メンテナの全パッケージへ自動的に汚染版が再公開され、盗まれたGitHub Appトークンでリポジトリ設定に悪意あるフックがコミットされることで、VS CodeやClaudeでプロジェクトを開いた開発者にも感染が広がった。窃取データはRSA暗号化後、「Shai-Hulud: Here We Go Again」と題した約1,300個のGitHubリポジトリへアップロードされ、フォールバックのC2はEthereumスマートコントラクトでインフラをローテーションする。8月4日13:37 CEST時点で、直接汚染された11パッケージに加え434パッケージ・1,381バージョンが二次感染し、影響は月間20億インストールを超えると確認された。</div>
+        <div class="editorial">🧠 GitHub Actionsの署名という「正規リリースの証」自体が攻撃者に奪われた点は見過ごせない。署名の真正性はメンテナのアカウント管理に依存しており、多要素認証やトークンのスコープ制限だけで防ぎきれる保証はない。ただし今回のワームは既知のIOC(setup.mjsのハッシュ値やnpm-cache.comドメイン)が早期に共有されており、検知ツール側の対応速度次第では被害拡大は今後数日で頭打ちになる可能性もある。</div>
+        <div class="key-points">
+          <ul>
+            <li>keyv 6.0.0(月間604M DL)、flat-cache 6.1.24(580M)、file-entry-cache 11.1.6(571M)など11パッケージが直接汚染、ワーム伝播で434パッケージ・1,381バージョン・月間20億インストール超に拡大</li>
+            <li>728KBの難読化された資格情報窃取スクリプトMath_Symbol.jsが約200個のglobパターンでnpmトークン・GitHubトークン・AWS認証情報などを走査、preinstallフックでnpm install時に自動起動</li>
+            <li>窃取データはRSA暗号化後「Shai-Hulud: Here We Go Again」と題した約1,300個のGitHubリポジトリへ流出、フォールバックC2はEthereumスマートコントラクトでインフラをローテーション</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 keyv等を直接・間接に依存するプロジェクトは影響バージョンを洗い出し、npmトークン・GitHubトークン・AWS認証情報を総入れ替えすべき。CI上でpreinstallフックの実行を許可している場合は特に対応を急ぐ必要がある。</div>
+        <div class="meta">
+          <span>aikido.dev</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-08-04</span>
+          <span class="engagement">▲ 218</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-product">Product</span>
+          <span class="content-type">💰 ビジネス</span>
+          <h3><a href="https://techcrunch.com/2026/08/04/apple-says-more-ex-employees-may-have-taken-confidential-data-to-openai/">AppleがOpenAI提訴を仮処分申請に格上げ、元社員11人の関与を追加主張——「未発表製品のスクショ」証拠に開発差し止めを要求</a></h3>
+        </div>
+        <div class="summary">Appleは7月に提訴した企業秘密侵害訴訟を、8月4日に仮処分申請へと格上げした。当初名指しされたのは元シニアシステムエンジニアのChang Liu氏と元Chief Hardware OfficerのTang Yew Tan氏の2名だが、追加調査で新たに元社員11人が証人または関与者として浮上した。Appleは、面接前に「未発表製品に関する機密文書のスクリーンショットを撮影していた」事例を証拠として提出し、Apple技術を転用したAIデバイス開発の差し止めを求めている。OpenAIは「Appleの企業秘密を保有も欲してもいない」と反論した。</div>
+        <div class="key-points">
+          <ul>
+            <li>当初提訴時の被告は元シニアシステムエンジニアのChang Liu氏と元Chief Hardware OfficerのTang Yew Tan氏の2名、8月4日の追加申請で元社員11人が新たに証人・関与者として浮上</li>
+            <li>Appleは「未発表製品の機密文書をOpenAI面接前にスクリーンショット撮影していた」事例を証拠に提出、Apple技術を転用したAIデバイス開発の差し止めを仮処分で要求</li>
+            <li>OpenAIは「Appleの企業秘密を保有も欲してもいない」と反論、複数の元Apple社員がApple支給端末の返却を申し出たこともApple側は指摘</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 元社員のスクリーンショット等の私的複製が訴訟の主要証拠になっており、機密情報を扱う企業は退職時のデバイス回収・アクセスログ監査の厳格化を迫られる局面だ。</div>
+        <div class="meta">
+          <span>TechCrunch</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-08-04</span>
+          <span class="engagement">▲ 290</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://mistral.ai/news/shieldstral/">Mistral、3Bパラメータのオープンウェイトモデレーションモデル「Shieldstral」公開——実行時に自然言語でポリシーを渡せ、7倍大きいモデルに匹敵</a></h3>
+        </div>
+        <div class="summary">Mistralは、Apache 2.0ライセンスのオープンウェイトマルチモーダル安全性分類器「Shieldstral」を公開した。固定カテゴリのガードモデルと異なり、実行時に自然言語のポリシーをそのまま渡せ、再学習なしにテキストと画像の安全性評価を統一的に扱える。モデレーションを2択の質問として扱い、1回のフォワードパスで較正済みの安全スコアを出力する。16GBのGPU1枚で動作し、テキスト安全性・拒否検出・ポリシー適応性・マルチモーダル安全性の4指標で、最大7倍大きいガードモデルと同等以上の性能を確認したという。NVIDIAらとのOpen Secure AI Allianceの一環としてHugging Faceで公開されている。</div>
+        <div class="key-points">
+          <ul>
+            <li>3Bパラメータ・Apache 2.0のオープンウェイトモデルで16GBのGPU1枚で動作、最大7倍大きいガードモデルと同等以上の性能をテキスト安全性・拒否検出・ポリシー適応性・マルチモーダル安全性の4指標で確認</li>
+            <li>固定カテゴリではなく実行時に自然言語のポリシーを渡せる設計で、再学習なしに新しいモデレーション基準へ適応可能</li>
+            <li>NVIDIAらとのOpen Secure AI Allianceの一環としてHugging Faceで公開、コンテンツの安全判定を1回のフォワードパスで完結</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 自前でモデレーション基準を頻繁に変える必要があるサービスでは、カテゴリ固定のガードモデルを再学習する運用から、ポリシーをプロンプトとして渡すだけで済むShieldstralへの置き換えを検討する価値がある。</div>
+        <div class="meta">
+          <span>Mistral AI</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-08-04</span>
+          <span class="engagement">▲ 216</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://blog.rust-lang.org/2026/08/04/enabling-polonius-alpha-on-nighty/">次世代借用チェッカー「Polonius」のアルファ版がnightlyで有効化、`-Zpolonius=next`で試行可能——年内の安定化に向け性能退行を洗い出す段階へ</a></h3>
+        </div>
+        <div class="summary">Rustチームは次世代借用チェッカーPoloniusのアルファ版をnightlyで有効化した。現行のNLLチェッカーが対応しないフロー依存のライフタイム外側関係(outlives)の借用検査に対応し、`-Zpolonius=next`フラグで試せる。安定化を妨げる既知の課題は残っておらず年内の安定化を目指すが、今回のnightly公開は性能退行や健全性バグ、診断メッセージの改善点を洗い出すのが主目的だ。</div>
+        <div class="key-points">
+          <ul>
+            <li>`-Zpolonius=next`フラグでnightly上から試行可能、現行NLL借用チェッカーが扱えないフロー依存のライフタイム外側関係の検査に対応</li>
+            <li>チーム内で安定化を妨げる既知の課題は残っておらず年内の安定化を予定、性能退行や健全性バグの洗い出しが今回のnightly公開の主目的</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Rust Blog</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-08-04</span>
+          <span class="engagement">▲ 21</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://github.com/FFmpeg/FFmpeg/blob/n9.0/RELEASE_NOTES">FFmpeg 9.0「Lei」リリース、8.1から約4カ月ぶりのメジャーアップデート</a></h3>
+        </div>
+        <div class="summary">FFmpegはコードネーム「Lei」を冠したメジャーバージョン9.0を、前バージョン8.1から約4カ月の開発期間を経てリリースした。詳細な変更点はリポジトリルートのChangelogとgit.ffmpeg.org上の完全なコミット履歴で公開されている。質問はIRCチャンネル#ffmpeg(irc.libera.chat)またはメーリングリストで受け付けている。</div>
+        <div class="key-points">
+          <ul>
+            <li>コードネーム「Lei」、前バージョン8.1のリリースから約4カ月での公開</li>
+            <li>詳細な変更内容はリポジトリルートのChangelogとgit.ffmpeg.org上の完全なコミット履歴で確認できる</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-08-04</span>
+          <span class="engagement">▲ 25</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://blog.jetbrains.com/idea/2026/08/intellij-idea-goes-lsp/">JetBrains、IntelliJ IDEAのJava/Kotlin解析エンジンをLSP経由でVS Code等に提供開始——プレビュー中は無料、正式版はUltimateサブスクが必要に</a></h3>
+        </div>
+        <div class="summary">JetBrainsはIntelliJ IDEAのJava・Kotlin解析機能をLanguage Server Protocol経由で提供するVS Code拡張を公開した。Maven・Gradle・Bazelビルドに対応し、大規模プロジェクトやモノレポでも動作する。現在プレビュー中で無料利用可能、Visual Studio MarketplaceとOpen VSXで配布され、2週間おきに新ビルドを出す。プレビュー終了後はIntelliJ IDEA Ultimateのサブスクリプションが必要になる。</div>
+        <div class="key-points">
+          <ul>
+            <li>Maven・Gradle・Bazelの3ビルドシステムに対応、VS CodeやCursorなどLSP互換エディタからIntelliJのJava/Kotlin解析機能を利用可能に</li>
+            <li>プレビュー期間は無料で2週間ごとに新ビルド公開、正式リリース後はIntelliJ IDEA Ultimateサブスクリプションが必要、AIエージェント連携ではトークン消費量削減の内部トライアル結果も報告</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>JetBrains Blog</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-08-04</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://textslashplain.com/2026/08/04/security-is-hard-yall/">「正規サービスとフィッシングが見分けられない」——Cloudflare Walletsの新ドメインcloudflare.payに遭遇した研究者が警鐘</a></h3>
+        </div>
+        <div class="summary">セキュリティ研究者は、Cloudflareが発表したAIエージェント向け決済機能「Cloudflare Wallets」の入り口が、信頼済みのcloudflare.comではなくcloudflare.payという新ドメインだった点、権限要求の画面が既知の同意フィッシングと酷似していた点を挙げ、正規サービスと攻撃を見分けるのがもはや困難だと指摘する。「不審なリクエストを報告」リンクの欠如など、正規サイト側のセキュリティUI設計の不備も批判した。</div>
+        <div class="key-points">
+          <ul>
+            <li>信頼されたcloudflare.comではなく新ドメインcloudflare.payが入り口になっており、既知の同意フィッシング攻撃の見た目的特徴と一致していたと指摘</li>
+            <li>正規のCloudflareの画面には「不審なリクエストを報告」リンクが存在せず、自社の新機能をパーミッションシステム側が認識していないなど設計上の不備も確認</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>textslashplain.com</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-08-04</span>
+          <span class="engagement">▲ 180</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/jetbrainsaijetbrains_context.html">JetBrains、AIエージェントのコンテキスト取得を効率化する「JetBrains Context」発表——ターン数最大68%減、レイテンシ最大59%減、実行コスト最大48%減</a></h3>
+        </div>
+        <div class="summary">JetBrainsは、AIエージェントがコードリポジトリから効率的にコンテキストを取得できる新サービス「JetBrains Context」を発表した。リポジトリのインデックス構築とセマンティック検索を提供し、マルチリポジトリにも対応する。少ないトークンでコンテキストを得られるため、より正確なコード生成につながるという。JetBrains AI for Teams and Organizationsユーザー向けにアーリーアクセス中。</div>
+        <div class="key-points">
+          <ul>
+            <li>自社計測でAIエージェントのターン数を最大68%、レイテンシを最大59%、実行コストを最大48%削減したと発表</li>
+            <li>マルチリポジトリのセマンティック検索に対応、JetBrains AI for Teams and Organizationsユーザー向けにアーリーアクセス提供中(2026年7月31日時点)</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-07-31</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/codatum/articles/80b99faba75704">AIエージェント向けツールをMCPではなくCLIで作った理由——「エージェントは間違える、コンテキストは有限」を前提にした3原則</a></h3>
+        </div>
+        <div class="summary">Codatumはエージェント向けツールをMCPサーバーとして実装しようとしたが、構造化ファイルの読み込み・パース・リクエスト組み立てをすべてコンテキスト上でエージェントにやらせる非効率さに直面し、ファイルを直接引数として渡せるCLIへ転換した。コンテキスト節約・自己修正設計・ワークフロー単純化の3原則に基づき、validate/render/formatコマンドなどを実装している。</div>
+        <div class="key-points">
+          <ul>
+            <li>JSON/YAMLより記号の少ないマークダウン形式を採用し、ドキュメントは必要なタイミングでエージェント自身に取得させる設計でコンテキストを節約</li>
+            <li>`validate`で構造エラーを具体的にフィードバックし`format`で機械的修復可能な部分は自動修正、複数ステップを1コマンドに統合しワークフローを単純化</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-08-03</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-frontend">Frontend</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/cybozu_frontend/articles/web_standards_trends_202607">2026年7月のWeb標準まとめ、`&lt;input type=checkbox switch&gt;`のトグルスイッチ化やCSSミックス、`Promise.allKeyed`がStage 3に</a></h3>
+        </div>
+        <div class="summary">サイボウズフロントエンドチームによる月次まとめ。HTMLでは`switch`属性を付けたチェックボックスが自動的に`role="switch"`のトグルスイッチ表示になる仕様が進行中。CSSではSASSのような再利用可能な宣言をネイティブ実装する「CSSミックス」、余分な行送りを除去する`text-box-trim`がGeckoで実装予定。JavaScriptではキー付きオブジェクトを並列処理する`Promise.allKeyed`がStage 3に到達した。</div>
+        <div class="key-points">
+          <ul>
+            <li>`&lt;input type="checkbox" switch&gt;`でトグルスイッチの見た目と`role="switch"`が自動付与される仕様が進行中、宣言的フラグメントで外部HTMLの取り込みも可能に</li>
+            <li>`Promise.allKeyed`がStage 3に到達、`Math.fma()`はStage 2、Firefox Betaは2週間サイクルへ短縮予定でLighthouseに「Baseline Features audit」が追加</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-08-03</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-product">Product</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/1passwordaiclaudecursorchatgptaii.html">1Password、Claude・ChatGPT・CursorのAI支出をダッシュボードでリアルタイム管理する新機能</a></h3>
+        </div>
+        <div class="summary">1Passwordは、SaaS Manager上で複数のAIサービスへの支出をリアルタイムに把握できる新機能を発表した。対応するのはAnthropic Claude・OpenAI ChatGPT・Anysphere Cursorの3サービス。チーム・ユーザー単位の支出監視、予算とアラートの事前設定に加え、日々の消費ペースから残高がなくなる日を推定する機能も備える。今後対応サービスを追加予定。</div>
+        <div class="key-points">
+          <ul>
+            <li>現時点の対応はAnthropic Claude・OpenAI ChatGPT・Anysphere Cursorの3サービス、チーム・ユーザー単位でリアルタイムに支出を可視化</li>
+            <li>日々の消費量から残高切れの予測日を算出する機能を搭載、予算超過前にアラートを出す設定も可能</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-08-04</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://qiita.com/udowanllc/items/024e91ccb6393159c798">毎日137件公開されるCVE、放置は「怠慢」ではなく物量的に処理不能な構造——AIエージェントで到達可能性判定を自動化する提案</a></h3>
+        </div>
+        <div class="summary">著者は2025年に49,972件のCVEが公開され、1日あたり約137件(2024年比23%増)のペースで新規脆弱性が公表されていると指摘する。NVDですら処理が追いつかない現状で、大半のアラートは「検知は正しいが実装に影響しない」到達可能性の問題であり、これまで人手でしか判定できなかったと分析する。Claude Codeなどのエージェントで到達可能性を自動判定すれば、対応対象を数件/週まで絞り込めると提案する。</div>
+        <div class="key-points">
+          <ul>
+            <li>2025年のCVE公開数は49,972件、1日あたり約137件で2024年の40,704件から約23%増加、NVDの処理能力を超えるペースが常態化</li>
+            <li>AIエージェントによる到達可能性の自動判定で、平時の監視対象を137件/日から数件/週まで圧縮できると提案</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-08-04</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/rustwebtopcoattokio.html">Rust製フルスタックWebフレームワーク「Topcoat」登場、Tokio上でSSR・ルーティング・コンポーネントライブラリを統合</a></h3>
+        </div>
+        <div class="summary">Tokio非同期ランタイム上で動くRust製フルスタックWebフレームワーク「Topcoat」が公開された。サーバサイドレンダリングを基盤に、ファイルベースのルーティング、Tailwindベースのコンポーネントライブラリ、Fontsource・Iconifyとの統合、ホットリロード対応の開発サーバを備える。開発チームは今後バリデーション機能やRust用ORM「Toasty」との統合を計画している。</div>
+        <div class="key-points">
+          <ul>
+            <li>Tailwindベースのコンポーネントライブラリとファイルベースルーティングを標準搭載、動的なHTML部分はサーバ連携用JavaScriptを自動生成</li>
+            <li>今後の計画としてバリデーション機能・メール機能・Rust用ORM「Toasty」との緊密な統合を予定</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-08-03</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://www.warp.dev/blog/introducing-the-warp-agent-cli-coding-agent">Warp、ターミナルエージェントを単体CLIとして独立公開——vim・sqliteなどフルスクリーンアプリの操作にも対応、月18ドルから</a></h3>
+        </div>
+        <div class="summary">WarpはWarp Terminalに組み込まれていたマルチモデルコーディングエージェントを、Ghostty・iTerm2・VS Code・Windows Terminalなど任意のターミナルで使える単体CLI「Warp Agent CLI」として公開した。vimやsqlite、Python REPLなどフルスクリーンの対話型アプリケーションもエージェント経由で操作でき、タスクの複雑さに応じてモデルを自動選択するコスト最適化ルーティングを備える。</div>
+        <div class="key-points">
+          <ul>
+            <li>自然言語プロンプトとシェルコマンドを自動判別し、vim・sqlite・Python REPLなどフルスクリーンの対話型アプリもエージェント経由で操作可能</li>
+            <li>月額18ドル(20ドル分の推論クレジット付き)から利用可能、タスク複雑度に応じてモデルを自動ルーティングするコスト最適化機能を搭載</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Warp Blog</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-08-04</span>
+          <span class="engagement">▲ 84</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/aiwindows_performance_analyzer_mcpwpa_mcp.html">マイクロソフト、Windows Performance AnalyzerをAIで操作する「WPA MCP」をプレビュー公開——自然言語でトレース分析しボトルネックを特定</a></h3>
+        </div>
+        <div class="summary">マイクロソフトはGitHub Copilot CLIとWindows Performance Analyzerを統合する「WPA MCP」をアーリープレビュー公開した。「このトレースを分析して、なぜマシンが遅かったのか教えて」といった自然言語の指示でAIがトレース分析を代行する。ハングアップ、応答遅延、CPU枯渇、ディスクボトルネック、メモリ負荷、ページング、ドライバ問題などを優先的に検出し、システム全体と個別アプリの問題を区別したレポートを作成する。</div>
+        <div class="key-points">
+          <ul>
+            <li>自然言語プロンプトでWindows Performance Analyzerのトレース分析を代行、ハングアップ・入力応答遅延・CPU枯渇・ディスクボトルネックなど複数の問題パターンを優先的に検出</li>
+            <li>システム全体の問題と個別アプリの問題を区別してレポート化、アーリープレビュー段階として2026年8月5日に公開</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-08-05</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
+
+      <div class="quick-link">
+        <span class="tag tag-frontend">Frontend</span>
+        <a href="https://tech.legalscape.co.jp/entry/2026/08/04/111358">「なぜp要素の中にdivを入れられないのか」——コンテンツモデルの制約とタグ省略パース規則の2つの理由</a>
+        <span class="quick-summary">— phrasing content制約に加え、div開始時にパーサーが自動でpを閉じるタグ省略規則が原因。</span>
+        <span class="meta">Legalscape Tech Blog</span>
+        <span class="engagement">🔖 101</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://github.com/ryanzhou/deepseek-v4-flash-mi300x">DeepSeek V4 FlashをAMD MI300X単体で動作させる実装が公開</a>
+        <span class="quick-summary">— NVIDIA以外のアクセラレータでの大規模MoE推論の実現例として注目を集めた。</span>
+        <span class="meta">GitHub</span>
+        <span class="engagement">▲ 344</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-oss">OSS</span>
+        <a href="https://pandoc.org/twenty-years-of-pandoc.html">ドキュメント変換ツールPandoc誕生20周年、入力51形式・出力76形式・3,876通りの変換に対応</a>
+        <span class="quick-summary">— 2006年8月3日に3,000行のHaskellコードとして誕生、現在は約85,684行・貢献者600人超・解決済みIssue7,346件に成長。</span>
+        <span class="meta">pandoc.org</span>
+        <span class="engagement">▲ 103</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://zenn.dev/osakayakyu/articles/e6aa9835c04d73">Claude CodeのSkillsは「手順書」だった、開発セッションからZenn記事の下書きを作る/articleコマンドを自作</a>
+        <span class="quick-summary">— SKILL.mdに自然言語で手順を書く仕組みを利用し、下書き生成までを自動化、公開判断は人間に残す設計。</span>
+        <span class="meta">Zenn</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://hisham.hm/2026/08/04/the-lua-community-needs-to-learn-to-move-on/">「Luaコミュニティはもう先に進むべき」——LuaRocksに2012年版Lua 2.0.8のバグ報告が届く現状にメンテナが苦言</a>
+        <span class="quick-summary">— Mike Pall氏による旧LuaJITタグ削除を機に、言語側と同様にライブラリ側も旧バージョンをEOL宣言すべきと提案。</span>
+        <span class="meta">hisham.hm</span>
+        <span class="engagement">▲ 50</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://qiita.com/shibuya-ys/items/2c9e2cc58c7744c6d7b1">Figma MCP×Claude CodeでSwiftUI実装、色・余白・角丸などの視覚スタイルはほぼ数値通り再現も画面遷移ロジックは自前実装が必要</a>
+        <span class="quick-summary">— font-weight 600を.semiboldに変換するなど忠実な反面、セーフエリア処理などAIが勝手に補完するケースもあると報告。</span>
+        <span class="meta">Qiita</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://blog.cloudflare.com/wallets/">Cloudflare、AIエージェント向け決済機能「Cloudflare Wallets」発表——x402プロトコルでHTTPリクエストに支払いを添付</a>
+        <span class="quick-summary">— 人間用のAccount Walletsとエージェント用のVirtual Walletsを分離し、支出上限やアローリストで安全に自律購入させる設計。</span>
+        <span class="meta">Cloudflare Blog</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://piyolog.hatenadiary.jp/entry/2026/08/04/183114">公衆WiFiキャプティブポータルを悪用する攻撃「CaptiveCrunch」、ゲートウェイ乗っ取りでMFA保護アカウントも侵害——米国複数都市・インド・サウジアラビアで確認</a>
+        <span class="quick-summary">— DNS応答偽装で偽Microsoft 365ログイン画面へ誘導し、デバイスコード認証フローの悪用でMFAを回避、RAT「CornFlake」等を配布。</span>
+        <span class="meta">piyolog</span>
+        <span class="engagement">🔖 46</span>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="./" class="archive-link">🗂 過去のダイジェスト</a>
+    </footer>
+  </div>
+</body>
+</html>
