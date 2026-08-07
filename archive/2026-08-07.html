@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-08-07</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="../feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-08-07 (Fri)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+      <nav class="site-nav">
+        <a href="../" class="active">📰 日刊ダイジェスト</a>
+        <a href="../trends.html">🔌 週次プラグイントレンド</a>
+        <a href="../ai-trends.html">🧠 AI プロダクト動向</a>
+        <a href="./">🗂 アーカイブ</a>
+      </nav>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 22 articles</span>
+      <span>🏷 8 categories</span>
+      <span>📡 17 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item">
+        <span class="number-value">56</span>
+        <span class="number-label">Qwen3.8 MaxのArtificial Analysis知能指数スコア</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">4,500台</span>
+        <span class="number-label">TeamCity CVE開示直後にネット公開されていた脆弱サーバー数</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">181,874件</span>
+        <span class="number-label">tl;dvから露出した会議記録の件数</span>
+      </div>
+    </div>
+
+    <div class="weekly-keywords">
+      <div class="section-title">📊 今週のキーワード</div>
+      <div class="keyword-chips">
+        <span class="keyword-chip">AIエージェントの侵入・データ窃取</span>
+        <span class="keyword-chip">CVE実悪用ラッシュ</span>
+        <span class="keyword-chip">オープンウェイトモデル競争</span>
+      </div>
+      <div class="keyword-summary">今週はLangflow・TeamCity・VMware vCenter・Cisco Secure FMCなど開発ツールやCI/CD基盤の脆弱性が相次いで実悪用され、CISAのKEVカタログ追加が連日発生した。同時にAtlassian Rovoのプロンプトインジェクションやtl;dvのテナント分離不備など、AIエージェント・SaaS側からのデータ露出も表面化している。モデル面ではQwen3.8 MaxやKimi K3など中国発のオープンウェイト系モデルがベンチマークで欧米勢に迫り、Google DeepMindの体制刷新と合わせて開発競争の構図が変わりつつある。</div>
+    </div>
+
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
+
+      <div class="card featured deep-dive">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://venturebeat.com/technology/qwen3-8-max-arrives-with-a-bold-claim-it-outperforms-gpt-5-6-sol-max-and-fable-5-on-agentic-computer-use">DEEP DIVE: アリババのQwen3.8 Maxが総合知能指数でGoogle・Meta・xAIを上回る——2.4兆パラメータMoEをAlibaba Cloudで提供開始、オープンウェイトは来週公開</a></h3>
+        </div>
+        <div class="summary">アリババのQwenチームは8月3日、同社最大のモデル「Qwen3.8 Max」をAlibaba CloudのModel StudioとQwenWork経由で一般提供した。7月20日のプレビュー公開時点では2.4兆パラメータという規模だけが明かされ、ベンチマーク結果は非公開のままだったが、今回の正式リリースで具体的な性能指標が出そろった。Maxクラスはまず商用APIとして提供され、オープンウェイト版は「翌週公開」と明言された点が従来のリリースと異なる。パラメータ構成は2.4兆のMixture-of-Expertsで、GDPval-AA・Terminal-Bench・SciCode・Humanity's Last Examなど9種のベンチマークを合成したArtificial Analysis Intelligence Indexで56点を記録した。この点数はAnthropicとOpenAIの最上位モデル、およびMoonshot AIのKimi K3を除く全モデルを上回り、GoogleやMeta、xAIの主力モデルより高い。コンピュータ操作の自律実行を測るOSWorld-Verifiedでは86.1点を記録し、GPT-5.6 Sol Maxの83.2点、Fable 5の85.0点を上回った。さらにOpenAI発の研究再現ベンチマークPaperBenchでは全モデル中最高スコアを記録し、ソフトウェアエンジニアリング・研究再現・マルチモーダル推論・ビジュアルWeb開発など複数領域で高い競争力を持つと報告されている。</div>
+        <div class="editorial">🧠 ベンチマークの選定と比較対象はAlibaba自身によるもので、第三者による独立検証はまだない。OSWorld-VerifiedとPaperBenchの数値は実測だが、それが実務のエージェントタスク全般に一般化するかは未検証だ。ただしAgentic Indexで欧米勢の序列を動かしたこと自体は事実で、来週予定のオープンウェイト公開後は自前ホスティングでの追試が始まり、数値の再現性が試されることになる。</div>
+        <div class="key-points">
+          <ul>
+            <li>Artificial Analysis Intelligence Indexで56点を記録し、Anthropic・OpenAI・Moonshot AI「Kimi K3」を除く全モデル(Google・Meta・xAIの主力モデル含む)を上回る</li>
+            <li>OSWorld-Verifiedで86.1点、GPT-5.6 Sol Maxの83.2点・Fable 5の85.0点を上回りコンピュータ操作の自律実行で優位、PaperBenchでは全モデル中最高スコア</li>
+            <li>2.4兆パラメータのMoE構成、8月3日にAlibaba CloudのModel StudioとQwenWorkで提供開始、オープンウェイト版は翌週公開予定</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 API経由で今すぐ触れる最上位クラスのモデルとして、GPT-5.6やClaude以外の選択肢を評価したい開発者は、オープンウェイト公開を待たずAlibaba CloudのAPIでOSWorldやPaperBench相当のエージェントタスクを自前で試せる。</div>
+        <div class="meta">
+          <span>VentureBeat</span>
+          <span>⏱ 7 min read</span>
+          <span>2026-08-05</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">💰 ビジネス</span>
+          <h3><a href="https://www.theregister.com/systems/2026/08/06/amd-acquires-ai-chip-startup-taalas-to-boost-inference-performance-by-etching-models-into-silicon/5284344">AMD、AIモデルをシリコンに直接焼き付けるチップ新興Taalasを買収——推論の電力・レイテンシ効率を底上げ</a></h3>
+        </div>
+        <div class="summary">AMDは8月6日、AIチップ新興企業Taalasの買収を発表した。Taalasは学習済みモデルの重みを汎用GPU上で動かすのではなく、モデルの構造そのものを回路として物理的に焼き付ける専用シリコンを開発してきた企業で、汎用性を犠牲にする代わりに特定モデルの推論を電力・レイテンシの両面で効率化できると位置づけられている。AMDはInstinctシリーズのGPUに加え、モデル固有の推論アクセラレータという新しい製品カテゴリを取り込むことで、汎用GPUでは対応しきれない超低レイテンシ・低消費電力の推論需要を狙う。買収額は公表されていない。</div>
+        <div class="key-points">
+          <ul>
+            <li>Taalasはモデルの重み・構造を専用回路として物理的に焼き付ける手法で、汎用GPU向けの重み読み込み・メモリ帯域律速を回避する設計</li>
+            <li>AMDのInstinct GPUラインに、モデル固有の推論アクセラレータという新しい製品カテゴリを追加する狙い、買収額は非公表</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>The Register</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-08-06</span>
+          <span class="engagement">▲ 327</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://thehackernews.com/2026/08/cisa-flags-teamcity-cve-2026-63077-rce.html">JetBrains TeamCityの認証不要RCE(CVSS 9.8)が実悪用中——CISAがKEV追加、連邦機関の対応期限は8月8日</a></h3>
+        </div>
+        <div class="summary">JetBrainsが7月27日に修正版を公開していたTeamCity On-Premisesの脆弱性CVE-2026-63077(CVSS 9.8、エージェントポーリングの安全でないデシリアライズが原因)について、CISAは8月、実際の攻撃で悪用が確認されたとしてKnown Exploited Vulnerabilitiesカタログに追加した。認証情報を持たない攻撃者がTeamCityサーバーにネットワーク到達できるだけで、サーバープロセスの権限のままOSコマンドを実行できる欠陥で、修正版が出てから2週間強で実悪用に至った形だ。Censysの調査では脆弱性開示直後の時点でインターネットから到達可能なTeamCity関連サーバーが約4,500台確認されている。連邦機関に対する対応期限は8月8日。</div>
+        <div class="key-points">
+          <ul>
+            <li>CVE-2026-63077(CVSS 9.8)は7月27日修正公開、原因はエージェントポーリングにおける安全でないデシリアライズで認証不要のままOSコマンドを実行可能</li>
+            <li>修正から2週間強でCISAが実悪用を確認しKEV追加、Censysは開示直後の時点で約4,500台のTeamCity関連サーバーがネットから到達可能な状態にあったと報告</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>The Hacker News</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-08-06</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://blog.cloudflare.com/webmcp/">Cloudflare、既存Webサイトに後付けでMCPインターフェースを追加する「WebMCP」プレビュー公開——Chrome 146の`document.modelContext`実験実装に対応</a></h3>
+        </div>
+        <div class="summary">CloudflareはWebMCPの開発者プレビューを公開した。Chrome 146で実験的に実装されているブラウザ標準`document.modelContext`に対応し、サイト側のコード変更なしにブラウザ上のAIエージェントへツールを公開できるようにする。HTMLRewriterでHTMLレスポンスに1行のスクリプトタグを注入し、エッジで動くWorkerが配信するブリッジスクリプトが`.registerTool()`でツールを登録する仕組みで、ダッシュボードのトグル1つで有効化できる。</div>
+        <div class="key-points">
+          <ul>
+            <li>Chrome 146の実験的ブラウザ標準`document.modelContext`に対応、HTMLRewriterでスクリプトタグを注入するだけでサイト本体の改修は不要</li>
+            <li>プレビューにはC2PAメタデータを画像全体のダウンロードなしに検査する「Content Credentials」と、既存MCPサーバーをブラウザ経由でプロキシする「Site MCP Server」の2ツールパックを同梱</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Cloudflare Blog</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-08-05</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://matklad.github.io/2026/08/06/neat-io-threaded.html">Zigの`Io.Threaded`実装、シグナルで安全にブロッキングsyscallをキャンセルする設計をmatklad氏が解説</a></h3>
+        </div>
+        <div class="summary">Rust-Analyzerの作者として知られるmatklad氏が、ZigのI/O抽象化実装`std.Io.Threaded`を読み解いた。POSIX環境ではブロッキングsyscall待機中のスレッドに対し、キャンセルする側が共有メモリのフラグを立てながらシグナルを送り続け、`EINTR`を受けた側がフラグを見てリトライか巻き戻しかを判断する2段構えのプロトコルで、シグナル単体につきまとう競合状態を回避する。Windows実装は`NtCancelSynchronousIoFile`をそのまま使い、より直接的だとしている。</div>
+        <div class="key-points">
+          <ul>
+            <li>POSIXではキャンセル側が共有メモリのフラグ設定とシグナル送信を繰り返し、`EINTR`受信側がフラグを見てリトライ/巻き戻しを判断する2段階プロトコルで競合状態を回避</li>
+            <li>`io.async`(並行実行するが失敗しない)と`io.concurrent`(必ず並行実行し失敗しうる)を型シグネチャ上で区別、キャンセルは例外ではなく`error.Canceled`として`try`/`defer`に統合</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>matklad's blog</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-08-06</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://scalex.dev/blog/ai-agent-permissions-stats/">AIエージェントのコマンド承認、4万セッションの実験で人間は脅威の3件に1件を見逃す——`npm run analyze`は64.7%が承認</a></h3>
+        </div>
+        <div class="summary">AIエージェントが提案するコマンドを人間が承認する状況を4万セッション・40.9万件の承認判断でシミュレートしたゲーム実験で、人間の脅威検知精度は66.3%(3件に1件を見逃す計算)にとどまった。認証情報へのアクセスなど権限逸脱型の脅威は35.0%を見逃す一方、`rm -rf /`のような明白な破壊コマンドの見逃し率は11.7%と低かった。見慣れたスクリプト名に偽装された`npm run analyze`は64.7%が承認されてしまい、単独では最も見逃されやすいコマンドだった。</div>
+        <div class="key-points">
+          <ul>
+            <li>認証情報アクセスなどのスコープ逸脱系脅威は見逃し率35.0%、データ持ち出し/コード実行系は33.4%と、破壊的コマンド(11.7%)より隠れた脅威の方が見抜かれにくい</li>
+            <li>`npm run analyze`のように見慣れたスクリプト名に偽装した攻撃は52.5%が承認され、それ以外の情報持ち出し攻撃(28.4%)の約2倍の成功率になった</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>scalex.dev</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-08-06</span>
+          <span class="engagement">▲ 248</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://blog.ploeh.dk/2026/07/23/does-code-quality-still-matter/">LLMが自律的にコードを書く時代、「コード品質」という概念はまだ意味を持つか——Mark Seemann氏が投げかける問い</a></h3>
+        </div>
+        <div class="summary">.NET界隈で知られるMark Seemann氏が、LLMが人間の監督なしにソフトウェアを書き切る未来において「コード品質」という概念が意味を持ち続けるかを考察した記事。現在のコード品質基準(メソッド長・命名規則など)は人間の認知的制約に由来するものであり、LLMがいずれ人間可読性を前提としない独自の最適化言語に到達すれば、その基準自体が無意味になりうると指摘する。一方で構造の良し悪しがLLMの機能追加・バグ修正の速度とコストを左右する点は変わらないとし、LLMは既存の文献から学べない分、自律的に試行錯誤して独自のベストプラクティスを見つけていく必要があると論じている。</div>
+        <div class="key-points">
+          <ul>
+            <li>現行のコード品質基準(メソッド長・命名規則など)は人間の認知的制約に由来し、LLMが人間可読性を前提としない独自言語に到達すれば無意味化しうると指摘</li>
+            <li>構造の良し悪しがLLMによる機能追加・バグ修正の速度とコストを左右する点は不変、LLMは既存文献から学べず自力で試行錯誤してベストプラクティスを見つける必要があると論じる</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>blog.ploeh.dk</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-07-23</span>
+          <span class="engagement">🔖 18</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://bobdahacker.com/blog/tldv-hack">会議録画サービスtl;dv、テナント分離の欠如で181,874件の会議データが誰でも閲覧可能に——マレーシア教育省の会議に無断参加できる状態だった</a></h3>
+        </div>
+        <div class="summary">200万人超が利用する会議録画・文字起こしサービスtl;dvのFirestoreデータベースにテナント分離が実装されておらず、認証済みユーザーであれば誰でも全アカウントの会議データを横断的にクエリできる状態だったと報告された。研究者はこの欠陥を使い、マレーシア教育省が主催するGoogle Meetの会議に無断で参加できることを実証した。脆弱性は2026年1月28日に報告されたが、tl;dvのCTOから応答がないまま7月時点でも未修正だった。</div>
+        <div class="key-points">
+          <ul>
+            <li>Firestoreの会議コレクションにテナント分離がなく、認証済みユーザーなら誰でも全アカウント横断でクエリ可能——84,312ユーザー・181,874件の会議記録・35,003メールドメインが露出、23カ国の政府関係会議を含む</li>
+            <li>2026年1月28日の報告から7月まで6カ月間CTOの応答がないまま未修正、ピーク時は約1,000件のライブ通話が同時に露出していた</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>bobdahacker.com</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-08-06</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/ait/articles/google-design-md-measured">DESIGN.mdを置くとどこまで「いい感じ」になるのか、74件を測って確かめた——CIがgreenでも実装が設計意図から乖離する落とし穴</a></h3>
+        </div>
+        <div class="summary">Airbnb・Apple・Figma・Nike・Spotify・TeslaなどのDESIGN.mdファイル74件を集めた「awesome-design-md」を対象に、実際の効果を計測スクリプトで検証した記事。74件中64件は色・タイポグラフィなどのデザイン値を含み、実装と公式サンプルの間でドキュメント量に5.6倍の差があった。DESIGN.mdが実際に検証できるのはWCAGアクセシビリティ準拠とマシン可読なデザイントークンの生成のみで、UI生成やコードの設計準拠の検証はできないと結論づけている。</div>
+        <div class="key-points">
+          <ul>
+            <li>74件中64件がデザイン値を含み実装と公式サンプルでドキュメント量に5.6倍差、51/64件が「レスポンシブ挙動」などDESIGN.mdの仕様にない項目を独自に含んでいた</li>
+            <li>数値やリンク参照がエクスポート時にエラーなく消失する「サイレントなデータ損失」を含む7種の失敗モードを特定、CIがgreenでも実装が設計意図から完全に乖離しうる</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-08-05</span>
+          <span class="engagement">🔖 142</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/estie/articles/882e14dcad0d46">Rustのテストを実行するとき裏側で何が起きているか——`tests/`配下のファイル分割がCIを遅くする仕組み</a></h3>
+        </div>
+        <div class="summary">Rustの`#[test]`属性は実行可能なコードを生成するのではなく、テスト記述子と実行クロージャを静的データとして生成するコンパイラ組み込みマクロであり、コンパイラがそれらを収集して`main`関数を合成すると解説する記事。`src/lib.rs`は通常のライブラリとテストバイナリの2回コンパイルされ、`tests/`配下のファイルはそれぞれ独立したバイナリになる。バイナリ内のテストはCPUコア数を上限に並列実行されるが、バイナリ間の実行は完全に直列であるため、`tests/`にファイルを増やすほどリンク回数が増えCI時間を押し上げる。</div>
+        <div class="key-points">
+          <ul>
+            <li>`#[test]`はテスト記述子と実行クロージャを静的データとして生成するコンパイラ組み込みマクロで、コンパイラが収集して`main`を合成する仕組み</li>
+            <li>バイナリ内は並列実行されるがバイナリ間は完全に直列実行、`tests/`配下のファイル分割やワークスペースメンバー追加は共にリンク回数を増やしCIを遅くする</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-08-06</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-frontend">Frontend</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/cybozu_frontend/articles/llm-wiki-for-design-systems">kintoneデザインシステムチーム、散らばった議論をLLM-Wikiに集約——GitHub・Slack・Figmaを横断してAIが引用付きで要約</a></h3>
+        </div>
+        <div class="summary">サイボウズのkintoneデザインシステム(kDS)チームは、GitHub・Slack・Confluence・kintone・Figma・Zoom録画に散らばったデザインの意思決定議論を集約する「LLM-Wiki」を導入した。LLMが読むだけで書き換えない`raw/`と、LLMが生成・更新する人間可読な`wiki/`を分離し、`AGENTS.md`でデータソースや引用ルールを定義する。`query`(質問して有用な回答をwikiに記録)・`ingest`(資料を取り込み既存ページに接続)・`lint`(矛盾や引用不足を検出)の3操作を軸に運用する。</div>
+        <div class="key-points">
+          <ul>
+            <li>`raw/`(LLMが読むだけで書き換えない原資料)と`wiki/`(LLMが生成・更新する人間可読ドキュメント)を分離し、`AGENTS.md`でアクセス可能なデータソースを許可リスト化</li>
+            <li>情報の重みはマージ済みPR&gt;ガイドライン&gt;議論&gt;チャットの順に優先、Git blame連携で実装決定の経緯を遡れる双方向リンクを備える</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-08-05</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-data">Data</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://qiita.com/yama3133/items/d0fc5f0ef530cf65008c">DynamoDBがネイティブベクトル検索に対応、GA当日に検証——単一桁ミリ秒のレイテンシで別建てのベクトルDB同期パイプラインが不要に</a></h3>
+        </div>
+        <div class="summary">Amazon DynamoDBは2026年8月5日、ネイティブなベクトル検索機能を一般提供した。`CreateTable`に`VectorIndexes`パラメータを追加するだけで、別途ベクトルデータベースへ同期するパイプラインなしに単一桁ミリ秒のレイテンシで検索できる。著者はBedrockの`amazon.titan-embed-text-v2:0`(1024次元)を使ったイベントマッチングアプリで検証し、COSINE距離のスコアはパーセンテージではなく0〜2の範囲(0が完全一致、2が正反対)で返る点や、`similarity% = (1 - score / 2) * 100`という変換式が必要な点を確認した。</div>
+        <div class="key-points">
+          <ul>
+            <li>`VectorIndexes`パラメータでIndexName・Dimensions・DistanceFunction(COSINE/EUCLIDEAN/DOT_PRODUCT)などを指定するだけで単一桁ミリ秒のベクトル検索を実現、boto3は1.43.64以降・AWS SDK for JavaScriptは3.1103.0以降で`SearchVectors`APIに対応</li>
+            <li>COSINEスコアは0〜2の範囲で返るためパーセンテージ変換に`(1 - score / 2) * 100`の式が必要、著者の検証では再現率99%以上を確認</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-08-06</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://github.com/jj-vcs/jj/releases/tag/v0.44.0">分散バージョン管理jj(Jujutsu) v0.44.0リリース——タグのfetch/push対応が正式stableに、ブックマークと同様track/untrack可能</a></h3>
+        </div>
+        <div class="summary">GitのDAGモデルを踏襲する次世代バージョン管理システムjj(Jujutsu)がv0.44.0をリリースした。目玉はタグのfetch/pushサポートの正式安定化で、`&lt;name&gt;@&lt;remote&gt;`形式のリモート参照としてタグを自動追跡し、ブックマークと同じ感覚でtrack/untrackできるようになった。この変更に伴いGitの`tagOpt`設定は参照されなくなり、タグ取得を止めたい場合は`remotes.&lt;name&gt;.fetch-tags = '~*'`を明示的に設定する必要がある。</div>
+        <div class="key-points">
+          <ul>
+            <li>タグのfetch/push対応が正式stable化、`jj git push --all`はブックマークに加え全タグも対象に含むよう変更、`--fetch-tags`は廃止され`--tag=PATTERN`に統合</li>
+            <li>`jj file search`はマッチした全行をファイルパス付きで表示するよう変更(旧挙動は`--name-only`で再現)、`jj absorb`にハンクを選んで吸収するインタラクティブモード`-i`を追加</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-08-06</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-product">Product</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.com/CopilotKit/channels-sdk">CopilotKit、AIエージェントをSlack・Teams・Discord・Telegramに接続する「Channels SDK」を公開——AG-UI互換エージェントならそのまま利用可能</a></h3>
+        </div>
+        <div class="summary">CopilotKitはMITライセンスで「Channels SDK」を公開した。開発者は自前インフラでエージェントとビジネスロジックを実行し、CopilotKit Intelligenceがプラットフォーム接続とイベント配信を担い、Channelsリスナーがメッセージを処理してSlackのBlock KitやTeamsのAdaptive Cardsなどプラットフォームネイティブな見た目でレスポンスを描画する3層構成。CopilotKit自身のエージェントに限らずLangGraph・CrewAI・Mastra・Pydantic AI・Google ADKなどAG-UI互換のエージェントであれば実装変更なしに接続できる。</div>
+        <div class="key-points">
+          <ul>
+            <li>対応プラットフォームはSlack・Microsoft Teams・Discord・Telegramの4種、npmパッケージ`@copilotkit/channels`としてMITライセンスで提供</li>
+            <li>LangGraph・CrewAI・Mastra・Pydantic AI・Google ADKなどAG-UI互換エージェントをそのまま接続可能、ツール実行・ストリーミング応答・人間による承認ゲートに対応</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-08-06</span>
+          <span class="engagement">▲ 84</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.com/firecrawl/anydoc">Firecrawl、Word/PowerPoint/PDFなど10形式超をMarkdownに変換するRust製ライブラリ「anydoc」を公開——1文書あたり中央値5ミリ秒未満</a></h3>
+        </div>
+        <div class="summary">AIスクレイピング企業Firecrawlは、Word・PowerPoint・Excel・OpenDocument・RTF・EPUB・CSV・PDFなど10種類超のドキュメント形式をクリーンなMarkdownに変換するRust製ライブラリ「anydoc」をオープンソース公開した。外部のMLモデルやサービスに依存せず、1文書あたりの変換時間の中央値は5ミリ秒未満。テキストベースのPDFは内製の`pdf-inspector`でOCRサービスなしにローカル変換し、どの形式も同一のドキュメントモデルを経由することで見出し・入れ子リスト・結合セル・脚注の出力を形式によらず揃えている。</div>
+        <div class="key-points">
+          <ul>
+            <li>外部MLモデル・サービス不要でRust単体実装、1文書あたりの変換時間は中央値5ミリ秒未満、Node.js/Pythonバインディングを同梱</li>
+            <li>テキストベースPDFは内製`pdf-inspector`でOCRサービスなしにローカル変換、全形式が同一ドキュメントモデルを経由し出力の一貫性を担保</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-08-06</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
+
+      <div class="quick-link">
+        <span class="tag tag-oss">OSS</span>
+        <a href="https://epage.github.io/blog/2026/08/cargo-vision/">Rustのビルドツールcargoのメンテナが描く今後のビジョン</a>
+        <span class="quick-summary">— 依存関係の把握・ビルドキャッシュ効率化・gitのplumbing/porcelainに倣ったプログラム可能なインターフェース化を優先課題に挙げる。</span>
+        <span class="meta">epage's blog</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://www.troyhunt.com/welcoming-the-nepalese-government-to-have-i-been-pwned/">Have I Been Pwnedの政府向け無償サービスにネパールが47カ国目として参加</a>
+        <span class="quick-summary">— 国家サイバーセキュリティセンター(NCSC)が政府ドメインの漏えい監視にアクセスできるようになる。</span>
+        <span class="meta">Troy Hunt</span>
+        <span class="engagement">▲ 72</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://herdr.dev/blog/herdr-is-joining-y-combinator/">個人開発のCLIエージェント常駐ランタイムHerdrがYC F26バッチに採択</a>
+        <span class="quick-summary">— 25,000スター・34万ダウンロードを獲得、コアランタイムはApache 2.0のオープンソースのまま維持する方針。</span>
+        <span class="meta">Herdr Blog</span>
+        <span class="engagement">▲ 136</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://www.publickey1.jp/blog/26/superlogical.html">HashiCorp共同創業者Mitchell Hashimoto氏、あらゆる作業向けの「マルチプレクサ」を掲げる新会社Superlogicalを設立</a>
+        <span class="quick-summary">— ローカル・リモート・サンドボックス・クラウドに分散する開発環境を束ね、ターミナルを人間・AIエージェント・ツール・インフラをつなぐハブに据える構想。</span>
+        <span class="meta">Publickey</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://github.com/V4bel/Zapscape">KVM/x86のシャドーMMU実装にゲストからホストへ脱出可能なuse-after-free「Zapscape」(CVE-2026-64561)</a>
+        <span class="quick-summary">— ゲストVM内のroot権限があればホストカーネルの権限昇格またはクラッシュに到達可能、ネスト仮想化を提供するマルチテナントクラウドが特に影響を受ける。</span>
+        <span class="meta">GitHub</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-infra">Infra</span>
+        <a href="https://www.githubstatus.com/incidents/qcvjkzcs7j74">GitHub ActionsとPagesが8月6日15:22 UTCから約9時間にわたり劣化</a>
+        <span class="quick-summary">— ジョブ成功率は一時30〜40%まで低下し、Webhook配信もピーク時は15%程度しか処理できなかった。</span>
+        <span class="meta">GitHub Status</span>
+        <span class="engagement">▲ 311</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://bruceediger.com/posts/offensive-machine/">個人VPSにフェイクWordPressログインやSSHタールピットなど攻撃的な防御策を実装</a>
+        <span class="quick-summary">— AIクローラーを200万ページ超の「無限の偽サイト」へ誘導するなど、自動化攻撃を経済的に割に合わなくする狙い。</span>
+        <span class="meta">bruceediger.com</span>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="./" class="archive-link">🗂 過去のダイジェスト</a>
+    </footer>
+  </div>
+</body>
+</html>
