@@ -1,0 +1,85 @@
+{
+  "issue": "2026-08-08",
+  "generated_at": "2026-08-08T07:00:00+09:00",
+  "theme": {
+    "title": "エージェントのコード実行基盤 — サンドボックスは「重い専用マシン」と「軽いアイソレート」に分かれ始めた",
+    "category": "sandbox",
+    "lede": "コード生成・実行までを自律的にこなすエージェントが増え、生成コードをどこで安全に走らせるかが2026年前半のインフラ論点になった。Cloudflare は container 基盤の永続サンドボックスと、V8 isolate 基盤の軽量実行の両方を GA させ、Vercel は Firecracker microVM 方式を GA、OpenAI は Agents SDK に7社のホスト型プロバイダを差し替え可能な形で組み込んだ。単一の「正解アーキテクチャ」に収束したのではなく、ワークロードの性質ごとに分離方式を使い分ける設計判断がこの数ヶ月で急速に明文化された。",
+    "tldr": [
+      "Cloudflare Sandboxes と Vercel Sandbox はどちらも「持続する専用マシン」型サンドボックスをGA化し、スナップショット復元でコールドブート30秒を2秒程度まで縮めた。",
+      "Cloudflare は同時にV8 isolate方式の Dynamic Worker Loader も提供し、コンテナ/VMより約100倍速い起動を、任意言語ではなくJSのグルーコード実行に限定して実現した。",
+      "OpenAI Agents SDK は自前のサンドボックス実装を持たず、Cloudflare・Vercel・E2B・Modal など7社のプロバイダをプラグイン差し替えできる抽象化レイヤーとして自らを位置づけた。"
+    ],
+    "sections": [
+      {
+        "heading": "「持続する専用マシン」型サンドボックスがGAになった",
+        "body_html": "<p>この方式は、エージェント1つに対してコンテナないしmicroVMを1台割り当て、シェル・ファイルシステム・バックグラウンドプロセスを持つ「本物のコンピュータ」として使わせる。起動のたびにゼロから作り直すのではなく、アイドル時はスリープし、要求が来たら再開する。ディスク状態・依存関係・OS設定をまるごと保存する<code>スナップショット</code>機能が中核で、これによりゼロから作り直すコストを毎回払わずに済む。</p><p>各社がこの形に収束した理由は、エージェントのタスクが単発の実行では終わらないからだ。コード生成→実行→エラー確認→修正、という往復や、人間のレビューを挟んで数日後に再開するような運用が現実に発生する。使い捨て前提のサンドボックスだと、その都度リポジトリのcloneや依存関係のインストールをやり直すことになり、これが待ち時間として蓄積する。持続性を前提にした設計に切り替えることで、この待ち時間をアーキテクチャレベルで消している。</p>",
+        "examples": [
+          {
+            "product": "Cloudflare Sandboxes（GA）",
+            "approach": "Cloudflare Containers基盤の永続サンドボックス。スナップショットでディスク状態を丸ごと保存・復元する",
+            "detail": "axiosをcloneしてnpm installするコールドブートは30秒かかるが、スナップショットからの復元は2秒で完了すると公式が公表している",
+            "source_url": "https://blog.cloudflare.com/sandbox-ga/"
+          },
+          {
+            "product": "Vercel Sandbox（GA、Roo Code / Blackbox AI が採用）",
+            "approach": "Firecracker microVMで1エージェント1VMを払い出し、Active CPU時間課金でアイドル時は課金しない",
+            "detail": "Roo Codeはスナップショットを使い、Slack/Linear/GitHub横断タスクを月曜に開始し木曜にステークホルダーがレビューする形で再開できるようにしたと公式ブログで説明している",
+            "source_url": "https://vercel.com/blog/vercel-sandbox-is-now-generally-available"
+          }
+        ],
+        "takeaway": "マルチステップかつ人間の介在を挟むタスクを扱うなら、実行のたびに使い捨てるサンドボックスより、一時停止・再開を前提にしたスナップショット型を最初から選んだ方が、状態管理を自前で書かずに済む。"
+      },
+      {
+        "heading": "軽量タスクにはコンテナ/VMより速いアイソレート方式という選択肢",
+        "body_html": "<p>もう一つの系統が、V8 isolate（Cloudflare Workersを2016年から支えてきた分離機構）でエージェント生成コードを動かす方式だ。コンテナが数百ミリ秒〜数秒かかるのに対し、isolateは数ミリ秒で起動し、メモリ効率も10〜100倍高い。ただし任意のOS環境ではなく、JavaScript/TypeScriptで書かれた短命なコードの実行に用途が絞られる。</p><p>この方式が伸びているのは、エージェントが実行するコードの性質が必ずしも「フル開発環境」を必要としないケースが多いためだ。複数のAPI呼び出しを連結するだけのグルーコードであれば、コンテナ起動の待ち時間もOSの重装備も不要で、むしろ足かせになる。Cloudflareはこれを\"Code Mode\"と呼び、APIをツール呼び出しではなくコードとして実行させることでトークン消費を81%削減した事例を公表しており、分離方式の選択がコストにも直結することを示している。</p>",
+        "examples": [
+          {
+            "product": "Cloudflare Dynamic Worker Loader（Code Mode）",
+            "approach": "V8 isolateでエージェント生成コードを数ミリ秒起動し、Cap'n Web RPCブリッジでホスト側APIを呼び出す",
+            "detail": "typicalなコンテナ比で約100倍速い起動、10〜100倍のメモリ効率を公式が主張。APIをコードとして実行するCode Modeでトークン消費を81%削減した事例も公表している",
+            "source_url": "https://blog.cloudflare.com/dynamic-workers/"
+          }
+        ],
+        "takeaway": "『エージェントに何を実行させるか』で分離方式を使い分ける発想が要る。任意言語のフル開発環境が要るならコンテナ/VM、API呼び出しをつなぐ短命なグルーコードだけならisolate方式の方が起動コストを払わずに済む。"
+      },
+      {
+        "heading": "サンドボックスは自前実装ではなく差し替え可能なプロバイダになった",
+        "body_html": "<p>OpenAI Agents SDKは自社製のサンドボックス技術を持たず、代わりにプロバイダインターフェースを公開し、Cloudflare・Vercel・E2B・Modal・Daytona・Runloop・Blaxelという7社のホスト型サンドボックスと、Docker/Unixローカル環境を差し替え可能にした。E2Bは最小限の設定変更でこのインターフェースに対応したことを自社ブログで説明し、Modalは同時期にAnthropicのClaude Managed Agentsとも統合し、ツール呼び出しをすべてModal Sandboxes内で実行する構成を発表している。</p><p>この収束の仕方は、LLMプロバイダをルーティング層で抽象化してベンダーロックインを避けた流れと同じ設計判断が、実行基盤側にも及んだものと見える。サンドボックス技術そのものがコモディティ化しつつあり、どのエージェントフレームワークを選ぶかと、どの実行基盤（isolate系かmicroVM系か）を選ぶかが別レイヤーの意思決定として分離され始めている。</p>",
+        "examples": [
+          {
+            "product": "OpenAI Agents SDK",
+            "approach": "サンドボックス実装を持たず、7社のホスト型プロバイダをプラグイン差し替えできるインターフェースとして公開",
+            "detail": "Cloudflare・Vercel・E2B・Modal・Daytona・Runloop・Blaxelが公式統合プロバイダとして名指しされており、開発者は実行基盤をコード変更なしで切り替えられる",
+            "source_url": "https://openai.com/index/the-next-evolution-of-the-agents-sdk/"
+          },
+          {
+            "product": "Modal Sandboxes × Claude Managed Agents",
+            "approach": "Anthropicのホスト型エージェントループとModalのサンドボックス実行環境を分離し、ツール呼び出しをすべてModal側で実行",
+            "detail": "エージェントのオーケストレーション層とコード実行層を分けることで、セキュリティ境界と可観測性を独立に強化できると公式ブログで説明している",
+            "source_url": "https://modal.com/blog/introducing-claude-managed-agents-with-modal-sandboxes"
+          }
+        ],
+        "takeaway": "自社でサンドボックスを内製する前に、プロバイダ抽象化レイヤーを一枚挟んでおけば、isolate系とmicroVM/コンテナ系のどちらが自分のワークロードに合うかを、後からコード変更なしで検証できる。"
+      }
+    ]
+  },
+  "editorial": "サンドボックス基盤の競争は、数ヶ月前のLLMルーティングやベクトルDB選定と同じ軌道をたどっている。技術が急速にコモディティ化する局面では、特定ベンダーの実行方式に強く結合したコードを書くより、抽象化レイヤーを一枚挟んで後から差し替えられる状態を保つ方が損失が小さい。",
+  "quick_picks": [
+    {
+      "title": "Cloudflare、Sandboxes をGA — コンテナ基盤の永続実行環境",
+      "summary": "スナップショットによる高速復元とActive CPU課金を導入した。本号の「重い専用マシン」型サンドボックスの代表例。",
+      "url": "https://blog.cloudflare.com/sandbox-ga/"
+    },
+    {
+      "title": "E2B、OpenAI Agents SDK の公式サンドボックスプロバイダに追加",
+      "summary": "最小限の設定変更でファイル編集・シェルコマンド実行・ライブプレビューURLに対応した。本号で扱ったプロバイダ抽象化レイヤーの実例のひとつ。",
+      "url": "https://e2b.dev/blog/e2b-is-now-in-agents-sdk"
+    },
+    {
+      "title": "Modal、Claude Managed Agents とのファーストパーティ統合を発表",
+      "summary": "Anthropicのエージェントループとサンドボックス実行を分離し、最大10万並列サンドボックスをサポートする。オーケストレーション層と実行層の分離という本号のテーマと直結する事例。",
+      "url": "https://modal.com/blog/introducing-claude-managed-agents-with-modal-sandboxes"
+    }
+  ]
+}
