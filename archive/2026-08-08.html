@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-08-08</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="../feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-08-08 (Sat)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+      <nav class="site-nav">
+        <a href="../" class="active">📰 日刊ダイジェスト</a>
+        <a href="../trends.html">🔌 週次プラグイントレンド</a>
+        <a href="../ai-trends.html">🧠 AI プロダクト動向</a>
+        <a href="./">🗂 アーカイブ</a>
+      </nav>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 21 articles</span>
+      <span>🏷 7 categories</span>
+      <span>📡 17 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item">
+        <span class="number-value">300x</span>
+        <span class="number-label">pgrustがPostgresの分析クエリを高速化した倍率</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">$567M</span>
+        <span class="number-label">New Mexico州がMetaに命じた青少年メンタルヘルス基金拠出額</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">70%</span>
+        <span class="number-label">DatabricksがAIコーディング支出を削減した割合</span>
+      </div>
+    </div>
+
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
+
+      <div class="card featured deep-dive">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://www.theregister.com/ai-and-ml/2026/08/03/as-larry-ellison-bets-the-farm-oracle-says-it-loves-ai-written-code-just-not-in-openjdk/5281851">DEEP DIVE: Oracle、OpenJDKへのAI生成コード投稿を全面禁止——理由はレビュー負荷・セキュリティ・IP帰属、同じOracle傘下のGraalVMは容認</a></h3>
+        </div>
+        <div class="summary">OpenJDKはJavaの参照実装であり、Oracleが統括するガバナンスボードがコントリビューションポリシーを管理している。2026年4月、このボードは大規模言語モデルや拡散モデルなど深層学習システムが生成したコード・文章・画像の投稿を、Gitリポジトリ・GitHubのプルリクエスト・メーリングリスト・Wiki・JBS(Issue管理システム)を含む全チャネルで一律禁止する暫定ポリシーを承認した。8月3日付のThe Register報道で、この禁止が原則論にとどまらず実運用として維持されていることが改めて確認された。Oracle創業者ラリー・エリソン氏は自社について「Oracleはコードを書いていない、AIが書いている」と公言してきたが、OpenJDKでは真逆の立場を取っている。ガバナンスボードが挙げる禁止理由は3点で、第一にもっともらしく見えて保守困難な低品質コードが大量に持ち込まれ限られたレビュアーの時間を消費する点、第二にJDKがミッションクリティカルなシステムの基盤であるためのセキュリティ・安全性の懸念、第三にOracle Contributor Agreement(OCA)がコントリビューターに提供コードの知的財産権保有を義務付けており、AI生成コードは権利の所在が不明確でこの要件と衝突する点である。なおAIをコードの理解・デバッグ・レビュー・研究目的で使うこと自体は禁止されていない。同じOracle傘下でもGraalVMプロジェクトはAIコントリビューションを容認しており、社内でも対応が一枚岩でないことが浮き彫りになった。</div>
+        <div class="editorial">🧠 レビュアー負荷とIP帰属の説明は筋が通っているが、実効性を左右するのは「AI生成コードをどう検知するか」という技術的な問題で、この点にポリシーは触れていない。摘発が自己申告や目視レビュー頼みなら抜け道は残る。ただしGraalVMとの温度差はOracle自身がAI活用の統一方針を持てていない証拠でもあり、他のOSS財団が同様の整合性の欠如を突かれる形で独自ルール策定を急ぐ可能性はある。</div>
+        <div class="key-points">
+          <ul>
+            <li>2026年4月にOpenJDKガバナンスボードが承認した暫定ポリシーは、Git・GitHub PR・メール・Wiki・JBSの全チャネルでLLM・拡散モデル生成コンテンツを禁止</li>
+            <li>禁止理由はレビュアー負荷・セキュリティ/安全性・Oracle Contributor Agreementが求めるIP帰属の3点、AIによるコード理解・デバッグ・研究利用は容認</li>
+            <li>同じOracle傘下のGraalVMプロジェクトはAIコントリビューションを許可しており、社内でポリシーが分裂している</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 OpenJDKにAI生成コードでコントリビュートしても機械的に却下対象になるため、Java本体への貢献を考えるなら人力での実装とレビュー説明を前提にすべきだ。</div>
+        <div class="meta">
+          <span>The Register</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-08-03</span>
+          <span class="engagement">▲ 292</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-product">Product</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://blog.cloudflare.com/kitesurf/">Cloudflare、AIエージェント専用ブラウザ「Kitesurf」をV8アイソレート上でベータ公開——Chromium比最大7倍省メモリ</a></h3>
+        </div>
+        <div class="summary">CloudflareはWorkers上でRustとWasmを使って構築した新ブラウザ「Kitesurf」をベータ公開した。人間向けに設計されたChromiumはAIエージェントには過剰なオーバーヘッドを抱えるとして、Engine・PageScript・PageRendererの3コンポーネントに分割し、ページ読み込みごとに未信頼として隔離する設計を採った。スクリーンショットやHTML抽出のCPU使用量はChromium比3.1〜3.8倍少なく、メモリ消費は4.7〜7.0倍少ない一方、処理時間は1.7〜1.8倍遅い。Web Platform Testsを21万5000件超通過しCSS・DOM・HTML・SVG・XHRの対応は手厚いが、動画再生・WebGL・長時間セッションには未対応。PuppeteerやPlaywright、MCPクライアントから利用できる。</div>
+        <div class="key-points">
+          <ul>
+            <li>CPU使用量はスクリーンショット・HTML抽出でChromium比3.1〜3.8倍少なく、メモリ消費は4.7〜7.0倍少ない一方、処理時間は1.7〜1.8倍遅い</li>
+            <li>Web Platform Testsを21万5000件以上通過、CSS・DOM・HTML・SVG・XHRの対応が中心で動画再生やWebGLは未対応</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 PuppeteerやPlaywrightのコードをほぼそのまま流用でき、コスト重視でスクレイピングや検証系のエージェントタスクを動かすなら、まずベータで速度と対応範囲を検証する価値がある。</div>
+        <div class="meta">
+          <span>Cloudflare Blog</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-08-06</span>
+          <span class="engagement">▲ 127</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://cloud.google.com/blog/ja/products/identity-security/find-and-fix-software-vulnerabilities-with-codemender">Google、脆弱性を自律検出・検証・修正するAIエージェント「CodeMender」をプレビュー公開</a></h3>
+        </div>
+        <div class="summary">Google Cloudは脆弱性の検出からサンドボックス内での実害検証、パッチ生成までを自律実行するAIエージェント「CodeMender」をプレビュー公開した。静的解析だけでは見逃しがちなメモリ破壊・インジェクション・暗号関連の欠陥まで検出し、実際にエクスプロイトコードをサンドボックスで実行してリスクの有無を検証することで誤検知を抑える。パッチ生成後は別のAI評価者が既存機能を壊していないか確認する二段構えを取る。対応言語はC/C++・Go・Java・Python・Ruby・Rust・TypeScriptで、CI/CDパイプラインへの組み込みのほかCLIやVS Code、Antigravityとの連携も可能。</div>
+        <div class="key-points">
+          <ul>
+            <li>検出だけでなくサンドボックス内でエクスプロイトを実際に実行してリスクを検証し、誤検知を減らす設計</li>
+            <li>対応言語はC/C++・Go・Java・Python・Ruby・Rust・TypeScriptの7言語、CI/CDやVS Codeへの統合が可能</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 静的解析ツールの誤検知に疲れているセキュリティチームは、サンドボックス実証付きのトリアージとしてCI/CDに組み込み、人手レビューの前段フィルタに使える。</div>
+        <div class="meta">
+          <span>Google Cloud Blog</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-08-05</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-data">Data</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://malisper.me/how-we-made-postgres-hundreds-of-times-faster-the-query-engine/">pgrust、Postgresの分析クエリをバッチ化・演算子融合・SIMDで最大300倍高速化——ClickHouseのベンチマークも上回る</a></h3>
+        </div>
+        <div class="summary">pgrustは、5億件の数値合計をPostgres標準のVolcanoモデル実行で約20秒かかっていた処理を135ミリ秒まで短縮した。1回の関数呼び出しで1024行をまとめて処理する「バッチ化」で2.7倍、スキャンと集約を1つの演算に統合し中間バッファのコピーを省く「演算子融合」で3.6倍、SIMDによる並列演算で9.6倍の高速化を積み上げた結果である。ClickBenchではClickHouseを上回る性能を記録したという。</div>
+        <div class="key-points">
+          <ul>
+            <li>バッチ化(1回の呼び出しで1024行処理)で2.7倍、演算子融合で3.6倍、SIMDで9.6倍と3段階の最適化を積み上げ、5億件の合計処理を20秒から135ミリ秒に短縮</li>
+            <li>Postgresの1行ずつ処理するVolcanoモデルはディスクI/Oがボトルネックだった1980年代の設計で、CPU・メモリ帯域がボトルネックの現代には最適化余地が残っている</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>malisper.me</span>
+          <span>⏱ 7 min read</span>
+          <span>2026-08-06</span>
+          <span class="engagement">▲ 208</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://www.databricks.com/blog/managing-ai-coding-costs-scale">Databricks、AIコーディング支出を70%削減——モデルルーティングとトークン最適化で</a></h3>
+        </div>
+        <div class="summary">Databricksは社内のAIコーディング支出を4つの施策で70%削減したと明かした。最大の効果はモデル選定の見直しで、最高性能ではなくコスト対性能に優れる「効率のフロンティア」を基準にGLM系モデルを採用した。Unity AI Gatewayの動的ルーティングでタスクごとに最安のモデルへ自動振り分けし、平均タスクコストを30%超削減しながら最上位モデル並みの品質を維持した。ハーネス調整とプロンプトキャッシュの最適化では生成トークン数を約50%削減している。</div>
+        <div class="key-points">
+          <ul>
+            <li>Unity AI Gatewayの動的ルーティングでタスクを最安モデルへ自動振り分け、平均タスクコストを30%超削減しつつ最上位モデル並みの品質を維持</li>
+            <li>ハーネス調整とプロンプトキャッシュ最適化により生成トークン数を約50%削減、品質を落とさずコストのみ圧縮</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Databricks Blog</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-08-05</span>
+          <span class="engagement">▲ 117</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://future-architect.github.io/articles/20260807a/">Go 1.27の`go fix`に新規モダナイザー5種——atomictypesやunsafefuncsでデータ競合・アライメント問題を機械的に是正</a></h3>
+        </div>
+        <div class="summary">Go 1.27の`go fix`は解析ツール(モダナイザー)を22種から26種に増やした。新規追加は5種で、`atomictypes`は`atomic.AddInt64()`のような旧来の関数呼び出しを型付きの`atomic.Int64`に変換しデータ競合や32bit環境でのアライメント問題を防ぎ、`unsafefuncs`は`unsafe.Pointer(uintptr(p)+size)`という危険なポインタ演算を`unsafe.Add(p, size)`に置き換える。一方、`[]byte(fmt.Sprintf())`を`fmt.Appendf`に変換する`fmtappendf`は、より良いリファクタリング機会を隠してしまうという理由で廃止された。</div>
+        <div class="key-points">
+          <ul>
+            <li>新規モダナイザーは`atomictypes`・`embedlit`・`slicesbackward`・`unsafefuncs`・`errorsastype`の5種で、解析ツール総数は22種から26種に増加</li>
+            <li>`fmtappendf`はパフォーマンス上の懸念とスタイル上の問題を理由に削除、`waitgroup`は`go vet`の同名アナライザーとの混同を避けるため`waitgroupgo`に改称</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Future Architect Tech Blog</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-08-07</span>
+          <span class="engagement">🔖 10</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.com/goauthentik/authentik">セルフホスト型IDプロバイダ「authentik」がGitHubトレンド入り——SAML・OAuth2/OIDC・LDAP・RADIUSに対応</a></h3>
+        </div>
+        <div class="summary">オープンソースのアイデンティティプロバイダ「authentik」が本日のGitHubトレンドでスター544件増となり注目を集めている。SAML・OAuth2/OIDC・LDAP・RADIUSの主要プロトコルに対応し、Okta・Auth0・Entra IDなど商用IdPの代替として位置付けられる。Docker Composeでの小規模検証からHelm Chart経由のKubernetesクラスタ、AWS CloudFormationまで複数のデプロイ手段を備え、コアはMITライセンスで公開されつつ有償のEnterprise Editionも用意する。</div>
+        <div class="key-points">
+          <ul>
+            <li>スター数2.35万・フォーク1800・オープンissue841件、コミット23,583件を積み重ねた実運用実績のあるプロジェクト</li>
+            <li>SAML・OAuth2/OIDC・LDAP・RADIUSの4プロトコルに対応し、Docker Compose・Kubernetes(Helm)・AWS CloudFormationなど複数のデプロイ経路を提供</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-08-07</span>
+          <span class="engagement">⭐ 544</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.com/PrimeIntellect-ai/prime-agent">PrimeIntellect、長時間自律動作するコーディングエージェント「Prime Agent」をオープンソース公開</a></h3>
+        </div>
+        <div class="summary">PrimeIntellectは、コンテキストを変数として・ツールを関数呼び出しとして扱う「Recursive Language Model(RLM)」と、実行を通じて改善される永続的なハーネス状態を組み合わせたコーディング/リサーチエージェント「Prime Agent」を公開した。組み込みのIPythonをモデルの主要な操作手段とし、`rlm(...)`関数で子エージェントを生成して並列・バックグラウンド実行できる。セッションはデーモンで永続化され、切断後も再接続して長時間タスクを継続できる。</div>
+        <div class="key-points">
+          <ul>
+            <li>`/refine`コマンドでベースプロンプトを変更せずにハーネスの一部だけを記録付きで改善できる「Refinable State」を実装</li>
+            <li>自動コンパクション・永続ゴール・ハートビートを備えた自律モードで予算(budget)を設定した長時間タスク実行に対応、スター数6.3k・フォーク501</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-08-06</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://tech.timee.co.jp/entry/2026/08/07/164910">テストが増えすぎてもう限界だったので、PRで全テストを回すのをやめた話</a></h3>
+        </div>
+        <div class="summary">Timeeのバックエンドチームは、毎月2000件ペースで増え続け約3万5000件に達したテストと向き合っていた。35並列ノードでの実行時間を10分まで切り詰めても増加ペースには追いつかず、Datadog Test Impact Analysis(TIA)を導入してコード変更に関連するテストだけを選択的に実行する方式へ切り替えた。PRのCIはTIAで関連テストのみを実行し1〜2分でフィードバックを返す一方、マージキュー上のCIでは全テストとカバレッジ計測を行い品質を担保する二層構成にした。ファイル単位で選択する「suiteモード」を採用したのは、個別テスト単位の「testモード」では判定だけで約2分かかり本末転倒だったためである。</div>
+        <div class="key-points">
+          <ul>
+            <li>テストは月2000件ペースで増加し約3万5000件に到達、35並列ノードでも実行時間の伸びに歯止めがかからなかった</li>
+            <li>PR時はTIAで関連テストのみ実行し1〜2分でフィードバック、マージキューで全テスト実行という二層構成に変更</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Timee Tech Blog</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-08-07</span>
+          <span class="engagement">🔖 92</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://zenn.dev/she_techblog/articles/937836550dfdf3">SHE、AIがPRを承認する仕組みを導入し2週間で承認率58%に到達</a></h3>
+        </div>
+        <div class="summary">SHEは直近75件のPRを分析し、60%が「LGTM」のみのサイレント承認で、意味のあるフィードバックが付くのは既存AIレビューツール由来を中心に約10%しかないという実態を確認した。そこでAIの意見(approve/pending/need fix)と人間レビューの要否(必須/任意)を組み合わせた2軸判定の仕組みを構築し、制御プレーンの変更や不可逆操作、セキュリティ境界、個人データの扱いなど8種のトリガーに該当するPRのみ人間レビューを必須にした。「pending」判定ではAIが確認質問を投げ、回答を得て承認へ進める人間レビュアーに近い挙動も実装している。導入から2週間でAI承認率は従来の約10%から58%まで上昇した。</div>
+        <div class="key-points">
+          <ul>
+            <li>導入前の分析で75件中60%がサイレント承認、意味あるフィードバックは約10%のみという実態が判明</li>
+            <li>制御プレーン変更・不可逆操作・セキュリティ境界など8種のトリガーで人間レビューを必須化、それ以外はAI承認率が10%から58%に上昇</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-08-07</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/kubernetesaikubeconcloudnativecon_japan_2026.html">KubeCon + CloudNativeCon Japan 2026が横浜で開幕、KubernetesはAIワークロードの基盤に</a></h3>
+        </div>
+        <div class="summary">CNCF最大級のイベントが2年連続で日本開催となり、7月29日に横浜で開幕した。CNCFがホストするOSSプロジェクトは230超、世界のコントリビューターは191カ国30万人超、クラウドネイティブ開発者は世界で2000万人近くに達し、日本国内だけでも約95万人にのぼる。基調講演では2030年までに推論ワークロードが93.3ギガワットの電力を要求し現在の総コンピューティング消費を上回るとの見通しが示され、継続稼働・スケーラビリティ・弾力性というクラウドネイティブが10年かけて磨いてきた特性がAI基盤にそのまま生きると強調された。企業の80%超がKubernetesを本番運用し、生成AIをKubernetes上で動かす企業は66%に達している。</div>
+        <div class="key-points">
+          <ul>
+            <li>CNCFホストのOSSプロジェクトは230超、世界のコントリビューターは191カ国30万人超、日本のクラウドネイティブ開発者は約95万人</li>
+            <li>2030年に推論ワークロードが要求する電力は93.3ギガワットと現在の総コンピューティング消費を上回る見通し、企業の66%が生成AIをKubernetes上で運用</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-07-29</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://speakerdeck.com/watany/expiration-date-of-sdd">仕様駆動開発(SDD)の消費期限——チームがAIワークフローを習熟した先に来る限界</a></h3>
+        </div>
+        <div class="summary">発表者はSDD(仕様駆動開発)を、AIエージェントへの指示を要件→設計→タスクの手順で構造化する初期の型として評価しつつ、チームがその型に習熟した先で限界を迎えると論じる。2025年7〜9月にAWS KiroやOpenSpec、Spec-Kitとともに広まったSDDだが、約1年の間に基盤モデルの能力が大きく伸びたことで前提が変わったという。個人でのAIコーディングでは表面化しなかった問題が、チーム開発では「仕様がないとAIの出力を理解できない」という理解負債、エージェントが大量にPRを生成する一方でレビュー能力が追いつかない認知負荷のボトルネック、仕様と実装がずれていく仕様ドリフトの3点として顕在化したと指摘する。</div>
+        <div class="key-points">
+          <ul>
+            <li>エージェントは1日約500件のPRを生成できる一方、人間のレビュー能力は1日約10件にとどまり認知負荷がボトルネック化</li>
+            <li>2025年7〜9月に広まったSDDから約1年でLLMの能力が大きく向上し、仕様維持のコストが便益を上回る局面が来たと指摘</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Speaker Deck</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-08-06</span>
+          <span class="engagement">🔖 110</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://github.com/Wyzer-Lang/wyzer">「Rustの安全性を、Rustの複雑さなしで」を掲げる新言語Wyzerが登場</a></h3>
+        </div>
+        <div class="summary">Wyzerは、メモリ・並行処理・ネットワークにまたがる安全性を「一度使ったリソースは二度と使えない」という単一の所有権ルールで統一しようとする静的型付けのコンパイル言語。Perceus参照カウントによるメモリ管理とコレオグラフィックプログラミングによる分散システム設計を組み合わせ、ガベージコレクタも複雑な借用チェッカーも持たない。変数はデフォルトで不変、エラー処理は`Result&lt;T, E&gt;`によるパターンマッチで扱う。開発者自身、これは初期段階の研究であり未解決の課題が残ると認めている。</div>
+        <div class="key-points">
+          <ul>
+            <li>メモリ安全性・並行処理・ネットワーク正当性を「使用済みリソースは再利用不可」という単一原則でまとめて保証しようとする設計</li>
+            <li>Perceus参照カウントでGCを排除しつつ、Rustのような複雑な借用チェッカーも不要とすることを目指す</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-08-06</span>
+          <span class="engagement">▲ 159</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://github.com/xoreaxeaxeax/asm-hall-of-shame">「Assembly Hall of Shame」、1命令だけでいかに遅くできるかを競うベンチマーク集がGitHubで公開</a></h3>
+        </div>
+        <div class="summary">低レイヤーの奇術的な実装で知られるChristopher Domas氏が、通常とは逆に「単一命令の実行速度の絶対的な下限」を探すリポジトリ「Assembly Hall of Shame」を公開した。単一命令のみを対象とし、割り込み不可・ストック構成のプラットフォームでのみ有効という明確なルールの下、30種類超の低速命令とその原理を収録している。現在の首位は`fxrstor64`(高レイテンシのメモリマップドI/Oから512バイトのFPU/MMX/XMM状態をロードする命令)で、AMD Ryzen 7 5800H上で1980億サイクルを記録した。</div>
+        <div class="key-points">
+          <ul>
+            <li>単一命令限定・割り込み不可・ストック構成という明確なルールの下、30種類超の低速命令とその原理を収録</li>
+            <li>首位は`fxrstor64`命令でAMD Ryzen 7 5800H上で1980億サイクルを記録、高レイテンシなメモリマップドI/OからFPU/MMX/XMM状態をロードする挙動を悪用</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-08-06</span>
+          <span class="engagement">▲ 150</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.com/cloudflare/computer">Cloudflare、エージェントに永続ファイルシステムと実行環境を与える「Computer」をプレビュー公開</a></h3>
+        </div>
+        <div class="summary">CloudflareがWorkers上で動くエージェント向けの仮想ファイルシステム基盤「Computer」を公開した。Durable Object内のSQLiteに状態を保持し、`workspace.runtime.exec(source, { backend })`という単一の呼び出し口から、コンテナ(FUSEマウントでLinuxユーザーランドを提供)・Isolate Shell(Dynamic Worker上のbash)・Isolate JavaScript(ESモジュール実行)という3種のバックエンドへルーティングする。現時点ではプレビュー段階で本番利用は非推奨としている。</div>
+        <div class="key-points">
+          <ul>
+            <li>SQLiteをDurable Objectに保持し複数の実行バックエンド(コンテナ・Isolate Shell・Isolate JS)へ単一APIでルーティング</li>
+            <li>コンテナバックエンドはFUSEマウント経由でフルのLinuxユーザーランドと実バイナリの実行に対応</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-08-07</span>
+          <span class="engagement">⭐ 894</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
+
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://www.pbs.org/newshour/nation/new-mexico-court-orders-meta-to-pay-567-million-over-mental-health-harms-to-kids-online">New Mexico州裁判所、Metaに子どものメンタルヘルス被害で5億6700万ドルの支払いを命令</a>
+        <span class="quick-summary">— 無限スクロールや通知など機能設計が青少年の鬱・不安・自傷リスクを高めたとして、治療・予防プログラム向けの拠出を命じた。</span>
+        <span class="meta">PBS News</span>
+        <span class="engagement">▲ 694</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://k-tai.watch.impress.co.jp/docs/news/2131649.html">KDDI、楽天モバイルへのローミング提供を9月末で終了</a>
+        <span class="quick-summary">— 7年間続けてきた人口カバー補完のローミングを終了、山間部などでは楽天自身の基地局整備を条件に限定的な協力を継続する。</span>
+        <span class="meta">Impress Watch</span>
+        <span class="engagement">🔖 131</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://textlog.cc/about">文字だけ・JSなしのミニマルなマイクロブログ「textlog」が公開</a>
+        <span class="quick-summary">— 投稿は280文字までで広告やアルゴリズム的エンゲージメント施策を持たず、アカウントデータはいつでもダウンロード・削除できる。</span>
+        <span class="meta">textlog</span>
+        <span class="engagement">▲ 114</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://daringfireball.net/2026/08/app_store_rejection_of_the_week_dark_hours">天文アプリ「Dark Hours」がタロット占いアプリと誤認されApp Storeで審査却下</a>
+        <span class="quick-summary">— 開発者が審査委員会まで異議申し立てしたが「ライブタロット占い機能を含む」という誤った理由で却下が維持され、審査プロセスの機能不全が批判されている。</span>
+        <span class="meta">Daring Fireball</span>
+        <span class="engagement">▲ 157</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://patronview.com/news/99-percent-of-my-website-traffic-is-bots/">寄付者データベース運営者、1年間戦ったボットトラフィックの実態を公開</a>
+        <span class="quick-summary">— 150万件のプロフィールページを持つサイトが、1日に中国発ボットから360万リクエスト、Amazonのクローラーから11万7000ページ分のアクセスを受けていた。</span>
+        <span class="meta">PatronView</span>
+        <span class="engagement">▲ 332</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-infra">Infra</span>
+        <a href="https://qiita.com/TaichiYamasaki/items/c75b139044362e18fa68">Google公式のCloud Run MCPサーバーで、Claude Codeに自然言語のままデプロイさせてみた</a>
+        <span class="quick-summary">— デフォルト設定ではIAMポリシーが空のまま公開アクセス可能なサービスが作成されてしまうため、`SKIP_IAM_CHECK=false`の明示指定が必要。</span>
+        <span class="meta">Qiita</span>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="./" class="archive-link">🗂 過去のダイジェスト</a>
+    </footer>
+  </div>
+</body>
+</html>
