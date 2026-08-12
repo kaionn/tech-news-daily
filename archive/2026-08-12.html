@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-08-12</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="../feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-08-12 (Wed)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+      <nav class="site-nav">
+        <a href="../" class="active">📰 日刊ダイジェスト</a>
+        <a href="../trends.html">🔌 週次プラグイントレンド</a>
+        <a href="../ai-trends.html">🧠 AI プロダクト動向</a>
+        <a href="./">🗂 アーカイブ</a>
+      </nav>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 21 articles</span>
+      <span>🏷 7 categories</span>
+      <span>📡 19 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item">
+        <span class="number-value">421件</span>
+        <span class="number-label">Microsoft 8月Patch Tuesdayで修正されたCVE件数</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">14MB</span>
+        <span class="number-label">エージェント型LLM「Needle 2」の圧縮後モデルサイズ(45Mパラメータ)</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">36億円</span>
+        <span class="number-label">KADOKAWAランサムウェア被害の特別損失額</span>
+      </div>
+    </div>
+
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
+
+      <div class="card featured deep-dive">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://www.securityweek.com/august-2026-patch-tuesday-microsoft-fixes-421-cves-one-exploited-zero-day/">DEEP DIVE: Microsoft 8月Patch Tuesdayで421件のCVEを修正——afd.sysのuse-after-freeは2022年以降3件目のゼロデイ、SYSTEM権限奪取の実悪用を確認</a></h3>
+        </div>
+        <div class="summary">Microsoftは2026年8月11日(現地時間)の月例セキュリティ更新で421件の脆弱性を修正した。今回の特徴は修正数の多さそのものより、実際に悪用が確認されているゼロデイの中身にある。afd.sys(WinSockの補助関数ドライバ)に存在するuse-after-freeの欠陥CVE-2026-68820は、ローカルで認証済みの攻撃者が特別に細工したアプリケーションでレースコンディションを引き起こし、SYSTEM権限を奪取できる。セキュリティ研究者の分析によれば、afd.sysのゼロデイは2022年以降でこれが3件目であり、うち1件は北朝鮮系Lazarusグループによる悪用が疑われている。同一のカーネルコンポーネントが繰り返し攻撃対象になっている事実は、Windowsのネットワークスタックの奥深くにある検証しづらい経路が、国家主体の攻撃者にとって継続的な標的になっていることを示す。今回はほかに、公開済みで将来の悪用が見込まれるWindows User Profile Serviceの権限昇格(CVE-2026-62832)や、Windows DNS・Deployment Services・Microsoft QUICのリモートコード実行脆弱性も含まれる。内訳ではWindows本体が236件、Officeが98件、SharePoint Serverが30件、Exchange Serverが7件と、依然としてWindowsとOfficeが修正の大半を占める。TPM 2.0参照実装に関する非Microsoft由来のCVEも2件含まれ、業界標準の実装レベルでの脆弱性も浮き彫りになった。</div>
+        <div class="editorial">🧠 同一のドライバが3度目のゼロデイ舞台になった点は、パッチ適用の速さだけでは解決しない構造問題を示している。afd.sysはWindowsのネットワーク処理の根幹に位置し、攻撃面を減らすには設計自体の見直しが必要になるはずだが、Microsoftがどこまで踏み込むかは今回のリリースノートからは読み取れない。ローカル権限昇格である以上、今回の実害はリモートから直接侵入されるケースより限定的だが、初期侵入後のラテラルムーブメントの足がかりとして使われる可能性は高い。</div>
+        <div class="key-points">
+          <ul>
+            <li>CVE-2026-68820はafd.sysのuse-after-free、ローカル権限昇格でSYSTEM権限を奪取——実悪用確認済みで2022年以降3件目のafd.sysゼロデイ</li>
+            <li>内訳はWindows236件・Office98件・SharePoint Server30件・Exchange Server7件、計421件のCVEを一括修正</li>
+            <li>公開済み未実悪用のCVE-2026-62832(User Profile Service権限昇格)のほか、Windows DNS・Deployment Services・Microsoft QUICのRCEも同時修正</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 afd.sys系の脆弱性は繰り返し攻撃対象になっており、Windows環境の運用者は月例パッチの即時適用に加え、ローカル権限昇格を前提とした多層防御(EDRでのプロセス監視等)を検討すべきだ。</div>
+        <div class="meta">
+          <span>SecurityWeek</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-08-11</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.modular.com/blog/modular-26-5-mojo-1-0-is-here">Modular、AI時代向けシステムプログラミング言語「Mojo」1.0を公開——約200人が1,100件超のPRで言語仕様を整理、コンパイラは2026年中にOSS化</a></h3>
+        </div>
+        <div class="summary">Modularは、AI時代向けシステムプログラミング言語「Mojo」の1.0版を公開した。2023年の初版公開から3年、単一のPointer型や`var`宣言への統一など言語仕様を整理し、Python風のラムダ構文と参照無効化を検出するメモリ安全性診断を追加した。開発は約200人のコントリビューターが1,100件超のプルリクエストを提出し、20万行超のコードに影響した共同作業の成果。1.xの間は破壊的変更を避け加算的な進化のみを約束し、コンパイラとツールチェーンは2026年中にオープンソース化する計画。</div>
+        <div class="key-points">
+          <ul>
+            <li>単一Pointer型・`var`宣言への統一など言語仕様を簡素化、参照無効化を検出するメモリ安全性診断とPython風ラムダ構文を追加</li>
+            <li>約200人のコントリビューターが1,100件超のPRを提出し20万行超に影響、2026年中にコンパイラ・ツールチェーンをオープンソース化予定</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 GPU・アクセラレータ横断の高性能コードをPythonライクな構文で書きたいAI/MLエンジニアにとって、言語仕様が固まった今が学習・移行を検討する好機になる。</div>
+        <div class="meta">
+          <span>Modular</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-08-11</span>
+          <span class="engagement">▲ 196</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-product">Product</span>
+          <span class="content-type">💰 ビジネス</span>
+          <h3><a href="https://manus.im/blog/a-note-to-our-users">AIエージェント「Manus」、Meta買収からわずか8ヶ月足らずで独立企業として再出発——「特定地域の規制要件への対応」と説明</a></h3>
+        </div>
+        <div class="summary">AIエージェント「Manus」が、2025年12月29日のMeta買収からわずか8ヶ月足らずで独立企業として再出発することになった。公式ブログは「特定地域の規制要件を順守するための措置」と説明する。買収後にデータを生成した対象ユーザーは、2026年8月23〜24日(シンガポール時間)にデータが削除されるため、それまでにバックアップが必須。復元は8月25日から可能で、バックアップ期間中の課金はなく復帰ボーナスも提供される。買収前からの利用者には影響がない。</div>
+        <div class="key-points">
+          <ul>
+            <li>Meta買収(2025年12月29日)から8ヶ月足らずで分離、公式理由は「特定地域の規制要件への対応」</li>
+            <li>買収後にデータを生成したユーザーのみ対象、2026年8月23〜24日(SGT)にデータ削除、8月25日から復元可能でバックアップ期間中は無課金</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 対象ユーザーは8月23日までにデータのバックアップを完了させる必要があり、Meta連携で構築したワークフローがある場合は移行計画を早めに立てるべきだ。</div>
+        <div class="meta">
+          <span>Manus</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-08-11</span>
+          <span class="engagement">▲ 112</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://www.lighthousenewsletter.com/p/i-put-github-copilot-behind-a-mitm">GitHub CopilotをMitMプロキシ経由で観測——無関係なファイルを開いただけで直前の.envの中身が補完リクエストに紛れ込んで送信</a></h3>
+        </div>
+        <div class="summary">開発者がmitmproxyでGitHub Copilotの通信を傍受したところ、無関係な`.env`ファイルを開いただけなのに、直後に開いた別ファイルへの補完リクエストに環境変数の値が紛れ込んで送信されていた。ローカルのSQLiteデータベース`session-store.db`には全会話が平文保存され、書き込み処理にスクラビング(機密情報の除去)工程が存在しないこともコード上から確認できたという。</div>
+        <div class="key-points">
+          <ul>
+            <li>無関係な`pyproject.toml`を開いた直後の補完リクエストに、直前に開いた`.env`の中身が紛れ込んで送信される挙動を確認</li>
+            <li>ローカルの`session-store.db`(SQLite)は全会話を平文保存、書き込みパスにスクラビング処理が存在しないことをコードから確認</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>lighthousenewsletter.com</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-08-11</span>
+          <span class="engagement">▲ 137</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.openssh.org/releasenotes.html#10.5">OpenSSH 10.5/10.5p1公開——ssh-agentロック中でもPKCS#11トークン追加が可能だった不具合など3件のセキュリティ修正</a></h3>
+        </div>
+        <div class="summary">OpenSSH 10.5/10.5p1が公開され、`session-bind@openssh.com`拡張によるssh-agentのロックバイパスとssh-agent経由でのPKCS#11トークン追加、クライアントのリモートフォワーディング処理でのuse-after-freeなど3件のセキュリティ修正が入った。FIDO認証鍵の試行順序を低摩擦なものから優先する最適化や、試行される鍵を事前表示する`-Z user@host`モードも追加された。</div>
+        <div class="key-points">
+          <ul>
+            <li>ssh-agentロック中でも`session-bind@openssh.com`拡張経由でPKCS#11トークン追加が可能だった不具合など3件のセキュリティ修正</li>
+            <li>FIDO認証鍵は生体認証なしのものから低摩擦順に試行するよう最適化、`-Z user@host`で試行される鍵を事前確認可能に</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>OpenSSH</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-08-11</span>
+          <span class="engagement">▲ 73</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://arstechnica.com/security/2026/08/a-researcher-bought-noreply-net-companies-started-sending-him-secrets/">研究者がnoreply.netドメインを取得したら、企業から誤送信の機密メールが数十万通届いた——「使われていない」と思い込んだ設定ミスが業界に横行</a></h3>
+        </div>
+        <div class="summary">セキュリティ研究者がドメイン`noreply.net`と`noreply.us`を取得したところ、多数の企業が「使われていない」と思い込んで送信していた実際のメールが届き始めた。負傷報告書やピザの注文、テスト用の認証情報まで含む数十万通のメールを受信しており、`noreply@`宛のメールを無検証で外部ドメインに送る設定ミスが業界に広く存在することを示した。</div>
+        <div class="key-points">
+          <ul>
+            <li>ドメイン取得後、企業からの誤送信メールを累計数十万通受信——内容は負傷報告書からテスト認証情報まで多岐にわたる</li>
+            <li>原因は多くの組織が自社管理下にない`noreply.net`等の外部ドメインを送信元/宛先として誤設定していたこと</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Ars Technica</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-08-11</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://www.seangoedecke.com/local-models-will-not-win/">「ローカルAIモデルは勝てない」論——データセンター向けGPUはコンシューマ機比で約30倍の効率、家庭用推論は構造的に劣勢</a></h3>
+        </div>
+        <div class="summary">著者は、ローカルAIモデルがクラウド推論を代替することはないと論じる。ユーザーは常に予算内で最も強力なモデルを選ぶ傾向があり、家庭用GPUが実用的な性能に達する頃にはデータセンター側のモデルはさらに先を行っている。加えてデータセンターは複数ユーザーのリクエストをバッチ処理できる一方、B200のようなデータセンター向けGPUはコンシューマ向けゲーミングGPU比で約30倍の効率を持つとし、経済合理性の面でも家庭用推論は劣勢だと結論づける。</div>
+        <div class="key-points">
+          <ul>
+            <li>ほぼ全てのユーザーは予算内で最も強いモデルを選ぶため、家庭で動かせる性能に達した頃にはデータセンター側がさらに先行するという構造的な遅れ</li>
+            <li>データセンター向けGPU(B200等)はコンシューマ向けゲーミングGPUの約30倍の効率、バッチ処理による稼働率の差も経済性で不利に働く</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>seangoedecke.com</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-08-11</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://typesanitizer.com/blog/code-review.html">コードレビューは訓練で伸ばせるスキル——ソクラテス式対話やヒヤリハット振り返りなど具体的な鍛え方を提示</a></h3>
+        </div>
+        <div class="summary">コードレビューは生まれつきの才能ではなく、訓練で伸ばせるスキルだと論じる記事。研究では教育・規範維持・門番・バグ防止という複数機能を果たすとされ、著者自身も「30〜100 SLOC/コメント」の密度でレビューできるまでに成長した経験を紹介する。ジュニアに理由を問うソクラテス式対話や、ヒヤリハットの録画振り返りなど具体的な鍛え方も提示する。</div>
+        <div class="key-points">
+          <ul>
+            <li>コードレビューの効果は教育・規範維持・門番・バグ防止の複数機能に分解でき、著者は「30〜100 SLOC/コメント」の密度まで習熟</li>
+            <li>ジュニアに理由を問うソクラテス式対話、ヒヤリハットの録画振り返り、コードを読まずにモデルを作る形式的検証など具体的な訓練法を提示</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>typesanitizer.com</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-08-11</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://www.techno-edge.net/article/2026/08/11/5382.html">Anthropic、Claude生成テキストへの電子透かし導入を計画——EU AI法第50条2項対応、SynthID-Text基盤で見た目を変えず統計的痕跡を残す</a></h3>
+        </div>
+        <div class="summary">Anthropicは、Claudeが生成したテキストに電子透かしを導入する計画を発表した。2026年8月2日に発効したEU AI法第50条2項への対応で、単語選択の確率をわずかに偏らせることで見た目を変えずに統計的な痕跡を残す仕組み。Google DeepMindの「SynthID-Text」を基盤とし、コピペや語順変更後も検出可能だが、翻訳や要約用途でも誤って透かしが付与されうる限界も指摘されている。</div>
+        <div class="key-points">
+          <ul>
+            <li>EU AI法第50条2項(2026年8月2日発効)への対応として、Chat・API・Claude Code・Coworkの全経路に透かしを導入</li>
+            <li>Google DeepMindの「SynthID-Text」を基盤に単語選択確率を偏らせる方式、コピペ後も検出耐性を持つが「誰が考えたか」までは判定不可能</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>techno-edge.net</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-08-11</span>
+          <span class="engagement">🔖 186</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://zenn.dev/tokium_dev/articles/gui-agent-zero-extra-cost">CLI上のClaude CodeでComputer Useを再現——追加課金ゼロ、441行のエージェントでスクショと操作をローカル実装</a></h3>
+        </div>
+        <div class="summary">追加課金ゼロでClaude CodeにComputer Use相当の操作をさせる実装が公開された。エージェントの「頭脳」をAPI呼び出しではなくClaude Codeの対話セッション自体にすることで、スクショ取得(snap.py)とマウス・キーボード操作(act.py)だけをローカルに実装すれば足りる設計。実機検証ではメモ帳に文字入力するデモをスクショ3枚・約4.1Kトークンで完遂した。</div>
+        <div class="key-points">
+          <ul>
+            <li>3ファイル計441行(snap.py・act.py・gui_agent_common.py)、依存はpyautoguiとpillowのみでANTHROPIC_API_KEYも不要</li>
+            <li>「撮影→分析→予測→実行→検証」のループを2行の可視テキストで出力し監査可能性を確保、実測でスクショ3枚・約4.1Kトークンで文字入力を完遂</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-08-11</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-product">Product</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/1passwordaiclaudecursorchatgptaii.html">1Password、組織のAI支出を一元管理する新機能——Claude・ChatGPT・Cursorの3サービスに対応、予算枯渇日を事前予測</a></h3>
+        </div>
+        <div class="summary">1Passwordは、SaaS管理ツール「1Password SaaS Manager」に組織のAI支出を監視する新機能を追加した。対応するのはAnthropic Claude・OpenAI ChatGPT・Anysphere Cursorの3サービスで、チーム・ユーザー・サービス単位での支出をリアルタイム把握できる。消費パターンから予算枯渇日を予測し、残高が尽きる前にアラートを出す機能も備える。</div>
+        <div class="key-points">
+          <ul>
+            <li>対応はAnthropic Claude・OpenAI ChatGPT・Anysphere Cursorの3サービス、チーム/ユーザー/サービス単位でリアルタイムに支出を追跡</li>
+            <li>日々の消費パターンから予算枯渇日を予測し、残高が尽きる前に事前アラートを発行する機能を搭載</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-08-05</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://qiita.com/suzukengo/items/9f9e25f203ecdb28bae2">KADOKAWAの障害事例を他山之石とする——仮想化管理プレーンの掌握でバックアップごと暗号化された教訓から「3-2-1-1-0」ルールを提案</a></h3>
+        </div>
+        <div class="summary">2024年6月のKADOKAWAランサムウェア被害(復旧に約2ヶ月、特別損失36億円)を教訓に、バックアップ設計を再点検する記事。攻撃者はESXi/vSphereという仮想化管理プレーンを掌握し、同一管理下にあったバックアップごと暗号化したと推測され、本番ADの権限奪取だけではバックアップに到達できない認証情報分離が必須だと説く。3-2-1ルールにイミュータブルストレージと復旧テストを加えた「3-2-1-1-0」を提案する。</div>
+        <div class="key-points">
+          <ul>
+            <li>攻撃者がESXi/vSphere管理プレーンを掌握し、同一ドメイン配下のバックアップごと暗号化——復旧に約2ヶ月、特別損失36億円</li>
+            <li>従来の3-2-1ルールにイミュータブルストレージ(AWS S3 Object Lock等)と四半期ごとの復旧テストを加えた「3-2-1-1-0」ルールを提案</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-08-11</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://cactuscompute.com/needle">14MBのエージェント型LLM「Needle 2」公開——Raspberry Pi 5で毎秒500トークン超、200ドル未満の廉価機器向け</a></h3>
+        </div>
+        <div class="summary">Cactus Computeは、45Mパラメータを2bit量子化で14MBに圧縮したエージェント型言語モデル「Needle 2」をApache 2.0で公開した。Raspberry Pi 5やESP32-S3、Meta Quest 3S、200ドル未満の廉価スマートフォンなど省リソース機器向けに、ツール呼び出しやスキーマ準拠のJSON構造化出力に特化する。Raspberry Pi 5で毎秒500トークン超のデコード速度を実測し、5〜70倍大きいモデルと同等の性能を主張する。</div>
+        <div class="key-points">
+          <ul>
+            <li>45Mパラメータ・2bit量子化・14MB、ピークセッションRAM28MBでRaspberry Pi 5上で毎秒500トークン超のデコード速度を実測</li>
+            <li>Mobile Actions・DroidCall・Seal-Tools・BFCL v4のベンチマークで、5〜70倍大きいFunctionGemma 270M等と互角の性能を主張、Apache 2.0で公開</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>cactuscompute.com</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-08-11</span>
+          <span class="engagement">▲ 501</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.com/antirez/h3.c">antirez氏、Apple Silicon向けMiniMax-H3ネイティブ推論エンジン「h3.c」を公開——M5 Maxで22フレーム動画を約8秒生成</a></h3>
+        </div>
+        <div class="summary">antirez氏(Redis作者)が、Apple Silicon Mac向けにMiniMax-H3のネイティブ推論エンジン「h3.c」を公開した。テキストプロンプトから映像と音声を同期生成するマルチモーダルモデルで、先頭・末尾フレーム指定や参照メディアにも対応。DiTモデルのストレージ使用量をSSDストリーミングで36.5GiBから2.0GiBへ削減し、M5 Maxでは512×512・22フレームの動画を約8秒で生成できるという。</div>
+        <div class="key-points">
+          <ul>
+            <li>M5 Maxで512×512・22フレームの動画を高速設定で約8秒生成、4ステップの高速プレビューから50ステップの参照品質まで選択可能</li>
+            <li>SSDストリーミングによりDiTモデルのストレージ使用量を36.5GiBから2.0GiBへ削減、MIT licenseでGitHub公開</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-08-11</span>
+          <span class="engagement">▲ 413</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.com/TheRealYT/git-knife">Git履歴をスプレッドシート感覚で一括編集するGUI「git-knife」公開——正規表現置換と書き換え前の自動バックアップに対応</a></h3>
+        </div>
+        <div class="summary">コミットのメッセージ・author/committer名・日時をスプレッドシート感覚で一括編集できるデスクトップGUI「git-knife」が公開された。TauriベースでRustバックエンドからシステムのGitコマンドを呼び出す設計で、正規表現による一括置換や書き換え前の自動バックアップ参照、プッシュ済みコミットへの警告表示を備える。現状はMVPで、コミットの並べ替えやスカッシュ機能は今後の実装予定。</div>
+        <div class="key-points">
+          <ul>
+            <li>コミットメッセージ・author/committer名・日時を表形式で一括編集、正規表現バックリファレンス対応の検索置換を搭載</li>
+            <li>書き換え前に自動バックアップ参照を作成しワンクリックで復元可能、`git commit-tree`で非破壊的に処理</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-08-11</span>
+          <span class="engagement">▲ 102</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://blogs.nvidia.com/blog/nemotron-lightning-switchyard-rtx-dgx/">NVIDIA、300億パラメータMoEモデル「Nemotron 3.5 Lightning」とモデルルーティングライブラリ「NeMo Switchyard」を発表</a>
+        <span class="quick-summary">— Switchyardはタスクに応じて最適なモデルへ自動振り分け、Opus 4.8単体比でタスク完了コストを約3分の1に削減するという。</span>
+        <span class="meta">NVIDIA Blog</span>
+        <span class="engagement">▲ 99</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-oss">OSS</span>
+        <a href="https://code.call-cc.org/releases/6.0.0/NEWS">Scheme処理系「CHICKEN Scheme」6.0.0リリース——内部文字列表現をUTF-8化しR7RS準拠のモジュール体系へ全面移行</a>
+        <span class="quick-summary">— ファイルI/O関連の手続きが文字列ではなくバイトベクタ引数を要求するなど複数の破壊的変更を伴う大型アップデート。</span>
+        <span class="meta">code.call-cc.org</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-oss">OSS</span>
+        <a href="https://bevy.org/news/bevys-sixth-birthday/">RustゲームエンジンBevy、6周年で新規コントリビューター236人増・GitHubスター47,529個に到達</a>
+        <span class="quick-summary">— 次世代シーンシステムBSN導入で7,364行のコード削減を報告した事例もあり、Steamでの商用リリース例も増加中。</span>
+        <span class="meta">Bevy</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://ngrok.com/blog/compression-is-prediction">「圧縮とは予測である」——エントロピー符号化とLLMのトークン予測が同じ数式を最小化していることを解説</a>
+        <span class="quick-summary">— Dickensの文章を圧縮する実験で、単純な統計モデルの434ビットに対しGPT-2ベースの予測は176ビットと6割減を達成。</span>
+        <span class="meta">ngrok</span>
+        <span class="engagement">▲ 97</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://stratechery.com/2026/nvidias-risky-business/">NVIDIA、AIデータセンター融資に年金基金等の第三者資本5000億ドル超を動員する新スキームを発表——1870年代の鉄道バブルとの類似を指摘する分析</a>
+        <span class="quick-summary">— ハイパースケーラーの2026年の負債発行額は7月時点で既に1,940億ドルに達し、86%が発行時より高い利回りで取引されているという。</span>
+        <span class="meta">Stratechery</span>
+        <span class="engagement">▲ 254</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-frontend">Frontend</span>
+        <a href="https://github.com/jackyzha0/sunlit">窓から差し込む陽光と揺れる葉をCSSのみで再現したデモ「sunlit」が公開</a>
+        <span class="quick-summary">— backdrop-filterの多層blurとSVGのfeTurbulence/feDisplacementMapで奥行きと風によるゆらぎを表現、JS不使用。</span>
+        <span class="meta">GitHub</span>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="./" class="archive-link">🗂 過去のダイジェスト</a>
+    </footer>
+  </div>
+</body>
+</html>
