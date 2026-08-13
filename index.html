@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tech News Daily — 2026-08-13</title>
+  <title>Tech News Daily — 2026-08-14</title>
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
   <link rel="icon" type="image/png" sizes="192x192" href="favicon.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -14,7 +14,7 @@
   <div class="container">
     <header>
       <h1>Tech News Daily</h1>
-      <div class="date">2026-08-13 (Thu)</div>
+      <div class="date">2026-08-14 (Fri)</div>
       <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
       <nav class="site-nav">
         <a href="./" class="active">📰 日刊ダイジェスト</a>
@@ -26,8 +26,8 @@
 
     <div class="stats-bar">
       <span>📰 21 articles</span>
-      <span>🏷 7 categories</span>
-      <span>📡 20 sources</span>
+      <span>🏷 8 categories</span>
+      <span>📡 19 sources</span>
     </div>
 
     <nav class="toc">
@@ -40,17 +40,27 @@
 
     <div class="numbers-bar">
       <div class="number-item">
-        <span class="number-value">16年</span>
-        <span class="number-label">Tailscaleが追跡したSQLite WAL-Resetバグの潜伏期間</span>
+        <span class="number-value">47ヶ国</span>
+        <span class="number-label">VMware vCenter脆弱性の実悪用による被害国数(361台)</span>
       </div>
       <div class="number-item">
-        <span class="number-value">450倍</span>
-        <span class="number-label">V8のArray.prototype.copyWithin高速化(1M要素配列実測)</span>
+        <span class="number-value">512TB</span>
+        <span class="number-label">DapuStorが展示したエンタープライズNVMe SSDの新記録容量(従来比2倍)</span>
       </div>
       <div class="number-item">
-        <span class="number-value">19.6倍</span>
-        <span class="number-label">.NET 11 Runtime Asyncの非中断時の高速化率</span>
+        <span class="number-value">750 tok/s</span>
+        <span class="number-label">Cerebras Ultrafast Modeの出力速度(Claude Fable 5比11倍)</span>
       </div>
+    </div>
+
+    <div class="weekly-keywords">
+      <div class="section-title">📊 今週のキーワード</div>
+      <div class="keyword-chips">
+        <span class="keyword-chip">AIエージェント基盤</span>
+        <span class="keyword-chip">重大脆弱性の実悪用</span>
+        <span class="keyword-chip">推論高速化競争</span>
+      </div>
+      <div class="keyword-summary">今週はAIエージェントを構築するための実行基盤が相次いで登場した一週間だった。Agent Plugins 1.0.0の標準化を皮切りに、OpenChamber・Ante・Docker Sandboxes・DeepSeek Harnessと、エージェント実行環境そのものを差別化しようとする動きが加速している。一方でMetabase・Patch Tuesday・GitHub Actions OIDC・Zoom・VMware vCenterと重大脆弱性の実悪用が途切れず、防御側の対応速度が追いついていない現実も浮き彫りになった。</div>
     </div>
 
     <div class="section" id="top-stories">
@@ -58,25 +68,24 @@
 
       <div class="card featured deep-dive">
         <div class="card-header">
-          <span class="tag tag-infra">Infra</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://tailscale.com/blog/sqlite-wal-reset-bug">DEEP DIVE: Tailscale、16年物のSQLite WAL-Resetバグを追跡——チェックポイントと書き込みトランザクションの競合がS3バックアップを静かに破損させていた</a></h3>
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://www.securityweek.com/critical-vmware-vcenter-vulnerability-in-attackers-crosshairs/">DEEP DIVE: VMware vCenterの脆弱性(CVSS 9.8)が公開5日で実悪用——ディレクトリトラバーサルからリバースSSHを設置し47ヶ国361台に感染</a></h3>
         </div>
-        <div class="summary">Tailscaleはコントロールプレーンの一部にSQLiteを採用しているが、2024年8月、S3へのバックアップに対する`PRAGMA integrity_check`が破損を検出したことで異変に気づいた。以後6ヶ月の間に19件の破損インシデントが発生し、10月から12月にかけて一時的に発生が止まる「偽りの静けさ」を経て2025年初頭に再発、そこで初めてSQLite開発陣を巻き込んだ本格的な原因調査が始まった。破損の正体は、チェックポイント処理と書き込みトランザクションが極めて狭いタイミングで衝突すると発生する競合状態(データレース)だった。チェックポイントはWAL(Write-Ahead Log)のページをメインのデータベースファイルへコピーする処理だが、このレースが起きると実際にはコピーされていないページを「コピー済み」と誤認識し、該当ページのデータが永久に失われる。SQLite開発者の分析では、このバグはTailscaleのように積極的な手動チェックポイント制御を行う非標準的な使い方でのみ顕在化する極めてまれな条件で、少なくとも16年間ソースコード中に潜んでいたと推定されている。破損はTailnetのデバイス接続や管理コンソールへのアクセス障害を引き起こし、ステータスページでのインシデント公表が繰り返されたことで信頼低下も招いた。修正はSQLite 3.51.3で、チェックポイント関数に別スレッドによるWALリセットを検知する追加チェックを組み込む形で行われ、リリース後2ヶ月時点での警告アラートで実際に発生していたことが確認された。現在は4ヶ月間インシデントが発生していない。</div>
-        <div class="editorial">🧠 16年間見つからなかったバグが、Tailscaleほど大量のトラフィックと非標準的な運用パターンを持つ環境で初めて表面化したという事実は、SQLiteの成熟度そのものよりも「テスト環境の多様性」の重要性を物語る。ただし今回の教訓を汎用化するのは早計だ——大半のSQLite利用はここまで攻撃的なチェックポイント制御を行わないため、同種の被害に遭うプロジェクトは限定的だろう。むしろ注目すべきは6週間の「偽りの静けさ」があった点で、障害調査において「再発しない」ことを安易に解決の証拠とみなす危うさを示している。</div>
+        <div class="summary">Broadcomは7月29日、VMware vCenter Serverに影響する複数の脆弱性を公表するセキュリティアドバイザリVMSA-2026-0006を発表した。中でも深刻度が最も高いのがCVE-2026-59310で、CVSSスコアは満点に近い9.8。vCenterのSyslogサーバーに存在するディレクトリトラバーサルの欠陥で、ネットワーク経由でアクセス可能な未認証の攻撃者が任意コードを実行できる。姉妹脆弱性のCVE-2026-59309(認証バイパス)と組み合わせれば、認証情報なしに管理コンソールへ侵入する経路が成立する。Broadcomはパッチ以外の回避策を提供しておらず、緊急アップデートの適用のみが対処法だと明言していた。この警告が現実の脅威であることは、公開からわずか5日後の8月3日に裏付けられた。脅威インテリジェンス企業QUIRSOが、攻撃者管理下のC2インフラと通信する侵害済みシステムの検出を報告したのだ。攻撃チェーンはディレクトリトラバーサルの痕跡に続いて悪意あるcronジョブを設置し、永続化のためにオープンソースツール「reverse_ssh」を用いた持続的リモートアクセスを確立するパターンが確認されている。現時点で被害は361台のIPアドレス、47ヶ国に及び、うちドイツ・米国・トルコ・イラン・フランスだけで過半数を占める。vCenterは仮想化基盤の管理プレーンそのものであり、侵害されれば配下の全仮想マシン・バックアップ・ネットワーク設定への足がかりを攻撃者に与える。</div>
+        <div class="editorial">🧠 5日という短さは、公開されたパッチのdiffから脆弱性を逆算する「patch diffing」がすでに定型作業として高速化していることを示している。ただし今回observedされているのはreverse_sshによる持続的アクセスの確立までで、ランサムウェア展開や大規模なデータ窃取の実例はまだ報告されていない——被害の全容はこれから拡大する可能性があり、361台という数字を「収束した被害規模」と読むのは早計だ。</div>
         <div class="key-points">
           <ul>
-            <li>破損の直接原因はチェックポイントと書き込みトランザクションのデータレースで、WALページを「コピー済み」と誤認識し永久喪失させる——少なくとも16年間ソースコードに潜伏</li>
-            <li>2024年8月の初検出から19件のインシデントを経て、2025年初頭にSQLite開発陣と共同でデバッグツールを作成し原因を特定、修正はSQLite 3.51.3で提供</li>
-            <li>修正後も2ヶ月間は警告アラートが発生し実際に問題が起きていたことを確認、現在は4ヶ月間インシデントなしで安定</li>
+            <li>CVE-2026-59310(CVSS 9.8)はSyslogサーバーのディレクトリトラバーサルで未認証RCEが成立、姉妹脆弱性CVE-2026-59309との連鎖で認証情報なしの侵入経路が完成する</li>
+            <li>Broadcomの7月29日公開から8月3日の実悪用検出までわずか5日、Broadcomはパッチ以外の回避策を提供していない</li>
+            <li>攻撃はcronジョブでreverse_sshを設置し持続的アクセスを確立するパターンで、361台・47ヶ国に感染が拡大(ドイツ・米国・トルコ・イラン・フランスが上位)</li>
           </ul>
         </div>
-        <div class="why-it-matters">💡 手動でチェックポイント制御を行うSQLite運用者は3.51.3以降へのアップグレードに加え、`PRAGMA integrity_check`を使った定期的なバックアップ検証をパイプラインに組み込むべきだ。</div>
+        <div class="why-it-matters">💡 vCenterを運用する組織は緊急アップデートの適用を最優先とし、パッチ未適用の環境ではSyslogサーバーへの外部アクセス遮断とreverse_ssh関連プロセスなどC2通信の兆候を直ちに監視すべきだ。</div>
         <div class="meta">
-          <span>Tailscale</span>
+          <span>SecurityWeek</span>
           <span>⏱ 5 min read</span>
           <span>2026-08-12</span>
-          <span class="engagement">▲ 656</span>
         </div>
       </div>
 
@@ -84,43 +93,43 @@
         <div class="card-header">
           <span class="tag tag-ai">AI</span>
           <span class="content-type">📦 リリース</span>
-          <h3><a href="https://x.ai/news/grok-4-6">xAI、Grok 4.6を公開——長時間稼働エージェントと視覚系タスクを強化、Artificial Analysis指数でGPT-5.6 Solと同点61</a></h3>
+          <h3><a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-3-7-flash/">Google、Gemini 3.7 Flashを公開——コーディングとエージェント性能を強化、3.6からわずか3週間での投入で価格は半額に</a></h3>
         </div>
-        <div class="summary">xAIは2026年8月12日、大規模言語モデル「Grok 4.6」を公開した。広範な製品アイデアを動くプロトタイプへと落とし込む多段階の推論・自己テスト・反復改善に重点を置き、視覚系・インタラクティブなタスクでの精度が前モデルから向上している。Artificial Analysis Intelligence IndexではGPT-5.6 Solと同スコアの61を記録し、CursorBench v3.2で69.9%、DeepSWE v1.1で65.9%、FrontierCode v1.1で61.3%を達成した。Cursor・Grok Build・API・OpenRouter・Vercel・Cloudflareなど各種プラットフォームで即日利用可能。価格は入力100万トークンあたり2ドル、出力6ドルで、高速版はその2倍。</div>
+        <div class="summary">Googleは2026年8月13日、「Gemini 3.7 Flash」を公開した。コーディングとエージェントタスク向けの主力モデルと位置付け、3.6 Flashからわずか3週間での投入となる。FrontierCode 1.1のスコアは34.4%から43.6%へ、DeepSWE v1.1は49.0%から65.3%へ向上し、Webアプリ生成の質を測るWebDev Arena Eloも1538から1588に上昇した。価格は2026年12月31日までの導入価格として入力100万トークンあたり0.75ドル・出力3.75ドルとなり、3.6 Flash比で50%引き下げられた。Google AI Studio・Android Studio・Gemini Enterprise・Gemini Sparkなど各プラットフォームで即日提供される。</div>
         <div class="key-points">
           <ul>
-            <li>Artificial Analysis Intelligence Indexで61を記録しGPT-5.6 Solと同点、CursorBench v3.2は69.9%・DeepSWE v1.1は65.9%</li>
-            <li>価格は入力$2/出力$6(100万トークンあたり)、高速版は2倍、初週は新規ユーザー向けに利用枠2倍を提供</li>
+            <li>FrontierCode 1.1が34.4%→43.6%、DeepSWE v1.1が49.0%→65.3%、WebDev Arena Eloが1538→1588に向上——3.6 Flashからわずか3週間での投入</li>
+            <li>導入価格は入力$0.75/出力$3.75(100万トークンあたり、2026年12月31日まで)で3.6 Flash比50%引き下げ、標準価格は2027年1月から適用</li>
           </ul>
         </div>
-        <div class="why-it-matters">💡 UIプロトタイピングを自動化したい開発チームは、Cursor経由で利用枠が2倍になる初週のうちに検証しておく価値がある。</div>
+        <div class="why-it-matters">💡 コーディングエージェント用途で速度とコストを優先するチームは、3.6 Flashからの切り替えを試す価値がある——標準価格への切り替わり時期(2027年1月)も見込んだコスト試算をしておきたい。</div>
         <div class="meta">
-          <span>xAI</span>
+          <span>Google</span>
           <span>⏱ 3 min read</span>
-          <span>2026-08-12</span>
-          <span class="engagement">▲ 297</span>
+          <span>2026-08-13</span>
+          <span class="engagement">▲ 460</span>
         </div>
       </div>
 
       <div class="card featured">
         <div class="card-header">
-          <span class="tag tag-product">Product</span>
-          <span class="content-type">👀 注目</span>
-          <h3><a href="https://blog.florianherrengt.com/ai-removing-middle-class-software-engineering.html">「AIはソフトウェアエンジニアの中間層を消し去る」論——週末で2万4千行超の差分を持つPRが7件溜まる開発速度が、平凡なエンジニアの居場所を奪う</a></h3>
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://deepseek.com/harness/en/">DeepSeek、AIエージェント開発フレームワーク「Harness」を開発者プレビュー公開——全機能をCordisカーネル上のプラグインとして差し替え可能に、MITライセンスで公開</a></h3>
         </div>
-        <div class="summary">AIツールによる開発速度の高速化が、ソフトウェアエンジニアの中間層を消し去りつつあると論じるエッセイ。著者は週末を挟んだだけで「24506行追加・3938行削除」規模のPRが7件溜まっているのを目にした経験を紹介し、AIエージェントが1日に数千行のコードを生成する時代には、以前なら数週間かかった作業量が数日で積み上がると指摘する。チームは自分たちのシステムを理解できなくなりつつあり、コードの経緯をAIとの会話履歴に頼らないと説明できないケースも生じている。悪いアーキテクチャ判断も蓄積が速く、LLMなら10分で追加できるデータベーステーブルも、後から巻き戻すには大がかりな移行計画が必要になるため、劣化が修復を上回るという。</div>
+        <div class="summary">DeepSeekは、AIエージェントを構築するためのオープンソースフレームワーク「Harness」を開発者プレビューとして公開した。モデル・ツール・スキル・ストレージ・スケジューリング・UIまで、あらゆる機能をCordisプラグインシステム上の差し替え可能なプラグインとして実装しているのが特徴で、依存関係の解決もCordisが担う。モデルが実際に見たプロンプト・推論過程・ツール呼び出し・コンテキスト注入のすべてを追記専用のイベントログに記録し、セッションの再開・分岐・検索・再生を可能にする。実行モードはフルツールセットの標準・モデル生成TypeScriptでオーケストレーションするCode・ベンチマーク用のMinimal・カスタムプリセットのCreatorの4種類を用意する。</div>
         <div class="key-points">
           <ul>
-            <li>週末を挟んだだけで「24506行追加・3938行削除」規模のPRが7件溜まる開発速度により、レビューが数週間分の変更を短期間で消化する必要に迫られる</li>
-            <li>LLMなら10分で追加できるDBテーブルも巻き戻しには大規模な移行計画が必要——アーキテクチャの劣化速度が修復速度を上回る非対称性を指摘</li>
+            <li>全機能がCordisプラグインシステム上の差し替え可能なプラグインとして実装され、依存関係解決も同カーネルが担う設計</li>
+            <li>セッションログは追記専用のイベントストリームで再開・分岐・検索・再生に対応、実行モードは標準/Code/Minimal/Creatorの4種類、`npx @deepseek-ai/dsh web`で試用可能</li>
           </ul>
         </div>
-        <div class="why-it-matters">💡 優秀なエンジニアはAIでさらに価値を高める一方、平凡なエンジニアは安価な人材に置き換わり給与の中間層が消えると著者は予測する——マネージャーはレビュー体制の再設計を迫られるはずだ。</div>
+        <div class="why-it-matters">💡 独自エージェントを構築中のチームは、Cordisプラグイン設計とセッションログの再生機能をデバッグ・監査基盤として参考にできる——MITライセンスなので商用への組み込み障壁も低い。</div>
         <div class="meta">
-          <span>blog.florianherrengt.com</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-08-11</span>
-          <span class="engagement">▲ 624</span>
+          <span>DeepSeek</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-08-13</span>
+          <span class="engagement">▲ 503</span>
         </div>
       </div>
     </div>
@@ -130,100 +139,102 @@
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://zed.dev/blog/introducing-delta">Zed、AIエージェントと共同編集するマルチプレイヤー開発ツール「Delta」を発表——コメントはコードの進化に追従し会話ごとスレッド化</a></h3>
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://a.security/blog/asecurity-zoomsday">Zoom、注釈機能に3件のゼロクリック脆弱性——会議に参加するだけでRCEが成立、6月発見から2ヶ月かけて全プラットフォームへ対処</a></h3>
         </div>
-        <div class="summary">Zedは、AIエージェントと人間が同じスレッド上でコードと会話を共有しながら共同作業する新ツール「Delta」を発表した。コメントはコミットではなくコードの進化そのものに紐付き、Claude Codeなどのサードパーティエージェントとも連携してターミナルセッションをスレッドにリアルタイム同期できる。新設計のデータベース「DeltaDB」が会話とワークツリーをリアルタイムに複製しつつ既存のGitリポジトリとの互換性を保つ。</div>
+        <div class="summary">セキュリティ研究チームが、Zoomの注釈機能を処理する`libannotate.so`ライブラリにメモリ破損の脆弱性(CVE-2026-53413/53414/53415)を発見した。テキスト注釈のデシリアライズ処理に固定バッファへの無制限コピーとオーバーリードがあり、細工した注釈プロトコルメッセージを送るだけでユーザー操作なしにRCEが成立する。6月8日の発見から6月22日にクライアント側、7月15日にサーバー側の対処を経て8月11日に公開された。</div>
         <div class="key-points">
           <ul>
-            <li>コメントはコード行・プラン・思考ブロック単位に付与でき、コミットベースのプラットフォームと異なりコードの変化に追従し続ける</li>
-            <li>ブラウザリンクでインストールなしに参加可能なRust-to-WebAssemblyアプリで、クラウドランナー上でエージェントの作業を継続しながらチームスレッドと同期</li>
+            <li>Windows/macOS/iOS/Android/Linuxの全プラットフォームでZoom Workplace 7.1.5未満・Zoom Rooms/Meeting SDK 7.1.0未満が対象</li>
+            <li>6月8日の発見から6月22日クライアントパッチ・7月15日サーバー側緩和を経て8月11日公開、E2E暗号化会議のみクライアント更新が別途必要</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Zed</span>
+          <span>a.security</span>
           <span>⏱ 3 min read</span>
-          <span>2026-08-12</span>
+          <span>2026-08-11</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-security">Security</span>
-          <span class="content-type">🔒 セキュリティ</span>
-          <h3><a href="https://signal.org/blog/automatic-key-verification/">Signal、鍵の自動検証機能「Automatic Key Verification」を導入——key transparencyでディレクトリ運営者による鍵すり替えを検知</a></h3>
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://github.com/systemd/systemd/issues/40262">systemd-journald、2行/秒のログ書き込みで約50 IOPSを消費——非効率なファイル形式が原因とissueで指摘、過去のissueも未解決のまま</a></h3>
         </div>
-        <div class="summary">Signalは、連絡先の安全番号を自動的に検証する「Automatic Key Verification」を導入した。ディレクトリ運営者が本人に気づかれずに暗号鍵をすり替える「Mallory in the middle」攻撃を防ぐのが狙いで、登録・変更履歴を記録する「Log Tree」と効率的な検索を可能にする「Prefix Trees」から成るkey transparency基盤で実現している。CloudflareとTrail of Bitsが独立監査者としてログの各エントリに署名し、サーバーがユーザーごとに異なるログを見せることを防ぐ。</div>
+        <div class="summary">XFSファイルシステム上でHAProxyが2秒に1行程度のログしか出力していないのに、仮想マシンが約50 IOPSものディスクI/Oを消費しているとGitHub issueで報告された。報告者はDebian 13・Linux 6.12.57・systemd 257.9の環境で検証し、カーネルレベルの書き込みまとめ処理があるにもかかわらず過剰なI/Oが発生している点から、原因はOSのバッファリングではなくjournald自体のファイル形式にあると指摘する。ジャーナルファイルは実際に書き込まれたデータの数倍のサイズになっており、非クリーンな再起動時にファイルが破損した経験も複数回あるという。</div>
         <div class="key-points">
           <ul>
-            <li>検証はIETFのkey transparencyプロトコル草案に基づき、ユーザーが定期的に自分の識別子を自動チェックする仕組みを含む3層構成</li>
-            <li>検証対象データは検証可能ランダム関数とキー付きハッシュ関数で秘匿され監査者にも平文が見えない設計、連絡先の電話番号登録が前提でPrivacy設定から無効化も可能</li>
+            <li>Debian 13/systemd 257.9環境で2秒に1回程度のログ出力が約50 IOPSを消費、ジャーナルファイルは実データの数倍のサイズに膨張</li>
+            <li>過去にも同種の指摘(issue #15292)があったが未対処のままクローズされており、非クリーンな再起動時の破損も複数回報告されている</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Signal</span>
+          <span>GitHub</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-08-13</span>
+          <span class="engagement">▲ 86</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://alan.norbauer.com/articles/github-stacks-with-jujutsu/">GitHub純正のスタックPR機能をJujutsuで使う——コミットごとのブックマーク作成が手作業で残り、中間コミットの修正はスタック全体の再作成が必要</a></h3>
+        </div>
+        <div class="summary">GitHubが新たに提供したスタックPR機能を、Git互換のバージョン管理システムJujutsu(jj)から使うための実践ガイド。スタック内の各コミットにブックマーク(ブランチ)を作成し`gh stack link`で連結されたドラフトPR群を生成する。著者はJujutsu 0.43.0以降・Git 2.52.0以降・GitHub CLI 2.96.0以降と`gh-stack`拡張が必要だと説明する一方、スタックの先頭へのコミット追加はブックマーク作成の繰り返しで済むが、中間や末尾のコミットを変更する場合はGitHub上のスタックを一度削除して作り直す必要があると指摘する。</div>
+        <div class="key-points">
+          <ul>
+            <li>Jujutsu 0.43.0+・Git 2.52.0+・GitHub CLI 2.96.0+と`gh-stack`拡張が前提、`gh stack link`でブックマークをドラフトPR群に変換</li>
+            <li>スタック先頭への追加はブックマーク作成のみで対応可能だが、中間・末尾コミットの変更はGitHub側のスタックを削除して再作成する必要がある</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>alan.norbauer.com</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-08-13</span>
+          <span class="engagement">▲ 42</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://community.openai.com/t/codex-in-chatgpt-desktop-app-for-linux-is-now-in-preview/1390027">OpenAI、ChatGPTデスクトップアプリのLinux版をプレビュー公開——CodexをChatGPT・Workと統合、Ubuntu/Debian/Fedoraにdeb/rpmで対応</a></h3>
+        </div>
+        <div class="summary">OpenAIは8月11日、ChatGPTデスクトップアプリのLinux版プレビューを公開した。ChatGPT・Work・Codexを単一のネイティブデスクトップ体験に統合し、プロジェクト管理やファイル操作、ブラウザワークフロー、Codexの実行をChatGPTと並行して行えるワークスペースとして機能する。対応ディストリビューションはUbuntu 24.04/26.04 LTS・Debian 13・Fedora 43/44で、x64・ARM64双方のアーキテクチャ向けに.deb・.rpm形式で提供される。</div>
+        <div class="key-points">
+          <ul>
+            <li>Ubuntu 24.04/26.04 LTS・Debian 13・Fedora 43/44にx64/ARM64・.deb/.rpm形式で対応、8月11日提供開始</li>
+            <li>コミュニティのフィードバックではWindows/macOS版と機能的に同等との声がある一方、一部Linux環境でIME互換性の問題が報告されている</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>OpenAI Community</span>
           <span>⏱ 3 min read</span>
           <span>2026-08-11</span>
+          <span class="engagement">▲ 436</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
           <span class="tag tag-frontend">Frontend</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://guillaumetech.github.io/posts/jpg-scaling-chrome/">なぜ小さなJPEGはChromeで違って見えるのか——libjpeg-turboの「部分IDCTスケーリング」が縮小時に高周波成分を切り捨てる</a></h3>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://flutter.dev/blog/whats-new-in-flutter-3-47">Flutter 3.47公開——デスクトップの既定レンダラーがImpellerに切り替わりSkia由来の描画カクつきを解消、iOS最小対応が13→15に引き上げ</a></h3>
         </div>
-        <div class="summary">15pxのロゴがFirefoxよりChromeで太く見えるという観察から始まった調査記事。原因はChromeのレンダリングエンジンSkiaが利用するlibjpeg-turboの最適化「部分IDCTスケーリング」で、画像を縮小表示する際に8×8ブロックの低周波係数だけを復号し、縮小時にどのみち失われる高周波の細部情報を最初から破棄する設計だ。15px程度の極小画像では平坦な色情報しか残らず、エッジのぼかしや階調が失われて輪郭が強調される。著者はアイコン用途にJPEGを使うべきではないと結論づける。</div>
+        <div class="summary">Flutter 3.47が公開された。macOS・Windows・LinuxのデスクトップでレンダリングエンジンがSkiaからImpellerへ切り替わり既定化された。Impellerは事前コンパイル済みシェーダーを使うことで「シェーダーコンパイルのカクつき」を解消し、初回フレームから滑らかなアニメーションを実現する。MaterialとCupertinoのウィジェットは`material_ui`・`cupertino_ui`という独立パッケージとしてpub.devでバージョン1.0に到達し、四半期ごとのSDKリリースを待たずに週次で更新できるようになった。次期Xcode 27対応に向け、iOSの最小対応バージョンは13から15へ、macOSは10.15から12へ引き上げられた。</div>
         <div class="key-points">
           <ul>
-            <li>JPEGは8×8ブロック単位で周波数領域に変換されており、1/8スケールなど8の倍数に近い縮小率では低周波係数のみを復号する最適化が働く</li>
-            <li>15px程度の極小画像では平坦な色情報しか残らずエッジのぼかしや階調が失われる——著者はアイコン用途にJPEGを使うべきではないと結論</li>
+            <li>デスクトップの既定レンダラーがImpellerに切り替わりシェーダーコンパイルのカクつきを解消、Material/CupertinoウィジェットはSDKと独立して週次更新可能な`material_ui`/`cupertino_ui`(v1.0)に分離</li>
+            <li>Xcode 27対応でiOS最小バージョンが13→15・macOSが10.15→12に引き上げ、Javaは17以上・AndroidはcompileSdk/targetSdk 36が必須に</li>
           </ul>
         </div>
         <div class="meta">
-          <span>guillaumetech.github.io</span>
-          <span>⏱ 3 min read</span>
-          <span>2026-08-11</span>
-          <span class="engagement">▲ 216</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://vitaut.net/posts/2026/yy-dtoa/">「yy」アルゴリズム解説——Schubfach系より192bit乗算2回分を省略し最速級のdouble→文字列変換を実現</a></h3>
-        </div>
-        <div class="summary">yyjsonライブラリ由来の「yy」アルゴリズムは、浮動小数点数を最短の10進文字列に変換する手法の一つで、Schubfach系アルゴリズムに属しながら計算のショートカットで高速化している。10進指数をlog₁₀(2)の固定小数点近似で決定し、事前計算済みの10のべき乗テーブルで浮動小数点数を再スケーリングした上で、4つの候補10進値に対し3つの単純な述語を評価して往復変換が成立する最短表現を特定する。従来のSchubfachが必要とする192bit乗算2回分の計算を、half-ulpをp₁₀の整数シフトとして扱うことで省略している。</div>
-        <div class="key-points">
-          <ul>
-            <li>Schubfach系のアルゴリズムでありながら、half-ulpの計算を「p₁₀の整数シフト」として扱うことで192bit乗算2回分を省略</li>
-            <li>4つの候補10進値に3つの単純な述語を適用して最短往復変換表現を特定する設計で、Apple M5 Max環境のベンチマークで最速級の実装に位置づけられる</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>vitaut.net</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-08-11</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://www.sandordargo.com/blog/2026/08/12/cpp26-indirect">C++26に`std::indirect`追加——`unique_ptr`メンバーのconst伝播漏れとコピー不可問題を解消する値型ラッパー</a></h3>
-        </div>
-        <div class="summary">C++26で新たに導入される`std::indirect<T>`は、ヒープ確保したオブジェクトに値型のセマンティクスを与えるボキャブラリ型だ。`unique_ptr`をメンバーに持つ場合の2つの問題——`operator*() const`が非const参照を返してしまうconst伝播の欠如と、Rule of Fiveの実装を強いられるコピー不可——を解消する。`indirect`のコピーはポインタではなく所有オブジェクト自体をディープコピーし、const経由での変更はコンパイルエラーになる。PIMPLイディオムや再帰的なデータ構造の実装で、ボイラープレートを削減する用途を想定する。</div>
-        <div class="key-points">
-          <ul>
-            <li>`unique_ptr::operator*() const`が非const参照を返すconst伝播の欠如を修正し、const文脈では`const T&`を返す</li>
-            <li>コピー操作をコンパイラ生成に任せられディープコピーを実現、PIMPLイディオムや再帰型の実装でRule of Five相当のボイラープレートを削減</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>sandordargo.com</span>
+          <span>Flutter</span>
           <span>⏱ 3 min read</span>
           <span>2026-08-12</span>
         </div>
@@ -236,81 +247,82 @@
       <div class="card">
         <div class="card-header">
           <span class="tag tag-dev">Dev</span>
-          <span class="content-type">🔬 研究</span>
-          <h3><a href="https://zenn.dev/dinii/articles/a272b7c3b60ab8">Chromium(V8)のArray.prototype.copyWithinを最大約450倍高速化——1要素ずつの処理をmemmove一括処理に置き換え</a></h3>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/nabettu/articles/a964f988e7cc75">月額5ドルでSaaSを本番運用——Next.js+Cloudflare Workers+Turso構成で踏んだ7つの罠、DB往復は240msから77msへ</a></h3>
         </div>
-        <div class="summary">V8の`Array.prototype.copyWithin`を高速化する最適化パッチがChromiumに投稿された。従来実装は要素を1つずつ`HasProperty`/`Get`/`Set`で処理していたが、新実装は「連続したメモリ領域の移動はmemmoveで一括処理すべき」という発想から、バッキングストア上の範囲を`MoveElements`でまとめて移動する。穴のないPACKED配列では無条件でmemmoveを使い、穴のあるHOLEY配列ではプロトタイプチェーンの保護機構を検証した上で適用する。1M要素の配列でのd8実測ではpacked smiが10.55msから0.0243msへ、holey smiが11.76msから0.0252msへと変化した。</div>
+        <div class="summary">イベント管理SaaSをNext.js 16(App Router)・Cloudflare Workers・Turso(HTTP経由のSQLite)で構築し、月額5ドル(Workers Paid)とドメイン代のみで本番運用している事例。OpenNext環境では`next/image`と`next/link`が使えずESLintで禁止し画像最適化はCloudflareの`/cdn-cgi/image/`で代替する。TursoはSQL1文につきHTTPS1往復が必要なため、バッチ処理と並列化でDB往復を240msから77msへ短縮した。RSCペイロードに非表示データが含まれる問題やタイムゾーン不一致によるhydration mismatchなど、フレームワーク特有の落とし穴が7件報告されている。</div>
         <div class="key-points">
           <ul>
-            <li>packed smi配列で10.55ms→0.0243ms(約434倍)、holey smi配列で11.76ms→0.0252ms(約467倍)、packed double配列で11.06ms→0.0491ms(約225倍)に高速化</li>
-            <li>ユーザーコード実行による配列変化を想定し移動直前に境界値を再検証、実装はTorqueマクロ言語でECMAScript仕様への完全準拠を維持</li>
+            <li>Workers Paid月額5ドル+ドメイン代のみで運用、R2・KV・Durable Objects・Turso・SESは無料枠内に収まる</li>
+            <li>SQL1文=HTTPS1往復という制約に対しバッチ処理と並列化でDB往復を240ms→77msに短縮、N+1クエリの回避が必須</li>
           </ul>
         </div>
         <div class="meta">
           <span>Zenn</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-08-12</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-08-13</span>
+          <span class="engagement">🔖 17</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
           <span class="tag tag-dev">Dev</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://qiita.com/hez2010/items/2aff0b2b40b9d0bfda91">.NET 11のRuntime Asyncはなぜ速いのか——ステートマシン生成をやめ非同期制御フローを実行時にそのまま渡す設計に転換</a></h3>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://zenn.dev/estie/articles/64b80da2fbf175">同じRust製リンタなのになぜ速度差5倍——BiomeとOxlintを実測比較、型認識lintでは逆にBiomeが16倍速い</a></h3>
         </div>
-        <div class="summary">従来のC#コンパイラは非同期メソッドを毎回「ステートマシン」に変換し、中断しないメソッドでも都度Taskオブジェクトを生成していた。.NET 11のRuntime Asyncはこの生成をやめ、非同期の制御フローをそのまま実行時に渡す設計に転換した。新しい「Async Calling Convention」では通常の戻り値に加えて`Continuation`オブジェクトを返し、中断が起きなければ`continuation`は`null`のままレジスタ経由でデータをやり取りするため、Taskオブジェクトが一切生成されない。</div>
+        <div class="summary">Rust製の2つのJS/TSリンタ「Biome」と「Oxlint」を実測比較したところ、通常のlintではOxlintが約4.9倍高速(Biome 0.78秒 vs Oxlint 0.16秒)だった一方、型認識lintではBiomeが約16倍速いという逆転が生じた。速度差の要因は3つ——Biomeはファイル間解析やCSS検査まで扱う分処理範囲が広いこと、Oxlintは複数ルールを単一のAST走査に相乗りさせてルール実行コストを最小化していること、そしてOxlintがbump allocationで連続領域メモリを確保するのに対しBiomeは編集対応のため個別確保・参照カウント方式を採る点だ。型認識lintでBiomeが優位なのは、TypeScript非依存の型推論で近似する設計により実行時間を抑えられるためだと分析する。</div>
         <div class="key-points">
           <ul>
-            <li>中断のない非同期処理でメモリ割り当てゼロを実現し従来比19.6倍高速化、ThreadPool継続では3.2倍、深い非同期チェーンでは7.4倍(メモリ使用量は30GBから19.2GBへ削減)</li>
-            <li>通常の戻り値と`Continuation`を同時に返す「Async Calling Convention」により、中断しないケースでは同期メソッド並みの性能を実現</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Qiita</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-08-10</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-ai">AI</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://zenn.dev/aws_japan/articles/agent-plugins-1-0-deep-dive">「Agent Plugins 1.0.0」は何を標準化し、何を標準化しなかったのか——OpenAI主導でAnthropicは不参加のまま独自形式を維持</a></h3>
-        </div>
-        <div class="summary">AIエージェント向けプラグインの配布形式を標準化する「Agent Plugins 1.0.0」を、仕様の中身に踏み込んで分析した記事。標準化したのはskillsとMCP設定を単一ディレクトリにまとめるパッケージ構造と、stdio・Streamable HTTP・SSEの3トランスポートに限定したMCP設定のclosed union形式で、パス封じ込めやHTTPS強制などのセキュリティ規定も含む。一方でhooks・subagents・rulesはクライアント固有性が強すぎるとして意図的に除外し、マーケットプレイス機構や認可・資格情報管理も各クライアントに委ねた。策定はOpenAI主導でAmazon・Cursor・Microsoft・Vercelが参加する一方、Anthropicは不参加でClaude Codeは独自形式のままだという。</div>
-        <div class="key-points">
-          <ul>
-            <li>標準化対象はskills+MCP設定のパッケージ構造とMCP設定の3トランスポート限定closed union形式、マニフェスト必須項目は`$schema`と`name`のみ</li>
-            <li>OpenAI・Cursor・GitHub Copilot・VS Codeが適合クライアント登録済みの一方、Anthropicは参加せずClaude Codeは`POWER.md`等の独自形式を維持</li>
+            <li>通常lintはOxlintが約4.9倍高速(0.78秒→0.16秒)、型認識lintは逆にBiomeが約16倍高速という逆転現象</li>
+            <li>Oxlintはbump allocationによる連続領域メモリ確保、Biomeは編集対応の個別確保・参照カウント方式という設計差が速度差の一因</li>
           </ul>
         </div>
         <div class="meta">
           <span>Zenn</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-08-10</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-08-13</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-ai">AI</span>
+          <span class="tag tag-infra">Infra</span>
           <span class="content-type">📜 解説</span>
-          <h3><a href="https://tech-blog.rakus.co.jp/entry/20260812/ai">ループエンジニアリングとグラフエンジニアリングは対立軸ではなく包含関係——「検証の積み木」で4層のエージェント設計を整理</a></h3>
+          <h3><a href="https://zenn.dev/akari1106/articles/9d2abbc63a4abb">Cloudflareは16年間ずっと同じことをしている——「トラフィックの通り道に立つ」という2004年の原点からWorkers・Zero Trustまで一直線</a></h3>
         </div>
-        <div class="summary">著者は、AIエージェント設計におけるループとグラフの関係を「検証の積み木モデル」として整理する。LLM単発推論(検証なし)→ReAct(LLMが自己申告)→ループエンジニアリング(テストや評価用LLMなど外部判定器に検証を委譲)→グラフエンジニアリング(複数ループの成果物を合流点で検証)という4層は、人間が担っていたレビュアー役やマネージャー役を段階的に自動化していく関係にあり、優劣で比較すべきものではないと主張する。実装判断では、複数成果物の整合性チェックや複数の戻り先が不要ならループで十分とし、安易なグラフ化に警鐘を鳴らす。</div>
+        <div class="summary">Cloudflareの製品戦略を「トラフィックの通り道に自分が立ち、そこで全部処理する」という一つの原則に還元して読み解く記事。起点は2004年のスパム追跡プロジェクト「Project Honey Pot」で、ユーザーから「追跡ではなく止めてくれ」と求められたことが転機になったと分析する。止めるには通り道に立つしかないという判断がその後16年の戦略を規定し、全サーバーが全機能を実行する均質アーキテクチャによってリクエストが一度の処理で完結する設計につながった。Workers・Durable Objects・Zero Trust・Cloudflare OSは、見た目は別々の製品でも立場を変えず対象を増やしているだけだと結論づける。</div>
         <div class="key-points">
           <ul>
-            <li>4層構造(LLM単発→ReAct→ループエンジニアリング→グラフエンジニアリング)は人間のレビュアー役・マネージャー役を段階的に自動化する包含関係と位置づける</li>
-            <li>実装判断基準として「複数成果物の整合性チェックと複数の戻り先が必要か」を提示し、不要ならループで十分だと結論</li>
+            <li>2004年のProject Honey Pot以来「通り道に立つ」という一つの原則を軸に、全サーバーが全機能を実行する均質アーキテクチャで低レイテンシを実現</li>
+            <li>Workers(通り道でコード実行)・Durable Objects(通り道上で状態保持)・Zero Trust(通り道の仮想ネットワーク化)・Cloudflare OSはいずれも同じ原則の対象を広げた製品群と位置づける</li>
           </ul>
         </div>
         <div class="meta">
-          <span>tech-blog.rakus.co.jp</span>
+          <span>Zenn</span>
           <span>⏱ 3 min read</span>
           <span>2026-08-12</span>
-          <span class="engagement">🔖 16</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-product">Product</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://www.lifehacker.jp/article/2509android-is-making-it-more-difficult-to-sideload-apps-pai/">Google、2027年からPlayストア外アプリに開発者認証を義務化——ブラジル・インドネシア・シンガポール・タイで先行導入し全世界へ拡大</a></h3>
+        </div>
+        <div class="summary">Googleは2027年、Google Playストア外で配布されるAndroidアプリのインストールに開発者認証を必須化する方針を発表した。ブラジル・インドネシア・シンガポール・タイで先行実施した後、全世界へ拡大する計画。Epic Gamesなどのサードパーティストアや個人サイトからの配布も対象となり、認証を受けていないアプリは事実上インストールできなくなる。Googleは偽装アプリやマルウェア対策としてプラットフォームのセキュリティ向上を目的に掲げるが、広告ブロッカーアプリなどユーザーの自由度を制限する側面への批判も出ている。</div>
+        <div class="key-points">
+          <ul>
+            <li>2027年から開発者認証のないアプリはPlayストア外でも事実上インストール不可に、ブラジル・インドネシア・シンガポール・タイで先行導入</li>
+            <li>Epic Gamesのサードパーティストアや個人配布サイトも対象、広告ブロッカーなど一部アプリカテゴリへの実質的な制限になるとの批判がある</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Lifehacker JP</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-08-13</span>
+          <span class="engagement">🔖 161</span>
         </div>
       </div>
     </div>
@@ -320,62 +332,63 @@
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-oss">OSS</span>
+          <span class="tag tag-ai">AI</span>
           <span class="content-type">📦 リリース</span>
-          <h3><a href="https://linebender.org/blog/fearless-simd-0-7/">Rust SIMDライブラリ「fearless_simd」v0.7公開——64bit整数対応で全型カバレッジ完成、v1.0は9月予定</a></h3>
+          <h3><a href="https://docs.mistral.ai/models/ocr-4-1">Mistral、OCR 4.1をパブリックプレビュー公開——段落単位のバウンディングボックスと信頼度スコアを追加、1000ページあたり3.5ユーロ</a></h3>
         </div>
-        <div class="summary">Rust向けポータブルSIMDライブラリ「fearless_simd」がv0.7を公開した。u64/i64の64bit整数型に完全対応し、整数・浮動小数点の全型でAPIカバレッジが揃った。全幅対応の`swizzle_dyn`やオーバーフロー挙動を指定できるベクトルの拡大縮小、ランタイムディスパッチ不要な明示的SSE2実装レベルなどを追加。型固有だった`reinterpret_*`系メソッドは汎用的な`bitcast`に統合された。64bit整数と新機能を追加したにもかかわらずコンパイル時間はx86で2秒・Aarch64で1秒のまま変化していない。</div>
+        <div class="summary">MistralはOCRサービスの最新版「OCR 4.1」をパブリックプレビュー公開した。`/v1/ocr`エンドポイントで段落レベルのバウンディングボックス抽出、構造ブロックのラベル付け、ブロック単位の信頼度スコアをネイティブに返せるようになった。`/v1/batch`エンドポイント経由のバッチ処理にも対応し、Document AIスタックの一部として位置づけられる。</div>
         <div class="key-points">
           <ul>
-            <li>`SimdBase`トレイトが整数・浮動小数点ベクトルを共通抽象化、`Bytes`トレイトによる汎用bitcastで型固有メソッドを整理</li>
-            <li>64bit整数対応や新機能追加後もコンパイル時間はx86で2秒・Aarch64で1秒を維持、v1.0は2026年9月上旬にAPI凍結して公開予定</li>
+            <li>`/v1/ocr`で段落単位のバウンディングボックス・構造ブロックラベル・ブロック単位信頼度スコアをネイティブ返却、`/v1/batch`でバッチ処理に対応</li>
+            <li>価格は標準OCRが1000ページ3.5ユーロ、注釈付きページが1000ページ4.38ユーロ</li>
           </ul>
         </div>
         <div class="meta">
-          <span>linebender.org</span>
-          <span>⏱ 3 min read</span>
-          <span>2026-08-11</span>
+          <span>Mistral</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-08-13</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://blogs.embarcadero.com/delphi-13-community-edition-is-now-available/">Delphi 13 Community Edition公開——64bit専用IDEとFireMonkeyのGPUアクセラレーション対応、年商5000ドル未満の個人・小規模チーム向け無償ライセンス</a></h3>
-        </div>
-        <div class="summary">EmbarcaderoはDelphi 13 Community Editionを公開した。バージョン12.1をベースに12.2・12.3・13.0の改善を統合し、if キーワードで実装された条件式(三項演算子相当)やNameOf組み込み関数、64bit Windowsアプリ専用の新IDEを追加。FireMonkeyはGPUアクセラレーションによるビットマップコピーとDisplay Linkサービスでアニメーションを高速化し、Android開発はAPIレベル35・iOSはバージョン18に対応した。無償対象は学生・趣味利用者・フリーランスと、アプリ収益が年5000ドル未満かつ5人以下のスタートアップ。</div>
-        <div class="key-points">
-          <ul>
-            <li>64bit Windows専用の新IDEと64bit言語サーバー、集中モード、エラー・警告のスクロールバー注釈を追加</li>
-            <li>無償ライセンスはアプリ収益年5000ドル未満の個人・フリーランスと、収益5000ドル未満かつ5人以下のスタートアップチームが対象、限定的な商用利用も許可</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Embarcadero</span>
-          <span>⏱ 3 min read</span>
-          <span>2026-08-11</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-oss">OSS</span>
+          <span class="tag tag-infra">Infra</span>
           <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://woxi.ad-si.com">RustでWolfram言語処理系を再実装した「Woxi」公開——ブラウザ内でローカル完結、.nbノートブックをMarkdown/LaTeX/PDFへ変換</a></h3>
+          <h3><a href="https://www.cerebras.ai/blog/accelerating-gpt-5-6-sol-ultrafast-with-openai">OpenAIとCerebras、推論特化ハードウェアで750トークン/秒を実現する「Ultrafast Mode」提供開始——Claude Fable 5比11倍速、限定プレビュー</a></h3>
         </div>
-        <div class="summary">Rustで書かれたWolfram言語のインタプリタ「Woxi」がShow HNで公開された。Mathematicaで知られるWolfram言語をオープンソースで再実装し、コードの実行はすべてブラウザ内でローカル完結するためデータを外部サーバーに送信しない。フルスクリーンエディタ・CLI・Jupyterカーネル・ネイティブノートブックアプリ「Woxi Studio」など複数のインターフェースを提供し、Wolfram形式の`.nb`ノートブックを読み込んで`.ipynb`・Markdown・LaTeX・Typst・PDFへエクスポートできる。</div>
+        <div class="summary">OpenAIとCerebrasは、Wafer-Scale EngineアーキテクチャでOpenAI APIの推論を高速化する新サービス階層「Ultrafast Mode」を発表した。出力速度は最大750トークン/秒で、Claude Fable 5比で11倍、Opus 4.8のFastモード比で5倍速い。2500問のPhDレベル問題からなるHumanity's Last Examを11時間11分で完走し、Claude Fable 5の78時間超と比べ精度を維持したまま約7倍高速化した。44GBのオンチップSRAMによりGPUのメモリ帯域幅がボトルネックになる構造を回避し、高速なトークン生成を持続させる設計。</div>
         <div class="key-points">
           <ul>
-            <li>ブラウザ内ローカル実行が設計の中心で、フルスクリーンエディタ・CLI・Jupyterカーネル・ネイティブアプリ「Woxi Studio」の複数インターフェースを提供</li>
-            <li>`.nb`ノートブックの読み込みと`.ipynb`・Markdown・LaTeX・Typst・PDFへのエクスポートに対応、JupyterLite統合でインストール不要のノートブック実行も可能</li>
+            <li>出力速度は最大750トークン/秒でClaude Fable 5比11倍、Humanity's Last Examを11時間11分で完走(Claude Fable 5は78時間超)</li>
+            <li>44GBのオンチップSRAMでGPUのメモリ帯域幅ボトルネックを回避、GDP-Valで品質維持のまま5.6倍のエンドツーエンド高速化</li>
           </ul>
         </div>
         <div class="meta">
-          <span>woxi.ad-si.com</span>
+          <span>Cerebras</span>
           <span>⏱ 3 min read</span>
-          <span>2026-08-12</span>
-          <span class="engagement">▲ 236</span>
+          <span>2026-08-13</span>
+          <span class="engagement">▲ 283</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://www.netlify.com/blog/one-prompt-11-models-very-different-results/">同じプロンプトを11個のAIモデルに投げたら、コストは2.4クレジットから519クレジットまで216倍の差——高いモデルほど良いとは限らない</a></h3>
+        </div>
+        <div class="summary">Netlifyは自社のAgent Runners基盤で、近所のコーヒーショップ向け1ページサイトを作らせる同一プロンプトを11個のAIモデルに投げて比較した。消費クレジットはClaude Opus 5が平均519(最大1055)と最も高く、DeepSeek V4 Flashは平均2.4と216倍の開きがあった。GPT 5.6 Solは141、Gemini 3.6 Flashは103と中位につけている。コストの高さは品質を保証せず、Opusは精緻なベクターグラフィックを生成した一方、DeepSeek V4 Flashのような低コストモデルも実用的なページを最小コストで生成した。</div>
+        <div class="key-points">
+          <ul>
+            <li>消費クレジットはClaude Opus 5が平均519(最大1055)、DeepSeek V4 Flashが平均2.4と約216倍の差</li>
+            <li>コストの高さは出力品質を保証せず、同一プロンプトを繰り返し実行しても出力が大きくばらつくモデルが確認された</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Netlify</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-08-13</span>
+          <span class="engagement">▲ 156</span>
         </div>
       </div>
     </div>
@@ -384,48 +397,47 @@
       <div class="section-title">🔗 Quick Links</div>
 
       <div class="quick-link">
-        <span class="tag tag-ai">AI</span>
-        <a href="https://huggingface.co/Qwen/Qwen3.8-2.4T-A95B">Alibaba、Qwenファミリー史上最強モデル「Qwen3.8-2.4T-A95B」公開——総パラメータ2.4兆・活性化950億のMoE、コーディングとエージェントタスクに特化</a>
-        <span class="quick-summary">— PaperBench 93.0・GPQA Diamond 92.6を記録、ネイティブ26万トークン(拡張で100万トークン)のコンテキストに対応。</span>
-        <span class="meta">Hugging Face</span>
-        <span class="engagement">▲ 378</span>
+        <span class="tag tag-data">Data</span>
+        <a href="https://pc.watch.impress.co.jp/docs/news/2132491.html">DapuStor、512TBのエンタープライズNVMe SSDを展示——従来最大の245TBから倍増、2台で1PBを構成可能</a>
+        <span class="quick-summary">— FMS 2026でスケールアウトストレージやAIトレーニングクラスター向けと位置づけ、性能指標は未公開。</span>
+        <span class="meta">PC Watch</span>
+        <span class="engagement">🔖 132</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://www.itmedia.co.jp/news/article/2608/13/2000000528/">ニコニコ、YouTubeの収益化条件引き上げに対抗——再生数・フォロワー数の基準なしで投稿当日から申請可能とアピール</a>
+        <span class="quick-summary">— プレミアム会員は本人確認不要、最小引き出し額は1円からで現金受け取りは一律198円の手数料。</span>
+        <span class="meta">ITmedia</span>
+        <span class="engagement">🔖 5</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://phunky.cafe/my-homelab-got-hacked/">自宅のForgejoがCVE-2026-60004で侵害されクリプトジャッキングに——EOLから6ヶ月放置したv13が標的に、24時間気づかず稼働</a>
+        <span class="quick-summary">— オープン登録の設定ミスが侵入経路になったが、3-2-1バックアップのおかげで復旧できたと著者は振り返る。</span>
+        <span class="meta">phunky.cafe</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://sebsite.pw/w/20260801-pythonconstants.html">Pythonの「定数」6兄弟はバラバラの挙動——True/False/Noneはキーワードだが、EllipsisとNotImplementedは上書き可能な普通のビルトイン</a>
+        <span class="quick-summary">— `__debug__`は代入不可の特殊識別子という第三の扱いで、「定数」という呼び方自体が実態と食い違うと指摘する。</span>
+        <span class="meta">sebsite.pw</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://domenkozar.com/2026/08/13/i-want-extern-fil-c/">Rustから安全にレガシーC資産を呼ぶ「extern "fil-c"」を提案——メモリ安全性違反を例外化するFil-Cとの橋渡しでC資産の速度コストを可視化</a>
+        <span class="quick-summary">— 遅いが安全なCライブラリをそのまま使うか性能が必要な箇所だけRustで書き直すかの判断をコストとして明示する狙い。</span>
+        <span class="meta">domenkozar.com</span>
       </div>
 
       <div class="quick-link">
         <span class="tag tag-ai">AI</span>
-        <a href="https://www.unite.ai/deepseek-ships-v4-pro-as-its-flagship-model-leaves-preview/">DeepSeek、「V4 Pro 0813」をプレビューから正式版へ移行——104万トークンのコンテキストと入力$0.435/出力$0.87の価格を維持</a>
-        <span class="quick-summary">— DeepSeek APIとDeepSeek Chatの両方で即日提供開始、近く大幅な値上げを予告している。</span>
-        <span class="meta">Unite.AI</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-frontend">Frontend</span>
-        <a href="https://en.andros.dev/blog/ef4968f5/html-over-websockets-real-time-spas-with-barely-any-javascript/">「HTML over WebSockets」でJavaScriptをほぼ使わずリアルタイムSPAを構築する手法を解説——サーバーが完成済みHTMLを直接送信しAPI契約自体を不要にする</a>
-        <span class="quick-summary">— Phoenix LiveViewやDjango LiveViewなど各言語の実装を比較し、双方向リアルタイム性が必要な用途にWebSocketを推奨する。</span>
-        <span class="meta">en.andros.dev</span>
-        <span class="engagement">▲ 83</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-ai">AI</span>
-        <a href="https://gowers.wordpress.com/2026/08/12/what-sort-of-maths-are-llms-good-at/">数学者ティモシー・ガワーズ氏、LLMは「探索木の枝刈り」が苦手だと分析——反例発見の成功例は標準手法と力任せの探索の組み合わせに支えられている</a>
-        <span class="quick-summary">— 未解決問題の相談では一見有望に見える方針を提示されるが、よく検討すると有望さが薄れる場面が多いと指摘する。</span>
-        <span class="meta">gowers.wordpress.com</span>
-        <span class="engagement">▲ 220</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-frontend">Frontend</span>
-        <a href="https://www.neowin.net/news/facebook-ads-are-so-hard-to-block-that-ublock-origin-stopped-filtering-them/">uBlock Origin、Facebook広告のブロックを事実上断念——「Sponsored」の文字分割や順序ランダム化といういたちごっこに5年間対応してきたが継続を停止</a>
-        <span class="quick-summary">— 既存フィルタは残すが今後の追従更新はボランティア開発チームとして行わず、対応は有志のプルリクエスト任せになる。</span>
-        <span class="meta">Neowin</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-oss">OSS</span>
-        <a href="https://blogs.gnome.org/shell-dev/2026/08/11/gnome-shell-design-dreams/">GNOMEデザインチームが次期Shellの構想を公開——検索結果のオーバーレイ化、Quick Settingsのカスタマイズ、ウィンドウ自動整列「Mosaic」などを提案</a>
-        <span class="quick-summary">— 通知パネルとカレンダーの分離やグリッド式ログイン画面なども盛り込まれるが、実装は開発者リソース次第としている。</span>
-        <span class="meta">blogs.gnome.org</span>
+        <a href="https://www.watch.impress.co.jp/docs/news/2132505.html">Google AI StudioのGemini API、10月12日までに後払いから前払い制へ移行必須——未対応だとサービス停止</a>
+        <span class="quick-summary">— 対象はAI StudioのGemini APIのみでGCPの他サービスは対象外、残高低下時のauto-reload設定も利用可能。</span>
+        <span class="meta">Impress Watch</span>
       </div>
     </div>
 
