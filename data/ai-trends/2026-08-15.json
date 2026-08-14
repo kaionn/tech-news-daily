@@ -1,0 +1,74 @@
+{
+  "issue": "2026-08-15",
+  "generated_at": "2026-08-15T07:00:00+09:00",
+  "theme": {
+    "title": "エージェントの評価・観測性 — 「最終出力の一致」から「軌跡(トラジェクトリ)の妥当性」へ",
+    "category": "agent-eval",
+    "lede": "エージェントが本番投入される数が増えるにつれ、「答えが合っているか」だけを見る評価では見落としが多いことが各社の実装から見えてきた。ツール呼び出しの順序、途中の迂回、非決定性による再現性の低さは最終出力だけでは検知できない。Anthropic・OpenAI・Langfuse がそれぞれの立場から示した実装は、評価対象を最終出力からステップ単位のトレースへ分解するという同じ方向を向いている。",
+    "tldr": [
+      "Anthropic は Tasks/Graders/Transcripts の三要素でエージェント評価を構造化し、1回でも成功する確率 pass@k と毎回成功する確率 pass^k を分けて計測する運用を提示した。",
+      "OpenAI の Codex 向け Skill eval は、outcome/process/style/efficiency の4分類を10〜20件の少数プロンプトから検証し、決定的チェックとモデル採点を役割分担させて GitHub Actions に組み込む。",
+      "Langfuse は2026年7月時点で trace単位のジャッジ評価を legacy 扱いとし、observation(スパン)単位のジャッジとツールコールの構造化フィールド化に移行した。"
+    ],
+    "sections": [
+      {
+        "heading": "何を評価するかが変わった — 出力一致から軌跡評価へ",
+        "body_html": "<p>Anthropic はエージェント評価を Tasks（入力と成功基準）、Graders（コードベース・モデルベース・人間による採点）、Transcripts（API呼び出しとツール使用の全記録）の三要素に分解して構造化する。非決定性を扱うために pass@k（k回中1回でも成功する確率）と pass^k（k回すべて成功する確率）を区別するのが特徴で、1試行あたり成功率75%でも3回連続成功の pass^3 は約42%まで落ちる、という具体例で「1回動く」と「本番で安定して動く」の差を示している。</p><p>この分解が広がったのは、最終出力だけを見る評価では合格していたはずのタスクが、実は無関係なツール呼び出しを挟んでいたり、有効な別解を「決まった手順と違う」という理由で誤って不合格にしていたりする、という失敗を各社が経験したからだ。Anthropic は Opus 4.5 が CORE-Bench で「96.12」の解答を「96.124991…」という厳密一致を要求する採点で不合格にされ、スコアが42%まで沈んだ事例を挙げている。採点ロジック自体のバグをモデルの欠陥と誤認するリスクが、軌跡単位でのレビューを必須にした。</p>",
+        "examples": [
+          {
+            "product": "Anthropic（公式エンジニアリングブログ）",
+            "approach": "Tasks/Graders/Transcripts の三要素構成 + pass@k と pass^k の使い分け",
+            "detail": "Opus 4.5 が CORE-Bench で厳密一致採点により42%まで score が沈んだ事例や、METR の時間軸ベンチマークで指示に従うモデルほど減点される採点バグの事例を公開し、採点ロジック自体を疑う重要性を具体的に示した",
+            "source_url": "https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents"
+          }
+        ],
+        "takeaway": "エージェント評価は最終出力の一致ではなく、ツール呼び出し順序やステップごとの妥当性を見る軌跡評価に軸足を移すべき。pass@k と pass^k を両方計測し、本番投入の閾値は後者で決めるのが実務的。"
+      },
+      {
+        "heading": "Eval を CI に組み込む — 決定的チェックとモデル採点のハイブリッド",
+        "body_html": "<p>OpenAI が Codex 向けに示した Skill eval の作り方は、outcome（タスク完了）・process（意図した手順を踏んだか）・style（出力が規約に沿うか）・efficiency（無駄な試行錯誤がないか）の4分類で成功基準を先に定義し、10〜20件の少数プロンプトセット（陽性・陰性の両方を含む）から始める。判定は二段構成で、<code>codex exec --json</code> の JSONL イベントストリームを解析して「npm install を実行したか」のような決定的チェックを行い、スタイルや規約遵守など定性的な要件は <code>--output-schema</code> で出力を構造化JSONに固定したモデル採点で処理する。</p><p>この役割分担が定着したのは、決定的チェックは高速で再現性が高い一方コーディング規約のような定性面を扱えず、モデル採点は柔軟だが素の自然文出力では同じ基準で一貫して採点しづらいためだ。<code>--output-schema</code> で採点結果自体をスキーマ制約すれば、GitHub Actions 上で他のCIチェックと同様に扱える。OpenAI は Codex GitHub Action がこの <code>--output-schema</code> を <code>codex-args</code> 経由でそのまま渡せる設計にしていることを明記している。</p>",
+        "examples": [
+          {
+            "product": "OpenAI Codex（Testing Agent Skills Systematically with Evals）",
+            "approach": "4分類の成功基準 + JSONLトレース解析による決定的チェック + --output-schemaでの構造化モデル採点",
+            "detail": "10〜20件の陽性・陰性プロンプトから始め、Codex GitHub Action の --output-schema をそのままCIに組み込める設計にすることで、eval をベンチマークではなく日常のCIチェックとして運用可能にした",
+            "source_url": "https://developers.openai.com/blog/eval-skills"
+          }
+        ],
+        "takeaway": "スキル単位のeval導入は数百件のベンチマークではなく10〜20件の陽性・陰性プロンプトから始め、決定的チェックとモデル採点を役割分担させたうえでCIに直結させるのが早い。"
+      },
+      {
+        "heading": "本番トレースの構造化 — observation単位の評価とツールコールのフィールド化",
+        "body_html": "<p>Langfuse は2026年7月時点で、LLM-as-a-judge の評価対象を trace全体からobservation（スパン）単位に移し、trace単位のジャッジ評価をレガシー扱いにした。あわせてツールコールを id / name / arguments / type / index を持つ構造化フィールドとして評価器に渡すようにし、生のテキスト出力を正規表現でパースする必要をなくした。エージェントのループを俯瞰するグラフビューも、繰り返しステップを「retrieve_docs (3/3)」のように集約する表示と、実行順に展開するDAG表示の2モードを用意している。</p><p>trace全体を一つのジャッジにかけると、失敗がどのステップに起因するか特定できず、改善のフィードバックが曖昧になる。observation単位に分解すれば、失敗したスパンにピンポイントで採点結果を紐づけられる。ツールコールの構造化フィールド化も同じ発想で、後付けのテキスト解析は引数のフォーマット変更ひとつで壊れるため、構造を最初からデータとして持たせる方向に各社が寄っている。</p>",
+        "examples": [
+          {
+            "product": "Langfuse",
+            "approach": "observation単位のLLM-as-judge評価 + ツールコールの構造化フィールド化",
+            "detail": "2026年7月時点でtrace単位のジャッジ評価をlegacy扱いとし、id/name/arguments/type/indexを持つ構造化フィールドとしてツールコールを評価器に公開する仕様に切り替えた",
+            "source_url": "https://langfuse.com/resources/engineering/ai-agent-evaluation"
+          },
+          {
+            "product": "Braintrust",
+            "approach": "本番トレース上でのインラインスコアラーによるリアルタイム品質検知 + 失敗トレースの自動eval化",
+            "detail": "ライブトレース上でLLM-as-a-judgeを実行して品質低下を発生時点で検知し、本番での失敗ケースをそのままeval suiteに組み込むことで回帰カバレッジが自動的に広がる設計を公式ブログで説明している",
+            "source_url": "https://www.braintrust.dev/articles/agent-observability-complete-guide-2026"
+          }
+        ],
+        "takeaway": "可観測性基盤を選ぶ際は、trace全体ではなくobservation（スパン）単位でジャッジできるか、ツールコールが構造化フィールドとして取得できるかを確認する。後付けのraw textパースに依存する構成は壊れやすい。"
+      }
+    ]
+  },
+  "editorial": "評価と可観測性は「エージェントを信じるための仕組み」から「エージェントの失敗を素早く特定する仕組み」へ重心が移っている。3社の実装に共通するのは、評価対象を最終出力から一段細かいステップ単位のトレースへ分解した点で、これは前号までのコンテキスト圧縮やサンドボックス分離と同じく、エージェント基盤側の「地味だが効く」レイヤーの整備が続いていることを示している。",
+  "quick_picks": [
+    {
+      "title": "Agent Improvement Loop with Traces, Evals, and Codex",
+      "summary": "トレースの記録→人間のフィードバックのeval化→自動採点→Codexによる改善提案までをつなぐ自己強化ループのcookbook。本号のトレース分解・eval構造化という方向性を、実際の改善サイクルに落とし込んだ実装例として参考になる。",
+      "url": "https://developers.openai.com/cookbook/examples/agents_sdk/agent_improvement_loop"
+    },
+    {
+      "title": "Braintrust: Agent observability complete guide 2026",
+      "summary": "マルチエージェント間のハンドオフをparent-child spanとして同一trace IDで連結する設計を解説。本号で扱ったobservation単位評価と並んで、複数エージェントをまたいだ可観測性をどう保つかという課題への回答になっている。",
+      "url": "https://www.braintrust.dev/articles/agent-observability-complete-guide-2026"
+    }
+  ]
+}
