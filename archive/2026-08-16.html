@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-08-16</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="../feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-08-16 (Sun)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+      <nav class="site-nav">
+        <a href="../" class="active">📰 日刊ダイジェスト</a>
+        <a href="../trends.html">🔌 週次プラグイントレンド</a>
+        <a href="../ai-trends.html">🧠 AI プロダクト動向</a>
+        <a href="./">🗂 アーカイブ</a>
+      </nav>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 20 articles</span>
+      <span>🏷 8 categories</span>
+      <span>📡 16 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item">
+        <span class="number-value">232倍</span>
+        <span class="number-label">CodexでGPUカーネルを高速化</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">1429万</span>
+        <span class="number-label">TLA+が探索した状態数</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">27万1187</span>
+        <span class="number-label">nixpkgs-multiverseがキャッシュしたパッケージバージョン数</span>
+      </div>
+    </div>
+
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
+
+      <div class="card featured deep-dive">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://www.bleepingcomputer.com/news/security/cisco-warns-of-asa-and-ftd-vpn-flaw-exploited-to-crash-devices/">DEEP DIVE: Cisco ASA/FTDのVPN欠陥が実悪用、CISAが連邦機関に緊急対応命令</a></h3>
+        </div>
+        <div class="summary">Cisco ASA・Secure Firewall Threat Defense(FTD)のリモートアクセスSSL VPNサービスは、企業がインターネット境界に直接晒す機器の代表格であり、パッチ未適用の脆弱性は真っ先に狙われる対象になる。CVE-2026-20349(CVSS 8.6)は、このSSL VPNサービスがHTTPリクエストを処理する際のエラーチェック不足が原因で、細工したHTTPリクエストを送るだけで認証・ユーザー操作なしにデバイスを強制リロードさせられる。Cisco PSIRTは8月に実際の悪用を確認し、CISAはKnown Exploited Vulnerabilitiesカタログへ追加、米連邦民間機関に対し8月14日までの対応を義務付けた。対象はASA 9.16・9.18・9.20・9.22・9.23・9.24系列とFTD 7.0・7.2・7.4・7.6・7.7・10.0系列で、Ciscoは各バージョン向けにホットフィックスを公開済み。影響範囲は現状デバイス再起動によるサービス停止(DoS)にとどまるとされているが、VPNゲートウェイは組織のリモートアクセス基盤そのものであり、繰り返しクラッシュさせられれば実質的に境界防御が機能停止する。インターネットに公開されたリモートアクセスサービスを持つ組織は、パッチ適用状況の確認が急務だ。</div>
+        <div class="editorial">🧠 CVSS 8.6という数値だけを見ると「単なるDoS」と軽視しがちだが、認証不要・crafted HTTPリクエスト一発という攻撃条件の低さが実悪用への障壁を下げている。CISAが実際に悪用を確認した上でKEV入りさせている以上、これは理論上のリスクではない。ただし現時点でコード実行や情報窃取につながる報告はなく、被害の実態がDoSにとどまるのかは今後の追跡が必要だ。</div>
+        <div class="key-points">
+          <ul>
+            <li>CVE-2026-20349はASA/FTDのRemote Access SSL VPNサービスへのHTTPリクエスト処理エラーが原因、CVSS8.6</li>
+            <li>ASA 9.16/9.18/9.20/9.22/9.23/9.24、FTD 7.0/7.2/7.4/7.6/7.7/10.0の各系列が対象、ホットフィックス公開済み</li>
+            <li>CISAはKEVカタログに追加し連邦民間機関に8月14日までの対応を義務付け</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 インターネット公開のASA/FTD VPNを運用しているなら、ホットフィックス適用状況を今すぐ確認すべきだ。</div>
+        <div class="meta">
+          <span>BleepingComputer</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-08-15</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://sankalp.bearblog.dev/autoresearch/">CodexとのAI協働研究でGPUカーネルを232倍高速化、GPU Modeコンテストで12位</a></h3>
+        </div>
+        <div class="summary">GPU Modeコンテストの課題「バッチ化QR分解」で、torch.geqrfのベースライン419,000マイクロ秒から最終的に1,805マイクロ秒まで短縮し、183人中12位に入った。`/goal`指示による構造化プロンプト、候補実装の並行追跡、プロファイリング駆動の反復、局所最適に陥った際の人間による方向修正を組み合わせ、ライブラリ呼び出しから独自Triton/CUDAカーネルへの移行、パネル組み立ての融合、CUDAグラフによる起動オーバーヘッド排除などライブラリ関数10段階の構造的改善を経た。</div>
+        <div class="key-points">
+          <ul>
+            <li>ベースライン419,000マイクロ秒→最終1,805マイクロ秒、232倍の高速化</li>
+            <li>183人中12位、B200 GPU上でバッチ化Compact-Householder QR分解を実装</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>bearblog.dev</span>
+          <span>⏱ 8 min read</span>
+          <span>2026-08-15</span>
+          <span class="engagement">▲ 344</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-frontend">Frontend</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://www.pcworld.com/article/3212428/firefox-is-now-the-last-major-browser-that-still-supports-ublock-origin.html">Firefoxが「uBlock Originをフル機能で使える最後の主要ブラウザ」に</a></h3>
+        </div>
+        <div class="summary">Chromiumベースの主要ブラウザ(Edge、Opera、Brave、Vivaldi、Samsung Browser)はGoogleが主導するManifest V3移行で、広告ブロッカーが必要とするAPIへのアクセスを失いつつある。独自エンジンを使うFirefoxはこの制約を受けず、8月10日にBlueskyで「uBlock Originのサポートはどこにも行かない」と表明した。SafariとDuckDuckGoブラウザはそもそもuBlock Originに非対応で、Chromium系ユーザーは機能縮小版のuBlock Origin Liteかブラウザ内蔵の広告ブロック機能を選ぶしかない状況になっている。</div>
+        <div class="key-points">
+          <ul>
+            <li>Edge・Opera・Brave・Vivaldi・Samsung BrowserはManifest V3移行で広告ブロックAPIへのアクセスを喪失</li>
+            <li>Firefoxは独自エンジンのためManifest V2拡張機能に依存するuBlock Originをフル機能のまま維持</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>PCWorld</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-08-14</span>
+          <span class="engagement">🔖 126</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://gist.github.com/camel-cdr/3a7aed17e017e8cab675ad696c7d14af">RISC-V RVA23とARMv9をchibicc自己コンパイルで比較、静的バイナリは18%小さく命令数はARMが優位</a></h3>
+        </div>
+        <div class="summary">QEMUとGEM5(O3 CPUモデル)を使い、chibicc自身をコンパイルする負荷でRVA23とARMv9の静的バイナリサイズ・動的命令数・コード密度・uop数を比較した。RISC-Vは静的バイナリで約18%小さく、フェッチバイト数も24%少ない一方、ARMは動的命令数が6.5%少ない。uop数ではARMの複雑なアドレッシングモードのクラッキング分がRISC-Vの追加命令分をほぼ相殺し、両者はほぼ互角という結果になった。</div>
+        <div class="key-points">
+          <ul>
+            <li>静的バイナリサイズはRVA23がARMv9より約18%小さく、フェッチバイト数も24%少ない</li>
+            <li>動的命令数はARMv9がRVA23より6.5%少ないが、GEM5シミュレーションでは両ISAとも実行速度は近い</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub Gist</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-08-14</span>
+          <span class="engagement">🔖 18</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://depot.dev/blog/tla-verification">DepotがGCの再設計をTLA+で検証、1429万状態の探索でテストが見逃したバグを発見</a></h3>
+        </div>
+        <div class="summary">Depot Registryのガベージコレクタ再設計で、「GCが未参照と判定した直後にクライアントが同一blobをS3へ再pushする」レースをTLA+でモデル化した。解決策はS3のバージョニングを使い、GC判定時点のバージョンIDのみを削除対象にすることで新規pushされたバージョンを保護する。TLCモデルチェッカーは1429万224状態を約21分で探索し、10の安全性不変条件と2の活性条件を検証、その過程でテストとレビューでは見逃していた実バグを発見した。仕様は人手ではなくAIエージェントが実装からTLA+モデルへ翻訳し、人間は高レベルの不変条件のレビューに専念する分業にした。</div>
+        <div class="key-points">
+          <ul>
+            <li>TLCモデルチェッカーが14,290,224状態を約21分で探索、10の安全性不変条件と2の活性条件を検証</li>
+            <li>S3のバージョンIDを削除対象として捕捉することでGCとpushのレース条件を安全に解消</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Depot Blog</span>
+          <span>⏱ 7 min read</span>
+          <span>2026-08-15</span>
+          <span class="engagement">🔖 7</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://www.securityweek.com/sonicwall-patches-critical-vulnerabilities-in-discontinued-gms-platform/">SonicWall、廃止済みGMSプラットフォームの重大RCE脆弱性2件を修正</a></h3>
+        </div>
+        <div class="summary">SonicWallはGlobal Management System(GMS)の重大なリモートコード実行脆弱性2件を修正した。CVE-2026-66147(CVSS9.4)はDispatcher Serviceのコマンドインジェクション、CVE-2026-66145(CVSS9.1)はzip-slipによる任意ファイル書き込みとデータ漏洩を許す。対象はGMS 9.5.1以前の仮想アプライアンス版・Windows版で、9.5.2で修正済み。GMSは2025年10月に正式に廃止済みだが、レガシー環境で稼働を続ける組織向けにパッチが提供された形だ。現時点で実悪用の証拠はないとSonicWallは説明している。</div>
+        <div class="key-points">
+          <ul>
+            <li>CVE-2026-66147(CVSS9.4、コマンドインジェクション)とCVE-2026-66145(CVSS9.1、zip-slip)を修正</li>
+            <li>対象はGMS 9.5.1以前、9.5.2で修正、Email Security側も10.0.36で別の2件を修正</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>SecurityWeek</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-08-15</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://serokell.io/blog/serokell-s-work-on-ghc-dependent-types-part-5">GHC依存型対応の最新進捗、GADTのvisible forallと10年来のインスタンス解決順序問題を解決</a></h3>
+        </div>
+        <div class="summary">Serokellのチームは、GADTのデータコンストラクタに型引数を明示的に渡せる「visible forall」構文(`forall a -> a -> T a`)、型コンストラクタとデータコンストラクタが同名の場合に`import M (type ..)`/`import M (data ..)`で明示的にインポートを区別する名前空間指定インポート、そして宣言順序によって型チェックが失敗していた10年来の問題を解決する反復SCCチェックアルゴリズムを実装した。3機能はすべてGHC 9.14で利用可能になっている。</div>
+        <div class="key-points">
+          <ul>
+            <li>visible forallでGADTのデータコンストラクタに型引数を明示的に渡せるように</li>
+            <li>型ファミリーインスタンスの解決を宣言順序に依存しない反復SCCアルゴリズムで解決、GHC 9.14で利用可能</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Serokell</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-08-14</span>
+          <span class="engagement">🔖 11</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://goonhost.rocks/blog/implementing-ipv8-internet-draft">「IPv8」構想をLinuxカーネル・Musl・BGPに実装、経済的・技術的な破綻を実証</a></h3>
+        </div>
+        <div class="summary">IPv8はASNごとに約43億のホストアドレスを割り当て「アドレス枯渇ゼロ」を謳う実験的なInternet-Draftだ。GoonHostチームはAF_INET8をサポートするLinuxカーネル、Musl libcのソケット関数、FRRoutingベースのBGP8デーモン、DHCP8/DNS8/NTP/OAuth2を統合したZoneサーバー、IPv8対応版NginxとcURLまで一通り実装し、4つの自律システムと11万経路超をシミュレートする10ノードQEMUテストベッドで検証した。結果、経路集約が効かずBGPテーブルが現行115万経路から300万〜500万経路に膨張し、RIRの登録料収入が75〜90%失われるなど、技術・経済両面での破綻が明らかになった。</div>
+        <div class="key-points">
+          <ul>
+            <li>ASNごとに42億9496万7296ホストアドレスを割り当てる設計だが、BGPテーブルが115万→300万〜500万経路に膨張</li>
+            <li>10ノードQEMUテストベッドで4自律システム・11万経路超を検証、RIR収入は75〜90%減少する試算</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GoonHost Blog</span>
+          <span>⏱ 9 min read</span>
+          <span>2026-08-14</span>
+          <span class="engagement">🔖 15</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-data">Data</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://qiita.com/8ga3/items/12a94f878679a5911443">地理院標高タイルの「穴」を5段階フォールバックで埋めるアルゴリズム</a></h3>
+        </div>
+        <div class="summary">地理院標高タイルは水面や未測量エリアにno-dataの「穴」があり、そのまま3Dメッシュ化すると地形が不自然になる。同一ズームでのレイヤー合成、粗いズームからの補填、局所的なBFS補間、タイル境界の接合、サンプリング時の無効値除外という5段階のフォールバックを順に適用し、実測データの優先度を保ったまま穴を埋める設計にした。</div>
+        <div class="key-points">
+          <ul>
+            <li>同一ズーム内レイヤー合成→粗ズーム補填→局所BFS補間→タイル境界接合→無効値除外の5段階構成</li>
+            <li>実測データを常に優先しつつ、補間データで穴を埋める順序を明示的に制御</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-08-15</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://qiita.com/tatsuya582/items/e5c56a2f7b976cfc17ea">エラーレスポンス設計の現在地2026——標準はコードに焼き込み、判断だけをドキュメント化する</a></h3>
+        </div>
+        <div class="summary">Web APIのエラー応答はステータスコード・ヘッダー・ボディの3層からなり、RFC 9110やRFC 9457など層ごとに異なる仕様が存在するため一貫した実装が難しい。記事は「エラーレスポンスは共通関数で組み立てる」「型で実装を制約する」という2手法を提案し、"401にはWWW-Authenticateを付ける"のような標準要件を人間の記憶ではなくコンパイラに強制させ、プロジェクト固有の判断のみをCLAUDE.mdなどのドキュメントに残すべきだと主張する。</div>
+        <div class="key-points">
+          <ul>
+            <li>エラー応答はステータスコード・ヘッダー・ボディの3層構成、RFC 9110/9457など層ごとに仕様が分かれる</li>
+            <li>標準要件は共通関数と型制約でコードに焼き込み、ドキュメントにはプロジェクト固有の判断だけを残す</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-08-15</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-product">Product</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://qiita.com/mhamadajp/items/7b159e09813f4c99a513">シャドーAIは「禁止」ではなく運用設計で向き合う——3層分類と90日サイクルの提案</a></h3>
+        </div>
+        <div class="summary">未承認AI利用を一律禁止するのではなく、組織的な運用設計で対応すべきだという提案。AI利用を「全社AI・部門AI・個人AI」の3層に分類し、リスクに応じた5段階の機能評価を実施する。申請審査では「データ・権限・実行・影響」を確認軸に、結果を「許可・条件付き許可・検証環境限定・禁止」の4段階で迅速に返すことで、現場の利用ニーズを可視化しながら安全な環境へ移行させる。初期段階として90日間の最小運用サイクルを回し、四半期ごとに検証・改善を重ねる設計にした。</div>
+        <div class="key-points">
+          <ul>
+            <li>AI利用を全社・部門・個人の3層に分類し、リスクに応じた5段階の機能評価を実施</li>
+            <li>申請結果は「許可・条件付き許可・検証環境限定・禁止」の4段階で迅速に返し、90日サイクルで改善</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-08-15</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/rdlabo/articles/cloudflare-workers-after-rich-programming">「富豪プログラミング」からの脱却、EC2からCloudflare Workers移行で気づいたリソース意識</a></h3>
+        </div>
+        <div class="summary">EC2+NestJsからCloudflare Workers+Honoへ移行する過程で、従量課金制がバンドルサイズ上限10MB・メモリ128MB・CPU時間課金という制約を可視化し、それまでの「富豪プログラミング」の習慣に気づいたという体験記。firebase-adminが251KiB、@hono/firebase-authが33KiBとパッケージサイズを実測して選定するようになり、3つのDB順序クエリの待機をPromise.allで並列化、SSEからWebSocket Hibernationへ移行するなど、リソースを「誰が持ち続けるか」を重視する設計に転換したと述べる。</div>
+        <div class="key-points">
+          <ul>
+            <li>バンドルサイズ上限10MB・メモリ128MBの制約下でfirebase-admin(251KiB)などパッケージサイズを実測して選定</li>
+            <li>直列DB待機をPromise.allで並列化、SSEからWebSocket Hibernationへ移行</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 7 min read</span>
+          <span>2026-08-15</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://gigazine.net/news/20260815-dbgate/">無料の統合DB管理ツール「DbGate」、MySQL・PostgreSQL・SQL Server・MongoDBなどをひとつのUIで操作</a></h3>
+        </div>
+        <div class="summary">DbGateは、SQLとNoSQLを問わず複数のデータベースシステムを単一インターフェースから操作できるオープンソースのDB管理ツール。MySQL・PostgreSQL・SQL Server・MongoDB・SQLiteなどに対応し、セルの直接編集やSQLクエリ実行が可能。Windows・Linux・Mac・ブラウザで動作し、Docker Composeでの認証情報付きデプロイにも対応する。無料のCommunity版に加え、クエリデザイナーやAI機能、チーム管理機能を備えた有料Premium版もある。</div>
+        <div class="key-points">
+          <ul>
+            <li>MySQL・PostgreSQL・SQL Server・MongoDB・SQLiteなどSQL/NoSQLを単一UIで横断操作、セル直接編集に対応</li>
+            <li>Community版は無料、Premium版はクエリデザイナー・AI機能・チーム管理を追加</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GIGAZINE</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-08-15</span>
+          <span class="engagement">🔖 62</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="http://www.stephen-cresswell.com/2026/08/15/Yadda-3.0.0-BDD-in-the-Age-of-AI-Agents.html">BDDライブラリ「Yadda 3.0.0」、コードの大半をClaudeが書いてAIエージェント時代向けに刷新</a></h3>
+        </div>
+        <div class="summary">JavaScript向けBDDライブラリYaddaのメジャーアップデート。PhantomJS・CasperJS・Bowerなど旧世代の統合を廃止しNode.js専用化、ES6構文への移行、TypeScript型定義の追加、PlaywrightとPuppeteerを使ったサンプルへの刷新を行った。更新作業の大部分はClaudeが書き、著者は複数のAIコーディングエージェントが並行作業する開発では、人間とエージェント双方が参照できる実行可能な自然言語仕様の価値が増すと論じる。</div>
+        <div class="key-points">
+          <ul>
+            <li>PhantomJS/CasperJS/Bowerを廃止しNode.js専用・ES6・TypeScript型定義に刷新、更新の大半をClaudeが実装</li>
+            <li>後継の3.1.0ではGitHub Flavored Markdownに対応し、仕様書をプロジェクトドキュメントと統合可能に</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>stephen-cresswell.com</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-08-15</span>
+          <span class="engagement">▲ 48</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://fzakaria.com/2026/08/14/nixpkgs-multiverse-fast-mode">nixpkgs-multiverseに評価スキップの「fast mode」、27万バージョンをゼロコストでキャッシュから取得</a></h3>
+        </div>
+        <div class="summary">従来「python3 3.8.9」のような特定バージョンを取得するには約378MBのNixpkgsツリー全体をダウンロード・評価する必要があった。fast modeはNixpkgsの評価そのものをスキップし、既知のストアパスをキャッシュから直接取得する方式に切り替え、インデックス済みの27万1187個のパッケージバージョンすべてを評価コストなしで利用可能にした。</div>
+        <div class="key-points">
+          <ul>
+            <li>従来は約378MBのNixpkgsツリー全体を評価する必要があったが、fast modeはストアパスを直接キャッシュから取得</li>
+            <li>271,187個のインデックス付きパッケージバージョンすべてが評価コストゼロでアクセス可能に</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>fzakaria.com</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-08-14</span>
+          <span class="engagement">🔖 11</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
+
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://blog.thunderbird.net/2026/08/desktop-calendar-a-design-journey/">Thunderbirdのデスクトップカレンダーが刷新——グリッド・ナビゲーションバー・管理サイドバーの3分割構成に</a>
+        <span class="quick-summary">— Google CalendarやOutlookに並ぶUIを目指した再設計。</span>
+        <span class="meta">Thunderbird Blog</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-infra">Infra</span>
+        <a href="https://dmitry.gr/?r=06.%20Thoughts&proj=12.%20RV">「RISC-Vはもっと学ぶべきだった」——ISA設計への辛口批評</a>
+        <span class="quick-summary">— ARMやx86の教訓を踏まえずに設計された点を実装者の視点から指摘する長文エッセイ。</span>
+        <span class="meta">dmitry.gr</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://qiita.com/haru-qiita/items/e00ebc98c598a1c4411a">判定をLLMに任せない設計思想——退去費用精算書診断AI「Okaeri」の再現性へのこだわり</a>
+        <span class="quick-summary">— LLMは読解だけに限定し、金額判定はTypeScriptの純関数で実装して同じ入力から常に同じ結果を保証。</span>
+        <span class="meta">Qiita</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://baselashraf81.github.io/eigendrum/">図形を描くと「太鼓の音」が鳴るWebツール「Eigendrum」、有限要素法で振動モードを計算</a>
+        <span class="quick-summary">— 任意の形状の固有値問題を解いて、輪郭ごとに異なる打音をリアルタイム生成する。</span>
+        <span class="meta">baselashraf81.github.io</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://zenn.dev/takeshi_teshima/articles/bae79b2f0f97be">概念設計が、その後のコードの命運を左右する——「注文」と「履行」を分離する例で見る設計論</a>
+        <span class="quick-summary">— 現実を正しく反映したモデル分離が、将来の機能追加を「自然に実装済み」にすると論じる。</span>
+        <span class="meta">Zenn</span>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="./" class="archive-link">🗂 過去のダイジェスト</a>
+    </footer>
+  </div>
+</body>
+</html>
