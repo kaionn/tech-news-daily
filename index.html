@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tech News Daily — 2026-08-17</title>
+  <title>Tech News Daily — 2026-08-18</title>
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
   <link rel="icon" type="image/png" sizes="192x192" href="favicon.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -14,7 +14,7 @@
   <div class="container">
     <header>
       <h1>Tech News Daily</h1>
-      <div class="date">2026-08-17 (Mon)</div>
+      <div class="date">2026-08-18 (Tue)</div>
       <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
       <nav class="site-nav">
         <a href="./" class="active">📰 日刊ダイジェスト</a>
@@ -26,8 +26,8 @@
 
     <div class="stats-bar">
       <span>📰 20 articles</span>
-      <span>🏷 6 categories</span>
-      <span>📡 15 sources</span>
+      <span>🏷 8 categories</span>
+      <span>📡 9 sources</span>
     </div>
 
     <nav class="toc">
@@ -40,16 +40,16 @@
 
     <div class="numbers-bar">
       <div class="number-item">
-        <span class="number-value">10.0</span>
-        <span class="number-label">SAP Commerce CloudのCVSS最大深刻度</span>
+        <span class="number-value">40倍</span>
+        <span class="number-label">DuckDB v2.0の再帰CTE高速化</span>
       </div>
       <div class="number-item">
-        <span class="number-value">30億</span>
-        <span class="number-label">Qwenの累計ダウンロード数(6ヶ月)</span>
+        <span class="number-value">5日</span>
+        <span class="number-label">Snowflakeの脆弱PRが発見されるまでの期間</span>
       </div>
       <div class="number-item">
-        <span class="number-value">5日間</span>
-        <span class="number-label">Defender有効下でのマイニング潜伏期間</span>
+        <span class="number-value">3.3倍</span>
+        <span class="number-label">GPT-5.6 Solの物体検出精度向上</span>
       </div>
     </div>
 
@@ -60,64 +60,64 @@
         <div class="card-header">
           <span class="tag tag-security">Security</span>
           <span class="content-type">🔒 セキュリティ</span>
-          <h3><a href="https://www.bleepingcomputer.com/news/security/max-severity-sap-commerce-cloud-flaw-now-targeted-in-attacks/">DEEP DIVE: SAP Commerce CloudにCVSS10.0の最大深刻度脆弱性、パッチ公開3日で実悪用</a></h3>
+          <h3><a href="https://www.wiz.io/blog/red-agent-snowflake-copilot-cicd-bug">DEEP DIVE: AIが書いた「安全な修正」がSnowflakeのJiraを危険にさらした——Wizの自律型エージェントが5日で発見</a></h3>
         </div>
-        <div class="summary">SAPのeコマース基盤「SAP Commerce Cloud」(旧Hybris)は大手小売企業のオンラインストアを支える基盤として広く使われており、そのコアコンポーネントであるData Hub Adapter拡張機能に、CVSS 10.0の最大深刻度を持つ脆弱性CVE-2026-58231が見つかった。SAPは8月のパッチデー(Security Note 3771065)で修正を公開したが、脅威インテリジェンス企業Defusedによると、公開PoCが存在しない段階でハニーポットへの実悪用が確認されており、パッチ公開からわずか3日で攻撃が始まった。原因は認可制御の不備で、Data Hub Adapterがデフォルトで持つ認証クライアントを悪用すると、未認証の攻撃者が検証不足の特定機能へ細工した入力を送り込める。攻撃には認証もユーザー操作も不要で複雑度は低く、成功すれば任意コード実行が可能になり、機密性・完全性・可用性のすべてに影響が及ぶ。Shadowserverの調査では、インターネットに露出したSAP Commerce Cloudインスタンスが4,200件超確認されており、大半が欧州と北米に集中する。ECサイトのバックエンドは決済処理や顧客データベースと直結しているため、侵害されれば単なるサービス停止にとどまらず、サプライチェーン全体への波及リスクを持つ。パッチ未適用のインスタンスは、公開されているだけで攻撃対象になっている状況だ。</div>
-        <div class="editorial">🧠 CVSS 10.0はSAPの脆弱性評価で最上位の区分であり、しかも未認証・低複雑度でRCEに直結するという組み合わせは近年でも珍しい。攻撃者がPoC公開前から悪用を始めている点は、パッチ適用の緊急性を裏付ける実測データだ。ただし現時点で侵害後の具体的な被害(データ窃取の範囲や規模)を示す公開報告はなく、影響の全体像は今後の追跡調査を待つ必要がある。</div>
+        <div class="summary">Wiz Researchが運用する自律型セキュリティ調査エージェント「Red Agent」が、Snowflakeの公開リポジトリ snowflakedb/snowflake-connector-net で見つけた脆弱性を報告した。発端は6月18日にマージされたPR #1218で、GitHub Actionsワークフロー内の安全な変数展開パターンをシェル文字列への直接補間に置き換えており、このコミットは「Copilot Autofix」をAI共著者としてクレジットしていた。ワークフローは issues: opened で発火する設定だったが、PRユーザーのみに実行を絞るはずの if: 条件は github.event.pull_request.user.login を参照しており、issueイベントではこの値が常にnullになるため条件は事実上素通りだった。Red Agentはシェルのメタ文字を含むissueタイトルを組み立ててecho文字列からの脱出に成功し、qa@snowflake.net名義のJira APIトークンを外部に持ち出した。このトークンでSnowflakeのエンジニアリング・セキュリティコンプライアンス・バグバウンティ管理のJiraプロジェクトへ読み取りアクセスできる状態になっており、途中でペイロードが失敗した際もエージェントは自律的に修正を重ねて突破した。脆弱なコードが生きていたのはわずか5日間で、Wizは6月23日に発見・攻撃・報告を同日中に行い、Snowflakeも同日中に env: 変数と jq --arg を使う安全な方式へ修正、翌24日にトークンをローテーションした。フォレンジック調査では、この期間に第三者による不正アクセスは確認されていない。公開開示は8月17日。</div>
+        <div class="editorial">🧠 AIが生成したコードをAIエージェントが発見・攻撃するという構図は皮肉が効いている。Copilot Autofixが「安全な書き方」をわざわざ退行させた事実は、AIコード生成ツールの品質保証がまだ人間のセキュリティレビューを代替できないことの実測データだ。ただし今回はSnowflake側の対応が同日中と極めて速く、第三者による実害も確認されていない——防御側の自動診断も同じ速度でスケールし始めている点は割り引いて見る必要がある。</div>
         <div class="key-points">
           <ul>
-            <li>CVE-2026-58231はData Hub Adapter拡張のデフォルト認証クライアント悪用が原因、CVSS10.0(最大深刻度)</li>
-            <li>パッチ公開(Security Note 3771065)からわずか3日で、公開PoC不在のままハニーポットへの実悪用を検知</li>
-            <li>Shadowserver調査でインターネット露出インスタンス4,200件超を確認、大半が欧州・北米に集中</li>
+            <li>PR #1218(6月18日マージ)がCopilot Autofixを共著者にクレジットしつつ、安全な変数展開をシェル文字列補間に退行させていた</li>
+            <li>issues: opened で発火するワークフローのif:条件はgithub.event.pull_request.user.loginを参照、issueイベントではnullになり事実上無効化されていた</li>
+            <li>Wizが6月23日に発見・攻撃・報告し同日中にSnowflakeがパッチ、6月24日にトークンローテーション、公開開示は8月17日</li>
           </ul>
         </div>
-        <div class="why-it-matters">💡 SAP Commerce Cloudを自社ECの基盤に使っているなら、Security Note 3771065のパッチ適用状況をインターネット公開の有無に関わらず今すぐ確認すべきだ。</div>
+        <div class="why-it-matters">💡 GitHub ActionsでAI生成コードをレビューなしにマージしている組織は、run:内の文字列補間パターンと、issueイベントでpull_request.user.loginを参照するif:条件のnullチェック抜けを今すぐ監査すべきだ。</div>
         <div class="meta">
-          <span>BleepingComputer</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-08-14</span>
+          <span>Wiz Research</span>
+          <span>⏱ 7 min read</span>
+          <span>2026-08-17</span>
         </div>
       </div>
 
       <div class="card featured">
         <div class="card-header">
-          <span class="tag tag-product">Product</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://appleinsider.com/articles/26/08/16/mozilla-gradually-rolls-out-an-ad-blocker-built-into-firefox-for-ios">MozillaがFirefox for iOSに標準の広告ブロック機能を段階展開開始</a></h3>
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://duckdb.org/2026/08/17/duckdb-20-highlights">DuckDB v2.0のハイライト公開、独自PEGパーサーと新ストレージ形式で再帰CTEが40倍高速化</a></h3>
         </div>
-        <div class="summary">MozillaがFirefox for iOSに、ネットワークレベルで動作する広告ブロック機能を段階的に展開している。有効化はSiteメニューから「Ad Blocker」をタップし、設定画面でトグルをオンにするだけ。サードパーティの広告配信網・広告エクスチェンジ・トラッキング用リクエストに加え、ポップアップやオーバーレイなど侵入的な広告フォーマットもブロック対象に含む。現在は実験的機能として一部ユーザーへの段階的ロールアウト中で、Mozillaは8月中旬にサポートページを公開し安定版リリースが近いことを示唆した。App Store経由でしか配布できないiOS版Firefoxが標準で広告ブロックを備えるのは、Safari向け拡張機能への依存が前提だった従来の対策と一線を画す。</div>
+        <div class="summary">DuckDBチームが、今秋公開予定のv2.0(コードネーム"Cyanoptera")のハイライトを公開した。v1.5から1万コミット超を経て、PostgreSQL由来だったパーサーを独自のPEGベースパーサーに置き換え、ICU依存を排除して独自実装のタイムゾーン・照合順序処理に移行した。新設計のストレージフォーマットはインデックスをバッファ管理し列メタデータを遅延読み込みする。クライアント/サーバー機能"Quack"プロトコルにより、DuckDBインスタンス同士やリモートのPostgreSQL/MySQLへ直接接続できるようになる。半構造化データ用のVARIANT型はストレージから直接シュレッド実行し、スキーマを自動検出する。</div>
         <div class="key-points">
           <ul>
-            <li>Siteメニュー→「Ad Blocker」→設定トグルの3ステップで有効化、現在は一部ユーザー向け段階ロールアウト中</li>
-            <li>ネットワークレベルで広告配信網・トラッカー・ポップアップ/オーバーレイをブロック、Safari拡張機能への依存を解消</li>
+            <li>再帰CTEクエリが4.9秒→0.12秒で40倍高速化、タイムゾーン変換も2.2倍高速に</li>
+            <li>BEFORE/AFTERトリガーを新規サポートし、監査テーブルやデータ検証ワークフローを構築可能に</li>
           </ul>
         </div>
         <div class="meta">
-          <span>AppleInsider</span>
-          <span>⏱ 3 min read</span>
-          <span>2026-08-16</span>
-          <span class="engagement">▲ 441</span>
+          <span>DuckDB Blog</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-08-17</span>
+          <span class="engagement">▲ 462</span>
         </div>
       </div>
 
       <div class="card featured">
         <div class="card-header">
           <span class="tag tag-ai">AI</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://platform.claude.com/docs/en/release-notes/system-prompts">Anthropic、claude.ai/モバイルアプリのシステムプロンプト全文を公開</a></h3>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://blog.roboflow.com/openai-gpt-5-6/">GPT-5.6 SolはOpenAI史上最高の「視覚」モデル、独自ベンチマークで物体検出精度3.3倍に</a></h3>
         </div>
-        <div class="summary">Anthropicが、claude.aiとモバイルアプリ(iOS/Android)向けに使われているシステムプロンプトの全文を公開した。対象はOpus5(7/24)・Fable5(6/9)・Opus4.8(5/28)・Opus4.7(4/16)・Sonnet4.6(2/17)の5バージョンで、それぞれの知識カットオフ日、拒否ポリシー、児童保護の定義(居住地域で未成年とされる18歳未満全員が対象)、メンタルヘルス相談時の対応方針(診断や精神分析はしないが事実ベースの会話は可能)、絵文字を求められない限り使わないといったトーン指針まで含む。ただしこの公開範囲はAPI経由の利用には適用されない。</div>
+        <div class="summary">Roboflowが独自のVLMベンチマーク(物体検出・カウント・OCR・データ抽出)でOpenAIのGPT-5.6ラインナップ(Sol・Terra・Luna)を検証したところ、上位モデルSolの物体検出精度(mAP@50)が46.2に達し、前世代GPT-5.5の13.8から3.3倍に跳ね上がった。物体カウントの精度も73.0%(GPT-5.5比64.9%)まで向上し、UI操作やエージェントタスクに求められる視覚推論が強化されている。一方でOCRの類似度スコアは90.7%とGPT-5.5の91.2%をわずかに下回り、テキスト抽出精度も82.5%(同87.6%)へ後退した。処理コストは1画像あたり約2.5セント・レイテンシ約10秒で、より安価で高速なGemini 3.5 Flash(0.8セント)が検出・カウント精度でも上回っており、コスト面の優位は依然としてない。</div>
         <div class="key-points">
           <ul>
-            <li>Opus5(7/24)からSonnet4.6(2/17)まで5モデルのシステムプロンプト全文と知識カットオフ日を公開</li>
-            <li>児童保護・メンタルヘルス対応・トーン指針まで明文化、ただしAPI経由の利用には非適用</li>
+            <li>物体検出mAP@50は46.2でGPT-5.5の13.8から3.3倍、物体カウント精度も73.0%(同64.9%)に向上</li>
+            <li>OCR類似度90.7%・テキスト抽出82.5%はGPT-5.5(91.2%/87.6%)からわずかに後退、視覚特化の代償が見える</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Anthropic</span>
-          <span>⏱ 5 min read</span>
-          <span>2026-08-16</span>
-          <span class="engagement">▲ 434</span>
+          <span>Roboflow Blog</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-08-17</span>
+          <span class="engagement">▲ 273</span>
         </div>
       </div>
     </div>
@@ -128,83 +128,40 @@
       <div class="card">
         <div class="card-header">
           <span class="tag tag-dev">Dev</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://duckdb.org/2026/07/31/asynchronous-io">DuckDBが非同期I/Oを実装、S3上のCSV読み込みが19.4倍高速化</a></h3>
-        </div>
-        <div class="summary">DuckDBはローカルSSD向けの早期プルーニング最適化を続けてきたが、S3などリモートストレージでは同期I/Oがボトルネックになり、ネットワーク帯域を使い切れずワーカースレッドが待機し続けていた。新設計はワーカー用REGULARプールと最大256のI/O専用ASYNCプールを分離し、read_ahead_depthでメモリ予算を管理しながら先読みキューでフェッチを先行実行する。</div>
-        <div class="key-points">
-          <ul>
-            <li>S3上の22GB Parquet読み込みが8.23秒→2.84秒(2.97倍)、ネットワーク使用率は5→25Gbit/sへ飽和</li>
-            <li>80GBのCSVは877.56秒→45.26秒(19.4倍)、DuckDB v2.0(2026年秋)でデフォルト有効化予定</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>DuckDB Blog</span>
-          <span>⏱ 6 min read</span>
-          <span>2026-07-31</span>
-          <span class="engagement">▲ 262</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-oss">OSS</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://predr.ag/blog/protecting-the-rust-stdlib-from-breakage/">cargo-semver-checksがRust標準ライブラリ自体の破壊的変更を自動検知</a></h3>
-        </div>
-        <div class="summary">Rust標準ライブラリは経験豊富なレビュアーが確認してもなお破壊的変更を見逃してきた。2020年のasync-std破壊、2021年のBuildHasherのdyn非対応化、2022年のイテレータSend/Sync自動トレイト誤削除に続き、2026年3月にはtokioがWindowsで破損し1.94.1のパッチリリースを要した。cargo-semver-checksはrustdoc JSONに3フィールドを追加し、安定性属性を公開APIの目印として扱うことでこれを検知できるようにした。</div>
-        <div class="key-points">
-          <ul>
-            <li>2026年3月のtokio Windows破損など、人手レビューでも見逃されてきた標準ライブラリの破壊的変更が続発</li>
-            <li>rustdoc JSONに`stability`・`const_stability`・`default_unstable`の3フィールドを追加し既存の`#[doc(hidden)]`検知の仕組みに統合</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>predr.ag</span>
-          <span>⏱ 5 min read</span>
-          <span>2026-08-15</span>
-          <span class="engagement">🔖 28</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-security">Security</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://snarky.ca/whats-missing-to-have-reproducible-builds-on-pypi/">PyPIの再現可能ビルドに欠けている3つの仕組み</a></h3>
-        </div>
-        <div class="summary">PyPIで配布されるsdistやwheelには、どのソースコードから作られたかを記録する仕組みがない。直接インストール時は`direct_url.json`にその情報が残るが、配布物自体には同等のメタデータがなく、wheelはPEP 770でSBOMを記録できてもsdistのtar+PKG-INFO形式には追加メタデータを置く余地がない。著者は独立した第三者がビルドを再現し検証結果をPyPIのインデックスAPIに反映する「信頼された検証者」制度を提案する。</div>
-        <div class="key-points">
-          <ul>
-            <li>sdist/wheelにソースコード出自を記録する仕組みがなく、wheelのSBOM(PEP770)もsdistには適用不可</li>
-            <li>「信頼された検証者」が独立再現しPyPIインデックスAPIに反映する任意参加の検証制度を提案、SLSAビルドレベル1に準拠</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>snarky.ca</span>
-          <span>⏱ 5 min read</span>
-          <span>2026-08-15</span>
-          <span class="engagement">🔖 17</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
           <span class="content-type">📦 リリース</span>
-          <h3><a href="https://zed.dev/blog/introducing-delta">Zedが「Delta」のプライベートベータ招待を開始、DeltaDBでコードと会話を実時間同期</a></h3>
+          <h3><a href="https://code.visualstudio.com/updates/v1_133">VS Code 1.133、チャットのスティッキースクロールとローカルHTML自動リロードを追加</a></h3>
         </div>
-        <div class="summary">Zedチームが8月12日に発表した「Delta」は、DeltaDBという実時間レプリケーションDBを核に、コードとの会話履歴を接続したまま複数人・複数エージェントが共同作業できる環境。コードコメントは変更後も対象箇所に追従し続け、Claude Codeなど外部エージェントハーネスとリアルタイム同期できる。発表当日からプライベートベータの招待が始まり、以降数週間かけて追加ユーザーへ順次拡大する計画だ。</div>
+        <div class="summary">Visual Studio Code 1.133が公開された。長いチャット会話でどのプロンプトへの返答かを見失わないよう画面上部に固定表示する「スティッキースクロール」、ローカルHTMLファイルをディスク変更時に内蔵ブラウザが自動リロードする機能、GitHubサインインなしでもClaude APIキー設定があればAgentsウィンドウを使える実験的機能を追加した。</div>
         <div class="key-points">
           <ul>
-            <li>DeltaDBがコードの差分と会話を実時間で複数人に同期、コメントは変更後もコード箇所に追従</li>
-            <li>8月12日の発表当日からプライベートベータ招待を開始、Claude Codeを最初の外部ハーネス統合先に</li>
+            <li>ターン単位でCopilotとAnthropicモデルを切り替え可能に、エージェントホストの再設定は不要</li>
+            <li>内蔵ブラウザがファイル変更を検知して自動リロード、AIエージェントによる編集結果もその場で確認できる</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Zed Blog</span>
-          <span>⏱ 4 min read</span>
+          <span>VS Code</span>
+          <span>⏱ 3 min read</span>
           <span>2026-08-12</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-frontend">Frontend</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/r1013t/articles/37669abac10840">Solid 2.0はuse()もstartTransitionも使わずに非同期をリアクティブグラフへ統合</a></h3>
+        </div>
+        <div class="summary">Solid 2.0は非同期処理をリアクティブグラフ自体に組み込み、Reactのuse()・startTransition・Suspenseのような複数APIの協調を不要にした。createMemoがPromiseをそのまま返せるため、フェッチを含むメモがpendingか解決済みかを透過的に扱える。書き込み側のaction APIはyield付きジェネレータでサーバー待機点を示し、楽観的更新は失敗時に自動でロールバックする。</div>
+        <div class="key-points">
+          <ul>
+            <li>createMemoがPromiseを直接返し、手動のSuspenseラップなしで結果を読める</li>
+            <li>isPending()は特定のメモ操作だけを追跡し、無関係なUI要素への不要なローディング表示を防ぐ</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-08-16</span>
         </div>
       </div>
 
@@ -212,20 +169,60 @@
         <div class="card-header">
           <span class="tag tag-dev">Dev</span>
           <span class="content-type">🔬 研究</span>
-          <h3><a href="https://arxiv.org/abs/2608.08421">SATソルバーでTarskiの高校代数問題を攻略、最小反例は12要素と証明</a></h3>
+          <h3><a href="https://arxiv.org/abs/2608.13759">RustコンパイラにGPUオフロードをネイティブ統合、ベンダー非依存でメモリ安全性を維持</a></h3>
         </div>
-        <div class="summary">Tarskiの高校代数問題は、正整数における加法・乗法・べき乗の恒等式がすべて11個の基本公理から導けるかを問うもので、Wilkieは公理から証明できない反例を発見していた。この論文はSAT(充足可能性)ソルバーを使い、公理は満たすがWilkieの恒等式を満たさない「反モデル」の最小サイズが12要素であることを証明し、895万7952個の反モデルを同型を除いて分類した。</div>
+        <div class="summary">GPU向け高性能プログラミングは、実行効率かメモリ安全性かの二択を迫ってきた。この論文はrustcとLLVMバックエンドに直接組み込む形で、ベンダー非依存のゼロオーバーヘッドGPUコンパイルフレームワークを実装した。Rustの所有権モデルと厳密なエイリアシング保証をLLVMのOffload基盤に適用し、手動・コンパイラ生成の両方のメモリ転送を2パスのコンパイルパイプラインで扱う。</div>
         <div class="key-points">
           <ul>
-            <li>SATソルバーでTarski公理系の最小反モデルが12要素であることを証明、895万7952個を同型を除いて分類</li>
-            <li>専用ツールMace4・SEMを上回る探索性能、正しさの証明は定理証明支援系Leanで形式検証済み</li>
+            <li>ホスト/デバイス間のABI下降の不一致というクロスベンダー特有の技術課題を解消し、複数ベンダーへの移植性を確保</li>
+            <li>RAJAPerfベンチマークでCUDA/HIP C++の手動最適化版と競合する性能のLLVM IRを生成</li>
           </ul>
         </div>
         <div class="meta">
           <span>arXiv</span>
           <span>⏱ 6 min read</span>
+          <span>2026-08-13</span>
+          <span class="engagement">▲ 86</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-data">Data</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://qiita.com/kuma_3838/items/aae2c66e38bb9498d82d">S3時代のファントムファイル、DBのトランザクションはS3までは面倒を見てくれない</a></h3>
+        </div>
+        <div class="summary">ファイルパスをDBに記録し実体をS3に置く構成では、DBのトランザクションがS3操作までは面倒を見てくれないため不整合が避けられない。記事は6つの根本課題のうち削除順序・アップロード順序・ロールバック不能・パス文字列の参照整合性など4つが2026年時点でも未解決だと整理し、削除はDB→S3の順、アップロードはS3→DBの順にして「孤立オブジェクト」を「壊れたリンク」より優先すべきだと提案する。</div>
+        <div class="key-points">
+          <ul>
+            <li>孤立オブジェクトはS3のライフサイクルルールや定期バッチでのDB/S3突合で掃除し、壊れたリンクより低コストな失敗モードとして許容する</li>
+            <li>S3のイレブンナインズ耐久性でバックアップ課題は解決済み、署名付きURL+IAMポリシーがSQL権限管理の代替になったと結論</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita</span>
+          <span>⏱ 4 min read</span>
           <span>2026-08-16</span>
-          <span class="engagement">▲ 72</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-data">Data</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://qiita.com/kuma_3838/items/21da0b9fad77240eed49">Cloudflare D1向けORM対決、PrismaよりDrizzleが優位な最大の理由はトランザクション失敗時の挙動</a></h3>
+        </div>
+        <div class="summary">Cloudflare D1向けORMとしてPrismaとDrizzleを比較すると、Prismaの改善(v7でバンドルサイズ約1.6MBまで圧縮)を踏まえてもDrizzleに軍配が上がる。最大の理由はトランザクション失敗時の挙動で、D1はインタラクティブトランザクションを持たないため、Prismaのラッパーはこの制約を黙って無視しクエリを個別実行し、失敗してもロールバックされず「静かに」データが壊れる。Drizzleは即座にエラーを出し、batch()などの安全な代替手段を強制する。</div>
+        <div class="key-points">
+          <ul>
+            <li>PrismaのD1アダプタは2年以上Preview状態で本番利用が公式非推奨、Drizzleは標準サポート</li>
+            <li>Drizzleは`_journal.json`でwranglerの追跡と統合、Prismaは生SQL出力でCI/CDでの適用管理が煩雑化</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-08-16</span>
         </div>
       </div>
     </div>
@@ -235,82 +232,84 @@
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
-          <span class="content-type">🔬 研究</span>
-          <h3><a href="https://zenn.dev/mizugeeks/articles/1019cf2353d343">デスクトップUIフレームワーク15種のメモリ使用量を横断計測、ElectronはSlintの4.5倍</a></h3>
-        </div>
-        <div class="summary">Electron・Tauri・Wails・NeutralinoなどのWebView系、Flutter・Compose Multiplatform・Avalonia・Fyneのクロスプラットフォーム系、Slint・egui・icedのRust系、GTK4・Qt6・AppKit・SwiftUIのネイティブ系まで15フレームワークで同一アプリを実装し、100枚サムネイルのギャラリーや1万行×10列のグリッドなど5モジュールでピークメモリを計測した。ネイティブ・Rust系は100〜170MB台に収まる一方、WebView系とJVM/Go系は450〜530MB帯に達した。</div>
-        <div class="key-points">
-          <ul>
-            <li>ネイティブ・Rust系(Slint・egui・SwiftUI等)は100〜170MB、WebView系(Electron・Fyne等)は450〜540MBに二極化</li>
-            <li>同一アプリ実装でElectronはSlintの約4.5倍のメモリを消費、5モジュール(ギャラリー・グリッド等)で横断計測</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Zenn</span>
-          <span>⏱ 5 min read</span>
-          <span>2026-08-15</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
           <span class="tag tag-ai">AI</span>
           <span class="content-type">📜 解説</span>
-          <h3><a href="https://zenn.dev/hellorusk/articles/3328866ca9e922">Claudeのテキスト電子透かし、SynthID-TextのGumbel-MaxトリックとTournament Samplingを解説</a></h3>
+          <h3><a href="https://zenn.dev/aun_phonogram/articles/3f8c1a7b5d902e">ChatGPTとCodexは利用枠が別物、コード変更以外をChatGPTに逃がして限られたCodex枠を延命する</a></h3>
         </div>
-        <div class="summary">Claudeが採用するテキスト電子透かしは、Google DeepMindのSynthID-Text方式をベースにする。次のトークンを確率分布からサンプリングする際、秘密鍵由来の疑似乱数でどちらが選ばれるかを決める「Gumbel-Maxトリック」を使い、ロジットに直接ボーナスを加える旧KGW法と違って出力分布そのものは変えずに検出可能性だけを埋め込む。候補トークン同士を秘密鍵由来の二値関数で勝ち抜き戦させる「Tournament Sampling」により、応答の多様性を保ったまま統計的な偏りを蓄積する。</div>
+        <div class="summary">ChatGPTとCodexは利用枠の扱いが異なり、ChatGPTのChatモードは別枠、CodexとChatGPT Workはエージェント系の枠を共有する。著者はコード変更以外の調査・計画・PRの一次レビューをGitHubプラグイン付きChatGPTに任せ、コード変更は必ずCodexに残す運用で限られたCodex枠を延命させる。ChatGPTでの会話履歴はCodexの@メンションで参照でき、複雑な計画立案には「GPT-5.6 Sol Extra High」やProモデルを使う。</div>
         <div class="key-points">
           <ul>
-            <li>Gumbel-Maxトリックで乱数の出どころを秘密鍵由来に置き換え、出力分布を変えずに検出可能性を埋め込む</li>
-            <li>Tournament Samplingで候補トークンを二値関数で勝ち抜き戦させ多様性を保持、短文・言い換えには弱いとAnthropicが明記</li>
+            <li>複雑な計画立案は精度優先で「GPT-5.6 Sol Extra High」またはProモデルを使用</li>
+            <li>リポジトリパスやPR/issue番号を必ず明記し、ChatGPTの曖昧な参照推定に頼らない</li>
           </ul>
         </div>
         <div class="meta">
           <span>Zenn</span>
-          <span>⏱ 5 min read</span>
-          <span>2026-08-12</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-08-16</span>
+          <span class="engagement">🔖 64</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
           <span class="tag tag-security">Security</span>
-          <span class="content-type">🔒 セキュリティ</span>
-          <h3><a href="https://qiita.com/claudecat/items/fd8f449f1dddcc9f31fe">【インシデント報告】Defender有効なのに開発機で5日間マイニングされていた</a></h3>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/hidebike712/books/oauth-attacks-and-bcp">攻撃手法から学ぶOAuthセキュリティベストプラクティス、DPoP Proofリプレイまで12種を無料公開</a></h3>
         </div>
-        <div class="summary">自宅のWindows11開発機で、暗号通貨マイナーXMRig 6.21.3が管理者権限のまま約5日間動き続けていた。侵入は8月10日18:21、発覚は8月15日22時台で、20コア中15コアを常時占有し発覚時点の累計CPU時間は9時間54分に達していた。Defenderが検知できなかったのは、マルウェアの格納フォルダがスキャン除外リストに登録されていたためで、実際にはカーネルドライバWinRing0を検知していたものの、その警告に誰も気づいていなかった。発覚のきっかけはAIによるCPU使用率とプロセス分析で、「updater.exe」という偽装プロセス名を特定したことだった。</div>
+        <div class="summary">Authlete共同創業者のhidebike712氏による無料公開bookで、リダイレクトURI検証不備・認可コード注入・アクセストークン注入・CSRF・盗まれたアクセストークンの悪用・IDトークンリプレイ・Mix-Up攻撃・クライアントによるリソースオーナーへのなりすまし・DPoP Proofリプレイ・DPoP Proof事前生成など12種の攻撃手法を、現行のOAuth 2.0/OIDC標準に沿った対策とセットで章立てして解説する。</div>
         <div class="key-points">
           <ul>
-            <li>侵入から発覚まで約5日間、20コア中15コアを常時占有し累計CPU時間9時間54分に到達</li>
-            <li>Defenderは除外リスト登録で見逃したが、実際はWinRing0ドライバを検知済み——警告が放置されていた</li>
+            <li>古典的なOAuth脆弱性から新しいDPoP(Demonstration of Proof-of-Possession)プロトコルのリスクまでを網羅</li>
+            <li>各攻撃章の後に攻撃手法の一覧リファレンス章を置き、実装者が参照しやすい構成にしている</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Qiita</span>
-          <span>⏱ 4 min read</span>
+          <span>Zenn</span>
+          <span>⏱ 6 min read</span>
           <span>2026-08-16</span>
-          <span class="engagement">🔖 128</span>
+          <span class="engagement">🔖 151</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-ai">AI</span>
-          <span class="content-type">🔬 研究</span>
-          <h3><a href="https://qiita.com/h-nabata/items/390b3558be49c30f85a7">【ローカルLLM】Qwen3.8-27BをWSL2+Ollama+RTX5070 Tiで推論性能テスト</a></h3>
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/aws_japan/articles/2b62886aa8735e">AIエージェントの「認可疲れ」に効く処方箋、RFC 8693のOBOトークン交換で追加プロンプトなしに権限委譲</a></h3>
         </div>
-        <div class="summary">WSL2(Ubuntu24.04.1)+Ollama0.32.13+RTX5070Ti(16GB VRAM)の環境で、Q4_K_M量子化した約19GBのQwen3.8-27Bを検証した。WSLメモリを32GBから48GBへ拡張し、KVキャッシュをf16からq8_0へ圧縮、Flash Attentionを有効化、コンテキスト長を4096から16384へ拡張するなど6項目を調整。数学・化学の推論では良好な結果を得た一方、事実知識の幻覚や化学計算での座標生成には課題が残った。</div>
+        <div class="summary">複数の外部サービス(GitHub・Slack・Notion等)と連携するAIエージェントは、サービスごとに認可を求められ「仕事を任せたと思ったら認可待ちで止まっていた」という状態に陥りやすい。記事はRFC 8693のOBO(On-Behalf-Of)トークン交換を提案し、ポータルログイン時のid_tokenを主体トークンとして各サービスの認可サーバーに交換し、サービス固有のaudienceクレームを持つaccess_tokenを都度発行することで、追加の認可プロンプトなしに複数サービスへ権限を委譲する。実装例ではAmazon Bedrock AgentCore IdentityがOBOをネイティブサポートする。</div>
         <div class="key-points">
           <ul>
-            <li>KVキャッシュをf16→q8_0圧縮、コンテキスト長4096→16384など6項目の調整でRTX5070Ti(16GB)上での実用性を検証</li>
-            <li>数学・化学推論は良好だが事実幻覚と化学計算の座標生成に課題、Thinkingモードは問題の複雑さに応じた選択利用を推奨</li>
+            <li>既存のCognitoによる人間向けログインは変更せず、Lambda/API Gatewayの独自認可サーバーが`/oauth2/token`エンドポイントを追加するだけで済む</li>
+            <li>署名鍵はAWS KMSで後方互換性を保ちながらローテーションし、ユーザーID・委任エージェント・付与権限を横断的に監査ログへ記録</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Qiita</span>
+          <span>Zenn</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-08-16</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://zenn.dev/karaage0703/articles/dgx-spark-switchbot-power-monitor">無応答になったDGX SparkをSwitchBotで遠隔復旧、壁側消費電力はGPU単体より常時30W高い</a></h3>
+        </div>
+        <div class="summary">SSH・ネットワーク接続が共に無応答になったDGX Sparkを物理的な電源引き抜きなしで復旧させるため、著者はSwitchBot Plug Mini(JP)を3P→2Pアダプタ経由でコンセントとDGX Spark間に挟み、Wi-Fi経由のリモートON/OFFを可能にした。DGX SparkのUEFI設定「After Power Loss Behavior」をAuto Bootにしておくことで、通電後は自動起動する。24時間の消費電力計測では、壁側消費電力がGPU単体の消費より常時約30W上回り、CPU・メモリ・ストレージ・ファン・電力変換損失の分を可視化した。</div>
+        <div class="key-points">
+          <ul>
+            <li>壁側消費電力は最小37.6W・平均46.3W・最大159.6W、GPU単体は平均13.8W・最大87.9W</li>
+            <li>SwitchBotが「独立したリモート電源スイッチ兼電力計」として機能し、緊急復旧と常時モニタリングを両立</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
           <span>⏱ 4 min read</span>
           <span>2026-08-16</span>
+          <span class="engagement">🔖 21</span>
         </div>
       </div>
     </div>
@@ -322,54 +321,13 @@
         <div class="card-header">
           <span class="tag tag-dev">Dev</span>
           <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://github.com/lazy-promise/lazy-promise">Effectの軽量版を志向するPromise代替「LazyPromise」</a></h3>
+          <h3><a href="https://qiita.com/minorun365/items/320b4230c0b0c169ba13">AIエージェントの大量HTML出力を集約するダッシュボード「HTML共有くん」、3週間で273ページ蓄積</a></h3>
         </div>
-        <div class="summary">LazyPromiseは、遅延評価・キャンセル対応・マイクロタスクを介さない同期的な発火・型付きエラー・依存性注入を備えたPromise的プリミティブ。同様の機能を持つEffectを引き合いに「ライブラリとフレームワークほど距離のある設計」と位置付け、意図的に最小限の実装にとどめる。単発のobservableパターンでDiamond Problemや同期再入の問題を回避し、パフォーマンス用途にはクラスベースAPIも用意する。</div>
+        <div class="summary">Claude Codeなどが生成する大量のHTML出力を「チャットに貼ると流れる、案件フォルダに置くと外出先のスマホから探せない」問題を解決するため、著者はS3+CloudFront(キャッシュ無効化)でHTMLを集約するダッシュボードをOSSとして公開した。認証はパスキー対応のCognitoで本人用、同僚向けにはIP許可リストや期限付き署名URLを使い分ける。CloudFront Functions上のHMAC-SHA256署名でサーバー状態を持たずにURL期限を検証する。</div>
         <div class="key-points">
           <ul>
-            <li>マイクロタスクを介さない同期的な発火とキャンセル対応で、Diamond Problem・同期再入を回避する単発observable設計</li>
-            <li>Effectとの違いを「ライブラリ対フレームワーク」と位置付け、MITライセンスで意図的に最小実装に留める</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>GitHub</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-08-14</span>
-          <span class="engagement">⭐ 62</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
-          <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://buf.build/blog/protobuf-lsp">Bufが本番運用レベルのProtobuf LSPサーバーを公開</a></h3>
-        </div>
-        <div class="summary">Bufが、Protobuf向けとして初となる本番運用レベルのLSPサーバーを公開した。VSCode拡張、Neovim(`nvim-lspconfig`または`buf lsp serve`直接起動)などエディタを問わず、コード補完・定義ジャンプ・参照検索・重複型修飾子などの高度な診断が使えるようになる。protocompileフロントエンドをクエリ駆動型のインクリメンタルコンパイル方式へ刷新し、専用AST/中間表現で大規模ワークスペースでもメモリ効率よくエラー位置を特定する。</div>
-        <div class="key-points">
-          <ul>
-            <li>VSCode/Neovim等で補完・定義ジャンプ・参照検索・重複型修飾子診断が使える、Protobuf初の本番級LSPサーバー</li>
-            <li>protocompileをクエリ駆動インクリメンタルコンパイルへ刷新、大規模ワークスペースでもメモリ効率を維持</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Buf Blog</span>
-          <span>⏱ 3 min read</span>
-          <span>2026-01-14</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-infra">Infra</span>
-          <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://qiita.com/yakumo_09/items/9c540e06512631ca0b39">「インフラ向けESLint」cdk-nagを生成AIアプリ構成で試す</a></h3>
-        </div>
-        <div class="summary">cdk-nagは「インフラ向けESLint」と呼ばれるAWS(cdklabs)製ツールで、CDKのTypeScriptをCloudFormationへ変換するsynth工程に割り込み、セキュリティのベストプラクティス違反を検出する。ルールパックは6種類あり、最も一般的な「AwsSolutionsChecks」だけで131ルールを含む。S3・DynamoDB・Lambda・API Gatewayを使う生成AIアプリの典型構成を検証したところ19件の指摘が出た。v3ではAPI名が変更されており、ネット上の情報の多くがv2向けである点に注意が必要とされる。</div>
-        <div class="key-points">
-          <ul>
-            <li>AwsSolutionsChecksルールパック(131ルール)でS3・DynamoDB・Lambda・API Gateway構成を検証し19件の指摘</li>
-            <li>v3でAPIが`Aspects.of(app).add()`→`Validations.of(app).addPlugins()`に変更、ネット上の情報の大半がv2向けで要注意</li>
+            <li>「公開するか迷う時間の方が公開そのものより高くつく」という設計思想で公開のためらいを減らし、3週間で273ページが蓄積</li>
+            <li>スマホからのタスク投稿・承認に使う`/inbox`・`/mobile`エンドポイントを分離、iPhone Safari対応など実運用の知見を反映</li>
           </ul>
         </div>
         <div class="meta">
@@ -378,43 +336,83 @@
           <span>2026-08-16</span>
         </div>
       </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://zenn.dev/prozolic/articles/2d09743e2f46ab">.NET 11 Preview 7でdouble→decimal変換が刷新、15桁丸めを廃止し正確な内部値をそのまま反映</a></h3>
+        </div>
+        <div class="summary">.NET 11 Preview 7で、double/floatからdecimalへの変換ロジックが刷新された。従来は変換前に有効桁数15桁へ丸めていたため、例えばdouble型の3.14をdecimalにキャストすると素直に3.14mになっていたが、新実装はdoubleが内部的に持つ正確な値(3.1400000000000001243449787580...)をそのまま変換するようになった(dotnet/runtime#130566)。定数式はSDKのランタイムでコンパイル時に評価されるため、.NET 11 Preview 7のSDKで旧フレームワーク向けにビルドすると、実行時の変換結果と食い違う場合がある点に著者は注意を促す。</div>
+        <div class="key-points">
+          <ul>
+            <li>丸め処理の廃止により、double由来のdecimal値がバイナリ浮動小数点表現の精度をそのまま反映するようになった</li>
+            <li>シリアライズ処理のテストで、SDKバージョン依存の挙動差(コンパイル時評価 vs 実行時変換)が新たに顕在化する恐れがある</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-08-15</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://zenn.dev/rozurozu/articles/20260815_jujutsu_tsurami">Jujutsu(jj)のつらみ、AIコーディングエージェントがdetached HEADを「修復」しようとして環境を壊す</a></h3>
+        </div>
+        <div class="summary">Jujutsu(jj)はGit互換だがGitネイティブではなく、ステージング領域やカレントブランチという概念を排した設計はエレガントな一方、周辺エコシステムはGitの前提を引きずる。Claude Codeがセッション開始時に取得するGitメタデータはjjのdetached HEAD状態を「Current branch: HEAD」や空のコミットメッセージとして誤解し、エージェントがgit checkoutのような状態変更コマンドを「修復」のつもりで実行してjjのワークスペースを壊しかねない。著者はPreToolUseフックで状態変更系Gitコマンドをブロックしつつ、閲覧はgit log等のGitツールを使う「デュアルモード」運用で回避している。</div>
+        <div class="key-points">
+          <ul>
+            <li>CLAUDE.mdにjjのモデルを明示することと、checkout・reset・commit・mergeをブロックするフックの実装を具体的対策として提示</li>
+            <li>ZedのGitパネルやObsidian Gitプラグインなど、ブランチ追跡を前提にしたサードパーティ製UIがjj環境下で部分的に機能しなくなる事例を列挙</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-08-15</span>
+        </div>
+      </div>
     </div>
 
     <div class="section" id="quick-links">
       <div class="section-title">🔗 Quick Links</div>
 
       <div class="quick-link">
-        <span class="tag tag-ai">AI</span>
-        <a href="https://gigazine.net/news/20260816-alibaba-qwen-3-billion-downloads/">AlibabaのQwen、累計ダウンロード数が30億件を突破</a>
-        <span class="quick-summary">— HuggingFace上のダウンロード数は6ヶ月で30億件に到達し、Google(4.18億)やOpenAI(3.29億)を大きく上回り派生モデルも約15万1000種に達した。</span>
-        <span class="meta">GIGAZINE</span>
+        <span class="tag tag-infra">Infra</span>
+        <a href="https://www.githubstatus.com/incidents/zkxwbgr0cnmx">GitHubで約8時間の大規模障害、Web/APIエラー率最大20%</a>
+        <span class="quick-summary">— 8月17日13:40〜21:15 UTCの約8時間、Git操作・API・Actions・CopilotなどでWeb/APIエラー率最大20%、アーカイブダウンロード失敗率約50%の障害が発生した。</span>
+        <span class="meta">GitHub Status</span>
       </div>
 
       <div class="quick-link">
-        <span class="tag tag-infra">Infra</span>
-        <a href="https://qiita.com/eureka_/items/40e0b4ced50375a91f62">terraform planとplan -refresh-onlyの組み合わせでドリフト原因を2種類に自動分類</a>
-        <span class="quick-summary">— 外部からのコンソール変更とコードのapply忘れをresource_drift件数の比較で判定し、Slackへ🔴🟡で通知する。</span>
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://www.benjoffe.com/fast-day-of-week">乗算・加算・シフトの3命令だけで曜日を求める高速アルゴリズム</a>
+        <span class="quick-summary">— 7がメルセンヌ数であることを利用した手法で、既存手法(Neri, 2024)比でApple M4 Proにて約0.17倍のスループットを達成した。</span>
+        <span class="meta">benjoffe.com</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://qiita.com/jqit_suwa/items/fe5975104ffefa49f632">Claude Codeの/watch-video、実は3段階の処理モードを選べる</a>
+        <span class="quick-summary">— 文字起こしのみのTranscript・フレーム抽出を加えるVisual・Gemini/Claude Visionで包括解析するMultimodalの3段階から選べ、10分超の動画は実行前にユーザー確認を求める。</span>
+        <span class="meta">Qiita</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://qiita.com/sumomoo/items/7a8bf8214f6d4f70de17">海外で急速に広がる「FDE」、AI時代のエンジニアに求められるより高い専門性</a>
+        <span class="quick-summary">— OpenAIやAnthropicが採用するForward Deployed Engineerは実装・現場・UXが役割分担する専門職チームで、著者は「広く浅く」でなく一点特化がAI時代の価値になると論じる。</span>
         <span class="meta">Qiita</span>
       </div>
 
       <div class="quick-link">
         <span class="tag tag-ai">AI</span>
-        <a href="https://w4g1.dev/blog/models-are-getting-dumber-on-purpose">AIラボは意図的にモデルの「物知り」を減らしている、という指摘</a>
-        <span class="quick-summary">— GPT-4の約2800億パラメータ/トークンからDeepSeek V4-Flashの130億へ縮小しつつ推論性能は向上、その代償としてQwen3.5の4B/9Bは事実知識の幻覚率が80〜82%に達すると論じる。</span>
-        <span class="meta">w4g1.dev</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-dev">Dev</span>
-        <a href="https://c3-lang.org/blog/i_thought_i_was_building_a_c_replacement/">C3言語の作者が「Cの後継」という売り出し方の誤りに気づいた話</a>
-        <span class="quick-summary">— 現代の「C」はOS・組み込み向けシステム言語を指すため、C3は本来C++やSwiftと競合する汎用アプリ言語として再定義すべきだったと述べる。</span>
-        <span class="meta">c3-lang.org</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-product">Product</span>
-        <a href="https://qiita.com/junko105106/items/f6c497d76b47a654fdf6">GitHub Copilot Appsで非エンジニアでも開発できた話</a>
-        <span class="quick-summary">— 分析・調査・実装・ビルド確認・PR作成までを任せて開発を完了、「Create PRで終わりではない」(マージは別途手動)という気づきを共有する。</span>
+        <a href="https://qiita.com/jqit_suwa/items/3906db61d153fe8691aa">Mermaidで書いた過去記事の図を、話題の図解スキルに食わせてみた</a>
+        <span class="quick-summary">— 15,600スターのClaude Codeスキル「diagram-design」はMermaid図を変換でなく「再描画」し、手動追加したcolor:指定はすべて破棄される一方、日本語の文字切れは発生しなかった。</span>
         <span class="meta">Qiita</span>
       </div>
     </div>
