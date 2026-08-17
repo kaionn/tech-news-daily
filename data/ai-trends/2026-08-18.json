@@ -1,0 +1,85 @@
+{
+  "issue": "2026-08-18",
+  "generated_at": "2026-08-18T07:00:00+09:00",
+  "theme": {
+    "title": "MCPエージェントの認可設計 — 同意画面を「増やす」実装と「無くす」実装に分岐した",
+    "category": "agent-authorization",
+    "lede": "MCP（Model Context Protocol）はここ数ヶ月で「ツール呼び出しAPI」から「エージェント向けOS」へと役割を広げ、認可まわりの仕様更新が相次いでいる。争点は一貫して同じ問いに戻ってくる——エージェントがサーバー越しに何をしてよいかを、誰が、いつ、どの粒度で決めるのか。ツール単位のスコープ設計、エージェントの自己登録が生む同意の摩擦、そしてエンタープライズ向けに同意画面そのものを無くす動きまで、この数ヶ月で実装が急速に分岐した。MCPクライアント・サーバーをプロダクトに組み込むなら、この3層のどこで権限判断をさせるかはもう後回しにできない設計判断になっている。",
+    "tldr": [
+      "MCPの権限設計は「サーバー単位のOAuth」から「ツールごとのスコープ」へ移り、WorkOSやCloudflareが個別ツール内での権限チェックを標準パターンとして提示している。",
+      "エージェントが実行時にツールを動的発見する構成ではDCR（Dynamic Client Registration）による自己登録が同意となりすまし対策の課題を生み、StytchとAuth0（CIMD採用）が異なる答えを出している。",
+      "エンタープライズ向けにはMCP拡張仕様Enterprise-Managed Authorizationが2026年6月18日に安定版となり、IdP委任によって同意画面自体を無くす設計が登場した。"
+    ],
+    "sections": [
+      {
+        "heading": "サーバー単位の許可から、ツール単位のスコープへ",
+        "body_html": "<p>MCPサーバーは2025年6月の仕様更新で「OAuth Authorization Serverではなく Resource Server」と明確化された。この結果、権限チェックの単位はサーバー全体ではなく個々のツールに移った。画像生成ツールが呼び出し時に<code>image_generation</code>スコープをセッションに対して照会し、なければ拒否する、という実装がWorkOSの解説記事でリファレンスパターンとして示されている。</p><p>なぜサーバー単位では不十分になったのか。1つのMCPサーバーが提供するツール数はリリースのたびに増え、「検索はできるが送金はできない」のような粒度の権限を、サーバー単位のOAuthスコープだけでは表現できなくなったためだ。CloudflareのAgents SDKはWorkOS・Stytch・Auth0の3プロバイダそれぞれと統合し、同じサーバー内で「<code>add</code>ツールは全ユーザーに公開、<code>image_generation</code>ツールは権限を持つユーザーのみ」という条件付き公開を標準パターンとして提示している。</p>",
+        "examples": [
+          {
+            "product": "WorkOS AuthKit（MCPツール単位パーミッション）",
+            "approach": "ツール呼び出し時にコード内でスコープを個別チェック",
+            "detail": "generateImageツールが呼び出し時にimage_generationパーミッションをセッションに照会し、なければ拒否するパターンをリファレンス実装として公開。サーバー単位のOAuthスコープでは表現できない粒度をツール側のロジックで担保している",
+            "source_url": "https://workos.com/blog/mcp-authorization-patterns-per-tool-scopes"
+          },
+          {
+            "product": "Cloudflare Agents SDK（MCPサーバーのDurable Objects実装）",
+            "approach": "同一サーバー内でツールごとに公開条件を分岐",
+            "detail": "McpAgentクラスがWorkOS・Stytch・Auth0のいずれとも統合できる形で設計されており、addツールは全認証ユーザーに、image_generationツールはロールを持つユーザーにのみ公開する条件分岐をサンプルとして提示している",
+            "source_url": "https://blog.cloudflare.com/building-ai-agents-with-mcp-authn-authz-and-durable-objects/"
+          }
+        ],
+        "takeaway": "新規にMCPサーバーやツールを設計するなら、最初からツール単位でスコープを切る。サーバー単位のOAuthアプリとして権限設計を始めると、後からツールが増えるたびに権限体系を作り直すことになる。"
+      },
+      {
+        "heading": "エージェントが自分でツールを見つけて要求する時代の同意設計",
+        "body_html": "<p>MCPエージェントは事前にどのツールを使うか人間が決めるのではなく、実行時にサーバーの提供するツール一覧を発見して呼び出す。この動的発見に対応するため、Dynamic Client Registration（DCR）でクライアント（エージェント）自身がサーバーへの登録とリダイレクトURIの申告を自律的に行う設計が広がった。StytchのConnected Appsはこの自己登録するクライアントを追跡し、権限ごとの同意画面でユーザーに「このエージェントが要求している権限」を提示する。</p><p>ただしDCRは登録済みクライアントのなりすましや、ユーザーが事前承認していない権限を実行時に要求されるリスクを伴う。Auth0はGA版のAuth for MCPでDCRの代わりに<code>Client ID Metadata Document（CIMD）</code>によるクライアント登録を採用し、あわせてdownstream API呼び出し用のOn-Behalf-Of（OBO）トークン交換を用意した。エージェントの自律的な発見と、なりすまし対策のバランスをどう取るかが実装ごとに割れている。</p>",
+        "examples": [
+          {
+            "product": "Stytch Connected Apps",
+            "approach": "DCRで自己登録するエージェントをライフサイクル管理し、要求権限ごとに同意画面を出す",
+            "detail": "Remote MCPサーバーが自己登録したクライアントの一覧を追跡し、なりすまし対策と、ロールに基づく同意画面の出し分けを提供する。CloudflareのRemote MCP実装と組み合わせた事例として公開されている",
+            "source_url": "https://stytch.com/blog/remote-mcp-stytch-cloudflare/"
+          },
+          {
+            "product": "Auth0 Auth for MCP（GA）",
+            "approach": "DCRをCIMDに置き換え、OBOトークン交換を追加",
+            "detail": "2026年5月にGAとなったAuth0のAuth for MCPは、動的クライアント登録の代替としてClient ID Metadata Documentを採用し、エージェントが自分の身元を偽装しにくい形でMCPリソース識別子とOBOトークン交換をサポートする",
+            "source_url": "https://auth0.com/blog/auth0-auth-for-mcp-servers-generally-available/"
+          }
+        ],
+        "takeaway": "エージェントに未知のツールを動的に発見させる設計を選ぶなら、同意UIとなりすまし対策は後付けできない。DCRをそのまま使うか、CIMDのような代替クライアント登録に寄せるかは、エージェントの実行環境（一般ユーザー向けか、社内基盤か）で判断が変わる。"
+      },
+      {
+        "heading": "エンタープライズは同意画面そのものを無くす方向に進んだ",
+        "body_html": "<p>2026年6月18日、MCPの拡張仕様Enterprise-Managed Authorization（EMA）が安定版になった。ユーザーがIdP経由でログインすると、MCPクライアントがIdPに署名付きのアイデンティティ表明JWTを要求し、IdPが管理者設定のポリシーを適用してこのJWTを発行、MCPサーバーは既存のSSO信頼関係と同じ仕組みでこれを検証してスコープ済みアクセストークンを発行する。ユーザー操作も同意画面も一切発生しない。</p><p>これは前段の「ツールごとに同意を取る」設計とは逆方向で、権限判断をエンドユーザーの同意からIdP管理者の事前ポリシーへ完全に移す発想だ。ローンチ時点の対応IdPはOktaのみで、Asana・Atlassian・Canva・Figma・Granola・Linear・Supabaseがサーバー側で対応、クライアント側はAnthropic（Claude・Claude Code・Cowork）とMicrosoft（VS Code）が対応した。IdPが単一障害点かつ単一の信頼の起点になる設計であり、対応IdPを増やせるかが普及の鍵になる。</p>",
+        "examples": [
+          {
+            "product": "MCP Enterprise-Managed Authorization（EMA）",
+            "approach": "IdP発行の署名付きJWTでゼロタッチのOAuthを実現",
+            "detail": "2026年6月18日に安定版となったMCP拡張仕様。ユーザーの同意画面を廃し、管理者がIdP側で設定したポリシーに基づいてMCPサーバーへのアクセスを一括付与する。ローンチ対応はOktaのみ、Anthropic・Microsoftがクライアント側で採用した",
+            "source_url": "https://blog.modelcontextprotocol.io/posts/enterprise-managed-auth/"
+          }
+        ],
+        "takeaway": "社内向けに閉じたMCPサーバー群を配るならEMA相当のIdP委任モデルを検討する価値がある。逆に不特定多数のエンドユーザーに公開するMCPサーバーでは、同意画面を無くす設計はまだ選択肢にならない。対応IdPが少ない今は、EMAとユーザー同意ベースの両方を実装できる抽象化を挟んでおくのが安全だ。"
+      }
+    ]
+  },
+  "editorial": "この3つの実装が示すのは、「認可をどこに置くか」という設計判断がMCPの成熟とともにレイヤーごとに専門化してきたということだ。ツール単位のスコープはアプリ側のロジックで、動的発見への対応はIdPやAuth基盤の役割へ、エンタープライズ配布は仕様レベルのIdP委任へと、判断の置き場所が徐々に上のレイヤーへ移動している。自作のMCPサーバーを設計するなら、この3層のどこまでを自前で持ち、どこから既製の認可基盤に任せるかを最初に決めておくべきだ。",
+  "quick_picks": [
+    {
+      "title": "MCP 2026-07-28 仕様アップデート",
+      "summary": "MCP公式ブログが7月28日付の仕様改定を解説。認可サーバーにRFC 9207のiss検証を必須化するなど認可周りの安全策が積み増され、本文で扱ったツール単位スコープやEMAの前提となる仕様変更を理解できる。",
+      "url": "https://blog.modelcontextprotocol.io/posts/2026-07-28/"
+    },
+    {
+      "title": "Auth0 Auth for MCP が正式GA",
+      "summary": "Auth0のMCPサーバー向け認可製品が2026年5月にGAし、CIMDによるクライアント登録とOBOトークン交換を導入した。本文セクション2で扱ったDCRの代替アプローチの一次情報。",
+      "url": "https://auth0.com/blog/auth0-auth-for-mcp-servers-generally-available/"
+    },
+    {
+      "title": "WorkOS: AIエージェントに専用クレデンシャルを持たせる",
+      "summary": "エージェントをユーザーのなりすましではなく、それ自体のアイデンティティとして扱うべきだと説く実装ガイド。本文で扱ったツール単位スコープ設計を、エージェント自身の資格情報という切り口から補強する内容。",
+      "url": "https://workos.com/blog/ai-agent-credentials"
+    }
+  ]
+}
