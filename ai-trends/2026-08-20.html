@@ -66,7 +66,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 <div class="container">
 <header>
   <h1>🧠 AI プロダクト動向</h1>
-  <p class="date">2026-08-11 発行（読了 5 分）</p>
+  <p class="date">2026-08-20 発行（読了 6 分）</p>
   <p class="tagline">実プロダクトのアーキテクチャ・使用例から AI 開発の現在地を週 3 回・1 号 1 テーマで深掘り</p>
   <nav class="site-nav">
     <a href="../">📰 日刊ダイジェスト</a>
@@ -77,78 +77,84 @@ footer a{color:var(--primary-500);text-decoration:none}
 </header>
 
 <div class="theme-hero">
-  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">CONTEXT-COMPACTION</span></span>
-  <h2>コンテキスト圧縮はどこで行うべきか — API・モデル訓練・ハーネス、3層に割れた実装場所</h2>
-  <p class="lede">長時間稼働するコーディングエージェントは、いずれ必ずコンテキストウィンドウの上限にぶつかる。この「古い会話をどう畳んで続きを走らせるか」という課題に対し、直近半年で Anthropic・OpenAI・Microsoft がほぼ同時に対処したが、実装した層がそれぞれ違う。API のオプション、モデルの訓練対象、ハーネスのランタイム機能——同じ問題への解が3層に分かれたのは、この機能がどこに置いても動くという裏返しでもある。</p>
+  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">MCP-TOOL-SCALING</span></span>
+  <h2>接続ツールが増えるほど遅くなる問題 — コード実行と検索遅延ロードの2つの答え</h2>
+  <p class="lede">MCP（Model Context Protocol）は2024年11月の公開から急速に普及し、2026年にはエンタープライズ環境で1万以上のMCPサーバーが稼働する規模になった。だが接続先が増えるほど、起動時に全ツールのスキーマをプロンプトに詰め込む素朴な実装はコストと精度の両面で限界を迎える。Anthropicが公式ブログで具体的なトークン数を示したのを皮切りに、Cloudflareが独立に同じ結論へ辿り着き、専業プロダクトが定型実装として提供し始めたことで、「起動時に全部渡さない」設計が急速に標準化しつつある。</p>
 </div>
 
 <div class="tldr">
   <div class="label">TL;DR — 3 行で</div>
   <ul>
-    <li>Anthropic は compaction をサーバーサイド API のオプションとして実装し、モデル本体は変更していない</li>
-    <li>OpenAI は GPT-5.1-Codex-Max で圧縮判断そのものを訓練対象にし、モデルが自分の履歴を刈り込む</li>
-    <li>Microsoft は Agent Framework のランタイム層に compaction を組み込み、todo 管理やツール承認と同列に扱う</li>
+    <li>Anthropicは公式エンジニアリングブログで、MCPツールをコードAPIとして提示しファイルシステム越しにオンデマンドで読み込ませる方式により、あるタスクのトークン消費を150,000から2,000（98.7%減）に削減したと報告した</li>
+    <li>Cloudflareは独立に同じ結論に達し「Code Mode」としてMCPツールをTypeScript APIに変換しサンドボックスで実行する仕組みを公開、異なる企業が同じアーキテクチャに収束したことを示した</li>
+    <li>Anthropic自身はコード実行とは別に、BM25/正規表現でツール定義を検索してから遅延ロードする「Tool Search Tool」も提供しており、トークン85%減とOpus 4のMCP評価精度49%→74%への改善を報告している。Klavisのような専業プロダクトはこれを4段階の照会フローとして製品化した</li>
   </ul>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 1: サーバーサイド API という選択 — Anthropic の compact_20260112</div>
+  <div class="section-title">📐 パターン 1: 起動時に全ツールを渡す設計はもう破綻している</div>
   <div class="theme-section">
-    <p>Anthropic の Context Compaction API は、入力トークン数が設定した閾値（デフォルト15万トークン、最小5万トークン）に達すると、API 側が会話を要約して <code>compaction</code> ブロックを生成する。以降のリクエストでは、このブロックより前の内容は自動的に破棄され、要約から会話が継続する。クライアント側で要約ロジックを書く必要はない。</p><p>この方式の要点は、モデルの重みには一切手を入れず、API 呼び出し時のオプション（ベータヘッダーと <code>context_management</code> パラメータ）として提供している点にある。要約に使うプロンプトも <code>instructions</code> で丸ごと差し替えられるため、圧縮の挙動をアプリ側で制御できる。AWS Bedrock・Google Cloud・Microsoft Foundry でも同一仕様が使えるのは、モデル非依存でAPIレイヤーに閉じているからだ。</p>
+    <p>MCPサーバーへの接続数が増えるほど、エージェントは実際のリクエストを読む前に大量のツール定義を処理することになる。Anthropicの公式エンジニアリングブログは、数千のツールに接続したエージェントは「リクエストを読む前に数十万トークンを処理する必要がある」と説明し、さらにツール呼び出しの結果（例えば2時間の会議の文字起こし）がモデルのコンテキストを2回通過することで5万トークン以上が追加消費される例を挙げている。</p><p>この無駄を解消する方法としてAnthropicが示したのが、MCPツールを直接呼び出すのではなく<code>./servers/google-drive/getDocument.ts</code>のようなコードAPIとしてファイルシステム上に提示し、エージェントにコードを書かせて操作させる方式だ。モデルはファイルシステムの探索が得意なため、必要なツール定義だけをオンデマンドで読み込め、結果もコード内でフィルタしてから返せる。中間状態や再利用可能な処理は「スキル」としてファイルに永続化できる。</p>
     <div class="example">
-      <div class="product">Claude Opus 5 / Sonnet 5（Anthropic, Context Compaction API）</div>
-      <div class="approach">入力トークンが閾値到達で自動要約し、以降のリクエストは要約ブロックから継続する</div>
-      <div class="detail">自前で要約ロジックを実装していたチームが置き換え対象にできる、最も仕様が具体的なcompaction実装。2026年3月のClaude Opus 4.6で先行導入され、1Mトークンウィンドウでの検索精度をSonnet 4.5比76%対18.5%まで改善したと報告されている</div>
-      <a href="https://platform.claude.com/docs/en/build-with-claude/compaction">📄 一次ソース</a>
+      <div class="product">Anthropic（公式エンジニアリングブログ, Code execution with MCP）</div>
+      <div class="approach">MCPツールをコードAPIとしてファイルシステム上に提示し、エージェントがコードを書いてオンデマンドで読み込み・実行する</div>
+      <div class="detail">同一タスクのトークン消費を150,000から2,000（98.7%減）に削減したと具体的な数値付きで報告し、中間結果のコード内フィルタリングと「スキル」としての永続化も提案している</div>
+      <a href="https://www.anthropic.com/engineering/code-execution-with-mcp">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> 自前で「古い会話を要約してプロンプトに詰め直す」ロジックを書いているなら、まず標準APIのcompactionオプションに置き換えられないか確認するのが先。車輪の再発明を避けられる。</div>
+    <div class="takeaway"><strong>示唆:</strong> MCP接続先を増やす設計をするなら、起動時に全スキーマをシステムプロンプトへ詰め込む実装は最初から避け、ツール定義を必要になった時点で読み込む経路を用意する。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 2: モデル自身に刈り込みを学習させる — OpenAI Codex-Max のcompaction</div>
+  <div class="section-title">📐 パターン 2: コード実行と検索遅延ロード — 同じ課題への2つの答え</div>
   <div class="theme-section">
-    <p>OpenAI の GPT-5.1-Codex-Max は、複数のコンテキストウィンドウをまたいで動作するよう訓練段階で学習した初めてのモデルだとされる。Codex アプリケーション上でコンテキスト上限に近づくと、モデル自身が重要な情報を保持しながら履歴を刈り込み、新しいウィンドウで作業を継続する。この繰り返しにより、単一タスクを24時間以上続けられたという社内評価が報告されている。</p><p>Anthropic方式との違いは、要約が外付けのAPI機能ではなく、モデルの意思決定そのものに埋め込まれている点だ。どの情報が「タスクに効くか」の判断を、汎用的な要約プロンプトではなくモデルの学習済みポリシーに委ねている。引き換えに、この挙動はそのモデル専用であり、他モデルに持ち出せない。</p>
+    <p>Cloudflareは公式ブログで、AnthropicのCode Executionと同じアーキテクチャに独立に到達したと明かしている。根拠は「LLMは現実のコードを大量に学習しているが、ツール呼び出しの例は限られた作り物にすぎず、コードを書かせる方が得意」という洞察で、MCPツールをTypeScript APIへ変換しLLMにコードを書かせ、サンドボックス化された隔離環境でミリ秒単位の起動時間で実行する。異なる2社が独立に同じ結論に達したことは、この設計が特定ベンダーの都合ではなく構造的な必然であることを示している。</p><p>一方Anthropicはコード実行とは別に、既存のtool-calling形式を変えずに済む代替案として「Tool Search Tool」も公式に提供している。BM25または正規表現でツール定義そのものを検索し、一致したツールだけを<code>defer_loading: true</code>指定で遅延ロードする仕組みで、コード実行基盤を持たないクライアントでも導入できる。両者は排他的な選択肢ではなく、任意のコードを書かせられるかどうかで使い分けるものだ。</p>
     <div class="example">
-      <div class="product">GPT-5.1-Codex-Max（OpenAI）</div>
-      <div class="approach">compactionを訓練対象に組み込み、モデル自身が履歴の取捨選択を判断する</div>
-      <div class="detail">外付けの要約ラッパーではなく学習済みモデルの挙動としてcompactionを実装した点が、APIオプション方式との明確な対比になる</div>
-      <a href="https://openai.com/index/gpt-5-1-codex-max/">📄 一次ソース</a>
+      <div class="product">Cloudflare（公式ブログ, Code Mode: the better way to use MCP）</div>
+      <div class="approach">MCPツールをTypeScript APIに変換しLLMにコードを書かせ、サンドボックス化された隔離環境で実行する</div>
+      <div class="detail">「LLMはツール呼び出しの作り物の例より、大量の実コードを学んでいる」という洞察を根拠に挙げ、AnthropicのCode Executionと独立に同じアーキテクチャへ到達したと明記している</div>
+      <a href="https://blog.cloudflare.com/code-mode/">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> 汎用の要約API（移植性が高いが浅い）と、訓練済みモデル任せの圧縮（そのモデル専用だが文脈保持が深い）はトレードオフ。モデルを固定できるプロダクトなら後者の恩恵が大きい。</div>
+    <div class="example">
+      <div class="product">Anthropic（公式ドキュメント, Tool Search Tool）</div>
+      <div class="approach">コード実行ではなくBM25/正規表現による検索でツール定義自体を遅延ロードする代替案</div>
+      <div class="detail">191,300トークン対122,800トークンで85%のコンテキスト削減を報告し、Opus 4のMCP評価での成功率が49%から74%へ改善したとしている</div>
+      <a href="https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-search-tool">📄 一次ソース</a>
+    </div>
+    <div class="takeaway"><strong>示唆:</strong> サンドボックスでコードを実行できる基盤があるならコード実行方式、既存のtool-use形式を維持したいなら検索遅延ロード方式、という基準で選ぶ。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 3: ハーネス層に押し込む — Microsoft Agent Framework の統合ランタイム</div>
+  <div class="section-title">📐 パターン 3: 製品として実装するとこうなる — 4段階の問い合わせに強制する設計</div>
   <div class="theme-section">
-    <p>Microsoft は2026年6月のBuildで、Agent Framework の Harness を GA にした。ここでは自動コンテキスト圧縮が独立機能ではなく、todoリストによるplan/execute管理、ツール承認エージェント、バックグラウンドエージェントへのタスク委譲などと同じランタイム層の一部として提供される。ツール呼び出しが連続する長いループの途中でトークン使用量を監視し、上限に達する前に会話履歴を圧縮する。</p><p>API層でもモデル層でもなく、その中間の「ハーネス」に置いたのは、実運用のエージェントがそもそも生のモデルAPIを直接叩くのではなく、独自のハーネスを介して動いていることが多いからだ。圧縮だけを個別実装させるより、他のランタイム機能とまとめて提供する方がチームの重複実装を減らせる。</p>
+    <p>Klavisは公式ブログで、数千のツールを一つのMCPサーバー（Strata）の裏に集約し、エージェントの問い合わせを「意図の表明 → カテゴリ選択 → アクション名の一覧 → スキーマ取得」という4段階に強制する設計を公開した。各段階で得られる情報は最小限に絞られ、エージェントが実際に実行するアクションを確定させるまで完全な入力スキーマは渡されない。</p><p>この段階分けは、AnthropicやCloudflareが示したコード実行・検索遅延ロードと発想は同じだが、クライアント側の実装を変えずにMCPサーバーを差し替えるだけで導入できる点が異なる。Klavisはこの構成で60〜80%のコンテキスト削減と13〜15%の精度向上を報告しており、既製品としての「遅延ロードゲートウェイ」という選択肢が実用段階にあることを示している。</p>
     <div class="example">
-      <div class="product">Agent Framework Harness（Microsoft, GitHub Copilot / Foundry 連携）</div>
-      <div class="approach">context compactionをtodo管理・ツール承認・バックグラウンドエージェントと同じランタイム層でGA化</div>
-      <div class="detail">2026年4月の1.0リリースに続き6月のBuildでGAに到達、自前ハーネスを持つチームが個別実装をやめて乗り換えられる水準の完成度</div>
-      <a href="https://www.infoq.com/news/2026/08/agent-framework-harness-ga/">📄 一次ソース</a>
+      <div class="product">Klavis AI（公式ブログ, Introducing Strata）</div>
+      <div class="approach">数千のMCPツールを1つのゲートウェイに集約し、意図表明→カテゴリ→アクション名→スキーマの4段階でしか情報を渡さない</div>
+      <div class="detail">60〜80%のコンテキスト削減と13〜15%の精度向上を報告し、クライアント側の実装を変えずに導入できる既製品としての遅延ロードを提示している</div>
+      <a href="https://www.klavis.ai/blog/introducing-strata-one-mcp-server-for-thousands-of-tools">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> 自分たちでハーネスを組んでいるなら、compactionを単独機能として作り込む前に、公開フレームワークがどの層にまとめているかを見て、同じ粒度で設計するかどうかを判断する。</div>
+    <div class="takeaway"><strong>示唆:</strong> 自前でコード実行基盤や検索遅延ロードを組む余裕がないなら、Strataのような遅延ロード専用のMCPゲートウェイを間に挟む選択肢がある。</div>
   </div>
   <div class="editorial">
     <span class="label">✍️ 編集後記</span>
-    3社とも「古い文脈を畳んで続ける」という結論自体は同じで、違うのはそれをAPIオプション・訓練対象・ランタイム機能のどの層に固定したかだけだ。自分のプロダクトがモデルを差し替える可能性があるならAPI層、特定モデルに賭けられるなら訓練層、独自ハーネスを持つなら実行時層——という具合に、選ぶべき層は自分のアーキテクチャの固定度合いに従う。
+    この半年の動きは「ツールを絞り込む賢いプロンプト」ではなく「そもそも何を渡すか」というアーキテクチャの問題として決着しつつある。Anthropicが自社製品内でコード実行と検索遅延ロードという2つの答えを並行提供し、Cloudflareが独立に同じ結論へ、Klavisのような専業プロダクトが定型実装として広めている。次にMCP接続先を増やす設計をするなら、まず自分たちがコードを書かせられる基盤を持つかどうかから選択肢を絞るとよい。
   </div>
 </div>
 
 <div class="section">
   <div class="section-title">🔗 今号の動向ピックアップ</div>
-  <div class="quick-link"><a href="https://www.infoq.com/news/2026/03/opus-4-6-context-compaction/">Claude Opus 4.6、adaptive reasoningとcontext compactionを同時導入</a><span class="quick-summary">2026年3月、Anthropicは長時間エージェントワークフローでの性能劣化に対処するためcompactionを先行導入し、1Mトークンウィンドウでの検索精度を大幅改善したと報告した。本号で扱ったcompact_20260112 APIの前身にあたる機能追加。</span></div>
-  <div class="quick-link"><a href="https://devin.ai/blog/windsurf-is-now-devin-desktop">Windsurf改めDevin Desktop、エージェント間でコンテキストを共有する「Spaces」を導入</a><span class="quick-summary">Cognitionは2026年、Windsurfをデスクトップ版DevinのIDEとして統合し、セッション・PR・ファイル・プロジェクト状態をまたいでコンテキストを共有するSpaces機能を追加した。個々のセッション内の圧縮ではなく、セッション横断の文脈共有という別角度からの解。</span></div>
+  <div class="quick-link"><a href="https://www.anthropic.com/engineering/advanced-tool-use">Anthropic、Tool Search Toolに加えProgrammatic Tool Callingとツール利用例の3機能を公式発表</a><span class="quick-summary">2025年11月24日の発表で、複数ツールをコード実行で束ねるProgrammatic Tool Callingでトークンを37%削減し、具体的な利用例の提示でパラメータ精度を72%から90%に改善したと報告している。本文で扱ったTool Search Toolと合わせ、Anthropicが同じ課題に複数の道具立てで応えていることを示す発表。</span></div>
+  <div class="quick-link"><a href="https://usewire.io/blog/progressive-tool-loading-mcp-context-pattern/">MCPサーバーが1万を超えた2026年、プログレッシブローディングが『新しいデフォルト』になったとの分析</a><span class="quick-summary">2026年5月6日公開の記事は、エンタープライズ向けMCPサーバーが1万以上・SDKダウンロードが9700万件に達した規模拡大を背景に、Anthropic・Klavis・Speakeasyなど複数の実装が独立に同じプログレッシブローディングの形へ収束したと整理している。本文で扱った各社の実装が業界共通の解になりつつある背景を数字で裏付ける。</span></div>
 </div>
 
 <div class="section">
   <div class="section-title">📚 過去号</div>
-  <div class="archive-item"><span class="week">2026-08-20</span><div class="body"><a href="../ai-trends.html">接続ツールが増えるほど遅くなる問題 — コード実行と検索遅延ロードの2つの答え</a><span class="sub">Anthropicは公式エンジニアリングブログで、MCPツールをコードAPIとして提示しファイルシステム越しにオンデマンドで読み込ませる方式により、あるタスクのトークン消費を150,000から2,000（98.7%減）に削減したと報告した</span></div></div>
   <div class="archive-item"><span class="week">2026-08-18</span><div class="body"><a href="2026-08-18.html">MCPエージェントの認可設計 — 同意画面を「増やす」実装と「無くす」実装に分岐した</a><span class="sub">MCPの権限設計は「サーバー単位のOAuth」から「ツールごとのスコープ」へ移り、WorkOSやCloudflareが個別ツール内での権限チェックを標準パターンとして提示している。</span></div></div>
   <div class="archive-item"><span class="week">2026-08-15</span><div class="body"><a href="2026-08-15.html">エージェントの評価・観測性 — 「最終出力の一致」から「軌跡(トラジェクトリ)の妥当性」へ</a><span class="sub">Anthropic は Tasks/Graders/Transcripts の三要素でエージェント評価を構造化し、1回でも成功する確率 pass@k と毎回成功する確率 pass^k を分けて計測する運用を提示した。</span></div></div>
   <div class="archive-item"><span class="week">2026-08-13</span><div class="body"><a href="2026-08-13.html">モデルルーティング — 1モデルに全部背負わせない設計が標準になった</a><span class="sub">Vercel AI GatewayやGitHub Copilot Autoは、ヒューリスティック分類→難易度ティア判定→プロバイダ違いのフォールバック、という二段構成のタスク別ルーティングをすでに標準実装にしている。</span></div></div>
+  <div class="archive-item"><span class="week">2026-08-11</span><div class="body"><a href="2026-08-11.html">コンテキスト圧縮はどこで行うべきか — API・モデル訓練・ハーネス、3層に割れた実装場所</a><span class="sub">Anthropic は compaction をサーバーサイド API のオプションとして実装し、モデル本体は変更していない</span></div></div>
   <div class="archive-item"><span class="week">2026-08-08</span><div class="body"><a href="2026-08-08.html">エージェントのコード実行基盤 — サンドボックスは「重い専用マシン」と「軽いアイソレート」に分かれ始めた</a><span class="sub">Cloudflare Sandboxes と Vercel Sandbox はどちらも「持続する専用マシン」型サンドボックスをGA化し、スナップショット復元でコールドブート30秒を2秒程度まで縮めた。</span></div></div>
   <div class="archive-item"><span class="week">2026-08-06</span><div class="body"><a href="2026-08-06.html">RAG 構成パターンの現在地 — 二段構成の次は、検索そのものをエージェントに埋め込む</a><span class="sub">Perplexity は Vespa 上で lexical・embedding のハイブリッド検索から cross-encoder rerank へ絞り込む多段構成を採り、Databricks は同じ構成を単一パラメータで追加できる機能として一般化した。</span></div></div>
   <div class="archive-item"><span class="week">2026-08-04</span><div class="body"><a href="2026-08-04.html">ワークフロー型 vs エージェント型 — 複雑さを足す前に何を確かめるか</a><span class="sub">Anthropic は「経路を誰が決めるか」で workflow と agent を定義し、単純な方から試すべきだと明言している。</span></div></div>
@@ -159,7 +165,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 </div>
 
 <footer>
-  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="../data/ai-trends/2026-08-11.json">data/ai-trends/2026-08-11.json</a>（このページは JSON からの生成物）</p>
+  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="../data/ai-trends/2026-08-20.json">data/ai-trends/2026-08-20.json</a>（このページは JSON からの生成物）</p>
   <p style="margin-top:.5rem"><a href="../">📰 日刊ダイジェストに戻る</a></p>
 </footer>
 </div>

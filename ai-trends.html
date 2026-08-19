@@ -66,7 +66,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 <div class="container">
 <header>
   <h1>🧠 AI プロダクト動向</h1>
-  <p class="date">2026-08-18 発行（読了 7 分）</p>
+  <p class="date">2026-08-20 発行（読了 6 分）</p>
   <p class="tagline">実プロダクトのアーキテクチャ・使用例から AI 開発の現在地を週 3 回・1 号 1 テーマで深掘り</p>
   <nav class="site-nav">
     <a href="./">📰 日刊ダイジェスト</a>
@@ -77,87 +77,81 @@ footer a{color:var(--primary-500);text-decoration:none}
 </header>
 
 <div class="theme-hero">
-  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">AGENT-AUTHORIZATION</span></span>
-  <h2>MCPエージェントの認可設計 — 同意画面を「増やす」実装と「無くす」実装に分岐した</h2>
-  <p class="lede">MCP（Model Context Protocol）はここ数ヶ月で「ツール呼び出しAPI」から「エージェント向けOS」へと役割を広げ、認可まわりの仕様更新が相次いでいる。争点は一貫して同じ問いに戻ってくる——エージェントがサーバー越しに何をしてよいかを、誰が、いつ、どの粒度で決めるのか。ツール単位のスコープ設計、エージェントの自己登録が生む同意の摩擦、そしてエンタープライズ向けに同意画面そのものを無くす動きまで、この数ヶ月で実装が急速に分岐した。MCPクライアント・サーバーをプロダクトに組み込むなら、この3層のどこで権限判断をさせるかはもう後回しにできない設計判断になっている。</p>
+  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">MCP-TOOL-SCALING</span></span>
+  <h2>接続ツールが増えるほど遅くなる問題 — コード実行と検索遅延ロードの2つの答え</h2>
+  <p class="lede">MCP（Model Context Protocol）は2024年11月の公開から急速に普及し、2026年にはエンタープライズ環境で1万以上のMCPサーバーが稼働する規模になった。だが接続先が増えるほど、起動時に全ツールのスキーマをプロンプトに詰め込む素朴な実装はコストと精度の両面で限界を迎える。Anthropicが公式ブログで具体的なトークン数を示したのを皮切りに、Cloudflareが独立に同じ結論へ辿り着き、専業プロダクトが定型実装として提供し始めたことで、「起動時に全部渡さない」設計が急速に標準化しつつある。</p>
 </div>
 
 <div class="tldr">
   <div class="label">TL;DR — 3 行で</div>
   <ul>
-    <li>MCPの権限設計は「サーバー単位のOAuth」から「ツールごとのスコープ」へ移り、WorkOSやCloudflareが個別ツール内での権限チェックを標準パターンとして提示している。</li>
-    <li>エージェントが実行時にツールを動的発見する構成ではDCR（Dynamic Client Registration）による自己登録が同意となりすまし対策の課題を生み、StytchとAuth0（CIMD採用）が異なる答えを出している。</li>
-    <li>エンタープライズ向けにはMCP拡張仕様Enterprise-Managed Authorizationが2026年6月18日に安定版となり、IdP委任によって同意画面自体を無くす設計が登場した。</li>
+    <li>Anthropicは公式エンジニアリングブログで、MCPツールをコードAPIとして提示しファイルシステム越しにオンデマンドで読み込ませる方式により、あるタスクのトークン消費を150,000から2,000（98.7%減）に削減したと報告した</li>
+    <li>Cloudflareは独立に同じ結論に達し「Code Mode」としてMCPツールをTypeScript APIに変換しサンドボックスで実行する仕組みを公開、異なる企業が同じアーキテクチャに収束したことを示した</li>
+    <li>Anthropic自身はコード実行とは別に、BM25/正規表現でツール定義を検索してから遅延ロードする「Tool Search Tool」も提供しており、トークン85%減とOpus 4のMCP評価精度49%→74%への改善を報告している。Klavisのような専業プロダクトはこれを4段階の照会フローとして製品化した</li>
   </ul>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 1: サーバー単位の許可から、ツール単位のスコープへ</div>
+  <div class="section-title">📐 パターン 1: 起動時に全ツールを渡す設計はもう破綻している</div>
   <div class="theme-section">
-    <p>MCPサーバーは2025年6月の仕様更新で「OAuth Authorization Serverではなく Resource Server」と明確化された。この結果、権限チェックの単位はサーバー全体ではなく個々のツールに移った。画像生成ツールが呼び出し時に<code>image_generation</code>スコープをセッションに対して照会し、なければ拒否する、という実装がWorkOSの解説記事でリファレンスパターンとして示されている。</p><p>なぜサーバー単位では不十分になったのか。1つのMCPサーバーが提供するツール数はリリースのたびに増え、「検索はできるが送金はできない」のような粒度の権限を、サーバー単位のOAuthスコープだけでは表現できなくなったためだ。CloudflareのAgents SDKはWorkOS・Stytch・Auth0の3プロバイダそれぞれと統合し、同じサーバー内で「<code>add</code>ツールは全ユーザーに公開、<code>image_generation</code>ツールは権限を持つユーザーのみ」という条件付き公開を標準パターンとして提示している。</p>
+    <p>MCPサーバーへの接続数が増えるほど、エージェントは実際のリクエストを読む前に大量のツール定義を処理することになる。Anthropicの公式エンジニアリングブログは、数千のツールに接続したエージェントは「リクエストを読む前に数十万トークンを処理する必要がある」と説明し、さらにツール呼び出しの結果（例えば2時間の会議の文字起こし）がモデルのコンテキストを2回通過することで5万トークン以上が追加消費される例を挙げている。</p><p>この無駄を解消する方法としてAnthropicが示したのが、MCPツールを直接呼び出すのではなく<code>./servers/google-drive/getDocument.ts</code>のようなコードAPIとしてファイルシステム上に提示し、エージェントにコードを書かせて操作させる方式だ。モデルはファイルシステムの探索が得意なため、必要なツール定義だけをオンデマンドで読み込め、結果もコード内でフィルタしてから返せる。中間状態や再利用可能な処理は「スキル」としてファイルに永続化できる。</p>
     <div class="example">
-      <div class="product">WorkOS AuthKit（MCPツール単位パーミッション）</div>
-      <div class="approach">ツール呼び出し時にコード内でスコープを個別チェック</div>
-      <div class="detail">generateImageツールが呼び出し時にimage_generationパーミッションをセッションに照会し、なければ拒否するパターンをリファレンス実装として公開。サーバー単位のOAuthスコープでは表現できない粒度をツール側のロジックで担保している</div>
-      <a href="https://workos.com/blog/mcp-authorization-patterns-per-tool-scopes">📄 一次ソース</a>
+      <div class="product">Anthropic（公式エンジニアリングブログ, Code execution with MCP）</div>
+      <div class="approach">MCPツールをコードAPIとしてファイルシステム上に提示し、エージェントがコードを書いてオンデマンドで読み込み・実行する</div>
+      <div class="detail">同一タスクのトークン消費を150,000から2,000（98.7%減）に削減したと具体的な数値付きで報告し、中間結果のコード内フィルタリングと「スキル」としての永続化も提案している</div>
+      <a href="https://www.anthropic.com/engineering/code-execution-with-mcp">📄 一次ソース</a>
     </div>
-    <div class="example">
-      <div class="product">Cloudflare Agents SDK（MCPサーバーのDurable Objects実装）</div>
-      <div class="approach">同一サーバー内でツールごとに公開条件を分岐</div>
-      <div class="detail">McpAgentクラスがWorkOS・Stytch・Auth0のいずれとも統合できる形で設計されており、addツールは全認証ユーザーに、image_generationツールはロールを持つユーザーにのみ公開する条件分岐をサンプルとして提示している</div>
-      <a href="https://blog.cloudflare.com/building-ai-agents-with-mcp-authn-authz-and-durable-objects/">📄 一次ソース</a>
-    </div>
-    <div class="takeaway"><strong>示唆:</strong> 新規にMCPサーバーやツールを設計するなら、最初からツール単位でスコープを切る。サーバー単位のOAuthアプリとして権限設計を始めると、後からツールが増えるたびに権限体系を作り直すことになる。</div>
+    <div class="takeaway"><strong>示唆:</strong> MCP接続先を増やす設計をするなら、起動時に全スキーマをシステムプロンプトへ詰め込む実装は最初から避け、ツール定義を必要になった時点で読み込む経路を用意する。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 2: エージェントが自分でツールを見つけて要求する時代の同意設計</div>
+  <div class="section-title">📐 パターン 2: コード実行と検索遅延ロード — 同じ課題への2つの答え</div>
   <div class="theme-section">
-    <p>MCPエージェントは事前にどのツールを使うか人間が決めるのではなく、実行時にサーバーの提供するツール一覧を発見して呼び出す。この動的発見に対応するため、Dynamic Client Registration（DCR）でクライアント（エージェント）自身がサーバーへの登録とリダイレクトURIの申告を自律的に行う設計が広がった。StytchのConnected Appsはこの自己登録するクライアントを追跡し、権限ごとの同意画面でユーザーに「このエージェントが要求している権限」を提示する。</p><p>ただしDCRは登録済みクライアントのなりすましや、ユーザーが事前承認していない権限を実行時に要求されるリスクを伴う。Auth0はGA版のAuth for MCPでDCRの代わりに<code>Client ID Metadata Document（CIMD）</code>によるクライアント登録を採用し、あわせてdownstream API呼び出し用のOn-Behalf-Of（OBO）トークン交換を用意した。エージェントの自律的な発見と、なりすまし対策のバランスをどう取るかが実装ごとに割れている。</p>
+    <p>Cloudflareは公式ブログで、AnthropicのCode Executionと同じアーキテクチャに独立に到達したと明かしている。根拠は「LLMは現実のコードを大量に学習しているが、ツール呼び出しの例は限られた作り物にすぎず、コードを書かせる方が得意」という洞察で、MCPツールをTypeScript APIへ変換しLLMにコードを書かせ、サンドボックス化された隔離環境でミリ秒単位の起動時間で実行する。異なる2社が独立に同じ結論に達したことは、この設計が特定ベンダーの都合ではなく構造的な必然であることを示している。</p><p>一方Anthropicはコード実行とは別に、既存のtool-calling形式を変えずに済む代替案として「Tool Search Tool」も公式に提供している。BM25または正規表現でツール定義そのものを検索し、一致したツールだけを<code>defer_loading: true</code>指定で遅延ロードする仕組みで、コード実行基盤を持たないクライアントでも導入できる。両者は排他的な選択肢ではなく、任意のコードを書かせられるかどうかで使い分けるものだ。</p>
     <div class="example">
-      <div class="product">Stytch Connected Apps</div>
-      <div class="approach">DCRで自己登録するエージェントをライフサイクル管理し、要求権限ごとに同意画面を出す</div>
-      <div class="detail">Remote MCPサーバーが自己登録したクライアントの一覧を追跡し、なりすまし対策と、ロールに基づく同意画面の出し分けを提供する。CloudflareのRemote MCP実装と組み合わせた事例として公開されている</div>
-      <a href="https://stytch.com/blog/remote-mcp-stytch-cloudflare/">📄 一次ソース</a>
+      <div class="product">Cloudflare（公式ブログ, Code Mode: the better way to use MCP）</div>
+      <div class="approach">MCPツールをTypeScript APIに変換しLLMにコードを書かせ、サンドボックス化された隔離環境で実行する</div>
+      <div class="detail">「LLMはツール呼び出しの作り物の例より、大量の実コードを学んでいる」という洞察を根拠に挙げ、AnthropicのCode Executionと独立に同じアーキテクチャへ到達したと明記している</div>
+      <a href="https://blog.cloudflare.com/code-mode/">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">Auth0 Auth for MCP（GA）</div>
-      <div class="approach">DCRをCIMDに置き換え、OBOトークン交換を追加</div>
-      <div class="detail">2026年5月にGAとなったAuth0のAuth for MCPは、動的クライアント登録の代替としてClient ID Metadata Documentを採用し、エージェントが自分の身元を偽装しにくい形でMCPリソース識別子とOBOトークン交換をサポートする</div>
-      <a href="https://auth0.com/blog/auth0-auth-for-mcp-servers-generally-available/">📄 一次ソース</a>
+      <div class="product">Anthropic（公式ドキュメント, Tool Search Tool）</div>
+      <div class="approach">コード実行ではなくBM25/正規表現による検索でツール定義自体を遅延ロードする代替案</div>
+      <div class="detail">191,300トークン対122,800トークンで85%のコンテキスト削減を報告し、Opus 4のMCP評価での成功率が49%から74%へ改善したとしている</div>
+      <a href="https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-search-tool">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> エージェントに未知のツールを動的に発見させる設計を選ぶなら、同意UIとなりすまし対策は後付けできない。DCRをそのまま使うか、CIMDのような代替クライアント登録に寄せるかは、エージェントの実行環境（一般ユーザー向けか、社内基盤か）で判断が変わる。</div>
+    <div class="takeaway"><strong>示唆:</strong> サンドボックスでコードを実行できる基盤があるならコード実行方式、既存のtool-use形式を維持したいなら検索遅延ロード方式、という基準で選ぶ。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 3: エンタープライズは同意画面そのものを無くす方向に進んだ</div>
+  <div class="section-title">📐 パターン 3: 製品として実装するとこうなる — 4段階の問い合わせに強制する設計</div>
   <div class="theme-section">
-    <p>2026年6月18日、MCPの拡張仕様Enterprise-Managed Authorization（EMA）が安定版になった。ユーザーがIdP経由でログインすると、MCPクライアントがIdPに署名付きのアイデンティティ表明JWTを要求し、IdPが管理者設定のポリシーを適用してこのJWTを発行、MCPサーバーは既存のSSO信頼関係と同じ仕組みでこれを検証してスコープ済みアクセストークンを発行する。ユーザー操作も同意画面も一切発生しない。</p><p>これは前段の「ツールごとに同意を取る」設計とは逆方向で、権限判断をエンドユーザーの同意からIdP管理者の事前ポリシーへ完全に移す発想だ。ローンチ時点の対応IdPはOktaのみで、Asana・Atlassian・Canva・Figma・Granola・Linear・Supabaseがサーバー側で対応、クライアント側はAnthropic（Claude・Claude Code・Cowork）とMicrosoft（VS Code）が対応した。IdPが単一障害点かつ単一の信頼の起点になる設計であり、対応IdPを増やせるかが普及の鍵になる。</p>
+    <p>Klavisは公式ブログで、数千のツールを一つのMCPサーバー（Strata）の裏に集約し、エージェントの問い合わせを「意図の表明 → カテゴリ選択 → アクション名の一覧 → スキーマ取得」という4段階に強制する設計を公開した。各段階で得られる情報は最小限に絞られ、エージェントが実際に実行するアクションを確定させるまで完全な入力スキーマは渡されない。</p><p>この段階分けは、AnthropicやCloudflareが示したコード実行・検索遅延ロードと発想は同じだが、クライアント側の実装を変えずにMCPサーバーを差し替えるだけで導入できる点が異なる。Klavisはこの構成で60〜80%のコンテキスト削減と13〜15%の精度向上を報告しており、既製品としての「遅延ロードゲートウェイ」という選択肢が実用段階にあることを示している。</p>
     <div class="example">
-      <div class="product">MCP Enterprise-Managed Authorization（EMA）</div>
-      <div class="approach">IdP発行の署名付きJWTでゼロタッチのOAuthを実現</div>
-      <div class="detail">2026年6月18日に安定版となったMCP拡張仕様。ユーザーの同意画面を廃し、管理者がIdP側で設定したポリシーに基づいてMCPサーバーへのアクセスを一括付与する。ローンチ対応はOktaのみ、Anthropic・Microsoftがクライアント側で採用した</div>
-      <a href="https://blog.modelcontextprotocol.io/posts/enterprise-managed-auth/">📄 一次ソース</a>
+      <div class="product">Klavis AI（公式ブログ, Introducing Strata）</div>
+      <div class="approach">数千のMCPツールを1つのゲートウェイに集約し、意図表明→カテゴリ→アクション名→スキーマの4段階でしか情報を渡さない</div>
+      <div class="detail">60〜80%のコンテキスト削減と13〜15%の精度向上を報告し、クライアント側の実装を変えずに導入できる既製品としての遅延ロードを提示している</div>
+      <a href="https://www.klavis.ai/blog/introducing-strata-one-mcp-server-for-thousands-of-tools">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> 社内向けに閉じたMCPサーバー群を配るならEMA相当のIdP委任モデルを検討する価値がある。逆に不特定多数のエンドユーザーに公開するMCPサーバーでは、同意画面を無くす設計はまだ選択肢にならない。対応IdPが少ない今は、EMAとユーザー同意ベースの両方を実装できる抽象化を挟んでおくのが安全だ。</div>
+    <div class="takeaway"><strong>示唆:</strong> 自前でコード実行基盤や検索遅延ロードを組む余裕がないなら、Strataのような遅延ロード専用のMCPゲートウェイを間に挟む選択肢がある。</div>
   </div>
   <div class="editorial">
     <span class="label">✍️ 編集後記</span>
-    この3つの実装が示すのは、「認可をどこに置くか」という設計判断がMCPの成熟とともにレイヤーごとに専門化してきたということだ。ツール単位のスコープはアプリ側のロジックで、動的発見への対応はIdPやAuth基盤の役割へ、エンタープライズ配布は仕様レベルのIdP委任へと、判断の置き場所が徐々に上のレイヤーへ移動している。自作のMCPサーバーを設計するなら、この3層のどこまでを自前で持ち、どこから既製の認可基盤に任せるかを最初に決めておくべきだ。
+    この半年の動きは「ツールを絞り込む賢いプロンプト」ではなく「そもそも何を渡すか」というアーキテクチャの問題として決着しつつある。Anthropicが自社製品内でコード実行と検索遅延ロードという2つの答えを並行提供し、Cloudflareが独立に同じ結論へ、Klavisのような専業プロダクトが定型実装として広めている。次にMCP接続先を増やす設計をするなら、まず自分たちがコードを書かせられる基盤を持つかどうかから選択肢を絞るとよい。
   </div>
 </div>
 
 <div class="section">
   <div class="section-title">🔗 今号の動向ピックアップ</div>
-  <div class="quick-link"><a href="https://blog.modelcontextprotocol.io/posts/2026-07-28/">MCP 2026-07-28 仕様アップデート</a><span class="quick-summary">MCP公式ブログが7月28日付の仕様改定を解説。認可サーバーにRFC 9207のiss検証を必須化するなど認可周りの安全策が積み増され、本文で扱ったツール単位スコープやEMAの前提となる仕様変更を理解できる。</span></div>
-  <div class="quick-link"><a href="https://auth0.com/blog/auth0-auth-for-mcp-servers-generally-available/">Auth0 Auth for MCP が正式GA</a><span class="quick-summary">Auth0のMCPサーバー向け認可製品が2026年5月にGAし、CIMDによるクライアント登録とOBOトークン交換を導入した。本文セクション2で扱ったDCRの代替アプローチの一次情報。</span></div>
-  <div class="quick-link"><a href="https://workos.com/blog/ai-agent-credentials">WorkOS: AIエージェントに専用クレデンシャルを持たせる</a><span class="quick-summary">エージェントをユーザーのなりすましではなく、それ自体のアイデンティティとして扱うべきだと説く実装ガイド。本文で扱ったツール単位スコープ設計を、エージェント自身の資格情報という切り口から補強する内容。</span></div>
+  <div class="quick-link"><a href="https://www.anthropic.com/engineering/advanced-tool-use">Anthropic、Tool Search Toolに加えProgrammatic Tool Callingとツール利用例の3機能を公式発表</a><span class="quick-summary">2025年11月24日の発表で、複数ツールをコード実行で束ねるProgrammatic Tool Callingでトークンを37%削減し、具体的な利用例の提示でパラメータ精度を72%から90%に改善したと報告している。本文で扱ったTool Search Toolと合わせ、Anthropicが同じ課題に複数の道具立てで応えていることを示す発表。</span></div>
+  <div class="quick-link"><a href="https://usewire.io/blog/progressive-tool-loading-mcp-context-pattern/">MCPサーバーが1万を超えた2026年、プログレッシブローディングが『新しいデフォルト』になったとの分析</a><span class="quick-summary">2026年5月6日公開の記事は、エンタープライズ向けMCPサーバーが1万以上・SDKダウンロードが9700万件に達した規模拡大を背景に、Anthropic・Klavis・Speakeasyなど複数の実装が独立に同じプログレッシブローディングの形へ収束したと整理している。本文で扱った各社の実装が業界共通の解になりつつある背景を数字で裏付ける。</span></div>
 </div>
 
 <div class="section">
   <div class="section-title">📚 過去号</div>
+  <div class="archive-item"><span class="week">2026-08-18</span><div class="body"><a href="ai-trends/2026-08-18.html">MCPエージェントの認可設計 — 同意画面を「増やす」実装と「無くす」実装に分岐した</a><span class="sub">MCPの権限設計は「サーバー単位のOAuth」から「ツールごとのスコープ」へ移り、WorkOSやCloudflareが個別ツール内での権限チェックを標準パターンとして提示している。</span></div></div>
   <div class="archive-item"><span class="week">2026-08-15</span><div class="body"><a href="ai-trends/2026-08-15.html">エージェントの評価・観測性 — 「最終出力の一致」から「軌跡(トラジェクトリ)の妥当性」へ</a><span class="sub">Anthropic は Tasks/Graders/Transcripts の三要素でエージェント評価を構造化し、1回でも成功する確率 pass@k と毎回成功する確率 pass^k を分けて計測する運用を提示した。</span></div></div>
   <div class="archive-item"><span class="week">2026-08-13</span><div class="body"><a href="ai-trends/2026-08-13.html">モデルルーティング — 1モデルに全部背負わせない設計が標準になった</a><span class="sub">Vercel AI GatewayやGitHub Copilot Autoは、ヒューリスティック分類→難易度ティア判定→プロバイダ違いのフォールバック、という二段構成のタスク別ルーティングをすでに標準実装にしている。</span></div></div>
   <div class="archive-item"><span class="week">2026-08-11</span><div class="body"><a href="ai-trends/2026-08-11.html">コンテキスト圧縮はどこで行うべきか — API・モデル訓練・ハーネス、3層に割れた実装場所</a><span class="sub">Anthropic は compaction をサーバーサイド API のオプションとして実装し、モデル本体は変更していない</span></div></div>
@@ -171,7 +165,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 </div>
 
 <footer>
-  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="data/ai-trends/2026-08-18.json">data/ai-trends/2026-08-18.json</a>（このページは JSON からの生成物）</p>
+  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="data/ai-trends/2026-08-20.json">data/ai-trends/2026-08-20.json</a>（このページは JSON からの生成物）</p>
   <p style="margin-top:.5rem"><a href="./">📰 日刊ダイジェストに戻る</a></p>
 </footer>
 </div>
