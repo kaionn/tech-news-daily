@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-18T22:31:46.071Z",
+  "generated_at": "2026-08-20T22:35:27.777Z",
   "latest_week": "2026-W34",
   "weeks_available": 5,
   "items": [
@@ -12,14 +12,14 @@
       "npm": "@anthropic-ai/claude-code",
       "description": "Anthropic 公式のターミナル AI コーディングエージェント。plugin / Skill 機構で拡張できる",
       "language": "Python",
-      "stars": 141893,
+      "stars": 142141,
       "stars_prev": 141356,
-      "stars_delta": 537,
-      "stars_pct": 0.4,
-      "npm_weekly_downloads": 19689878,
+      "stars_delta": 785,
+      "stars_pct": 0.6,
+      "npm_weekly_downloads": 18259096,
       "npm_prev": 15100156,
-      "npm_delta": 4589722,
-      "npm_pct": 30.4,
+      "npm_delta": 3158940,
+      "npm_pct": 20.9,
       "history": [
         {
           "week": "2026-W30",
@@ -43,8 +43,8 @@
         },
         {
           "week": "2026-W34",
-          "stars": 141893,
-          "npm_weekly_downloads": 19689878
+          "stars": 142141,
+          "npm_weekly_downloads": 18259096
         }
       ],
       "streak": 4,
@@ -59,14 +59,14 @@
       "npm": "ccusage",
       "description": "Claude Code のトークン使用量・コストをローカルの JSONL から集計する CLI",
       "language": "Rust",
-      "stars": 18011,
+      "stars": 18071,
       "stars_prev": 17897,
-      "stars_delta": 114,
-      "stars_pct": 0.6,
-      "npm_weekly_downloads": 77026,
+      "stars_delta": 174,
+      "stars_pct": 1,
+      "npm_weekly_downloads": 102221,
       "npm_prev": 83521,
-      "npm_delta": -6495,
-      "npm_pct": -7.8,
+      "npm_delta": 18700,
+      "npm_pct": 22.4,
       "history": [
         {
           "week": "2026-W30",
@@ -90,8 +90,8 @@
         },
         {
           "week": "2026-W34",
-          "stars": 18011,
-          "npm_weekly_downloads": 77026
+          "stars": 18071,
+          "npm_weekly_downloads": 102221
         }
       ],
       "streak": 4,
@@ -106,14 +106,14 @@
       "npm": "@musistudio/claude-code-router",
       "description": "Claude Code のリクエストを他モデルへルーティングするプロキシ",
       "language": "TypeScript",
-      "stars": 36717,
+      "stars": 36771,
       "stars_prev": 36636,
-      "stars_delta": 81,
-      "stars_pct": 0.2,
-      "npm_weekly_downloads": 72914,
+      "stars_delta": 135,
+      "stars_pct": 0.4,
+      "npm_weekly_downloads": 133268,
       "npm_prev": 101000,
-      "npm_delta": -28086,
-      "npm_pct": -27.8,
+      "npm_delta": 32268,
+      "npm_pct": 31.9,
       "history": [
         {
           "week": "2026-W30",
@@ -137,8 +137,8 @@
         },
         {
           "week": "2026-W34",
-          "stars": 36717,
-          "npm_weekly_downloads": 72914
+          "stars": 36771,
+          "npm_weekly_downloads": 133268
         }
       ],
       "streak": 4,
@@ -153,10 +153,10 @@
       "npm": null,
       "description": "MCP 公式リファレンスサーバー集。エコシステムの定点",
       "language": "TypeScript",
-      "stars": 89666,
+      "stars": 89719,
       "stars_prev": 89541,
-      "stars_delta": 125,
-      "stars_pct": 0.1,
+      "stars_delta": 178,
+      "stars_pct": 0.2,
       "npm_weekly_downloads": null,
       "npm_prev": null,
       "npm_delta": null,
@@ -184,7 +184,7 @@
         },
         {
           "week": "2026-W34",
-          "stars": 89666,
+          "stars": 89719,
           "npm_weekly_downloads": null
         }
       ],
@@ -200,14 +200,14 @@
       "npm": "@modelcontextprotocol/sdk",
       "description": "MCP の公式 TypeScript SDK。サーバー・クライアント実装の土台",
       "language": "TypeScript",
-      "stars": 13198,
+      "stars": 13215,
       "stars_prev": 13164,
-      "stars_delta": 34,
-      "stars_pct": 0.3,
-      "npm_weekly_downloads": 35101265,
+      "stars_delta": 51,
+      "stars_pct": 0.4,
+      "npm_weekly_downloads": 43466247,
       "npm_prev": 51726406,
-      "npm_delta": -16625141,
-      "npm_pct": -32.1,
+      "npm_delta": -8260159,
+      "npm_pct": -16,
       "history": [
         {
           "week": "2026-W30",
@@ -231,8 +231,8 @@
         },
         {
           "week": "2026-W34",
-          "stars": 13198,
-          "npm_weekly_downloads": 35101265
+          "stars": 13215,
+          "npm_weekly_downloads": 43466247
         }
       ],
       "streak": 4,
@@ -247,10 +247,10 @@
       "npm": null,
       "description": "GitHub 公式の MCP サーバー（Go 実装）",
       "language": "Go",
-      "stars": 32344,
+      "stars": 32390,
       "stars_prev": 32225,
-      "stars_delta": 119,
-      "stars_pct": 0.4,
+      "stars_delta": 165,
+      "stars_pct": 0.5,
       "npm_weekly_downloads": null,
       "npm_prev": null,
       "npm_delta": null,
@@ -278,7 +278,7 @@
         },
         {
           "week": "2026-W34",
-          "stars": 32344,
+          "stars": 32390,
           "npm_weekly_downloads": null
         }
       ],
@@ -294,14 +294,14 @@
       "npm": "@playwright/mcp",
       "description": "Playwright をエージェントから操作するブラウザ自動化 MCP サーバー",
       "language": "TypeScript",
-      "stars": 36250,
+      "stars": 36309,
       "stars_prev": 36095,
-      "stars_delta": 155,
-      "stars_pct": 0.4,
-      "npm_weekly_downloads": 4819822,
+      "stars_delta": 214,
+      "stars_pct": 0.6,
+      "npm_weekly_downloads": 4646088,
       "npm_prev": 6659312,
-      "npm_delta": -1839490,
-      "npm_pct": -27.6,
+      "npm_delta": -2013224,
+      "npm_pct": -30.2,
       "history": [
         {
           "week": "2026-W30",
@@ -325,8 +325,8 @@
         },
         {
           "week": "2026-W34",
-          "stars": 36250,
-          "npm_weekly_downloads": 4819822
+          "stars": 36309,
+          "npm_weekly_downloads": 4646088
         }
       ],
       "streak": 4,
@@ -341,14 +341,14 @@
       "npm": "@upstash/context7-mcp",
       "description": "ライブラリの最新ドキュメントを LLM に供給する MCP サーバー",
       "language": "TypeScript",
-      "stars": 60940,
+      "stars": 61024,
       "stars_prev": 60693,
-      "stars_delta": 247,
-      "stars_pct": 0.4,
-      "npm_weekly_downloads": 1169818,
+      "stars_delta": 331,
+      "stars_pct": 0.5,
+      "npm_weekly_downloads": 553744,
       "npm_prev": 1005327,
-      "npm_delta": 164491,
-      "npm_pct": 16.4,
+      "npm_delta": -451583,
+      "npm_pct": -44.9,
       "history": [
         {
           "week": "2026-W30",
@@ -372,8 +372,8 @@
         },
         {
           "week": "2026-W34",
-          "stars": 60940,
-          "npm_weekly_downloads": 1169818
+          "stars": 61024,
+          "npm_weekly_downloads": 553744
         }
       ],
       "streak": 4,
@@ -388,10 +388,10 @@
       "npm": null,
       "description": "VS Code 上で動くオープンソースの自律コーディングエージェント拡張",
       "language": "TypeScript",
-      "stars": 66424,
+      "stars": 66549,
       "stars_prev": 66143,
-      "stars_delta": 281,
-      "stars_pct": 0.4,
+      "stars_delta": 406,
+      "stars_pct": 0.6,
       "npm_weekly_downloads": null,
       "npm_prev": null,
       "npm_delta": null,
@@ -419,7 +419,7 @@
         },
         {
           "week": "2026-W34",
-          "stars": 66424,
+          "stars": 66549,
           "npm_weekly_downloads": null
         }
       ],
@@ -435,10 +435,10 @@
       "npm": null,
       "description": "Cline 派生の VS Code AI エージェント拡張",
       "language": "TypeScript",
-      "stars": 24331,
+      "stars": 24332,
       "stars_prev": 24344,
-      "stars_delta": -13,
-      "stars_pct": -0.1,
+      "stars_delta": -12,
+      "stars_pct": 0,
       "npm_weekly_downloads": null,
       "npm_prev": null,
       "npm_delta": null,
@@ -466,7 +466,7 @@
         },
         {
           "week": "2026-W34",
-          "stars": 24331,
+          "stars": 24332,
           "npm_weekly_downloads": null
         }
       ],
@@ -482,9 +482,9 @@
       "npm": null,
       "description": "オープンソースの IDE AI アシスタント（VS Code / JetBrains）",
       "language": "TypeScript",
-      "stars": 35532,
+      "stars": 35563,
       "stars_prev": 35478,
-      "stars_delta": 54,
+      "stars_delta": 85,
       "stars_pct": 0.2,
       "npm_weekly_downloads": null,
       "npm_prev": null,
@@ -513,7 +513,7 @@
         },
         {
           "week": "2026-W34",
-          "stars": 35532,
+          "stars": 35563,
           "npm_weekly_downloads": null
         }
       ],
@@ -529,10 +529,10 @@
       "npm": null,
       "description": "ターミナルで動くペアプログラミング AI（Python 製・PyPI 配布）",
       "language": "Python",
-      "stars": 48313,
+      "stars": 48357,
       "stars_prev": 48175,
-      "stars_delta": 138,
-      "stars_pct": 0.3,
+      "stars_delta": 182,
+      "stars_pct": 0.4,
       "npm_weekly_downloads": null,
       "npm_prev": null,
       "npm_delta": null,
@@ -560,7 +560,7 @@
         },
         {
           "week": "2026-W34",
-          "stars": 48313,
+          "stars": 48357,
           "npm_weekly_downloads": null
         }
       ],
@@ -576,14 +576,14 @@
       "npm": "@openai/codex",
       "description": "OpenAI のターミナルコーディングエージェント",
       "language": "Rust",
-      "stars": 106671,
+      "stars": 107111,
       "stars_prev": 105751,
-      "stars_delta": 920,
-      "stars_pct": 0.9,
-      "npm_weekly_downloads": 13714917,
+      "stars_delta": 1360,
+      "stars_pct": 1.3,
+      "npm_weekly_downloads": 13530406,
       "npm_prev": 16311927,
-      "npm_delta": -2597010,
-      "npm_pct": -15.9,
+      "npm_delta": -2781521,
+      "npm_pct": -17.1,
       "history": [
         {
           "week": "2026-W30",
@@ -607,8 +607,8 @@
         },
         {
           "week": "2026-W34",
-          "stars": 106671,
-          "npm_weekly_downloads": 13714917
+          "stars": 107111,
+          "npm_weekly_downloads": 13530406
         }
       ],
       "streak": 4,
@@ -623,14 +623,14 @@
       "npm": "@google/gemini-cli",
       "description": "Google 公式のターミナル AI エージェント",
       "language": "TypeScript",
-      "stars": 106562,
+      "stars": 106595,
       "stars_prev": 106511,
-      "stars_delta": 51,
-      "stars_pct": 0,
-      "npm_weekly_downloads": 332258,
+      "stars_delta": 84,
+      "stars_pct": 0.1,
+      "npm_weekly_downloads": 300431,
       "npm_prev": 396002,
-      "npm_delta": -63744,
-      "npm_pct": -16.1,
+      "npm_delta": -95571,
+      "npm_pct": -24.1,
       "history": [
         {
           "week": "2026-W30",
@@ -654,11 +654,11 @@
         },
         {
           "week": "2026-W34",
-          "stars": 106562,
-          "npm_weekly_downloads": 332258
+          "stars": 106595,
+          "npm_weekly_downloads": 300431
         }
       ],
-      "streak": 0,
+      "streak": 4,
       "is_new": false
     },
     {
@@ -670,14 +670,14 @@
       "npm": "opencode-ai",
       "description": "ターミナル特化のオープンソース AI コーディングエージェント。プロバイダー非依存",
       "language": "TypeScript",
-      "stars": 198823,
+      "stars": 199535,
       "stars_prev": 197080,
-      "stars_delta": 1743,
-      "stars_pct": 0.9,
-      "npm_weekly_downloads": 2351829,
+      "stars_delta": 2455,
+      "stars_pct": 1.2,
+      "npm_weekly_downloads": 1728914,
       "npm_prev": 2138728,
-      "npm_delta": 213101,
-      "npm_pct": 10,
+      "npm_delta": -409814,
+      "npm_pct": -19.2,
       "history": [
         {
           "week": "2026-W30",
@@ -701,8 +701,8 @@
         },
         {
           "week": "2026-W34",
-          "stars": 198823,
-          "npm_weekly_downloads": 2351829
+          "stars": 199535,
+          "npm_weekly_downloads": 1728914
         }
       ],
       "streak": 4,
@@ -717,10 +717,10 @@
       "npm": null,
       "description": "自律ソフトウェア開発エージェントのプラットフォーム（Python 製）",
       "language": "TypeScript",
-      "stars": 84421,
+      "stars": 84619,
       "stars_prev": 83947,
-      "stars_delta": 474,
-      "stars_pct": 0.6,
+      "stars_delta": 672,
+      "stars_pct": 0.8,
       "npm_weekly_downloads": null,
       "npm_prev": null,
       "npm_delta": null,
@@ -748,7 +748,7 @@
         },
         {
           "week": "2026-W34",
-          "stars": 84421,
+          "stars": 84619,
           "npm_weekly_downloads": null
         }
       ],
