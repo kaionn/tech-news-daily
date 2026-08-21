@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-08-21</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="../feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-08-21 (Fri)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+      <nav class="site-nav">
+        <a href="../" class="active">📰 日刊ダイジェスト</a>
+        <a href="../trends.html">🔌 週次プラグイントレンド</a>
+        <a href="../ai-trends.html">🧠 AI プロダクト動向</a>
+        <a href="./">🗂 アーカイブ</a>
+      </nav>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 21 articles</span>
+      <span>🏷 6 categories</span>
+      <span>📡 16 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item">
+        <span class="number-value">2.45億</span>
+        <span class="number-label">サプライチェーン攻撃を受けたarrayrefクレートの累計DL数</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">$12.2B</span>
+        <span class="number-label">GoogleがMarvell株を取得できる購入オプションの上限額</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">7時間47分</span>
+        <span class="number-label">GitHub 8月17日障害の継続時間</span>
+      </div>
+    </div>
+
+    <div class="weekly-keywords">
+      <div class="section-title">📊 今週のキーワード</div>
+      <div class="keyword-chips">
+        <span class="keyword-chip">Rust書き換えラッシュ</span>
+        <span class="keyword-chip">AIエージェントの権限管理</span>
+        <span class="keyword-chip">サプライチェーン攻撃の連鎖</span>
+      </div>
+      <div class="keyword-summary">今週はBunがついにRust全面書き換えの正式版1.4をリリースする一方、arrayrefクレートのサプライチェーン攻撃やGitea・SAP Commerce Cloud・N-ableの認証バイパス実悪用が相次ぎ、Rustエコシステムの拡大とその足元を突く攻撃が同時進行した。もう一つの通奏低音はAIエージェントの権限設計で、AWS鍵を渡さない代理署名、Claudeに機密データを見せない5層防御、AGENTS.mdの同期バグなど、エージェントに何を渡し何を隠すかという設計論が各所で語られた週だった。</div>
+    </div>
+
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
+
+      <div class="card featured deep-dive">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://bun.com/blog/bun-v1.4">DEEP DIVE: Bun 1.4が正式リリース、Rust全面書き換えが初の本番投入でメモリ使用量を最大48%削減</a></h3>
+        </div>
+        <div class="summary">JavaScriptランタイムBunは8月20日、バージョン1.4を正式リリースした。7月に明らかになったZigからRustへの全面書き換えは今回が初の本番リリースで、「Bun is now written in Rust」という一文が過去1年続いた移行作業の到達点を示す。移行の副産物として、HTTPサーバーのピークメモリ使用量が13〜48%削減され、起動時間はWindowsで2.5倍・Linuxで2倍高速化、アイドル時CPU使用率も5分の1に下がった。新機能面では、これまでnpmパッケージに頼っていた領域を`Bun.Image`(画像処理)、`Bun.WebView`(ヘッドレスブラウザ操作)、`Bun.markdown`、`Bun.cron()`、`Bun.Terminal`として標準搭載し、`fetch()`とサーバー双方で実験的HTTP/3対応も追加した。パッケージマネージャには`bun audit fix`・`bun dedupe`・`bun prune`・`bun pm diff`が加わっている。Node.js互換性の検証にはNode本家のテストスイートから1,517件を移植し、`node:http`や`node:fs`など複数モジュールで97〜100%のパス率を達成した。Claude Codeはすでにこのバージョンを本番投入しており、Prismaも新サービス「Compute」の基盤に採用したという。一方で前日までのDev欄では、Rust移行に伴い未マージPRが5,000件を超えたことへの懸念が報じられたばかりで、今回の正式リリースはその移行が実用段階に入ったことを示す一つの区切りになる。</div>
+        <div class="editorial">🧠 メモリ・起動時間の改善幅は独自ベンチマークの数値であり、実運用でのGCプロファイルやRust化によるビルド時間の変化はまだ外部検証されていない。ただしClaude CodeやPrismaが早期に本番採用したという事実は、少なくとも社内ドッグフーディングの段階では実用に耐える品質に達したと読める。未マージPR急増という「開発プロセスの荒さ」への懸念と、今回の「機能・性能面の実利」は別軸の話であり、両方が同時に真でありうる点には留意したい。</div>
+        <div class="key-points">
+          <ul>
+            <li>HTTPサーバーのピークメモリ使用量を13〜48%削減、起動時間はWindows2.5倍・Linux2倍高速化、アイドルCPU使用率は24%から10%(p99)へ低下</li>
+            <li>`Bun.Image`・`Bun.WebView`・`Bun.markdown`・`Bun.cron()`・`Bun.Terminal`を標準搭載、`fetch()`とサーバー双方で実験的HTTP/3に対応</li>
+            <li>Node.js本家テストスイートから1,517件を移植し`node:http`等で97〜100%パス、URL解析4.6倍・markdown用正規表現138倍・bot検知200倍高速化</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 メモリ制約のあるコンテナ環境やコールドスタートを気にするサーバーレス用途では、既存のBunプロジェクトをこのバージョンに上げるだけで実測できる改善が見込める。</div>
+        <div class="meta">
+          <span>Bun Blog</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-08-20</span>
+          <span class="engagement">🔖 22</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://blog.rust-lang.org/2026/08/20/supply-chain-attack-on-arrayref/">累計2.45億DLのRustクレート「arrayref」がサプライチェーン攻撃を受ける、ビルド時に自己実行するマルウェアが最短86分で公開状態に</a></h3>
+        </div>
+        <div class="summary">Rust Security Response Teamは8月20日、人気クレート「arrayref」がサプライチェーン攻撃を受けたと発表した。メンテナのアカウントが侵害され、`proc-macro1`など偽装クレートに依存する悪意あるバージョンがcrates.ioへ公開された。ペイロードはビルドスクリプトとして実行され、プロジェクトをコンパイルするだけで起動する。サーバーアドレスはbase64で分割エンコードされビルド時にのみ復元される難読化が施され、Linux/Windows/macOS(x86_64・ARM64)向けにプラットフォーム別バイナリを配信、Windows版はVBScript経由でCargoのジョブオブジェクトから離脱しビルド終了後も常駐する。arrayref@0.3.10はUTC7時15分から8時41分まで86分間、append-only-vec@0.1.9は107分間、internment@0.8.7は90分間それぞれ公開状態にあった。arrayrefは累計約2.45億ダウンロードを記録し、egui・eframe・icedなど主要GUIフレームワークの間接依存先になっていた。Nextron Systems GmbHの調査チームが発見・報告し、Rustチームは悪意あるバージョンの削除とアカウントのロックで対応した。</div>
+        <div class="key-points">
+          <ul>
+            <li>arrayref@0.3.10(86分)・append-only-vec@0.1.9(107分)・internment@0.8.7(90分)の3クレートが偽装依存経由で汚染、コンパイルするだけでペイロードが起動</li>
+            <li>arrayrefは累計約2.45億DL(0.3.9単体で約1.52億)、egui/eframe/icedなど主要GUIフレームワークの間接依存先だった</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Rust Blog</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-08-20</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-product">Product</span>
+          <span class="content-type">💰 ビジネス</span>
+          <h3><a href="https://finance.yahoo.com/technology/articles/marvell-grants-google-12-2-123812695.html">MarvellがGoogleに最大122億ドル分の自社株購入オプションを付与、TPU向けカスタムチップ契約の対価として</a></h3>
+        </div>
+        <div class="summary">半導体大手Marvellは、Googleとのカスタムチップ契約に関連し、Googleに自社株最大約5,897万株(1株206.58ドル)を購入できるオプションを付与したと発表した。行使上限額は約122億ドルに達する。対象はTPU(Tensor Processing Unit)本体だけでなく、AIモデルを実行するプロセッサやデータストレージ、ネットワーク機器まで含む幅広い技術群。Googleの調達額が5億ドル分積み上がるごとに段階的にオプションが権利確定する仕組みで、2033会計年度までの目標達成時にはMarvellにとって約1,200億ドル規模の売上になるという。発表を受けMarvell株は一時8%近く上昇した一方、既存の主要サプライヤーだったBroadcomは5%超下落した。</div>
+        <div class="key-points">
+          <ul>
+            <li>Googleは最大約5,897万株(1株206.58ドル)・上限122億ドル分の購入オプションを取得、調達額5億ドルごとに段階的に権利確定</li>
+            <li>2033年度までの目標達成でMarvellに約1,200億ドル規模の売上、発表後Marvell株8%高・Broadcom株5%超安</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Yahoo Finance</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-08-19</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-frontend">Frontend</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/fluter_347uiwebassembly.html">Flutter 3.47正式リリース、UIライブラリを本体から分離し独立更新可能に・WebAssembly出力がデフォルト方向へ</a></h3>
+        </div>
+        <div class="summary">GoogleはFlutter 3.47を正式リリースした。従来SDK本体に同梱されていたMaterial・CupertinoなどのUIライブラリを独立パッケージへ分離し、Flutter SDK自体のリリースを待たずに単独でアップデートできるようにした。Web向けビルドではWebAssembly出力をデフォルトにする方向性も示されている。</div>
+        <div class="key-points">
+          <ul>
+            <li>UIライブラリ(Material/Cupertino等)をSDK本体から分離し独立パッケージ化、SDKリリースを待たずに更新可能に</li>
+            <li>Web向けビルド出力をWebAssemblyへデフォルト移行する方針を明示</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-08-20</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://github.blog/news-insights/company-news/the-august-17-outage-and-the-work-ahead/">GitHub、8月17日障害の7時間47分の内訳を公表、Copilotのリトライ嵐が復旧を長引かせた</a></h3>
+        </div>
+        <div class="summary">GitHubは8月17日に発生した7時間47分の大規模障害について、原因と再発防止策を公表した。米中部データセンターの重要インフラコンポーネントが想定を超えるトラフィックでスケールに失敗し、認証系を中心に障害が連鎖した。復旧作業中にはCopilotのクライアント側リトライループがさらにトラフィックを増やし、収束を長引かせる要因になったという。月間コミット数は4月の14億件から8月には29億件へと倍増しており、インフラへの継続的な負荷が背景にある。今月2件目の大規模インシデントで、8月6日にもActionsの障害が発生していた。</div>
+        <div class="key-points">
+          <ul>
+            <li>米中部データセンターのインフラがスケール失敗、復旧中のCopilotリトライループがトラフィックを増やし収束を遅延させた</li>
+            <li>月間コミット数は4月の14億件から8月に29億件へ倍増、対策としてCPU300万コア超・ストレージ120PB追加とAzureへの移行加速(5月12%→現在58%)を計画</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub Blog</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-08-19</span>
+          <span class="engagement">▲ 79</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://patchstack.com/articles/critical-unauthenticated-file-upload-to-rce-in-elementor-pro-plugin/">Elementor Pro(CVSS9.0)の未認証RCE、検証ループと処理ループの食い違いを突きファイル拡張子チェックを回避</a></h3>
+        </div>
+        <div class="summary">WordPressプラグインElementor ProのFormsモジュールにあるファイルアップロード機能に、未認証で悪用可能なRCE脆弱性CVE-2026-32475が見つかった。拡張子検証ループは空のファイルエントリで`return`により処理を打ち切るのに対し、実際の移動処理ループは`continue`で次へ進む仕様の食い違いを突く。空のファイルパートに続けて`.php`ペイロードを送ると、拡張子ブロックリストは2件目をスキップしつつ移動処理だけは実行され、公開ディレクトリにPHPファイルが書き込まれる。7月16日の報告から8月19日のv4.2.2リリースまで1ヶ月強を要した。</div>
+        <div class="key-points">
+          <ul>
+            <li>空ファイル+`.php`ペイロードの2パート送信で拡張子ブロックリストを回避、公開の`wp-content/uploads/elementor/forms/`配下にPHPが書き込まれる</li>
+            <li>影響はv4.2.1以下、ファイルはuniqid()由来のファイル名で時刻ベースのブルートフォースにより特定可能。v4.2.2で修正済み</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Patchstack</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-08-19</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.igalia.com/2026/08/19/Linux-72-Released.html">Linux 7.2リリース、歴代2番目に長い開発サイクルでキャッシュ考慮型スケジューラとGPU用フェアポリシーを追加</a></h3>
+        </div>
+        <div class="summary">Linux 7.2が8月19日にリリースされた。開発サイクルの長さは歴代最長の6.7に次ぐ規模となり、CPU/GPUスケジューリングまわりの改善が目立つ。キャッシュを考慮したCPUスケジューリング、MGLRU(多世代LRU)メモリ管理の改善、sched_ext向けサブスケジューラの導入に加え、Igaliaが実装したGPUリソース共有向けのフェアスケジューリングポリシーも入った。直前のリグレッションによりデフォルト無効のオプトイン扱いとなり、従来のFIFOスケジューラが引き続きデフォルトとなる。Raspberry Pi 4/5のGPU向けランタイム電源管理も追加され、アイドル時にGPUの電源を落とせるようになった。</div>
+        <div class="key-points">
+          <ul>
+            <li>キャッシュ考慮型CPUスケジューリング・sched_extサブスケジューラを追加、Igalia実装のGPUフェアスケジューリングはリグレッションによりオプトイン扱い</li>
+            <li>16年物のrobust futexバグを修正、Raspberry Pi 4/5 GPUにランタイム電源管理を追加しアイドル時の電力消費を削減</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Igalia Blog</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-08-19</span>
+          <span class="engagement">▲ 152</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://besok.github.io/posts/what-zig-felt-like-coming-from-rust/">7年選手のRustエンジニアがZigでJSONPathを再実装、モナド的抽象が消え明示的ループに置き換わる体験を報告</a></h3>
+        </div>
+        <div class="summary">7年間Rustを書いてきた著者が、比較のため同じJSONPathパーサをZigで再実装した。Rustの`Data<T>`のような`map`・`flat_map`を持つモナド的な型はZigには存在せず、明示的なループとその場での変更に置き換わり、可読性は主観的に低下したと感じたという。一方でZigの「インポート摩擦」は深いフォルダ階層を避けさせ、Rust版の`src/parser/`のようなネスト構造がZig版では5ファイルのフラットな構成に収まった。`TestAllocator`はメモリ安全性の穴を4種(deinit忘れ・エラー経路でのスキップ・二重解放・迷子アロケーション)検出したが、これらはRustなら`Drop`とムーブセマンティクスで自動的に防げるものだった。</div>
+        <div class="key-points">
+          <ul>
+            <li>Rust版はネストしたフォルダ構成、Zig版は「インポート摩擦」により5ファイルのフラット構成に収束</li>
+            <li>`TestAllocator`がdeinit忘れ・エラー経路でのスキップ・二重解放・迷子アロケーションの4種のメモリ安全性バグを検出、RustならDrop/ムーブセマンティクスで自動回避できる種類</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>besok.github.io</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-08-20</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://zenn.dev/yujif/articles/90696ac3f098e2">首掛けウェアラブルTHINKLET×OpenAI Realtime APIで料理中に手を止めず相談できる相方を自作、6日間の試用でセッション上限2ドル設定が発動</a></h3>
+        </div>
+        <div class="summary">著者は首掛け型ウェアラブルTHINKLETのカメラ映像とOpenAIのgpt-realtime-2をWebSocketで接続し、手を止めずに音声相談できるアプリを自作した。動画を連続送信せず640×480のJPEG静止画を約2秒ごとに送ることでデータ量を抑え、1セッションあたりのAPIコストが2ドルに達すると自動停止する安全装置を備える。6日間・調理時間累計2時間25分の試用でコストは約11.50ドルに収まった。近接センサーが調理中の位置を誤検知する、キッチンの騒音でスピーカー音量が不足するなどの実運用課題も報告している。</div>
+        <div class="key-points">
+          <ul>
+            <li>640×480のJPEG静止画を約2秒ごとに送信しデータ量を抑制、セッションコストが2ドルに達すると自動停止する安全機構を実装</li>
+            <li>6日間・調理累計2時間25分の試用でAPIコストは約11.50ドル、5GHz帯Wi-Fiは電子レンジ近くでも安定したがスピーカー音量とセンサー誤検知が課題として残った</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-08-19</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://zenn.dev/mizchi/articles/quint-application-modeling">形式仕様言語Quintでdenoland/celldの二重writerバグを発見、壁時計と単調クロックの混在が生む1秒のずれを5状態のトレースで特定</a></h3>
+        </div>
+        <div class="summary">著者は時相論理ベースの形式仕様言語Quintを使い、Rust製分散システムcelldの「単一writer」不変条件が破られる条件をモデル検査で発見した。ノード間のリース期限比較には壁時計(UTC)を、ローカルの権限チェックにはプロセスローカルな単調クロックを使う設計のずれが原因で、TTL10秒・クロックずれ+1秒・実経過9秒という条件が揃うと両ノードが同時にwriter権限を得てしまう。TTL=3・offset=1に簡略化したモデルをQuintのモデル検査器にかけると5状態のトレースで反例が見つかり、実際の数値でRustの回帰テストに変換して未修正のcelldに対して実行したところ、両ノードが"Local"というルーティング判定を返しバグを再現できた。修正はテイクオーバー処理に30秒のクロックずれ許容を追加する形で行われた。</div>
+        <div class="key-points">
+          <ul>
+            <li>リース期限比較に壁時計・ローカル権限チェックに単調クロックを使う設計のずれが原因、TTL10秒+クロックずれ1秒+実経過9秒で両ノードが同時にwriter権限を取得</li>
+            <li>簡略化モデル(TTL=3, offset=1)をQuintのモデル検査器で解析し5状態のトレースで反例を発見、実数値のRust回帰テストで実際のバグ再現に成功。修正はテイクオーバーに30秒のクロックずれ許容を追加</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-08-19</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/green_tea/articles/a994964786cb4f">Claude Codeに機密データを一切見せない5層防御、スキーマとダミーデータだけで分析コードを書かせ実行は人間が担う</a></h3>
+        </div>
+        <div class="summary">著者は、顧客情報など機密データをAIに扱わせつつ漏洩を防ぐ手法として、データの中身を一切見せず型定義と統計サマリー・ダミーデータだけで分析コードを生成させる「スキーマ駆動分析」を提案する。Claudeはダミーデータでコードを生成・テストし、実データでの実行は分析担当者がローカルで行う。機密データは`~/datasets/`配下にのみ置きパス参照は`.env`経由に限定(L0)、`Read`/`Edit`を拒否する権限ルール(L1)、Seatbelt/bubblewrapによるOSレベルのサンドボックス化(L2)、`.env`がダミーデータを指しているかを検証する実行フック(L3)、実データの実行は人間限定でエラーもサニタイズしてから共有(L4)という5層で構成する。侵害を検知して対処するのではなく、機密データの物理的な所在とClaudeの動作領域を分離することで構造的に侵害を不可能にする発想だという。</div>
+        <div class="key-points">
+          <ul>
+            <li>機密データは`~/datasets/`配下限定・パスは`.env`経由、`Read`/`Edit`拒否ルール(L1)とOSサンドボックス(L2)で多重に防御</li>
+            <li>実行フックが`.env`のダミーデータ参照を検証(L3)、実データの実行は人間限定でエラーもサニタイズ後にClaudeへ共有(L4)</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-08-18</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://qiita.com/harupython/items/1fba6abe5e2eac105edd">パスキーはなぜ「盗まれても意味がない」と言えるのか、サービス側は秘密鍵ではなく署名できるかだけを確認する</a></h3>
+        </div>
+        <div class="summary">パスキーは共有秘密ではなく公開鍵暗号を使うため、サービス側の認証データが漏洩しても攻撃者が得られるのは公開鍵のみで、正当な署名の偽造はできない。加えてWebAuthnの認証情報は特定サイトに暗号的に紐づいており、偽サイトで署名させられても正規サービス側では悪用できない。ただし著者は、パスキー自体が盗まれても安全という性質は、脆弱なアカウント復旧手段・同期デバイスの侵害・ログイン後のセッションハイジャックまでは守らないと強調する。安全性は強力な認証方式の導入そのものではなく、「一番弱い入り口」をなくすことに懸かっているという。</div>
+        <div class="key-points">
+          <ul>
+            <li>サービス側が確認するのは秘密鍵の開示ではなく「Challengeに署名できるか」のみ、認証データ漏洩でも公開鍵しか渡らず署名偽造は不可能</li>
+            <li>WebAuthn認証情報は特定オリジンに暗号的に紐づき偽サイトでの署名は正規サービスで悪用不可、ただし弱いアカウント復旧やセッションハイジャックは別問題として残る</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-08-19</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://thehackernews.com/2026/08/isolated-vm-flaw-lets-sandboxed.html">サンドボックスライブラリisolated-vmに型混同の脱獄脆弱性、ExternalCopyの欠陥がホストプロセスのRCEにまで到達</a></h3>
+        </div>
+        <div class="summary">Node.js向けサンドボックスライブラリisolated-vmに、V8分離境界とC++マーシャリングコードの結合部を突く型混同の脆弱性が見つかった。ExternalCopyのtransferListオプション処理の不備が原因で、制御されたアドレスでのクラッシュからホストの制御フロー乗っ取りまでエスカレーションできることが実証された。CVE番号は未採番でGHSA-864f-rcv7-6rh4として追跡され、7.0.0以下の全バージョンが影響を受ける。6.2.0と7.0.1で修正済み。</div>
+        <div class="key-points">
+          <ul>
+            <li>ExternalCopyのtransferList処理における型混同で、制御アドレスのクラッシュからホスト制御フロー乗っ取りまでエスカレーション可能と実証</li>
+            <li>V8の分離プリミティブ自体ではなくC++バインディング層の欠陥、7.0.0以下が影響を受け6.2.0/7.0.1で修正済み</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>The Hacker News</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-08-20</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://zenn.dev/fjktkm/articles/95ec94e1c2ab38">Google Fonts全2,048ファミリー・3,793ファイルを1つのTTCファイルに統合、Windows GDIの2GiB上限まで残り68MiB</a></h3>
+        </div>
+        <div class="summary">著者はGoogle Fontsの全フォントファイルを1つのTrueTypeコレクション(TTC)ファイルに統合した。共通データを共有できるTTC形式を使い、2,048ファミリー・3,793ファイル・ライセンス内訳はSIL Open Font License3,715件を含め約1.93GiBに収めた。メタデータが欠落していたGidugu-Regular.ttfにはWindows識別用の「Name ID 3」レコードをプログラムで追加、当初2.2GiBだったファイルはHarfBuzzのsubsetツールでTrueTypeヒンティング情報を削除し1.93GiBまで縮小した。Windowsのフォントビューアで約5秒で開き2,130フォントとしてインストールできるが、1つでもアンインストールすると全3,793ファイルが削除される仕様。ライセンス遵守の複雑さから配布は見送られた。</div>
+        <div class="key-points">
+          <ul>
+            <li>2,048ファミリー・3,793ファイルを1つのTTCに統合し約1.93GiB、Windows GDIの2GiB上限まで残り68MiBに収まった</li>
+            <li>HarfBuzzのsubsetツールでTrueTypeヒンティング情報を削除し2.2GiB→1.93GiBに圧縮、個別アンインストール不可のため配布は見送り</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-08-19</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.com/zachahn/vomit">CLIツール「vomit」、Claudeの冗長なトークン出力をローカルLLM経由で人間向けの平易な文章に変換</a></h3>
+        </div>
+        <div class="summary">vomitは、Claudeの冗長な出力をローカルLLM(Llama.appやOllama)に通して分かりやすい文章に変換するCLIツール。フックで自動的に出力を差し替える統合モードと、`vomit tail`でセッションを監視・変換する非侵襲モードの2種を用意する。テレメトリなし・外部依存なしでローカル完結する設計。作者自身、ローカルモデルがClaudeの意図を誤って幻覚する可能性や処理速度の遅さ、元のメッセージを取りこぼすリスクを限界として明記しており、無加工の出力を見たい場合はAgentsViewなど別ツールを勧めている。</div>
+        <div class="key-points">
+          <ul>
+            <li>フックで自動差し替えする統合モードと`vomit tail`で監視・変換する非侵襲モードの2種、Llama.appやOllamaなどローカルLLMが必須</li>
+            <li>テレメトリなし・完全ローカル動作、作者自身が幻覚・処理速度・メッセージ取りこぼしのリスクを限界として明記</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-08-20</span>
+          <span class="engagement">▲ 130</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://blog.laserphile.com/2026/08/aliexpress-webpage-keeping-multipoint.html">AliExpressのフィンガープリンティングスクリプトが無音のWebAudioグラフを常時処理し、Bluetoothマルチポイントヘッドホンの復帰を妨害</a>
+        <span class="quick-summary">— 出力音量ゼロでもAudioContextへの接続でブラウザが能動処理と判定し、PC側の音声パスが専有され続ける。</span>
+        <span class="meta">blog.laserphile.com</span>
+        <span class="engagement">▲ 781</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://www.helpnetsecurity.com/2026/08/03/cve-2026-18577-n-able-n-central-vulnerability/">N-able N-central認証バイパスCVE-2026-18577が実悪用、パートナー側クラウドサーバーの55.6%が未パッチのまま攻撃継続</a>
+        <span class="quick-summary">— 侵害後はCloudflare Tunnelで永続アクセスを確立、CISAはKEVカタログに追加済み。</span>
+        <span class="meta">Help Net Security</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://thehackernews.com/2026/08/sap-commerce-cloud-cve-2026-58231.html">SAP Commerce Cloud(CVSS10.0)のData Hub Adapter脆弱性、パッチ公開わずか3日後にハニーポットへの悪用試行を観測</a>
+        <span class="quick-summary">— 既定の認証クライアントを悪用し不十分な検証をすり抜けてRCEに到達しうる、回避策はIPフィルタでの制限。</span>
+        <span class="meta">The Hacker News</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://simedw.com/2026/08/20/midi-autocomplete/">125MパラメータのピアノAI「RollTab」、iPhone15上で秒間108ノートを生成しリアルタイム自動補完</a>
+        <span class="quick-summary">— note-on/offを1トークンに統合する独自表現とDPOによる選好スコア24.55%→69.05%への改善が鍵。</span>
+        <span class="meta">simedw.com</span>
+        <span class="engagement">▲ 436</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-infra">Infra</span>
+        <a href="https://www.phoronix.com/news/X.Org-Server-26.1-RC1">X.Org Server 26.1がRC1公開、21.1系以来5年ぶりの機能リリースでAutoconfを廃しMesonへ全面移行</a>
+        <span class="quick-summary">— バイトスワップクライアントとフォントサーバー接続を既定で無効化し、セキュリティ面も強化。</span>
+        <span class="meta">Phoronix</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://qiita.com/jqit_suwa/items/c87c377fa192de27e2a1">AGENTS.mdを共有したつもりがClaude Codeだけ古い指示を読んでいた、原因はGit Bashがsymlinkを無言でコピーに変換</a>
+        <span class="quick-summary">— `@AGENTS.md`のインポート記法に切り替えることで解消、`ls -l`の先頭文字でsymlinkかどうかを判別できる。</span>
+        <span class="meta">Qiita</span>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="./" class="archive-link">🗂 過去のダイジェスト</a>
+    </footer>
+  </div>
+</body>
+</html>
