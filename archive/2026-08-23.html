@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-08-23</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="../feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-08-23 (Sun)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+      <nav class="site-nav">
+        <a href="../" class="active">📰 日刊ダイジェスト</a>
+        <a href="../trends.html">🔌 週次プラグイントレンド</a>
+        <a href="../ai-trends.html">🧠 AI プロダクト動向</a>
+        <a href="./">🗂 アーカイブ</a>
+      </nav>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 20 articles</span>
+      <span>🏷 7 categories</span>
+      <span>📡 17 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item">
+        <span class="number-value">100x</span>
+        <span class="number-label">Rust LSP「Rust Glancer」のrust-analyzer比メモリ削減率</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">3〜7倍</span>
+        <span class="number-label">CloudflareのAIエージェント専用ブラウザ「Kitesurf」のメモリ・CPU削減率</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">$600億</span>
+        <span class="number-label">SpaceXによるCursor(Anysphere)買収額</span>
+      </div>
+    </div>
+
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
+
+      <div class="card featured deep-dive">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.modular.com/blog/mojo-open-source">DEEP DIVE: Qualcomm傘下のModular、AI言語Mojoのコンパイラとツールチェーンを完全オープンソース化、Apache 2.0で公開</a></h3>
+        </div>
+        <div class="summary">Modularは2023年にAI言語Mojoを発表して以来、NVIDIA・AMD・Intel・Armなど異なるアクセラレータ間でAIモデルを書き換えずに動かす基盤を志向してきたが、標準ライブラリこそ2024年からコミュニティに公開した一方、性能の核心を握るコンパイラ本体は非公開のまま維持してきた。Chris Lattner氏らLLVM/Swift出身者が集う少人数チームで言語設計の一貫性を守り、外部意見の取り込みは標準ライブラリの範囲にとどめる方針だったためだ。状況が変わったのは、Qualcommが2026年6月21日に基本合意し7月29日に完了した39億ドル規模の全株式買収により、ModularがQualcommの一部門となってからだ。8月18日開催のModCon 2026基調講演で、Modularはコンパイラ・ツールチェーン・数十万行規模のカーネルコード一式をApache 2.0ライセンス(LLVM例外付き)で公開すると発表した。GitHubのmodularリポジトリからソースを取得し、Bazelで`./bazelw run --config=build-mojo KGEN:mojo -- run hello.mojo`を実行すればローカルビルドできる。ただし公開は「読める」段階にとどまり、コンパイラとツール群への外部プルリクエスト受け入れは2026年末を目標とする但し書きが付いた。Mojoは今回の発表の直前にバージョン1.0(API安定版)に到達済みで、Lattner氏はQualcomm入り後の役職としてAdvanced AI Software and Platforms担当EVPに就いている。Mojo・MAX・Modular Cloudのブランドと開発方針は買収後も継続する方針が示されている。</div>
+        <div class="editorial">🧠 巨大半導体メーカー傘下でコンパイラを手放す判断は、閉鎖戦略の限界を認めた実利的な選択に見える。ただし「読めるが書けない」状態が本当に年内で終わるかは未知数で、少人数チームの設計哲学とオープンな共同開発体制がどう両立するかはこれからの検証課題だ。Qualcommのハードウェア戦略にMojoが取り込まれることで、他社アクセラレータへの対応が後回しにされるリスクも否定できない。</div>
+        <div class="key-points">
+          <ul>
+            <li>Qualcommが2026年6月21日合意・7月29日完了で39億ドル規模の全株式買収を完了、Chris Lattner氏はAdvanced AI Software and Platforms担当EVPに就任</li>
+            <li>コンパイラ・ツールチェーン・数十万行規模のカーネルコードをApache 2.0ライセンス(LLVM例外付き)で公開、GitHubのmodularリポジトリとBazelビルドで即座に取得・ビルド可能</li>
+            <li>外部プルリクエストの受け入れは2026年末を目標とし公開直後は「読める」段階にとどまる、標準ライブラリは2024年から先行して外部貢献を受け付け済み</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 自社のAI推論基盤を特定ベンダーの独自コンパイラに依存させたくない開発者にとって内部挙動を検証・フォークできる意味は大きいが、実際にPRを送れるようになるまでは様子見が妥当だろう。</div>
+        <div class="meta">
+          <span>Modular</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-08-19</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.docker.com/blog/docker-vmm-public-beta/">Dockerが自社製ハイパーバイザ「Docker VMM」をパブリックベータ公開、Mac・Windows両対応でDesktop v4.86から利用可能</a></h3>
+        </div>
+        <div class="summary">Dockerは8月12日、Docker Desktop内部の仮想化層を刷新した新ハイパーバイザ「Docker VMM」のパブリックベータをDocker Desktop v4.86で公開した。外部ライブラリに依存していた従来の仮想化基盤を自社実装に置き換えるのは今回が初めてで、コンテナ起動の高速化・ホストとコンテナ間のファイルI/O改善・アイドル時のメモリ回収の効率化を掲げる。Windows版はHyper-V分離を保ったままWSL2並みの速度を目指す。フィーチャーフラグや順番待ちは不要で、Mac・Windows双方の既存ユーザーがすぐに切り替えて試せる。Linux対応を含む正式版は2026年10月末を目標としており、GA後は新規インストールのデフォルトエンジンになる予定。</div>
+        <div class="key-points">
+          <ul>
+            <li>外部ライブラリ依存をやめ自社実装のハイパーバイザへ全面刷新、コンテナ起動高速化・ホスト-コンテナ間ファイルI/O改善・アイドル時メモリ回収の効率化を実現</li>
+            <li>Docker Desktop v4.86でMac・Windows同時にベータ提供開始、Linux対応を含む正式版は2026年10月末を目標に新規インストールのデフォルトエンジン化を予定</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Docker Blog</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-08-12</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://blog.modelcontextprotocol.io/posts/mcp-roadmap/">Model Context Protocolがロードマップ公開、APIキー廃止・長時間タスク・段階的ツール発見など5つの優先領域を提示</a></h3>
+        </div>
+        <div class="summary">MCPのリード開発者David Soria Parra氏とDen Delimarsky氏は8月22日、2026年7月28日の仕様リリースに続く次期仕様策定に向けたロードマップを公開した。優先領域は5つで、Tasksとサブスクリプションによりサーバー側から結果をプッシュしたり作業を途中操作したりできるようにする「エージェント的メッセージング」、リモートMCPサーバーを標準的なHTTPワークロードとして扱う「HTTPネイティブ転送の統一」、APIキーに代わりDPoPとWorkload Identity Federationでエージェントを認証する「エージェントID・企業セキュリティ」、大規模ツールカタログのモデル負荷を減らす「段階的ツール発見」、SDKの使い勝手向上の5点。コミュニティはWorking GroupやSEP提案を通じて直接関与できる。</div>
+        <div class="key-points">
+          <ul>
+            <li>APIキーに代わりDPoP(Demonstrating Proof of Possession)とWorkload Identity Federationでエージェントを認証する企業向けID基盤を優先領域に設定</li>
+            <li>Tasksとサブスクリプションで長時間タスクの途中操作・サーバー側プッシュを可能にし、大規模ツールカタログではモデルに全件を読ませない段階的ツール発見を導入予定</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>MCP Blog</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-08-22</span>
+          <span class="engagement">▲ 155</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://rust-glancer.github.io/blog/hello-world/">Rust LSP実装「Rust Glancer」、rust-analyzerの100倍省メモリを謳いsalsa・rowanを排したファイルシステム永続化設計で登場</a></h3>
+        </div>
+        <div class="summary">開発者@popzxc氏は、salsaのインクリメンタル計算基盤やrowan構文木といったrust-analyzerのメモリ多消費コンポーネントを避け、解析結果をファイルシステムにオフロードし必要な時だけメモリへ読み込む「凍結解析」方式のRust LSP実装「Rust Glancer」を公開した。VS Code拡張として配布し、妥当な規模のプロジェクトでメモリ使用量100MB未満を実測、M4 Maxで基本インデックス5〜6秒・フルインデックス8〜13秒という速度も確認している。</div>
+        <div class="key-points">
+          <ul>
+            <li>salsaのインクリメンタル計算・rowan構文木を採用せず、解析結果をファイルシステムに永続化し必要時だけメモリへ読み込む設計でメモリ使用量100MB未満を実現</li>
+            <li>型推論・トレイト解決器(chalk)を含むフルインデックスパイプラインを搭載しつつM4 Maxで基本インデックス5〜6秒・フルインデックス8〜13秒を実測、ただしプロックマクロ実行は非対応</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>rust-glancer.github.io</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-08-22</span>
+          <span class="engagement">▲ 384</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://blog.rust-lang.org/2026/08/21/enabling-next-solver-on-nightly/">Rustのトレイトソルバーを4年がかりで全面書き換え、次世代版がnightlyでデフォルト有効化——datafusionは8倍高速コンパイルに</a></h3>
+        </div>
+        <div class="summary">Rustコンパイラチームは8月21日付nightlyビルドで、trait解決・関連型正規化を担う次世代トレイトソルバーをデフォルト有効化した。開発は4年越しで、200件超のissueを修正し戻り値位置の`impl Trait`の不具合や高階型での関連型推論の誤りを解消した。トレイト多用クレートの`datafusion`は8倍速くコンパイルされる一方、一部クレートでは軽微な低速化も生じている。旧実装は`-Znext-solver=coherence`で無効化可能で、安定化は数ヶ月以内を予定する。</div>
+        <div class="key-points">
+          <ul>
+            <li>戻り値位置の`impl Trait`の不具合とBevy・MiniJinjaなど高階ジェネリクスを使うクレートでの関連型推論誤りを修正、200件超のissueを解消</li>
+            <li>`datafusion`は8倍速くコンパイルされる一方一部クレートでは軽微な低速化も発生、破壊的変更はGitHub issue #160895で追跡中</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Rust Blog</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-08-21</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://code.visualstudio.com/updates/v1_133">VS Code 1.133公開、GitHubサインインなしでAgentsウィンドウを開ける実験的設定やチャットの固定スクロールを追加</a></h3>
+        </div>
+        <div class="summary">Microsoftは8月17日、Visual Studio Code 1.133をリリースした。実験的設定`chat.agentHost.allowSignedOutWhenUsable`を有効にすると、GitHubへのサインインなしでAgentsウィンドウを開けるようになる。チャットは長い会話でスクロールした発言を上部に固定して振り返れる「固定スクロール」に対応し、統合ブラウザはローカルHTMLファイルの変更を検知して自動リロードするようになった。ターン単位でプロバイダを切り替えられる柔軟なClaudeセッションも追加された。</div>
+        <div class="key-points">
+          <ul>
+            <li>実験的設定`chat.agentHost.allowSignedOutWhenUsable`でGitHubサインインなしでもAgentsウィンドウを利用可能に</li>
+            <li>チャットの固定スクロールで長い会話を追いやすくし、統合ブラウザはローカルHTMLファイルの変更検知で自動リロード、ターンごとにプロバイダを切り替えられる柔軟なClaudeセッションにも対応</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>VS Code</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-08-17</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://aengelke.net/llvm23-ct.html">LLVM 23でコンパイル時間が最大10.53%短縮、ハッシュテーブルの線形プロービング化やプリコンパイル済みヘッダーで実現</a></h3>
+        </div>
+        <div class="summary">LLVM 23は-O3ビルドで全体6.75%、SQLite3では10.53%のコンパイル時間短縮を達成した。DenseMapの二次プロービングから線形プロービングへの移行、xxh3ハッシュの採用、支配木のbump allocation化など内部データ構造の刷新が主因で、GlobalISelの-O0時のFastISel比の遅さも12.71%から9.39%へ縮小した。プリコンパイル済みヘッダーの改善はLLVM/Clang自体のビルド時間を約45%短縮し、フロントエンドが占める割合を全体の80%から約55%へ下げた。</div>
+        <div class="key-points">
+          <ul>
+            <li>DenseMapを二次プロービングから線形プロービングへ変更しxxh3ハッシュを採用、支配木もbump allocation化してSQLite3のコンパイル時間を10.53%短縮</li>
+            <li>GlobalISelの-O0時のFastISel比の遅さを12.71%から9.39%へ縮小、プリコンパイル済みヘッダー改善でLLVM/Clang自身のビルド時間を約45%短縮</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>aengelke.net</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-08-21</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://qiita.com/Y-Y-dev/items/d526fb7cdbe35a3f9384">Claude Code/Codexの中大規模開発、チャットではなく`task-list.md`を単一の真実の情報源にして破綻を防ぐ運用術</a></h3>
+        </div>
+        <div class="summary">著者は、チャット履歴やGitHub Issue、Slackに進捗を分散させると大規模なAIコーディングは破綻すると指摘し、ID・状態・進捗・依存関係・完了条件を持つ`task-list.md`を唯一の真実の情報源にする運用を提案する。同時に着手するタスクは1つに絞り、「変更してよいもの」「変更してはいけないもの」「いつ止めるか」を明記した禁止リストでスコープの逸脱を防ぐ。完了判定はAIの自己申告ではなくGitの差分やテスト結果などの証拠に基づかせ、複数AIを並行させる際もタスクID・差分・テスト結果だけを共有し全リポジトリ文脈を渡さないことでロールを分離する。</div>
+        <div class="key-points">
+          <ul>
+            <li>同時進行タスクを1つに絞り、`task-list.md`にID・状態・進捗・依存関係・完了条件を記録して真実の情報源を一本化</li>
+            <li>完了判定はGit差分・テスト結果などの証拠ベースで行い自己申告を排除、複数AI並行時はタスクID・差分・テスト結果のみを共有し全文脈を渡さない設計でロールを分離</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-08-21</span>
+          <span class="engagement">🔖 235</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-frontend">Frontend</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/uhyo/articles/react-use-browser-usage">React 19.3の新API`browser()`、SSR時に「ブラウザAPI必須」を宣言してSuspenseへ自然にフォールバックさせる設計</a></h3>
+        </div>
+        <div class="summary">React 19.3で追加された`browser()`は、SSRでは描画できないコンポーネントであることを`use()`と組み合わせて宣言するAPIだ。従来はエラーを投げて処理していたSSR非対応コンポーネントを、近傍のSuspense境界へフォールバックさせる疑似サスペンスとして扱えるようになった。ルーティングライブラリ「FUNSTACK Router」はこれを使い、URLが未確定な段階でもレンダリングする「pathless SSR」を実現し、従来`<Outlet/>`が空のままハイドレーションミスマッチを起こしていた問題を、Suspenseで包むだけで解消した。</div>
+        <div class="key-points">
+          <ul>
+            <li>`use(browser(...))`の組み合わせでSSR非対応コンポーネントをエラーではなく疑似サスペンスとして扱い、近傍のSuspense fallbackを初期HTMLに出力</li>
+            <li>FUNSTACK RouterはURLが未確定な`pathless SSR`にこのAPIを採用し、`<Outlet/>`起因のハイドレーションミスマッチをSuspenseで包むだけで解消</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-08-21</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/karamem0/books/505df6779ec89a">Microsoft Entra IDアプリ開発を15章で体系化、認可コード・デバイスコード・クライアントクレデンシャル・OBOの4フローとMSAL実装を無料公開</a></h3>
+        </div>
+        <div class="summary">Microsoft MVPのkaramem0氏は、Entra ID(旧Azure AD)を使ったアプリ開発の基礎から実装までを15章にまとめた無料書籍を公開した。認証・認可の核となるトークンの仕組みを解説したうえで、認可コードフロー・デバイスコードフロー・クライアントクレデンシャルフロー・On-Behalf-Ofフローという4種のOAuth 2.0フローを個別の章で扱い、.NETとReactそれぞれのMSALライブラリでの実装とWeb API開発までをカバーする。</div>
+        <div class="key-points">
+          <ul>
+            <li>認可コード・デバイスコード・クライアントクレデンシャル・On-Behalf-Ofの4種のOAuth 2.0フローをそれぞれ独立した章で解説</li>
+            <li>MSALライブラリを使った.NET/Reactでの実装パターンとWeb API開発までを15章で構成、ユーザー・グループ管理からアプリ登録まで基礎も網羅</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-08-21</span>
+          <span class="engagement">🔖 118</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://zenn.dev/mizchi/articles/quint-application-modeling">形式仕様言語Quintでdenoland/celldの二重書き込みバグを発見、クロックスキューが生む1秒の隙間を状態空間探索で特定</a></h3>
+        </div>
+        <div class="summary">著者はTLA+系の形式仕様言語Quintを使い、単一ライター保証を持つはずのdenoland/celldに「二重書き込み」が起こりうるバグを発見した。ノード間のクロックスキューにより、TTL10秒のリースに対しノードBの時計が1秒進んでいると、実時間で9秒しか経過していなくてもBはリース失効とみなして所有権を奪い、Aは自分がまだ有効だと思っている、という矛盾した状態が一瞬生じる。実装の詳細を捨象しオーナーシップの時刻ロジックだけを抽出したモデルをApalache/Z3とTLCで探索し、見つかった反例をRustの再現テストに変換して実際のバグであることを確認した。</div>
+        <div class="key-points">
+          <ul>
+            <li>TTL10秒のリースに対しノードBの時計が1秒先行していると、実時間9秒経過時点でBはリース失効・Aはまだ有効と互いに矛盾した状態を持つ瞬間が生じる</li>
+            <li>データベース・ストレージ・ネットワークの実装詳細を捨象しオーナーシップの時刻ロジックのみを抽出したモデルをApalache/Z3・TLCで探索、反例をRustの再現テストに変換して実バグと確認</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-08-19</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://flutter.dev/blog/whats-new-in-flutter-3-47">Flutter 3.47公開、UIライブラリをSDK本体から分離しmaterial_ui/cupertino_uiを1.0で独立、Web版はWasm分割ロードに対応</a></h3>
+        </div>
+        <div class="summary">Flutterチームはバージョン3.47で、これまでコアSDKに同梱していたデザインシステムを`material_ui`・`cupertino_ui`という独立パッケージとして1.0リリースし、SDK本体の開発速度に縛られず更新できるようにした。デスクトップ向けレンダラーImpellerをデフォルト化し、iOS・macOS・Xcode 27向けのビルドパイプラインも整備した。Web版ではWebAssemblyの実験的な分割ロード(deferred loading)に対応し、Wasmアプリを小さな遅延読み込みモジュールへ分割して初期ロードを高速化できる。Flutter Widget Previewsも安定版に昇格した。</div>
+        <div class="key-points">
+          <ul>
+            <li>`material_ui`・`cupertino_ui`をSDK本体から切り離し独立パッケージとして1.0リリース、デザインシステム単独での更新が可能に</li>
+            <li>Web版はWasmの実験的な分割ロードに対応し初期ロード時間を短縮、デスクトップはImpellerをデフォルト化しXcode 27向けビルドも準備</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Flutter Blog</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-08-20</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.cncf.io/announcements/2026/08/11/cncf-announces-graduation-of-cloud-native-buildpacks-advancing-the-standard-for-container-builds/">Cloud Native BuildpacksがCNCF卒業プロジェクトに、Dockerfile不要でOCIコンテナを自動ビルドする仕組みが本番実績と第三者監査を経て正式認定</a></h3>
+        </div>
+        <div class="summary">CNCFは8月11日、Dockerfileなしでアプリのソースコードから直接OCI準拠のコンテナイメージをビルドする「Cloud Native Buildpacks」の卒業(Graduated)認定を発表した。Java・Python・Go・Node.js・Rubyなどの言語を自動検出して本番運用可能なイメージを生成する仕組みで、QuarkslabとOSTIFによる第三者セキュリティ監査に合格しOpenSSF Best Practicesバッジも取得している。2018年にHerokuの旧Buildpacksを土台に始まり同年10月にCNCF入りしたプロジェクトで、今後はOCI Artifact対応の拡張やSBOMワークフローの強化、WebAssembly形式への対応拡大を予定する。</div>
+        <div class="key-points">
+          <ul>
+            <li>QuarkslabとOSTIFによる第三者セキュリティ監査に合格しOpenSSF Best Practicesバッジを取得、本番運用レベルの採用実績とベンダー中立なガバナンスが認められ卒業</li>
+            <li>2018年にHerokuの旧Buildpacksを土台に始動し同年10月にCNCF入り、今後はOCI Artifact対応拡張・SBOMワークフロー強化・WebAssembly形式への対応拡大を計画</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>CNCF</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-08-11</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-product">Product</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://hister.org/">自分専用の検索エンジンを作るセルフホストツール「Hister」、閲覧履歴・ローカルファイルを全文索引しMCPサーバーとしても提供</a></h3>
+        </div>
+        <div class="summary">HisterはAGPLv3で公開されたセルフホスト型の検索プラットフォームで、訪問したWebページ・ローカルファイル・ブラウザ履歴・クロール結果を全文索引し、フィールド指定検索やワイルドカード、カスタムクエリエイリアスに対応する。テレメトリなし・外部通信なしを掲げ、意味検索を使う場合もユーザー自身が設定した外部エンドポイント経由に限定する。SQLiteとPostgreSQLの両方に対応し単一バイナリでのローカル実行も複数ユーザーでの共有サーバー運用も選べるほか、Web・ターミナル・CLI・HTTP API・MCPサーバーという複数の手段でアクセスできる。</div>
+        <div class="key-points">
+          <ul>
+            <li>訪問済みWebページ・ローカルファイル・ブラウザ履歴・クロール結果を全文索引し、フィールド指定・ワイルドカード・カスタムクエリエイリアスに対応</li>
+            <li>SQLite/PostgreSQL両対応でDocker・Nixによるデプロイをサポート、Web・ターミナル・CLI・HTTP API・MCPサーバーの複数手段でアクセス可能、テレメトリ・外部通信なしを明言</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Hister</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-08-22</span>
+          <span class="engagement">▲ 147</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
+
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://techcrunch.com/2026/08/18/cursor-capitalizes-on-github-frustration-launches-rival-hosting-platform/">CursorがAIエージェント優先のコード管理基盤「Origin」をベータ公開、親会社SpaceXの600億ドル買収完了2日後というタイミング</a>
+        <span class="quick-summary">— 同時期に発生したGitHubの障害でエラー率が最大20%に達し、両者の対比がSNSで話題になった。</span>
+        <span class="meta">TechCrunch</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://zed.dev/blog/introducing-delta">ZedがAIエージェントと人間のペアプロ専用アプリ「Delta」を発表、コミットの背後にある会話ごとリアルタイム複製するDeltaDBが基盤</a>
+        <span class="quick-summary">— 既存のGitリポジトリとそのまま併存し、Delta未使用のチームメイトには普通のGitリポジトリに見える設計。</span>
+        <span class="meta">Zed Blog</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://blog.cloudflare.com/kitesurf/">CloudflareがAIエージェント専用ブラウザ「Kitesurf」を発表、RustでスクラッチからブラウザエンジンをWasm化しWorkersのV8分離環境内で実行</a>
+        <span class="quick-summary">— Chromiumより実行速度は遅いが、メモリ・CPU使用量を3〜7倍削減できる点を「速さより安さ」と明言。</span>
+        <span class="meta">Cloudflare Blog</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://developers.googleblog.com/expanding-our-fully-homomorphic-encryption-offering/">Googleが準同型暗号でAI推論を可能にするコンパイラ「HEIR」をオープンソース化、暗号を復号せずに学習済みモデルを実行可能に</a>
+        <span class="quick-summary">— MLIR上に構築し複数のFHE方式・コンパイラ・専用アクセラレータ間の相互運用を狙う。</span>
+        <span class="meta">Google Developers Blog</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://qiita.com/tasekino/items/9d16bb77c5b3c8a16d54">新HTTPメソッド「QUERY」を定めるRFC 10008、GETの安全性・冪等性・キャッシュ可能性を保ったままリクエストボディを送れる「本文付きGET」</a>
+        <span class="quick-summary">— FastAPIでの実装例では専用デコレータが未整備で`METHODS_WITH_BODY`への内部パッチが必要と紹介。</span>
+        <span class="meta">Qiita</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://ascii.jp/elem/000/004/428/4428609/">中国でE Inkデバイスが「脱スマホ」需要で急拡大、220ppi・77gの4.3インチ機や6インチAI要約ノートデバイスが続々登場</a>
+        <span class="quick-summary">— Kindleの中国撤退後の空白をXteink・BOox・Hanwang・iFLYTEKが埋め、主戦場はタオバオでの即応販売。</span>
+        <span class="meta">ascii.jp</span>
+        <span class="engagement">🔖 134</span>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="./" class="archive-link">🗂 過去のダイジェスト</a>
+    </footer>
+  </div>
+</body>
+</html>
