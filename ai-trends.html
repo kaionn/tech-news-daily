@@ -66,7 +66,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 <div class="container">
 <header>
   <h1>🧠 AI プロダクト動向</h1>
-  <p class="date">2026-08-22 発行（読了 6 分）</p>
+  <p class="date">2026-08-25 発行（読了 5 分）</p>
   <p class="tagline">実プロダクトのアーキテクチャ・使用例から AI 開発の現在地を週 3 回・1 号 1 テーマで深掘り</p>
   <nav class="site-nav">
     <a href="./">📰 日刊ダイジェスト</a>
@@ -77,87 +77,94 @@ footer a{color:var(--primary-500);text-decoration:none}
 </header>
 
 <div class="theme-hero">
-  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">PROMPT-CACHING</span></span>
-  <h2>プロンプトキャッシュはコスト最適化ではない — 「プレフィックス固定」というアーキテクチャ制約</h2>
-  <p class="lede">プロンプトキャッシュは長らく「地味なコスト削減の設定項目」として扱われてきたが、エージェントが1タスクで数十回の LLM 呼び出しを重ねる今、話は変わった。Anthropic は キャッシュ読み込みを通常入力の10分の1、DeepSeek は128Kトークンのプロンプトで初回応答を13秒から500msに短縮できると公言する。差が大きすぎて「キャッシュを効かせられる設計かどうか」がエージェントのレイテンシとコストの上限を決める構造的制約になった。プレフィックス完全一致というキャッシュの仕組み上、この制約はプロンプト文面だけでなくツール順序や履歴の圧縮方法にまで及ぶ。</p>
+  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">AGENT-MEMORY</span></span>
+  <h2>エージェントのメモリ設計 — 生ログでも単一要約でもなく、書き換え可能な単位に分解する</h2>
+  <p class="lede">2026年に入り、OpenAI と Anthropic はほぼ同時期に、消費者向けチャットとエージェント製品の双方でメモリ機構を刷新した。共通しているのは「会話をそのまま貯める」「1本の要約文にまとめる」のどちらでもなく、書き換え可能な小さい単位に分解して保存する設計への転換だ。だが記憶をいつ作り直すか、どこに保存するかという次の設計判断は各社で割れており、この2軸が実装の分かれ目になっている。</p>
 </div>
 
 <div class="tldr">
   <div class="label">TL;DR — 3 行で</div>
   <ul>
-    <li>キャッシュ命中率はもはや副次指標ではなく、Manus はこれを「本番エージェントで最重要のメトリック」と明言している。</li>
-    <li>ProjectDiscovery は動的な情報をシステムプロンプトの先頭から末尾のユーザーメッセージへ移すだけで命中率を7%から84%に引き上げ、LLM コストを最大70%削減した。</li>
-    <li>キャッシュはトークン列の完全プレフィックス一致で決まるため、ツールの並び順や履歴圧縮の実装まで「キャッシュを壊さない設計」に揃える必要がある。</li>
+    <li>Claude は2026年7月、記憶を単一のローリング要約から個別の書き換え可能なエントリへ移行。ChatGPT は非同期の「Dreaming」処理で古い事実を時制ごと書き換える。</li>
+    <li>Claude Managed Agents はセッション中のリアルタイム書き込みと、セッション間で横断整理するバッチ処理（Dreaming）を明確に分けて提供する。</li>
+    <li>Claude API の memory tool はモデルがファイル操作を要求するだけで保存先を開発者側に残す設計で、mem0 のような専業ベンダーに記憶レイヤーごと預ける選択肢と対比できる。</li>
   </ul>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 1: キャッシュ命中率が最重要指標になった理由</div>
+  <div class="section-title">📐 パターン 1: 会話ログでも単一の要約でもなく、書き換え可能な個別エントリへ</div>
   <div class="theme-section">
-    <p>プロンプトキャッシュは、同一のトークン列（プレフィックス）を再送すると、その部分の推論をモデル側が再利用し、料金と待ち時間を大きく下げる仕組みだ。Anthropic はキャッシュ読み込みを通常入力の10分の1の価格に設定し、DeepSeek は自動ディスクキャッシュにより <code>128K</code> トークン規模のプロンプトで初回トークンまでの時間を13秒から500ミリ秒へ短縮できるとしている。エージェントは1タスクで同じシステムプロンプトとツール定義を何十回も再送するため、この差はプロダクト全体のレイテンシとコスト構造を決めてしまう。</p><p>ただしキャッシュは「トークン列が0文字目から完全一致した範囲」にしか効かない。途中で1トークンでも変わればそこから後ろは全て再計算になる。Manus はこの性質を踏まえ、入力対出力のトークン比が平均100対1というエージェント特有の負荷構造の中で、キャッシュ命中率を「本番段階のAIエージェントにおいて最も重要な単一指標」と位置づけている。ツールの利用可否をコンテキストに追加・削除で表現せず、<code>logit masking</code>（デコード時に特定トークンを選択不可にする処理）で切り替えるのも、コンテキスト本文を変えずにプレフィックスを保つための工夫だ。</p>
+    <p>従来の2方式にはそれぞれ弱点があった。生の会話履歴をそのまま保持する方式はコンテキストコストが際限なく膨らみ、1件の誤りを消すために関係ない発言まで巻き込む。1本の要約文に凝縮する方式は逆に、1つの事実を訂正するには要約全体を書き直す必要があり、その過程で無関係な情報が欠落するリスクがある。</p><p>今の主流は、記憶を「1つの検証可能な事実」を単位にした個別レコードへ分解し、それぞれを独立に読み書き・削除できるようにすることだ。単位を細かくするほど、間違いの訂正や失効判定を他の記憶に影響させずに局所化できる。</p>
     <div class="example">
-      <div class="product">Manus（AIエージェントプラットフォーム、公式ブログ）</div>
-      <div class="approach">ツールの利用可否をコンテキストへの追加・削除ではなく logit masking で制御し、KVキャッシュのプレフィックスを崩さない</div>
-      <div class="detail">入力:出力トークン比が100:1という自社の負荷実測をもとに、キャッシュ命中率を本番エージェントの最重要指標と明言した一次情報</div>
-      <a href="https://manus.im/blog/Context-Engineering-for-AI-Agents-Lessons-from-Building-Manus">📄 一次ソース</a>
+      <div class="product">Claude（Anthropic、コンシューマー向けメモリ）</div>
+      <div class="approach">単一のローリング要約から、カテゴリ分けされた個別エントリへ移行</div>
+      <div class="detail">2026年7月10日、Anthropic は Claude の記憶を「毎日更新される1本の要約文」から「会話中に読み書きされるカテゴリ別の個別エントリ」に置き換えた。ユーザーは1件だけを確認・修正・削除でき、他の記憶を巻き込まない。</div>
+      <a href="https://support.claude.com/en/articles/12138966-release-notes">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">DeepSeek API（Context Caching on Disk）</div>
-      <div class="approach">コード変更不要の自動ディスクキャッシュで、頻出プレフィックスを検出して再利用する</div>
-      <div class="detail">128Kトークンのプロンプトで初回応答が13秒→500msに短縮、キャッシュ命中時の単価は10分の1という具体的な公式実測値を提示</div>
-      <a href="https://api-docs.deepseek.com/news/news0802/">📄 一次ソース</a>
+      <div class="product">ChatGPT（OpenAI、Dreaming）</div>
+      <div class="approach">対話とは別のバックグラウンド処理が記憶を継続的に再統合し、古い事実を書き換える</div>
+      <div class="detail">2026年6月に展開された新アーキテクチャでは、複数の会話から学習する専用プロセスが「7月にシンガポールに行く予定」を「7月にシンガポールに行った」のように時制ごと更新する。ユーザーが読める要約ページとして提示され、項目単位の追加・修正に対応する。</div>
+      <a href="https://openai.com/index/chatgpt-memory-dreaming/">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> エージェントのレイテンシ改善はモデル選定より先に、まずキャッシュ命中率を測ることから始めるべき判断基準になる。</div>
+    <div class="takeaway"><strong>示唆:</strong> メモリを実装するなら保存の最小単位を「会話」や「1つの人物像」ではなく「検証可能な1事実」に置く。単位が細かいほど訂正と失効判定のコストが下がる。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 2: 動的な情報を「末尾」に逃がす設計</div>
+  <div class="section-title">📐 パターン 2: 記憶を作り直すタイミング — セッション中のリアルタイム書き込みか、セッション間のバッチ処理か</div>
   <div class="theme-section">
-    <p>キャッシュはプレフィックスの先頭から効くため、システムプロンプトの冒頭付近に1バイトでも変動する値（現在時刻、ユーザーごとの状態など）を置くと、後続の全トークンでキャッシュが不成立になる。セキュリティ診断エージェント Neo を運用する ProjectDiscovery は、稼働中のタスク状態やスキルコンテキストといった動的情報をシステムプロンプトの先頭から、会話の末尾に付け足す1本のユーザーメッセージ（<code>&lt;system-reminder&gt;</code> タグで囲む）に移設した。</p><p>加えて、静的なツール定義をアルファベット順に固定してキャッシュチェーンを揃える、実際の値の代わりに <code>[provided in Runtime Context]</code> のようなプレースホルダをテンプレートに描画する、日時を秒単位でなく日付単位に丸めるといった細かい積み上げで、システムプロンプト自体をユーザー間・タスク間で「バイト単位で同一」に保っている。1つの構造変更だけで命中率が跳ね上がった事実は、キャッシュ最適化がプロンプトの言い回しではなく配置順の問題であることを示している。</p>
+    <p>もう一つの分かれ目は更新のタイミングだ。作業しながらその場でファイルに書き込む同期方式は即時性が高い一方、1セッションの視野に閉じるため冗長な記憶が溜まりやすい。対して、複数セッションが終わった後にまとめて見直す非同期方式は、単体のセッションでは見えないパターン（繰り返し起きるミスや複数エージェント間の共通知見）を検出できる。</p><p>企業向けのエージェント製品が後者を別立てで用意するのは、記憶を横断的にマージ・重複排除できるだけでなく、自動推論された記憶が人のレビューを経ずに将来の挙動を静かに変えてしまうリスクを、承認ゲートで止められるからだ。</p>
     <div class="example">
-      <div class="product">ProjectDiscovery Neo（自律型セキュリティ診断エージェント、公式ブログ）</div>
-      <div class="approach">動的なランタイム情報をシステムプロンプト先頭から会話末尾のユーザーメッセージへ移設し、3つのキャッシュブレークポイント（システムプロンプト・ツール定義・直近の会話ウィンドウ）を明示管理する</div>
-      <div class="detail">この1点の変更だけでキャッシュ命中率が7%→74%に跳ね上がり、その後の周辺最適化で84%・LLMコスト最大70%削減まで到達したという公式の実測推移</div>
-      <a href="https://projectdiscovery.io/blog/how-we-cut-llm-cost-with-prompt-caching">📄 一次ソース</a>
+      <div class="product">Claude Managed Agents（Anthropic、Memory）</div>
+      <div class="approach">作業中にその場でファイルへ書き込む</div>
+      <div class="detail">エージェントの記憶はファイルシステムにマウントされたファイル群として実装され、Claude は既存の bash・コード実行ツールでそのまま読み書きする。セッションの終了を待たず、作業しながら学習する設計。</div>
+      <a href="https://claude.com/blog/claude-managed-agents-memory">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> システムプロンプトを書くときは「毎回変わる値をどこに置くか」を最初に決める。先頭ではなく必ず末尾に寄せる。</div>
+    <div class="example">
+      <div class="product">Claude Managed Agents（Anthropic、Dreaming）</div>
+      <div class="approach">セッション間で動く別プロセスが記憶を横断的に整理し直す</div>
+      <div class="detail">Dreaming はスケジュール実行されるプロセスで、複数エージェントのセッションと記憶ストアを見直し、繰り返し起きるミスやチーム共通の知見を抽出して記憶を再構成する。変更を自動反映するか、人のレビュー待ちにするかを開発者が選べる。</div>
+      <a href="https://claude.com/blog/new-in-claude-managed-agents">📄 一次ソース</a>
+    </div>
+    <div class="takeaway"><strong>示唆:</strong> 1エージェント・1セッションで完結する記憶はリアルタイム書き込みで足りる。複数エージェントや複数日にまたがる知見を集約したいなら、別立てのバッチ整理プロセスと、誤った記憶が自動適用される前に人が止められる仕組みをセットで用意する。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 3: ツール順序と履歴圧縮も「キャッシュを壊さない実装」に揃える</div>
+  <div class="section-title">📐 パターン 3: 誰が保存先を持つか — マネージドな記憶か、自前インフラに預ける記憶か</div>
   <div class="theme-section">
-    <p>MCP（Model Context Protocol）の仕様はツール一覧の返却順を保証しないため、ページネーションやサーバー実装の違いでターンごとに順序が変わると、そのたびにツール定義ブロックからキャッシュが壊れる。387kスター超のオープンソースAIアシスタント基盤 OpenClaw では、これを防ぐために MCP ツール一覧をターンをまたいで名前順にソートしてから API リクエストへ渡す修正が取り込まれた。</p><p>履歴圧縮（compaction）の実装でも同じ制約が効く。直感的には古い会話から削るのが自然だが、それでは会話の先頭付近（プレフィックス）が変わってしまい、そこから後ろのキャッシュが総崩れになる。OpenClaw は逆に「直近のツール実行結果から先に圧縮する」方式へ変更し、画像など大きなコンテンツの履歴からの削除も可能な限り遅延させることで、プレフィックスを長く保つ実装にしている。</p>
+    <p>3つ目の軸は保存先の所有権だ。モデルは <code>view</code> や <code>create</code> といったファイル操作を要求するだけで、実際の保存先とアクセス制御は呼び出し側のアプリケーションが持つクライアントサイド方式がある一方、保存から取り出しまで丸ごとベンダーやサードパーティに委ねるマネージド方式もある。</p><p>マネージド方式は導入が速いが、記憶の保存場所と保持ポリシーがベンダーのインフラに縛られる。クライアントサイド方式は、パストラバーサル対策やファイルサイズ上限の実装といった手間と引き換えに、データ所在地の制御やゼロデータリテンション対応など、企業導入で求められる要件を自分で満たせる。</p>
     <div class="example">
-      <div class="product">OpenClaw（オープンソースAIアシスタント基盤、GitHub PR）</div>
-      <div class="approach">MCPツール一覧をターン間で名前順に固定ソートし、キャッシュ対象のプレフィックスを安定させる</div>
-      <div class="detail">MCP仕様がlistTools()の順序を保証しないことに起因するキャッシュ崩れを、実際のマージ済みPRとして修正した一次情報（bcherny によるPR #58037）</div>
-      <a href="https://github.com/openclaw/openclaw/pull/58037">📄 一次ソース</a>
+      <div class="product">Claude API（Anthropic、memory tool）</div>
+      <div class="approach">Claude はファイル操作を要求するだけで、保存先は開発者のアプリ側が持つ</div>
+      <div class="detail">memory tool はクライアントサイド実装で、Claude が /memories 配下への view・create・str_replace・delete を要求し、実際の保存先（ディスク・DB・暗号化ストレージなど）とパストラバーサル対策は呼び出し側が実装する。ゼロデータリテンション要件に対応できるのはこの分離ゆえ。</div>
+      <a href="https://platform.claude.com/docs/en/agents-and-tools/tool-use/memory-tool">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">OpenClaw（履歴圧縮ロジックのPR）</div>
-      <div class="approach">履歴圧縮を「古い会話から」ではなく「直近のツール実行結果から」削る順序に変更し、プレフィックスを保持する</div>
-      <div class="detail">直感に反する削除順序の変更を、キャッシュ崩れ対策として明記したマージ済みPR（#58036）</div>
-      <a href="https://github.com/openclaw/openclaw/pull/58036">📄 一次ソース</a>
+      <div class="product">mem0</div>
+      <div class="approach">記憶レイヤー自体を専業ベンダーに委譲する</div>
+      <div class="detail">2026年4月公開の新アルゴリズムは単一パスの階層抽出と複数シグナルの検索を組み合わせ、時系列が絡む質問で旧アルゴリズム比+29.6ポイントの精度改善を報告している。自前実装をせず記憶レイヤーごと外部に預ける選択肢の代表例。</div>
+      <a href="https://mem0.ai/blog/state-of-ai-agent-memory-2026">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> 履歴圧縮やツール一覧生成のロジックを書くときは、常に「プレフィックスの何文字目から変わるか」を先に確認する。末尾から削る・順序を固定するが基本形になる。</div>
+    <div class="takeaway"><strong>示唆:</strong> データ所在地やコンプライアンス要件が強いならクライアントサイドのツールで自前インフラに保存し、そうでなければマネージドな記憶機能かサードパーティの記憶レイヤーで実装コストを削る、という順で検討する。</div>
   </div>
   <div class="editorial">
     <span class="label">✍️ 編集後記</span>
-    プロンプトキャッシュの話が面白いのは、最適化の主戦場がプロンプト文面そのものではなく「何をどこに置くか」という配置の問題に移っている点だ。モデルの賢さや文章の巧拙とは別の軸で、レイテンシとコストの上限が決まってしまう。エージェント基盤を選ぶ・作る際は、まずキャッシュ命中率をダッシュボードに出すところから始めるのが早道だろう。
+    OpenAI と Anthropic は同じ2026年に、示し合わせたかのように「生ログを貯めない」設計へ収束した。だが同期か非同期か、マネージドか自前インフラかという次の階層の選択は割れたままで、この組み合わせの違いが今後1年のメモリ機構の実質的な差別化ポイントになりそうだ。
   </div>
 </div>
 
 <div class="section">
   <div class="section-title">🔗 今号の動向ピックアップ</div>
-  <div class="quick-link"><a href="https://yage.ai/share/prompt-caching-harness-constraint-en-20260404.html">Prompt Caching as a First-Class Constraint in Harness Engineering</a><span class="quick-summary">プロンプトキャッシュをエージェント基盤（ハーネス）設計の必須制約として扱うべき理由を、複数社の実装差分から整理した論考。本稿で扱った「配置順の設計問題」という視点の元ネタの一つ。</span></div>
-  <div class="quick-link"><a href="https://sourcegraph.com/blog/context-engineering">Context Engineering: A Practical Guide for AI Agents</a><span class="quick-summary">大規模コードベース向けのコンテキスト設計を扱うSourcegraphの解説記事で、ベクトル検索だけでは足りない構造的コンテキストの必要性を論じる。キャッシュ設計とは別軸だが、同じ「エージェントに何を・どう見せるか」という設計問題を扱う関連テーマ。</span></div>
-  <div class="quick-link"><a href="https://api-docs.deepseek.com/news/news0802/">DeepSeek API introduces Context Caching on Disk, cutting prices by an order of magnitude</a><span class="quick-summary">DeepSeekが自動ディスクキャッシュ機能を発表した公式アナウンス。本稿セクション1で扱った「13秒→500ms」「単価10分の1」という数値の一次ソース。</span></div>
+  <div class="quick-link"><a href="https://redis.io/blog/long-term-memory-architectures-ai-agents/">Redis: Long-Term Memory Architectures for AI Agents</a><span class="quick-summary">pgvector や Redis を使い、記憶をエントリ単位で自前実装する際の具体的なデータモデルを示す。マネージドな記憶機能を使わない選択をした場合の設計の出発点になる。</span></div>
+  <div class="quick-link"><a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents">Anthropic: Effective context engineering for AI agents</a><span class="quick-summary">Claude の memory tool ドキュメントが「広いパターン」として直接参照する記事で、記憶をコンテキストウィンドウにどう出し入れするかの設計原則をまとめている。本文で扱った「いつ記憶を作るか」の一段上にある「いつ思い出すか」の設計に相当する。</span></div>
+  <div class="quick-link"><a href="https://openai.com/index/memory-and-new-controls-for-chatgpt/">OpenAI: Memory and new controls for ChatGPT</a><span class="quick-summary">2024年当時の「明示的に保存を頼むメモリ」の発表で、本文で扱った Dreaming の前段にあたる旧世代アーキテクチャを示す。比較すると今回の非同期化がどこを変えたかが分かる。</span></div>
 </div>
 
 <div class="section">
   <div class="section-title">📚 過去号</div>
+  <div class="archive-item"><span class="week">2026-08-22</span><div class="body"><a href="ai-trends/2026-08-22.html">プロンプトキャッシュはコスト最適化ではない — 「プレフィックス固定」というアーキテクチャ制約</a><span class="sub">キャッシュ命中率はもはや副次指標ではなく、Manus はこれを「本番エージェントで最重要のメトリック」と明言している。</span></div></div>
   <div class="archive-item"><span class="week">2026-08-20</span><div class="body"><a href="ai-trends/2026-08-20.html">接続ツールが増えるほど遅くなる問題 — コード実行と検索遅延ロードの2つの答え</a><span class="sub">Anthropicは公式エンジニアリングブログで、MCPツールをコードAPIとして提示しファイルシステム越しにオンデマンドで読み込ませる方式により、あるタスクのトークン消費を150,000から2,000（98.7%減）に削減したと報告した</span></div></div>
   <div class="archive-item"><span class="week">2026-08-18</span><div class="body"><a href="ai-trends/2026-08-18.html">MCPエージェントの認可設計 — 同意画面を「増やす」実装と「無くす」実装に分岐した</a><span class="sub">MCPの権限設計は「サーバー単位のOAuth」から「ツールごとのスコープ」へ移り、WorkOSやCloudflareが個別ツール内での権限チェックを標準パターンとして提示している。</span></div></div>
   <div class="archive-item"><span class="week">2026-08-15</span><div class="body"><a href="ai-trends/2026-08-15.html">エージェントの評価・観測性 — 「最終出力の一致」から「軌跡(トラジェクトリ)の妥当性」へ</a><span class="sub">Anthropic は Tasks/Graders/Transcripts の三要素でエージェント評価を構造化し、1回でも成功する確率 pass@k と毎回成功する確率 pass^k を分けて計測する運用を提示した。</span></div></div>
@@ -173,7 +180,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 </div>
 
 <footer>
-  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="data/ai-trends/2026-08-22.json">data/ai-trends/2026-08-22.json</a>（このページは JSON からの生成物）</p>
+  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="data/ai-trends/2026-08-25.json">data/ai-trends/2026-08-25.json</a>（このページは JSON からの生成物）</p>
   <p style="margin-top:.5rem"><a href="./">📰 日刊ダイジェストに戻る</a></p>
 </footer>
 </div>

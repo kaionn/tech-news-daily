@@ -66,7 +66,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 <div class="container">
 <header>
   <h1>🧠 AI プロダクト動向</h1>
-  <p class="date">2026-08-20 発行（読了 6 分）</p>
+  <p class="date">2026-08-25 発行（読了 5 分）</p>
   <p class="tagline">実プロダクトのアーキテクチャ・使用例から AI 開発の現在地を週 3 回・1 号 1 テーマで深掘り</p>
   <nav class="site-nav">
     <a href="../">📰 日刊ダイジェスト</a>
@@ -77,82 +77,95 @@ footer a{color:var(--primary-500);text-decoration:none}
 </header>
 
 <div class="theme-hero">
-  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">MCP-TOOL-SCALING</span></span>
-  <h2>接続ツールが増えるほど遅くなる問題 — コード実行と検索遅延ロードの2つの答え</h2>
-  <p class="lede">MCP（Model Context Protocol）は2024年11月の公開から急速に普及し、2026年にはエンタープライズ環境で1万以上のMCPサーバーが稼働する規模になった。だが接続先が増えるほど、起動時に全ツールのスキーマをプロンプトに詰め込む素朴な実装はコストと精度の両面で限界を迎える。Anthropicが公式ブログで具体的なトークン数を示したのを皮切りに、Cloudflareが独立に同じ結論へ辿り着き、専業プロダクトが定型実装として提供し始めたことで、「起動時に全部渡さない」設計が急速に標準化しつつある。</p>
+  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">AGENT-MEMORY</span></span>
+  <h2>エージェントのメモリ設計 — 生ログでも単一要約でもなく、書き換え可能な単位に分解する</h2>
+  <p class="lede">2026年に入り、OpenAI と Anthropic はほぼ同時期に、消費者向けチャットとエージェント製品の双方でメモリ機構を刷新した。共通しているのは「会話をそのまま貯める」「1本の要約文にまとめる」のどちらでもなく、書き換え可能な小さい単位に分解して保存する設計への転換だ。だが記憶をいつ作り直すか、どこに保存するかという次の設計判断は各社で割れており、この2軸が実装の分かれ目になっている。</p>
 </div>
 
 <div class="tldr">
   <div class="label">TL;DR — 3 行で</div>
   <ul>
-    <li>Anthropicは公式エンジニアリングブログで、MCPツールをコードAPIとして提示しファイルシステム越しにオンデマンドで読み込ませる方式により、あるタスクのトークン消費を150,000から2,000（98.7%減）に削減したと報告した</li>
-    <li>Cloudflareは独立に同じ結論に達し「Code Mode」としてMCPツールをTypeScript APIに変換しサンドボックスで実行する仕組みを公開、異なる企業が同じアーキテクチャに収束したことを示した</li>
-    <li>Anthropic自身はコード実行とは別に、BM25/正規表現でツール定義を検索してから遅延ロードする「Tool Search Tool」も提供しており、トークン85%減とOpus 4のMCP評価精度49%→74%への改善を報告している。Klavisのような専業プロダクトはこれを4段階の照会フローとして製品化した</li>
+    <li>Claude は2026年7月、記憶を単一のローリング要約から個別の書き換え可能なエントリへ移行。ChatGPT は非同期の「Dreaming」処理で古い事実を時制ごと書き換える。</li>
+    <li>Claude Managed Agents はセッション中のリアルタイム書き込みと、セッション間で横断整理するバッチ処理（Dreaming）を明確に分けて提供する。</li>
+    <li>Claude API の memory tool はモデルがファイル操作を要求するだけで保存先を開発者側に残す設計で、mem0 のような専業ベンダーに記憶レイヤーごと預ける選択肢と対比できる。</li>
   </ul>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 1: 起動時に全ツールを渡す設計はもう破綻している</div>
+  <div class="section-title">📐 パターン 1: 会話ログでも単一の要約でもなく、書き換え可能な個別エントリへ</div>
   <div class="theme-section">
-    <p>MCPサーバーへの接続数が増えるほど、エージェントは実際のリクエストを読む前に大量のツール定義を処理することになる。Anthropicの公式エンジニアリングブログは、数千のツールに接続したエージェントは「リクエストを読む前に数十万トークンを処理する必要がある」と説明し、さらにツール呼び出しの結果（例えば2時間の会議の文字起こし）がモデルのコンテキストを2回通過することで5万トークン以上が追加消費される例を挙げている。</p><p>この無駄を解消する方法としてAnthropicが示したのが、MCPツールを直接呼び出すのではなく<code>./servers/google-drive/getDocument.ts</code>のようなコードAPIとしてファイルシステム上に提示し、エージェントにコードを書かせて操作させる方式だ。モデルはファイルシステムの探索が得意なため、必要なツール定義だけをオンデマンドで読み込め、結果もコード内でフィルタしてから返せる。中間状態や再利用可能な処理は「スキル」としてファイルに永続化できる。</p>
+    <p>従来の2方式にはそれぞれ弱点があった。生の会話履歴をそのまま保持する方式はコンテキストコストが際限なく膨らみ、1件の誤りを消すために関係ない発言まで巻き込む。1本の要約文に凝縮する方式は逆に、1つの事実を訂正するには要約全体を書き直す必要があり、その過程で無関係な情報が欠落するリスクがある。</p><p>今の主流は、記憶を「1つの検証可能な事実」を単位にした個別レコードへ分解し、それぞれを独立に読み書き・削除できるようにすることだ。単位を細かくするほど、間違いの訂正や失効判定を他の記憶に影響させずに局所化できる。</p>
     <div class="example">
-      <div class="product">Anthropic（公式エンジニアリングブログ, Code execution with MCP）</div>
-      <div class="approach">MCPツールをコードAPIとしてファイルシステム上に提示し、エージェントがコードを書いてオンデマンドで読み込み・実行する</div>
-      <div class="detail">同一タスクのトークン消費を150,000から2,000（98.7%減）に削減したと具体的な数値付きで報告し、中間結果のコード内フィルタリングと「スキル」としての永続化も提案している</div>
-      <a href="https://www.anthropic.com/engineering/code-execution-with-mcp">📄 一次ソース</a>
+      <div class="product">Claude（Anthropic、コンシューマー向けメモリ）</div>
+      <div class="approach">単一のローリング要約から、カテゴリ分けされた個別エントリへ移行</div>
+      <div class="detail">2026年7月10日、Anthropic は Claude の記憶を「毎日更新される1本の要約文」から「会話中に読み書きされるカテゴリ別の個別エントリ」に置き換えた。ユーザーは1件だけを確認・修正・削除でき、他の記憶を巻き込まない。</div>
+      <a href="https://support.claude.com/en/articles/12138966-release-notes">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> MCP接続先を増やす設計をするなら、起動時に全スキーマをシステムプロンプトへ詰め込む実装は最初から避け、ツール定義を必要になった時点で読み込む経路を用意する。</div>
+    <div class="example">
+      <div class="product">ChatGPT（OpenAI、Dreaming）</div>
+      <div class="approach">対話とは別のバックグラウンド処理が記憶を継続的に再統合し、古い事実を書き換える</div>
+      <div class="detail">2026年6月に展開された新アーキテクチャでは、複数の会話から学習する専用プロセスが「7月にシンガポールに行く予定」を「7月にシンガポールに行った」のように時制ごと更新する。ユーザーが読める要約ページとして提示され、項目単位の追加・修正に対応する。</div>
+      <a href="https://openai.com/index/chatgpt-memory-dreaming/">📄 一次ソース</a>
+    </div>
+    <div class="takeaway"><strong>示唆:</strong> メモリを実装するなら保存の最小単位を「会話」や「1つの人物像」ではなく「検証可能な1事実」に置く。単位が細かいほど訂正と失効判定のコストが下がる。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 2: コード実行と検索遅延ロード — 同じ課題への2つの答え</div>
+  <div class="section-title">📐 パターン 2: 記憶を作り直すタイミング — セッション中のリアルタイム書き込みか、セッション間のバッチ処理か</div>
   <div class="theme-section">
-    <p>Cloudflareは公式ブログで、AnthropicのCode Executionと同じアーキテクチャに独立に到達したと明かしている。根拠は「LLMは現実のコードを大量に学習しているが、ツール呼び出しの例は限られた作り物にすぎず、コードを書かせる方が得意」という洞察で、MCPツールをTypeScript APIへ変換しLLMにコードを書かせ、サンドボックス化された隔離環境でミリ秒単位の起動時間で実行する。異なる2社が独立に同じ結論に達したことは、この設計が特定ベンダーの都合ではなく構造的な必然であることを示している。</p><p>一方Anthropicはコード実行とは別に、既存のtool-calling形式を変えずに済む代替案として「Tool Search Tool」も公式に提供している。BM25または正規表現でツール定義そのものを検索し、一致したツールだけを<code>defer_loading: true</code>指定で遅延ロードする仕組みで、コード実行基盤を持たないクライアントでも導入できる。両者は排他的な選択肢ではなく、任意のコードを書かせられるかどうかで使い分けるものだ。</p>
+    <p>もう一つの分かれ目は更新のタイミングだ。作業しながらその場でファイルに書き込む同期方式は即時性が高い一方、1セッションの視野に閉じるため冗長な記憶が溜まりやすい。対して、複数セッションが終わった後にまとめて見直す非同期方式は、単体のセッションでは見えないパターン（繰り返し起きるミスや複数エージェント間の共通知見）を検出できる。</p><p>企業向けのエージェント製品が後者を別立てで用意するのは、記憶を横断的にマージ・重複排除できるだけでなく、自動推論された記憶が人のレビューを経ずに将来の挙動を静かに変えてしまうリスクを、承認ゲートで止められるからだ。</p>
     <div class="example">
-      <div class="product">Cloudflare（公式ブログ, Code Mode: the better way to use MCP）</div>
-      <div class="approach">MCPツールをTypeScript APIに変換しLLMにコードを書かせ、サンドボックス化された隔離環境で実行する</div>
-      <div class="detail">「LLMはツール呼び出しの作り物の例より、大量の実コードを学んでいる」という洞察を根拠に挙げ、AnthropicのCode Executionと独立に同じアーキテクチャへ到達したと明記している</div>
-      <a href="https://blog.cloudflare.com/code-mode/">📄 一次ソース</a>
+      <div class="product">Claude Managed Agents（Anthropic、Memory）</div>
+      <div class="approach">作業中にその場でファイルへ書き込む</div>
+      <div class="detail">エージェントの記憶はファイルシステムにマウントされたファイル群として実装され、Claude は既存の bash・コード実行ツールでそのまま読み書きする。セッションの終了を待たず、作業しながら学習する設計。</div>
+      <a href="https://claude.com/blog/claude-managed-agents-memory">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">Anthropic（公式ドキュメント, Tool Search Tool）</div>
-      <div class="approach">コード実行ではなくBM25/正規表現による検索でツール定義自体を遅延ロードする代替案</div>
-      <div class="detail">191,300トークン対122,800トークンで85%のコンテキスト削減を報告し、Opus 4のMCP評価での成功率が49%から74%へ改善したとしている</div>
-      <a href="https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-search-tool">📄 一次ソース</a>
+      <div class="product">Claude Managed Agents（Anthropic、Dreaming）</div>
+      <div class="approach">セッション間で動く別プロセスが記憶を横断的に整理し直す</div>
+      <div class="detail">Dreaming はスケジュール実行されるプロセスで、複数エージェントのセッションと記憶ストアを見直し、繰り返し起きるミスやチーム共通の知見を抽出して記憶を再構成する。変更を自動反映するか、人のレビュー待ちにするかを開発者が選べる。</div>
+      <a href="https://claude.com/blog/new-in-claude-managed-agents">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> サンドボックスでコードを実行できる基盤があるならコード実行方式、既存のtool-use形式を維持したいなら検索遅延ロード方式、という基準で選ぶ。</div>
+    <div class="takeaway"><strong>示唆:</strong> 1エージェント・1セッションで完結する記憶はリアルタイム書き込みで足りる。複数エージェントや複数日にまたがる知見を集約したいなら、別立てのバッチ整理プロセスと、誤った記憶が自動適用される前に人が止められる仕組みをセットで用意する。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 3: 製品として実装するとこうなる — 4段階の問い合わせに強制する設計</div>
+  <div class="section-title">📐 パターン 3: 誰が保存先を持つか — マネージドな記憶か、自前インフラに預ける記憶か</div>
   <div class="theme-section">
-    <p>Klavisは公式ブログで、数千のツールを一つのMCPサーバー（Strata）の裏に集約し、エージェントの問い合わせを「意図の表明 → カテゴリ選択 → アクション名の一覧 → スキーマ取得」という4段階に強制する設計を公開した。各段階で得られる情報は最小限に絞られ、エージェントが実際に実行するアクションを確定させるまで完全な入力スキーマは渡されない。</p><p>この段階分けは、AnthropicやCloudflareが示したコード実行・検索遅延ロードと発想は同じだが、クライアント側の実装を変えずにMCPサーバーを差し替えるだけで導入できる点が異なる。Klavisはこの構成で60〜80%のコンテキスト削減と13〜15%の精度向上を報告しており、既製品としての「遅延ロードゲートウェイ」という選択肢が実用段階にあることを示している。</p>
+    <p>3つ目の軸は保存先の所有権だ。モデルは <code>view</code> や <code>create</code> といったファイル操作を要求するだけで、実際の保存先とアクセス制御は呼び出し側のアプリケーションが持つクライアントサイド方式がある一方、保存から取り出しまで丸ごとベンダーやサードパーティに委ねるマネージド方式もある。</p><p>マネージド方式は導入が速いが、記憶の保存場所と保持ポリシーがベンダーのインフラに縛られる。クライアントサイド方式は、パストラバーサル対策やファイルサイズ上限の実装といった手間と引き換えに、データ所在地の制御やゼロデータリテンション対応など、企業導入で求められる要件を自分で満たせる。</p>
     <div class="example">
-      <div class="product">Klavis AI（公式ブログ, Introducing Strata）</div>
-      <div class="approach">数千のMCPツールを1つのゲートウェイに集約し、意図表明→カテゴリ→アクション名→スキーマの4段階でしか情報を渡さない</div>
-      <div class="detail">60〜80%のコンテキスト削減と13〜15%の精度向上を報告し、クライアント側の実装を変えずに導入できる既製品としての遅延ロードを提示している</div>
-      <a href="https://www.klavis.ai/blog/introducing-strata-one-mcp-server-for-thousands-of-tools">📄 一次ソース</a>
+      <div class="product">Claude API（Anthropic、memory tool）</div>
+      <div class="approach">Claude はファイル操作を要求するだけで、保存先は開発者のアプリ側が持つ</div>
+      <div class="detail">memory tool はクライアントサイド実装で、Claude が /memories 配下への view・create・str_replace・delete を要求し、実際の保存先（ディスク・DB・暗号化ストレージなど）とパストラバーサル対策は呼び出し側が実装する。ゼロデータリテンション要件に対応できるのはこの分離ゆえ。</div>
+      <a href="https://platform.claude.com/docs/en/agents-and-tools/tool-use/memory-tool">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> 自前でコード実行基盤や検索遅延ロードを組む余裕がないなら、Strataのような遅延ロード専用のMCPゲートウェイを間に挟む選択肢がある。</div>
+    <div class="example">
+      <div class="product">mem0</div>
+      <div class="approach">記憶レイヤー自体を専業ベンダーに委譲する</div>
+      <div class="detail">2026年4月公開の新アルゴリズムは単一パスの階層抽出と複数シグナルの検索を組み合わせ、時系列が絡む質問で旧アルゴリズム比+29.6ポイントの精度改善を報告している。自前実装をせず記憶レイヤーごと外部に預ける選択肢の代表例。</div>
+      <a href="https://mem0.ai/blog/state-of-ai-agent-memory-2026">📄 一次ソース</a>
+    </div>
+    <div class="takeaway"><strong>示唆:</strong> データ所在地やコンプライアンス要件が強いならクライアントサイドのツールで自前インフラに保存し、そうでなければマネージドな記憶機能かサードパーティの記憶レイヤーで実装コストを削る、という順で検討する。</div>
   </div>
   <div class="editorial">
     <span class="label">✍️ 編集後記</span>
-    この半年の動きは「ツールを絞り込む賢いプロンプト」ではなく「そもそも何を渡すか」というアーキテクチャの問題として決着しつつある。Anthropicが自社製品内でコード実行と検索遅延ロードという2つの答えを並行提供し、Cloudflareが独立に同じ結論へ、Klavisのような専業プロダクトが定型実装として広めている。次にMCP接続先を増やす設計をするなら、まず自分たちがコードを書かせられる基盤を持つかどうかから選択肢を絞るとよい。
+    OpenAI と Anthropic は同じ2026年に、示し合わせたかのように「生ログを貯めない」設計へ収束した。だが同期か非同期か、マネージドか自前インフラかという次の階層の選択は割れたままで、この組み合わせの違いが今後1年のメモリ機構の実質的な差別化ポイントになりそうだ。
   </div>
 </div>
 
 <div class="section">
   <div class="section-title">🔗 今号の動向ピックアップ</div>
-  <div class="quick-link"><a href="https://www.anthropic.com/engineering/advanced-tool-use">Anthropic、Tool Search Toolに加えProgrammatic Tool Callingとツール利用例の3機能を公式発表</a><span class="quick-summary">2025年11月24日の発表で、複数ツールをコード実行で束ねるProgrammatic Tool Callingでトークンを37%削減し、具体的な利用例の提示でパラメータ精度を72%から90%に改善したと報告している。本文で扱ったTool Search Toolと合わせ、Anthropicが同じ課題に複数の道具立てで応えていることを示す発表。</span></div>
-  <div class="quick-link"><a href="https://usewire.io/blog/progressive-tool-loading-mcp-context-pattern/">MCPサーバーが1万を超えた2026年、プログレッシブローディングが『新しいデフォルト』になったとの分析</a><span class="quick-summary">2026年5月6日公開の記事は、エンタープライズ向けMCPサーバーが1万以上・SDKダウンロードが9700万件に達した規模拡大を背景に、Anthropic・Klavis・Speakeasyなど複数の実装が独立に同じプログレッシブローディングの形へ収束したと整理している。本文で扱った各社の実装が業界共通の解になりつつある背景を数字で裏付ける。</span></div>
+  <div class="quick-link"><a href="https://redis.io/blog/long-term-memory-architectures-ai-agents/">Redis: Long-Term Memory Architectures for AI Agents</a><span class="quick-summary">pgvector や Redis を使い、記憶をエントリ単位で自前実装する際の具体的なデータモデルを示す。マネージドな記憶機能を使わない選択をした場合の設計の出発点になる。</span></div>
+  <div class="quick-link"><a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents">Anthropic: Effective context engineering for AI agents</a><span class="quick-summary">Claude の memory tool ドキュメントが「広いパターン」として直接参照する記事で、記憶をコンテキストウィンドウにどう出し入れするかの設計原則をまとめている。本文で扱った「いつ記憶を作るか」の一段上にある「いつ思い出すか」の設計に相当する。</span></div>
+  <div class="quick-link"><a href="https://openai.com/index/memory-and-new-controls-for-chatgpt/">OpenAI: Memory and new controls for ChatGPT</a><span class="quick-summary">2024年当時の「明示的に保存を頼むメモリ」の発表で、本文で扱った Dreaming の前段にあたる旧世代アーキテクチャを示す。比較すると今回の非同期化がどこを変えたかが分かる。</span></div>
 </div>
 
 <div class="section">
   <div class="section-title">📚 過去号</div>
-  <div class="archive-item"><span class="week">2026-08-25</span><div class="body"><a href="../ai-trends.html">エージェントのメモリ設計 — 生ログでも単一要約でもなく、書き換え可能な単位に分解する</a><span class="sub">Claude は2026年7月、記憶を単一のローリング要約から個別の書き換え可能なエントリへ移行。ChatGPT は非同期の「Dreaming」処理で古い事実を時制ごと書き換える。</span></div></div>
   <div class="archive-item"><span class="week">2026-08-22</span><div class="body"><a href="2026-08-22.html">プロンプトキャッシュはコスト最適化ではない — 「プレフィックス固定」というアーキテクチャ制約</a><span class="sub">キャッシュ命中率はもはや副次指標ではなく、Manus はこれを「本番エージェントで最重要のメトリック」と明言している。</span></div></div>
+  <div class="archive-item"><span class="week">2026-08-20</span><div class="body"><a href="2026-08-20.html">接続ツールが増えるほど遅くなる問題 — コード実行と検索遅延ロードの2つの答え</a><span class="sub">Anthropicは公式エンジニアリングブログで、MCPツールをコードAPIとして提示しファイルシステム越しにオンデマンドで読み込ませる方式により、あるタスクのトークン消費を150,000から2,000（98.7%減）に削減したと報告した</span></div></div>
   <div class="archive-item"><span class="week">2026-08-18</span><div class="body"><a href="2026-08-18.html">MCPエージェントの認可設計 — 同意画面を「増やす」実装と「無くす」実装に分岐した</a><span class="sub">MCPの権限設計は「サーバー単位のOAuth」から「ツールごとのスコープ」へ移り、WorkOSやCloudflareが個別ツール内での権限チェックを標準パターンとして提示している。</span></div></div>
   <div class="archive-item"><span class="week">2026-08-15</span><div class="body"><a href="2026-08-15.html">エージェントの評価・観測性 — 「最終出力の一致」から「軌跡(トラジェクトリ)の妥当性」へ</a><span class="sub">Anthropic は Tasks/Graders/Transcripts の三要素でエージェント評価を構造化し、1回でも成功する確率 pass@k と毎回成功する確率 pass^k を分けて計測する運用を提示した。</span></div></div>
   <div class="archive-item"><span class="week">2026-08-13</span><div class="body"><a href="2026-08-13.html">モデルルーティング — 1モデルに全部背負わせない設計が標準になった</a><span class="sub">Vercel AI GatewayやGitHub Copilot Autoは、ヒューリスティック分類→難易度ティア判定→プロバイダ違いのフォールバック、という二段構成のタスク別ルーティングをすでに標準実装にしている。</span></div></div>
@@ -167,7 +180,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 </div>
 
 <footer>
-  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="../data/ai-trends/2026-08-20.json">data/ai-trends/2026-08-20.json</a>（このページは JSON からの生成物）</p>
+  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="../data/ai-trends/2026-08-25.json">data/ai-trends/2026-08-25.json</a>（このページは JSON からの生成物）</p>
   <p style="margin-top:.5rem"><a href="../">📰 日刊ダイジェストに戻る</a></p>
 </footer>
 </div>
