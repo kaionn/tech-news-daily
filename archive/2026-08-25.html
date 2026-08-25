@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-08-25</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="../feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-08-25 (Tue)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+      <nav class="site-nav">
+        <a href="../" class="active">📰 日刊ダイジェスト</a>
+        <a href="../trends.html">🔌 週次プラグイントレンド</a>
+        <a href="../ai-trends.html">🧠 AI プロダクト動向</a>
+        <a href="./">🗂 アーカイブ</a>
+      </nav>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 20 articles</span>
+      <span>🏷 7 categories</span>
+      <span>📡 17 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item">
+        <span class="number-value">9/30</span>
+        <span class="number-label">IPFS Shipyardの運用終了予定日</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">1%未満</span>
+        <span class="number-label">実行形式SELFのELF比サイズ増加</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">24GB</span>
+        <span class="number-label">Qwen3.8-27BがOpus 4.6超えを出すVRAM要件</span>
+      </div>
+    </div>
+
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
+
+      <div class="card featured deep-dive">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://ipshipyard.com/blog/2026-the-end-of-ipfs-at-shipyard/">DEEP DIVE: IPFSの保守運営元Shipyardが解散へ——Protocol Labsが資金提供を打ち切り、9月30日で主要サービス停止</a></h3>
+        </div>
+        <div class="summary">分散ファイルシステムIPFSは2022年にProtocol LabsからスピンアウトしたShipyardが実装・保守の中核を担ってきたが、Shipyardは8月、Protocol Labsが資金提供を更新しない方針を伝えてきたと公表した。これにより同団体は9月30日をもって業務を終了する。影響が及ぶのはコア実装のKubo（Go版）、Helia（JS版）、転送層のBoxo、ゲートウェイのRainbow、デスクトップ・ブラウザ拡張のIPFS DesktopとIPFS Companionなど、IPFSエコシステムの事実上すべての主要コンポーネントだ。加えて、公開インフラであるipfs.io・dweb.link・check.ipfs.network、そしてネットワーク参加の起点となるブートストラップノードの運用も終了対象に含まれる。IPFS関連の標準策定やアップストリームライブラリへの貢献活動も同時に打ち切られる。Shipyardは月末まで移行支援に応じる姿勢を示しつつ、これらの公開サービスの今後をどう扱うかはドメインとインフラを保有するProtocol Labs側の判断に委ねられるとしている。IPFSはWeb3ストレージやNFTメタデータ配信など幅広い用途で採用されてきたが、実装の大部分を単一の資金提供元に依存する構造だった実態が、今回の資金打ち切り一つで露呈した形だ。</div>
+        <div class="editorial">🧠 「エコシステムを可能な限り良い状態で引き継ぐ」というShipyardの言葉は前向きだが、Kubo・Helia・Boxoという主要3実装を同時に手放す状況で「良い状態」を保つのは技術的にも組織的にも容易ではない。ipfs.ioやブートストラップノードのような公開インフラが実際に止まるかどうかはProtocol Labs次第で、現時点で継続を約束する発表はない。IPFSを本番システムに組み込んでいる開発者は、9月30日を待たずに自前ノードへの移行やゲートウェイの代替手段を検討し始めるべきだろう。</div>
+        <div class="key-points">
+          <ul>
+            <li>Kubo(Go実装)・Helia(JS実装)・転送層Boxo・ゲートウェイRainbow・IPFS Desktop/Companionなど主要コンポーネントすべてが保守担当を失う</li>
+            <li>公開インフラのipfs.io・dweb.link・check.ipfs.network・ブートストラップノードも9月30日で運用終了対象に</li>
+            <li>原因はProtocol Labsによる資金更新の見送り、Shipyardは月末まで移行支援に応じるが後継体制は未定</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 IPFSを利用したストレージ・配信基盤を運用している場合、9月30日までに自前ノード運用への切り替えや代替ゲートウェイの選定を進めないと、パブリックインフラの停止で接続経路が失われるリスクがある。</div>
+        <div class="meta">
+          <span>IPFS Shipyard Blog</span>
+          <span>⏱ 6 min read</span>
+          <span class="engagement">▲ 275</span>
+          <span>2026-08-22</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://fzakaria.com/2026/08/23/your-executable-is-a-sqlite-database">実行ファイルをSQLiteデータベースにする「SELF」形式、ELF比サイズ増加はわずか1%</a></h3>
+        </div>
+        <div class="summary">エンジニアのFarid Zakaria氏が提案する実験的フォーマット「SELF」は、ELF実行ファイルの構造をそのままSQLiteデータベースのテーブルに格納し、ファイル自体をクエリ可能な実行体にする試みだ。`application_id`フィールドに"SELF"を書き込み、`self_meta`テーブルにELFヘッダ、`segments`テーブルにロードイメージをBLOBとして保持する。Linuxの`binfmt_misc`でSQLiteのマジックナンバーを登録し、libsqlite3にリンクした小さなインタプリタがセグメントをマップして実行に移る。strip処理はSQLの`DELETE`+`VACUUM`で完結し、`LD_PRELOAD`の変更もトランザクションとして扱えるようになる。</div>
+        <div class="key-points">
+          <ul>
+            <li>coreutils相当(1.79MiB)のSELF変換でサイズ増加はELF比1%未満(1.77MiB→1.79MiB)、実行開始のオーバーヘッドは約5ms</li>
+            <li>723個の実行ファイルと400個のライブラリからなるユーザーランド一式をSELF化すると611.9MiBとなり、元のELF一式644.4MiBより小さくなった(共有ライブラリの重複排除が効くため)</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>fzakaria.com</span>
+          <span>⏱ 6 min read</span>
+          <span class="engagement">▲ 442</span>
+          <span>2026-08-23</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://xusheng.dev/posts/reversing/mspaint_invisible_watermark/main/">Windows PaintとPhotosのAI生成画像に不可視の電子透かし、ピクセルに16バイトGUIDを埋め込みモデレーションサーバーと紐付け</a></h3>
+        </div>
+        <div class="summary">セキュリティ研究者Xusheng Li氏は、Windows PaintとPhotosアプリが生成するAI画像に、C2PA Content Credentialsとは別にピクセル自体へ不可視の透かしを埋め込んでいることを、`Watermarker.dll`(1.67MB)のリバースエンジニアリングで突き止めた。512×512画像で約19万3000画素を改変するブロック単位のSVD的量子化方式で、`WmkWriteWatermark()`関数が受け取る16バイトのペイロードはGUIDであり、プロンプトのモデレーションを担うMicrosoftのリモートサーバーが生成・発行している。このGUIDはC2PAメタデータの「ソフトバインディング」値としても署名付きで現れ、生成画像とモデレーション記録を結び付ける識別子として機能する。</div>
+        <div class="key-points">
+          <ul>
+            <li>512×512画像で約19万3000画素を改変するブロック単位の量子化透かしを採用、1ビットにつき3か所以上への埋め込みで肉眼では判別不能</li>
+            <li>16バイトのGUIDはモデレーションサーバーが発行しC2PAメタデータにも同一値が署名付きで記録されるが、この仕組み自体はMicrosoftから開示されていない</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>xusheng.dev</span>
+          <span>⏱ 7 min read</span>
+          <span class="engagement">▲ 430</span>
+          <span>2026-08-23</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-frontend">Frontend</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://hacks.mozilla.org/2026/08/intent-to-ship-jpeg-xl/">FirefoxがJPEG XLの出荷方針を表明、Google製Rust実装jxl-rsで年内対応へ</a></h3>
+        </div>
+        <div class="summary">MozillaはFirefoxでのJPEG XL対応を正式に表明した。2021年からフラグ付きで試験提供してきたが、C実装のコードベースサイズが安全上の懸念だった。Google Researchが開発したRust製デコーダ"jxl-rs"の採用でこの懸念を解消し、プログレッシブレンダリングも含めて実装する。</div>
+        <div class="key-points">
+          <ul>
+            <li>スクリーンショットの高品質(ロスレス)圧縮でJPEG XLは92kB、AVIFは164kBとなり約44%小さい</li>
+            <li>Rust製デコーダjxl-rsの採用で2021年以来懸念されていたC実装のメモリ安全性問題を回避、年内に主要ブラウザで対応が揃う見込み</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Mozilla Hacks</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-08-20</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://chipsandcheese.com/p/hot-chips-2026-cuda-targets-risc">NVIDIA、CUDAをRISC-Vに拡張へ——サーバー級RVA23準拠が条件、SiFiveと実証</a></h3>
+        </div>
+        <div class="summary">Hot Chips 2026でNVIDIAは、CUDAの対応アーキテクチャをx86-64とAArch64からRISC-Vへ広げる方針を示した。要求仕様はRVA23準拠、述語付きベクトル拡張、ACPI対応、PCIeコヒーレンシ、ピアツーピアPCIe転送などサーバー級SoCを前提とする。あわせてNVLinkを外部チップに実装可能にする"NVLink Fusion"も発表された。</div>
+        <div class="key-points">
+          <ul>
+            <li>要件はRVA23準拠・分岐回避のための述語付きベクトル拡張・ACPI対応・PCIeコヒーレンシと厳格で、既存のRISC-Vハードウェアの大半は対象外</li>
+            <li>SiFiveと組んだ実証はサーバー・高コア数システム想定で、コンシューマ向けRISC-V機器への波及は当面見込みにくい</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Chips and Cheese</span>
+          <span>⏱ 6 min read</span>
+          <span class="engagement">▲ 56</span>
+          <span>2026-08-22</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://lists.gnu.org/archive/html/info-gnu-emacs/2026-08/msg00004.html">テキストエディタEmacs 31.1が正式リリース</a></h3>
+        </div>
+        <div class="summary">GNU ProjectはEmacs 31.1を8月24日にリリースした。gzip・xz両形式のtarballと、改ざん検知用のPGP署名・SHA256/SHA512チェックサムが提供される。詳細な変更点はtarball同梱のNEWSファイル（`C-h n`）またはGNU Savannahのgitリポジトリで確認できる。</div>
+        <div class="key-points">
+          <ul>
+            <li>リリースはSean Whitton氏がinfo-gnu-emacsメーリングリストで告知、gzip/xz両方のtarballを提供</li>
+            <li>改ざん検知のためPGP署名とSHA256/SHA512チェックサムを同時公開、詳細な変更点は同梱NEWSファイル参照が必要</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GNU Savannah</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-08-24</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://larsfaye.com/articles/ai-coding-will-prevent-expertise">「AIコーディングへの依存がエンジニアの実力を空洞化させる」という主張、Hacker Newsで345ポイント集める</a></h3>
+        </div>
+        <div class="summary">個人ブログの論考は、AIアシスタントに実装を委ねる時間が増えるほど、失敗から学ぶ機会そのものが減っていくと指摘する。デバッグや設計判断を繰り返すことでしか身につかない勘所が、AIの提案をそのまま採用するワークフローでは育たないという主張だ。</div>
+        <div class="key-points">
+          <ul>
+            <li>AIが正解に近いコードを即座に出すほど、エンジニアが遠回りして原理を学ぶ「摩擦」の機会が失われると指摘</li>
+            <li>Hacker Newsで345ポイントを集め、AI依存への懸念が開発者コミュニティで広く共感を呼んだ</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>larsfaye.com</span>
+          <span>⏱ 5 min read</span>
+          <span class="engagement">▲ 345</span>
+          <span>2026-08-22</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/marvelousu/articles/windows-mcp-vs-computer-use">Claude Codeのデスクトップ操作、内蔵computer-useではなくWindows-MCPを使う理由</a></h3>
+        </div>
+        <div class="summary">Windows環境でのデスクトップ自動化について、スクリーンショットから座標を推定してクリックするcomputer-useに対し、Windows UI Automation APIで構造化されたUIツリーを読むWindows-MCPの優位性を検証した記事。メモ帳へのテキスト入力タスクで、computer-useの5操作に対しWindows-MCPは2操作で完了した。</div>
+        <div class="key-points">
+          <ul>
+            <li>computer-useはスクリーンショット→座標クリック→全選択→削除→入力の5操作、Windows-MCPはスナップショット取得→座標指定入力の2操作で完了</li>
+            <li>UI Automationで要素を名前指定できるためスケーリングや解像度差に影響されないが、UI Automation非対応アプリ(Claude Codeのデスクトップ版自体を含む)では効果がない</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-08-22</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://qiita.com/jqit_suwa/items/137a2810fb3fa3f773e8">Claude Codeのセッション間通信がWindowsネイティブでも動作、v2.1.234で対応</a></h3>
+        </div>
+        <div class="summary">これまで「Claude Codeはネイティブ Windowsでセッション間メッセージングを提供しない」と明記されていた制限が、8月17日リリースのv2.1.234で解消された。`ListAgents`でのセッション一覧取得や`SendMessage`によるメッセージ送信がWindowsでも機能し、macOS/Linuxとの機能差がなくなった。</div>
+        <div class="key-points">
+          <ul>
+            <li>macOS/LinuxはUnixドメインソケット、Windowsは認証トークン必須のネームドパイプという異なる実装で同等機能を提供</li>
+            <li>WSL 2セッションとネイティブWindowsセッションはホームディレクトリとソケット種別の違いから互いに到達できず、WSL 2からの移行では接続断に注意が必要</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-08-24</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://codenote.net/ja/posts/windows-desktop-app-code-signing-distribution-japan-2026/">日本の開発者はAzure Trusted Signingを使えない——Windowsアプリ配布の2026年時点の選択肢</a></h3>
+        </div>
+        <div class="summary">Windowsデスクトップアプリのコード署名について、EV証明書によるSmartScreen即時バイパスが2024年に廃止され、秘密鍵も2023年6月からFIPS 140-2 Level 2以上のハードウェア保管が必須になったことを整理する記事。月額9.99ドルのAzure Trusted Signingは米国・カナダ・EU・英国の組織限定で、日本法人は対象外だと指摘する。</div>
+        <div class="key-points">
+          <ul>
+            <li>EV証明書によるSmartScreen即時バイパスは2024年に廃止、秘密鍵もソフトウェア保管(PFXエクスポート)は2023年6月以降不可でFIPS 140-2 Level 2以上のハードウェア保管が必須に</li>
+            <li>月額9.99ドルのAzure Trusted Signingは米国・カナダ・EU・英国の組織限定で日本法人は対象外、実質的な選択肢は年6万円程度の標準コード署名証明書かMicrosoft Store経由のMSIX配布</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>codenote.net</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-08-23</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://www.pospome.work/entry/2026/08/24/223309">優れたエンジニアの設計ドキュメントは何が違うのか——「代替案」「懸念点」「未決定事項」の書き方に差が出る</a></h3>
+        </div>
+        <div class="summary">VPoEのpospome氏は、優秀なエンジニアの設計ドキュメントを分ける要素を「代替案」「懸念点」「未決定事項」の3点に整理する。A案・B案・C案を挙げてCを却下した理由まで言語化できているかどうかが、引き出しの多さを示すという。</div>
+        <div class="key-points">
+          <ul>
+            <li>採用案自体にも「この点は不安」と懸念点を明記できるかどうかで、設計の思考の深さが判断できると指摘</li>
+            <li>「なぜ今決めないか」「いつ誰が決めるか」まで書ける未決定事項の記述は、不確実性を見極める嗅覚の表れだとする</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>pospome.work</span>
+          <span>⏱ 4 min read</span>
+          <span class="engagement">🔖 58</span>
+          <span>2026-08-24</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://picomq.com/">オブジェクトストレージ上で動く耐久性ストリーミングツール「PicoMQ」、HTTP経由で複数トピックを独立管理</a></h3>
+        </div>
+        <div class="summary">PicoMQはS3互換オブジェクトストレージを基盤に、HTTP経由で耐久性のあるリアルタイムストリームを提供するツール。従来のストリーミング基盤が異なる種類のレコードを1つのトピックにまとめがちな問題に対し、ユースケースごとに独立したストリームを無制限に作成できる設計にした。</div>
+        <div class="key-points">
+          <ul>
+            <li>ディスクを使わないゼロディスクアーキテクチャを採用し、ストリームはユースケースごとに独立してオンデマンドにスケール</li>
+            <li>Apache 2.0ライセンスのOSSとして公開、既存のメッセージキューのようにレコード種別を1トピックへ混在させる設計を避けられる</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>PicoMQ</span>
+          <span>⏱ 3 min read</span>
+          <span class="engagement">▲ 62</span>
+          <span>2026-08-22</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://glassbox.codecanary.org">ブラウザが収集できる情報を可視化する診断ツール「GlassBox」、識別されやすさを4階層でスコア化</a></h3>
+        </div>
+        <div class="summary">GlassBoxはトラッキング・不正検知スクリプトが実際に取得できるブラウザ情報を、利用者自身のブラウザ上でそのまま可視化するツール。ハードウェア・環境、エンジン×ハードウェア、ブラウザビルド、セッションデータの4階層に分けて生の値と推定識別力を提示する。</div>
+        <div class="key-points">
+          <ul>
+            <li>位置情報・VPN判定のための公開ジオロケーションAPI呼び出しを除き、計測はすべてローカルで完結し外部送信されない(この機能はオフ可能)</li>
+            <li>識別力スコアは各シグナルのエントロピー値を組み合わせた「モデルであり実測ではない」と明記、実際の母集団データが必要だと注記</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GlassBox</span>
+          <span>⏱ 4 min read</span>
+          <span class="engagement">▲ 72</span>
+          <span>2026-08-22</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
+
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://www.watch.impress.co.jp/docs/news/2134964.html">AnthropicがAI活用法を教える学習プラットフォーム「Claude Academy」に日本語表示を追加</a>
+        <span class="quick-summary">— 社内トレーニングを元にしたユースケース・チュートリアル・コースで構成し、Claudeの機能説明ではなく「AIをどう考えて使うか」に重点を置く。</span>
+        <span class="meta">Impress Watch <span class="engagement">🔖 334</span></span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://qiita.com/jqit_suwa/items/5edf6037203a15c3fdfd">Anthropic Python SDKがhttpxから内部フォークhttpx2へ移行、書き換えは`import httpx2 as httpx`の1行で完了</a>
+        <span class="quick-summary">— 旧httpxが依存として残るため気づかず動いてしまうが、クリーンな環境では失敗しうるので注意が必要。</span>
+        <span class="meta">Qiita</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://www.itmedia.co.jp/aiplus/article/2608/24/2000000723/">30Bクラスのオープンモデルが「主戦場」に、Qwen3.8-27Bは24GBのVRAMでOpus 4.6超えのスコアを記録</a>
+        <span class="quick-summary">— 常時稼働型AIエージェントの定型作業を軽量モデルに任せる分業と、高額フロンティアモデルからの乗り換え圧力が背景にある。</span>
+        <span class="meta">ITmedia</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://gigazine.net/news/20260824-ox-alpha/">出所不明のステルスAIモデル「Ox Alpha」が無料公開、100万トークンの文脈窓で日次「兆単位」のトークンを処理</a>
+        <span class="quick-summary">— OpenRouterの匿名テスト制度を通じて配布され、GPUシミュレーションでは一発成功する一方、three.jsタスクではOpus 5に劣るなど評価は割れている。</span>
+        <span class="meta">Gigazine <span class="engagement">🔖 5</span></span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-infra">Infra</span>
+        <a href="https://www.itmedia.co.jp/news/article/2608/24/2000000718/">「うるう秒」、2027年5月20日で27年・27回の歴史に幕——UTCとUT1のズレは最大1時間まで許容へ</a>
+        <span class="quick-summary">— 負のうるう秒を実装した経験がないまま重要インフラで初めて発生した場合の混乱が最大の懸念として挙げられている。</span>
+        <span class="meta">ITmedia <span class="engagement">🔖 128</span></span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://zenn.dev/catatsuy/articles/8e8dbf6afd1196">Go 1.27のhttptest.NewTestServerで本番URLのままAPIクライアントをテスト可能に</a>
+        <span class="quick-summary">— 通信経路だけをin-memory networkに差し替える方式で、`export_test.go`によるURL書き換えとポート消費が不要になる。</span>
+        <span class="meta">Zenn</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-infra">Infra</span>
+        <a href="https://github.com/pythops/kudu">libvirt不要でLinux上のVMをTUIから管理するRust製ツール「kudu」</a>
+        <span class="quick-summary">— QEMUを直接呼び出しx86・ARM・RISC-Vに対応、cloud-initやネットワーク設定もCUIだけで完結する。</span>
+        <span class="meta">GitHub</span>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="./" class="archive-link">🗂 過去のダイジェスト</a>
+    </footer>
+  </div>
+</body>
+</html>
