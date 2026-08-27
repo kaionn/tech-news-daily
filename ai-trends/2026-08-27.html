@@ -66,7 +66,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 <div class="container">
 <header>
   <h1>🧠 AI プロダクト動向</h1>
-  <p class="date">2026-08-11 発行（読了 5 分）</p>
+  <p class="date">2026-08-27 発行（読了 6 分）</p>
   <p class="tagline">実プロダクトのアーキテクチャ・使用例から AI 開発の現在地を週 3 回・1 号 1 テーマで深掘り</p>
   <nav class="site-nav">
     <a href="../">📰 日刊ダイジェスト</a>
@@ -77,81 +77,94 @@ footer a{color:var(--primary-500);text-decoration:none}
 </header>
 
 <div class="theme-hero">
-  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">CONTEXT-COMPACTION</span></span>
-  <h2>コンテキスト圧縮はどこで行うべきか — API・モデル訓練・ハーネス、3層に割れた実装場所</h2>
-  <p class="lede">長時間稼働するコーディングエージェントは、いずれ必ずコンテキストウィンドウの上限にぶつかる。この「古い会話をどう畳んで続きを走らせるか」という課題に対し、直近半年で Anthropic・OpenAI・Microsoft がほぼ同時に対処したが、実装した層がそれぞれ違う。API のオプション、モデルの訓練対象、ハーネスのランタイム機能——同じ問題への解が3層に分かれたのは、この機能がどこに置いても動くという裏返しでもある。</p>
+  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">MULTI-AGENT-COORDINATION</span></span>
+  <h2>マルチエージェント協調 — 割っていいのは「コンテキストの切れ目」だけ</h2>
+  <p class="lede">Anthropic は自社のリサーチ機能を並列サブエージェントで作り、性能が大きく上がったと公表した。一方コーディングエージェントを作る Cognition は同じ時期に「マルチエージェントを作るな」という真逆に見える主張をブログに掲げた。両者を並べると矛盾ではなく、分割していい境界線がどこにあるかについて同じ基準を別の場所に適用しているだけだと分かる。今号ではその基準と、それを実装に落とし込む2つのやり方を見る。</p>
 </div>
 
 <div class="tldr">
   <div class="label">TL;DR — 3 行で</div>
   <ul>
-    <li>Anthropic は compaction をサーバーサイド API のオプションとして実装し、モデル本体は変更していない</li>
-    <li>OpenAI は GPT-5.1-Codex-Max で圧縮判断そのものを訓練対象にし、モデルが自分の履歴を刈り込む</li>
-    <li>Microsoft は Agent Framework のランタイム層に compaction を組み込み、todo 管理やツール承認と同列に扱う</li>
+    <li>Anthropic は Research 機能で並列サブエージェントを使い内部評価で90.2%の性能改善を報告するが、トークン消費は通常の約15倍になるとも明記している。</li>
+    <li>Cognition は逆に「コーディングでは並列化するな、個別メッセージではなく全トレースを共有せよ」と結論し、単一スレッド+履歴圧縮をデフォルトにした。</li>
+    <li>両社とも『ワークフローの工程』ではなく『他のエージェントの判断を見なくても仕事が完結するか』で分割の可否を判断しており、この一点が実質的な分岐基準になっている。</li>
   </ul>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 1: サーバーサイド API という選択 — Anthropic の compact_20260112</div>
+  <div class="section-title">📐 パターン 1: 並列化していいのは「コンテキストが独立している」仕事だけ</div>
   <div class="theme-section">
-    <p>Anthropic の Context Compaction API は、入力トークン数が設定した閾値（デフォルト15万トークン、最小5万トークン）に達すると、API 側が会話を要約して <code>compaction</code> ブロックを生成する。以降のリクエストでは、このブロックより前の内容は自動的に破棄され、要約から会話が継続する。クライアント側で要約ロジックを書く必要はない。</p><p>この方式の要点は、モデルの重みには一切手を入れず、API 呼び出し時のオプション（ベータヘッダーと <code>context_management</code> パラメータ）として提供している点にある。要約に使うプロンプトも <code>instructions</code> で丸ごと差し替えられるため、圧縮の挙動をアプリ側で制御できる。AWS Bedrock・Google Cloud・Microsoft Foundry でも同一仕様が使えるのは、モデル非依存でAPIレイヤーに閉じているからだ。</p>
+    <p>Anthropic の公式ガイドは、マルチエージェント化が効くケースを「コンテキスト保護」「並列化」「専門化」の3つに整理する。コンテキスト保護とは、あるタスクの探索ノイズが次のタスクの推論を汚染するのを防ぐこと。並列化とは、独立した調査経路を同時に走らせて網羅性を上げること。専門化とは、ツールが15〜20個を超えると単一エージェントでは選択ミスが増えるため、担当を分けること。逆に同ガイドは「テレフォンゲーム問題」を名指しし、計画→実装→テストのような<code>ワークフローの工程</code>で分割すると、前工程の判断が引き継がれず品質が落ちると警告する。</p><p>この基準の下で最も安定するのが検証専用サブエージェントだ。検証は他の作業の結果を受け取って合否を返すだけで、他エージェントの途中経過を知る必要がない——つまりコンテキストが構造的に独立している。逆に「早すぎる合格判定」を防ぐため、テストスイート全体の実行のような明示的な完了条件を与える必要があるとも指摘されている。</p>
     <div class="example">
-      <div class="product">Claude Opus 5 / Sonnet 5（Anthropic, Context Compaction API）</div>
-      <div class="approach">入力トークンが閾値到達で自動要約し、以降のリクエストは要約ブロックから継続する</div>
-      <div class="detail">自前で要約ロジックを実装していたチームが置き換え対象にできる、最も仕様が具体的なcompaction実装。2026年3月のClaude Opus 4.6で先行導入され、1Mトークンウィンドウでの検索精度をSonnet 4.5比76%対18.5%まで改善したと報告されている</div>
-      <a href="https://platform.claude.com/docs/en/build-with-claude/compaction">📄 一次ソース</a>
+      <div class="product">Claude の Research 機能（Anthropic 公式）</div>
+      <div class="approach">Lead agent が3〜5体のsubagentを並列生成し、独立したコンテキストで探索させてから引用付きで統合する</div>
+      <div class="detail">内部評価で単一エージェント比90.2%の性能改善を報告する一方、トークン消費は通常のチャット比で約15倍かかると明記しており、並列化の利得とコストを両方定量化して公開している点が判断材料として貴重。</div>
+      <a href="https://www.anthropic.com/engineering/multi-agent-research-system">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> 自前で「古い会話を要約してプロンプトに詰め直す」ロジックを書いているなら、まず標準APIのcompactionオプションに置き換えられないか確認するのが先。車輪の再発明を避けられる。</div>
+    <div class="example">
+      <div class="product">Claude（Anthropic 公式ガイド）</div>
+      <div class="approach">『テレフォンゲーム問題』を名指しし、工程ではなくコンテキストの独立性で分割すべきと提言</div>
+      <div class="detail">検証専用のサブエージェント（テストスイート実行など）だけは一貫して機能するという具体的な設計パターンを挙げている。</div>
+      <a href="https://claude.com/blog/building-multi-agent-systems-when-and-how-to-use-them">📄 一次ソース</a>
+    </div>
+    <div class="takeaway"><strong>示唆:</strong> 自分のタスクを『計画/実装/テスト』のような工程で割ろうとしていないか点検する。工程ではなく『他のサブエージェントの出力を見なくても完遂できるか』で線を引く。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 2: モデル自身に刈り込みを学習させる — OpenAI Codex-Max のcompaction</div>
+  <div class="section-title">📐 パターン 2: Cognition は逆の結論 — コーディングでは全トレースを共有せよ</div>
   <div class="theme-section">
-    <p>OpenAI の GPT-5.1-Codex-Max は、複数のコンテキストウィンドウをまたいで動作するよう訓練段階で学習した初めてのモデルだとされる。Codex アプリケーション上でコンテキスト上限に近づくと、モデル自身が重要な情報を保持しながら履歴を刈り込み、新しいウィンドウで作業を継続する。この繰り返しにより、単一タスクを24時間以上続けられたという社内評価が報告されている。</p><p>Anthropic方式との違いは、要約が外付けのAPI機能ではなく、モデルの意思決定そのものに埋め込まれている点だ。どの情報が「タスクに効くか」の判断を、汎用的な要約プロンプトではなくモデルの学習済みポリシーに委ねている。引き換えに、この挙動はそのモデル専用であり、他モデルに持ち出せない。</p>
+    <p>コーディングエージェント Devin を作る Cognition は「共有すべきは個別メッセージではなく、エージェントの全トレース」「アクションは暗黙の決定を伴い、決定が食い違えば結果も食い違う」という2原則を掲げる。実例として、2体のサブエージェントに同じ Flappy Bird 実装を並列に任せたところ、一方が『スーパーマリオ風』のグラフィックを、もう一方が非互換の鳥アセットを作ってしまった、という具体的な失敗を報告している。どちらも指示は誤読していないが、互いの暗黙の設計判断が見えなかったために結果が矛盾した。</p><p>この失敗はコーディング特有だ。前の判断（変数名、データ構造、UIのトーン）が後続のコードの前提になり続けるため、コンテキストを割った瞬間に暗黙の合意が失われる。そのため Cognition は並列コーディングを避け、単一スレッド設計をデフォルトにし、長時間タスクでは会話履歴を圧縮するレイヤーを挟むことで文脈を保つ方針を取る。</p>
     <div class="example">
-      <div class="product">GPT-5.1-Codex-Max（OpenAI）</div>
-      <div class="approach">compactionを訓練対象に組み込み、モデル自身が履歴の取捨選択を判断する</div>
-      <div class="detail">外付けの要約ラッパーではなく学習済みモデルの挙動としてcompactionを実装した点が、APIオプション方式との明確な対比になる</div>
-      <a href="https://openai.com/index/gpt-5-1-codex-max/">📄 一次ソース</a>
+      <div class="product">Devin（Cognition 公式ブログ）</div>
+      <div class="approach">『共有すべきは個別メッセージではなくエージェントの全トレース』という原則を掲げ、並列コーディングを避けて単一スレッド設計をデフォルトにする</div>
+      <div class="detail">検証として、2体のサブエージェントに同じ Flappy Bird 実装を並列に任せると設計判断が食い違って破綻するという具体例を報告。長時間タスクでは会話履歴を圧縮するレイヤーを挟み、単一スレッドのまま文脈を保つ。</div>
+      <a href="https://cognition.com/blog/dont-build-multi-agents">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> 汎用の要約API（移植性が高いが浅い）と、訓練済みモデル任せの圧縮（そのモデル専用だが文脈保持が深い）はトレードオフ。モデルを固定できるプロダクトなら後者の恩恵が大きい。</div>
+    <div class="example">
+      <div class="product">Claude Code（Cognitionによる分析）</div>
+      <div class="approach">Cognition は同ブログで、Claude Code を『サブタスクを生成するが、そのサブタスクエージェントとは決して並行作業しない』設計の代表例として引用</div>
+      <div class="detail">OpenAI の Swarm や Microsoft の AutoGen が推す並列マルチエージェント設計とは一線を画す事例として名指ししている。</div>
+      <a href="https://cognition.com/blog/dont-build-multi-agents">📄 一次ソース</a>
+    </div>
+    <div class="takeaway"><strong>示唆:</strong> コーディングのように『前の判断が次のコードの前提になる』タスクは、並列化よりも全トレース共有+圧縮を優先したほうが壊れにくい。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 3: ハーネス層に押し込む — Microsoft Agent Framework の統合ランタイム</div>
+  <div class="section-title">📐 パターン 3: 動的サブエージェント生成というインフラ側の解</div>
   <div class="theme-section">
-    <p>Microsoft は2026年6月のBuildで、Agent Framework の Harness を GA にした。ここでは自動コンテキスト圧縮が独立機能ではなく、todoリストによるplan/execute管理、ツール承認エージェント、バックグラウンドエージェントへのタスク委譲などと同じランタイム層の一部として提供される。ツール呼び出しが連続する長いループの途中でトークン使用量を監視し、上限に達する前に会話履歴を圧縮する。</p><p>API層でもモデル層でもなく、その中間の「ハーネス」に置いたのは、実運用のエージェントがそもそも生のモデルAPIを直接叩くのではなく、独自のハーネスを介して動いていることが多いからだ。圧縮だけを個別実装させるより、他のランタイム機能とまとめて提供する方がチームの重複実装を減らせる。</p>
+    <p>LangChain の Deep Agents は、<code>task()</code> というビルトイン関数でサブエージェントをコードから動的に生成する仕組みを導入した。エージェント自身が軽量なインタプリタ上で実行されるコードを書き、ループ・分岐・<code>Promise.all</code> のような制御フローをターンごとのモデル判断ではなく確定的なコード実行として走らせる。公式には「分類して実行」「ファンアウトして統合」「敵対的検証」「生成してフィルタ」「トーナメント」「ドライになるまでループ」の6パターンが定義されている。</p><p>これは「マルチエージェントを使うべきか」という問いを、「この6パターンのどれに当てはまるか」という問いに置き換えるインフラだ。特に敵対的検証パターンは、Anthropic が指摘する『検証専用サブエージェントが最も安定する』という知見と一致しており、異なる企業が独立に同じ設計に収束していることを裏付ける。</p>
     <div class="example">
-      <div class="product">Agent Framework Harness（Microsoft, GitHub Copilot / Foundry 連携）</div>
-      <div class="approach">context compactionをtodo管理・ツール承認・バックグラウンドエージェントと同じランタイム層でGA化</div>
-      <div class="detail">2026年4月の1.0リリースに続き6月のBuildでGAに到達、自前ハーネスを持つチームが個別実装をやめて乗り換えられる水準の完成度</div>
-      <a href="https://www.infoq.com/news/2026/08/agent-framework-harness-ga/">📄 一次ソース</a>
+      <div class="product">Deep Agents（LangChain 公式）</div>
+      <div class="approach">task() 関数でサブエージェントをコードから動的に生成し、制御フローをコードとして確定的に実行する</div>
+      <div class="detail">『分類して実行』『ファンアウトして統合』『敵対的検証』『生成してフィルタ』『トーナメント』『ドライになるまでループ』の6パターンを公式に定義。うち敵対的検証パターンは、Anthropic の『検証専用サブエージェントが最も安定する』という知見と一致する。</div>
+      <a href="https://www.langchain.com/blog/introducing-dynamic-subagents-in-deep-agents">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> 自分たちでハーネスを組んでいるなら、compactionを単独機能として作り込む前に、公開フレームワークがどの層にまとめているかを見て、同じ粒度で設計するかどうかを判断する。</div>
+    <div class="takeaway"><strong>示唆:</strong> マルチエージェントを検討するときは『対話的な役割分担』ではなく、この6パターンのどれかとしてコードで表現できるかをまず確認する。当てはまらないなら単一エージェントに戻したほうが安全。</div>
   </div>
   <div class="editorial">
     <span class="label">✍️ 編集後記</span>
-    3社とも「古い文脈を畳んで続ける」という結論自体は同じで、違うのはそれをAPIオプション・訓練対象・ランタイム機能のどの層に固定したかだけだ。自分のプロダクトがモデルを差し替える可能性があるならAPI層、特定モデルに賭けられるなら訓練層、独自ハーネスを持つなら実行時層——という具合に、選ぶべき層は自分のアーキテクチャの固定度合いに従う。
+    Anthropic と Cognition は正反対の結論を出しているように見えるが、実際は同じ基準を別の場所に適用しているだけだ。『他のエージェントの判断を見なくても仕事が完結するか』という一点で分割の可否を判断しており、独立した探索が多いリサーチではこの基準を満たしやすく、前の判断が次のコードの前提になり続けるコーディングでは満たしにくい、というだけの話だ。
   </div>
 </div>
 
 <div class="section">
   <div class="section-title">🔗 今号の動向ピックアップ</div>
-  <div class="quick-link"><a href="https://www.infoq.com/news/2026/03/opus-4-6-context-compaction/">Claude Opus 4.6、adaptive reasoningとcontext compactionを同時導入</a><span class="quick-summary">2026年3月、Anthropicは長時間エージェントワークフローでの性能劣化に対処するためcompactionを先行導入し、1Mトークンウィンドウでの検索精度を大幅改善したと報告した。本号で扱ったcompact_20260112 APIの前身にあたる機能追加。</span></div>
-  <div class="quick-link"><a href="https://devin.ai/blog/windsurf-is-now-devin-desktop">Windsurf改めDevin Desktop、エージェント間でコンテキストを共有する「Spaces」を導入</a><span class="quick-summary">Cognitionは2026年、Windsurfをデスクトップ版DevinのIDEとして統合し、セッション・PR・ファイル・プロジェクト状態をまたいでコンテキストを共有するSpaces機能を追加した。個々のセッション内の圧縮ではなく、セッション横断の文脈共有という別角度からの解。</span></div>
+  <div class="quick-link"><a href="https://cognition.com/blog/multi-agents-working">Cognition『マルチエージェントで実際に機能しているもの』</a><span class="quick-summary">『書き込みは単一スレッドのまま、判断だけ複数エージェントで補う』という2パターン(レビューエージェント/より賢いモデルへのエスカレーション)を報告。本文で紹介した『コーディングでは並列化するな』という結論の、半年後の実践的な着地点にあたる。</span></div>
+  <div class="quick-link"><a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents">Anthropic『AIエージェントのための実践的コンテキストエンジニアリング』</a><span class="quick-summary">サブエージェントは1,000〜2,000トークン程度に凝縮した要約だけをリードエージェントに返すべきと提言。本文で扱った Claude Research 事例と同じ設計思想を、より一般的なガイドラインとして書いたもの。</span></div>
+  <div class="quick-link"><a href="https://openai.github.io/openai-agents-python/multi_agent/">OpenAI Agents SDK『マネージャー型』と『ハンドオフ型』</a><span class="quick-summary">中央のオーケストレーターが専門エージェントをツールとして呼ぶ『マネージャー』型と、会話の主導権ごと専門エージェントに渡し切る『ハンドオフ』型を明確に分けて文書化。本文のオーケストレーター/ワーカー型とは異なる第三の分割軸を提示している。</span></div>
 </div>
 
 <div class="section">
   <div class="section-title">📚 過去号</div>
-  <div class="archive-item"><span class="week">2026-08-27</span><div class="body"><a href="../ai-trends.html">マルチエージェント協調 — 割っていいのは「コンテキストの切れ目」だけ</a><span class="sub">Anthropic は Research 機能で並列サブエージェントを使い内部評価で90.2%の性能改善を報告するが、トークン消費は通常の約15倍になるとも明記している。</span></div></div>
   <div class="archive-item"><span class="week">2026-08-25</span><div class="body"><a href="2026-08-25.html">エージェントのメモリ設計 — 生ログでも単一要約でもなく、書き換え可能な単位に分解する</a><span class="sub">Claude は2026年7月、記憶を単一のローリング要約から個別の書き換え可能なエントリへ移行。ChatGPT は非同期の「Dreaming」処理で古い事実を時制ごと書き換える。</span></div></div>
   <div class="archive-item"><span class="week">2026-08-22</span><div class="body"><a href="2026-08-22.html">プロンプトキャッシュはコスト最適化ではない — 「プレフィックス固定」というアーキテクチャ制約</a><span class="sub">キャッシュ命中率はもはや副次指標ではなく、Manus はこれを「本番エージェントで最重要のメトリック」と明言している。</span></div></div>
   <div class="archive-item"><span class="week">2026-08-20</span><div class="body"><a href="2026-08-20.html">接続ツールが増えるほど遅くなる問題 — コード実行と検索遅延ロードの2つの答え</a><span class="sub">Anthropicは公式エンジニアリングブログで、MCPツールをコードAPIとして提示しファイルシステム越しにオンデマンドで読み込ませる方式により、あるタスクのトークン消費を150,000から2,000（98.7%減）に削減したと報告した</span></div></div>
   <div class="archive-item"><span class="week">2026-08-18</span><div class="body"><a href="2026-08-18.html">MCPエージェントの認可設計 — 同意画面を「増やす」実装と「無くす」実装に分岐した</a><span class="sub">MCPの権限設計は「サーバー単位のOAuth」から「ツールごとのスコープ」へ移り、WorkOSやCloudflareが個別ツール内での権限チェックを標準パターンとして提示している。</span></div></div>
   <div class="archive-item"><span class="week">2026-08-15</span><div class="body"><a href="2026-08-15.html">エージェントの評価・観測性 — 「最終出力の一致」から「軌跡(トラジェクトリ)の妥当性」へ</a><span class="sub">Anthropic は Tasks/Graders/Transcripts の三要素でエージェント評価を構造化し、1回でも成功する確率 pass@k と毎回成功する確率 pass^k を分けて計測する運用を提示した。</span></div></div>
   <div class="archive-item"><span class="week">2026-08-13</span><div class="body"><a href="2026-08-13.html">モデルルーティング — 1モデルに全部背負わせない設計が標準になった</a><span class="sub">Vercel AI GatewayやGitHub Copilot Autoは、ヒューリスティック分類→難易度ティア判定→プロバイダ違いのフォールバック、という二段構成のタスク別ルーティングをすでに標準実装にしている。</span></div></div>
+  <div class="archive-item"><span class="week">2026-08-11</span><div class="body"><a href="2026-08-11.html">コンテキスト圧縮はどこで行うべきか — API・モデル訓練・ハーネス、3層に割れた実装場所</a><span class="sub">Anthropic は compaction をサーバーサイド API のオプションとして実装し、モデル本体は変更していない</span></div></div>
   <div class="archive-item"><span class="week">2026-08-08</span><div class="body"><a href="2026-08-08.html">エージェントのコード実行基盤 — サンドボックスは「重い専用マシン」と「軽いアイソレート」に分かれ始めた</a><span class="sub">Cloudflare Sandboxes と Vercel Sandbox はどちらも「持続する専用マシン」型サンドボックスをGA化し、スナップショット復元でコールドブート30秒を2秒程度まで縮めた。</span></div></div>
   <div class="archive-item"><span class="week">2026-08-06</span><div class="body"><a href="2026-08-06.html">RAG 構成パターンの現在地 — 二段構成の次は、検索そのものをエージェントに埋め込む</a><span class="sub">Perplexity は Vespa 上で lexical・embedding のハイブリッド検索から cross-encoder rerank へ絞り込む多段構成を採り、Databricks は同じ構成を単一パラメータで追加できる機能として一般化した。</span></div></div>
   <div class="archive-item"><span class="week">2026-08-04</span><div class="body"><a href="2026-08-04.html">ワークフロー型 vs エージェント型 — 複雑さを足す前に何を確かめるか</a><span class="sub">Anthropic は「経路を誰が決めるか」で workflow と agent を定義し、単純な方から試すべきだと明言している。</span></div></div>
@@ -162,7 +175,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 </div>
 
 <footer>
-  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="../data/ai-trends/2026-08-11.json">data/ai-trends/2026-08-11.json</a>（このページは JSON からの生成物）</p>
+  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="../data/ai-trends/2026-08-27.json">data/ai-trends/2026-08-27.json</a>（このページは JSON からの生成物）</p>
   <p style="margin-top:.5rem"><a href="../">📰 日刊ダイジェストに戻る</a></p>
 </footer>
 </div>

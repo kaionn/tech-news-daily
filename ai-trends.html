@@ -66,7 +66,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 <div class="container">
 <header>
   <h1>🧠 AI プロダクト動向</h1>
-  <p class="date">2026-08-25 発行（読了 5 分）</p>
+  <p class="date">2026-08-27 発行（読了 6 分）</p>
   <p class="tagline">実プロダクトのアーキテクチャ・使用例から AI 開発の現在地を週 3 回・1 号 1 テーマで深掘り</p>
   <nav class="site-nav">
     <a href="./">📰 日刊ダイジェスト</a>
@@ -77,93 +77,88 @@ footer a{color:var(--primary-500);text-decoration:none}
 </header>
 
 <div class="theme-hero">
-  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">AGENT-MEMORY</span></span>
-  <h2>エージェントのメモリ設計 — 生ログでも単一要約でもなく、書き換え可能な単位に分解する</h2>
-  <p class="lede">2026年に入り、OpenAI と Anthropic はほぼ同時期に、消費者向けチャットとエージェント製品の双方でメモリ機構を刷新した。共通しているのは「会話をそのまま貯める」「1本の要約文にまとめる」のどちらでもなく、書き換え可能な小さい単位に分解して保存する設計への転換だ。だが記憶をいつ作り直すか、どこに保存するかという次の設計判断は各社で割れており、この2軸が実装の分かれ目になっている。</p>
+  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">MULTI-AGENT-COORDINATION</span></span>
+  <h2>マルチエージェント協調 — 割っていいのは「コンテキストの切れ目」だけ</h2>
+  <p class="lede">Anthropic は自社のリサーチ機能を並列サブエージェントで作り、性能が大きく上がったと公表した。一方コーディングエージェントを作る Cognition は同じ時期に「マルチエージェントを作るな」という真逆に見える主張をブログに掲げた。両者を並べると矛盾ではなく、分割していい境界線がどこにあるかについて同じ基準を別の場所に適用しているだけだと分かる。今号ではその基準と、それを実装に落とし込む2つのやり方を見る。</p>
 </div>
 
 <div class="tldr">
   <div class="label">TL;DR — 3 行で</div>
   <ul>
-    <li>Claude は2026年7月、記憶を単一のローリング要約から個別の書き換え可能なエントリへ移行。ChatGPT は非同期の「Dreaming」処理で古い事実を時制ごと書き換える。</li>
-    <li>Claude Managed Agents はセッション中のリアルタイム書き込みと、セッション間で横断整理するバッチ処理（Dreaming）を明確に分けて提供する。</li>
-    <li>Claude API の memory tool はモデルがファイル操作を要求するだけで保存先を開発者側に残す設計で、mem0 のような専業ベンダーに記憶レイヤーごと預ける選択肢と対比できる。</li>
+    <li>Anthropic は Research 機能で並列サブエージェントを使い内部評価で90.2%の性能改善を報告するが、トークン消費は通常の約15倍になるとも明記している。</li>
+    <li>Cognition は逆に「コーディングでは並列化するな、個別メッセージではなく全トレースを共有せよ」と結論し、単一スレッド+履歴圧縮をデフォルトにした。</li>
+    <li>両社とも『ワークフローの工程』ではなく『他のエージェントの判断を見なくても仕事が完結するか』で分割の可否を判断しており、この一点が実質的な分岐基準になっている。</li>
   </ul>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 1: 会話ログでも単一の要約でもなく、書き換え可能な個別エントリへ</div>
+  <div class="section-title">📐 パターン 1: 並列化していいのは「コンテキストが独立している」仕事だけ</div>
   <div class="theme-section">
-    <p>従来の2方式にはそれぞれ弱点があった。生の会話履歴をそのまま保持する方式はコンテキストコストが際限なく膨らみ、1件の誤りを消すために関係ない発言まで巻き込む。1本の要約文に凝縮する方式は逆に、1つの事実を訂正するには要約全体を書き直す必要があり、その過程で無関係な情報が欠落するリスクがある。</p><p>今の主流は、記憶を「1つの検証可能な事実」を単位にした個別レコードへ分解し、それぞれを独立に読み書き・削除できるようにすることだ。単位を細かくするほど、間違いの訂正や失効判定を他の記憶に影響させずに局所化できる。</p>
+    <p>Anthropic の公式ガイドは、マルチエージェント化が効くケースを「コンテキスト保護」「並列化」「専門化」の3つに整理する。コンテキスト保護とは、あるタスクの探索ノイズが次のタスクの推論を汚染するのを防ぐこと。並列化とは、独立した調査経路を同時に走らせて網羅性を上げること。専門化とは、ツールが15〜20個を超えると単一エージェントでは選択ミスが増えるため、担当を分けること。逆に同ガイドは「テレフォンゲーム問題」を名指しし、計画→実装→テストのような<code>ワークフローの工程</code>で分割すると、前工程の判断が引き継がれず品質が落ちると警告する。</p><p>この基準の下で最も安定するのが検証専用サブエージェントだ。検証は他の作業の結果を受け取って合否を返すだけで、他エージェントの途中経過を知る必要がない——つまりコンテキストが構造的に独立している。逆に「早すぎる合格判定」を防ぐため、テストスイート全体の実行のような明示的な完了条件を与える必要があるとも指摘されている。</p>
     <div class="example">
-      <div class="product">Claude（Anthropic、コンシューマー向けメモリ）</div>
-      <div class="approach">単一のローリング要約から、カテゴリ分けされた個別エントリへ移行</div>
-      <div class="detail">2026年7月10日、Anthropic は Claude の記憶を「毎日更新される1本の要約文」から「会話中に読み書きされるカテゴリ別の個別エントリ」に置き換えた。ユーザーは1件だけを確認・修正・削除でき、他の記憶を巻き込まない。</div>
-      <a href="https://support.claude.com/en/articles/12138966-release-notes">📄 一次ソース</a>
+      <div class="product">Claude の Research 機能（Anthropic 公式）</div>
+      <div class="approach">Lead agent が3〜5体のsubagentを並列生成し、独立したコンテキストで探索させてから引用付きで統合する</div>
+      <div class="detail">内部評価で単一エージェント比90.2%の性能改善を報告する一方、トークン消費は通常のチャット比で約15倍かかると明記しており、並列化の利得とコストを両方定量化して公開している点が判断材料として貴重。</div>
+      <a href="https://www.anthropic.com/engineering/multi-agent-research-system">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">ChatGPT（OpenAI、Dreaming）</div>
-      <div class="approach">対話とは別のバックグラウンド処理が記憶を継続的に再統合し、古い事実を書き換える</div>
-      <div class="detail">2026年6月に展開された新アーキテクチャでは、複数の会話から学習する専用プロセスが「7月にシンガポールに行く予定」を「7月にシンガポールに行った」のように時制ごと更新する。ユーザーが読める要約ページとして提示され、項目単位の追加・修正に対応する。</div>
-      <a href="https://openai.com/index/chatgpt-memory-dreaming/">📄 一次ソース</a>
+      <div class="product">Claude（Anthropic 公式ガイド）</div>
+      <div class="approach">『テレフォンゲーム問題』を名指しし、工程ではなくコンテキストの独立性で分割すべきと提言</div>
+      <div class="detail">検証専用のサブエージェント（テストスイート実行など）だけは一貫して機能するという具体的な設計パターンを挙げている。</div>
+      <a href="https://claude.com/blog/building-multi-agent-systems-when-and-how-to-use-them">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> メモリを実装するなら保存の最小単位を「会話」や「1つの人物像」ではなく「検証可能な1事実」に置く。単位が細かいほど訂正と失効判定のコストが下がる。</div>
+    <div class="takeaway"><strong>示唆:</strong> 自分のタスクを『計画/実装/テスト』のような工程で割ろうとしていないか点検する。工程ではなく『他のサブエージェントの出力を見なくても完遂できるか』で線を引く。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 2: 記憶を作り直すタイミング — セッション中のリアルタイム書き込みか、セッション間のバッチ処理か</div>
+  <div class="section-title">📐 パターン 2: Cognition は逆の結論 — コーディングでは全トレースを共有せよ</div>
   <div class="theme-section">
-    <p>もう一つの分かれ目は更新のタイミングだ。作業しながらその場でファイルに書き込む同期方式は即時性が高い一方、1セッションの視野に閉じるため冗長な記憶が溜まりやすい。対して、複数セッションが終わった後にまとめて見直す非同期方式は、単体のセッションでは見えないパターン（繰り返し起きるミスや複数エージェント間の共通知見）を検出できる。</p><p>企業向けのエージェント製品が後者を別立てで用意するのは、記憶を横断的にマージ・重複排除できるだけでなく、自動推論された記憶が人のレビューを経ずに将来の挙動を静かに変えてしまうリスクを、承認ゲートで止められるからだ。</p>
+    <p>コーディングエージェント Devin を作る Cognition は「共有すべきは個別メッセージではなく、エージェントの全トレース」「アクションは暗黙の決定を伴い、決定が食い違えば結果も食い違う」という2原則を掲げる。実例として、2体のサブエージェントに同じ Flappy Bird 実装を並列に任せたところ、一方が『スーパーマリオ風』のグラフィックを、もう一方が非互換の鳥アセットを作ってしまった、という具体的な失敗を報告している。どちらも指示は誤読していないが、互いの暗黙の設計判断が見えなかったために結果が矛盾した。</p><p>この失敗はコーディング特有だ。前の判断（変数名、データ構造、UIのトーン）が後続のコードの前提になり続けるため、コンテキストを割った瞬間に暗黙の合意が失われる。そのため Cognition は並列コーディングを避け、単一スレッド設計をデフォルトにし、長時間タスクでは会話履歴を圧縮するレイヤーを挟むことで文脈を保つ方針を取る。</p>
     <div class="example">
-      <div class="product">Claude Managed Agents（Anthropic、Memory）</div>
-      <div class="approach">作業中にその場でファイルへ書き込む</div>
-      <div class="detail">エージェントの記憶はファイルシステムにマウントされたファイル群として実装され、Claude は既存の bash・コード実行ツールでそのまま読み書きする。セッションの終了を待たず、作業しながら学習する設計。</div>
-      <a href="https://claude.com/blog/claude-managed-agents-memory">📄 一次ソース</a>
+      <div class="product">Devin（Cognition 公式ブログ）</div>
+      <div class="approach">『共有すべきは個別メッセージではなくエージェントの全トレース』という原則を掲げ、並列コーディングを避けて単一スレッド設計をデフォルトにする</div>
+      <div class="detail">検証として、2体のサブエージェントに同じ Flappy Bird 実装を並列に任せると設計判断が食い違って破綻するという具体例を報告。長時間タスクでは会話履歴を圧縮するレイヤーを挟み、単一スレッドのまま文脈を保つ。</div>
+      <a href="https://cognition.com/blog/dont-build-multi-agents">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">Claude Managed Agents（Anthropic、Dreaming）</div>
-      <div class="approach">セッション間で動く別プロセスが記憶を横断的に整理し直す</div>
-      <div class="detail">Dreaming はスケジュール実行されるプロセスで、複数エージェントのセッションと記憶ストアを見直し、繰り返し起きるミスやチーム共通の知見を抽出して記憶を再構成する。変更を自動反映するか、人のレビュー待ちにするかを開発者が選べる。</div>
-      <a href="https://claude.com/blog/new-in-claude-managed-agents">📄 一次ソース</a>
+      <div class="product">Claude Code（Cognitionによる分析）</div>
+      <div class="approach">Cognition は同ブログで、Claude Code を『サブタスクを生成するが、そのサブタスクエージェントとは決して並行作業しない』設計の代表例として引用</div>
+      <div class="detail">OpenAI の Swarm や Microsoft の AutoGen が推す並列マルチエージェント設計とは一線を画す事例として名指ししている。</div>
+      <a href="https://cognition.com/blog/dont-build-multi-agents">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> 1エージェント・1セッションで完結する記憶はリアルタイム書き込みで足りる。複数エージェントや複数日にまたがる知見を集約したいなら、別立てのバッチ整理プロセスと、誤った記憶が自動適用される前に人が止められる仕組みをセットで用意する。</div>
+    <div class="takeaway"><strong>示唆:</strong> コーディングのように『前の判断が次のコードの前提になる』タスクは、並列化よりも全トレース共有+圧縮を優先したほうが壊れにくい。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 3: 誰が保存先を持つか — マネージドな記憶か、自前インフラに預ける記憶か</div>
+  <div class="section-title">📐 パターン 3: 動的サブエージェント生成というインフラ側の解</div>
   <div class="theme-section">
-    <p>3つ目の軸は保存先の所有権だ。モデルは <code>view</code> や <code>create</code> といったファイル操作を要求するだけで、実際の保存先とアクセス制御は呼び出し側のアプリケーションが持つクライアントサイド方式がある一方、保存から取り出しまで丸ごとベンダーやサードパーティに委ねるマネージド方式もある。</p><p>マネージド方式は導入が速いが、記憶の保存場所と保持ポリシーがベンダーのインフラに縛られる。クライアントサイド方式は、パストラバーサル対策やファイルサイズ上限の実装といった手間と引き換えに、データ所在地の制御やゼロデータリテンション対応など、企業導入で求められる要件を自分で満たせる。</p>
+    <p>LangChain の Deep Agents は、<code>task()</code> というビルトイン関数でサブエージェントをコードから動的に生成する仕組みを導入した。エージェント自身が軽量なインタプリタ上で実行されるコードを書き、ループ・分岐・<code>Promise.all</code> のような制御フローをターンごとのモデル判断ではなく確定的なコード実行として走らせる。公式には「分類して実行」「ファンアウトして統合」「敵対的検証」「生成してフィルタ」「トーナメント」「ドライになるまでループ」の6パターンが定義されている。</p><p>これは「マルチエージェントを使うべきか」という問いを、「この6パターンのどれに当てはまるか」という問いに置き換えるインフラだ。特に敵対的検証パターンは、Anthropic が指摘する『検証専用サブエージェントが最も安定する』という知見と一致しており、異なる企業が独立に同じ設計に収束していることを裏付ける。</p>
     <div class="example">
-      <div class="product">Claude API（Anthropic、memory tool）</div>
-      <div class="approach">Claude はファイル操作を要求するだけで、保存先は開発者のアプリ側が持つ</div>
-      <div class="detail">memory tool はクライアントサイド実装で、Claude が /memories 配下への view・create・str_replace・delete を要求し、実際の保存先（ディスク・DB・暗号化ストレージなど）とパストラバーサル対策は呼び出し側が実装する。ゼロデータリテンション要件に対応できるのはこの分離ゆえ。</div>
-      <a href="https://platform.claude.com/docs/en/agents-and-tools/tool-use/memory-tool">📄 一次ソース</a>
+      <div class="product">Deep Agents（LangChain 公式）</div>
+      <div class="approach">task() 関数でサブエージェントをコードから動的に生成し、制御フローをコードとして確定的に実行する</div>
+      <div class="detail">『分類して実行』『ファンアウトして統合』『敵対的検証』『生成してフィルタ』『トーナメント』『ドライになるまでループ』の6パターンを公式に定義。うち敵対的検証パターンは、Anthropic の『検証専用サブエージェントが最も安定する』という知見と一致する。</div>
+      <a href="https://www.langchain.com/blog/introducing-dynamic-subagents-in-deep-agents">📄 一次ソース</a>
     </div>
-    <div class="example">
-      <div class="product">mem0</div>
-      <div class="approach">記憶レイヤー自体を専業ベンダーに委譲する</div>
-      <div class="detail">2026年4月公開の新アルゴリズムは単一パスの階層抽出と複数シグナルの検索を組み合わせ、時系列が絡む質問で旧アルゴリズム比+29.6ポイントの精度改善を報告している。自前実装をせず記憶レイヤーごと外部に預ける選択肢の代表例。</div>
-      <a href="https://mem0.ai/blog/state-of-ai-agent-memory-2026">📄 一次ソース</a>
-    </div>
-    <div class="takeaway"><strong>示唆:</strong> データ所在地やコンプライアンス要件が強いならクライアントサイドのツールで自前インフラに保存し、そうでなければマネージドな記憶機能かサードパーティの記憶レイヤーで実装コストを削る、という順で検討する。</div>
+    <div class="takeaway"><strong>示唆:</strong> マルチエージェントを検討するときは『対話的な役割分担』ではなく、この6パターンのどれかとしてコードで表現できるかをまず確認する。当てはまらないなら単一エージェントに戻したほうが安全。</div>
   </div>
   <div class="editorial">
     <span class="label">✍️ 編集後記</span>
-    OpenAI と Anthropic は同じ2026年に、示し合わせたかのように「生ログを貯めない」設計へ収束した。だが同期か非同期か、マネージドか自前インフラかという次の階層の選択は割れたままで、この組み合わせの違いが今後1年のメモリ機構の実質的な差別化ポイントになりそうだ。
+    Anthropic と Cognition は正反対の結論を出しているように見えるが、実際は同じ基準を別の場所に適用しているだけだ。『他のエージェントの判断を見なくても仕事が完結するか』という一点で分割の可否を判断しており、独立した探索が多いリサーチではこの基準を満たしやすく、前の判断が次のコードの前提になり続けるコーディングでは満たしにくい、というだけの話だ。
   </div>
 </div>
 
 <div class="section">
   <div class="section-title">🔗 今号の動向ピックアップ</div>
-  <div class="quick-link"><a href="https://redis.io/blog/long-term-memory-architectures-ai-agents/">Redis: Long-Term Memory Architectures for AI Agents</a><span class="quick-summary">pgvector や Redis を使い、記憶をエントリ単位で自前実装する際の具体的なデータモデルを示す。マネージドな記憶機能を使わない選択をした場合の設計の出発点になる。</span></div>
-  <div class="quick-link"><a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents">Anthropic: Effective context engineering for AI agents</a><span class="quick-summary">Claude の memory tool ドキュメントが「広いパターン」として直接参照する記事で、記憶をコンテキストウィンドウにどう出し入れするかの設計原則をまとめている。本文で扱った「いつ記憶を作るか」の一段上にある「いつ思い出すか」の設計に相当する。</span></div>
-  <div class="quick-link"><a href="https://openai.com/index/memory-and-new-controls-for-chatgpt/">OpenAI: Memory and new controls for ChatGPT</a><span class="quick-summary">2024年当時の「明示的に保存を頼むメモリ」の発表で、本文で扱った Dreaming の前段にあたる旧世代アーキテクチャを示す。比較すると今回の非同期化がどこを変えたかが分かる。</span></div>
+  <div class="quick-link"><a href="https://cognition.com/blog/multi-agents-working">Cognition『マルチエージェントで実際に機能しているもの』</a><span class="quick-summary">『書き込みは単一スレッドのまま、判断だけ複数エージェントで補う』という2パターン(レビューエージェント/より賢いモデルへのエスカレーション)を報告。本文で紹介した『コーディングでは並列化するな』という結論の、半年後の実践的な着地点にあたる。</span></div>
+  <div class="quick-link"><a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents">Anthropic『AIエージェントのための実践的コンテキストエンジニアリング』</a><span class="quick-summary">サブエージェントは1,000〜2,000トークン程度に凝縮した要約だけをリードエージェントに返すべきと提言。本文で扱った Claude Research 事例と同じ設計思想を、より一般的なガイドラインとして書いたもの。</span></div>
+  <div class="quick-link"><a href="https://openai.github.io/openai-agents-python/multi_agent/">OpenAI Agents SDK『マネージャー型』と『ハンドオフ型』</a><span class="quick-summary">中央のオーケストレーターが専門エージェントをツールとして呼ぶ『マネージャー』型と、会話の主導権ごと専門エージェントに渡し切る『ハンドオフ』型を明確に分けて文書化。本文のオーケストレーター/ワーカー型とは異なる第三の分割軸を提示している。</span></div>
 </div>
 
 <div class="section">
   <div class="section-title">📚 過去号</div>
+  <div class="archive-item"><span class="week">2026-08-25</span><div class="body"><a href="ai-trends/2026-08-25.html">エージェントのメモリ設計 — 生ログでも単一要約でもなく、書き換え可能な単位に分解する</a><span class="sub">Claude は2026年7月、記憶を単一のローリング要約から個別の書き換え可能なエントリへ移行。ChatGPT は非同期の「Dreaming」処理で古い事実を時制ごと書き換える。</span></div></div>
   <div class="archive-item"><span class="week">2026-08-22</span><div class="body"><a href="ai-trends/2026-08-22.html">プロンプトキャッシュはコスト最適化ではない — 「プレフィックス固定」というアーキテクチャ制約</a><span class="sub">キャッシュ命中率はもはや副次指標ではなく、Manus はこれを「本番エージェントで最重要のメトリック」と明言している。</span></div></div>
   <div class="archive-item"><span class="week">2026-08-20</span><div class="body"><a href="ai-trends/2026-08-20.html">接続ツールが増えるほど遅くなる問題 — コード実行と検索遅延ロードの2つの答え</a><span class="sub">Anthropicは公式エンジニアリングブログで、MCPツールをコードAPIとして提示しファイルシステム越しにオンデマンドで読み込ませる方式により、あるタスクのトークン消費を150,000から2,000（98.7%減）に削減したと報告した</span></div></div>
   <div class="archive-item"><span class="week">2026-08-18</span><div class="body"><a href="ai-trends/2026-08-18.html">MCPエージェントの認可設計 — 同意画面を「増やす」実装と「無くす」実装に分岐した</a><span class="sub">MCPの権限設計は「サーバー単位のOAuth」から「ツールごとのスコープ」へ移り、WorkOSやCloudflareが個別ツール内での権限チェックを標準パターンとして提示している。</span></div></div>
@@ -180,7 +175,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 </div>
 
 <footer>
-  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="data/ai-trends/2026-08-25.json">data/ai-trends/2026-08-25.json</a>（このページは JSON からの生成物）</p>
+  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="data/ai-trends/2026-08-27.json">data/ai-trends/2026-08-27.json</a>（このページは JSON からの生成物）</p>
   <p style="margin-top:.5rem"><a href="./">📰 日刊ダイジェストに戻る</a></p>
 </footer>
 </div>
