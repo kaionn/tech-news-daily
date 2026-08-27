@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-08-26</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="../feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-08-26 (Wed)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+      <nav class="site-nav">
+        <a href="../" class="active">📰 日刊ダイジェスト</a>
+        <a href="../trends.html">🔌 週次プラグイントレンド</a>
+        <a href="../ai-trends.html">🧠 AI プロダクト動向</a>
+        <a href="./">🗂 アーカイブ</a>
+      </nav>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 20 articles</span>
+      <span>🏷 7 categories</span>
+      <span>📡 15 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item">
+        <span class="number-value">90%</span>
+        <span class="number-label">Turbopack devサーバーのメモリ使用量削減(Next.js 16.3)</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">CVSS 10.0</span>
+        <span class="number-label">Oracle HTTP Server/WebLogic脆弱性、CISAが72時間の修正命令</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">17%</span>
+        <span class="number-label">Rust enumを64bit語に置換しインタプリタが高速化</span>
+      </div>
+    </div>
+
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
+
+      <div class="card featured deep-dive">
+        <div class="card-header">
+          <span class="tag tag-product">Product</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.apple.com/newsroom/2026/08/apple-introduces-m6-and-m5-ultra-for-a-big-leap-in-performance-and-ai-compute/">DEEP DIVE: Apple、2nm世代の「M6」と初のクアッドダイ「M5 Ultra」を発表——AI推論性能はM1比で最大8倍</a></h3>
+        </div>
+        <div class="summary">Appleは新しいMac miniにM6、新しいMac StudioにM5 Ultraを搭載して発表した。M6はAppleとして初の2ナノメートルプロセスで製造され、12コアCPU(超高性能コア2基・高性能コア4基・高効率コア6基)と12コアGPUを統合、ニューラルアクセラレータを備える。マルチスレッド性能はM5比1.2倍、M1比では2.4倍に達し、GPUのAI向けピーク演算はM5比30%増、M1比では8倍に伸びた。メモリ帯域は170GB/秒でM5比10%増。一方のM5 Ultraは、2基のM5 Max(いずれもデュアルダイ)をUltraFusion技術で接合したApple初のクアッドダイ設計だ。ダイ間帯域は4.4TB/秒に達し、接続密度は従来比6倍に向上した。CPUは最大36コア(超高性能コア12基・高性能コア24基)、GPUは最大80コアでニューラルアクセラレータを搭載し、AI向けGPU演算はM3 Ultra比4.5倍・M1 Ultra比6倍に伸びた。統合メモリは最大512GB、メモリ帯域は1.2TB/秒でM3 Ultra比50%増となる。両チップともデュアル/32コアのニューラルエンジンを備え、オンデバイスでの大規模モデル推論を前提とした設計だ。</div>
+        <div class="editorial">🧠 世代ごとの倍率表記(M5比1.2倍、M1比8倍など)はAppleの発表資料に共通する演出だが、512GBという統合メモリ量と1.2TB/秒の帯域は、ローカルで数百億パラメータ級のモデルを実行する開発者にとって実質的な意味を持つ数字だ。ただし、これらはApple自身が選んだベンチマークとワークロードに基づく数値であり、実アプリケーションでの再現性は第三者計測を待つ必要がある。2nmプロセスの歩留まりが価格にどう跳ね返るかも、まだ実機レビューが出ていない段階では未知数だ。</div>
+        <div class="key-points">
+          <ul>
+            <li>M6は12コアCPU+12コアGPUで2.4TB/秒級ではなく170GB/秒のメモリ帯域(M5比10%増)、最大32GB統合メモリで、AI向けGPU演算はM1比8倍に到達</li>
+            <li>M5 UltraはUltraFusionでM5 Max×2を接合したクアッドダイ構成、ダイ間帯域4.4TB/秒・接続密度6倍、最大80コアGPU・512GB統合メモリ</li>
+            <li>M5 UltraのCPU性能はM3 Ultra比でシングルスレッド1.25倍・マルチスレッド1.3倍、グラフィックスは40%高速化</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 ローカルLLM推論やオンデバイス画像・動画生成を行う開発者にとって、M5 Ultraの512GB統合メモリと1.2TB/秒帯域は、これまでクラウドGPUに頼っていたモデルサイズを手元のMac Studioで扱える可能性を示す。</div>
+        <div class="meta">
+          <span>Apple Newsroom</span>
+          <span>⏱ 6 min read</span>
+          <span class="engagement">▲ 825</span>
+          <span>2026-08-25</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-frontend">Frontend</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://nextjs.org/blog/next-16-3-turbopack">Next.js 16.3、Turbopackのdevメモリ使用量を最大90%削減——ビルドキャッシュでCIは最大5.5倍高速化</a></h3>
+        </div>
+        <div class="summary">Next.js 16.3ではTurbopackのメモリ管理が刷新された。従来は変更のない部分の再コンパイルを避けるため結果をメモリに溜め込む設計だったが、16.1で導入したファイルシステムキャッシュを土台に、使われなくなったキャッシュをメモリから追い出す「メモリ縮小」がデフォルト有効になった。Vercel自身のダッシュボードアプリでは21.5GBから2GBへ、nextjs.org本体でも4.6GBから840MBへとメモリ使用量が縮小した。ビルド側でも同じ永続キャッシュが`next build`に対応し、nextjs.org本体で2.3倍、Vercelの一部サイトでは最大5.5倍のビルド高速化を確認したという。あわせて、React公式が新たに提供するRust製React Compilerの実験的統合、Vite互換の`import.meta.glob` API、HMRの購読処理見直しによるコールドスタート15%以上の短縮なども含まれる。</div>
+        <div class="key-points">
+          <ul>
+            <li>devサーバーのメモリ使用量はVercelダッシュボードで21.5GB→2GB(約90%減)、nextjs.org本体で4.6GB→840MB(約82%減)</li>
+            <li>永続ディスクキャッシュにより`next build`はnextjs.orgで2.3倍、vercel.com/geistページで5.5倍高速化(ただしCIでは`.next/cache`のリストアが前提)</li>
+            <li>React公式のRust製React Compilerを実験フラグで統合、v0など大規模アプリで20〜50%のコンパイル時間短縮を確認</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Next.js Blog</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-08-25</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://www.cisa.gov/news-events/alerts/2026/08/24/cisa-adds-one-known-exploited-vulnerability-catalog">CISA、CVSS満点10.0のOracle HTTP Server/WebLogic脆弱性に72時間の修正期限——1月から実悪用が継続</a></h3>
+        </div>
+        <div class="summary">CISAは8月24日、Oracle HTTP ServerとOracle WebLogic Server Proxy Plug-inに存在するアクセス制御不備の脆弱性CVE-2026-21962を、既知の悪用脆弱性(KEV)カタログに追加した。連邦文民行政機関に対して認められる中で最も厳しい猶予である72時間以内の対処を義務付けている。影響を受けるのはバージョン12.2.1.4.0、14.1.1.0.0、14.1.2.0.0で、攻撃は低複雑度・認証不要で成立し、成功すればデータの作成・削除・改ざんに加えデータ全体への「完全アクセス」まで到達しうる。Oracleは1月20日の定例パッチで修正版を提供済みだったが、あるハニーポット運用者は1月末から2月初旬にかけてnmapなどを用いた無差別型の自動攻撃を既に観測していたと報告している。</div>
+        <div class="key-points">
+          <ul>
+            <li>対象は12.2.1.4.0・14.1.1.0.0・14.1.2.0.0、認証不要・低複雑度の攻撃でデータの作成/削除/改ざんから「完全アクセス」まで到達しうる</li>
+            <li>Oracleは1月20日の定例パッチで修正済みだが、CISAのKEV登録は8月24日、実悪用の観測はパッチ公開直後の1月末から継続</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>CISA</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-08-24</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://blog.ihatereality.space/0C-never-type/">Rustの「never型」が10年越し・5度目の挑戦でついに安定化</a></h3>
+        </div>
+        <div class="summary">戻ることのない処理(パニックや無限ループなど)の型として提案されてきたRustの「never型」(`!`)が、nightlyビルドで安定化した。2016年の導入提案から10年、過去4回の安定化試行はいずれも既存コードとの後方互換性問題で頓挫しており、今回の担当者は2年以上をこの作業に費やしたという。</div>
+        <div class="key-points">
+          <ul>
+            <li>never型の安定化提案は2016年以来10年間で通算5度目、過去4回は型推論の変更が既存クレートを壊す互換性問題で撤回されてきた</li>
+            <li>今回の安定化作業には担当者単独で2年以上を要しており、現時点ではnightlyチャンネルでの提供にとどまる</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>blog.ihatereality.space</span>
+          <span>⏱ 3 min read</span>
+          <span class="engagement">▲ 54</span>
+          <span>2026-08-24</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://sigma-star.at/blog/2026/08/go-runtime-netpoll-bug/">Goランタイムの32bit組込みLinuxだけで再現するnetpollバグ、原因はポインタと逆参照カウンタのビット衝突</a></h3>
+        </div>
+        <div class="summary">32bit ARM組込みLinux上のGoアプリで断続的に発生していた`runtime: netpoll: eventfd ready for something unexpected`エラーの原因究明記事。epollの`ev.Data`(8バイト)にGoランタイムは生ポインタとタグ付きポインタの2種類を格納するが、32bitプラットフォームでは4バイトの`uintptr`にキャストされるため、`fdseq`という逆参照カウンタがおよそ300万回転すると`netpollEventFd`のアドレスと偶然一致し、ソケットのfdをイベントfdと誤認する。</div>
+        <div class="key-points">
+          <ul>
+            <li>バグはGo 1.14(2020年)で混入、2025年3月に初報告され2026年に修正。64bitプラットフォームでは`ev.Data`が8バイトのまま扱われるため再現しない</li>
+            <li>修正では生の`netpollEventFd`ポインタの格納をやめ、タグ付きの`nil`な`pollDesc`を格納することでエイリアシングの原因そのものを排除した</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>sigma-star.at</span>
+          <span>⏱ 6 min read</span>
+          <span class="engagement">▲ 15</span>
+          <span>2026-08-23</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://pointersgonewild.com/2026-08-25-replacing-a-rust-enum-with-a-64-bit-word/">動的言語インタプリタ「Plush」、値表現をRust enum(128bit)から64bit語に圧縮して平均17%高速化</a></h3>
+        </div>
+        <div class="summary">リアルタイム3Dレンダリング対応を目指すインタプリタ「Plush」は、値を表すRust enumがメモリアライメント制約により実質64bitで足りる情報に128bitを消費していた問題を解消した。ヒープポインタの下位3bitが常に0であることを利用したロービットタグ方式に置き換え、fixnum・flonum・immediate値・2種のポインタ型を64bit一語にエンコードする。</div>
+        <div class="key-points">
+          <ul>
+            <li>全ベンチマークで速度改善、平均17%・メモリ負荷の高いテストでは最大37%の高速化を確認</li>
+            <li>値サイズが半分になりキャッシュ効率が向上したことに加え、レジスタ1つに収まることでスタックスピルが解消されたことが主要因</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>pointersgonewild.com</span>
+          <span>⏱ 4 min read</span>
+          <span class="engagement">▲ 6</span>
+          <span>2026-08-25</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://gigazine.net/news/20260825-metal-gear-online-3-rce/">「メタルギアオンライン」にロビー参加だけでRCEに至る脆弱性、kick_numパラメータのヒープオーバーフローが原因</a></h3>
+        </div>
+        <div class="summary">PC版「メタルギアオンライン」バージョン1.1.2.8に、悪意あるロビーへ参加するだけで任意コード実行に至るヒープベースのバッファオーバーフロー脆弱性(CVE-2026-19874)が見つかった。ロビー情報内の`kick_num`パラメータの値検証が不十分で、細工したロビー情報を送り込むことでメモリ領域外への書き込みと次に実行する処理の書き換えが可能だった。</div>
+        <div class="key-points">
+          <ul>
+            <li>7月15日に報告され8月24日公開、修正版はバージョン1.1.2.9(`mgsvmgo.exe`)で対応済み</li>
+            <li>脆弱なバージョンのクライアントはオンラインサービスへの接続自体が制限されており、被害拡大の抑止が図られている</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Gigazine</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-08-24</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/layerx/articles/e01465a15e79c2">マイクロサービス間の認可伝搬、LayerXの独自実装「Capability Assertion」とIETF Transaction Tokensを比較する</a></h3>
+        </div>
+        <div class="summary">複数サービスをホップするリクエストで認可判定の文脈が失われ、後続サービスが前段の承認を自己申告ベースで信頼するしかない問題に対し、LayerXは独自の署名付きトークン「Capability Assertion」を実装した。IETF標準化中のTransaction Tokens(有効期間6分・処理内容そのものを署名して伝搬)と比べ、Capability Assertionは判定済みリソースIDへのアクセスに限定したスコープ(デフォルト180秒)を持つ点が異なる。</div>
+        <div class="key-points">
+          <ul>
+            <li>Transaction Tokensは`tctx`に処理パラメータと計算値を含め更新処理まで対応する一方、Capability Assertionは`resources`にリソースID限定で参照処理向けに絞る</li>
+            <li>両者とも短命なトークンを署名で改ざん防止し認証と分離する点は共通、Capability Assertionのデフォルト有効期間は180秒</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 5 min read</span>
+          <span class="engagement">🔖 61</span>
+          <span>2026-08-25</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-frontend">Frontend</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://ics.media/entry/260825/">新API「HTML-in-Canvas」、Canvas内のHTML要素を`drawElementImage()`で画像化しWebGLで加工可能に</a></h3>
+        </div>
+        <div class="summary">Canvasの`fillText()`は自動折り返しやルビ・縦書きなど多言語レイアウトに対応できず、ボタン一つ作るにもクリック判定やスクリーンリーダー対応を自前実装する必要があった。「HTML-in-Canvas」はCanvas内に配置したHTML要素を`drawElementImage()`で画像化し、戻り値のDOMMatrixをHTML要素の`transform`に適用することでCanvas描画位置とDOM座標を同期できる。テキスト検索・コピー・翻訳・スクリーンリーダー読み上げが自動的に機能する一方、IME未確定文字の下線やクロスオリジンコンテンツなどはプライバシー保護のため描画対象から除外される。</div>
+        <div class="key-points">
+          <ul>
+            <li>Chromeはオリジントライアルを実施中で当初のChrome 150予定からChrome 155まで延長、WebKitは2026年7月から試験実装、Firefoxは態度未決定</li>
+            <li>`paint`イベントと`requestPaint()`で動的更新に対応し、入力欄への入力やボタンクリックがCanvas内にリアルタイム反映される</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>ics.media</span>
+          <span>⏱ 5 min read</span>
+          <span class="engagement">🔖 93</span>
+          <span>2026-08-25</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://qiita.com/h-nabata/items/b80484406e839ee6507b">国産LLM「LLM-jp-4-33B」とQwen3.8-27B、208問のデュアルGPU推論比較でほぼ互角の結果に</a></h3>
+        </div>
+        <div class="summary">RTX 5070 Ti+RTX 3070 Tiのデュアル構成で、基本問題128問・応用問題80問の計208問をF16 KV cache・Flash Attention有効・全層GPU offloadで検証した。LLM-jp-4-33Bは基本問題正答率92.97%(119/128)でQwen3.8-27Bの89.84%を上回ったが、応用問題ではQwenが91.25%(73/80)とLLM-jpの86.25%を上回った。プロンプト処理速度はQwenが約344.2 tok/sとLLM-jpの約191.5 tok/sの約1.8倍に達した。</div>
+        <div class="key-points">
+          <ul>
+            <li>LLM-jpは平均467トークンで簡潔に完遂する傾向、Qwenは平均724トークンで数値推論・コーディングに強い反面「overthinking」で4K上限に達しやすい</li>
+            <li>デコード速度はLLM-jp約27.9 tok/s、Qwen約29.7 tok/sとほぼ同等、結論は「異なる失敗様式を持つほぼ同等クラス」</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-08-25</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/cscloud_blog/articles/e0ea529d061906">オンコール手当の相場を約50社分調査、金額を明記していた企業は1社もなし</a></h3>
+        </div>
+        <div class="summary">ベンダー導入事例・登壇資料・企業テックブログ・求人票・技術メディアの5チャネルを横断して約50社を調べたが、オンコール手当の金額を明記していた企業は1社も見つからなかった。求人票の8社前後は「待機手当あり」と記載するのみで金額非公開、MIXIや10Xなどの登壇資料も「手当あり」まで言及するにとどまる。</div>
+        <div class="key-points">
+          <ul>
+            <li>「相場がない」で終わらせず、Atlassianの公開テンプレートを土台に自社基準を構築する方が現実的だと結論</li>
+            <li>アラート件数に応じた出来高制は改善意欲を削ぐ逆インセンティブになりうるとして、輪番人数や交代周期など金額以外の設計要素への注目を提案</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-08-24</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://zenn.dev/uehaj/articles/claude-code-supervisor-agent-view">Claude Codeがターミナルを閉じても動き続ける仕組み、常駐supervisorデーモンとAgent viewを解説</a></h3>
+        </div>
+        <div class="summary">Claude Codeのバックグラウンドセッションは、ユーザーごとの常駐プロセス「supervisorデーモン」が`/tmp/cc-daemon-<uid>/`配下のソケット経由でホストしている。セッションの実体はtranscriptと状態データであり、プロセスが終了してもセッション自体は`~/.claude/daemon/roster.json`のセッション台帳に保持され、`claude agents`コマンドの管理画面「Agent view」から再開できる。</div>
+        <div class="key-points">
+          <ul>
+            <li>`/bg`(現セッション移行)・`/fork`(コピー新規作成)・`claude --bg`・Agent viewからの新規ディスパッチの4通りでバックグラウンドセッションを起動可能</li>
+            <li>gitリポジトリ内でのファイル書き込みは`.claude/worktrees/`配下へ自動的にcopy-on-write隔離され、デーモンは初回セッション作成時に自動起動・全終了時に自動終了する</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-08-25</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://qiita.com/yangguofu/items/ae3e9f9f0f5a4515f276">Google AntigravityのVS Code拡張機能をGitHub Codespacesで動かし、承認ダイアログとローカル認証情報リスクを同時に解消する</a></h3>
+        </div>
+        <div class="summary">Googleが2026年8月に公開したAntigravity公式VS Code拡張機能は、既存のVS Code環境にそのまま統合できる。リポジトリごとに使い捨てられるLinuxコンテナであるGitHub Codespaces上で動かせば、Terminal Command Auto Executionを「Always Proceed」に設定して人間の承認を省略しても、ローカルマシンの認証情報やSSH鍵が危険にさらされることはない。ただし認証情報自体は使い捨てではないため、Denyリストで`git push --force`やGitHubトークン取得などを明示的に制限する必要がある。</div>
+        <div class="key-points">
+          <ul>
+            <li>`devcontainer.json`にAntigravity拡張を記述しCodespaceを起動、サインイン後にAuto Executionを「Always Proceed」へ変更する手順で全自動実行が可能</li>
+            <li>GitHub Copilotが2026年6月からクレジット制の従量課金へ移行したことを踏まえ、Google AI Proユーザーには契約見直しの価値があると指摘</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-08-25</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://qiita.com/sewiihidekikudo/items/1c835d5d1f0a8b3dbf65">PostmanコレクションをBrunoの.bruファイルへ移行しgit管理、Cursorのターミナルからテスト工数を約78%削減</a></h3>
+        </div>
+        <div class="summary">オープンソースAPIクライアントBrunoは、PostmanのJSONエクスポートと違いプレーンテキストの`.bruファイル`でリクエストとテストを管理でき、差分レビューがしやすい。公式CLI(`@usebruno/cli`)を標準搭載しており、Cursorのターミナルから`bru run`で直接実行するほか、`--reporter-junit`でレポートを出力するスクリプトを噛ませてGitHub ActionsのCI連携も容易にする。</div>
+        <div class="key-points">
+          <ul>
+            <li>各リクエストの「Tests」タブに`expect(res.getStatus()).to.equal(200)`のようなアサーションを記述し.bruファイルにそのまま保存できる</li>
+            <li>実測でテスト工数を約78%削減、テストケース数が多い案件ほど効果が顕著だとする</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-08-25</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
+
+      <div class="quick-link">
+        <span class="tag tag-infra">Infra</span>
+        <a href="https://povo.jp/news/newsrelease/20260825_01/">povo2.0が「5G SA」提供開始、Sub6対応エリアでカバー率90%超</a>
+        <span class="quick-summary">— 対応スマホとSIM交換(eSIMは手数料3,850円)が必要で、現在は無料だが将来的に有料オプション化の可能性も示されている。</span>
+        <span class="meta">povo.jp <span class="engagement">🔖 266</span></span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://gigazine.net/news/20260825-anthropic-best-ai-model-struggles/">Claude Fable 5の企業支出、Opus 5リリース後は横ばい約11%——Anthropicの年換算収益は投資家予想の800億ドルを下回る650億ドル</a>
+        <span class="quick-summary">— Ramp社が7万社から集めたデータに基づく分析で、高価格帯モデルを自動的に選ぶ従来パターンが崩れつつあるとFTとAccelが指摘。</span>
+        <span class="meta">Gigazine <span class="engagement">🔖 24</span></span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-oss">OSS</span>
+        <a href="https://github.com/jeffhajewski/latticedb">Zig製の組込みグラフDB「LatticeDB」、2ホップ探索でSQLite比14倍高速</a>
+        <span class="quick-summary">— 単一ファイルでCypherクエリ・ベクトル類似検索・BM25全文検索を1つのクエリ層に統合、依存ライブラリなしで動作する。</span>
+        <span class="meta">GitHub <span class="engagement">▲ 67</span></span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://www.crowdsupply.com/mnt-research/mnt-station">モジュール式オープンハードウェアのデスクトップ/サーバー機「MNT Station」がcrowdsupplyで登場</a>
+        <span class="quick-summary">— 基板・筐体ともに再構成可能な設計を掲げ、修理性とベンダーロックイン回避を重視するオープンハードウェア機として注目を集めている。</span>
+        <span class="meta">CrowdSupply</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://www.eveonline.com/news/view/the-move-to-python-3-begins">EVE Online、16年動かし続けたStackless Python 2.7からPython 3への移行に着手</a>
+        <span class="quick-summary">— 240万行のコードベースの95.9%は両バージョンでコンパイル済みだが、ダメージ量やISK計算など約2万行は挙動差があり人手判断が必要という。</span>
+        <span class="meta">EVE Online</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-infra">Infra</span>
+        <a href="https://nil.wallyjones.com/run-openbsd-on-digitalocean-for-4month/">OpenBSDのminirootイメージをカスタムイメージとして登録し、DigitalOceanの月4ドルdropletで起動する裏技</a>
+        <span class="quick-summary">— SSH鍵登録は起動に必須の手続き上の要件にすぎず、実際には使われないため、公式非対応のOSでもWebコンソール経由でインストールが完了する。</span>
+        <span class="meta">nil.wallyjones.com</span>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="./" class="archive-link">🗂 過去のダイジェスト</a>
+    </footer>
+  </div>
+</body>
+</html>
