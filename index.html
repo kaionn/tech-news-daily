@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tech News Daily — 2026-08-29</title>
+  <title>Tech News Daily — 2026-08-30</title>
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
   <link rel="icon" type="image/png" sizes="192x192" href="favicon.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -14,7 +14,7 @@
   <div class="container">
     <header>
       <h1>Tech News Daily</h1>
-      <div class="date">2026-08-29 (Sat)</div>
+      <div class="date">2026-08-30 (Sun)</div>
       <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
       <nav class="site-nav">
         <a href="./" class="active">📰 日刊ダイジェスト</a>
@@ -25,9 +25,9 @@
     </header>
 
     <div class="stats-bar">
-      <span>📰 20 articles</span>
-      <span>🏷 8 categories</span>
-      <span>📡 12 sources</span>
+      <span>📰 22 articles</span>
+      <span>🏷 7 categories</span>
+      <span>📡 17 sources</span>
     </div>
 
     <nav class="toc">
@@ -40,16 +40,16 @@
 
     <div class="numbers-bar">
       <div class="number-item">
-        <span class="number-value">753B</span>
-        <span class="number-label">GLM-5.3のパラメータ数</span>
+        <span class="number-value">770B</span>
+        <span class="number-label">Tencent Hy4 previewの総パラメータ数(活性化49B)</span>
       </div>
       <div class="number-item">
-        <span class="number-value">90%</span>
-        <span class="number-label">Next.js 16.3のTurbopack開発時メモリ削減率</span>
+        <span class="number-value">614GB/s</span>
+        <span class="number-label">Samsung PIMの内部帯域(標準LPDDR5X比8倍)</span>
       </div>
       <div class="number-item">
-        <span class="number-value">9GB</span>
-        <span class="number-label">ownCloud脆弱性でフィリピン原子力機関から窃取されたデータ量</span>
+        <span class="number-value">7000倍</span>
+        <span class="number-label">S3 VectorsがOpenSearch Serverlessよりコスト減となる倍率</span>
       </div>
     </div>
 
@@ -60,65 +60,64 @@
         <div class="card-header">
           <span class="tag tag-ai">AI</span>
           <span class="content-type">📦 リリース</span>
-          <h3><a href="https://huggingface.co/zai-org/GLM-5.3">DEEP DIVE: Z.ai、753BパラメータのオープンウェイトモデルGLM-5.3を公開、コーディング・脆弱性発見ベンチマークでSOTA</a></h3>
+          <h3><a href="https://www.tencent.com/tencent-releases-and-open-sources-tencent-hy4-preview/">DEEP DIVE: Tencent、7700億パラメータの新モデル「Hy4 preview」をオープンソース公開——モデル自身が自社の学習最適化に参加</a></h3>
         </div>
-        <div class="summary">中国Z.ai(旧Zhipu AI)は8月26日に軽量版「GLM-5.3-Flash」(MoE、総パラメータ320B)を先行公開していたが、その際は上位に位置するフラッグシップ「GLM-5.3」本体はAPI提供のみで重み非公開の状態だった。今回、このフラッグシップ本体の重みがオープンウェイトとしてHugging Faceに公開され、HN上で大きな反響を呼んだ。GLM-5.3はGLM-5.2と同じベースアーキテクチャを維持しつつ、事後学習(post-training)を強化した版という位置づけになる。パラメータ数は753億で、BF16・F8_E4M3・F32の複数テンソル形式で重みを配布し、vLLM・SGLang・Transformersなど主要な推論フレームワークで即座にデプロイできる。技術的な焦点はコーディングタスクと長時間稼働するエージェント的タスクへの最適化にあり、Z.ai独自のCode Benchでは前バージョンGLM-5.2から50%のスコア改善を確認したという。ベンチマーク面では、ソフトウェアエンジニアリング能力を測るTerminal Bench 3.0で28.3、DeepSWEで66.9を記録し、公開されているオープンソースモデルの中では上位に位置する。特に脆弱性発見を評価するCyberGymでは84.5というスコアを叩き出し、攻撃的セキュリティ用途での実用性を示した。推論コストを調整できるreasoning_effortパラメータ(low/high/max)を備え、用途に応じて計算量とレイテンシのトレードオフを選べる設計も特徴だ。オープンウェイトの巨大モデルが商用モデルに匹敵する脆弱性発見能力を持つことは、防御側・攻撃側双方の実務に影響を与える可能性がある。</div>
-        <div class="editorial">🧠 CyberGymで商用トップモデルに迫るスコアを出したという点は、脆弱性調査の自動化がオープンウェイトモデルでも手が届く水準に来たことを示す。ただし、この種のベンチマークスコアは実運用でのfalse positive率や、実際の攻撃チェーン構築能力までは測っていない点に留保が要る。753億パラメータという規模は単一の高性能GPUでは扱いにくく、量子化や分散推論の工夫なしには「誰でも自宅で使える」水準ではないことも実務上は無視できない。</div>
+        <div class="summary">Tencentが次世代大規模言語モデル「Hy4 preview」をオープンソースとして公開した。総パラメータ数770億(活性化49億)のMoE構成で、コンテキスト長は100万トークンを超える。WorkBuddy・CodeBuddy・元宝(Yuanbao)などTencent自社製品のほか、Tencent Cloud TokenHubやOpenRouter経由でも利用でき、公開直後の2週間は無料アクセスを提供した。技術面での焦点はソフトウェアエンジニアリング・財務分析・自然言語からのゲーム開発・複雑な科学的問題解決で、特にコーディングとオフィスワークでの改善が強調されている。注目すべきは、Hy4 preview自身が自社の学習プロセスに参加し、学習手法の自動最適化に初めて関与したという点だ。加えて推論システムの最適化も自律的に行い、スループットを31.8%向上させたという。ベンチマーク面では、163人の専門家が203件のエンジニアリングタスクを評価する社内テストで4点満点中2.99を記録し、GLM-5.3の2.92、Kimi K3の2.94をわずかに上回った。API価格は入力100万トークンあたり0.834ドル、出力2.501ドル、キャッシュ読み込み0.042ドルに設定されている。オープンウェイトの巨大モデルが商用トップモデルと横並びの性能を主張する事例が、また一つ増えた形だ。</div>
+        <div class="editorial">🧠 「モデル自身が学習最適化に参加した」という説明は目を引くが、具体的にどこまでを自動化しどこからが従来型のハイパーパラメータ探索の延長かは記事だけでは判別できない。ベンチマークスコアの差(2.99対2.92対2.94)も4点満点の評価としては僅差で、評価者163人・タスク203件という規模を踏まえても誤差の範囲内と見る余地は残る。ただし推論スループット31.8%向上という実測値は再現性のある主張であり、こちらは素直に評価してよさそうだ。</div>
         <div class="key-points">
           <ul>
-            <li>パラメータ数753億、BF16/F8_E4M3/F32で重みを配布、vLLM・SGLang・Transformers等に対応</li>
-            <li>Terminal Bench 3.0で28.3、DeepSWEで66.9、CyberGym(脆弱性発見)で84.5を記録</li>
-            <li>Z.ai独自Code BenchでGLM-5.2比50%改善、reasoning_effort(low/high/max)で推論コストを調整可能</li>
+            <li>770億総パラメータ・49億活性化のMoE構成、コンテキスト長100万トークン超、WorkBuddy/CodeBuddy/Yuanbao/TokenHub/OpenRouterで利用可能</li>
+            <li>163人の専門家による203件のエンジニアリングタスク評価でスコア2.99/4.00、GLM-5.3(2.92)・Kimi K3(2.94)をわずかに上回る</li>
+            <li>推論システムを自律的に最適化しスループットが31.8%向上、API価格は入力$0.834/百万トークン・出力$2.501/百万トークン</li>
           </ul>
         </div>
-        <div class="why-it-matters">💡 セキュリティ研究や自動コードレビューにオープンウェイトモデルを組み込みたい開発者にとって、商用APIに依存せず自社インフラでホストできる選択肢が広がる。</div>
+        <div class="why-it-matters">💡 自社インフラにオープンウェイトの大規模モデルをホストしたい開発者にとって選択肢が増えるが、770億パラメータという規模は量子化や分散推論の工夫なしには扱いにくい点に留意が必要。</div>
         <div class="meta">
-          <span>Hugging Face</span>
+          <span>Tencent</span>
           <span>⏱ 4 min read</span>
-          <span class="engagement">▲ 611</span>
           <span>2026-08-28</span>
         </div>
       </div>
 
       <div class="card featured">
         <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://four.htmx.org/announcements/2026-08-28-htmx-4.0.0-is-released">htmx 4.0.0リリース、属性継承がオプトインに変更・fetch()へ全面移行する破壊的アップデート</a></h3>
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://chipsandcheese.com/p/hot-chips-2026-samsungs-processing">Samsung、LPDDR5Xメモリ内に演算ユニットを内蔵するPIM技術をHot Chips 2026で発表——内部帯域は標準比8倍の614GB/s</a></h3>
         </div>
-        <div class="summary">HTML拡張ライブラリhtmxのメジャーアップデート版4.0.0が公開された。最大の破壊的変更は属性の継承方式で、これまで暗黙的に子要素へ継承されていた属性が、`:inherited`サフィックスを明示的に付けない限り継承されなくなった。イベント名も`htmx:beforeRequest`のような形式から`htmx:before:request`という`phase:action`形式に統一され、XHR関連・バリデーション関連の一部イベントは廃止された。履歴管理ではlocalStorageによるキャッシュを廃止し、戻る操作時にページを再取得する方式に変更したことでサードパーティ製JSライブラリとの互換性が向上する。内部実装もXMLHttpRequestからfetch() APIへ移行した。新機能としてはDOM差分更新のmorphingがコアに統合され、複数要素更新を分かりやすく書ける`<hx-partial>`タグが追加された。</div>
+        <div class="summary">SamsungがHot Chips 2026で、LPDDR5Xメモリの各バンクに乗算加算(MAC)ユニットを組み込むProcessing-in-Memory(PIM)技術を発表した。16バンク構成のメモリ全体でMAC演算を並列実行することで、内部帯域は標準LPDDR5Xの76.8GB/sに対し614GB/sに達する。4bit重み使用時はチップ単体で最大2.4TOPSの性能を発揮し、8チップ構成ならINT8換算で約9.6TOPSとなり、IntelのMeteor Lake NPUに匹敵する。ただしPIMモードは通常のDRAMアクセスと同時利用できず、対象メモリ領域のキャッシュ・プリフェッチ無効化やマルチタスク制限が必要になるなど、ソフトウェア側の制約は大きい。</div>
         <div class="key-points">
           <ul>
-            <li>属性継承は`:inherited`サフィックス明示が必須に、イベント名は`htmx:phase:action`形式へ統一</li>
-            <li>履歴管理からlocalStorageキャッシュを廃止し戻る操作時に再取得する方式へ変更、内部実装はfetch()へ移行</li>
+            <li>16バンク構成の各バンクにMACユニットを配置、内部帯域は標準LPDDR5Xの76.8GB/s比8倍の614GB/sへ</li>
+            <li>4bit重みでチップ単体2.4TOPS、8チップ構成でINT8約9.6TOPS(Intel Meteor Lake NPU相当)</li>
           </ul>
         </div>
         <div class="meta">
-          <span>htmx</span>
+          <span>Chips and Cheese</span>
+          <span>⏱ 4 min read</span>
+          <span class="engagement">▲ 232</span>
+          <span>2026-08-29</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-product">Product</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://zackbartel.com/blog/2026/08/tether/">LinuxでiMessage・SMS・OTP自動入力を実現する「Tether」、Bluetooth LEプロトコルをクリーンルーム実装</a></h3>
+        </div>
+        <div class="summary">個人開発者がLinux向けにApple Continuity機能を再現するツール「Tether」を公開した。iMessage・SMS送受信、ファイル転送、クリップボード同期、通知転送、連絡先同期に加え、ブラウザ・メール拡張機能によるOTPコードの自動入力にも対応する。実装の核心はBluetooth Low Energy経由でiPhoneのメッセージングサービスに直接アクセスする点で、既存プロジェクトBlueFerryのプロトコルを参考にしつつライセンス衝突を避けるためクリーンルームでC++実装をゼロから書き直した。iOS-Linux間の全通信は相互TLS(mTLS)で暗号化され、Linux側で常駐するデーモン`tetherd`がiOSアプリと安全に通信する。Macをプロキシに使う従来手法特有の煩雑さを回避した設計になっている。</div>
+        <div class="key-points">
+          <ul>
+            <li>Bluetooth Low Energy経由でiPhoneのメッセージングサービスに直接アクセス、BlueFerryのプロトコルを参考にクリーンルームでC++実装</li>
+            <li>相互TLS(mTLS)で全通信を暗号化、Linux常駐デーモンtetherdとiOSアプリ間でiMessage・SMS・OTP自動入力・クリップボード同期などを実現</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>zackbartel.com</span>
           <span>⏱ 3 min read</span>
-          <span class="engagement">▲ 552</span>
-          <span>2026-08-28</span>
-        </div>
-      </div>
-
-      <div class="card featured">
-        <div class="card-header">
-          <span class="tag tag-frontend">Frontend</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://www.publickey1.jp/blog/26/nextjs_163turbopack90ssr22typescript_7.html">Next.js 16.3、Turbopackのメモリ使用量を最大90%削減・SSRを最大22%高速化</a></h3>
-        </div>
-        <div class="summary">Next.js 16.3が正式リリースされた。開発時のビルドツールTurbopackはファイルシステムキャッシュの最適化により、メモリ使用量を最大90%削減し、再ビルド速度も最大5.5倍に向上した。サーバーサイドレンダリングでは、レンダリング処理をWeb Streams APIからNode.jsネイティブのStream APIへ切り替えたことで、高負荷時のパフォーマンスが最大22%改善している。ビルド時の型チェックにはGo実装のTypeScript 7を統合し高速化した。新機能「Instant Navigations」は、SSRアプリケーションにSPA的な即応性をもたらす仕組みで、ローディングUIを即座に表示しつつ残りのコンテンツをストリーミングし、直前にレンダリング済みのコンポーネントをキャッシュして再利用する。遅いレンダリング箇所を特定する開発ツール「Instant Insights」も追加された。</div>
-        <div class="key-points">
-          <ul>
-            <li>Turbopackのファイルシステムキャッシュ最適化でメモリ使用量最大90%削減、再ビルド速度最大5.5倍</li>
-            <li>SSRはWeb Streams APIからNode.jsネイティブStream APIへの切替で高負荷時最大22%高速化</li>
-            <li>TypeScript 7(Go実装)統合でビルド時型チェックを高速化、Instant NavigationsでSSRにSPA的即応性を追加</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Publickey</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-08-25</span>
+          <span class="engagement">▲ 274</span>
+          <span>2026-08-29</span>
         </div>
       </div>
 
@@ -129,81 +128,104 @@
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-security">Security</span>
-          <span class="content-type">🔒 セキュリティ</span>
-          <h3><a href="https://cybersecuritynews.com/hackers-exploit-owncloud/">中国語話者の攻撃者、ownCloudの認証バイパス脆弱性を悪用しフィリピン原子力機関・海軍造船関連企業からデータ窃取</a></h3>
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://github.com/vllm-project/vllm/releases/tag/v0.28.0">vLLM v0.28.0リリース、Kimi-K3の1GPUあたりメモリ使用量を約17GiB削減・最大バッチトークン数を2倍に</a></h3>
         </div>
-        <div class="summary">ownCloudのWebDAV機能に存在する認証バイパス脆弱性(CVE-2023-49105、CVSS9.8)が悪用され、フィリピンの原子力研究機関と同国海軍向けの造船・海洋エンジニアリング企業が侵害された。この脆弱性は、署名鍵が未設定(デフォルト状態)の場合に被害者のユーザー名さえ分かれば事前署名URLの検証をすり抜けてファイルの読み書き・削除ができるというもの。セキュリティ企業Hunt.ioが8月13日に攻撃者の公開サーバーを発見し、攻撃ツールや転送ログ、窃取ファイルから侵入の全容が事後的に判明した。原子力機関からは約9GBの原子炉関連記録・職員データ・暗号化認証情報ストアなどが、造船企業からはWordPress一式・データベースダンプ・メディアライブラリ(195MB)が盗まれていた。窃取ファイルは簡体字中国語のフォルダ名で財務・放射線安全・核物質勘定などに分類されており、中国語話者の関与が示唆されている。</div>
+        <div class="summary">推論エンジンvLLMのv0.28.0が公開された。270人のcontributor(新規76人)による584コミットを含む。Kimi-K3向けにDecode Context Parallelや共有エキスパートのシャーディングを導入しGPUあたりメモリ使用量を約17GiB削減、ROCm上でも動作するようになった。デフォルトの最大バッチトークン数は8192から16384に倍増し、DSpark方式の投機的デコーディングではTTFTが約60%改善したという。</div>
         <div class="key-points">
           <ul>
-            <li>CVE-2023-49105(CVSS9.8)、署名鍵未設定時にユーザー名既知だけで事前署名URLの検証をバイパスできる認証不備</li>
-            <li>原子力機関から約9GB(原子炉関連記録・職員データ・暗号化認証情報)、造船企業からWordPress一式とDBダンプ・195MBのメディアを窃取</li>
+            <li>Kimi-K3向けDecode Context Parallel・共有エキスパートシャーディングでGPUあたりメモリ使用量を約17GiB削減、ROCm対応も追加</li>
+            <li>デフォルト最大バッチトークン数を8192→16384に倍増、DSpark投機的デコーディングでTTFT約60%改善</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Cyber Security News</span>
+          <span>GitHub</span>
+          <span>⏱ 3 min read</span>
+          <span class="engagement">▲ 72</span>
+          <span>2026-08-26</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://pwning.systems/posts/llm-memory-program-analysis/">脆弱性調査用のLLMメモリを作ろうとしたらDatalogエンジンになった——LongMemEvalで38分の1のコンテキストで同等スコア</a></h3>
+        </div>
+        <div class="summary">脆弱性調査向けAIエージェントを開発していた著者は、調査中に前提が覆った際に古い結論が自動で無効化されないというメモリシステムの欠陥に直面し、LLM向けDatalogエンジン「Lemmalog」を実装した。LLMが雑多な入力を構造化ファクトへ変換し、Datalogエンジンが依存関係付きで結論を追跡・撤回する。LongMemEvalでF1約0.463を全会話プロンプトの約38分の1のコンテキスト量で達成し、LoCoMo(1986問)でもF1 0.533と専用メモリシステムに匹敵した。</div>
+        <div class="key-points">
+          <ul>
+            <li>LLMが構造化ファクトへ変換しDatalogエンジンが依存関係付きで結論を追跡・撤回、前提が覆った際は関連結論のみ再計算</li>
+            <li>LongMemEvalでF1約0.463を全会話プロンプト比約38分の1のコンテキストで達成、LoCoMo(1986問)ではF1 0.533</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>pwning.systems</span>
           <span>⏱ 4 min read</span>
-          <span>2026-08-27</span>
+          <span class="engagement">▲ 266</span>
+          <span>2026-08-29</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
           <span class="tag tag-security">Security</span>
-          <span class="content-type">🔒 セキュリティ</span>
-          <h3><a href="https://securityaffairs.com/198014/hacking/u-s-cisa-adds-owncloud-linux-kernel-and-jfrog-artifactory-flaws-to-its-known-exploited-vulnerabilities-catalog.html">CISA、LinuxカーネルIPv6処理の境界外書き込みとJFrog ArtifactoryのパストラバーサルをKEVカタログに追加</a></h3>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://bsky.app/profile/grapheneos.org/post/3mua32q4ds22e">GrapheneOS、Pixel 11がハードウェアメモリタギング(MTE)に非対応と表明——Pixel 8以来採用してきたメモリ破壊対策が後退</a></h3>
         </div>
-        <div class="summary">米CISAは8月28日、実悪用が確認された脆弱性としてLinuxカーネル(CVE-2026-53362、CVSS7.8)とJFrog Artifactory(CVE-2026-66384、CVSS5.3)を含む3件をKnown Exploited Vulnerabilities(KEV)カタログに追加した。LinuxカーネルのCVEは、断片化されたIPv6パケット処理中のパラメータ計算誤りに起因する境界外メモリ書き込みで、UDPソケットへのアクセス権を持つローカル攻撃者がクラッシュ・データ破損・権限昇格を引き起こせる。JFrog ArtifactoryのCVEは、特定のリモートリポジトリ条件下で認証済みユーザーがDockerキャッシュの想定パス外にファイルを書き込めるパストラバーサルで、7.146.35未満および7.161.0〜7.161.16が対象。連邦機関への対応期限はLinuxカーネル分が8月30日、JFrog Artifactory分が9月10日とされた。</div>
+        <div class="summary">GrapheneOSプロジェクトは、GoogleのPixel 11がハードウェアメモリタギング拡張(MTE)に対応していないと発表した。PixelはPixel 8以降MTEをサポートしており、GrapheneOSはPixel 8発売の約1ヶ月後から本番環境に投入、カーネルとベースOSのほぼ全体、一部サードパーティアプリにも適用してきた。メモリ破壊系脆弱性の実行時検出という主要な防御層が最新世代で失われることになり、セキュリティ重視ユーザーへの影響が懸念されている。</div>
         <div class="key-points">
           <ul>
-            <li>Linuxカーネル CVE-2026-53362(CVSS7.8)、断片化IPv6パケット処理の境界外書き込みでローカル権限昇格の恐れ</li>
-            <li>JFrog Artifactory CVE-2026-66384(CVSS5.3)、Dockerキャッシュのパストラバーサル、対象は7.146.35未満と7.161.0〜7.161.16</li>
+            <li>Pixel 8以降のPixelはMTEに対応、GrapheneOSはカーネル・ベースOSのほぼ全体と一部サードパーティアプリに適用してきた</li>
+            <li>Pixel 11ではMTEが非対応となり、メモリ破壊系脆弱性の実行時検出という防御層が失われる</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Security Affairs</span>
-          <span>⏱ 3 min read</span>
-          <span>2026-08-28</span>
+          <span>GrapheneOS(Bluesky)</span>
+          <span>⏱ 2 min read</span>
+          <span class="engagement">▲ 223</span>
+          <span>2026-08-29</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
           <span class="tag tag-oss">OSS</span>
-          <span class="content-type">👀 注目</span>
-          <h3><a href="https://blog.luanti.org/2026/08/27/luanti-dmca-tracer-ai/">オープンソースゲームLuanti、AI自動生成のDMCA申立でGoogle Playから削除——具体的な侵害箇所は示されず</a></h3>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://reactos.org/project-news/reactos-0416-released/">ReactOS 0.4.16リリース、18ヶ月ぶりの更新でグラフィカルインストーラ統合・NVIDIA/AMD GPU互換性を修正</a></h3>
         </div>
-        <div class="summary">オープンソースのMinecraft風ゲーム「Luanti」のAndroidアプリが、Microsoftの代理を名乗るブランド保護サービスTracer.AIからのDMCA申立を受けGoogle Playから削除された。申立はLuantiが「Minecraft Java Edition」の著作権登録(TX 8-192-097)された資産を無断使用していると主張するが、具体的にどの資産が侵害しているかは一切明記されていない。Tracer.AIはAIエージェントを使った侵害検知を売りにするサービスで、自社実績として「削除通知の処理速度85%向上」「月次レビュー件数100%増」を掲げている。Luanti開発チームはカウンター通知を提出し復元を待っているが、2023年3月の同様の申立では復元まで46日を要した前例があり、法定期限(10〜14営業日)を大幅に超過した経緯がある。アプリはF-Droidおよび公式サイトからの直接ダウンロードでは引き続き入手可能。</div>
+        <div class="summary">Windows互換オープンソースOS「ReactOS」の0.4.16が、18ヶ月の開発期間を経てリリースされた。bootcdとlivecdを統合した新しいグラフィカルインストーラを導入し、テストとインストールを同一ディスクイメージで行えるようになった。カーネルのメモリ管理を再構築しNVIDIAドライバでのページテーブルエントリ枯渇を解消、AMD環境でOpenGLウィンドウが真っ黒になる不具合も`ExtEscape`の書き直しで修正した。オーディオはHDオーディオバスドライバを刷新しRealtek等への対応を拡大、音量設定は再起動後も保持されるようになった。</div>
         <div class="key-points">
           <ul>
-            <li>Microsoft代理のTracer.AIによるDMCA申立、著作権登録TX 8-192-097を根拠に挙げるが具体的な侵害箇所は不明示</li>
-            <li>2023年3月の同様の申立では復元まで46日を要した前例あり、法定の復元期限(10〜14営業日)を大幅超過</li>
+            <li>bootcdとlivecdを統合したグラフィカルインストーラを新規導入、NVIDIA GPUのページテーブルエントリ枯渇・AMD環境でのOpenGL描画不良を修正</li>
+            <li>HDオーディオバスドライバを刷新しRealtek等に対応、Hyper-V起動を可能にする新ATAドライバも追加</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Luanti Blog</span>
+          <span>ReactOS</span>
           <span>⏱ 3 min read</span>
-          <span class="engagement">▲ 464</span>
           <span>2026-08-27</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-data">Data</span>
-          <span class="content-type">💰 ビジネス</span>
-          <h3><a href="https://www.publickey1.jp/blog/26/duckdbducklabsawsduckdbmit.html">DuckDBの開発元DuckLabsがAWS子会社に、MITライセンス・ガバナンスは維持と発表</a></h3>
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://noahlev.org/blog/2026/08/27/making-rustdoc-faster/">Rustdocを1週間で33%高速化——実装を全て先に構築してから絞り込むのをやめ、フィルタを先に行う設計に転換</a></h3>
         </div>
-        <div class="summary">組み込み型OLAPデータベースDuckDBの商用開発元DuckLabsが、AWSの子会社になると発表した。買収は2026年9月上旬に完了予定。発表ではDuckDB本体のMITライセンス、開発体制、DuckDB Foundationによるガバナンス、ロードマップは今後も維持されるとしている。AWSにとってはS3などクラウドストレージ上のファイルをローカルで高速分析できるDuckDBを取り込むことでデータ戦略を強化する狙いがあり、同時にSnowflake・Databricks・Google Cloudなど競合他社にこの技術を渡さない防衛的な意味合いもあると見られる。DuckLake・Quackプロトコルなど関連プロジェクトもAWSのリソースと販路を得る一方、オープンソースとしての性格は維持される方針。買収額など財務条件は公表されていない。</div>
+        <div class="summary">RustdocのビルドをNoah Lev Bartell-Mangel氏が1週間で33%(実測25%のウォールタイム削減)高速化した記録。全てのtrait実装をまず構築してから不要分をフィルタする従来の流れを逆転し、必要な実装だけに`build_impl`を呼ぶよう変更して20%改善。プリミティブ型処理をローカルのプリミティブに限定して12%、非公開型への自動trait合成をドキュメント対象の型のみに絞って6%、self型の"head"部分だけを見て`param_env`クエリの呼び出しを削減して18%、それぞれ改善した。</div>
         <div class="key-points">
           <ul>
-            <li>買収完了予定は2026年9月上旬、DuckDB本体のMITライセンス・DuckDB Foundationによるガバナンスは維持と明言</li>
-            <li>AWSの狙いはS3等クラウドストレージのローカル高速分析技術の取り込みと、Snowflake・Databricks・Google Cloudへの技術流出防止</li>
+            <li>全実装を構築してから絞り込む処理を逆転し必要な実装だけbuild_implする変更で20%改善、非公開型への自動trait合成の絞り込みで6%改善</li>
+            <li>self型の"head"だけを見てparam_envクエリ呼び出しを削減し18%改善、hyperやbitmapsクレートでは最大40%高速化</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Publickey</span>
+          <span>noahlev.org</span>
           <span>⏱ 3 min read</span>
+          <span class="engagement">🔖 47</span>
           <span>2026-08-27</span>
         </div>
       </div>
@@ -215,41 +237,61 @@
       <div class="card">
         <div class="card-header">
           <span class="tag tag-dev">Dev</span>
-          <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://zenn.dev/rhosokawa/articles/d0a958c17c2820">並行開発に特化した「Agent IDE」Orcaが便利——4セッション以上の同時進行ならエディタよりIDE型が有利</a></h3>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/tokium_dev/articles/claude-md-keeps-growing">肥大化し続けるCLAUDE.mdをフックで止める——12KB超で自動検知し、削除せずdocs/へ退避する仕組み</a></h3>
         </div>
-        <div class="summary">cmuxやSupersetの発想を継承した「Agent IDE」Orcaを、複数セッションを同時に走らせる並行開発に使ってみた記事。著者は4セッション以上を並行して扱う場面では、個々のファイル編集機能よりコンテキスト切り替えの効率を優先するAgent IDE型のツールが有利になると指摘する。セッションごとに独立したタブ群を保持しセッション切り替え時に自動で表示を切り替える内蔵ブラウザが特徴で、複数タブ・パスキーなど高度な機能にも対応するため外部ブラウザを別途用意する必要がない。デスクトップ相当のUIをモバイル端末からリモート操作できる機能や、リモートのデフォルトブランチとの自動同期、AIが生成したworktreeの表示可否を細かく設定できる機能など、既存ツールで感じていた細かな不満を解消する設計になっている。</div>
+        <div class="summary">CLAUDE.mdは定期的に整理しても際限なく肥大化するという課題に対し、著者はClaude Codeのフック機能で書き込み時に自動監視する仕組みを構築した。オンボーディング期間中に87行から378行まで膨張した経験から、ファイルサイズが12,288バイト(約12KB)を超えるとフックが発火し、削除ではなく`docs/`や`.claude/rules/`へ内容を退避するようClaudeに促す約35行のシェルスクリプトを実装。導入前は7日間で181.8%増加していた成長率が、導入後は1.2%増に抑えられた。</div>
         <div class="key-points">
           <ul>
-            <li>4セッション以上の並行作業ではAgent IDE型がコンテキスト切り替え効率で従来エディタに勝ると指摘</li>
-            <li>セッションごとに独立したタブ群を持つ内蔵ブラウザ(複数タブ・パスキー対応)とモバイルからのリモート操作に対応</li>
+            <li>オンボーディング中に87行→378行まで膨張、ファイルサイズ12,288バイト超で発火するフックを実装</li>
+            <li>導入前7日間で181.8%増加していた成長率が導入後は1.2%増に抑制、削除ではなくdocs/や.claude/rules/への退避で対応</li>
           </ul>
         </div>
         <div class="meta">
           <span>Zenn</span>
           <span>⏱ 4 min read</span>
-          <span class="engagement">🔖 81</span>
-          <span>2026-08-26</span>
+          <span class="engagement">🔖 162</span>
+          <span>2026-08-29</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://www.m3tech.blog/entry/2026/08/28/160000">Testcontainersで実DBを使う並列テスト基盤を設計——テンプレートDBのクローンで1件17msの高速リセットを実現</a></h3>
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://qiita.com/jqit_suwa/items/4183a8e97738ba45f435">Claude Codeの--restrictedモードで自作スキル47本が0本に——ツール数は42から23へ45%減、~/.claude/以下が丸ごと不可視化</a></h3>
         </div>
-        <div class="summary">モックでは実際のSQLやORMの挙動、DB制約を検証できないという課題から、実PostgreSQLを使う統合テストを高速な並列実行と両立させる基盤を設計した記事。1つのコンテナの中にFlywayでマイグレーション済みのテンプレートDBを1つ用意し、そこからスレッドごとにテスト用DBをクローンしてThreadLocalに割り当てる構成を取る。テンプレートクローンは非競合時17ms(負荷時68〜96ms)で完了し、毎回マイグレーションを実行する場合の約500msから大幅に短縮した。データリセットはTRUNCATE後にpg_dumpで抽出した初期データを再投入する方式が最速で、10並列時27.20msとDB再作成方式の47.15msを上回った。これはCREATE DATABASE処理がサーバー側でボトルネックになるためという。16以上のDBを保持してもコンテナのメモリ消費はピーク239MBに収まり、直列実行比で3倍の速度を達成した。</div>
+        <div class="summary">Claude Code 2.1.248で追加された`--restricted`モードを検証した記事。公式にはBash・PowerShell・WebFetchの削除と作業ディレクトリへのファイル操作制限が説明されているが、実際には利用可能ツールが42から23へ45%減少し、8個のMCPツールを含む未文書化のツールも消えていた。最大の影響は`~/.claude/skills/`以下のユーザー設定ディレクトリが一切読み込まれなくなることで、著者が作り込んだ47個のカスタムスキルは`Skill`ツール自体は残っていても参照先が存在せず実質的に使えなくなった。`--tools`フラグで個別復元は可能だが、`default`プリセットでは制限を解除できない。</div>
         <div class="key-points">
           <ul>
-            <li>Flywayマイグレーション済みテンプレートDBのクローンで1件17ms(負荷時68〜96ms)、毎回マイグレーションの約500msから大幅短縮</li>
-            <li>TRUNCATE+pg_dump再投入方式のリセットは10並列で27.20ms、DB再作成方式の47.15msより高速。直列実行比で全体3倍高速化</li>
+            <li>利用可能ツールが42から23へ45%減少、8個のMCPツールなど未文書化の削除も含む</li>
+            <li>~/.claude/以下のユーザー設定が一切不可視化され自作スキル47本が実質消滅、--toolsフラグでの個別復元は可能</li>
           </ul>
         </div>
         <div class="meta">
-          <span>m3tech Tech Blog</span>
-          <span>⏱ 5 min read</span>
-          <span class="engagement">🔖 37</span>
+          <span>Qiita</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-08-29</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://atmarkit.itmedia.co.jp/ait/articles/2608/28/news020.html">ローカルLLM向けGUIアプリ「Unsloth Desktop」公開、チャット・Web検索・コード実行・画像生成・ファインチューニングを1本に統合</a></h3>
+        </div>
+        <div class="summary">Unsloth AIが、ローカルLLMをGUIで扱えるデスクトップアプリ「Unsloth Desktop」をmacOS・Windows・Linux向けに公開した。GGUF・safetensors・MLX形式のモデルに対応し、チャット・Web検索・コード実行・画像生成(FLUX、Z-Image等の拡散モデル)・ファイルのノーコード学習を1アプリに統合、OpenAI互換のローカルAPIエンドポイントも提供する。標準的なノートPC(Core i7-1360P・64GBメモリ)では1024×1024画像生成に約30分かかるため、実用にはNVIDIA RTX 4070以上・VRAM12GB以上のGPUが推奨される。</div>
+        <div class="key-points">
+          <ul>
+            <li>GGUF・safetensors・MLX形式に対応、チャット・Web検索・コード実行・画像生成・ファインチューニングを1アプリに統合</li>
+            <li>OpenAI互換ローカルAPIを提供、CPU実行のみだと1024×1024画像生成に約30分要しRTX4070以上のGPUが実用上推奨</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>ITmedia</span>
+          <span>⏱ 3 min read</span>
+          <span class="engagement">🔖 159</span>
           <span>2026-08-28</span>
         </div>
       </div>
@@ -258,40 +300,20 @@
         <div class="card-header">
           <span class="tag tag-infra">Infra</span>
           <span class="content-type">📜 解説</span>
-          <h3><a href="https://www.m3tech.blog/entry/2026/08/26/110000">Claude CodeからCloud Run上のMCPサーバーを使うための認可構成——IAM/IAPがMCPのOAuth 2.1と噛み合わない問題への対処</a></h3>
+          <h3><a href="https://dev.classmethod.jp/articles/lambdalith-vs-single-purpose-lambda/">LambdalithとSingle-Purpose Lambda、7つの観点で比較——AWS公式はアンチパターンと言いつつLambda Web Adapterを提供する矛盾</a></h3>
         </div>
-        <div class="summary">Cloud RunのIAMやIdentity-Aware Proxy(IAP)は、MCPが前提とするOAuth 2.1ベースの認可フロー(特定のメタデータエンドポイントやトークン交換パターンを要求する)と噛み合わないため、Claude CodeからCloud Run上のMCPサーバーへ標準的なGCP認証だけではアクセスできない。この記事はMCPサーバーに併設する形で独自の認可サーバーを実装し、Claude Codeが期待するPKCE検証やクライアントメタデータ検証を含むOAuth 2.1フローを仲介する「OAuthプロキシ」構成を紹介する。ユーザー認証にはGoogleの同意画面を使うが、Googleのトークンをそのまま渡すのではなくMCP専用のアクセストークンを発行する点がポイント。RFC 9728(Protected Resource Metadata)とRFC 8414(Authorization Server Metadata)を`.well-known`エンドポイントで公開し、Claude Codeが認可情報を動的に発見できるようにしている。</div>
+        <div class="summary">1つのAPI GatewayルートごとにLambda関数を分ける「Single-Purpose Lambda」と、Honoでルーティングを1つのLambda内に集約する「Lambdalith」を7つの観点で比較した記事。IAM権限はSingle-Purposeの方が関数単位の最小権限を実現できる一方、Lambdalithはローカル実行・テストがHonoだけで完結し開発体験に優れる。API Gateway側での事前認証・スロットリングが必要ならSingle-Purpose、ルーティングの柔軟性やCloudFormationリソース数の削減を重視するならLambdalithが有利と結論づける。著者はAWSが公式にLambdalithをアンチパターンと呼びながらLambda Web Adapterを提供している点に組織的な立場の曖昧さを指摘する。</div>
         <div class="key-points">
           <ul>
-            <li>Cloud RunのIAM/IAPはMCPのOAuth 2.1フローと非対応、MCPサーバーに併設した独自認可サーバーで仲介</li>
-            <li>Googleの同意画面でユーザー認証しつつGoogleトークンは渡さずMCP専用トークンを発行、RFC 9728/RFC 8414準拠のメタデータで動的発見に対応</li>
+            <li>IAM権限はSingle-Purposeが関数単位の最小権限を実現、LambdalithはローカルテストがHonoだけで完結し開発体験に優れる</li>
+            <li>CloudFormationリソース数はSingle-Purposeがエンドポイントごとに15以上増加する一方、Lambdalithはエンドポイント追加でも一定</li>
           </ul>
         </div>
         <div class="meta">
-          <span>m3tech Tech Blog</span>
-          <span>⏱ 5 min read</span>
-          <span class="engagement">🔖 32</span>
-          <span>2026-08-26</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-ai">AI</span>
-          <span class="content-type">🔬 研究</span>
-          <h3><a href="https://zenn.dev/jtechjapan_pub/articles/local-llm-qwen-flash-next-eval">MacBook Pro 128GBでQwen3.8 Flash Nextを実測——190回のツール呼び出しをエラーゼロで完走、鍵はMoEのメモリ効率</a></h3>
-        </div>
-        <div class="summary">M4 Max・128GB統合メモリ搭載のMacBook Proで、Q3_K_XL量子化(約90GB)のQwen3.8 Flash Nextをllama.cppとOpenCode経由で動かした実測記事。自社OSSプロジェクトの実issue2件(コード実装・テスト・PR作成まで)を課題にしたところ、190回のツール呼び出しをエラーゼロで完走し、片方はレビュー1回で完了する精度だった。実効スループットは9.1〜9.8トークン/秒、プリフィルは文脈長により143〜281トークン/秒、デコードは12.2〜22.6トークン/秒(文脈が伸びると低下)。弱点としては修正が必要な副次的な箇所を見落とす、テスト結果を一度誤報告するなど網羅性に課題が見られた。著者は「実用性はモデルの賢さ単体でなくワークフローが実時間内で完結するかで決まる」と結論づけ、90GBのモデルを128GBメモリに収めるMoEアーキテクチャが決め手だったとし、同程度の稠密27Bモデルではコンテキスト圧縮の繰り返しで8倍の時間を要したという。</div>
-        <div class="key-points">
-          <ul>
-            <li>実効スループット9.1〜9.8トークン/秒、190回のツール呼び出しをエラーゼロで完走(実issue2件でコード実装からPR作成まで)</li>
-            <li>90GBのMoEモデルが128GBメモリに収まる効率が決め手、同等の稠密27Bモデルはコンテキスト圧縮の繰り返しで8倍の時間を要した</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Zenn</span>
-          <span>⏱ 5 min read</span>
-          <span>2026-08-27</span>
+          <span>Classmethod Developers.IO</span>
+          <span>⏱ 4 min read</span>
+          <span class="engagement">🔖 16</span>
+          <span>2026-08-29</span>
         </div>
       </div>
     </div>
@@ -301,41 +323,64 @@
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-oss">OSS</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://www.publickey1.jp/blog/26/rustbun_14nodejsplaywrightvitestcpu.html">Rustに全面移植した「Bun 1.4」正式リリース、アイドルCPU使用率5分の1・正規表現最大281倍高速化</a></h3>
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.com/Lakr233/vphone-cli">Apple純正Virtualization.framework経由で仮想iPhoneを起動する「vphone-cli」、5段階のパッチレベルでjailbreak相当の改変も可能</a></h3>
         </div>
-        <div class="summary">JavaScriptランタイムBunの1.4が正式リリースされた。ZigからRustへの全面書き直しを果たした初のバージョンで、この移植作業自体をClaude Codeを使い11日間で完了させたという。性能面ではアイドル時CPU使用率が5分の1に、メモリ消費量は最大35%削減、Linuxでの起動速度は50%向上し4.8ミリ秒に達した。正規表現処理はNode.js比で最大281倍高速化している。Node.js互換性では2900件超のGitHub issueを解消し、Node.jsのテストスイートを1517件追加、これによりPlaywright・vitest・OpenTelemetryなど従来動作しなかったツール群が利用可能になった。Next.js App RouterのSSRでfetch()実行時にメモリリークを起こしていたガベージコレクションの保持サイクルの不具合も修正された。</div>
+        <div class="summary">Apple SiliconのMac上でVirtualization.frameworkを使い仮想iPhoneをブート・管理するCLIツール「vphone-cli」。ダウンロードからパッチ適用・復元・インストールまでを一括で実行でき、複数VMのクローン・エクスポート・インポート、CPU/メモリ/ディスクの構成変更にも対応する。iOSのセキュリティ緩和度に応じてパッチ数が4から141まで段階的に増える5種類のファームウェアバリアントを提供し、SSH(ポート22222)・VNC・ホストソケット経由のプログラム制御でAI駆動のテスト自動化にも使える。macOS 15以降のApple SiliconとXcode+iOS SDKが前提条件。</div>
         <div class="key-points">
           <ul>
-            <li>ZigからRustへの全面移植をClaude Codeで11日間で実施、アイドルCPU使用率5分の1・メモリ消費最大35%削減</li>
-            <li>Node.js互換性はGitHub issue 2900件超解消・テスト1517件追加、Next.js App Router SSRのメモリリークも修正</li>
+            <li>ダウンロード→パッチ適用→復元→インストールを一括実行、パッチ数4〜141の5段階でセキュリティ緩和度を選択可能</li>
+            <li>SSH(ポート22222)・VNC・ホストソケット経由のプログラム制御に対応、AI駆動のテスト自動化にも利用可能</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Publickey</span>
+          <span>GitHub</span>
           <span>⏱ 3 min read</span>
-          <span>2026-08-23</span>
+          <span class="engagement">▲ 372</span>
+          <span>2026-08-29</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-data">Data</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://www.publickey1.jp/blog/26/olap_dbduckdb_20variantio.html">「DuckDB 2.0」プレビュー公開、クライアント/サーバ機能安定化・スキーマレスVARIANT型・非同期I/Oを追加</a></h3>
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.com/stemdeckapp/stemdeck">ローカル完結のAI音源分離アプリ「StemDeck」、Meta製Demucsで6パート分離・アカウント登録不要</a></h3>
         </div>
-        <div class="summary">シングルバイナリの組み込み型OLAPデータベースDuckDBの次期メジャーバージョン2.0のプレビューが公開された。2026年秋のリリースを予定する。複数クライアントが1つのマスターインスタンスに接続できる「Quack」プロトコルによるクライアント/サーバ機能が安定版になるほか、SQLパーサーをPostgreSQL由来の実装からPEG(Parsing Expression Grammar)ベースへ刷新し、今後の文法拡張をしやすくした。半構造化データの隠れた構造を自動検出し圧縮形式で格納するスキーマレスの新型「VARIANT型」、データの挿入・更新・削除時に処理を自動実行するトリガー機能も追加される。クエリ処理とI/O処理を独立してスケールさせる非同期I/Oにより、Amazon S3など遠隔ストレージからの読み込みを伴う並列処理性能が大きく向上する。</div>
+        <div class="summary">MP3・WAV・FLAC・OGG/Opus・MP4・M4AファイルやYouTube URLを入力し、ボーカル・ドラム・ベース・ギター・ピアノ・その他の最大6パートに音源分離するデスクトップアプリ「StemDeck」。処理は全てローカルで完結しアカウント登録も不要。バックエンドはMeta AI製のオープンソースモデルDemucs(htdemucs_6s)をPython 3.12・FastAPIで動かし、デスクトップ側はTauri v2を採用する。波形エディタ・フェーダー・ミュート/ソロ・BPM検出・キー判定・ラウドネス(LUFS)測定も備え、選んだパートだけを1つのWAVに書き出せる。</div>
         <div class="key-points">
           <ul>
-            <li>複数クライアントが1マスターインスタンスに接続できる「Quack」プロトコルのクライアント/サーバ機能が安定版に</li>
-            <li>PostgreSQL由来からPEGベースへパーサー刷新、スキーマレスのVARIANT型・トリガー・非同期I/Oを追加、2026年秋リリース予定</li>
+            <li>Meta製オープンソースモデルDemucs(htdemucs_6s)で最大6パートに分離、処理は全てローカル完結・アカウント登録不要</li>
+            <li>波形エディタ・フェーダー・BPM検出・キー判定・ラウドネス測定を搭載、Tauri v2ベースでApache-2.0ライセンス</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Publickey</span>
+          <span>GitHub</span>
           <span>⏱ 3 min read</span>
-          <span>2026-08-24</span>
+          <span class="engagement">▲ 191</span>
+          <span>2026-08-29</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://typebase.io">TypeScriptだけでDB・API・認証を定義する「Typebase」、Convexの開発体験とSupabaseのオープン性を両立</a></h3>
+        </div>
+        <div class="summary">データベーススキーマ・APIアクション・認証を全てTypeScriptコードとしてアプリ内のフォルダに定義し、Vercel・Cloudflare Workers・Deno Deployへ直接デプロイできるバックエンドフレームワーク「Typebase」。DrizzleORMでスキーマを、`auth.ts`で認証を一元管理し、フロントエンドとバックエンド間でエンドツーエンドの型安全性を確保する。`typebase init`でスキャフォールディング、`typebase deploy`でNeon上のPostgresごとデプロイが完了する2コマンド構成。Next.js・SvelteKit・Nuxt・Expo向けの専用クライアントとリアルタイムストリーミング機能も備える。</div>
+        <div class="key-points">
+          <ul>
+            <li>typebase init/deployの2コマンドでDrizzleORM・認証・APIを含むバックエンド一式をNeon上のPostgresへデプロイ</li>
+            <li>Next.js・SvelteKit・Nuxt・Expo向けクライアントとリアルタイムストリーミングを標準搭載、RLSより明示的なコンパイル時アクセス制御を採用</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>typebase.io</span>
+          <span>⏱ 3 min read</span>
+          <span class="engagement">▲ 89</span>
+          <span>2026-08-29</span>
         </div>
       </div>
     </div>
@@ -345,51 +390,51 @@
 
       <div class="quick-link">
         <span class="tag tag-security">Security</span>
-        <a href="https://thehackernews.com/2026/08/amazon-kiro-prompt-injection-can.html">Amazon Kiro IDE、悪意あるディレクトリ名だけでエージェントを操るプロンプトインジェクションでデータ窃取可能に</a>
-        <span class="quick-summary">— ユーザーが悪意あるプロンプトを送る必要すらなく、細工したワークスペースを開いて何かメッセージを送るだけで機密情報が外部に送信される、難易度「低」の攻撃チェーンが報告された。</span>
-        <span class="meta">The Hacker News</span>
+        <a href="https://r136a1.dev/2026/08/24/sleepwalker-a-passive-backdoor-with-its-own-command-language/">ESETの正規プロセスにサイドロードする受動型バックドア「Sleepwalker」、23命令の独自バイトコード言語でC2ビーコンなしに動作</a>
+        <span class="quick-summary">— dpapi.dllを偽装しERAAgent.exeにサイドロード、特定のトリガーパケットが届くまで休眠し続けるため通常のネットワーク監視では検知しづらい。</span>
+        <span class="meta">r136a1.dev</span>
       </div>
 
       <div class="quick-link">
-        <span class="tag tag-ai">AI</span>
-        <a href="https://www.itmedia.co.jp/news/article/2608/28/2000000897/">Anthropic、AIが物理機器を安全に制御する共通規格「MHS」発表、統合作業を数週間から数分に短縮</a>
-        <span class="quick-summary">— HHMI Janelia Research Campusと共同開発、Carnegie Mellon大学では投与量反応試験が従来のベンダー経由の数週間から8時間へ短縮されたと報告、安全性評価を経て将来オープンソース化予定。</span>
-        <span class="meta">ITmedia</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-product">Product</span>
-        <a href="https://techcrunch.com/2026/08/25/x-sends-cease-and-desist-to-open-source-project-nitter-over-alleged-scraping/">X社がプライバシー重視のTwitterフロントエンド「Nitter」に停止要求、姉妹サービスXCancelも道連れで閉鎖</a>
-        <span class="quick-summary">— X社は8月25日午後5時(米東部時間)を期限に指定、開発者zedeus氏によれば他のNitterインスタンスにも同様の通知が送られGitHubリポジトリはアーカイブ状態になった。</span>
-        <span class="meta">TechCrunch</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-ai">AI</span>
-        <a href="https://qiita.com/tatsuya582/items/cf74c9b6fc9c370e67e6">Claude CodeのAuto modeを解剖——許可判定はメインのモデルとは別のSonnet 5分類器が4段階で下す</a>
-        <span class="quick-summary">— 明示ルール・カテゴリ判定・高速分類器・詳細分類器の4層構成で、デフォルトは許可、ハードブロック/ソフトブロック条件に該当した場合のみ拒否する設計。</span>
-        <span class="meta">Qiita</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-dev">Dev</span>
-        <a href="https://qiita.com/ktdatascience/items/02b6b45e2ca7d34ad146">ベテランのPRレビュー187件を分類したらバグ指摘は5件に1件、69%は差分外のファイルを見て気づいた指摘だった</a>
-        <span class="quick-summary">— 最多カテゴリは「コード一貫性」(17%)と「意図の明文化」(16%)で、いずれも機能不全とは無関係な観点が上位を占めた。</span>
-        <span class="meta">Qiita</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-security">Security</span>
-        <a href="https://zenn.dev/layerx/articles/e01465a15e79c2">マイクロサービス間の認可伝搬、IETF Transaction Tokensと自社の「Capability Assertion」を比較する</a>
-        <span class="quick-summary">— 下流サービスが上流の「正しく認可判定した」という自己申告を信じるしかない問題に対し、短命な署名付きJWTで処理詳細ごと伝搬するTxn-Tokenと、認可済みリソースIDだけを伝搬する軽量な自社実装の使い分けを整理する。</span>
-        <span class="meta">Zenn</span>
+        <span class="tag tag-oss">OSS</span>
+        <a href="https://www.phoronix.com/news/Debian-Votes-Responsible-AI-Use">DebianがGeneral ResolutionでAI利用方針を「責任ある利用」に決定——禁止も義務化もせず、貢献者に説明責任を課す</a>
+        <span class="quick-summary">— 8案の投票の結果、LLM利用を明示的に禁止も許可もしない中間案が勝利、大規模自動変更には引き続き事前のコミュニティ合意が必要。</span>
+        <span class="meta">Phoronix</span>
       </div>
 
       <div class="quick-link">
         <span class="tag tag-infra">Infra</span>
-        <a href="https://qiita.com/moritalous/items/728b20d34d36275c0a33">Cloudflare Workersの「一時アカウント」機能で、事前登録もOAuthもなしに`wrangler deploy --temporary`だけでデプロイ</a>
-        <span class="quick-summary">— 生成されたアカウントは60分間有効でURLから本アカウント化でき、著者はOAuth・MFA・トークンをネタにしたミニゲームを1つのWorkerだけで作成して機能を実演した。</span>
+        <a href="https://www.nikkei.com/article/DGXZQOUA276CL0X20C26A8000000/">防衛省、NTTの光通信基盤IOWNをAI活用の自衛隊通信インフラに採用へ——2028年度から本格運用目標</a>
+        <span class="quick-summary">— 2027年度予算に関連費用を計上し次期防衛力整備計画に明記、全国の部隊・基地を高速光回線で結びAI活用に必要な大容量データ共有を可能にする。</span>
+        <span class="meta">日本経済新聞</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://zenn.dev/avaintelligence/articles/dont-outsource-understanding-to-ai">AIに丸投げしないための7ステップ開発フロー——実装計画に90%以上の労力を割き、別セッションでレビューする</a>
+        <span class="quick-summary">— ログイン機能の実装計画は3,137行に及び、GPT-5.6 Solによるレビューループを重ねてから別セッションで実装、さらに別モデルでPRレビューする体制を敷いている。</span>
+        <span class="meta">Zenn</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://github.com/godaddy/sshenc">秘密鍵をSecure EnclaveやTPMから一切出さないSSHエージェント「sshenc」、コミット署名もハードウェア鍵で</a>
+        <span class="quick-summary">— macOSのSecure Enclave・Windows/LinuxのTPM 2.0で鍵を生成しエクスポート不可に、gitencコマンドでリポジトリごとにSSH/署名アイデンティティを1コマンド設定できる。</span>
+        <span class="meta">GitHub</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-data">Data</span>
+        <a href="https://qiita.com/takahumi27/items/6fe3157b5f1d28cba2ec">OpenSearch ServerlessからS3 Vectorsへ移行しコストを約7000分の1に——小規模構成で月額350ドルが0.05ドルへ</a>
+        <span class="quick-summary">— 1万ベクトル・月1万検索の小規模構成で検証、レイテンシはP50で4,904ms対5,245msとほぼ同等だが、メタデータフィルタが2KB制限に抵触するなど移行時に6つの課題が発生した。</span>
         <span class="meta">Qiita</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-oss">OSS</span>
+        <a href="https://www.osnews.com/story/145883/easyeffects-should-be-part-of-every-linux-distribution-and-desktop-environment-to-massively-improve-laptop-speaker-sound-quality/">ノートPCスピーカーの音質はソフトで改善できる——EasyEffectsを全Linuxディストリに標準搭載すべき論</a>
+        <span class="quick-summary">— PipeWireベースのイコライザ/コンプレッサーで消費CPUは0.1〜0.2%程度、AppleやDellの上位機種が工場出荷時に行っている音響チューニングと同じことを無料プリセットで実現できると主張する。</span>
+        <span class="meta">OSnews</span>
       </div>
     </div>
 
