@@ -1,0 +1,79 @@
+{
+  "issue": "2026-08-29",
+  "generated_at": "2026-08-29T07:00:00+09:00",
+  "theme": {
+    "title": "構造化出力は「お願い」から「強制」へ — 3社がグラマー制約デコーディングで足並みを揃えた2026年",
+    "category": "structured-output",
+    "lede": "「JSON で返して」とプロンプトに書いて祈るフェーズは終わった。OpenAI が2024年8月にJSON Schema をトークン生成そのものに強制するアプローチを出してから1年半、Anthropic は2026年3月に構造化出力とstrict tool use をGA、Google も2025年11月にGemini API のJSON Schema 対応範囲を大幅拡張した。3社が同じ技術（グラマー制約デコーディング）に収束したことで、エージェント設計における「壊れたJSON をどう扱うか」という問いそのものが過去のものになりつつある。",
+    "tldr": [
+      "OpenAI・Anthropic・Google の主要3社が、JSON Schema をトークン生成レベルで強制する「グラマー制約デコーディング」に共通で対応した",
+      "対応時期にはズレがあり、サポートするJSON Schemaキーワードの範囲も各社バラバラなため、モデルを切り替える際は互換性の再検証が必要",
+      "対象は最終出力だけでなく、エージェントの途中のツール呼び出し引数にも拡大しており、リトライ前提の設計を見直す動きが出ている"
+    ],
+    "sections": [
+      {
+        "heading": "「お願い」から「強制」へ — グラマー制約デコーディングの仕組み",
+        "body_html": "<p>従来のJSON出力は、プロンプトで「このスキーマ通りに返して」と指示し、返ってきたテキストを<code>json.loads</code>でパースし、失敗したらリトライする、という運任せの設計だった。グラマー制約デコーディングはこれを生成側の制約に変える。JSON Schema をコンテキストフリー文法（CFG）に変換し、次のトークン候補をその文法に一致するものだけに動的にマスキングすることで、モデルが構造的に間違ったトークンを出力できないようにする。</p><p>業界がここに収束したのは、プロンプト頼みの遵守率がどれだけ高くても、エージェントの多段処理では1回の失敗が全体を止めるからだ。OpenAI は自社ベンチマークで、この方式に切り替えた<code>gpt-4o-2024-08-06</code>が複雑なJSON Schema追随評価で100%を記録した一方、旧世代の<code>gpt-4-0613</code>は40%未満だったと報告している。数パーセントの失敗率でも、ステップ数が増えるほど累積的に致命傷になる。</p>",
+        "examples": [
+          {
+            "product": "OpenAI API Structured Outputs（gpt-4o-2024-08-06）",
+            "approach": "JSON Schema をCFGに変換し、トークン単位で生成を制約",
+            "detail": "この方式を最初に本番投入した事例。公式ブログで、旧来のプロンプト依存方式との精度差（100% vs 40%未満）を具体的な評価スコアとして公開しており、後続2社が同方式を採用する根拠になった",
+            "source_url": "https://openai.com/index/introducing-structured-outputs-in-the-api/"
+          }
+        ],
+        "takeaway": "新規にJSON出力を要件にする機能は、プロンプト指示ではなく各社のstrict/structured-outputオプションを最初から使う。「プロンプトで頼んでパースでリカバリ」は技術的負債として扱う。"
+      },
+      {
+        "heading": "2026年、Anthropic・Google も追いついた — ただし対応スキーマの範囲は揃っていない",
+        "body_html": "<p>Anthropic は2026年3月、Claude Developer Platform とAWS Bedrock 上で構造化出力とstrict tool use を一般提供した。公式ドキュメントは「<code>strict: true</code>で<code>input_schema</code>を文法にコンパイルし、生成時点でスキーマ違反を排除する」と明記しており、コンパイル済みスキーマは最大24時間キャッシュされる。Google も2025年11月、Gemini API のJSON Schema 対応を拡張し、<code>anyOf</code>・<code>$ref</code>・<code>prefixItems</code>などのキーワードとプロパティの順序保持に対応、Pydantic やZod のスキーマがそのまま通るようになったと発表した。</p><p>ただし「JSON Schema に対応した」の中身は3社で一致していない。Claude のドキュメントには専用の「JSON Schema limitations」ページがあり、サポート対象外のキーワードが明記されている。Google は再帰スキーマや条件分岐まで踏み込んでいるが、対応モデルはGemini 2.5系に限られる。JSON Schema という共通仕様の名前を使っていても、実装が保証する範囲は各社の実装依存だということが、複数モデルを併用するプロダクトほど効いてくる。</p>",
+        "examples": [
+          {
+            "product": "Claude Developer Platform Structured Outputs / Strict Tool Use",
+            "approach": "2026年3月にAPI・Bedrockで一般提供、グラマー制約サンプリングで出力とツール引数の両方を保証",
+            "detail": "公式ドキュメントがキャッシュの挙動（24時間）とJSON Schemaの非対応キーワードを明示しており、他社より仕様の透明性を優先した設計であることがわかる",
+            "source_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/strict-tool-use"
+          },
+          {
+            "product": "Gemini API 構造化出力",
+            "approach": "2025年11月にJSON Schemaキーワード対応を拡張し、プロパティ順序を保持",
+            "detail": "公式ブログで、Pydantic/Zodのスキーマ定義がそのまま使えるようになったと明言しており、既存のバリデーションライブラリ資産を移行コストなく転用できる設計を狙ったことがわかる",
+            "source_url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-api-structured-outputs/"
+          }
+        ],
+        "takeaway": "複数プロバイダーを切り替え可能にするプロダクトは、JSON Schemaの仕様書ではなく各社の「サポート範囲」ドキュメントを突き合わせてから設計する。名前が同じでも保証内容は同じではない。"
+      },
+      {
+        "heading": "対象は「最終出力」から「途中のツール呼び出し」へ拡大した",
+        "body_html": "<p>同じ技術は、エージェントが最後に返す答えだけでなく、途中のツール呼び出しの引数にも適用され始めている。OpenAI の関数呼び出しガイドは、<code>strict: true</code>を設定することで「best effort ではなく確実に」スキーマ通りの引数になると明記し、その代わり<code>additionalProperties: false</code>と全フィールドの<code>required</code>指定を要求する制約を課している。Anthropic のstrict tool use も同じグラマー制約サンプリングのパイプラインをツール定義に対して使う。</p><p>これが効くのは多段エージェントだ。1つのツール呼び出しの引数が壊れれば、そこから先の全ステップが止まるか誤動作する。従来は「呼び出し後に検証し、失敗したらモデルにもう一度呼ばせる」というリトライ設計で吸収していたが、これは呼び出しのたびにレイテンシとコストを積み増す。生成時点で構造を保証する方式に倒せば、このリトライループ自体が不要になる。</p>",
+        "examples": [
+          {
+            "product": "OpenAI Function calling（strict mode）",
+            "approach": "関数呼び出しの引数生成にもCFG制約を適用し、best effortをやめる",
+            "detail": "公式ガイドが、strict modeを有効にする条件（additionalProperties: falseと全フィールドrequired）を明示しており、引数の型不一致によるランタイムエラーを構造的に排除する設計であることがわかる",
+            "source_url": "https://developers.openai.com/api/docs/guides/function-calling"
+          }
+        ],
+        "takeaway": "多段エージェントを新規に組むなら、ツール引数の正しさをリトライループで担保するのではなく、対応モデルのstrict機能を最初から有効化し、リトライは「引数は正しいが実行が失敗した場合」専用に絞る。"
+      }
+    ]
+  },
+  "editorial": "構造化出力の技術自体は目新しくない。ただし「3社が同じ保証を提供する」状態になったことで、開発者側の設計判断が「モデルの出力をどう検証・修復するか」から「どの範囲までモデルに保証させ、どこからをアプリ側の責務にするか」に移った。パースエラー対策のコードを書く時間は減るが、代わりに各社のスキーマ対応範囲表を読む時間が増える——トレードオフの中身が変わっただけだ、と捉えておくのが実務的だろう。",
+  "quick_picks": [
+    {
+      "title": "OpenAI Cookbook: Structured Outputs入門",
+      "summary": "response_formatでの直接指定とPydanticモデル+parseヘルパーの2通りの実装法、および安全性拒否時のrefusalフィールドの扱いを解説する公式実践ガイド。本文で触れたOpenAIのstrict実装を実際に組む際の一次リファレンスになる。",
+      "url": "https://developers.openai.com/cookbook/examples/structured_outputs_intro"
+    },
+    {
+      "title": "Claude Structured Outputs — JSON Schema対応範囲のドキュメント",
+      "summary": "Claudeの構造化出力がサポートするJSON Schemaキーワードと非対応キーワードを一覧化した公式ページ。第2セクションで触れた「対応範囲は各社バラバラ」を実際に確認できる一次情報。",
+      "url": "https://platform.claude.com/docs/en/build-with-claude/structured-outputs"
+    },
+    {
+      "title": "JSONSchemaBench: 構造化出力エンジン横断ベンチマーク論文",
+      "summary": "Guidance・Outlines・XGrammar・OpenAI・Geminiなど6つの制約付きデコーディング実装を効率・カバレッジ・出力品質で比較した学術ベンチマーク。「グラマー制約デコーディングは普及したが実際の効果は正しく理解されていない」という指摘は、本文の互換性の議論と直結する。",
+      "url": "https://arxiv.org/pdf/2501.10868"
+    }
+  ]
+}
