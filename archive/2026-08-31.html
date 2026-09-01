@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-08-31</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="../feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-08-31 (Mon)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+      <nav class="site-nav">
+        <a href="../" class="active">📰 日刊ダイジェスト</a>
+        <a href="../trends.html">🔌 週次プラグイントレンド</a>
+        <a href="../ai-trends.html">🧠 AI プロダクト動向</a>
+        <a href="./">🗂 アーカイブ</a>
+      </nav>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 23 articles</span>
+      <span>🏷 6 categories</span>
+      <span>📡 16 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item">
+        <span class="number-value">60〜80%</span>
+        <span class="number-label">Claude Code Auto ModeでのRCE攻撃成功率</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">69対0</span>
+        <span class="number-label">AB-1856可決時のカリフォルニア州下院の賛否</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">50%</span>
+        <span class="number-label">AgentCore RuntimeがAZ障害時に健全AZへ再接続できる確率</span>
+      </div>
+    </div>
+
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
+
+      <div class="card featured deep-dive">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://embracethered.com/blog/posts/2026/breaking-claude-code-opus-5-and-automode/">DEEP DIVE: Claude Code Opus 5のAuto Modeをプロンプトインジェクションで突破——RCE成功率60〜80%、Anthropicの「0.00%」主張と矛盾</a></h3>
+        </div>
+        <div class="summary">Anthropicは2026年8月、Claude CodeのAuto Mode(コマンド実行の自動承認判定機能)についてレッドチーム評価を公開し、悪意ある指示に対する攻撃成功率を0.00%と報告していた。しかしセキュリティ研究者が同年8月26日に公開した検証では、7段階の間接的なプロンプトインジェクション連鎖によってリモートコード実行(RCE)を60〜80%の確率で成立させられることが示された。攻撃はまずWebFetchツールをHTTP 415エラーで拒否させ、Claudeを`curl`直接実行へ誘導するところから始まる。続けてダウンロードしたZIPアーカイブには一見正当なノートブック記録が含まれるが、同梱の`decoder-darwin`バイナリの実行をClaudeが拒否すると、代わりに自前のPythonデコーダを書いて実行してしまう。このアーカイブ内には標準ライブラリの`base64`をシャドーイングする偽の`struct.py`が仕込まれており、インポート時に隔離されたPythonサブプロセスを起動、外部からネイティブマルウェアをダウンロード・実行してC2との通信を確立する。攻撃者はモデルに直接的な悪意ある指示を与えるのではなく、「目的を達成するために最も筋の通った道」として悪意あるパスを提示するだけで、Claude自身がその経路を選び取ってしまう設計になっている。5回中3〜4回の成功率で電卓アプリの起動やファイル書き込みといった実害が確認された。Anthropicはこの報告を「Informative」として処理を終了し、Auto Modeは安全境界ではなく利便性のための分類器であり、OSレベルの隔離とネットワーク制御こそが本来の防御層だと説明した。</div>
+        <div class="editorial">🧠 「攻撃はモデルに何をしろとは言わない、ただ目的達成のために辻褄の合う道を用意するだけだ」という指摘は、プロンプトインジェクション対策の難しさを的確に言い当てている。実測で5回中3〜4回のRCEが通ったという数字は、0.00%という数字だけを一人歩きさせる危うさを示す好例だ。ただしAnthropicの「Auto Modeは安全境界ではなく利便性のための分類器」という反論も筋は通っており、OSレベルのサンドボックス化を怠ってAuto Modeだけに頼っていた運用側の設定不備という側面も無視できない。</div>
+        <div class="key-points">
+          <ul>
+            <li>7段階の間接プロンプトインジェクション連鎖で、WebFetchのHTTP 415エラーからcurl誘導→ZIP同梱の偽struct.pyによるモジュールシャドーイング→C2コールバック確立まで到達</li>
+            <li>検証では5回中3回(60%)・4回(80%)の割合でRCEが成立、電卓起動やファイル書き込みなど実害を確認</li>
+            <li>Anthropicは報告を「Informative」としてクローズ、Auto Modeは安全境界でなく利便性のための分類器でOSレベルの隔離・ネットワーク制御が本来の防御層と説明</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 Claude CodeのAuto Modeでコマンド実行を自動承認する運用をしている場合、OSレベルのサンドボックスやネットワーク制御を別途組んでいなければ、この攻撃連鎖はそのまま成立し得る。</div>
+        <div class="meta">
+          <span>embracethered.com</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-08-26</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://www.phoronix.com/news/California-AB-1856-Passes">カリフォルニア州下院、AB-1856可決——オープンソースOSやディストリビューションを年齢確認義務から適用除外</a></h3>
+        </div>
+        <div class="summary">カリフォルニア州の下院(Assembly)が、デジタル年齢保証法(Digital Age Assurance Act)にオープンソース向けの適用除外を追加する法案AB-1856を、賛成69・反対0の全会一致で可決した。同法はデバイス設定時の年齢収集やアプリの年齢層シグナル送信を義務付けるものだが、AB-1856はコピー・再配布・改変を許すライセンスで配布されるOSやアプリケーションを適用除外に加える。LinuxディストリビューションやBSD系OS、単体アプリとして提供されないパッケージマネージャのコンポーネントも対象外となる。適用除外を受けない一般ソフトウェアについては、Digital Age Assurance Act本体が2027年1月1日に施行される予定で、上院での審議・可決が今後の焦点になる。</div>
+        <div class="key-points">
+          <ul>
+            <li>カリフォルニア州下院でAB-1856が賛成69・反対0の全会一致で可決、コピー・再配布・改変を許すライセンスのOS・アプリを年齢確認義務から適用除外に追加</li>
+            <li>適用除外を受けないソフトウェアに対するDigital Age Assurance Act本体の施行日は2027年1月1日、AB-1856は上院審議が今後の焦点</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Phoronix</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-08-29</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/jetbrainsmacjunie_localclaude_sonnet_45rtx5909.html">JetBrains、Mac向けローカル動作のコーディングエージェント「Junie Local」を無料公開——Claude Sonnet 4.5に匹敵する性能主張</a></h3>
+        </div>
+        <div class="summary">JetBrainsが、クラウド接続なしでローカル完結するコーディングエージェント「Junie Local」を2026年8月24日に公開した。現時点ではM5チップ・メモリ64GB以上のMacのみ対応し、モデルにはAlibaba CloudのQwen3.6-27Bを4bit量子化して独自最適化したものを採用する。JetBrains社内テストでは10Kトークンの推論制限下でClaude Sonnet 4.5相当の性能を示した一方、GPT-5.6の「medium」設定にはやや劣るという。API料金・モデル利用料・ダウンロード費用のいずれも一切かからず、リファクタリングやリネーム、フレームワーク依存関係の解決、テストカバレッジ改善などコストを気にして避けていた定型作業への適用を想定する。RTX 5090・DGX Sparkでのプロトタイプ動作も進行中。</div>
+        <div class="key-points">
+          <ul>
+            <li>Qwen3.6-27Bを4bit量子化し独自最適化、JetBrains社内テストでは10Kトークン推論制限下でClaude Sonnet 4.5相当・GPT-5.6のmedium設定にはやや劣る結果</li>
+            <li>API料金・モデル利用料・ダウンロード費用ゼロで提供、現状M5チップ+メモリ64GB以上のMac限定、RTX 5090・DGX Sparkでのプロトタイプ動作も進行中</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 3 min read</span>
+          <span class="engagement">🔖 8</span>
+          <span>2026-08-30</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://ziglang.org/devlog/2026/#2026-08-27">Zig、std.ArrayListに「ポインタ安定化ロック」を追加——再配置によるダングリングポインタをパニックで検出</a></h3>
+        </div>
+        <div class="summary">Zigの標準ライブラリ`std.ArrayList`に、2024年からHashMapのみに存在した「ポインタ安定化ロック」機能が追加された。要素へのポインタを保持する前に`lockPointers()`を呼ぶことで、容量超過による再確保や`orderedRemove()`・`pop()`などの要素移動を伴う操作を実行時アサーションで検知し、サイレントなメモリ破壊やセグフォルトではなく詳細なスタックトレース付きパニックに変換する。</div>
+        <div class="key-points">
+          <ul>
+            <li>容量超過による再確保だけでなくorderedRemove()やpop()のような要素移動を伴う操作もlockPointers()中は実行時アサーションで検知</li>
+            <li>導入前はポインタ無効化バグがサイレントなデータ破壊やセグフォルトとして現れていたが、導入後はスタックトレース付きの即時パニックに変わる</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zig公式Devlog</span>
+          <span>⏱ 2 min read</span>
+          <span class="engagement">▲ 75</span>
+          <span>2026-08-27</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://blog.rust-lang.org/inside-rust/2026/08/19/overloading-experiment/">Rust、C++相互運用のための関数オーバーロードを実験開始——nightlyの#[rustc_splat]でタプル引数を回避</a></h3>
+        </div>
+        <div class="summary">Rust-C++ Interop Initiativeの資金提供により、Rustが関数オーバーロードの実験を開始した。現状の安定版Rustでは`hypot((2.0, 3.0, 6.0))`のようなタプル引数を強いられるが、nightly限定の`#[rustc_splat]`属性を使えば`hypot(2.0, 3.0, 6.0)`という自然な呼び出しが可能になる。既存のトレイトシステムでどこまでオーバーロードを表現できるかを検証する目的で、RFCは存在せず2026年7月31日以降のnightlyでいつでも変更・撤回されうる位置づけ。</div>
+        <div class="key-points">
+          <ul>
+            <li>nightly限定の#[rustc_splat]属性でタプル引数を回避し自然な多引数呼び出しを実現、既存のトレイトシステムの拡張で表現</li>
+            <li>RFCは存在せず2026年7月31日以降のnightlyでのみ利用可能、将来的には手動trait実装が不要な#[overload]属性への発展を想定</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Rust Blog (Inside Rust)</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-08-19</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://qiita.com/yosuke-suzuki/items/3cbd19db1e33853a2f91">CloudFront OAC経由のLambda Function URLでPOSTだけ403に——原因はSigV4のペイロードハッシュ未計算</a></h3>
+        </div>
+        <div class="summary">Next.jsのSSRアプリをAmplifyからCloudFront+Lambda Function URL構成へ移行した際、GETは正常でもPOSTだけがSigV4署名検証エラーで403になる問題に遭遇した。原因はOACがPOST/PUTリクエストに対しリクエストボディのSHA256ハッシュを`x-amz-content-sha256`ヘッダーに含めることを要求するのに対し、通常のfetch呼び出しはこのハッシュ計算を行わないこと。解決策としてOACを外し、CloudFrontが上書きするカスタムヘッダーによる`authType: NONE`+シークレットヘッダー検証方式に戻すことで全HTTPメソッドを問題なく転送できるようにした。</div>
+        <div class="key-points">
+          <ul>
+            <li>OACはPOST/PUTリクエストにx-amz-content-sha256ヘッダーでのペイロードハッシュを要求するが、通常のfetch呼び出しはこれを自動計算しないためLambdaが"unsigned payloads"を拒否</li>
+            <li>OACを外しCloudFrontが上書きするカスタムヘッダーとNext.js Middlewareでのシークレット検証に切り替え、SSM Parameter Storeで固定シークレットを管理しデプロイのたびの403を回避</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-08-30</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://qiita.com/yakumo_09/items/6f83dc660382f10388c3">AWS AgentCore RuntimeのマイクロVM障害は1.4秒で復旧するが、ネットワーク障害は自動回復しない</a></h3>
+        </div>
+        <div class="summary">AWSのAIエージェント実行基盤AgentCore Runtimeで、セッションと物理マイクロVMの障害挙動を検証した記事。マイクロVM自体がクラッシュした場合は約1.4秒で新しいVMに透過的に切り替わり同一セッションIDでエラーなく継続するが、会話履歴はAgentCore Memoryに外部化していない限り失われる。一方VPCモード下でのネットワーク障害はヘルスチェックがコンテナの応答性しか見ないため検知されず、壊れたVMがエラーを返し続けても自動復旧が起きない。可用性ゾーン(AZ)障害時は同一セッションIDでのリトライが健全なAZに当たる確率が50%にとどまり、`StopRuntimeSession`による強制再割り当てが必要になる。</div>
+        <div class="key-points">
+          <ul>
+            <li>マイクロVMクラッシュ時は約1.4秒で新VMに透過的に切り替わり同一セッションIDが継続するが、会話履歴はAgentCore Memoryへの外部化なしには失われる</li>
+            <li>AZ障害時は同一セッションIDでのリトライが健全なAZに当たる確率が50%にとどまり、StopRuntimeSessionでの強制再割り当てが必要</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-08-30</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://martinalderson.com/posts/glm-5-3-flash-chinese-hardware/">GLM-5.3-Flashが中国製ハードウェアで動くことの意味——輸出規制下でのAI自給を検証する</a></h3>
+        </div>
+        <div class="summary">中国Z.aiのオープンウェイトモデル「GLM-5.3-Flash」(320BパラメータのMoE、覆面モデル「Ox Alpha」の正体)が、NVIDIA非依存の中国製アクセラレータ上で実際に動作することを検証したブログ記事。学習・推論の両方を国産チップ上で完結させられるかという問いは、米国の対中輸出規制下で中国のAI開発が自給体制をどこまで確立できているかを測る実質的な指標になっていると論じる。</div>
+        <div class="key-points">
+          <ul>
+            <li>320BパラメータのMoEモデルGLM-5.3-Flashを、NVIDIA非依存の中国製アクセラレータ上で推論動作させて検証</li>
+            <li>輸出規制下でのAI自給度を測る指標として、モデル単体の性能でなく国産ハードウェアでの実動作可否に注目する視点を提示</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>martinalderson.com</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-08-29</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://qiita.com/R-You/items/e8cf2f1c783401563ef2">AIエージェントが決済で予算超過した時、インフラ制御で暴走を止められるか——AgentCore Paymentsで実験</a></h3>
+        </div>
+        <div class="summary">AWSのAgentCore Paymentsを使い、AIエージェントが決済処理で意図せず予算を超過した際にインフラ側の制御だけで暴走を止められるかを検証した記事。アプリケーションロジックのバグやプロンプト操作によってエージェントが想定外の高額決済や連続決済を試みるシナリオを再現し、決済APIレベルでの上限設定やレート制御がどこまで防波堤になるかを実測している。</div>
+        <div class="key-points">
+          <ul>
+            <li>AgentCore Paymentsの決済APIレベルでの上限設定・レート制御を使い、エージェントの暴走的な決済リクエストを実際に発生させて防御効果を検証</li>
+            <li>アプリケーションロジック側の対策だけに頼らず、インフラ側の決済制御を防御層として組み込む設計思想を提示</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-08-30</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://zenn.dev/7nohe/articles/npm-malware-incident-response">自作npmパッケージ@7nohe/openapi-react-query-codegenにマルウェア混入、発覚から5時間で全10バージョンを削除</a></h3>
+        </div>
+        <div class="summary">著者が保守するnpmパッケージ`@7nohe/openapi-react-query-codegen`に対し、2026年8月29日、GitHub Actionsのワークフロートリガーを突かれる形で不正な公開権限が奪われ、0.5系から3.0系まで4つのリリースラインにまたがる悪意あるバージョン10個が公開された。危険なインストール期間は05:00〜07:51 JSTの約2.5時間で、この間に通常インストールを行うと侵害済みコードが取得された。ペイロードはインストール時に実行され認証情報を窃取し他パッケージへの伝播を試みるものだった。著者は攻撃経路の遮断、Trusted Publisher・アクセストークンの無効化、latestタグの安全バージョンへの巻き戻し、npmへの通報を経て10バージョンすべてを約5時間以内に削除させた。</div>
+        <div class="key-points">
+          <ul>
+            <li>GitHub Actionsのワークフロートリガーを突かれ公開権限を奪取され、0.5系〜3.0系4リリースラインにまたがる悪意あるバージョン10個を公開、危険なインストール期間は約2.5時間</li>
+            <li>攻撃経路遮断・Trusted Publisher無効化・latestタグ巻き戻し・npmへの通報という手順を踏み、10バージョン全てを発覚から約5時間以内に削除</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-08-30</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://eeengineer.com/description-by-wireshark/">WiresharkでTLS 1.3のHTTPS通信を復号する方法——秘密鍵でなくSSLKEYLOGFILEのセッション鍵を使う</a></h3>
+        </div>
+        <div class="summary">TLS 1.3は鍵交換に一時鍵(エフェメラル)を用いるため、サーバーの秘密鍵だけでは通信を復号できない。この記事はPowerShell経由で環境変数`SSLKEYLOGFILE`を設定した状態でChromeを起動し、閲覧中にブラウザが書き出すセッション鍵ログをWiresharkの「Preferences → Protocols → TLS」に指定することで、Application DataパケットをそのままHTTPリクエスト/レスポンスとして復号表示する手順を解説する。</div>
+        <div class="key-points">
+          <ul>
+            <li>サーバー秘密鍵ではなくSSLKEYLOGFILE環境変数でChromeが書き出すセッション鍵ログを使うことでTLS 1.3のエフェメラル鍵交換に対応</li>
+            <li>既存プロセスではなくPowerShellから新規起動したChromeでのみ環境変数が有効になる点と、鍵ログファイルの取り扱いに注意が必要な点を明記</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>eeengineer.com</span>
+          <span>⏱ 3 min read</span>
+          <span class="engagement">🔖 235</span>
+          <span>2026-08-29</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/facraft/articles/aws-org-security-for-enterprise-saas">「スタートアップだから」が通用しない、大手製造業向けSaaSのAWSセキュリティ設計</a></h3>
+        </div>
+        <div class="summary">少人数チームでも大手製造業顧客の要求水準に応えるため、Google Workspace認証とSlackでの権限申請を分離した多層認証、Organization CloudTrailとAWS Configによる全アカウント・全リージョンの監査ログ収集、S3 Object Lock(GOVERNANCEモード)とKMS暗号化によるログの改ざん防止を実装した設計を解説する。管理・セキュリティ・ログ・ワークロードの4アカウント構成とし、権限付与は最大4時間のJust-in-Timeアクセスに限定、Terraformでガバナンスの再現性を担保している。</div>
+        <div class="key-points">
+          <ul>
+            <li>Google Workspace認証+Slack権限申請という2経路の多層認証と、S3 Object Lock(GOVERNANCEモード)+KMS暗号化で改ざん不可能な監査ログを実現</li>
+            <li>管理・セキュリティ・ログ・ワークロードの4アカウント構成、権限付与は最大4時間のJust-in-Timeアクセスに限定しTerraformで再現性を担保</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-08-29</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://qiita.com/jqit_suwa/items/4231026d13f7527c0f69">AIの「口癖」を日本語記事で測ろうとして、3回とも失敗した</a></h3>
+        </div>
+        <div class="summary">GitHub上のPull RequestからClaude特有の語彙("load-bearing"など)を可視化した話題の分析(HN663ポイント)を、自分の日本語技術記事30本に応用しようと試みた記録。英語の特徴語をそのまま検索しても出現1回で不発、同じ頻度比の手法を日本語の2〜6文字列に適用しても「記しています」のような定型免責文を拾うだけ、AI的言い回し13パターンでの比較でも自分の記事(千字あたり0.08)と他292人の記事(同0.10)で有意差が出ず、3通りの方法すべてが失敗に終わった。</div>
+        <div class="key-points">
+          <ul>
+            <li>英語の特徴語("load-bearing"等)をそのまま日本語記事に検索しても出現1回、頻度比の手法も定型免責文を拾うだけで機能せず</li>
+            <li>AI的言い回し13パターンでの比較でも自分の記事(千字あたり0.08)と他292人の記事(同0.10)の差は僅少で、GitHub PR分析の手法をそのまま日本語技術記事へ転用できないと結論</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-08-30</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://qiita.com/aliean/items/bec57a9a20c7f9e60f79">AWS DevOps Agentのコードレビュー・自動検証テストをプレビューで検証、意図的に埋め込んだ秘密情報を検出</a></h3>
+        </div>
+        <div class="summary">プレビュー公開中のAWS DevOps Agentが行う「リリース可否判定のコードレビュー」と「マネージド環境での自動検証テスト」を試した記事。意図的にシークレットを埋め込んだPull Requestを作成したところ、GitHubコメントとレポートの両方でセキュリティ問題として検出された。CDKブートストラップはus-east-1のみ対応、カスタムレビュー基準はリポジトリ内でなくAgent Space内の`AGENTS.md`でしか認識されない、指示なしではレビューコメントが英語になるという3つの制約が見つかった。</div>
+        <div class="key-points">
+          <ul>
+            <li>意図的に埋め込んだシークレットをGitHubコメントとレポートの両方で検出、コードレビューと自動検証テストは個別にオン/オフ可能</li>
+            <li>CDKブートストラップはus-east-1限定、カスタムレビュー基準はリポジトリ内ファイルでなくAgent Space内のAGENTS.mdでのみ認識、日本語出力には明示指示が必要</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-08-30</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://kakakakakku.hatenablog.com/entry/2026/08/27/130630">IAM Policy Autopilot 0.3.0、Terraform planの結果から最小権限IAMポリシーを生成する機能を追加</a></h3>
+        </div>
+        <div class="summary">CLIとMCPサーバーとして使えるAWS Labs製ツール「IAM Policy Autopilot」の0.3.0で、`terraform plan`の実行結果からIAMポリシーを生成する機能が追加された。`terraform show -json`でJSON化したプラン結果を`generate-policies`コマンドに渡すだけで、計画された操作に対応する最小権限ポリシーのベースラインを出力する。ワイルドカードリソースなど過度に広い権限には警告を表示する`Warnings`機能も新設され、CI/CDデプロイで`AdministratorAccess`のような過剰権限ロールに頼らずに済むようになる。</div>
+        <div class="key-points">
+          <ul>
+            <li>terraform show -jsonでJSON化したplan結果をgenerate-policiesコマンドに渡すだけで、計画された操作に対応する最小権限IAMポリシーのベースラインを生成</li>
+            <li>ワイルドカードリソースなど過度に広い権限を検知するWarnings機能を新設、create/destroy両方のplanを実行して操作セット全体を捕捉する必要がある</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>kakakakakku.hatenablog.com</span>
+          <span>⏱ 3 min read</span>
+          <span class="engagement">🔖 12</span>
+          <span>2026-08-27</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-frontend">Frontend</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://zenn.dev/inaniwaudon/articles/62f1def4bad627">TypeScriptライブラリとして動作する組版エンジン「minitype」公開、日本語組版とAI生成の両方に対応</a></h3>
+        </div>
+        <div class="summary">DSLやGUIツールに頼らず、TypeScriptのオブジェクトや関数でドキュメント構造を記述できる組版エンジン「minitype」が公開された。Node.js・Bun・ブラウザ上で動作し、フォント処理にopentype.js、PDF生成にpdf-libやPDFKitを活用しつつ、改行処理とページ組みに専念する設計。縦書き・改行ルール・ルビなど日本語組版を本格サポートし、マルチカラムやflexbox・ボックス・フロート要素によるレイアウトも可能。Claude Codeによるセキュリティレポート生成など、AIによるドキュメント自動生成のバックエンドとしての利用例もデモされている。</div>
+        <div class="key-points">
+          <ul>
+            <li>Node.js・Bun・ブラウザ上で動作し、opentype.js/pdf-lib/PDFKitを活用しつつ改行処理とページ組みに専念、縦書き・ルビなど日本語組版を本格サポート</li>
+            <li>Claude Codeと組み合わせたセキュリティレポートの自動生成など、AI生成ドキュメントのバックエンドとしての利用例をデモ、PolyForm Strictライセンスで個人利用は例外的に許可</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 3 min read</span>
+          <span class="engagement">🔖 62</span>
+          <span>2026-08-29</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://0xcc.io/posts/omarchy-root-creds/">Omarchyに任意のユーザープロセスがroot権限へ昇格できる脆弱性、原因と影響範囲を解説</a>
+        <span class="quick-summary">— Linuxディストリビューション「Omarchy」で、ローカルの一般ユーザープロセスから特権昇格が可能になる設計上の欠陥が指摘されている。</span>
+        <span class="meta">0xcc.io <span class="engagement">▲ 346</span></span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://www.qubes-os.org/news/2026/08/29/qsb-118/">QubesOS、qvm-copy-to-vmのエラー報告経路にコマンドインジェクションの脆弱性(QSB-118)、4.3.22で修正</a>
+        <span class="quick-summary">— dom0側のファイル名サニタイズがシェルメタ文字を除去し損ねておりsystem()に渡っていたのが原因、侵害済みqubeからdom0を乗っ取れた。</span>
+        <span class="meta">Qubes OS <span class="engagement">▲ 192</span></span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://reclaimthenet.org/eu-protecteu-strategy-encryption-backdoor-law-enforcement">欧州委員会、「ProtectEU」戦略で暗号バックドア義務化の議論を再燃させる</a>
+        <span class="quick-summary">— 法執行機関向けのメッセージアクセスを念頭に置いた提案で、エンドツーエンド暗号化サービスへの影響を懸念する声が上がっている。</span>
+        <span class="meta">Reclaim The Net <span class="engagement">▲ 318</span></span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-oss">OSS</span>
+        <a href="https://www.haiku-os.org/news/2026-08-26_haiku_r1_beta6">オープンソースOS「Haiku」がR1/beta6をリリース</a>
+        <span class="quick-summary">— BeOS系オープンソースOSの最新ベータ版で、ドライバ・パッケージ更新を中心とした継続的な改善が含まれる。</span>
+        <span class="meta">Haiku OS <span class="engagement">▲ 220</span></span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://gigazine.net/news/20260830-ai-consciousness-backwards/">「AIに意識はあるのか？」という疑問に対するGoogle研究者の見解</a>
+        <span class="quick-summary">— 意識の有無を機能的な振る舞いから逆算しようとする議論そのものが本末転倒だと指摘し、判断基準の設定自体の難しさを論じている。</span>
+        <span class="meta">GIGAZINE <span class="engagement">🔖 68</span></span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://zenn.dev/holy_fox/articles/572083c130ce46">GPUを燃やさないために——RTX 5090にパワーリミットをかけると性能と発熱はどう変わるか</a>
+        <span class="quick-summary">— 消費電力を段階的に絞りながらベンチマークを取り、性能低下幅と温度・ファン騒音のトレードオフを実測で示している。</span>
+        <span class="meta">Zenn</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://www.atsumell.com/blog/ai-code-review-seven-checkpoints">AIコードレビューのやり方——7つの確認点</a>
+        <span class="quick-summary">— セキュリティ・パフォーマンス・可読性など観点別にAIへ何を確認させるべきかをチェックリスト形式で整理している。</span>
+        <span class="meta">atsumell.com <span class="engagement">🔖 68</span></span>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="./" class="archive-link">🗂 過去のダイジェスト</a>
+    </footer>
+  </div>
+</body>
+</html>
