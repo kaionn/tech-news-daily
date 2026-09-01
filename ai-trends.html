@@ -66,7 +66,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 <div class="container">
 <header>
   <h1>🧠 AI プロダクト動向</h1>
-  <p class="date">2026-08-29 発行（読了 6 分）</p>
+  <p class="date">2026-09-01 発行（読了 6 分）</p>
   <p class="tagline">実プロダクトのアーキテクチャ・使用例から AI 開発の現在地を週 3 回・1 号 1 テーマで深掘り</p>
   <nav class="site-nav">
     <a href="./">📰 日刊ダイジェスト</a>
@@ -77,81 +77,94 @@ footer a{color:var(--primary-500);text-decoration:none}
 </header>
 
 <div class="theme-hero">
-  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">STRUCTURED-OUTPUT</span></span>
-  <h2>構造化出力は「お願い」から「強制」へ — 3社がグラマー制約デコーディングで足並みを揃えた2026年</h2>
-  <p class="lede">「JSON で返して」とプロンプトに書いて祈るフェーズは終わった。OpenAI が2024年8月にJSON Schema をトークン生成そのものに強制するアプローチを出してから1年半、Anthropic は2026年3月に構造化出力とstrict tool use をGA、Google も2025年11月にGemini API のJSON Schema 対応範囲を大幅拡張した。3社が同じ技術（グラマー制約デコーディング）に収束したことで、エージェント設計における「壊れたJSON をどう扱うか」という問いそのものが過去のものになりつつある。</p>
+  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">CODE-REVIEW-AGENT</span></span>
+  <h2>コードレビューエージェントの設計 — 差別化は検出率ではなく、文脈の取り方と『直すところまで』の範囲に移った</h2>
+  <p class="lede">GitHub Copilot Code Reviewは2026年3月にdiff単体からエージェント型のツール呼び出しへアーキテクチャを刷新し、8月27日にはレビューへの反応を構造化して回収する「Resolution reasons」を追加した。同時期にCursor BugbotはAutofixとルール学習ループを、QodoはPR履歴を踏まえた専門エージェント合議を、それぞれ独自に実装している。「バグを検出できるか」がコモディティ化した結果、各社の実装は文脈をどこまで動的に取りに行くか、指摘への反応をどう次のレビューに反映するか、検出後にどこまで自動で直すか、という3つの軸で分岐し始めている。</p>
 </div>
 
 <div class="tldr">
   <div class="label">TL;DR — 3 行で</div>
   <ul>
-    <li>OpenAI・Anthropic・Google の主要3社が、JSON Schema をトークン生成レベルで強制する「グラマー制約デコーディング」に共通で対応した</li>
-    <li>対応時期にはズレがあり、サポートするJSON Schemaキーワードの範囲も各社バラバラなため、モデルを切り替える際は互換性の再検証が必要</li>
-    <li>対象は最終出力だけでなく、エージェントの途中のツール呼び出し引数にも拡大しており、リトライ前提の設計を見直す動きが出ている</li>
+    <li>GitHub Copilot・Qodo・Cursor Bugbot・Cloudflareの内製ツールが、diff単体の解析から脱却し、リポジトリ全体・PR履歴・過去の指摘への反応まで動的に文脈を取りに行く設計へ収束している</li>
+    <li>レビューコメントへの反応（Won&#39;t fix・Incorrectなどの解決理由、ダウンボート、返信）を構造化データとして回収し、次のレビュー精度に反映するフィードバックループの実装が各社で進んでいる</li>
+    <li>検出だけで終わらせず、隔離VM上のクラウドエージェントがテスト・パッチ提案まで行うAutofixや、責務ごとに専門エージェントへ委譲する多エージェント構成が、2026年前半に相次いで一般提供された</li>
   </ul>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 1: 「お願い」から「強制」へ — グラマー制約デコーディングの仕組み</div>
+  <div class="section-title">📐 パターン 1: コンテキストの取り方 — diff単体から「動的取得」「PR履歴」まで</div>
   <div class="theme-section">
-    <p>従来のJSON出力は、プロンプトで「このスキーマ通りに返して」と指示し、返ってきたテキストを<code>json.loads</code>でパースし、失敗したらリトライする、という運任せの設計だった。グラマー制約デコーディングはこれを生成側の制約に変える。JSON Schema をコンテキストフリー文法（CFG）に変換し、次のトークン候補をその文法に一致するものだけに動的にマスキングすることで、モデルが構造的に間違ったトークンを出力できないようにする。</p><p>業界がここに収束したのは、プロンプト頼みの遵守率がどれだけ高くても、エージェントの多段処理では1回の失敗が全体を止めるからだ。OpenAI は自社ベンチマークで、この方式に切り替えた<code>gpt-4o-2024-08-06</code>が複雑なJSON Schema追随評価で100%を記録した一方、旧世代の<code>gpt-4-0613</code>は40%未満だったと報告している。数パーセントの失敗率でも、ステップ数が増えるほど累積的に致命傷になる。</p>
+    <p>従来のコードレビューボットは、プルリクエストのdiffをそのままモデルに渡して指摘を生成する構成が主流だった。2026年に入って主要プロダクトが揃って踏み出したのは、レビュー時にエージェント自身がツール呼び出しでディレクトリ構造や関連コード、過去のPR履歴を動的に取得しにいく設計への転換だ。固定のコンテキストウィンドウに何を詰めるかを事前設計するのではなく、「この変更を評価するのに何が必要か」をエージェントの判断に委ねる。</p><p>この転換が起きたのは、diffだけでは「この変更がリポジトリ全体の設計や過去のレビュー基準とどう整合するか」を評価できないという限界に各社が行き着いたからだ。関数の呼び出し元を見なければ副作用の有無は判断できないし、チームのレビュー傾向を踏まえなければ「今回だけ許容すべきか」の線引きもできない。コンテキスト取得そのものをエージェント化することで、リポジトリが大きくなるほど固定ウィンドウ方式が頭打ちになる問題を回避している。</p>
     <div class="example">
-      <div class="product">OpenAI API Structured Outputs（gpt-4o-2024-08-06）</div>
-      <div class="approach">JSON Schema をCFGに変換し、トークン単位で生成を制約</div>
-      <div class="detail">この方式を最初に本番投入した事例。公式ブログで、旧来のプロンプト依存方式との精度差（100% vs 40%未満）を具体的な評価スコアとして公開しており、後続2社が同方式を採用する根拠になった</div>
-      <a href="https://openai.com/index/introducing-structured-outputs-in-the-api/">📄 一次ソース</a>
+      <div class="product">GitHub Copilot Code Review</div>
+      <div class="approach">diff解析からエージェント型のツール呼び出しアーキテクチャへ刷新</div>
+      <div class="detail">2026年3月5日、レビュー時にディレクトリ構造や関連コード・参照箇所を動的に取得する構成へ変更。GitHubは「変更が大きな設計にどう収まるかを評価できるようになった」と説明している</div>
+      <a href="https://github.blog/changelog/2026-03-05-copilot-code-review-now-runs-on-an-agentic-architecture/">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> 新規にJSON出力を要件にする機能は、プロンプト指示ではなく各社のstrict/structured-outputオプションを最初から使う。「プロンプトで頼んでパースでリカバリ」は技術的負債として扱う。</div>
+    <div class="example">
+      <div class="product">Qodo 2.0</div>
+      <div class="approach">Context EngineにPRレビュー履歴を一級市民として組み込み</div>
+      <div class="detail">2026年2月4日発表。チームのレビュー基準が時間とともにどう変化してきたかを踏まえて指摘を出せるようにした、と公式ブログが明記している</div>
+      <a href="https://www.qodo.ai/blog/introducing-qodo-2-0-agentic-code-review/">📄 一次ソース</a>
+    </div>
+    <div class="takeaway"><strong>示唆:</strong> レビューエージェントを選ぶ・作るなら、diffの外側にどこまで動的にアクセスできる設計かを最初に見る。固定コンテキストに詰め込む方式は、リポジトリが育つほど精度が頭打ちになる。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 2: 2026年、Anthropic・Google も追いついた — ただし対応スキーマの範囲は揃っていない</div>
+  <div class="section-title">📐 パターン 2: フィードバックを構造化して閉じるループ</div>
   <div class="theme-section">
-    <p>Anthropic は2026年3月、Claude Developer Platform とAWS Bedrock 上で構造化出力とstrict tool use を一般提供した。公式ドキュメントは「<code>strict: true</code>で<code>input_schema</code>を文法にコンパイルし、生成時点でスキーマ違反を排除する」と明記しており、コンパイル済みスキーマは最大24時間キャッシュされる。Google も2025年11月、Gemini API のJSON Schema 対応を拡張し、<code>anyOf</code>・<code>$ref</code>・<code>prefixItems</code>などのキーワードとプロパティの順序保持に対応、Pydantic やZod のスキーマがそのまま通るようになったと発表した。</p><p>ただし「JSON Schema に対応した」の中身は3社で一致していない。Claude のドキュメントには専用の「JSON Schema limitations」ページがあり、サポート対象外のキーワードが明記されている。Google は再帰スキーマや条件分岐まで踏み込んでいるが、対応モデルはGemini 2.5系に限られる。JSON Schema という共通仕様の名前を使っていても、実装が保証する範囲は各社の実装依存だということが、複数モデルを併用するプロダクトほど効いてくる。</p>
+    <p>指摘の質を上げるもう一つの軸は、レビューへの人間の反応をどう回収するかだ。GitHub Copilot Code Reviewは2026年8月27日、レビューコメントを解決する際に「Addressed」「Won't fix」「Incorrect」の3択から理由を選ばせる「Resolution reasons」を追加した。Cursor Bugbotは同様の目的を、ダウンボートや開発者の返信をシグナルとして候補ルールを生成し、有効性を検証しながらcandidate→activeへ昇格、逆効果ならdemoteする学習パイプラインで実現している。</p><p>両者に共通するのは、「指摘が的外れだった」という情報を捨てずに構造化データとして蓄積し、次のレビュー精度の改善に回すという発想だ。プロンプトの手直しだけで精度を上げる方式は運用者の勘に依存するが、反応をシグナルとして自動的にルール化・重み付けする方式は、利用が増えるほど精度が上がる複利構造を作れる。</p>
     <div class="example">
-      <div class="product">Claude Developer Platform Structured Outputs / Strict Tool Use</div>
-      <div class="approach">2026年3月にAPI・Bedrockで一般提供、グラマー制約サンプリングで出力とツール引数の両方を保証</div>
-      <div class="detail">公式ドキュメントがキャッシュの挙動（24時間）とJSON Schemaの非対応キーワードを明示しており、他社より仕様の透明性を優先した設計であることがわかる</div>
-      <a href="https://platform.claude.com/docs/en/agents-and-tools/tool-use/strict-tool-use">📄 一次ソース</a>
+      <div class="product">GitHub Copilot Code Review</div>
+      <div class="approach">コメント解決時に3択の解決理由を選ばせ、反応を構造化データとして回収</div>
+      <div class="detail">2026年8月27日公開。ボットが開いたPRのレビューやbot作成PRのレビューにも対応範囲を広げ、300ファイル・2万行だった大規模PRの上限も同時に撤廃した</div>
+      <a href="https://github.blog/changelog/2026-08-27-copilot-code-review-resolution-reasons-and-expanded-capabilities/">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">Gemini API 構造化出力</div>
-      <div class="approach">2025年11月にJSON Schemaキーワード対応を拡張し、プロパティ順序を保持</div>
-      <div class="detail">公式ブログで、Pydantic/Zodのスキーマ定義がそのまま使えるようになったと明言しており、既存のバリデーションライブラリ資産を移行コストなく転用できる設計を狙ったことがわかる</div>
-      <a href="https://blog.google/innovation-and-ai/technology/developers-tools/gemini-api-structured-outputs/">📄 一次ソース</a>
+      <div class="product">Cursor Bugbot（学習機能）</div>
+      <div class="approach">ダウンボート・返信・人間レビュアーの見落としをシグナルにルールを自動生成し、有効性で昇格・降格</div>
+      <div class="detail">2026年4月8日時点で11万超のリポジトリが学習機能を有効化し、4.4万超のルールを生成。2025年7月の機能公開時点で52%だった解決率は同時点で約78%まで上昇したとCursorは報告している</div>
+      <a href="https://cursor.com/blog/bugbot-learning">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> 複数プロバイダーを切り替え可能にするプロダクトは、JSON Schemaの仕様書ではなく各社の「サポート範囲」ドキュメントを突き合わせてから設計する。名前が同じでも保証内容は同じではない。</div>
+    <div class="takeaway"><strong>示唆:</strong> レビューエージェントを継続運用するなら、指摘への反応（解決理由・リアクション）を捨てずに構造化して回収する仕組みを最初から組み込む。後付けでは学習の起点になるログが残っていない。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 3: 対象は「最終出力」から「途中のツール呼び出し」へ拡大した</div>
+  <div class="section-title">📐 パターン 3: 責務の分割と自動修正 — 検出後の範囲をどこまで広げるか</div>
   <div class="theme-section">
-    <p>同じ技術は、エージェントが最後に返す答えだけでなく、途中のツール呼び出しの引数にも適用され始めている。OpenAI の関数呼び出しガイドは、<code>strict: true</code>を設定することで「best effort ではなく確実に」スキーマ通りの引数になると明記し、その代わり<code>additionalProperties: false</code>と全フィールドの<code>required</code>指定を要求する制約を課している。Anthropic のstrict tool use も同じグラマー制約サンプリングのパイプラインをツール定義に対して使う。</p><p>これが効くのは多段エージェントだ。1つのツール呼び出しの引数が壊れれば、そこから先の全ステップが止まるか誤動作する。従来は「呼び出し後に検証し、失敗したらモデルにもう一度呼ばせる」というリトライ設計で吸収していたが、これは呼び出しのたびにレイテンシとコストを積み増す。生成時点で構造を保証する方式に倒せば、このリトライループ自体が不要になる。</p>
+    <p>単一のプロンプトで「バグも品質もセキュリティもテストも見る」設計は、カテゴリ間で精度がトレードオフになる。Qodo 2.0はこれを、バグ検出・コード品質・セキュリティ・テストカバレッジの専門エージェントを並列実行する多エージェント構成に分割した。一方Cursor BugbotのAutofixは、検出したバグを放置せず、隔離されたVM上のクラウドエージェントに再現・テスト・パッチ提案まで行わせる方向に範囲を広げている。</p><p>両者は方向性が異なるように見えて、「検出はゴールではなく通過点」という認識では一致している。責務を分割すれば各エージェントが自分の専門でだけ精度を最適化でき、検出後の修正まで自動化すれば人間のレビュー負荷そのものを減らせる。ただしAutofixのような自動修正は誤った変更を提案するリスクも増えるため、前セクションのフィードバックループとセットで運用する設計が前提になっている。</p>
     <div class="example">
-      <div class="product">OpenAI Function calling（strict mode）</div>
-      <div class="approach">関数呼び出しの引数生成にもCFG制約を適用し、best effortをやめる</div>
-      <div class="detail">公式ガイドが、strict modeを有効にする条件（additionalProperties: falseと全フィールドrequired）を明示しており、引数の型不一致によるランタイムエラーを構造的に排除する設計であることがわかる</div>
-      <a href="https://developers.openai.com/api/docs/guides/function-calling">📄 一次ソース</a>
+      <div class="product">Qodo 2.0</div>
+      <div class="approach">バグ・品質・セキュリティ・テストカバレッジの専門エージェントを並列実行する多エージェント構成</div>
+      <div class="detail">単一タスクではなく責務ごとにエージェントを分割。公式ブログはCode Review Bench比較でF1スコア60.1%が最高、重大issueとルール違反の精度・再現率は他ツール比+11%だったと主張している</div>
+      <a href="https://www.qodo.ai/blog/introducing-qodo-2-0-agentic-code-review/">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> 多段エージェントを新規に組むなら、ツール引数の正しさをリトライループで担保するのではなく、対応モデルのstrict機能を最初から有効化し、リトライは「引数は正しいが実行が失敗した場合」専用に絞る。</div>
+    <div class="example">
+      <div class="product">Cursor Bugbot Autofix</div>
+      <div class="approach">検出したバグを隔離VM上のクラウドエージェントに再現・テスト・パッチ提案までさせる</div>
+      <div class="detail">2026年2月26日一般提供。承認後にマージするか自動プッシュするかを選べる設計で、提案された変更のうち35%超がベースPRにそのままマージされているとCursorは報告している</div>
+      <a href="https://cursor.com/changelog/02-26-26">📄 一次ソース</a>
+    </div>
+    <div class="takeaway"><strong>示唆:</strong> 検出精度だけを見て導入を決めない。責務を分割できる構成か、修正まで自動化する場合はフィードバックで誤りを是正する仕組みとセットになっているかを確認する。</div>
   </div>
   <div class="editorial">
     <span class="label">✍️ 編集後記</span>
-    構造化出力の技術自体は目新しくない。ただし「3社が同じ保証を提供する」状態になったことで、開発者側の設計判断が「モデルの出力をどう検証・修復するか」から「どの範囲までモデルに保証させ、どこからをアプリ側の責務にするか」に移った。パースエラー対策のコードを書く時間は減るが、代わりに各社のスキーマ対応範囲表を読む時間が増える——トレードオフの中身が変わっただけだ、と捉えておくのが実務的だろう。
+    コードレビューエージェントの競争軸は、もう「バグを見つけられるか」ではない。どこまで文脈を動的に取りに行き、指摘への反応をどう次に活かし、検出後どこまで自動で直すか——この3層で実装が分かれ始めている。次の分水嶺は、Autofixのような自動修正ループを人間の承認なしにどこまで回せるかという信頼設計になりそうだ。
   </div>
 </div>
 
 <div class="section">
   <div class="section-title">🔗 今号の動向ピックアップ</div>
-  <div class="quick-link"><a href="https://developers.openai.com/cookbook/examples/structured_outputs_intro">OpenAI Cookbook: Structured Outputs入門</a><span class="quick-summary">response_formatでの直接指定とPydanticモデル+parseヘルパーの2通りの実装法、および安全性拒否時のrefusalフィールドの扱いを解説する公式実践ガイド。本文で触れたOpenAIのstrict実装を実際に組む際の一次リファレンスになる。</span></div>
-  <div class="quick-link"><a href="https://platform.claude.com/docs/en/build-with-claude/structured-outputs">Claude Structured Outputs — JSON Schema対応範囲のドキュメント</a><span class="quick-summary">Claudeの構造化出力がサポートするJSON Schemaキーワードと非対応キーワードを一覧化した公式ページ。第2セクションで触れた「対応範囲は各社バラバラ」を実際に確認できる一次情報。</span></div>
-  <div class="quick-link"><a href="https://arxiv.org/pdf/2501.10868">JSONSchemaBench: 構造化出力エンジン横断ベンチマーク論文</a><span class="quick-summary">Guidance・Outlines・XGrammar・OpenAI・Geminiなど6つの制約付きデコーディング実装を効率・カバレッジ・出力品質で比較した学術ベンチマーク。「グラマー制約デコーディングは普及したが実際の効果は正しく理解されていない」という指摘は、本文の互換性の議論と直結する。</span></div>
+  <div class="quick-link"><a href="https://blog.cloudflare.com/internal-ai-engineering-stack/">Cloudflareの内製コードレビュアー、リスク階層で専門エージェントに委譲</a><span class="quick-summary">MRをtrivial/lite/fullの3段階に振り分け、セキュリティ・品質・Engineering Codex準拠の専門エージェントへ委譲し、指摘に具体的なルールIDを添えて追跡可能にしている。本文で扱った「責務の分割」を、規則ベースの説明可能性まで一歩進めた実装だ。</span></div>
+  <div class="quick-link"><a href="https://cursor.com/blog/bugbot-updates-june-2026">Bugbot、3倍速・22%コスト減・検出10%増を専用モデルで実現</a><span class="quick-summary">Cursor Bugbotが専用モデルComposer 2.5とハーネス改善で高速化・低コスト化を達成したと2026年6月に発表。本文のAutofixや学習ループを毎PRで回す際の推論コストを支える基盤側の変化にあたる。</span></div>
+  <div class="quick-link"><a href="https://github.blog/changelog/2026-04-27-github-copilot-code-review-will-start-consuming-github-actions-minutes-on-june-1-2026/">Copilotコードレビュー、GitHub Actions利用時間を消費する課金へ</a><span class="quick-summary">2026年6月1日からプライベートリポジトリでのレビュー実行がGitHub Actions利用時間を消費する仕様に変更されたと4月27日に公式発表。エージェント型レビューが「無料の付加機能」からコスト構造の一部になったことを示している。</span></div>
 </div>
 
 <div class="section">
   <div class="section-title">📚 過去号</div>
+  <div class="archive-item"><span class="week">2026-08-29</span><div class="body"><a href="ai-trends/2026-08-29.html">構造化出力は「お願い」から「強制」へ — 3社がグラマー制約デコーディングで足並みを揃えた2026年</a><span class="sub">OpenAI・Anthropic・Google の主要3社が、JSON Schema をトークン生成レベルで強制する「グラマー制約デコーディング」に共通で対応した</span></div></div>
   <div class="archive-item"><span class="week">2026-08-27</span><div class="body"><a href="ai-trends/2026-08-27.html">マルチエージェント協調 — 割っていいのは「コンテキストの切れ目」だけ</a><span class="sub">Anthropic は Research 機能で並列サブエージェントを使い内部評価で90.2%の性能改善を報告するが、トークン消費は通常の約15倍になるとも明記している。</span></div></div>
   <div class="archive-item"><span class="week">2026-08-25</span><div class="body"><a href="ai-trends/2026-08-25.html">エージェントのメモリ設計 — 生ログでも単一要約でもなく、書き換え可能な単位に分解する</a><span class="sub">Claude は2026年7月、記憶を単一のローリング要約から個別の書き換え可能なエントリへ移行。ChatGPT は非同期の「Dreaming」処理で古い事実を時制ごと書き換える。</span></div></div>
   <div class="archive-item"><span class="week">2026-08-22</span><div class="body"><a href="ai-trends/2026-08-22.html">プロンプトキャッシュはコスト最適化ではない — 「プレフィックス固定」というアーキテクチャ制約</a><span class="sub">キャッシュ命中率はもはや副次指標ではなく、Manus はこれを「本番エージェントで最重要のメトリック」と明言している。</span></div></div>
@@ -170,7 +183,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 </div>
 
 <footer>
-  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="data/ai-trends/2026-08-29.json">data/ai-trends/2026-08-29.json</a>（このページは JSON からの生成物）</p>
+  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="data/ai-trends/2026-09-01.json">data/ai-trends/2026-09-01.json</a>（このページは JSON からの生成物）</p>
   <p style="margin-top:.5rem"><a href="./">📰 日刊ダイジェストに戻る</a></p>
 </footer>
 </div>
