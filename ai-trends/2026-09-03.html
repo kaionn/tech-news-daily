@@ -66,7 +66,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 <div class="container">
 <header>
   <h1>🧠 AI プロダクト動向</h1>
-  <p class="date">2026-08-25 発行（読了 5 分）</p>
+  <p class="date">2026-09-03 発行（読了 5 分）</p>
   <p class="tagline">実プロダクトのアーキテクチャ・使用例から AI 開発の現在地を週 3 回・1 号 1 テーマで深掘り</p>
   <nav class="site-nav">
     <a href="../">📰 日刊ダイジェスト</a>
@@ -77,97 +77,91 @@ footer a{color:var(--primary-500);text-decoration:none}
 </header>
 
 <div class="theme-hero">
-  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">AGENT-MEMORY</span></span>
-  <h2>エージェントのメモリ設計 — 生ログでも単一要約でもなく、書き換え可能な単位に分解する</h2>
-  <p class="lede">2026年に入り、OpenAI と Anthropic はほぼ同時期に、消費者向けチャットとエージェント製品の双方でメモリ機構を刷新した。共通しているのは「会話をそのまま貯める」「1本の要約文にまとめる」のどちらでもなく、書き換え可能な小さい単位に分解して保存する設計への転換だ。だが記憶をいつ作り直すか、どこに保存するかという次の設計判断は各社で割れており、この2軸が実装の分かれ目になっている。</p>
+  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">AGENT-DURABILITY</span></span>
+  <h2>長時間稼働エージェントの状態管理 — 「会話の保存」から「プロセスの永続化」へ</h2>
+  <p class="lede">エージェントが数分の対話ではなく数時間・数日単位のバックグラウンドタスクをこなすようになったことで、コンテナ再起動やタイムアウトはもはや例外ではなく前提になった。これまでチャットボットが会話履歴だけを保存してきたのに対し、いま各社が取り組んでいるのは「どのステップまで完了したか」という実行状態そのものをチェックポイントとして永続化する設計だ。何を保存し、何を保存しないかという粒度の判断も含め、具体例を追う。</p>
 </div>
 
 <div class="tldr">
   <div class="label">TL;DR — 3 行で</div>
   <ul>
-    <li>Claude は2026年7月、記憶を単一のローリング要約から個別の書き換え可能なエントリへ移行。ChatGPT は非同期の「Dreaming」処理で古い事実を時制ごと書き換える。</li>
-    <li>Claude Managed Agents はセッション中のリアルタイム書き込みと、セッション間で横断整理するバッチ処理（Dreaming）を明確に分けて提供する。</li>
-    <li>Claude API の memory tool はモデルがファイル操作を要求するだけで保存先を開発者側に残す設計で、mem0 のような専業ベンダーに記憶レイヤーごと預ける選択肢と対比できる。</li>
+    <li>Google ADKやMastraは、ツール呼び出しなどステップの境界ごとに実行状態をシリアライズして外部ストレージに書き込み、コンテナが落ちても直前のステップから再開できる設計に収束している。</li>
+    <li>LangGraphのinterrupt()は人間の承認待ちを例外処理ではなくグラフの一時停止として扱い、待機時間の長さに関係なく同じチェックポイント/再開の仕組みに乗せる。</li>
+    <li>スナップショットには大きなデータそのものではなく参照(ID)だけを持たせるclaim checkパターンが標準になりつつあり、Temporal上の実装ではイベント履歴の上限を超えないための必須設計になっている。</li>
   </ul>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 1: 会話ログでも単一の要約でもなく、書き換え可能な個別エントリへ</div>
+  <div class="section-title">📐 パターン 1: チェックポイントは「会話履歴の保存」ではなく「プロセス状態の永続化」</div>
   <div class="theme-section">
-    <p>従来の2方式にはそれぞれ弱点があった。生の会話履歴をそのまま保持する方式はコンテキストコストが際限なく膨らみ、1件の誤りを消すために関係ない発言まで巻き込む。1本の要約文に凝縮する方式は逆に、1つの事実を訂正するには要約全体を書き直す必要があり、その過程で無関係な情報が欠落するリスクがある。</p><p>今の主流は、記憶を「1つの検証可能な事実」を単位にした個別レコードへ分解し、それぞれを独立に読み書き・削除できるようにすることだ。単位を細かくするほど、間違いの訂正や失効判定を他の記憶に影響させずに局所化できる。</p>
+    <p>長時間稼働エージェントの標準構成は、ツール呼び出しなど各ステップの境界でエージェントの実行状態（変数・実行位置・保留中のタスク）をシリアライズし、外部ストレージへ書き込むというものだ。会話ログとは別に、<code>ToolContext.state</code>のような実行状態そのものを永続化することで、プロセスが落ちても直前のステップから再開できるようにする。</p><p>バックグラウンドで数時間から数日動くエージェントが増え、コンテナのタイムアウトやスケールゼロは例外ではなく前提になった。インメモリの会話履歴だけを保持していると、再起動のたびに文脈は残っても「どこまで進んだか」という実行位置が失われる。この2つを分けて管理しないと、副作用のあるツール呼び出しまで巻き戻って再実行してしまう、というのが各社が同じ設計に落ち着いた理由だ。</p>
     <div class="example">
-      <div class="product">Claude（Anthropic、コンシューマー向けメモリ）</div>
-      <div class="approach">単一のローリング要約から、カテゴリ分けされた個別エントリへ移行</div>
-      <div class="detail">2026年7月10日、Anthropic は Claude の記憶を「毎日更新される1本の要約文」から「会話中に読み書きされるカテゴリ別の個別エントリ」に置き換えた。ユーザーは1件だけを確認・修正・削除でき、他の記憶を巻き込まない。</div>
-      <a href="https://support.claude.com/en/articles/12138966-release-notes">📄 一次ソース</a>
+      <div class="product">Google ADK（Agent Development Kit）</div>
+      <div class="approach">ツール呼び出しごとに自動でチェックポイントし、DatabaseSessionServiceでToolContext.stateをSQLite/Cloud SQLへ永続化</div>
+      <div class="detail">コンテナがスケールゼロしても、Webhook到達時にセッションをストレージから復元し推論チェーンを中断箇所から再開する設計を公式ブログで解説している</div>
+      <a href="https://developers.googleblog.com/build-long-running-ai-agents-that-pause-resume-and-never-lose-context-with-adk/">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">ChatGPT（OpenAI、Dreaming）</div>
-      <div class="approach">対話とは別のバックグラウンド処理が記憶を継続的に再統合し、古い事実を書き換える</div>
-      <div class="detail">2026年6月に展開された新アーキテクチャでは、複数の会話から学習する専用プロセスが「7月にシンガポールに行く予定」を「7月にシンガポールに行った」のように時制ごと更新する。ユーザーが読める要約ページとして提示され、項目単位の追加・修正に対応する。</div>
-      <a href="https://openai.com/index/chatgpt-memory-dreaming/">📄 一次ソース</a>
+      <div class="product">Mastra</div>
+      <div class="approach">1回のrunをJSONにチェックポイントし、別マシンでも同じスナップショットから再開できる設計</div>
+      <div class="detail">起動時にstatusがrunningのまま止まっている全runを検出し、最後のスナップショットから自動的に再実行する仕組みを公式ブログで公開している</div>
+      <a href="https://mastra.ai/blog/what-are-durable-ai-agents">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> メモリを実装するなら保存の最小単位を「会話」や「1つの人物像」ではなく「検証可能な1事実」に置く。単位が細かいほど訂正と失効判定のコストが下がる。</div>
+    <div class="takeaway"><strong>示唆:</strong> 長時間動くエージェントを設計するなら、会話履歴の永続化とは別に「どのステップまで完了したか」を表す実行状態を明示的にモデル化し、ステップ境界ごとに書き込む仕組みを最初から組み込むべき。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 2: 記憶を作り直すタイミング — セッション中のリアルタイム書き込みか、セッション間のバッチ処理か</div>
+  <div class="section-title">📐 パターン 2: 人間の承認待ちを「例外処理」ではなく「グラフの一時停止」として設計する</div>
   <div class="theme-section">
-    <p>もう一つの分かれ目は更新のタイミングだ。作業しながらその場でファイルに書き込む同期方式は即時性が高い一方、1セッションの視野に閉じるため冗長な記憶が溜まりやすい。対して、複数セッションが終わった後にまとめて見直す非同期方式は、単体のセッションでは見えないパターン（繰り返し起きるミスや複数エージェント間の共通知見）を検出できる。</p><p>企業向けのエージェント製品が後者を別立てで用意するのは、記憶を横断的にマージ・重複排除できるだけでなく、自動推論された記憶が人のレビューを経ずに将来の挙動を静かに変えてしまうリスクを、承認ゲートで止められるからだ。</p>
+    <p>LangGraphの<code>interrupt()</code>は、承認が必要な地点でグラフの状態をチェックポインタに保存し、再開の合図が来るまで無期限に待つ。呼び出し側は<code>thread_id</code>で「どの中断中の実行を再開するか」を指定し、人間の判断は<code>Command(resume=...)</code>というJSONシリアライズ可能なペイロードとして<code>interrupt()</code>の戻り値になる。</p><p>承認待ちを個別のポーリングAPIやtry/exceptで実装すると、承認までの待ち時間が数分でも数日でも同じコードパスで扱うのが難しい。グラフの一時停止として扱えば、待機時間の長さに関係なく同じチェックポイント/再開の仕組みに乗る。これが「割り込みは例外ではなく状態遷移の一種」という設計に各フレームワークが収束した理由だ。</p>
     <div class="example">
-      <div class="product">Claude Managed Agents（Anthropic、Memory）</div>
-      <div class="approach">作業中にその場でファイルへ書き込む</div>
-      <div class="detail">エージェントの記憶はファイルシステムにマウントされたファイル群として実装され、Claude は既存の bash・コード実行ツールでそのまま読み書きする。セッションの終了を待たず、作業しながら学習する設計。</div>
-      <a href="https://claude.com/blog/claude-managed-agents-memory">📄 一次ソース</a>
+      <div class="product">LangGraph</div>
+      <div class="approach">interrupt()でグラフ状態を保存し、Command(resume=...)で再開する一時停止パターン</div>
+      <div class="detail">checkpointerとthread_idを必須要件とし、中断中の実行を人間の判断が届くまで待たせる設計を公式ドキュメントが規定している</div>
+      <a href="https://docs.langchain.com/oss/python/langgraph/interrupts">📄 一次ソース</a>
     </div>
-    <div class="example">
-      <div class="product">Claude Managed Agents（Anthropic、Dreaming）</div>
-      <div class="approach">セッション間で動く別プロセスが記憶を横断的に整理し直す</div>
-      <div class="detail">Dreaming はスケジュール実行されるプロセスで、複数エージェントのセッションと記憶ストアを見直し、繰り返し起きるミスやチーム共通の知見を抽出して記憶を再構成する。変更を自動反映するか、人のレビュー待ちにするかを開発者が選べる。</div>
-      <a href="https://claude.com/blog/new-in-claude-managed-agents">📄 一次ソース</a>
-    </div>
-    <div class="takeaway"><strong>示唆:</strong> 1エージェント・1セッションで完結する記憶はリアルタイム書き込みで足りる。複数エージェントや複数日にまたがる知見を集約したいなら、別立てのバッチ整理プロセスと、誤った記憶が自動適用される前に人が止められる仕組みをセットで用意する。</div>
+    <div class="takeaway"><strong>示唆:</strong> 承認待ちやレビュー待ちのような不定長の待機は、専用のポーリング機構を自作せず、チェックポイント可能なグラフの一時停止として設計に組み込むと後から待機時間の制約に振り回されにくい。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 3: 誰が保存先を持つか — マネージドな記憶か、自前インフラに預ける記憶か</div>
+  <div class="section-title">📐 パターン 3: スナップショットの粒度設計 — 保存するのは本文ではなく参照</div>
   <div class="theme-section">
-    <p>3つ目の軸は保存先の所有権だ。モデルは <code>view</code> や <code>create</code> といったファイル操作を要求するだけで、実際の保存先とアクセス制御は呼び出し側のアプリケーションが持つクライアントサイド方式がある一方、保存から取り出しまで丸ごとベンダーやサードパーティに委ねるマネージド方式もある。</p><p>マネージド方式は導入が速いが、記憶の保存場所と保持ポリシーがベンダーのインフラに縛られる。クライアントサイド方式は、パストラバーサル対策やファイルサイズ上限の実装といった手間と引き換えに、データ所在地の制御やゼロデータリテンション対応など、企業導入で求められる要件を自分で満たせる。</p>
+    <p>実行状態のスナップショットには、大きなデータそのものではなく参照（ID）だけを持たせ、必要になった時点で再取得する「claim check」パターンが標準になりつつある。Temporal上でエージェントを組む場合、イベント履歴には50MB・51,200イベントという上限があり、数KBを超えるペイロードは履歴に直接書かず外部ストレージへ逃がすことが推奨されている。</p><p>これはストレージ節約の話ではなく再開速度の話だ。スナップショットが肥大化するとシリアライズ・デシリアライズのコストが増え、再開のたびに大きなペイロードを読み込むことになる。ステップの状態を小さく保つことが、復元を高速かつどこでも安全に行うための前提条件だという認識に、各社のドキュメントが揃ってきている。</p>
     <div class="example">
-      <div class="product">Claude API（Anthropic、memory tool）</div>
-      <div class="approach">Claude はファイル操作を要求するだけで、保存先は開発者のアプリ側が持つ</div>
-      <div class="detail">memory tool はクライアントサイド実装で、Claude が /memories 配下への view・create・str_replace・delete を要求し、実際の保存先（ディスク・DB・暗号化ストレージなど）とパストラバーサル対策は呼び出し側が実装する。ゼロデータリテンション要件に対応できるのはこの分離ゆえ。</div>
-      <a href="https://platform.claude.com/docs/en/agents-and-tools/tool-use/memory-tool">📄 一次ソース</a>
+      <div class="product">Mastra</div>
+      <div class="approach">ステップ状態に大きなドキュメント本文を持たせず、IDだけを保持して必要時に再取得</div>
+      <div class="detail">スナップショットを小さく・速く・どこでも安全に読み込めるものに保つためのベストプラクティスとして公式ブログが明記している</div>
+      <a href="https://mastra.ai/blog/what-are-durable-ai-agents">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">mem0</div>
-      <div class="approach">記憶レイヤー自体を専業ベンダーに委譲する</div>
-      <div class="detail">2026年4月公開の新アルゴリズムは単一パスの階層抽出と複数シグナルの検索を組み合わせ、時系列が絡む質問で旧アルゴリズム比+29.6ポイントの精度改善を報告している。自前実装をせず記憶レイヤーごと外部に預ける選択肢の代表例。</div>
-      <a href="https://mem0.ai/blog/state-of-ai-agent-memory-2026">📄 一次ソース</a>
+      <div class="product">Ably（Temporal上のAIエージェントチャット実装）</div>
+      <div class="approach">50MB・51,200イベントの上限を超える前にclaim checkパターンで大きなペイロードを外部ストレージへ逃がす</div>
+      <div class="detail">イベント履歴に会話全文を置くと実行がContinue-As-Newで分断され、単一クエリで全文を取得できなくなる問題を実例付きで解説している</div>
+      <a href="https://ably.com/temporal/managing-conversation-history-in-a-temporal-ai-agent-chat">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> データ所在地やコンプライアンス要件が強いならクライアントサイドのツールで自前インフラに保存し、そうでなければマネージドな記憶機能かサードパーティの記憶レイヤーで実装コストを削る、という順で検討する。</div>
+    <div class="takeaway"><strong>示唆:</strong> エージェントの状態設計では、まず「再開に絶対必要な最小の情報は何か」を先に決め、それ以外は参照だけを持たせる。スナップショットのサイズは後から効いてくるコストなので最初から意識しておく。</div>
   </div>
   <div class="editorial">
     <span class="label">✍️ 編集後記</span>
-    OpenAI と Anthropic は同じ2026年に、示し合わせたかのように「生ログを貯めない」設計へ収束した。だが同期か非同期か、マネージドか自前インフラかという次の階層の選択は割れたままで、この組み合わせの違いが今後1年のメモリ機構の実質的な差別化ポイントになりそうだ。
+    会話の続きを保存するのと、プロセスの続きを保存するのは別の設計課題だ。会話履歴だけを永続化してきたチャットボット時代の発想のままバックグラウンドエージェントを作ると、再起動のたびに「どこまでやったか」を失う。2026年に各社が収束したのは、実行位置そのものを一級市民として永続化するという、地味だが本質的な転換だった。
   </div>
 </div>
 
 <div class="section">
   <div class="section-title">🔗 今号の動向ピックアップ</div>
-  <div class="quick-link"><a href="https://redis.io/blog/long-term-memory-architectures-ai-agents/">Redis: Long-Term Memory Architectures for AI Agents</a><span class="quick-summary">pgvector や Redis を使い、記憶をエントリ単位で自前実装する際の具体的なデータモデルを示す。マネージドな記憶機能を使わない選択をした場合の設計の出発点になる。</span></div>
-  <div class="quick-link"><a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents">Anthropic: Effective context engineering for AI agents</a><span class="quick-summary">Claude の memory tool ドキュメントが「広いパターン」として直接参照する記事で、記憶をコンテキストウィンドウにどう出し入れするかの設計原則をまとめている。本文で扱った「いつ記憶を作るか」の一段上にある「いつ思い出すか」の設計に相当する。</span></div>
-  <div class="quick-link"><a href="https://openai.com/index/memory-and-new-controls-for-chatgpt/">OpenAI: Memory and new controls for ChatGPT</a><span class="quick-summary">2024年当時の「明示的に保存を頼むメモリ」の発表で、本文で扱った Dreaming の前段にあたる旧世代アーキテクチャを示す。比較すると今回の非同期化がどこを変えたかが分かる。</span></div>
+  <div class="quick-link"><a href="https://addyosmani.com/blog/long-running-agents/">Long-running Agents（AddyOsmani.com）</a><span class="quick-summary">長時間稼働エージェントを実務で構築する際の実装パターンをまとめた記事。ディスクへの中間状態の書き込みとNユニットごとのチェックポイントを推奨しており、本文の「チェックポイント境界の設計」と直接つながる。</span></div>
+  <div class="quick-link"><a href="https://mastra.ai/blog/introducing-durable-agents">Introducing Durable Agents（Mastra Blog）</a><span class="quick-summary">MastraがDurableAgentという実行時プリミティブを発表した際の一次情報。本文で紹介したチェックポイント機構の元になった製品発表で、設計思想の背景を補足する。</span></div>
+  <div class="quick-link"><a href="https://www.restate.dev/blog/build-resilient-ai-agents-with-restate-and-google-adk">Build Resilient AI Agents with Restate and Google ADK（Restate Blog）</a><span class="quick-summary">Restateのdurable execution基盤をGoogle ADKと組み合わせてエージェントを堅牢化する実装例。本文のチェックポイント/再開設計を、別のランタイムでどう実現するかの比較対象になる。</span></div>
 </div>
 
 <div class="section">
   <div class="section-title">📚 過去号</div>
-  <div class="archive-item"><span class="week">2026-09-03</span><div class="body"><a href="../ai-trends.html">長時間稼働エージェントの状態管理 — 「会話の保存」から「プロセスの永続化」へ</a><span class="sub">Google ADKやMastraは、ツール呼び出しなどステップの境界ごとに実行状態をシリアライズして外部ストレージに書き込み、コンテナが落ちても直前のステップから再開できる設計に収束している。</span></div></div>
   <div class="archive-item"><span class="week">2026-09-01</span><div class="body"><a href="2026-09-01.html">コードレビューエージェントの設計 — 差別化は検出率ではなく、文脈の取り方と『直すところまで』の範囲に移った</a><span class="sub">GitHub Copilot・Qodo・Cursor Bugbot・Cloudflareの内製ツールが、diff単体の解析から脱却し、リポジトリ全体・PR履歴・過去の指摘への反応まで動的に文脈を取りに行く設計へ収束している</span></div></div>
   <div class="archive-item"><span class="week">2026-08-29</span><div class="body"><a href="2026-08-29.html">構造化出力は「お願い」から「強制」へ — 3社がグラマー制約デコーディングで足並みを揃えた2026年</a><span class="sub">OpenAI・Anthropic・Google の主要3社が、JSON Schema をトークン生成レベルで強制する「グラマー制約デコーディング」に共通で対応した</span></div></div>
   <div class="archive-item"><span class="week">2026-08-27</span><div class="body"><a href="2026-08-27.html">マルチエージェント協調 — 割っていいのは「コンテキストの切れ目」だけ</a><span class="sub">Anthropic は Research 機能で並列サブエージェントを使い内部評価で90.2%の性能改善を報告するが、トークン消費は通常の約15倍になるとも明記している。</span></div></div>
+  <div class="archive-item"><span class="week">2026-08-25</span><div class="body"><a href="2026-08-25.html">エージェントのメモリ設計 — 生ログでも単一要約でもなく、書き換え可能な単位に分解する</a><span class="sub">Claude は2026年7月、記憶を単一のローリング要約から個別の書き換え可能なエントリへ移行。ChatGPT は非同期の「Dreaming」処理で古い事実を時制ごと書き換える。</span></div></div>
   <div class="archive-item"><span class="week">2026-08-22</span><div class="body"><a href="2026-08-22.html">プロンプトキャッシュはコスト最適化ではない — 「プレフィックス固定」というアーキテクチャ制約</a><span class="sub">キャッシュ命中率はもはや副次指標ではなく、Manus はこれを「本番エージェントで最重要のメトリック」と明言している。</span></div></div>
   <div class="archive-item"><span class="week">2026-08-20</span><div class="body"><a href="2026-08-20.html">接続ツールが増えるほど遅くなる問題 — コード実行と検索遅延ロードの2つの答え</a><span class="sub">Anthropicは公式エンジニアリングブログで、MCPツールをコードAPIとして提示しファイルシステム越しにオンデマンドで読み込ませる方式により、あるタスクのトークン消費を150,000から2,000（98.7%減）に削減したと報告した</span></div></div>
   <div class="archive-item"><span class="week">2026-08-18</span><div class="body"><a href="2026-08-18.html">MCPエージェントの認可設計 — 同意画面を「増やす」実装と「無くす」実装に分岐した</a><span class="sub">MCPの権限設計は「サーバー単位のOAuth」から「ツールごとのスコープ」へ移り、WorkOSやCloudflareが個別ツール内での権限チェックを標準パターンとして提示している。</span></div></div>
@@ -184,7 +178,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 </div>
 
 <footer>
-  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="../data/ai-trends/2026-08-25.json">data/ai-trends/2026-08-25.json</a>（このページは JSON からの生成物）</p>
+  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="../data/ai-trends/2026-09-03.json">data/ai-trends/2026-09-03.json</a>（このページは JSON からの生成物）</p>
   <p style="margin-top:.5rem"><a href="../">📰 日刊ダイジェストに戻る</a></p>
 </footer>
 </div>
