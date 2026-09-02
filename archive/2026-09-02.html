@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-09-02</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="../feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-09-02 (Wed)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+      <nav class="site-nav">
+        <a href="../" class="active">📰 日刊ダイジェスト</a>
+        <a href="../trends.html">🔌 週次プラグイントレンド</a>
+        <a href="../ai-trends.html">🧠 AI プロダクト動向</a>
+        <a href="./">🗂 アーカイブ</a>
+      </nav>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 22 articles</span>
+      <span>🏷 8 categories</span>
+      <span>📡 15 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item">
+        <span class="number-value">9.8</span>
+        <span class="number-label">JFrog Artifactoryの認証バイパス脆弱性CVE-2026-82329のCVSSスコア</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">2.2倍</span>
+        <span class="number-label">Wasmインタプリタ「Wasmi 2.0」がv1.0比で高速化した倍率(Apple M2 Pro計測)</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">1,688ドル</span>
+        <span class="number-label">家庭用ヒューマノイド「NORI A3」の予約価格</span>
+      </div>
+    </div>
+
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
+
+      <div class="card featured deep-dive">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.anthropic.com/claude-fable-and-mythos-5-1">DEEP DIVE: Anthropic、新フラッグシップ「Claude Fable 5.1」と専門家限定「Claude Mythos 5.1」を発表</a></h3>
+        </div>
+        <div class="summary">Anthropicは9月1日、新フラッグシップモデル「Claude Fable 5.1」と、専門家限定提供の「Claude Mythos 5.1」を発表した。両者はモデル本体が同一で、セーフガードの適用範囲だけが異なる。Fable 5.1は一般提供、Mythos 5.1はサイバーセキュリティ・生命科学分野の審査済み専門家に米国組織限定でアクセスが絞られる。ベンチマークでは、エージェント型科学研究タスク(Terminal-Bench-Science)がFable 5の24.7%から52.6%へ倍増し、エージェント型コーディング(Terminal-Bench 4.0)ではMythosが60.9%(Fable 5は42.0%)を記録した。分子設計の実証実験では、コンペ優勝チームの10倍の結合親和性を持つタンパク質バインダーを設計し、12標的中ほぼ半数でヒットを出したという。ディープラーニングモデルの最適化タスクでは処理速度を最大2.5倍に高め、GPUコストを30〜60%削減したと報告している。価格面では、キャッシュ読み込みが100万トークンあたり0.25ドルへ75%値下げされ、標準料金は入力10ドル・出力50ドル(各100万トークン)。典型的なワークロードで約25%、エージェント多用時は最大45%のコスト削減になる計算だ。セーフガード面では、サイバーセキュリティ文脈での誤検知を60%削減しつつ脆弱性発見支援は維持し、生物領域では良性リクエストへの誤トリガーを85%減らしたとしている。AWS・Google Cloud・Microsoft Azureで同時提供が始まった。</div>
+        <div class="editorial">🧠 ベンチマークの伸び幅はいずれも社内測定で、第三者による再現はまだない。医薬・セキュリティ領域での誤検知率低下は実務上ありがたい一方、Mythos 5.1が米国組織限定にとどまる間は恩恵を受けられる開発者はごく一部だ。コスト削減効果もエージェント多用ワークロード前提の数字であり、通常利用でどこまで効くかは実際に使ってみるまで分からない。</div>
+        <div class="key-points">
+          <ul>
+            <li>Terminal-Bench 4.0のエージェント型コーディングでMythos 5.1が60.9%を記録(Fable 5は42.0%)</li>
+            <li>キャッシュ読み込み価格を100万トークン0.25ドルへ75%値下げ、エージェント多用ワークロードで最大45%のコスト減</li>
+            <li>AWS・Google Cloud・Microsoft Azureで同時提供開始、Mythos 5.1は米国組織の審査済み専門家に限定</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 エージェント型コーディングやキャッシュ多用のワークフローを回している開発者は、コスト構造の変化を踏まえてモデル選定を見直す価値がある。</div>
+        <div class="meta">
+          <span>Anthropic公式ブログ</span>
+          <span>⏱ 6 min read</span>
+          <span class="engagement">▲ 792</span>
+          <span>2026-09-01</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-product">Product</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://blog.mozilla.org/en/firefox/ad-blocker-on-ios/">Mozilla、Firefox for iOSに広告ブロック機能を標準搭載——拡張機能なしでWebKit連携</a></h3>
+        </div>
+        <div class="summary">Mozillaは、Firefox for iOSに広告ブロック機能を標準搭載した。AppleのWebKit Content Blocker技術とEasyListフィルタリストを組み合わせ、拡張機能のインストールなしにサードパーティ広告とトラッカーの読み込み前ブロックを行う。既存のEnhanced Tracking Protectionとは独立した機能で、「Settings > Browsing > Ad Blocker」から有効化する。iOSは拡張機能の仕組みがデスクトップ・Android版と異なるため、ブラウザへの直接統合という形を取った。サイト自身が配信する広告や検索結果内広告、Firefoxの新規タブページのスポンサーコンテンツは対象外で、デフォルトでは無効になっている。</div>
+        <div class="key-points">
+          <ul>
+            <li>AppleのWebKit Content BlockerとEasyListフィルタリストを組み合わせ拡張機能なしで広告読み込み前ブロックを実現</li>
+            <li>サイト自身が配信する広告・検索結果内広告・新規タブのスポンサーコンテンツは対象外、デフォルトはオフでオプトイン</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Mozilla Blog</span>
+          <span>⏱ 2 min read</span>
+          <span class="engagement">▲ 255</span>
+          <span>2026-09-01</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://thehackernews.com/2026/09/attackers-exploit-critical-jfrog.html">JFrog Artifactoryの認証バイパス脆弱性、パッチ公開から数日で実悪用が発生</a></h3>
+        </div>
+        <div class="summary">JFrogは8月28日、Artifactoryの認証バイパス脆弱性「CVE-2026-82329」(CVSS 9.8)を修正するバージョン7.161.20を公開したが、わずか数日後の9月1日には実際の悪用が確認された。脆弱性はクレデンシャル発行を担うJFrog Access内にあり、追加のjoinキーを設定していないインスタンスに割り当てられる「ファントムjoinキー」を悪用して管理者権限のアクセストークンを偽造できる。攻撃者はすでに管理者トークンを発行し、ユーザー・グループ・クレデンシャルセット・フェデレーションアクセス構成を列挙する行動が観測されている。</div>
+        <div class="key-points">
+          <ul>
+            <li>CVSSスコア9.8、認証不要でJFrog Accessの「ファントムjoinキー」を悪用し管理者トークンを偽造</li>
+            <li>パッチ版7.161.20の公開(8月28日)からわずか4日で実悪用を確認(9月1日)、影響範囲は7.111.4〜7.161.19の6系統</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>The Hacker News</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-01</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://simonwillison.net/2026/Sep/1/codex-libreoffice/">ChatGPT(旧Codex)デスクトップアプリ、キャッシュにLibreOffice一式を同梱していたことが発覚</a></h3>
+        </div>
+        <div class="summary">著名開発者Simon Willison氏が、OpenAIのデスクトップアプリ「ChatGPT」(旧Codex)のキャッシュフォルダを調査したところ、`codex-primary-runtime`に完全なPython環境・Node.js環境に加え、Poppler・git・LibreOfficeのネイティブバイナリ一式が同梱されていることを発見した。合計約1.7GBの容量を占め、設定フォルダにはこれらのバイナリの使い方をCodexに指示する「skill」ファイルも含まれる。クラウド処理に頼らずローカルでドキュメント処理を完結させる設計であることを示唆する発見だ。</div>
+        <div class="key-points">
+          <ul>
+            <li>`codex-primary-runtime`フォルダに完全なPython・Node.js環境とLibreOffice・Poppler・gitのネイティブバイナリを同梱、合計約1.7GB</li>
+            <li>バイナリの使い方をCodexに教える「skill」設定ファイルが同梱され、ローカル完結のドキュメント処理を示唆</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>simonwillison.net</span>
+          <span>⏱ 2 min read</span>
+          <span class="engagement">▲ 178</span>
+          <span>2026-09-01</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://www.worldlabs.ai/blog/atlas">World Labs、テキスト・画像・動画・3Dを統合した世界モデル「Atlas」を発表</a></h3>
+        </div>
+        <div class="summary">World Labsは9月1日、テキスト・画像・動画・3Dをネイティブに扱う「マルチモーダル自己回帰拡散トランスフォーマー」型の世界モデル「Atlas」を発表した。1枚〜数枚の参照画像から最長1分・1440p解像度の動画をカメラパス制御付きで生成でき、スパースな入力画像から点群やガウシアンスプラットなど明示的な3D表現を復元する機能も持つ。動画から時間方向のダイナミクスを学習し、「バレットタイム」的な視点変更やロボット向けのReal-to-Simワークフローにも対応する。</div>
+        <div class="key-points">
+          <ul>
+            <li>カメラパス追従の人間評価でGemini Omni FlashやFLUX 3など競合モデルに対し81〜93%の選好率を獲得</li>
+            <li>3D復元ではDTU・ETH3D・ScanNetの標準ベンチマークで専用モデルを上回る誤差率(AbsRel 25.3、競合は28.7〜47.7)を記録</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>World Labs Blog</span>
+          <span>⏱ 3 min read</span>
+          <span class="engagement">▲ 115</span>
+          <span>2026-09-01</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://github.com/janet-lang/janet/releases/tag/v1.42.0">Lispライク言語「Janet 1.42.0」リリース、GC関連バグ修正とドキュメント大幅改訂</a></h3>
+        </div>
+        <div class="summary">軽量Lispライク言語Janetのメジャーアップデート「1.42.0」がリリースされた。ネストした操作中にアクティブなfiberが関わるガベージコレクションの不具合や、fiberスタックポインタの陳腐化・二重解放など複数のメモリ管理バグを修正。bash・zsh・fish向けのシェル補完追加、pretty-printのフォーマット改善、int8_t・uint8_t・floatのゲッター追加なども含む。ドキュメントの大幅改訂も行われた。</div>
+        <div class="key-points">
+          <ul>
+            <li>fiberスタックポインタの陳腐化や二重解放など、ネストしたGC操作に起因する複数のメモリ管理バグを修正</li>
+            <li>18人の開発者が貢献し、うち10人が今回が初めてのコントリビューションだった</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 2 min read</span>
+          <span class="engagement">▲ 54</span>
+          <span>2026-09-01</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://wasmi-labs.github.io/blog/posts/wasmi-v2.0/">WebAssemblyインタプリタ「Wasmi 2.0」公開、v1.0比約2.2倍高速化</a></h3>
+        </div>
+        <div class="summary">WebAssemblyインタプリタ「Wasmi」のメジャーアップデート「2.0」が公開された。命令ディスパッチをDirect-Threaded・Indirect-Threaded・Switch-Loop・Call-Loopの4方式から選べるようにし、スタック経由の値の読み書きを3つのハードウェアレジスタでのアキュムレータ方式に置き換えるなど、内部アーキテクチャを刷新した。Apple M2 Proでのベンチマークでは1.0比で約2.2倍高速化し、Wasm3やStitchに匹敵する性能を達成したという。</div>
+        <div class="key-points">
+          <ul>
+            <li>Apple M2 Pro上のベンチマークでWasmi 1.0比約2.2倍高速化、Wasm3・Stitchに匹敵する性能水準に到達</li>
+            <li>単一のコンパイラ最適化修正だけでCoreMarkスコアが約50%改善したと報告</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>wasmi-labs.github.io</span>
+          <span>⏱ 2 min read</span>
+          <span class="engagement">▲ 12</span>
+          <span>2026-09-01</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://dbushell.com/2026/09/01/text-editor/">「もう昔ながらのエディタは作られない」——canvas・contenteditable・textareaの3方式を試して自作テキストエディタに挑んだ記録</a></h3>
+        </div>
+        <div class="summary">開発者David Bushell氏が、Sublime Textのようなエディタが今はもう作られていないという不満から自作テキストエディタに挑戦した記録を公開した。まず`&lt;canvas&gt;`要素への全描画を試みたが、アクセシビリティが皆無でブラウザ標準機能を活かせないため断念。次に`contenteditable="plaintext-only"`のdivへ切り替え、テキスト選択やundo/redoはブラウザ標準機能を利用できたが、大きなファイルでのパフォーマンスがブラウザごとに不安定だった。最終的に標準の`&lt;textarea&gt;`へ回帰し、表示中の行だけにMicroLighterでシンタックスハイライトを適用する構成に落ち着いた。</div>
+        <div class="key-points">
+          <ul>
+            <li>`spellcheck`などのブラウザ機能が入力レイテンシのスパイクを引き起こすことを発見し無効化</li>
+            <li>JavaScriptのネイティブ文字列長と`Intl.Segmenter`によるグラフェム分割の違いが絵文字処理で問題になることを実証</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>dbushell.com</span>
+          <span>⏱ 3 min read</span>
+          <span class="engagement">▲ 57</span>
+          <span>2026-09-01</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://qiita.com/yuji_yasuhara/items/99c589264a006658a15a">ゲーム制作にHerdrとgit worktreeを組み合わせた自立型マルチエージェント環境、調査待ち時間を21〜28分から数分へ短縮</a></h3>
+        </div>
+        <div class="summary">Godotゲーム「StarShooter」開発を題材に、AIコーディングエージェントをターミナル内で並行運用するツール「Herdr」とgit worktreeを組み合わせた自立型マルチエージェント環境を構築した記事。Herdrはtmuxライクなペイン管理に加え、ソケットAPI経由でペイン上のエージェントを外部から操作できる点が特徴。ワーカーごとに`~/.herdr/worktrees/&lt;repo&gt;/&lt;ticket-name&gt;`の専用worktreeを割り当て、`.git/kanban/`に置く共有かんばんボードで進捗を管理する。</div>
+        <div class="key-points">
+          <ul>
+            <li>同時進行チケットの上限を3〜4件と設定、それを超えるとレビュー滞留と衝突が増えると報告</li>
+            <li>ターミナル表示への依存をやめかんばんボードの状態変化で指示受信を確認する方式に変え、調査待ちの手待ち時間を21〜28分から数分へ短縮</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-01</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://zenn.dev/coji/articles/artifactshare-preview-claude-codex-cursor">会話セッションを止めずにClaude Code・Codex・Cursorへフィードバックを届けるCLI「Artifact Share Preview」公開</a></h3>
+        </div>
+        <div class="summary">個人開発者のcoji氏が、Claude Code・Codex・CursorのAIエージェントに会話セッションを止めずにフィードバックを届けるCLIツール「Artifact Share Preview」を公開した。`npx @artifactshare/cli preview ./report.html`でローカルサーバを起動し、ブラウザ上でクリックした要素にフィードバックを付ける。エージェント側は`preview next --wait 90`で受信し`preview done --stdin`で結果を返す仕組みで、3つのエージェントそれぞれ異なる方式(Claude Codeのバックグラウンドタスク再開、Codexのメッセージキュー注入、CursorのACP通知)でセッションを起こす。</div>
+        <div class="key-points">
+          <ul>
+            <li>通知には内容を含めずシグナルのみを送信し、エージェント自身が本文を取得する設計でセキュリティを確保</li>
+            <li>常駐デーモン不要で、`preview`コマンドごとに独立したサーバが起動する</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-01</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-frontend">Frontend</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://qiita.com/rana_kualu/items/83783c6dd3b4b51fa77f">JavaScript「using」宣言がStage 4到達、try-finallyによるリソース解放の手間から解放される</a></h3>
+        </div>
+        <div class="summary">リソースの明示的な解放を扱うJavaScriptの`using`宣言が2026年5月にStage 4へ到達し、主要ブラウザへの実装が出揃った。従来のtry-finallyによる手動解放を`using handle = ...`と書くだけでスコープ終了時に`Symbol.dispose()`が自動実行される形に置き換える。非同期リソースは`await using`で`Symbol.asyncDispose()`を呼ぶ。複数リソースは宣言と逆順に解放される。既存APIが`Symbol.dispose`を実装していない限り恩恵はなく、ライブラリ側の追従が今後の普及を左右する。</div>
+        <div class="key-points">
+          <ul>
+            <li>Firefox 141・Chrome 134・Safari Technology Preview 250で実装済み、主要ブラウザが出揃った</li>
+            <li>複数の`using`宣言は宣言と逆順に`[Symbol.dispose]`が呼ばれ、例外発生時も解放漏れを防ぐ</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-09-01</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/dely_jp/articles/22a2c10b2e130d">数億枚のレシピ画像を溜めるS3のストレージコストを55%削減、ストレージクラス使い分けで実現</a></h3>
+        </div>
+        <div class="summary">レシピ動画アプリ運営のdelyが、数億ファイル・数百TB規模のレシピ画像をS3に保存するコストを55%削減した事例を公開した。全量へのIntelligent-Tiering適用は監視料金(1,000オブジェクトあたり月0.0025ドル)が数十億オブジェクト規模では非現実的と判断し、アクセス頻度で2系統に分離。処理用途のみの低頻度画像はGlacier Instant Retrievalへ、ユーザー向けのアクセス頻度が読めない画像はIntelligent-Tieringへ移した。</div>
+        <div class="key-points">
+          <ul>
+            <li>低頻度画像をGlacier IRへ移行しGB単価を0.025ドルから0.005ドルへ80%削減</li>
+            <li>移行時に発生する大量リクエスト課金(Glacier IR移行1,000リクエストあたり0.02ドル)を当初見落としていたと言及</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-09-01</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/rickysb527/articles/spf-dkim-dmarc-roles">SPFとDKIMとDMARCの役割の違いを整理する——「どこから」「改ざんないか」「失敗時どうするか」の3層構造</a></h3>
+        </div>
+        <div class="summary">SMTPプロトコルは送信者アドレスを自由に偽装できてしまうという前提から出発し、それを防ぐSPF・DKIM・DMARCそれぞれの役割の違いを整理した解説記事。SPFは「どのサーバーから来たか」を検証する送信元IPのアローリスト、DKIMは秘密鍵で本文・ヘッダーに署名し公開鍵で検証する「改ざんされていないか」の確認、DMARCはSPFやDKIMの検証結果を踏まえ、失敗時にquarantineやrejectといった扱いをドメイン管理者が明示的に宣言する施行ポリシーだと位置づける。3つは互いに異なる問いに答えるものであり、単体では十分な保護にならないと結論づける。</div>
+        <div class="key-points">
+          <ul>
+            <li>SPFは送信元IPのアローリスト、DKIMは秘密鍵署名による本文改ざん検知、DMARCはSPF/DKIMの結果を踏まえた失敗時の施行ポリシーという役割分担</li>
+            <li>DMARCはSPF・DKIMいずれか(または両方)の検証結果に依存して機能するため、単体導入では効果が限定的と指摘</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-09-01</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/vs_codeairubber_duck.html">VS Codeに別AIモデルからセカンドオピニオンを得る実験的機能「Rubber Duck」搭載</a></h3>
+        </div>
+        <div class="summary">GitHub CopilotのVS Code拡張に、別のAIモデルからセカンドオピニオンを得る実験的機能「Rubber Duck」が実装された。同一モデルは同じ盲点を持ちレビューを見逃しやすいという課題に対し、Copilot Agent Hostセッション内で`/rubber-duck`と入力すると別モデルが計画段階でレビューする。2026年4月にGitHub Copilot CLIで先行実装された機能のVS Code版で、現在VS Code 1.135に実験的機能として搭載されている。</div>
+        <div class="key-points">
+          <ul>
+            <li>Copilot Agent Hostセッションで`/rubber-duck`と入力するだけで別AIモデルによるレビューを起動</li>
+            <li>実装・テスト段階ではなく計画段階でのエラー検出を狙う設計、VS Code 1.135に実験的機能として搭載</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-09-01</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://qiita.com/jqit_suwa/items/817a26e02cd1f08c7edd">スター6万のAgent Skillを導入したら呼び出しごとに9万トークン消費、自作スキルの28倍だった</a></h3>
+        </div>
+        <div class="summary">GitHubスター6万超のAgent Skill「last30days-skill」を導入し、自作の代替スキルと比較検証した記事。Reddit・X・YouTube・Hacker News・Polymarketなど19以上のソースから情報を集約し、エンゲージメント指標でスコアリングする多機能スキルだが、呼び出しのたびに約9万トークンを消費し、自作スキル(3,225トークン)の28倍に達した。実装はPythonファイル308個・32MBに対し、自作は7,096文字のSKILL.md 1本のみ。Python 3.12以上を要求する一方、システムPATHが3.11.9を指していたため実行できなかった原因も特定している。</div>
+        <div class="key-points">
+          <ul>
+            <li>起動コストは約9万トークンで、著者の自作スキル(3,225トークン)の28倍に達した</li>
+            <li>インストール済みかどうかより「ツールから見えているか」が重要という教訓、PATHが古いPythonを指していたことが実行失敗の原因だった</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-09-01</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://ersc.io/blog/martin-joins-ersc">分散バージョン管理「Jujutsu」作者、ストレージインフラ企業ERSCのCTOに就任</a></h3>
+        </div>
+        <div class="summary">分散バージョン管理システム「Jujutsu(jj)」の作者Martin von Zweigbergk氏が、ストレージインフラ企業East River Source Control(ERSC)のCTOに就任した。JujutsuはGoogleで2019年にサイドプロジェクトとして始まり、現在GitHub上で3万以上のスターを持つApache 2.0ライセンスのOSS。von Zweigbergk氏はJujutsuのコアメンテナー職を継続しながら、ERSCでは既存バージョン管理システムのスケーラビリティの限界に対応するインフラ開発を主導する。</div>
+        <div class="key-points">
+          <ul>
+            <li>Jujutsuは2019年にGoogleでのサイドプロジェクトとして始まり、GitHubスター3万超のApache 2.0 OSSに成長</li>
+            <li>von Zweigbergk氏はJujutsuのコアメンテナーを継続しつつERSC CTOを兼務</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>ERSC Blog</span>
+          <span>⏱ 2 min read</span>
+          <span class="engagement">▲ 156</span>
+          <span>2026-09-01</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
+
+      <div class="quick-link">
+        <span class="tag tag-data">Data</span>
+        <a href="https://www.publickey1.jp/blog/26/airedshiftdwhamazon_redshiftagent_toolkit_for_aws.html">Amazon RedshiftがAgent Toolkit for AWSと統合、AIエージェントによるDWH構築・集計分析が可能に</a>
+        <span class="quick-summary">— 専用スキルとMCPサーバー、ガードレールにより自然言語でのデータウェアハウス運用ができるようになった。</span>
+        <span class="meta">Publickey</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://mvakde.github.io/blog/44-on-arc-1/">学習コスト67セント・1.5時間の小型Transformerが、ARC-AGI-1評価セットで44%を達成し多くのLLMを上回る</a>
+        <span class="quick-summary">— RTX5090で1から学習し、テスト時学習と3D RoPE位置埋め込みでグリッド構造を扱う設計が寄与したという。</span>
+        <span class="meta">mvakde.github.io</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-oss">OSS</span>
+        <a href="https://blogs.kde.org/2026/08/31/this-month-in-kde-linux-august-2026/">KDE Linux、8月はホームフォルダのBtrfs自動スナップショット化とCJK+ベトナム語入力の標準対応を実装、Beta到達度85%に</a>
+        <span class="quick-summary">— DolphinからGUIでロールバックできる「kio-snapshot」を統合し、Dockerデーモンソケットのwheelグループ権限など2件のセキュリティ不備も修正した。</span>
+        <span class="meta">KDE Blog</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://www.norirobotics.com/">YC出資のNori Robotics、双腕ヒューマノイド「NORI A3」を1,688ドルで予約受付開始</a>
+        <span class="quick-summary">— 7+1自由度アームとペイロード1.5kg×2本、12mLiDARを搭載し2026年秋出荷予定、スキルはNori Labアプリで学習・共有できる。</span>
+        <span class="meta">Nori Robotics</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://zenn.dev/acntechjp/articles/930d899e62943e">偽のOpenAI互換モデルサーバーでGoogle ADK・Microsoft Agent Framework・Amazon Strandsを比較、ツール例外時の挙動に差</a>
+        <span class="quick-summary">— 通常時はほぼ同等だが、ADKは例外でエージェントを終了させる一方、MAF/Strandsはモデルへ返し自己修復を試みる設計だった。</span>
+        <span class="meta">Zenn</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://qiita.com/yama3133/items/ca7ac26f593b541b0ac0">AWS、ビジネス職向け新資格「AI Business Strategist(AIB-C01)」をベータ開始</a>
+        <span class="quick-summary">— 85問・4分野構成で実装経験は前提とせず、AI投資判断やガバナンスなど戦略面の力を測る。</span>
+        <span class="meta">Qiita</span>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="./" class="archive-link">🗂 過去のダイジェスト</a>
+    </footer>
+  </div>
+</body>
+</html>
