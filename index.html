@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tech News Daily — 2026-09-03</title>
+  <title>Tech News Daily — 2026-09-04</title>
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
   <link rel="icon" type="image/png" sizes="192x192" href="favicon.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -14,7 +14,7 @@
   <div class="container">
     <header>
       <h1>Tech News Daily</h1>
-      <div class="date">2026-09-03 (Thu)</div>
+      <div class="date">2026-09-04 (Fri)</div>
       <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
       <nav class="site-nav">
         <a href="./" class="active">📰 日刊ダイジェスト</a>
@@ -25,9 +25,9 @@
     </header>
 
     <div class="stats-bar">
-      <span>📰 21 articles</span>
-      <span>🏷 8 categories</span>
-      <span>📡 16 sources</span>
+      <span>📰 22 articles</span>
+      <span>🏷 6 categories</span>
+      <span>📡 17 sources</span>
     </div>
 
     <nav class="toc">
@@ -40,17 +40,27 @@
 
     <div class="numbers-bar">
       <div class="number-item">
-        <span class="number-value">215,128</span>
-        <span class="number-label">3サイトが機械生成した「ベストソフトウェア」ページの総数</span>
+        <span class="number-value">$12.93B</span>
+        <span class="number-label">NVIDIAによるHugging Face買収額</span>
       </div>
       <div class="number-item">
-        <span class="number-value">70%+</span>
-        <span class="number-label">Gemini 3.8 Flash Cyberの実環境脆弱性検出成功率(20言語)</span>
+        <span class="number-value">420Tbps</span>
+        <span class="number-label">AWS新太平洋海底ケーブル「Sta'O'Nuk」の伝送容量</span>
       </div>
       <div class="number-item">
-        <span class="number-value">2.8倍</span>
-        <span class="number-label">Cloudflareがzstd圧縮でキャッシュ対象アセットを圧縮した倍率</span>
+        <span class="number-value">72.6%</span>
+        <span class="number-label">GPT-6 AstraのOSWorld V2ベンチマークスコア(前モデル比+6.9pt)</span>
       </div>
+    </div>
+
+    <div class="weekly-keywords">
+      <div class="section-title">📊 今週のキーワード</div>
+      <div class="keyword-chips">
+        <span class="keyword-chip">AI業界M&amp;A</span>
+        <span class="keyword-chip">新フラッグシップモデル</span>
+        <span class="keyword-chip">インフラ巨額投資</span>
+      </div>
+      <div class="keyword-summary">今週はNVIDIAによるHugging Face買収(約129.3億ドル)を筆頭に、AI基盤企業の資本再編が相次いだ。Gemini 3.8 Flash、Claude Fable 5.1、GPT-6 Astraと主要ベンダーの新フラッグシップモデル発表も重なり、エージェント型コーディングやMCP関連の実運用知見を共有する記事が目立った。AWSの新型太平洋海底ケーブル「Sta'O'Nuk」やCloudflareのキャッシュ基盤刷新など、AI需要を支えるインフラ投資も続いている。</div>
     </div>
 
     <div class="section" id="top-stories">
@@ -59,65 +69,65 @@
       <div class="card featured deep-dive">
         <div class="card-header">
           <span class="tag tag-ai">AI</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/3-8-flash-and-3-8-flash-cyber/">DEEP DIVE: Google、汎用モデル「Gemini 3.8 Flash」とサイバーセキュリティ特化版「3.8 Flash Cyber」を発表</a></h3>
-        </div>
-        <div class="summary">Googleは9月2日、汎用モデル「Gemini 3.8 Flash」とサイバーセキュリティ特化版「Gemini 3.8 Flash Cyber」を発表した。3.8 Flashは前モデルの速度とコスト効率を保ちながら、ソフトウェアエンジニアリングと自律型エージェントタスク向けに強化した「最も知的なワークホースモデル」と位置づけられる。ソフトウェアエンジニアリングのベンチマークDeepSWE v1.1では、より大規模なフロンティアモデルの多くを、はるかに低いコストで上回ったという。Cyber版は脆弱性の発見と自動パッチ適用に特化し、Googleの検証済み防御担当者向けプログラム「Fairwind Program」経由の申請者にのみ提供される。ベンチマークCyberGymの脆弱性発見タスクではこれまでのモデルを上回るフロンティア級の性能を記録し、20のプログラミング言語にまたがる実環境の脆弱性検出では成功率70%を超えた。パッチ生成のCWE-Benchではpass@1が47.2%で、先行モデルに匹敵する精度をより低コストで達成したとしている。価格は標準3.8 Flashが2026年12月31日までの導入価格として入力100万トークン0.75ドル・出力3.75ドルで、以降は1.50ドル・7.50ドルに引き上げられる。プロンプトインジェクションへの耐性もGray Swanの計測で大幅に改善したという。開発者はGoogle AI Studio・Android Studio・Google Antigravity経由で3.8 Flashを利用でき、Cyber版はFairwind Programの審査を経た組織に限定される。</div>
-        <div class="editorial">🧠 脆弱性検出成功率70%やCyberGymでの好成績は社内ベンチマークの数字であり、実運用の攻撃対象がどこまでカバーされるかは第三者評価を待つ必要がある。Fairwind Program限定という提供形態は防御側だけが恩恵を受け攻撃側の悪用を防ぐ狙いだろうが、審査基準や対象国が明らかになっていない点は不透明さを残す。価格面では導入価格が年内限定というのも見逃せず、来年からのコスト計算はいまの好条件のままでは成り立たない。</div>
-        <div class="key-points">
-          <ul>
-            <li>CWE-Benchのパッチ生成でpass@1 47.2%を記録、先行モデルに匹敵する精度をより低コストで実現</li>
-            <li>20のプログラミング言語にまたがる実環境の脆弱性検出で成功率70%超を記録</li>
-            <li>標準3.8 Flashは2026年12月31日までの導入価格で入力100万トークン0.75ドル・出力3.75ドル、以降は2倍に値上げ</li>
-          </ul>
-        </div>
-        <div class="why-it-matters">💡 脆弱性スキャンや自動パッチ生成をパイプラインに組み込む開発者は、Cyber版のFairwind Program申請可否と、通常版の値上げ後コストを併せて検討する価値がある。</div>
-        <div class="meta">
-          <span>Google Blog</span>
-          <span>⏱ 6 min read</span>
-          <span class="engagement">▲ 753</span>
-          <span>2026-09-02</span>
-        </div>
-      </div>
-
-      <div class="card featured">
-        <div class="card-header">
-          <span class="tag tag-product">Product</span>
           <span class="content-type">💰 ビジネス</span>
-          <h3><a href="https://www.axios.com/2026/09/02/google-ad-tech-antitrust-remedies">米連邦地裁、Googleに広告技術事業の分割を命じず——独占認定は維持しつつ業務慣行の変更のみ指示</a></h3>
+          <h3><a href="https://blogs.nvidia.com/blog/nvidia-to-acquire-hugging-face/">DEEP DIVE: NVIDIA、AIモデル共有プラットフォーム「Hugging Face」を約129.3億ドルで買収へ</a></h3>
         </div>
-        <div class="summary">米連邦地裁のLeonie Brinkema判事は9月2日、司法省が求めていたGoogle広告技術事業の売却命令を退けた。2025年4月に同判事はGoogleが広告主向けエクスチェンジ市場で違法な独占状態にあると認定していたが、司法省が求めた売り手側取引所AdXおよび広告サーバーDFPの分離売却は命じず、業務慣行の変更のみを命じた。具体的な是正措置の内容はまだ示されていない。判決は1兆ドル規模とされる世界の広告市場に影響を与えるもので、Googleにとっては独占認定を維持されながらも事業解体を回避した大きな勝利となった。</div>
+        <div class="summary">NVIDIAは9月3日、AIモデル共有プラットフォーム「Hugging Face」を約129.3億ドルで買収すると発表した。Hugging Faceは1800万人の開発者・研究者を抱え、300万件のモデルと50万件のデータセット、100万件のアプリケーションをホストする、オープンウェイトAIの事実上の集積地だ。20万社以上がモデルの発見・デプロイに利用している。NVIDIAはこれまでにも500以上のモデルと250以上のデータセットをHugging Faceへ提供してきた最大のコントリビューターであり、買収は既存の関係を資本関係へ格上げする形になる。CEOのジェンスン・フアン氏は「共にAIをより開かれた、より高性能で、よりアクセスしやすいものにする」と述べた。NVIDIAは買収後もHugging Faceのマルチクラウド・マルチアクセラレータ対応を維持すると説明しており、開発者はモデル・フレームワーク・クラウド・計算基盤を自由に選べる立場を保つとしている。NVIDIA製ハードウェアの利用が必須になることはないという。買収の狙いは、GPUという計算資源のレイヤーだけでなく、その上に乗る開発者エコシステムとモデル流通の中核を押さえることにある。競合するAMDやGoogleがそれぞれ独自のモデルハブ戦略を持つ中、Hugging Faceという「中立的」プラットフォームをNVIDIA傘下に置くことは、業界のオープンモデル流通における影響力構造を大きく塗り替える可能性がある。</div>
+        <div class="editorial">🧠 NVIDIAが「中立性を維持する」と明言した点は評価できるが、買収後の実際のガバナンス構造や、競合GPUベンダーのモデルがどこまで平等に扱われ続けるかは、契約条件が明らかになるまで判断を保留すべきだ。実測ではNVIDIAは既にHugging Face最大のコントリビューターであり、資本の主従関係が変わっても実務上の影響は限定的という見方もできる。ただし、オープンモデルの「集積地」が特定のハードウェアベンダーの傘下に入ること自体が、独占禁止当局の関心を集める可能性は高い。</div>
         <div class="key-points">
           <ul>
-            <li>2025年4月の独占認定を維持しつつ、司法省が求めたAdX・DFPの分離売却は命じず業務慣行の変更のみを指示</li>
-            <li>判決は1兆ドル規模とされる世界の広告技術市場の構造に影響、具体的な是正措置の内容は今後示される見通し</li>
+            <li>Hugging Faceは1800万人の開発者が利用し、300万件のモデル・50万件のデータセット・100万件のアプリケーションをホスト</li>
+            <li>NVIDIAはこれまでに500以上のモデルと250以上のデータセットをHugging Faceへ提供してきた最大級のコントリビューター</li>
+            <li>買収額は約129.3億ドルで、買収後もマルチクラウド・マルチアクセラレータ対応の維持を約束</li>
           </ul>
         </div>
+        <div class="why-it-matters">💡 Hugging Face上でモデルを配布・利用する開発者は、今後のガバナンス方針や利用規約の変更、NVIDIA以外のハードウェアベンダーとの関係がどう扱われるかを注視する必要がある。</div>
         <div class="meta">
-          <span>Axios</span>
-          <span>⏱ 2 min read</span>
-          <span>2026-09-02</span>
+          <span>NVIDIA Blog</span>
+          <span>⏱ 4 min read</span>
+          <span class="engagement">🔖 11</span>
+          <span>2026-09-03</span>
         </div>
       </div>
 
       <div class="card featured">
         <div class="card-header">
-          <span class="tag tag-data">Data</span>
-          <span class="content-type">🔬 研究</span>
-          <h3><a href="https://trellner.com/reports/manufactured-sources-behind-ai-recommendations/">機械生成の「ベストソフトウェア」ページ21万件超がPerplexityに権威ある情報源として引用されていたと判明</a></h3>
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://openai.com/index/gpt-6-astra/">OpenAI、新フラッグシップ「GPT-6 Astra」を発表——Brockman氏「AGI時代の始まり」</a></h3>
         </div>
-        <div class="summary">調査会社TrellnerがPerplexityの引用ソースを分析した結果、worldmetrics.org・wifitalents.com・gitnux.orgの3サイトが機械生成した「ベストソフトウェア」ページ計215,128件が、AIの回答で権威ある情報源として引用されていることが判明した。3サイトはCloudflareの同一ネームサーバーや同一テンプレートを共有し、共通運営が疑われる。380のソフトウェアカテゴリで検証したところ、Perplexityはこれら3サイトを合計181回引用し、全体の2.4%を占めた。引用先の6割近くがTrancoランキング10万位以下、23.4%はランキング圏外のドメインだったという。</div>
+        <div class="summary">OpenAIは9月3日、最新の主力モデル「GPT-6 Astra」を発表した。GPT-5.6 Solに代わる新フラッグシップで、Greg Brockman社長は「AGI時代の始まり」と位置づけた。エージェント型コンピュータ操作のベンチマークOSWorld V2-Offlineでは72.6%を記録し、Solの65.7%を上回った。113タスクの実務的コーディング評価DeepSWE v1.1でも74.1%とSolの70.8%を上回る。数学のFrontierMath Tier 4は97.6%、脆弱性発見のExploitBenchは100%に達し、OpenAIの安全基準で初めて「Critical」評価を受けたモデルとなった。ChatGPT Plus/Pro/Business/Enterprise、API、AWS経由で数日以内に順次提供される。</div>
         <div class="key-points">
           <ul>
-            <li>3サイト合計で「/best/カテゴリ名-software/」形式のページを各7万〜7.2万件、計21万件超を機械生成</li>
-            <li>Perplexityの引用先の59%がTrancoランキング10万位以下、23.4%はランキング圏外で信頼性の低いドメインに偏っていた</li>
+            <li>価格は入力100万トークン10ドル・出力50ドルで、2.5倍速の高速モードは同倍額に設定</li>
+            <li>サイバー攻撃能力はChatGPT/API版では分類器と監視で制限、フル機能は防御担当者向けプログラム「Daybreak Blue」内に限定</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Trellner Research</span>
+          <span>OpenAI</span>
           <span>⏱ 3 min read</span>
-          <span class="engagement">▲ 267</span>
-          <span>2026-09-02</span>
+          <span class="engagement">▲ 1055</span>
+          <span>2026-09-03</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/awsstaonuk420tbps2029.html">AWS、新たな太平洋海底ケーブル「Sta'O'Nuk」発表。420Tbps、2029年に稼働へ</a></h3>
+        </div>
+        <div class="summary">AWSは9月3日、日米間を結ぶ新たな太平洋横断海底ケーブル「Sta'O'Nuk」を発表した。20対の光ファイバーで構成し、伝送容量は420Tbpsに達する。稼働開始は2029年を予定する。現行の日米間海底ケーブル(約25〜30本)は米側がカリフォルニア・オレゴン、日本側が千葉・三重に集中しており、自然災害や船舶事故、地政学リスクへの耐性が課題だった。Sta'O'Nukは米側の陸揚げ地点をワシントン州に新設し、集中リスクを分散する。ケーブル名はワシントン州の先住民族クイノート族の言語で「稲妻の蛇」を意味し、同部族政府と共同でプロジェクトを進めた。</div>
+        <div class="key-points">
+          <ul>
+            <li>物理層で量子暗号、データリンク層でMACsec、トランスポート層でTLS/SSLまたはQUICを重ねる多層防御構成</li>
+            <li>現行の日米間海底ケーブル約25〜30本は米側カリフォルニア・オレゴン/日本側千葉・三重に集中、新規陸揚げ地点で単一障害点を分散</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-03</span>
         </div>
       </div>
 
@@ -128,21 +138,60 @@
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-ai">AI</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://developer.meta.com/ai/models/muse-spark/">Meta、長時間稼働エージェント向けコーディングモデル「Muse Spark 1.3」を発表</a></h3>
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://blog.rust-lang.org/2026/09/03/Rust-1.98.1/">Rust 1.98.1リリース——1.98.0のvtable生成ミスコンパイルを修正</a></h3>
         </div>
-        <div class="summary">Metaは長時間稼働のエージェント型ワークフローと競技プログラミング水準のコーディングに特化した新モデル「Muse Spark 1.3」を発表した。100万トークンのコンテキストウィンドウを持ち、動画・画像・文書のネイティブなマルチモーダル入力に対応する。複数エージェントの協調やコンピュータ操作によるソフトウェア構築も可能で、Meta Model API・ターミナル型マルチエージェントツール「Muse Code」・OpenRouter経由で利用できる。</div>
+        <div class="summary">Rustは9月3日、1.98.1をリリースした。1.98.0で発生していたトレイトオブジェクトのvtable生成に関する重大なミスコンパイルを修正する更新で、本来関数ポインタが入るべき箇所にヌルポインタが生成される不具合があった。未定義動作によりセグメンテーションフォルトなど予期しない挙動を招く可能性があったため、新機能を含まない緊急の安定性・正確性修正のみのリリースとなった。</div>
         <div class="key-points">
           <ul>
-            <li>コンテキストウィンドウ100万トークン、価格は入力100万トークン1.25ドル・キャッシュ入力0.15ドル・出力4.25ドル</li>
-            <li>複数のコーディング評価でフロンティアモデルに匹敵する性能、実行環境を伴う視覚的推論にも対応</li>
+            <li>1.98.0のトレイトオブジェクトvtableで関数ポインタの代わりにヌルポインタが生成される不具合を修正</li>
+            <li>新機能追加なしの安定性修正のみ、`rustup update stable`で即座に適用可能</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Meta AI</span>
+          <span>Rust Blog</span>
           <span>⏱ 2 min read</span>
-          <span class="engagement">▲ 291</span>
+          <span>2026-09-03</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-data">Data</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://pola.rs/posts/announcing-polars-2/">Polars 2.0プレリリース——ストリーミングエンジンが既定化し5倍高速に</a></h3>
+        </div>
+        <div class="summary">DataFrameライブラリ「Polars」の2.0プレリリースが公開された。最大の変更は全`LazyFrame`クエリでストリーミングエンジンを既定にしたことで、典型的なユースケースで約5倍の高速化とメモリ削減を実現する。ただしストリーミングエンジンはjoinやgroup_byで行順序を保持しないため、`maintain_order=True`を明示しない限り後方互換性が崩れる。`is_in`での型の暗黙変換拒否や、水平結合での行数不一致検証など、早期にエラーを検出する厳格化も進めた。</div>
+        <div class="key-points">
+          <ul>
+            <li>ストリーミングエンジンの既定化により典型ユースケースで約5倍高速化、ただしjoin/group_byの行順序保持には`maintain_order=True`が必要</li>
+            <li>`AttributeRemovedError`/`ArgumentRemovedError`など新しい例外型で非推奨API使用時に移行方法を案内</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Polars Blog</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-02</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://victoriametrics.com/blog/go-swiss-table-map/">GoのマップはどうSwiss Tableで動くか——制御バイトとSIMD比較の内部構造を解説</a></h3>
+        </div>
+        <div class="summary">VictoriaMetricsのブログが、Go 1.24で刷新されたマップ実装「Swiss Table」の内部構造を解説する。従来のバケット連結方式は依存ポインタの読み出しが発生し速度低下とパディングによるメモリ浪費を招いていたが、新方式は8スロット単位の「グループ」を64ビットの制御ワードで管理し、SIMD命令で8スロットを同時比較できる。Go開発チームの報告では、マップ操作はGo 1.23比で最大60%高速化した一方、アプリ全体では幾何平均で約1.5%のCPU時間改善にとどまるという。</div>
+        <div class="key-points">
+          <ul>
+            <li>ハッシュ値をH1(テーブル/グループ選択用の上位ビット)とH2(スロットのフィルタ用下位7ビット)に分割し、制御バイトでSIMD比較を可能にする設計</li>
+            <li>負荷率7/8を閾値にテーブルを拡張、ディレクトリ構造により全体再構築せず一部テーブルのみ再配分できる</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>VictoriaMetrics Blog</span>
+          <span>⏱ 4 min read</span>
           <span>2026-09-02</span>
         </div>
       </div>
@@ -151,80 +200,40 @@
         <div class="card-header">
           <span class="tag tag-infra">Infra</span>
           <span class="content-type">📜 解説</span>
-          <h3><a href="https://diary.sorah.jp/2026/09/03/dsql-in-action">Aurora DSQLをRailsアプリで運用した知見——楽観的並行性制御ゆえのトランザクション失敗頻発とスキーマ制約</a></h3>
+          <h3><a href="https://tech-blog.monotaro.com/entry/2026/09/03/090000">壊してもいいデータベースを数秒で——モノタロウがZFSで作るDBブランチ基盤</a></h3>
         </div>
-        <div class="summary">AWSのサーバーレスRDB「Aurora DSQL」をRailsアプリで運用した知見を報告する記事。DynamoDBに近い楽観的並行性制御(OCC)を採用しているため、通常のPostgreSQLよりトランザクション失敗が頻発し、`SerializationFailure`を捕捉した指数バックオフ再試行の実装が必須になる。SAVEPOINT非対応でネストしたトランザクションが組めない、スキーマ上限が1クラスタ10個(実質7個)などの制約も報告している。</div>
+        <div class="summary">モノタロウの技術ブログは、共有DB環境でのE2Eテスト並列実行の壁をZFSで解決した事例を報告する。テストごとに固定ユーザーへ依存する設計のため並列実行できず、他人のテストデータで検証が壊れる問題があった。NeonやAuroraなどのクラウドサービスではなく、既存インフラのZFSストレージ層でコピーオンライトを活用し、MySQL自体には手を加えずにDBブランチを実現した。ブランチ作成のAPI応答は約0.1秒、MySQL接続可能になるまで約1.6〜2.5秒、TB級データからのクローン直後のディスク消費はわずか2.74MBだったという。</div>
         <div class="key-points">
           <ul>
-            <li>Azure-AWS間のリージョン間レイテンシは6ms(eastus↔us-east-1)〜42ms(westcentralus↔us-west-2)と7倍の差がありCI実行時間に影響</li>
-            <li>32テーブル・56インデックスの作成に約90秒を要し、うち50秒は非同期インデックス完了待ちだった</li>
+            <li>稼働中のスナップショットは「正常終了していない状態と同じ」ため、InnoDBクラッシュリカバリ済みのベースラインを用意し起動時間を十数秒から2秒に短縮</li>
+            <li>リセット操作は約1.3秒で完了、ZFSのスナップショット・クローン機能によりデータ量に関わらず一瞬でクローンを作成可能</li>
           </ul>
         </div>
         <div class="meta">
-          <span>diary.sorah.jp</span>
+          <span>モノタロウ Tech Blog</span>
           <span>⏱ 3 min read</span>
-          <span class="engagement">🔖 30</span>
+          <span class="engagement">🔖 90</span>
           <span>2026-09-03</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-ai">AI</span>
-          <span class="content-type">🔬 研究</span>
-          <h3><a href="https://zenn.dev/knowledgesense/articles/ad123283bdea26">Google・Purdue大提唱の「SKILL.state」、会話履歴の代わりに型付き実行状態だけを渡しエージェントの劣化を防ぐ</a></h3>
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://www.phoronix.com/news/CERN-Goes-Debian-Leaving-RHEL">CERN、産業用制御コンピュータ2,200台超をRHEL系からDebianへ移行</a></h3>
         </div>
-        <div class="summary">GoogleとPurdue大学の研究者が、長時間稼働するAIエージェントが会話が長引くほど性能低下する問題への対策として、会話履歴の代わりに型付きスキーマで実行状態だけを保持する手法「SKILL.state」を提案した。200ステップの倉庫作業タスクでは、従来手法が617万トークンを消費し正解率0.74〜0.88だったのに対し、SKILL.stateは12万トークンで0.94の精度を達成した。</div>
+        <div class="summary">CERNは、産業用制御コンピュータおよび組込み機器2,200台以上をRHEL系からDebian 13へ移行すると発表した。長年Red Hat系のScientific Linuxを使用し2015年にCentOSへ切り替えた経緯があるが、CentOS Streamへの移行は見送りDebianを選んだ。決め手はRHEL系ディストリビューションのデフォルトコンパイラフラグ`-march=x86-64-v2`で、CERNの旧世代ハードウェアが事実上サポート対象外になる「強制的な陳腐化」と判断した。移行完了目標は2026年末で、対象は加速器制御用の産業用コンピュータに限定され、データセンターや実験用計算基盤は引き続きRHEL/AlmaLinuxを使用する。</div>
         <div class="key-points">
           <ul>
-            <li>ノイズを含む条件下でもSKILL.stateは0.97以上の精度を維持、比較手法は0.53まで低下した</li>
-            <li>モデルの推論結果は破棄しJSONパッチで更新した状態のみを次ターンへ引き継ぐ設計で、決定的な手順が定まったタスクに向くと位置づける</li>
+            <li>移行対象は加速器制御系の産業用コンピュータ・組込み機器2,200台以上に限定、データセンターはRHEL/AlmaLinux継続</li>
+            <li>Debianの自動パッケージビルド・公開ツールや複数バージョン管理機能の不足など、移行過程でツールチェーンのギャップが判明</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Zenn</span>
+          <span>Phoronix</span>
           <span>⏱ 3 min read</span>
-          <span>2026-09-01</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-security">Security</span>
-          <span class="content-type">🔒 セキュリティ</span>
-          <h3><a href="https://www.bleepingcomputer.com/news/security/papercut-releases-second-emergency-patch-for-exploited-flaws/">PaperCut、未認証RCEチェーンの脆弱性に3度の緊急パッチ——Huntressが実悪用を確認</a></h3>
-        </div>
-        <div class="summary">印刷管理ソフトPaperCutは、未認証のままリモートコード実行が可能な脆弱性チェーンに対し、8月27日から29日にかけて3度にわたる緊急パッチをリリースした。認証バイパスの`CVE-2026-81578`(CVSS 8.8)と、設定パラメータの操作でJavaバイトコードを実行できる動的クラスロードの不備`CVE-2026-82078`(CVSS 9.4)を組み合わせ、事前認証のRCEチェーンとして悪用可能。セキュリティ企業Huntressは2件の顧客環境で実際の悪用を確認したと報告している。</div>
-        <div class="key-points">
-          <ul>
-            <li>最初のパッチでは不十分と判明し、8月29日にWindows・Linux・macOS向けのバージョン24・25・26全てに追加の堅牢化パッチを適用</li>
-            <li>Huntressがフルチェーンでの実悪用を2件の顧客環境で確認、未認証の管理系エンドポイントが起点になっていた</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>BleepingComputer</span>
-          <span>⏱ 2 min read</span>
-          <span>2026-08-28</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-frontend">Frontend</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://zenn.dev/cybozu_frontend/articles/web_standards_trends_202608">Web標準動向2026年8月版——XSLT段階的廃止、CSS `@supports at-rule()` が出そろう</a></h3>
-        </div>
-        <div class="summary">サイボウズフロントエンドチームによる2026年8月のWeb標準動向まとめ。HTMLではXSLTの段階的廃止が進み、Chrome152で非推奨化トライアルが始まり完全削除はChrome176・Firefoxも2027年8月に予定される。CSSでは`@supports at-rule()`によるアットルールの機能検出がFirefox157・Chrome148・Safari Technology Preview251で出そろい、ミックスイン構文が`@mixin`/`@private`ブロックへ統一された。JavaScriptでは`Iterator.prototype.join`がStage4に到達した。</div>
-        <div class="key-points">
-          <ul>
-            <li>XSLTはChrome152で非推奨化トライアル開始、完全削除はChrome176(2027年8月)・Firefoxも同時期を予定</li>
-            <li>ワイルドカードクラスセレクタ`.foo-*`がユーティリティファーストのCSS設計向けに承認された</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Zenn</span>
-          <span>⏱ 2 min read</span>
-          <span>2026-09-01</span>
+          <span>2026-09-02</span>
         </div>
       </div>
     </div>
@@ -234,35 +243,36 @@
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
-          <span class="content-type">🔬 研究</span>
-          <h3><a href="https://qiita.com/songchong/items/64a8710cffb39963c2b3">MCP vs. API、日本企業56システムを調査——MCP提供14件は全てAPIも併設、単体提供はゼロ</a></h3>
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://www.itmedia.co.jp/aiplus/article/2609/04/2000001152/">複数のAIサービスで障害発生——ChatGPT／Claude／Grokが深夜に相次いでダウン</a></h3>
         </div>
-        <div class="summary">日本企業56システムを対象に、MCPと従来型API(REST・SOAP・GraphQL・gRPC)の実装実態を調査した記事。何らかのAPIを提供する47システムのうちREST採用が31、SOAP3、GraphQL1、gRPCは0だった一方、MCPサーバーを提供するのは14システムにとどまり、その全てが従来型APIも併せて提供していた。MCP単体のみを提供するシステムはゼロで、「MCPはAPIの代替ではなく補完的な発見メカニズム」と結論づけている。</div>
+        <div class="summary">9月3日深夜から4日未明にかけ、Claude・Grok・ChatGPTの主要AIサービスが相次いで接続障害に陥った。Claude・Grokは9月3日午後10時30分頃から、ChatGPTは4日午前0時前から発生し、Claudeは午前1時16分、ChatGPTは午前1時55分、Grokは午前2時7分にそれぞれ復旧した。3社とも原因は公表されておらず、OpenAIは復旧後にCodexユーザーの一部でモバイル端末との再ペアリングが必要になる場合があると案内している。</div>
         <div class="key-points">
           <ul>
-            <li>MCP提供14システムは全てAPIも併設、MCP単体提供は0件という結果からAPI代替ではなく補完機能と位置づけ</li>
-            <li>呼び出し回数の上限を明記していたのは56システム中25件のみで、技術的制約というより公開方針の問題と指摘</li>
+            <li>Claude・Grokは9月3日22時30分頃、ChatGPTは4日0時前から障害発生、復旧は1時16分〜2時7分の間にずれて完了</li>
+            <li>3社とも障害原因は「不明」として具体的な説明はなく、OpenAIのみCodexの再ペアリングが必要になる場合があると案内</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Qiita</span>
-          <span>⏱ 3 min read</span>
-          <span>2026-09-03</span>
+          <span>ITmedia</span>
+          <span>⏱ 2 min read</span>
+          <span class="engagement">🔖 45</span>
+          <span>2026-09-04</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-security">Security</span>
+          <span class="tag tag-ai">AI</span>
           <span class="content-type">📜 解説</span>
-          <h3><a href="https://zenn.dev/ymotongpoo/books/chainguard-image-toolchain">Dockerfileに頼らないセキュアなコンテナイメージ構築——Wolfi OS・melange・apkoのツールチェーンを11章で解説</a></h3>
+          <h3><a href="https://zenn.dev/miogawa/articles/09bed306fc615a">AIエージェント時代にデータサイエンティストは生き残れるのか——4度目の希少性剥奪と職務の二極化</a></h3>
         </div>
-        <div class="summary">Wolfi OS・melange・apkoを使ってDockerfileに頼らずセキュアなコンテナイメージを構築する手法をまとめたZenn本。ソースコードをmelangeでAPKパッケージ化し、それをapkoでコンテナイメージへ組み立ててレジストリへ配信する一連のワークフローを、基礎概念から実践的な運用まで11章・約3.4万字で解説する。再現性の低さというDockerfileの課題への対応がテーマ。</div>
+        <div class="summary">AIエージェント時代にデータサイエンティストという職種が生き残れるかを論じるZenn記事。著者は、職名自体は存続するが中身は総取り替えされると主張する。2008年の職名確立以降、AutoMLによる特徴量エンジニアリングの自動化、AIコーディングによる定石作業の自動化と、これまで2度にわたり希少性が剥がされてきた経緯を辿り、現在は「数学基盤の精度追求型」と「ソフトウェア工学基盤のエージェント運用型」への二極化が進んでいると分析する。</div>
         <div class="key-points">
           <ul>
-            <li>melangeでソースをAPKパッケージ化、apkoでイメージ組み立てという2段階のツールチェーンでDockerfileを置き換える設計</li>
-            <li>全11章・約3.4万字構成で、基礎概念からChainguard Imagesの実運用までを段階的にカバー</li>
+            <li>米労働統計局予測では2024年24.6万人から2034年に32.8万人へ33.5%増、テック求人全体が3割減る中でも過去3年で15%増</li>
+            <li>職務は「数学基盤で精度を追求する型」と「ソフトウェア工学基盤で本番AIシステムを構築する型」の二極化が進行中と分析</li>
           </ul>
         </div>
         <div class="meta">
@@ -274,41 +284,42 @@
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-ai">AI</span>
-          <span class="content-type">👀 注目</span>
-          <h3><a href="https://qiita.com/jqit_suwa/items/c0f5b86dfb8a3106cbaf">Claude Fable 5.1、`tool_choice`に"any"/"tool"指定でHTTP 400エラーが発生する破壊的変更を発見</a></h3>
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://future-architect.github.io/articles/20260903a/">「レビューがしんどい」の正体を、認知的負債から考えてみた</a></h3>
         </div>
-        <div class="summary">Claude Fable 5.1で`tool_choice`に`"any"`または`"tool"`を指定するとHTTP 400エラー(`type "tool" and "any" are not supported for this model`)が返るようになったことを報告する記事。Messages API・Batch API・トークンカウントAPIの全てで発生する破壊的変更で、構造化出力を強制する目的でtool_choiceを使う一般的なエージェント実装パターンに影響する。キャッシュ読み込み価格が100万トークン1.00ドルから0.25ドルへ下がった値下げ告知に気を取られ、この変更を見落としやすいと注意を促している。</div>
+        <div class="summary">AI駆動開発の普及でコードレビューが過大な負担になった構造を「認知的負債」の観点から分析する記事。AIエージェント使用時のPR変更行数は293行と、不使用時の157行から倍増し、エージェントが変更内容を詳細に説明する冗長なPR文が判断の重要度を隠す。一見整ったAI生成コードは表面的な誤りが少なく、レビュワーは深層の問題を探すのに余計な注意力を要する。著者はThoughtWorksらが提案する自動チェックやレビューAI導入だけでなく、Docs as Codeによるドキュメンテーションの重要性が見過ごされていると指摘する。</div>
         <div class="key-points">
           <ul>
-            <li>Messages API・Batch API・トークンカウントAPIの3系統全てで`tool_choice: "any"`/`"tool"`指定時に400エラーが発生</li>
-            <li>移行前に既存コードで`tool_choice`の使用箇所を検索し、Anthropicの移行ガイドで代替手段を確認するよう推奨</li>
+            <li>AIエージェント使用時のPR変更行数は293行、不使用時の157行からほぼ倍増し確認負荷が増大</li>
+            <li>Technology Radarの定義する「実装とチーム共通理解のギャップ」を認知的負債の核心とし、Docs as Codeの活用を提言</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Qiita</span>
-          <span>⏱ 2 min read</span>
-          <span>2026-09-02</span>
+          <span>future-architect.github.io</span>
+          <span>⏱ 3 min read</span>
+          <span class="engagement">🔖 17</span>
+          <span>2026-09-03</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
           <span class="tag tag-ai">AI</span>
-          <span class="content-type">🔬 研究</span>
-          <h3><a href="https://www.ipa.go.jp/jinzai/ics/core_human_resource/final_project/2026/pm_ai.html">IPA、GPU非搭載の10年前サーバー+OSSのみでオンプレミスAI基盤を構築しクローズド環境での実務適用を実証</a></h3>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://dev.classmethod.jp/articles/webmcp-introduction/">WebMCPがアツいので見てほしい——サイトが自らツールを公開するWeb API</a></h3>
         </div>
-        <div class="summary">IPAが、GPUを積まない10年前のサーバーとOSSのみでオンプレミスAI基盤を構築し、クローズド環境でAIを組織の実務に組み込めるかを検証した実証事業。AI RMF・Futures Toolkit・ISO/IEC42001の3つの国際フレームワークと、5層構造の独自枠組み「ICS-XAF」を用い、モデル実装・認証・通信の暗号化・ソフトウェアサプライチェーン・監査ログなど21のテストシナリオで検証した。AIDE・SBOM・Lynis・AI-IDEといったツールで複数のセキュリティ層を確認したという。</div>
+        <div class="summary">ブラウザ内のAIエージェントに対し、Webサイトが自身の機能を構造化された「ツール」として公開するWeb API「WebMCP」を紹介する記事。従来のMCPはユーザー側での接続登録や認証が必要でハードルが高く、Browser Useのように画面からAIが操作を推測する方式は複雑なUIで精度が落ちる課題があった。WebMCPは宣言型(既存HTMLフォームへの属性追加)と命令型(JavaScriptでの直接定義)の2方式を持ち、サイト側が「このボタンは何か」「どの順番で入力するか」を明示できるためUI変更の影響を受けにくい。</div>
         <div class="key-points">
           <ul>
-            <li>GPU非搭載の10年前サーバーとOSSのみで構築、クラウド依存を前提としないオンプレミスAI基盤の実現可能性を検証</li>
-            <li>21のテストシナリオをAI RMF・Futures Toolkit・ISO/IEC42001の3フレームワークで評価、独自枠組み「ICS-XAF」を新たに定義</li>
+            <li>宣言型(既存HTMLフォーム属性)と命令型(JavaScript直接定義)の2方式を提供し、人間とAIが同じ画面を共有しながら操作を委譲できる</li>
+            <li>模倣サイトによる偽ツール公開や、曖昧な指示でのツール誤選択などセキュリティ・信頼性面の課題も指摘</li>
           </ul>
         </div>
         <div class="meta">
-          <span>IPA</span>
+          <span>Classmethod</span>
           <span>⏱ 3 min read</span>
-          <span class="engagement">🔖 24</span>
+          <span class="engagement">🔖 55</span>
           <span>2026-09-02</span>
         </div>
       </div>
@@ -319,43 +330,43 @@
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
-          <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://forest.watch.impress.co.jp/docs/news/2137283.html">定番ネットワーク診断ツールが3世代目「NetEnum6」へ、IPv6対応と機器自動判別・パケット解析を統合</a></h3>
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://github.com/audacity/audacity/releases/tag/Audacity-4.0.0">音声編集ソフトAudacity 4.0.0リリース——UIをQtで全面刷新、クリップ単位編集に対応</a></h3>
         </div>
-        <div class="summary">Windows向けのネットワーク診断ツール「NetEnum」シリーズが3世代目となる「NetEnum6」としてv1.0.0を8月31日に公開した。IPv6対応やSNMP/mDNS/SMBを使った接続機器の自動判別、TCP/UDPポートスキャン、パケットキャプチャとHTTP/1.x・TLSのプロトコル解析、SVG/HTML形式でのネットワーク構成の可視化などを1本に統合した。レポートはJSON・HTML・PDF形式で出力できる。</div>
+        <div class="summary">オープンソースの音声編集ソフト「Audacity」がメジャーアップデート版4.0.0をリリースした。インターフェースをQtベースで全面刷新し、高DPI描画とカスタマイズ可能なツールバー・パネルに対応する。クリップ単位での直接選択・複数クリップ編集・グルーピングを可能にする新しい編集モデルを採用し、Modern・Classic・Musicの3種類のワークスペースレイアウトも用意した。一方でSync-Lock機能を廃止し、VST2・VAMP・LADSPAプラグインのサポートを打ち切るなど、Audacity 3からの後方互換性を一部犠牲にしている。</div>
         <div class="key-points">
           <ul>
-            <li>SNMP・mDNS・SMBを用いてNAS・プリンター・ルーター・IoT機器などを自動分類する機能を搭載</li>
-            <li>Windows 10/11の64bit版のみ対応、旧バージョンの継続利用にはNetEnum5が必要</li>
+            <li>Select・Envelope・Draw・Multi-toolの各モードを廃止し、コンテキストに応じた操作へ統合</li>
+            <li>Time Track・MIDIトラック・Mixer・Macro Managerは4.0では利用不可、プレビューサムネイルを保持する新プロジェクト形式`.aup4`を導入</li>
           </ul>
         </div>
         <div class="meta">
-          <span>窓の杜</span>
-          <span>⏱ 2 min read</span>
-          <span class="engagement">🔖 150</span>
-          <span>2026-08-31</span>
+          <span>GitHub</span>
+          <span>⏱ 3 min read</span>
+          <span class="engagement">▲ 1009</span>
+          <span>2026-09-03</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-oss">OSS</span>
-          <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://github.com/mlc-ai/web-llm">ブラウザ完結のLLM推論エンジン「WebLLM」、WebGPUアクセラレーションとOpenAI互換APIでサーバー不要を実現</a></h3>
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://vitest.dev/blog/vitest-5.html">Vitest 5.0発表——ブラウザモードにTrace View、依存関係の多い構成で53%高速化</a></h3>
         </div>
-        <div class="summary">ブラウザ上でWebGPUのハードウェアアクセラレーションを使いLLM推論をサーバー不要で完結させるOSS「WebLLM」。OpenAI互換APIをそのままサポートし、ストリーミング応答やJSONモードでの構造化出力にも対応する。Llama・Phi・Gemma・Mistral・Qwenなど主要オープンモデル群を動かせ、MLC形式に変換すれば独自モデルの組み込みも可能。Web WorkerやService Worker経由での実行にも対応する。</div>
+        <div class="summary">テストランナー「Vitest」がメジャーバージョン5.0を発表した。ブラウザモードにテスト実行後もDOMスナップショットをステップ単位で再生できる「Trace View」を追加し、モノレポ向けにはネストしたプロジェクトがルート設定を既定で継承する仕組みを導入した。条件付きモックを簡潔に書ける`vi.when()` APIや、`bench`を通常の`test()`内で使えるフィクスチャとして再設計したベンチマーク機能も目玉となる。パフォーマンス面では依存関係の多い構成で1.59秒から0.74秒へ53%の高速化を確認したという。</div>
         <div class="key-points">
           <ul>
-            <li>処理は全てブラウザ内で完結しサーバーへのデータ送信が発生しないため、プライバシー面でのメリットがある</li>
-            <li>OpenAI互換のストリーミング・JSON構造化出力APIをサポートし、既存のOpenAIクライアントコードを流用しやすい設計</li>
+            <li>依存関係の多い"deps-heavy"構成で53%(1.59秒→0.74秒)、"enterprise-monolith"構成で19%の実行時間短縮を確認</li>
+            <li>Vite 6.4以上・Node.js 22.12以上が必須要件になり、`clearMocks: true`が既定値になるなど複数の破壊的変更を伴う</li>
           </ul>
         </div>
         <div class="meta">
-          <span>GitHub</span>
+          <span>Vitest Blog</span>
           <span>⏱ 2 min read</span>
-          <span class="engagement">▲ 79</span>
-          <span>2026-09-02</span>
+          <span class="engagement">🔖 13</span>
+          <span>2026-09-03</span>
         </div>
       </div>
 
@@ -363,19 +374,19 @@
         <div class="card-header">
           <span class="tag tag-oss">OSS</span>
           <span class="content-type">📦 リリース</span>
-          <h3><a href="https://tinygo.org/blog/2026/tinygo-0.42-recover-is-real/">組み込み向けGoコンパイラ「TinyGo 0.42」、ランタイムパニックの`recover`が可能に</a></h3>
+          <h3><a href="https://github.com/jj-vcs/jj/releases/tag/v0.45.0">分散VCS「Jujutsu」v0.45.0——分岐コミットを自動解決する`jj converge`を追加</a></h3>
         </div>
-        <div class="summary">組み込み向けGoコンパイラ「TinyGo」の0.42がリリースされ、目玉機能としてランタイムパニックの`recover`が可能になった。これまでnilポインタ参照やゼロ除算が発生すると即座に実行が停止していたが、標準Goと同様に`defer`と`recover`で例外処理ができるようになった。Windows向けのベクトル化例外処理とriscv64対応も実装した。Go 1.27・LLVM22へアップグレードしつつLLVM19〜20との互換性も維持する。</div>
+        <div class="summary">分散バージョン管理システム「Jujutsu(jj)」がv0.45.0をリリースした。目玉機能は、分岐したコミットをヒューリスティックで自動解決する新コマンド`jj converge`で、非対話モードも用意する。Git連携ではHEAD状態をワークツリーごとに内部管理するよう変更し、将来のマルチワークツリー対応に備える。非colocatedリポジトリでは`jj git import`がdetached HEADブランチからコミットを取り込まなくなる破壊的変更があるほか、コンフリクト時の改行コード保持など9件のバグ修正を含む。</div>
         <div class="key-points">
           <ul>
-            <li>OOM(メモリ不足)など致命的エラーは設計上引き続き回復不可能で、対象は通常のランタイムパニックに限定</li>
-            <li>ESP32向けにWiFi(espradioパッケージ)・Bluetooth(ESP32-C3/S3)対応を追加、UEFIをターゲットにしたブートローダー実行も新規サポート</li>
+            <li>新コマンド`jj converge`が分岐コミットを自動解決、解決不能な場合はユーザーに確認を求める非対話モードも提供</li>
+            <li>26人の名前付きコントリビューターが参加、非colocatedリポジトリでのGit import挙動変更など2件の破壊的変更を含む</li>
           </ul>
         </div>
         <div class="meta">
-          <span>TinyGo Blog</span>
+          <span>GitHub</span>
           <span>⏱ 2 min read</span>
-          <span>2026-09-02</span>
+          <span>2026-09-03</span>
         </div>
       </div>
     </div>
@@ -384,45 +395,52 @@
       <div class="section-title">🔗 Quick Links</div>
 
       <div class="quick-link">
-        <span class="tag tag-ai">AI</span>
-        <a href="https://help.mistral.ai/en/articles/455207-can-i-opt-out-of-my-input-or-output-data-being-used-for-training">Mistralが学習データのオプトアウト設定を整理、Vibe Enterpriseはデフォルトで対象外</a>
-        <span class="quick-summary">— Vibe(通常版)とAPI/Studioは個別にトグルで無効化する必要があり、一方の設定はもう一方に影響しない。</span>
-        <span class="meta">Mistral Help Center</span>
+        <span class="tag tag-security">Security</span>
+        <a href="https://www.publickey1.jp/blog/26/adaptive_intelligencecloudflare.html">Cloudflare、使い捨てルールで攻撃者の学習を無効化する自己学習型ボット検知「Adaptive Intelligence」を発表</a>
+        <span class="quick-summary">— 誤検知の修正からも継続的に学習し、固定閾値を狙う攻撃者に対抗する。</span>
+        <span class="meta">Publickey</span>
       </div>
 
       <div class="quick-link">
         <span class="tag tag-infra">Infra</span>
-        <a href="https://blog.cloudflare.com/cache-transcoding/">Cloudflare、Pingora上でのzstd圧縮によりキャッシュストレージを約3分の1に削減する「Cache Transcoding」を実装</a>
-        <span class="quick-summary">— エンコード4.31ns/バイト・デコード1.56ns/バイトのコストで、追加ハードウェアなしに対象アセットを約2.8倍圧縮する。</span>
-        <span class="meta">Cloudflare Blog</span>
+        <a href="https://www.publickey1.jp/blog/26/awsazure100gbpsawsazuregoogle_cloudoracle_cloud.html">AWSとAzureが最大100Gbpsでの相互接続プレビューを開始、AWSはAzure・Google Cloud・Oracle Cloudとの3社マルチクラウドに対応</a>
+        <span class="quick-summary">— 物理接続の構築・ルーティング設定に要していた数週間〜数か月の作業を短縮する。</span>
+        <span class="meta">Publickey</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://www.publickey1.jp/blog/26/webgitclivimwebterm_learn.html">ブラウザ完結のターミナルシミュレータ「WebTerm Learn」公開、Git・Linux・Vimを12コース129レッスンで無料学習</a>
+        <span class="quick-summary">— TypeScript製コマンドエンジンが100以上のコマンドと仮想ファイルシステムを再現する。</span>
+        <span class="meta">Publickey</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://www.publickey1.jp/blog/26/javathe_java_storyyoutube.html">Java誕生から現代に至る歴史をゴスリン氏ら関係者が語る公式ドキュメンタリー「The Java Story」がYouTubeで公開</a>
+        <span class="quick-summary">— 失敗した家電プロジェクト「Oak」からWrite Once, Run Anywhereへ至る30年超を追う。</span>
+        <span class="meta">Publickey</span>
       </div>
 
       <div class="quick-link">
         <span class="tag tag-ai">AI</span>
-        <a href="https://www.publickey1.jp/blog/26/claudesalesforceclaudeforceanthropicsalesforceclaude.html">AnthropicとSalesforce、CRM機能をClaudeから直接呼び出す「Claudeforce」を発表</a>
-        <span class="quick-summary">— 37のセールス向けスキルを共同開発し、Data 360・Tableau・Slackへガバナンス付きでアクセスできる。</span>
-        <span class="meta">Publickey</span>
+        <a href="https://pc.watch.impress.co.jp/docs/news/2138088.html">NVIDIA、家庭内の複数PCへAI推論を自動振り分けするソフト「PAIR」をベータ公開</a>
+        <span class="quick-summary">— 3台構成のデモで単一ノード比約2倍の高速化、最大18台のGPUでの動作を確認済み。</span>
+        <span class="meta">PC Watch</span>
       </div>
 
       <div class="quick-link">
-        <span class="tag tag-product">Product</span>
-        <a href="https://www.publickey1.jp/blog/26/awsaws_cloud_questaws_cloud_quest_20_ai.html">AWS Cloud Quest 2.0公開、AI生成の仮想顧客との対話で要件定義スキルを練習できる新機能を追加</a>
-        <span class="quick-summary">— 3D都市環境を刷新し、正しい設計を実装すると顧客満足度スコアが数値でフィードバックされる。</span>
-        <span class="meta">Publickey</span>
+        <span class="tag tag-security">Security</span>
+        <a href="https://satoweb.net/2026/09/p-18390/">放置していたWordPressがREST API経由の不正管理者アカウント作成を起点に乗っ取られ、WebShellだらけになっていた実体験</a>
+        <span class="quick-summary">— 「重要な記事がないから問題ない」という油断がサーバー全体を攻撃対象にした。</span>
+        <span class="meta">satoweb.net</span>
       </div>
 
       <div class="quick-link">
-        <span class="tag tag-dev">Dev</span>
-        <a href="https://zenn.dev/uniquevision/articles/345368d3188b98">Tokio作者によるRust ORM「Toasty」、構造体定義からスキーマを自動生成するモデルファーストの設計</a>
-        <span class="quick-summary">— SQLite・Turso・PostgreSQL・MySQL・DynamoDBを横断対応し、条件付き削除ではDB特性に応じてPostgreSQLはCTE・SQLiteは単純なトランザクションを自動生成する。</span>
-        <span class="meta">Zenn</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-dev">Dev</span>
-        <a href="https://matklad.github.io/2026/09/02/static-allocation-constant-work.html">matklad氏、注文マッチングエンジン向けに「静的確保」と「定数ワーク」という2つの信頼性設計原則を提示</a>
-        <span class="quick-summary">— 初期化後の動的メモリ確保を禁止し、生死管理の代わりに全スロットを予約状態で埋めることでuse-after-freeを構造的に排除する。</span>
-        <span class="meta">matklad.github.io</span>
+        <span class="tag tag-oss">OSS</span>
+        <a href="https://qiita.com/suwa_nobu/items/1c0f27da8eb685f6ba05">Anthropicが購入客・店舗スタッフ向けショッピングエージェント実装「commerce-agents」をApache 2.0でオープンソース化</a>
+        <span class="quick-summary">— 小売・旅行・通信・娯楽の4業種向け参考実装と640ファイルのコードを含む。</span>
+        <span class="meta">Qiita</span>
       </div>
     </div>
 
