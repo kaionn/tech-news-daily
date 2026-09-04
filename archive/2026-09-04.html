@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-09-04</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="../feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-09-04 (Fri)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+      <nav class="site-nav">
+        <a href="../" class="active">📰 日刊ダイジェスト</a>
+        <a href="../trends.html">🔌 週次プラグイントレンド</a>
+        <a href="../ai-trends.html">🧠 AI プロダクト動向</a>
+        <a href="./">🗂 アーカイブ</a>
+      </nav>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 22 articles</span>
+      <span>🏷 6 categories</span>
+      <span>📡 17 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item">
+        <span class="number-value">$12.93B</span>
+        <span class="number-label">NVIDIAによるHugging Face買収額</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">420Tbps</span>
+        <span class="number-label">AWS新太平洋海底ケーブル「Sta'O'Nuk」の伝送容量</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">72.6%</span>
+        <span class="number-label">GPT-6 AstraのOSWorld V2ベンチマークスコア(前モデル比+6.9pt)</span>
+      </div>
+    </div>
+
+    <div class="weekly-keywords">
+      <div class="section-title">📊 今週のキーワード</div>
+      <div class="keyword-chips">
+        <span class="keyword-chip">AI業界M&amp;A</span>
+        <span class="keyword-chip">新フラッグシップモデル</span>
+        <span class="keyword-chip">インフラ巨額投資</span>
+      </div>
+      <div class="keyword-summary">今週はNVIDIAによるHugging Face買収(約129.3億ドル)を筆頭に、AI基盤企業の資本再編が相次いだ。Gemini 3.8 Flash、Claude Fable 5.1、GPT-6 Astraと主要ベンダーの新フラッグシップモデル発表も重なり、エージェント型コーディングやMCP関連の実運用知見を共有する記事が目立った。AWSの新型太平洋海底ケーブル「Sta'O'Nuk」やCloudflareのキャッシュ基盤刷新など、AI需要を支えるインフラ投資も続いている。</div>
+    </div>
+
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
+
+      <div class="card featured deep-dive">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">💰 ビジネス</span>
+          <h3><a href="https://blogs.nvidia.com/blog/nvidia-to-acquire-hugging-face/">DEEP DIVE: NVIDIA、AIモデル共有プラットフォーム「Hugging Face」を約129.3億ドルで買収へ</a></h3>
+        </div>
+        <div class="summary">NVIDIAは9月3日、AIモデル共有プラットフォーム「Hugging Face」を約129.3億ドルで買収すると発表した。Hugging Faceは1800万人の開発者・研究者を抱え、300万件のモデルと50万件のデータセット、100万件のアプリケーションをホストする、オープンウェイトAIの事実上の集積地だ。20万社以上がモデルの発見・デプロイに利用している。NVIDIAはこれまでにも500以上のモデルと250以上のデータセットをHugging Faceへ提供してきた最大のコントリビューターであり、買収は既存の関係を資本関係へ格上げする形になる。CEOのジェンスン・フアン氏は「共にAIをより開かれた、より高性能で、よりアクセスしやすいものにする」と述べた。NVIDIAは買収後もHugging Faceのマルチクラウド・マルチアクセラレータ対応を維持すると説明しており、開発者はモデル・フレームワーク・クラウド・計算基盤を自由に選べる立場を保つとしている。NVIDIA製ハードウェアの利用が必須になることはないという。買収の狙いは、GPUという計算資源のレイヤーだけでなく、その上に乗る開発者エコシステムとモデル流通の中核を押さえることにある。競合するAMDやGoogleがそれぞれ独自のモデルハブ戦略を持つ中、Hugging Faceという「中立的」プラットフォームをNVIDIA傘下に置くことは、業界のオープンモデル流通における影響力構造を大きく塗り替える可能性がある。</div>
+        <div class="editorial">🧠 NVIDIAが「中立性を維持する」と明言した点は評価できるが、買収後の実際のガバナンス構造や、競合GPUベンダーのモデルがどこまで平等に扱われ続けるかは、契約条件が明らかになるまで判断を保留すべきだ。実測ではNVIDIAは既にHugging Face最大のコントリビューターであり、資本の主従関係が変わっても実務上の影響は限定的という見方もできる。ただし、オープンモデルの「集積地」が特定のハードウェアベンダーの傘下に入ること自体が、独占禁止当局の関心を集める可能性は高い。</div>
+        <div class="key-points">
+          <ul>
+            <li>Hugging Faceは1800万人の開発者が利用し、300万件のモデル・50万件のデータセット・100万件のアプリケーションをホスト</li>
+            <li>NVIDIAはこれまでに500以上のモデルと250以上のデータセットをHugging Faceへ提供してきた最大級のコントリビューター</li>
+            <li>買収額は約129.3億ドルで、買収後もマルチクラウド・マルチアクセラレータ対応の維持を約束</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 Hugging Face上でモデルを配布・利用する開発者は、今後のガバナンス方針や利用規約の変更、NVIDIA以外のハードウェアベンダーとの関係がどう扱われるかを注視する必要がある。</div>
+        <div class="meta">
+          <span>NVIDIA Blog</span>
+          <span>⏱ 4 min read</span>
+          <span class="engagement">🔖 11</span>
+          <span>2026-09-03</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://openai.com/index/gpt-6-astra/">OpenAI、新フラッグシップ「GPT-6 Astra」を発表——Brockman氏「AGI時代の始まり」</a></h3>
+        </div>
+        <div class="summary">OpenAIは9月3日、最新の主力モデル「GPT-6 Astra」を発表した。GPT-5.6 Solに代わる新フラッグシップで、Greg Brockman社長は「AGI時代の始まり」と位置づけた。エージェント型コンピュータ操作のベンチマークOSWorld V2-Offlineでは72.6%を記録し、Solの65.7%を上回った。113タスクの実務的コーディング評価DeepSWE v1.1でも74.1%とSolの70.8%を上回る。数学のFrontierMath Tier 4は97.6%、脆弱性発見のExploitBenchは100%に達し、OpenAIの安全基準で初めて「Critical」評価を受けたモデルとなった。ChatGPT Plus/Pro/Business/Enterprise、API、AWS経由で数日以内に順次提供される。</div>
+        <div class="key-points">
+          <ul>
+            <li>価格は入力100万トークン10ドル・出力50ドルで、2.5倍速の高速モードは同倍額に設定</li>
+            <li>サイバー攻撃能力はChatGPT/API版では分類器と監視で制限、フル機能は防御担当者向けプログラム「Daybreak Blue」内に限定</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>OpenAI</span>
+          <span>⏱ 3 min read</span>
+          <span class="engagement">▲ 1055</span>
+          <span>2026-09-03</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/awsstaonuk420tbps2029.html">AWS、新たな太平洋海底ケーブル「Sta'O'Nuk」発表。420Tbps、2029年に稼働へ</a></h3>
+        </div>
+        <div class="summary">AWSは9月3日、日米間を結ぶ新たな太平洋横断海底ケーブル「Sta'O'Nuk」を発表した。20対の光ファイバーで構成し、伝送容量は420Tbpsに達する。稼働開始は2029年を予定する。現行の日米間海底ケーブル(約25〜30本)は米側がカリフォルニア・オレゴン、日本側が千葉・三重に集中しており、自然災害や船舶事故、地政学リスクへの耐性が課題だった。Sta'O'Nukは米側の陸揚げ地点をワシントン州に新設し、集中リスクを分散する。ケーブル名はワシントン州の先住民族クイノート族の言語で「稲妻の蛇」を意味し、同部族政府と共同でプロジェクトを進めた。</div>
+        <div class="key-points">
+          <ul>
+            <li>物理層で量子暗号、データリンク層でMACsec、トランスポート層でTLS/SSLまたはQUICを重ねる多層防御構成</li>
+            <li>現行の日米間海底ケーブル約25〜30本は米側カリフォルニア・オレゴン/日本側千葉・三重に集中、新規陸揚げ地点で単一障害点を分散</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-03</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://blog.rust-lang.org/2026/09/03/Rust-1.98.1/">Rust 1.98.1リリース——1.98.0のvtable生成ミスコンパイルを修正</a></h3>
+        </div>
+        <div class="summary">Rustは9月3日、1.98.1をリリースした。1.98.0で発生していたトレイトオブジェクトのvtable生成に関する重大なミスコンパイルを修正する更新で、本来関数ポインタが入るべき箇所にヌルポインタが生成される不具合があった。未定義動作によりセグメンテーションフォルトなど予期しない挙動を招く可能性があったため、新機能を含まない緊急の安定性・正確性修正のみのリリースとなった。</div>
+        <div class="key-points">
+          <ul>
+            <li>1.98.0のトレイトオブジェクトvtableで関数ポインタの代わりにヌルポインタが生成される不具合を修正</li>
+            <li>新機能追加なしの安定性修正のみ、`rustup update stable`で即座に適用可能</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Rust Blog</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-09-03</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-data">Data</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://pola.rs/posts/announcing-polars-2/">Polars 2.0プレリリース——ストリーミングエンジンが既定化し5倍高速に</a></h3>
+        </div>
+        <div class="summary">DataFrameライブラリ「Polars」の2.0プレリリースが公開された。最大の変更は全`LazyFrame`クエリでストリーミングエンジンを既定にしたことで、典型的なユースケースで約5倍の高速化とメモリ削減を実現する。ただしストリーミングエンジンはjoinやgroup_byで行順序を保持しないため、`maintain_order=True`を明示しない限り後方互換性が崩れる。`is_in`での型の暗黙変換拒否や、水平結合での行数不一致検証など、早期にエラーを検出する厳格化も進めた。</div>
+        <div class="key-points">
+          <ul>
+            <li>ストリーミングエンジンの既定化により典型ユースケースで約5倍高速化、ただしjoin/group_byの行順序保持には`maintain_order=True`が必要</li>
+            <li>`AttributeRemovedError`/`ArgumentRemovedError`など新しい例外型で非推奨API使用時に移行方法を案内</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Polars Blog</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-02</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://victoriametrics.com/blog/go-swiss-table-map/">GoのマップはどうSwiss Tableで動くか——制御バイトとSIMD比較の内部構造を解説</a></h3>
+        </div>
+        <div class="summary">VictoriaMetricsのブログが、Go 1.24で刷新されたマップ実装「Swiss Table」の内部構造を解説する。従来のバケット連結方式は依存ポインタの読み出しが発生し速度低下とパディングによるメモリ浪費を招いていたが、新方式は8スロット単位の「グループ」を64ビットの制御ワードで管理し、SIMD命令で8スロットを同時比較できる。Go開発チームの報告では、マップ操作はGo 1.23比で最大60%高速化した一方、アプリ全体では幾何平均で約1.5%のCPU時間改善にとどまるという。</div>
+        <div class="key-points">
+          <ul>
+            <li>ハッシュ値をH1(テーブル/グループ選択用の上位ビット)とH2(スロットのフィルタ用下位7ビット)に分割し、制御バイトでSIMD比較を可能にする設計</li>
+            <li>負荷率7/8を閾値にテーブルを拡張、ディレクトリ構造により全体再構築せず一部テーブルのみ再配分できる</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>VictoriaMetrics Blog</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-09-02</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://tech-blog.monotaro.com/entry/2026/09/03/090000">壊してもいいデータベースを数秒で——モノタロウがZFSで作るDBブランチ基盤</a></h3>
+        </div>
+        <div class="summary">モノタロウの技術ブログは、共有DB環境でのE2Eテスト並列実行の壁をZFSで解決した事例を報告する。テストごとに固定ユーザーへ依存する設計のため並列実行できず、他人のテストデータで検証が壊れる問題があった。NeonやAuroraなどのクラウドサービスではなく、既存インフラのZFSストレージ層でコピーオンライトを活用し、MySQL自体には手を加えずにDBブランチを実現した。ブランチ作成のAPI応答は約0.1秒、MySQL接続可能になるまで約1.6〜2.5秒、TB級データからのクローン直後のディスク消費はわずか2.74MBだったという。</div>
+        <div class="key-points">
+          <ul>
+            <li>稼働中のスナップショットは「正常終了していない状態と同じ」ため、InnoDBクラッシュリカバリ済みのベースラインを用意し起動時間を十数秒から2秒に短縮</li>
+            <li>リセット操作は約1.3秒で完了、ZFSのスナップショット・クローン機能によりデータ量に関わらず一瞬でクローンを作成可能</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>モノタロウ Tech Blog</span>
+          <span>⏱ 3 min read</span>
+          <span class="engagement">🔖 90</span>
+          <span>2026-09-03</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://www.phoronix.com/news/CERN-Goes-Debian-Leaving-RHEL">CERN、産業用制御コンピュータ2,200台超をRHEL系からDebianへ移行</a></h3>
+        </div>
+        <div class="summary">CERNは、産業用制御コンピュータおよび組込み機器2,200台以上をRHEL系からDebian 13へ移行すると発表した。長年Red Hat系のScientific Linuxを使用し2015年にCentOSへ切り替えた経緯があるが、CentOS Streamへの移行は見送りDebianを選んだ。決め手はRHEL系ディストリビューションのデフォルトコンパイラフラグ`-march=x86-64-v2`で、CERNの旧世代ハードウェアが事実上サポート対象外になる「強制的な陳腐化」と判断した。移行完了目標は2026年末で、対象は加速器制御用の産業用コンピュータに限定され、データセンターや実験用計算基盤は引き続きRHEL/AlmaLinuxを使用する。</div>
+        <div class="key-points">
+          <ul>
+            <li>移行対象は加速器制御系の産業用コンピュータ・組込み機器2,200台以上に限定、データセンターはRHEL/AlmaLinux継続</li>
+            <li>Debianの自動パッケージビルド・公開ツールや複数バージョン管理機能の不足など、移行過程でツールチェーンのギャップが判明</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Phoronix</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-02</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://www.itmedia.co.jp/aiplus/article/2609/04/2000001152/">複数のAIサービスで障害発生——ChatGPT／Claude／Grokが深夜に相次いでダウン</a></h3>
+        </div>
+        <div class="summary">9月3日深夜から4日未明にかけ、Claude・Grok・ChatGPTの主要AIサービスが相次いで接続障害に陥った。Claude・Grokは9月3日午後10時30分頃から、ChatGPTは4日午前0時前から発生し、Claudeは午前1時16分、ChatGPTは午前1時55分、Grokは午前2時7分にそれぞれ復旧した。3社とも原因は公表されておらず、OpenAIは復旧後にCodexユーザーの一部でモバイル端末との再ペアリングが必要になる場合があると案内している。</div>
+        <div class="key-points">
+          <ul>
+            <li>Claude・Grokは9月3日22時30分頃、ChatGPTは4日0時前から障害発生、復旧は1時16分〜2時7分の間にずれて完了</li>
+            <li>3社とも障害原因は「不明」として具体的な説明はなく、OpenAIのみCodexの再ペアリングが必要になる場合があると案内</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>ITmedia</span>
+          <span>⏱ 2 min read</span>
+          <span class="engagement">🔖 45</span>
+          <span>2026-09-04</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/miogawa/articles/09bed306fc615a">AIエージェント時代にデータサイエンティストは生き残れるのか——4度目の希少性剥奪と職務の二極化</a></h3>
+        </div>
+        <div class="summary">AIエージェント時代にデータサイエンティストという職種が生き残れるかを論じるZenn記事。著者は、職名自体は存続するが中身は総取り替えされると主張する。2008年の職名確立以降、AutoMLによる特徴量エンジニアリングの自動化、AIコーディングによる定石作業の自動化と、これまで2度にわたり希少性が剥がされてきた経緯を辿り、現在は「数学基盤の精度追求型」と「ソフトウェア工学基盤のエージェント運用型」への二極化が進んでいると分析する。</div>
+        <div class="key-points">
+          <ul>
+            <li>米労働統計局予測では2024年24.6万人から2034年に32.8万人へ33.5%増、テック求人全体が3割減る中でも過去3年で15%増</li>
+            <li>職務は「数学基盤で精度を追求する型」と「ソフトウェア工学基盤で本番AIシステムを構築する型」の二極化が進行中と分析</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-02</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://future-architect.github.io/articles/20260903a/">「レビューがしんどい」の正体を、認知的負債から考えてみた</a></h3>
+        </div>
+        <div class="summary">AI駆動開発の普及でコードレビューが過大な負担になった構造を「認知的負債」の観点から分析する記事。AIエージェント使用時のPR変更行数は293行と、不使用時の157行から倍増し、エージェントが変更内容を詳細に説明する冗長なPR文が判断の重要度を隠す。一見整ったAI生成コードは表面的な誤りが少なく、レビュワーは深層の問題を探すのに余計な注意力を要する。著者はThoughtWorksらが提案する自動チェックやレビューAI導入だけでなく、Docs as Codeによるドキュメンテーションの重要性が見過ごされていると指摘する。</div>
+        <div class="key-points">
+          <ul>
+            <li>AIエージェント使用時のPR変更行数は293行、不使用時の157行からほぼ倍増し確認負荷が増大</li>
+            <li>Technology Radarの定義する「実装とチーム共通理解のギャップ」を認知的負債の核心とし、Docs as Codeの活用を提言</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>future-architect.github.io</span>
+          <span>⏱ 3 min read</span>
+          <span class="engagement">🔖 17</span>
+          <span>2026-09-03</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://dev.classmethod.jp/articles/webmcp-introduction/">WebMCPがアツいので見てほしい——サイトが自らツールを公開するWeb API</a></h3>
+        </div>
+        <div class="summary">ブラウザ内のAIエージェントに対し、Webサイトが自身の機能を構造化された「ツール」として公開するWeb API「WebMCP」を紹介する記事。従来のMCPはユーザー側での接続登録や認証が必要でハードルが高く、Browser Useのように画面からAIが操作を推測する方式は複雑なUIで精度が落ちる課題があった。WebMCPは宣言型(既存HTMLフォームへの属性追加)と命令型(JavaScriptでの直接定義)の2方式を持ち、サイト側が「このボタンは何か」「どの順番で入力するか」を明示できるためUI変更の影響を受けにくい。</div>
+        <div class="key-points">
+          <ul>
+            <li>宣言型(既存HTMLフォーム属性)と命令型(JavaScript直接定義)の2方式を提供し、人間とAIが同じ画面を共有しながら操作を委譲できる</li>
+            <li>模倣サイトによる偽ツール公開や、曖昧な指示でのツール誤選択などセキュリティ・信頼性面の課題も指摘</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Classmethod</span>
+          <span>⏱ 3 min read</span>
+          <span class="engagement">🔖 55</span>
+          <span>2026-09-02</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://github.com/audacity/audacity/releases/tag/Audacity-4.0.0">音声編集ソフトAudacity 4.0.0リリース——UIをQtで全面刷新、クリップ単位編集に対応</a></h3>
+        </div>
+        <div class="summary">オープンソースの音声編集ソフト「Audacity」がメジャーアップデート版4.0.0をリリースした。インターフェースをQtベースで全面刷新し、高DPI描画とカスタマイズ可能なツールバー・パネルに対応する。クリップ単位での直接選択・複数クリップ編集・グルーピングを可能にする新しい編集モデルを採用し、Modern・Classic・Musicの3種類のワークスペースレイアウトも用意した。一方でSync-Lock機能を廃止し、VST2・VAMP・LADSPAプラグインのサポートを打ち切るなど、Audacity 3からの後方互換性を一部犠牲にしている。</div>
+        <div class="key-points">
+          <ul>
+            <li>Select・Envelope・Draw・Multi-toolの各モードを廃止し、コンテキストに応じた操作へ統合</li>
+            <li>Time Track・MIDIトラック・Mixer・Macro Managerは4.0では利用不可、プレビューサムネイルを保持する新プロジェクト形式`.aup4`を導入</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 3 min read</span>
+          <span class="engagement">▲ 1009</span>
+          <span>2026-09-03</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://vitest.dev/blog/vitest-5.html">Vitest 5.0発表——ブラウザモードにTrace View、依存関係の多い構成で53%高速化</a></h3>
+        </div>
+        <div class="summary">テストランナー「Vitest」がメジャーバージョン5.0を発表した。ブラウザモードにテスト実行後もDOMスナップショットをステップ単位で再生できる「Trace View」を追加し、モノレポ向けにはネストしたプロジェクトがルート設定を既定で継承する仕組みを導入した。条件付きモックを簡潔に書ける`vi.when()` APIや、`bench`を通常の`test()`内で使えるフィクスチャとして再設計したベンチマーク機能も目玉となる。パフォーマンス面では依存関係の多い構成で1.59秒から0.74秒へ53%の高速化を確認したという。</div>
+        <div class="key-points">
+          <ul>
+            <li>依存関係の多い"deps-heavy"構成で53%(1.59秒→0.74秒)、"enterprise-monolith"構成で19%の実行時間短縮を確認</li>
+            <li>Vite 6.4以上・Node.js 22.12以上が必須要件になり、`clearMocks: true`が既定値になるなど複数の破壊的変更を伴う</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Vitest Blog</span>
+          <span>⏱ 2 min read</span>
+          <span class="engagement">🔖 13</span>
+          <span>2026-09-03</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://github.com/jj-vcs/jj/releases/tag/v0.45.0">分散VCS「Jujutsu」v0.45.0——分岐コミットを自動解決する`jj converge`を追加</a></h3>
+        </div>
+        <div class="summary">分散バージョン管理システム「Jujutsu(jj)」がv0.45.0をリリースした。目玉機能は、分岐したコミットをヒューリスティックで自動解決する新コマンド`jj converge`で、非対話モードも用意する。Git連携ではHEAD状態をワークツリーごとに内部管理するよう変更し、将来のマルチワークツリー対応に備える。非colocatedリポジトリでは`jj git import`がdetached HEADブランチからコミットを取り込まなくなる破壊的変更があるほか、コンフリクト時の改行コード保持など9件のバグ修正を含む。</div>
+        <div class="key-points">
+          <ul>
+            <li>新コマンド`jj converge`が分岐コミットを自動解決、解決不能な場合はユーザーに確認を求める非対話モードも提供</li>
+            <li>26人の名前付きコントリビューターが参加、非colocatedリポジトリでのGit import挙動変更など2件の破壊的変更を含む</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-09-03</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://www.publickey1.jp/blog/26/adaptive_intelligencecloudflare.html">Cloudflare、使い捨てルールで攻撃者の学習を無効化する自己学習型ボット検知「Adaptive Intelligence」を発表</a>
+        <span class="quick-summary">— 誤検知の修正からも継続的に学習し、固定閾値を狙う攻撃者に対抗する。</span>
+        <span class="meta">Publickey</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-infra">Infra</span>
+        <a href="https://www.publickey1.jp/blog/26/awsazure100gbpsawsazuregoogle_cloudoracle_cloud.html">AWSとAzureが最大100Gbpsでの相互接続プレビューを開始、AWSはAzure・Google Cloud・Oracle Cloudとの3社マルチクラウドに対応</a>
+        <span class="quick-summary">— 物理接続の構築・ルーティング設定に要していた数週間〜数か月の作業を短縮する。</span>
+        <span class="meta">Publickey</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://www.publickey1.jp/blog/26/webgitclivimwebterm_learn.html">ブラウザ完結のターミナルシミュレータ「WebTerm Learn」公開、Git・Linux・Vimを12コース129レッスンで無料学習</a>
+        <span class="quick-summary">— TypeScript製コマンドエンジンが100以上のコマンドと仮想ファイルシステムを再現する。</span>
+        <span class="meta">Publickey</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://www.publickey1.jp/blog/26/javathe_java_storyyoutube.html">Java誕生から現代に至る歴史をゴスリン氏ら関係者が語る公式ドキュメンタリー「The Java Story」がYouTubeで公開</a>
+        <span class="quick-summary">— 失敗した家電プロジェクト「Oak」からWrite Once, Run Anywhereへ至る30年超を追う。</span>
+        <span class="meta">Publickey</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://pc.watch.impress.co.jp/docs/news/2138088.html">NVIDIA、家庭内の複数PCへAI推論を自動振り分けするソフト「PAIR」をベータ公開</a>
+        <span class="quick-summary">— 3台構成のデモで単一ノード比約2倍の高速化、最大18台のGPUでの動作を確認済み。</span>
+        <span class="meta">PC Watch</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://satoweb.net/2026/09/p-18390/">放置していたWordPressがREST API経由の不正管理者アカウント作成を起点に乗っ取られ、WebShellだらけになっていた実体験</a>
+        <span class="quick-summary">— 「重要な記事がないから問題ない」という油断がサーバー全体を攻撃対象にした。</span>
+        <span class="meta">satoweb.net</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-oss">OSS</span>
+        <a href="https://qiita.com/suwa_nobu/items/1c0f27da8eb685f6ba05">Anthropicが購入客・店舗スタッフ向けショッピングエージェント実装「commerce-agents」をApache 2.0でオープンソース化</a>
+        <span class="quick-summary">— 小売・旅行・通信・娯楽の4業種向け参考実装と640ファイルのコードを含む。</span>
+        <span class="meta">Qiita</span>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="./" class="archive-link">🗂 過去のダイジェスト</a>
+    </footer>
+  </div>
+</body>
+</html>
