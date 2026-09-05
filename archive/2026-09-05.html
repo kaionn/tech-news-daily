@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-09-05</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="../feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-09-05 (Sat)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+      <nav class="site-nav">
+        <a href="../" class="active">📰 日刊ダイジェスト</a>
+        <a href="../trends.html">🔌 週次プラグイントレンド</a>
+        <a href="../ai-trends.html">🧠 AI プロダクト動向</a>
+        <a href="./">🗂 アーカイブ</a>
+      </nav>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 21 articles</span>
+      <span>🏷 6 categories</span>
+      <span>📡 20 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item">
+        <span class="number-value">1300万行</span>
+        <span class="number-label">ClaudeがLean 4で書いたフェルマー最終定理の証明コード量</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">CVSS 8.8</span>
+        <span class="number-label">全Chromiumで悪用中のV8型混同0-day(CVE-2026-85046)の深刻度</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">17.6倍</span>
+        <span class="number-label">RustネイティブReact CompilerによるVite内コンパイル高速化(1,036ファイル実測)</span>
+      </div>
+    </div>
+
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
+
+      <div class="card featured deep-dive">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://www.anthropic.com/research/formalizing-fermats-last-theorem">DEEP DIVE: ClaudeがフェルマーAI最終定理をLean 4で完全形式化——11日で1300万行の証明を生成</a></h3>
+        </div>
+        <div class="summary">アンドリュー・ワイルズが1995年に証明したフェルマーの最終定理は、専門家による査読は経ているものの、証明全体をコンピュータが行単位で検証する「形式化」はされていなかった。コロンビア大学のTianyi Peng氏らは、Claude Fable 5.1相当の社内汎用リサーチモデルを使い、この証明をLean(証明のあらゆる論理ステップを省略なく明示させ、機械的に検証する定理証明系)へ変換する作業を進めた。作業には11日間で約60億出力トークンを要し、最終的な証明は1300万行のLeanコードとなった。証明の過程で3万300個の補題を生成し、そのうち2万9500個を最終証明で実際に使用している。これは数学の中核的証明ライブラリMathlibの約5倍の規模にあたる。検証はLeanのカーネルが持つわずか3つの標準公理だけを使って機械的に行われ、証明された定理の主張がMathlib収録の定義と一致するかを照合する専用ツールも別途用意された。作業はコロンビア大学が開発した協調プラットフォーム「Prove2Me」上で進められ、複数のAIエージェントが並行して補題を分担する形を取った。インペリアル・カレッジ・ロンドンのKevin Buzzard氏が成果をレビューし、内容を認めている。この取り組みは同校が進めてきたFLTプロジェクトおよびflt-regularプロジェクトの蓄積を土台にしている。</div>
+        <div class="editorial">🧠 Leanのカーネル検証は機械的な照合である以上、証明に論理的な誤りが紛れ込む余地は原理的にない。ただし1300万行という規模は、人間の査読者が全体を通読して意味を追うことをすでに不可能にしており、「検証済みである」ことと「人間が理解している」ことの距離はむしろ広がった。この手法が数学界の査読不足という実務課題にどこまで浸透するかは、Prove2Meのような協調基盤がアカデミアの外の分野でも使われるようになるかどうかにかかっている。実測では11日という期間はワイルズ本人による証明の完成までの歳月とは比較にならないほど短いが、これは「新定理の発見」ではなく「既知の証明の機械可読化」である点は区別して評価すべきだ。</div>
+        <div class="key-points">
+          <ul>
+            <li>作業時間11日・出力トークン約60億で、Mathlibの約5倍にあたる1300万行のLean証明コードを生成</li>
+            <li>3万300個の補題を生成し2万9500個を最終証明に使用、検証はLeanカーネルの標準公理3つのみで機械的に完了</li>
+            <li>コロンビア大学の協調基盤「Prove2Me」上で複数エージェントが並行作業、Imperial College LondonのKevin Buzzard氏がレビュー</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 形式手法(Lean/Coq等)を使う開発者にとって、AIが数百万行規模の証明を数日で生成できることが実証された意味は大きく、ソフトウェアの正当性証明やコンパイラ検証など実務領域への応用速度が今後の焦点になる。</div>
+        <div class="meta">
+          <span>Anthropic</span>
+          <span>⏱ 5 min read</span>
+          <span class="engagement">▲ 373</span>
+          <span>2026-09-04</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://www.helpnetsecurity.com/2026/09/04/google-chrome-zero-day-cve-2026-85046/">全Chromiumで悪用中のV8型混同0-day、CVE-2026-85046としてGoogleが緊急パッチ</a></h3>
+        </div>
+        <div class="summary">Googleは9月3日、ChromeのJavaScript/WebAssemblyエンジンV8に存在する型混同の脆弱性CVE-2026-85046を修正した。CVSSスコアは8.8で、細工したHTMLページを開かせるだけでサンドボックス内での任意コード実行を許す。開示前から実際の攻撃で悪用されていたことをGoogleが確認しており、2026年に入って6件目の実悪用済みChrome 0-dayとなる。修正はWindows/macOS向けChrome 152.0.7977.82/.83、Linux向け152.0.7977.82で提供され、数日から数週間かけて全ユーザーに展開される。脆弱性はサンドボックス内での実行に留まり、ホストの完全な制御には別のサンドボックス脱出や権限昇格と組み合わせる必要があるとされる。発見者のSalvatore Gulizia氏(ハンドル名Serotav)は8月4日に責任開示し、1,000ドルの報奨金を得た。</div>
+        <div class="key-points">
+          <ul>
+            <li>CVSSスコア8.8、V8の型混同によりサンドボックス内で任意コード実行が可能、単独ではホストの完全掌握には至らない</li>
+            <li>Windows/macOS向けChrome 152.0.7977.82/.83、Linux向け152.0.7977.82で修正済み、Edge/Brave等の他Chromium系ブラウザも追随が必要</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Help Net Security</span>
+          <span>⏱ 2 min read</span>
+          <span class="engagement">▲ 36</span>
+          <span>2026-09-04</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://mullvad.net/en/blog/shutting-down-our-public-encrypted-dns-servers-and-sponsoring-quad9-instead">Mullvad、公開の暗号化DNSサーバーを11月2日に停止——自前運用をやめQuad9への資金提供に切り替え</a></h3>
+        </div>
+        <div class="summary">VPN事業者Mullvadは、一般向けに提供してきた暗号化DNSサーバーを2026年11月2日に停止すると発表した。同社は「プライバシー重視の公開DNSサービス運用は高度に専門化した仕事」であり、非営利のQuad9財団が既にこの領域を主導していると判断し、自前でインフラを持つのではなくQuad9への資金提供へ切り替える。これによりMullvadはVPNとブラウザという中核製品にリソースを集中できる。手動でMullvadのDNSを設定しているユーザーは期限までにQuad9の案内に沿って移行が必要。Mullvad Browserの初期設定利用者は自動的にQuad9へ切り替わるが、設定をカスタマイズしている場合は自動移行されない。iOS/macOSでMullvadのDNSプロファイルを使っているユーザーも、Quad9公式プロファイルへの入れ替えが必要になる。</div>
+        <div class="key-points">
+          <ul>
+            <li>停止期限は2026年11月2日、非営利のQuad9財団への資金提供という形で暗号化DNS事業への関与を継続</li>
+            <li>Mullvad Browserの初期設定利用者は自動でQuad9へ移行、カスタム設定・手動設定・iOS/macOSプロファイル利用者は個別対応が必要</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Mullvad</span>
+          <span>⏱ 2 min read</span>
+          <span class="engagement">▲ 187</span>
+          <span>2026-09-04</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-frontend">Frontend</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://blog.master.dev/react-now-rusted-all-the-way-out/">RustネイティブReact Compiler、Viteに正式統合——1,036ファイル実測でコンパイル17.6倍高速化</a></h3>
+        </div>
+        <div class="summary">oxcチームが8月にRust実装のReact Compilerを公開し、`@vitejs/plugin-react` v6.1.0が`{ compiler: true }`オプションで実験的にネイティブ対応した。従来のBabelベース実装を置き換えるもので、oxcプロジェクトリードは予備ベンチマークで「Babel比10倍以上高速」と説明する。ブログ運営元Outlyneが自社の1,036ファイル規模のReactコードベースで検証したところ、コンパイル部分だけで14.3秒から0.81秒へ17.6倍、ビルド全体でも22.1秒から9.3秒へ2.4倍に短縮した。try/catchブロックや分割代入プロパティ、計算プロパティキーなど従来のJavaScript実装で扱えなかったパターンにも対応し、リンターとビルドツールが同一バージョンのコンパイラを共有できるようになった。React Routerのフレームワークモードでは別途`@acusti/vite-plugin-react-compiler`が必要になる。</div>
+        <div class="key-points">
+          <ul>
+            <li>1,036ファイル規模の実プロジェクトでコンパイル時間14.3秒→0.81秒(17.6倍)、ビルド全体は22.1秒→9.3秒(2.4倍)に短縮</li>
+            <li>try/catchや分割代入プロパティなどBabel版で未対応だったパターンをサポート、React Routerフレームワークモードは別プラグインが必要</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>blog.master.dev</span>
+          <span>⏱ 3 min read</span>
+          <span class="engagement">▲ 89</span>
+          <span>2026-09-04</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://rietta.com/blog/ruby-on-rails-cve-exploited-hours-after-patch/">Rails ActiveStorageの緊急CVE、政府系サイトがパッチ公開から数時間で標的に</a></h3>
+        </div>
+        <div class="summary">Rails 8以降のActiveStorageに存在するCVSS 9.5の脆弱性「KindaRails2Shell」(CVE-2026-66066)は、未認証の攻撃者がRailsプロセスからアクセス可能な任意ファイル(環境変数やアプリのシークレットを含む)を読み取れるもので、これがリモートコード実行や横方向への侵害につながり得る。7月29日夜、セキュリティ企業Riettaは政府系クライアントを含む全顧客サイトへ緊急ホットフィックスを適用したが、営業時間再開前にはすでに悪用の試みが始まっていた。VulnCheckの調査では、パッチ公開から約1か月後に実悪用が本格化し、8月初旬時点でKindaRails2Shellに対して脆弱な公開Railsインスタンスが約7,000件確認されている。</div>
+        <div class="key-points">
+          <ul>
+            <li>CVSSスコア9.5、未認証で環境変数やアプリシークレットを含む任意ファイル読み取りが可能、RCEや横展開に発展し得る</li>
+            <li>パッチ公開から約1か月後にVulnCheckが実悪用の本格化を確認、8月初旬時点で脆弱な公開インスタンスは約7,000件</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Rietta</span>
+          <span>⏱ 3 min read</span>
+          <span class="engagement">▲ 58</span>
+          <span>2026-09-04</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://lemire.me/blog/2026/08/29/the-new-go-json-api-twice-as-fast-or-1-5x-slower/">Goの新JSON API `encoding/json/v2`、汎用型は2倍速いが構造体は1.5倍遅くなる場合も</a></h3>
+        </div>
+        <div class="summary">Go 1.27で追加された新JSON実装`encoding/json/v2`について、Daniel Lemire氏がtwitter.json・canada.json・citm_catalog.jsonの3種のデータセットでベンチマークを行った。旧実装とv2はUnicode検証や大文字小文字の扱いが異なるため単純比較はできないと前置きした上で、`any`型への非構造化デコードではv2が1.5〜2.3倍高速、`any`型のエンコードでは最大2倍高速という結果を示した。一方、型付き構造体の往復変換ではv2のエンコードが旧実装より約1.5倍遅くなるケースが確認された。Go 1.27へアップグレードするだけでコード変更なしに非構造化データのデコード・エンコードは高速化するが、スキーマに基づく構造体処理では速度が悪化しうるため、移行前に自分のワークロードで実測することが必要となる。</div>
+        <div class="key-points">
+          <ul>
+            <li>`any`型への非構造化デコードはv2が旧実装比1.5〜2.3倍高速、エンコードは最大2倍高速</li>
+            <li>型付き構造体の往復変換ではv2のエンコードが旧実装より約1.5倍遅くなるケースを確認、移行前の実測が必須</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Daniel Lemire</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-08-29</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://purplesyringa.moe/blog/guest/the-nx-bit-is-not-just-about-security/">NXビットはセキュリティのためだけじゃない——ARMの投機的命令フェッチがハイパーバイザーをクラッシュさせた話</a></h3>
+        </div>
+        <div class="summary">NX(No eXecute)ビットは一般にスタックオーバーフロー攻撃を防ぐセキュリティ機構として語られるが、著者はARM64のハイパーバイザー開発で全く別の役割に遭遇した。ARM CPUは実行可能とマークされたメモリを「Normal」メモリとして扱い、そこから投機的に命令フェッチを行う。著者のハイパーバイザーではアドレス0番地にロックされたbootromが存在し、`blr`(分岐命令)による分岐予測ミスがこの領域への投機的フェッチを引き起こしてクラッシュしていた。Device メモリへの変更は投機的なデータアクセスは防げても投機的な命令フェッチは防げず、根本的な解決にはNXビットで当該領域を非実行可能にする必要があった。ペイロード以外のハイパーバイザーメモリ全体を非実行可能にすることでバグが解消し、副次的にセキュリティ強化にもなったという。</div>
+        <div class="key-points">
+          <ul>
+            <li>ARM CPUは実行可能メモリを投機的に命令フェッチする仕様上、ロックされたbootrom領域(アドレス0)へのミスフェッチがクラッシュを誘発</li>
+            <li>Deviceメモリへの変更は投機的データアクセスのみ防止、投機的命令フェッチの防止にはNXビットによる非実行可能指定が必須</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>purplesyringa.moe</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-03</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://eighty-twenty.org/2026/09/04/smolts">教育向け言語SMoL用IDE「smolts」——継続・環境・ストアをコード上に直接可視化</a></h3>
+        </div>
+        <div class="summary">Brown大学のPLAIカリキュラムで使われる教育用フレームワーク「SMoL(Standard Model of Languages)」向けに、開発者Tony Garnock-Jones氏が対話的IDE「smolts」を公開した。TypeScriptとSvelteで実装され、`https://smol.leastfixedpoint.com/`でWebアプリとして動作する。S式で書いたプログラムをステップ実行しながら、継続・環境・ストアといった言語処理系の内部状態をエディタ上に直接注釈表示する。逆方向へのステップ戻りや「カーソル位置まで実行」機能も備え、ブラウザ内でGitベースのプロジェクト管理も行える。開発者自身は「半分完成」の状態でstate管理に既知のバグがあると明かしているが、言語実装の内部を可視化する教育アプローチの有効性は示せているとしている。</div>
+        <div class="key-points">
+          <ul>
+            <li>TypeScript/Svelte製、S式プログラムのステップ実行時に継続・環境・ストアをエディタ上へ直接注釈表示</li>
+            <li>逆方向ステップ戻りと「カーソル位置まで実行」に対応、ブラウザ内Git管理も統合、開発者自身は「半分完成」と明言</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>eighty-twenty.org</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-09-04</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://www.m3tech.blog/entry/2026/09/03/200000">副作用の影響範囲を型で示したい——Scala 3が模索する「Capture Checking」</a></h3>
+        </div>
+        <div class="summary">Scalaでは、リソース(DB接続やRedisクライアントなど)を受け取るクロージャがそのリソースを外部スコープへ「逃がして」しまい、クローズ済みリソースへのアクセスエラーを実行時まで検出できない問題があった。関数シグネチャを見るだけでは各リソースの影響範囲が分からないことが根本原因だ。Scala 3.8.3で実験的に実装された「Capture Checking」は、副作用を実行する権利を引数として受け取る「Capability」パターンと、型に`^`を付けてCapabilityのスコープ外流出を型システムで検出する仕組みの2つで構成される。まだ実験的機能であり次期LTS(3.9)での安定化は未定で、reach capabilityの削除など仕様も急速に変わっている。標準ライブラリは既にキャプチャチェック済みで同梱されており、将来的には例外追跡(`CanThrow`)やAI生成コードの検証への応用も見込まれている。</div>
+        <div class="key-points">
+          <ul>
+            <li>型に`^`を付けCapabilityのスコープ外流出を検出する「Capture Checking」をScala 3.8.3で実験的実装</li>
+            <li>次期LTS(3.9)での安定化は未定、reach capability削除など仕様変更中、応用先として例外追跡やAI生成コード検証を想定</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>m3tech.blog</span>
+          <span>⏱ 3 min read</span>
+          <span class="engagement">🔖 8</span>
+          <span>2026-09-03</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://zenn.dev/nanasess/articles/noctty-wsl-terminal-contribution">WSL用ターミナルはnoctty(旧winghostty)が良いぞ——PRを4本マージしてもらった話</a></h3>
+        </div>
+        <div class="summary">nocttyは、GhosttyのターミナルコアをWindowsネイティブアプリへ移植したZig製フォーク(MITライセンス、テレメトリなし、2026年8月にwinghosttyから改名)。著者が従来使っていたGhostInTheWSLはHyper-VソケットとvsockでLinuxのPTYへ直結するため高速だったが、nocttyはConPTY経由と見なされ敬遠されていた。実際にはConPTYには世代差があり、v2ではVTバイト列をそのまま別パイプに書き出すため、同梱版を使えばvsock直結と同等の性能が出ることが判明した。著者はURL風文字列の誤ったパス解決を防ぐ修正、UIスレッドをレンダラロックでブロックしない改善(78秒かかっていた処理を154ミリ秒に短縮)、タブラベルの端末タイトル追従修正、IME変換中のウィンドウクラッシュ修正の4件のPRを送り、いずれもマージされた。直近2件は1時間強で対応されたという。</div>
+        <div class="key-points">
+          <ul>
+            <li>ConPTY v2はVTバイト列を別パイプへそのまま書き出す仕様のため、vsock直結方式と同等の速度が出ると判明</li>
+            <li>UIスレッドをレンダラロックでブロックしない修正で78秒かかっていた処理が154ミリ秒に短縮、4本のPRが全てマージ</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 3 min read</span>
+          <span class="engagement">🔖 10</span>
+          <span>2026-09-04</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/uzu_tech/articles/58a84a9346b910">ルールではなくskillに指示を書くことで、Claudeのコメントを減らせた</a></h3>
+        </div>
+        <div class="summary">著者はClaude Codeに実装させると設定1行に18行のコメントが付くなど過剰なコメント生成に悩んでいた。「コードから復元できない情報だけを書く」というルールを`.claude/rules/`や`~/.claude/CLAUDE.md`に置いても、コメント比率は21.0%から19.1%へとほぼ変わらなかった。AIは実装中に自分が書いたコメントを「非自明な情報」と認識しやすく、ルールを思い出す機会が限定的なためだ。そこでPR作成用のskillに、`git diff HEAD -U0 | grep -E '^\+' | grep -E '^\+\s*(//|///|/\*)'`で追加コメント行を機械的に抽出し1行ずつ判定する検査手順を組み込んだところ、PR当たりのコメント行数が27行から21行に、4行以上のコメント塊を含むPRの割合が77%から65%に減少した。記憶に頼るルールから、機械的に抽出されたリストを判定する仕組みへ変えたことが効いたとしている。</div>
+        <div class="key-points">
+          <ul>
+            <li>ルールをCLAUDE.md等に置いてもコメント比率は21.0%→19.1%とほぼ改善せず、記憶依存の限界を確認</li>
+            <li>PR作成skillにgrepでコメント行を機械抽出する検査手順を追加し、PR当たりのコメント行数27行→21行、4行以上の塊を含むPRの割合77%→65%に削減</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 3 min read</span>
+          <span class="engagement">🔖 55</span>
+          <span>2026-09-04</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://qiita.com/suwa_nobu/items/3a135f5db9d53257a9e4">Claude Codeのキャッシュ、ツールを使ったターンだけ乗るようになった——修正は部分的</a></h3>
+        </div>
+        <div class="summary">著者は9月2日にClaude Fable 5.1のキャッシュ問題を報告していたが、9月3日リリースのバージョン2.1.260で「ツール結果の後に付いたcontextをカバーしていなかった」点が修正された。著者が再測定したところ、ツール使用時のキャッシュヒット率は99.7%まで改善した一方、ツールを使わないターンでは38.6%のままで、質問のみのバッチ処理・ファイル編集を伴わない相談・要約や翻訳作業といった非ツール系ワークフローでは、2ターン目に約5万トークンが書き直される状況が継続している。コスト換算ではキャッシュ外のターンが約1ドル、キャッシュ内なら約0.01ドルで、1ターンあたり約100倍の差になるという。著者は「公式の修正発表」と「実際の改善範囲」を区別し、自分のワークロードで再測定する重要性を強調している。</div>
+        <div class="key-points">
+          <ul>
+            <li>v2.1.260でツール使用時のキャッシュヒット率は38.6%から99.7%に改善、非ツール系ワークフローは38.6%のまま未解決</li>
+            <li>キャッシュ外ターンは約1ドル、キャッシュ内は約0.01ドルで1ターンあたり約100倍のコスト差が発生</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-04</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://blog.michielborkent.nl/babashka-ffi.html">Clojureスクリプト実行環境Babashka 1.13.220、`babashka.ffi`でC言語ライブラリを直接呼び出し可能に</a></h3>
+        </div>
+        <div class="summary">高速起動が特徴のClojureスクリプト実行環境Babashkaが1.13.220で`babashka.ffi`名前空間を追加し、システムのCライブラリを直接ロードして関数を呼び出せるようになった。JVM Clojureプロジェクト向けの単体ライブラリとしても利用できる。数学ライブラリの呼び出し、SQLite内でのカスタムClojure関数定義、GTK 4などネイティブGUIフレームワークへのアクセス、PortAudioによる音声処理、双方向コールバック付きのCPython組み込みなどが可能になる。設計は`java.lang.foreign`を土台にし、arenaによる明示的なメモリ管理でセグメンテーションフォルトを防ぎ、`with-open`でのリソース解放にも対応する。Linux版はデフォルトでglibcのみに依存するほぼ静的なバイナリで、完全静的が必要な場合は`--static`インストーラフラグを使う。</div>
+        <div class="key-points">
+          <ul>
+            <li>`babashka.ffi`でzlib等のシステムCライブラリをロードし関数を直接呼び出し可能、GTK 4やPortAudio、CPython組み込みにも対応</li>
+            <li>`java.lang.foreign`ベースでarenaによる明示的メモリ管理、Linux版はglibcのみに依存するほぼ静的バイナリを既定に</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>REPL adventures</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-09-04</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://jank-lang.org/blog/2026-09-04-better-and-better/">Clojure系言語jank、C++連携のエラー表示を全面刷新し公式ネイティブパッケージリポジトリ「jank commons」を公開</a></h3>
+        </div>
+        <div class="summary">C++にコンパイルされるClojure系言語jankが、エラー体験を3方向から改善した。実行時例外では、実行ファイル・AOTコンパイル済みオブジェクトファイル・JITコンパイル済みコードの情報を統合したスタックトレースを生成し、C++のフレームを元のClojureソースの行番号・アリティへ正確に対応付ける。関数オーバーロードが曖昧な場合は、従来のコンパイラ出力ではなく表形式で候補を提示し、引数の数・必要な型変換・アクセスレベルで候補をランク付けして上位3件のみ既定表示する。各コンパイルエラーからはjankの解説書内の該当ページへ直接リンクする。あわせて、Clojarsに公開する公式ネイティブパッケージリポジトリ「jank commons」も新設した。Rustの慣例に倣い、システムライブラリへの薄いバインディングには`-sys`サフィックスを付け、jankのネイティブビルドツールと連携してサンドボックス環境内でビルドスクリプトを実行する。閲覧用の「awesome-jank」リストも用意された。</div>
+        <div class="key-points">
+          <ul>
+            <li>実行時例外で実行ファイル・AOT・JIT情報を統合したスタックトレースを生成し、C++フレームをClojureソースの行番号へ対応付け</li>
+            <li>関数オーバーロード曖昧時は表形式で上位3候補を提示、Clojarsに公式ネイティブパッケージリポジトリ「jank commons」を新設</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>jank-lang.org</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-04</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.blog/ai-and-ml/github-copilot/project-hydrafusion-frontier-quality-via-multi-model-orchestration/">GitHub Copilot研究プレビュー「Project HydraFusion」、タスクごとに単一・カスケード・批評の3方式を自動選択</a></h3>
+        </div>
+        <div class="summary">GitHub Copilotの研究プレビュー機能「Project HydraFusion」は、単一モデルに固定するのではなく、タスクごとに最適な実行パターンをランタイムで選択する。方式は3種類で、1つのモデルが直接解く「Single」、効率重視のモデルが下書きし品質ゲートが上位モデルへのエスカレーションを判断する「Cascade」、1つのモデルが下書きし別モデルがレビューして修正する「Critique」がある。推論・コード生成・デバッグ・ツール利用の能力シグナルを基に、性能・コスト・レイテンシのバランスを最適化問題として解く仕組みだ。ベンチマークでは、TerminalBench 2.1でOpus 5比コスト67%減かつ品質4.9ポイント向上、DeepSWEでコスト36%減(品質1.5ポイント低下)、CheckpointBenchでコスト65%減(品質0.1ポイント低下)という結果を示した。</div>
+        <div class="key-points">
+          <ul>
+            <li>Single/Cascade/Critiqueの3実行パターンをタスクごとに自動選択し、性能・コスト・レイテンシのバランスを最適化</li>
+            <li>TerminalBench 2.1でOpus 5比コスト67%減・品質+4.9ポイント、DeepSWEはコスト36%減だが品質1.5ポイント低下</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub Blog</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-03</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://desec.io/">非営利DNSプロバイダdeSEC、無料の権威DNSホスティングと公開リカバーシブリゾルバを提供</a>
+        <span class="quick-summary">— Mullvadの暗号化DNS撤退・Quad9移行の流れで、代替候補として再注目された。</span>
+        <span class="meta">desec.io</span>
+        <span class="engagement">▲ 94</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-infra">Infra</span>
+        <a href="https://www.statichost.eu/">欧州製静的サイトホスティング「Statichost.eu」、GitHub等連携の自動ビルドとインスタントロールバックを提供</a>
+        <span class="quick-summary">— 米クラウド依存を避けたい開発者向けに、インフラを完全に欧州域内へ収める設計を掲げる。</span>
+        <span class="meta">Statichost.eu</span>
+        <span class="engagement">▲ 107</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-oss">OSS</span>
+        <a href="https://opentrailpaper.com">オープンソースEインクサイクルコンピュータ「OpenTrailPaper」、LilyGO T5S3を自転車用ナビへ改造</a>
+        <span class="quick-summary">— 直射日光下でも視認できる4.7インチ電子ペーパーで、スマホ不要のGPSナビ・FIT記録に対応する。</span>
+        <span class="meta">opentrailpaper.com</span>
+        <span class="engagement">▲ 199</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://eebench.org/blog/can-ai-design-circuit-boards-yet/">AIは基板設計をこなせるか——ベンチマークEEBenchでClaude Opus 5が61.6%でトップに</a>
+        <span class="quick-summary">— SPICEシミュレーションで許容誤差込みの実動作を検証、Grok 4.6が57.1%で続く。</span>
+        <span class="meta">EEBench</span>
+        <span class="engagement">▲ 102</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://gmcgoldr.github.io/2026/09/04/llm-next-token-predictors.html">LLMを「次トークン予測器」と呼ぶのはもう的外れだという主張——RLVR後は探索由来の知識を内包する</a>
+        <span class="quick-summary">— 事前学習は既存データの模倣だが、強化学習では自ら生成した系列から報酬を通じて学ぶ点が本質的に異なるとする。</span>
+        <span class="meta">gmcgoldr.github.io</span>
+        <span class="engagement">▲ 46</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-oss">OSS</span>
+        <a href="https://github.com/Nozistance/collider">Clojure製の実験的Minecraftサーバー「Collider」、ロックフリーの並行tickで6コア実測4.5倍高速</a>
+        <span class="quick-summary">— 約5,500行の個人プロジェクトで、空間分割前提を置かない並行アーキテクチャの検証を目的とする。</span>
+        <span class="meta">GitHub</span>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="./" class="archive-link">🗂 過去のダイジェスト</a>
+    </footer>
+  </div>
+</body>
+</html>
