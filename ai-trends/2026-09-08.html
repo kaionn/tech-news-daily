@@ -66,7 +66,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 <div class="container">
 <header>
   <h1>🧠 AI プロダクト動向</h1>
-  <p class="date">2026-07-28 発行（読了 6 分）</p>
+  <p class="date">2026-09-08 発行（読了 4 分）</p>
   <p class="tagline">実プロダクトのアーキテクチャ・使用例から AI 開発の現在地を週 3 回・1 号 1 テーマで深掘り</p>
   <nav class="site-nav">
     <a href="../">📰 日刊ダイジェスト</a>
@@ -77,81 +77,75 @@ footer a{color:var(--primary-500);text-decoration:none}
 </header>
 
 <div class="theme-hero">
-  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">AGENT-MEMORY</span></span>
-  <h2>エージェントのメモリ設計 — 保存容量ではなく「書き込みの境界線」を設計する</h2>
-  <p class="lede">エージェントが複数セッションにまたがって学習・継続動作するようになるにつれ、「何を覚えておくか」の設計が改めて焦点になっている。Anthropic は Claude Managed Agents にファイルベースの長期メモリと監査ログを追加し、Cursor はツール定義や過去の会話を常駐させず必要な時だけ取得させる構成でトークン消費を46.9%削減し、OpenAI は Agents SDK の実装例で短期メモリと長期メモリの境界を書き込み時のガードレールで引いている。3社の手法を並べると、メモリ設計が「保存容量を増やす」話ではなく「どこで区切り、何を書かせないか」を先に決める設計行為になっていることが見えてくる。</p>
+  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">AGENT-EVALUATION</span></span>
+  <h2>エージェント評価の再設計 — テキスト一致から状態検証、そして「修正がテストになる」仕組みへ</h2>
+  <p class="lede">エージェントが複数ステップにまたがってツールを呼び、状態を変えていく以上、出力テキストを正解文と突き合わせる評価はもう成立しない。LangChainの調査では観測性（トレーシング）導入が89%に達した一方、評価の導入は52%にとどまり、多くのチームが「見えているが測れていない」状態にある。この差を埋めようとする各社の具体策が、この数週間で言語化され始めた。</p>
 </div>
 
 <div class="tldr">
   <div class="label">TL;DR — 3 行で</div>
   <ul>
-    <li>Anthropic は Claude Managed Agents の記憶をファイルとして保存し、監査ログ・ロールバック・スコープ別パーミッションを標準機能として public beta で提供している</li>
-    <li>Cursor はツール定義や過去の会話をデフォルトで常駐させず、grep/tail/セマンティック検索で必要な時だけ取得させる設計により、MCPツール呼び出し時のエージェント総トークン消費を46.9%削減したと報告している</li>
-    <li>OpenAI の Agents SDK 実装例は、長期メモリへの書き込みを「恒常的に成り立つか」「実際に挙動を変えるか」の2条件でガードし、セッションメモがグローバルメモに優先する明示的な優先順位ルールで汚染を防いでいる</li>
+    <li>Anthropicはテキスト一致の判定から、環境の状態が実際に変わったかを見る outcome/state チェックへの転換を公式に推奨している。</li>
+    <li>Cursorは人間のレビュー修正をそのまま回帰テストケースに変換し、CIのベースラインチェックやリスクスコアリングと組み合わせて自動マージの可否を判断している。</li>
+    <li>Notionはエージェントが辿る経路が増えるほど評価の組み合わせが爆発すると気づき、手作業のJSONLから数百のデータセット運用へ移行した。</li>
   </ul>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 1: ファイルベースの長期メモリと監査ログ</div>
+  <div class="section-title">📐 パターン 1: 「合っているか」の判定基準が変わった</div>
   <div class="theme-section">
-    <p>Claude Managed Agents 向けに2026年4月23日に公開された Memory 機能は、記憶を構造化データベースではなく通常のファイルとして保存する設計を取る。エージェントは既存の bash・コード実行能力をそのまま使って記憶を読み書きし、org 全体で共有する読み取り専用ストアとユーザーごとの読み書き可能なストアを使い分けられる。どの変更がどのエージェント・どのセッションに由来するかを追う監査ログが標準で付き、過去バージョンへのロールバックや履歴からの redact も可能だ。</p><p>この設計が選ばれたのは、ベクトル DB や専用メモリストアを新たに構築せずに済むからだ。コーディングエージェントはすでにファイルシステム操作を前提に訓練・運用されており、「ファイルとして保存する」は既存の道具立てに乗るだけで実装できる。逆に監査ログとロールバックを標準機能にしたのは、エンタープライズ導入で「エージェントが何を学習し、なぜその判断に至ったか」を追跡できないと承認が下りないという実務上の制約が先にあったからだ。</p>
+    <p>従来の評価は、モデルの出力テキストを正解文やルーブリックと突き合わせる方式が中心だった。これに対し outcome/state チェックは、判定対象をテキストではなく「実行後の環境の状態」に置く。コーディングエージェントなら <code>テストが通るか</code>、カスタマー対応エージェントなら返金レコードが実在するか、ブラウザ操作エージェントなら対象ページの状態が変わったかを見る。</p><p>この転換が起きた理由は、エージェントが同じ正解にたどり着く経路が一通りではなくなったからだ。ステップの順序やツール呼び出しの回数まで厳密一致を求める評価は、有効なバリエーションを次々と「不合格」に弾いてしまい、評価そのものが開発のボトルネックになる。状態を見れば、経路が違っても結果が正しければ合格にできる。</p>
     <div class="example">
-      <div class="product">Claude Managed Agents Memory（Anthropic 公式ブログ）</div>
-      <div class="approach">記憶をファイルとして保存し、監査ログ・ロールバック・スコープ別パーミッションを標準機能として提供</div>
-      <div class="detail">Rakuten は初回パス誤り率97%減・コスト27%減・レイテンシ34%減、Wisedocs は書類検証の速度を30%改善したと公式に報告している</div>
-      <a href="https://claude.com/blog/claude-managed-agents-memory">📄 一次ソース</a>
+      <div class="product">Anthropic（公式エンジニアリングブログ）</div>
+      <div class="approach">コーディング/カスタマー対応/ブラウザ/データエージェントそれぞれについて、テキスト一致ではなくテストの合否や実データの状態変化を判定基準にするよう明文化</div>
+      <div class="detail">自社エージェント運用の知見として、判定基準をコード実行結果や環境状態という「壊れにくい対象」に固定する具体的な手法を提示している点が代表的</div>
+      <a href="https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> コーディングエージェント基盤の上に長期メモリを足すなら、専用DBより先にファイル＋監査ログの構成を検討する。エンタープライズ導入の障壁は記憶の性能より追跡可能性であることが多い。</div>
+    <div class="takeaway"><strong>示唆:</strong> 経路（トラジェクトリ）の妥当性ではなく、最終的な環境状態を検証対象にする。ステップ順序を厳格にチェックする eval は、有効なバリエーションを弾いて壊れやすい。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 2: 静的に持たせず、必要な分だけ取りに行かせる</div>
+  <div class="section-title">📐 パターン 2: レビュー指摘がそのまま回帰テストになる</div>
   <div class="theme-section">
-    <p>Cursor が公開した dynamic context discovery は、ツール定義や過去の会話、MCPサーバーのツール一覧をあらかじめすべてコンテキストに詰め込むのではなく、最小限の手がかりだけを常駐させ、必要になった時にエージェント自身が grep や <code>tail</code>、セマンティック検索で取りに行く設計だ。長い shell 出力や MCP の応答はファイルに書き出し、エージェントが <code>tail</code> で必要な分だけ読み進める。要約で失われた過去の会話も、検索可能なファイルとして残すことで後から引き出せるようにしている。</p><p>この方式が効くのは、MCPサーバーの数が増えるほど全ツール定義を毎回コンテキストに載せるコストが線形に膨らみ、しかも大半のターンでは使わないツールの説明が「使われない高コストな常駐者」になるからだ。Cursor は MCP ツールを呼び出したランに限定した計測で、この方式がエージェントの総トークン消費を46.9%削減したと公式に報告している。</p>
+    <p>評価セットを人力で維持し続けるのは、エージェントの生産量が増えるほど破綻する。そこで採られているのが、人間のレビュー修正やコメントをそのまま「同じ種類の問題を再度検知できるか」の回帰ケースに変換し、CIのベースラインチェックやリスクスコアリングと組み合わせてマージ経路を自動判断する仕組みだ。低リスクな変更は自動パスに、高リスクな変更は適切な担当者にルーティングされる。</p><p>この構成が広がっているのは、評価セットの拡充を専任チームの追加作業にしないためだ。本番で見つかった不具合やレビュー指摘を、そのまま次の評価に変換する導線を先に作っておけば、エージェントの利用が増えるほど評価セットも自動的に厚くなる。人手を増やさずに評価のカバレッジを利用量に追随させられる。</p>
     <div class="example">
-      <div class="product">Cursor（公式エンジニアリングブログ）</div>
-      <div class="approach">スキル定義・MCPツール一覧・過去の会話をデフォルトで最小化し、grep/tail/セマンティック検索でエージェントに必要な分だけ取得させる</div>
-      <div class="detail">MCPツールを呼び出したランに限定した計測で、動的発見によりエージェントの総トークン消費を46.9%削減したと報告している</div>
-      <a href="https://cursor.com/blog/dynamic-context-discovery">📄 一次ソース</a>
+      <div class="product">Cursor（自動コードレビュー機構 Bugbot）</div>
+      <div class="approach">人間のレビューコメントによる修正を回帰ケースに変換し、CIと専用エージェントによるエビデンス収集、リスクスコアリングによる自動マージ判断と組み合わせて運用</div>
+      <div class="detail">Arize Observe 2026でCursorのフィールドエンジニアリング責任者が公開した運用フローで、レビュー指摘から評価セット拡充までを自動化のループにしている点が具体的</div>
+      <a href="https://www.youtube.com/watch?v=Lsp5YZ9Jj3Q">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> ツール定義やドキュメントを「念のため全部常駐させる」のをやめる。特に MCP サーバーが増えてきたら、ツール一覧はインデックスだけ持たせて詳細は呼び出し時に取得させる設計に切り替える。</div>
+    <div class="takeaway"><strong>示唆:</strong> 評価セットは人力でメンテしない。本番のバグ報告やレビュー指摘が、そのまま次の回帰チェックに変換される導線を先に設計する。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 3: 短期はセッション、長期はグローバル — 境界は「書く前のチェック」で引く</div>
+  <div class="section-title">📐 パターン 3: エージェントの複雑化が評価の組み合わせ爆発を生む</div>
   <div class="theme-section">
-    <p>OpenAI Agents SDK の実装例は、状態を Profile（構造化された既知情報）・Global Memory（セッションをまたぐ長期メモ）・Session Memory（今回限りの短期メモ）・Trip History に分けて管理する。長期メモへの書き込みは save_memory_note ツールを経由し、「複数回の利用を通じて成り立ちそうか（durable）」「実際にレコメンドや制約を変えるか（actionable）」の2条件を満たした場合のみ保存を許可する。セッション終了時には LLM 呼び出しでセッションメモをグローバルメモへ統合し、重複排除と競合解消（新しい情報を優先）を行う。会話履歴そのものの管理には、直近 N ターンだけを残す Trimming と、古いターンを要約に圧縮する Summarizing の2方式があり、前者は決定的でレイテンシ0、後者は長期文脈を保てる代わりに要約起因の情報汚染リスクを持つとされる。</p><p>この二層設計と書き込み時ガードレールが必要になるのは、「今回だけ窓側の席がいい」のような一回限りの要望と、「いつも通路側」のような恒常的な好みを同じ場所に書くと、次回以降のレコメンドが一回限りの要望に汚染されるからだ。OpenAI の実装は「セッションメモがグローバルメモに優先する」という明示的な優先順位ルールを持たせることで、この汚染を読み出し時ではなく書き込み・統合時に処理している。</p>
+    <p>エージェントの自律性が上がり、辿る経路（パスファインディング）が増えるほど、想定すべき評価シナリオは足し算ではなく掛け算で増えていく。この問題への対処として、恒常的にほぼ100%を維持すべき「回帰eval」と、新モデルの能力を測るための「フロンティアeval」を明確に分離し、後者の結果に応じてユースケースごとに新モデルの採否を決める運用が定着しつつある。</p><p>背景にあるのは、フロンティアモデルのリリース頻度そのものが上がったことだ。数週間おきに新モデルが出る状況では、評価は「一度作って終わり」ではいられず、リリースのたびに「このユースケースに新モデルを使うか」を素早く判断するための恒常的な意思決定インフラにならざるを得ない。</p>
     <div class="example">
-      <div class="product">OpenAI Agents SDK（公式Cookbook, context personalization）</div>
-      <div class="approach">Global/Session の二層メモリを save_memory_note の durable/actionable チェックと統合時の重複排除・競合解消で運用</div>
-      <div class="detail">「SESSION memory overrides GLOBAL memory for this trip when they conflict」という明示的な優先順位ルールを実装コードごと公開している</div>
-      <a href="https://developers.openai.com/cookbook/examples/agents_sdk/context_personalization">📄 一次ソース</a>
+      <div class="product">Notion AI（70人規模のAIチーム）</div>
+      <div class="approach">手作業のJSONL採点から、LLM-as-judgeとカスタムスコアラーを組み合わせた数百のデータセット運用に移行し、回帰evalとフロンティアevalを分離して新モデルをユースケース別に24時間以内に採否判断</div>
+      <div class="detail">Braintrustが公開した顧客事例で、「エージェントが辿る経路が増えるほど評価の組み合わせが爆発する」という課題認識と、それに対応した運用の変化が具体的に語られている</div>
+      <a href="https://www.braintrust.dev/customers/notion">📄 一次ソース</a>
     </div>
-    <div class="example">
-      <div class="product">OpenAI Agents SDK（公式Cookbook, session memory）</div>
-      <div class="approach">会話履歴の圧縮を Trimming（直近Nターン保持）と Summarizing（要約圧縮）の2方式で使い分ける実装を公開</div>
-      <div class="detail">Trimming は決定的でレイテンシ0だが古い文脈を失うリスク、Summarizing は長期文脈を保てるが要約起因の「context poisoning」リスクがあるとトレードオフを明記している</div>
-      <a href="https://developers.openai.com/cookbook/examples/agents_sdk/session_memory">📄 一次ソース</a>
-    </div>
-    <div class="takeaway"><strong>示唆:</strong> 長期メモを持たせるなら、書き込み時に「恒常的に成り立つか」「実際に挙動を変えるか」の2条件チェックを先に入れる。一回限りの要望と恒常的な好みを同じ場所に書かせると、次回以降の挙動が汚染される。</div>
+    <div class="takeaway"><strong>示唆:</strong> 評価基盤は静的な合否判定ではなく、新モデルのリリースサイクルに合わせて『採用可否を短時間で判断できる』運用速度を持たせることを目標にする。</div>
   </div>
   <div class="editorial">
     <span class="label">✍️ 編集後記</span>
-    3社の実装が揃って示すのは、エージェントのメモリ設計がもはや「何を保存するか」ではなく「どこに書き込みの境界線を引くか」の設計行為になっているということだ。Anthropic はファイル＋監査ログで追跡可能性を、Cursor は常駐させないことでトークン効率を、OpenAI は書き込み時ガードレールで汚染防止を、それぞれ別の軸で解いている。どれも「メモリを増やす」のではなく「メモリの粒度と境界を制御する」方向の工夫である点に注目したい。
+    3つの事例に共通するのは、evalを品質保証チームの後工程ではなく、開発ループそのものの一部として設計し直している点だ。ただしLangChainの調査が示す通り、観測性の導入率89%に対し評価の導入率は52%にとどまる。トレースは取れているのに、それを合否判定に変換する仕組みがまだ整っていないチームの方が、実際には多数派だろう。
   </div>
 </div>
 
 <div class="section">
   <div class="section-title">🔗 今号の動向ピックアップ</div>
-  <div class="quick-link"><a href="https://www.anthropic.com/research/long-running-Claude">Anthropic、長時間タスクでは CHANGELOG.md が「失敗した試み」を記録する携行型長期メモリになると報告</a><span class="quick-summary">科学計算エージェントの事例で、進捗ファイルに失敗したアプローチとその理由を記録することで、次のセッションが同じ行き止まりを再試行しなくなると説明する。本文で扱った「何を書くかより何を書かないかを決める」設計と同じ発想の実例。</span></div>
-  <div class="quick-link"><a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents">Anthropic、長文脈エージェントの実務指針として compaction・構造化ノート・サブエージェント分離の3手法を整理</a><span class="quick-summary">コンテキストウィンドウを使い切る前に要約して引き継ぐ compaction、NOTES.md 的な外部メモリへの構造化ノート、サブエージェントが1000〜2000トークンの要約だけを返す設計を公式に解説する。本文セクション1・2で扱った「メモリの粒度を絞る」設計判断の上位概念として読める。</span></div>
+  <div class="quick-link"><a href="https://www.langchain.com/state-of-agent-engineering">LangChain「State of Agent Engineering」レポート</a><span class="quick-summary">1,340人へのサーベイで、観測性導入89%に対し評価導入は52%にとどまり、品質が本番投入の最大の障壁として挙げられたと報告している。本文で扱った『evalが後回しになりがち』という課題を裏付ける一次データだ。</span></div>
+  <div class="quick-link"><a href="https://www.anthropic.com/engineering/april-23-postmortem">Anthropic「Claude Code品質低下」ポストモーテム</a><span class="quick-summary">Claude Codeの品質劣化を招いた3つの独立したharness変更（reasoning-effort低下・キャッシュ最適化バグ・冗長性抑制プロンプト）を公式に分析している。regression evalが機能していれば本番投入前に検知できたはずの変化だった可能性を示す事例として、本文の回帰eval論と対になる。</span></div>
+  <div class="quick-link"><a href="https://arxiv.org/abs/2608.13867">Engineering Reliable Coding Agents（arXiv）</a><span class="quick-summary">コーディングエージェントの信頼性はモデル単体ではなくharness・実行状態・検索・メモリ・権限・レビュー画面・リソース配分に依存すると論じ、164の学術文献と100件の実務記録を統合したモノグラフ。『多くの見かけ上のモデル失敗は、実はシステムの別の場所に原因がある』という指摘は、本文のoutcome/stateチェック論の理論的裏付けになる。</span></div>
 </div>
 
 <div class="section">
   <div class="section-title">📚 過去号</div>
-  <div class="archive-item"><span class="week">2026-09-08</span><div class="body"><a href="../ai-trends.html">エージェント評価の再設計 — テキスト一致から状態検証、そして「修正がテストになる」仕組みへ</a><span class="sub">Anthropicはテキスト一致の判定から、環境の状態が実際に変わったかを見る outcome/state チェックへの転換を公式に推奨している。</span></div></div>
   <div class="archive-item"><span class="week">2026-09-03</span><div class="body"><a href="2026-09-03.html">長時間稼働エージェントの状態管理 — 「会話の保存」から「プロセスの永続化」へ</a><span class="sub">Google ADKやMastraは、ツール呼び出しなどステップの境界ごとに実行状態をシリアライズして外部ストレージに書き込み、コンテナが落ちても直前のステップから再開できる設計に収束している。</span></div></div>
   <div class="archive-item"><span class="week">2026-09-01</span><div class="body"><a href="2026-09-01.html">コードレビューエージェントの設計 — 差別化は検出率ではなく、文脈の取り方と『直すところまで』の範囲に移った</a><span class="sub">GitHub Copilot・Qodo・Cursor Bugbot・Cloudflareの内製ツールが、diff単体の解析から脱却し、リポジトリ全体・PR履歴・過去の指摘への反応まで動的に文脈を取りに行く設計へ収束している</span></div></div>
   <div class="archive-item"><span class="week">2026-08-29</span><div class="body"><a href="2026-08-29.html">構造化出力は「お願い」から「強制」へ — 3社がグラマー制約デコーディングで足並みを揃えた2026年</a><span class="sub">OpenAI・Anthropic・Google の主要3社が、JSON Schema をトークン生成レベルで強制する「グラマー制約デコーディング」に共通で対応した</span></div></div>
@@ -168,11 +162,12 @@ footer a{color:var(--primary-500);text-decoration:none}
   <div class="archive-item"><span class="week">2026-08-04</span><div class="body"><a href="2026-08-04.html">ワークフロー型 vs エージェント型 — 複雑さを足す前に何を確かめるか</a><span class="sub">Anthropic は「経路を誰が決めるか」で workflow と agent を定義し、単純な方から試すべきだと明言している。</span></div></div>
   <div class="archive-item"><span class="week">2026-08-01</span><div class="body"><a href="2026-08-01.html">コンテキストエンジニアリング — 「何を見せるか」ではなく「何を見せないか」を設計する</a><span class="sub">事前に全部読み込むのではなく、ファイルパスやURLなど軽量な参照を渡して実行時に取得する「Just-in-Time retrieval」がCursorやAnthropicの標準手法になった。</span></div></div>
   <div class="archive-item"><span class="week">2026-07-30</span><div class="body"><a href="2026-07-30.html">マルチエージェント協調 — 「書き込みを一本化する」が唯一の合意点になった理由</a><span class="sub">Cognition は2025年、複数エージェントの並行書き込みが矛盾した判断を生むとして「マルチエージェントを作るな」と主張したが、2026年4月に態度を転換し「書き込みは一本化し、エージェントは行動ではなく知性を提供する」構成に絞って実例を公開した</span></div></div>
+  <div class="archive-item"><span class="week">2026-07-28</span><div class="body"><a href="2026-07-28.html">エージェントのメモリ設計 — 保存容量ではなく「書き込みの境界線」を設計する</a><span class="sub">Anthropic は Claude Managed Agents の記憶をファイルとして保存し、監査ログ・ロールバック・スコープ別パーミッションを標準機能として public beta で提供している</span></div></div>
   <div class="archive-item"><span class="week">2026-W30</span><div class="body"><a href="2026-W30.html">エージェントの評価・観測性 — 「良さそう」を数値にする前に何を測らないかを決める</a><span class="sub">Anthropic は Claude Code の品質劣化が6週間、内部の eval・コードレビュー・単体テストをすべてすり抜けていたと自ら公表し、変更ごとの広範な eval とソーク期間の導入を表明した</span></div></div>
 </div>
 
 <footer>
-  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="../data/ai-trends/2026-07-28.json">data/ai-trends/2026-07-28.json</a>（このページは JSON からの生成物）</p>
+  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="../data/ai-trends/2026-09-08.json">data/ai-trends/2026-09-08.json</a>（このページは JSON からの生成物）</p>
   <p style="margin-top:.5rem"><a href="../">📰 日刊ダイジェストに戻る</a></p>
 </footer>
 </div>
