@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-09-07</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="../feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-09-07 (Mon)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+      <nav class="site-nav">
+        <a href="../" class="active">📰 日刊ダイジェスト</a>
+        <a href="../trends.html">🔌 週次プラグイントレンド</a>
+        <a href="../ai-trends.html">🧠 AI プロダクト動向</a>
+        <a href="./">🗂 アーカイブ</a>
+      </nav>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 22 articles</span>
+      <span>🏷 7 categories</span>
+      <span>📡 16 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item">
+        <span class="number-value">9.8</span>
+        <span class="number-label">VMware vCenter脆弱性のCVSSスコア</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">50x</span>
+        <span class="number-label">porfforのネイティブバイナリ縮小率</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">25x</span>
+        <span class="number-label">IBM Quantum新型機のスループット向上</span>
+      </div>
+    </div>
+
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
+
+      <div class="card featured deep-dive">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/javascriptcporfforwasm.html">DEEP DIVE: JavaScriptをC言語にコンパイルする「porffor」がアルファ版に到達</a></h3>
+        </div>
+        <div class="summary">Node.jsやDenoなどのJavaScriptランタイムは、V8などのエンジン一式を同梱するため実行ファイルが数十MB単位に膨らみ、サーバーレス環境ではコールドスタートの遅延やメモリ消費の増大を招いてきた。この構造的な重さに対し、JavaScript/TypeScriptのコードを直接C言語に変換し、そこからネイティブバイナリやWebAssemblyを生成するコンパイラ「porffor」が、2026年8月にアルファ版へ到達した。作者のOliver Medhurst氏は「実際の依存関係が動き始める新しい段階」と位置づけている。porfforはJavaScriptランタイムを同梱せず、コンパイル時に必要な処理だけをCコードへ落とし込む。この方式により生成バイナリはNode.jsのバンドル実行ファイルに比べて最大50倍小さくなり、1GBのメモリを持つサーバー上で実行できるアプリケーション数はNode.jsの28個に対しporfforでは1,000個以上に達する。起動処理も軽量化され、コールドスタート時間は100マイクロ秒台まで短縮された。次期バージョンではクロージャの実行が65%高速化し、メモリ使用量も30%削減される見込みだという。現時点での最大の制約はNode.js APIとの互換性で、既存のnpmパッケージ資産をそのまま動かせるかどうかが実運用への普及を左右する。アルファ版はこの互換性の壁に本格的に取り組み始めた段階であり、プロダクション導入はまだ先の話になる。</div>
+        <div class="editorial">🧠 サーバーレス実行環境のコスト構造は起動時間とメモリ密度で決まるため、50倍のバイナリ縮小と28倍のアプリケーション密度が実測値なら、エッジコンピューティング分野への影響は小さくない。ただし互換性の壁を越えられるかは未知数で、既存のNode.jsエコシステムに依存する資産をどこまで動かせるかは、アルファ版の段階ではまだ検証されていない。</div>
+        <div class="key-points">
+          <ul>
+            <li>生成バイナリはバンドル済みNode.js実行ファイルに比べ最大50倍小さく、1GBメモリのサーバーで動かせるアプリ数はNode.jsの28個に対し1,000個以上</li>
+            <li>コールドスタート時間はサブミリ秒(約100マイクロ秒)まで短縮、次期バージョンではクロージャ処理が65%高速化しメモリ使用量も30%削減予定</li>
+            <li>現状の最大のボトルネックはNode.js API互換性で、既存npmパッケージの実行可否がプロダクション導入の分かれ目になる</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 サーバーレスやエッジ環境でNode.jsベースの関数を運用しているなら、コールドスタートとメモリコストを削減できる可能性があるが、依存パッケージの互換性検証なしに移行するのはまだ早い。</div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-09-07</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://thehackernews.com/2026/09/attackers-exploit-papercut-flaws-to.html">PaperCutの認証バイパス+RCEチェーンが悪用され、米欧の学校・大学から資格情報が窃取される</a></h3>
+        </div>
+        <div class="summary">PaperCutの印刷管理サーバーに存在する2つの脆弱性——アクセス制御不備のCVE-2026-81578と、Javaバイトコードを任意実行できる安全でない動的クラスロードのCVE-2026-82078——を連鎖させる攻撃が、米国と欧州のK-12から大学までの教育機関を狙って観測されている。攻撃には認証情報が一切不要で、対象のIPアドレスかホスト名さえ分かれば足りる。Huntress社は最初のパッチへのバイパス手法まで確認しており、CISAは両CVEを既知悪用脆弱性(KEV)カタログに追加した。攻撃者は特権アカウントの作成やレジストリ情報の収集、Meterpreterペイロードの展開など、侵入後の偵察・永続化活動を行っている。</div>
+        <div class="key-points">
+          <ul>
+            <li>CVE-2026-81578(アクセス制御不備)とCVE-2026-82078(安全でない動的クラスロード)を連鎖させ、認証不要でJavaバイトコードを任意実行</li>
+            <li>Huntress社が最初の緊急パッチのバイパス経路を確認、CISAがKEVカタログに追加し米連邦機関に対応を義務付け</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 PaperCutを運用している教育機関や企業は、最新パッチが最初の修正のバイパスに対応済みかを確認し、外部公開している管理画面のアクセス制限を見直す必要がある。</div>
+        <div class="meta">
+          <span>The Hacker News</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-09-05</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://github.com/zedeus/nitter/commit/1428b4c2b4246f92a7e5b2673438e5fb39fcc4a3">X社の停止要求を受けていたNitter/XCancel、法的助言を得てサービス継続へ</a></h3>
+        </div>
+        <div class="summary">Twitter/Xの投稿を広告・ログインなしで閲覧できる非公式ビューアー「Nitter」とそのインスタンス「XCancel」は、2026年8月29日に一度サービスを停止していた。X Corp.は8月24日付で、Nitterインスタンスとリポジトリの恒久的な停止を求める停止通告書を送付していたためだ。9月6日、プロジェクトのリポジトリに「法的助言を受けてNitterプロジェクトは継続する」との更新がコミットされ、サービス再開が明らかになった。具体的な法的根拠の詳細は今後発表するとしており、コミットではREADMEの寄付案内の位置も見直された。</div>
+        <div class="key-points">
+          <ul>
+            <li>X Corp.が8月24日付でNitter/XCancelの恒久停止とリポジトリ削除を要求する停止通告書を送付していた</li>
+            <li>一度は8月29日に停止したが、9月6日のコミットで弁護士の助言を得て継続することが明らかに、詳細は追って公表予定</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 Nitter/XCancelを組み込みで使っているサービスやブックマークレットは、停止・再開が繰り返される前提でフォールバックを用意しておいた方がよい。</div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-06</span>
+          <span class="engagement">▲ 351</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://michael.stapelberg.ch/posts/2026-09-06-dcs-fast-turbopfor-go-simd/">Debian Code Search、最後のCコード依存をGoのSIMD実装で置き換え完全ネイティブ化</a></h3>
+        </div>
+        <div class="summary">Debianの全ソースコードを横断検索できる「Debian Code Search」の開発者Michael Stapelberg氏は、転置インデックスの整数圧縮に使っていたcgo経由のTurboPFor(C言語製)を、Go 1.26の実験的SIMDパッケージ`simd/archsimd`によるネイティブGo実装に置き換えた。ビット幅特化とSIMD化でcgo版と同等の速度に到達し、positional popcount最適化でさらに2倍高速化した。</div>
+        <div class="key-points">
+          <ul>
+            <li>SIMD化とビット幅特化でcgo(C言語)版と同等のエンコード速度に到達、positional popcount最適化でさらに2倍高速化</li>
+            <li>デコード性能はdebian-mixデータセットで773Mval/sから858Mval/sへ向上(アロケーション削減で約11%改善)、IPCは理論最大8に対し7を達成</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Michael Stapelbergブログ</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-09-06</span>
+          <span class="engagement">▲ 44</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://uutils.org/blog/2026-08-error-diagnostics/">uutils coreutils 0.11.0、Rustコンパイラ風のキャレット付きエラー診断を28コマンドに実装</a></h3>
+        </div>
+        <div class="summary">GNU coreutilsをRustで再実装する「uutils coreutils」の0.11.0が、Rustコンパイラのような「キャレットで問題箇所を指す」エラー表示を追加した。標準エラー出力が端末に接続されている場合のみ発動し、スクリプトやパイプ実行時は従来通り1行のメッセージを返すため互換性を壊さない。</div>
+        <div class="key-points">
+          <ul>
+            <li>端末接続時のみキャレット付き診断を表示し、パイプ・スクリプト実行時は従来の1行メッセージを維持して後方互換性を確保</li>
+            <li>`tr 'qw[y-b]' x`のような逆順レンジ指定に「b-yのつもりでは?」と提案するなど、chmod/sort/cutなど28コマンドの引数エラーに対応、`UUTILS_DIAG`環境変数で動作を強制指定可能</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>uutils.orgブログ</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-08-28</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://fzakaria.com/2026/09/04/any-nix-package-live-in-your-browser">任意のNixパッケージをブラウザだけで起動できる「TryNix」、31万バージョンから検索・実行可能</a></h3>
+        </div>
+        <div class="summary">Nixパッケージマネージャのパッケージを、ローカルにインストールせずブラウザタブ内だけで起動できる実験的サービス「TryNix」が公開された。nixpkgsの履歴から31万件超のパッケージバージョンを検索し、QEMUベースのx86_64 Linuxカーネルをwasmにコンパイルしてブラウザ内で動かす。バックエンドサーバーは持たず、公開バイナリキャッシュから直接パッケージを取得する静的構成だ。</div>
+        <div class="key-points">
+          <ul>
+            <li>nixpkgs履歴の31万件超のパッケージバージョンを対象に、QEMUベースのLinuxカーネルをWebAssembly化してブラウザタブ内で実行、バックエンドサーバー不要の静的構成</li>
+            <li>VMスナップショットとJITトランスレーションキャッシュをブラウザに保存することで、初回起動は約7.5秒、再訪時は主要パッケージで4.3秒までシェル到達時間を短縮</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>fzakaria.comブログ</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-09-04</span>
+          <span class="engagement">▲ 41</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://asahilinux.org/2026/09/m2-episode-1/">Asahi Linux、Apple M3シリーズのサポートをインストーラーに統合</a></h3>
+        </div>
+        <div class="summary">Apple SiliconにネイティブLinuxを移植するAsahi Linuxプロジェクトが、M3シリーズ搭載Mac(MacBook・iMac)向けのサポートをインストーラーに統合し、正式サポート対象に加えた。ウェブカメラ・USB・AV1デコード・Wi-Fi/BluetoothなどM1/M2シリーズの機能はほぼそのまま動作する。</div>
+        <div class="key-points">
+          <ul>
+            <li>ウェブカメラ・USB 3.0(10Gbps)・AV1ハードウェアデコード・Wi-Fi/Bluetoothなど、M1/M2で動いていた機能の大半がM3でもそのまま動作</li>
+            <li>スリープ機能はファームウェア制約で無効化、HDMI出力とGPUアクセラレーションは未対応、Mac Studio(M3 Ultra)は非対応でMacBook/iMacのみサポート対象</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Asahi Linux Blog</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-06</span>
+          <span class="engagement">▲ 283</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://www.bleepingcomputer.com/news/security/critical-vmware-vcenter-rce-flaw-exploited-for-reverse-ssh-access/">VMware vCenterのCVSS 9.8脆弱性、開示5日で47ヶ国361件が侵害されESXi上にランサムウェア展開</a></h3>
+        </div>
+        <div class="summary">Broadcomが7月29日に公開したvCenter ServerのSyslogサーバーにおけるディレクトリトラバーサル脆弱性CVE-2026-59310(CVSS 9.8)は、認証不要でネットワーク到達可能な攻撃者が細工したリクエストを送るだけでコード実行が成立する。開示からわずか5日で悪用が確認され、これまでに47ヶ国361件のIPアドレスで侵害が判明した。侵入後はオープンソースのリバースSSHツールで永続化し、ESXiホスト上に直接Babuk派生ランサムウェアを展開する手口が確認された。</div>
+        <div class="key-points">
+          <ul>
+            <li>CVSS 9.8のディレクトリトラバーサル(CVE-2026-59310)、認証不要でSyslogサービス経由のリモートコード実行が成立し、開示から5日で悪用開始</li>
+            <li>47ヶ国361件のIPアドレスが侵害され、リバースSSHツールで永続化後にESXiホスト上へBabuk派生ランサムウェアを直接展開、ワークアラウンドは存在せずパッチ適用のみが対策</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>BleepingComputer</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-08-17</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/vs_codethe_story_of_vs_codeyoutubeibmmsvs_code.html">「VS Codeはこうして生まれた」、生みの親エリック・ガンマ氏らのドキュメンタリーがYouTube公開</a></h3>
+        </div>
+        <div class="summary">VS Codeの生みの親であるErich Gamma氏がIBM在籍中にマイクロソフト本社を訪れ、ビル・ゲイツ氏と約1時間面会した逸話を含む公式ドキュメンタリー「The Story of VS Code」が、2026年9月5日にYouTubeで公開された。Gamma氏は2011年6月、当時のVPだったJason Zander氏からブラウザベースの開発ツール構想への参加を打診され移籍を決断、スイス・チューリッヒに開発拠点を立ち上げた。VS Codeは2015年4月のBuildでLinux/macOS/Windows対応版を発表し、同年11月のConnect()でオープンソース化された。</div>
+        <div class="key-points">
+          <ul>
+            <li>Erich Gamma氏はIBM在籍中にビル・ゲイツ氏と面会、2011年6月に当時のVP Jason Zander氏の誘いでマイクロソフトへ移籍しチューリッヒに開発拠点を設立</li>
+            <li>TypeScript共同開発者Steve Lucco氏との協業、jQuery不採用、UIスレッド軽量化が技術的決断の柱。2015年4月にクロスプラットフォーム版を発表、同年11月にオープンソース化</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-09-06</span>
+          <span class="engagement">🔖 44</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-frontend">Frontend</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://qiita.com/Sicut_study/items/8fa7302bbb5bc1c897bf">Next.jsはいかにして覇権を握ったか、Gatsbyからの移行史とCVSS10.0脆弱性の教訓を辿る</a></h3>
+        </div>
+        <div class="summary">2015年にGuillermo Rauch氏が設立した「Zeit」社(現Vercel)発のNext.jsは、2016年10月25日に「小さなリポジトリ」として静かにGitHub公開された。ビルドに数十分から1時間を要したGatsbyから、Twitch・TikTok・Huluなど大規模サービスが移行した経緯を軸に歴史を整理している。2022年10月のNext.js 13でApp Router(React Server Components採用)を導入し大企業採用が進む一方、2025年にはCVSS 9.1・CVSS 10.0満点の脆弱性が相次いで発覚した歴史も記録している。</div>
+        <div class="key-points">
+          <ul>
+            <li>2016年10月25日に静かにGitHub公開され、ビルドに数十分〜1時間要したGatsbyからTwitch・TikTok・Huluなどが移行</li>
+            <li>2022年10月のNext.js 13でReact Server ComponentsベースのApp Routerを導入する一方、2025年にCVSS 9.1とCVSS 10.0満点の脆弱性が相次いで発覚</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-09-06</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/saku0512/books/3735de8d0aa09f">CとGoが生成するアセンブリを読み比べ、言語設計の違いを可視化するZenn本が公開</a></h3>
+        </div>
+        <div class="summary">C言語とGo言語で同じ処理を書き、生成されるアセンブリコードを比較することで両言語の設計思想の違いを解説するZenn本が公開された。全15章構成で、関数引数の渡し方(ABI)、malloc/newとスタック割り当て・エスケープ解析によるメモリ管理の違い、配列アクセス時の境界チェックの実装、Goroutineのスタック管理とCのスタックの違い、ガベージコレクションがアセンブリに残す痕跡まで、足し算のような基本操作を起点に段階的に扱う。</div>
+        <div class="key-points">
+          <ul>
+            <li>全15章構成で、関数引数の渡し方(ABI)からポインタ操作・Go固有機能まで、足し算のような基本操作を起点に段階的にアセンブリレベルで比較</li>
+            <li>配列境界チェックの実装、malloc/newとエスケープ解析によるメモリ管理の違い、Goroutineスタックの扱い、GCがアセンブリに残す痕跡まで具体的に可視化</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-09-05</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-frontend">Frontend</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/geekplus/articles/b5f1757e2869ef">66万セルの在庫計画画面をTanStack Virtualで仮想化、鍵は初期表示でなくスクロール中の再計算削減</a></h3>
+        </div>
+        <div class="summary">拠点100件×指標9種類×日数731日で最大66万セルに達する在庫計画画面に、画面外の要素をDOM化しないTanStack Virtualを導入した事例。縦方向はページ基準の`useWindowVirtualizer`、横方向はスクロール枠基準の`useVirtualizer`で別々に仮想化した。効果の本質は初期表示の高速化ではなく、900行全描画時に横スクロールのたびに再計算されていた13,500セルを300セルまで削減できた点にあった。</div>
+        <div class="key-points">
+          <ul>
+            <li>縦・横を別々に仮想化(useWindowVirtualizer/useVirtualizer)し、横スクロール時の再計算対象を900行×15列=13,500セルから300セルへ削減</li>
+            <li>セルごとのオブジェクト生成をやめFloat64Array/Uint8Arrayに畳み込み660万オブジェクトを9,000個に削減、高さ測定はCSS変数直書きで再描画連鎖を回避</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-09-04</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.com/microsoft/tgrep">トライグラム索引で高速化するコード検索ツール「tgrep」、ripgrep比最大52倍を実測</a></h3>
+        </div>
+        <div class="summary">Microsoftが公開したコード検索ツール「tgrep」は、テキストファイルから3バイトの重複トライグラムを事前抽出してインデックス化し、検索時にはマッチしうる小さなファイル集合だけを走査する。クライアント/サーバー方式でJSON-RPC 2.0を使い、mmapしたディスク上インデックスとリアルタイム更新用のメモリ内オーバーレイを組み合わせたHybridIndexを採用する。ripgrepとの比較ベンチマークでは、gecko-dev(38.8万ファイル)でmacOS 51.9倍・Windows 38.6倍と、大規模リポジトリほど差が広がる結果になった。</div>
+        <div class="key-points">
+          <ul>
+            <li>3バイトトライグラムの事前インデックス化とHybridIndex(mmap+メモリ内オーバーレイ)により、検索時は候補ファイルのみ走査</li>
+            <li>ripgrepとの比較で18項目中17項目で上回り、gecko-dev(38.8万ファイル)ではmacOS上で51.9倍高速、リポジトリが大きいほど差が拡大</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-09-06</span>
+          <span class="engagement">🔖 45</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-data">Data</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.com/TabularisDB/tabularis">PostgreSQL/MySQL/SQLite横断のデスクトップSQLワークスペース「Tabularis」、AIエージェント接続用MCPサーバーを内蔵</a></h3>
+        </div>
+        <div class="summary">オープンソースのデスクトップアプリ「Tabularis」は、PostgreSQL・MySQL/MariaDB・SQLiteを3種の組み込みドライバでカバーし、ClickHouse・DuckDB・MongoDB・Redis・Firestoreなど16以上の公式プラグインで対応範囲を広げるマルチデータベースクライアント。Monacoベースのエディタに加え、SQLとMarkdownを混在させたノートブック機能、実行計画をグラフ表示する「Visual EXPLAIN」を備える。ClaudeやCursor、Devinがデータベーススキーマにアクセスしてクエリを実行できるMCPサーバーを内蔵している。</div>
+        <div class="key-points">
+          <ul>
+            <li>3種の組み込みドライバ+16以上の公式プラグインでPostgreSQL/MySQL/SQLite/ClickHouse/DuckDB/MongoDBなどを横断操作、実行計画をグラフ表示する「Visual EXPLAIN」を搭載</li>
+            <li>Claude・Cursor・DevinがDBスキーマにアクセスしクエリを実行できるMCPサーバーを内蔵、React 19+TypeScript/Rust+Tauri v2構成でApache 2.0ライセンス公開</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-06</span>
+          <span class="engagement">⭐ 4.8k</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://ktrmnm.jp/blog/2026-09-05-madoc-intro/">AIエージェントが生成する大量のMarkdownを整形する「madoc」、PDF組版にVivliostyleを採用</a></h3>
+        </div>
+        <div class="summary">Markdownファイルを見やすいHTMLやPDFに変換するコマンドラインツール「madoc」が公開された。`madoc html input.md -o output.html`のようにコマンド一つで変換でき、PDF組版にはVivliostyleを採用、目次自動生成・表紙画像挿入・CSSカスタムテーマにも対応する。開発のほぼ全てをAIエージェントが担っており、作者はAIとの作業で大量に生成されるMarkdownをチームメンバーに共有する際、見やすい形式に変換する必要に迫られて開発したと述べている。</div>
+        <div class="key-points">
+          <ul>
+            <li>`madoc html`/`madoc pdf`のコマンド一つでMarkdownをHTML/PDFに変換、PDF組版にVivliostyleを採用し目次自動生成・表紙画像・CSSテーマに対応</li>
+            <li>複数MarkdownファイルをYAMLの章立て定義で1文書に結合可能、開発のほぼ全工程をAIエージェントが担当</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>ktrmnm.jpブログ</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-05</span>
+          <span class="engagement">🔖 93</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
+
+      <div class="quick-link">
+        <span class="tag tag-oss">OSS</span>
+        <a href="https://blog.netbsd.org/tnf/entry/netbsd_9_5_released_and">NetBSD 9.5リリース、9.xブランチはこれで終了</a>
+        <span class="quick-summary">— セキュリティ・安定性上重要な修正のみを収録した9.xブランチ最終版で、以後はNetBSD 11.0か10.2への移行が推奨される。</span>
+        <span class="meta">NetBSD Blog</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-data">Data</span>
+        <a href="https://aws.amazon.com/jp/blogs/news/streamlining-access-to-tabular-datasets-stored-in-amazon-s3-tables-with-duckdb/">DuckDBからApache IcebergテーブルをAmazon S3 Tablesに直接ATTACHして分析</a>
+        <span class="quick-summary">— 追加インフラなしでS3 TablesバケットをDuckDBのATTACHコマンドで接続し、SQLで直接クエリできる手順を解説している。</span>
+        <span class="meta">AWS Blog</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://www.ibm.com/quantum/blog/nighthawk-r2">IBM、量子プロセッサ「Nighthawk r2」を発表——前世代比25倍のスループット</a>
+        <span class="quick-summary">— 120量子ビットと458個の物理素子を搭載し、高速な量子ビットリセット機構により前世代Heron比で最大25倍、毎秒10万回以上の回路実行を実現した。</span>
+        <span class="meta">IBM Quantum Blog</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://github.com/marsbos/mador">わずか855バイトの最小リアクティブDOMライブラリ「Mador」</a>
+        <span class="quick-summary">— 仮想DOMもコンポーネントも使わず、既存のDOM要素に`read()`/`write()`で状態を結びつけるだけの軽量リアクティビティを提供する。</span>
+        <span class="meta">GitHub</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://zenn.dev/bitkey_dev/articles/test-estimation-formula">テスト工数の見積もりは掛け算2つで出せるという提案</a>
+        <span class="quick-summary">— テストケース数と1件あたりの実施時間という2つの掛け算だけで、勘に頼らないテスト見積もりの型を示している。</span>
+        <span class="meta">Zenn</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://runjs.app/blog/music-theory-for-programmers">音楽理論を「周波数という1つの数値」から積み上げて説明する記事</a>
+        <span class="quick-summary">— 音声を44,100分の1秒ごとの数値配列として捉え、長音階を`[2,2,1,2,2,2,1]`という配列として説明するなど、暗記でなく計算構造として音楽理論を導出する。</span>
+        <span class="meta">RunJSブログ</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://mathstodon.xyz/@tao/117207856734787448">Terence Tao氏、AIだけで数学の未解決問題を性急に解くことへの懸念を表明</a>
+        <span class="quick-summary">— 透明性のないAI単独の証明は数学の進歩にとって正味マイナスになりかねないと指摘し、ナビエ・ストークス方程式の大域正則性問題を例に挙げている。</span>
+        <span class="meta">Mathstodon</span>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="./" class="archive-link">🗂 過去のダイジェスト</a>
+    </footer>
+  </div>
+</body>
+</html>
