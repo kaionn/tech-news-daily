@@ -1,0 +1,85 @@
+{
+  "issue": "2026-09-10",
+  "generated_at": "2026-09-10T07:00:00+09:00",
+  "theme": {
+    "title": "Agent Skills という第3のレイヤー — プロンプトでもRAGでもなく「必要になるまで読まない」設計",
+    "category": "agent-skills",
+    "lede": "2025年10月にAnthropicが発表したAgent Skillsは、当初はClaude専用のディレクトリ形式に過ぎなかった。しかし同年12月に仕様がagentskills.ioとしてオープン化されて以降、Microsoft・OpenAI・Cursorなど20以上のプラットフォームが同じSKILL.md形式を採用し、Notion・Canva・Rakutenなどがパートナー製スキルを提供するに至った。RAGやツール呼び出しとは別の「第3のコンテキスト供給経路」がここまで速く普及した例は珍しい。仕組みと実例からその理由を見る。",
+    "tldr": [
+      "Agent Skillsは「メタデータ(~100トークン)→本文(<5000トークン推奨)→付随ファイル」の3段階でコンテキストに読み込む、プログレッシブディスクロージャー設計。",
+      "2025年12月にAnthropicが仕様をagentskills.ioとしてオープン化し、Microsoft・OpenAI・Cursorなど20以上のプラットフォームが同一フォーマットを採用した。",
+      "スキルを「モデルが自動判断で呼ぶもの」と「ユーザーが明示的に呼ぶもの」に分離するdisable-model-invocationのような制御が、実運用の次の焦点になっている。"
+    ],
+    "sections": [
+      {
+        "heading": "メタデータ・本文・付随ファイルの3段階ロード",
+        "body_html": "<p>Agent Skills の基本構造は、SKILL.md というファイル1枚に frontmatter（name / description）と本文を持たせ、それをディレクトリ単位でまとめたものだ。エージェントは起動時に全スキルの description だけ（1件あたり目安100トークン程度）をシステムプロンプトに読み込み、タスクとの関連が疑わしいと判断した時点で初めてそのSKILL.md本文（推奨5000トークン未満）を読みに行く。さらに <code>scripts/</code> や <code>references/</code> 配下のファイルは、本文を読んだ後に必要になったものだけを個別に読む。</p><p>この3段構成が要るのは、スキルの「量」に制約を持たせないためだ。数十個のスキルを常駐させても、常に載るのはdescriptionの合計だけで、本文以下はタスクごとに1〜数個しか展開されない。RAGが「検索して該当ドキュメントを渡す」設計であるのに対し、Skillsは「事前にインデックス化された手順書を、目次から本文、付録の順にエージェント自身がたどる」設計であり、検索インフラを持たずに同じ効果を得られる点が普及の起点になった。</p>",
+        "examples": [
+          {
+            "product": "Claude Skills（Anthropic公式エンジニアリングブログ）",
+            "approach": "description(~100トークン)→SKILL.md本文(<5000トークン推奨)→scripts/referencesの3段階でコンテキストに展開する",
+            "detail": "この3段階ロードの仕組みを最初に定義し、後続の仕様のベースになった",
+            "source_url": "https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills"
+          }
+        ],
+        "takeaway": "スキル数を増やしても常駐コストはdescription分だけで済むため、「ツールを増やすとコンテキストが膨らむ」問題への対処として、頻度の低い専門タスクはツールではなくスキルとして切り出す方が筋がいい。"
+      },
+      {
+        "heading": "独自フォーマットからオープン標準への転換",
+        "body_html": "<p>Agent Skills は登場から2ヶ月後の2025年12月18日、Anthropicが仕様を agentskills.io として公開し、Claude専用のディレクトリ形式からプラットフォーム非依存のオープン標準に切り替わった。SKILL.mdの命名規則・frontmatterの必須フィールド・progressive disclosureの3段階を仕様として固定したことで、Microsoft・OpenAI・Cursor・GitHubなど20以上のプラットフォームが同じフォーマットを採用し、1つのスキルディレクトリを複数のエージェント実装で使い回せるようになった。</p><p>Rakutenは公式ブログで、スキル導入後に経理関連の作業が「1日かかっていたものが1時間に短縮された」と報告している。この種の具体的な効果が出るのは、スキルが「プロンプトの中身」ではなく「組織の手順書そのもの」を成果物として管理できるからだ。MCPが「ツールをどう繋ぐか」の標準だったのに対し、Skillsは「手順とノウハウをどう配布するか」の標準であり、両者は補完関係にある。</p>",
+        "examples": [
+          {
+            "product": "agentskills.io（オープン仕様）",
+            "approach": "SKILL.mdのfrontmatter必須フィールドとprogressive disclosureの3段階をプラットフォーム非依存の仕様として固定",
+            "detail": "Microsoft・OpenAI・Cursor・GitHubなど20以上のプラットフォームが同一フォーマットを採用する起点になった",
+            "source_url": "https://agentskills.io/specification"
+          },
+          {
+            "product": "Rakuten（Anthropic公式ブログのパートナー事例）",
+            "approach": "経理関連ワークフローにスキルを導入し、作業時間を1日から1時間に短縮したと報告",
+            "detail": "スキルが「プロンプトの工夫」でなく「組織の手順書」として機能した具体的な数値例",
+            "source_url": "https://claude.com/blog/skills"
+          }
+        ],
+        "takeaway": "自社の業務手順をスキルとして切り出すなら、社内限定のプロンプトの工夫として抱え込むより、オープン標準に沿って書いた方が将来複数のエージェント実装に転用でき、投資回収が早い。"
+      },
+      {
+        "heading": "モデル任せの呼び出しと、明示呼び出しの分離",
+        "body_html": "<p>スキルが数十個規模になると、次に問題になるのは「常駐コストの低さ」ではなく「エージェントが余計なタイミングでスキルを呼んでしまう」ことだ。GitHub上で最も星の多いAgent Skillsコレクションの一つであるmattpocock/skillsは、v1.0でスキルを「モデルが自律的に呼ぶもの」と「ユーザーが明示的に <code>/skill-name</code> で呼ぶもの」に分離し、後者には <code>disable-model-invocation: true</code> を設定してdescriptionごとモデルの判断対象から外した。</p><p>この分離が必要になるのは、デプロイや送信のような副作用のある操作を「意味的に関連しそうだから」とモデルが自動発火させると事故につながるためだ。実務ブログでも、副作用を持つスキルには <code>disable-model-invocation</code> を付け、ユーザーの明示的な呼び出しだけで発火させる設計が推奨されている。プログレッシブディスクロージャーが「いつ本文を読むか」の設計だったのに対し、この分離は「いつ実行を許可するか」の設計であり、Skillsの普及後に議論の焦点が移った先はここにある。</p>",
+        "examples": [
+          {
+            "product": "mattpocock/skills（GitHub上の代表的なコミュニティ製スキル集）",
+            "approach": "v1.0でスキルを「モデル呼び出し可」と「ユーザー明示呼び出し専用」に分割し、後者にdisable-model-invocation: trueを設定",
+            "detail": "個人のスキル集がv1.0で構造変更するほど、呼び出し制御の粒度が実運用上の課題として顕在化したことを示す",
+            "source_url": "https://github.com/mattpocock/skills/releases/tag/v1.0.0"
+          },
+          {
+            "product": "disable-model-invocationの実装解説（コーディングエージェント向け）",
+            "approach": "デプロイ・送信など副作用のある操作は明示呼び出し専用にし、モデルの自動発火対象から外す",
+            "detail": "副作用のある操作をモデル任せにしない設計判断の具体例",
+            "source_url": "https://rajeevpentyala.com/2026/06/29/disable-model-invocation-control-when-your-coding-agent-auto-invokes-a-skill/"
+          }
+        ],
+        "takeaway": "スキルを増やすなら、最初から「モデルが選ぶ」と「ユーザーが選ぶ」を分けて設計する。副作用のある操作を後からdisable-model-invocationで塞ぐより、設計時点で分離しておく方が事故が減る。"
+      }
+    ]
+  },
+  "editorial": "Skillsが9ヶ月でオープン標準まで進んだ速度は、MCPの再演に近い。ただしMCPが「繋ぎ方」の標準だったのに対し、Skillsは「手順とノウハウの配布」の標準であり、企業が本当に蓄積したいのは後者のはずだ。プロンプトを個人の工夫として抱え込むより、SKILL.mdとして書き出す文化が根付くかどうかが次の分水嶺になる。",
+  "quick_picks": [
+    {
+      "title": "Simon Willison による Agent Skills 解説",
+      "summary": "Agent Skillsのオープン標準化発表当日に書かれた独立した技術者による設計解説。CursorやGitHubの採用、後追いのOpenAI対応にも触れている。",
+      "url": "https://simonwillison.net/2025/Dec/19/agent-skills/"
+    },
+    {
+      "title": "anthropics/skills（公式スキル集リポジトリ）",
+      "summary": "Anthropicが公開しているPowerPoint・Excel・Word・PDF向けの公式Skillsの実装例。本号で説明したSKILL.mdの3段階ロード構造の実物リファレンスになる。",
+      "url": "https://github.com/anthropics/skills"
+    },
+    {
+      "title": "claude.com/blog/skills（パートナー導入事例まとめ）",
+      "summary": "Box・Canva・Notion・Rakutenの導入事例を含む公式パートナー発表。本号で触れたRakutenの「1日→1時間」事例の出典。",
+      "url": "https://claude.com/blog/skills"
+    }
+  ]
+}

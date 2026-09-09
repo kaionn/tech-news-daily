@@ -66,7 +66,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 <div class="container">
 <header>
   <h1>🧠 AI プロダクト動向</h1>
-  <p class="date">2026-08-29 発行（読了 6 分）</p>
+  <p class="date">2026-09-10 発行（読了 6 分）</p>
   <p class="tagline">実プロダクトのアーキテクチャ・使用例から AI 開発の現在地を週 3 回・1 号 1 テーマで深掘り</p>
   <nav class="site-nav">
     <a href="../">📰 日刊ダイジェスト</a>
@@ -77,85 +77,91 @@ footer a{color:var(--primary-500);text-decoration:none}
 </header>
 
 <div class="theme-hero">
-  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">STRUCTURED-OUTPUT</span></span>
-  <h2>構造化出力は「お願い」から「強制」へ — 3社がグラマー制約デコーディングで足並みを揃えた2026年</h2>
-  <p class="lede">「JSON で返して」とプロンプトに書いて祈るフェーズは終わった。OpenAI が2024年8月にJSON Schema をトークン生成そのものに強制するアプローチを出してから1年半、Anthropic は2026年3月に構造化出力とstrict tool use をGA、Google も2025年11月にGemini API のJSON Schema 対応範囲を大幅拡張した。3社が同じ技術（グラマー制約デコーディング）に収束したことで、エージェント設計における「壊れたJSON をどう扱うか」という問いそのものが過去のものになりつつある。</p>
+  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">AGENT-SKILLS</span></span>
+  <h2>Agent Skills という第3のレイヤー — プロンプトでもRAGでもなく「必要になるまで読まない」設計</h2>
+  <p class="lede">2025年10月にAnthropicが発表したAgent Skillsは、当初はClaude専用のディレクトリ形式に過ぎなかった。しかし同年12月に仕様がagentskills.ioとしてオープン化されて以降、Microsoft・OpenAI・Cursorなど20以上のプラットフォームが同じSKILL.md形式を採用し、Notion・Canva・Rakutenなどがパートナー製スキルを提供するに至った。RAGやツール呼び出しとは別の「第3のコンテキスト供給経路」がここまで速く普及した例は珍しい。仕組みと実例からその理由を見る。</p>
 </div>
 
 <div class="tldr">
   <div class="label">TL;DR — 3 行で</div>
   <ul>
-    <li>OpenAI・Anthropic・Google の主要3社が、JSON Schema をトークン生成レベルで強制する「グラマー制約デコーディング」に共通で対応した</li>
-    <li>対応時期にはズレがあり、サポートするJSON Schemaキーワードの範囲も各社バラバラなため、モデルを切り替える際は互換性の再検証が必要</li>
-    <li>対象は最終出力だけでなく、エージェントの途中のツール呼び出し引数にも拡大しており、リトライ前提の設計を見直す動きが出ている</li>
+    <li>Agent Skillsは「メタデータ(~100トークン)→本文(&lt;5000トークン推奨)→付随ファイル」の3段階でコンテキストに読み込む、プログレッシブディスクロージャー設計。</li>
+    <li>2025年12月にAnthropicが仕様をagentskills.ioとしてオープン化し、Microsoft・OpenAI・Cursorなど20以上のプラットフォームが同一フォーマットを採用した。</li>
+    <li>スキルを「モデルが自動判断で呼ぶもの」と「ユーザーが明示的に呼ぶもの」に分離するdisable-model-invocationのような制御が、実運用の次の焦点になっている。</li>
   </ul>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 1: 「お願い」から「強制」へ — グラマー制約デコーディングの仕組み</div>
+  <div class="section-title">📐 パターン 1: メタデータ・本文・付随ファイルの3段階ロード</div>
   <div class="theme-section">
-    <p>従来のJSON出力は、プロンプトで「このスキーマ通りに返して」と指示し、返ってきたテキストを<code>json.loads</code>でパースし、失敗したらリトライする、という運任せの設計だった。グラマー制約デコーディングはこれを生成側の制約に変える。JSON Schema をコンテキストフリー文法（CFG）に変換し、次のトークン候補をその文法に一致するものだけに動的にマスキングすることで、モデルが構造的に間違ったトークンを出力できないようにする。</p><p>業界がここに収束したのは、プロンプト頼みの遵守率がどれだけ高くても、エージェントの多段処理では1回の失敗が全体を止めるからだ。OpenAI は自社ベンチマークで、この方式に切り替えた<code>gpt-4o-2024-08-06</code>が複雑なJSON Schema追随評価で100%を記録した一方、旧世代の<code>gpt-4-0613</code>は40%未満だったと報告している。数パーセントの失敗率でも、ステップ数が増えるほど累積的に致命傷になる。</p>
+    <p>Agent Skills の基本構造は、SKILL.md というファイル1枚に frontmatter（name / description）と本文を持たせ、それをディレクトリ単位でまとめたものだ。エージェントは起動時に全スキルの description だけ（1件あたり目安100トークン程度）をシステムプロンプトに読み込み、タスクとの関連が疑わしいと判断した時点で初めてそのSKILL.md本文（推奨5000トークン未満）を読みに行く。さらに <code>scripts/</code> や <code>references/</code> 配下のファイルは、本文を読んだ後に必要になったものだけを個別に読む。</p><p>この3段構成が要るのは、スキルの「量」に制約を持たせないためだ。数十個のスキルを常駐させても、常に載るのはdescriptionの合計だけで、本文以下はタスクごとに1〜数個しか展開されない。RAGが「検索して該当ドキュメントを渡す」設計であるのに対し、Skillsは「事前にインデックス化された手順書を、目次から本文、付録の順にエージェント自身がたどる」設計であり、検索インフラを持たずに同じ効果を得られる点が普及の起点になった。</p>
     <div class="example">
-      <div class="product">OpenAI API Structured Outputs（gpt-4o-2024-08-06）</div>
-      <div class="approach">JSON Schema をCFGに変換し、トークン単位で生成を制約</div>
-      <div class="detail">この方式を最初に本番投入した事例。公式ブログで、旧来のプロンプト依存方式との精度差（100% vs 40%未満）を具体的な評価スコアとして公開しており、後続2社が同方式を採用する根拠になった</div>
-      <a href="https://openai.com/index/introducing-structured-outputs-in-the-api/">📄 一次ソース</a>
+      <div class="product">Claude Skills（Anthropic公式エンジニアリングブログ）</div>
+      <div class="approach">description(~100トークン)→SKILL.md本文(&lt;5000トークン推奨)→scripts/referencesの3段階でコンテキストに展開する</div>
+      <div class="detail">この3段階ロードの仕組みを最初に定義し、後続の仕様のベースになった</div>
+      <a href="https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> 新規にJSON出力を要件にする機能は、プロンプト指示ではなく各社のstrict/structured-outputオプションを最初から使う。「プロンプトで頼んでパースでリカバリ」は技術的負債として扱う。</div>
+    <div class="takeaway"><strong>示唆:</strong> スキル数を増やしても常駐コストはdescription分だけで済むため、「ツールを増やすとコンテキストが膨らむ」問題への対処として、頻度の低い専門タスクはツールではなくスキルとして切り出す方が筋がいい。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 2: 2026年、Anthropic・Google も追いついた — ただし対応スキーマの範囲は揃っていない</div>
+  <div class="section-title">📐 パターン 2: 独自フォーマットからオープン標準への転換</div>
   <div class="theme-section">
-    <p>Anthropic は2026年3月、Claude Developer Platform とAWS Bedrock 上で構造化出力とstrict tool use を一般提供した。公式ドキュメントは「<code>strict: true</code>で<code>input_schema</code>を文法にコンパイルし、生成時点でスキーマ違反を排除する」と明記しており、コンパイル済みスキーマは最大24時間キャッシュされる。Google も2025年11月、Gemini API のJSON Schema 対応を拡張し、<code>anyOf</code>・<code>$ref</code>・<code>prefixItems</code>などのキーワードとプロパティの順序保持に対応、Pydantic やZod のスキーマがそのまま通るようになったと発表した。</p><p>ただし「JSON Schema に対応した」の中身は3社で一致していない。Claude のドキュメントには専用の「JSON Schema limitations」ページがあり、サポート対象外のキーワードが明記されている。Google は再帰スキーマや条件分岐まで踏み込んでいるが、対応モデルはGemini 2.5系に限られる。JSON Schema という共通仕様の名前を使っていても、実装が保証する範囲は各社の実装依存だということが、複数モデルを併用するプロダクトほど効いてくる。</p>
+    <p>Agent Skills は登場から2ヶ月後の2025年12月18日、Anthropicが仕様を agentskills.io として公開し、Claude専用のディレクトリ形式からプラットフォーム非依存のオープン標準に切り替わった。SKILL.mdの命名規則・frontmatterの必須フィールド・progressive disclosureの3段階を仕様として固定したことで、Microsoft・OpenAI・Cursor・GitHubなど20以上のプラットフォームが同じフォーマットを採用し、1つのスキルディレクトリを複数のエージェント実装で使い回せるようになった。</p><p>Rakutenは公式ブログで、スキル導入後に経理関連の作業が「1日かかっていたものが1時間に短縮された」と報告している。この種の具体的な効果が出るのは、スキルが「プロンプトの中身」ではなく「組織の手順書そのもの」を成果物として管理できるからだ。MCPが「ツールをどう繋ぐか」の標準だったのに対し、Skillsは「手順とノウハウをどう配布するか」の標準であり、両者は補完関係にある。</p>
     <div class="example">
-      <div class="product">Claude Developer Platform Structured Outputs / Strict Tool Use</div>
-      <div class="approach">2026年3月にAPI・Bedrockで一般提供、グラマー制約サンプリングで出力とツール引数の両方を保証</div>
-      <div class="detail">公式ドキュメントがキャッシュの挙動（24時間）とJSON Schemaの非対応キーワードを明示しており、他社より仕様の透明性を優先した設計であることがわかる</div>
-      <a href="https://platform.claude.com/docs/en/agents-and-tools/tool-use/strict-tool-use">📄 一次ソース</a>
+      <div class="product">agentskills.io（オープン仕様）</div>
+      <div class="approach">SKILL.mdのfrontmatter必須フィールドとprogressive disclosureの3段階をプラットフォーム非依存の仕様として固定</div>
+      <div class="detail">Microsoft・OpenAI・Cursor・GitHubなど20以上のプラットフォームが同一フォーマットを採用する起点になった</div>
+      <a href="https://agentskills.io/specification">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">Gemini API 構造化出力</div>
-      <div class="approach">2025年11月にJSON Schemaキーワード対応を拡張し、プロパティ順序を保持</div>
-      <div class="detail">公式ブログで、Pydantic/Zodのスキーマ定義がそのまま使えるようになったと明言しており、既存のバリデーションライブラリ資産を移行コストなく転用できる設計を狙ったことがわかる</div>
-      <a href="https://blog.google/innovation-and-ai/technology/developers-tools/gemini-api-structured-outputs/">📄 一次ソース</a>
+      <div class="product">Rakuten（Anthropic公式ブログのパートナー事例）</div>
+      <div class="approach">経理関連ワークフローにスキルを導入し、作業時間を1日から1時間に短縮したと報告</div>
+      <div class="detail">スキルが「プロンプトの工夫」でなく「組織の手順書」として機能した具体的な数値例</div>
+      <a href="https://claude.com/blog/skills">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> 複数プロバイダーを切り替え可能にするプロダクトは、JSON Schemaの仕様書ではなく各社の「サポート範囲」ドキュメントを突き合わせてから設計する。名前が同じでも保証内容は同じではない。</div>
+    <div class="takeaway"><strong>示唆:</strong> 自社の業務手順をスキルとして切り出すなら、社内限定のプロンプトの工夫として抱え込むより、オープン標準に沿って書いた方が将来複数のエージェント実装に転用でき、投資回収が早い。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 3: 対象は「最終出力」から「途中のツール呼び出し」へ拡大した</div>
+  <div class="section-title">📐 パターン 3: モデル任せの呼び出しと、明示呼び出しの分離</div>
   <div class="theme-section">
-    <p>同じ技術は、エージェントが最後に返す答えだけでなく、途中のツール呼び出しの引数にも適用され始めている。OpenAI の関数呼び出しガイドは、<code>strict: true</code>を設定することで「best effort ではなく確実に」スキーマ通りの引数になると明記し、その代わり<code>additionalProperties: false</code>と全フィールドの<code>required</code>指定を要求する制約を課している。Anthropic のstrict tool use も同じグラマー制約サンプリングのパイプラインをツール定義に対して使う。</p><p>これが効くのは多段エージェントだ。1つのツール呼び出しの引数が壊れれば、そこから先の全ステップが止まるか誤動作する。従来は「呼び出し後に検証し、失敗したらモデルにもう一度呼ばせる」というリトライ設計で吸収していたが、これは呼び出しのたびにレイテンシとコストを積み増す。生成時点で構造を保証する方式に倒せば、このリトライループ自体が不要になる。</p>
+    <p>スキルが数十個規模になると、次に問題になるのは「常駐コストの低さ」ではなく「エージェントが余計なタイミングでスキルを呼んでしまう」ことだ。GitHub上で最も星の多いAgent Skillsコレクションの一つであるmattpocock/skillsは、v1.0でスキルを「モデルが自律的に呼ぶもの」と「ユーザーが明示的に <code>/skill-name</code> で呼ぶもの」に分離し、後者には <code>disable-model-invocation: true</code> を設定してdescriptionごとモデルの判断対象から外した。</p><p>この分離が必要になるのは、デプロイや送信のような副作用のある操作を「意味的に関連しそうだから」とモデルが自動発火させると事故につながるためだ。実務ブログでも、副作用を持つスキルには <code>disable-model-invocation</code> を付け、ユーザーの明示的な呼び出しだけで発火させる設計が推奨されている。プログレッシブディスクロージャーが「いつ本文を読むか」の設計だったのに対し、この分離は「いつ実行を許可するか」の設計であり、Skillsの普及後に議論の焦点が移った先はここにある。</p>
     <div class="example">
-      <div class="product">OpenAI Function calling（strict mode）</div>
-      <div class="approach">関数呼び出しの引数生成にもCFG制約を適用し、best effortをやめる</div>
-      <div class="detail">公式ガイドが、strict modeを有効にする条件（additionalProperties: falseと全フィールドrequired）を明示しており、引数の型不一致によるランタイムエラーを構造的に排除する設計であることがわかる</div>
-      <a href="https://developers.openai.com/api/docs/guides/function-calling">📄 一次ソース</a>
+      <div class="product">mattpocock/skills（GitHub上の代表的なコミュニティ製スキル集）</div>
+      <div class="approach">v1.0でスキルを「モデル呼び出し可」と「ユーザー明示呼び出し専用」に分割し、後者にdisable-model-invocation: trueを設定</div>
+      <div class="detail">個人のスキル集がv1.0で構造変更するほど、呼び出し制御の粒度が実運用上の課題として顕在化したことを示す</div>
+      <a href="https://github.com/mattpocock/skills/releases/tag/v1.0.0">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> 多段エージェントを新規に組むなら、ツール引数の正しさをリトライループで担保するのではなく、対応モデルのstrict機能を最初から有効化し、リトライは「引数は正しいが実行が失敗した場合」専用に絞る。</div>
+    <div class="example">
+      <div class="product">disable-model-invocationの実装解説（コーディングエージェント向け）</div>
+      <div class="approach">デプロイ・送信など副作用のある操作は明示呼び出し専用にし、モデルの自動発火対象から外す</div>
+      <div class="detail">副作用のある操作をモデル任せにしない設計判断の具体例</div>
+      <a href="https://rajeevpentyala.com/2026/06/29/disable-model-invocation-control-when-your-coding-agent-auto-invokes-a-skill/">📄 一次ソース</a>
+    </div>
+    <div class="takeaway"><strong>示唆:</strong> スキルを増やすなら、最初から「モデルが選ぶ」と「ユーザーが選ぶ」を分けて設計する。副作用のある操作を後からdisable-model-invocationで塞ぐより、設計時点で分離しておく方が事故が減る。</div>
   </div>
   <div class="editorial">
     <span class="label">✍️ 編集後記</span>
-    構造化出力の技術自体は目新しくない。ただし「3社が同じ保証を提供する」状態になったことで、開発者側の設計判断が「モデルの出力をどう検証・修復するか」から「どの範囲までモデルに保証させ、どこからをアプリ側の責務にするか」に移った。パースエラー対策のコードを書く時間は減るが、代わりに各社のスキーマ対応範囲表を読む時間が増える——トレードオフの中身が変わっただけだ、と捉えておくのが実務的だろう。
+    Skillsが9ヶ月でオープン標準まで進んだ速度は、MCPの再演に近い。ただしMCPが「繋ぎ方」の標準だったのに対し、Skillsは「手順とノウハウの配布」の標準であり、企業が本当に蓄積したいのは後者のはずだ。プロンプトを個人の工夫として抱え込むより、SKILL.mdとして書き出す文化が根付くかどうかが次の分水嶺になる。
   </div>
 </div>
 
 <div class="section">
   <div class="section-title">🔗 今号の動向ピックアップ</div>
-  <div class="quick-link"><a href="https://developers.openai.com/cookbook/examples/structured_outputs_intro">OpenAI Cookbook: Structured Outputs入門</a><span class="quick-summary">response_formatでの直接指定とPydanticモデル+parseヘルパーの2通りの実装法、および安全性拒否時のrefusalフィールドの扱いを解説する公式実践ガイド。本文で触れたOpenAIのstrict実装を実際に組む際の一次リファレンスになる。</span></div>
-  <div class="quick-link"><a href="https://platform.claude.com/docs/en/build-with-claude/structured-outputs">Claude Structured Outputs — JSON Schema対応範囲のドキュメント</a><span class="quick-summary">Claudeの構造化出力がサポートするJSON Schemaキーワードと非対応キーワードを一覧化した公式ページ。第2セクションで触れた「対応範囲は各社バラバラ」を実際に確認できる一次情報。</span></div>
-  <div class="quick-link"><a href="https://arxiv.org/pdf/2501.10868">JSONSchemaBench: 構造化出力エンジン横断ベンチマーク論文</a><span class="quick-summary">Guidance・Outlines・XGrammar・OpenAI・Geminiなど6つの制約付きデコーディング実装を効率・カバレッジ・出力品質で比較した学術ベンチマーク。「グラマー制約デコーディングは普及したが実際の効果は正しく理解されていない」という指摘は、本文の互換性の議論と直結する。</span></div>
+  <div class="quick-link"><a href="https://simonwillison.net/2025/Dec/19/agent-skills/">Simon Willison による Agent Skills 解説</a><span class="quick-summary">Agent Skillsのオープン標準化発表当日に書かれた独立した技術者による設計解説。CursorやGitHubの採用、後追いのOpenAI対応にも触れている。</span></div>
+  <div class="quick-link"><a href="https://github.com/anthropics/skills">anthropics/skills（公式スキル集リポジトリ）</a><span class="quick-summary">Anthropicが公開しているPowerPoint・Excel・Word・PDF向けの公式Skillsの実装例。本号で説明したSKILL.mdの3段階ロード構造の実物リファレンスになる。</span></div>
+  <div class="quick-link"><a href="https://claude.com/blog/skills">claude.com/blog/skills（パートナー導入事例まとめ）</a><span class="quick-summary">Box・Canva・Notion・Rakutenの導入事例を含む公式パートナー発表。本号で触れたRakutenの「1日→1時間」事例の出典。</span></div>
 </div>
 
 <div class="section">
   <div class="section-title">📚 過去号</div>
-  <div class="archive-item"><span class="week">2026-09-10</span><div class="body"><a href="../ai-trends.html">Agent Skills という第3のレイヤー — プロンプトでもRAGでもなく「必要になるまで読まない」設計</a><span class="sub">Agent Skillsは「メタデータ(~100トークン)→本文(&lt;5000トークン推奨)→付随ファイル」の3段階でコンテキストに読み込む、プログレッシブディスクロージャー設計。</span></div></div>
   <div class="archive-item"><span class="week">2026-09-08</span><div class="body"><a href="2026-09-08.html">エージェント評価の再設計 — テキスト一致から状態検証、そして「修正がテストになる」仕組みへ</a><span class="sub">Anthropicはテキスト一致の判定から、環境の状態が実際に変わったかを見る outcome/state チェックへの転換を公式に推奨している。</span></div></div>
   <div class="archive-item"><span class="week">2026-09-03</span><div class="body"><a href="2026-09-03.html">長時間稼働エージェントの状態管理 — 「会話の保存」から「プロセスの永続化」へ</a><span class="sub">Google ADKやMastraは、ツール呼び出しなどステップの境界ごとに実行状態をシリアライズして外部ストレージに書き込み、コンテナが落ちても直前のステップから再開できる設計に収束している。</span></div></div>
   <div class="archive-item"><span class="week">2026-09-01</span><div class="body"><a href="2026-09-01.html">コードレビューエージェントの設計 — 差別化は検出率ではなく、文脈の取り方と『直すところまで』の範囲に移った</a><span class="sub">GitHub Copilot・Qodo・Cursor Bugbot・Cloudflareの内製ツールが、diff単体の解析から脱却し、リポジトリ全体・PR履歴・過去の指摘への反応まで動的に文脈を取りに行く設計へ収束している</span></div></div>
+  <div class="archive-item"><span class="week">2026-08-29</span><div class="body"><a href="2026-08-29.html">構造化出力は「お願い」から「強制」へ — 3社がグラマー制約デコーディングで足並みを揃えた2026年</a><span class="sub">OpenAI・Anthropic・Google の主要3社が、JSON Schema をトークン生成レベルで強制する「グラマー制約デコーディング」に共通で対応した</span></div></div>
   <div class="archive-item"><span class="week">2026-08-27</span><div class="body"><a href="2026-08-27.html">マルチエージェント協調 — 割っていいのは「コンテキストの切れ目」だけ</a><span class="sub">Anthropic は Research 機能で並列サブエージェントを使い内部評価で90.2%の性能改善を報告するが、トークン消費は通常の約15倍になるとも明記している。</span></div></div>
   <div class="archive-item"><span class="week">2026-08-25</span><div class="body"><a href="2026-08-25.html">エージェントのメモリ設計 — 生ログでも単一要約でもなく、書き換え可能な単位に分解する</a><span class="sub">Claude は2026年7月、記憶を単一のローリング要約から個別の書き換え可能なエントリへ移行。ChatGPT は非同期の「Dreaming」処理で古い事実を時制ごと書き換える。</span></div></div>
   <div class="archive-item"><span class="week">2026-08-22</span><div class="body"><a href="2026-08-22.html">プロンプトキャッシュはコスト最適化ではない — 「プレフィックス固定」というアーキテクチャ制約</a><span class="sub">キャッシュ命中率はもはや副次指標ではなく、Manus はこれを「本番エージェントで最重要のメトリック」と明言している。</span></div></div>
@@ -174,7 +180,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 </div>
 
 <footer>
-  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="../data/ai-trends/2026-08-29.json">data/ai-trends/2026-08-29.json</a>（このページは JSON からの生成物）</p>
+  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="../data/ai-trends/2026-09-10.json">data/ai-trends/2026-09-10.json</a>（このページは JSON からの生成物）</p>
   <p style="margin-top:.5rem"><a href="../">📰 日刊ダイジェストに戻る</a></p>
 </footer>
 </div>
