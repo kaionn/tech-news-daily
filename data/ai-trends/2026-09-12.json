@@ -1,0 +1,86 @@
+{
+  "issue": "2026-09-12",
+  "generated_at": "2026-09-12T07:00:00+09:00",
+  "theme": {
+    "title": "コンテキストは会話ログではない — Working Context / Session / Memory / Artifacts への分離が実装標準になった",
+    "category": "context-engineering",
+    "lede": "コンテキストウィンドウを増やせば性能も上がる、という前提はすでに崩れている。Chromaの調査は18モデル全てで入力トークンが増えるほど性能が非線形に劣化することを示した。2026年9月、GoogleはエージェントフレームワークADKで、コンテキストを「いま提示すべきもの」と「どこかに保存すべきデータ」に分離するアーキテクチャを公式に説明した。AnthropicやManusの実装にも同じ設計原則がすでに埋め込まれている。今号はこの「コンテキストを保存問題として設計する」という転換を、具体的な実装から追う。",
+    "tldr": [
+      "Google ADKは2026年9月、コンテキストを Working Context・Session・Memory・Artifacts の4層に分離し、閾値到達で非同期に要約するcompactionを実装したと公式ブログで説明した。",
+      "Anthropicも、Claude Codeの自動要約やマルチエージェント・リサーチシステムの「計画を先にMemoryへ保存してから動く」設計で、同じ「何を残し何を捨てるか」の原則を採用している。",
+      "AIエージェントManusは、KV-cacheのヒット率を本番運用の最重要指標に位置付けており、プレフィックスキャッシュを壊さない設計はGoogle ADKのcontext caching方針とも一致する。"
+    ],
+    "sections": [
+      {
+        "heading": "コンテキストを4層のストレージ問題として設計する",
+        "body_html": "<p>Google ADK（Agent Development Kit）が2026年9月に公開した設計解説では、コンテキストを単一の会話ログではなく、直近のプロンプトを保持する Working Context、構造化イベントとして記録される Session、検索可能な長期知識である Memory、大きな外部データを保持する Artifacts という4層に分けている。<code>invocations</code>数などのしきい値に達すると非同期の compaction プロセスが古い Session イベントを要約し、生データを刈り込みながら Session 自体の整合性は保つ。</p><p>この分離が広がっている理由は単純だ。会話を素朴に積み上げる設計では、エージェントが長時間・多ターンで動くほどトークン予算を消費し尽くすうえ、単に容量を増やしても性能は比例して上がらない。Claude Code も、コンテキスト容量の95%に達した時点で auto-compact を発火させ、アーキテクチャ上の決定や未解決のバグは残しつつツール呼び出しの生の結果を優先的に捨てる、という同じ発想の実装を公式に明文化している。</p>",
+        "examples": [
+          {
+            "product": "Google ADK（Agent Development Kit）",
+            "approach": "コンテキストをWorking Context/Session/Memory/Artifactsに分離し、しきい値到達で非同期にcompactionする",
+            "detail": "大きなペイロードはArtifactServiceにハンドルとして外部化し、必要になった時だけLoadArtifactsToolで明示的に展開する「コンパイラ」的アーキテクチャを公式ブログが解説",
+            "source_url": "https://developers.googleblog.com/architecting-efficient-context-aware-multi-agent-framework-for-production/"
+          },
+          {
+            "product": "Claude Code（Anthropic）",
+            "approach": "コンテキスト容量の95%到達で自動要約（auto-compact）し、決定事項は残しツール結果は捨てる",
+            "detail": "「最大限想起してから段階的に不要を削る」という圧縮の優先順位を公式エンジニアリングブログが明文化",
+            "source_url": "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents"
+          }
+        ],
+        "takeaway": "会話全体を毎回モデルに投げるのをやめ、「いま何が必要か」を判定するレイヤーを持つ設計に倣うとよい。しきい値ベースの要約と、大きなデータは参照渡しにする、の2点は最小構成として真似しやすい。"
+      },
+      {
+        "heading": "サブエージェントの境界を越えていいのは要約と計画だけ",
+        "body_html": "<p>サブエージェントを使う設計でも、境界を越えて子に渡してよい情報は選別されている。Google ADK は <code>include_contents</code> というパラメータで、祖先エージェントの会話やツール結果をどこまで子エージェントに伝播させるかを明示的にスコープし、階層が深くなっても不要な文脈が下流まで流れ込む「コンテキスト爆発」を防ぐ。</p><p>Anthropicが自社のマルチエージェント・リサーチシステムで採用したのは、その手前の設計だ。LeadResearcher はサブエージェントを立てる前に、まず自分の調査計画をMemoryに保存する。Claudeのコンテキストウィンドウが200,000トークンを超えると古い内容が切り詰められるため、計画自体を失っても困らない形で先に永続化しておく、という手当てにあたる。</p>",
+        "examples": [
+          {
+            "product": "Google ADK（Agent Development Kit）",
+            "approach": "include_contentsで祖先エージェントのコンテキストが子にどこまで伝播するかを明示的にスコープ管理",
+            "detail": "階層的なマルチエージェント構成での「コンテキスト爆発」を防ぐ設計として公式ブログが明記",
+            "source_url": "https://developers.googleblog.com/architecting-efficient-context-aware-multi-agent-framework-for-production/"
+          },
+          {
+            "product": "Claude（Anthropicのマルチエージェント・リサーチシステム）",
+            "approach": "LeadResearcherはサブエージェントを立てる前に自分の調査計画をMemoryに保存する",
+            "detail": "200Kトークンを超えるとコンテキストが切り詰められるため、計画そのものを先に永続化して生き延びさせる設計を公式ブログが説明",
+            "source_url": "https://www.anthropic.com/engineering/multi-agent-research-system"
+          }
+        ],
+        "takeaway": "サブエージェントに渡すのは全文脈ではなく要約や計画に絞るとよい。特に切り詰めが起きる前提で「失っても困らない計画」を先に永続化しておくと、後続処理が壊れにくい。"
+      },
+      {
+        "heading": "プレフィックスキャッシュを壊さない設計",
+        "body_html": "<p>コンテキスト管理はトークン数だけでなく推論コストにも直結する。AIエージェント「Manus」を開発するチームは、KV-cacheのヒット率を本番エージェントにとって最重要の指標だと位置付けている。入力対出力のトークン比が平均100:1に達する同社の環境では、プレフィックスが一致する限り再利用できるKV-cacheが、レイテンシとコストの大部分を決めるためだ。</p><p>だからこそ両者は同じ設計判断に行き着く。Google ADK は、安定したシステム指示をコンテキストの先頭に固定し、変化する内容を末尾に寄せることでプレフィックスキャッシュを温存するprocessor順序を採用している。Manus側も、ツール定義を実行途中で動的に追加・削除しないことを明確な指針として挙げている。ツール定義は通常コンテキストの先頭付近にあるため、そこを変更するとそれ以降の全てのKV-cacheが無効化されてしまうからだ。</p>",
+        "examples": [
+          {
+            "product": "Manus",
+            "approach": "KV-cacheヒット率を本番エージェントの最重要指標と位置付け、ツール定義を実行途中で変更しない",
+            "detail": "入力:出力トークン比が平均100:1という自社の運用データから、プレフィックス一致によるキャッシュ再利用がコストとレイテンシを支配すると結論",
+            "source_url": "https://manus.im/blog/Context-Engineering-for-AI-Agents-Lessons-from-Building-Manus"
+          },
+          {
+            "product": "Google ADK（Agent Development Kit）",
+            "approach": "安定したシステム指示を先頭に、変化する内容を末尾に配置するprocessor順序でプレフィックスキャッシュを温存",
+            "detail": "モデル側のprefix cachingの仕組みをそのまま活かす設計として公式ブログが明記",
+            "source_url": "https://developers.googleblog.com/architecting-efficient-context-aware-multi-agent-framework-for-production/"
+          }
+        ],
+        "takeaway": "プロンプトの内容そのものより「何を先頭に固定し、何を動的にするか」の順序設計がコストを左右する。ツール一覧やシステムプロンプトを実行中に書き換えるくらいなら、使わない選択肢を渡したまま無視させる方が安く済む。"
+      }
+    ]
+  },
+  "editorial": "コンテキストウィンドウが大きくなるほど「とりあえず全部入れる」設計は罰される、というのがContext Rotが示した現実だった。2026年9月のGoogle ADKの発表は、この教訓を4層のストレージアーキテクチャという形で実装に落とし込んだ、公式ドキュメントとしては早い部類の例だ。次に来るのは、この構造をフレームワーク非依存でどう標準化するか、という議論だろう。",
+  "quick_picks": [
+    {
+      "title": "LangChainのContext Engineering解説「Write/Select/Compress/Isolate」",
+      "summary": "コンテキスト管理をWrite/Select/Compress/Isolateの4戦略に整理した解説記事。本文で扱ったcompactionはCompress、サブエージェント分離はIsolateにそれぞれ対応する。",
+      "url": "https://www.langchain.com/blog/context-engineering-for-agents"
+    },
+    {
+      "title": "ChromaのContext Rot研究レポート",
+      "summary": "入力トークン数を増やすほど18モデル全てで性能が非線形に劣化することを実証した技術レポート。本文で扱った「4層アーキテクチャへの移行」は、この現象への直接的な対応策にあたる。",
+      "url": "https://www.trychroma.com/research/context-rot"
+    }
+  ]
+}

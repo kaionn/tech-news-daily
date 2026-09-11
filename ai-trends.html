@@ -66,7 +66,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 <div class="container">
 <header>
   <h1>🧠 AI プロダクト動向</h1>
-  <p class="date">2026-09-10 発行（読了 6 分）</p>
+  <p class="date">2026-09-12 発行（読了 6 分）</p>
   <p class="tagline">実プロダクトのアーキテクチャ・使用例から AI 開発の現在地を週 3 回・1 号 1 テーマで深掘り</p>
   <nav class="site-nav">
     <a href="./">📰 日刊ダイジェスト</a>
@@ -77,87 +77,93 @@ footer a{color:var(--primary-500);text-decoration:none}
 </header>
 
 <div class="theme-hero">
-  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">AGENT-SKILLS</span></span>
-  <h2>Agent Skills という第3のレイヤー — プロンプトでもRAGでもなく「必要になるまで読まない」設計</h2>
-  <p class="lede">2025年10月にAnthropicが発表したAgent Skillsは、当初はClaude専用のディレクトリ形式に過ぎなかった。しかし同年12月に仕様がagentskills.ioとしてオープン化されて以降、Microsoft・OpenAI・Cursorなど20以上のプラットフォームが同じSKILL.md形式を採用し、Notion・Canva・Rakutenなどがパートナー製スキルを提供するに至った。RAGやツール呼び出しとは別の「第3のコンテキスト供給経路」がここまで速く普及した例は珍しい。仕組みと実例からその理由を見る。</p>
+  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">CONTEXT-ENGINEERING</span></span>
+  <h2>コンテキストは会話ログではない — Working Context / Session / Memory / Artifacts への分離が実装標準になった</h2>
+  <p class="lede">コンテキストウィンドウを増やせば性能も上がる、という前提はすでに崩れている。Chromaの調査は18モデル全てで入力トークンが増えるほど性能が非線形に劣化することを示した。2026年9月、GoogleはエージェントフレームワークADKで、コンテキストを「いま提示すべきもの」と「どこかに保存すべきデータ」に分離するアーキテクチャを公式に説明した。AnthropicやManusの実装にも同じ設計原則がすでに埋め込まれている。今号はこの「コンテキストを保存問題として設計する」という転換を、具体的な実装から追う。</p>
 </div>
 
 <div class="tldr">
   <div class="label">TL;DR — 3 行で</div>
   <ul>
-    <li>Agent Skillsは「メタデータ(~100トークン)→本文(&lt;5000トークン推奨)→付随ファイル」の3段階でコンテキストに読み込む、プログレッシブディスクロージャー設計。</li>
-    <li>2025年12月にAnthropicが仕様をagentskills.ioとしてオープン化し、Microsoft・OpenAI・Cursorなど20以上のプラットフォームが同一フォーマットを採用した。</li>
-    <li>スキルを「モデルが自動判断で呼ぶもの」と「ユーザーが明示的に呼ぶもの」に分離するdisable-model-invocationのような制御が、実運用の次の焦点になっている。</li>
+    <li>Google ADKは2026年9月、コンテキストを Working Context・Session・Memory・Artifacts の4層に分離し、閾値到達で非同期に要約するcompactionを実装したと公式ブログで説明した。</li>
+    <li>Anthropicも、Claude Codeの自動要約やマルチエージェント・リサーチシステムの「計画を先にMemoryへ保存してから動く」設計で、同じ「何を残し何を捨てるか」の原則を採用している。</li>
+    <li>AIエージェントManusは、KV-cacheのヒット率を本番運用の最重要指標に位置付けており、プレフィックスキャッシュを壊さない設計はGoogle ADKのcontext caching方針とも一致する。</li>
   </ul>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 1: メタデータ・本文・付随ファイルの3段階ロード</div>
+  <div class="section-title">📐 パターン 1: コンテキストを4層のストレージ問題として設計する</div>
   <div class="theme-section">
-    <p>Agent Skills の基本構造は、SKILL.md というファイル1枚に frontmatter（name / description）と本文を持たせ、それをディレクトリ単位でまとめたものだ。エージェントは起動時に全スキルの description だけ（1件あたり目安100トークン程度）をシステムプロンプトに読み込み、タスクとの関連が疑わしいと判断した時点で初めてそのSKILL.md本文（推奨5000トークン未満）を読みに行く。さらに <code>scripts/</code> や <code>references/</code> 配下のファイルは、本文を読んだ後に必要になったものだけを個別に読む。</p><p>この3段構成が要るのは、スキルの「量」に制約を持たせないためだ。数十個のスキルを常駐させても、常に載るのはdescriptionの合計だけで、本文以下はタスクごとに1〜数個しか展開されない。RAGが「検索して該当ドキュメントを渡す」設計であるのに対し、Skillsは「事前にインデックス化された手順書を、目次から本文、付録の順にエージェント自身がたどる」設計であり、検索インフラを持たずに同じ効果を得られる点が普及の起点になった。</p>
+    <p>Google ADK（Agent Development Kit）が2026年9月に公開した設計解説では、コンテキストを単一の会話ログではなく、直近のプロンプトを保持する Working Context、構造化イベントとして記録される Session、検索可能な長期知識である Memory、大きな外部データを保持する Artifacts という4層に分けている。<code>invocations</code>数などのしきい値に達すると非同期の compaction プロセスが古い Session イベントを要約し、生データを刈り込みながら Session 自体の整合性は保つ。</p><p>この分離が広がっている理由は単純だ。会話を素朴に積み上げる設計では、エージェントが長時間・多ターンで動くほどトークン予算を消費し尽くすうえ、単に容量を増やしても性能は比例して上がらない。Claude Code も、コンテキスト容量の95%に達した時点で auto-compact を発火させ、アーキテクチャ上の決定や未解決のバグは残しつつツール呼び出しの生の結果を優先的に捨てる、という同じ発想の実装を公式に明文化している。</p>
     <div class="example">
-      <div class="product">Claude Skills（Anthropic公式エンジニアリングブログ）</div>
-      <div class="approach">description(~100トークン)→SKILL.md本文(&lt;5000トークン推奨)→scripts/referencesの3段階でコンテキストに展開する</div>
-      <div class="detail">この3段階ロードの仕組みを最初に定義し、後続の仕様のベースになった</div>
-      <a href="https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills">📄 一次ソース</a>
+      <div class="product">Google ADK（Agent Development Kit）</div>
+      <div class="approach">コンテキストをWorking Context/Session/Memory/Artifactsに分離し、しきい値到達で非同期にcompactionする</div>
+      <div class="detail">大きなペイロードはArtifactServiceにハンドルとして外部化し、必要になった時だけLoadArtifactsToolで明示的に展開する「コンパイラ」的アーキテクチャを公式ブログが解説</div>
+      <a href="https://developers.googleblog.com/architecting-efficient-context-aware-multi-agent-framework-for-production/">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> スキル数を増やしても常駐コストはdescription分だけで済むため、「ツールを増やすとコンテキストが膨らむ」問題への対処として、頻度の低い専門タスクはツールではなくスキルとして切り出す方が筋がいい。</div>
+    <div class="example">
+      <div class="product">Claude Code（Anthropic）</div>
+      <div class="approach">コンテキスト容量の95%到達で自動要約（auto-compact）し、決定事項は残しツール結果は捨てる</div>
+      <div class="detail">「最大限想起してから段階的に不要を削る」という圧縮の優先順位を公式エンジニアリングブログが明文化</div>
+      <a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents">📄 一次ソース</a>
+    </div>
+    <div class="takeaway"><strong>示唆:</strong> 会話全体を毎回モデルに投げるのをやめ、「いま何が必要か」を判定するレイヤーを持つ設計に倣うとよい。しきい値ベースの要約と、大きなデータは参照渡しにする、の2点は最小構成として真似しやすい。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 2: 独自フォーマットからオープン標準への転換</div>
+  <div class="section-title">📐 パターン 2: サブエージェントの境界を越えていいのは要約と計画だけ</div>
   <div class="theme-section">
-    <p>Agent Skills は登場から2ヶ月後の2025年12月18日、Anthropicが仕様を agentskills.io として公開し、Claude専用のディレクトリ形式からプラットフォーム非依存のオープン標準に切り替わった。SKILL.mdの命名規則・frontmatterの必須フィールド・progressive disclosureの3段階を仕様として固定したことで、Microsoft・OpenAI・Cursor・GitHubなど20以上のプラットフォームが同じフォーマットを採用し、1つのスキルディレクトリを複数のエージェント実装で使い回せるようになった。</p><p>Rakutenは公式ブログで、スキル導入後に経理関連の作業が「1日かかっていたものが1時間に短縮された」と報告している。この種の具体的な効果が出るのは、スキルが「プロンプトの中身」ではなく「組織の手順書そのもの」を成果物として管理できるからだ。MCPが「ツールをどう繋ぐか」の標準だったのに対し、Skillsは「手順とノウハウをどう配布するか」の標準であり、両者は補完関係にある。</p>
+    <p>サブエージェントを使う設計でも、境界を越えて子に渡してよい情報は選別されている。Google ADK は <code>include_contents</code> というパラメータで、祖先エージェントの会話やツール結果をどこまで子エージェントに伝播させるかを明示的にスコープし、階層が深くなっても不要な文脈が下流まで流れ込む「コンテキスト爆発」を防ぐ。</p><p>Anthropicが自社のマルチエージェント・リサーチシステムで採用したのは、その手前の設計だ。LeadResearcher はサブエージェントを立てる前に、まず自分の調査計画をMemoryに保存する。Claudeのコンテキストウィンドウが200,000トークンを超えると古い内容が切り詰められるため、計画自体を失っても困らない形で先に永続化しておく、という手当てにあたる。</p>
     <div class="example">
-      <div class="product">agentskills.io（オープン仕様）</div>
-      <div class="approach">SKILL.mdのfrontmatter必須フィールドとprogressive disclosureの3段階をプラットフォーム非依存の仕様として固定</div>
-      <div class="detail">Microsoft・OpenAI・Cursor・GitHubなど20以上のプラットフォームが同一フォーマットを採用する起点になった</div>
-      <a href="https://agentskills.io/specification">📄 一次ソース</a>
+      <div class="product">Google ADK（Agent Development Kit）</div>
+      <div class="approach">include_contentsで祖先エージェントのコンテキストが子にどこまで伝播するかを明示的にスコープ管理</div>
+      <div class="detail">階層的なマルチエージェント構成での「コンテキスト爆発」を防ぐ設計として公式ブログが明記</div>
+      <a href="https://developers.googleblog.com/architecting-efficient-context-aware-multi-agent-framework-for-production/">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">Rakuten（Anthropic公式ブログのパートナー事例）</div>
-      <div class="approach">経理関連ワークフローにスキルを導入し、作業時間を1日から1時間に短縮したと報告</div>
-      <div class="detail">スキルが「プロンプトの工夫」でなく「組織の手順書」として機能した具体的な数値例</div>
-      <a href="https://claude.com/blog/skills">📄 一次ソース</a>
+      <div class="product">Claude（Anthropicのマルチエージェント・リサーチシステム）</div>
+      <div class="approach">LeadResearcherはサブエージェントを立てる前に自分の調査計画をMemoryに保存する</div>
+      <div class="detail">200Kトークンを超えるとコンテキストが切り詰められるため、計画そのものを先に永続化して生き延びさせる設計を公式ブログが説明</div>
+      <a href="https://www.anthropic.com/engineering/multi-agent-research-system">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> 自社の業務手順をスキルとして切り出すなら、社内限定のプロンプトの工夫として抱え込むより、オープン標準に沿って書いた方が将来複数のエージェント実装に転用でき、投資回収が早い。</div>
+    <div class="takeaway"><strong>示唆:</strong> サブエージェントに渡すのは全文脈ではなく要約や計画に絞るとよい。特に切り詰めが起きる前提で「失っても困らない計画」を先に永続化しておくと、後続処理が壊れにくい。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 3: モデル任せの呼び出しと、明示呼び出しの分離</div>
+  <div class="section-title">📐 パターン 3: プレフィックスキャッシュを壊さない設計</div>
   <div class="theme-section">
-    <p>スキルが数十個規模になると、次に問題になるのは「常駐コストの低さ」ではなく「エージェントが余計なタイミングでスキルを呼んでしまう」ことだ。GitHub上で最も星の多いAgent Skillsコレクションの一つであるmattpocock/skillsは、v1.0でスキルを「モデルが自律的に呼ぶもの」と「ユーザーが明示的に <code>/skill-name</code> で呼ぶもの」に分離し、後者には <code>disable-model-invocation: true</code> を設定してdescriptionごとモデルの判断対象から外した。</p><p>この分離が必要になるのは、デプロイや送信のような副作用のある操作を「意味的に関連しそうだから」とモデルが自動発火させると事故につながるためだ。実務ブログでも、副作用を持つスキルには <code>disable-model-invocation</code> を付け、ユーザーの明示的な呼び出しだけで発火させる設計が推奨されている。プログレッシブディスクロージャーが「いつ本文を読むか」の設計だったのに対し、この分離は「いつ実行を許可するか」の設計であり、Skillsの普及後に議論の焦点が移った先はここにある。</p>
+    <p>コンテキスト管理はトークン数だけでなく推論コストにも直結する。AIエージェント「Manus」を開発するチームは、KV-cacheのヒット率を本番エージェントにとって最重要の指標だと位置付けている。入力対出力のトークン比が平均100:1に達する同社の環境では、プレフィックスが一致する限り再利用できるKV-cacheが、レイテンシとコストの大部分を決めるためだ。</p><p>だからこそ両者は同じ設計判断に行き着く。Google ADK は、安定したシステム指示をコンテキストの先頭に固定し、変化する内容を末尾に寄せることでプレフィックスキャッシュを温存するprocessor順序を採用している。Manus側も、ツール定義を実行途中で動的に追加・削除しないことを明確な指針として挙げている。ツール定義は通常コンテキストの先頭付近にあるため、そこを変更するとそれ以降の全てのKV-cacheが無効化されてしまうからだ。</p>
     <div class="example">
-      <div class="product">mattpocock/skills（GitHub上の代表的なコミュニティ製スキル集）</div>
-      <div class="approach">v1.0でスキルを「モデル呼び出し可」と「ユーザー明示呼び出し専用」に分割し、後者にdisable-model-invocation: trueを設定</div>
-      <div class="detail">個人のスキル集がv1.0で構造変更するほど、呼び出し制御の粒度が実運用上の課題として顕在化したことを示す</div>
-      <a href="https://github.com/mattpocock/skills/releases/tag/v1.0.0">📄 一次ソース</a>
+      <div class="product">Manus</div>
+      <div class="approach">KV-cacheヒット率を本番エージェントの最重要指標と位置付け、ツール定義を実行途中で変更しない</div>
+      <div class="detail">入力:出力トークン比が平均100:1という自社の運用データから、プレフィックス一致によるキャッシュ再利用がコストとレイテンシを支配すると結論</div>
+      <a href="https://manus.im/blog/Context-Engineering-for-AI-Agents-Lessons-from-Building-Manus">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">disable-model-invocationの実装解説（コーディングエージェント向け）</div>
-      <div class="approach">デプロイ・送信など副作用のある操作は明示呼び出し専用にし、モデルの自動発火対象から外す</div>
-      <div class="detail">副作用のある操作をモデル任せにしない設計判断の具体例</div>
-      <a href="https://rajeevpentyala.com/2026/06/29/disable-model-invocation-control-when-your-coding-agent-auto-invokes-a-skill/">📄 一次ソース</a>
+      <div class="product">Google ADK（Agent Development Kit）</div>
+      <div class="approach">安定したシステム指示を先頭に、変化する内容を末尾に配置するprocessor順序でプレフィックスキャッシュを温存</div>
+      <div class="detail">モデル側のprefix cachingの仕組みをそのまま活かす設計として公式ブログが明記</div>
+      <a href="https://developers.googleblog.com/architecting-efficient-context-aware-multi-agent-framework-for-production/">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> スキルを増やすなら、最初から「モデルが選ぶ」と「ユーザーが選ぶ」を分けて設計する。副作用のある操作を後からdisable-model-invocationで塞ぐより、設計時点で分離しておく方が事故が減る。</div>
+    <div class="takeaway"><strong>示唆:</strong> プロンプトの内容そのものより「何を先頭に固定し、何を動的にするか」の順序設計がコストを左右する。ツール一覧やシステムプロンプトを実行中に書き換えるくらいなら、使わない選択肢を渡したまま無視させる方が安く済む。</div>
   </div>
   <div class="editorial">
     <span class="label">✍️ 編集後記</span>
-    Skillsが9ヶ月でオープン標準まで進んだ速度は、MCPの再演に近い。ただしMCPが「繋ぎ方」の標準だったのに対し、Skillsは「手順とノウハウの配布」の標準であり、企業が本当に蓄積したいのは後者のはずだ。プロンプトを個人の工夫として抱え込むより、SKILL.mdとして書き出す文化が根付くかどうかが次の分水嶺になる。
+    コンテキストウィンドウが大きくなるほど「とりあえず全部入れる」設計は罰される、というのがContext Rotが示した現実だった。2026年9月のGoogle ADKの発表は、この教訓を4層のストレージアーキテクチャという形で実装に落とし込んだ、公式ドキュメントとしては早い部類の例だ。次に来るのは、この構造をフレームワーク非依存でどう標準化するか、という議論だろう。
   </div>
 </div>
 
 <div class="section">
   <div class="section-title">🔗 今号の動向ピックアップ</div>
-  <div class="quick-link"><a href="https://simonwillison.net/2025/Dec/19/agent-skills/">Simon Willison による Agent Skills 解説</a><span class="quick-summary">Agent Skillsのオープン標準化発表当日に書かれた独立した技術者による設計解説。CursorやGitHubの採用、後追いのOpenAI対応にも触れている。</span></div>
-  <div class="quick-link"><a href="https://github.com/anthropics/skills">anthropics/skills（公式スキル集リポジトリ）</a><span class="quick-summary">Anthropicが公開しているPowerPoint・Excel・Word・PDF向けの公式Skillsの実装例。本号で説明したSKILL.mdの3段階ロード構造の実物リファレンスになる。</span></div>
-  <div class="quick-link"><a href="https://claude.com/blog/skills">claude.com/blog/skills（パートナー導入事例まとめ）</a><span class="quick-summary">Box・Canva・Notion・Rakutenの導入事例を含む公式パートナー発表。本号で触れたRakutenの「1日→1時間」事例の出典。</span></div>
+  <div class="quick-link"><a href="https://www.langchain.com/blog/context-engineering-for-agents">LangChainのContext Engineering解説「Write/Select/Compress/Isolate」</a><span class="quick-summary">コンテキスト管理をWrite/Select/Compress/Isolateの4戦略に整理した解説記事。本文で扱ったcompactionはCompress、サブエージェント分離はIsolateにそれぞれ対応する。</span></div>
+  <div class="quick-link"><a href="https://www.trychroma.com/research/context-rot">ChromaのContext Rot研究レポート</a><span class="quick-summary">入力トークン数を増やすほど18モデル全てで性能が非線形に劣化することを実証した技術レポート。本文で扱った「4層アーキテクチャへの移行」は、この現象への直接的な対応策にあたる。</span></div>
 </div>
 
 <div class="section">
   <div class="section-title">📚 過去号</div>
+  <div class="archive-item"><span class="week">2026-09-10</span><div class="body"><a href="ai-trends/2026-09-10.html">Agent Skills という第3のレイヤー — プロンプトでもRAGでもなく「必要になるまで読まない」設計</a><span class="sub">Agent Skillsは「メタデータ(~100トークン)→本文(&lt;5000トークン推奨)→付随ファイル」の3段階でコンテキストに読み込む、プログレッシブディスクロージャー設計。</span></div></div>
   <div class="archive-item"><span class="week">2026-09-08</span><div class="body"><a href="ai-trends/2026-09-08.html">エージェント評価の再設計 — テキスト一致から状態検証、そして「修正がテストになる」仕組みへ</a><span class="sub">Anthropicはテキスト一致の判定から、環境の状態が実際に変わったかを見る outcome/state チェックへの転換を公式に推奨している。</span></div></div>
   <div class="archive-item"><span class="week">2026-09-03</span><div class="body"><a href="ai-trends/2026-09-03.html">長時間稼働エージェントの状態管理 — 「会話の保存」から「プロセスの永続化」へ</a><span class="sub">Google ADKやMastraは、ツール呼び出しなどステップの境界ごとに実行状態をシリアライズして外部ストレージに書き込み、コンテナが落ちても直前のステップから再開できる設計に収束している。</span></div></div>
   <div class="archive-item"><span class="week">2026-09-01</span><div class="body"><a href="ai-trends/2026-09-01.html">コードレビューエージェントの設計 — 差別化は検出率ではなく、文脈の取り方と『直すところまで』の範囲に移った</a><span class="sub">GitHub Copilot・Qodo・Cursor Bugbot・Cloudflareの内製ツールが、diff単体の解析から脱却し、リポジトリ全体・PR履歴・過去の指摘への反応まで動的に文脈を取りに行く設計へ収束している</span></div></div>
@@ -180,7 +186,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 </div>
 
 <footer>
-  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="data/ai-trends/2026-09-10.json">data/ai-trends/2026-09-10.json</a>（このページは JSON からの生成物）</p>
+  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="data/ai-trends/2026-09-12.json">data/ai-trends/2026-09-12.json</a>（このページは JSON からの生成物）</p>
   <p style="margin-top:.5rem"><a href="./">📰 日刊ダイジェストに戻る</a></p>
 </footer>
 </div>
