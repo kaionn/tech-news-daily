@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-09-11</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="../feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-09-11 (Fri)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+      <nav class="site-nav">
+        <a href="../" class="active">📰 日刊ダイジェスト</a>
+        <a href="../trends.html">🔌 週次プラグイントレンド</a>
+        <a href="../ai-trends.html">🧠 AI プロダクト動向</a>
+        <a href="./">🗂 アーカイブ</a>
+      </nav>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 23 articles</span>
+      <span>🏷 7 categories</span>
+      <span>📡 18 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item">
+        <span class="number-value">136万563</span>
+        <span class="number-label">さくらインターネット販売管理システムで閲覧された可能性がある契約情報アカウント数</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">64%安い</span>
+        <span class="number-label">Cognition SWE-2のコスト、Fable 5.1に1ポイント差まで肉薄</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">-43%</span>
+        <span class="number-label">Claude Codeスキル導入後の出力文字数の減少幅</span>
+      </div>
+    </div>
+
+    <div class="weekly-keywords">
+      <div class="section-title">📊 今週のキーワード</div>
+      <div class="keyword-chips">
+        <span class="keyword-chip">AIエージェントの自律化</span>
+        <span class="keyword-chip">相次ぐ重大脆弱性</span>
+        <span class="keyword-chip">ネイティブ回帰とRust台頭</span>
+      </div>
+      <div class="keyword-summary">今週はOpenAIの自律エージェント群やMeta「Muse」、Kubernetesを自律修復するDataAgentなど、AIエージェントが人間の介在なしにタスクを完遂する事例が相次いだ一方、Chrome V8ゼロデイの二度の実悪用やForgejoの重大RCE、ランサムウェア集団Rhysidaの侵害など深刻な脆弱性のニュースも途切れなかった。ShopifyのReact Nativeからネイティブへの回帰やMicrosoftによるRustのTier-1格上げは、コーディングエージェントの実装支援を前提に開発言語・アーキテクチャの選択基準そのものが見直され始めていることを示している。</div>
+    </div>
+
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
+
+      <div class="card featured deep-dive">
+        <div class="card-header">
+          <span class="tag tag-frontend">Frontend</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://shopify.engineering/back-to-native">DEEP DIVE: ShopifyがReact Nativeからネイティブへ回帰、決め手はコーディングエージェントによる「2度書くコスト」の消滅</a></h3>
+        </div>
+        <div class="summary">2020年にShopifyがモバイル開発をReact Nativeに統一した際の判断根拠は「機能を1度書けば両OSに展開でき、両プラットフォームをまたいで貢献できる」という点にあった。しかし2026年9月、同社はこの判断を覆し、Swift/Kotlinによるネイティブ実装への回帰を発表した。エンジニアリングブログは「LLMが2020年の意思決定を支えていた前提の一つを変えた」と明言する。コーディングエージェントが実装・翻訳・テスト・レビューの相当部分を担えるようになったことで、「機能を1度書く」というReact Native最大の利点が、判断を左右する決定要因ではなくなったという。移行はコードの段階的置き換えではなく、Helixと呼ぶ独自の仕組みでグリーンフィールドから作り直す方式を採る。Helixはテスト・目視確認・コードレビューという品質チェックポイントを各段階で強制する。主力アプリ「Shop」はこの方式で概念実証から公開まで12週間で完了し、現在はショッピングカテゴリで上位にランクインしている。300以上の画面、ホーム/ロック画面ウィジェット、Apple Watchアプリ、コンプリケーション、Siriショートカットを抱える本体の「Shopify」アプリも移行が進行中で、年内の提供を予定する。ネイティブへの回帰により、プラットフォーム機能や標準ツールチェーンに直結し、フレームワークや依存関係の層を減らせる点も理由に挙げている。</div>
+        <div class="editorial">🧠 「エージェントが2度書くコストを消した」という説明は実装コストの話であって、UI一貫性やブランド体験の統一コストまで消えたわけではない。ネイティブ回帰の判断はShopifyのようにOSごとの専任チームを維持できる大企業だからこそ取りうる選択肢であり、少人数チームがエージェント前提で同じ結論に飛びつくのは早計だろう。ただしHelixのような品質ゲートを伴うグリーンフィールド書き直しの手法自体は、レガシーコードを抱える中小チームにも応用の余地がある。</div>
+        <div class="key-points">
+          <ul>
+            <li>Shop Appは概念実証から公開まで12週間でネイティブ実装に移行、現在ショッピングカテゴリで上位にランクイン</li>
+            <li>本体アプリ「Shopify」は300以上の画面・ホーム/ロック画面ウィジェット・Apple Watchアプリ・Siriショートカットを含み、年内の移行完了を予定</li>
+            <li>独自フレームワーク「Helix」がテスト・目視確認・コードレビューの品質チェックポイントを各段階で強制するグリーンフィールド書き直し方式を採用</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 クロスプラットフォームフレームワークを採用中のチームは、コーディングエージェントの実装支援能力が「1度書く」利点を上回るかどうかを自チームの規模とプラットフォーム専任体制に照らして再検証する価値がある。</div>
+        <div class="meta">
+          <span>Shopify Engineering</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-09-10</span>
+          <span class="engagement">▲ 637</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://rustfoundation.org/media/guest-post-rust-is-tier-1-language-at-microsoft/">MicrosoftがRustをC++・C#・TypeScriptと同格の「Tier-1言語」に格上げ、独自バックエンドが100超のリポジトリで稼働</a></h3>
+        </div>
+        <div class="summary">Microsoftは社内開発言語としてRustをC++・C#・TypeScriptと同じ「Tier-1」に位置づけたと発表した。中核となるのは、RustコンパイラをMicrosoft独自のMSVCバックエンドへ接続する新コード生成基盤「rustc_codegen_utc」。Windowsエコシステムとのバイナリ互換性やABI整合、セキュリティ強化機能、C++との相互運用、横断的な最適化・プロファイリング、統一デバッグ環境を提供する。2026年初頭に本番運用へ移行し、Rust 1.90以降はセルフホスト化済み。現在100以上の社内リポジトリがこのバックエンドでビルドされており、週単位で展開範囲を拡大している。</div>
+        <div class="key-points">
+          <ul>
+            <li>rustc_codegen_utcはRustコンパイラをMSVCバックエンドに接続し、2026年初頭に本番運用へ移行、Rust 1.90からセルフホスト化</li>
+            <li>Microsoft社内で100以上のリポジトリが同バックエンドでビルド済み、週次で展開範囲を拡大中</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Rust Foundation</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-09-09</span>
+          <span class="engagement">▲ 566</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://cognition.com/blog/swe-2">Cognition、コーディングモデル「SWE-2」を発表。Fable 5.1に1ポイント差で迫りながらコストは64%安い</a></h3>
+        </div>
+        <div class="summary">Cognitionは新コーディングモデル「SWE-2」を発表した。2.8兆パラメータの基盤モデルKimi K3をベースに、性能とコストのバランスを最適化する強化学習手法を採用する。FrontierCode 1.1 Mainで50.0%(前世代SWE-1.7は42.0%)、DeepSWE 1.1で73.0%(同37.7%)を記録し、Fable 5.1に1ポイント差まで迫りながら価格は64%安い。実タスクでは中モデルが平均53ステップで完了し、SWE-1.7の127ステップから半減以下となった。Devin Desktop・CLI・Web・Fusionの各環境で即日展開する。</div>
+        <div class="key-points">
+          <ul>
+            <li>FrontierCode 1.1 Mainで50.0%(SWE-1.7比+8pt)、DeepSWE 1.1で73.0%(同+35.3pt)、Fable 5.1に1ポイント差ながら64%安価</li>
+            <li>実タスク完了までの平均ステップ数はSWE-1.7の127から53へ半減以下、Devin Desktop/CLI/Web/Fusionで即日提供開始</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Cognition Blog</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-10</span>
+          <span class="engagement">▲ 329</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://codeberg.org/forgejo/forgejo/src/branch/forgejo/release-notes-published/16.0.4.md">Forgejo 16.0.4・15.0.8リリース、テンプレートリポジトリ経由のリモートコード実行を緊急修正</a></h3>
+        </div>
+        <div class="summary">Forgejoは16.0.4と15.0.8で、テンプレートリポジトリからの新規作成時に悪用できる重大なリモートコード実行(RCE)脆弱性を修正した。変数展開処理で悪意ある`.forgejo/template`設定を使うと新たな`.git`フォルダを生成させられ、gitがそれを取り込むことでホスト上の任意データ読み取りと任意プロセス実行が可能だった。修正版では変数展開後に既存の`.git`フォルダを削除してから初期化する。ドラフトリリースの添付ファイル配信で公開範囲チェックが漏れていた別件(GiteaのCVE-2026-27660と同種)も同時に修正された。</div>
+        <div class="key-points">
+          <ul>
+            <li>変数展開後に悪意ある`.git`フォルダをgitが取り込み、ホスト上での任意プロセス実行を許す脆弱性を16.0.4/15.0.8で修正</li>
+            <li>ドラフトリリースの添付ファイルが公開範囲チェックを回避できる別件(Gitea CVE-2026-27660と同種)も同時修正</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Forgejo (Codeberg)</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-10</span>
+          <span class="engagement">▲ 128</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-data">Data</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://planetscale.com/blog/introducing-neki">PlanetScale、シャーディング型Postgres「Neki」をプレビュー公開。各シャードは素のPostgresを維持</a></h3>
+        </div>
+        <div class="summary">PlanetScaleはPostgresをワイヤプロトコル互換のまま複数ノードへ分散する新製品「Neki」をプラットフォームプレビューとして公開した。各シャードは1プライマリ+3AZにまたがる2レプリカ以上の構成で純正Postgresを稼働させ、アプリはルーターへ標準のPostgresプロトコルで接続するだけでよい。ルーターはPostgresクエリパーサーと分散クエリプランナーを内蔵し、サイドカーが実サーバー容量に基づいて接続プールを管理する。アプリケーション層シャーディングや非互換な分散DBへの乗り換えを迫られてきたチームに、Postgres互換性を保ったまま水平分割する選択肢を提供する。</div>
+        <div class="key-points">
+          <ul>
+            <li>各シャードは1プライマリ+3AZ分散の2レプリカ以上で純正Postgresを稼働、ルーターが標準Postgresワイヤプロトコルでクエリを受けクエリパーサー/分散プランナーで処理</li>
+            <li>サイドカーが実サーバー容量に基づき接続プールをサイジング、制御プレーンがリシャーディング・スキーマ変更・バージョンアップを調整(現在プラットフォームプレビュー)</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>PlanetScale Blog</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-09-09</span>
+          <span class="engagement">▲ 182</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://stockfishchess.org/blog/2026/stockfish-19/">チェスエンジンStockfish 19リリース、前版比最大44 Eloの強化と新ニューラルネット「SFNNv16」を搭載</a></h3>
+        </div>
+        <div class="summary">オープンソースのチェスエンジンStockfish 19が公開された。バージョン18比で最大44 Eloのレーティング向上を達成し、対戦では負けの3倍以上勝ち越す。CPU機能を自動検出しAVX2/AVX-512などの手動選択が不要になる「ユニバーサルバイナリ」を採用したほか、冗長な脅威特徴量を削減しポーンペア特徴量を追加した新ネット「SFNNv16」で性能の弱かった局面を改善した。Leelaネットワークで再採点した数千億局面での量子化考慮トレーニングも新たに導入し、RISC-V・LoongArch・WebAssembly向けのネイティブ対応も加わった。</div>
+        <div class="key-points">
+          <ul>
+            <li>バージョン18比で最大44 Eloのレーティング向上、対局では負けの3倍以上を勝ち越す</li>
+            <li>新ネット「SFNNv16」が冗長な脅威特徴量を削減しポーンペア特徴量を追加、数千億局面での量子化考慮トレーニングを導入しRISC-V/LoongArch/WebAssemblyへネイティブ対応</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Stockfish Blog</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-09</span>
+          <span class="engagement">▲ 258</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://blog.fallible.net/it-breaks-a-village/">ゲームエンジンBevy、6周年を迎えるも祝賀より「AI生成コード」ポリシーを巡るコミュニティ対立の総括に紙幅</a></h3>
+        </div>
+        <div class="summary">Rust製ゲームエンジンBevyの開発者が6周年を機に投稿した記事。本来はBSNマクロがついにマージされ「宣言的データモデルによりUIがようやく実用段階に入った」ことを祝う内容になるはずだったが、直近2ヶ月にわたりコミュニティで続いたLLM利用ポリシーを巡る対立と信頼の毀損に大半の紙幅を割いた。著者は技術的な統計より、方針転換がどう合意形成されコミュニティのエネルギーを消耗させたかというプロセス上の課題を優先して記録している。</div>
+        <div class="key-points">
+          <ul>
+            <li>Bevy 0.19でBSNマクロがマージされ宣言的データモデルによるUI構築が実用段階に到達</li>
+            <li>直近2ヶ月のLLM利用ポリシーを巡るコミュニティ対立が信頼問題を生み、6周年記事の大半がその総括に費やされた</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>blog.fallible.net</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-09-08</span>
+          <span class="engagement">▲ 86</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://openjdk.org/jeps/544">JEP 544「Ahead-of-Time Code Compilation」、事前コンパイルでJavaの起動を65〜80%短縮</a></h3>
+        </div>
+        <div class="summary">JEP 544は、トレーニング実行で得た最適化済みネイティブコードをAOTキャッシュへ保存し、本番実行時に即座に利用できるようにする仕組み。従来のJavaはバイトコードの解釈・プロファイリング・ホットメソッドの段階的コンパイルという起動〜ウォームアップの重い処理を毎回本番で行っていたが、これをトレーニング段階に前倒しする。AArch64とx64に対応し、ベースライン比で起動時間を約65〜80%短縮、初回イテレーションのウォームアップも約75%改善する。Serial・Parallel・G1・ZGCの各GCに対応するが、実行CPUはトレーニング時と同一アーキテクチャ・機能セットである必要がある。</div>
+        <div class="key-points">
+          <ul>
+            <li>トレーニング実行の最適化済みネイティブコードをAOTキャッシュに保存し、本番の起動時間を約65〜80%短縮</li>
+            <li>初回イテレーションのウォームアップは約75%改善、AArch64/x64対応でSerial/Parallel/G1/ZGCの各GCをサポート</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>OpenJDK</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-09-08</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://magic.dev/blog/pretraining#">Magic、DeepSeek V4 Pro Baseと同等性能を50分の1のFLOPsで達成する計算効率重視の事前学習手法を公開</a></h3>
+        </div>
+        <div class="summary">AIスタートアップMagicは、単一の新技術ではなくモデルアーキテクチャ・最適化手法・学習目的・データキュレーションにまたがる数十の改善の掛け合わせで計算効率を高める事前学習アプローチを公開した。2桁のオーダーにまたがる3モデルで反復検証し、標準的なLLM設計から不要な要素を取り除く方針を取る。最大モデル「V5 e24」は約400万ドルの計算コストでDeepSeek V4 Pro Baseに匹敵する性能を約50分の1のFLOPsで達成し、GB200換算で約50万ドル(GPT-3の事前学習計算量の約半分相当)で主要なオープンソースベースモデルをパープレキシティで上回った。事前学習計算量のわずか0.2%を強化学習に充てるだけで、競技数学問題の正答率72%を達成している。</div>
+        <div class="key-points">
+          <ul>
+            <li>最大モデル「V5 e24」は約400万ドルの計算コストでDeepSeek V4 Pro Base相当の性能を約50分の1のFLOPsで達成</li>
+            <li>事前学習計算量のわずか0.2%を強化学習に充てるのみで競技数学問題の正答率72%を記録、2024年末から2026年9月の間にV2基準比で計算効率50倍を達成</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Magic.dev Blog</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-09-08</span>
+          <span class="engagement">▲ 106</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-data">Data</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/loglass/articles/7c140c6689d8c2">メモリに載らないGROUP BYをDuckDBはどう処理するのか、5000万行ベンチマークで見る2段階パーティショニング</a></h3>
+        </div>
+        <div class="summary">DuckDBがメモリを超えるGROUP BY処理をどう捌くかを、5000万行・1.7GBのParquetファイルで検証した記事。DuckDBは「パーティション分割」と「集約」の2段階戦略を取り、ハッシュ値で行をN個のパーティションへディスク書き出ししたうえで、各パーティションを個別にメモリへ読み戻して集約する。バッファマネージャがLRU方式でハッシュテーブルページを自動的に一時ストレージへ退避させる。デフォルト上限(38.3GB)では3.0秒・ゼロスピルで完了する一方、300MBまでメモリを絞ると書き込み1.5秒+読み込み7秒の計8秒で1,770MiBがディスクへスピルし、250MBでは失敗率50%、200MBでは常時OutOfMemoryとなった。</div>
+        <div class="key-points">
+          <ul>
+            <li>パーティション分割→集約の2段階戦略でハッシュ値により行をN分割しディスクへ書き出し、各パーティションを個別に読み戻して集約</li>
+            <li>5000万行・1.7GBのParquetで検証、デフォルト38.3GB上限は3.0秒でゼロスピル、300MB制限では8秒・1,770MiBスピル、250MB以下では失敗が頻発</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn (loglass)</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-09-10</span>
+          <span class="engagement">🔖 51</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://qiita.com/suwa_nobu/items/cec37ce5a6141bb3eefc">3万スターのClaude Codeスキルを導入したら出力が43%短くなった、削減ではなく情報の入れ替わりだった</a></h3>
+        </div>
+        <div class="summary">30,233スターを獲得したGitHubプロジェクト「ayghri/i-have-adhd」のClaude Codeスキルを試した検証記事。エージェントの回答から前置き・要約・挨拶文を禁止し、実行可能なコマンドやコードを先頭に置かせる10のルールで構成される。3問×3回の計9回測定した結果、文字数は1,884字から1,066字へ43%減、出力トークンは1,603から1,056へ34%減り、9回すべてで短縮を再現した。ただし著者は、短縮分は情報の「削減」ではなく「入れ替わり」であり、技術キーワード密度はむしろ上昇(1,000字あたり3.2個→6.6個)したと分析する。</div>
+        <div class="key-points">
+          <ul>
+            <li>3問×3回・計9回の測定で文字数1,884字→1,066字(-43%)、出力トークン1,603→1,056(-34%)を9回とも再現</li>
+            <li>前置き・要約・挨拶文の禁止とリスト5項目までの上限などスキル内10ルールで制御、技術キーワード密度は1,000字あたり3.2個→6.6個へ上昇し「短縮」ではなく「情報の入れ替わり」と分析</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-09-09</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://qiita.com/carol0226/items/c9cccdd64e71a731a58d">パスキーでも被害に遭うデバイスコードフロー攻撃、Entra IDの条件付きアクセスでの防御法</a></h3>
+        </div>
+        <div class="summary">パスキーやMFAの強度をすり抜ける「デバイスコードフロー攻撃」を解説する記事。攻撃者は事前にデバイスコードフロー認証を開始してコードを取得し、フィッシングメールでユーザーにそのコードを入力させる。ユーザーは本物のMicrosoft認証画面でパスキーを使い正規に認証するが、認証結果は攻撃者のセッションに紐づき、パスキーの秘密情報自体は漏えいしないまま攻撃者がトークンを獲得する。Entra IDでは条件付きアクセスでデバイスコードフロー自体をブロックできるとし、サインインログでの利用状況把握、影響評価、ポリシー設定、効果確認という手順を示す。</div>
+        <div class="key-points">
+          <ul>
+            <li>攻撃者が事前取得したデバイスコードをフィッシングでユーザーに入力させ、正規のパスキー認証をしても認証結果が攻撃者セッションに紐づきトークンを奪われる</li>
+            <li>Entra IDの条件付きアクセスでデバイスコードフロー自体をブロック可能、サインインログでの利用状況把握→影響評価→ポリシー設定→効果確認の4手順を提示</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-09-09</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://internet.watch.impress.co.jp/docs/news/2139863.html">さくらインターネット、レンタルサーバーと販売管理システムへの不正アクセスを検知。最大136万563アカウントの契約情報に閲覧の可能性</a></h3>
+        </div>
+        <div class="summary">さくらインターネットは2026年8月9日、「さくらのレンタルサーバ」とその販売管理システムへの不正アクセスを検知したと発表した。レンタルサーバー側は951アカウントが被害対象に拡大し、マルウェアが設置された。販売管理システムでは最大136万563アカウントの契約情報(会員ID・会社名・住所・氏名・電話番号・メールアドレスなど)が閲覧された可能性があるが、クレジットカード情報の漏えいや外部への持ち出しの明確な事実は確認されていない。侵害は2023年4月から2026年3月の間に発生していたとみられる。同社は認証情報の無効化とセキュリティ設定強化、全サーバーの再構築を実施し、外部機関と連携した継続監視と定期的な外部監査を予定する。</div>
+        <div class="key-points">
+          <ul>
+            <li>レンタルサーバーで951アカウントが被害対象、マルウェア設置を確認。販売管理システムでは最大136万563アカウントの契約情報が閲覧された可能性(2023年4月〜2026年3月の間に侵害発生)</li>
+            <li>クレジットカード情報の漏えいと外部持ち出しの明確な事実は未確認、認証情報無効化・セキュリティ強化・全サーバー再構築を実施し外部機関と継続監視・定期監査を予定</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Internet Watch</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-09-10</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-frontend">Frontend</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/htmx_40xhrfetchstreaming_html.html">HTMX 4.0正式リリース、内部通信をXHRからfetch APIへ移行しStreaming HTMLに対応</a></h3>
+        </div>
+        <div class="summary">HTMXは2026年8月28日、破壊的変更を含むメジャーバージョン4.0をリリースした。内部通信をXMLHttpRequestからfetch APIへ全面移行し、Server-Sent Events・WebSocket・マルチパートレスポンスの3方式でサーバーからの連続データをリアルタイム描画するStreaming HTMLに対応した。属性の自動継承を廃止し明示的な`:inherited`指定を必須化したほか、イベント名を`htmx:beforeRequest`から`htmx:before:request`形式へ統一するなど、既存コードの書き換えが必要な変更が複数含まれる。</div>
+        <div class="key-points">
+          <ul>
+            <li>内部通信をXHRからfetch APIへ全面移行し、SSE・WebSocket・マルチパートレスポンスの3方式でStreaming HTMLに対応</li>
+            <li>属性の自動継承を廃止し`:inherited`明示指定を必須化、イベント名を`htmx:beforeRequest`から`htmx:before:request`形式に統一する破壊的変更を実施</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-10</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/awsaiawsnx_plugin_for_aws_10.html">AWS、Nx Plugin for AWS 1.0をOSS公開。自然言語の要件からCDK/Terraformのインフラコードを数分で自動生成</a></h3>
+        </div>
+        <div class="summary">AWSはNxモノレポツールと連携する「Nx Plugin for AWS」の1.0版をオープンソースとして公開した。開発者がアプリケーション要件を自然言語で伝えると、AWS CDKまたはTerraformによるインフラコードとアプリケーション基盤コードを数分で自動生成する。セキュリティ・可観測性・インフラを一貫した構成でスキャフォルドし、React・Node.js・PythonなどのフレームワークとAmazon Bedrock・MCPサーバー連携に対応する。生成後のコードはプラグイン非依存で自由に編集できる。</div>
+        <div class="key-points">
+          <ul>
+            <li>自然言語の要件記述からAWS CDK/Terraformのインフラコードとアプリ基盤コードを数分で自動生成、React/Node.js/Python等の複数フレームワークに対応</li>
+            <li>Amazon BedrockやMCPサーバー構築との連携を標準サポート、生成後のコードはプラグインに依存せず自由に編集可能なオープンソース公開</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-09</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://www.publickey1.jp/blog/26/net_11netaot.html">.NET 11 Release Candidate 1公開、ランタイムネイティブ非同期対応と1024超プロセッサ制限の撤廃で11月正式リリース予定</a>
+        <span class="quick-summary">— JITの境界チェック冗長処理削減や共有ディスパッチによるAOT高速化も同時に導入される。</span>
+        <span class="meta">Publickey</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://julialang.org/blog/2026/09/julia-1.13-highlights/index.html">Julia 1.13の新機能ハイライトを公式ブログが公開</a>
+        <span class="quick-summary">— 言語コアと標準ライブラリの改善点を開発チームがまとめて紹介している。</span>
+        <span class="meta">Julia Blog</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://www.helpnetsecurity.com/2026/09/09/google-chrome-cve-2026-87491-zero-day-flaw/">Google、Chrome V8エンジンの実悪用ゼロデイCVE-2026-87491を安定版153.0.8010.36で修正</a>
+        <span class="quick-summary">— V8のout-of-bounds writeを突く脆弱性で、2026年に入り7件目の実悪用ゼロデイ修正となる。</span>
+        <span class="meta">Help Net Security</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://www.anthropic.com/threat-intelligence-report-september-2026">Anthropic、Claudeを悪用した7件の脅威アクター活動を無効化した脅威インテリジェンスレポートを公開</a>
+        <span class="quick-summary">— ロシア諜報系のサイバー攻撃キャンペーンから偽ニュースサイト群、選挙操作プラットフォームまで多様な悪用事例を報告している。</span>
+        <span class="meta">Anthropic</span>
+        <span class="engagement">🔖 6</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://www.publickey1.jp/blog/26/eve_online240python_27python_3.html">EVE Online運営CCP、16年運用のPython 2.7コード240万行をPython 3へ段階移行中、初期スキャンで95.9%がコンパイル成功</a>
+        <span class="quick-summary">— Python-Futureで機械変換した後、除算結果の型変化など挙動差のある約2万行を人手で修正している。</span>
+        <span class="meta">Publickey</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-data">Data</span>
+        <a href="https://www.publickey1.jp/blog/26/awsamazon_quick.html">AWS、自然言語だけでタブ・表・フォームを備えた業務アプリを生成できる新機能をAmazon Quickに追加</a>
+        <span class="quick-summary">— アプリ固有のキーバリューストレージやAI推論の組み込み、自動レイアウトにも対応する。</span>
+        <span class="meta">Publickey</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://queue.acm.org/doi/10.1145/3831361">MMUなしで強力なメモリ分離を実現するCHERIoTアーキテクチャの設計をACM Queueが解説</a>
+        <span class="quick-summary">— マイクロコントローラ向けにケイパビリティベースの保護機構をハードウェアレベルで組み込む手法を論じている。</span>
+        <span class="meta">ACM Queue</span>
+        <span class="engagement">▲ 18</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-data">Data</span>
+        <a href="https://anchorsandlinks.com/posts/primary-keys/">IDの設計と主キー選定、UUID・連番・複合キーの使い分けを論じるエンジニアリング記事</a>
+        <span class="quick-summary">— スキーマ設計初期の主キー選択がその後の運用コストに与える影響を具体例とともに検討している。</span>
+        <span class="meta">anchorsandlinks.com</span>
+        <span class="engagement">▲ 21</span>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="./" class="archive-link">🗂 過去のダイジェスト</a>
+    </footer>
+  </div>
+</body>
+</html>
