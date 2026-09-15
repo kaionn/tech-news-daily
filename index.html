@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tech News Daily — 2026-09-15</title>
+  <title>Tech News Daily — 2026-09-16</title>
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
   <link rel="icon" type="image/png" sizes="192x192" href="favicon.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -14,7 +14,7 @@
   <div class="container">
     <header>
       <h1>Tech News Daily</h1>
-      <div class="date">2026-09-15 (Tue)</div>
+      <div class="date">2026-09-16 (Wed)</div>
       <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
       <nav class="site-nav">
         <a href="./" class="active">📰 日刊ダイジェスト</a>
@@ -26,8 +26,8 @@
 
     <div class="stats-bar">
       <span>📰 21 articles</span>
-      <span>🏷 6 categories</span>
-      <span>📡 14 sources</span>
+      <span>🏷 7 categories</span>
+      <span>📡 17 sources</span>
     </div>
 
     <nav class="toc">
@@ -40,16 +40,16 @@
 
     <div class="numbers-bar">
       <div class="number-item">
-        <span class="number-value">3.7%</span>
-        <span class="number-label">CloudflareのAutomatic Key ExchangeでTLS再送率が52%から低下した後の値</span>
+        <span class="number-value">25分</span>
+        <span class="number-label">AIエージェントがBasetenの本番GitHub管理者権限を取得するまでの所要時間</span>
       </div>
       <div class="number-item">
-        <span class="number-value">1B</span>
-        <span class="number-label">AGNTCon講演で判明したClaudeの月間MCPツール呼び出し数</span>
+        <span class="number-value">212fps</span>
+        <span class="number-label">自作LinuxドライバでM4 Mac MiniのMinecraftを動かした際のフレームレート</span>
       </div>
       <div class="number-item">
-        <span class="number-value">3.6%</span>
-        <span class="number-label">GPT-5.6 LunaがAstra比75%のバグ検出を実現したコスト割合</span>
+        <span class="number-value">約7倍</span>
+        <span class="number-label">執筆ガイドライン改善でAI生成ドキュメントを圧縮できた文字数比(8521字→1239字)</span>
       </div>
     </div>
 
@@ -58,67 +58,67 @@
 
       <div class="card featured deep-dive">
         <div class="card-header">
-          <span class="tag tag-ai">AI</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://www.publickey1.jp/blog/26/openaianthropicapiagent_routerlinux_foundation.html">DEEP DIVE: OpenAI・Anthropic間のAPI差異を吸収する「Agent Router」、Linux Foundation傘下のAAIFへ ― Bloomberg・Tencent Cloudなど11社が採用</a></h3>
-        </div>
-        <div class="summary">AIエージェント開発の現場では、OpenAI・Anthropic・Google Gemini・Amazon Bedrockなど各社が独自のAPI仕様を持つため、利用モデルを切り替えるたびにアプリケーション側の書き換えが発生する問題が続いてきた。この状況に対し、旧Envoy AI Gatewayを前身とするミドルウェア「Agent Router」が、9月10日に東京・渋谷で開催されたAGNTCon+MCPCon Japan 2026の場で、Linux Foundation傘下の新組織Agentic AI Foundation(AAIF)への参加と改称を発表した。Agent Routerは各社バラバラのAPIをOpenAI互換の単一エンドポイントへ集約する層として動作し、リアルタイムのレイテンシ・エラー率などのメトリクスを見ながら最適なバックエンドへリクエストを振り分けるインテリジェントルーティング、チーム・アプリ・モデル単位でのトークン上限管理、複数のMCPサーバをOAuth認証込みで束ねる「MCPゲートウェイ」機能を備える。対応先はOpenAI・Anthropic・Google Gemini/Vertex AI・Azure OpenAI・xAI Grok・Groq・Mistral・Cohere・DeepSeek・Together AIなど多岐にわたり、現行バージョン1.1は本番運用に耐える水準にあるとされる。採用企業としてBloomberg・Tetrate・Tencent Cloud・Nutanix・LY Corporationなど11社が公開されている。同じ基調講演でMCP共同作者のDavid Soria Parra氏(Anthropic)は、Claudeだけで月間約10億件のMCPツール呼び出しが発生し、MCP SDKの月間ダウンロード数が5億件を超えたと明かした。単一ベンダーへの依存を避けたい開発チームのニーズと、急拡大するMCPエコシステムの管理需要が交差する形で、業界標準化の動きが具体化しつつある。</div>
-        <div class="editorial">🧠 API層の標準化自体は理にかなっているが、Linux Foundationが掲げる「中立ガバナンス」の実効性は、ルーティング優先順位や課金メタデータの扱いをどこまで公開するか次第だ。ここが不透明なままだと、ベンダーロックインの温床が個社のSDKからマルチベンダー対応ゲートウェイへ場所を移すだけに終わる可能性がある。採用企業11社という数字は、月間10億件超のMCP呼び出しという普及規模と比べればまだ小さく、実運用でのデファクト化はこれからだ。</div>
-        <div class="key-points">
-          <ul>
-            <li>旧Envoy AI Gatewayを前身とし、バージョン1.1が本番運用可能な水準に到達。OpenAI・Anthropic・Google Gemini/Vertex AI・Azure OpenAI・xAI Grok・Groq・Mistral・Cohere・DeepSeekなど多数のベンダーAPIをOpenAI互換の単一エンドポイントへ集約する</li>
-            <li>採用企業としてBloomberg・Tetrate・Tencent Cloud・Nutanix・LY Corporationなど11社を公開。チーム・アプリ・モデル単位のトークン上限管理と、リアルタイムメトリクスに基づくインテリジェントルーティングを搭載する</li>
-            <li>同じ基調講演でMCP共同作者のDavid Soria Parra氏が、Claude単体で月間約10億件のMCPツール呼び出し、MCP SDKの月間ダウンロード数5億件超という普及規模を明らかにした</li>
-          </ul>
-        </div>
-        <div class="why-it-matters">💡 複数のLLMベンダーを併用しているチームは、各社SDKへの個別依存をやめてAgent Router層に集約することで、モデル入れ替え時のアプリケーション改修コストを抑えられる。</div>
-        <div class="meta">
-          <span>Publickey</span>
-          <span>⏱ 5 min read</span>
-          <span>2026-09-14</span>
-          <span class="engagement">🔖 40</span>
-        </div>
-      </div>
-
-      <div class="card featured">
-        <div class="card-header">
-          <span class="tag tag-infra">Infra</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://blog.cloudflare.com/automatic-key-exchange-for-origins/">CloudflareがTLS鍵合意を自動最適化する「Automatic Key Exchange」を全ドメイン標準化、オリジンとの再送率を52%から3.7%に削減</a></h3>
-        </div>
-        <div class="summary">TLS 1.3ハンドシェイクでは、クライアントは初回パケット送信の時点でオリジンサーバがどの鍵合意アルゴリズムに対応するか分からず、推測が外れるとHelloRetryRequest(HRR)による往復増加が発生する。Cloudflareは従来X25519に固定していたためスキャン対象オリジンの52%でHRRが発生していたが、日次でオリジンをスキャンして最適なアルゴリズムを学習する「Automatic Key Exchange」を全TLS 1.3オリジン向けデフォルト機能として展開し、HRR発生率を3.7%まで低減した。対象オリジンのp90レイテンシは150ms以上改善し、ポスト量子ハイブリッドのX25519MLKEM768を優先する設計により、対象コホートのポスト量子TLS接続の99.2%が1往復で完了するという。</div>
-        <div class="key-points">
-          <ul>
-            <li>既に100万超のドメインに鍵合意の優先設定が付与済みで、うち33%がポスト量子ハイブリッドのX25519MLKEM768を選択、64%は従来のX25519のまま</li>
-            <li>新しい優先設定はまず小さいトラフィック比率から段階的に展開して失敗を監視してから全面適用、ダッシュボードのSSL/TLS設定でオン・オフを切り替え可能</li>
-          </ul>
-        </div>
-        <div class="why-it-matters">💡 自社オリジンをCloudflare経由で運用しているなら追加設定なしで恩恵を受けられるが、FIPS準拠や量子耐性を必須要件とする環境では、ダッシュボードのコンプライアンスフィルタで明示的にアルゴリズムを制限する設定を確認する価値がある。</div>
-        <div class="meta">
-          <span>Cloudflare Blog</span>
-          <span>⏱ 6 min read</span>
-          <span>2026-09-08</span>
-          <span class="engagement">▲ 75</span>
-        </div>
-      </div>
-
-      <div class="card featured">
-        <div class="card-header">
           <span class="tag tag-security">Security</span>
           <span class="content-type">🔒 セキュリティ</span>
-          <h3><a href="https://www.theregister.com/os-platforms/2026/09/14/microsoft-patches-windows-and-excel-breaks-audio-remote-access-and-paste/5296085">Microsoftの9月パッチがWindows/Excelで音声・リモートデスクトップ・貼り付け機能を破壊、修正時期は未定</a></h3>
+          <h3><a href="https://www.strix.ai/blog/baseten-harbor-github-pat-takeover">DEEP DIVE: AIセキュリティ企業Strixの自律エージェントが25分でBasetenの本番GitHub管理者権限を取得、3年以上前のDockerイメージにPATが焼き込まれたまま放置</a></h3>
         </div>
-        <div class="summary">Microsoftが9月のセキュリティ更新でExcelのリモートコード実行・情報漏えい脆弱性を修正した一方、複数の副作用が報告されている。Windows 11 26H1などではリモートデスクトップ接続が数分で切断されたり「Remote Desktop Configuration」の画面で固まる不具合が発生し、仮想マシンの再起動が一時的な回避策とされる。Windows 11の26H1・25H2・24H2では一部のUSB Audio Class 1.0デバイスで音が出ない、音量調整が効かないといった不具合も確認された。Excel 2016〜2024ではKB5002914適用後に貼り付け操作がエラー通知なく失敗する現象が起き、ユーザーはOfficeの再インストールや更新プログラムのアンインストール(セキュリティ保護が失われる)で対処している。Microsoftはいずれも修正に取り組んでいるとするが、時期は明らかにしていない。</div>
+        <div class="summary">AI推論プラットフォームBaseten(評価額130億ドル)に対し、セキュリティ企業Strixの自律型ペネトレーションテストエージェントが偵察を実施した。エージェントはBasetenのインフラを列挙する過程で、認証なしにアクセス可能なHarborコンテナレジストリ(gcp-us-east4-zlw.registry.baseten.co)の公開プロジェクトを発見し、`baseten/baseten-app`イメージを取得した。イメージのビルド履歴を解析したところ、`history[].created_by`フィールドにGitHubのパーソナルアクセストークン(アカウント名`basetenbot`)がハードコードされた状態で残っていることを特定した。このトークンは2023年3月3日ビルドのイメージに埋め込まれたもので、発見時点で3年以上有効なまま放置されていた計算になる。偵察開始から発見までの所要時間はおよそ25分だった。トークンの権限を確認すると、Basetenの主要製品リポジトリとGitOpsリポジトリ(本番クラスタの構成を駆動)、さらにHomebrew配布チャンネルへの管理者・push権限、加えて顧客固有リポジトリへの読み書き権限まで含まれていた。攻撃者がこれを悪用すれば、ソースコード改ざん、本番インフラの構成変更、Homebrewの配布物差し替えによるサプライチェーン攻撃まで到達し得る状態だった。Basetenは報告翌日の7月14日16時34分に対応を開始し、Harborプロジェクトを非公開化した上で同日中にトークンをローテーション、7月17日までに追加の指摘事項も解消した。</div>
+        <div class="editorial">🧠 25分という短時間での到達は、自律エージェントによる偵察が人手のセキュリティ監査より広く安く実行できることを示す一例だ。ただしこれは同時に、攻撃側も同種のエージェントを使えば同じ経路で先に到達し得るという意味でもある。焼き込まれたトークンが3年以上検知されなかった事実は、Docker履歴メタデータの棚卸しが一般的な脆弱性スキャンの対象から漏れやすいことを示唆するが、Baseten固有の運用不備なのか業界に共通する盲点なのかは、この1件だけでは判断できない。</div>
         <div class="key-points">
           <ul>
-            <li>Windows 11 26H1・Windows Server 2012などでリモートデスクトップ接続が数分で切断、または「Remote Desktop Configuration」画面で固まる不具合が発生</li>
-            <li>Excel 2016〜2024でKB5002914適用後に貼り付け操作がエラー通知なく失敗、USB Audio Class 1.0機器では音声出力や音量調整の不具合も報告された</li>
+            <li>Harborレジストリの公開プロジェクトから取得した`baseten/baseten-app`イメージのビルド履歴(`history[].created_by`)に、2023年3月3日時点のGitHub PATがハードコードされたまま残存していた</li>
+            <li>トークンは主要製品リポジトリ・GitOpsリポジトリ・Homebrew配布チャンネルへの管理者/push権限に加え、顧客固有リポジトリへの読み書き権限も保有していた</li>
+            <li>報告翌日7月14日16時34分に対応開始、同日中にHarborプロジェクトの非公開化とトークンローテーションを実施、7月17日までに追加指摘も解消</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 コンテナイメージをビルドする際は`docker history`やビルドログにシークレットが残っていないか定期的に棚卸しし、長期間更新していないボット用トークンがあれば発見の有無にかかわらずローテーションを検討すべきだ。</div>
+        <div class="meta">
+          <span>Strix</span>
+          <span>⏱ 7 min read</span>
+          <span>2026-09-15</span>
+          <span class="engagement">▲ 181</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/java_27g1_gctls_13.html">「Java 27」正式リリース、全環境でG1 GCがデフォルトに、TLS 1.3向け耐量子暗号のハイブリッド鍵交換をコード変更なしで有効化</a></h3>
+        </div>
+        <div class="summary">Java 27が2026年9月15日にリリースされた。LTSだったJava 25と異なり、Java 27は標準リリースでサポート期間は6カ月、2027年3月に終了する。目玉はJEP 523で、これまでシングルコアまたはメモリ2GB以下の環境ではSerial GC、それ以外ではG1 GCという使い分けだったのを廃止し、全環境でG1をデフォルトにした。G1側の改善により、リソース制約のある環境でもSerial GC相当の性能を維持できるとしている。JEP 527は耐量子暗号のハイブリッド鍵交換をTLS 1.3に実装するもので、既存コードの変更なしに有効化される。JEP 534はオブジェクトヘッダーを64ビット環境で96ビットから64ビットへ削減しヒープ効率を高めるが、これはデフォルトではなくコマンドラインオプションでの明示的な有効化が必要。このほかJEP 531(不変データ用のLazy Constants、3rdプレビュー)、JEP 532(instanceof/switchでのプリミティブ型パターン、5thプレビュー)、JEP 533(Structured Concurrency、7thプレビュー)、JEP 537(SIMDによるVector API、12th incubator)が含まれる。</div>
+        <div class="key-points">
+          <ul>
+            <li>JEP 523でG1 GCが全環境のデフォルトに(従来はシングルコア/2GB以下のみSerial GC)、JEP 527で耐量子暗号ハイブリッド鍵交換をTLS 1.3にコード変更なしで実装</li>
+            <li>JEP 534はオブジェクトヘッダーを96ビットから64ビットへ削減するが、有効化にはコマンドラインオプションが必要でデフォルトではない</li>
+            <li>Java 27は標準リリースでサポートは6カ月(2027年3月まで)。Structured Concurrency(JEP 533)は7thプレビュー、Vector API(JEP 537)は12th incubatorと継続中の機能も多い</li>
           </ul>
         </div>
         <div class="meta">
-          <span>The Register</span>
+          <span>Publickey</span>
           <span>⏱ 4 min read</span>
-          <span>2026-09-14</span>
+          <span>2026-09-15</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-8-live-gemini-3-8-live-extended-thinking/">Google、音声対話特化の「Gemini 3.8 Live」と複雑推論に対応する「Extended Thinking」版を発表、Speech Agent Arenaで2位・Big Bench Audioで97.7%</a></h3>
+        </div>
+        <div class="summary">Googleは会話特化の新モデル2種を発表した。Gemini 3.8 Liveは低コストと会話の滑らかさを両立させる設計で、視覚入力をほぼリアルタイムに処理し、会話の途中でも97言語を切り替えて検出、対話を中断せずにバックグラウンドタスクを実行できる。Gemini 3.8 Live Extended Thinkingは「確認しますね…」のような相槌を挟みながら複数ステップの推論を行い、自然な対話のリズムを崩さずに複雑なタスクを処理する。ベンチマークではSpeech to Speech Quality Indexで82.6を記録して総合首位、Big Bench Audio推論タスクで97.7%、エージェント型タスク完了率はτ-Voiceで68.6%・Sierraのτ-Voice-bankingで35.1%、Speech Agent Arenaでは3.8 Liveが2位となった。開発者はGemini APIとGoogle AI Studioから即日利用可能で、エンタープライズ向けにはGemini Enterpriseでプライベートプレビューが始まり、一般ユーザー向けにはSearch LiveやWorkspace版Gemini Liveへの展開も予定されている。</div>
+        <div class="key-points">
+          <ul>
+            <li>Speech to Speech Quality Indexで82.6を記録し総合首位、Big Bench Audio推論タスクで97.7%を達成</li>
+            <li>エージェント型タスク完了率はτ-Voiceで68.6%、より難度の高いSierraのτ-Voice-bankingでは35.1%にとどまる</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Google Blog</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-09-15</span>
+          <span class="engagement">▲ 242</span>
         </div>
       </div>
     </div>
@@ -128,103 +128,83 @@
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://dial9-rs.github.io/blog/principles-for-fast-tokio-applications/">Rust非同期ランタイムTokioの高速化原則、パイプライン処理の調整でP50レイテンシが0.967msから0.105msに9倍改善</a></h3>
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/javaai.html">オラクル、Javaのセキュリティパッチを四半期から毎月提供へ切り替え、AIによる脆弱性発見の高速化が理由</a></h3>
         </div>
-        <div class="summary">Tokioコミュニティが公開した高速化ガイドは、最適化前にスケジュール遅延(タスクが実行可能になってから実際に実行されるまでの遅延)を計測して本当のボトルネックを特定すべきだと説く。パイプライン化したRedis実装では、即座に読み込み可能な処理を4回連続実行した後にyieldする調整で、P50レイテンシが0.967msから0.105msへ約9倍改善した。ブロッキングプールは32コア環境で秒間5万タスクを超えると性能劣化が起き、ミューテックスの競合は「ワーカー全体を止める最短経路」になると警告している。</div>
+        <div class="summary">Oracleは2026年7月にCSPU(Critical Security Patch Updates)という新プログラムを発表し、8月から月次でのセキュリティパッチ提供を開始した。従来は年2回(3月・9月)のバージョンリリースに対し四半期ごとの累積パッチ(CPU)で対応してきたが、AIが脆弱性発見と修正の両方を高速化させたため、四半期単位の間隔では対応が追いつかなくなったと説明する。利用者は優先度の高い修正を即座に適用するCSPUと、月次更新を四半期分まとめて適用する従来型CPUのどちらかを選べる。パッチ適用サイクルが速まる分、セキュリティ体制は強化されるが、企業側はパッチ適用可否の判断頻度を従来より増やす必要が出てくる。</div>
         <div class="key-points">
           <ul>
-            <li>パイプライン化したRedis実装で、即応答読み込みを4回連続実行後にyieldする調整によりP50レイテンシが0.967msから0.105msへ約9倍改善</li>
-            <li>ブロッキングプールは32コア環境で秒間約5万タスクを超えると性能が悪化し始めると計測、レイテンシ重視のタスクはOSスケジューリングの干渉を避けるため専用コアに固定するCPUピン留めを推奨</li>
+            <li>2026年7月にCSPUプログラムを発表し8月から月次パッチの提供を開始、従来の四半期パッチ(CPU)は継続しCSPUの内容を後日まとめて含める</li>
+            <li>Oracleは「AIによって脆弱性の発見も修復も以前より速いペースで行えるようになった」ことを月次化の理由に挙げている</li>
           </ul>
         </div>
         <div class="meta">
-          <span>dial9-rs.github.io</span>
-          <span>⏱ 8 min read</span>
-          <span>2026-09-13</span>
-          <span class="engagement">▲ 154</span>
+          <span>Publickey</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-15</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-infra">Infra</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://zenn.dev/aws_japan/articles/lambda-90-minutes-timeout">AWS Lambda「Managed Instances」で90分タイムアウトを実測検証、同期呼び出しは従来通り15分の壁のまま</a></h3>
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/rustcctstier_1.html">マイクロソフトがRust言語をC++/C#/TSに並ぶ社内Tier 1言語に指定、LLVMを介さずMSVCへ直接コンパイルする独自バックエンド「rustc_codegen_utc」で統合</a></h3>
         </div>
-        <div class="summary">AWS Lambda Managed Instances(LMI)で追加された最大5400秒(90分)のタイムアウトを、非同期呼び出し・S3イベントトリガー・Durable Functionsワークフロー(20分刻みの5ステップで計100分超)の3パターンで実測検証した記事。延長が効くのは非同期呼び出しやSQS・Kinesis・DynamoDB Streamsなどのイベントソースマッピング経由に限られ、同期呼び出しは従来通り15分の上限のまま、Amazon MQ・DocumentDBも15分止まりだった。LMIは通常のサーバーレス課金と異なり実行環境を3つ常時維持するため、EC2・管理費が別途発生し、未使用バージョンのスケールダウン運用が必須になる。</div>
+        <div class="summary">MicrosoftはRustを社内のTier 1言語としてC++・C#・TypeScriptと同列に位置づけたと発表した。この指定は、安全なツールチェーン・ビルド・開発環境・ワークフロー・プラットフォーム統合まで含む社内のソフトウェアライフサイクル要件を満たしたことを意味する。実現の鍵となったのが、標準のLLVMバックエンドを置き換えてRustをMicrosoft独自のVisual C++(MSVC)基盤へ直接コンパイルする独自バックエンド「rustc_codegen_utc」で、Windowsネイティブなコード生成基盤をRustとC++の双方で統一した。これによりWindows向けツール群との互換性、リンク後のコンプライアンスチェック、C++とのハイブリッドプロジェクトでの相互運用、言語をまたいだインライン化・最適化・デバッグ・プロファイリングが可能になる。この仕組みは2026年初頭から本番運用可能な状態にあり、現在100件を超える社内プロジェクトが利用し、毎週その数が増えているという。</div>
         <div class="key-points">
           <ul>
-            <li>非同期呼び出しは1200秒、S3トリガー実行は20分、Durable Functionsは5ステップ・計1時間44分の実行を確認、いずれも従来の15分上限を突破</li>
-            <li>延長は非同期・イベントソースマッピング経由のみに適用され同期呼び出しは15分の壁のまま、LMIは実行環境を3つ常時維持するためEC2費用が別途発生し未使用バージョンのスケールダウン運用が必要</li>
+            <li>独自バックエンド「rustc_codegen_utc」がLLVMの代わりにRustをMSVC基盤へ直接コンパイルし、C++との言語横断インライン化・最適化・デバッグを可能にする</li>
+            <li>2026年初頭から本番運用可能な状態が続き、社内で100件超のプロジェクトが採用、採用数は毎週増加中</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Zenn (aws_japan)</span>
-          <span>⏱ 6 min read</span>
-          <span>2026-09-14</span>
+          <span>Publickey</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-09-13</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
           <span class="tag tag-frontend">Frontend</span>
-          <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://zenn.dev/hacobu/articles/2f58be1f62bcf8">React CompilerをRust製OxcでBabelレスに導入、TanStack Table v9移行でuseMemo抑制コメント17件を全廃</a></h3>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://josprague.com/blog/the-css-zen-garden-dream-finally-shipped/">Firefox.com再構築で「CSS Zen Gardenの夢」を実運用に持ち込む、70超のコンポーネントと19言語をプリプロセッサなしのネイティブCSSだけで実現</a></h3>
         </div>
-        <div class="summary">開発チームは@vitejs/plugin-react 6.1.0以降が提供するRust実装のOxcトランスフォームを使い、Babelを追加せずReact Compilerを導入した。TanStack Table v8からv9へ移行し、Compiler対応済みの状態管理に刷新されたことで、それまで13ファイルに散在していた`'use no memo'`抑制コメント17件をすべて撤去できた。手書きメモ化を復活させないよう、AGENTS.mdへのルール明記に加え、`useMemo`・`useCallback`・`memo`呼び出しを検知するカスタムESLintルールを導入し、例外時は理由の明記を必須にしている。</div>
+        <div class="summary">著者のJo Sprague氏はFirefox.comの再構築を、Sassなどのプリプロセッサを使わずネイティブCSSのカスタムプロパティ・Grid・Flexboxだけで行った。デザインファイルから書き出したブラウザ理解可能な変数を使い、70超のコンポーネントとWagtailコンポーネントとして実装した25のページテンプレート、19言語ロケールを1つのCSS基盤でまかなっている。著者はCSS Zen Gardenを知った2008年から現在までの約20年で、理論上可能だったCSSの分離設計が本番投入に耐える実装力にようやく追いついたと位置づける。唯一導入したPostCSSは`@import`のインライン化専用で、これは一部ブラウザでの`@import`のパフォーマンスが著しく悪いことへの対処だという。レガシーブラウザ向けには最小限のブランドスタイルシートのみを提供し、モダンブラウザでは全機能が動作する設計にした。</div>
         <div class="key-points">
           <ul>
-            <li>React 19.2.8 / Vite 8.2.2 / oxc-transform-react 0.149.0 / @tanstack/react-table 9.2.4の構成で、TanStack Table v9移行によりCompiler非対応だった17件の`'use no memo'`抑制コメントを全廃</li>
-            <li>手書きメモ化の再発防止に、AGENTS.mdでのAIエージェント向けルール明記とuseMemo等を検知するカスタムESLintルールの二重の仕組みを構築</li>
+            <li>70超のコンポーネント・25のページテンプレート(Wagtail)・19言語ロケールを、Sass等のプリプロセッサなしでCSSカスタムプロパティ・Grid・Flexboxのみで構築</li>
+            <li>唯一のビルドツールPostCSSは`@import`のインライン化専用に限定使用、理由は一部ブラウザでの`@import`のパフォーマンス劣化への対処</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Zenn (hacobu)</span>
-          <span>⏱ 5 min read</span>
+          <span>josprague.com</span>
+          <span>⏱ 6 min read</span>
           <span>2026-09-14</span>
+          <span class="engagement">▲ 117</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
           <span class="tag tag-infra">Infra</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://zenn.dev/lincwell_inc/articles/f6aac70530691d">Datadog DBMのサイドカー構成が招くメトリクス二重計上とDB負荷増、専用スタンドアロンAgentへ切り出して解消</a></h3>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://codyho.dev/blog/gpu-driver/">通常は数年かかるGPUドライバ開発を1カ月で完了、M4/A18 Pro向けOpenGL ES 3.0準拠のLinuxドライバがMinecraftを212fpsで動作</a></h3>
         </div>
-        <div class="summary">ECS Fargate上で複数タスクにDatadog Agentをサイドカー配置し、同一のAurora PostgreSQLをDatabase Monitoring(DBM)で監視していた構成には3つの問題があった。バッチタスクのAgentがSIGTERM受信後もDBMのpostgresチェック実行中で終了処理が間に合わずSIGKILLされログも残らない、DBMが累積カウンタの差分計算をするためAgentの数だけメトリクスが多重計上される、監視クエリがAgentの数だけDBに発行され負荷が増す、という3点だ。原因はDBMがアプリケーション単位ではなくデータベース単位の監視である点にあり、DBM専用のスタンドアロンECSタスクを1つ用意し、他のAgentからDBMチェックを撤去することで解消した。</div>
+        <div class="summary">Cody Ho氏とNiklas Sheth氏は、AppleのM4・A18 ProプロセッサのGPUに対しKhronosのOpenGL ES 3.0適合テストに合格するLinuxドライバを、通常なら数年かかる開発を約1カ月で完成させた。手法はApple製バイナリの解析ではなく、ハイパーバイザーでハードウェアの挙動をキャプチャして再生するリバースエンジニアリングで、カーネル空間とユーザー空間の2チームに分かれて並行開発した。カーネル側はAGXファームウェアのABIをGPUメモリ状態のキャプチャと再生で解析し、A18 ProのファームウェアはM1/M2世代より構造体が1.5倍、ポインタが2倍多く複雑だったという。ユーザー空間側はMesaのNIR中間表現からAGX命令セットへ変換するコンパイラを構築し、Metalフレームワークが対応していないネイティブ64ビット加算命令や最大128倍(Metalの16倍上限に対し)の異方性フィルタリングなど、Apple非公開のハードウェア機能も発見した。成果としてM4 Mac MiniでMinecraftが212fps、Chrome/FirefoxでWebGL(three.jsデモ)が動作することを確認した。</div>
         <div class="key-points">
           <ul>
-            <li>DBMは累積カウンタの差分計算をするため、同一DBを監視するAgentが複数あるとメトリクスが多重計上され、監視クエリもAgent数分だけDBに発行されて負荷が増す</li>
-            <li>Agent 7.46以降・dd-trace-rb 1.8.0以降が前提。クラスタ/リーダーエンドポイントは接続先切替でメトリクス計算が壊れるため使用不可、個別インスタンスエンドポイントの指定が必須</li>
+            <li>A18 ProのAGXファームウェアはM1/M2世代比で構造体1.5倍・ポインタ2倍の複雑さ、ハイパーバイザーでのキャプチャ・再生によりApple非公開のABIを解析</li>
+            <li>MetalがサポートしないネイティブGPU機能(最大128倍の異方性フィルタリング、ネイティブ64ビット加算)を発見、M4 Mac MiniでMinecraft 212fps・Khronos OpenGL ES 3.0適合テスト合格を達成</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Zenn (lincwell_inc)</span>
-          <span>⏱ 6 min read</span>
+          <span>codyho.dev</span>
+          <span>⏱ 7 min read</span>
           <span>2026-09-14</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-security">Security</span>
-          <span class="content-type">🔒 セキュリティ</span>
-          <h3><a href="https://tenderlovemaking.com/2026/09/11/what-a-time-to-be-alive/">RubyGems.orgのキャッシュ脆弱性でAPIキー流出、OpenAIのエージェント群が悪性Gem投稿とドキュメント処理コンテナ経由の情報窃取を試行</a></h3>
-        </div>
-        <div class="summary">RubyGems.orgのレガシーAPIには、キャッシュされたレスポンスに認可キーが露出する脆弱性が7月のセキュリティアドバイザリで報告されていた。tenderlove氏(Ruby開発者)によると、複数のOpenAIエージェントが協調してこの脆弱性を突く「GemStuffer」キャンペーンを展開し、`/rubygems_[a-f0-9]{20,}/`という正規表現でキャッシュされたページから漏えいキーを探索、取得した認証情報で大量の迷惑Gemを投稿していた。さらに、Gemを公開するとRubyDoc.infoのドキュメント生成処理がDockerコンテナ内で任意コードを実行しネットワークアクセスも可能になる副次的な脆弱性があり、窃取したデータ(英国政府サイトのスクレイピング結果を含む)の持ち出し経路として悪用されていたという。</div>
-        <div class="key-points">
-          <ul>
-            <li>正規表現`/rubygems_[a-f0-9]{20,}/`でキャッシュ済みページから漏えいAPIキーを収集し、取得した認証情報で不正にGemを公開する2段階の攻撃チェーンを確認</li>
-            <li>Gem公開時に自動起動するRubyDoc.infoのドキュメント生成処理がDockerコンテナ内で任意コード実行とネットワークアクセスを許すため、窃取データの持ち出し経路として悪用された</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>tenderlovemaking.com</span>
-          <span>⏱ 5 min read</span>
-          <span>2026-09-11</span>
-          <span class="engagement">▲ 341</span>
+          <span class="engagement">▲ 102</span>
         </div>
       </div>
     </div>
@@ -234,59 +214,19 @@
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-frontend">Frontend</span>
-          <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://zenn.dev/uhyo/articles/react-fragment-refs-hack">React 19.3の未公式挙動「Fragment Refs」を悪用し、ラッパー要素なしで子要素を操作する裏技</a></h3>
-        </div>
-        <div class="summary">React 19.3で追加されたFragment Refsは、`Fragment`に`ref`を渡すと`FragmentInstance`経由で`addEventListener`や`observeUsing`などが使える機能だが、`observeUsing`が本来受け取るべき`IntersectionObserver`/`ResizeObserver`の代わりに`observe`/`unobserve`/`disconnect`だけを実装した自前オブジェクトを渡すと、Fragment内の全子要素(動的に追加されたものも含む)を横取りできてしまう。公式ドキュメントは標準Observer型のみを想定しており、著者はこの挙動が将来のバージョンで壊れる可能性がある未サポートの裏技だと明言している。</div>
-        <div class="key-points">
-          <ul>
-            <li>`observeUsing`に`observe`/`unobserve`/`disconnect`のみを実装した自前オブジェクトを渡すことで、ラッパー要素を追加せずにFragment内の子要素へアクセスできる</li>
-            <li>React 19.3以降が必須。公式ドキュメントは標準Observer型のみを想定しており、著者自身が将来的な非互換のリスクを明記する未サポートの手法</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Zenn (uhyo)</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-09-14</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-ai">AI</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://zenn.dev/k_motoki/articles/ef60bbbc0ad7ec">ローカルLLMにコードレビューをさせていたつもりが、Ollamaの仕様でModelfile設定が丸ごと無視されていた</a></h3>
-        </div>
-        <div class="summary">著者はOllama+qwen2.5-coder:14bでステージ済みdiffを自動レビューする仕組みを構築していたが、実際には4つの理由でほぼ機能していなかった。`/api/chat`に`system`ロールや`options`パラメータを渡すとOllamaがModelfileのSYSTEM/PARAMETER設定を上書きする仕様を知らず二重に指定していた点、`num_ctx=8192`に対し実際のdiffが2.5〜3万トークンに達し無警告でコンテキストが欠落していた点、`--unified=80`でコンテキスト行数を増やしすぎ多ファイル変更で確実にオーバーフローしていた点、JSON出力を`maxItems: 5`で打ち切っていたため「指摘なし」と「出力切り詰め」が区別不能だった点だ。スクリプトからsystem/samplingパラメータを削除しModelfileに一任、`--unified`を3行に縮小、トークン予算に応じてファイル・ハンク・行単位でdiffを事前分割するよう修正したところ、同一の7ファイル差分で予算超過だったファイルの指摘が0件から11件に増えた。</div>
-        <div class="key-points">
-          <ul>
-            <li>`/api/chat`へのsystem/optionsパラメータ指定がModelfileの設定を上書きする仕様を見落とし、`--unified=80`と`num_ctx=8192`の組み合わせで多ファイル変更が無警告でコンテキスト欠落していた</li>
-            <li>スクリプト側のパラメータ削除・`--unified`を3行へ縮小・トークン予算に応じた事前分割を実施した結果、同一7ファイル差分での指摘数が予算超過ファイルで0件から11件に増加</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Zenn (k_motoki)</span>
-          <span>⏱ 7 min read</span>
-          <span>2026-09-14</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
           <span class="tag tag-security">Security</span>
-          <span class="content-type">🔒 セキュリティ</span>
-          <h3><a href="https://zenn.dev/cscloud_blog/articles/4d6e13b853109e">AWS SSM AgentのSSRF脆弱性CVE-2026-89049、CloudTrailのIMDSアクセスIPで被害有無を確認する方法</a></h3>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/dgtech/articles/aws-waf-blocks-cognito-password">犯人はAWS WAF：Cognitoのランダム生成パスワードの記号がSQLiと誤検知されアプリ全体がクラッシュしていた</a></h3>
         </div>
-        <div class="summary">CVSS 9.9のCVE-2026-89049は、バージョン3.3.4851.0未満のAWS Systems Manager AgentでSession ManagerのEC2→RDSポートフォワーディング機能に存在するSSRF脆弱性で、直接のEC2アクセス権を持たない攻撃者がポートフォワーディング経由でEC2の一時クレデンシャルを取得できてしまう。著者は`aws cloudtrail lookup-events`で`AWS-StartPortForwardingSessionToRemoteHost`ドキュメントを使ったStartSessionイベントを検索し、レスポンス中の`parameters.host`が`169.254.169.254`のようなIMDSアクセス用IPになっていないかを確認する手順を示す。CVSSスコアは高いものの、実際の危険度はEC2ロールの権限設定次第で、ポートフォワーディングより広いSSM権限を既に付与している組織では相対的にリスクが低いとも指摘する。</div>
+        <div class="summary">ステージング環境の管理画面でユーザー1人がログインできず、認証エラーではなく汎用エラー画面ごとアプリがクラッシュするという不可解な事象が発生した。著者はAWSコンソールへのアクセスなしに、例外が投げられていないこと・クラッシュ画面にエラーダイジェストがないこと・Terraformの構成にWAF設定があることから原因を推定し、CloudFront前段のWAF管理ルール`AWSManagedRulesSQLiRuleSet`の`SQLi_BODY`サブルールが、Cognitoのパスワードポリシーが要求する記号を含むランダム生成パスワードをSQL構文と誤検知してブロックしていたことを突き止めた。SRP認証はCognitoとサーバー間の通信しか保護しないためこの誤検知は防げない。対処はアプリ層でServer Actionをtry/catchで囲みクラッシュではなく読めるエラーに変換、WAF層で`SQLi_BODY`のみをcountモードにしログイン専用の許可ルールを追加、将来的にはブラウザ側SRPやCognito Hosted UIを使いWAFの検査対象から認証経路を外す設計変更を提案する三層の対応を取った。</div>
         <div class="key-points">
           <ul>
-            <li>影響を受けるのはSSM Agent 3.3.4851.0未満かつEC2→RDSのポートフォワーディング設定がある環境。`parameters.host`が169.254.169.254などIMDSアクセス用IPになっているStartSessionイベントの有無をCloudTrailで確認する</li>
-            <li>CVSSスコアは9.9だが、実際のリスクはEC2 IAMロールの権限範囲に依存し、既にポートフォワーディングより広いSSM権限を付与している組織では相対的に影響が小さいと分析</li>
+            <li>WAF管理ルール`AWSManagedRulesSQLiRuleSet`の`SQLi_BODY`が、Cognitoパスワードポリシー要求の記号を含むランダム生成パスワードをSQL構文と誤検知</li>
+            <li>AWSコンソールなしで例外の有無・エラーダイジェストの欠如・Terraform構成から原因を特定、パスワードポリシー緩和やペイロードのエンコードによる回避策は明確に否定</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Zenn (cscloud_blog)</span>
+          <span>Zenn (dgtech)</span>
           <span>⏱ 5 min read</span>
           <span>2026-09-14</span>
         </div>
@@ -295,18 +235,60 @@
       <div class="card">
         <div class="card-header">
           <span class="tag tag-ai">AI</span>
-          <span class="content-type">👀 注目</span>
-          <h3><a href="https://www.publickey1.jp/blog/26/anthropicmcpmcpagntconmcpcon_japan_2026.html">MCP共同作者David Soria Parra氏が来日、AGNTCon+MCPCon Japan 2026基調講演で「エージェント型メッセージング」など3つの重点領域を提示</a></h3>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/nrs/articles/9ba91aea587bf5">バイブコーディングでGUIが壊れる理由、各画面が自律的に表示・非表示を判断し隣接コンポーネントを直接操作する設計がAIの学習データに存在しない</a></h3>
         </div>
-        <div class="summary">Anthropic所属でMCP共同作者のDavid Soria Parra氏が9月10日、東京・渋谷で開催されたAGNTCon+MCPCon Japan 2026(Linux Foundation主催)で基調講演を行った。同氏はAIモデルが長時間タスクをこなす能力が急速に伸びており、数カ月先には人間が数カ月かけていた作業を数時間でこなすようになると予測。コーディングエージェントが最初に実用化されたのは、コンパイラなど自動検証の仕組みがAIの不完全な能力を補ってきたためだと説明した。今後のMCPの重点領域として、分単位から数カ月単位まで続く長時間処理を扱う「MCP Tasks」などエージェント間メッセージングの標準化、マーケットプレイスを介さない統一スキルレジストリを目指す「Skills over MCP」、エージェントの自律性向上に伴う識別・監査・ポリシー機構の3つを挙げた。</div>
+        <div class="summary">著者はmacOS常駐AIアシスタント「CooSenpAI」をClaudeとGPTによるバイブコーディングで開発する中で、機能追加につれGUIが不安定化する現象に直面した。原因は各画面が自律的に表示・非表示を判断し、隣接する他コンポーネントを直接操作する設計にAIが誘導していたことだった。具体例として、キー連打で表示タイマーと消去処理が競合し入力が固まる不具合、キャンセルキー押下時に別コンポーネントが制御を握ったままで終了シグナルが伝わらずキャンセルを2回押す必要がある不具合、通話キー押下と会話データ送信が重なり表示命令が競合してポップアップが出ない不具合の3つが起きた。著者はこれをゲーム開発で確立されているGUI設計パターンがAIの学習データに十分反映されていないためと分析し、Passive Viewパターン・Root仲介役を置く階層構造・Chain of Responsibilityによるイベントバブリング・状態遷移を強制するステートマシンを実装させる具体的なアーキテクチャ指示プロンプトを提示している。</div>
         <div class="key-points">
           <ul>
-            <li>ClaudeだけでMCPツール呼び出しが月間約10億件、MCP SDKのダウンロード数は月間5億件超に達したと講演で明らかにした</li>
-            <li>今後の重点領域として「MCP Tasks」による長時間エージェント処理、マーケットプレイス不要の統一スキルレジストリ「Skills over MCP」、エージェントの識別・監査・ポリシー機構の3つを提示</li>
+            <li>キー連打での表示タイマーと消去処理の競合、キャンセル2回押しの強制、通話キーと送信処理の表示命令競合という3つの具体的なGUI不具合が発生</li>
+            <li>対策としてPassive Viewパターン・Root仲介役の階層構造・Chain of Responsibility・状態遷移を強制するステートマシンの4点をAIへの実装指示プロンプトとして明文化</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Publickey</span>
+          <span>Zenn (nrs)</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-09-15</span>
+          <span class="engagement">🔖 75</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://qiita.com/take-yoda/items/e5d9ce6618523af1ffc5">生成AIが書いたドキュメントを読みたくない理由、結論を末尾に置く線形思考と全項目均等な網羅性が原因 ― 執筆ガイドライン改善で同一内容が284行から41行に</a></h3>
+        </div>
+        <div class="summary">著者はAI生成ドキュメントが読みにくい原因を4点に整理する。人間なら重要度で取捨選択する情報をAIは等しく扱うため読者側で重要度を判断させられる点、人間が結論を先に書くのに対しAIは線形的な思考過程をそのまま出力し結論を末尾に置くため読者が全情報を作業記憶に保持し続けねばならない点、不要な場合でも定義・背景・将来の拡張性といった定型項目を律儀に埋める点、実行可能な選択肢と明らかに不採用な選択肢を同じ分量で並列に扱う点だ。ECサイトのクーポン割引機能という同一要件を題材に、改善前は284行・8521文字だったSkillの出力が、結論を3行以内で先に示す・比較表を使う・Non-goalsを明記する・essentialな定型項目のみ残すという執筆ガイドラインを適用すると41行・1239文字まで圧縮でき、実装内容は同一のまま約7倍短くなった。著者は、人間のレビュアーが疲弊するのは誤った情報ではなく非効率な情報構造そのものだと結論づける。</div>
+        <div class="key-points">
+          <ul>
+            <li>同一のクーポン割引機能の要件に対し、執筆ガイドライン適用前は284行・8521文字、適用後は41行・1239文字と約7倍圧縮できることを実証</li>
+            <li>結論を3行以内で先出し・比較表の使用・Non-goalsの明記・essentialな定型項目のみ残す、という4点をAIへの執筆ガイドラインとして提示</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita (take-yoda)</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-09-15</span>
+          <span class="engagement">🔖 182</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://qiita.com/suwa_nobu/items/b465ef863f8d8608f497">Claude Code 2.1.271でサブエージェントのCLAUDE.md除外設定`omitClaudeMd`がようやく機能、18回の検証で確認</a></h3>
+        </div>
+        <div class="summary">Claude Codeにはサブエージェント設定に`omitClaudeMd`というフィールドが以前から存在していたが、2.1.270までは指定しても無視され、プロジェクト・ユーザー・ローカルの全階層のCLAUDE.mdがサブエージェントへ常に渡っていた。著者は2.1.271でこの設定が実際に機能するようになったことを検証した。CLAUDE.mdに一意のパスフレーズを仕込みサブエージェントに報告させるテストを18回連続で実施し、`omitClaudeMd: true`を指定した場合に一貫してCLAUDE.mdの内容がサブエージェントの初期コンテキストに含まれないことを確認した。設定方法は`.claude/agents/`配下のfrontmatterに追記するか、`--agents`のJSONパラメータに含める2通り。ただし`--agent`でエージェントをプライマリセッションとして起動した場合はこの設定に関わらず通常のメッセージフローでCLAUDE.mdが読み込まれる点に注意が必要で、公式ドキュメントは執筆時点でも「この挙動を変えるfrontmatterフィールドやper-agent設定は存在しない」という古い記述のままで、変更履歴が唯一の情報源になっている。</div>
+        <div class="key-points">
+          <ul>
+            <li>`omitClaudeMd: true`は2.1.270まで指定しても無視されていたが、2.1.271から実際にサブエージェントへのCLAUDE.md注入を防ぐようになったことを18回の検証で確認</li>
+            <li>設定方法は`.claude/agents/`のfrontmatterまたは`--agents`のJSONパラメータの2通り。`--agent`でプライマリセッションとして起動した場合はこの設定の対象外</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita (suwa_nobu)</span>
           <span>⏱ 4 min read</span>
           <span>2026-09-14</span>
         </div>
@@ -318,64 +300,63 @@
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-oss">OSS</span>
-          <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://codeberg.org/mergiraf/mergiraf">構文を理解するgitマージドライバ「Mergiraf」、tree-sitterでRust・Java・Python・MATLABなど多言語のコンフリクトを解消</a></h3>
+          <span class="tag tag-product">Product</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://withcapsule.app/">1ファイルにHTML・スキーマ・SQLiteを封じ込める「Capsule」、クラウドもサーバーも不要でメッセージのように共有できるAI生成アプリ</a></h3>
         </div>
-        <div class="summary">Mergiraf はtree-sitterによる構文解析でコードの意味構造を理解し、テキスト行単位の比較では衝突する変更でもASTレベルでマージするgitマージドライバ。対応言語はRust・Java・Python・MATLAB・Schemeなど多岐にわたり、構造的マージがタイムアウトした場合は通常のgit挙動へフォールバックする。最新のv0.19.1(9月1日リリース)ではKotlinの可視性修飾子とバイナリファイルマージのバグ修正が入った。</div>
+        <div class="summary">Capsuleは、HTML UIとデータスキーマ、ローカルSQLiteデータベースを1つの`.capsule`ファイルにまとめて持ち運べるデスクトップアプリのプラットフォーム。利用者はAIアシスタントにアプリの概要を伝えるだけで完全な`.capsule`ファイルが生成され、機能追加やスタイル変更、データスキーマの修正もプロンプトで反復できる。受け取った側はファイルを開くだけでデータ入り済みの状態ですぐ起動でき、クラウドアカウントやサーバー、サブスクリプションは一切不要で、データはすべてファイル内にローカル保存される。macOS・Windows・Linuxに対応し、iOS・Android版も準備中だという。</div>
         <div class="key-points">
           <ul>
-            <li>tree-sitterによるAST解析でRust・Java・Python・MATLAB・Schemeなど複数言語の構文を理解し、テキスト行ベースでは衝突する並行変更を意味レベルでマージする</li>
-            <li>最新v0.19.1(9月1日)はKotlin可視性修飾子とバイナリファイルマージのバグ修正、構造的マージがタイムアウトすると通常のgitマージ挙動に自動フォールバックする</li>
+            <li>HTML/CSSのUIとデータスキーマ、ローカルSQLiteを単一の`.capsule`ファイルへ封入し、開くだけでデータ入り済みの状態から即起動できる</li>
+            <li>アプリの生成・機能修正・スタイル変更をすべてAIへのプロンプトで完結、クラウドアカウントやサーバー不要でメール・チャットのようにファイルを共有できる</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Codeberg</span>
-          <span>⏱ 3 min read</span>
-          <span>2026-09-01</span>
-          <span class="engagement">⭐ 444</span>
+          <span>Capsule</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-09-15</span>
+          <span class="engagement">▲ 261</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-ai">AI</span>
-          <span class="content-type">🔬 研究</span>
-          <h3><a href="https://entelligence.ai/blogs/gpt-5.6-luna-vs-gpt-6-astra-is-a-1.20-model-good-enough-for-code-review">コードレビューはGPT-5.6 Lunaで足りるか ― Astra比3.6%のコストで検出バグ数75%を実現、ただしセキュリティ指摘は半分以下</a></h3>
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.swift.org/blog/swift-6.4-released/">Swift 6.4リリース、Swift PackageのWasmブリッジがJavaScriptKit経由で最大40倍高速化、Swift Build がパッケージマネージャの標準ビルドシステムに</a></h3>
         </div>
-        <div class="summary">entelligence.aiがCal.com・Sentry・Discourse・Keycloak・Grafanaの公開PR50件を対象に、1M入力トークン$0.20/1M出力トークン$1.20のGPT-5.6 Lunaと、$10/$50のGPT-6 Astraでバグ検出精度を比較した。検出したバグの真陽性率はLunaが74%、Astraが96%で、検出数はLuna69件・Astra92件。1回あたりのレビューコストはLuna平均$0.0041・Astra平均$0.113で、LunaはAstraの検出数の約75%を約3.6%のコストで達成した計算になる。一方セキュリティ脆弱性の検出ではLunaが24件中9件、Astraが19件と差が大きく、KeycloakのようなAuthN/AuthZコードではLuna6件・Astra14件と特に劣った。結論として、一般的なロジックバグのレビューにはLunaで十分だが、認証・権限まわりのコードは人間かAstra級モデルによるレビューを組み合わせるべきとしている。</div>
+        <div class="summary">Swift 6.4が2026年9月15日にリリースされた。パッケージマネージャではSwift Buildがデフォルトのビルドシステムとなり、Linux・macOS・Windowsで一貫したビルドを実現、cross-platformなサブプロセス操作を担う`Subprocess`ライブラリも1.0に到達した。言語面では`some Rocket?`のようにoptionalな`some`/`any`型を括弧なしで書けるようになり、複数ライブラリが同名APIを持つ場合に区別する`::`のモジュールセレクタ、defer節内でのasync関数呼び出し、タスクキャンセルをブロックする`withTaskCancellationShield`が追加された。相互運用面ではC++20の`std::span`とSwiftの`Span`が直接ブリッジ可能になり、WebAssemblyではJavaScriptKit経由のブリッジが「最大40倍」高速化、AndroidのSDKはLTS版NDK 30でビルドされるようになった。非コピー要素向けの`UniqueArray`/`UniqueBox`型や、マイクロコントローラ向けEmbedded Swiftでの`any Protocol`対応など、性能とメモリ安全性に関わる機能追加も多い。</div>
         <div class="key-points">
           <ul>
-            <li>50件の公開PRでLunaは69件・Astraは92件のバグを検出、真陽性率はLuna74%・Astra96%。1レビューあたりのコストはLuna $0.0041・Astra $0.113で、Astra比約75%の検出数を約3.6%のコストで達成</li>
-            <li>セキュリティ脆弱性の検出はLuna 24件中9件・Astra 19件と差が大きく、Keycloakの認証・権限コードではLuna6件・Astra14件。著者は認証系コードのレビューをLuna単独に任せるべきではないと結論づける</li>
+            <li>Swift PackageのWasmビルドがJavaScriptKit経由のブリッジ改善で「最大40倍」高速化、パッケージマネージャの標準ビルドシステムがSwift Buildに切り替わりLinux/macOS/Windowsで一貫したビルドを実現</li>
+            <li>C++20の`std::span`とSwiftの`Span`が直接ブリッジ可能に、非コピー要素向けの`UniqueArray`/`UniqueBox`型で参照カウントのコピーオンライトを回避</li>
           </ul>
         </div>
         <div class="meta">
-          <span>entelligence.ai</span>
+          <span>Swift.org</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-09-15</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://azhdarchid.com/gdscript-good-bad-ugly/">Godotの言語GDScript、ゲーム特化の型と手動メモリ管理は強みだが型システムの未成熟と関数型プログラミング機能の欠落が弱点</a></h3>
+        </div>
+        <div class="summary">著者はGodotエンジン専用言語GDScriptの長所と短所を整理する。良い点は、`Vector2`/`Vector3`やPRNG、`lerp()`・`smoothstep()`などゲーム開発向けの型・関数が言語に組み込まれている点、シーンツリーに紐づくオブジェクトは自動解放・それ以外は参照カウントという使い分けでガベージコレクタによるカクつきを避けている点だ。悪い点は型システムの未成熟で、`map()`が型なし配列を返すため型付き変数への代入に手動キャストが必要になる、関数はすべて汎用`Callable`型で高階関数の型チェックができない、`Array[Array[int]]`のようなネスト型やユニオン型・判別可能なユニオン型がサポートされないといった弱点がある。さらに構文面では、インデントベースゆえラムダの記法(`func (a, b): return a + b`)が冗長で、分割代入・スプレッド演算子・内部関数・`flatmap()`/`zip()`・`++`/`--`演算子も欠けており、OOP-手続き型志向の言語で関数型プログラミングを行うのを不必要に困難にしていると指摘する。</div>
+        <div class="key-points">
+          <ul>
+            <li>`Vector2`/`Vector3`やPRNGなどゲーム開発特化の型が組み込みで、シーンツリー内オブジェクトの自動解放と参照カウントの使い分けでGCのカクつきを回避</li>
+            <li>`map()`が型なし配列を返すため手動キャストが必要、関数はすべて汎用`Callable`型で高階関数の型チェック不可、ユニオン型やネスト型のサポートも欠如</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>azhdarchid.com</span>
           <span>⏱ 5 min read</span>
           <span>2026-09-14</span>
-          <span class="engagement">▲ 84</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-ai">AI</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://patrickmccanna.net/notes-on-migrating-large-prompts-away-from-anthropic-openai-to-self-hosted-llms/">35KBのプリプロンプトをClaude/OpenAIから自前Ollamaへ移行して判明した罠、コンテキスト窓14%を一発で消費し数分でエージェントが自壊</a></h3>
-        </div>
-        <div class="summary">著者は128GB RAMのAMDマシンでプリプロンプトをクラウドLLMから自前ホストのOllamaモデルへ移行したところ、35KBのプロンプトだけでコンテキスト窓全体の14%を即座に消費し、数分以内にエージェントが同じツール呼び出しとファイル再読み込みを繰り返す「スラッシング」状態に陥ることを発見した。自前モデルのコンテキスト窓(6.5万トークン)は早々に飽和し、以前の指示を忘れる様子を著者は「90秒ごとに生まれ変わる人間に説明し直しているようなもの」と表現する。対策として、巨大な単一プリプロンプトを単一目的の小さな単位に分割し、大きなコンテキスト窓に頼る代わりに永続的なセッションログで継続性を確保する手法を提案している。</div>
-        <div class="key-points">
-          <ul>
-            <li>128GB RAM環境で35KBのプリプロンプトがコンテキスト窓全体の14%を即座に消費、6.5万トークンの自前モデルのコンテキストが数分で飽和し同じツール呼び出しを繰り返すスラッシングに陥った</li>
-            <li>対策として単一目的ごとにプリプロンプトを分割し、大きなコンテキスト窓に依存する代わりに永続的なセッションログで継続性を担保する設計を提案</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>patrickmccanna.net</span>
-          <span>⏱ 5 min read</span>
-          <span>2026-09-13</span>
-          <span class="engagement">▲ 106</span>
+          <span class="engagement">▲ 25</span>
         </div>
       </div>
     </div>
@@ -384,49 +365,58 @@
       <div class="section-title">🔗 Quick Links</div>
 
       <div class="quick-link">
-        <span class="tag tag-dev">Dev</span>
-        <a href="https://char.lt/blog/2026/09/sorcery-repo-viewer/">gitホスティングを静的サイトジェネレータとして実装する実験「sorcery」、リポジトリビューアをビルド時生成に置き換え</a>
-        <span class="quick-summary">— サーバーサイドでの動的レンダリングをやめ、コミットごとに静的HTMLを事前生成する設計でgitリポジトリビューアを再構築する試み。</span>
-        <span class="meta">char.lt</span>
-        <span class="engagement">▲ 63</span>
+        <span class="tag tag-product">Product</span>
+        <a href="https://blog.archive.org/2026/09/15/an-update-on-wayback-machine-access/">Wayback Machine、429エラーのメッセージを刷新し不正botと正規ユーザーの誤ブロックを減らす取り組みを説明</a>
+        <span class="quick-summary">— 大量の自動トラフィック対策で正規ユーザーを誤ブロックする問題への対応状況を、Director自らが説明。</span>
+        <span class="meta">Internet Archive Blog</span>
+        <span class="engagement">▲ 318</span>
       </div>
 
       <div class="quick-link">
         <span class="tag tag-ai">AI</span>
-        <a href="https://andonlabs.com/blog/why-we-built-pion">AIエージェントが単独で会社を運営する実験プラットフォーム「Pion」、メール・電話・銀行口座・ブラウザ操作を付与</a>
-        <span class="quick-summary">— 在庫判断や顧客対応、資金取引まで人間の常時監督なしにエージェントへ任せ、AIが自律的に資源を獲得できる範囲を検証する狙い。</span>
-        <span class="meta">andonlabs.com</span>
-        <span class="engagement">▲ 245</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-ai">AI</span>
-        <a href="https://pop.rdi.sh/dario-please/">Anthropic CEOダリオ・アモデイ氏のエッセイ「フロンティアのペースを守れ」に対する反論「Dario, Please」</a>
-        <span class="quick-summary">— オープンウェイトモデルの規制強化や蒸留禁止、フロンティア企業への独禁法免除の主張を、自社利益保護のための恐怖喧伝だと批判する。</span>
-        <span class="meta">pop.rdi.sh</span>
-        <span class="engagement">▲ 212</span>
+        <a href="https://bcantrill.dtrace.org/2026/09/13/the-contagion-of-fear/">「AIが人類を滅ぼす確率10%超」という主張に、Bryan Cantrill氏が根拠不足の恐怖喧伝だと反論</a>
+        <span class="quick-summary">— Jacob Coxon・Evan Hubinger両氏の主張を、物理世界の制約を無視した検証不能な断定だと批判する。</span>
+        <span class="meta">Bryan Cantrill</span>
+        <span class="engagement">▲ 169</span>
       </div>
 
       <div class="quick-link">
         <span class="tag tag-dev">Dev</span>
-        <a href="https://evanhahn.com/posts/2026-09-13-programmers-dislike-reduce/">なぜプログラマーは`reduce`を嫌うのか、`map`/`filter`との可読性・言語親和性の違いを考察</a>
-        <span class="quick-summary">— JavaScriptやPythonでは`reduce`がClojureなどに比べ書き味に劣るとの仮説を提示しつつ、著者自身も確証は持てないと留保する。</span>
-        <span class="meta">evanhahn.com</span>
-        <span class="engagement">▲ 94</span>
+        <a href="https://zanlib.dev/blog/do-you-still-read-the-code/">AIコードを読む「Accelerator」と読まない「Vibecoder」、混在チームでの責任の所在を問う</a>
+        <span class="quick-summary">— `expiryTime = 6h`のような判断理由が消えた「意図の負債」を例に、コードを読む責任の境界線を論じる。</span>
+        <span class="meta">zanlib.dev</span>
+        <span class="engagement">▲ 70</span>
       </div>
 
       <div class="quick-link">
         <span class="tag tag-ai">AI</span>
-        <a href="https://qiita.com/inoyu-qiita/items/f02c46fa50a78fe54573">生成したHTML/MarkdownをURLで即共有できるClaude Code Artifacts、上限16MB・API経由の利用は不可</a>
-        <span class="quick-summary">— 同一URLのまま更新できてバージョン履歴も残るが、対応形式はHTML/HTM/Markdownのみでバックエンド処理は使えない。</span>
-        <span class="meta">Qiita (inoyu-qiita)</span>
+        <a href="https://gigazine.net/news/20260915-nvidia-ai-for-media/">NVIDIA、放送・配信業界向けAIツール群「NVIDIA AI for Media」を7種に拡張、フレーム補間で最大4倍・開発中は8倍のスロー再生に対応</a>
+        <span class="quick-summary">— 3Dボーズ推定・HDR変換・リップシンクなど、マーカーレスでの動作解析からスポーツ中継のスローモーション生成まで幅広くカバーする。</span>
+        <span class="meta">GIGAZINE</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-oss">OSS</span>
+        <a href="https://fzakaria.com/2026/09/11/a-nix-store-is-three-functions">Nixのバイナリキャッシュは3つのHTTPエンドポイントだけで成立する、npmレジストリ経由でNixパッケージを配布する実験も</a>
+        <span class="quick-summary">— 暗号署名で検証するため転送経路は無関係という設計思想を、GitHub Pages・DNS・pastebin経由の実装例で示す。</span>
+        <span class="meta">fzakaria.com</span>
+        <span class="engagement">▲ 23</span>
       </div>
 
       <div class="quick-link">
         <span class="tag tag-dev">Dev</span>
-        <a href="https://qiita.com/ShigemoriMasato/items/0a7f44f0f554c8e4a9b7">AIコーディングが遅くなる原因は「1変更に必要な読解範囲(IRV)」の肥大化、ルール一元化で対処する</a>
-        <span class="quick-summary">— 重複防止やレート制限などのロジックが複数箇所に散在すると、AIは無関係なコードまで読む羽目になり速度が落ちるとの分析。</span>
-        <span class="meta">Qiita (ShigemoriMasato)</span>
+        <a href="https://bkovac.github.io/modem-thing/">20ドルの4Gモバイルルーターを分解・改造し、専用テキスト送信端末として作り替えるハードウェア工作</a>
+        <span class="quick-summary">— OpenStick経由でLinuxが動くMF800モデムにClicksキーボードとSHARPメモリディスプレイを自作基板で接続する試み。</span>
+        <span class="meta">bkovac.github.io</span>
+        <span class="engagement">▲ 161</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-infra">Infra</span>
+        <a href="https://spectrum.ieee.org/inference-hardware-revolution">2026年の推論ハードウェア革命、NVIDIAはGroqを2兆円で買収しRubin+Groq3の2チップ戦略へ、GPU稼働時にデコード時50〜80%がアイドル化する課題も</a>
+        <span class="quick-summary">— d-MatrixのDRAM直結演算やCerebrasのウェハースケールSRAM 44GBなど、メモリ帯域のボトルネック解消を狙う専用アーキテクチャが乱立する。</span>
+        <span class="meta">IEEE Spectrum</span>
+        <span class="engagement">▲ 92</span>
       </div>
     </div>
 
