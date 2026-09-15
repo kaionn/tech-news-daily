@@ -66,7 +66,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 <div class="container">
 <header>
   <h1>🧠 AI プロダクト動向</h1>
-  <p class="date">2026-09-12 発行（読了 6 分）</p>
+  <p class="date">2026-09-15 発行（読了 6 分）</p>
   <p class="tagline">実プロダクトのアーキテクチャ・使用例から AI 開発の現在地を週 3 回・1 号 1 テーマで深掘り</p>
   <nav class="site-nav">
     <a href="./">📰 日刊ダイジェスト</a>
@@ -77,92 +77,94 @@ footer a{color:var(--primary-500);text-decoration:none}
 </header>
 
 <div class="theme-hero">
-  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">CONTEXT-ENGINEERING</span></span>
-  <h2>コンテキストは会話ログではない — Working Context / Session / Memory / Artifacts への分離が実装標準になった</h2>
-  <p class="lede">コンテキストウィンドウを増やせば性能も上がる、という前提はすでに崩れている。Chromaの調査は18モデル全てで入力トークンが増えるほど性能が非線形に劣化することを示した。2026年9月、GoogleはエージェントフレームワークADKで、コンテキストを「いま提示すべきもの」と「どこかに保存すべきデータ」に分離するアーキテクチャを公式に説明した。AnthropicやManusの実装にも同じ設計原則がすでに埋め込まれている。今号はこの「コンテキストを保存問題として設計する」という転換を、具体的な実装から追う。</p>
+  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">AGENT-INFRASTRUCTURE</span></span>
+  <h2>エージェント実行基盤のマネージド化 — 3社が同時に「実行環境を貸す側」に回った</h2>
+  <p class="lede">エージェントプロダクトを作るとは、これまでモデル呼び出しの外側にセッション管理・サンドボックス・コンテキスト圧縮・エラー復旧を自前で組むことを意味した。それが今四半期で崩れた。2026年4月にAnthropicがClaude Managed Agentsを、7月にGoogleがGemini APIのManaged Agentsを拡張し、9月10日にOpenAIがAgents APIを公開ベータで出した。3社がほぼ同時に、足回りのインフラを「貸す側」に回ったことになる。</p>
 </div>
 
 <div class="tldr">
   <div class="label">TL;DR — 3 行で</div>
   <ul>
-    <li>Google ADKは2026年9月、コンテキストを Working Context・Session・Memory・Artifacts の4層に分離し、閾値到達で非同期に要約するcompactionを実装したと公式ブログで説明した。</li>
-    <li>Anthropicも、Claude Codeの自動要約やマルチエージェント・リサーチシステムの「計画を先にMemoryへ保存してから動く」設計で、同じ「何を残し何を捨てるか」の原則を採用している。</li>
-    <li>AIエージェントManusは、KV-cacheのヒット率を本番運用の最重要指標に位置付けており、プレフィックスキャッシュを壊さない設計はGoogle ADKのcontext caching方針とも一致する。</li>
+    <li>OpenAIが9月10日、Codexハーネスをagents/environments/sessions/eventsの4プリミティブに集約した Agents API を公開ベータで公開。基盤自体の追加課金はなくトークン・ツール実費のみ。</li>
+    <li>Anthropicは4月にサンドボックス・チェックポイント・認証情報管理・トレースを丸ごと運用するClaude Managed Agentsを開始（$0.08/セッション時間）、5月には「脳」はAnthropic側・「手」は自社インフラという分離構成の自己ホスト型サンドボックスを追加した。</li>
+    <li>Googleは7月28日、Gemini APIのManaged Agentsにフック・予算上限・cronトリガーを追加し、状態を7日間保持するホスト型サンドボックスとして完成度を上げた。</li>
   </ul>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 1: コンテキストを4層のストレージ問題として設計する</div>
+  <div class="section-title">📐 パターン 1: 自前オーケストレーションの構成要素がAPIひとつに集約された</div>
   <div class="theme-section">
-    <p>Google ADK（Agent Development Kit）が2026年9月に公開した設計解説では、コンテキストを単一の会話ログではなく、直近のプロンプトを保持する Working Context、構造化イベントとして記録される Session、検索可能な長期知識である Memory、大きな外部データを保持する Artifacts という4層に分けている。<code>invocations</code>数などのしきい値に達すると非同期の compaction プロセスが古い Session イベントを要約し、生データを刈り込みながら Session 自体の整合性は保つ。</p><p>この分離が広がっている理由は単純だ。会話を素朴に積み上げる設計では、エージェントが長時間・多ターンで動くほどトークン予算を消費し尽くすうえ、単に容量を増やしても性能は比例して上がらない。Claude Code も、コンテキスト容量の95%に達した時点で auto-compact を発火させ、アーキテクチャ上の決定や未解決のバグは残しつつツール呼び出しの生の結果を優先的に捨てる、という同じ発想の実装を公式に明文化している。</p>
+    <p>これまでエージェントプロダクトを作るチームは、セッションの永続化、ツール呼び出しループ、コンテキスト圧縮、失敗時のリトライ、サブエージェントへの委譲を個別に実装する必要があった。OpenAIのAgents APIは、社内でCodexを動かしているのと同じハーネスを、<code>agents</code>（モデル・指示・ツール定義）・<code>environments</code>（任意のサンドボックス）・<code>sessions</code>（永続的な作業単位）・<code>events/items</code>（実行記録）という4つのプリミティブに畳み込み、単一のAPI呼び出しの背後に隠した。</p><p>これはAnthropicが4月に先行した構成と実質的に同じ設計判断だ。Claude Managed Agentsもサンドボックス実行・状態チェックポイント・認証情報管理・実行トレースをAnthropic側で運用し、構造化ファイル生成タスクでは標準的なプロンプトループ比でタスク成功率が最大10ポイント改善したと報告している。2社が半年足らずで同じ抽象化に収束したのは、この足回りが正しく作るのが難しい割に製品差別化にならない、コモディティ化した層だと判断されたからだろう。</p>
     <div class="example">
-      <div class="product">Google ADK（Agent Development Kit）</div>
-      <div class="approach">コンテキストをWorking Context/Session/Memory/Artifactsに分離し、しきい値到達で非同期にcompactionする</div>
-      <div class="detail">大きなペイロードはArtifactServiceにハンドルとして外部化し、必要になった時だけLoadArtifactsToolで明示的に展開する「コンパイラ」的アーキテクチャを公式ブログが解説</div>
-      <a href="https://developers.googleblog.com/architecting-efficient-context-aware-multi-agent-framework-for-production/">📄 一次ソース</a>
+      <div class="product">OpenAI Agents API（Codexハーネスの外部提供）</div>
+      <div class="approach">agents/environments/sessions/eventsの4プリミティブでハーネスを1エンドポイント化し、コンテキスト圧縮とサブエージェント委譲をサーバー側で処理</div>
+      <div class="detail">社内でChatGPTやCodexを動かす基盤をそのまま外部公開した点で、自社運用実績のある「本物のハーネス」を貸し出す先行事例になる</div>
+      <a href="https://openai.com/index/introducing-the-agents-api/">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">Claude Code（Anthropic）</div>
-      <div class="approach">コンテキスト容量の95%到達で自動要約（auto-compact）し、決定事項は残しツール結果は捨てる</div>
-      <div class="detail">「最大限想起してから段階的に不要を削る」という圧縮の優先順位を公式エンジニアリングブログが明文化</div>
-      <a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents">📄 一次ソース</a>
+      <div class="product">Anthropic Claude Managed Agents</div>
+      <div class="approach">サンドボックス実行・チェックポイント・認証情報管理・トレースをAnthropic側で運用し、$0.08/セッション時間を追加課金</div>
+      <div class="detail">内部テストで構造化ファイル生成タスクの成功率が最大10ポイント改善したと具体的な数値で効果を示した、数少ない公式ベンチマーク公開例</div>
+      <a href="https://claude.com/blog/claude-managed-agents">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> 会話全体を毎回モデルに投げるのをやめ、「いま何が必要か」を判定するレイヤーを持つ設計に倣うとよい。しきい値ベースの要約と、大きなデータは参照渡しにする、の2点は最小構成として真似しやすい。</div>
+    <div class="takeaway"><strong>示唆:</strong> 自社プロダクトでセッション管理・サンドボックス・リトライ処理を自前実装する投資対効果は下がっている。差別化すべきはこの層の上——ドメイン固有のツールと評価基準——であって、ハーネス自体ではない。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 2: サブエージェントの境界を越えていいのは要約と計画だけ</div>
+  <div class="section-title">📐 パターン 2: 「脳」と「手」を分離する設計が次の分岐点になった</div>
   <div class="theme-section">
-    <p>サブエージェントを使う設計でも、境界を越えて子に渡してよい情報は選別されている。Google ADK は <code>include_contents</code> というパラメータで、祖先エージェントの会話やツール結果をどこまで子エージェントに伝播させるかを明示的にスコープし、階層が深くなっても不要な文脈が下流まで流れ込む「コンテキスト爆発」を防ぐ。</p><p>Anthropicが自社のマルチエージェント・リサーチシステムで採用したのは、その手前の設計だ。LeadResearcher はサブエージェントを立てる前に、まず自分の調査計画をMemoryに保存する。Claudeのコンテキストウィンドウが200,000トークンを超えると古い内容が切り詰められるため、計画自体を失っても困らない形で先に永続化しておく、という手当てにあたる。</p>
+    <p>基盤を丸ごと預けるか、一部を自社に残すかという選択が次の論点になっている。Anthropicが5月に追加した自己ホスト型サンドボックスは、オーケストレーション・コンテキスト管理・エラー復旧という「脳」はAnthropic側に置いたまま、ツール実行という「手」だけを自社インフラに残す構成だ。機密ファイルやサービスは企業の境界内に留まり、ハーネスは他のツールを呼ぶのと同じ要領でその実行環境を呼び出す。</p><p>一方Googleは逆方向に振り切り、サンドボックスの状態を7日間保持する完全ホスト型を選んだ。7月の更新ではフックによるツール呼び出し前後のカスタム検証、予算上限、cronによる定期実行までホスト側の機能として追加している。「実行環境を誰が持つか」は、機密データの所在という制約で決まる設計軸であり、単純にどちらが優れているという話ではない。</p>
     <div class="example">
-      <div class="product">Google ADK（Agent Development Kit）</div>
-      <div class="approach">include_contentsで祖先エージェントのコンテキストが子にどこまで伝播するかを明示的にスコープ管理</div>
-      <div class="detail">階層的なマルチエージェント構成での「コンテキスト爆発」を防ぐ設計として公式ブログが明記</div>
-      <a href="https://developers.googleblog.com/architecting-efficient-context-aware-multi-agent-framework-for-production/">📄 一次ソース</a>
+      <div class="product">Anthropic 自己ホスト型サンドボックス</div>
+      <div class="approach">オーケストレーション・コンテキスト管理はAnthropic側、ツール実行は自社インフラ（Cloudflare・Daytona・Modal・Vercel等）に分離</div>
+      <div class="detail">「脳」と「手」を切り離すという表現を公式ブログが使っており、ハーネスをサンドボックスから独立した設計要素として明示的に扱った稀有な例</div>
+      <a href="https://claude.com/blog/claude-managed-agents-updates">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">Claude（Anthropicのマルチエージェント・リサーチシステム）</div>
-      <div class="approach">LeadResearcherはサブエージェントを立てる前に自分の調査計画をMemoryに保存する</div>
-      <div class="detail">200Kトークンを超えるとコンテキストが切り詰められるため、計画そのものを先に永続化して生き延びさせる設計を公式ブログが説明</div>
-      <a href="https://www.anthropic.com/engineering/multi-agent-research-system">📄 一次ソース</a>
+      <div class="product">Google Gemini API Managed Agents</div>
+      <div class="approach">完全ホスト型サンドボックスに状態の7日間永続化・フック・予算上限・cronトリガーを追加</div>
+      <div class="detail">I/O 2026でのプレビュー公開から3か月弱で、単純な実行環境から運用機能を備えた基盤へ機能追加した更新</div>
+      <a href="https://blog.google/innovation-and-ai/technology/developers-tools/expanding-managed-agents-gemini-api-3-6-flash-hooks/">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> サブエージェントに渡すのは全文脈ではなく要約や計画に絞るとよい。特に切り詰めが起きる前提で「失っても困らない計画」を先に永続化しておくと、後続処理が壊れにくい。</div>
+    <div class="takeaway"><strong>示唆:</strong> 機密データやレガシー資産に触れるエージェントは自己ホスト型サンドボックスを、迅速な立ち上げを優先するなら完全ホスト型を選ぶ、という判断軸で設計する。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 3: プレフィックスキャッシュを壊さない設計</div>
+  <div class="section-title">📐 パターン 3: 従量課金の設計思想も分かれた — セッション時間課金・トークン従量・自動一時停止</div>
   <div class="theme-section">
-    <p>コンテキスト管理はトークン数だけでなく推論コストにも直結する。AIエージェント「Manus」を開発するチームは、KV-cacheのヒット率を本番エージェントにとって最重要の指標だと位置付けている。入力対出力のトークン比が平均100:1に達する同社の環境では、プレフィックスが一致する限り再利用できるKV-cacheが、レイテンシとコストの大部分を決めるためだ。</p><p>だからこそ両者は同じ設計判断に行き着く。Google ADK は、安定したシステム指示をコンテキストの先頭に固定し、変化する内容を末尾に寄せることでプレフィックスキャッシュを温存するprocessor順序を採用している。Manus側も、ツール定義を実行途中で動的に追加・削除しないことを明確な指針として挙げている。ツール定義は通常コンテキストの先頭付近にあるため、そこを変更するとそれ以降の全てのKV-cacheが無効化されてしまうからだ。</p>
+    <p>長時間稼働するエージェントは暴走時のコストリスクを抱える。3社はこれを異なる方法で扱っている。Anthropicはセッション時間そのものを課金対象にし、サンドボックスが稼働している時間そのものに$0.08/時間を課す。OpenAIは逆に基盤自体を無償にし、実際に消費したトークンとツール利用分しか課金しない立場を取った。Googleは価格モデルではなく制御機構で対処し、<code>max_total_tokens</code>で上限に達すると状態を保持したまま実行を自動一時停止する。</p><p>この違いは、自社のリトライロジックがバグって無限ループに陥ったとき誰がコストを負担するかという設計判断そのものだ。セッション時間課金は「想定より長引いたセッション」を、自動一時停止は「暴走したループ」を直接的に止める。トークン従量制はどちらのリスクも吸収してくれず、その管理責任を利用者側に残す。</p>
     <div class="example">
-      <div class="product">Manus</div>
-      <div class="approach">KV-cacheヒット率を本番エージェントの最重要指標と位置付け、ツール定義を実行途中で変更しない</div>
-      <div class="detail">入力:出力トークン比が平均100:1という自社の運用データから、プレフィックス一致によるキャッシュ再利用がコストとレイテンシを支配すると結論</div>
-      <a href="https://manus.im/blog/Context-Engineering-for-AI-Agents-Lessons-from-Building-Manus">📄 一次ソース</a>
+      <div class="product">OpenAI Agents API</div>
+      <div class="approach">基盤利用に追加費用を課さず、トークンとツール実費のみを課金</div>
+      <div class="detail">ハーネス部分を無償化することで採用障壁を下げる代わり、暴走時のコスト管理は利用者側の実装責任として残した</div>
+      <a href="https://openai.com/index/introducing-the-agents-api/">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">Google ADK（Agent Development Kit）</div>
-      <div class="approach">安定したシステム指示を先頭に、変化する内容を末尾に配置するprocessor順序でプレフィックスキャッシュを温存</div>
-      <div class="detail">モデル側のprefix cachingの仕組みをそのまま活かす設計として公式ブログが明記</div>
-      <a href="https://developers.googleblog.com/architecting-efficient-context-aware-multi-agent-framework-for-production/">📄 一次ソース</a>
+      <div class="product">Google Gemini API Managed Agents</div>
+      <div class="approach">max_total_tokensで上限到達時に状態を保持したまま自動一時停止</div>
+      <div class="detail">課金額を抑える機構ではなく実行そのものを止める機構として、暴走コストの問題に価格設計ではなく制御設計で答えた</div>
+      <a href="https://blog.google/innovation-and-ai/technology/developers-tools/expanding-managed-agents-gemini-api-3-6-flash-hooks/">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> プロンプトの内容そのものより「何を先頭に固定し、何を動的にするか」の順序設計がコストを左右する。ツール一覧やシステムプロンプトを実行中に書き換えるくらいなら、使わない選択肢を渡したまま無視させる方が安く済む。</div>
+    <div class="takeaway"><strong>示唆:</strong> 長時間稼働エージェントを設計するなら、価格モデルの違いより「暴走を止める機構が課金レイヤーに組み込まれているか」を選定基準にする。トークン従量制のみの基盤を使うなら、上限監視は自前で実装する前提で設計する。</div>
   </div>
   <div class="editorial">
     <span class="label">✍️ 編集後記</span>
-    コンテキストウィンドウが大きくなるほど「とりあえず全部入れる」設計は罰される、というのがContext Rotが示した現実だった。2026年9月のGoogle ADKの発表は、この教訓を4層のストレージアーキテクチャという形で実装に落とし込んだ、公式ドキュメントとしては早い部類の例だ。次に来るのは、この構造をフレームワーク非依存でどう標準化するか、という議論だろう。
+    3つの競合ラボが半年足らずでほぼ同じ抽象化——セッション・サンドボックス・ハーネスの分離——に収束したのは、この層がもはや競争領域ではなく前提条件になったことを意味する。次に差がつくのは基盤の上、つまりドメイン知識をどう組み込み、失敗をどう評価するかという層のはずだ。
   </div>
 </div>
 
 <div class="section">
   <div class="section-title">🔗 今号の動向ピックアップ</div>
-  <div class="quick-link"><a href="https://www.langchain.com/blog/context-engineering-for-agents">LangChainのContext Engineering解説「Write/Select/Compress/Isolate」</a><span class="quick-summary">コンテキスト管理をWrite/Select/Compress/Isolateの4戦略に整理した解説記事。本文で扱ったcompactionはCompress、サブエージェント分離はIsolateにそれぞれ対応する。</span></div>
-  <div class="quick-link"><a href="https://www.trychroma.com/research/context-rot">ChromaのContext Rot研究レポート</a><span class="quick-summary">入力トークン数を増やすほど18モデル全てで性能が非線形に劣化することを実証した技術レポート。本文で扱った「4層アーキテクチャへの移行」は、この現象への直接的な対応策にあたる。</span></div>
+  <div class="quick-link"><a href="https://openai.com/index/introducing-agentkit/">Introducing AgentKit（OpenAI公式）</a><span class="quick-summary">Agents API公開に先立ちOpenAIが提供していた、ビジュアル構築ツールとEvalsを含む自前組み立て型のエージェント開発キット。本号で扱った「基盤ごと預ける」方向とは対照的な、自社で組み立てる側の公式リファレンスになる。</span></div>
+  <div class="quick-link"><a href="https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes">Self-hosted sandboxes（Claude Platform公式ドキュメント）</a><span class="quick-summary">Anthropicの自己ホスト型サンドボックスの設定手順を解説した公式ドキュメント。本文で触れた「脳」と「手」の分離構成を、ワーカーの実装レベルで確認できる。</span></div>
+  <div class="quick-link"><a href="https://docs.cloud.google.com/gemini-enterprise-agent-platform/scale/sandbox">Sandboxes overview（Gemini Enterprise Agent Platform公式ドキュメント）</a><span class="quick-summary">Googleのエンタープライズ版マネージドサンドボックスの仕様書。本文で扱った消費者向けGemini APIのManaged Agentsとは別に、サブ秒起動・最大14日間の状態保持など企業向け仕様が定義されている。</span></div>
 </div>
 
 <div class="section">
   <div class="section-title">📚 過去号</div>
+  <div class="archive-item"><span class="week">2026-09-12</span><div class="body"><a href="ai-trends/2026-09-12.html">コンテキストは会話ログではない — Working Context / Session / Memory / Artifacts への分離が実装標準になった</a><span class="sub">Google ADKは2026年9月、コンテキストを Working Context・Session・Memory・Artifacts の4層に分離し、閾値到達で非同期に要約するcompactionを実装したと公式ブログで説明した。</span></div></div>
   <div class="archive-item"><span class="week">2026-09-10</span><div class="body"><a href="ai-trends/2026-09-10.html">Agent Skills という第3のレイヤー — プロンプトでもRAGでもなく「必要になるまで読まない」設計</a><span class="sub">Agent Skillsは「メタデータ(~100トークン)→本文(&lt;5000トークン推奨)→付随ファイル」の3段階でコンテキストに読み込む、プログレッシブディスクロージャー設計。</span></div></div>
   <div class="archive-item"><span class="week">2026-09-08</span><div class="body"><a href="ai-trends/2026-09-08.html">エージェント評価の再設計 — テキスト一致から状態検証、そして「修正がテストになる」仕組みへ</a><span class="sub">Anthropicはテキスト一致の判定から、環境の状態が実際に変わったかを見る outcome/state チェックへの転換を公式に推奨している。</span></div></div>
   <div class="archive-item"><span class="week">2026-09-03</span><div class="body"><a href="ai-trends/2026-09-03.html">長時間稼働エージェントの状態管理 — 「会話の保存」から「プロセスの永続化」へ</a><span class="sub">Google ADKやMastraは、ツール呼び出しなどステップの境界ごとに実行状態をシリアライズして外部ストレージに書き込み、コンテナが落ちても直前のステップから再開できる設計に収束している。</span></div></div>
@@ -186,7 +188,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 </div>
 
 <footer>
-  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="data/ai-trends/2026-09-12.json">data/ai-trends/2026-09-12.json</a>（このページは JSON からの生成物）</p>
+  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="data/ai-trends/2026-09-15.json">data/ai-trends/2026-09-15.json</a>（このページは JSON からの生成物）</p>
   <p style="margin-top:.5rem"><a href="./">📰 日刊ダイジェストに戻る</a></p>
 </footer>
 </div>

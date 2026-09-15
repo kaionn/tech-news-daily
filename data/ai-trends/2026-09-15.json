@@ -1,0 +1,91 @@
+{
+  "issue": "2026-09-15",
+  "generated_at": "2026-09-15T07:00:00+09:00",
+  "theme": {
+    "title": "エージェント実行基盤のマネージド化 — 3社が同時に「実行環境を貸す側」に回った",
+    "category": "agent-infrastructure",
+    "lede": "エージェントプロダクトを作るとは、これまでモデル呼び出しの外側にセッション管理・サンドボックス・コンテキスト圧縮・エラー復旧を自前で組むことを意味した。それが今四半期で崩れた。2026年4月にAnthropicがClaude Managed Agentsを、7月にGoogleがGemini APIのManaged Agentsを拡張し、9月10日にOpenAIがAgents APIを公開ベータで出した。3社がほぼ同時に、足回りのインフラを「貸す側」に回ったことになる。",
+    "tldr": [
+      "OpenAIが9月10日、Codexハーネスをagents/environments/sessions/eventsの4プリミティブに集約した Agents API を公開ベータで公開。基盤自体の追加課金はなくトークン・ツール実費のみ。",
+      "Anthropicは4月にサンドボックス・チェックポイント・認証情報管理・トレースを丸ごと運用するClaude Managed Agentsを開始（$0.08/セッション時間）、5月には「脳」はAnthropic側・「手」は自社インフラという分離構成の自己ホスト型サンドボックスを追加した。",
+      "Googleは7月28日、Gemini APIのManaged Agentsにフック・予算上限・cronトリガーを追加し、状態を7日間保持するホスト型サンドボックスとして完成度を上げた。"
+    ],
+    "sections": [
+      {
+        "heading": "自前オーケストレーションの構成要素がAPIひとつに集約された",
+        "body_html": "<p>これまでエージェントプロダクトを作るチームは、セッションの永続化、ツール呼び出しループ、コンテキスト圧縮、失敗時のリトライ、サブエージェントへの委譲を個別に実装する必要があった。OpenAIのAgents APIは、社内でCodexを動かしているのと同じハーネスを、<code>agents</code>（モデル・指示・ツール定義）・<code>environments</code>（任意のサンドボックス）・<code>sessions</code>（永続的な作業単位）・<code>events/items</code>（実行記録）という4つのプリミティブに畳み込み、単一のAPI呼び出しの背後に隠した。</p><p>これはAnthropicが4月に先行した構成と実質的に同じ設計判断だ。Claude Managed Agentsもサンドボックス実行・状態チェックポイント・認証情報管理・実行トレースをAnthropic側で運用し、構造化ファイル生成タスクでは標準的なプロンプトループ比でタスク成功率が最大10ポイント改善したと報告している。2社が半年足らずで同じ抽象化に収束したのは、この足回りが正しく作るのが難しい割に製品差別化にならない、コモディティ化した層だと判断されたからだろう。</p>",
+        "examples": [
+          {
+            "product": "OpenAI Agents API（Codexハーネスの外部提供）",
+            "approach": "agents/environments/sessions/eventsの4プリミティブでハーネスを1エンドポイント化し、コンテキスト圧縮とサブエージェント委譲をサーバー側で処理",
+            "detail": "社内でChatGPTやCodexを動かす基盤をそのまま外部公開した点で、自社運用実績のある「本物のハーネス」を貸し出す先行事例になる",
+            "source_url": "https://openai.com/index/introducing-the-agents-api/"
+          },
+          {
+            "product": "Anthropic Claude Managed Agents",
+            "approach": "サンドボックス実行・チェックポイント・認証情報管理・トレースをAnthropic側で運用し、$0.08/セッション時間を追加課金",
+            "detail": "内部テストで構造化ファイル生成タスクの成功率が最大10ポイント改善したと具体的な数値で効果を示した、数少ない公式ベンチマーク公開例",
+            "source_url": "https://claude.com/blog/claude-managed-agents"
+          }
+        ],
+        "takeaway": "自社プロダクトでセッション管理・サンドボックス・リトライ処理を自前実装する投資対効果は下がっている。差別化すべきはこの層の上——ドメイン固有のツールと評価基準——であって、ハーネス自体ではない。"
+      },
+      {
+        "heading": "「脳」と「手」を分離する設計が次の分岐点になった",
+        "body_html": "<p>基盤を丸ごと預けるか、一部を自社に残すかという選択が次の論点になっている。Anthropicが5月に追加した自己ホスト型サンドボックスは、オーケストレーション・コンテキスト管理・エラー復旧という「脳」はAnthropic側に置いたまま、ツール実行という「手」だけを自社インフラに残す構成だ。機密ファイルやサービスは企業の境界内に留まり、ハーネスは他のツールを呼ぶのと同じ要領でその実行環境を呼び出す。</p><p>一方Googleは逆方向に振り切り、サンドボックスの状態を7日間保持する完全ホスト型を選んだ。7月の更新ではフックによるツール呼び出し前後のカスタム検証、予算上限、cronによる定期実行までホスト側の機能として追加している。「実行環境を誰が持つか」は、機密データの所在という制約で決まる設計軸であり、単純にどちらが優れているという話ではない。</p>",
+        "examples": [
+          {
+            "product": "Anthropic 自己ホスト型サンドボックス",
+            "approach": "オーケストレーション・コンテキスト管理はAnthropic側、ツール実行は自社インフラ（Cloudflare・Daytona・Modal・Vercel等）に分離",
+            "detail": "「脳」と「手」を切り離すという表現を公式ブログが使っており、ハーネスをサンドボックスから独立した設計要素として明示的に扱った稀有な例",
+            "source_url": "https://claude.com/blog/claude-managed-agents-updates"
+          },
+          {
+            "product": "Google Gemini API Managed Agents",
+            "approach": "完全ホスト型サンドボックスに状態の7日間永続化・フック・予算上限・cronトリガーを追加",
+            "detail": "I/O 2026でのプレビュー公開から3か月弱で、単純な実行環境から運用機能を備えた基盤へ機能追加した更新",
+            "source_url": "https://blog.google/innovation-and-ai/technology/developers-tools/expanding-managed-agents-gemini-api-3-6-flash-hooks/"
+          }
+        ],
+        "takeaway": "機密データやレガシー資産に触れるエージェントは自己ホスト型サンドボックスを、迅速な立ち上げを優先するなら完全ホスト型を選ぶ、という判断軸で設計する。"
+      },
+      {
+        "heading": "従量課金の設計思想も分かれた — セッション時間課金・トークン従量・自動一時停止",
+        "body_html": "<p>長時間稼働するエージェントは暴走時のコストリスクを抱える。3社はこれを異なる方法で扱っている。Anthropicはセッション時間そのものを課金対象にし、サンドボックスが稼働している時間そのものに$0.08/時間を課す。OpenAIは逆に基盤自体を無償にし、実際に消費したトークンとツール利用分しか課金しない立場を取った。Googleは価格モデルではなく制御機構で対処し、<code>max_total_tokens</code>で上限に達すると状態を保持したまま実行を自動一時停止する。</p><p>この違いは、自社のリトライロジックがバグって無限ループに陥ったとき誰がコストを負担するかという設計判断そのものだ。セッション時間課金は「想定より長引いたセッション」を、自動一時停止は「暴走したループ」を直接的に止める。トークン従量制はどちらのリスクも吸収してくれず、その管理責任を利用者側に残す。</p>",
+        "examples": [
+          {
+            "product": "OpenAI Agents API",
+            "approach": "基盤利用に追加費用を課さず、トークンとツール実費のみを課金",
+            "detail": "ハーネス部分を無償化することで採用障壁を下げる代わり、暴走時のコスト管理は利用者側の実装責任として残した",
+            "source_url": "https://openai.com/index/introducing-the-agents-api/"
+          },
+          {
+            "product": "Google Gemini API Managed Agents",
+            "approach": "max_total_tokensで上限到達時に状態を保持したまま自動一時停止",
+            "detail": "課金額を抑える機構ではなく実行そのものを止める機構として、暴走コストの問題に価格設計ではなく制御設計で答えた",
+            "source_url": "https://blog.google/innovation-and-ai/technology/developers-tools/expanding-managed-agents-gemini-api-3-6-flash-hooks/"
+          }
+        ],
+        "takeaway": "長時間稼働エージェントを設計するなら、価格モデルの違いより「暴走を止める機構が課金レイヤーに組み込まれているか」を選定基準にする。トークン従量制のみの基盤を使うなら、上限監視は自前で実装する前提で設計する。"
+      }
+    ]
+  },
+  "editorial": "3つの競合ラボが半年足らずでほぼ同じ抽象化——セッション・サンドボックス・ハーネスの分離——に収束したのは、この層がもはや競争領域ではなく前提条件になったことを意味する。次に差がつくのは基盤の上、つまりドメイン知識をどう組み込み、失敗をどう評価するかという層のはずだ。",
+  "quick_picks": [
+    {
+      "title": "Introducing AgentKit（OpenAI公式）",
+      "summary": "Agents API公開に先立ちOpenAIが提供していた、ビジュアル構築ツールとEvalsを含む自前組み立て型のエージェント開発キット。本号で扱った「基盤ごと預ける」方向とは対照的な、自社で組み立てる側の公式リファレンスになる。",
+      "url": "https://openai.com/index/introducing-agentkit/"
+    },
+    {
+      "title": "Self-hosted sandboxes（Claude Platform公式ドキュメント）",
+      "summary": "Anthropicの自己ホスト型サンドボックスの設定手順を解説した公式ドキュメント。本文で触れた「脳」と「手」の分離構成を、ワーカーの実装レベルで確認できる。",
+      "url": "https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes"
+    },
+    {
+      "title": "Sandboxes overview（Gemini Enterprise Agent Platform公式ドキュメント）",
+      "summary": "Googleのエンタープライズ版マネージドサンドボックスの仕様書。本文で扱った消費者向けGemini APIのManaged Agentsとは別に、サブ秒起動・最大14日間の状態保持など企業向け仕様が定義されている。",
+      "url": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/scale/sandbox"
+    }
+  ]
+}

@@ -66,7 +66,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 <div class="container">
 <header>
   <h1>🧠 AI プロダクト動向</h1>
-  <p class="date">2026-07-28 発行（読了 6 分）</p>
+  <p class="date">2026-09-15 発行（読了 6 分）</p>
   <p class="tagline">実プロダクトのアーキテクチャ・使用例から AI 開発の現在地を週 3 回・1 号 1 テーマで深掘り</p>
   <nav class="site-nav">
     <a href="../">📰 日刊ダイジェスト</a>
@@ -77,81 +77,93 @@ footer a{color:var(--primary-500);text-decoration:none}
 </header>
 
 <div class="theme-hero">
-  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">AGENT-MEMORY</span></span>
-  <h2>エージェントのメモリ設計 — 保存容量ではなく「書き込みの境界線」を設計する</h2>
-  <p class="lede">エージェントが複数セッションにまたがって学習・継続動作するようになるにつれ、「何を覚えておくか」の設計が改めて焦点になっている。Anthropic は Claude Managed Agents にファイルベースの長期メモリと監査ログを追加し、Cursor はツール定義や過去の会話を常駐させず必要な時だけ取得させる構成でトークン消費を46.9%削減し、OpenAI は Agents SDK の実装例で短期メモリと長期メモリの境界を書き込み時のガードレールで引いている。3社の手法を並べると、メモリ設計が「保存容量を増やす」話ではなく「どこで区切り、何を書かせないか」を先に決める設計行為になっていることが見えてくる。</p>
+  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">AGENT-INFRASTRUCTURE</span></span>
+  <h2>エージェント実行基盤のマネージド化 — 3社が同時に「実行環境を貸す側」に回った</h2>
+  <p class="lede">エージェントプロダクトを作るとは、これまでモデル呼び出しの外側にセッション管理・サンドボックス・コンテキスト圧縮・エラー復旧を自前で組むことを意味した。それが今四半期で崩れた。2026年4月にAnthropicがClaude Managed Agentsを、7月にGoogleがGemini APIのManaged Agentsを拡張し、9月10日にOpenAIがAgents APIを公開ベータで出した。3社がほぼ同時に、足回りのインフラを「貸す側」に回ったことになる。</p>
 </div>
 
 <div class="tldr">
   <div class="label">TL;DR — 3 行で</div>
   <ul>
-    <li>Anthropic は Claude Managed Agents の記憶をファイルとして保存し、監査ログ・ロールバック・スコープ別パーミッションを標準機能として public beta で提供している</li>
-    <li>Cursor はツール定義や過去の会話をデフォルトで常駐させず、grep/tail/セマンティック検索で必要な時だけ取得させる設計により、MCPツール呼び出し時のエージェント総トークン消費を46.9%削減したと報告している</li>
-    <li>OpenAI の Agents SDK 実装例は、長期メモリへの書き込みを「恒常的に成り立つか」「実際に挙動を変えるか」の2条件でガードし、セッションメモがグローバルメモに優先する明示的な優先順位ルールで汚染を防いでいる</li>
+    <li>OpenAIが9月10日、Codexハーネスをagents/environments/sessions/eventsの4プリミティブに集約した Agents API を公開ベータで公開。基盤自体の追加課金はなくトークン・ツール実費のみ。</li>
+    <li>Anthropicは4月にサンドボックス・チェックポイント・認証情報管理・トレースを丸ごと運用するClaude Managed Agentsを開始（$0.08/セッション時間）、5月には「脳」はAnthropic側・「手」は自社インフラという分離構成の自己ホスト型サンドボックスを追加した。</li>
+    <li>Googleは7月28日、Gemini APIのManaged Agentsにフック・予算上限・cronトリガーを追加し、状態を7日間保持するホスト型サンドボックスとして完成度を上げた。</li>
   </ul>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 1: ファイルベースの長期メモリと監査ログ</div>
+  <div class="section-title">📐 パターン 1: 自前オーケストレーションの構成要素がAPIひとつに集約された</div>
   <div class="theme-section">
-    <p>Claude Managed Agents 向けに2026年4月23日に公開された Memory 機能は、記憶を構造化データベースではなく通常のファイルとして保存する設計を取る。エージェントは既存の bash・コード実行能力をそのまま使って記憶を読み書きし、org 全体で共有する読み取り専用ストアとユーザーごとの読み書き可能なストアを使い分けられる。どの変更がどのエージェント・どのセッションに由来するかを追う監査ログが標準で付き、過去バージョンへのロールバックや履歴からの redact も可能だ。</p><p>この設計が選ばれたのは、ベクトル DB や専用メモリストアを新たに構築せずに済むからだ。コーディングエージェントはすでにファイルシステム操作を前提に訓練・運用されており、「ファイルとして保存する」は既存の道具立てに乗るだけで実装できる。逆に監査ログとロールバックを標準機能にしたのは、エンタープライズ導入で「エージェントが何を学習し、なぜその判断に至ったか」を追跡できないと承認が下りないという実務上の制約が先にあったからだ。</p>
+    <p>これまでエージェントプロダクトを作るチームは、セッションの永続化、ツール呼び出しループ、コンテキスト圧縮、失敗時のリトライ、サブエージェントへの委譲を個別に実装する必要があった。OpenAIのAgents APIは、社内でCodexを動かしているのと同じハーネスを、<code>agents</code>（モデル・指示・ツール定義）・<code>environments</code>（任意のサンドボックス）・<code>sessions</code>（永続的な作業単位）・<code>events/items</code>（実行記録）という4つのプリミティブに畳み込み、単一のAPI呼び出しの背後に隠した。</p><p>これはAnthropicが4月に先行した構成と実質的に同じ設計判断だ。Claude Managed Agentsもサンドボックス実行・状態チェックポイント・認証情報管理・実行トレースをAnthropic側で運用し、構造化ファイル生成タスクでは標準的なプロンプトループ比でタスク成功率が最大10ポイント改善したと報告している。2社が半年足らずで同じ抽象化に収束したのは、この足回りが正しく作るのが難しい割に製品差別化にならない、コモディティ化した層だと判断されたからだろう。</p>
     <div class="example">
-      <div class="product">Claude Managed Agents Memory（Anthropic 公式ブログ）</div>
-      <div class="approach">記憶をファイルとして保存し、監査ログ・ロールバック・スコープ別パーミッションを標準機能として提供</div>
-      <div class="detail">Rakuten は初回パス誤り率97%減・コスト27%減・レイテンシ34%減、Wisedocs は書類検証の速度を30%改善したと公式に報告している</div>
-      <a href="https://claude.com/blog/claude-managed-agents-memory">📄 一次ソース</a>
+      <div class="product">OpenAI Agents API（Codexハーネスの外部提供）</div>
+      <div class="approach">agents/environments/sessions/eventsの4プリミティブでハーネスを1エンドポイント化し、コンテキスト圧縮とサブエージェント委譲をサーバー側で処理</div>
+      <div class="detail">社内でChatGPTやCodexを動かす基盤をそのまま外部公開した点で、自社運用実績のある「本物のハーネス」を貸し出す先行事例になる</div>
+      <a href="https://openai.com/index/introducing-the-agents-api/">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> コーディングエージェント基盤の上に長期メモリを足すなら、専用DBより先にファイル＋監査ログの構成を検討する。エンタープライズ導入の障壁は記憶の性能より追跡可能性であることが多い。</div>
+    <div class="example">
+      <div class="product">Anthropic Claude Managed Agents</div>
+      <div class="approach">サンドボックス実行・チェックポイント・認証情報管理・トレースをAnthropic側で運用し、$0.08/セッション時間を追加課金</div>
+      <div class="detail">内部テストで構造化ファイル生成タスクの成功率が最大10ポイント改善したと具体的な数値で効果を示した、数少ない公式ベンチマーク公開例</div>
+      <a href="https://claude.com/blog/claude-managed-agents">📄 一次ソース</a>
+    </div>
+    <div class="takeaway"><strong>示唆:</strong> 自社プロダクトでセッション管理・サンドボックス・リトライ処理を自前実装する投資対効果は下がっている。差別化すべきはこの層の上——ドメイン固有のツールと評価基準——であって、ハーネス自体ではない。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 2: 静的に持たせず、必要な分だけ取りに行かせる</div>
+  <div class="section-title">📐 パターン 2: 「脳」と「手」を分離する設計が次の分岐点になった</div>
   <div class="theme-section">
-    <p>Cursor が公開した dynamic context discovery は、ツール定義や過去の会話、MCPサーバーのツール一覧をあらかじめすべてコンテキストに詰め込むのではなく、最小限の手がかりだけを常駐させ、必要になった時にエージェント自身が grep や <code>tail</code>、セマンティック検索で取りに行く設計だ。長い shell 出力や MCP の応答はファイルに書き出し、エージェントが <code>tail</code> で必要な分だけ読み進める。要約で失われた過去の会話も、検索可能なファイルとして残すことで後から引き出せるようにしている。</p><p>この方式が効くのは、MCPサーバーの数が増えるほど全ツール定義を毎回コンテキストに載せるコストが線形に膨らみ、しかも大半のターンでは使わないツールの説明が「使われない高コストな常駐者」になるからだ。Cursor は MCP ツールを呼び出したランに限定した計測で、この方式がエージェントの総トークン消費を46.9%削減したと公式に報告している。</p>
+    <p>基盤を丸ごと預けるか、一部を自社に残すかという選択が次の論点になっている。Anthropicが5月に追加した自己ホスト型サンドボックスは、オーケストレーション・コンテキスト管理・エラー復旧という「脳」はAnthropic側に置いたまま、ツール実行という「手」だけを自社インフラに残す構成だ。機密ファイルやサービスは企業の境界内に留まり、ハーネスは他のツールを呼ぶのと同じ要領でその実行環境を呼び出す。</p><p>一方Googleは逆方向に振り切り、サンドボックスの状態を7日間保持する完全ホスト型を選んだ。7月の更新ではフックによるツール呼び出し前後のカスタム検証、予算上限、cronによる定期実行までホスト側の機能として追加している。「実行環境を誰が持つか」は、機密データの所在という制約で決まる設計軸であり、単純にどちらが優れているという話ではない。</p>
     <div class="example">
-      <div class="product">Cursor（公式エンジニアリングブログ）</div>
-      <div class="approach">スキル定義・MCPツール一覧・過去の会話をデフォルトで最小化し、grep/tail/セマンティック検索でエージェントに必要な分だけ取得させる</div>
-      <div class="detail">MCPツールを呼び出したランに限定した計測で、動的発見によりエージェントの総トークン消費を46.9%削減したと報告している</div>
-      <a href="https://cursor.com/blog/dynamic-context-discovery">📄 一次ソース</a>
+      <div class="product">Anthropic 自己ホスト型サンドボックス</div>
+      <div class="approach">オーケストレーション・コンテキスト管理はAnthropic側、ツール実行は自社インフラ（Cloudflare・Daytona・Modal・Vercel等）に分離</div>
+      <div class="detail">「脳」と「手」を切り離すという表現を公式ブログが使っており、ハーネスをサンドボックスから独立した設計要素として明示的に扱った稀有な例</div>
+      <a href="https://claude.com/blog/claude-managed-agents-updates">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> ツール定義やドキュメントを「念のため全部常駐させる」のをやめる。特に MCP サーバーが増えてきたら、ツール一覧はインデックスだけ持たせて詳細は呼び出し時に取得させる設計に切り替える。</div>
+    <div class="example">
+      <div class="product">Google Gemini API Managed Agents</div>
+      <div class="approach">完全ホスト型サンドボックスに状態の7日間永続化・フック・予算上限・cronトリガーを追加</div>
+      <div class="detail">I/O 2026でのプレビュー公開から3か月弱で、単純な実行環境から運用機能を備えた基盤へ機能追加した更新</div>
+      <a href="https://blog.google/innovation-and-ai/technology/developers-tools/expanding-managed-agents-gemini-api-3-6-flash-hooks/">📄 一次ソース</a>
+    </div>
+    <div class="takeaway"><strong>示唆:</strong> 機密データやレガシー資産に触れるエージェントは自己ホスト型サンドボックスを、迅速な立ち上げを優先するなら完全ホスト型を選ぶ、という判断軸で設計する。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 3: 短期はセッション、長期はグローバル — 境界は「書く前のチェック」で引く</div>
+  <div class="section-title">📐 パターン 3: 従量課金の設計思想も分かれた — セッション時間課金・トークン従量・自動一時停止</div>
   <div class="theme-section">
-    <p>OpenAI Agents SDK の実装例は、状態を Profile（構造化された既知情報）・Global Memory（セッションをまたぐ長期メモ）・Session Memory（今回限りの短期メモ）・Trip History に分けて管理する。長期メモへの書き込みは save_memory_note ツールを経由し、「複数回の利用を通じて成り立ちそうか（durable）」「実際にレコメンドや制約を変えるか（actionable）」の2条件を満たした場合のみ保存を許可する。セッション終了時には LLM 呼び出しでセッションメモをグローバルメモへ統合し、重複排除と競合解消（新しい情報を優先）を行う。会話履歴そのものの管理には、直近 N ターンだけを残す Trimming と、古いターンを要約に圧縮する Summarizing の2方式があり、前者は決定的でレイテンシ0、後者は長期文脈を保てる代わりに要約起因の情報汚染リスクを持つとされる。</p><p>この二層設計と書き込み時ガードレールが必要になるのは、「今回だけ窓側の席がいい」のような一回限りの要望と、「いつも通路側」のような恒常的な好みを同じ場所に書くと、次回以降のレコメンドが一回限りの要望に汚染されるからだ。OpenAI の実装は「セッションメモがグローバルメモに優先する」という明示的な優先順位ルールを持たせることで、この汚染を読み出し時ではなく書き込み・統合時に処理している。</p>
+    <p>長時間稼働するエージェントは暴走時のコストリスクを抱える。3社はこれを異なる方法で扱っている。Anthropicはセッション時間そのものを課金対象にし、サンドボックスが稼働している時間そのものに$0.08/時間を課す。OpenAIは逆に基盤自体を無償にし、実際に消費したトークンとツール利用分しか課金しない立場を取った。Googleは価格モデルではなく制御機構で対処し、<code>max_total_tokens</code>で上限に達すると状態を保持したまま実行を自動一時停止する。</p><p>この違いは、自社のリトライロジックがバグって無限ループに陥ったとき誰がコストを負担するかという設計判断そのものだ。セッション時間課金は「想定より長引いたセッション」を、自動一時停止は「暴走したループ」を直接的に止める。トークン従量制はどちらのリスクも吸収してくれず、その管理責任を利用者側に残す。</p>
     <div class="example">
-      <div class="product">OpenAI Agents SDK（公式Cookbook, context personalization）</div>
-      <div class="approach">Global/Session の二層メモリを save_memory_note の durable/actionable チェックと統合時の重複排除・競合解消で運用</div>
-      <div class="detail">「SESSION memory overrides GLOBAL memory for this trip when they conflict」という明示的な優先順位ルールを実装コードごと公開している</div>
-      <a href="https://developers.openai.com/cookbook/examples/agents_sdk/context_personalization">📄 一次ソース</a>
+      <div class="product">OpenAI Agents API</div>
+      <div class="approach">基盤利用に追加費用を課さず、トークンとツール実費のみを課金</div>
+      <div class="detail">ハーネス部分を無償化することで採用障壁を下げる代わり、暴走時のコスト管理は利用者側の実装責任として残した</div>
+      <a href="https://openai.com/index/introducing-the-agents-api/">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">OpenAI Agents SDK（公式Cookbook, session memory）</div>
-      <div class="approach">会話履歴の圧縮を Trimming（直近Nターン保持）と Summarizing（要約圧縮）の2方式で使い分ける実装を公開</div>
-      <div class="detail">Trimming は決定的でレイテンシ0だが古い文脈を失うリスク、Summarizing は長期文脈を保てるが要約起因の「context poisoning」リスクがあるとトレードオフを明記している</div>
-      <a href="https://developers.openai.com/cookbook/examples/agents_sdk/session_memory">📄 一次ソース</a>
+      <div class="product">Google Gemini API Managed Agents</div>
+      <div class="approach">max_total_tokensで上限到達時に状態を保持したまま自動一時停止</div>
+      <div class="detail">課金額を抑える機構ではなく実行そのものを止める機構として、暴走コストの問題に価格設計ではなく制御設計で答えた</div>
+      <a href="https://blog.google/innovation-and-ai/technology/developers-tools/expanding-managed-agents-gemini-api-3-6-flash-hooks/">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> 長期メモを持たせるなら、書き込み時に「恒常的に成り立つか」「実際に挙動を変えるか」の2条件チェックを先に入れる。一回限りの要望と恒常的な好みを同じ場所に書かせると、次回以降の挙動が汚染される。</div>
+    <div class="takeaway"><strong>示唆:</strong> 長時間稼働エージェントを設計するなら、価格モデルの違いより「暴走を止める機構が課金レイヤーに組み込まれているか」を選定基準にする。トークン従量制のみの基盤を使うなら、上限監視は自前で実装する前提で設計する。</div>
   </div>
   <div class="editorial">
     <span class="label">✍️ 編集後記</span>
-    3社の実装が揃って示すのは、エージェントのメモリ設計がもはや「何を保存するか」ではなく「どこに書き込みの境界線を引くか」の設計行為になっているということだ。Anthropic はファイル＋監査ログで追跡可能性を、Cursor は常駐させないことでトークン効率を、OpenAI は書き込み時ガードレールで汚染防止を、それぞれ別の軸で解いている。どれも「メモリを増やす」のではなく「メモリの粒度と境界を制御する」方向の工夫である点に注目したい。
+    3つの競合ラボが半年足らずでほぼ同じ抽象化——セッション・サンドボックス・ハーネスの分離——に収束したのは、この層がもはや競争領域ではなく前提条件になったことを意味する。次に差がつくのは基盤の上、つまりドメイン知識をどう組み込み、失敗をどう評価するかという層のはずだ。
   </div>
 </div>
 
 <div class="section">
   <div class="section-title">🔗 今号の動向ピックアップ</div>
-  <div class="quick-link"><a href="https://www.anthropic.com/research/long-running-Claude">Anthropic、長時間タスクでは CHANGELOG.md が「失敗した試み」を記録する携行型長期メモリになると報告</a><span class="quick-summary">科学計算エージェントの事例で、進捗ファイルに失敗したアプローチとその理由を記録することで、次のセッションが同じ行き止まりを再試行しなくなると説明する。本文で扱った「何を書くかより何を書かないかを決める」設計と同じ発想の実例。</span></div>
-  <div class="quick-link"><a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents">Anthropic、長文脈エージェントの実務指針として compaction・構造化ノート・サブエージェント分離の3手法を整理</a><span class="quick-summary">コンテキストウィンドウを使い切る前に要約して引き継ぐ compaction、NOTES.md 的な外部メモリへの構造化ノート、サブエージェントが1000〜2000トークンの要約だけを返す設計を公式に解説する。本文セクション1・2で扱った「メモリの粒度を絞る」設計判断の上位概念として読める。</span></div>
+  <div class="quick-link"><a href="https://openai.com/index/introducing-agentkit/">Introducing AgentKit（OpenAI公式）</a><span class="quick-summary">Agents API公開に先立ちOpenAIが提供していた、ビジュアル構築ツールとEvalsを含む自前組み立て型のエージェント開発キット。本号で扱った「基盤ごと預ける」方向とは対照的な、自社で組み立てる側の公式リファレンスになる。</span></div>
+  <div class="quick-link"><a href="https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes">Self-hosted sandboxes（Claude Platform公式ドキュメント）</a><span class="quick-summary">Anthropicの自己ホスト型サンドボックスの設定手順を解説した公式ドキュメント。本文で触れた「脳」と「手」の分離構成を、ワーカーの実装レベルで確認できる。</span></div>
+  <div class="quick-link"><a href="https://docs.cloud.google.com/gemini-enterprise-agent-platform/scale/sandbox">Sandboxes overview（Gemini Enterprise Agent Platform公式ドキュメント）</a><span class="quick-summary">Googleのエンタープライズ版マネージドサンドボックスの仕様書。本文で扱った消費者向けGemini APIのManaged Agentsとは別に、サブ秒起動・最大14日間の状態保持など企業向け仕様が定義されている。</span></div>
 </div>
 
 <div class="section">
   <div class="section-title">📚 過去号</div>
-  <div class="archive-item"><span class="week">2026-09-15</span><div class="body"><a href="../ai-trends.html">エージェント実行基盤のマネージド化 — 3社が同時に「実行環境を貸す側」に回った</a><span class="sub">OpenAIが9月10日、Codexハーネスをagents/environments/sessions/eventsの4プリミティブに集約した Agents API を公開ベータで公開。基盤自体の追加課金はなくトークン・ツール実費のみ。</span></div></div>
   <div class="archive-item"><span class="week">2026-09-12</span><div class="body"><a href="2026-09-12.html">コンテキストは会話ログではない — Working Context / Session / Memory / Artifacts への分離が実装標準になった</a><span class="sub">Google ADKは2026年9月、コンテキストを Working Context・Session・Memory・Artifacts の4層に分離し、閾値到達で非同期に要約するcompactionを実装したと公式ブログで説明した。</span></div></div>
   <div class="archive-item"><span class="week">2026-09-10</span><div class="body"><a href="2026-09-10.html">Agent Skills という第3のレイヤー — プロンプトでもRAGでもなく「必要になるまで読まない」設計</a><span class="sub">Agent Skillsは「メタデータ(~100トークン)→本文(&lt;5000トークン推奨)→付随ファイル」の3段階でコンテキストに読み込む、プログレッシブディスクロージャー設計。</span></div></div>
   <div class="archive-item"><span class="week">2026-09-08</span><div class="body"><a href="2026-09-08.html">エージェント評価の再設計 — テキスト一致から状態検証、そして「修正がテストになる」仕組みへ</a><span class="sub">Anthropicはテキスト一致の判定から、環境の状態が実際に変わったかを見る outcome/state チェックへの転換を公式に推奨している。</span></div></div>
@@ -171,11 +183,12 @@ footer a{color:var(--primary-500);text-decoration:none}
   <div class="archive-item"><span class="week">2026-08-04</span><div class="body"><a href="2026-08-04.html">ワークフロー型 vs エージェント型 — 複雑さを足す前に何を確かめるか</a><span class="sub">Anthropic は「経路を誰が決めるか」で workflow と agent を定義し、単純な方から試すべきだと明言している。</span></div></div>
   <div class="archive-item"><span class="week">2026-08-01</span><div class="body"><a href="2026-08-01.html">コンテキストエンジニアリング — 「何を見せるか」ではなく「何を見せないか」を設計する</a><span class="sub">事前に全部読み込むのではなく、ファイルパスやURLなど軽量な参照を渡して実行時に取得する「Just-in-Time retrieval」がCursorやAnthropicの標準手法になった。</span></div></div>
   <div class="archive-item"><span class="week">2026-07-30</span><div class="body"><a href="2026-07-30.html">マルチエージェント協調 — 「書き込みを一本化する」が唯一の合意点になった理由</a><span class="sub">Cognition は2025年、複数エージェントの並行書き込みが矛盾した判断を生むとして「マルチエージェントを作るな」と主張したが、2026年4月に態度を転換し「書き込みは一本化し、エージェントは行動ではなく知性を提供する」構成に絞って実例を公開した</span></div></div>
+  <div class="archive-item"><span class="week">2026-07-28</span><div class="body"><a href="2026-07-28.html">エージェントのメモリ設計 — 保存容量ではなく「書き込みの境界線」を設計する</a><span class="sub">Anthropic は Claude Managed Agents の記憶をファイルとして保存し、監査ログ・ロールバック・スコープ別パーミッションを標準機能として public beta で提供している</span></div></div>
   <div class="archive-item"><span class="week">2026-W30</span><div class="body"><a href="2026-W30.html">エージェントの評価・観測性 — 「良さそう」を数値にする前に何を測らないかを決める</a><span class="sub">Anthropic は Claude Code の品質劣化が6週間、内部の eval・コードレビュー・単体テストをすべてすり抜けていたと自ら公表し、変更ごとの広範な eval とソーク期間の導入を表明した</span></div></div>
 </div>
 
 <footer>
-  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="../data/ai-trends/2026-07-28.json">data/ai-trends/2026-07-28.json</a>（このページは JSON からの生成物）</p>
+  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="../data/ai-trends/2026-09-15.json">data/ai-trends/2026-09-15.json</a>（このページは JSON からの生成物）</p>
   <p style="margin-top:.5rem"><a href="../">📰 日刊ダイジェストに戻る</a></p>
 </footer>
 </div>
