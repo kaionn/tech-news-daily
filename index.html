@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tech News Daily — 2026-09-17</title>
+  <title>Tech News Daily — 2026-09-18</title>
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
   <link rel="icon" type="image/png" sizes="192x192" href="favicon.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -14,7 +14,7 @@
   <div class="container">
     <header>
       <h1>Tech News Daily</h1>
-      <div class="date">2026-09-17 (Thu)</div>
+      <div class="date">2026-09-18 (Fri)</div>
       <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
       <nav class="site-nav">
         <a href="./" class="active">📰 日刊ダイジェスト</a>
@@ -25,9 +25,9 @@
     </header>
 
     <div class="stats-bar">
-      <span>📰 21 articles</span>
+      <span>📰 22 articles</span>
       <span>🏷 7 categories</span>
-      <span>📡 20 sources</span>
+      <span>📡 22 sources</span>
     </div>
 
     <nav class="toc">
@@ -40,17 +40,27 @@
 
     <div class="numbers-bar">
       <div class="number-item">
-        <span class="number-value">2,362万件</span>
-        <span class="number-label">Gyazo不正アクセスで流出したユーザーアカウント数</span>
+        <span class="number-value">約3倍</span>
+        <span class="number-label">GLM-5.3-Flashの推論スループット改善(実装開始から本番投入まで13日)</span>
       </div>
       <div class="number-item">
-        <span class="number-value">1.81倍</span>
-        <span class="number-label">個人開発の40億パラメータモデルが実現したPostgresクエリ実行計画の高速化(幾何平均)</span>
+        <span class="number-value">9分の1</span>
+        <span class="number-label">Bonsai 2 27Bの容量圧縮(54GB→5.9GB、性能は98.2%維持)</span>
       </div>
       <div class="number-item">
-        <span class="number-value">6ヶ月超</span>
-        <span class="number-label">ドローン攻撃後、AWSがバーレーン/UAEのデータ復旧を断念するまでの経過期間</span>
+        <span class="number-value">144コア</span>
+        <span class="number-label">Fujitsu MONAKAの最大コア数(2nmコア+5nm SRAMの3D積層)</span>
       </div>
+    </div>
+
+    <div class="weekly-keywords">
+      <div class="section-title">📊 今週のキーワード</div>
+      <div class="keyword-chips">
+        <span class="keyword-chip">AIエージェントの権限介入</span>
+        <span class="keyword-chip">開発者を狙う標的型攻撃</span>
+        <span class="keyword-chip">モデル軽量化</span>
+      </div>
+      <div class="keyword-summary">今週は、AIエージェントが企業の管理基盤やインフラに直接手を入れる事例(StrixによるBaseten管理者権限奪取、GLMによる自社推論基盤の最適化)が相次いだ一方、Rustエコシステムを狙う標的型攻撃やCrowdSecのソースコード漏えいなど、開発者個人や依存チェーンを狙うセキュリティインシデントも目立った。モデル側では三値・低ビット量子化による軽量化(BITCOS、Bonsai 2)が推論コスト削減の主戦場になりつつある。</div>
     </div>
 
     <div class="section" id="top-stories">
@@ -58,66 +68,67 @@
 
       <div class="card featured deep-dive">
         <div class="card-header">
-          <span class="tag tag-infra">Infra</span>
+          <span class="tag tag-ai">AI</span>
           <span class="content-type">👀 注目</span>
-          <h3><a href="https://www.tomshardware.com/tech-industry/data-centers/amazon-reportedly-tells-customers-in-abu-dhabi-and-bahrain-to-find-safer-harbors-for-their-data-aws-has-no-timeline-for-resuming-operations-six-months-after-drone-strikes-damaged-data-centers-in-the-region">DEEP DIVE: AWSがバーレーン/UAEのデータセンター復旧を断念、イランのドローン攻撃から半年超経過も「耐障害設計の想定超え」で顧客に他リージョンへの移行を指示</a></h3>
+          <h3><a href="https://z.ai/blog/glm-built-its-inference-infrastructure">DEEP DIVE: 中国Z.ai、自社モデルGLM-5.3に自社の推論基盤そのものを構築させる——「Infra Agent」が13日でスループット約3倍を達成</a></h3>
         </div>
-        <div class="summary">2026年3月、イラン戦争の初期段階で米国とイスラエルがイラン国内を攻撃し、イランはこれに対する報復として、イスラエルおよび米軍基地を抱える湾岸諸国にミサイルとドローンで反撃した。この一連の応酬で、UAE(アラブ首長国連邦)とバーレーンにあるAWSのデータセンター群が巻き添えとなった。AWSは、UAE国内の2施設が直接攻撃を受け、バーレーンでは施設近郊でのドローン攻撃により物理インフラが損傷したと説明している。攻撃発生から半年以上が経過した2026年9月15日時点でも、AWSはバーレーンの複数拠点で生じた損傷が「サービスの耐障害設計の想定を超える規模」だったとして、データとアクセスの復旧を断念する方針を顧客に伝えた。AWSは影響を受けた拠点のワークロードを他リージョンへ移行するよう顧客に指示しており、復旧完了の見通しは示していない。攻撃当時は湾岸地域の一部銀行業務にも支障が生じたとロイターが報じた。イラン革命防衛隊(IRGC)は攻撃への関与を認め、バーレーン施設を狙った理由として「アマゾンによる米軍支援」を挙げている。UAE側では被災を教訓に、地下データセンターの建設が検討され始めているという。クラウド事業者の冗長性設計は主に自然災害や機器故障を想定しており、紛争地域に近接した物理攻撃による損傷までは前提にしていないケースが多いことが今回露呈した。</div>
-        <div class="editorial">🧠 半年以上経っても復旧できないという事実は、クラウドの「リージョン分散で耐障害性を確保する」という前提が、平時のハードウェア故障や自然災害を想定したものであり、戦争による物理破壊までは織り込んでいなかったことを示す。ただし、AWSが具体的にどの程度の損傷なら復旧可能と設計していたのかは公表されておらず、今回の「設計想定超え」がどこまで一般化できる教訓かは、この1件だけでは判断できない。地政学的リスクが高い地域にデータセンターを置く事業者にとって単一クラウドプロバイダへの依存自体を見直す契機にもなり得るが、それは復旧断念という既成事実に対する後付けの結論でもある。</div>
+        <div class="summary">中国AI企業Z.aiは2026年9月17日、自社の言語モデルGLM-5.3が、軽量版GLM-5.3-Flashを実運用に載せるための推論基盤そのものを構築した経緯を公開した。大規模モデルの推論基盤は通常、エンジニアチームが数か月かけてカーネル最適化やスケジューラ調整を積み重ねて仕上げる領域である。今回Z.aiは、この最適化作業の大部分を「Infra Agent」と呼ぶGLM-5.3駆動のエージェントに担わせ、中国製アクセラレータ10万基超からなるクラスタ上で、初回の動作確認から本番投入までをわずか13日間で完了させた。Infra Agentは、長文コンテキスト処理を担うKDAカーネルの数値精度の不具合を自ら特定して修正し、Pythonのグローバルインタプリタロック(GIL)が性能の約20%を奪っていたボトルネックを解消、デコード用カーネルを1.71倍高速化するなど、人間のエンジニアが数週間かけて行うような改善を連続して実行した。結果としてエンドツーエンドのスループットは初期実装比で約3倍に達し、ハードウェア効率とトークン単価は主要なNVIDIA GPU環境に匹敵する水準になったという。Z.aiはブログで「モデルがシステムを最適化し、システムがモデルを動かす」と表現しつつ、目標設定やリスク評価といった判断は依然として人間が担うべきだとして、再帰的自己改善(RSI)の域には達していないと自ら位置づけている。</div>
+        <div class="editorial">🧠 エージェントが自らの実行基盤を最適化するという構図は、開発サイクルの短縮という実利では既に効果を示している。ただし「13日」という数字は、既知のトランスフォーマー実装知識をInfra Agentの訓練に反映できたからこその短縮であり、未知のアーキテクチャや全く新しいハードウェアに同じ速度で適応できるかは未検証だ。Z.ai自身が目標設定とリスク評価は人間が担うと明言している点は実務上の安全弁になる一方、エージェントの改善範囲が広がるほど、その境界線を維持するコスト自体も増していくはずだ。</div>
         <div class="key-points">
           <ul>
-            <li>UAE国内2施設が直接攻撃を受け、バーレーンでは施設近郊のドローン攻撃で物理損傷、2026年3月の攻撃から半年以上経った9月時点でも復旧できず</li>
-            <li>AWSはバーレーンの損傷が「耐障害設計の想定超え」と説明し、顧客に他リージョンへのワークロード移行を指示、復旧の見通しは非公表</li>
-            <li>攻撃当時は湾岸地域の一部銀行業務にも影響、イラン革命防衛隊(IRGC)は「アマゾンの米軍支援」を理由に攻撃への関与を認めた</li>
+            <li>Infra Agentが初動作確認から本番投入までを13日で完了、クラスタは中国製アクセラレータ10万基超</li>
+            <li>KDAカーネルの数値精度不具合を修正、PythonのGILボトルネック(性能の約20%)を解消、デコードカーネルを1.71倍高速化</li>
+            <li>エンドツーエンドスループットは初期実装比で約3倍、ハードウェア効率・トークン単価は主要NVIDIA GPU環境に匹敵</li>
           </ul>
         </div>
-        <div class="why-it-matters">💡 中東リージョンでAWSを利用している場合、単一リージョンの冗長性だけでなくマルチリージョン/マルチクラウドでのDR設計を見直す契機とし、地政学的リスクの高い地域では物理攻撃も可用性設計の脅威モデルに含めるべきだ。</div>
+        <div class="why-it-matters">💡 自社インフラを持つAI事業者にとって、推論基盤のチューニングをエージェントに任せる選択肢が現実味を帯びてきた。ただし人間による目標設定とリスク評価を省略できる段階ではない点には注意したい。</div>
         <div class="meta">
-          <span>Tom's Hardware</span>
-          <span>⏱ 7 min read</span>
-          <span>2026-09-15</span>
-          <span class="engagement">▲ 154</span>
+          <span>Z.ai Blog</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-09-17</span>
+          <span class="engagement">▲ 352</span>
         </div>
       </div>
 
       <div class="card featured">
         <div class="card-header">
-          <span class="tag tag-ai">AI</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://mistral.ai/news/mistral-x-mozilla/">Mozilla、FirefoxのAIアシスタント「Smart Window」にMistralモデルを採用しベータ公開、会話はサーバー未保存・ゼロデータ保持を明言</a></h3>
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://blog.rust-lang.org/2026/09/17/targeted-attacks/">著名Rust開発者・人気クレートメンテナーを狙う標的型攻撃が継続、偽ビデオ通話でマルウェア実行を誘導</a></h3>
         </div>
-        <div class="summary">Mozillaは2026年9月16日、Firefoxの新機能「Smart Window」(ベータ)がMistral AIのモデルを採用したと発表した。Smart Windowは複雑な検索の理解、以前見たページの想起、開いているタブからの情報収集を支援するAIアシスタントで、会話内容はMozillaのサーバーに既定で保存されず、Mistralを含むパートナー各社はゼロデータ保持に同意しているという。提供地域はまずフランスと北米から開始し、英国・ドイツは2026年内に追随予定。地域の言語・方言に合わせたモデルのファインチューニングも進めるとしている。</div>
+        <div class="summary">Rustプロジェクトのセキュリティチームは2026年9月17日、著名なRust開発者や人気クレートのメンテナーを狙った標的型攻撃について注意喚起を公開した。攻撃者はLinkedIn等で実在感のある企業アカウントを装い、就業機会やプロジェクトの相談を名目にビデオ通話を持ちかけ、通話中に「不足している音声コーデック」などと偽ってマルウェアの実行を促す。6月には複数の著名Rust開発者が標的になり、8月には`arrayref`クレートが侵害された。攻撃の手口はDPRK(北朝鮮)の関与が指摘されるものと一致し、Rustコミュニティ以外の開発者も標的にされているという。</div>
         <div class="key-points">
           <ul>
-            <li>提供地域はまずフランス・北米から開始、英国・ドイツは2026年内に追随予定、地域言語・方言向けのファインチューニングも実施</li>
-            <li>会話ログはMozillaサーバーに既定で保存されず、Mistralを含むパートナー各社はゼロデータ保持に同意</li>
+            <li>6月に複数の著名Rust開発者が標的、8月には`arrayref`クレートが侵害される事案が発生</li>
+            <li>攻撃者はLinkedIn上で実在感のある企業を装い、ビデオ通話中に偽の音声コーデックインストールやコマンド実行を要求、手口はDPRK関与が指摘されるものと一致</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Mistral AI Blog</span>
-          <span>⏱ 3 min read</span>
-          <span>2026-09-16</span>
-          <span class="engagement">▲ 512</span>
+          <span>Rust Blog</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-09-17</span>
+          <span class="engagement">▲ 31</span>
         </div>
       </div>
 
       <div class="card featured">
         <div class="card-header">
-          <span class="tag tag-ai">AI</span>
+          <span class="tag tag-infra">Infra</span>
           <span class="content-type">📦 リリース</span>
-          <h3><a href="https://www.publickey1.jp/blog/26/devinmacosmacdevinappstore.html">Devinが仮想環境でmacOSの提供開始、Macの実機不要でコード生成・テスト・デバッグ・実行、App Store配信前のベータ公開まで実行</a></h3>
+          <h3><a href="https://global.fujitsu/en-global/pr/news/2026/09/14-02">富士通、純国産の次世代CPU「FUJITSU-MONAKA」を発表——2nmコア×5nm SRAMの3D積層で最大144コア</a></h3>
         </div>
-        <div class="summary">コーディングエージェント「Devin」を開発するCognitionは2026年9月15日、これまでUbuntuとWindowsに対応していたDevinの実行環境にmacOSを追加したと発表した。Macの実機を用意しなくても、DevinがmacOS/iOSアプリのコード生成からiOSシミュレータでの動作確認・デバッグ、TestFlightを通じたベータ版のApp Store配信直前工程までを一気通貫で担当できるようになる。デモではゲームアプリのクローンを題材に、画面録画やSlack共有を交えた開発フローが示された。</div>
+        <div class="summary">富士通は次世代CPU「FUJITSU-MONAKA」を発表した。2nmプロセスの演算コアダイと5nmのSRAM・I/Oダイを3D積層するチップレット構成で、Armv9-Aアーキテクチャを採用し最大144コアを1ソケットに収める。ソフトウェアの要件に応じて18コア×8ノード、36コア×4ノード、144コア単一ノードのいずれかとして動作させられる柔軟なNUMA構成が特徴で、2ソケット構成では最大288コアまで拡張できる。2027年の量産開始を予定し、AI推論とHPC向けの「ソブリンAIサーバー」用途を主眼に据える。</div>
         <div class="key-points">
           <ul>
-            <li>Devinの対応OSがUbuntu・Windowsに加えmacOSへ拡大、Macの実機なしでiOSシミュレータ上での動作確認・デバッグが可能に</li>
-            <li>TestFlightを使ったベータ版配信までDevinが担当でき、画面録画やSlackでの共有を組み込んだ開発フローも実演</li>
+            <li>最大動作周波数3.8GHz、メモリ転送速度8,800MT/sの12chDDR5、PCIe 6.0(CXL 3.0対応)、AI・HPC向けのArm SVE2を搭載</li>
+            <li>2ソケット構成で最大288コアまでスケール、2027年の量産開始を予定</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Publickey</span>
-          <span>⏱ 3 min read</span>
-          <span>2026-09-15</span>
+          <span>Fujitsu</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-09-14</span>
+          <span class="engagement">▲ 479</span>
         </div>
       </div>
     </div>
@@ -127,22 +138,85 @@
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-data">Data</span>
-          <span class="content-type">🔬 研究</span>
-          <h3><a href="https://rohanbansal.com/qorl">個人開発者がRTX 3090上で40億パラメータモデルを訓練、蒸留とエージェント型強化学習だけでPostgresクエリ実行計画を平均1.81倍高速化</a></h3>
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://about.gitlab.com/blog/rate-limit-change-2026/">GitLab.comのレート制限をプラン別の従量設計に変更、未認証アクセスは1時間60リクエスト/IPまでに縮小</a></h3>
         </div>
-        <div class="summary">GPT-6 Astraの120本の実行ログを教師データにLoRAで40億パラメータの`Qwen3.8-4B-Distill`をSFTし、続くRL(GRPO変種)でPostgresのデフォルト実行計画を上回るヒント付きクエリを生成するよう学習させた。Join Order Benchmark(IMDbデータセットの113クエリ)で検証したところ、全体で44.7%のレイテンシ削減、幾何平均で1.81倍の高速化を達成した。</div>
+        <div class="summary">GitLabは2026年10月19日、GitLab.comの無料プランと未認証リクエストのレート制限を、プラン別の従量設計に切り替える。未認証アクセスはIPアドレスごとに1時間60リクエストまでに制限され、Premium/Ultimateプランは2027年1月まで現行の制限を維持する。GitLabは「大半のユーザーは既に新制限の範囲内に収まっており変化に気づかない」としつつ、標準プラン超過分の追加購入手段も用意するとしている。</div>
         <div class="key-points">
           <ul>
-            <li>LoRAで追加した学習パラメータは2,120万個(全体46.6億のごく一部)、訓練コストはLambdaのH100レンタルとAPI利用料込みで約1,200ドル</li>
-            <li>113クエリ中68クエリで5%超の改善、101クエリ(89%)で有効な実行計画を生成、リグレッション(5%超の悪化)は112クエリ中2件のみ</li>
+            <li>未認証リクエストは1時間60回/IPに制限、無料プランは2026年10月19日、Premium/Ultimateは2027年1月から適用</li>
+            <li>プレビュー期間として10月7日・14日の15:00〜19:00(UTC)に新制限を試験適用、超過ユーザー向けに認証・バッチ化・キャッシュ活用を推奨</li>
           </ul>
         </div>
         <div class="meta">
-          <span>rohanbansal.com</span>
-          <span>⏱ 6 min read</span>
+          <span>GitLab Blog</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-17</span>
+          <span class="engagement">▲ 141</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://www.crowdsec.net/blog/crowdsec-statement-source-code-exposure">CrowdSec、5月発生のソースコード漏えいを9月に公表——原因はTanstackのサプライチェーン侵害</a></h3>
+        </div>
+        <div class="summary">セキュリティ企業CrowdSecは2026年9月16日、2026年5月に発生していたソースコード漏えいを公表した。原因はTanstackのサプライチェーン侵害で組み込みコンポーネントがバックドア化され、読み取り権限を持つAPIキーが窃取されたこと。約300リポジトリ(うち130以上は元々公開)のSaaSコンソールやAWS連携機能などの非公開コードが対象で、顧客データや認証情報の漏えいはないという。</div>
+        <div class="key-points">
+          <ul>
+            <li>漏えいの原因はTanstack侵害で混入したバックドア経由のAPIキー窃取、発生は5月・発覚は9月16日で発覚まで4か月超</li>
+            <li>対象は約300リポジトリ(130超は公開済み)のSaaSコンソール/AWS連携/コネクタのコード、顧客データ・パスワード等の漏えいはなしと説明、該当トークン類は即時ローテーション済み</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>CrowdSec Blog</span>
+          <span>⏱ 3 min read</span>
           <span>2026-09-16</span>
-          <span class="engagement">▲ 327</span>
+          <span class="engagement">▲ 119</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://prismml.com/news/bonsai-2-27b">三値量子化モデル「Bonsai 2 27B」公開、54GBを5.9GBへ圧縮しベンチマーク性能98.2%を維持</a></h3>
+        </div>
+        <div class="summary">PrismMLは、Qwen3.8 27Bをベースに三値({-1,0,+1})量子化とFP16グループ単位スケーリングを組み合わせた圧縮モデル「Bonsai 2 27B」を公開した。重み1個あたり実効1.76ビットまで削減し、フルプレシジョン版の54GBから5.9GBへ約9分の1に圧縮しながら、集計ベンチマークスコアはフルプレシジョン比98.2%(83.9対85.4)を維持する。</div>
+        <div class="key-points">
+          <ul>
+            <li>RTX 5090で143トークン/秒、M5 Maxで46.8トークン/秒を実測、26.2万トークンのコンテキスト長にも対応</li>
+            <li>RTX 4090上の消費電力は0.714 mWh/トークンで、フルプレシジョン8Bモデル比40%省エネ、Apache 2.0でHugging Face公開</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>PrismML</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-17</span>
+          <span class="engagement">▲ 106</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://servo.org/blog/2026/09/15/one-year-of-sponsorship/">Servo、寄付で賄うパートタイムメンテナンス1年の成果を報告——PR1,150件レビュー、新メンテナー8人任命</a></h3>
+        </div>
+        <div class="summary">Servoブラウザエンジンの長年のメンテナーJosh Bowman-Matthewsが、OpenCollective/GitHub経由の寄付で賄われた1年間のパートタイム活動の成果を報告した。この1年で新メンテナー8人を任命し、プルリクエスト1,150件をレビュー、初心者向けにIssueを114件起票して92%を解決に導いた。JSエンジン統合の大規模書き換えなどインフラ改善にも従事したという。</div>
+        <div class="key-points">
+          <ul>
+            <li>プルリクエスト1,150件をレビューし新メンテナーを8人任命、初心者向けIssue114件のうち92%が解決済み</li>
+            <li>window.open関連の不安定テストを調査・安定化、JSエンジン統合の大規模書き換えを支援、後任者のNLnet助成金申請も承認され活動継続</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Servo Blog</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-09-15</span>
+          <span class="engagement">▲ 339</span>
         </div>
       </div>
 
@@ -150,82 +224,19 @@
         <div class="card-header">
           <span class="tag tag-dev">Dev</span>
           <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://developer.nvidia.com/blog/introducing-cuda-rust-two-tracks-for-writing-gpu-kernels/">NVIDIA、RustでGPUカーネルを直接記述できる「CUDA Rust」を発表、SIMT向け`cuda-oxide`とタイル抽象の`cutile-rs`の2トラック構成</a></h3>
+          <h3><a href="https://www.amazon.science/blog/developing-provably-correct-rust-code-with-verus">Amazon、Rustコードを数学的に証明する検証ツール「Verus」の活用事例を公開、AWS Nitro Isolation Engineにも採用</a></h3>
         </div>
-        <div class="summary">NVIDIAはRustのコードをラップせずPTXへ直接コンパイルする「CUDA Rust」を発表した。スレッド単位で書く従来型のSIMTモデル向け`cuda-oxide`(nightly Rust必須、まだアルファ版)と、タイル単位の抽象化でスレッドマッピングをコンパイラに任せる`cutile-rs`(stable Rust 1.89+、CUDA 13.3で動作)の2トラックを用意し、両方ともコンパイル時にメモリアクセスの安全性を保証する。</div>
+        <div class="summary">Amazonは、Rustコードを形式仕様と照合して数学的に正しさを証明する自動検証ツール「Verus」の活用事例を公開した。開発者はRust風の構文で事前条件・事後条件を注釈し、複数のソルバーが1秒未満で証明を自動導出する。AWS EC2のハイパーバイザ「Nitro Isolation Engine」の重要プリミティブ検証など、複数の基幹インフラで採用しているという。</div>
         <div class="key-points">
           <ul>
-            <li>`cutile-rs`は既にHuggingFaceの推論エンジンGroutやmistral.rsで実運用中、crates.ioで公開済み</li>
-            <li>`cuda-oxide`はRust MIR・Pliron IR・LLVMを経由してPTXを生成、`DisjointSlice`型でコンパイル時にメモリエイリアシングを防止</li>
+            <li>unsafeブロックについても仕様との整合を機械的に証明し、コンパイラの安全性チェックが及ばない範囲を補完</li>
+            <li>ロックに紐づく不変条件を注釈することで並行プログラムの正しさも検証可能、証明生成にはAIエージェントの支援も想定</li>
           </ul>
         </div>
         <div class="meta">
-          <span>NVIDIA Developer Blog</span>
+          <span>Amazon Science</span>
           <span>⏱ 5 min read</span>
           <span>2026-09-16</span>
-          <span class="engagement">▲ 81</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-ai">AI</span>
-          <span class="content-type">🔬 研究</span>
-          <h3><a href="https://arxiv.org/abs/2609.16338">三値LLMの理論限界1.58ビット/重みの壁を突破する符号化手法「BITCOS」、ゼロの偏在を利用し29モデル中26モデルで圧縮率改善</a></h3>
-        </div>
-        <div class="summary">三値(-1・0・+1)で重みを表現するLLMは、情報理論上の下限がlog₂3≈1.585ビット/重みだが、従来の5値パッキングは各記号が均等出現すると仮定するため1.625ビットに切り上がっていた。研究チームは29の三値LLMで重みの最大51.5%がゼロに偏っている実態を発見し、密なビットマップと圧縮した符号ベクトルを組み合わせる「BITCOS」で2-zビット/重み(zはゼロ密度)まで削減した。</div>
-        <div class="key-points">
-          <ul>
-            <li>29モデル中26モデルで5値パッキングを上回る圧縮率、最も疎なモデルでは1.485ビット/重みまで低減</li>
-            <li>行列ベクトル積を最大1.28倍高速化、5種のプラットフォームでCPUのデコードスループットを最大1.18倍、GPUで最大1.27倍改善</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>arXiv</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-09-16</span>
-          <span class="engagement">▲ 91</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-security">Security</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://www.publickey1.jp/blog/26/androidgoogle1passwordbitwardendashlane.html">Android、パスワードマネージャ間でパスキーを転送可能に、Googleパスワードマネージャ・1Password・Bitwarden・Dashlaneが対応</a></h3>
-        </div>
-        <div class="summary">Googleは新しいパスワードマネージャをAndroidで開くだけで、既存のマネージャからパスワードとパスキーを数クリックで安全に転送できる機能を発表した。ファイルのダウンロードや手動エクスポートは不要で、Googleパスワードマネージャ・1Password・Bitwarden・Dashlaneの4社が初期対応する。</div>
-        <div class="key-points">
-          <ul>
-            <li>ファイルダウンロード不要、新しいパスワードマネージャを開くだけで既存マネージャからの転送フローが始まる</li>
-            <li>初期対応はGoogleパスワードマネージャ・1Password・Bitwarden・Dashlaneの4社、対応拡大を予定</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Publickey</span>
-          <span>⏱ 2 min read</span>
-          <span>2026-09-16</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-oss">OSS</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://www.omgubuntu.co.uk/2026/09/ubuntu-2610-rust-coreutils-complete">Ubuntu 26.10、`cp`/`mv`/`rm`を含むコアユーティリティのRust移行が完了、26.04では見送られたTOCTOU脆弱性対応も解消</a></h3>
-        </div>
-        <div class="summary">Ubuntu 26.10(10月15日リリース予定)で、26.04 LTSではTOCTOU(time-of-check to time-of-use)脆弱性を理由に見送られていた`cp`・`mv`・`rm`のRust実装への移行が完了する。`ls`・`cat`・`chmod`・`du`など既存のRust版コマンドと合わせ、GNU版との互換性を保ったドロップイン置き換えとなる。</div>
-        <div class="key-points">
-          <ul>
-            <li>Canonicalは26.04移行前にRustユーティリティのセキュリティ監査を実施済み、Trifecta Tech Foundationへ年間4万ユーロを拠出しNTP実装のRust書き換えも27.10へ向けて進行中</li>
-            <li>25.10でRust版sudoが既定化されて以降の一連の移行の集大成、C実装からの置き換えでコンパイル時のメモリバグ検出を狙う</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>omgubuntu.co.uk</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-09-15</span>
-          <span class="engagement">▲ 45</span>
         </div>
       </div>
     </div>
@@ -235,85 +246,85 @@
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-security">Security</span>
-          <span class="content-type">🔒 セキュリティ</span>
-          <h3><a href="https://internet.watch.impress.co.jp/docs/news/2141538.html">画像共有サービスGyazoに不正アクセス、ユーザー情報2,362万件と画像メタデータ4.9億件が流出</a></h3>
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://www.nict.go.jp/publicity/topics/2026/09/11-1.html">NICT、日本標準時の公開NTPサービスで11分間の誤時刻配信を発表、原因はメンテナンス中の機器異常</a></h3>
         </div>
-        <div class="summary">Gyazoを運営するHelpfeelは、アップロードサーバーの脆弱性を突いた不正アクセスを9月11日に検知し、翌12日未明までに侵入経路を遮断したと発表した。流出したのはメールアドレス・パスワードハッシュ・ユーザーID・端末ID・ログインセッションID・X連携トークンなどを含むユーザー情報約2,362万件と、主に2019年1月以前登録分を中心とする画像メタデータ約4.9億件で、決済情報は含まれない。非公開画像のファイル一覧取得も確認され、一部画像の閲覧を無効化して対応中という。</div>
+        <div class="summary">情報通信研究機構(NICT)は、日本標準時に基づく公開NTPサービスの一部で、2026年9月9日10時20分から10時31分の11分間、冗長系統の不具合により誤った時刻データが配信されていたと発表した。原因はメンテナンス作業中に生じた公開NTP機器の異常で、他の時刻供給サービスへの影響はないとしている。</div>
         <div class="key-points">
           <ul>
-            <li>ユーザー情報約2,362万件(メール・パスワードハッシュ・端末ID・X連携トークン等)、画像メタデータ約4.9億件(うち14.4%が2019年1月以前登録分)が流出</li>
-            <li>決済情報の流出はなし、ただし非公開画像のファイル一覧取得を確認、二次被害防止のため一部画像の閲覧を無効化中</li>
+            <li>影響が生じたのは9月9日10:20〜10:31の11分間で、原因はメンテナンス作業中に発生した公開NTP機器の異常</li>
+            <li>影響範囲は公開NTPサービスに限定され、他の時刻供給サービスへの影響はなしと説明、発表時点で復旧済み</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Impress Watch</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-09-16</span>
-          <span class="engagement">🔖 36</span>
+          <span>NICT</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-09-11</span>
+          <span class="engagement">🔖 54</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://nomolk.hatenablog.com/entry/2026/09/18/020558">なぜハッカーは変なデバイスでDOOMを動かすのか、Kodak DC260から妊娠検査キット・ハエの神経回路シミュレーションまでの系譜</a></h3>
+        </div>
+        <div class="summary">1993年発売のDOOMを変わったデバイスで動かす文化の歴史を追った記事。デジタルカメラ(Kodak DC260)や妊娠検査キットの表示部改造、2026年にはハエの神経回路のコネクトームデータを使ったシミュレーション上での「DOOM実行」まで対象は広がっている。John CarmackがLinux版DOOMのソースコードを1997年にGPLで公開したことが、移植文化の起点になったと指摘する。</div>
+        <div class="key-points">
+          <ul>
+            <li>Kodak DC260(2000年)、Nokia 7650(2002年)、電卓・オシロスコープ(2006年)、衛星OPS-SAT(2019年)、SQLデータベース(DOOMQL、2025年)など移植先は多岐にわたる</li>
+            <li>動作させること自体が「任意コード実行」の証明になり、セキュリティ研究や「修理する権利」運動の文脈でも意味を持つと指摘、妊娠検査キットの例のように表示部を後付けした「再現」に留まる事例もあると注記</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>nomolk.hatenablog.com</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-09-18</span>
+          <span class="engagement">🔖 26</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
           <span class="tag tag-ai">AI</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://tech.smarthr.jp/entry/2026/09/16/110205">Claude Codeの「ハーネス」設計で開発期間を2.5か月から1か月に短縮、4アクターへの責務分離とTDD固定化が鍵</a></h3>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://zenn.dev/mizchi/articles/jev-plays-gomoku">構造化出力特化エージェント「jev」同士を五目並べで対戦させる実験、1局25手を約13秒で完了</a></h3>
         </div>
-        <div class="summary">SmartHRのエンジニアは、情シス機能開発でオーケストレータ・実装エージェント・レビュアー・機械検査の4アクターに役割を分離し、実装を必ずTDDで進めるハーネスを構築した。1タスク=1セッションで進捗はJSONへ外部化し、完了条件は12項目のシェルスクリプトで機械判定する設計により、大きな手戻りなしで開発期間を2.5か月から1か月へ短縮した。</div>
+        <div class="summary">Typesafe AI社の構造化出力特化エージェント「jev」を2体対戦させ、五目並べを打たせた実験記事。自由記述の代わりに「はい/いいえ」「選択」「スコア」の3形式で出力を返す設計で、盤面状態とルール・着手候補を選択肢として渡すと、1局(25手)を約13秒、1手あたり平均500ミリ秒で完了した。</div>
         <div class="key-points">
           <ul>
-            <li>レビュアーは全タスク完了後に仕様突合・並行性・認可・完結性の4観点で並列起動、機械検査はシェルスクリプトでトークン消費なし</li>
-            <li>モデルは設計余地に応じてOpus(設計判断が必要なタスク)とSonnet(既定パターンの実装)を使い分け</li>
+            <li>サーバーが米国西海岸にあるためネットワーク遅延は110〜130ミリ秒と推定、終盤ほど選択肢が絞られ確信度スコアが上昇する傾向を確認</li>
+            <li>著者は自由記述より制約付き出力を好むプログラマー向けの設計と評価しつつ、同様のアプローチを他社が1〜2か月で追随すると予想</li>
           </ul>
         </div>
         <div class="meta">
-          <span>SmartHR Tech Blog</span>
-          <span>⏱ 6 min read</span>
-          <span>2026-09-16</span>
-          <span class="engagement">🔖 166</span>
+          <span>Zenn (mizchi)</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-17</span>
+          <span class="engagement">🔖 54</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-security">Security</span>
+          <span class="tag tag-data">Data</span>
           <span class="content-type">📜 解説</span>
-          <h3><a href="https://atmarkit.itmedia.co.jp/ait/articles/2609/17/news006.html">「APIキーは.envに」はもう通用しない、AIエージェントの内通者化リスクにシークレット管理・トークンボーリング・APIゲートウェイの3層で対処</a></h3>
+          <h3><a href="https://qiita.com/yushibats/items/d4e3e0186f4d8eb83874">オントロジー？ナレッジグラフ？ AI時代のデータ基盤用語をグラフ・セマンティックレイヤー・データカタログと合わせて整理</a></h3>
         </div>
-        <div class="summary">AIエージェントがツール呼び出しの過程で.env内の認証情報へアクセスできてしまう構造が、プロンプトインジェクションやツール中毒による権限悪用の入口になっていると指摘する記事。Gartnerは2028年までに組織の90%超が人間の承認なしにAIエージェントへアクセス権を委譲すると予測しており、Infisical等のシークレット管理ツール・OAuthベースのトークンボーリング・エージェントIDで権限を絞るAPIゲートウェイの3層構造で対処すべきとする。</div>
+        <div class="summary">AI時代のデータ基盤用語であるグラフ・オントロジー・ナレッジグラフ・セマンティックレイヤー・データカタログの違いを整理した解説記事。オントロジーを「概念と関係性のルールを定めた設計図」、ナレッジグラフを「そのルールに沿って実データを結びつけたもの」と位置づけ、表は集計に強くグラフは関係性の探索に強いと対比している。</div>
         <div class="key-points">
           <ul>
-            <li>Gartner予測: 2028年までに組織の90%超が人間の承認なしでAIエージェントにアクセス権を委譲</li>
-            <li>対策はInfisical/HashiCorp Vault等のシークレット管理・必要時のみ発行するトークンボーリング・エージェントID単位で権限を絞るAPIゲートウェイの3層、Human-in-the-loopの組み込みも重要</li>
+            <li>オントロジーは「顧客は契約を持つ」という関係ルールの定義、ナレッジグラフは「顧客Aは契約123を持つ」という実データへの適用と区別</li>
+            <li>セマンティックレイヤーは物理的なDB構造からビジネス指標を計算する変換層、データカタログは所有者・品質・リネージ・アクセス権を管理するメタデータ台帳と整理</li>
           </ul>
         </div>
         <div class="meta">
-          <span>@IT</span>
+          <span>Qiita (yushibats)</span>
           <span>⏱ 4 min read</span>
           <span>2026-09-17</span>
-          <span class="engagement">🔖 58</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-infra">Infra</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://velumesh.jp/blog/blog-2026-09-16.html">「Tailscaleやめたい」7つの指摘を一次資料で再検証、26主張中12件が事実誤認・修正済みは2件のみ</a></h3>
-        </div>
-        <div class="summary">2026年5月に出た「Tailscaleやめたい」記事の7つの技術的指摘・26個の主張を、公式ドキュメントやGitHub Issue・RFCを基に再検証した記事。resolv.confの上書きやRFC違反とされたDNS実装の多くは事実誤認と判定された一方、EDNSペイロードサイズ問題は2026年1月のPRで修正済み、Calicoとのfwmark競合など4件は現在も未解決と整理している。</div>
-        <div class="key-points">
-          <ul>
-            <li>26主張の内訳は事実誤認12件・設計思想の違い8件・未解決4件・修正済み2件</li>
-            <li>`options ndots:5`がdirect modeで剥がされる問題(Issue #13245)やCalicoとのfwmark競合(Issue #591)は対応予定なしのまま未解決</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>velumesh.jp</span>
-          <span>⏱ 6 min read</span>
-          <span>2026-09-16</span>
-          <span class="engagement">🔖 68</span>
+          <span class="engagement">🔖 59</span>
         </div>
       </div>
     </div>
@@ -325,61 +336,62 @@
         <div class="card-header">
           <span class="tag tag-dev">Dev</span>
           <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://zed.dev/blog/delta-public-beta">Zed、プルリクエストを置き換える「Delta」パブリックベータ公開、エージェントとの共同作業をGit互換のDeltaDBで実現</a></h3>
+          <h3><a href="https://github.com/asciimoo/hister">個人検索エンジン「Hister」、閲覧履歴とローカルファイルを横断全文インデックス化しMCP経由でAIからも検索可能に</a></h3>
         </div>
-        <div class="summary">Zed Industriesは、コーディングエージェントとの共同作業・レビューを行う「Delta」のパブリックベータをmacOS・Linux・Windows・Web向けに公開した。レビューはコミット/プッシュを介さずチームメイトを会話に直接招待する形で行い、レビュー用スレッドは親スレッドのworktreeを独立コピーして影響を与えずに探索できる。基盤の「DeltaDB」はGitのコンテンツベース管理を拡張し、コミット間の編集履歴を保持しつつGit互換を保つ。</div>
+        <div class="summary">GoとNode製の個人検索エンジン「Hister」は、閲覧したWebページとローカルファイルを横断的に全文インデックス化し、クラウドに頼らず自分のためだけの検索エンジンを構築できるツールだ。Firefox/Chrome拡張でブラウジング履歴を自動取得し、フィールド指定検索・ワイルドカード・埋め込みベクトルによる意味検索にも対応する。</div>
         <div class="key-points">
           <ul>
-            <li>Zedチーム自身がプルリクエストを無効化し、33人体制でDeltaのみを使いmainへ570件の変更をランディング</li>
-            <li>パブリックベータは現時点で無料、GitHubリポジトリを維持したままDeltaを併用可能</li>
+            <li>GitHubスター4.2k・フォーク189、テレメトリなし・クラウド必須なしのセルフホスト設計でAGPLv3ライセンス</li>
+            <li>Web UI・ターミナル・MCP経由のAIアシスタントの3経路からアクセス可能、複数ユーザーでの共有サーバー運用にも対応</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Zed Blog</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-09-16</span>
-          <span class="engagement">▲ 11</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-oss">OSS</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://release.gnome.org/51/">「GNOME 51 (A Coruña)」リリース、Mutterのスケジューリング再設計とMapsオフライン地図・GNOME Circleに3アプリ追加</a></h3>
-        </div>
-        <div class="summary">GNOME 51が2026年9月16日にリリースされた。Mutterのスケジューリングを再設計し高負荷時のアニメーションを滑らかにしたほか、モニターの輝度設定が再起動をまたいで保持されるようになった。Mapsはオフライン地図のダウンロードに対応し海外旅行時にも利用しやすくなり、GNOME Circleには SQLiteブラウザ「Bobby」・カウンターアプリ「Tally」・アプリストア「Bazaar」の3本が新規参加した。</div>
-        <div class="key-points">
-          <ul>
-            <li>旧来のNVIDIAレガシードライバサポートを廃止し標準インターフェースへ一本化、SSHソケットサーバー経由のリモートログインにも対応</li>
-            <li>Calendarを刷新しMonth viewのスクロールを滑らかに、Papersでは専用ハードウェアなしで署名画像を挿入可能に</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>GNOME.org</span>
+          <span>GitHub (asciimoo/hister)</span>
           <span>⏱ 3 min read</span>
-          <span>2026-09-16</span>
-          <span class="engagement">▲ 23</span>
+          <span>2026-09-17</span>
+          <span class="engagement">⭐ 4.2k</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
           <span class="tag tag-dev">Dev</span>
-          <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://qiita.com/rana_kualu/items/f82f870ef8481d9b1f0b">JavaScriptをCへ事前コンパイルする「Porffor」、1GBメモリのサーバでアプリ1,000個を同時起動できる軽量実行基盤</a></h3>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://github.com/jemalloc/jemalloc/releases/tag/5.4.0">メモリアロケータ「jemalloc 5.4.0」リリース、tcache制御パラメータ7種を廃止する非互換変更を含む</a></h3>
         </div>
-        <div class="summary">PorfforはJITを一切使わずJavaScriptを100%事前コンパイルでCに変換するAoTコンパイラ。LLVMなど外部依存を避けつつ、1GBメモリのサーバでNodeコンテナ25個・セルフホスト型ワーカー45個分の領域に1,000個のアプリを同時稼働できるとする。Test262準拠テストでは実行時エラーやテスト未対応が残り、合格率は約60%にとどまる。</div>
+        <div class="summary">メモリアロケータjemallocのバージョン5.4.0が9月17日にリリースされた。160件超のコミットで技術的負債の解消と移植性向上を進めつつ、HugeTLBページ等の非再利用可能なマッピングを扱う`EXTENT_ALLOC_FLAG_PINNED`やCPU単位アリーナの`thread.arena`再開機能を追加した。tcacheの挙動をGC間の需要観測に基づき自動調整する変更に伴い、旧来の個別制御用パラメータ7種を廃止する。</div>
         <div class="key-points">
           <ul>
-            <li>Bun/Denoと比較してビルド後のアプリサイズが50倍以上小さい、eval()やnew Function()など動的コード評価は非対応</li>
-            <li>Test262公式テストスイートでコンパイルエラーはほぼ解消したが、実行時エラー等により合格率は約60%</li>
+            <li>`errno`をメモリ解放・ページパージ処理をまたいで保持するよう修正、C23準拠の`free_sized()`/`free_aligned_sized()`でのNULL受理不具合も解消</li>
+            <li>アリーナリセット時のデッドロック修正やサイズクラス計算のオーバーフローチェック修正など、フロントエンドをモジュール化</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Qiita (rana_kualu)</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-09-16</span>
+          <span>GitHub (jemalloc)</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-17</span>
+          <span class="engagement">▲ 9</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.unicode.org/versions/Unicode18.0.0/">Unicode 18.0.0ベータ公開、新規文字13,007個追加で総数172,808文字に、女真文字・篆書など3スクリプトを新規収録</a></h3>
+        </div>
+        <div class="summary">Unicodeコンソーシアムは次期バージョン18.0のベータレビューを公開した。新規文字13,007個を追加し総数は172,808文字に到達、原楔形文字(Proto-Cuneiform)数字専用ブロック・女真文字・篆書(Seal)の3新規スクリプトを収録する。絵文字仕様UTS #51や照合・IDNA・リンク検出など5つの関連技術標準も同時に更新される。</div>
+        <div class="key-points">
+          <ul>
+            <li>新規追加の女真文字・篆書はいずれも大規模な表意文字体系、原楔形文字数字ブロックには非常に多数の数値記号を収録</li>
+            <li>現時点はベータレビュー段階の草案で、正式確定に向け詳細は今後変更の可能性あり</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Unicode.org</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-09-17</span>
+          <span class="engagement">▲ 40</span>
         </div>
       </div>
     </div>
@@ -388,50 +400,57 @@
       <div class="section-title">🔗 Quick Links</div>
 
       <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://openai.com/index/astra-for-law/">OpenAI、法律事務所向けAI「Astra for Law」を発表、2億3,000万件超の判例・法令インデックスを搭載</a>
+        <span class="quick-summary">— 最高推論設定での正答率は54.0%(Web検索併用のGPT-6 Astraは38.7%)、RelativityやClioと連携する26種のプラグインも提供する。</span>
+        <span class="meta">OpenAI</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://martinfowler.com/articles/2026-dont-like-llms.html">Martin Fowler「LLMは好きになれない」、効用は認めつつ対話の不誠実さに感じる違和感を率直に綴る</a>
+        <span class="quick-summary">— もっともらしい誤情報を確信ありげに語る「confidently bullshit」な性質に時間を費やすことへの倫理的な引っかかりを、責任論との緊張関係として提示する。</span>
+        <span class="meta">Martin Fowler Blog</span>
+        <span class="engagement">▲ 50</span>
+      </div>
+
+      <div class="quick-link">
         <span class="tag tag-security">Security</span>
-        <a href="https://www.wired.com/story/hackers-flock-camera-data-shows-how-system-works/">ハッカーがFlockの監視カメラをハッキング、21日間で160万枚・5万台分の車両検知データが実際の監視範囲を露呈</a>
-        <span class="quick-summary">— 車両だけでなく歩行者も検知し信頼度スコアを付与する仕組みが、盗まれたカメラのストレージ解析で明らかになった。</span>
-        <span class="meta">Wired</span>
-        <span class="engagement">▲ 430</span>
+        <a href="https://www.hackerfactor.com/blog/index.php?/archives/1102-C2PA-and-Pixel-Glitter-Milk.html">Google Pixel 10のC2PA署名機構に「Confused Deputy」脆弱性、root化端末なら任意画像を「本物」として署名可能</a>
+        <span class="quick-summary">— 研究者は捏造画像への署名をわずか2分で生成、強固な暗号技術も信頼できないデータに使えば信頼性を保証しないと指摘する。</span>
+        <span class="meta">hackerfactor.com</span>
+        <span class="engagement">▲ 52</span>
       </div>
 
       <div class="quick-link">
         <span class="tag tag-oss">OSS</span>
-        <a href="https://cybernews.com/tech/switzerland-microsoft-opendesk/">スイス連邦政府、Microsoft 365から独自OSS基盤「openDesk」への移行パイロットを開始、3,000台・900万スイスフラン規模</a>
-        <span class="quick-summary">— デジタル主権とMicrosoftの値上げを理由に、まず全体の7%にあたる端末で並行運用を始め2027年末までの移行を目指す。</span>
-        <span class="meta">Cybernews</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-product">Product</span>
-        <a href="https://gigazine.net/news/20260916-meta-one/">Meta、月額239円から加入できるサブスク「Meta One」を発表、登録数は既に1,500万件超</a>
-        <span class="quick-summary">— WhatsApp・Instagram・Facebookの単体プランに加え、Meta AIの生成枠を増やすセットプランも用意する。</span>
-        <span class="meta">GIGAZINE</span>
-        <span class="engagement">🔖 10</span>
+        <a href="https://verdagon.dev/blog/golden-spike-reviving-vale-valen">新言語「Valen」発表、Vale後継のメモリモデル「group borrowing」でRustとのシームレスな相互運用を実現</a>
+        <span class="quick-summary">— ジェネリクス・トレイト・クロージャを含むRustとの境界を越えたメモリ安全な相互運用を、標準的なC FFIを介さずに達成したという。</span>
+        <span class="meta">verdagon.dev</span>
+        <span class="engagement">▲ 39</span>
       </div>
 
       <div class="quick-link">
         <span class="tag tag-dev">Dev</span>
-        <a href="https://www.sandordargo.com/blog/2026/09/16/cpp26-trivial-infinite-loops">C++26で「while(true);」のような自明な無限ループが未定義動作でなくなる、組み込み機器のエラーハンドラ消失問題に対応</a>
-        <span class="quick-summary">— 本体が空でconstexprなtrueだけのループはyield呼び出しへ変換され、「実行されない」前提でのコード除去を防ぐ。</span>
-        <span class="meta">sandordargo.com</span>
-        <span class="engagement">▲ 5</span>
+        <a href="https://vhaudiquet.fr/blog/duet-ubuntu/">ChromeOS専用ブートローダのLenovo IdeaPad DuetにUbuntu 26.10を移植、U-Bootを20コミット開発しUEFI環境を自作</a>
+        <span class="quick-summary">— Depthchargeブートローダの制約をU-Bootで回避し、MediaTek MT8183のディスプレイドライバもリバースエンジニアリングで実装した。</span>
+        <span class="meta">vhaudiquet.fr</span>
+        <span class="engagement">▲ 61</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://arxiv.org/abs/2609.18842">「無限パラメータLLM」提案、ハイパーネットワークが実行時に重みを動的生成しベイズ的信念として保持し続ける</a>
+        <span class="quick-summary">— MoE型ハイパーネットワークで低ランク重みをオンライン生成し続ける手法で、in-context learningとの比較評価プロトコルを提示する(具体的な性能数値は今後の課題)。</span>
+        <span class="meta">arXiv</span>
+        <span class="engagement">▲ 93</span>
       </div>
 
       <div class="quick-link">
         <span class="tag tag-dev">Dev</span>
-        <a href="https://gegell.github.io/posts/factorio-rng/">Factorioの疑似乱数生成器taus88を線形代数だけで完全解析、コンビネータ回路だけで伝説品質を的中させる自律回路を構築</a>
-        <span class="quick-summary">— 3つの32bit LFSRの内部状態をXOR出力3回分の観測から行列演算で復元し、1,000手先までのRNG状態を予測する。</span>
-        <span class="meta">gegell.github.io</span>
-        <span class="engagement">▲ 99</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-infra">Infra</span>
-        <a href="https://marc.info/?l=openbsd-tech&m=178948744271633&w=2">Plan 9系ファイルシステム「GEFS」のOpenBSD移植プレビューが公開、本番投入不可・データ消失前提の粗削り版</a>
-        <span class="quick-summary">— 約9,000行のカーネルコードをPlan 9と共有しつつ、書き込み整合性プロトコルやユーザ空間ツール群は未整備のまま残る。</span>
-        <span class="meta">OpenBSD ML (marc.info)</span>
-        <span class="engagement">▲ 90</span>
+        <a href="https://qiita.com/ya-mizobuchi/items/6ae906dd28bf61b32329">Claude Codeの常駐コンテキストを36.4Kトークンから15.0Kトークンへ59%削減、月額コストを41%圧縮</a>
+        <span class="quick-summary">— CLAUDE.mdをトリガー表方式に再構成しWikiインデックス化することで、蓄積した203万トークンの知識のうち常駐は0.7%のみに抑えた。</span>
+        <span class="meta">Qiita (ya-mizobuchi)</span>
       </div>
     </div>
 
