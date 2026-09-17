@@ -66,7 +66,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 <div class="container">
 <header>
   <h1>🧠 AI プロダクト動向</h1>
-  <p class="date">2026-08-25 発行（読了 5 分）</p>
+  <p class="date">2026-09-17 発行（読了 6 分）</p>
   <p class="tagline">実プロダクトのアーキテクチャ・使用例から AI 開発の現在地を週 3 回・1 号 1 テーマで深掘り</p>
   <nav class="site-nav">
     <a href="../">📰 日刊ダイジェスト</a>
@@ -77,94 +77,81 @@ footer a{color:var(--primary-500);text-decoration:none}
 </header>
 
 <div class="theme-hero">
-  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">AGENT-MEMORY</span></span>
-  <h2>エージェントのメモリ設計 — 生ログでも単一要約でもなく、書き換え可能な単位に分解する</h2>
-  <p class="lede">2026年に入り、OpenAI と Anthropic はほぼ同時期に、消費者向けチャットとエージェント製品の双方でメモリ機構を刷新した。共通しているのは「会話をそのまま貯める」「1本の要約文にまとめる」のどちらでもなく、書き換え可能な小さい単位に分解して保存する設計への転換だ。だが記憶をいつ作り直すか、どこに保存するかという次の設計判断は各社で割れており、この2軸が実装の分かれ目になっている。</p>
+  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">AGENTIC-SEARCH</span></span>
+  <h2>コード検索の設計が三方向に割れた — ベクトルDBを捨てる陣営、極める陣営、置き換える陣営</h2>
+  <p class="lede">「RAGはハイブリッド検索+リランカーが正解」という結論は一般的な文書検索では固まりつつあるが、コーディングエージェントの世界では事情が違う。Claude Code はベクトルインデックスを完全に捨てて grep/glob による反復探索に切り替え、Cursor と GitHub Copilot は逆に埋め込みの構築効率を磨き込み、Sourcegraph は検索そのものを静的解析に置き換える道を選んだ。同じ「コードを探す」という課題に、3社が3通りの答えを出している。</p>
 </div>
 
 <div class="tldr">
   <div class="label">TL;DR — 3 行で</div>
   <ul>
-    <li>Claude は2026年7月、記憶を単一のローリング要約から個別の書き換え可能なエントリへ移行。ChatGPT は非同期の「Dreaming」処理で古い事実を時制ごと書き換える。</li>
-    <li>Claude Managed Agents はセッション中のリアルタイム書き込みと、セッション間で横断整理するバッチ処理（Dreaming）を明確に分けて提供する。</li>
-    <li>Claude API の memory tool はモデルがファイル操作を要求するだけで保存先を開発者側に残す設計で、mem0 のような専業ベンダーに記憶レイヤーごと預ける選択肢と対比できる。</li>
+    <li>Claude Code は埋め込みベースのRAGを捨て、grep/globの反復探索に完全移行——再インデックスの陳腐化とコードアップロードのセキュリティリスクを避けるため。</li>
+    <li>Cursor と GitHub Copilot は埋め込みを維持しつつ、Merkle木による差分再索引や新埋め込みモデルで構築・更新コストを下げる方向に投資している。</li>
+    <li>Sourcegraph は「答えが一意に決まるクエリ」を静的解析（SCIP）による確定的ルックアップに逃し、曖昧なクエリだけを検索に残す設計で精度を底上げした。</li>
   </ul>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 1: 会話ログでも単一の要約でもなく、書き換え可能な個別エントリへ</div>
+  <div class="section-title">📐 パターン 1: Claude Code はなぜベクトル検索をやめたのか</div>
   <div class="theme-section">
-    <p>従来の2方式にはそれぞれ弱点があった。生の会話履歴をそのまま保持する方式はコンテキストコストが際限なく膨らみ、1件の誤りを消すために関係ない発言まで巻き込む。1本の要約文に凝縮する方式は逆に、1つの事実を訂正するには要約全体を書き直す必要があり、その過程で無関係な情報が欠落するリスクがある。</p><p>今の主流は、記憶を「1つの検証可能な事実」を単位にした個別レコードへ分解し、それぞれを独立に読み書き・削除できるようにすることだ。単位を細かくするほど、間違いの訂正や失効判定を他の記憶に影響させずに局所化できる。</p>
+    <p>Claude Code の「エージェント検索」は、事前にコードベース全体をベクトル化してインデックスを作る代わりに、<code>grep</code> と <code>glob</code> による反復探索をエージェント自身に実行させる方式だ。クエリのたびにファイルを絞り込み、読み、必要なら検索語を変えて再検索する——人間のエンジニアがコードを探すのと同じ手順をツール呼び出しの連鎖として再現する。</p><p>Anthropicは当初、埋め込みベースのRAGパイプラインをClaude Codeに組み込んでいたが、後にエージェント検索へ完全に置き換えた。理由は精度だけでなく運用コストにある。ベクトルインデックスはコード変更のたびに再構築が必要で、ローカルの未コミット変更とはすぐにズレる。さらに社外のベクトルDBへコードをアップロードすること自体がセキュリティ上のリスクになる。エージェント検索はレイテンシとトークン消費の増加を引き受ける代わりに、この2つの負債を丸ごと回避した。</p>
     <div class="example">
-      <div class="product">Claude（Anthropic、コンシューマー向けメモリ）</div>
-      <div class="approach">単一のローリング要約から、カテゴリ分けされた個別エントリへ移行</div>
-      <div class="detail">2026年7月10日、Anthropic は Claude の記憶を「毎日更新される1本の要約文」から「会話中に読み書きされるカテゴリ別の個別エントリ」に置き換えた。ユーザーは1件だけを確認・修正・削除でき、他の記憶を巻き込まない。</div>
-      <a href="https://support.claude.com/en/articles/12138966-release-notes">📄 一次ソース</a>
+      <div class="product">Claude Code（Anthropic）</div>
+      <div class="approach">grep/glob による反復探索でベクトルDBを完全代替</div>
+      <div class="detail">創業エンジニアのBoris Cherny はLatent Space のインタビューで、社内評価においてエージェント検索が「あらゆる面で圧倒的に(RAGを)上回った」と証言。埋め込みの再インデックス負債とコードアップロードのセキュリティリスクを避けるトレードオフとして、レイテンシとトークン消費の増加を受け入れたと説明している。</div>
+      <a href="https://www.latent.space/p/claude-code">📄 一次ソース</a>
     </div>
-    <div class="example">
-      <div class="product">ChatGPT（OpenAI、Dreaming）</div>
-      <div class="approach">対話とは別のバックグラウンド処理が記憶を継続的に再統合し、古い事実を書き換える</div>
-      <div class="detail">2026年6月に展開された新アーキテクチャでは、複数の会話から学習する専用プロセスが「7月にシンガポールに行く予定」を「7月にシンガポールに行った」のように時制ごと更新する。ユーザーが読める要約ページとして提示され、項目単位の追加・修正に対応する。</div>
-      <a href="https://openai.com/index/chatgpt-memory-dreaming/">📄 一次ソース</a>
-    </div>
-    <div class="takeaway"><strong>示唆:</strong> メモリを実装するなら保存の最小単位を「会話」や「1つの人物像」ではなく「検証可能な1事実」に置く。単位が細かいほど訂正と失効判定のコストが下がる。</div>
+    <div class="takeaway"><strong>示唆:</strong> コードベースが頻繁に変わる、または社外へのアップロードを避けたい場合は、精度より鮮度とセキュリティを優先してエージェント検索を検討する価値がある。ただしレイテンシとトークンコストの増加は事前に計測しておくこと。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 2: 記憶を作り直すタイミング — セッション中のリアルタイム書き込みか、セッション間のバッチ処理か</div>
+  <div class="section-title">📐 パターン 2: 埋め込みを手放さない陣営 — Cursor と GitHub Copilot は索引の構築効率に投資する</div>
   <div class="theme-section">
-    <p>もう一つの分かれ目は更新のタイミングだ。作業しながらその場でファイルに書き込む同期方式は即時性が高い一方、1セッションの視野に閉じるため冗長な記憶が溜まりやすい。対して、複数セッションが終わった後にまとめて見直す非同期方式は、単体のセッションでは見えないパターン（繰り返し起きるミスや複数エージェント間の共通知見）を検出できる。</p><p>企業向けのエージェント製品が後者を別立てで用意するのは、記憶を横断的にマージ・重複排除できるだけでなく、自動推論された記憶が人のレビューを経ずに将来の挙動を静かに変えてしまうリスクを、承認ゲートで止められるからだ。</p>
+    <p>一方でCursorとGitHub Copilotは埋め込みベースの検索を手放していない。むしろ索引の構築・更新コストを下げる方向に工数を投じている。Cursorはファイルツリーをハッシュ差分で管理し、変更があったブランチだけを再索引する。新規メンバーが参加した際は、その人のコードベースと類似度の高い既存インデックスを組織内で探して再利用し、初回検索までの待ち時間を数秒からミリ秒単位に縮めた。GitHub Copilotも新しい埋め込みモデルを投入し、検索精度を約38%引き上げつつインデックスサイズを8分の1に圧縮している。</p><p>この2社が埋め込みを維持する理由は、Claude Codeとは前提が違うからだ。IDEに常駐して多数のユーザーが同じリポジトリに繰り返しアクセスする製品では、索引コストを一度払えば以後のクエリで償却できる。エージェント検索のように毎回ファイルシステムを探索するコストは、多人数・高頻度アクセスの場では割に合わない。</p>
     <div class="example">
-      <div class="product">Claude Managed Agents（Anthropic、Memory）</div>
-      <div class="approach">作業中にその場でファイルへ書き込む</div>
-      <div class="detail">エージェントの記憶はファイルシステムにマウントされたファイル群として実装され、Claude は既存の bash・コード実行ツールでそのまま読み書きする。セッションの終了を待たず、作業しながら学習する設計。</div>
-      <a href="https://claude.com/blog/claude-managed-agents-memory">📄 一次ソース</a>
+      <div class="product">Cursor</div>
+      <div class="approach">差分ハッシュによる部分再索引と組織内インデックス再利用でオンボーディングを高速化</div>
+      <div class="detail">ファイル変更をMerkle木のハッシュ差分で検出し、変更されたブランチだけを再索引する。新規参加者には組織内の類似コードベースの既存indexを再利用し、初回検索までの時間を7.87秒から525ミリ秒に短縮したと公式ブログで報告している。</div>
+      <a href="https://cursor.com/blog/secure-codebase-indexing">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">Claude Managed Agents（Anthropic、Dreaming）</div>
-      <div class="approach">セッション間で動く別プロセスが記憶を横断的に整理し直す</div>
-      <div class="detail">Dreaming はスケジュール実行されるプロセスで、複数エージェントのセッションと記憶ストアを見直し、繰り返し起きるミスやチーム共通の知見を抽出して記憶を再構成する。変更を自動反映するか、人のレビュー待ちにするかを開発者が選べる。</div>
-      <a href="https://claude.com/blog/new-in-claude-managed-agents">📄 一次ソース</a>
+      <div class="product">GitHub Copilot</div>
+      <div class="approach">新しい埋め込みモデルで検索精度と索引効率を同時に改善</div>
+      <div class="detail">VS Code向けに投入した新埋め込みモデルで検索品質を37.6%向上、スループットを約2倍、インデックスサイズを8分の1に圧縮したと公式ブログで報告。C#開発者のコード採用率は+110.7%だったという。</div>
+      <a href="https://github.blog/news-insights/product-news/copilot-new-embedding-model-vs-code/">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> 1エージェント・1セッションで完結する記憶はリアルタイム書き込みで足りる。複数エージェントや複数日にまたがる知見を集約したいなら、別立てのバッチ整理プロセスと、誤った記憶が自動適用される前に人が止められる仕組みをセットで用意する。</div>
+    <div class="takeaway"><strong>示唆:</strong> 同一リポジトリに多数のユーザーが繰り返しアクセスする製品では、索引コストは償却できる投資になる。索引の鮮度そのものより、索引構築の効率化（差分更新・共有再利用）に工数を割く方が費用対効果が高い。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 3: 誰が保存先を持つか — マネージドな記憶か、自前インフラに預ける記憶か</div>
+  <div class="section-title">📐 パターン 3: 中間解 — Sourcegraph は『検索』の一部を確定的なコード解析に置き換える</div>
   <div class="theme-section">
-    <p>3つ目の軸は保存先の所有権だ。モデルは <code>view</code> や <code>create</code> といったファイル操作を要求するだけで、実際の保存先とアクセス制御は呼び出し側のアプリケーションが持つクライアントサイド方式がある一方、保存から取り出しまで丸ごとベンダーやサードパーティに委ねるマネージド方式もある。</p><p>マネージド方式は導入が速いが、記憶の保存場所と保持ポリシーがベンダーのインフラに縛られる。クライアントサイド方式は、パストラバーサル対策やファイルサイズ上限の実装といった手間と引き換えに、データ所在地の制御やゼロデータリテンション対応など、企業導入で求められる要件を自分で満たせる。</p>
+    <p>SourcegraphのMCPサーバーは、キーワード検索とベクトル検索に加えて、SCIPという静的解析ベースのコードインデックスを使う13種類のツールをエージェントに公開する。シンボルの定義元や参照元を尋ねるクエリには、テキスト類似度に基づく確率的な検索ではなく、コンパイラ相当の精度を持つ確定的なルックアップで答える。</p><p>この使い分けが効くのは、クエリの種類によって「正解が一意に決まるか」が違うからだ。「この関数はどこで定義されているか」への答えは1つしかなく、検索より静的解析の方が向いている。Sourcegraph自身のベンチマークでは、MCPサーバー経由でのファイル再現率が0.127から0.277まで改善し、grepベースのベースラインではタイムアウトしていたタスクが制限時間内に完了する例もあったという。</p>
     <div class="example">
-      <div class="product">Claude API（Anthropic、memory tool）</div>
-      <div class="approach">Claude はファイル操作を要求するだけで、保存先は開発者のアプリ側が持つ</div>
-      <div class="detail">memory tool はクライアントサイド実装で、Claude が /memories 配下への view・create・str_replace・delete を要求し、実際の保存先（ディスク・DB・暗号化ストレージなど）とパストラバーサル対策は呼び出し側が実装する。ゼロデータリテンション要件に対応できるのはこの分離ゆえ。</div>
-      <a href="https://platform.claude.com/docs/en/agents-and-tools/tool-use/memory-tool">📄 一次ソース</a>
+      <div class="product">Sourcegraph（Amp / MCP server）</div>
+      <div class="approach">SCIPベースの確定的コード解析をキーワード/セマンティック検索と併用</div>
+      <div class="detail">MCPサーバーが13種類のツールを公開し、シンボルの定義・参照解決はSCIPインデックスによる確定的ルックアップで返す。CodeScaleBenchでファイル再現率が0.127から0.277に改善したと公式ブログで報告している。</div>
+      <a href="https://sourcegraph.com/blog/context-engineering">📄 一次ソース</a>
     </div>
-    <div class="example">
-      <div class="product">mem0</div>
-      <div class="approach">記憶レイヤー自体を専業ベンダーに委譲する</div>
-      <div class="detail">2026年4月公開の新アルゴリズムは単一パスの階層抽出と複数シグナルの検索を組み合わせ、時系列が絡む質問で旧アルゴリズム比+29.6ポイントの精度改善を報告している。自前実装をせず記憶レイヤーごと外部に預ける選択肢の代表例。</div>
-      <a href="https://mem0.ai/blog/state-of-ai-agent-memory-2026">📄 一次ソース</a>
-    </div>
-    <div class="takeaway"><strong>示唆:</strong> データ所在地やコンプライアンス要件が強いならクライアントサイドのツールで自前インフラに保存し、そうでなければマネージドな記憶機能かサードパーティの記憶レイヤーで実装コストを削る、という順で検討する。</div>
+    <div class="takeaway"><strong>示唆:</strong> 検索精度を上げたいなら、まず『このクエリは一意の正解を持つか』を仕分けるとよい。一意に決まるクエリ（定義・参照・依存関係）は検索ではなく静的解析やAPI呼び出しに載せ替え、曖昧な自然言語クエリだけをキーワード/ベクトル検索に残すと、両方の精度が上がる。</div>
   </div>
   <div class="editorial">
     <span class="label">✍️ 編集後記</span>
-    OpenAI と Anthropic は同じ2026年に、示し合わせたかのように「生ログを貯めない」設計へ収束した。だが同期か非同期か、マネージドか自前インフラかという次の階層の選択は割れたままで、この組み合わせの違いが今後1年のメモリ機構の実質的な差別化ポイントになりそうだ。
+    RAGの標準装備として語られてきた「ハイブリッド検索+リランカー」は依然として有効だが、コーディングエージェントの世界ではそれが唯一の正解ではなくなった。Claude Codeはコストとセキュリティを理由に検索そのものを放棄し、CursorとCopilotは索引の償却コストが合う前提で埋め込みを磨き、Sourcegraphは「検索が要らないクエリ」を静的解析に逃がした。問われているのは「RAGを使うか」ではなく、自分のプロダクトがどの前提——鮮度、多人数償却、クエリの一意性——の上に成り立っているかだ。
   </div>
 </div>
 
 <div class="section">
   <div class="section-title">🔗 今号の動向ピックアップ</div>
-  <div class="quick-link"><a href="https://redis.io/blog/long-term-memory-architectures-ai-agents/">Redis: Long-Term Memory Architectures for AI Agents</a><span class="quick-summary">pgvector や Redis を使い、記憶をエントリ単位で自前実装する際の具体的なデータモデルを示す。マネージドな記憶機能を使わない選択をした場合の設計の出発点になる。</span></div>
-  <div class="quick-link"><a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents">Anthropic: Effective context engineering for AI agents</a><span class="quick-summary">Claude の memory tool ドキュメントが「広いパターン」として直接参照する記事で、記憶をコンテキストウィンドウにどう出し入れするかの設計原則をまとめている。本文で扱った「いつ記憶を作るか」の一段上にある「いつ思い出すか」の設計に相当する。</span></div>
-  <div class="quick-link"><a href="https://openai.com/index/memory-and-new-controls-for-chatgpt/">OpenAI: Memory and new controls for ChatGPT</a><span class="quick-summary">2024年当時の「明示的に保存を頼むメモリ」の発表で、本文で扱った Dreaming の前段にあたる旧世代アーキテクチャを示す。比較すると今回の非同期化がどこを変えたかが分かる。</span></div>
+  <div class="quick-link"><a href="https://every.to/podcast/how-to-use-claude-code-like-the-people-who-built-it">Claude Codeチームが語る、ベクトル検索を捨てた本音</a><span class="quick-summary">Every.toのインタビューでCat WuとThariqが、埋め込みの再インデックス負債とセキュリティリスクを理由にエージェント検索へ移行した経緯を語る。本文で扱ったClaude Codeの意思決定の一次証言にあたる。</span></div>
+  <div class="quick-link"><a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents">Anthropic公式：『必要になるまで読み込まない』コンテキスト設計</a><span class="quick-summary">Anthropicのエンジニアリングブログが提唱するjust-in-time context loadingは、事前に全データを処理せずファイルパスなどの軽量な参照だけを保持し実行時に取得する設計思想。本文のエージェント検索がなぜ有効かを裏付ける原則になっている。</span></div>
+  <div class="quick-link"><a href="https://www.agentic-patterns.com/patterns/agentic-search-over-vector-embeddings/">パターンカタログ：ベクトル埋め込みの代わりにエージェント検索を使う</a><span class="quick-summary">コミュニティ主導のエージェント設計パターン集が「Agentic Search Over Vector Embeddings」を独立したパターンとして整理している。本文3社の実装がこのパターンのどの変種にあたるかを比較する際の参考になる。</span></div>
 </div>
 
 <div class="section">
   <div class="section-title">📚 過去号</div>
-  <div class="archive-item"><span class="week">2026-09-17</span><div class="body"><a href="../ai-trends.html">コード検索の設計が三方向に割れた — ベクトルDBを捨てる陣営、極める陣営、置き換える陣営</a><span class="sub">Claude Code は埋め込みベースのRAGを捨て、grep/globの反復探索に完全移行——再インデックスの陳腐化とコードアップロードのセキュリティリスクを避けるため。</span></div></div>
   <div class="archive-item"><span class="week">2026-09-15</span><div class="body"><a href="2026-09-15.html">エージェント実行基盤のマネージド化 — 3社が同時に「実行環境を貸す側」に回った</a><span class="sub">OpenAIが9月10日、Codexハーネスをagents/environments/sessions/eventsの4プリミティブに集約した Agents API を公開ベータで公開。基盤自体の追加課金はなくトークン・ツール実費のみ。</span></div></div>
   <div class="archive-item"><span class="week">2026-09-12</span><div class="body"><a href="2026-09-12.html">コンテキストは会話ログではない — Working Context / Session / Memory / Artifacts への分離が実装標準になった</a><span class="sub">Google ADKは2026年9月、コンテキストを Working Context・Session・Memory・Artifacts の4層に分離し、閾値到達で非同期に要約するcompactionを実装したと公式ブログで説明した。</span></div></div>
   <div class="archive-item"><span class="week">2026-09-10</span><div class="body"><a href="2026-09-10.html">Agent Skills という第3のレイヤー — プロンプトでもRAGでもなく「必要になるまで読まない」設計</a><span class="sub">Agent Skillsは「メタデータ(~100トークン)→本文(&lt;5000トークン推奨)→付随ファイル」の3段階でコンテキストに読み込む、プログレッシブディスクロージャー設計。</span></div></div>
@@ -173,6 +160,7 @@ footer a{color:var(--primary-500);text-decoration:none}
   <div class="archive-item"><span class="week">2026-09-01</span><div class="body"><a href="2026-09-01.html">コードレビューエージェントの設計 — 差別化は検出率ではなく、文脈の取り方と『直すところまで』の範囲に移った</a><span class="sub">GitHub Copilot・Qodo・Cursor Bugbot・Cloudflareの内製ツールが、diff単体の解析から脱却し、リポジトリ全体・PR履歴・過去の指摘への反応まで動的に文脈を取りに行く設計へ収束している</span></div></div>
   <div class="archive-item"><span class="week">2026-08-29</span><div class="body"><a href="2026-08-29.html">構造化出力は「お願い」から「強制」へ — 3社がグラマー制約デコーディングで足並みを揃えた2026年</a><span class="sub">OpenAI・Anthropic・Google の主要3社が、JSON Schema をトークン生成レベルで強制する「グラマー制約デコーディング」に共通で対応した</span></div></div>
   <div class="archive-item"><span class="week">2026-08-27</span><div class="body"><a href="2026-08-27.html">マルチエージェント協調 — 割っていいのは「コンテキストの切れ目」だけ</a><span class="sub">Anthropic は Research 機能で並列サブエージェントを使い内部評価で90.2%の性能改善を報告するが、トークン消費は通常の約15倍になるとも明記している。</span></div></div>
+  <div class="archive-item"><span class="week">2026-08-25</span><div class="body"><a href="2026-08-25.html">エージェントのメモリ設計 — 生ログでも単一要約でもなく、書き換え可能な単位に分解する</a><span class="sub">Claude は2026年7月、記憶を単一のローリング要約から個別の書き換え可能なエントリへ移行。ChatGPT は非同期の「Dreaming」処理で古い事実を時制ごと書き換える。</span></div></div>
   <div class="archive-item"><span class="week">2026-08-22</span><div class="body"><a href="2026-08-22.html">プロンプトキャッシュはコスト最適化ではない — 「プレフィックス固定」というアーキテクチャ制約</a><span class="sub">キャッシュ命中率はもはや副次指標ではなく、Manus はこれを「本番エージェントで最重要のメトリック」と明言している。</span></div></div>
   <div class="archive-item"><span class="week">2026-08-20</span><div class="body"><a href="2026-08-20.html">接続ツールが増えるほど遅くなる問題 — コード実行と検索遅延ロードの2つの答え</a><span class="sub">Anthropicは公式エンジニアリングブログで、MCPツールをコードAPIとして提示しファイルシステム越しにオンデマンドで読み込ませる方式により、あるタスクのトークン消費を150,000から2,000（98.7%減）に削減したと報告した</span></div></div>
   <div class="archive-item"><span class="week">2026-08-18</span><div class="body"><a href="2026-08-18.html">MCPエージェントの認可設計 — 同意画面を「増やす」実装と「無くす」実装に分岐した</a><span class="sub">MCPの権限設計は「サーバー単位のOAuth」から「ツールごとのスコープ」へ移り、WorkOSやCloudflareが個別ツール内での権限チェックを標準パターンとして提示している。</span></div></div>
@@ -189,7 +177,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 </div>
 
 <footer>
-  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="../data/ai-trends/2026-08-25.json">data/ai-trends/2026-08-25.json</a>（このページは JSON からの生成物）</p>
+  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="../data/ai-trends/2026-09-17.json">data/ai-trends/2026-09-17.json</a>（このページは JSON からの生成物）</p>
   <p style="margin-top:.5rem"><a href="../">📰 日刊ダイジェストに戻る</a></p>
 </footer>
 </div>
