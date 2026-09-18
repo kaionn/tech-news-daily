@@ -66,7 +66,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 <div class="container">
 <header>
   <h1>🧠 AI プロダクト動向</h1>
-  <p class="date">2026-08-04 発行（読了 5 分）</p>
+  <p class="date">2026-09-19 発行（読了 6 分）</p>
   <p class="tagline">実プロダクトのアーキテクチャ・使用例から AI 開発の現在地を週 3 回・1 号 1 テーマで深掘り</p>
   <nav class="site-nav">
     <a href="../">📰 日刊ダイジェスト</a>
@@ -77,87 +77,93 @@ footer a{color:var(--primary-500);text-decoration:none}
 </header>
 
 <div class="theme-hero">
-  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">WORKFLOW-VS-AGENT</span></span>
-  <h2>ワークフロー型 vs エージェント型 — 複雑さを足す前に何を確かめるか</h2>
-  <p class="lede">「とりあえずエージェント化」が合言葉のようになる一方で、Shopify や Ramp は複雑化したエージェント基盤を単一のエージェントループへ戻す判断を公表している。Anthropic 自身も、workflow と agent を『処理経路を誰が決めるか』という一点で二分し、まず単純な方から試すよう明言済みだ。流行りの構成を輸入する前に、自分のタスクがどちらの条件に当てはまるかを確認する動きが今週の複数の一次情報に共通していた。</p>
+  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">AGENT-SECURITY</span></span>
+  <h2>エージェントの権限設計は「毎回確認」から「境界を先に固定する」へ移った</h2>
+  <p class="lede">エージェントがファイル操作やコマンド実行を任される場面が増えるほど、行為ごとに確認を求めるダイアログは形骸化する。ユーザーは10回目の確認では中身を読まずに許可を押すようになり、承認は安全装置ではなく儀式になる。この『承認疲れ』への対処として、2026年に入り複数のベンダーが同じ結論にたどり着いた——確認の頻度を運用で調整するのではなく、ファイルシステムとネットワークの到達範囲を実行前に構造的に固定し、その範囲内では確認を求めない設計への転換だ。ただし境界が及ぶ範囲はツールごとに異なり、抜け穴も残る。</p>
 </div>
 
 <div class="tldr">
   <div class="label">TL;DR — 3 行で</div>
   <ul>
-    <li>Anthropic は「経路を誰が決めるか」で workflow と agent を定義し、単純な方から試すべきだと明言している。</li>
-    <li>Shopify Sidekick と Ramp Research は、複雑化する前にまず単一のエージェントループへ収束させた。</li>
-    <li>並列読み取りが効く調査タスクだけがオーケストレーター型多エージェントで得をする、という条件が絞られてきた。</li>
+    <li>OpenAI CodexとAnthropicのClaude Codeは、サンドボックスの制限強度と確認ダイアログの要否を別軸にし、境界内の行為は原則自動承認する設計にそろえた。</li>
+    <li>CursorとGitHub Copilot coding agentは、ネットワーク到達範囲をsandbox.jsonや組織設定で宣言的に固定し、SSRF対策のプライベートアドレス遮断をデフォルト装備した。</li>
+    <li>いずれのサンドボックスもBash・ターミナル経由の子プロセスしか保護せずMCPサーバー通信は対象外——Microsoftはこの抜け穴を埋めるネットワーク層のMCP Firewallを別立てで投入した。</li>
   </ul>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 1: 処理経路を「誰が決めるか」で分ける</div>
+  <div class="section-title">📐 パターン 1: 「毎回確認」の限界 — 境界の強さと確認頻度を分離する</div>
   <div class="theme-section">
-    <p>Anthropic は自社の設計指針で、workflow を「LLM とツールが事前に定義されたコードパスに沿って呼び出される構成」、agent を「LLM が自らの処理とツール利用を動的に制御する構成」と定義している。前者には prompt chaining（逐次分解＋検証ゲート）、routing（分類して専門処理へ振り分け）、parallelization（並列実行と多数決）、orchestrator-workers（中心の LLM が動的に分解・委譲）、evaluator-optimizer（フィードバックによる反復改善）という 5 つの具体パターンが並ぶ。</p><p>この切り分けが実務で効くのは、判断基準が「流行っているかどうか」ではなく「手順を事前に書き切れるかどうか」という一点に絞られているからだ。書き切れるタスクに agent を充てても、コストと遅延を払って再現性を失うだけの結果になる。</p>
+    <p>エージェントに任せる操作が増えるほど、行為のたびに『実行していいですか』と確認を求めるUIは機能しなくなる。最初の数回は内容を読んで判断できても、10回、20回と続くうちに承認は反射的なクリックに変わり、本当に危険な操作が紛れ込んでも気づけなくなる。これは個々のプロンプト設計の問題ではなく、確認頻度をサンドボックスの緩さで決めている限り避けられない構造的な限界だ。</p><p>OpenAI CodexとAnthropicのClaude Codeは、この2つを分離する設計にそろえた。Codexは<code>read-only</code>/<code>workspace-write</code>/<code>danger-full-access</code>のサンドボックス段階と、<code>untrusted</code>/<code>on-request</code>/<code>never</code>の承認ポリシーを独立した軸として組み合わせる。Claude Codeもサンドボックス自体が課すファイルシステム・ネットワーク制限を2つのモードで共通にした上で、自動承認するか確認を挟むかだけを切り替える。境界の強さと確認の頻度を別々のノブにしたことで、境界内の行為はまとめて自動承認しても安全性は落ちない。</p>
     <div class="example">
-      <div class="product">Anthropic の設計指針（Building Effective Agents）</div>
-      <div class="approach">処理経路の決定権が『開発者』か『LLM自身』かで workflow と agent を二分し、5 つの具体パターンに整理</div>
-      <div class="detail">多くの企業が採用ガイドとして参照する一次資料で、その後の Shopify・Ramp などの実装判断の前提になっている</div>
-      <a href="https://www.anthropic.com/research/building-effective-agents">📄 一次ソース</a>
+      <div class="product">OpenAI Codex</div>
+      <div class="approach">サンドボックス段階と承認ポリシーを独立変数にし、境界内の操作はauto-reviewモードで自動承認する</div>
+      <div class="detail">3段階サンドボックス×3段階承認ポリシーの組み合わせにより、危険度の高い操作だけを確認対象に絞り込める設計</div>
+      <a href="https://developers.openai.com/codex/agent-approvals-security">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> 設計に着手する前に『このタスクの手順は事前に書き切れるか』を自問し、書き切れるなら workflow、書き切れないなら agent、という一問で最初の分岐を決める。</div>
+    <div class="example">
+      <div class="product">Claude Code（Anthropic）</div>
+      <div class="approach">2つのサンドボックスモードで同一のファイルシステム/ネットワーク制限を強制し、自動承認か確認要求かのみを切り替える</div>
+      <div class="detail">制限の強さを揺らさずに確認頻度だけを調整できるため、緩い設定にするほど危険になるトレードオフを避けられる</div>
+      <a href="https://code.claude.com/docs/en/sandboxing">📄 一次ソース</a>
+    </div>
+    <div class="takeaway"><strong>示唆:</strong> 自作のエージェントに承認フローを組むなら、『確認するかどうか』と『何ができる範囲か』を同じ設定値で決めないこと。境界を先に固定し、その内側は自動化する方が、確認疲れによる誤許可を構造的に防げる。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 2: 単一エージェントループを選ぶ理由</div>
+  <div class="section-title">📐 パターン 2: 境界を宣言的に固定する — ネットワーク許可リストの標準化</div>
   <div class="theme-section">
-    <p>Shopify の Sidekick チームはツール数が 20 から 50 以上に増える過程で、システムプロンプトへ指示を積み上げる方式が破綻したため、必要な指示をツールの結果と一緒にその場で渡す JIT（Just-In-Time）instructions へ切り替えた。同時にマルチエージェント化は見送り、単一のエージェントループ（入力→判断→実行→フィードバック）のまま複雑なマーチャント業務に対応させている。Ramp が社内向けに作った agentic データアナリスト「Ramp Research」も同様に単一エージェント構成で、<code>inspect column values, branch, and backtrack</code> という人間のアナリストに近い探索的なツール利用を LLM 自身に判断させている。</p><p>両社に共通するのは、複雑さは実証されてから足すという順序だ。マルチエージェント化やオーケストレーション層の追加は、単一エージェントで頭打ちになったことを確認してからの手当てであり、最初から選ぶものではない。</p>
+    <p>ファイルシステムの制限だけでなく、到達可能なネットワーク範囲を実行前に宣言しておく動きも標準化しつつある。エージェントが外部と通信できる範囲を都度の確認任せにせず、設定ファイルや組織ポリシーとして固定しておけば、確認ダイアログを増やさなくても攻撃対象を絞り込める。</p><p>Cursorはサンドボックスのネットワークアクセスを<code>sandbox.json</code>で3段階（許可リストのみ/許可リスト+既定値/全許可）に分け、<code>169.254.169.254</code>のようなクラウドメタデータエンドポイントやRFC1918プライベートアドレスをデフォルトで遮断してSSRFを防ぐ。GitHub Copilot coding agentも同様に、組織管理者がfirewallの有効/無効/リポジトリ委任を一元設定でき、OSパッケージリポジトリやコンテナレジストリなどの推奨許可リストをリポジトリ横断で強制できる。個別の確認ではなく境界そのものを組織のポリシーとして先に決める点で、両社は同じ方向を向いている。</p>
     <div class="example">
-      <div class="product">Shopify Sidekick</div>
-      <div class="approach">マルチエージェント化を見送り単一のエージェントループに統一、JIT instructions でシステムプロンプト肥大化を回避</div>
-      <div class="detail">ツール数が 20→50+ に増える過程で『指示過多』問題が起き、その解決策として一次情報で報告されている</div>
-      <a href="https://shopify.engineering/building-production-ready-agentic-systems">📄 一次ソース</a>
+      <div class="product">Cursor</div>
+      <div class="approach">sandbox.jsonでネットワークアクセスを3段階に分け、プライベートアドレスとクラウドメタデータエンドポイントをデフォルト遮断する</div>
+      <div class="detail">SSRF対策をサンドボックスの既定動作に組み込み、許可リストの設定漏れがあっても内部ネットワークへの到達を防ぐ</div>
+      <a href="https://cursor.com/blog/agent-sandboxing">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">Ramp Research（社内向け agentic データアナリスト）</div>
-      <div class="approach">単一エージェントに列の中身を調べる・分岐する・後戻りするツールを与え、人間アナリストの探索手順を LLM に代行させる</div>
-      <div class="detail">オーケストレーション層を足さず、単一エージェントの推論能力向上で対応した具体例</div>
-      <a href="https://engineering.ramp.com/post/meet-ramp-research">📄 一次ソース</a>
+      <div class="product">GitHub Copilot coding agent</div>
+      <div class="approach">組織管理者がfirewallの有効/無効/委任をEnabled・Disabled・Let repositories decideの3択で一元設定し、推奨許可リストをリポジトリ横断で強制できる</div>
+      <div class="detail">個々のリポジトリ設定に依存せず、組織ポリシーとして境界を先に決める設計</div>
+      <a href="https://docs.github.com/en/copilot/how-tos/use-copilot-agents/coding-agent/customize-the-agent-firewall">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> ツールが増えて『指示過多』が起きたら、まずマルチエージェント化ではなく JIT instructions などコンテキスト設計の見直しを疑う。</div>
+    <div class="takeaway"><strong>示唆:</strong> ネットワーク境界は個々のエージェント実行時の設定ではなく、リポジトリや組織単位で宣言的に管理する前提で設計するのが安全。後からallowlistを足す運用にすると、抜け漏れの検出が属人的になる。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 3: オーケストレーター型・ハイブリッド型が効く場面</div>
+  <div class="section-title">📐 パターン 3: 境界の抜け穴 — サンドボックスが及ばないMCP経路</div>
   <div class="theme-section">
-    <p>一方で Anthropic 自身の Research 機能は、Lead Researcher が調査計画を立て、3〜5 体のサブエージェントを並列に立てて Web 検索を分担させるオーケストレーター・ワーカー構成を採っており、複雑な調査クエリで所要時間を最大 90% 短縮したと報告している。これは『読み取りが並列化できる、探索的で開放的なタスク』という条件が揃った場合の話であり、前節の単一エージェント推奨と矛盾しない。</p><p>顧客対応のような書き込みを伴う業務では、むしろ workflow と agent を組み合わせるほうが安定する。Intercom の Fin はメール対応において RAG ベースのエージェントが自律的に応答を組み立てつつ、ワークフロー側のトリガーで起動し、対応しきれない場合は人間のサポート担当へエスカレーションする設計を取っている。</p>
+    <p>こうしたサンドボックスの多くは、エージェントのBash・ターミナルツールとその子プロセスだけを対象にしている。だが実際のエージェントはMCP（Model Context Protocol）サーバー経由で外部サービスに接続する場面が増えており、この経路はBashサンドボックスの外側にある。ファイルシステムやネットワークの境界をどれだけ厳しく固定しても、MCP接続自体が別経路で外部と通信していれば境界は素通りされる。</p><p>Claude Codeの公式ドキュメントも、サンドボックスが保護するのはBash・PowerShell・Monitorとその子プロセスに限られることを明記しており、MCPサーバー通信はスコープ外だと認めている。この抜け穴に対しMicrosoftは、エージェント側のサンドボックスを強化するのではなく、ネットワークのエッジ側でMCPトラフィックを検査・許可判定する専用ファイアウォールを別レイヤーとして投入した。サンドボックス設計が『ツールごとの境界』の集合である以上、抜けているツールをどう塞ぐかは各社まだ足並みが揃っていない。</p>
     <div class="example">
-      <div class="product">Anthropic Research（Claude の調査機能）</div>
-      <div class="approach">Lead Researcher が計画を立て 3〜5 体のサブエージェントに Web 検索を並列委譲するオーケストレーター・ワーカー構成</div>
-      <div class="detail">読み取り中心で並列化しやすい調査タスクに限定してマルチエージェント化が効いた一次資料の実例</div>
-      <a href="https://www.anthropic.com/engineering/multi-agent-research-system">📄 一次ソース</a>
+      <div class="product">Claude Code（Anthropic）</div>
+      <div class="approach">サンドボックスの保護範囲をBash・PowerShell・Monitorとその子プロセスに限定し、MCPサーバー通信はスコープ外と公式に明記する</div>
+      <div class="detail">境界がツール単位でしか及ばないことを示す一次情報</div>
+      <a href="https://code.claude.com/docs/en/sandboxing">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">Intercom Fin（メール対応）</div>
-      <div class="approach">ワークフローのトリガーでエージェントを起動し、RAG で自律応答しつつ対応不能時は人間へエスカレーション</div>
-      <div class="detail">書き込み（顧客への回答）を伴う業務で全自律化を避け、ワークフローと人間を安全弁として残した例</div>
-      <a href="https://www.intercom.com/blog/fin-over-email-how-we-built/">📄 一次ソース</a>
+      <div class="product">Microsoft Entra Agent ID（MCP Firewall）</div>
+      <div class="approach">MCPクライアント/サーバーを改変せずに、ネットワークのエッジでMCPトラフィックを検査しAllow/Blockを強制する専用ファイアウォールをプレビュー投入した</div>
+      <div class="detail">エージェント側のサンドボックスでは塞げない経路を、ネットワーク層の別コントロールで補う設計</div>
+      <a href="https://techcommunity.microsoft.com/blog/microsoft-entra-blog/microsoft-entra-what%E2%80%99s-new-in-secure-access-on-the-ai-frontier/4468732">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> 並列化できる読み取り中心タスクはオーケストレーター型で攻め、顧客対応など書き込みを伴うタスクは workflow のトリガー＋agent＋人間エスカレーションのハイブリッドで守る、とタスクの性質で使い分ける。</div>
+    <div class="takeaway"><strong>示唆:</strong> MCPサーバーを組み込む場合、ホストアプリのサンドボックスがその通信も守ってくれると仮定しないこと。MCP接続用に独立したネットワークポリシー（プロキシ/ファイアウォール）を別途用意する前提で設計する。</div>
   </div>
   <div class="editorial">
     <span class="label">✍️ 編集後記</span>
-    「workflow か agent か」は思想対立ではなく、タスクの手順を事前に書き切れるか・書き込みを伴うかという 2 つの条件でほぼ機械的に決まる話になってきた。マルチエージェントも同様で、Anthropic の調査機能のように読み取りが並列化できる場合にだけ効き、Shopify や Ramp が扱う書き込みを伴う業務では単一エージェントか workflow とのハイブリッドに落ち着く。流行りの構成を輸入するのではなく、自分のタスクがどちらの条件に当てはまるかを先に確認したい。
+    3社が『承認疲れ』への答えとして境界の事前固定にそろったのは、UXの問題を権限モデルの問題として解き直した結果だ。ただし境界の粒度はまだツール単位でバラバラで、MCPのような新しい実行経路が増えるたびに抜け穴も増える。境界設計は一度作って終わりではなく、エージェントが使うツールが増えるたびに棚卸しする運用が要る。
   </div>
 </div>
 
 <div class="section">
   <div class="section-title">🔗 今号の動向ピックアップ</div>
-  <div class="quick-link"><a href="https://engineering.ramp.com/post/why-we-built-our-background-agent">Ramp が自前のバックグラウンドコーディングエージェント「Inspect」を作った理由</a><span class="quick-summary">既存の汎用エージェントではなく自社基盤に特化した検証ループ付きエージェントを内製した経緯を解説している。『エージェントに裁量を持たせつつ人間中心のワークフローに組み込む』という判断は、本号の workflow×agent ハイブリッド設計と同じ発想。</span></div>
-  <div class="quick-link"><a href="https://cognition.com/blog/multi-agents-working">Cognition、マルチエージェントに対する立場を修正</a><span class="quick-summary">コーディングエージェント Devin の開発元が『書き込みは単一スレッドに保ち、追加のエージェントは判断材料だけを提供する』という限定的な形でのマルチエージェント活用に転じたと報告している。単一エージェント推奨とオーケストレーター型許容の境界線を考える上で参考になる一次情報。</span></div>
+  <div class="quick-link"><a href="https://cursor.com/docs/reference/sandbox">Cursor sandbox.json Reference</a><span class="quick-summary">sandbox.jsonの設定項目とネットワークアクセス3段階の詳細仕様をまとめた公式リファレンス。本文のCursorのSSRF対策設定の一次情報。</span></div>
+  <div class="quick-link"><a href="https://openai.com/index/running-codex-safely/">Running Codex safely at OpenAI</a><span class="quick-summary">OpenAIがCodexの実行環境設計の背景を解説する公式記事。本文のサンドボックス×承認ポリシー分離という設計思想を補足する。</span></div>
+  <div class="quick-link"><a href="https://docs.github.com/en/copilot/reference/copilot-allowlist-reference">GitHub Copilot allowlist reference</a><span class="quick-summary">推奨allowlistが許可する具体的なホスト一覧をまとめた公式リファレンス。本文の組織単位でのネットワーク境界固定の対象範囲を補足する。</span></div>
 </div>
 
 <div class="section">
   <div class="section-title">📚 過去号</div>
-  <div class="archive-item"><span class="week">2026-09-19</span><div class="body"><a href="../ai-trends.html">エージェントの権限設計は「毎回確認」から「境界を先に固定する」へ移った</a><span class="sub">OpenAI CodexとAnthropicのClaude Codeは、サンドボックスの制限強度と確認ダイアログの要否を別軸にし、境界内の行為は原則自動承認する設計にそろえた。</span></div></div>
   <div class="archive-item"><span class="week">2026-09-17</span><div class="body"><a href="2026-09-17.html">コード検索の設計が三方向に割れた — ベクトルDBを捨てる陣営、極める陣営、置き換える陣営</a><span class="sub">Claude Code は埋め込みベースのRAGを捨て、grep/globの反復探索に完全移行——再インデックスの陳腐化とコードアップロードのセキュリティリスクを避けるため。</span></div></div>
   <div class="archive-item"><span class="week">2026-09-15</span><div class="body"><a href="2026-09-15.html">エージェント実行基盤のマネージド化 — 3社が同時に「実行環境を貸す側」に回った</a><span class="sub">OpenAIが9月10日、Codexハーネスをagents/environments/sessions/eventsの4プリミティブに集約した Agents API を公開ベータで公開。基盤自体の追加課金はなくトークン・ツール実費のみ。</span></div></div>
   <div class="archive-item"><span class="week">2026-09-12</span><div class="body"><a href="2026-09-12.html">コンテキストは会話ログではない — Working Context / Session / Memory / Artifacts への分離が実装標準になった</a><span class="sub">Google ADKは2026年9月、コンテキストを Working Context・Session・Memory・Artifacts の4層に分離し、閾値到達で非同期に要約するcompactionを実装したと公式ブログで説明した。</span></div></div>
@@ -176,6 +182,7 @@ footer a{color:var(--primary-500);text-decoration:none}
   <div class="archive-item"><span class="week">2026-08-11</span><div class="body"><a href="2026-08-11.html">コンテキスト圧縮はどこで行うべきか — API・モデル訓練・ハーネス、3層に割れた実装場所</a><span class="sub">Anthropic は compaction をサーバーサイド API のオプションとして実装し、モデル本体は変更していない</span></div></div>
   <div class="archive-item"><span class="week">2026-08-08</span><div class="body"><a href="2026-08-08.html">エージェントのコード実行基盤 — サンドボックスは「重い専用マシン」と「軽いアイソレート」に分かれ始めた</a><span class="sub">Cloudflare Sandboxes と Vercel Sandbox はどちらも「持続する専用マシン」型サンドボックスをGA化し、スナップショット復元でコールドブート30秒を2秒程度まで縮めた。</span></div></div>
   <div class="archive-item"><span class="week">2026-08-06</span><div class="body"><a href="2026-08-06.html">RAG 構成パターンの現在地 — 二段構成の次は、検索そのものをエージェントに埋め込む</a><span class="sub">Perplexity は Vespa 上で lexical・embedding のハイブリッド検索から cross-encoder rerank へ絞り込む多段構成を採り、Databricks は同じ構成を単一パラメータで追加できる機能として一般化した。</span></div></div>
+  <div class="archive-item"><span class="week">2026-08-04</span><div class="body"><a href="2026-08-04.html">ワークフロー型 vs エージェント型 — 複雑さを足す前に何を確かめるか</a><span class="sub">Anthropic は「経路を誰が決めるか」で workflow と agent を定義し、単純な方から試すべきだと明言している。</span></div></div>
   <div class="archive-item"><span class="week">2026-08-01</span><div class="body"><a href="2026-08-01.html">コンテキストエンジニアリング — 「何を見せるか」ではなく「何を見せないか」を設計する</a><span class="sub">事前に全部読み込むのではなく、ファイルパスやURLなど軽量な参照を渡して実行時に取得する「Just-in-Time retrieval」がCursorやAnthropicの標準手法になった。</span></div></div>
   <div class="archive-item"><span class="week">2026-07-30</span><div class="body"><a href="2026-07-30.html">マルチエージェント協調 — 「書き込みを一本化する」が唯一の合意点になった理由</a><span class="sub">Cognition は2025年、複数エージェントの並行書き込みが矛盾した判断を生むとして「マルチエージェントを作るな」と主張したが、2026年4月に態度を転換し「書き込みは一本化し、エージェントは行動ではなく知性を提供する」構成に絞って実例を公開した</span></div></div>
   <div class="archive-item"><span class="week">2026-07-28</span><div class="body"><a href="2026-07-28.html">エージェントのメモリ設計 — 保存容量ではなく「書き込みの境界線」を設計する</a><span class="sub">Anthropic は Claude Managed Agents の記憶をファイルとして保存し、監査ログ・ロールバック・スコープ別パーミッションを標準機能として public beta で提供している</span></div></div>
@@ -183,7 +190,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 </div>
 
 <footer>
-  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="../data/ai-trends/2026-08-04.json">data/ai-trends/2026-08-04.json</a>（このページは JSON からの生成物）</p>
+  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="../data/ai-trends/2026-09-19.json">data/ai-trends/2026-09-19.json</a>（このページは JSON からの生成物）</p>
   <p style="margin-top:.5rem"><a href="../">📰 日刊ダイジェストに戻る</a></p>
 </footer>
 </div>
