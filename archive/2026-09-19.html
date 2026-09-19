@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-09-19</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="../feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-09-19 (Sat)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+      <nav class="site-nav">
+        <a href="../" class="active">📰 日刊ダイジェスト</a>
+        <a href="../trends.html">🔌 週次プラグイントレンド</a>
+        <a href="../ai-trends.html">🧠 AI プロダクト動向</a>
+        <a href="./">🗂 アーカイブ</a>
+      </nav>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 22 articles</span>
+      <span>🏷 7 categories</span>
+      <span>📡 20 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item">
+        <span class="number-value">193.6倍</span>
+        <span class="number-label">TypeSafe AI「Jev」のワークフロー実行速度(LLM比、社内評価)</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">100TB</span>
+        <span class="number-label">Cloudflareが数式の見直しだけで世界全体で削減したメモリ量</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">10%</span>
+        <span class="number-label">韓国の改正個人情報保護法が定める情報漏えい制裁金の上限(売上高比、改正前は3%)</span>
+      </div>
+    </div>
+
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
+
+      <div class="card featured deep-dive">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://typesafe.ai/blog/introducing-system-one-models-and-jev">DEEP DIVE: 元OpenAI研究者が「文章を書かないAI」を発表——TypeSafe AIの新モデル群「System One Models」第1弾「Jev」、構造化判断に特化しLLM比193.6倍高速・444.6倍安価</a></h3>
+        </div>
+        <div class="summary">元OpenAI研究者Diogo Almeida率いるTypeSafe AIは2026年9月15日、早期アクセス版として新モデルクラス「System One Models」の第1弾「Jev」を発表した。従来のLLMが自然文字列をトークンごとに逐次生成するのに対し、JevはRLCD(Reinforcement Learning for Calibrated Decisions)という学習手法で、あらかじめ与えられた選択肢の中から確率較正済みの構造化された値を並列サンプリングで直接返す。出力は型安全な値に限定されるため、原理上「存在しない選択肢」を返すことがなく、ハルシネーション率はゼロになるとTypeSafe AIは説明する。応答速度はLLMの3〜329秒に対しJevは70〜500ミリ秒、入力コストは1メガトークンあたり0.042ドル(LLMの0.20〜10ドル)で出力は無料という価格設定だ。実際のワークフロー評価では速度で193.6倍、コストで444.6倍の差がついたとしている。デモではリアルタイムゲームAI(DOOM風、毎秒約10クエリで時間あたり約7ドル)や、最大255択のリンクから次のページを選ぶWikipediaの「Wikiracing」ナビゲーションなど、深い推論よりも高頻度・低遅延の判断が求められる用途を示した。用途としては条件分岐ロジック、大規模データセットへのマップリデュース処理、LLM出力の検証・ガードレールなどが想定されている。発表直後から日本のテックコミュニティでも「既存のLLMがCPUならJevはGPU」という例えで急速に話題化し、要約・検証記事が相次いだ。</div>
+        <div class="editorial">🧠 「文章を生成しない」という設計そのものは目新しくない(分類器や決定木は昔からある)が、Jevが強調するのは既存LLMと同じ規模の事前学習を経た上で、判断だけに特化して並列化・型安全性を確保した点だ。193.6倍という数値は自社が定義したワークフロー評価での結果であり、第三者ベンチマークでの再現性はまだ確認されていない。ハルシネーション率ゼロも「選択肢の中に正解がある」ことが前提で、選択肢自体の設計を誤れば的外れな判断に高い確信度を与えるリスクは残る。それでも、LLM呼び出しのレイテンシとコストを理由に見送られてきた「毎キー入力ごとのAI判定」のような用途が現実的になる点は、開発者にとって具体的なインパクトがある。</div>
+        <div class="key-points">
+          <ul>
+            <li>RLCD(Reinforcement Learning for Calibrated Decisions)で学習し、応答時間はLLMの3〜329秒に対し70〜500ミリ秒(40〜200倍高速)、入力コストは0.042ドル/MTok・出力は無料</li>
+            <li>ワークフロー評価で速度193.6倍・コスト444.6倍の差、単一クエリ内で256択を並列評価可能、Wikiracingデモでは最大255択のリンク選択に対応</li>
+            <li>DOOM風リアルタイムゲームAIデモでは毎秒約10クエリを実行し稼働コストは時間あたり約7ドル、用途は条件分岐ロジック・大規模データのマップリデュース・LLM出力の検証やガードレールなど</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 LLM呼び出しのレイテンシとコストで断念していたリアルタイム判定・全件スキャン系の機能があれば、Jevのような構造化専用モデルへの置き換えを検討する価値がある。ただし選択肢設計の質が結果の質に直結する点には注意したい。</div>
+        <div class="meta">
+          <span>TypeSafe AI Blog</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-09-15</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://www.cnn.com/2026/09/18/politics/us-military-ai-false-intelligence-china-ship">米軍、AIが捏造した「中国船が核兵器部品を輸送」という偽情報レポートを基に拿捕作戦を準備、実行直前に虚偽と判明</a></h3>
+        </div>
+        <div class="summary">CNNの独自報道によると、今春のイラン戦争中、米インド太平洋特殊作戦司令部発の情報を基にアナリストがチャットボットに船荷目録を照会したところ、AIがオープンソース情報と機密シギント(信号情報)を誤って結びつけ、中東を航行する中国船が核兵器計画関連部品を輸送していると結論づけた。アナリストはその結果をさらにAIで通常の情報レポート形式に整形し配布、これを信頼した軍が拿捕作戦の準備に入り、武装要員が乗船態勢を取り軍用機も出動していた。作戦実行の直前になって内容の精査が行われ、レポートがAI生成の誤情報だったことが判明し、作戦は中止された。使用されたチャットボットの具体名は特定されていない。</div>
+        <div class="key-points">
+          <ul>
+            <li>アナリストがAIチャットボットに船荷目録を照会し、公開情報と機密シギントを誤結合、核兵器部品輸送という誤った結論を生成</li>
+            <li>誤情報はAIで正式な情報レポート形式に整形され配布、武装要員の乗船準備・軍用機出動まで進んだ後、作戦直前に虚偽と判明し中止</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>CNN</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-09-18</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://www.koreajoongangdaily.com/business/korea-raises-data-breach-fines-to-10-of-revenue/12869899">韓国、情報漏えいの制裁金上限を売上高の10%に引き上げ——改正前の3%から3倍超、Coupangの過去事例なら「兆ウォン規模」に達する試算</a></h3>
+        </div>
+        <div class="summary">韓国個人情報保護委員会(PIPC)は2026年9月13日施行の改正個人情報保護法で、故意または重過失により1,000万人以上の個人情報を漏えいさせた企業への制裁金上限を、年間売上高の10%(改正前は3%)に引き上げた。10%の上限は過去3年以内の再違反、または是正命令への不履行後に漏えいが発生した企業に適用される。漏えいリスクが高いと判断した場合は確定前でも72時間以内のユーザー通知が義務化され、データ保護investmentの実施や早期検知・迅速な通知があれば制裁金を最大40%ずつ軽減できる仕組みも設けた。売上高1,800億ウォン超の大企業には、最高プライバシー責任者の任命・解任に取締役会承認と委員会への報告を義務付ける。</div>
+        <div class="key-points">
+          <ul>
+            <li>制裁金上限は売上高の3%→10%に引き上げ、適用は再違反企業または是正命令不履行後の漏えいに限定、リスク高と判断した時点で確定前でも72時間以内の通知義務</li>
+            <li>データ保護投資や早期検知・迅速通知でそれぞれ最大40%の減額、6月の Coupang(3,755万人漏えいで6,246億ウォンの制裁金)なら新基準では兆ウォン規模に達し得ると試算</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Korea JoongAng Daily</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-18</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://blog.cloudflare.com/saving-100-tb-of-ram-with-math/">Cloudflare、ロードバランサ内部構造体のフィールドを32bitから16bitへ縮小しハッシュ生成数を90%削減、世界全体で100TBのメモリを節約</a></h3>
+        </div>
+        <div class="summary">Cloudflareは内部ロードバランシングサービス「Pingora Backend Router(PBR)」のメモリ使用量を、2つの数学的手法の組み合わせで削減した。まず、6万5千台超のサーバーを扱う想定がないことからハッシュ格納構造体のインデックスフィールドを32bitから16bitに縮小し、この構造変更だけで25%のメモリ削減を達成。さらに一貫性ハッシュの変動係数を導出する確率式を使い、サーバー1台あたり約10万個生成していたハッシュを約1万個まで90%削減しても実用上無視できる誤差に収まることを確認した。変動係数はサーバー100台・ハッシュ160個/台で約8%まで低下することを示し、10万個を超えるハッシュ数では改善が頭打ちになる収穫逓減の関係も突き止めた。移行はデュアルリング方式で段階的に展開し、キャッシュの無効化やオリジンへのトラフィック急増を防いだ。</div>
+        <div class="key-points">
+          <ul>
+            <li>インデックスフィールドを32bit→16bitに縮小するだけで25%のメモリ削減、サーバー1台あたりのハッシュ生成数を約10万→約1万(90%減)に圧縮</li>
+            <li>サーバー100台・160ハッシュ/台の一貫性ハッシュで変動係数(CV)は約8%まで低下、デュアルリング方式で段階展開しキャッシュ無効化やオリジン負荷急増を回避</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Cloudflare Blog</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-09-18</span>
+          <span class="engagement">▲ 155</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://blog.ferstar.org/en/posts/zcode-silent-workspace-snapshot-upload/">AIコーディングアプリ「ZCode」がGit履歴を含むワークスペース全体を無断でAliyun OSSへ暗号化アップロード、復号鍵はユーザーの手元になし</a></h3>
+        </div>
+        <div class="summary">Zhipu製のAIコーディングデスクトップアプリ「ZCode」を調査した研究者は、`~/.zcode`のディスク使用量確認中にペンディング状態の313MB暗号化アーカイブを発見した。アプリのログ解析とapp.asarのリバースエンジニアリングにより、ZCodeが`.git`履歴・LFSキャッシュ・reflog・グローバル設定を含むワークスペース全体を無断でパッケージ化し、暗号化した上でAliyun OSSへアップロードしていることを突き止めた。スナップショットの内訳はLFSキャッシュ56.8%(196.1MB)・gitオブジェクト29.6%(102.2MB)・ソースコード等13.4%(46.2MB)で、Git履歴だけで9割近くを占める。暗号化にはサーバー側が動的に配布するRSA公開鍵を使う一方、秘密鍵はクラウド側にのみ保管されるため、ユーザー自身は自分がアップロードしたデータを復号できない構造になっている。</div>
+        <div class="key-points">
+          <ul>
+            <li>345MBのワークスペースが313MBの暗号化アーカイブとしてアップロードされ、削除後も繰り返し再パッケージ化されることを確認</li>
+            <li>スナップショットの90%近くがGit履歴(LFSキャッシュ56.8%・gitオブジェクト29.6%)、復号用秘密鍵はクラウド側のみに保管されユーザーは自データを復号不可</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>ferstar.org</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-09-17</span>
+          <span class="engagement">▲ 237</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://davidlattimore.github.io/posts/2026/09/18/benchmarking-wild-vs-mold.html">高速リンカ「Wild」対「Mold」のベンチマーク条件を検証、ファイルシステムや出力ファイル削除有無で結果が逆転すると判明</a></h3>
+        </div>
+        <div class="summary">Rust製リンカ「Wild」の開発者が、公表済みの高速性ベンチマークとMoldの主張が食い違う原因を検証した記事。blender・godot・clangのビルドで比較したところ、ext4上で出力ファイルを削除し`--no-fork`を付けた条件ではMoldがデバッグビルドで1.0〜1.3倍優位、Wildはリリースビルドでわずかに優位(0.8〜0.9倍)と拮抗する一方、tmpfs・出力ファイルのキャッシュ維持・fork許可というWildに有利な条件では0.6倍までWildが上回った。Mold側のベンチマークは出力ファイルを実行間で削除する設計になっており、この差が結果に大きく影響していたという。</div>
+        <div class="key-points">
+          <ul>
+            <li>Mold 2.42.0〜2.42.1で性能改善があり、Wildの旧ベンチマーク公表値との乖離の一因になっていたことが判明</li>
+            <li>Wildはfallocateやhugepagesなどファイル作成を高速化するOS依存の最適化を未実装(次期リリースで追加予定)、コア数が多い環境でのスレッドスケーリングの違いも影響と分析</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>davidlattimore.github.io</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-09-18</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://donjon.ledger.com/blog/rp2350-secure-debug-laser-fault-injection/">Raspberry Pi RP2350、光子発光解析とレーザーフォールトインジェクションでセキュアデバッグロックを突破、OTPの128bitシークレットを奪取</a></h3>
+        </div>
+        <div class="summary">Ledger Donjonの研究チームは、RP2350マイコン(A4リビジョン)の`DEBUGEN`レジスタが他のセキュリティ関連フィールドと異なり冗長エンコーディング保護を欠く弱点を発見した。まず光子発光顕微鏡(PEM)でチップ動作中の赤外光子放出を計測し、`DEBUGEN`の各ビットを制御するトランジスタ領域を特定。続いてその領域にレーザーパルスを照射し、恒久的な`DEBUG_DISABLE`フラグやロックビット`DEBUGEN_LOCK`、OTPメモリを守るランタイムのページロックを、レーザー誘起のビット反転で無効化した。`PROC1`と`PROC1_SECURE`の2ビットを狙って設定することでセキュア世界の実行制御を奪取でき、レーザーパラメータの較正後は数秒で成功したという。この手法とファームウェアの再ロックを防ぐ「レスキューリセット」を組み合わせ、OTPに保存された128bitのチャレンジシークレットの復元に成功した。</div>
+        <div class="key-points">
+          <ul>
+            <li>攻撃には破壊的なバックサイド開封と約25万ドル相当の実験機材が必要、レーザーパラメータ較正後は数秒で`DEBUGEN`のビット反転に成功</li>
+            <li>`PROC1`/`PROC1_SECURE`ビットの設定でセキュア世界のメモリアクセス・実行制御を奪取、レスキューリセットとの組み合わせでOTPの128bitシークレットを復元</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Ledger Donjon Blog</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-09-17</span>
+          <span class="engagement">▲ 136</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-data">Data</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/planetscalepostgresql11800qpsdbneki.html">PlanetScale、PostgreSQLの自動シャーディングDB「Neki」をプレビュー公開、512シャード・1.22PBのデータで1億1,853万QPSを実測</a></h3>
+        </div>
+        <div class="summary">PlanetScaleは、YouTubeのMySQLスケーリング技術Vitessから着想を得た自動シャーディング型PostgreSQLサービス「Neki」をプレビュー公開した。標準のPostgreSQLプロトコルに対応するため既存のドライバやツールを無改修で利用でき、クライアントは「Nekiルーター」に接続してクエリの解析・分散実行計画・結果集約を任せる。ベンチマークでは512シャード・1.22PBのデータに対し1億1,853万8,803QPSを記録し、シャード数の増加にほぼ線形に性能が伸びることを確認した。各シャードはプライマリ1台・異なるアベイラビリティゾーンに配置したレプリカ2台以上の構成で高可用性を確保し、単一プライマリ・レプリカ構成から必要に応じてシャーディングへ移行できる柔軟性も備える。</div>
+        <div class="key-points">
+          <ul>
+            <li>512シャード・1.22PBのデータで1億1,853万8,803QPSを記録、シャード数増加に対しほぼ線形にスケール</li>
+            <li>標準PostgreSQLプロトコル互換で既存ドライバ・ツールをそのまま利用可能、各シャードはプライマリ1+異なるAZのレプリカ2以上で高可用性を確保</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-09-17</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://tech.layerx.co.jp/entry/2026/09/18/185816">LayerX、緊急社内Jev勉強会に50人超が参加し30分でアイデア50件超、「既存LLM呼び出しの置き換え」ではなく「今まで置けなかった場所にAIを置く」発想への転換を強調</a></h3>
+        </div>
+        <div class="summary">LayerXは、TypeSafe AIの新モデル「Jev」について緊急の社内勉強会を開催し、50人超のエンジニアが参加、30分間で50件超のアイデアが出た様子を報告した。著者は、既存のLLM呼び出しを単純にJevへ置き換えるのではなく「今まで検討すらしなかった場所にAIを組み込む」発想の転換が重要だと強調する。議論では、文章生成ではなく「判断だけ」で足りる書類分類・自動承認・名寄せなどの業務や、確信度スコアに応じて自動処理と人間レビュー・上位モデルへのエスカレーションを振り分けるワークフロー、低コスト・低遅延を活かした全件データスキャンやキー入力ごとのリアルタイム判定といった、これまでレイテンシとコストで断念していた用途が挙がった。契約管理・経費処理・人事システムなど複数の事業部にまたがるアイデアが出て、部門横断のブレストが議論を加速させたという。</div>
+        <div class="key-points">
+          <ul>
+            <li>50人超が参加した30分の勉強会で50件超のアイデアが創出、書類分類・自動承認・名寄せなど「判断だけ」で足りる業務が主な対象に</li>
+            <li>確信度スコアに応じ自動処理/人間レビュー/上位モデルへエスカレーションを振り分けるワークフローや、全件データスキャン・キー入力ごとのリアルタイム判定などレイテンシ・コストで断念していた用途を議論</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>LayerX Tech Blog</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-09-18</span>
+          <span class="engagement">🔖 195</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/mizchi/articles/jev-is-gpu-for-llms">「既存のLLMがCPUなら、JevはそのGPU版」、精度と引き換えに並列性を得た構造化判断モデルの技術的位置づけを解説</a></h3>
+        </div>
+        <div class="summary">著者はJevを、深い逐次推論が得意な既存LLMを「CPU」に、精度を落とす代わりに大量並列処理を実現する「GPU」に例えて解説する。Jevは自然文を生成してからJSONに変換するのではなく、推論内部の理解を保ったまま修正済みのデコード層で構造化データを直接出力する設計で、あらかじめ与えられた選択肢からしか選べないため原理上「あり得ない出力」は発生しないが、選択肢自体が誤っていれば高い確信度で誤答するとも指摘する。著者はチェスでClaudeに勝利、MOBAでの戦術連携、ESLintルール検出で86%の精度、監視付きブラウザ自動化で96%超の成功率という実験結果を示した。</div>
+        <div class="key-points">
+          <ul>
+            <li>1ゲームあたり約0.0001ドルで稼働(出力は無料)、1リクエスト500〜600ミリ秒で完了し秒間2フレーム相当のリアルタイム性、1リクエスト内で256択を並列評価</li>
+            <li>ESLintルール検出で86%の精度、監視付きブラウザ自動化タスクで96%超の成功率、地理的距離による遅延は約120ミリ秒(米国内テストでは350ミリ秒)</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn (mizchi)</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-09-18</span>
+          <span class="engagement">🔖 255</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://qiita.com/suwa_nobu/items/e867493a5cbcdfaa40c9">Claude Codeの`Write()`拒否ルールは12回中12回すり抜け、効果があったのは`Edit()`ルールだけと36回の検証で判明</a></h3>
+        </div>
+        <div class="summary">著者はClaude Code v2.1.273とv2.1.275を対象に、`Write()`/`Edit()`の権限拒否ルールが実際に機能するかを、3種のルール×3種のファイルアクセス経路×2バージョン×2回の計36回`acceptEdits`モードで検証した。結果、`Write()`ルールは12回の書き込み試行すべてが成功してしまい効果0%だったのに対し、`Edit()`ルールはEditツール・Writeツール・Bashリダイレクトの全経路で12回とも書き込みをブロックし効果100%を示した。両バージョンで挙動は同一で、v2.1.275の変更履歴は「修正」を謳っていたが、これは新規ルール生成時に`Edit()`を優先する変更に過ぎず、既存の機能しない`Write()`ルールの評価自体は直っていなかった。</div>
+        <div class="key-points">
+          <ul>
+            <li>3ルール×3アクセス経路×2バージョン×2回=計36回のテストで検証、`Write()`ルールは12回中12回すり抜け(効果0%)</li>
+            <li>`Edit()`ルールはEdit/Write/Bashリダイレクトの全経路で12回中12回ブロック(効果100%)、v2.1.275の修正は新規ルール生成時の挙動のみで既存`Write()`ルールの評価は無修正のまま</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita (suwa_nobu)</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-09-18</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://qiita.com/yasusun/items/3d4d31566ad9a1107216">NVIDIA DGX Station GB300相当機を導入、Grace 72コア+HBM3e 252GB(7.1TB/s)でDeepSeek-V4-Flash-Vision-Exp(305B)を運用しトークン生成273/秒を実測</a></h3>
+        </div>
+        <div class="summary">著者の会社はDellがNVIDIAのDGX Station設計に基づき製造した「Dell Pro Max with Station GB300」を導入した。NVIDIA Grace(Armベース72コア)CPU、252GBのHBM3e(帯域7.1TB/s)、496GBのLPDDR5Xを統合メモリアーキテクチャで748GBとして扱え、FP4演算性能は20petaFLOPS。GPU単体最大1,300W・電源1,600W、重量38.67kgで200V電源が必要なためサーバールームへの設置となった。Ubuntu 24.04.4 LTS・CUDA 13.2・Docker同梱で、vLLMとLiteLLMのOpenAI互換API経由でDeepSeek-V4-Flash-Vision-Exp(305Bパラメータ)を運用し、稼働1日・2,876リクエストの実測で生成速度は中央値約273トークン/秒、初回トークンまでの時間は中央値約0.50秒だったという。</div>
+        <div class="key-points">
+          <ul>
+            <li>Grace 72コア・HBM3e 252GB(7.1TB/s)・LPDDR5X 496GBを統合メモリ748GBとして利用、FP4で20petaFLOPS、重量38.67kg・200V電源必須でサーバールーム設置</li>
+            <li>DeepSeek-V4-Flash-Vision-Exp(305B)をvLLM+LiteLLMで運用、稼働1日・2,876リクエストで生成速度中央値273トークン/秒・TTFB中央値約0.50秒を実測、Claude Opus級と遜色ない体感という利用者評あり</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita (yasusun)</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-09-17</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://lwn.net/Articles/1092993/">組版ツール「Typst」進捗レビュー、0.15で変数フォント・MathML出力・複数参考文献リストに対応もLaTeX代替には出版社側の壁</a></h3>
+        </div>
+        <div class="summary">Rust製の組版システムTypst(Apache-2.0)の進捗を追ったLWNのレビュー記事。2026年6月リリースの0.15では変数フォント対応、HTML向け数式出力用のMathML変換、1文書内での複数参考文献リスト、相互リンクした文書集合を作る「バンドル出力」、長期保存性とアクセシビリティを両立するPDF規格対応が追加された。コントリビューター数は460人、パッケージエコシステムは1,500以上に拡大し「いずれLaTeXを置き換える」と目されているが、多くの学術出版社が投稿形式としてLaTeXやWordを指定しているため、実際の置き換えは進んでいないと指摘する。斜体と通常書体を行き来する際の字間調整(イタリック補正)など、プロ品質の組版に必要な機能もまだ欠けている。</div>
+        <div class="key-points">
+          <ul>
+            <li>0.15で変数フォント・MathML出力・複数参考文献リスト・バンドル出力・PDF規格対応を追加、コントリビューター460人・パッケージ1,500以上に拡大</li>
+            <li>学術出版社の多くがLaTeX/Word指定の投稿形式を維持しているためLaTeX代替としての普及は限定的、イタリック補正など組版品質面の機能もまだ未実装</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>LWN.net</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-09-17</span>
+          <span class="engagement">▲ 66</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://cactuscompute.com/needle">エッジ向け基盤モデル「Cactus Needle 3」公開、8〜29MBのバイナリで10倍大きいモデルのモバイルツール呼び出しを上回る精度</a></h3>
+        </div>
+        <div class="summary">Cactus Computeは、単一の重み集合を2〜20層の複数モデルとして使い分けられる「intelligence laddering」設計のエッジ向け基盤モデル「Needle 3」を公開した。CQ2bit量子化により2,900万〜1億2,100万パラメータ(層数に応じて可変)を8〜29MBのバイナリに圧縮し、スマートホーム機器・ロボティクス・スマートフォン・ウェアラブル・ARグラス・車載機器での利用を想定する。モバイル向けツール呼び出しタスクでは自身の10倍のサイズのモデルを上回る精度を示し、抽出タスクでは2〜3倍大きいモデルに匹敵、ファインチューニング後は4層以上のサブネットワークがDeepSeek V4 Flashを上回ったという。</div>
+        <div class="key-points">
+          <ul>
+            <li>CQ2bit量子化で2,900万〜1億2,100万パラメータを8〜29MBに圧縮、3.6億トークンの独自構造化データで学習、ツール呼び出し・構造化抽出・テキスト埋め込みの3機能を搭載</li>
+            <li>モバイルツール呼び出しで自身の10倍サイズのモデルを上回る精度、ファインチューニング後は4層以上のサブネットワークがDeepSeek V4 Flashを上回る性能</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Cactus Compute</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-18</span>
+          <span class="engagement">▲ 144</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://github.com/warp-tech/warpgate/releases/tag/v0.29.0">アクセス管理基盤「Warpgate v0.29.0」リリース、セッション事前承認(JITアクセス)と組織全体へのMFA強制ポリシーを追加</a></h3>
+        </div>
+        <div class="summary">サーバー・Kubernetesクラスタ・RDPターゲットへの安全なリモートアクセスを提供するOSS「Warpgate」がv0.29.0をリリースした。管理者はターゲットへのアクセス前に承認を必須化できる「セッション事前承認(JITアクセス)」をタイムアウト・キャッシュ設定付きで導入でき、SSO認証済みアカウントを除外可能な組織全体のMFA強制ポリシーも新設した。Kubernetes操作(exec・attach・port-forward・debug)を構造化監査ログに記録するようになったほか、再作成されたアカウントが古いセッションでアクセスできてしまう問題などモデレート〜軽微な4件のセキュリティ問題も修正した。</div>
+        <div class="key-points">
+          <ul>
+            <li>セッション事前承認(JITアクセス)とSSO除外可能な組織全体MFA強制ポリシーを新設、新規ユーザーには既定のクレデンシャルポリシーを自動適用</li>
+            <li>Kubernetesのexec/attach/port-forward/debug操作を構造化監査ログに記録、古いセッションでの再作成アカウントアクセスなどモデレート〜軽微な脆弱性4件を修正</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub (warp-tech/warpgate)</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-16</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://sockpuppet.org/blog/2026/09/17/how-to-write-with-an-llm/">LLMを「ゴーストライター」でなく「校閲者」として使う執筆術、モデルが提案する言い回しは採用せず機械的な欠陥検出だけに使う</a>
+        <span class="quick-summary">— 受動態の多用や「very」「actually」などの冗語検出はLLMが得意な一方、褒め言葉に流されず自分で書き直す姿勢を保つべきと説く。</span>
+        <span class="meta">sockpuppet.org</span>
+        <span class="engagement">▲ 345</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://overreacted.io/how-i-vibed-a-proof-of-conways-conjecture/">Dan AbramovがChatGPT・Claudeのマルチエージェント構成でConwayの精密化予想を証明、1か月で計400億トークン・約4万ドル分を投入</a>
+        <span class="quick-summary">— 50年間未解決だった超現実数に関する予想を、PM役・数学役・批判役・Lean検証役に分担させる体制へ2度作り直して到達した。</span>
+        <span class="meta">overreacted.io</span>
+        <span class="engagement">▲ 197</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://hawksley.dev/blog/i-dont-like-passkeys">「パスキーは嫌いだ」、フィッシング耐性と引き換えにアカウント永久ロックアウトのリスクを負う個人利用者の視点から批判</a>
+        <span class="quick-summary">— ハードウェアキー1本あたり25〜100件(上位機種でも最大300件)という保存上限や、Apple/Googleのアカウント停止で同期パスキーごと失う設計を問題視する。</span>
+        <span class="meta">hawksley.dev</span>
+        <span class="engagement">▲ 38</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://www.hacktron.ai/blog/hacking-openai">研究者、DiscourseフォーラムのlibheifヒープバッファオーバーフローとSSO設定不備を連鎖させOpenAI社員アカウントを72時間以内に乗っ取り</a>
+        <span class="quick-summary">— Claude Opus 5でエクスプロイト開発を進め、内部GitHubへのPR作成まで到達、OpenAIはSSOの欠陥を報告から14時間で修正しバウンティ6,500ドルを支払った。</span>
+        <span class="meta">hacktron.ai</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://seclists.org/oss-sec/2026/q3/822">Linuxカーネルにroot権限奪取可能な脆弱性4件、10〜21年前から存在するXFRM/AH6・TUN・PPPoE・SCTP周りのバグ群</a>
+        <span class="quick-summary">— 3件は非特権ユーザー名前空間や特定capabilityが前提だが、DiagSpill(SCTP)は標準機能のみで悪用可能、Linux 5.10.270以降の安定版で修正済み。</span>
+        <span class="meta">seclists.org (oss-sec)</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://www.publickey1.jp/blog/26/java_27g1_gctls_13.html">「Java 27」リリース、全環境でG1 GCがデフォルト化しTLS 1.3向け耐量子暗号ハイブリッド鍵交換にも対応</a>
+        <span class="quick-summary">— オブジェクトヘッダーを96bitから64bitに圧縮する新機能や構造化並行処理(7th preview)も収録、Java 27自体は非LTSでサポートは2027年3月まで。</span>
+        <span class="meta">Publickey</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://www.publickey1.jp/blog/26/ai75csstailwindshopify.html">AIによるドキュメント流入減でエンジニアの75%を解雇していたTailwind CSS、Shopifyによる買収を発表し「長期的な安定した居場所」を確保</a>
+        <span class="quick-summary">— 2026年1月時点で公式ドキュメントへのトラフィックは2023年比40%減、商用製品Tailwind UI/Appは新規販売を終了するが既存契約者は利用継続、OSS本体の開発は継続する。</span>
+        <span class="meta">Publickey</span>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="./" class="archive-link">🗂 過去のダイジェスト</a>
+    </footer>
+  </div>
+</body>
+</html>
