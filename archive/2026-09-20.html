@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-09-20</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="../feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-09-20 (Sun)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+      <nav class="site-nav">
+        <a href="../" class="active">📰 日刊ダイジェスト</a>
+        <a href="../trends.html">🔌 週次プラグイントレンド</a>
+        <a href="../ai-trends.html">🧠 AI プロダクト動向</a>
+        <a href="./">🗂 アーカイブ</a>
+      </nav>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 20 articles</span>
+      <span>🏷 7 categories</span>
+      <span>📡 20 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item">
+        <span class="number-value">541倍</span>
+        <span class="number-label">PlanetScale「Tin」のフレーズ検索速度(標準Postgres GIN比)</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">1/10</span>
+        <span class="number-label">200人規模企業がOpenCode+LiteLLM統一で圧縮したAI利用コスト</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">CVSS 9.8</span>
+        <span class="number-label">Check Point Security Management Serverの未認証root RCE脆弱性の深刻度</span>
+      </div>
+    </div>
+
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
+
+      <div class="card featured deep-dive">
+        <div class="card-header">
+          <span class="tag tag-product">Product</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://itsfoss.com/news/grapheneos-android-17-qpr1-fiasco/">DEEP DIVE: Android 17 QPR1、Honeycomb以来15年ぶりにAOSPへ公開されない新APIが登場——GrapheneOSがGoogleのPixel優遇を批判</a></h3>
+        </div>
+        <div class="summary">Googleは例年、Android の新APIをAndroid Open Source Project(AOSP)へ即座に公開してきたが、Android 17 QPR1では新パッケージ`android.hardware.hid`と`android.media`・`android.os`・`android.provider`・`android.telecom`・`android.view`など16パッケージの変更をAOSPに公開しなかった。GrapheneOSはこれを「Android 3.x(Honeycomb、2011年)以来初めて、開発者向け新APIの実装ソースがAOSPに来ない」事態と位置づけ、3点の問題を指摘する。第一に、Pixel以外のOEM向けセキュリティパッチが標準のAndroid Security Bulletinの範囲を超えてPixel限定で先行配布されている点。第二に、非Pixel端末へのパッチ到達が3か月遅れている点。第三に、GrapheneOSが9月1日にGPLソースコードを要求してから実際に提供されるまで2週間以上かかった点。GrapheneOS自身はQPR1向けのコードを先行して移植済みだが、配布する法的な許可がまだない状態が続いている。次のQPR2は12月にリリース予定で、その時点で非Pixel端末にもパッチが届く可能性があるとみられる。この動きは、2027年に予定されるアプリ開発者登録義務化などGoogleのAndroidエコシステム管理強化の流れとも重なり、"Keep Android Open"キャンペーンが反対の声を上げている。</div>
+        <div class="editorial">🧠 GoogleはAOSPを「オープンな基盤」と謳ってきたが、今回の措置はPixelを事実上の一級市民として扱う先例になりかねない。QPR2で本当に非Pixel端末に穴埋めされるかは12月まで確認しようがなく、一時的な運用ミスなのか意図的な差別化戦略なのかは現時点では判断できない。ただしGrapheneOSのようにAOSPソースへの依存度が高いカスタムROMやセキュリティ研究者にとっては、パッチ提供の遅延そのものが実害になる点は疑いようがない。</div>
+        <div class="key-points">
+          <ul>
+            <li>新パッケージ`android.hardware.hid`を含む17パッケージの変更がAOSPに未公開、Android 3.x(2011年)以来約15年ぶりの事態</li>
+            <li>非Pixel OEM向けパッチ配布が標準ルートで3か月遅延、GrapheneOSのGPLソースコード要求も2週間以上かかって提供</li>
+            <li>次期QPR2は12月リリース予定でそこで非Pixel端末にもパッチが届く可能性、2027年のアプリ開発者登録義務化とも軌を一にする動き</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 AOSPソースに依存するカスタムROM開発者やセキュリティ研究者は、当面Pixelファームウェアのリバースエンジニアリングを前提にした対応が必要になる。</div>
+        <div class="meta">
+          <span>It's FOSS</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-09-18</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://thehackernews.com/2026/09/critical-check-point-management-server.html">Check Point、Security Management Serverの未認証スタックオーバーフロー(CVSS 9.8)を修正——長すぎるユーザー名でroot権限のリモートコード実行</a></h3>
+        </div>
+        <div class="summary">Check PointはSecurity Management Server・Multi-Domain Server・Log Serverに影響する脆弱性CVE-2026-91843を修正した。認証前のログイン処理を担うコードパスにスタックオーバーフローがあり、極端に長いユーザー名を送るだけで未認証の攻撃者がネットワーク越しにroot権限でコードを実行できる。対象はR82.20からR80.10まで幅広いリリースブランチに及ぶ。緊急LivePatch「BUNDLE_URGENT_SECURITY_UPDATE」で修正済みで、適用状況は`cplp list`コマンドで確認できる。サポート終了ブランチには修正が提供されない。記事公開時点で実悪用の報告は確認されていないが、攻撃条件が「ログイン要求を送るだけ」と極めて低いため、監査ログの「Username too long」エントリを手がかりに悪用試行を検知することが推奨されている。</div>
+        <div class="key-points">
+          <ul>
+            <li>CVE-2026-91843、CVSS 9.8。認証前のログイン処理でスタックオーバーフローが発生し未認証のままroot権限のRCEに到達</li>
+            <li>R82.20〜R80.10の主要ブランチが対象、緊急LivePatch適用と`cplp list`での確認、EoSブランチには修正なし</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>The Hacker News</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-17</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-data">Data</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://planetscale.com/blog/introducing-tin">PlanetScale、Postgres向け全文検索拡張「Tin」を一般提供開始——ctidをドキュメントIDに使う設計で標準GIN比541倍、ParadeDB比最大57倍を実測</a></h3>
+        </div>
+        <div class="summary">PlanetScaleは全文検索用のPostgres拡張「Tin(Text INdex)」を2026年9月16日に一般提供開始した。ブール式・フレーズ検索・あいまい一致・BM25スコアリングに対応し、Postgresのトランザクション・レプリケーション・更新とも整合する。性能面の鍵は、独自の連番IDではなくPostgresネイティブの`ctid`(タプル識別子)をドキュメントIDとして使う点で、別途マッピング構造を持たずにAVX2レジスタへ収まるページ単位のビットマップでベクトル化演算を行える。85GBのStack Exchangeデータセットでのベンチマークでは、上位10件取得のクエリでParadeDBの25倍のスループット・26倍低いp99レイテンシ、フレーズ検索では標準Postgres GIN比541倍・ParadeDB比10倍、書き込み同時実行下の論理和検索ではParadeDB比36〜57倍のスループットを記録した。インデックス構築は約8分・50.7GBの容量を要した。全PlanetScale PostgresおよびNekiデータベースで即時利用可能。</div>
+        <div class="key-points">
+          <ul>
+            <li>ctidをドキュメントIDに使いAVX2でページ単位ビットマップ演算、上位10件取得クエリでParadeDB比25倍スループット・p99レイテンシ26倍改善</li>
+            <li>フレーズ検索で標準Postgres GIN比541倍、書き込み同時実行下の論理和検索でParadeDB比36〜57倍、85GBデータセットでインデックス構築約8分・50.7GB</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>PlanetScale Blog</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-09-16</span>
+          <span class="engagement">▲ 165</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://www.cisa.gov/news-events/alerts/2026/09/18/cisa-adds-two-known-exploited-vulnerabilities-catalog">CISA、Linuxカーネルの脆弱性2件を悪用確認済み(KEV)カタログに追加、BOD 26-04で連邦機関に修正義務</a></h3>
+        </div>
+        <div class="summary">CISAは2026年9月18日、Linuxカーネルの脆弱性CVE-2025-39964(AF_ALGソケットへの同時書き込みを許すレースコンディション)とCVE-2026-53266(ebtablesのSNAT ARP書き換えパスにおける境界外書き込み)を、悪用確認済み脆弱性(KEV)カタログに追加した。いずれもローカル権限を持つ攻撃者によるサービス拒否や権限昇格、暗号処理結果の破壊につながる。同日別件のCVE-2025-39682(TLS受信パスの例外条件チェック不備、CVSS 9.8)も追加され、これら3件はBinding Operational Directive 26-04に基づき連邦機関に優先的な修正対応が求められている。</div>
+        <div class="key-points">
+          <ul>
+            <li>CVE-2025-39964はAF_ALGソケットへの競合書き込みでDoSや暗号処理結果の破壊を招くレースコンディション、CVE-2026-53266はebtables SNAT ARP書き換えパスの境界外書き込み</li>
+            <li>同時にCVSS 9.8のCVE-2025-39682(TLS受信パス)も追加されKEVカタログは計3件、BOD 26-04に基づき連邦機関へ修正対応を義務化</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>CISA</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-18</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://aws.amazon.com/blogs/machine-learning/the-new-agentcore-runtime-elastic-optimized-and-consistently-fast-starts/">AWS、Bedrock AgentCoreのランタイムを刷新——コールドスタートをP75で最大30秒→1.9〜2.0秒に短縮、メモリ課金も実使用量ベースへ</a></h3>
+        </div>
+        <div class="summary">AWSは2026年9月18日、Amazon Bedrock AgentCoreの新ランタイムを発表した。従来はセッション中コンテナイメージ全体をメモリに保持する分の課金だったが、新ランタイムはエージェントが実際に使用中のメモリのみをオンデマンドで読み込み、アイドル時には回収して課金対象から外す。コールドスタートも大きく改善し、200MB〜2GBのコンテナイメージでP75が従来の5.4〜30秒から1.9〜2.0秒へ短縮した。us-east-1・us-east-2・us-west-2・eu-west-1・ap-northeast-1で利用可能で、既存ランタイム作成・更新時に`platformVersion`を`V2`に設定するだけで有効化できる。ただしV2は環境のスナップショット準備を伴うため、READY状態になるまで数分かかる点はV1(数秒)と異なる。</div>
+        <div class="key-points">
+          <ul>
+            <li>コールドスタートP75が200MB〜2GBのイメージで5.4〜30秒→1.9〜2.0秒に短縮、メモリはオンデマンド読み込み・アイドル時回収の実使用量課金に変更</li>
+            <li>5リージョンで利用可能、`platformVersion=V2`設定で有効化できるがREADYまでに数分(V1は数秒)かかる点に注意</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>AWS Machine Learning Blog</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-09-18</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://lemire.me/blog/2026/09/18/faster-json-parsing-with-sve2-on-arm-processors/">simdjsonがARM SVE2の`match`命令でJSON構造文字判定を1命令に圧縮、Graviton4のインデックス処理速度が4.8→5.3GB/秒に向上</a></h3>
+        </div>
+        <div class="summary">Daniel Lemireは、新しいARMプロセッサのSVE2命令セットでJSON構造文字(`,` `:` `[` `]` `{` `}`)の判定を高速化する手法をsimdjsonに導入した。従来のNEON方式は16バイトあたり4命令を要していたが、SVE2の`match`命令は128bitレジスタ内の16バイトルックアップテーブルを使い、ほぼ1命令で同等の分類を実現する。AWS Graviton4(clang)ではインデックス処理段階が4.8GB/秒から5.3GB/秒に、Graviton5では6.3GB/秒から6.6GB/秒に改善し、パース全体ではGraviton4で2〜4%・Graviton5で1〜2%の性能向上を確認した。構造の多いファイル(gsoc-2018やgithub_events)ほど効果が大きく、数値中心のファイル(canadaやmesh)では効果が小さい。現状SVE2最適化はコンパイル時に`-mcpu=native`指定が必要で、SVE2非対応のApple SiliconやGraviton3世代ではNEONにフォールバックする。</div>
+        <div class="key-points">
+          <ul>
+            <li>SVE2の`match`命令は16バイトルックアップテーブルでJSON構造文字判定をほぼ1命令に圧縮、従来のNEONは16バイトあたり4命令</li>
+            <li>Graviton4のインデックス処理が4.8→5.3GB/秒、Graviton5が6.3→6.6GB/秒に向上、パース全体では2〜4%(Graviton4)・1〜2%(Graviton5)の改善に留まる</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>lemire.me</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-09-18</span>
+          <span class="engagement">▲ 10</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://fex-emu.com/Scourge-of-emulation/">x86からARMへのエミュレーションが遅い根本原因はメモリ順序モデルの違い——split-lockアトミックで458倍、書き込み結合メモリで816倍の性能劣化も</a></h3>
+        </div>
+        <div class="summary">x86エミュレータFEX-Emuの開発者が、x86の強いメモリ順序モデル(TSO)をARMの弱い順序モデルで再現する難しさを解説した記事。x86の全ロード・ストアをARMのacquire-load/release-storeに変換する初期実装はCPUによってはコストが高く、アンアラインメモリアクセスはアライメント違反フォールトを起こしメモリバリアへのフォールバックで最大50%の性能低下を招く。キャッシュライン境界をまたぐアトミック操作(split-lock)はx86基準比で458倍遅く、GPU向けアンキャッシュメモリへの書き込み結合ストアはバンド幅が816倍悪化し、SilksongやSubnautica 2が1FPSを下回る原因になっていた。ARMv8.3以降のLRCPC命令や、Apple M1のTSOモード、Qualcomm Oryon-3の「コヒーレントキャッシュライン」実装が、それぞれハードウェアレベルでこの差を縮めている。</div>
+        <div class="key-points">
+          <ul>
+            <li>アンアラインメモリアクセスはアライメントフォールト経由のメモリバリアで最大50%減、split-lockアトミックはx86基準比458倍遅い</li>
+            <li>GPU向け書き込み結合メモリのバンド幅が816倍悪化しゲームが1FPSを下回る事例も、ARMv8.3 LRCPCやApple M1 TSOモードが緩和策</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>fex-emu.com</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-09-17</span>
+          <span class="engagement">▲ 61</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-data">Data</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://duckdb.org/2026/09/18/opfs-wasm">DuckDB-Wasm 1.32でブラウザのOPFSに永続化対応、タブを閉じてもデータベースが消えない設計に</a></h3>
+        </div>
+        <div class="summary">DuckDB-Wasmが、ブラウザのOrigin Private File System(OPFS)を使ったデータベース永続化に対応した。これまではタブを閉じるとデータベースが消える制約があったが、1.32.0以降(または`next`タグの1.33.1-dev64.0以降)では`.duckdb`本体に加え`.wal`(先行書き込みログ)・`.wal.checkpoint`・`.wal.recovery`のヘルパーファイルをOPFS上に保持できる。デフォルトのチェックポイント閾値は16MBで、`checkpoint_threshold='0KB'`を設定すれば文ごとの自動チェックポイントも可能。想定用途はHTTPレンジリクエストで一度取得したリモートデータセットのOPFSキャッシュ、Parquetエクスポートの結果キャッシュ、サーバー不要のローカルファーストアプリなど。ブラウザタブは正常終了しないことが多いため、個別文ごとではなくバッチ単位で明示的に`CHECKPOINT`を呼ぶことが推奨されている。ただしOPFSはあくまで一時キャッシュ扱いで、ディスク不足時などにブラウザが内容を破棄する可能性がある。</div>
+        <div class="key-points">
+          <ul>
+            <li>DuckDB-Wasm 1.32.0以降でOPFS永続化に対応、`.duckdb`+`.wal`+ヘルパーファイル構成でデフォルトチェックポイント閾値は16MB</li>
+            <li>HTTPレンジリクエストで取得したリモートデータのローカルキャッシュやサーバー不要のローカルファーストアプリに活用可能、OPFSは一時キャッシュのため低ディスク時に破棄されうる</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>DuckDB Blog</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-09-18</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://syu-m-5151.hatenablog.com/entry/2026/09/19/112330">Codexのconfig.toml優先順位は7階層、AGENTS.mdは1ディレクトリにつき1ファイルだけ読む仕様を実地検証</a></h3>
+        </div>
+        <div class="summary">Codexの設定ファイル`config.toml`と作業手順ファイル`AGENTS.md`の挙動を検証した記事。`config.toml`はCLIフラグ→プロジェクト`.codex/config.toml`→`--profile`指定→個人`~/.codex/config.toml`→組織のクラウド管理既定値→システム設定→組み込み既定値の7階層で優先順位が決まる。`AGENTS.md`はプロジェクトルートから作業ディレクトリまで探索するが、各ディレクトリ階層では`AGENTS.override.md`を優先しつつ最大1ファイルしか読まない仕様で、指示サイズの上限はデフォルト32KiBとされる。Codex 0.134.0以降はプロファイル設定が`[profiles.review]`のようなインラインセクションではなく`review.config.toml`という別ファイル方式に変わった点にも触れ、`/status`や`/debug-config`で読み込み内容を確認してから設定失敗を疑うべきだと助言する。</div>
+        <div class="key-points">
+          <ul>
+            <li>config.tomlの優先順位はCLIフラグ〜組み込み既定値まで7階層、AGENTS.mdは各ディレクトリでAGENTS.override.md優先・最大1ファイルのみ読み込み</li>
+            <li>指示サイズ上限はデフォルト32KiB、Codex 0.134.0以降はプロファイル設定がインラインから別ファイル(review.config.toml等)方式に変更</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>syu-m-5151.hatenablog.com</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-09-19</span>
+          <span class="engagement">🔖 153</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://zenn.dev/nogu66/articles/claude-code-function-hooks-claude-mods">Claude Code拡張の新方式「Claude Mods」入門、TypeScript関数でUIやツール登録までカスタマイズ可能に</a></h3>
+        </div>
+        <div class="summary">Claude Codeを拡張する新方式「Claude Mods」を解説する記事。従来のコマンド型フックと異なり、TypeScriptの関数をエンジンに直接読み込ませてUI描画やツール登録まで自由にカスタマイズできる。`register(on, options)`でイベントハンドラを登録し、`$`(エンジンインターフェース)・`e`(イベントデータ)・`next()`(次のハンドラ呼び出し)の3引数パターンで動作する。イベントは`prepend`(組織ポリシー)→`user`→`append`(組織ポリシー)→`builtin`→`core`の5層を通過し、外側の層が内側を制御する入れ子のセキュリティ境界を形成する。現状は環境変数`CLAUDE_CODE_ENABLE_FUNCTION_HOOKS=1`が必要な早期アクセス機能で、変更はセッション中ホットリロードされる。公式mods(`/diff`・`agents-md`・`sec-default`)に加え、Claude Code内でゲームを動かす`cc-arcade`などコミュニティ製の実装例も紹介されている。</div>
+        <div class="key-points">
+          <ul>
+            <li>`register(on, options)`と`($, e, next)`3引数パターンでツール・UI・ファイルシステム・HTTP・MCPまで拡張可能、イベントはprepend→user→append→builtin→coreの5層を通過</li>
+            <li>環境変数`CLAUDE_CODE_ENABLE_FUNCTION_HOOKS=1`が必要な早期アクセス機能でホットリロード対応、プラグインは`$`を使わない限り外部に影響しない隔離環境で動作</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn (nogu66)</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-09-19</span>
+          <span class="engagement">🔖 83</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://zenn.dev/jtcc/articles/7e74fef42580a1">200人規模の企業がOpenCode+LiteLLMで全社AI利用を統一、コストは導入前の1/10以下に圧縮</a></h3>
+        </div>
+        <div class="summary">日本トレカセンター(従業員約200人)が、ChatGPT・Claude・Cursorなど個別ツールが乱立していたAI利用をOpenCode+LiteLLMの統一ゲートウェイに集約した事例。各従業員のデバイスにOpenCode(デスクトップクライアント)を配布し、AWS ECS Fargate上でセルフホストするLiteLLMゲートウェイ経由で各種LLMプロバイダーへリクエストを転送する構成で、利用可能モデルを一元管理できる。月次予算配分と従業員ごとの週次上限、Low/Mid/High/XHighの効果ベースのモデル階層でバックエンドを動的に切り替え、Google WorkspaceのSSOでAPIキーを発行する。結果として「コストを把握しやすくなり、金額も導入前の10分の1以下に収まっています」と報告されており、コメント欄では全従業員平均の月間利用額が約20万円という数値も挙がっている。</div>
+        <div class="key-points">
+          <ul>
+            <li>約200人の全社員にOpenCodeを配布しAWS ECS Fargate上のLiteLLMゲートウェイに集約、Low/Mid/High/XHighの効果ベースモデル階層でバックエンドを動的切替</li>
+            <li>コストは導入前の1/10以下に圧縮、月次予算配分+従業員ごとの週次上限とGoogle WorkspaceのSSOでキー発行・利用状況を可視化</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn (jtcc)</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-09-18</span>
+          <span class="engagement">🔖 74</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://qiita.com/suwa_nobu/items/c795cf89d0fd4091c9cb">Claude Code 2.1.277のAGENTS.md対応、インストール後「最初のセッションだけ読まれない」仕様をパスフレーズ検証で発見</a></h3>
+        </div>
+        <div class="summary">Claude Code 2.1.277で追加されたAGENTS.md対応を検証した記事。設定ファイルに仕込んだ「合言葉」をファイル読み込みツールなしで列挙させる手法で、実際にどのファイルが読み込まれているかを確認した。結果、CLAUDE.mdがAGENTS.mdより優先される、CLAUDE.local.mdが存在すると警告なしにAGENTS.md読み込みが無効化される、ユーザーレベルの`~/.claude/CLAUDE.md`は「CLAUDE.mdが存在する」扱いにならないなどの挙動が判明した。最大の落とし穴は、インストールまたはアップグレード後の最初のセッションではAGENTS.mdが読まれず、2セッション目以降で初めて読み込まれる点で、「機能していない」と誤解されやすい。両ファイルを読ませるには、プロジェクト単位ではなく`~/.claude/settings.json`に`"claude-md-and-agents-md"`設定を追加する必要がある。検証はv2.1.277のみ・各条件2〜3回の試行にとどまり、Bedrock/Vertex/Foundry環境での挙動は未検証としている。</div>
+        <div class="key-points">
+          <ul>
+            <li>インストール・アップグレード後の最初のセッションではAGENTS.mdが読まれず2セッション目以降で読み込まれる、CLAUDE.local.mdの存在は警告なしにAGENTS.md読み込みを無効化</li>
+            <li>両ファイルを読ませるには`~/.claude/settings.json`に`"claude-md-and-agents-md"`設定が必要、ユーザーレベルの`~/.claude/CLAUDE.md`は「CLAUDE.md存在」扱いにならない</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita (suwa_nobu)</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-09-19</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://zenn.dev/mizchi/articles/jev-lint-intro">Jev APIとast-grepを組み合わせたリントツール「jev-lint」、9,800行のコードを7.7秒・0.055ドルで命名/コメントの陳腐化を検出</a></h3>
+        </div>
+        <div class="summary">関数名・テスト名・コメントが実装内容とズレていないかを検出するツール「jev-lint」。ast-grepでセレクタルールに基づきコード断片を抽出し、自然言語ルールで評価、TypeSafe AIのJev APIへバッチ問い合わせしてスコアリングする3段構成で、tree-sitter対応言語なら適用できる。`npx -y jev-lint`で実行し`TYPESAFE_API_KEY`が必要。jev-lint自身(9,800行・22ルール・1,950対象)を対象にした自己適用テストでは実行7.7秒・コスト0.055ドル(約8円)、単一関数diffなら0.02ドル、複数ファイルdiffでも0.10〜1.00ドルに収まった。1リクエストで1,200件超の質問をバッチ処理できるJevの並列性がAPI呼び出し削減の鍵になっている。ただしコンテキストは約32Kトークンまでで単一ファイル解析に限られ、LLMの評価ぶれは`--retry`と`--record`のリプレイモードで緩和する設計。</div>
+        <div class="key-points">
+          <ul>
+            <li>ast-grep(抽出)+自然言語ルール(評価)+Jev API(バッチスコアリング)の3段構成、9,800行・22ルールの自己適用テストで実行7.7秒・0.055ドル</li>
+            <li>1リクエストで1,200件超の質問をバッチ処理しAPI呼び出しを削減、コンテキストは約32Kトークンまでで単一ファイル解析に限定</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn (mizchi)</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-18</span>
+          <span class="engagement">🔖 14</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://srcreigh.ca/posts/auditable-kata/">Kubernetes+Firecracker向けにKata Containersをフォークしコードベースを60%削減、監査しやすい最小構成に絞り込み</a></h3>
+        </div>
+        <div class="summary">Kata ContainersをAIツールAstraで監査しながらフォークし、ホストランタイムを13.5k行・エージェントを8.1k行まで約60%削減したプロジェクト。代替VMサポートやレガシーGoランタイム、エージェントのカーネルモジュールロードなど不要機能を削除し、x86_64+Kubernetes+Firecracker構成に絞ったコードを1行ずつ監査した。過程で、参照されないまま保持されていたエージェントRPC結果データや、不正な形式のエージェント応答でランタイムshimがパニックするケース、非同期コンテキストのスレッド処理に起因するネットワーク初期化のデッドロックを発見した。ホームラボのKubernetesクラスタで信頼できないワークロードをFirecracker上で動かして検証しており、Kubernetes+Firecracker組み合わせに特化した最小攻撃面プロジェクトはこれまで存在しなかったとしている。</div>
+        <div class="key-points">
+          <ul>
+            <li>ホストランタイム13.5k行・エージェント8.1k行まで約60%のコード削減、代替VMサポートやレガシーGoランタイムなど不要機能を除去</li>
+            <li>不正なエージェント応答によるshimパニックや非同期コンテキストのネットワーク初期化デッドロックを発見、ホームラボKubernetesクラスタで実地検証</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>srcreigh.ca</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-09-18</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.com/svenssonjoel/lispBM">マイコン向け並行Lisp処理系「LispBM」、VESC Labs発でブラウザ内WebAssembly REPLも提供</a></h3>
+        </div>
+        <div class="summary">LispBMは、マイコン(組み込み機器)向けに設計された並行処理対応のLisp言語。Erlang由来の並行処理・メッセージパッシング・パターンマッチング・プロセス監視の仕組みを取り入れており、STM32・NRF52・ESP32・x86など32/64bit問わず幅広いハードウェアで動作し、ChibiOS・FreeRTOS・ZephyrOSまたはベアメタル上に組み込める。電動モーターコントローラー向けファームウェアVESCを手がけるVESC Labsが関連プロジェクトとして提供しており、リソース制約の厳しい組み込み環境で複数タスクを同時に扱えるのが特徴。ドキュメント・Discordコミュニティに加え、ローカルにインストールせずブラウザ上で試せるWebAssembly版REPLも用意されている。</div>
+        <div class="key-points">
+          <ul>
+            <li>Erlang由来の並行処理・メッセージパッシング・パターンマッチングを備え、STM32・NRF52・ESP32・x86など32/64bit環境で動作</li>
+            <li>ChibiOS・FreeRTOS・ZephyrOSまたはベアメタル上に組み込み可能、インストール不要のブラウザ内WebAssembly REPLも提供</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub (svenssonjoel/lispBM)</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-09-18</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://www.prinzai.com/p/gpt-6-astra-solves-a-wwi-german-radio">GPT-6 Astraが第一次大戦のドイツ軍ADFGVX暗号を解読、1918年11月27日の未解読電文を史実の艦船記録と照合し裏付け</a>
+        <span class="quick-summary">— 鍵語「TRUPPENVERSCHIEBUNG」を特定し復号、内容は英巡洋艦のセヴァストポリ到着と連合国艦隊followの予告で、HMS Canterburyの航海日誌と一致した。</span>
+        <span class="meta">prinzai.com</span>
+        <span class="engagement">▲ 347</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://bw.swerdlow.dev/report">AIモデルにStarCraft: Brood Warで総当たり対戦させるベンチマーク、Codex Astra(xhigh)が18戦全勝でも「初心者レベルを超えない」と結論</a>
+        <span class="quick-summary">— Codex Astra(xhigh)は勝率100%・1戦10.54ドル、Claude Haikuは16戦全敗、Grok 4.6は行動数が少なく思考時間ばかり消費する傾向が出た。</span>
+        <span class="meta">bw.swerdlow.dev</span>
+        <span class="engagement">▲ 93</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://erichgrunewald.substack.com/p/why-you-should-almost-never-use-ai">「AIにはほぼ書かせるべきでない」、執筆をLLMに委ねることへの反論エッセイ</a>
+        <span class="quick-summary">— 「How to Write with an LLM」への反論として、文章の質は思考過程そのものであり、生成に頼ると自分の考えを検証する力が失われると主張する。</span>
+        <span class="meta">erichgrunewald.substack.com</span>
+        <span class="engagement">▲ 171</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://danluu.com/brain-off/">「AIに思考を丸投げする働き方に長期的な安全はない」、雑なAI生成コードの実例とレビューで差分が25%まで削られた事例を紹介</a>
+        <span class="quick-summary">— Bazel移行をAIエージェントで進めたところ判断点の多さから数か月を要した実例を挙げ、LLMが本当に有能になれば人間ごと自動化されるだけだと指摘する。</span>
+        <span class="meta">danluu.com</span>
+        <span class="engagement">▲ 42</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://ch.terabyteoff.com/">一貫性ハッシュの分散誤差を高校数学だけで導出、Cloudflareの100TBメモリ削減の数式的背景を解説</a>
+        <span class="quick-summary">— N台・1台あたりkハッシュの誤差率を√[(N-1)/(kN+1)]と導出し、二項分布とベータ関数積分で単純化する過程を示す。</span>
+        <span class="meta">ch.terabyteoff.com</span>
+        <span class="engagement">▲ 5</span>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="./" class="archive-link">🗂 過去のダイジェスト</a>
+    </footer>
+  </div>
+</body>
+</html>
