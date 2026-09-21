@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-09-21</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="../feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-09-21 (Mon)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+      <nav class="site-nav">
+        <a href="../" class="active">📰 日刊ダイジェスト</a>
+        <a href="../trends.html">🔌 週次プラグイントレンド</a>
+        <a href="../ai-trends.html">🧠 AI プロダクト動向</a>
+        <a href="./">🗂 アーカイブ</a>
+      </nav>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 19 articles</span>
+      <span>🏷 7 categories</span>
+      <span>📡 19 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item">
+        <span class="number-value">973件</span>
+        <span class="number-label">Microsoftが2026年9月Patch Tuesdayで修正したCVE件数</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">84.5%</span>
+        <span class="number-label">オープンウェイトモデルGLM 5.3-flashのCyberGym脆弱性再現スコア</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">73%</span>
+        <span class="number-label">国内チームがPRのCI実行時間を144分→39分に削減した割合</span>
+      </div>
+    </div>
+
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
+
+      <div class="card featured deep-dive">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://www.buchodi.com/chatgpt-now-knows-what-you-do-on-other-websites-via-ad-collector/">DEEP DIVE: ChatGPTに「広告コレクター」機能、Cookie `__obi`で他サイトの閲覧・購買履歴とアカウントを紐付け——スクレイピングされた身元情報が広告主提供分の2.7倍</a></h3>
+        </div>
+        <div class="summary">研究者の調査により、OpenAIが社内で「bazaar」と呼ぶ広告トラッキング基盤の実態が2026年9月20日に公表された。広告主がOpenAIのコンバージョンピクセルを自社サイトに設置すると、Cookie`__obi`を通じて閲覧・購買データがChatGPTアカウントに送り返される仕組みだ。収集対象はメール・電話番号・氏名・所在地といった身元情報から、閲覧商品・購読記事・購入履歴・持病・債務整理の申し込みフォームまで及ぶ。SDKはフォーム欄やタグマネージャーからもデータを取得し、実際の通信ではスクレイピングによる身元情報イベントが685件と、広告主が直接渡した255件の2.7倍に達した。メール・電話はSHA-256でハッシュ化される一方、位置情報は平文のまま送信される。Cookieの有効期間は1年で、Chewy・Wayfair・Coursera・SeatGeekなど12の商用サイトで観測され、確認された30種の`__obi`値のうち12種は複数の広告主にまたがって出現した。ログアウト状態でも196件の匿名同期トークンが27日以上安定して追跡を継続する。研究者が9月14日に送った問い合わせに対し、OpenAIから実質的な回答はまだない。</div>
+        <div class="editorial">🧠 実測ではスクレイピングされた身元情報が広告主提供分を上回っており、ユーザーが同意したのはあくまで分析目的の範囲であるにもかかわらず、マーケティング目的のプロファイリングにまで使われている疑いが強い。ただしOpenAI側の公式説明はまだ得られておらず、これが意図した設計なのか実装上の副作用に過ぎないのかは未確認のままだ。自社サイトに広告主のコンバージョンピクセルを設置している開発者は、そのタグがこのクロスサイト追跡経路を意図せず有効化していないか確認する価値がある。</div>
+        <div class="key-points">
+          <ul>
+            <li>Cookie `__obi`の有効期間は1年、観測対象は12商用サイト(Chewy・Wayfair・Coursera・SeatGeekなど)、確認済み30種の`__obi`値のうち12種が複数広告主にまたがって出現</li>
+            <li>スクレイピングによる身元情報の収集イベントは685件で広告主提供分255件の2.7倍、メール・電話はSHA-256でハッシュ化される一方、位置情報は平文のまま送信</li>
+            <li>ログアウト状態でも196件の匿名同期トークンが27日以上安定して追跡を継続、研究者が9月14日に送った問い合わせにOpenAIから実質的な回答なし</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 広告主のコンバージョンピクセルを自社サイトに設置している開発者・事業者は、埋め込みタグの通信先を確認し、意図せずChatGPTアカウントへの行動データ紐付けを許可していないか点検すべきだ。</div>
+        <div class="meta">
+          <span>buchodi.com</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-09-20</span>
+          <span class="engagement">▲ 494</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">💰 ビジネス</span>
+          <h3><a href="https://en.sedaily.com/finance/2026/09/20/samsung-to-double-hbm4-output-next-year-sources-say">Samsung、HBM4/HBM4E生産能力を来年倍増へ——月産18万枚から25万枚に、出荷構成比は現行40%から80%に</a></h3>
+        </div>
+        <div class="summary">Samsungは、AI向け高帯域メモリHBM4・HBM4Eの生産を2027年にかけて倍増させる計画だ。月間平均ウェハ生産量を現在の約18万枚から約25万枚に引き上げ、HBM4系製品が全体の出荷構成に占める比率も現行の40%から80%へ高める。2026年2月にHBM4の量産を開始し、5月には12層HBM4EのサンプルをNvidiaなど顧客に提供済み。ウェハ薄化時の反りを防ぐガラスキャリアの外部委託量を月2万枚から5万枚へ2.5倍に増やす契約も進んでおり、業界関係者はこれを増産計画の裏付けと見ている。Seoul Economic Dailyが9月20日、半導体業界関係者の話として報じた。</div>
+        <div class="key-points">
+          <ul>
+            <li>月間平均ウェハ生産量を現行約18万枚から約25万枚に引き上げ、HBM4系(HBM4+HBM4E)が出荷構成に占める比率も40%→80%に倍増</li>
+            <li>2026年2月にHBM4量産開始、5月には12層HBM4EサンプルをNvidiaなど顧客へ提供済み</li>
+            <li>ウェハ薄化時の反り防止に使うガラスキャリアの外部委託量を月2万枚→5万枚に2.5倍増、業界関係者はこれを増産計画の裏付けと見る</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 AIアクセラレータ向け高帯域メモリの供給余力拡大は、HBM調達に依存するGPU・AIサーバーメーカーの価格や供給見通しに直接影響する。</div>
+        <div class="meta">
+          <span>Seoul Economic Daily</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-20</span>
+          <span class="engagement">▲ 267</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://cybersecuritynews.com/microsoft-patch-tuesday-update-september-2026/">Microsoft、2026年9月Patch Tuesdayで973件のCVEを一括修正——悪用確認済みゼロデイ2件、Windowsだけで723件</a></h3>
+        </div>
+        <div class="summary">Microsoftは2026年9月のPatch Tuesdayで973件の脆弱性を修正した。内訳はWindows 723件、Office 111件、SQL Server 62件、開発者ツール22件、SharePoint Server 16件、Exchange Server 9件など。すでに実際の攻撃で悪用が確認されているゼロデイは2件で、Windows Update Stackのリンク解決不備を突く権限昇格の脆弱性CVE-2026-81963と、Advanced Local Procedure Call(ALPC)の権限昇格を突くCVE-2026-85880が含まれる。前者はCISAの既知悪用脆弱性(KEV)カタログにも追加され、連邦機関に9月22日までの対応期限が課された。Critical評価にはWindows Secure Kernel ModeやVirtualization-Based Securityエンクレーブに関わる複数の権限昇格・情報漏えい脆弱性、Excel・Wordの複数のリモートコード実行も含まれる。</div>
+        <div class="key-points">
+          <ul>
+            <li>修正件数973件、内訳はWindows 723件・Office 111件・SQL Server 62件・開発者ツール22件・SharePoint Server 16件・Exchange Server 9件</li>
+            <li>実悪用確認済みゼロデイはCVE-2026-81963(Windows Update Stackの権限昇格)とCVE-2026-85880(ALPCの権限昇格)の2件</li>
+            <li>CVE-2026-81963はCISAのKEVカタログに追加され連邦機関に9月22日までの対応期限、Critical評価にはSecure Kernel ModeやVBSエンクレーブの権限昇格・情報漏えいも含まれる</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 Windows環境を運用する開発者・情シスは、KEV入りした2件のゼロデイパッチ適用を最優先し、SQL Server・Exchange Serverなどサーバー系コンポーネントの修正も計画的に反映する必要がある。</div>
+        <div class="meta">
+          <span>cybersecuritynews.com</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-09-08</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://www.notion.com/blog/how-notion-handles-concurrent-editing-with-crdts">Notion、CRDTの文字単位ID管理にRGA+Peritextを採用——分間数百万オペレーションを裁く本番運用の内部構造を公開</a></h3>
+        </div>
+        <div class="summary">NotionはリアルタイムのCRDT編集基盤の内部構造を解説した。文字ごとに一意なIDを振るReplicated Growable Array(RGA)をベースに、同一セッションID・論理タイムスタンプを持つ文字をまとめて「run」として格納し保存効率を高める。太字のような伸縮可能な書式とリンクのような非伸縮書式を区別するPeritextアルゴリズムでリッチテキストの注釈も扱う。本番環境では分間数百万件のCRDTオペレーションを処理しており、2025年7月のリリース以降、世界最大級のCRDT実運用の一つになっているという。</div>
+        <div class="key-points">
+          <ul>
+            <li>文字ごとに一意IDを持つRGA構造で同時編集を決定的にマージ、同一セッション・タイムスタンプの文字は「run」としてまとめ保存効率を確保</li>
+            <li>Peritextアルゴリズムで太字など伸縮可能な書式とリンクなど非伸縮書式を区別、2025年7月の本番投入以降は分間数百万件のCRDTオペレーションを処理</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Notion Blog</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-09-18</span>
+          <span class="engagement">▲ 11</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://jyn.dev/a-year-to-fix-security/">オープンウェイトモデル「GLM 5.3-flash」が実在の脆弱性を再現・悪用、CyberGymで84.5%——民生用ハードウェアで誰でも実行可能に</a></h3>
+        </div>
+        <div class="summary">著者は、オープンウェイトの言語モデル「GLM 5.3-flash」が実際の脆弱性を発見・悪用できる能力を持ち、5,000〜9,500ドル程度の民生用ハードウェアでローカル実行可能になったと警告する。CVE記述とソースコードだけから脆弱性を再現する能力を測るCyberGymベンチマークで84.5%、実際のエクスプロイト作成能力を測るExploitBenchで54.4%のスコアを記録し、最適化環境では毎秒約45トークンで動作する。著者は攻撃側の能力向上速度が防御側の対策強化を上回っていると指摘し、モデルの禁止ではなく政府による定期的なセキュリティ診断の義務化や修正体制への投資、企業側がフロンティアモデルを防御目的で即座に活用する体制整備を求めている。</div>
+        <div class="key-points">
+          <ul>
+            <li>CyberGym(CVE記述からの脆弱性再現)で84.5%、ExploitBench(実エクスプロイト作成)で54.4%のスコア、5,000〜9,500ドルの民生用ハードウェアで毎秒約45トークンで動作</li>
+            <li>著者はモデルの禁止ではなく、政府による定期的セキュリティ診断の義務化・修正体制への投資、フロンティアモデルの防御的活用の加速を提言</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>jyn.dev</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-09-18</span>
+          <span class="engagement">▲ 52</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://thomasahle.com/blog/adversarial-examples-for-hashes/">高速ハッシュ関数40種超に体系的な衝突攻撃、CityHash64・FarmHash64は理論値から乖離ゼロ——統計テスト合格と攻撃耐性は別物と実証</a></h3>
+        </div>
+        <div class="summary">研究者はxxHash3・wyhash・MurmurHash3・SipHashなどSMHasherプロジェクト由来の高速ハッシュ関数40種類以上を対象に、折り畳み乗算の情報欠落やゼロオペランドの構成など7種類の構造的パターンを突く体系的な衝突攻撃を分析した。CityHash64とFarmHash64はシードによらず特定の入力ペアで常に同じ出力を返す構造的な衝突を持ち理論値との乖離が0bit、MurmurHash3も1.59bit以下にとどまるなど、統計的ランダム性テスト(SMHasher)に合格していても意図的な攻撃には耐性がないことを示した。ChainHashやUMASHなど同等速度で証明可能な安全性を持つハッシュも存在するとして、速度と安全性の両立が可能だと結論づけている。</div>
+        <div class="key-points">
+          <ul>
+            <li>CityHash64・FarmHash64はシード非依存の構造的衝突を持ち理論値との乖離0bit、MurmurHash3も1.59bit以下、統計テスト合格と攻撃耐性は無関係と実証</li>
+            <li>折り畳み乗算・ゼロオペランド構成・長さエンコーディング衝突など7パターンの攻撃手法を体系化、ChainHash・UMASHなど同等速度で証明可能安全性を持つ代替も存在</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>thomasahle.com</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-09-19</span>
+          <span class="engagement">▲ 1</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://dev.classmethod.jp/articles/ec2-t8i-tokyo-launch/">AWS、バーストパフォーマンス型EC2「T8i」を東京リージョンに投入——T3比で最大30%のコスト性能改善、70%のコンピュート性能向上</a></h3>
+        </div>
+        <div class="summary">AWSはバーストパフォーマンス型EC2の新世代インスタンス「T8i」を2026年9月17日に一般提供開始し、東京リージョン(ap-northeast-1)でも利用可能になった。第6世代Intel Xeon Scalable(Granite Rapids)のカスタム版であるXeon 6975P-Cを採用し、M8i・C8i・R8iと同じCPU世代・Nitro基盤を共有する。AWSはT3比で最大30%のコスト性能改善、最大70%のコンピュート性能向上を謳う。東京リージョンの価格はT3比で約20%高く、us-east-1比でも30.8%高いが、本番でM8iを使う企業が開発・検証環境でENA対応などのドライバ互換性を事前確認する用途に適する。</div>
+        <div class="key-points">
+          <ul>
+            <li>Xeon 6975P-C(第6世代Granite Rapidsのカスタム版)採用、T3比で最大30%のコスト性能改善・最大70%のコンピュート性能向上をAWSが謳う</li>
+            <li>東京リージョンの価格はT3比約20%高・us-east-1比30.8%高、本番M8i利用企業が開発・検証環境でのドライバ/ENA互換性事前確認に活用できる</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Classmethod</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-17</span>
+          <span class="engagement">🔖 5</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://zenn.dev/mizchi/articles/laya-mlx-60fps">Jev類似の判断特化モデルをローカルで60fps超再現、ModernBERT/mmBERTベースの「Laya」がApple M5上で毎秒87〜98判断</a></h3>
+        </div>
+        <div class="summary">「Laya」は、選択肢から確率較正済みの判断のみを返すTypeSafe AIの「Jev」と同種の機能を、オープンウェイトのModernBERT(英語版4億2,100万パラメータ)/mmBERT(多言語版3億2,200万パラメータ)ベースで再現した実装。Apple M5上のMLXバックエンドではモデルロードに0.7秒、1判断あたり8〜9ミリ秒(毎秒87〜98判断)で動作し、Jevのクラウド経由500ミリ秒・地理的遅延込みという制約をローカル実行で解消した。ONNX形式に変換しWebGPU対応のonnxruntime-webでブラウザ実行も試し、fp16量子化で647MBのモデルサイズながら1判断48〜50ミリ秒(毎秒18〜20判断)を記録した一方、WASMバックエンドは1判断900ミリ秒で実用に耐えなかった。</div>
+        <div class="key-points">
+          <ul>
+            <li>Apple M5+MLXでモデルロード0.7秒、1判断8〜9ミリ秒(毎秒87〜98判断)、Jevのクラウド経由500ミリ秒から大幅な高速化</li>
+            <li>ONNX+WebGPU(onnxruntime-web)のブラウザ実行では1判断48〜50ミリ秒(毎秒18〜20判断)、WASMバックエンドは900ミリ秒で実用不可</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn (mizchi)</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-09-20</span>
+          <span class="engagement">🔖 13</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/innovation/articles/e84f8ccca8e6da">PRのCI実行時間を144分→39分に73%削減、差分ベースのテスト絞り込み+Draft PRスキップ+DBコンテナ共有の三段構え</a></h3>
+        </div>
+        <div class="summary">ある開発チームは、プルリクエストのCI実行時間を144分から39分へ73%削減した過程を公開した。まずgit diffの変更ファイルからgo listで依存関係グラフを作り、影響を受けるパッケージのみテストする方式で144分→54分(62%減)。次にPRの7〜8割がDraft状態で作成される実態を踏まえ、Draftのうちは重いテストをスキップする設定で47分まで短縮。最後に、テストケースごとに約13秒かかっていたMySQLコンテナ起動をsync.Onceでパッケージ単位の共有コンテナに変更し、日次CI合計は307分→182分、パッケージあたりの実行時間は27.7秒→15.3秒(45%減)まで縮んだ。</div>
+        <div class="key-points">
+          <ul>
+            <li>変更ファイルからgo listで依存グラフを構築し影響パッケージのみテストする方式で144分→54分(62%減)、Draft PRの重いテストスキップで47分まで短縮</li>
+            <li>テストケースごとに約13秒かかるMySQLコンテナ起動をsync.Onceでパッケージ単位共有に変更、日次CI合計307分→182分・パッケージ単位27.7秒→15.3秒(45%減)、最終的に144分→39分(73%減)</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn (innovation)</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-09-18</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://qiita.com/ktdatascience/items/6aec726eac024e83651b">「Googleでログイン」でパスワードは渡っていない——認可コード・IDトークン・アクセストークンの3種を送る仕組みをOAuth/OIDCの違いから解説</a></h3>
+        </div>
+        <div class="summary">「Googleでログイン」ボタンを押した際にGoogleがサービス側へ渡すのはパスワードではなく、短命・単回利用の認可コード、身元を証明するJWTのIDトークン、Google API呼び出し用のアクセストークンの3種類だと解説する記事。ブラウザはaccounts.google.comへリダイレクトされ認証情報はGoogle側の画面にのみ入力されるためサービス側からは見えず、認可コードとトークンの交換はサーバー間通信で行われPKCE検証が付与される。OAuth 2.0自体は「委任された権限」の認可を扱うだけで認証機能を持たず、認証を担うIDトークン(aud・iss検証付き)を追加するのがOpenID Connectの役割だと整理し、トークンをURLに直接露出する非推奨のimplicitフローに代わり、現在はPKCE+stateパラメータの組み合わせが標準になっていると説明する。</div>
+        <div class="key-points">
+          <ul>
+            <li>Googleが渡すのは認可コード・IDトークン・アクセストークンの3種でパスワードは非通知、認証情報の入力はaccounts.google.com上でのみ行われサービス側からは不可視</li>
+            <li>OAuth 2.0は認可のみを扱いIDトークンによる認証はOpenID Connectが担う、非推奨のimplicitフローに代わり現在はPKCE+stateパラメータの組み合わせが標準</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita (ktdatascience)</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-09-19</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://qiita.com/segavvy/items/b08eee93a0abe0c0726d">「Jev」にMNIST手書き数字を文字変換して分類させたら精度38%止まり、画像入力のGPT-5.6 Lunaは約80%——テキスト化の限界を実証</a></h3>
+        </div>
+        <div class="summary">著者はゼロショットの選択肢分類モデル「Jev」にMNIST手書き数字(28×28ピクセル・8bitグレースケール)を認識させる実験を行った。画像を直接扱えないJevに対し、2値ASCIIアート・生の数値行列・10段階グレースケール文字・3桁フォーマット数値・前景ピクセル座標のJSON配列という5通りのテキスト変換方式を試したが、2値ASCIIアートで38%、他の変換方式も同様に低精度にとどまった。同じ100枚(各数字10枚、seed=42固定)の画像を画像入力のままGPT-5.6 Lunaに渡した場合は約80%の精度を記録し、著者は「画像をテキスト化して処理させるのには無理がある」と結論づけている。</div>
+        <div class="key-points">
+          <ul>
+            <li>2値ASCIIアート・数値行列・グレースケール文字・座標JSON配列など5通りのテキスト変換を試すも最高で38%程度の精度にとどまる</li>
+            <li>同一100枚のテスト画像を画像入力のままGPT-5.6 Lunaに渡すと約80%の精度を記録、空間的なピクセル情報のテキスト化に構造的な限界があることを示した</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita (segavvy)</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-09-20</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.com/dmtrKovalenko/bashka">「curl | bash」の危険性を可視化するRust製ツール「Bashka」、40種超の脅威パターンを静的解析でスコアリング</a></h3>
+        </div>
+        <div class="summary">Bashkaは、`curl | bash`形式のインストールスクリプトを実行前に検証するRust製ツール。インストールコマンドの末尾に`bashka`を追記するだけで(`curl https://example.com/install.sh | bashka`)、転送先スクリプトを多段階まで追跡しながら静的解析し、認証情報窃取・データ流出・リバースシェル・難読化など40種類以上の脅威パターンを検出、致命的💀・危険🚩・注意🟡・安全✅の4段階で警告する。インストール済みソフトウェアを`installed.toml`で一覧管理し、削除・更新コマンドも提供する。</div>
+        <div class="key-points">
+          <ul>
+            <li>インストールコマンド末尾に`bashka`を追記するだけで多段リダイレクト先まで含めてスクリプトを静的解析、40種類以上の脅威パターンを4段階(💀🚩🟡✅)で警告</li>
+            <li>Homebrew・Cargo・miseなど複数のインストール方法に対応、`installed.toml`でインストール済みソフトウェアの一覧管理・更新・削除もサポート</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub (dmtrKovalenko/bashka)</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-09-19</span>
+          <span class="engagement">🔖 33</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.com/iamgio/quarkdown">Kotlin製組版システム「Quarkdown」、関数・変数・制御構文を備えたTuring完全なMarkdown拡張で書籍からスライドまで単一プロジェクトから出力</a></h3>
+        </div>
+        <div class="summary">QuarkdownはCommonMark・GitHub Flavored Markdownに関数定義・変数・条件分岐・ループを追加した拡張記法を持つ組版システム。`.functionname {arg1} {arg2}`という関数呼び出し構文で動的なコンテンツ生成が可能で、単一のプロジェクトから書籍・論文・Webサイト・プレゼンテーションなど複数フォーマット(HTML・PDF・Markdown・プレーンテキスト)を出力できる。VS Code拡張とIntelliJ IDEAプラグインも提供し、低遅延のライブプレビューに対応する。GPLv3ライセンス(CLI・LSPはAGPLv3)。</div>
+        <div class="key-points">
+          <ul>
+            <li>`.functionname {arg}`構文で関数定義・変数・条件分岐・ループを扱えるTuring完全なMarkdown拡張、単一プロジェクトから書籍・論文・Web・スライドなど複数フォーマットを出力</li>
+            <li>VS Code拡張・IntelliJ IDEAプラグイン・低遅延ライブプレビューに対応、GitHub上で16.2k star・507 fork、Kotlin製でGPLv3ライセンス(CLI/LSPはAGPLv3)</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub (iamgio/quarkdown)</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-20</span>
+          <span class="engagement">⭐ 16.2k</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://andre.arko.net/2026/09/16/beyond-jj-config-and-tools-ecosystem/">Git代替バージョン管理「jj(Jujutsu)」、設定・ツールエコシステムの最新動向——ブックマーク自動追従やGUI/TUIが標準機能に取り込まれ独自スクリプト不要に</a></h3>
+        </div>
+        <div class="summary">Gitの代替バージョン管理システムjj(Jujutsu)を巡る設定・周辺ツールの最新動向をまとめた記事。従来は独自エイリアス「tug」で実現していたブックマーク追従が`jj bookmark advance`として標準搭載されたほか、二分探索の`jj bisect run`、複数コミットへのスクリプト一括適用`jj run`/`jj fix`、Gitコマンドなしでのタグ管理`jj tag`など、外部スクリプトに頼っていた機能が次々に組み込みコマンド化されている。周辺エコシステムにはGUI(gg・jayjay・lightjj)、TUI(lazyjj・jjui等)、VSCode/JetBrains/Vim/Emacs/Helixのエディタプラグイン、スタックPRを扱うjj-spr/jj-stackなどが揃い、GitHubのスタックPR対応やRadicle、jjネイティブなフォージ「Tangled」への対応も進んでいる。</div>
+        <div class="key-points">
+          <ul>
+            <li>`jj bookmark advance`(旧「tug」エイリアス代替)・`jj bisect run`・`jj run`/`jj fix`・`jj tag`など、外部スクリプト依存だった機能が標準コマンド化</li>
+            <li>GUI(gg・jayjay)・TUI(lazyjj・jjui等)・主要エディタのプラグイン・スタックPR管理ツール(jj-spr等)が揃い、jjネイティブフォージ「Tangled」への対応も進む</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>andre.arko.net</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-09-16</span>
+          <span class="engagement">▲ 45</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
+
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://tarosite.net/tech/2026/09/20/iphone-duo-weight-and-touch-id/">折りたたみ「iPhone Duo」実機レビュー、重量はPro Max比21g増でもTouch ID採用に不満の声</a>
+        <span class="quick-summary">— 閉時117.8mm×84.1mmでPro Max比45.6mm短く持ちやすい一方、Face ID搭載のiPad miniに慣れた著者はTouch IDへの回帰に依然として抵抗感を示す。</span>
+        <span class="meta">tarosite.net</span>
+        <span class="engagement">🔖 70</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-oss">OSS</span>
+        <a href="https://github.com/adonis-singh/re4">GameCube版「バイオハザード4」を約55万行のC/C++へ完全デコンパイル、リビルド後もバイナリが1バイト単位で原本と一致</a>
+        <span class="quick-summary">— SN GCC 2.95.3とMetrowerks CodeWarriorで1,083オブジェクト・15,641関数を復元、アセンブリはハードウェア制御など231行のみ。</span>
+        <span class="meta">GitHub (adonis-singh/re4)</span>
+        <span class="engagement">⭐ 185</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-oss">OSS</span>
+        <a href="https://seldo.com/posts/nobody-pays-for-open-source-we-can-force-them-to/">「OSSに誰も金を払わない、なら払わせればいい」——npmやDocker Hubが企業利用に課金しメンテナーへ還元する仕組みを提案</a>
+        <span class="quick-summary">— 個人・非営利は無料のまま維持し、依存関係ツリーに登場する頻度に応じ月次で自動的にメンテナーへ収益分配する、申請不要の仕組みを構想する。</span>
+        <span class="meta">seldo.com</span>
+        <span class="engagement">▲ 57</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-frontend">Frontend</span>
+        <a href="https://sarahjamielewis.com/log/2026/future-of-web-browsers.html">「Firefoxはもう独立したWebの理想を裏切った」、AI機能統合への反発からブラウザの分岐(フォーク)を訴えるエッセイ</a>
+        <span class="quick-summary">— 商業的しがらみのない価値観駆動の代替ブラウザ構築を呼びかけつつ、資金調達と持続的な開発体制という現実的な壁も認める。</span>
+        <span class="meta">sarahjamielewis.com</span>
+        <span class="engagement">▲ 55</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://github.com/minorun365/minorun-marp-skill">Claude Codeなど AI エージェントに読ませるMarpスライド設計ガイド「minorun-marp-skill」、ストーリーテリングやダークテーマ図解の型を提供</a>
+        <span class="quick-summary">— 見た目の装飾だけでなく構成力を底上げする「スキル」集で、GitHub上で129 star。</span>
+        <span class="meta">GitHub (minorun365/minorun-marp-skill)</span>
+        <span class="engagement">🔖 30</span>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="./" class="archive-link">🗂 過去のダイジェスト</a>
+    </footer>
+  </div>
+</body>
+</html>
