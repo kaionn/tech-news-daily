@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tech News Daily — 2026-09-22</title>
+  <title>Tech News Daily — 2026-09-23</title>
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
   <link rel="icon" type="image/png" sizes="192x192" href="favicon.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -14,7 +14,7 @@
   <div class="container">
     <header>
       <h1>Tech News Daily</h1>
-      <div class="date">2026-09-22 (Tue)</div>
+      <div class="date">2026-09-23 (Wed)</div>
       <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
       <nav class="site-nav">
         <a href="./" class="active">📰 日刊ダイジェスト</a>
@@ -27,7 +27,7 @@
     <div class="stats-bar">
       <span>📰 21 articles</span>
       <span>🏷 8 categories</span>
-      <span>📡 17 sources</span>
+      <span>📡 21 sources</span>
     </div>
 
     <nav class="toc">
@@ -40,16 +40,16 @@
 
     <div class="numbers-bar">
       <div class="number-item">
-        <span class="number-value">240万行</span>
-        <span class="number-label">EVE OnlineがPython 3へ移行する既存コードの行数</span>
+        <span class="number-value">40%</span>
+        <span class="number-label">Claude Opus 5.5がエージェント用途で謳う実効コスト削減率</span>
       </div>
       <div class="number-item">
-        <span class="number-value">73%</span>
-        <span class="number-label">Linearがtsgo導入で削減した型チェック時間</span>
+        <span class="number-value">9.2</span>
+        <span class="number-label">WordPress未認証RCE(CVE-2026-87902)のCVSSスコア</span>
       </div>
       <div class="number-item">
-        <span class="number-value">1,024</span>
-        <span class="number-label">.NET 11で撤廃される論理プロセッサ数の旧上限</span>
+        <span class="number-value">32倍</span>
+        <span class="number-label">AIエージェントの反復プロンプトでRustコードが高速化した最大倍率</span>
       </div>
     </div>
 
@@ -58,25 +58,25 @@
 
       <div class="card featured deep-dive">
         <div class="card-header">
-          <span class="tag tag-infra">Infra</span>
+          <span class="tag tag-ai">AI</span>
           <span class="content-type">📦 リリース</span>
-          <h3><a href="https://blog.cloudflare.com/python-workers-ga/">DEEP DIVE: Cloudflare、Python WorkersをGA(正式提供)に格上げ——JS境界の型変換コードが不要に、PEP 783でPython-on-Wasm標準化にも貢献</a></h3>
+          <h3><a href="https://www.anthropic.com/claude-opus-5-5">DEEP DIVE: Anthropic、Claude Opus 5.5を発表——トークン単価20%減・キャッシュ読み込み60%減で実効コストを最大40%圧縮、安全性評価は自社史上最高に</a></h3>
         </div>
-        <div class="summary">CloudflareのPython WorkersがExperimentalの位置づけから正式に一般提供(GA)へ移行し、「Cloudflare Developer Platformにおけるファーストクラス言語」になった。2年前に実験的機能として始まったPython対応が、ようやく本番運用に耐える段階に達した形だ。実行基盤はPyodideによるWasmコンパイル済みPythonインタプリタで、2018年からWebAssemblyに対応してきたWorkersランタイム上で動く。今回の目玉は、JavaScriptとの境界で必要だった型変換コードの排除だ。従来はキューへの送信一つとっても`to_js({"key": "value"}, dict_converter=js.Object.fromEntries)`のようなJS向け変換を書く必要があったが、GA版では`self.env.QUEUE.send({"key": "value"})`と素のPython構文だけで完結する。CloudflareはこのFFI境界の型変換ミスを「人間とAIエージェント双方に共通するエラー要因」と位置づけていた。FastAPI(ASGI)・Django/Flask(WSGI)といった主要フレームワークに対応し、カスタムソケット実装によりasyncpg経由のPostgreSQLやaiomysql経由のMySQLへの直接接続も可能になった。R2・D1・Queues・Workflows・Durable Objects・Vectorize・AI GatewayといったCloudflareネイティブのbindingも一通り揃う。裏側ではCloudflareがPEP 783を提案し、1年以上の議論を経てPython-on-WebAssemblyの標準プラットフォーム「PyEmscripten」の採用を実現、Pyodideのビルドチェーンとcibuildwheelへの統合も済ませた。一方でC/C++/Rust製ネイティブ拡張を持つパッケージは依然Wasmへのクロスコンパイルが必要で、エコシステム側の対応はまだ発展途上だ。</div>
-        <div class="editorial">🧠 型変換の自動化とPEP 783によるエコシステム標準化を両輪で進めた点は評価できる。自社プラットフォームの都合だけでなくPython-on-Wasm全体の底上げに繋がる標準化に踏み込んだのは、単なる機能追加以上の意味を持つ。ただしネイティブ拡張依存のパッケージ移行はまだ道半ばで、実運用でどこまで「JS知識ゼロでPythonだけ書ける」状態に近づけるかは、今後個々のライブラリの対応状況次第という留保が残る。</div>
+        <div class="summary">AnthropicはCEOのDario Amodeiが表明した「フロンティアの進歩ペースを意図的に落とし、能力開発を安全性研究の進捗に合わせる」という方針転換後、初のモデルとしてClaude Opus 5.5を公開した。前モデルOpus 5からの変更の中心は価格と速度だ。入力トークンは100万あたり5ドルから4ドルへ、出力は25ドルから20ドルへ、それぞれ単価表上20%引き下げられた。エージェント型コーディングやツール呼び出しの反復処理でコストの大半を占めるキャッシュ読み込み単価は0.50ドルから0.20ドルへ60%引き下げられており、こうしたワークロードの構成比を踏まえるとAnthropicが謳う「実効コスト40%減」は、単価表の20%減とは別に、キャッシュ読み込み比率の高い利用パターンを加味した数字だと解釈できる。出力速度もOpus 5比で30%以上向上した。ベンチマークでは上位モデルのFable 5.1をエージェント型コーディング・コンピュータ操作・知識労働タスクで上回ったとAnthropicは主張する。リリース前にはFrontier DesignとMETRという外部機関が評価に加わり、Anthropicが実施する自動行動監査において「これまでテストした中で最も安全性評価の高いモデル」と位置づけられた。</div>
+        <div class="editorial">🧠 単価表だけを見れば20%引き下げに過ぎないが、キャッシュ読み込み60%減という設計はエージェント運用の実態を反映した合理的な価格改定だ。ただし外部機関による安全性評価は結果の要約が公開されているに過ぎず、監査項目の詳細や失敗事例の有無までは分からない。「安全性重視のペース配分」を掲げた直後のモデルという位置づけ自体が、性能訴求との整合性を問われる場面が今後出てくるだろう。</div>
         <div class="key-points">
           <ul>
-            <li>JS境界の型変換コードが不要になり`self.env.QUEUE.send({"key": "value"})`のような素のPython構文で完結</li>
-            <li>FastAPI(ASGI)・Django/Flask(WSGI)に対応、asyncpg経由のPostgreSQLやaiomysql経由のMySQLへのカスタムソケット接続も可能に</li>
-            <li>CloudflareがPEP 783を提案し1年以上の議論を経て採択、Python-on-Wasm標準「PyEmscripten」の確立に貢献</li>
+            <li>入力$4/出力$20(100万トークンあたり)で前モデル比各20%減、キャッシュ読み込みは$0.50→$0.20で60%減</li>
+            <li>出力速度はOpus 5比30%以上向上、エージェント型コーディング・コンピュータ操作・知識労働でFable 5.1を上回ったとAnthropicが主張</li>
+            <li>Frontier DesignとMETRが外部評価に参加、自動行動監査でAnthropicが「これまでで最も安全性評価の高いモデル」と説明</li>
           </ul>
         </div>
-        <div class="why-it-matters">💡 Cloudflare WorkersでPythonを使う開発者は、JS境界の型変換コードを書く必要がなくなりFastAPI/Django資産をそのままエッジで動かせるようになる——ただしネイティブ拡張を使うライブラリは事前に対応状況を確認したい。</div>
+        <div class="why-it-matters">💡 Claude APIでOpus系モデルを使うエージェント/コーディング用途は、キャッシュ読み込み比率が高いほどOpus 5.5への切り替えでコスト効果が大きくなる——単価表の数字だけで20%減と早合点せず、自分のワークロード構成で試算したい。</div>
         <div class="meta">
-          <span>Cloudflare Blog</span>
-          <span>⏱ 6 min read</span>
-          <span>2026-09-21</span>
-          <span class="engagement">▲ 174</span>
+          <span>Anthropic</span>
+          <span>⏱ 7 min read</span>
+          <span>2026-09-22</span>
+          <span class="engagement">▲ 1070</span>
         </div>
       </div>
 
@@ -84,41 +84,41 @@
         <div class="card-header">
           <span class="tag tag-ai">AI</span>
           <span class="content-type">📦 リリース</span>
-          <h3><a href="https://x.ai/news/grok-4-7">xAI、「Grok 4.7」を発表——CursorBench 4.0で46.3%、価格はGrok 4.6と同水準を維持</a></h3>
+          <h3><a href="https://openai.com/index/introducing-gpt-6-sol-and-luna/">OpenAI、「GPT-6 Sol」「GPT-6 Luna」を発表——API価格を半減、Solはミス率をGPT-5.6比で半減</a></h3>
         </div>
-        <div class="summary">xAIが最新モデル「Grok 4.7」を発表した。コーディングとナレッジワーク向けに位置づけ、ベースモデルを拡大した上で強化学習を追加訓練した。CursorBench 4.0で46.3%、ソフトウェアエンジニアリング評価のDeepSWE v1.1で71.0%を記録し、長文コーディングタスクでの価格性能比を訴求する。価格はGrok 4.6と同水準を維持しつつ、入力100万トークンあたり2ドル・出力100万トークンあたり6ドル、2倍速・2倍価格の高速版も用意した。自己検証能力の向上、長いコンテキストの管理改善、新しい安全対策スタックも導入され、Cursor・Grok Build・Grok API・サードパーティのクラウド/モデルルーター経由で利用できる。</div>
+        <div class="summary">OpenAIはGPT-6 Astraの技術を土台に、より高速で安価な2モデル「GPT-6 Sol」「GPT-6 Luna」を発表した。SolはGPT-5.6 Sol比でミスをおよそ半分に減らしたとされ推論力を重視する設計、Lunaは高速・大量処理向けに最適化され応答速度を優先する。API価格はGPT-5.6のプロモーション価格からさらに50%引き下げられ、Solは入力2ドル・出力10ドル(100万トークンあたり)、Lunaは入力0.10ドル・出力0.50ドルとなる。Astraで導入した平易な会話スタイルも両モデルに引き継がれ、Plus/Pro/Business/Enterprise/Eduの各プランとChatGPT・Codex・APIで順次利用できるようになる。</div>
         <div class="key-points">
           <ul>
-            <li>CursorBench 4.0で46.3%、DeepSWE v1.1(ソフトウェアエンジニアリング評価)で71.0%を記録</li>
-            <li>価格は入力$2/出力$6(100万トークンあたり)でGrok 4.6と同水準、2倍速・2倍価格の高速版も提供</li>
+            <li>SolはGPT-5.6 Sol比で誤りをおよそ半減、Lunaは応答速度と大量処理を優先する設計</li>
+            <li>API価格はGPT-5.6のプロモーション価格からさらに50%引き下げ、Sol $2/$10・Luna $0.10/$0.50(100万トークンあたり)</li>
           </ul>
         </div>
         <div class="meta">
-          <span>x.ai</span>
-          <span>⏱ 3 min read</span>
-          <span>2026-09-21</span>
-          <span class="engagement">▲ 466</span>
+          <span>OpenAI</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-09-22</span>
+          <span class="engagement">▲ 1029</span>
         </div>
       </div>
 
       <div class="card featured">
         <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://bcantrill.dtrace.org/2026/09/20/what-sun-got-wrong/">「サンが間違えたこと」——Bryan CantrillがOSS戦略の成功とビジネス運営の失敗を対比して回顧</a></h3>
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://github.com/WordPress/wordpress-develop/security/advisories/GHSA-7hp8-65ch-5whp">WordPress本体に未認証RCEにつながるパストラバーサル脆弱性(CVSS9.2)——7.1.2で修正、pearcmd.php経由の悪用条件も判明</a></h3>
         </div>
-        <div class="summary">Oxide Computer共同創業者のBryan Cantrillが、Sun Microsystemsの失敗を回顧するエッセイを公開した。2005年、OpenSolarisで基盤を構築していたスタートアップがSun製ハードウェアの購入を望んだにもかかわらず、担当者に連絡が取れず、ようやく繋がっても的外れな製品を売り込まれた実例を紹介する。同じ顧客に対しDellの営業担当「Steve」は迅速に対応し、顧客は「Steveは自分のために働いているようだった」とまで評した逸話を対比させる。Cantrillは、OSS戦略という「戦略の成功」がありながら販売という「オペレーションの失敗」で機会を逃した点にSunの本質的な欠陥を見出す。彼は後にこのスタートアップへ入社し、DellのSteveとともにOxideを共同創業した。</div>
+        <div class="summary">WordPressコアのページテンプレート解決処理`get_page_template()`に、未認証の攻撃者がテーマディレクトリ外の任意の読み取り可能なPHPファイルを読み込ませられるパストラバーサル脆弱性(CVE-2026-87902、CVSS 9.2)が見つかった。選択されたテンプレートの先頭ディレクトリ名が`page-`で始まる条件(Twenty TwelveやTwenty Fourteenなど一部テーマで該当)を満たすと、`register_argc_argv`がOn(cPanelのPHP 8.5未満で既定有効)な環境では`pearcmd.php`経由でリモートコード実行に発展しうる。影響範囲はWordPressコア4.7.0から7.1.1までの全バージョンで、7.1.2以降および4.7.37までの各サポートブランチにパッチが遡及提供された。</div>
         <div class="key-points">
           <ul>
-            <li>2005年、OpenSolaris採用スタートアップがSun製ハードウェア購入を希望するも営業対応が機能せず失注</li>
-            <li>同顧客のDell担当営業「Steve」は迅速対応、顧客が「Steveは自分のために働いている」と評価する逸話を対比</li>
+            <li>CVE-2026-87902(CVSS9.2)はWordPressコア4.7.0〜7.1.1に影響、`get_page_template()`のパストラバーサル不備が原因</li>
+            <li>テンプレート先頭ディレクトリ名が`page-`で始まり`register_argc_argv=On`(cPanelのPHP8.5未満で既定)の環境ではpearcmd.php経由でRCEに発展</li>
           </ul>
         </div>
         <div class="meta">
-          <span>bcantrill.dtrace.org</span>
-          <span>⏱ 6 min read</span>
-          <span>2026-09-20</span>
-          <span class="engagement">▲ 476</span>
+          <span>GitHub Security Advisories</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-09-21</span>
+          <span class="engagement">▲ 143</span>
         </div>
       </div>
     </div>
@@ -128,103 +128,106 @@
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://linear.app/now/ci-bottleneck-reworked">Linear、AIコーディング時代にCIがボトルネック化——`tsgo`導入で型チェック73%削減、月87,000ランナー分を圧縮</a></h3>
-        </div>
-        <div class="summary">LinearはAIコーディングエージェントの普及で開発速度が上がった結果、CIが新たなボトルネックになったとして、パイプラインを全面的に再構築した。GitHub Actionsから高性能サードパーティランナーへ移行し平均34%高速化、TypeScriptのネイティブコンパイラ`tsgo`導入で型チェック時間を73%削減、7つの独立チェックを2つのバッチジョブに統合し月間約87,000ランナー分を削減した。テストシャード数を4から8に増やし、モジュール状態の共有をオプトインで導入したことが単体では最大の効果(月間コスト約17%減)を生んだという。</div>
-        <div class="key-points">
-          <ul>
-            <li>GitHub Actionsから高性能サードパーティランナーへ移行し平均34%高速化、`tsgo`導入で型チェック時間73%削減</li>
-            <li>7チェックを2バッチジョブに統合し月間約87,000ランナー分を削減、モジュール状態のオプトイン共有で月間コスト約17%減</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Linear Blog</span>
-          <span>⏱ 5 min read</span>
-          <span>2026-09-21</span>
-          <span class="engagement">▲ 111</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://www.publickey1.jp/blog/26/eve_online240python_27python_3.html">「EVE Online」、240万行のStackless Python 2.7コードをPython 3へ移行——自動変換で95.9%はそのまま通過</a></h3>
-        </div>
-        <div class="summary">17年以上稼働を続けるMMO「EVE Online」の開発元は、ゲームを支える240万行のコードをStackless Python 2.7からPython 3へ移行すると発表した。2020年に公式サポートが終了したPython 2.7の維持コストと、デバッガ・プロファイラなどエコシステムがPython 3専用になっている現状が背景にある。Python-Futureによる自動変換で全体の95.9%はそのままコンパイルが通るとしており、残りはダメージ計算や座標処理など挙動差が出やすい箇所を手動で修正する二段階の移行戦略を取る。</div>
-        <div class="key-points">
-          <ul>
-            <li>240万行のStackless Python 2.7コードをPython 3へ移行、公式サポート終了(2020年)後もエコシステムがPython 3専用化している点が背景</li>
-            <li>Python-Futureによる自動変換で95.9%はそのままコンパイル可、ダメージ計算や座標処理など挙動差が出る箇所は手動修正の二段階移行</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Publickey</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-09-20</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://www.publickey1.jp/blog/26/net_11netaot.html">.NET 11 Release Candidate 1公開——プロセッサ数1024の上限撤廃、asyncをネイティブ実行に</a></h3>
-        </div>
-        <div class="summary">Microsoftは2026年9月11日、.NET 11のRelease Candidate 1を公開した。ランタイムがasync処理をコンパイラによるタスク分解なしにネイティブ実行できるようになり、動的なCPUセット割り当てにより従来1024論理プロセッサだった初期化上限を撤廃した。JITコンパイラは配列の境界チェックや算術演算のオーバーフロー検査を冗長な箇所で省略するようになり、AOTコンパイラも複数インターフェース呼び出しで共有ディスパッチを使うことでネイティブバイナリを高速化・小型化した。正式リリースは2026年11月の.NET Conf 2026で、STS(標準サポート)として2028年11月までサポートされる。</div>
-        <div class="key-points">
-          <ul>
-            <li>動的CPUセット割り当てにより従来1024論理プロセッサだった初期化上限を撤廃、asyncをコンパイラのタスク分解なしにネイティブ実行</li>
-            <li>正式版は2026年11月の.NET Conf 2026でリリース予定、STSとして2028年11月までサポート</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Publickey</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-09-11</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-infra">Infra</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://www.publickey1.jp/blog/26/amazon_linux4amazon_linux_2027selinux.html">「Amazon Linux 2027」プレビュー公開——4年ぶりのメジャー更新、SELinuxが既定でEnforcingモードに</a></h3>
-        </div>
-        <div class="summary">AWSは2026年9月9日、4年ぶりのメジャーアップデートとなる「Amazon Linux 2027」をパブリックプレビュー公開した。最大の変更点はSELinuxが従来のPermissiveモードからEnforcing(強制)モードへ既定で切り替わったことで、管理者であってもポリシー違反の操作はシステム全体でブロックされるようになる。カーネルはFedora 44/45系コンポーネントをベースに6.18から7.1以降へ引き上げられ、x86-64・ARM双方に対応、Trainium・Inferentia向けのAWS Neuronドライバも同梱する。現行のAmazon Linux 2023は2029年6月30日までサポートが続く。</div>
-        <div class="key-points">
-          <ul>
-            <li>SELinuxが既定でPermissiveからEnforcingモードへ変更、管理者操作もポリシー違反はシステム全体でブロック</li>
-            <li>カーネルをFedora 44/45ベースで6.18→7.1以降に更新、Trainium/Inferentia向けAWS Neuronドライバを同梱、Amazon Linux 2023は2029年6月30日までサポート継続</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Publickey</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-09-09</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
           <span class="tag tag-security">Security</span>
           <span class="content-type">🔒 セキュリティ</span>
-          <h3><a href="https://projectzero.google/2026/09/windows-dangling-com.html">Google Project Zero、Windowsの「ダングリングCOM登録」悪用でSYSTEM権限奪取する手法を解説</a></h3>
+          <h3><a href="https://blog.rust-lang.org/2026/09/21/github-actions-leaking-secrets-when-miri-output-is-cached/">GitHub Actionsの`target/`キャッシュ経由でMiriが環境変数ごとシークレットを漏らす不具合、Rustチームが修正</a></h3>
         </div>
-        <div class="summary">Google Project Zeroは、Windowsのダングリング(不完全な)COMオブジェクト登録を悪用しSYSTEM権限を奪取する手法を公開した。CVE-2026-66804は、システム全体に登録された「CrossDevice」というCOMオブジェクトが、誰でも書き込める`C:\ProgramData`配下の存在しないDLLパスを指していた不備を突く。攻撃者はIMarshalインターフェースを実装したカスタムCOMマーシャリングで任意のCLSIDを指定し、SYSTEM権限で動く「Shell Create Object Handler」サービスにダングリング登録先の悪意あるDLLを読み込ませることで、権限昇格を成立させる。</div>
+        <div class="summary">Miriは実行時に環境変数をまるごと`target/`配下に書き出す仕様があり、このディレクトリをGitHub Actionsでキャッシュしているリポジトリでは、read-only権限のPRであってもcargo miriを実行するだけでキャッシュされたシークレットを読み出せた。攻撃者は読み取り後に別コミットで痕跡を隠すことも可能だったという。Rustセキュリティチームは実際に影響を受けたリポジトリを1件特定し、念のため7件に連絡した。</div>
         <div class="key-points">
           <ul>
-            <li>CVE-2026-66804は誰でも書き込める`C:\ProgramData`配下の存在しないDLLパスを指すCOM登録の不備を突く</li>
-            <li>IMarshal実装のカスタムマーシャリングで任意CLSIDを指定し、SYSTEM権限の「Shell Create Object Handler」にDLLを読み込ませ権限昇格</li>
+            <li>Miriが環境変数を`target/`へ書き出す仕様とGitHub Actionsキャッシュの組み合わせで、read-only権限のPRからでもシークレットを読み出せた</li>
+            <li>修正版(nightly、2026年9月22日以降)は保持対象を`CARGO_*`(トークン系を除く)と`OUT_DIR`のみに制限、既存キャッシュのクリアとシークレットのローテーションを推奨</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Google Project Zero</span>
+          <span>Rust Blog</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-09-21</span>
+          <span class="engagement">▲ 3</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://blog.trailofbits.com/2026/09/21/saml-a-fractal-of-bad-design/">「SAMLは悪い設計のフラクタル」——Trail of BitsがXML基盤・正規化・封入署名など5つの根本的欠陥を整理</a></h3>
+        </div>
+        <div class="summary">Trail of BitsがSAMLの設計上の欠陥を5点に整理した記事を公開した。XMLを基盤にした複雑な攻撃対象領域、ハッシュ化前の正規化処理が生む解釈違いのバグ、署名をアサーション内部に埋め込む「封入署名」の構造、4つの競合するXMLセキュリティ仕様を委員会設計で寄せ集めた「なんでも入り」設計、HTTPS標準化前の設計ゆえの硬直性を挙げ、2012年発見のXML Signature Wrapping攻撃が今なお有効である点を「SAMLのアキレス腱」と評した。</div>
+        <div class="key-points">
+          <ul>
+            <li>署名をアサーション内部に埋め込む「封入署名」構造は、バイト単位の正規化と改変を同時に成立させる必要があり原理的にバグを生みやすい</li>
+            <li>実運用では仕様のおよそ10%しか使われないにもかかわらず4つのXMLセキュリティ仕様を寄せ集めた「なんでも入り」設計が複雑さの温床になっている</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Trail of Bits Blog</span>
           <span>⏱ 6 min read</span>
           <span>2026-09-21</span>
-          <span class="engagement">▲ 4</span>
+          <span class="engagement">▲ 121</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-data">Data</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://nathan.rs/posts/gzip-lm/">「gzipは言語モデルになれるか」——圧縮と予測の等価性を使い、ニューラルネット無しでテキスト生成を試す</a></h3>
+        </div>
+        <div class="summary">圧縮とテキスト予測が理論的に等価であるという原理を使い、gzipだけで文章生成を試みた記事。候補となる続きの文字列をコンテキストに追加した際の圧縮後サイズを比較し、圧縮率が高い(=gzipが「予期していた」)候補を採用する。逐語的な繰り返しループに陥らないよう、スコアリング対象を直近の生成バイトに絞るビームサーチで数バイト先まで探索する。生成結果は著者自身「一貫した文章とは言えない」としつつ、テキストの構造について何かを「知っている」動作は確認できたという。</div>
+        <div class="key-points">
+          <ul>
+            <li>続きの候補をコンテキストに追加した際の圧縮後サイズを比較し、圧縮率が高い(gzipが「予期していた」)候補を採用する仕組み</li>
+            <li>スコアリング対象を直近の生成バイトに絞ったビームサーチで逐語的な繰り返しループを回避、数値的なベンチマークは未提示</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>nathan.rs</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-09-21</span>
+          <span class="engagement">▲ 368</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://botahamec.dev/named-optional-args">「名前付き引数とデフォルト引数は最高だ」——Rustに無い機能をpubキーワードで実現する提案</a></h3>
+        </div>
+        <div class="summary">Rustには名前付き引数・デフォルト引数が無く、同じ型の引数が並ぶ関数では「取り違えがバグの主要因になる」と著者は指摘する。回避策のビルダーパターンやDefault実装はprivate関数にすら大げさな定型コードを要求する。Dartの波括弧記法、C#の任意引数命名、TypeScriptのデストラクチャリングを比較した上で、関数引数に`pub`キーワードを付けた場合のみ引数名が公開APIの一部になるというC#寄りの折衷案を提案し、後方互換性を保ったまま導入できるとする。</div>
+        <div class="key-points">
+          <ul>
+            <li>同じ型の引数が並ぶ関数では位置の取り違えがバグの主要因になると指摘、現状の回避策(ビルダー・Default実装)は定型コードが過剰</li>
+            <li>引数に`pub`を付けた場合のみ引数名が公開APIの一部になる折衷案を提案、既存コードの後方互換性を維持できる設計</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>botahamec.dev</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-09-22</span>
+          <span class="engagement">▲ 58</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-frontend">Frontend</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://htmx.org/essays/markdown-in-src/">「/srcにMarkdownを置け」——htmx作者が提案するAI時代の「設計意図のソースコード化」</a></h3>
+        </div>
+        <div class="summary">htmx作者Carson Grossが、Markdownをドキュメントではなく`src/md`配下に置く「ソースコードの一部」として扱う提案を公開した。背景には「コンパイラのワークフローは元のソースコードを保持し続けるが、LLMのワークフローは通常そうならない」という問題意識があり、設計意図がLinearやSlack、Wikiに散逸し生成後のコードだけが事実上の正とみなされる状況を懸念する。README・OVERVIEW・機能別ファイルという構成例を示し、テストはプロンプトではなくこのMarkdownから導出すべきだとする。</div>
+        <div class="key-points">
+          <ul>
+            <li>「コンパイラのワークフローは元のソースコードを保持するが、LLMのワークフローは通常そうならない」という非対称性を問題視</li>
+            <li>README/OVERVIEW/機能別ファイルという`src/md`配下の構成例を提示、テストはプロンプトでなくMarkdown仕様から導出すべきと主張</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>htmx.org</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-09-21</span>
+          <span class="engagement">▲ 70</span>
         </div>
       </div>
     </div>
@@ -236,81 +239,80 @@
         <div class="card-header">
           <span class="tag tag-dev">Dev</span>
           <span class="content-type">📜 解説</span>
-          <h3><a href="https://mtx2s.hatenablog.com/entry/2026/09/21/182658">テックリードとアーキテクトの違い、テックリードとEMの違い——キャリアパスと役割範囲から整理</a></h3>
+          <h3><a href="https://syu-m-5151.hatenablog.com/entry/2026/09/22/124945">Claude Code Pluginsで社内Skill配布を一元化する設計——バージョン管理と`/reload-plugins`の使い分け</a></h3>
         </div>
-        <div class="summary">テックリード・アーキテクト・エンジニアリングマネージャー(EM)という3つの役割の違いを整理した記事。テックリードはIC(Individual Contributor)のキャリアパス上に位置づけられ人事評価や配置の権限を持たないのに対し、EMはマネジメントのキャリアパス上でピープルマネジメントの責任と権限を持つ点が本質的な違いだとする。テックリードとアーキテクトの違いは扱う範囲で、テックリードは単一チームの技術的方向性を導くのに対し、アーキテクトは複数チームを横断し長期的な技術ロードマップを描く「イネーブラー」として機能する。</div>
+        <div class="summary">社内で共有するSkillはファイルコピーではなくプラグインにまとめて配布すべきだと説く記事。開発元・配布元・インストール先・実行中セッションの4階層を区別し、`plugin.json`のバージョンを上げなければ利用者に更新が届かない点を強調する。最小構成の例として、コードレビュー用の説明文を整形するSkill「change-brief」を`plugin.json`と`SKILL.md`の2ファイルで作り、`claude plugin validate`での検証、`claude --plugin-dir`でのローカル読み込み、`/reload-plugins`でのセッション反映、`/plugin marketplace add`での配布元登録という一連の運用手順を示す。</div>
         <div class="key-points">
           <ul>
-            <li>テックリードはICキャリアパス上で人事権限を持たず、EMはマネジメントキャリアパス上でピープルマネジメントの責任と権限を持つ</li>
-            <li>アーキテクトは複数チームを横断し長期ロードマップを描く「イネーブラー」、テックリードは単一チームの技術方向性を担う点で範囲が異なる</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>はてなブログ (mtx2s)</span>
-          <span>⏱ 5 min read</span>
-          <span>2026-09-21</span>
-          <span class="engagement">🔖 136</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-ai">AI</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://syu-m-5151.hatenablog.com/entry/2026/09/21/104258">Claude Codeの「Agent view」とセッション間通信は使ったほうがいい——待ち時間の活用法と注意点</a></h3>
-        </div>
-        <div class="summary">Claude CodeのResearch Preview機能「Agent view」と、2026年8月に追加されたセッション間通信の実践的な使い方を解説する記事。Agent viewは複数のバックグラウンドセッションの状態(作業中・入力待ち・完了)を一覧表示し、入力待ちのセッションへ素早く移動できる機能だ。セッション間通信は`@`メンションで別セッションへ決定事項だけを伝える仕組みで、著者はGit Worktreeでファイル編集を分離しつつ、CI失敗の調査中に別セッションを進めるなど「待ち時間」に活用することを推奨する。「Completed」表示は品質保証ではなく、diff確認・テスト実行は必須だと釘を刺す。</div>
-        <div class="key-points">
-          <ul>
-            <li>Agent viewは複数バックグラウンドセッションの状態(作業中・入力待ち・完了)を一覧表示、入力待ちセッションへ即座に移動可能</li>
-            <li>セッション間通信は`@`メンションで決定事項のみを伝達、「Completed」表示は品質保証でないためdiff確認・テスト実行が必須</li>
+            <li>開発元・配布元・インストール先・実行中セッションの4階層を区別、`plugin.json`のバージョンを上げないと利用者に更新が届かない</li>
+            <li>`claude plugin validate`→`claude --plugin-dir`→`/reload-plugins`→`/plugin marketplace add`という検証から配布までの手順を最小構成例で提示</li>
           </ul>
         </div>
         <div class="meta">
           <span>はてなブログ (syu-m-5151)</span>
           <span>⏱ 5 min read</span>
-          <span>2026-09-21</span>
-          <span class="engagement">🔖 75</span>
+          <span>2026-09-22</span>
+          <span class="engagement">🔖 74</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-frontend">Frontend</span>
-          <span class="content-type">👀 注目</span>
-          <h3><a href="https://zenn.dev/chot/articles/268804cd6694ab">WebMCPを試してみた——GUI操作の5分52秒がツール登録で3分9秒に短縮</a></h3>
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://zenn.dev/tanakh/articles/c-code-in-rust">RustのマクロにCコードをそのまま書けるライブラリ「cinrs」公開——外部Cコンパイラ不要でGCC比0.93倍の速度</a></h3>
         </div>
-        <div class="summary">会社のCMS「Orizm」のデザインエディタをAIエージェントに操作させる実験でWebMCPを試した記事。WebMCPはAI向け操作(ツール)をサーバーサイドではなくブラウザ側のフロントエンドに登録する仕組みで、ログイン済みセッションをそのまま使え、画面上の未保存データもJS経由で操作できる。GUI操作のみでCodex(ChatGPT)にブロック編集させると5分52秒かかったのに対し、`list_blocks`・`insert_block`・`update_block_props`などのツールを登録したWebMCP経由では3分9秒に短縮された。</div>
+        <div class="summary">Rustソース中に`c99!`・`c11!`・`c23!`マクロでC89〜C23とGNU拡張のコードをそのまま埋め込み、外部Cコンパイラなしで呼び出せるライブラリ「cinrs」が公開された。Rust製の完全なCコンパイラをマクロ内部に実装し、前処理・構文解析・意味解析を経てCコードと同等のセマンティクスを持つRustコードを生成する。C型は`core::ffi`にマッピングされ`no_std`にも対応、生成関数は`[[cinrs_safe]]`を付けない限り既定で`unsafe`になる。ベンチマークではGCC比0.93倍・Clang比1.07倍の実行速度を達成した一方、コンパイル自体は在来のCコンパイラよりおよそ2倍遅い。</div>
         <div class="key-points">
           <ul>
-            <li>WebMCPはツールをブラウザ側フロントエンドに登録、ログイン済みセッションをそのまま使え未保存データもJS経由で操作可能</li>
-            <li>GUI操作のみでは5分52秒かかった作業が、`list_blocks`等のツール登録によるWebMCP経由では3分9秒に短縮</li>
+            <li>C89〜C23とGNU拡張に対応する完全なCコンパイラをマクロ内に実装、外部Cコンパイラなしで前処理から意味解析まで完結</li>
+            <li>実行速度はGCC比0.93倍・Clang比1.07倍を達成した一方、コンパイル時間は在来Cコンパイラのおよそ2倍</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Zenn (chot)</span>
+          <span>Zenn (tanakh)</span>
           <span>⏱ 4 min read</span>
-          <span>2026-09-21</span>
+          <span>2026-09-22</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-security">Security</span>
+          <span class="tag tag-oss">OSS</span>
           <span class="content-type">📜 解説</span>
-          <h3><a href="https://qiita.com/btncon/items/a79f056fab859293e0b3">取引先からセキュリティチェックシートを求められたら——誇張しない回答と証跡提示、委託先アクセス管理の盲点</a></h3>
+          <h3><a href="https://zenn.dev/subaru_hello/articles/biome-rust-first-contribution">Biomeに`noReactObjectTypeAsDefaultProp`ルールを実装——オブジェクト・配列リテラルの初期値がRe-render地雷になる理由</a></h3>
         </div>
-        <div class="summary">取引先から届く「セキュリティチェックシート」への向き合い方を解説する記事。サプライチェーン経由の被害が常態化する中、企業は疑いではなく説明・証跡を求めていると位置づけ、誇張せず正確に回答すること、「多要素認証実施済み」なら適用範囲や設定画面のスクリーンショットまで示すことを勧める。特に見落とされがちな委託先アクセス管理として、保守業者の未記録リモートアクセスや退職済み委託先の管理者アカウント放置などを具体例に挙げ、棚卸し・最小権限・期限設定・監査ログ・契約への明記を提言する。</div>
+        <div class="summary">リンター「Biome」に、Reactコンポーネントのpropsでオブジェクト・配列リテラルをデフォルト値に使うパターンを検出するルールを実装した記事。`[] === []`や`{} === {}`が評価のたびに新しい参照を生成しfalseになる性質がメモ化を壊し不要な再レンダリングを招く原理を踏まえ、文字列・数値などプリミティブは対象外としつつ、オブジェクト・配列・アロー関数・クラス式・JSX要素・正規表現・`Symbol()`呼び出しまで検出対象に含める形で実装した。Rust未経験だった著者は、AST走査での`Option`/`Result`型の扱いやクロージャ内での`?`演算子の挙動差に苦戦したという。</div>
         <div class="key-points">
           <ul>
-            <li>誇張せず正確に回答し、「多要素認証実施済み」のような項目は適用範囲・設定画面のスクリーンショットまで証跡として示すことを推奨</li>
-            <li>保守業者の未記録リモートアクセスや退職済み委託先の放置管理者アカウントを盲点として指摘、棚卸し・最小権限・監査ログ・契約明記を提言</li>
+            <li>オブジェクト・配列リテラルは評価のたびに新しい参照になりメモ化を壊す性質を利用し、プリミティブ以外(アロー関数・クラス式・JSX要素等)まで検出対象に含めて実装</li>
+            <li>Rust未経験の著者はAST走査での`Option`/`Result`型の扱いとクロージャ内`?`演算子の挙動差に苦戦、レビューを経て共通ロジックを`AnyJsFunction`実装へ再配置</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Qiita (btncon)</span>
+          <span>Zenn (subaru_hello)</span>
           <span>⏱ 4 min read</span>
-          <span>2026-09-21</span>
+          <span>2026-09-22</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://qiita.com/hikariclaude01/items/681ad21c35a17d8e44c6">Claude Codeの権限モデルを6パターン総当たり検証——Bash権限がWrite/Edit制限を実質無効化する落とし穴</a></h3>
+        </div>
+        <div class="summary">Claude CodeのRead/Write/Edit/Bash権限を6パターン(Read単独・Read+Edit・Read+Write・Read+Edit+Write・全権限・Read+Bash)で総当たり検証した記事。Write単独では部分編集ができずファイル全体を書き換える挙動になる点、全権限では`npm install`が自動実行され大量の`node_modules`が生成される点を報告する。最大の発見は「Bash権限はWrite/Edit権限を実質的にバイパスする」ことで、`echo > file.txt`のようなシェルリダイレクトでファイルレベルの制御を回避できてしまう。個人開発は`Edit+Write+限定Bash`、チーム開発はBash除外、本番リポジトリは読み取り専用という権限設計を提言する。</div>
+        <div class="key-points">
+          <ul>
+            <li>Write権限単独では部分編集ができずファイル全体を書き換える挙動になり、全権限では`npm install`が自動実行され大量の`node_modules`が生成される</li>
+            <li>「Bash権限はWrite/Edit権限を実質的にバイパスする」ことが判明、`echo > file.txt`等のシェルリダイレクトでファイルレベル制御を回避できる</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita (hikariclaude01)</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-09-22</span>
         </div>
       </div>
     </div>
@@ -320,42 +322,22 @@
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-ai">AI</span>
-          <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://github.com/jaredpalmer/kev">軽量判断特化モデル群「Kev」がOSS公開——Qwen3.5+LoRAで商用「Jev」に数値上3.5ポイント差まで接近</a></h3>
-        </div>
-        <div class="summary">Jared Palmer氏が、TypeSafe AIの商用サービス「Jev」に似た軽量な判断特化モデル群「Kev」をオープンソースで公開した。Qwen3.5をベースにrank-16のLoRAアダプタとポインタヘッドを組み合わせ、0.8B・4B・9Bの3サイズを用意する。最上位のKev-9Bは新規ソースのテストデータで正解率0.852・Brierスコア0.237を記録し、商用のJevに数値上は約3.5ポイント差まで迫った(ただしJev側の学習データは非公開で単純比較には限界がある)。コード・QwenベースモデルともにApache-2.0ライセンスで、自前での学習・実行が可能だ。</div>
-        <div class="key-points">
-          <ul>
-            <li>Qwen3.5+rank-16 LoRA+ポインタヘッドで0.8B/4B/9Bの3サイズを用意、Kev-9Bは正解率0.852・Brierスコア0.237</li>
-            <li>商用Jevとの差は数値上約3.5ポイントまで縮小(学習データ非公開のため単純比較には限界)、コード・モデルともApache-2.0</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>GitHub (jaredpalmer/kev)</span>
-          <span>⏱ 3 min read</span>
-          <span>2026-09-21</span>
-          <span class="engagement">⭐ 2.4k</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
           <span class="tag tag-oss">OSS</span>
           <span class="content-type">📦 リリース</span>
-          <h3><a href="https://www.publickey1.jp/blog/26/awsaiawsnx_plugin_for_aws_10.html">AWS、フルスタックAWSアプリを自動生成する「Nx Plugin for AWS 1.0」をOSS公開</a></h3>
+          <h3><a href="https://linebender.org/blog/fearless-simd-1-0/">RustのSIMDライブラリ「Fearless SIMD」がv1.0リリース——`unsafe`排除の型システム活用、既に30クレートが直接依存</a></h3>
         </div>
-        <div class="summary">AWSはNxモノレポ向けの「Nx Plugin for AWS 1.0」をオープンソースで公開した。自然言語の指示から数分でAWS CDK/Terraformのインフラコード、フロントエンド/バックエンドのアプリコード、セキュリティ設定、X-Ray/CloudWatchによる可観測性統合、Amazon Bedrockを使うAIエージェント実装やMCPサーバー設定まで一括生成する。生成後のコードはNx Plugin for AWS自体への依存を持たず、自由に編集して運用を続けられる。</div>
+        <div class="summary">Rust製のポータブルSIMD抽象化ライブラリ「Fearless SIMD」がv1.0に到達した。`kernel!`マクロと安全なtransmuteモジュールにより、Rustの型システムを活用して`unsafe`コードをほぼ排除しながらプラットフォーム固有intrinsicsへ安全にアクセスできる。新設の`fearless_simd_macros`クレートは`#[simd]`マクロによる関数多重化(function multiversioning)を提供し、手動でのinline注釈が不要になった。ARMのSVEやRISC-V Vector Extensionなど将来の拡張も破壊的変更なしに追加できる設計だという。既に30クレートが直接依存し、間接的には1,000以上のクレートに影響する。</div>
         <div class="key-points">
           <ul>
-            <li>自然言語指示からAWS CDK/Terraformのインフラコード・アプリコード・X-Ray/CloudWatch統合・Bedrock AIエージェントまで数分で一括生成</li>
-            <li>生成コードはNx Plugin for AWSへの依存を持たず、生成後は自由に編集・運用可能</li>
+            <li>`kernel!`マクロと安全なtransmuteモジュールでRustの型システムを活用し、SIMDプログラミングから`unsafe`コードをほぼ排除</li>
+            <li>新設`fearless_simd_macros`の`#[simd]`マクロで関数多重化を自動化、既に30クレートが直接依存し間接的には1,000以上のクレートに影響</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Publickey</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-09-10</span>
+          <span>linebender.org</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-21</span>
+          <span class="engagement">▲ 46</span>
         </div>
       </div>
 
@@ -363,20 +345,39 @@
         <div class="card-header">
           <span class="tag tag-dev">Dev</span>
           <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://github.com/acsandmann/rift">macOS向けタイル型ウィンドウマネージャ「rift」がRust製で公開——SIP無効化不要で複数レイアウトに対応</a></h3>
+          <h3><a href="https://qiita.com/yukihirop/items/e0d8ffb121c1a753075a">あらゆるCLIを自然言語対応にする「jany」公開——曖昧な単語だけLLMに問い合わせ実行前に人間が確認</a></h3>
         </div>
-        <div class="summary">macOS向けタイル型ウィンドウマネージャ「rift」がRust製で公開された。glide-wmからのフォークとして始まり、タイル・二分木分割・フローティング・マスタースタック・スクロールカラムなど複数のレイアウトスタイルに対応する。System Integrity Protection(SIP)の無効化が不要で、トラックパッドジェスチャーによるワークスペース切り替えやホットリロード可能な設定、Mach ports経由のIPCによるサードパーティ連携も備える。開発者は既存ツール「Aerospace」のアニメーションやマルチディスプレイのフルスクリーン対応への不満を開発動機に挙げている。</div>
+        <div class="summary">既存のCLIコマンドを自然言語入力で組み立てられるRust製ツール「jany」が公開された。入力単語をスキーマ規則で分類し、ファイルパスやポート番号など明確な要素はローカルで処理、曖昧な単語だけをLLMに問い合わせて解決する。組み立てたコマンドはシェルプロンプトに表示され、実行前に必ず人間が確認する設計だ。コマンド定義はRustのハードコードでなくTOMLとシェルスクリプトで管理され拡張が容易で、`find log files older than 7 days in logs delete`が`find logs -type f -iname '*.log' -mtime +7 -delete`に変換される例が示されている。</div>
         <div class="key-points">
           <ul>
-            <li>SIP無効化不要でタイル・二分木分割・フローティング・マスタースタックなど複数レイアウトスタイルに対応、Rust製</li>
-            <li>トラックパッドジェスチャー・ホットリロード設定・Mach ports経由IPCに対応、既存ツールAerospaceの不満が開発動機</li>
+            <li>入力単語をスキーマ規則で分類し曖昧な要素だけをLLMに問い合わせ、組み立てたコマンドは実行前に必ず人間が確認する設計</li>
+            <li>コマンド定義はRustのハードコードでなくTOML/シェルスクリプトで管理され拡張が容易、`find`や`docker run`など複数コマンドで変換例を提示</li>
           </ul>
         </div>
         <div class="meta">
-          <span>GitHub (acsandmann/rift)</span>
+          <span>Qiita (yukihirop)</span>
           <span>⏱ 3 min read</span>
-          <span>2026-09-21</span>
-          <span class="engagement">⭐ 2.3k</span>
+          <span>2026-09-22</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://zenn.dev/koichi73/articles/pokemon-go-plus-teardown-esp32">「ポケモンGO Plus+」を分解しESP32で睡眠計測を完全自動化——目標比1%以内の精度で毎晩満点スコアを再現</a></h3>
+        </div>
+        <div class="summary">「ポケモンGO Plus+」の電源ボタン内部の2接点を電圧測定で特定し、電子スイッチで橋渡しすることでボタン押下を再現する自動化装置を製作した記事。ESP32・電子スイッチ・振動モーター・Web操作パネルの4要素で構成し、毎晩23時から翌8時まで2秒間隔でボタンを自動操作する。「浅い眠り」は2分ごと、「通常の眠り」は10分ごとに振動を発生させ「深い眠り」では振動しないパターンをWeb画面で指定した比率どおりに再現し、8時間超の計測で目標比1%以内の精度、常に満点の睡眠スコア100点を達成したという。</div>
+        <div class="key-points">
+          <ul>
+            <li>電源ボタン内部の2接点を電圧測定で特定し電子スイッチで橋渡し、ESP32・振動モーター・Web操作パネルの4要素で自動化装置を構成</li>
+            <li>睡眠タイプ別の振動間隔(浅い眠り2分毎・通常10分毎・深い眠りは振動なし)をWeb画面で指定した比率どおりに再現し、目標比1%以内の精度で満点スコアを再現</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn (koichi73)</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-09-22</span>
         </div>
       </div>
     </div>
@@ -385,49 +386,50 @@
       <div class="section-title">🔗 Quick Links</div>
 
       <div class="quick-link">
+        <span class="tag tag-infra">Infra</span>
+        <a href="https://david.alvarezrosa.com/posts/self-hosting-behind-cgnat/">CGNAT環境でも自宅サーバーを公開する方法——WireGuardで安価な海外VPSへ常時トンネルを張る</a>
+        <span class="quick-summary">— ホームラボ側からVPSへWireGuardトンネルを常時接続することで固定IPやポート開放なしに自宅サーバーを公開でき、ブリッジ経由で39msのレイテンシ増加と引き換えになる。</span>
+        <span class="meta">david.alvarezrosa.com</span>
+        <span class="engagement">▲ 54</span>
+      </div>
+
+      <div class="quick-link">
         <span class="tag tag-product">Product</span>
-        <a href="https://alicegg.tech/2026/09/21/attention">「Attention is all you have」——アルゴリズム推薦に支配された注意力を取り戻すエッセイ</a>
-        <span class="quick-summary">— YouTube・Spotify・LinkedIn・Redditのアルゴリズム推薦が思考を形作っていると指摘し、ブックマークやRSSで能動的に選ぶ「意図的なインターネット」への回帰を提案する。</span>
-        <span class="meta">alicegg.tech</span>
-        <span class="engagement">▲ 541</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-data">Data</span>
-        <a href="https://www.publickey1.jp/blog/26/awsamazon_quick.html">Amazon Quick、自然言語だけでカスタムデータ分析アプリを構築可能に</a>
-        <span class="quick-summary">— タブ・ナビゲーション・表・グラフなどのUI部品を自然言語指示だけで組み立てられる新機能で、Plus/Professional/Enterpriseの各ティアで利用できる。</span>
-        <span class="meta">Publickey</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-dev">Dev</span>
-        <a href="https://blog.jetbrains.com/kotlin/2026/09/kotlin-2-4-20-released/">Kotlin 2.4.20リリース——when式のinvokedynamicコンパイルが正式安定化</a>
-        <span class="quick-summary">— Kotlin/NativeのSwiftエクスポート強化やGradle 9.7.0対応に加え、when式をinvokedynamicにコンパイルする最適化がStableとして標準有効化された。</span>
-        <span class="meta">JetBrains Blog</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-oss">OSS</span>
-        <a href="https://canonical.com/blog/zephyr-lts-announcement">Canonical、組み込み機器向け「Zephyr 26.04 LTS」を発表——最長15年のセキュリティサポート</a>
-        <span class="quick-summary">— EUサイバーレジリエンス法の最低5年を大幅に上回る最長15年のパッチ提供とGolioth CloudによるOTA更新管理を統合し、長寿命マイコン製品のベンダー向けに提供する。</span>
-        <span class="meta">Canonical Blog</span>
+        <a href="https://www.jeffgeerling.com/blog/2026/raspberry-pi-ram-lockdown/">Raspberry Pi 5、ファームウェアでRAMチップ交換を制限——中古転売の不正改造対策も「ハードウェア所有権の喪失」と批判</a>
+        <span class="quick-summary">— 型番と実装RAMの不一致を検知しRAM換装を拒否する仕組みで、低RAM品への粗悪チップ換装転売への対策だが、著者は旧モデルにあった「保証ビット」方式のような改造許容案を提案する。</span>
+        <span class="meta">jeffgeerling.com</span>
         <span class="engagement">▲ 14</span>
       </div>
 
       <div class="quick-link">
-        <span class="tag tag-ai">AI</span>
-        <a href="https://blog.colinbreck.com/i-dont-want-to-read-what-you-didnt-write/">「書いていない文章は読みたくない」——AI生成文章が読者との信頼を壊す理由</a>
-        <span class="quick-summary">— 校正や事実確認にAIを使うのは有効だが、設計文書やインシデント報告のような文脈と経験が要る文章は本人の言葉で書くべきだと論じる。</span>
-        <span class="meta">blog.colinbreck.com</span>
-        <span class="engagement">▲ 86</span>
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://ahelwer.ca/post/2026-09-21-concurrency-textbook/">「並行プログラミングは本当に難しいのか」——McKenney本のレビュー、コンパイラとCPU双方が罠を仕込む「二重の罠」</a>
+        <span class="quick-summary">— MESIキャッシュコヒーレンシプロトコルの理解が前提になる点と、コンパイラの最適化(ロード/ストアの分断・融合・並べ替え)がCPU実行前から罠を仕込む点を指摘する。</span>
+        <span class="meta">ahelwer.ca</span>
+        <span class="engagement">▲ 48</span>
       </div>
 
       <div class="quick-link">
-        <span class="tag tag-frontend">Frontend</span>
-        <a href="https://kevquirk.com/do-you-use-visited-on-links">CSSの`:visited`疑似クラスを見直すべき理由——訪問済みリンクの色分けでフィード読みが捗る</a>
-        <span class="quick-summary">— フィードリーダーで訪問済みリンクが色分けされる体験から着想し、数行のCSSで既読・未読を視覚的に区別する手軽さを紹介する。</span>
-        <span class="meta">kevquirk.com</span>
-        <span class="engagement">▲ 22</span>
+        <span class="tag tag-ai">AI</span>
+        <a href="https://minimaxir.com/2026/09/agentic-iteration/">AIエージェントに「ブレイクスルーを試して」と煽ってRustコードを最大32倍高速化した実験</a>
+        <span class="quick-summary">— criterionでベースラインを取り「全ベンチマークで1.2倍以上」と数値目標を課す反復プロンプトを重ね、UMAP実装はPython版比4〜15倍、GPT-5〜GPT-6世代累計で7.5〜32倍の高速化を達成した。</span>
+        <span class="meta">minimaxir.com</span>
+        <span class="engagement">▲ 5</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://lwn.net/SubscriberLink/1094575/2385e98583715c2b/">Git 2.56は`git history drop`や`git refs`サブコマンドを追加、Git 3.0はSHA-256既定化とRustビルド必須化へ</a>
+        <span class="quick-summary">— 2.56ではマージコミット非対応ながらコミットを削除し後続を再生する`git history drop`を追加、次期3.0ではSHA-1既定からSHA-256への切り替えとreftable形式への移行、Rustコンパイル必須化という互換性を破る変更が控える。</span>
+        <span class="meta">lwn.net</span>
+        <span class="engagement">▲ 71</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://qiita.com/kemuniku/items/71f509c9487199c4718a">PyPyの内部最適化「ListStrategy」まとめ——型が混ざる一撃で1億要素リストの変換に2.47秒かかる罠</a>
+        <span class="quick-summary">— IntegerListStrategyなど9種類のリスト内部表現を型に応じて自動切り替える仕組みを解説し、64bit超の値混入によるObjectListStrategyへの変換コストが1億要素で2.47秒に達する例を示す。</span>
+        <span class="meta">Qiita (kemuniku)</span>
       </div>
     </div>
 
