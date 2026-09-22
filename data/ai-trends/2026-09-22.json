@@ -1,0 +1,91 @@
+{
+  "issue": "2026-09-22",
+  "generated_at": "2026-09-22T07:00:00+09:00",
+  "theme": {
+    "title": "モデルルーティングが開発ツールの既定機能になった — 選ぶのは人間ではなく分類器",
+    "category": "model-routing",
+    "lede": "2026年に入り、複数のAIコーディングツールが『どのモデルを使うか』をユーザーの選択から切り離した。GitHub Copilotは9月にコスト/品質の3段階ティアを追加し、Cursorは60万件超の実利用データで学習した分類器にモデル選定を任せるCursor Routerを投入した。背景にあるのは、開発者の多くが単一モデルを固定して使い続け、単純な作業まで最上位モデルの価格で処理しているという非効率だ。ただし『どの基準で振り分けるか』の設計は各社で割れており、満足度を学習する方式と、品質差分の許容範囲を管理者が数値で設定する方式が併存している。",
+    "tldr": [
+      "GitHub Copilotは9月にauto model selectionへ「efficiency/balance/intelligence」の3段階ティアを追加し、Cursorは60万件超の実利用データで学習した分類器（Cursor Router）でモデル選定を自動化した。",
+      "Cursor Routerはユーザー満足度を目的関数に学習するのに対し、Amazon Bedrock Intelligent Prompt Routingは同一モデルファミリー内で許容する品質差分をパーセンテージで管理者が設定する、対照的な設計を取る。",
+      "Not Diamond Codeのようなコーディングエージェント向けルーターは、モデルを切り替えるとプロンプトキャッシュが切れてコストが増える点まで考慮し、切り替えの得失をセッション単位で計算する。"
+    ],
+    "sections": [
+      {
+        "heading": "モデル選択が『人間の設定』から『毎リクエストの自動判定』になった",
+        "body_html": "<p>従来、開発者はチャットUIやCLIでモデルを1つ選び、単純な補完にも複雑なバグ診断にも同じモデルを使い続けてきた。GitHub CopilotとCursorはこの前提を崩し、リクエストごとにタスクの複雑さを評価してモデルを割り当てる層を標準機能として組み込んだ。</p><p>転換の理由は非対称なコスト構造にある。単純なファイル検索や定型的な補完に最上位モデルを使っても品質は大差なく、コストと待ち時間だけが増える。逆に複雑なバグ診断を安価なモデルに回すと品質が落ちる。この非対称性を人間が都度判断するのは非効率なため、判定自体をモデル選択の外側、つまりシステム側に出す設計へ収束した。</p>",
+        "examples": [
+          {
+            "product": "GitHub Copilot（auto model selection）",
+            "approach": "efficiency/balance/intelligenceの3段階ティアを導入し、同一のモデル群からプロンプトごとに最適なモデルを選ぶ",
+            "detail": "3ティアとも使えるモデル集合は同じで、ティアは『コストと品質のどちらに倍率を振るか』の設定に過ぎない。課金は実際に選ばれたモデルの単価で行われる",
+            "source_url": "https://github.blog/changelog/2026-09-14-configure-cost-and-quality-in-copilot-auto-model-selection/"
+          },
+          {
+            "product": "Cursor（Cursor Router）",
+            "approach": "60万件超の実利用データで学習した分類器が、クエリ・コンテキスト・タスクの複雑さを見てモデルを割り振る",
+            "detail": "Auto IntelligenceモードはFableと同等の満足度を約60%低いコストで、Auto BalanceはOpus 4.8を上回る満足度を約36%低いコストで達成したと公表している",
+            "source_url": "https://cursor.com/blog/router"
+          }
+        ],
+        "takeaway": "モデル選択UIを作るなら、ユーザーに『賢いモデル/安いモデル』を選ばせる二択にせず、タスクの特徴量から自動判定する層を挟む設計にする方が、この非対称なコスト構造を活かせる。"
+      },
+      {
+        "heading": "判定基準の設計は『満足度学習型』と『品質差分閾値型』に割れた",
+        "body_html": "<p>モデルを振り分ける基準の作り方には、少なくとも2つの流儀がある。Cursor Routerはユーザーの実利用ログから『どちらのモデルの出力が好まれたか』を学習し、満足度を目的関数にする。一方Amazon Bedrock Intelligent Prompt Routingは、同一モデルファミリー内の2モデル間で許容する『応答品質の差』をパーセンテージで管理者が指定し、その閾値内なら安いモデルへ倒す。</p><p>この違いはプロダクトの立ち位置を反映している。開発者向けエージェントは出力の『体感の良さ』が離脱に直結するため主観指標を最適化する。一方クラウド基盤は多数のテナントが多様な用途で使うため、管理者が数値で制御できるノブを用意する方が運用しやすい。同じ『安いモデルに倒す』という結論でも、判定基準の設計は製品が誰向けかで変わる。</p>",
+        "examples": [
+          {
+            "product": "Cursor（Cursor Router）",
+            "approach": "オンラインA/Bテストでユーザー満足度を主指標にモデル選択ロジックを評価・学習する",
+            "detail": "本番トラフィックでのA/Bテストを通じ、満足度を落とさない範囲でより安価なモデルに寄せるよう継続的に調整する",
+            "source_url": "https://cursor.com/blog/router"
+          },
+          {
+            "product": "Amazon Bedrock Intelligent Prompt Routing",
+            "approach": "同一モデルファミリー内の2モデル間で許容する応答品質の差分を管理者がパーセンテージで設定し、閾値内なら安価なモデルへルーティングする",
+            "detail": "Anthropicファミリーで最大56%、RAG用途のデータセットでは平均63.6%のコスト削減を確認したと報告している",
+            "source_url": "https://aws.amazon.com/blogs/machine-learning/use-amazon-bedrock-intelligent-prompt-routing-for-cost-and-latency-benefits/"
+          }
+        ],
+        "takeaway": "社内向けにルーティングを組むなら、ユーザー体験に直結するプロダクトは満足度ベースの学習型、コスト管理が主目的の基盤側は閾値を数値で握れる設定型、と用途で設計方針を変えた方が運用しやすい。"
+      },
+      {
+        "heading": "モデルを切り替えるとキャッシュが切れる — ルーティングはセッション単位のコスト計算になった",
+        "body_html": "<p>モデル振り分けは1リクエスト単体の損得では決まらない。プロンプトキャッシュはモデルごとに管理されており、会話の途中でモデルを切り替えるとそれまで蓄積したキャッシュ済みプレフィックスが失効し、次のリクエストは丸ごとキャッシュミスとして課金される。安いモデルへの切り替えで得るはずのコスト削減が、キャッシュ再構築のコストで相殺される場合がある。</p><p>GitHub CopilotとNot Diamond Codeは、この『切り替えの得失』をルーティング判断そのものに組み込んでいる。単発のリクエストではなく、セッション全体でのコストを最小化する設計に踏み込んでいる点で、リクエストごとに最安モデルを選ぶだけの初期の実装とは一段階違う。</p>",
+        "examples": [
+          {
+            "product": "GitHub Copilot（auto model selection）",
+            "approach": "モデル切り替えのタイミングを『自然なキャッシュの境界』に合わせ、無駄なキャッシュ関連コストの発生を避ける",
+            "detail": "タスクの評価だけでなく、既存のキャッシュ済みコンテキストを崩さないタイミングを選んでルーティングする",
+            "source_url": "https://github.blog/changelog/2026-07-01-copilot-cli-auto-model-selection-routes-based-on-task/"
+          },
+          {
+            "product": "Not Diamond Code",
+            "approach": "セッション単位でモデル切り替えのコストとキャッシュ温存効果を比較し、高いモデルを維持する場合と積極的に切り替える場合を使い分ける",
+            "detail": "Poly-SWE-BenchでOpus 4.8相当の品質を保ちながら39%、LongCodeQAでは61%のコスト削減を報告。Anthropic以外のモデルを混在させると削減率は66%まで伸びるという",
+            "source_url": "https://www.notdiamond.ai/blog/not-diamond-code-intelligent-model-routing-for-coding-agents"
+          }
+        ],
+        "takeaway": "会話やセッションが続くエージェントにモデルルーティングを組むなら、リクエスト単体の最安モデル選びではなく、キャッシュ再構築コストを含めたセッション全体の期待コストで判断する設計にする。"
+      }
+    ]
+  },
+  "editorial": "3つの実装に共通するのは、『モデルを選ぶ』という判断が、プロンプト設計と同じ扱いの人間の作業から、システムが毎リクエスト下す推論へ格下げされたことだ。次の分岐点は、この判定ロジック自体をどこまでユーザーに開示するかに移るだろう——ブラックボックスの分類器に委ねたコストと品質のトレードオフを、誰がどう検証するかという問題はまだ手つかずのままだ。",
+  "quick_picks": [
+    {
+      "title": "About Copilot auto model selection",
+      "summary": "efficiency/balance/intelligenceの3ティアを含む設定項目を解説する公式ドキュメント。本文のGitHub Copilotのティア設計の一次情報。",
+      "url": "https://docs.github.com/en/copilot/concepts/models/auto-model-selection"
+    },
+    {
+      "title": "RouteLLM: An Open-Source Framework for Cost-Effective LLM Routing",
+      "summary": "LMSYSが公開した、人間の選好データからルーターを学習するOSSフレームワークの研究記事。本文のCursor Routerが採る『満足度学習型』ルーティングの源流にあたる。",
+      "url": "https://www.lmsys.org/blog/2024-07-01-routellm/"
+    },
+    {
+      "title": "Understanding intelligent prompt routing in Amazon Bedrock",
+      "summary": "品質差分の閾値設定やペアで組めるモデルファミリーの制約を詳述する公式ユーザーガイド。本文のBedrockの『品質差分閾値型』設計の仕様面を補足する。",
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-routing.html"
+    }
+  ]
+}

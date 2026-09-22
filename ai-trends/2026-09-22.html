@@ -66,7 +66,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 <div class="container">
 <header>
   <h1>🧠 AI プロダクト動向</h1>
-  <p class="date">2026-08-06 発行（読了 6 分）</p>
+  <p class="date">2026-09-22 発行（読了 6 分）</p>
   <p class="tagline">実プロダクトのアーキテクチャ・使用例から AI 開発の現在地を週 3 回・1 号 1 テーマで深掘り</p>
   <nav class="site-nav">
     <a href="../">📰 日刊ダイジェスト</a>
@@ -77,82 +77,93 @@ footer a{color:var(--primary-500);text-decoration:none}
 </header>
 
 <div class="theme-hero">
-  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">RAG</span></span>
-  <h2>RAG 構成パターンの現在地 — 二段構成の次は、検索そのものをエージェントに埋め込む</h2>
-  <p class="lede">naive RAG がプロトタイプ以上の扱いを受けなくなって久しい。ベクトル検索単体では拾えない完全一致・固有名詞・エラーメッセージを補うため、lexical 検索と組み合わせて rerank する二段構成はもはや議論の余地がない既定線になった。今週の一次情報が示すのはその先で、検索を「事前に一回だけ行う処理」ではなく「エージェントが判断しながら繰り返し呼ぶツール」として組み込む動きと、その多段検索を支える基盤コストが設計の自由度そのものを規定し始めている現実だ。</p>
+  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">MODEL-ROUTING</span></span>
+  <h2>モデルルーティングが開発ツールの既定機能になった — 選ぶのは人間ではなく分類器</h2>
+  <p class="lede">2026年に入り、複数のAIコーディングツールが『どのモデルを使うか』をユーザーの選択から切り離した。GitHub Copilotは9月にコスト/品質の3段階ティアを追加し、Cursorは60万件超の実利用データで学習した分類器にモデル選定を任せるCursor Routerを投入した。背景にあるのは、開発者の多くが単一モデルを固定して使い続け、単純な作業まで最上位モデルの価格で処理しているという非効率だ。ただし『どの基準で振り分けるか』の設計は各社で割れており、満足度を学習する方式と、品質差分の許容範囲を管理者が数値で設定する方式が併存している。</p>
 </div>
 
 <div class="tldr">
   <div class="label">TL;DR — 3 行で</div>
   <ul>
-    <li>Perplexity は Vespa 上で lexical・embedding のハイブリッド検索から cross-encoder rerank へ絞り込む多段構成を採り、Databricks は同じ構成を単一パラメータで追加できる機能として一般化した。</li>
-    <li>Cognition は SWE-grep という検索専用モデルを RL で訓練し、1 ターン最大 8 並列・最大 4 ターンの検索をエージェントのループ内に組み込んで、コード検索の速度と精度を両立させた。</li>
-    <li>Notion はベクトル検索基盤をサーバーレス化・差分キャッシュ化・自前推論基盤への移行で作り直し、コストを約 9 割削減しながら 15 倍の規模拡大を支えた——検索パターンの選択肢は基盤側のコストにも制約される。</li>
+    <li>GitHub Copilotは9月にauto model selectionへ「efficiency/balance/intelligence」の3段階ティアを追加し、Cursorは60万件超の実利用データで学習した分類器（Cursor Router）でモデル選定を自動化した。</li>
+    <li>Cursor Routerはユーザー満足度を目的関数に学習するのに対し、Amazon Bedrock Intelligent Prompt Routingは同一モデルファミリー内で許容する品質差分をパーセンテージで管理者が設定する、対照的な設計を取る。</li>
+    <li>Not Diamond Codeのようなコーディングエージェント向けルーターは、モデルを切り替えるとプロンプトキャッシュが切れてコストが増える点まで考慮し、切り替えの得失をセッション単位で計算する。</li>
   </ul>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 1: ハイブリッド検索 → rerank の二段構成が既定線になった</div>
+  <div class="section-title">📐 パターン 1: モデル選択が『人間の設定』から『毎リクエストの自動判定』になった</div>
   <div class="theme-section">
-    <p>現在の標準構成は、BM25 などの lexical 検索とベクトル検索を並走させて候補を広く取り、cross-encoder の rerank モデルで上位のみに絞り込む二段構成だ。ベクトル検索は言い換えに強い一方、<code>TypeError: cannot read properties</code> のようなエラーメッセージや固有名詞のような完全一致には弱く、この取りこぼしは埋め込みモデルの改善だけでは直らない。lexical 側で広い網を張り、精度が要求される最終段だけ計算コストの高い cross-encoder に任せる、という役割分担がここに来て一巡した。</p><p>この構成が既定線になったのは、埋め込みモデル単体を磨き続けるより、検索段を分業させたほうが安く速く精度が上がると各社が同じ結論に達したからだ。rerank を後付けの最適化ではなく最初から組み込む前提の機能として提供する動きが、この構成の定着を裏付けている。</p>
+    <p>従来、開発者はチャットUIやCLIでモデルを1つ選び、単純な補完にも複雑なバグ診断にも同じモデルを使い続けてきた。GitHub CopilotとCursorはこの前提を崩し、リクエストごとにタスクの複雑さを評価してモデルを割り当てる層を標準機能として組み込んだ。</p><p>転換の理由は非対称なコスト構造にある。単純なファイル検索や定型的な補完に最上位モデルを使っても品質は大差なく、コストと待ち時間だけが増える。逆に複雑なバグ診断を安価なモデルに回すと品質が落ちる。この非対称性を人間が都度判断するのは非効率なため、判定自体をモデル選択の外側、つまりシステム側に出す設計へ収束した。</p>
     <div class="example">
-      <div class="product">Perplexity（検索基盤、Vespa.ai 上に構築）</div>
-      <div class="approach">lexical・embedding 双方のスコアラーで数億〜数十億文書規模から広く候補を取り、cross-encoder の rerank で section・span 単位まで絞り込む</div>
-      <div class="detail">毎時数百万件規模のクエリを処理する実運用環境で、ハイブリッド検索＋多段 rerank が機能することを示す代表例</div>
-      <a href="https://blog.vespa.ai/perplexity-show-what-great-rag-takes/">📄 一次ソース</a>
+      <div class="product">GitHub Copilot（auto model selection）</div>
+      <div class="approach">efficiency/balance/intelligenceの3段階ティアを導入し、同一のモデル群からプロンプトごとに最適なモデルを選ぶ</div>
+      <div class="detail">3ティアとも使えるモデル集合は同じで、ティアは『コストと品質のどちらに倍率を振るか』の設定に過ぎない。課金は実際に選ばれたモデルの単価で行われる</div>
+      <a href="https://github.blog/changelog/2026-09-14-configure-cost-and-quality-in-copilot-auto-model-selection/">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">Databricks Mosaic AI Vector Search</div>
-      <div class="approach">rerank 機能を単一パラメータで追加できる形で Public Preview 提供し、enterprise ベンチマークで recall@10 を 74% から 89% に改善</div>
-      <div class="detail">rerank を『後から足す最適化』ではなく標準機能として組み込んだ、二段構成の一般化を示す事例</div>
-      <a href="https://www.databricks.com/blog/reranking-mosaic-ai-vector-search-faster-smarter-retrieval-rag-agents">📄 一次ソース</a>
+      <div class="product">Cursor（Cursor Router）</div>
+      <div class="approach">60万件超の実利用データで学習した分類器が、クエリ・コンテキスト・タスクの複雑さを見てモデルを割り振る</div>
+      <div class="detail">Auto IntelligenceモードはFableと同等の満足度を約60%低いコストで、Auto BalanceはOpus 4.8を上回る満足度を約36%低いコストで達成したと公表している</div>
+      <a href="https://cursor.com/blog/router">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> これから RAG を組むなら最初からハイブリッド＋rerank を既定にする。ベクトル単体で始めて後から rerank を足すのは二重管理になりやすく、Databricks のように標準機能で提供されているなら最初から使う方が合理的。</div>
+    <div class="takeaway"><strong>示唆:</strong> モデル選択UIを作るなら、ユーザーに『賢いモデル/安いモデル』を選ばせる二択にせず、タスクの特徴量から自動判定する層を挟む設計にする方が、この非対称なコスト構造を活かせる。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 2: 検索を『事前の一回』ではなく『エージェントのループ内ツール』にする</div>
+  <div class="section-title">📐 パターン 2: 判定基準の設計は『満足度学習型』と『品質差分閾値型』に割れた</div>
   <div class="theme-section">
-    <p>Cognition は SWE-grep / SWE-grep-mini という検索専用モデルを強化学習で訓練し、コーディングエージェントの検索段に組み込んだ。1 ターンあたり最大 8 並列のツール呼び出しを、最大 4 ターン（探索 3 回＋回答 1 回）まで繰り返させる設計で、単発の埋め込み検索でも逐次的なツール呼び出しの繰り返しでもない、第三の形になっている。SWE-grep-mini は毎秒 2,800 トークン超という速度で、Haiku 4.5 比で約 20 倍速いという。</p><p>この設計転換の動機は明快で、既存のコーディングエージェントは最初のターンの 60% 以上を検索に費やしていた。埋め込み検索は複雑な多段クエリを取りこぼし、逐次的なエージェント検索は精度が出ても遅い。汎用 LLM に検索を任せるのではなく、検索専用の軽量モデルを間に挟むことで、この速度と精度のトレードオフを崩さずに済ませている。</p>
+    <p>モデルを振り分ける基準の作り方には、少なくとも2つの流儀がある。Cursor Routerはユーザーの実利用ログから『どちらのモデルの出力が好まれたか』を学習し、満足度を目的関数にする。一方Amazon Bedrock Intelligent Prompt Routingは、同一モデルファミリー内の2モデル間で許容する『応答品質の差』をパーセンテージで管理者が指定し、その閾値内なら安いモデルへ倒す。</p><p>この違いはプロダクトの立ち位置を反映している。開発者向けエージェントは出力の『体感の良さ』が離脱に直結するため主観指標を最適化する。一方クラウド基盤は多数のテナントが多様な用途で使うため、管理者が数値で制御できるノブを用意する方が運用しやすい。同じ『安いモデルに倒す』という結論でも、判定基準の設計は製品が誰向けかで変わる。</p>
     <div class="example">
-      <div class="product">Cognition SWE-grep / SWE-grep-mini（Windsurf の Fast Context）</div>
-      <div class="approach">RL で訓練した検索専用モデルが 1 ターン最大 8 並列・最大 4 ターンの検索をエージェントのループ内で実行し、Fast Context として最大 20 倍高速にコード検索を提供</div>
-      <div class="detail">検索を事前処理ではなくエージェントが繰り返し呼ぶツールとして設計した具体例で、埋め込み検索単体・逐次エージェント検索双方の弱点を狙って作られている</div>
-      <a href="https://cognition.com/blog/swe-grep">📄 一次ソース</a>
+      <div class="product">Cursor（Cursor Router）</div>
+      <div class="approach">オンラインA/Bテストでユーザー満足度を主指標にモデル選択ロジックを評価・学習する</div>
+      <div class="detail">本番トラフィックでのA/Bテストを通じ、満足度を落とさない範囲でより安価なモデルに寄せるよう継続的に調整する</div>
+      <a href="https://cursor.com/blog/router">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> 1 回のベクトル検索では終わらない多段・探索的なクエリ（特にコード検索）は、汎用 LLM に検索させるより、検索専用の軽量モデルをエージェントのループに挟む設計を検討する。</div>
+    <div class="example">
+      <div class="product">Amazon Bedrock Intelligent Prompt Routing</div>
+      <div class="approach">同一モデルファミリー内の2モデル間で許容する応答品質の差分を管理者がパーセンテージで設定し、閾値内なら安価なモデルへルーティングする</div>
+      <div class="detail">Anthropicファミリーで最大56%、RAG用途のデータセットでは平均63.6%のコスト削減を確認したと報告している</div>
+      <a href="https://aws.amazon.com/blogs/machine-learning/use-amazon-bedrock-intelligent-prompt-routing-for-cost-and-latency-benefits/">📄 一次ソース</a>
+    </div>
+    <div class="takeaway"><strong>示唆:</strong> 社内向けにルーティングを組むなら、ユーザー体験に直結するプロダクトは満足度ベースの学習型、コスト管理が主目的の基盤側は閾値を数値で握れる設定型、と用途で設計方針を変えた方が運用しやすい。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 3: 検索基盤のコスト構造が設計の自由度を規定する</div>
+  <div class="section-title">📐 パターン 3: モデルを切り替えるとキャッシュが切れる — ルーティングはセッション単位のコスト計算になった</div>
   <div class="theme-section">
-    <p>Notion は 2 年かけてベクトル検索基盤を作り直した。専用ハードウェアの pod 構成から turbopuffer によるサーバーレス構成へ移行し、ページ編集のたびに全文を再埋め込みしていた処理をハッシュ差分検出に切り替えて再計算範囲を絞り、埋め込み生成・推論を Ray on Anyscale の単一基盤へ統合した。結果としてコストは合計で約 9 割削減され、クエリレイテンシは 70-100ms から 50-70ms に改善しながら、アクティブワークスペースは 15 倍に成長した。</p><p>この事例が示すのは、ハイブリッド検索や rerank、エージェント型の多段検索を足すほど呼び出し回数とコストが増えるという単純な事実だ。どのパターンを選べるかは、検索基盤がその呼び出し回数に耐えるコスト構造になっているかに先に規定される。パターンの選定と基盤コストの最適化は、もはや別々の意思決定ではない。</p>
+    <p>モデル振り分けは1リクエスト単体の損得では決まらない。プロンプトキャッシュはモデルごとに管理されており、会話の途中でモデルを切り替えるとそれまで蓄積したキャッシュ済みプレフィックスが失効し、次のリクエストは丸ごとキャッシュミスとして課金される。安いモデルへの切り替えで得るはずのコスト削減が、キャッシュ再構築のコストで相殺される場合がある。</p><p>GitHub CopilotとNot Diamond Codeは、この『切り替えの得失』をルーティング判断そのものに組み込んでいる。単発のリクエストではなく、セッション全体でのコストを最小化する設計に踏み込んでいる点で、リクエストごとに最安モデルを選ぶだけの初期の実装とは一段階違う。</p>
     <div class="example">
-      <div class="product">Notion（ベクトル検索基盤の 2 年間の刷新）</div>
-      <div class="approach">turbopuffer への移行・ハッシュ差分による再埋め込み削減・Ray on Anyscale への統合で、コストを約 9 割削減しつつレイテンシと 15 倍のスケールを両立</div>
-      <div class="detail">検索パターンそのものではなく、検索を支える基盤コストの作り直しが規模拡大の前提条件になったことを示す一次情報</div>
-      <a href="https://www.notion.com/blog/two-years-of-vector-search-at-notion">📄 一次ソース</a>
+      <div class="product">GitHub Copilot（auto model selection）</div>
+      <div class="approach">モデル切り替えのタイミングを『自然なキャッシュの境界』に合わせ、無駄なキャッシュ関連コストの発生を避ける</div>
+      <div class="detail">タスクの評価だけでなく、既存のキャッシュ済みコンテキストを崩さないタイミングを選んでルーティングする</div>
+      <a href="https://github.blog/changelog/2026-07-01-copilot-cli-auto-model-selection-routes-based-on-task/">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> rerank やエージェント型の多段検索を足す前に、自社の検索基盤が呼び出し回数の増加に耐えるコスト構造かどうかを先に確認する。基盤側のボトルネックがあると、正しいパターンを選んでも本番投入できない。</div>
+    <div class="example">
+      <div class="product">Not Diamond Code</div>
+      <div class="approach">セッション単位でモデル切り替えのコストとキャッシュ温存効果を比較し、高いモデルを維持する場合と積極的に切り替える場合を使い分ける</div>
+      <div class="detail">Poly-SWE-BenchでOpus 4.8相当の品質を保ちながら39%、LongCodeQAでは61%のコスト削減を報告。Anthropic以外のモデルを混在させると削減率は66%まで伸びるという</div>
+      <a href="https://www.notdiamond.ai/blog/not-diamond-code-intelligent-model-routing-for-coding-agents">📄 一次ソース</a>
+    </div>
+    <div class="takeaway"><strong>示唆:</strong> 会話やセッションが続くエージェントにモデルルーティングを組むなら、リクエスト単体の最安モデル選びではなく、キャッシュ再構築コストを含めたセッション全体の期待コストで判断する設計にする。</div>
   </div>
   <div class="editorial">
     <span class="label">✍️ 編集後記</span>
-    ハイブリッド検索＋rerank の二段構成はもう『業界の合意』として決着し、争点は次の層に移った。検索をエージェントのループにどう埋め込むか、そしてその埋め込みを支える基盤コストをどう抑えるか。Notion の事例が示す通り、後者を無視して前者だけを追うと本番では回らない。
+    3つの実装に共通するのは、『モデルを選ぶ』という判断が、プロンプト設計と同じ扱いの人間の作業から、システムが毎リクエスト下す推論へ格下げされたことだ。次の分岐点は、この判定ロジック自体をどこまでユーザーに開示するかに移るだろう——ブラックボックスの分類器に委ねたコストと品質のトレードオフを、誰がどう検証するかという問題はまだ手つかずのままだ。
   </div>
 </div>
 
 <div class="section">
   <div class="section-title">🔗 今号の動向ピックアップ</div>
-  <div class="quick-link"><a href="https://aws.amazon.com/blogs/aws/amazon-s3-vectors-now-generally-available-with-increased-scale-and-performance">Amazon S3 Vectors が正式リリース、ベクトル保存コストを最大 9 割削減</a><span class="quick-summary">オブジェクトストレージにネイティブなベクトル検索機能を持たせ、専用ベクトル DB 比でコストを最大 90% 削減できると AWS が公式発表した。本号の『基盤コストが検索パターンの選択肢を規定する』という論点と直接つながる動き。</span></div>
-  <div class="quick-link"><a href="https://blog.voyageai.com/2025/08/11/rerank-2-5/">Voyage AI、指示追従型の rerank-2.5 / rerank-2.5-lite を公開</a><span class="quick-summary">自然言語の指示でランキング基準を調整できる rerank モデルを Voyage AI が公式発表し、コンテキスト長も Cohere Rerank v3.5 比で 8 倍の 32K トークンに拡張した。本号のハイブリッド検索＋rerank 構成における rerank 側の選択肢が広がっている一例。</span></div>
-  <div class="quick-link"><a href="https://github.blog/news-insights/product-news/copilot-new-embedding-model-vs-code/">GitHub、Copilot のコード検索向け新埋め込みモデルを投入</a><span class="quick-summary">検索精度を 37.6% 向上させつつインデックスサイズを 8 分の 1 に縮小した新しい埋め込みモデルを GitHub が公式発表した。埋め込み側の改善が二段構成の一段目（候補生成）の質を底上げする、本号の議論と直接つながる事例。</span></div>
+  <div class="quick-link"><a href="https://docs.github.com/en/copilot/concepts/models/auto-model-selection">About Copilot auto model selection</a><span class="quick-summary">efficiency/balance/intelligenceの3ティアを含む設定項目を解説する公式ドキュメント。本文のGitHub Copilotのティア設計の一次情報。</span></div>
+  <div class="quick-link"><a href="https://www.lmsys.org/blog/2024-07-01-routellm/">RouteLLM: An Open-Source Framework for Cost-Effective LLM Routing</a><span class="quick-summary">LMSYSが公開した、人間の選好データからルーターを学習するOSSフレームワークの研究記事。本文のCursor Routerが採る『満足度学習型』ルーティングの源流にあたる。</span></div>
+  <div class="quick-link"><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-routing.html">Understanding intelligent prompt routing in Amazon Bedrock</a><span class="quick-summary">品質差分の閾値設定やペアで組めるモデルファミリーの制約を詳述する公式ユーザーガイド。本文のBedrockの『品質差分閾値型』設計の仕様面を補足する。</span></div>
 </div>
 
 <div class="section">
   <div class="section-title">📚 過去号</div>
-  <div class="archive-item"><span class="week">2026-09-22</span><div class="body"><a href="../ai-trends.html">モデルルーティングが開発ツールの既定機能になった — 選ぶのは人間ではなく分類器</a><span class="sub">GitHub Copilotは9月にauto model selectionへ「efficiency/balance/intelligence」の3段階ティアを追加し、Cursorは60万件超の実利用データで学習した分類器（Cursor Router）でモデル選定を自動化した。</span></div></div>
   <div class="archive-item"><span class="week">2026-09-19</span><div class="body"><a href="2026-09-19.html">エージェントの権限設計は「毎回確認」から「境界を先に固定する」へ移った</a><span class="sub">OpenAI CodexとAnthropicのClaude Codeは、サンドボックスの制限強度と確認ダイアログの要否を別軸にし、境界内の行為は原則自動承認する設計にそろえた。</span></div></div>
   <div class="archive-item"><span class="week">2026-09-17</span><div class="body"><a href="2026-09-17.html">コード検索の設計が三方向に割れた — ベクトルDBを捨てる陣営、極める陣営、置き換える陣営</a><span class="sub">Claude Code は埋め込みベースのRAGを捨て、grep/globの反復探索に完全移行——再インデックスの陳腐化とコードアップロードのセキュリティリスクを避けるため。</span></div></div>
   <div class="archive-item"><span class="week">2026-09-15</span><div class="body"><a href="2026-09-15.html">エージェント実行基盤のマネージド化 — 3社が同時に「実行環境を貸す側」に回った</a><span class="sub">OpenAIが9月10日、Codexハーネスをagents/environments/sessions/eventsの4プリミティブに集約した Agents API を公開ベータで公開。基盤自体の追加課金はなくトークン・ツール実費のみ。</span></div></div>
@@ -171,6 +182,7 @@ footer a{color:var(--primary-500);text-decoration:none}
   <div class="archive-item"><span class="week">2026-08-13</span><div class="body"><a href="2026-08-13.html">モデルルーティング — 1モデルに全部背負わせない設計が標準になった</a><span class="sub">Vercel AI GatewayやGitHub Copilot Autoは、ヒューリスティック分類→難易度ティア判定→プロバイダ違いのフォールバック、という二段構成のタスク別ルーティングをすでに標準実装にしている。</span></div></div>
   <div class="archive-item"><span class="week">2026-08-11</span><div class="body"><a href="2026-08-11.html">コンテキスト圧縮はどこで行うべきか — API・モデル訓練・ハーネス、3層に割れた実装場所</a><span class="sub">Anthropic は compaction をサーバーサイド API のオプションとして実装し、モデル本体は変更していない</span></div></div>
   <div class="archive-item"><span class="week">2026-08-08</span><div class="body"><a href="2026-08-08.html">エージェントのコード実行基盤 — サンドボックスは「重い専用マシン」と「軽いアイソレート」に分かれ始めた</a><span class="sub">Cloudflare Sandboxes と Vercel Sandbox はどちらも「持続する専用マシン」型サンドボックスをGA化し、スナップショット復元でコールドブート30秒を2秒程度まで縮めた。</span></div></div>
+  <div class="archive-item"><span class="week">2026-08-06</span><div class="body"><a href="2026-08-06.html">RAG 構成パターンの現在地 — 二段構成の次は、検索そのものをエージェントに埋め込む</a><span class="sub">Perplexity は Vespa 上で lexical・embedding のハイブリッド検索から cross-encoder rerank へ絞り込む多段構成を採り、Databricks は同じ構成を単一パラメータで追加できる機能として一般化した。</span></div></div>
   <div class="archive-item"><span class="week">2026-08-04</span><div class="body"><a href="2026-08-04.html">ワークフロー型 vs エージェント型 — 複雑さを足す前に何を確かめるか</a><span class="sub">Anthropic は「経路を誰が決めるか」で workflow と agent を定義し、単純な方から試すべきだと明言している。</span></div></div>
   <div class="archive-item"><span class="week">2026-08-01</span><div class="body"><a href="2026-08-01.html">コンテキストエンジニアリング — 「何を見せるか」ではなく「何を見せないか」を設計する</a><span class="sub">事前に全部読み込むのではなく、ファイルパスやURLなど軽量な参照を渡して実行時に取得する「Just-in-Time retrieval」がCursorやAnthropicの標準手法になった。</span></div></div>
   <div class="archive-item"><span class="week">2026-07-30</span><div class="body"><a href="2026-07-30.html">マルチエージェント協調 — 「書き込みを一本化する」が唯一の合意点になった理由</a><span class="sub">Cognition は2025年、複数エージェントの並行書き込みが矛盾した判断を生むとして「マルチエージェントを作るな」と主張したが、2026年4月に態度を転換し「書き込みは一本化し、エージェントは行動ではなく知性を提供する」構成に絞って実例を公開した</span></div></div>
@@ -179,7 +191,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 </div>
 
 <footer>
-  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="../data/ai-trends/2026-08-06.json">data/ai-trends/2026-08-06.json</a>（このページは JSON からの生成物）</p>
+  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="../data/ai-trends/2026-09-22.json">data/ai-trends/2026-09-22.json</a>（このページは JSON からの生成物）</p>
   <p style="margin-top:.5rem"><a href="../">📰 日刊ダイジェストに戻る</a></p>
 </footer>
 </div>

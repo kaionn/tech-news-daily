@@ -66,7 +66,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 <div class="container">
 <header>
   <h1>🧠 AI プロダクト動向</h1>
-  <p class="date">2026-09-19 発行（読了 6 分）</p>
+  <p class="date">2026-09-22 発行（読了 6 分）</p>
   <p class="tagline">実プロダクトのアーキテクチャ・使用例から AI 開発の現在地を週 3 回・1 号 1 テーマで深掘り</p>
   <nav class="site-nav">
     <a href="./">📰 日刊ダイジェスト</a>
@@ -77,93 +77,94 @@ footer a{color:var(--primary-500);text-decoration:none}
 </header>
 
 <div class="theme-hero">
-  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">AGENT-SECURITY</span></span>
-  <h2>エージェントの権限設計は「毎回確認」から「境界を先に固定する」へ移った</h2>
-  <p class="lede">エージェントがファイル操作やコマンド実行を任される場面が増えるほど、行為ごとに確認を求めるダイアログは形骸化する。ユーザーは10回目の確認では中身を読まずに許可を押すようになり、承認は安全装置ではなく儀式になる。この『承認疲れ』への対処として、2026年に入り複数のベンダーが同じ結論にたどり着いた——確認の頻度を運用で調整するのではなく、ファイルシステムとネットワークの到達範囲を実行前に構造的に固定し、その範囲内では確認を求めない設計への転換だ。ただし境界が及ぶ範囲はツールごとに異なり、抜け穴も残る。</p>
+  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">MODEL-ROUTING</span></span>
+  <h2>モデルルーティングが開発ツールの既定機能になった — 選ぶのは人間ではなく分類器</h2>
+  <p class="lede">2026年に入り、複数のAIコーディングツールが『どのモデルを使うか』をユーザーの選択から切り離した。GitHub Copilotは9月にコスト/品質の3段階ティアを追加し、Cursorは60万件超の実利用データで学習した分類器にモデル選定を任せるCursor Routerを投入した。背景にあるのは、開発者の多くが単一モデルを固定して使い続け、単純な作業まで最上位モデルの価格で処理しているという非効率だ。ただし『どの基準で振り分けるか』の設計は各社で割れており、満足度を学習する方式と、品質差分の許容範囲を管理者が数値で設定する方式が併存している。</p>
 </div>
 
 <div class="tldr">
   <div class="label">TL;DR — 3 行で</div>
   <ul>
-    <li>OpenAI CodexとAnthropicのClaude Codeは、サンドボックスの制限強度と確認ダイアログの要否を別軸にし、境界内の行為は原則自動承認する設計にそろえた。</li>
-    <li>CursorとGitHub Copilot coding agentは、ネットワーク到達範囲をsandbox.jsonや組織設定で宣言的に固定し、SSRF対策のプライベートアドレス遮断をデフォルト装備した。</li>
-    <li>いずれのサンドボックスもBash・ターミナル経由の子プロセスしか保護せずMCPサーバー通信は対象外——Microsoftはこの抜け穴を埋めるネットワーク層のMCP Firewallを別立てで投入した。</li>
+    <li>GitHub Copilotは9月にauto model selectionへ「efficiency/balance/intelligence」の3段階ティアを追加し、Cursorは60万件超の実利用データで学習した分類器（Cursor Router）でモデル選定を自動化した。</li>
+    <li>Cursor Routerはユーザー満足度を目的関数に学習するのに対し、Amazon Bedrock Intelligent Prompt Routingは同一モデルファミリー内で許容する品質差分をパーセンテージで管理者が設定する、対照的な設計を取る。</li>
+    <li>Not Diamond Codeのようなコーディングエージェント向けルーターは、モデルを切り替えるとプロンプトキャッシュが切れてコストが増える点まで考慮し、切り替えの得失をセッション単位で計算する。</li>
   </ul>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 1: 「毎回確認」の限界 — 境界の強さと確認頻度を分離する</div>
+  <div class="section-title">📐 パターン 1: モデル選択が『人間の設定』から『毎リクエストの自動判定』になった</div>
   <div class="theme-section">
-    <p>エージェントに任せる操作が増えるほど、行為のたびに『実行していいですか』と確認を求めるUIは機能しなくなる。最初の数回は内容を読んで判断できても、10回、20回と続くうちに承認は反射的なクリックに変わり、本当に危険な操作が紛れ込んでも気づけなくなる。これは個々のプロンプト設計の問題ではなく、確認頻度をサンドボックスの緩さで決めている限り避けられない構造的な限界だ。</p><p>OpenAI CodexとAnthropicのClaude Codeは、この2つを分離する設計にそろえた。Codexは<code>read-only</code>/<code>workspace-write</code>/<code>danger-full-access</code>のサンドボックス段階と、<code>untrusted</code>/<code>on-request</code>/<code>never</code>の承認ポリシーを独立した軸として組み合わせる。Claude Codeもサンドボックス自体が課すファイルシステム・ネットワーク制限を2つのモードで共通にした上で、自動承認するか確認を挟むかだけを切り替える。境界の強さと確認の頻度を別々のノブにしたことで、境界内の行為はまとめて自動承認しても安全性は落ちない。</p>
+    <p>従来、開発者はチャットUIやCLIでモデルを1つ選び、単純な補完にも複雑なバグ診断にも同じモデルを使い続けてきた。GitHub CopilotとCursorはこの前提を崩し、リクエストごとにタスクの複雑さを評価してモデルを割り当てる層を標準機能として組み込んだ。</p><p>転換の理由は非対称なコスト構造にある。単純なファイル検索や定型的な補完に最上位モデルを使っても品質は大差なく、コストと待ち時間だけが増える。逆に複雑なバグ診断を安価なモデルに回すと品質が落ちる。この非対称性を人間が都度判断するのは非効率なため、判定自体をモデル選択の外側、つまりシステム側に出す設計へ収束した。</p>
     <div class="example">
-      <div class="product">OpenAI Codex</div>
-      <div class="approach">サンドボックス段階と承認ポリシーを独立変数にし、境界内の操作はauto-reviewモードで自動承認する</div>
-      <div class="detail">3段階サンドボックス×3段階承認ポリシーの組み合わせにより、危険度の高い操作だけを確認対象に絞り込める設計</div>
-      <a href="https://developers.openai.com/codex/agent-approvals-security">📄 一次ソース</a>
+      <div class="product">GitHub Copilot（auto model selection）</div>
+      <div class="approach">efficiency/balance/intelligenceの3段階ティアを導入し、同一のモデル群からプロンプトごとに最適なモデルを選ぶ</div>
+      <div class="detail">3ティアとも使えるモデル集合は同じで、ティアは『コストと品質のどちらに倍率を振るか』の設定に過ぎない。課金は実際に選ばれたモデルの単価で行われる</div>
+      <a href="https://github.blog/changelog/2026-09-14-configure-cost-and-quality-in-copilot-auto-model-selection/">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">Claude Code（Anthropic）</div>
-      <div class="approach">2つのサンドボックスモードで同一のファイルシステム/ネットワーク制限を強制し、自動承認か確認要求かのみを切り替える</div>
-      <div class="detail">制限の強さを揺らさずに確認頻度だけを調整できるため、緩い設定にするほど危険になるトレードオフを避けられる</div>
-      <a href="https://code.claude.com/docs/en/sandboxing">📄 一次ソース</a>
+      <div class="product">Cursor（Cursor Router）</div>
+      <div class="approach">60万件超の実利用データで学習した分類器が、クエリ・コンテキスト・タスクの複雑さを見てモデルを割り振る</div>
+      <div class="detail">Auto IntelligenceモードはFableと同等の満足度を約60%低いコストで、Auto BalanceはOpus 4.8を上回る満足度を約36%低いコストで達成したと公表している</div>
+      <a href="https://cursor.com/blog/router">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> 自作のエージェントに承認フローを組むなら、『確認するかどうか』と『何ができる範囲か』を同じ設定値で決めないこと。境界を先に固定し、その内側は自動化する方が、確認疲れによる誤許可を構造的に防げる。</div>
+    <div class="takeaway"><strong>示唆:</strong> モデル選択UIを作るなら、ユーザーに『賢いモデル/安いモデル』を選ばせる二択にせず、タスクの特徴量から自動判定する層を挟む設計にする方が、この非対称なコスト構造を活かせる。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 2: 境界を宣言的に固定する — ネットワーク許可リストの標準化</div>
+  <div class="section-title">📐 パターン 2: 判定基準の設計は『満足度学習型』と『品質差分閾値型』に割れた</div>
   <div class="theme-section">
-    <p>ファイルシステムの制限だけでなく、到達可能なネットワーク範囲を実行前に宣言しておく動きも標準化しつつある。エージェントが外部と通信できる範囲を都度の確認任せにせず、設定ファイルや組織ポリシーとして固定しておけば、確認ダイアログを増やさなくても攻撃対象を絞り込める。</p><p>Cursorはサンドボックスのネットワークアクセスを<code>sandbox.json</code>で3段階（許可リストのみ/許可リスト+既定値/全許可）に分け、<code>169.254.169.254</code>のようなクラウドメタデータエンドポイントやRFC1918プライベートアドレスをデフォルトで遮断してSSRFを防ぐ。GitHub Copilot coding agentも同様に、組織管理者がfirewallの有効/無効/リポジトリ委任を一元設定でき、OSパッケージリポジトリやコンテナレジストリなどの推奨許可リストをリポジトリ横断で強制できる。個別の確認ではなく境界そのものを組織のポリシーとして先に決める点で、両社は同じ方向を向いている。</p>
+    <p>モデルを振り分ける基準の作り方には、少なくとも2つの流儀がある。Cursor Routerはユーザーの実利用ログから『どちらのモデルの出力が好まれたか』を学習し、満足度を目的関数にする。一方Amazon Bedrock Intelligent Prompt Routingは、同一モデルファミリー内の2モデル間で許容する『応答品質の差』をパーセンテージで管理者が指定し、その閾値内なら安いモデルへ倒す。</p><p>この違いはプロダクトの立ち位置を反映している。開発者向けエージェントは出力の『体感の良さ』が離脱に直結するため主観指標を最適化する。一方クラウド基盤は多数のテナントが多様な用途で使うため、管理者が数値で制御できるノブを用意する方が運用しやすい。同じ『安いモデルに倒す』という結論でも、判定基準の設計は製品が誰向けかで変わる。</p>
     <div class="example">
-      <div class="product">Cursor</div>
-      <div class="approach">sandbox.jsonでネットワークアクセスを3段階に分け、プライベートアドレスとクラウドメタデータエンドポイントをデフォルト遮断する</div>
-      <div class="detail">SSRF対策をサンドボックスの既定動作に組み込み、許可リストの設定漏れがあっても内部ネットワークへの到達を防ぐ</div>
-      <a href="https://cursor.com/blog/agent-sandboxing">📄 一次ソース</a>
+      <div class="product">Cursor（Cursor Router）</div>
+      <div class="approach">オンラインA/Bテストでユーザー満足度を主指標にモデル選択ロジックを評価・学習する</div>
+      <div class="detail">本番トラフィックでのA/Bテストを通じ、満足度を落とさない範囲でより安価なモデルに寄せるよう継続的に調整する</div>
+      <a href="https://cursor.com/blog/router">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">GitHub Copilot coding agent</div>
-      <div class="approach">組織管理者がfirewallの有効/無効/委任をEnabled・Disabled・Let repositories decideの3択で一元設定し、推奨許可リストをリポジトリ横断で強制できる</div>
-      <div class="detail">個々のリポジトリ設定に依存せず、組織ポリシーとして境界を先に決める設計</div>
-      <a href="https://docs.github.com/en/copilot/how-tos/use-copilot-agents/coding-agent/customize-the-agent-firewall">📄 一次ソース</a>
+      <div class="product">Amazon Bedrock Intelligent Prompt Routing</div>
+      <div class="approach">同一モデルファミリー内の2モデル間で許容する応答品質の差分を管理者がパーセンテージで設定し、閾値内なら安価なモデルへルーティングする</div>
+      <div class="detail">Anthropicファミリーで最大56%、RAG用途のデータセットでは平均63.6%のコスト削減を確認したと報告している</div>
+      <a href="https://aws.amazon.com/blogs/machine-learning/use-amazon-bedrock-intelligent-prompt-routing-for-cost-and-latency-benefits/">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> ネットワーク境界は個々のエージェント実行時の設定ではなく、リポジトリや組織単位で宣言的に管理する前提で設計するのが安全。後からallowlistを足す運用にすると、抜け漏れの検出が属人的になる。</div>
+    <div class="takeaway"><strong>示唆:</strong> 社内向けにルーティングを組むなら、ユーザー体験に直結するプロダクトは満足度ベースの学習型、コスト管理が主目的の基盤側は閾値を数値で握れる設定型、と用途で設計方針を変えた方が運用しやすい。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 3: 境界の抜け穴 — サンドボックスが及ばないMCP経路</div>
+  <div class="section-title">📐 パターン 3: モデルを切り替えるとキャッシュが切れる — ルーティングはセッション単位のコスト計算になった</div>
   <div class="theme-section">
-    <p>こうしたサンドボックスの多くは、エージェントのBash・ターミナルツールとその子プロセスだけを対象にしている。だが実際のエージェントはMCP（Model Context Protocol）サーバー経由で外部サービスに接続する場面が増えており、この経路はBashサンドボックスの外側にある。ファイルシステムやネットワークの境界をどれだけ厳しく固定しても、MCP接続自体が別経路で外部と通信していれば境界は素通りされる。</p><p>Claude Codeの公式ドキュメントも、サンドボックスが保護するのはBash・PowerShell・Monitorとその子プロセスに限られることを明記しており、MCPサーバー通信はスコープ外だと認めている。この抜け穴に対しMicrosoftは、エージェント側のサンドボックスを強化するのではなく、ネットワークのエッジ側でMCPトラフィックを検査・許可判定する専用ファイアウォールを別レイヤーとして投入した。サンドボックス設計が『ツールごとの境界』の集合である以上、抜けているツールをどう塞ぐかは各社まだ足並みが揃っていない。</p>
+    <p>モデル振り分けは1リクエスト単体の損得では決まらない。プロンプトキャッシュはモデルごとに管理されており、会話の途中でモデルを切り替えるとそれまで蓄積したキャッシュ済みプレフィックスが失効し、次のリクエストは丸ごとキャッシュミスとして課金される。安いモデルへの切り替えで得るはずのコスト削減が、キャッシュ再構築のコストで相殺される場合がある。</p><p>GitHub CopilotとNot Diamond Codeは、この『切り替えの得失』をルーティング判断そのものに組み込んでいる。単発のリクエストではなく、セッション全体でのコストを最小化する設計に踏み込んでいる点で、リクエストごとに最安モデルを選ぶだけの初期の実装とは一段階違う。</p>
     <div class="example">
-      <div class="product">Claude Code（Anthropic）</div>
-      <div class="approach">サンドボックスの保護範囲をBash・PowerShell・Monitorとその子プロセスに限定し、MCPサーバー通信はスコープ外と公式に明記する</div>
-      <div class="detail">境界がツール単位でしか及ばないことを示す一次情報</div>
-      <a href="https://code.claude.com/docs/en/sandboxing">📄 一次ソース</a>
+      <div class="product">GitHub Copilot（auto model selection）</div>
+      <div class="approach">モデル切り替えのタイミングを『自然なキャッシュの境界』に合わせ、無駄なキャッシュ関連コストの発生を避ける</div>
+      <div class="detail">タスクの評価だけでなく、既存のキャッシュ済みコンテキストを崩さないタイミングを選んでルーティングする</div>
+      <a href="https://github.blog/changelog/2026-07-01-copilot-cli-auto-model-selection-routes-based-on-task/">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">Microsoft Entra Agent ID（MCP Firewall）</div>
-      <div class="approach">MCPクライアント/サーバーを改変せずに、ネットワークのエッジでMCPトラフィックを検査しAllow/Blockを強制する専用ファイアウォールをプレビュー投入した</div>
-      <div class="detail">エージェント側のサンドボックスでは塞げない経路を、ネットワーク層の別コントロールで補う設計</div>
-      <a href="https://techcommunity.microsoft.com/blog/microsoft-entra-blog/microsoft-entra-what%E2%80%99s-new-in-secure-access-on-the-ai-frontier/4468732">📄 一次ソース</a>
+      <div class="product">Not Diamond Code</div>
+      <div class="approach">セッション単位でモデル切り替えのコストとキャッシュ温存効果を比較し、高いモデルを維持する場合と積極的に切り替える場合を使い分ける</div>
+      <div class="detail">Poly-SWE-BenchでOpus 4.8相当の品質を保ちながら39%、LongCodeQAでは61%のコスト削減を報告。Anthropic以外のモデルを混在させると削減率は66%まで伸びるという</div>
+      <a href="https://www.notdiamond.ai/blog/not-diamond-code-intelligent-model-routing-for-coding-agents">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> MCPサーバーを組み込む場合、ホストアプリのサンドボックスがその通信も守ってくれると仮定しないこと。MCP接続用に独立したネットワークポリシー（プロキシ/ファイアウォール）を別途用意する前提で設計する。</div>
+    <div class="takeaway"><strong>示唆:</strong> 会話やセッションが続くエージェントにモデルルーティングを組むなら、リクエスト単体の最安モデル選びではなく、キャッシュ再構築コストを含めたセッション全体の期待コストで判断する設計にする。</div>
   </div>
   <div class="editorial">
     <span class="label">✍️ 編集後記</span>
-    3社が『承認疲れ』への答えとして境界の事前固定にそろったのは、UXの問題を権限モデルの問題として解き直した結果だ。ただし境界の粒度はまだツール単位でバラバラで、MCPのような新しい実行経路が増えるたびに抜け穴も増える。境界設計は一度作って終わりではなく、エージェントが使うツールが増えるたびに棚卸しする運用が要る。
+    3つの実装に共通するのは、『モデルを選ぶ』という判断が、プロンプト設計と同じ扱いの人間の作業から、システムが毎リクエスト下す推論へ格下げされたことだ。次の分岐点は、この判定ロジック自体をどこまでユーザーに開示するかに移るだろう——ブラックボックスの分類器に委ねたコストと品質のトレードオフを、誰がどう検証するかという問題はまだ手つかずのままだ。
   </div>
 </div>
 
 <div class="section">
   <div class="section-title">🔗 今号の動向ピックアップ</div>
-  <div class="quick-link"><a href="https://cursor.com/docs/reference/sandbox">Cursor sandbox.json Reference</a><span class="quick-summary">sandbox.jsonの設定項目とネットワークアクセス3段階の詳細仕様をまとめた公式リファレンス。本文のCursorのSSRF対策設定の一次情報。</span></div>
-  <div class="quick-link"><a href="https://openai.com/index/running-codex-safely/">Running Codex safely at OpenAI</a><span class="quick-summary">OpenAIがCodexの実行環境設計の背景を解説する公式記事。本文のサンドボックス×承認ポリシー分離という設計思想を補足する。</span></div>
-  <div class="quick-link"><a href="https://docs.github.com/en/copilot/reference/copilot-allowlist-reference">GitHub Copilot allowlist reference</a><span class="quick-summary">推奨allowlistが許可する具体的なホスト一覧をまとめた公式リファレンス。本文の組織単位でのネットワーク境界固定の対象範囲を補足する。</span></div>
+  <div class="quick-link"><a href="https://docs.github.com/en/copilot/concepts/models/auto-model-selection">About Copilot auto model selection</a><span class="quick-summary">efficiency/balance/intelligenceの3ティアを含む設定項目を解説する公式ドキュメント。本文のGitHub Copilotのティア設計の一次情報。</span></div>
+  <div class="quick-link"><a href="https://www.lmsys.org/blog/2024-07-01-routellm/">RouteLLM: An Open-Source Framework for Cost-Effective LLM Routing</a><span class="quick-summary">LMSYSが公開した、人間の選好データからルーターを学習するOSSフレームワークの研究記事。本文のCursor Routerが採る『満足度学習型』ルーティングの源流にあたる。</span></div>
+  <div class="quick-link"><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-routing.html">Understanding intelligent prompt routing in Amazon Bedrock</a><span class="quick-summary">品質差分の閾値設定やペアで組めるモデルファミリーの制約を詳述する公式ユーザーガイド。本文のBedrockの『品質差分閾値型』設計の仕様面を補足する。</span></div>
 </div>
 
 <div class="section">
   <div class="section-title">📚 過去号</div>
+  <div class="archive-item"><span class="week">2026-09-19</span><div class="body"><a href="ai-trends/2026-09-19.html">エージェントの権限設計は「毎回確認」から「境界を先に固定する」へ移った</a><span class="sub">OpenAI CodexとAnthropicのClaude Codeは、サンドボックスの制限強度と確認ダイアログの要否を別軸にし、境界内の行為は原則自動承認する設計にそろえた。</span></div></div>
   <div class="archive-item"><span class="week">2026-09-17</span><div class="body"><a href="ai-trends/2026-09-17.html">コード検索の設計が三方向に割れた — ベクトルDBを捨てる陣営、極める陣営、置き換える陣営</a><span class="sub">Claude Code は埋め込みベースのRAGを捨て、grep/globの反復探索に完全移行——再インデックスの陳腐化とコードアップロードのセキュリティリスクを避けるため。</span></div></div>
   <div class="archive-item"><span class="week">2026-09-15</span><div class="body"><a href="ai-trends/2026-09-15.html">エージェント実行基盤のマネージド化 — 3社が同時に「実行環境を貸す側」に回った</a><span class="sub">OpenAIが9月10日、Codexハーネスをagents/environments/sessions/eventsの4プリミティブに集約した Agents API を公開ベータで公開。基盤自体の追加課金はなくトークン・ツール実費のみ。</span></div></div>
   <div class="archive-item"><span class="week">2026-09-12</span><div class="body"><a href="ai-trends/2026-09-12.html">コンテキストは会話ログではない — Working Context / Session / Memory / Artifacts への分離が実装標準になった</a><span class="sub">Google ADKは2026年9月、コンテキストを Working Context・Session・Memory・Artifacts の4層に分離し、閾値到達で非同期に要約するcompactionを実装したと公式ブログで説明した。</span></div></div>
@@ -190,7 +191,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 </div>
 
 <footer>
-  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="data/ai-trends/2026-09-19.json">data/ai-trends/2026-09-19.json</a>（このページは JSON からの生成物）</p>
+  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="data/ai-trends/2026-09-22.json">data/ai-trends/2026-09-22.json</a>（このページは JSON からの生成物）</p>
   <p style="margin-top:.5rem"><a href="./">📰 日刊ダイジェストに戻る</a></p>
 </footer>
 </div>
