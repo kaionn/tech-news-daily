@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-09-24</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="../feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-09-24 (Thu)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+      <nav class="site-nav">
+        <a href="../" class="active">📰 日刊ダイジェスト</a>
+        <a href="../trends.html">🔌 週次プラグイントレンド</a>
+        <a href="../ai-trends.html">🧠 AI プロダクト動向</a>
+        <a href="./">🗂 アーカイブ</a>
+      </nav>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 22 articles</span>
+      <span>🏷 8 categories</span>
+      <span>📡 21 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item">
+        <span class="number-value">950</span>
+        <span class="number-label">Claudeエージェントが新酵素系「ART」発見に投じた並列探索数</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">39%</span>
+        <span class="number-label">Stripeの全社AI基盤「Kai」利用週に営業担当の商談成立が増えた割合</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">10倍</span>
+        <span class="number-label">Apache Parquetの新エンコーディング「ALP」がPLAIN+ZSTD比で速い展開速度</span>
+      </div>
+    </div>
+
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
+
+      <div class="card featured deep-dive">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://blog.szypowi.cz/p/claude-code-reads-agents.md-only-when-telemetry-is-on/">DEEP DIVE: Claude Codeの「AGENTS.md」対応、実はリモートフラグ頼み——テレメトリを切ると設定ファイルが黙って読まれない不具合が発覚</a></h3>
+        </div>
+        <div class="summary">Claude Codeは2.1.277(9月18日)で、CLAUDE.mdが存在しないプロジェクトではAGENTS.mdを読む機能を正式に追加した。Codex・Gemini CLI・Devin・Cursor・GitHub Copilotが既に対応済みの業界標準フォーマットへの追随で、ベンダー間の移行や複数エージェント併用時の設定共有を楽にする狙いがある。ところがエンジニアの調査で、このAGENTS.md読み込みはリモートのフィーチャーフラグ`tengu_agents_md_mod`(既定オフ)を取得できて初めて有効化される作りだと判明した。検証者はテスト用ディレクトリにキーワード「PERIWINKLE」だけを書いたAGENTS.mdを置き、`claude -p`を条件を変えて複数回実行(フラグはキャッシュされるため各条件2回ずつ)して挙動を確認した。結果、`DISABLE_TELEMETRY=1`や`CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1`を設定しているとフラグ取得自体が起きずAGENTS.mdは一切読まれない。Amazon BedrockやGoogle Vertex経由の利用でもフラグを解決する経路がなく同様に機能しない。プロジェクト単位の`.claude/settings.json`で上書きしても効かず、有効化できるのはセッションレベルの設定だけだ。ローカルディスク上のファイル読み込みという本来ネットワークに依存しないはずの処理が、遠隔フラグの成否に左右される設計になっている。</div>
+        <div class="editorial">🧠 ファイル読み込みという純粋にローカルな処理をリモートフラグの成否に結びつけた設計判断自体が筋が悪く、しかも失敗時に警告が一切出ない点は見過ごせない。回避策(`CLAUDE.md`に`@AGENTS.md`と1行書いてインポートする)が存在するため致命的とまでは言えないが、記事公開時点でIssue #95690は未対応のままで、テレメトリを切って使う開発者やBedrock/Vertex経由の企業利用者ほど気づかぬまま指示を無視され続けるリスクが残る。</div>
+        <div class="key-points">
+          <ul>
+            <li>2.1.277(2026年9月18日)でAGENTS.md正式サポート、CLAUDE.md不在時のフォールバックとして機能——Codex/Gemini CLI/Devin/Cursor/Copilotに続く業界標準への追随</li>
+            <li>ローダーはリモートフラグ`tengu_agents_md_mod`(既定オフ)に依存、`DISABLE_TELEMETRY=1`や`CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1`設定時はローカルファイルが読まれない</li>
+            <li>Bedrock/Vertex等サードパーティ経路はフラグを解決できず機能せず、回避策は`CLAUDE.md`に`@AGENTS.md`と1行書くインポートのみ</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 テレメトリを無効化して使う開発者や、Bedrock/Vertex経由で導入している企業ほどAGENTS.mdの指示が無警告で無視される——プロジェクト指示を信頼する前に`CLAUDE.md`へ`@AGENTS.md`を明示インポートして動作確認したい。</div>
+        <div class="meta">
+          <span>blog.szypowi.cz</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-09-23</span>
+          <span class="engagement">▲ 436</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://www.anthropic.com/news/claude-discovers-novel-enzyme-system">Claude、バクテリオファージにCRISPR類似の新規酵素系「ART」を発見——950エージェント・21時間・2億1000万トークンの探索から1件を特定</a></h3>
+        </div>
+        <div class="summary">Anthropicは2026年春に設立した生命科学研究チームで、Claudeエージェント群にDNA配列データベースを探索させ、新規システム「array-associated reverse transcriptases(ART)」を発見したと発表した。約950のClaudeエージェントが21時間・2億1000万トークンを投入し、20万件超の逆転写酵素候補を3,500件、さらに20件の有望候補へ絞り込み、人間の研究者が実験室で検証した。ARTは逆転写酵素・パートナー遺伝子・等間隔に並ぶ非コードDNA配列のアレイという3要素で構成され、アレイから短いRNAが生成される兆候が確認された。CRISPR開発に関わったFeng Zhang氏(MIT/Broad)は「AIエージェントが生物学的発見に貢献する好例」と評価した。</div>
+        <div class="key-points">
+          <ul>
+            <li>約950のClaudeエージェントが21時間・2億1000万トークンを投入、20万件超の逆転写酵素候補を3,500件→20件へ絞り込み1件を特定</li>
+            <li>ARTは逆転写酵素・パートナー遺伝子・等間隔非コードDNAアレイの3要素で構成、CRISPR類似の短RNA生成兆候を確認</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Anthropic Blog</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-09-23</span>
+          <span class="engagement">▲ 404</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://radicle.dev/2026/09/23/disclosure-of-vulnerability-in-network-protocol.html">分散型コード協業ツール「Radicle」、ネットワークプロトコルに無暗号通信+ピア認証回避の重大脆弱性——公開済み全バージョンが対象</a></h3>
+        </div>
+        <div class="summary">Radicleは公開済み全バージョンのネットワークプロトコルに2件の重大な欠陥があると開示した。1つはノード間通信が暗号化も認証もされず経路上の攻撃者に平文を読まれる問題(6月24日にKonstantinos Maninakis氏が報告)、もう1つはハンドシェイクでNode IDを偽装できる認証回避(8月12日にcryptocode氏が報告)。両者を組み合わせると、許可リストのNode IDを把握した経路上の攻撃者がプライベートリポジトリの内容を読み取り、リポジトリ全体を取得できてしまう。開発チームは独自プロトコルを破棄しOSSのP2Pネットワークスタック「iroh」へ置き換える方針で、ワイヤプロトコル非互換のためメジャーバージョンを上げる破壊的変更になる。</div>
+        <div class="key-points">
+          <ul>
+            <li>ノード間通信が無暗号・無認証で経路上の攻撃者に読み取られる問題と、ハンドシェイクでNode IDを偽装できる認証回避の2件、公開済み全バージョンが対象</li>
+            <li>開発チームは独自プロトコルを破棄しiroh(OSS P2Pスタック)へ移行、ワイヤプロトコル非互換によりメジャーバージョンアップの破壊的変更に</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Radicle Blog</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-09-23</span>
+          <span class="engagement">▲ 110</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://stripe.dev/blog/meet-stripes-knowledge-ai-platform">Stripe、非エンジニア向け全社AIエージェント基盤「Kai」公開——Kubernetes上のLangChain deep agentsで932ターンの長時間セッションも処理</a></h3>
+        </div>
+        <div class="summary">Stripeは営業調査から財務分析、コンプライアンス確認まで扱う全社横断のAIエージェント基盤「Kai」を公開した。ノーコードビルダーで作った4,000超のワークフロー特化エージェントの品質バラつきと、コーディングエージェントを非エンジニアに使わせる際のセキュリティリスクという二重の課題を、単一プラットフォームへ統合して解決する。実行層はKubernetes上でLangChainのdeep agentsフレームワークを使い、セッションごとのサンドボックスとマルチテナント仮想ファイルシステムでデータ分離を担保する。公開2週間で週間アクティブ率83%、営業担当はKai利用週に案件創出17%増・商談成立39%増を記録したという。</div>
+        <div class="key-points">
+          <ul>
+            <li>Kubernetes上でLangChainのdeep agentsを実行、セッションごとのサンドボックス+マルチテナント仮想ファイルシステムで顧客データ混在を防止、最長932ターンのセッションも処理</li>
+            <li>公開2週間で週間アクティブ率83%、営業担当はKai利用週に案件創出17%増・商談成立39%増を記録</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Stripe Dev Blog</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-09-22</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-frontend">Frontend</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/astrologian/articles/562fe3f749d985">React Router、`useRouterState`で遷移先の情報を先読みできる実験的Hookを追加——`pending.matches`比較でスケルトン表示を最小化</a></h3>
+        </div>
+        <div class="summary">React Router v7.15.1で実験的Hook`useRouterState`(`unstable_`接頭辞)が追加された。現在表示中のルートを表す`active`と遷移先の情報を表す`pending`の2つを返し、`pending`は`params`・`matches`・`type`という従来取得できなかった3つの値を公開する。`pending.matches`で遷移前後のマッチ配列を比較すればレイアウトのどのoutletが変わるかを特定でき、画面全体ではなく必要な部分だけにスケルトンを出せる。v8.4.0時点でも実験的APIのままで、パッチリリースでも破壊的変更が入り得る点には注意したい。</div>
+        <div class="key-points">
+          <ul>
+            <li>`pending.params`/`matches`/`type`の3値で遷移先の情報を先読み、`matches`比較でレイアウト内の変更outletのみにスケルトン表示を絞り込める</li>
+            <li>`pending.type`(PUSH/REPLACE/POP)でアニメーション方向を出し分け可能、v8.4.0時点でも`unstable_`接頭辞の実験的APIのまま</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn (astrologian)</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-09-21</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://jyn.dev/tokens-too-cheap-to-meter/">「トークンは測るまでもなく安くなる」——年2.5桁ペースの値下がりで、AI活用のボトルネックは価格から品質・アクセスへ移ると予測するエッセイ</a></h3>
+        </div>
+        <div class="summary">ソフトウェアエンジニアのJyn氏は、AIトークン単価が年率約2.5桁(250倍)のペースで下落しており、いずれ「メーターを付けるまでもなく安い」領域に達すると論じる。20世紀半ばの原子力発電が「測るまでもなく安い電気」を約束した史実になぞらえ、TypeSafe AIの「Jev」が入力10億トークンあたり42ドル・出力無料、GPT-5.6 Lunaが100万トークンあたり約30セントという実例を挙げ、AI推論のコストが基本的な計算処理より安くなりつつあると指摘する。開発者への提言として、AIをプレミアム機能ではなくツールやインフラに直接埋め込む発想への転換を提案し、競争優位はアルゴリズム性能よりも運用とUXに移ると予測する。</div>
+        <div class="key-points">
+          <ul>
+            <li>TypeSafe AI「Jev」は入力10億トークンあたり42ドルで出力無料、GPT-5.6 Lunaは100万トークンあたり約30セントという実例からAIトークンの年2.5桁の値下がりペースを論証</li>
+            <li>AIをプレミアム機能でなくツール・インフラに直接埋め込む転換を提言、競争優位はアルゴリズムより運用・UXに移ると予測</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>jyn.dev</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-09-22</span>
+          <span class="engagement">▲ 216</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://huggingface.co/apple/LensVLM-9B">Apple、長文書を圧縮画像として読み関連ページだけ展開するVLM「LensVLM-9B」を公開——Qwen3.5-9Bベースで5x/10x/15xの圧縮率を選択可能</a></h3>
+        </div>
+        <div class="summary">AppleがQwen3.5-9Bをベースにした9Bパラメータの視覚言語モデル「LensVLM」を公開した。長文書をまず圧縮した画像表現としてスキャンし、質問に関連するページだけを学習済みツールで元解像度に展開して詳細解析する二段階方式を採る。圧縮率は5x・10x・15xから選べ、全ページを高解像度処理するコストを避けつつ文書QAの精度を維持する狙いだ。</div>
+        <div class="key-points">
+          <ul>
+            <li>長文書を圧縮画像としてスキャンし、質問に関連するページのみ学習済みツールで元解像度に展開する二段階方式</li>
+            <li>圧縮率5x/10x/15xを選択可能、Qwen3.5-9Bをベースにファインチューニング、BF16精度で公開</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Hugging Face (Apple)</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-23</span>
+          <span class="engagement">▲ 32</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://blog.melashri.net/posts/scientific-linux-mistake/">「Scientific Linuxを畳んだのは誤りだった」——CERNの加速器制御がRHEL依存から抜け出すのに約540万CHF規模の移行を強いられた顛末</a></h3>
+        </div>
+        <div class="summary">2019年にFermilabとCERNがScientific LinuxをやめCentOSへ移行した判断を、著者は「独立性というオプション価値を手放した誤り」と総括する。2020年にRed HatがCentOS Linuxを打ち切り、2022年にCERN/FermilabはAlmaLinuxへ再び乗り換えた。2026年にはRHEL 9/10のx86-64ベースライン引き上げで加速器制御用の旧ハードウェア更新に約540万CHFかかると判明し、CERNは基板11種の再設計を避けてDebianへ移行、年末までに産業用・組み込み機2,200台以上をDebian 13化する。</div>
+        <div class="key-points">
+          <ul>
+            <li>2019年のCentOS移行後、2020年のCentOS Linux打ち切りで2022年にAlmaLinuxへ再移行——独自RHEL互換ディストリを手放した反動が繰り返された</li>
+            <li>RHEL 9/10のx86-64ベースライン引き上げで加速器制御ハードウェア更新に約540万CHF必要と判明、基板11種再設計を避けCERNはDebianへ移行し2,200台超をDebian 13化</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>blog.melashri.net</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-09-23</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://syu-m-5151.hatenablog.com/entry/2026/09/23/123604">Codexを使うならSkillsとPluginsを——AGENTS.mdに書くべきでない「反復する手順」の切り出し方</a></h3>
+        </div>
+        <div class="summary">Codexの「Skills」(反復するタスク手順の再利用可能な指示)と「Plugins」(Skillsをまとめて配布するパッケージ)の使い分けを解説する記事。ドメイン知識・判断基準・複数手順の手続き・固有ツールの使い方・繰り返す失敗の防止という5カテゴリをSkill化の対象に挙げ、AGENTS.mdにはプロジェクト全体設定だけを残す方針を提案する。PR説明文で未検証のテスト結果を断定調で書かせない`change-brief`Skillを実例に、`.agents/skills/`配下への配置や、Skill未使用時との比較による効果測定、モデル更新のたびの要不要見直しを勧める。</div>
+        <div class="key-points">
+          <ul>
+            <li>Skill化対象を「ドメイン知識」「判断基準」「複数手順の手続き」「固有ツール利用」「失敗防止」の5カテゴリに整理、AGENTS.mdには全体設定のみ残す方針</li>
+            <li>Skill未使用時との比較で効果を実測し、モデル更新のたびに必要性を再評価すべきと提言</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>はてなブログ (syu-m-5151)</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-09-23</span>
+          <span class="engagement">🔖 30</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://portablecode.info/2026/09/23/herdr-annotate-ai-review/">ターミナルマルチプレクサ「Herdr」向けプラグイン「Herdr Annotate」——コードに直接コメントしてAIへ一括フィードバック</a></h3>
+        </div>
+        <div class="summary">エージェント管理機能を持つターミナルマルチプレクサ「Herdr」のプラグイン「Herdr Annotate」を紹介する記事。`Ctrl+B o`でファイルを開き`c`でコメントを付け`E`でエージェントへ送信、`Ctrl+B O`では過去の応答にも遡ってコメントできる。長文で修正指示を書く代わりに該当箇所へ短いメモを残すだけでよく、AIがファイルを更新してもコメント位置は差分に追従して保持される。フィードバック送信中も別箇所のレビューを続けられる非同期設計で、まとめ送信によりトークン消費も抑えられるという。</div>
+        <div class="key-points">
+          <ul>
+            <li>`Ctrl+B o`でファイルを開き`c`でコメント付与、`E`で一括送信、`Ctrl+B O`で過去の応答にも遡及コメント可能</li>
+            <li>コメント位置はAIによるファイル更新後も差分に追従して保持、非同期レビューとまとめ送信でトークン消費を抑制</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>portablecode.info</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-09-23</span>
+          <span class="engagement">🔖 32</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/imkohenauser/articles/vscode-cursor-parallel-development">並列開発でVS CodeとCursorの違いを実感——開いているファイルが意図せずコンテキスト化する等5つの分離不全</a></h3>
+        </div>
+        <div class="summary">Cursorに慣れた著者が、複数エージェントを並列稼働させつつ人間も並行してコーディングする運用をVS Code(GitHub Copilot Chat)で試し、5つの問題を指摘する。エディタで開いているファイルが意図せずチャットのコンテキストに混入する、指定した行番号と異なる箇所が編集される、別セッションの文脈が漏れ込む(Issue #316051)、無関係な端末操作で休眠中のチャットが再開し無許可の変更をする、エージェント完了時に人間の作業中ファイルへ強制的にジャンプする、という5点だ。著者は「複数エージェントが並列実行できることと、人間を含めて並列に開発できることは同じではない」とし、Cursorはインライン参照とUI設計でこの分離を保てていると評価する。</div>
+        <div class="key-points">
+          <ul>
+            <li>開いているファイルの意図しないコンテキスト混入、指定行と異なる箇所への誤編集、別セッションの文脈漏れ(Issue #316051)など5つの分離不全を実地で確認</li>
+            <li>無関係な端末操作での休眠チャット再開や完了時の強制ファイルジャンプが人間の作業を妨げ、Cursorはインライン参照とUI設計で分離を維持できると対比</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn (imkohenauser)</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-09-22</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://qiita.com/songchong/items/89175eaa7a30f71d0351">MCPサーバー接続で情報漏洩する4パターンと、繋ぐ前に確認すべき7項目——ツール中毒からOAuth未対応の固定APIキーまで</a></h3>
+        </div>
+        <div class="summary">MCPサーバー接続に伴う情報漏洩リスクを4パターンに整理した記事。ツール説明文に埋め込まれた悪意ある指示をAIが読み込む「ツール中毒」(調査対象の5.5%で確認)、GitHub issueなど外部コンテンツ経由の間接プロンプトインジェクション、OAuthでなく固定APIキーに依存するMCPサーバーが53%に上る過剰権限・長命キー問題、人間確認なしの自動承認の4つだ。接続前のチェックとして、提供元とバージョンの確認、外部コンテンツ読み込みの有無、個人・チーム・組織のどの範囲で追加するか、ツールと権限の最小化、認証情報の保管・失効手段、自動承認対象の線引き、非対話実行経路の把握という7点を挙げる。</div>
+        <div class="key-points">
+          <ul>
+            <li>ツール説明文への悪意ある指示埋め込み(調査対象の5.5%)、外部コンテンツ経由の間接プロンプトインジェクション、OAuth未対応の固定APIキー依存(53%)、無確認自動承認の4パターンを整理</li>
+            <li>接続前チェックとして提供元/バージョン確認、外部コンテンツ読み込みの有無、権限最小化、認証情報の保管・失効手段、`-p`フラグ等の非対話実行経路の把握など7項目を提示</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita (songchong)</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-09-24</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-product">Product</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://accessiblepdfview.org/ja/">PDFを見出しから読める文書に変換する拡張機能「Accessible PDF View」公開——ブラウザ内完結でAI画像説明・OCRも</a></h3>
+        </div>
+        <div class="summary">PDFをスクリーンリーダーで扱いやすい構造に変換するChrome拡張機能「Accessible PDF View」が公開された。見出し階層・リスト・表を再構成した「Reader」表示、元のレイアウトを保つ「Original」表示、Markdown書き出しの3モードを備え、見出しジャンプ(HキーやH1〜H6)やリンクナビゲーションに対応する。Chrome内蔵AIモデルを使った画像の説明文生成とスキャンPDFのOCRも組み込み、処理はすべてローカルで完結する。MITライセンスのオープンソースで、Firefox版も準備中。</div>
+        <div class="key-points">
+          <ul>
+            <li>Reader/Original/Markdownの3表示モードと見出しジャンプ・リンクナビゲーションを搭載、処理はすべてローカル完結</li>
+            <li>Chrome内蔵AIによる画像説明文生成とスキャンPDFのOCRに対応、MITライセンスでFirefox版も開発中</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>accessiblepdfview.org</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-23</span>
+          <span class="engagement">🔖 17</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://zenn.dev/otakakot/articles/14d162ea65f67d">Vercel、Goサーバーのゼロコンフィグ無料デプロイに対応——`go.mod`・`main.go`・`vercel.json`3ファイルで約40秒</a></h3>
+        </div>
+        <div class="summary">VercelがGoサーバーのデプロイを大幅に簡素化し、クレジットカード登録不要のHobbyプランで無料デプロイできるようになった。従来は`api/`配下に個別の`index.go`を並べ複雑な`vercel.json`ルーティングを書く必要があったが、新方式では`go.mod`・標準的な`main.go`・`{"framework": "go"}`だけを書いた`vercel.json`の3ファイルで足りる。`PORT`環境変数(既定3000)をlistenする通常のGo HTTPサーバーを`vercel --prod`するだけで、約40秒でデプロイが完了する。</div>
+        <div class="key-points">
+          <ul>
+            <li>`go.mod`/`main.go`/`vercel.json`の3ファイルのみでゼロコンフィグ対応、従来必要だった複雑なルーティング設定が不要に</li>
+            <li>クレジットカード登録不要のHobbyプランで無料デプロイ、`vercel --prod`で約40秒で完了</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn (otakakot)</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-21</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://atlas-sysdes.vercel.app/">システム設計面接向けの対話型アーキテクチャ図集「System Design Atlas」公開——15のケーススタディと4つのトレードオフ軸で整理</a></h3>
+        </div>
+        <div class="summary">レイテンシとスループット、整合性パターン、キャッシュ戦略などを扱う10の基礎概念、Twitterのフィードやチャット・決済処理・動画配信など面接頻出順に並べた15のケーススタディ、PostgreSQL・Cassandra・DynamoDB・Kafka・Elasticsearchなど15の技術解説をまとめたオープンソースサイト。すべての設計判断を「今かあとか」「1コピーか複数か」「単一マシンか分散か」「正しさか可用性か」という4つのトレードオフ軸で捉える枠組みを一貫して使う。GitHubでソース公開されスポンサーも受け付けている。</div>
+        <div class="key-points">
+          <ul>
+            <li>基礎概念10・ケーススタディ15・技術解説15を「タイミング」「複製」「スケール」「一貫性」の4トレードオフ軸で統一的に整理</li>
+            <li>GitHubでソースコード公開、面接頻出順にケーススタディを並べた対話型アーキテクチャ図で構成</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub (atlas-sysdes)</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-09-23</span>
+          <span class="engagement">▲ 28</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://claude.com/blog/what-a-task-costs-on-opus-5-5">Opus 5.5のタスク単価を分解——キャッシュ読込$0.20/100万トークンで、キャッシュ90%ヒットなら$1.62、非キャッシュだと$11.20に</a>
+        <span class="quick-summary">— 入出力トークンはOpus 5比20%減、キャッシュ読込は60%減となり、ターン数削減とキャッシュ活用がリトライ削減より効くとコスト構造を解説する。</span>
+        <span class="meta">Claude Blog</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-8-text-to-speech/">Google、「Gemini 3.8 Flash TTS」と軽量版「Flash-Lite」を発表——Hume AI音声デザインベンチマークで首位の71.4点</a>
+        <span class="quick-summary">— 自然言語プロンプトで100言語超のオリジナル音声を生成でき、30秒の音声サンプルから同意確認付きで声を複製できる。</span>
+        <span class="meta">Google Blog</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://no-sloptober.com/">AIツール断ちを呼びかける「No Sloptober」キャンペーン始動——10月の1カ月間LLMを使わず技能を鍛え直す</a>
+        <span class="quick-summary">— AI出力をほぼノーチェックで右から左に流す「ミートプロキシ」化への警鐘として、コーディング課題や新言語学習など代替活動を提案する。</span>
+        <span class="meta">no-sloptober.com</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-oss">OSS</span>
+        <a href="https://blogs.gnome.org/alatiera/2026/09/23/the-gnome-llm-policy-that-i-want/">GNOME開発者、「GNOMEへの提出物にLLMを使うべきでない」という強い方針を提案</a>
+        <span class="quick-summary">— コミュニティの結束を損ない優秀な貢献者を遠ざけるとして、ドメイン知識の証明や根本原因への対処など人間主体の評価基準への回帰を訴える。</span>
+        <span class="meta">GNOME Blog</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-data">Data</span>
+        <a href="https://parquet.apache.org/blog/2026/09/22/alp-adaptive-lossless-floating-point-encoding-in-apache-parquet/">Apache Parquet、浮動小数点向け新エンコーディング「ALP」をparquet-format 2.14.0で追加——PLAIN+ZSTD比10倍高速に展開</a>
+        <span class="quick-summary">— 1,024値単位の指数・係数で整数化しビットパッキングする可逆圧縮方式で、ランダムアクセスは数千倍高速化するという。</span>
+        <span class="meta">Apache Parquet Blog</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-infra">Infra</span>
+        <a href="https://qiita.com/wakamesoba98/items/19693e80c0551eada894">自宅にISDNを再現する——退役した交換機とアナログ電話機で往年のデジタル電話網を蘇らせる工作記事</a>
+        <span class="quick-summary">— 中古のISDN交換機とターミナルアダプタを組み合わせ、実際にダイヤルアップ通信を成立させるまでの構築手順を追う。</span>
+        <span class="meta">Qiita (wakamesoba98)</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://qiita.com/songchong/items/5aa4bc07279ea271909a">37のAIツールを調査、企業向けチャット履歴は上司に読めるか——ChatGPT/Claude/Copilotは管理者が監査ログを180日程度取得可能</a>
+        <span class="quick-summary">— 個人が削除しても提供元のバックエンドには残り、Geminiは人間レビュー済み会話が最長3年保持されるなど、削除操作と実際のデータ保持のズレを指摘する。</span>
+        <span class="meta">Qiita (songchong)</span>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="./" class="archive-link">🗂 過去のダイジェスト</a>
+    </footer>
+  </div>
+</body>
+</html>
