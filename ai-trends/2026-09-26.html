@@ -66,7 +66,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 <div class="container">
 <header>
   <h1>🧠 AI プロダクト動向</h1>
-  <p class="date">2026-08-18 発行（読了 7 分）</p>
+  <p class="date">2026-09-26 発行（読了 6 分）</p>
   <p class="tagline">実プロダクトのアーキテクチャ・使用例から AI 開発の現在地を週 3 回・1 号 1 テーマで深掘り</p>
   <nav class="site-nav">
     <a href="../">📰 日刊ダイジェスト</a>
@@ -77,88 +77,87 @@ footer a{color:var(--primary-500);text-decoration:none}
 </header>
 
 <div class="theme-hero">
-  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">AGENT-AUTHORIZATION</span></span>
-  <h2>MCPエージェントの認可設計 — 同意画面を「増やす」実装と「無くす」実装に分岐した</h2>
-  <p class="lede">MCP（Model Context Protocol）はここ数ヶ月で「ツール呼び出しAPI」から「エージェント向けOS」へと役割を広げ、認可まわりの仕様更新が相次いでいる。争点は一貫して同じ問いに戻ってくる——エージェントがサーバー越しに何をしてよいかを、誰が、いつ、どの粒度で決めるのか。ツール単位のスコープ設計、エージェントの自己登録が生む同意の摩擦、そしてエンタープライズ向けに同意画面そのものを無くす動きまで、この数ヶ月で実装が急速に分岐した。MCPクライアント・サーバーをプロダクトに組み込むなら、この3層のどこで権限判断をさせるかはもう後回しにできない設計判断になっている。</p>
+  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">MULTI-AGENT-ORCHESTRATION</span></span>
+  <h2>マルチエージェント協調は「並列に投げる」から「役割を絞った2体」に収束した — Fusion 型アーキテクチャが解いた失敗伝播問題</h2>
+  <p class="lede">2025年半ば、Cognitionは自社ブログで「マルチエージェントを作るな」と名指しで警告した。分散した複数エージェントは互いの前提を共有できず、失敗が下流に伝播するというのがその理由だ。ところが同社は1年後、自社の主力製品に2体構成のマルチエージェント機構「Fusion」を実装し、2026年9月にはローカル環境にまで展開範囲を広げた。矛盾しているように見えるこの動きは、実は同じ問題意識から出た一つの結論だ — 「エージェントを増やすな」ではなく「役割と依存関係を先に固定してから、必要な分だけ増やせ」という設計原則への収束である。</p>
 </div>
 
 <div class="tldr">
   <div class="label">TL;DR — 3 行で</div>
   <ul>
-    <li>MCPの権限設計は「サーバー単位のOAuth」から「ツールごとのスコープ」へ移り、WorkOSやCloudflareが個別ツール内での権限チェックを標準パターンとして提示している。</li>
-    <li>エージェントが実行時にツールを動的発見する構成ではDCR（Dynamic Client Registration）による自己登録が同意となりすまし対策の課題を生み、StytchとAuth0（CIMD採用）が異なる答えを出している。</li>
-    <li>エンタープライズ向けにはMCP拡張仕様Enterprise-Managed Authorizationが2026年6月18日に安定版となり、IdP委任によって同意画面自体を無くす設計が登場した。</li>
+    <li>Cognitionは「分散マルチエージェントは前提の食い違いで失敗が伝播する」と自ら警告した後、lead+sidekickの2体だけに絞った制約付き構成「Fusion」を主力製品化し、2026年9月にローカル環境まで展開した。</li>
+    <li>Anthropicは「コンテキスト汚染の回避・並列化・専門化」の3条件に該当する場合のみ複数エージェントを勧め、それ以外はまず単一エージェントで始めるようガイドラインで明言している。</li>
+    <li>Sierraの Horizon は並列実行ではなく、数日〜数ヶ月にまたがる顧客対応を context engine で一本の文脈として繋ぐ、時間軸方向のオーケストレーションという別解を示した。</li>
   </ul>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 1: サーバー単位の許可から、ツール単位のスコープへ</div>
+  <div class="section-title">📐 パターン 1: 分散型マルチエージェントはなぜ失敗が伝播するのか</div>
   <div class="theme-section">
-    <p>MCPサーバーは2025年6月の仕様更新で「OAuth Authorization Serverではなく Resource Server」と明確化された。この結果、権限チェックの単位はサーバー全体ではなく個々のツールに移った。画像生成ツールが呼び出し時に<code>image_generation</code>スコープをセッションに対して照会し、なければ拒否する、という実装がWorkOSの解説記事でリファレンスパターンとして示されている。</p><p>なぜサーバー単位では不十分になったのか。1つのMCPサーバーが提供するツール数はリリースのたびに増え、「検索はできるが送金はできない」のような粒度の権限を、サーバー単位のOAuthスコープだけでは表現できなくなったためだ。CloudflareのAgents SDKはWorkOS・Stytch・Auth0の3プロバイダそれぞれと統合し、同じサーバー内で「<code>add</code>ツールは全ユーザーに公開、<code>image_generation</code>ツールは権限を持つユーザーのみ」という条件付き公開を標準パターンとして提示している。</p>
+    <p>Cognitionの Walden Yan は自社ブログで、Flappy Bird クローンの実装を2つのサブエージェントに分割した例を示す。片方はマリオ風の背景を作り、もう片方はそれと噛み合わない鳥のデザインを作った。それぞれの行動は「事前に共有されていない前提」に基づいており、最後にそれらを統合する役目のエージェントは矛盾した成果物を渡されて詰む。Yanはこれを「行動には暗黙の意思決定が埋め込まれている」と表現し、コンテキストを完全に共有しない限り、分散したエージェントの行動は互いに矛盾しうると指摘した。</p><p>この主張の1年後、同じCognitionが Devin に実装したのが Fusion だ。ただしこれは「多数のエージェントに分散させる」設計ではなく、frontierモデルの lead 1体とコスト効率の良い sidekick 1体という2体構成に絞り込んでいる。lead が計画・曖昧さの解釈・レビューを担い、委譲するタスクごとに制約と成功基準を書いた <code>brief</code> を sidekick に渡す。エージェント数を増やすことと、責任範囲を分割すること自体は別問題であり、後者さえ設計できれば2体でも十分に効果が出る、というのがこの1年で固まった結論だ。</p>
     <div class="example">
-      <div class="product">WorkOS AuthKit（MCPツール単位パーミッション）</div>
-      <div class="approach">ツール呼び出し時にコード内でスコープを個別チェック</div>
-      <div class="detail">generateImageツールが呼び出し時にimage_generationパーミッションをセッションに照会し、なければ拒否するパターンをリファレンス実装として公開。サーバー単位のOAuthスコープでは表現できない粒度をツール側のロジックで担保している</div>
-      <a href="https://workos.com/blog/mcp-authorization-patterns-per-tool-scopes">📄 一次ソース</a>
+      <div class="product">Cognition「Don&#39;t Build Multi-Agents」（Walden Yan, 2025.06）</div>
+      <div class="approach">分散型マルチエージェントはコンテキスト非共有により失敗が下流に伝播する</div>
+      <div class="detail">Flappy Bird クローンを2つのサブエージェントに分割した結果、互いに矛盾する成果物（マリオ風背景＋非対応の鳥）が生まれた事例を根拠に、複数エージェントへの安易な分散を戒めている</div>
+      <a href="https://cognition.com/blog/dont-build-multi-agents">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">Cloudflare Agents SDK（MCPサーバーのDurable Objects実装）</div>
-      <div class="approach">同一サーバー内でツールごとに公開条件を分岐</div>
-      <div class="detail">McpAgentクラスがWorkOS・Stytch・Auth0のいずれとも統合できる形で設計されており、addツールは全認証ユーザーに、image_generationツールはロールを持つユーザーにのみ公開する条件分岐をサンプルとして提示している</div>
-      <a href="https://blog.cloudflare.com/building-ai-agents-with-mcp-authn-authz-and-durable-objects/">📄 一次ソース</a>
+      <div class="product">Cognition Devin Fusion / Local Fusion</div>
+      <div class="approach">lead（frontierモデル）とsidekick（低コストモデル）の2体構成に制約と成功基準付きでタスクを委譲</div>
+      <div class="detail">2026年6月にDevin Cloudでプレビューし、9月11日にDesktop・CLIへ展開。エージェント数を絞り、委譲ごとにbriefで前提を明示することで『分散＝失敗伝播』の問題を回避している</div>
+      <a href="https://cognition.com/blog/local-fusion">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> 新規にMCPサーバーやツールを設計するなら、最初からツール単位でスコープを切る。サーバー単位のOAuthアプリとして権限設計を始めると、後からツールが増えるたびに権限体系を作り直すことになる。</div>
+    <div class="takeaway"><strong>示唆:</strong> 複数エージェント化を検討するなら、まず『エージェントの数』ではなく『委譲するタスクの境界と成功基準を明文化できるか』を先に問う。それが書けないなら2体でも失敗する。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 2: エージェントが自分でツールを見つけて要求する時代の同意設計</div>
+  <div class="section-title">📐 パターン 2: Anthropicの判断基準: いつマルチエージェントを使うべきか</div>
   <div class="theme-section">
-    <p>MCPエージェントは事前にどのツールを使うか人間が決めるのではなく、実行時にサーバーの提供するツール一覧を発見して呼び出す。この動的発見に対応するため、Dynamic Client Registration（DCR）でクライアント（エージェント）自身がサーバーへの登録とリダイレクトURIの申告を自律的に行う設計が広がった。StytchのConnected Appsはこの自己登録するクライアントを追跡し、権限ごとの同意画面でユーザーに「このエージェントが要求している権限」を提示する。</p><p>ただしDCRは登録済みクライアントのなりすましや、ユーザーが事前承認していない権限を実行時に要求されるリスクを伴う。Auth0はGA版のAuth for MCPでDCRの代わりに<code>Client ID Metadata Document（CIMD）</code>によるクライアント登録を採用し、あわせてdownstream API呼び出し用のOn-Behalf-Of（OBO）トークン交換を用意した。エージェントの自律的な発見と、なりすまし対策のバランスをどう取るかが実装ごとに割れている。</p>
+    <p>Anthropicは2026年1月のブログで、複数エージェントが単一エージェントを上回るのは「コンテキスト汚染の回避」「並列化」「専門化」の3条件に該当する場合に限られると明言した。例えば注文履歴を大量に取得する顧客対応と技術的な問題診断を同一エージェントに任せると、無関係な情報がコンテキストを汚染する。こうした場合はサブエージェントで作業を切り分けた方がよい、という具合だ。逆に言えば、この3条件に当てはまらない限りは単一エージェントで始めるべきだと釘を刺している。</p><p>4月の追補記事では、この判断をさらに5パターンに分解している。汎用性が高く推奨されるのは「orchestrator-subagent」で、タスク分解の境界が明確な場合に最小限の調整コストで機能する。Anthropic自身のResearch機能もこの型で、lead agentが3〜5体のsubagentに並列で調査を委譲し、最後に引用チェックを行う専用のverification subagentへ渡す。検証専用エージェントへの委譲は情報の受け渡し量が少なく、伝言ゲーム的な劣化が起きにくいという理由で最も推奨される具体パターンとして挙げられている。</p>
     <div class="example">
-      <div class="product">Stytch Connected Apps</div>
-      <div class="approach">DCRで自己登録するエージェントをライフサイクル管理し、要求権限ごとに同意画面を出す</div>
-      <div class="detail">Remote MCPサーバーが自己登録したクライアントの一覧を追跡し、なりすまし対策と、ロールに基づく同意画面の出し分けを提供する。CloudflareのRemote MCP実装と組み合わせた事例として公開されている</div>
-      <a href="https://stytch.com/blog/remote-mcp-stytch-cloudflare/">📄 一次ソース</a>
+      <div class="product">Anthropic「When to use multi-agent systems (and when not to)」（2026.01.23）</div>
+      <div class="approach">コンテキスト汚染回避・並列化・専門化の3条件に該当する場合のみ複数エージェント化を推奨</div>
+      <div class="detail">3条件に当てはまらないケースでは、数ヶ月かけて作った複雑なマルチエージェント構成を単一エージェント＋プロンプト改善で置き換えられた事例があると明記している</div>
+      <a href="https://claude.com/blog/building-multi-agent-systems-when-and-how-to-use-them">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">Auth0 Auth for MCP（GA）</div>
-      <div class="approach">DCRをCIMDに置き換え、OBOトークン交換を追加</div>
-      <div class="detail">2026年5月にGAとなったAuth0のAuth for MCPは、動的クライアント登録の代替としてClient ID Metadata Documentを採用し、エージェントが自分の身元を偽装しにくい形でMCPリソース識別子とOBOトークン交換をサポートする</div>
-      <a href="https://auth0.com/blog/auth0-auth-for-mcp-servers-generally-available/">📄 一次ソース</a>
+      <div class="product">Anthropic Research（orchestrator-worker型）</div>
+      <div class="approach">lead agentが3〜5体のsubagentへ並列調査を委譲し、専用の引用検証subagentで最終チェックする</div>
+      <div class="detail">subagentへの委譲契約に目的・出力形式・使うツールとソース・作業範囲を明記することが、挙動を制御する上で最も重要な要素だったとしている</div>
+      <a href="https://www.anthropic.com/engineering/multi-agent-research-system">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> エージェントに未知のツールを動的に発見させる設計を選ぶなら、同意UIとなりすまし対策は後付けできない。DCRをそのまま使うか、CIMDのような代替クライアント登録に寄せるかは、エージェントの実行環境（一般ユーザー向けか、社内基盤か）で判断が変わる。</div>
+    <div class="takeaway"><strong>示唆:</strong> 複数エージェント化の是非を『技術的に可能か』で判断しない。コンテキスト汚染・並列化・専門化の3条件のどれにも当てはまらないなら、まず単一エージェントに戻す方が速い。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 3: エンタープライズは同意画面そのものを無くす方向に進んだ</div>
+  <div class="section-title">📐 パターン 3: 並列ではなく時間軸のオーケストレーション: Sierra Horizon という別解</div>
   <div class="theme-section">
-    <p>2026年6月18日、MCPの拡張仕様Enterprise-Managed Authorization（EMA）が安定版になった。ユーザーがIdP経由でログインすると、MCPクライアントがIdPに署名付きのアイデンティティ表明JWTを要求し、IdPが管理者設定のポリシーを適用してこのJWTを発行、MCPサーバーは既存のSSO信頼関係と同じ仕組みでこれを検証してスコープ済みアクセストークンを発行する。ユーザー操作も同意画面も一切発生しない。</p><p>これは前段の「ツールごとに同意を取る」設計とは逆方向で、権限判断をエンドユーザーの同意からIdP管理者の事前ポリシーへ完全に移す発想だ。ローンチ時点の対応IdPはOktaのみで、Asana・Atlassian・Canva・Figma・Granola・Linear・Supabaseがサーバー側で対応、クライアント側はAnthropic（Claude・Claude Code・Cowork）とMicrosoft（VS Code）が対応した。IdPが単一障害点かつ単一の信頼の起点になる設計であり、対応IdPを増やせるかが普及の鍵になる。</p>
+    <p>ここまでの2社が扱っているのは「1つのタスクを同時にどう分割するか」という並列方向のオーケストレーションだが、Sierraが2026年7月に発表した Horizon は別の軸を扱う。数日から数ヶ月にまたがる顧客対応（ローン審査や保険の承認手続きなど）を、単発の会話ではなく一連の関与として捉え、context engineがすべてのやり取りを縫い合わせて1つの文脈として保持する。エージェントは決められた手順をなぞるのではなく、過去のやり取りの結果を踏まえて次にどう動くかを都度判断する。</p><p>これが「並列化」ではなく「時間軸方向の一貫性」の問題である点が重要だ。CognitionやAnthropicの議論がサブエージェント間でコンテキストをどう共有するかを扱うのに対し、Horizonは同一エージェント（あるいはその系譜）が数週間後の自分に対して、どうコンテキストを引き継ぐかを扱っている。マルチエージェント設計の論点は「空間的な分割」と「時間的な継続」の2軸に分けて考える必要があるという実例だ。</p>
     <div class="example">
-      <div class="product">MCP Enterprise-Managed Authorization（EMA）</div>
-      <div class="approach">IdP発行の署名付きJWTでゼロタッチのOAuthを実現</div>
-      <div class="detail">2026年6月18日に安定版となったMCP拡張仕様。ユーザーの同意画面を廃し、管理者がIdP側で設定したポリシーに基づいてMCPサーバーへのアクセスを一括付与する。ローンチ対応はOktaのみ、Anthropic・Microsoftがクライアント側で採用した</div>
-      <a href="https://blog.modelcontextprotocol.io/posts/enterprise-managed-auth/">📄 一次ソース</a>
+      <div class="product">Sierra Horizon（2026.07.16）</div>
+      <div class="approach">context engineで数日〜数ヶ月にまたがる顧客対応を1つの文脈として繋ぎ、都度の関与ごとにエージェントが次の行動を再判断する</div>
+      <div class="detail">成果報酬型（tokenではなく成果に課金）のモデルと組み合わせることで、単発対話の最適化ではなく関係全体の最適化を狙っている</div>
+      <a href="https://sierra.ai/blog/horizon">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> 社内向けに閉じたMCPサーバー群を配るならEMA相当のIdP委任モデルを検討する価値がある。逆に不特定多数のエンドユーザーに公開するMCPサーバーでは、同意画面を無くす設計はまだ選択肢にならない。対応IdPが少ない今は、EMAとユーザー同意ベースの両方を実装できる抽象化を挟んでおくのが安全だ。</div>
+    <div class="takeaway"><strong>示唆:</strong> 『マルチエージェントにすべきか』を検討する前に、自分の課題が空間的な分割（並列サブエージェント）と時間的な継続（長時間軸の文脈保持）のどちらの問題なのかを切り分ける。</div>
   </div>
   <div class="editorial">
     <span class="label">✍️ 編集後記</span>
-    この3つの実装が示すのは、「認可をどこに置くか」という設計判断がMCPの成熟とともにレイヤーごとに専門化してきたということだ。ツール単位のスコープはアプリ側のロジックで、動的発見への対応はIdPやAuth基盤の役割へ、エンタープライズ配布は仕様レベルのIdP委任へと、判断の置き場所が徐々に上のレイヤーへ移動している。自作のMCPサーバーを設計するなら、この3層のどこまでを自前で持ち、どこから既製の認可基盤に任せるかを最初に決めておくべきだ。
+    1年前に『マルチエージェントを作るな』と言った会社が、今は制約付きの2体構成を主力製品にしている。これは方針転換ではなく、同じ診断から出た一貫した結論だ — 問題は『エージェントの数』ではなく『前提の共有と責任範囲の明文化』であり、それさえ設計できれば2体でも3条件を満たす並列でも機能する。エージェント数を増やす前に、まず自分のタスクが本当にこの3条件のどれかに当てはまるのかを疑う姿勢が、今のところ最も再現性の高い判断基準になっている。
   </div>
 </div>
 
 <div class="section">
   <div class="section-title">🔗 今号の動向ピックアップ</div>
-  <div class="quick-link"><a href="https://blog.modelcontextprotocol.io/posts/2026-07-28/">MCP 2026-07-28 仕様アップデート</a><span class="quick-summary">MCP公式ブログが7月28日付の仕様改定を解説。認可サーバーにRFC 9207のiss検証を必須化するなど認可周りの安全策が積み増され、本文で扱ったツール単位スコープやEMAの前提となる仕様変更を理解できる。</span></div>
-  <div class="quick-link"><a href="https://auth0.com/blog/auth0-auth-for-mcp-servers-generally-available/">Auth0 Auth for MCP が正式GA</a><span class="quick-summary">Auth0のMCPサーバー向け認可製品が2026年5月にGAし、CIMDによるクライアント登録とOBOトークン交換を導入した。本文セクション2で扱ったDCRの代替アプローチの一次情報。</span></div>
-  <div class="quick-link"><a href="https://workos.com/blog/ai-agent-credentials">WorkOS: AIエージェントに専用クレデンシャルを持たせる</a><span class="quick-summary">エージェントをユーザーのなりすましではなく、それ自体のアイデンティティとして扱うべきだと説く実装ガイド。本文で扱ったツール単位スコープ設計を、エージェント自身の資格情報という切り口から補強する内容。</span></div>
+  <div class="quick-link"><a href="https://cognition.com/blog/local-fusion">Fusion、DevinのDesktop・CLIにも展開（Cognition, 2026.09.11）</a><span class="quick-summary">Devin CloudでテストしてきたFusion（lead+sidekickの2体構成）をローカル開発環境に拡大した発表。本文で扱った『分散させず役割を絞る』設計が実運用の主戦場にまで広がったことを示す。</span></div>
+  <div class="quick-link"><a href="https://claude.com/blog/multi-agent-coordination-patterns">マルチエージェント協調パターン5選（Anthropic, 2026.04.10）</a><span class="quick-summary">orchestrator-subagent・generator-verifier・agent teams・message bus・shared stateの5パターンを整理し、まずorchestrator-subagentから始めることを推奨する記事。本文セクション2の判断基準をパターンとして具体化している。</span></div>
+  <div class="quick-link"><a href="https://www.langchain.com/blog/how-and-when-to-build-multi-agent-systems">How and when to build multi-agent systems（LangChain）</a><span class="quick-summary">LangChain自身のフレームワーク設計思想として、いつマルチエージェント化に踏み切るべきかをまとめた記事。AnthropicやCognitionとは別のベンダーが同じ結論（安易な分散を避け境界を先に決める）に至っている点が興味深い。</span></div>
 </div>
 
 <div class="section">
   <div class="section-title">📚 過去号</div>
-  <div class="archive-item"><span class="week">2026-09-26</span><div class="body"><a href="../ai-trends.html">マルチエージェント協調は「並列に投げる」から「役割を絞った2体」に収束した — Fusion 型アーキテクチャが解いた失敗伝播問題</a><span class="sub">Cognitionは「分散マルチエージェントは前提の食い違いで失敗が伝播する」と自ら警告した後、lead+sidekickの2体だけに絞った制約付き構成「Fusion」を主力製品化し、2026年9月にローカル環境まで展開した。</span></div></div>
   <div class="archive-item"><span class="week">2026-09-24</span><div class="body"><a href="2026-09-24.html">カスタマー対応エージェントの設計は「決定木」から「自然言語手順×コードの二層構造」へ</a><span class="sub">Decagonは決定木を捨て、業務担当者が自然言語で書いた手順を構造化ロジックにする一方、返金などの機微操作だけコードで検証するAOPへ移行し、NG.CASHでは解決率が70%まで向上した。</span></div></div>
   <div class="archive-item"><span class="week">2026-09-22</span><div class="body"><a href="2026-09-22.html">モデルルーティングが開発ツールの既定機能になった — 選ぶのは人間ではなく分類器</a><span class="sub">GitHub Copilotは9月にauto model selectionへ「efficiency/balance/intelligence」の3段階ティアを追加し、Cursorは60万件超の実利用データで学習した分類器（Cursor Router）でモデル選定を自動化した。</span></div></div>
   <div class="archive-item"><span class="week">2026-09-19</span><div class="body"><a href="2026-09-19.html">エージェントの権限設計は「毎回確認」から「境界を先に固定する」へ移った</a><span class="sub">OpenAI CodexとAnthropicのClaude Codeは、サンドボックスの制限強度と確認ダイアログの要否を別軸にし、境界内の行為は原則自動承認する設計にそろえた。</span></div></div>
@@ -174,6 +173,7 @@ footer a{color:var(--primary-500);text-decoration:none}
   <div class="archive-item"><span class="week">2026-08-25</span><div class="body"><a href="2026-08-25.html">エージェントのメモリ設計 — 生ログでも単一要約でもなく、書き換え可能な単位に分解する</a><span class="sub">Claude は2026年7月、記憶を単一のローリング要約から個別の書き換え可能なエントリへ移行。ChatGPT は非同期の「Dreaming」処理で古い事実を時制ごと書き換える。</span></div></div>
   <div class="archive-item"><span class="week">2026-08-22</span><div class="body"><a href="2026-08-22.html">プロンプトキャッシュはコスト最適化ではない — 「プレフィックス固定」というアーキテクチャ制約</a><span class="sub">キャッシュ命中率はもはや副次指標ではなく、Manus はこれを「本番エージェントで最重要のメトリック」と明言している。</span></div></div>
   <div class="archive-item"><span class="week">2026-08-20</span><div class="body"><a href="2026-08-20.html">接続ツールが増えるほど遅くなる問題 — コード実行と検索遅延ロードの2つの答え</a><span class="sub">Anthropicは公式エンジニアリングブログで、MCPツールをコードAPIとして提示しファイルシステム越しにオンデマンドで読み込ませる方式により、あるタスクのトークン消費を150,000から2,000（98.7%減）に削減したと報告した</span></div></div>
+  <div class="archive-item"><span class="week">2026-08-18</span><div class="body"><a href="2026-08-18.html">MCPエージェントの認可設計 — 同意画面を「増やす」実装と「無くす」実装に分岐した</a><span class="sub">MCPの権限設計は「サーバー単位のOAuth」から「ツールごとのスコープ」へ移り、WorkOSやCloudflareが個別ツール内での権限チェックを標準パターンとして提示している。</span></div></div>
   <div class="archive-item"><span class="week">2026-08-15</span><div class="body"><a href="2026-08-15.html">エージェントの評価・観測性 — 「最終出力の一致」から「軌跡(トラジェクトリ)の妥当性」へ</a><span class="sub">Anthropic は Tasks/Graders/Transcripts の三要素でエージェント評価を構造化し、1回でも成功する確率 pass@k と毎回成功する確率 pass^k を分けて計測する運用を提示した。</span></div></div>
   <div class="archive-item"><span class="week">2026-08-13</span><div class="body"><a href="2026-08-13.html">モデルルーティング — 1モデルに全部背負わせない設計が標準になった</a><span class="sub">Vercel AI GatewayやGitHub Copilot Autoは、ヒューリスティック分類→難易度ティア判定→プロバイダ違いのフォールバック、という二段構成のタスク別ルーティングをすでに標準実装にしている。</span></div></div>
   <div class="archive-item"><span class="week">2026-08-11</span><div class="body"><a href="2026-08-11.html">コンテキスト圧縮はどこで行うべきか — API・モデル訓練・ハーネス、3層に割れた実装場所</a><span class="sub">Anthropic は compaction をサーバーサイド API のオプションとして実装し、モデル本体は変更していない</span></div></div>
@@ -187,7 +187,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 </div>
 
 <footer>
-  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="../data/ai-trends/2026-08-18.json">data/ai-trends/2026-08-18.json</a>（このページは JSON からの生成物）</p>
+  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="../data/ai-trends/2026-09-26.json">data/ai-trends/2026-09-26.json</a>（このページは JSON からの生成物）</p>
   <p style="margin-top:.5rem"><a href="../">📰 日刊ダイジェストに戻る</a></p>
 </footer>
 </div>

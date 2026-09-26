@@ -66,7 +66,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 <div class="container">
 <header>
   <h1>🧠 AI プロダクト動向</h1>
-  <p class="date">2026-09-24 発行（読了 5 分）</p>
+  <p class="date">2026-09-26 発行（読了 6 分）</p>
   <p class="tagline">実プロダクトのアーキテクチャ・使用例から AI 開発の現在地を週 3 回・1 号 1 テーマで深掘り</p>
   <nav class="site-nav">
     <a href="./">📰 日刊ダイジェスト</a>
@@ -77,81 +77,88 @@ footer a{color:var(--primary-500);text-decoration:none}
 </header>
 
 <div class="theme-hero">
-  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">CUSTOMER-AGENT-ARCHITECTURE</span></span>
-  <h2>カスタマー対応エージェントの設計は「決定木」から「自然言語手順×コードの二層構造」へ</h2>
-  <p class="lede">顧客対応エージェントは、この1年で「決定木」と「自由な会話任せ」の両方から離れた。決定木は条件分岐が組み合わせ爆発を起こし現実の会話に追従できず、逆に自由な会話任せは返金や解約のような後戻りできない操作を安心して渡せない。2026年に入り複数の主要ベンダーが同じ形に収束している——業務側が自然言語で手順を書き、機微な操作だけをコードで検証する二層構造だ。さらにその内部でも、会話全体を1つのモデルに任せず、監督・分類・応答生成を別モデルに分担させる設計が広がっている。今号はDecagon、Sierra、Adaの公式発表から、この収束の中身を追う。</p>
+  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">MULTI-AGENT-ORCHESTRATION</span></span>
+  <h2>マルチエージェント協調は「並列に投げる」から「役割を絞った2体」に収束した — Fusion 型アーキテクチャが解いた失敗伝播問題</h2>
+  <p class="lede">2025年半ば、Cognitionは自社ブログで「マルチエージェントを作るな」と名指しで警告した。分散した複数エージェントは互いの前提を共有できず、失敗が下流に伝播するというのがその理由だ。ところが同社は1年後、自社の主力製品に2体構成のマルチエージェント機構「Fusion」を実装し、2026年9月にはローカル環境にまで展開範囲を広げた。矛盾しているように見えるこの動きは、実は同じ問題意識から出た一つの結論だ — 「エージェントを増やすな」ではなく「役割と依存関係を先に固定してから、必要な分だけ増やせ」という設計原則への収束である。</p>
 </div>
 
 <div class="tldr">
   <div class="label">TL;DR — 3 行で</div>
   <ul>
-    <li>Decagonは決定木を捨て、業務担当者が自然言語で書いた手順を構造化ロジックにする一方、返金などの機微操作だけコードで検証するAOPへ移行し、NG.CASHでは解決率が70%まで向上した。</li>
-    <li>Sierraはエージェントの応答生成とは別に、会話をリアルタイムで監査する「監督エージェント」と、認証前は口座変更ツール自体を渡さない決定的ガードを組み合わせた4層防御を採用している。</li>
-    <li>Sierraは15以上のモデルをツール呼び出し・分類・長文推論・トーン調整といったタスクごとに使い分け、Adaも同様に「どのステップにどのモデルを」という設計を公式に説明している。</li>
+    <li>Cognitionは「分散マルチエージェントは前提の食い違いで失敗が伝播する」と自ら警告した後、lead+sidekickの2体だけに絞った制約付き構成「Fusion」を主力製品化し、2026年9月にローカル環境まで展開した。</li>
+    <li>Anthropicは「コンテキスト汚染の回避・並列化・専門化」の3条件に該当する場合のみ複数エージェントを勧め、それ以外はまず単一エージェントで始めるようガイドラインで明言している。</li>
+    <li>Sierraの Horizon は並列実行ではなく、数日〜数ヶ月にまたがる顧客対応を context engine で一本の文脈として繋ぐ、時間軸方向のオーケストレーションという別解を示した。</li>
   </ul>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 1: 決定木から「自然言語手順 + コード保証」の二層構造へ</div>
+  <div class="section-title">📐 パターン 1: 分散型マルチエージェントはなぜ失敗が伝播するのか</div>
   <div class="theme-section">
-    <p>従来の顧客対応ボットは、条件分岐を手作業で積み上げる決定木で作られていた。担当者が想定するシナリオを列挙し、それぞれに分岐を用意する方式だが、実際の問い合わせは想定した分岐の間をすり抜ける。かといって手順を一切固定せずLLMの自由な会話に任せると、返金や解約のように取り消せない操作まで確認なしで実行してしまうリスクが残る。Decagonが「Agent Operating Procedures（AOP）」と呼ぶ設計は、この両端を避ける。業務担当者は手順を<code>自然言語</code>で書き、それが構造化されたロジックとして実行される一方、返金処理や本人確認のような機微な操作にだけ、エンジニアがコード側の検証を追加する。</p><p>この二層構造が広がっているのは、権限を「誰が手順を書くか」で分けると、業務の変更速度と安全性を両立できるからだ。業務側が自然言語で書き換えられる範囲はイテレーションを止めず、コードでしか変更できない範囲は監査対象を絞り込める。Decagonは導入から本番稼働まで3〜6週間という具体的な期間も公表しており、抽象的な設計思想ではなく運用のフェーズとして定着していることがうかがえる。</p>
+    <p>Cognitionの Walden Yan は自社ブログで、Flappy Bird クローンの実装を2つのサブエージェントに分割した例を示す。片方はマリオ風の背景を作り、もう片方はそれと噛み合わない鳥のデザインを作った。それぞれの行動は「事前に共有されていない前提」に基づいており、最後にそれらを統合する役目のエージェントは矛盾した成果物を渡されて詰む。Yanはこれを「行動には暗黙の意思決定が埋め込まれている」と表現し、コンテキストを完全に共有しない限り、分散したエージェントの行動は互いに矛盾しうると指摘した。</p><p>この主張の1年後、同じCognitionが Devin に実装したのが Fusion だ。ただしこれは「多数のエージェントに分散させる」設計ではなく、frontierモデルの lead 1体とコスト効率の良い sidekick 1体という2体構成に絞り込んでいる。lead が計画・曖昧さの解釈・レビューを担い、委譲するタスクごとに制約と成功基準を書いた <code>brief</code> を sidekick に渡す。エージェント数を増やすことと、責任範囲を分割すること自体は別問題であり、後者さえ設計できれば2体でも十分に効果が出る、というのがこの1年で固まった結論だ。</p>
     <div class="example">
-      <div class="product">Decagon（Agent Operating Procedures）</div>
-      <div class="approach">自然言語の手順を構造化ロジックにし、機微操作だけコードで検証</div>
-      <div class="detail">NG.CASHの事例で解決率(deflection rate)が70%まで向上したと公式ブログが報告。導入は3〜6週間で本番稼働に至るとしている</div>
-      <a href="https://decagon.ai/blog/from-sops-to-agent-operating-procedures">📄 一次ソース</a>
+      <div class="product">Cognition「Don&#39;t Build Multi-Agents」（Walden Yan, 2025.06）</div>
+      <div class="approach">分散型マルチエージェントはコンテキスト非共有により失敗が下流に伝播する</div>
+      <div class="detail">Flappy Bird クローンを2つのサブエージェントに分割した結果、互いに矛盾する成果物（マリオ風背景＋非対応の鳥）が生まれた事例を根拠に、複数エージェントへの安易な分散を戒めている</div>
+      <a href="https://cognition.com/blog/dont-build-multi-agents">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> 自社で顧客対応エージェントを作るなら、最初に『誰が何を書けるか』の境界を決める。業務側が自然言語で編集できる範囲と、後戻りできない操作だけエンジニアのコードを通す範囲を分けると、決定木の保守負担も自由入力のリスクも避けられる。</div>
+    <div class="example">
+      <div class="product">Cognition Devin Fusion / Local Fusion</div>
+      <div class="approach">lead（frontierモデル）とsidekick（低コストモデル）の2体構成に制約と成功基準付きでタスクを委譲</div>
+      <div class="detail">2026年6月にDevin Cloudでプレビューし、9月11日にDesktop・CLIへ展開。エージェント数を絞り、委譲ごとにbriefで前提を明示することで『分散＝失敗伝播』の問題を回避している</div>
+      <a href="https://cognition.com/blog/local-fusion">📄 一次ソース</a>
+    </div>
+    <div class="takeaway"><strong>示唆:</strong> 複数エージェント化を検討するなら、まず『エージェントの数』ではなく『委譲するタスクの境界と成功基準を明文化できるか』を先に問う。それが書けないなら2体でも失敗する。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 2: 会話の外側に監督エージェントを置く多層防御</div>
+  <div class="section-title">📐 パターン 2: Anthropicの判断基準: いつマルチエージェントを使うべきか</div>
   <div class="theme-section">
-    <p>Sierraは顧客対応エージェントの安全性を、1つのプロンプトの精度ではなく4層のチェックの積み重ねとして設計している。まずナレッジベースの内容に応答を根拠づける層、次に「競合製品と比較しない」のような自然言語のルール層、そのうえで会話をリアルタイムに監視し逸脱があれば書き換えやブロックを行う「監督エージェント」層、最後にモデルの判断を介さない決定的なガード層が続く。決定的ガードの具体例は、本人確認が済むまで口座変更ツール自体をエージェントに渡さないというもので、確認ダイアログではなくツールの可視性そのものを制御する。</p><p>1件のメッセージに対して、この中の複数のチェックが同時に走る設計になっているのは、生成モデル単体の指示追従性を信頼しないという前提があるからだ。プロンプトでルールを守らせる層と、モデルの判断を経由しない層を分けておけば、片方が突破されてももう片方が残る。会話型の顧客対応エージェントで『監督役のエージェントが主エージェントを常時監査する』構成を採る例は、開発ツール向けのサンドボックス設計とは異なる形で同じ『事前に構造で縛る』発想の応用と言える。</p>
+    <p>Anthropicは2026年1月のブログで、複数エージェントが単一エージェントを上回るのは「コンテキスト汚染の回避」「並列化」「専門化」の3条件に該当する場合に限られると明言した。例えば注文履歴を大量に取得する顧客対応と技術的な問題診断を同一エージェントに任せると、無関係な情報がコンテキストを汚染する。こうした場合はサブエージェントで作業を切り分けた方がよい、という具合だ。逆に言えば、この3条件に当てはまらない限りは単一エージェントで始めるべきだと釘を刺している。</p><p>4月の追補記事では、この判断をさらに5パターンに分解している。汎用性が高く推奨されるのは「orchestrator-subagent」で、タスク分解の境界が明確な場合に最小限の調整コストで機能する。Anthropic自身のResearch機能もこの型で、lead agentが3〜5体のsubagentに並列で調査を委譲し、最後に引用チェックを行う専用のverification subagentへ渡す。検証専用エージェントへの委譲は情報の受け渡し量が少なく、伝言ゲーム的な劣化が起きにくいという理由で最も推奨される具体パターンとして挙げられている。</p>
     <div class="example">
-      <div class="product">Sierra（Defense in Depth）</div>
-      <div class="approach">コンテンツ・ポリシー・監督エージェント・決定的ガードの4層で1メッセージを検証</div>
-      <div class="detail">口座変更などのツールは本人確認前にはエージェントへ渡されないよう、モデルの判断を介さず制御される</div>
-      <a href="https://sierra.ai/blog/defense-in-depth-in-the-age-of-agents">📄 一次ソース</a>
+      <div class="product">Anthropic「When to use multi-agent systems (and when not to)」（2026.01.23）</div>
+      <div class="approach">コンテキスト汚染回避・並列化・専門化の3条件に該当する場合のみ複数エージェント化を推奨</div>
+      <div class="detail">3条件に当てはまらないケースでは、数ヶ月かけて作った複雑なマルチエージェント構成を単一エージェント＋プロンプト改善で置き換えられた事例があると明記している</div>
+      <a href="https://claude.com/blog/building-multi-agent-systems-when-and-how-to-use-them">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> 確認プロンプトや指示文だけに頼る防御は1点突破に弱い。会話内容を監査する層と、モデルの判断を経由しないツール可視性の制御を両方持たせると、どちらかが破られても被害を限定できる。</div>
+    <div class="example">
+      <div class="product">Anthropic Research（orchestrator-worker型）</div>
+      <div class="approach">lead agentが3〜5体のsubagentへ並列調査を委譲し、専用の引用検証subagentで最終チェックする</div>
+      <div class="detail">subagentへの委譲契約に目的・出力形式・使うツールとソース・作業範囲を明記することが、挙動を制御する上で最も重要な要素だったとしている</div>
+      <a href="https://www.anthropic.com/engineering/multi-agent-research-system">📄 一次ソース</a>
+    </div>
+    <div class="takeaway"><strong>示唆:</strong> 複数エージェント化の是非を『技術的に可能か』で判断しない。コンテキスト汚染・並列化・専門化の3条件のどれにも当てはまらないなら、まず単一エージェントに戻す方が速い。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 3: 1つのモデルではなく、タスクごとにモデルを使い分ける</div>
+  <div class="section-title">📐 パターン 3: 並列ではなく時間軸のオーケストレーション: Sierra Horizon という別解</div>
   <div class="theme-section">
-    <p>Sierraは顧客対応エージェントを単一のLLMで動かさず、15以上のモデルを役割ごとに割り当てる「constellation」構成を採る。推論に強いモデルは応答が遅くなりがちで、応答が速いモデルは複雑な方針の理解に弱いというトレードオフがあるため、注文管理のような低遅延のツール呼び出し、不審な挙動を見分ける高精度の分類、長い規約文書を読む長文脈の推論、ブランドに合った文面調整をそれぞれ別モデルに担わせ、オーケストレーションと経路選択は会話設計者の目に触れないところで自動化されている。</p><p>同じ発想はAdaのPlaybooksにも見られ、公式ブログは課題を「推論の深さか応答速度かの二択ではなく、どのステップにどのモデルを、どの範囲で使うかだ」と説明している。1回のリクエスト単位でモデルを選ぶ従来型のルーティングと異なり、これは1つの会話ターンの中でサブタスクごとにモデルを切り替える粒度の設計で、顧客対応エージェントが分類・検索・生成・トーン調整のように性質の異なる仕事を1ターンでこなすようになったことの帰結だ。</p>
+    <p>ここまでの2社が扱っているのは「1つのタスクを同時にどう分割するか」という並列方向のオーケストレーションだが、Sierraが2026年7月に発表した Horizon は別の軸を扱う。数日から数ヶ月にまたがる顧客対応（ローン審査や保険の承認手続きなど）を、単発の会話ではなく一連の関与として捉え、context engineがすべてのやり取りを縫い合わせて1つの文脈として保持する。エージェントは決められた手順をなぞるのではなく、過去のやり取りの結果を踏まえて次にどう動くかを都度判断する。</p><p>これが「並列化」ではなく「時間軸方向の一貫性」の問題である点が重要だ。CognitionやAnthropicの議論がサブエージェント間でコンテキストをどう共有するかを扱うのに対し、Horizonは同一エージェント（あるいはその系譜）が数週間後の自分に対して、どうコンテキストを引き継ぐかを扱っている。マルチエージェント設計の論点は「空間的な分割」と「時間的な継続」の2軸に分けて考える必要があるという実例だ。</p>
     <div class="example">
-      <div class="product">Sierra（Constellation of Models）</div>
-      <div class="approach">ツール呼び出し・分類・長文推論・トーン調整を別モデルに分担</div>
-      <div class="detail">推論が得意なモデルは低遅延なツール呼び出しに弱く、その逆も真であることが使い分けの理由と公式ブログが説明</div>
-      <a href="https://sierra.ai/blog/constellation-of-models">📄 一次ソース</a>
+      <div class="product">Sierra Horizon（2026.07.16）</div>
+      <div class="approach">context engineで数日〜数ヶ月にまたがる顧客対応を1つの文脈として繋ぎ、都度の関与ごとにエージェントが次の行動を再判断する</div>
+      <div class="detail">成果報酬型（tokenではなく成果に課金）のモデルと組み合わせることで、単発対話の最適化ではなく関係全体の最適化を狙っている</div>
+      <a href="https://sierra.ai/blog/horizon">📄 一次ソース</a>
     </div>
-    <div class="example">
-      <div class="product">Ada（Playbooks）</div>
-      <div class="approach">ステップごとに適したモデルと範囲を割り当てる設計を公式に明言</div>
-      <div class="detail">「推論の深さか実行速度かではなく、どのステップにどのモデルをどの範囲で使うか」が課題だとブログで述べている</div>
-      <a href="https://www.ada.cx/blog/agentic-ai-customer-experience-playbooks/">📄 一次ソース</a>
-    </div>
-    <div class="takeaway"><strong>示唆:</strong> 会話の中の仕事を分類・検索・生成・トーン調整のように切り分けられるなら、1モデルに全部を担わせる前提を疑う価値がある。粒度はリクエスト単位ではなくサブタスク単位まで下げられる。</div>
+    <div class="takeaway"><strong>示唆:</strong> 『マルチエージェントにすべきか』を検討する前に、自分の課題が空間的な分割（並列サブエージェント）と時間的な継続（長時間軸の文脈保持）のどちらの問題なのかを切り分ける。</div>
   </div>
   <div class="editorial">
     <span class="label">✍️ 編集後記</span>
-    3社の発表に共通するのは、『AIに任せる範囲を広げる』話ではなく『どこを構造で固定し、どこを自然言語の柔軟性に残すか』という線引きの話だという点だ。決定木の全廃でも自由な会話への全面移行でもなく、書く人と検証する仕組みを分けるという地味な設計判断が、結果的に安全性とイテレーション速度の両方を支えている。
+    1年前に『マルチエージェントを作るな』と言った会社が、今は制約付きの2体構成を主力製品にしている。これは方針転換ではなく、同じ診断から出た一貫した結論だ — 問題は『エージェントの数』ではなく『前提の共有と責任範囲の明文化』であり、それさえ設計できれば2体でも3条件を満たす並列でも機能する。エージェント数を増やす前に、まず自分のタスクが本当にこの3条件のどれかに当てはまるのかを疑う姿勢が、今のところ最も再現性の高い判断基準になっている。
   </div>
 </div>
 
 <div class="section">
   <div class="section-title">🔗 今号の動向ピックアップ</div>
-  <div class="quick-link"><a href="https://decagon.ai/blog/aop-the-future-of-cx">Decagon「AOPが描くCXの未来」</a><span class="quick-summary">AOPが自然言語とコードの精度をどう両立させるかを公式にまとめた記事。本号のDecagon事例の背景を補足する。</span></div>
-  <div class="quick-link"><a href="https://sierra.ai/blog/context-engineering-the-key-to-great-agents">Sierra「コンテキストエンジニアリングが優れたエージェントの鍵」</a><span class="quick-summary">エージェントが各瞬間にどの情報へアクセスできるかの設計が性能を左右するという、Sierraのアーキテクチャ思想の別の柱を解説する記事。本号の多層防御・モデル分担と同じ設計哲学の延長にある。</span></div>
-  <div class="quick-link"><a href="https://docs.ada.cx/docs/automation/playbooks">Ada Playbooksのドキュメント</a><span class="quick-summary">Playbooksがガイドライン・トーン・エッジケース処理をどう構造化するかを示す公式ドキュメント。本号で触れたステップ単位のモデル割り当てを支える設計の詳細。</span></div>
+  <div class="quick-link"><a href="https://cognition.com/blog/local-fusion">Fusion、DevinのDesktop・CLIにも展開（Cognition, 2026.09.11）</a><span class="quick-summary">Devin CloudでテストしてきたFusion（lead+sidekickの2体構成）をローカル開発環境に拡大した発表。本文で扱った『分散させず役割を絞る』設計が実運用の主戦場にまで広がったことを示す。</span></div>
+  <div class="quick-link"><a href="https://claude.com/blog/multi-agent-coordination-patterns">マルチエージェント協調パターン5選（Anthropic, 2026.04.10）</a><span class="quick-summary">orchestrator-subagent・generator-verifier・agent teams・message bus・shared stateの5パターンを整理し、まずorchestrator-subagentから始めることを推奨する記事。本文セクション2の判断基準をパターンとして具体化している。</span></div>
+  <div class="quick-link"><a href="https://www.langchain.com/blog/how-and-when-to-build-multi-agent-systems">How and when to build multi-agent systems（LangChain）</a><span class="quick-summary">LangChain自身のフレームワーク設計思想として、いつマルチエージェント化に踏み切るべきかをまとめた記事。AnthropicやCognitionとは別のベンダーが同じ結論（安易な分散を避け境界を先に決める）に至っている点が興味深い。</span></div>
 </div>
 
 <div class="section">
   <div class="section-title">📚 過去号</div>
+  <div class="archive-item"><span class="week">2026-09-24</span><div class="body"><a href="ai-trends/2026-09-24.html">カスタマー対応エージェントの設計は「決定木」から「自然言語手順×コードの二層構造」へ</a><span class="sub">Decagonは決定木を捨て、業務担当者が自然言語で書いた手順を構造化ロジックにする一方、返金などの機微操作だけコードで検証するAOPへ移行し、NG.CASHでは解決率が70%まで向上した。</span></div></div>
   <div class="archive-item"><span class="week">2026-09-22</span><div class="body"><a href="ai-trends/2026-09-22.html">モデルルーティングが開発ツールの既定機能になった — 選ぶのは人間ではなく分類器</a><span class="sub">GitHub Copilotは9月にauto model selectionへ「efficiency/balance/intelligence」の3段階ティアを追加し、Cursorは60万件超の実利用データで学習した分類器（Cursor Router）でモデル選定を自動化した。</span></div></div>
   <div class="archive-item"><span class="week">2026-09-19</span><div class="body"><a href="ai-trends/2026-09-19.html">エージェントの権限設計は「毎回確認」から「境界を先に固定する」へ移った</a><span class="sub">OpenAI CodexとAnthropicのClaude Codeは、サンドボックスの制限強度と確認ダイアログの要否を別軸にし、境界内の行為は原則自動承認する設計にそろえた。</span></div></div>
   <div class="archive-item"><span class="week">2026-09-17</span><div class="body"><a href="ai-trends/2026-09-17.html">コード検索の設計が三方向に割れた — ベクトルDBを捨てる陣営、極める陣営、置き換える陣営</a><span class="sub">Claude Code は埋め込みベースのRAGを捨て、grep/globの反復探索に完全移行——再インデックスの陳腐化とコードアップロードのセキュリティリスクを避けるため。</span></div></div>
@@ -180,7 +187,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 </div>
 
 <footer>
-  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="data/ai-trends/2026-09-24.json">data/ai-trends/2026-09-24.json</a>（このページは JSON からの生成物）</p>
+  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="data/ai-trends/2026-09-26.json">data/ai-trends/2026-09-26.json</a>（このページは JSON からの生成物）</p>
   <p style="margin-top:.5rem"><a href="./">📰 日刊ダイジェストに戻る</a></p>
 </footer>
 </div>
