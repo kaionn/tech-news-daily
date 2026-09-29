@@ -66,7 +66,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 <div class="container">
 <header>
   <h1>🧠 AI プロダクト動向</h1>
-  <p class="date">2026-09-22 発行（読了 6 分）</p>
+  <p class="date">2026-09-29 発行（読了 6 分）</p>
   <p class="tagline">実プロダクトのアーキテクチャ・使用例から AI 開発の現在地を週 3 回・1 号 1 テーマで深掘り</p>
   <nav class="site-nav">
     <a href="../">📰 日刊ダイジェスト</a>
@@ -77,96 +77,84 @@ footer a{color:var(--primary-500);text-decoration:none}
 </header>
 
 <div class="theme-hero">
-  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">MODEL-ROUTING</span></span>
-  <h2>モデルルーティングが開発ツールの既定機能になった — 選ぶのは人間ではなく分類器</h2>
-  <p class="lede">2026年に入り、複数のAIコーディングツールが『どのモデルを使うか』をユーザーの選択から切り離した。GitHub Copilotは9月にコスト/品質の3段階ティアを追加し、Cursorは60万件超の実利用データで学習した分類器にモデル選定を任せるCursor Routerを投入した。背景にあるのは、開発者の多くが単一モデルを固定して使い続け、単純な作業まで最上位モデルの価格で処理しているという非効率だ。ただし『どの基準で振り分けるか』の設計は各社で割れており、満足度を学習する方式と、品質差分の許容範囲を管理者が数値で設定する方式が併存している。</p>
+  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">AGENT-MEMORY</span></span>
+  <h2>エージェントの長期記憶は「要約」をやめた — 編集可能なファイル、共有された手順、非破壊のグラフへ</h2>
+  <p class="lede">個人アシスタントの記憶は「会話の要約」ではなく「編集可能な事実の集合」に置き換わりつつある。2026年8月、AnthropicはClaudeの記憶を会話終了後の要約ではなく、対話中にトピックごとのファイルへ書き込む方式に切り替えた。同年9月にはCursorが、プロジェクト単位でエージェント群が学んだ手順を共有ファイルに蓄積する仕組みを公開した。個人の事実、プロジェクトの手順、監査可能な事実の履歴——記憶の対象が違えば選ぶべき構造も違う。今号はその使い分けを、具体的な実装から追う。</p>
 </div>
 
 <div class="tldr">
   <div class="label">TL;DR — 3 行で</div>
   <ul>
-    <li>GitHub Copilotは9月にauto model selectionへ「efficiency/balance/intelligence」の3段階ティアを追加し、Cursorは60万件超の実利用データで学習した分類器（Cursor Router）でモデル選定を自動化した。</li>
-    <li>Cursor Routerはユーザー満足度を目的関数に学習するのに対し、Amazon Bedrock Intelligent Prompt Routingは同一モデルファミリー内で許容する品質差分をパーセンテージで管理者が設定する、対照的な設計を取る。</li>
-    <li>Not Diamond Codeのようなコーディングエージェント向けルーターは、モデルを切り替えるとプロンプトキャッシュが切れてコストが増える点まで考慮し、切り替えの得失をセッション単位で計算する。</li>
+    <li>Claudeは会話終了後の要約をやめ、対話中にトピック単位のファイルへ直接書き込み、ユーザーが個別に編集できる方式に切り替えた。</li>
+    <li>Cursor Projectsは「個人の事実」ではなく「学んだ手順」を記憶の対象にし、コーディネーターとサブエージェント群がクラウド上の共有ファイルに蓄積し続ける。</li>
+    <li>Zepのようなフレームワーク層は「いつ真だったか」を保持する時間軸付きグラフを採用し、フラットな要約では扱えない監査要件に応える。</li>
   </ul>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 1: モデル選択が『人間の設定』から『毎リクエストの自動判定』になった</div>
+  <div class="section-title">📐 パターン 1: 個人アシスタントの記憶は「要約」から「編集可能な事実」へ</div>
   <div class="theme-section">
-    <p>従来、開発者はチャットUIやCLIでモデルを1つ選び、単純な補完にも複雑なバグ診断にも同じモデルを使い続けてきた。GitHub CopilotとCursorはこの前提を崩し、リクエストごとにタスクの複雑さを評価してモデルを割り当てる層を標準機能として組み込んだ。</p><p>転換の理由は非対称なコスト構造にある。単純なファイル検索や定型的な補完に最上位モデルを使っても品質は大差なく、コストと待ち時間だけが増える。逆に複雑なバグ診断を安価なモデルに回すと品質が落ちる。この非対称性を人間が都度判断するのは非効率なため、判定自体をモデル選択の外側、つまりシステム側に出す設計へ収束した。</p>
+    <p>2026年8月、Anthropicは Claude の記憶方式を変更した。それまで主流だった「会話終了後にモデルが全体を要約し、その要約を次回の context に差し込む」方式をやめ、対話中にトピックごとのファイルへ直接書き込むようにした。ユーザーは Memory 設定で Topics 一覧からファイルを個別に読み書き・削除でき、会社名の誤りのような事実を1ファイル訂正するだけで、以降の全会話に反映される。</p><p>この設計転換の背景には、要約ベースの記憶が抱えていた「訂正が効かない」問題がある。要約は生成のたびに作り直されるため、ユーザーが一度間違いを指摘しても次の要約で再び同じ誤りが復元されかねない。Letta が Sleep-Time Compute で採った解法は少し異なり、応答を返す主エージェントとは別に、アイドル時間帯だけ動く「Sleep-Time エージェント」が非同期に <code>memory block</code> を書き換える。目的は同じく編集の質を上げることだが、対話を止めずに記憶の整理コストを裏側に逃がす点に重心がある。</p>
     <div class="example">
-      <div class="product">GitHub Copilot（auto model selection）</div>
-      <div class="approach">efficiency/balance/intelligenceの3段階ティアを導入し、同一のモデル群からプロンプトごとに最適なモデルを選ぶ</div>
-      <div class="detail">3ティアとも使えるモデル集合は同じで、ティアは『コストと品質のどちらに倍率を振るか』の設定に過ぎない。課金は実際に選ばれたモデルの単価で行われる</div>
-      <a href="https://github.blog/changelog/2026-09-14-configure-cost-and-quality-in-copilot-auto-model-selection/">📄 一次ソース</a>
+      <div class="product">Claude（Anthropic）</div>
+      <div class="approach">対話中にトピック単位のファイルへ直接書き込み、ユーザーが個別に編集・削除できる</div>
+      <div class="detail">会話終了後の要約生成をやめたことで、一度の訂正が以降の全会話に反映されるようになった。同時期にClaude ChatとCoworkの記憶も統合された。</div>
+      <a href="https://claude.com/blog/claudes-memory-works-everywhere-and-you-decide-whats-in-it">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">Cursor（Cursor Router）</div>
-      <div class="approach">60万件超の実利用データで学習した分類器が、クエリ・コンテキスト・タスクの複雑さを見てモデルを割り振る</div>
-      <div class="detail">Auto IntelligenceモードはFableと同等の満足度を約60%低いコストで、Auto BalanceはOpus 4.8を上回る満足度を約36%低いコストで達成したと公表している</div>
-      <a href="https://cursor.com/blog/router">📄 一次ソース</a>
+      <div class="product">Letta（旧MemGPT, Sleep-Time Compute）</div>
+      <div class="approach">応答を返す主エージェントとは別に、アイドル時間に動く専用エージェントが非同期にメモリブロックを編集する</div>
+      <div class="detail">会話をブロックせずに記憶の整理・矛盾解消を行える設計で、主エージェントより低速・高精度なモデルを整理役に充てられる。</div>
+      <a href="https://www.letta.com/blog/sleep-time-compute/">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> モデル選択UIを作るなら、ユーザーに『賢いモデル/安いモデル』を選ばせる二択にせず、タスクの特徴量から自動判定する層を挟む設計にする方が、この非対称なコスト構造を活かせる。</div>
+    <div class="takeaway"><strong>示唆:</strong> エンドユーザーに記憶の中身を見せて訂正させたいならトピックファイル方式、対話のレイテンシを犠牲にせず記憶品質を上げたいなら非同期のバックグラウンド書き換え方式——ここは要件で決まる。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 2: 判定基準の設計は『満足度学習型』と『品質差分閾値型』に割れた</div>
+  <div class="section-title">📐 パターン 2: プロジェクト単位のエージェントは「学んだ手順」を共有ファイルに貯める</div>
   <div class="theme-section">
-    <p>モデルを振り分ける基準の作り方には、少なくとも2つの流儀がある。Cursor Routerはユーザーの実利用ログから『どちらのモデルの出力が好まれたか』を学習し、満足度を目的関数にする。一方Amazon Bedrock Intelligent Prompt Routingは、同一モデルファミリー内の2モデル間で許容する『応答品質の差』をパーセンテージで管理者が指定し、その閾値内なら安いモデルへ倒す。</p><p>この違いはプロダクトの立ち位置を反映している。開発者向けエージェントは出力の『体感の良さ』が離脱に直結するため主観指標を最適化する。一方クラウド基盤は多数のテナントが多様な用途で使うため、管理者が数値で制御できるノブを用意する方が運用しやすい。同じ『安いモデルに倒す』という結論でも、判定基準の設計は製品が誰向けかで変わる。</p>
+    <p>Cursor が2026年9月10日に公開した Projects は、記憶の対象を「個人の事実」から「プロジェクトの手順」に移した。コード自体は書かないコーディネーターエージェントが配下のサブエージェント群にタスクを振り、各エージェントが調べたコードベースの構造やテスト手順、作業の進め方の好みを共有ファイル群に書き足していく。あるエージェントがサービスのテスト方法を突き止めれば、以降に立ち上がる別のエージェントは同じ調査をやり直さずに済む。</p><p>この共有ファイルはクラウド上のマシンで永続し、ローカルの端末を閉じても止まらない。Slack やPRの監視、スケジュール実行のように、ユーザーが毎回プロンプトを打たなくても再開できる運用を前提にしているためで、Cursor は Projects を主に使うユーザーはマージするPR数が6倍になったと報告している。個人向け記憶が「誰か一人のための事実」を保持するのに対し、こちらは複数のエージェントインスタンスが横断で参照する共有ストックである点が構造的に異なる。</p>
     <div class="example">
-      <div class="product">Cursor（Cursor Router）</div>
-      <div class="approach">オンラインA/Bテストでユーザー満足度を主指標にモデル選択ロジックを評価・学習する</div>
-      <div class="detail">本番トラフィックでのA/Bテストを通じ、満足度を落とさない範囲でより安価なモデルに寄せるよう継続的に調整する</div>
-      <a href="https://cursor.com/blog/router">📄 一次ソース</a>
+      <div class="product">Cursor Projects</div>
+      <div class="approach">コーディネーター配下のサブエージェント群が学んだコードベース知識・テスト手順・作業の好みを、クラウド上で永続する共有ファイルに蓄積する</div>
+      <div class="detail">個人の事実ではなくプロジェクトの運用知識を記憶の対象にしている点が個人アシスタント型の記憶と異なる。Projects利用者はPRのマージ数が6倍という数字も公表されている。</div>
+      <a href="https://cursor.com/blog/projects">📄 一次ソース</a>
     </div>
-    <div class="example">
-      <div class="product">Amazon Bedrock Intelligent Prompt Routing</div>
-      <div class="approach">同一モデルファミリー内の2モデル間で許容する応答品質の差分を管理者がパーセンテージで設定し、閾値内なら安価なモデルへルーティングする</div>
-      <div class="detail">Anthropicファミリーで最大56%、RAG用途のデータセットでは平均63.6%のコスト削減を確認したと報告している</div>
-      <a href="https://aws.amazon.com/blogs/machine-learning/use-amazon-bedrock-intelligent-prompt-routing-for-cost-and-latency-benefits/">📄 一次ソース</a>
-    </div>
-    <div class="takeaway"><strong>示唆:</strong> 社内向けにルーティングを組むなら、ユーザー体験に直結するプロダクトは満足度ベースの学習型、コスト管理が主目的の基盤側は閾値を数値で握れる設定型、と用途で設計方針を変えた方が運用しやすい。</div>
+    <div class="takeaway"><strong>示唆:</strong> エージェントが単発の会話ではなく継続的にコードベースやシステムを運用する用途なら、記憶すべきは「ユーザーの好み」ではなく「エージェント自身が積み上げた運用知識」であり、複数インスタンス間で共有できる構造にする必要がある。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 3: モデルを切り替えるとキャッシュが切れる — ルーティングはセッション単位のコスト計算になった</div>
+  <div class="section-title">📐 パターン 3: 「いつ真だったか」を残す必要があるなら、要約ではなくグラフを選ぶ</div>
   <div class="theme-section">
-    <p>モデル振り分けは1リクエスト単体の損得では決まらない。プロンプトキャッシュはモデルごとに管理されており、会話の途中でモデルを切り替えるとそれまで蓄積したキャッシュ済みプレフィックスが失効し、次のリクエストは丸ごとキャッシュミスとして課金される。安いモデルへの切り替えで得るはずのコスト削減が、キャッシュ再構築のコストで相殺される場合がある。</p><p>GitHub CopilotとNot Diamond Codeは、この『切り替えの得失』をルーティング判断そのものに組み込んでいる。単発のリクエストではなく、セッション全体でのコストを最小化する設計に踏み込んでいる点で、リクエストごとに最安モデルを選ぶだけの初期の実装とは一段階違う。</p>
+    <p>Zepの Graphiti エンジンは、会話ログと構造化されたビジネスデータの両方を、時間軸を持つ知識グラフとして統合する。ノードとエッジで事実を表現し、event time（その事実がいつ現実に起きたか）と ingestion time（システムがいつそれを取り込んだか）を別々に持たせることで、過去のある時点で何が正しいとされていたかまで遡って再現できる。事実は上書きされるのではなく、有効期間が終わった時点で invalid と記録されるだけで、履歴自体は消えない。</p><p>フラットな要約やトピックファイルは「今何が正しいか」には強いが、「いつからいつまで正しかったか」は原理的に表現しづらい——要約し直すたびに古い版は失われるためだ。監査や契約変更の追跡のように、過去の状態そのものが問い合わせの対象になる業務データを扱うエージェントでは、この非破壊性が要件になる。Zepはこの設計でDeep Memory Retrievalベンチマークにおいて既存手法を上回る結果を報告している。</p>
     <div class="example">
-      <div class="product">GitHub Copilot（auto model selection）</div>
-      <div class="approach">モデル切り替えのタイミングを『自然なキャッシュの境界』に合わせ、無駄なキャッシュ関連コストの発生を避ける</div>
-      <div class="detail">タスクの評価だけでなく、既存のキャッシュ済みコンテキストを崩さないタイミングを選んでルーティングする</div>
-      <a href="https://github.blog/changelog/2026-07-01-copilot-cli-auto-model-selection-routes-based-on-task/">📄 一次ソース</a>
+      <div class="product">Zep（Graphiti）</div>
+      <div class="approach">会話データと業務データを時間軸付きの知識グラフに統合し、event time / ingestion timeの二重タイムスタンプで事実の有効期間を管理する</div>
+      <div class="detail">事実を削除・上書きせずinvalid化するだけなので、過去のある時点で何が真だったかを後から再現できる。Deep Memory Retrievalベンチマークで既存手法を上回る結果を報告。</div>
+      <a href="https://blog.getzep.com/zep-a-temporal-knowledge-graph-architecture-for-agent-memory/">📄 一次ソース</a>
     </div>
-    <div class="example">
-      <div class="product">Not Diamond Code</div>
-      <div class="approach">セッション単位でモデル切り替えのコストとキャッシュ温存効果を比較し、高いモデルを維持する場合と積極的に切り替える場合を使い分ける</div>
-      <div class="detail">Poly-SWE-BenchでOpus 4.8相当の品質を保ちながら39%、LongCodeQAでは61%のコスト削減を報告。Anthropic以外のモデルを混在させると削減率は66%まで伸びるという</div>
-      <a href="https://www.notdiamond.ai/blog/not-diamond-code-intelligent-model-routing-for-coding-agents">📄 一次ソース</a>
-    </div>
-    <div class="takeaway"><strong>示唆:</strong> 会話やセッションが続くエージェントにモデルルーティングを組むなら、リクエスト単体の最安モデル選びではなく、キャッシュ再構築コストを含めたセッション全体の期待コストで判断する設計にする。</div>
+    <div class="takeaway"><strong>示唆:</strong> 「今の状態」だけでよいなら要約やトピックファイルで十分だが、監査・コンプライアンスのように過去の状態そのものが問われる用途では、非破壊で時間を刻めるグラフ構造を最初から選んでおく方が後から作り直すより安い。</div>
   </div>
   <div class="editorial">
     <span class="label">✍️ 編集後記</span>
-    3つの実装に共通するのは、『モデルを選ぶ』という判断が、プロンプト設計と同じ扱いの人間の作業から、システムが毎リクエスト下す推論へ格下げされたことだ。次の分岐点は、この判定ロジック自体をどこまでユーザーに開示するかに移るだろう——ブラックボックスの分類器に委ねたコストと品質のトレードオフを、誰がどう検証するかという問題はまだ手つかずのままだ。
+    2026年の記憶実装が割れているのは「ベクトルDBを使うかどうか」ではなく、「いつ記憶を書き換えるか」と「壊れた記憶をどう訂正するか」だ。ライブ書き込み、非同期のバックグラウンド処理、非破壊のグラフ——どれも生の会話ログをそのまま貯めない点では一致している。次に来る論点は、この3層をまたいで記憶を移し替えるコスト——たとえば個人の記憶をプロジェクトの記憶に昇格させる境界線——になるはずだ。
   </div>
 </div>
 
 <div class="section">
   <div class="section-title">🔗 今号の動向ピックアップ</div>
-  <div class="quick-link"><a href="https://docs.github.com/en/copilot/concepts/models/auto-model-selection">About Copilot auto model selection</a><span class="quick-summary">efficiency/balance/intelligenceの3ティアを含む設定項目を解説する公式ドキュメント。本文のGitHub Copilotのティア設計の一次情報。</span></div>
-  <div class="quick-link"><a href="https://www.lmsys.org/blog/2024-07-01-routellm/">RouteLLM: An Open-Source Framework for Cost-Effective LLM Routing</a><span class="quick-summary">LMSYSが公開した、人間の選好データからルーターを学習するOSSフレームワークの研究記事。本文のCursor Routerが採る『満足度学習型』ルーティングの源流にあたる。</span></div>
-  <div class="quick-link"><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-routing.html">Understanding intelligent prompt routing in Amazon Bedrock</a><span class="quick-summary">品質差分の閾値設定やペアで組めるモデルファミリーの制約を詳述する公式ユーザーガイド。本文のBedrockの『品質差分閾値型』設計の仕様面を補足する。</span></div>
+  <div class="quick-link"><a href="https://openai.com/index/chatgpt-memory-dreaming/">ChatGPTの記憶システム「Dreaming」</a><span class="quick-summary">OpenAIが2026年6月に導入した、バックグラウンドで記憶の要約を再合成し続ける仕組み。「7月にシンガポールへ行く予定」を旅行後に自動で過去形へ書き換えるなど、Lettaの Sleep-Time Computeと同じく非同期の記憶整理という設計思想を共有する。</span></div>
+  <div class="quick-link"><a href="https://www.langchain.com/blog/launching-long-term-memory-support-in-langgraph">LangGraphの長期記憶ストア</a><span class="quick-summary">LangChainが公式発表した、スレッドをまたいで参照できる長期記憶用のstore機能。namespace区切りのJSONドキュメントというフラットな構造を選んでおり、本文中のグラフ型（Zep）や共有ファイル型（Cursor）とは異なる第三の選択肢にあたる。</span></div>
+  <div class="quick-link"><a href="https://www.letta.com/blog/memory-blocks/">LettaのMemory Blocks</a><span class="quick-summary">Sleep-Time Computeが書き換える対象である「メモリブロック」の設計思想を解説する記事。エージェントの記憶をコンテキストウィンドウ内に固定表示される編集可能な単位として扱う発想は、本文のClaudeのトピックファイルと近い。</span></div>
 </div>
 
 <div class="section">
   <div class="section-title">📚 過去号</div>
-  <div class="archive-item"><span class="week">2026-09-29</span><div class="body"><a href="../ai-trends.html">エージェントの長期記憶は「要約」をやめた — 編集可能なファイル、共有された手順、非破壊のグラフへ</a><span class="sub">Claudeは会話終了後の要約をやめ、対話中にトピック単位のファイルへ直接書き込み、ユーザーが個別に編集できる方式に切り替えた。</span></div></div>
   <div class="archive-item"><span class="week">2026-09-26</span><div class="body"><a href="2026-09-26.html">マルチエージェント協調は「並列に投げる」から「役割を絞った2体」に収束した — Fusion 型アーキテクチャが解いた失敗伝播問題</a><span class="sub">Cognitionは「分散マルチエージェントは前提の食い違いで失敗が伝播する」と自ら警告した後、lead+sidekickの2体だけに絞った制約付き構成「Fusion」を主力製品化し、2026年9月にローカル環境まで展開した。</span></div></div>
   <div class="archive-item"><span class="week">2026-09-24</span><div class="body"><a href="2026-09-24.html">カスタマー対応エージェントの設計は「決定木」から「自然言語手順×コードの二層構造」へ</a><span class="sub">Decagonは決定木を捨て、業務担当者が自然言語で書いた手順を構造化ロジックにする一方、返金などの機微操作だけコードで検証するAOPへ移行し、NG.CASHでは解決率が70%まで向上した。</span></div></div>
+  <div class="archive-item"><span class="week">2026-09-22</span><div class="body"><a href="2026-09-22.html">モデルルーティングが開発ツールの既定機能になった — 選ぶのは人間ではなく分類器</a><span class="sub">GitHub Copilotは9月にauto model selectionへ「efficiency/balance/intelligence」の3段階ティアを追加し、Cursorは60万件超の実利用データで学習した分類器（Cursor Router）でモデル選定を自動化した。</span></div></div>
   <div class="archive-item"><span class="week">2026-09-19</span><div class="body"><a href="2026-09-19.html">エージェントの権限設計は「毎回確認」から「境界を先に固定する」へ移った</a><span class="sub">OpenAI CodexとAnthropicのClaude Codeは、サンドボックスの制限強度と確認ダイアログの要否を別軸にし、境界内の行為は原則自動承認する設計にそろえた。</span></div></div>
   <div class="archive-item"><span class="week">2026-09-17</span><div class="body"><a href="2026-09-17.html">コード検索の設計が三方向に割れた — ベクトルDBを捨てる陣営、極める陣営、置き換える陣営</a><span class="sub">Claude Code は埋め込みベースのRAGを捨て、grep/globの反復探索に完全移行——再インデックスの陳腐化とコードアップロードのセキュリティリスクを避けるため。</span></div></div>
   <div class="archive-item"><span class="week">2026-09-15</span><div class="body"><a href="2026-09-15.html">エージェント実行基盤のマネージド化 — 3社が同時に「実行環境を貸す側」に回った</a><span class="sub">OpenAIが9月10日、Codexハーネスをagents/environments/sessions/eventsの4プリミティブに集約した Agents API を公開ベータで公開。基盤自体の追加課金はなくトークン・ツール実費のみ。</span></div></div>
@@ -194,7 +182,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 </div>
 
 <footer>
-  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="../data/ai-trends/2026-09-22.json">data/ai-trends/2026-09-22.json</a>（このページは JSON からの生成物）</p>
+  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="../data/ai-trends/2026-09-29.json">data/ai-trends/2026-09-29.json</a>（このページは JSON からの生成物）</p>
   <p style="margin-top:.5rem"><a href="../">📰 日刊ダイジェストに戻る</a></p>
 </footer>
 </div>
