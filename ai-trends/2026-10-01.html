@@ -66,7 +66,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 <div class="container">
 <header>
   <h1>🧠 AI プロダクト動向</h1>
-  <p class="date">2026-07-28 発行（読了 6 分）</p>
+  <p class="date">2026-10-01 発行（読了 5 分）</p>
   <p class="tagline">実プロダクトのアーキテクチャ・使用例から AI 開発の現在地を週 3 回・1 号 1 テーマで深掘り</p>
   <nav class="site-nav">
     <a href="../">📰 日刊ダイジェスト</a>
@@ -77,81 +77,81 @@ footer a{color:var(--primary-500);text-decoration:none}
 </header>
 
 <div class="theme-hero">
-  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">AGENT-MEMORY</span></span>
-  <h2>エージェントのメモリ設計 — 保存容量ではなく「書き込みの境界線」を設計する</h2>
-  <p class="lede">エージェントが複数セッションにまたがって学習・継続動作するようになるにつれ、「何を覚えておくか」の設計が改めて焦点になっている。Anthropic は Claude Managed Agents にファイルベースの長期メモリと監査ログを追加し、Cursor はツール定義や過去の会話を常駐させず必要な時だけ取得させる構成でトークン消費を46.9%削減し、OpenAI は Agents SDK の実装例で短期メモリと長期メモリの境界を書き込み時のガードレールで引いている。3社の手法を並べると、メモリ設計が「保存容量を増やす」話ではなく「どこで区切り、何を書かせないか」を先に決める設計行為になっていることが見えてくる。</p>
+  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">AGENT-PERSISTENCE</span></span>
+  <h2>エージェントは「呼び出すたびに消える」から「状態を持ち続ける」へ — OpenAI・Google・Alibabaが同時に永続化レイヤーを足した</h2>
+  <p class="lede">この1週間で、OpenAIの常駐エージェント「dots」、GoogleのInteractions API正式版、AlibabaのAgentCoreが相次いで発表された。共通するのは、エージェントを「リクエストのたびにゼロから起動するプロセス」ではなく「状態を保持し続ける存在」として設計し直した点だ。会話もサンドボックスも組織知識も、セッションをまたいで持ち越す前提に変わりつつある。消費者向け・開発者向け・企業向けという異なる市場でほぼ同時にこの設計へ収束したことが今号の論点だ。</p>
 </div>
 
 <div class="tldr">
   <div class="label">TL;DR — 3 行で</div>
   <ul>
-    <li>Anthropic は Claude Managed Agents の記憶をファイルとして保存し、監査ログ・ロールバック・スコープ別パーミッションを標準機能として public beta で提供している</li>
-    <li>Cursor はツール定義や過去の会話をデフォルトで常駐させず、grep/tail/セマンティック検索で必要な時だけ取得させる設計により、MCPツール呼び出し時のエージェント総トークン消費を46.9%削減したと報告している</li>
-    <li>OpenAI の Agents SDK 実装例は、長期メモリへの書き込みを「恒常的に成り立つか」「実際に挙動を変えるか」の2条件でガードし、セッションメモがグローバルメモに優先する明示的な優先順位ルールで汚染を防いでいる</li>
+    <li>OpenAIの「dots」はユーザーごとに専用クラウドコンピュータを割り当て、ChatGPT・Slack・Teamsを横断して会話間の文脈を保持する常駐エージェント。</li>
+    <li>GoogleのInteractions APIはGA版で「サーバー側状態」を一等機能にし、有料ティアでは過去のやり取りを55日間保持できる。</li>
+    <li>AlibabaのAgentCoreは文書・業務システム・チャット履歴を単一の永続コンテキスト層に統合し、知識集約タスクのトークン消費を最大67%削減すると謳う。</li>
   </ul>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 1: ファイルベースの長期メモリと監査ログ</div>
+  <div class="section-title">📐 パターン 1: OpenAI dots — エージェントに「専用コンピュータ」を持たせる</div>
   <div class="theme-section">
-    <p>Claude Managed Agents 向けに2026年4月23日に公開された Memory 機能は、記憶を構造化データベースではなく通常のファイルとして保存する設計を取る。エージェントは既存の bash・コード実行能力をそのまま使って記憶を読み書きし、org 全体で共有する読み取り専用ストアとユーザーごとの読み書き可能なストアを使い分けられる。どの変更がどのエージェント・どのセッションに由来するかを追う監査ログが標準で付き、過去バージョンへのロールバックや履歴からの redact も可能だ。</p><p>この設計が選ばれたのは、ベクトル DB や専用メモリストアを新たに構築せずに済むからだ。コーディングエージェントはすでにファイルシステム操作を前提に訓練・運用されており、「ファイルとして保存する」は既存の道具立てに乗るだけで実装できる。逆に監査ログとロールバックを標準機能にしたのは、エンタープライズ導入で「エージェントが何を学習し、なぜその判断に至ったか」を追跡できないと承認が下りないという実務上の制約が先にあったからだ。</p>
+    <p>dots はユーザーごとに専用のクラウドコンピュータとブラウザを割り当てられる常駐エージェントで、会話を終えてもプロセスは止まらない。ChatGPT・Slack・Microsoft Teams・音声通話のどこからアクセスしても同じ dot につながり、与えたゴールに向けて会話の合間も作業を進め続ける。</p><p>この設計が成り立つのは、状態を「会話」ではなく「エージェント自身」に紐づけたからだ。従来のチャットボットはセッションが終われば文脈も消える前提だったが、常駐させるなら文脈はエージェント側の永続状態として持たせるほかない。消費者向けプロダクトが先にこの転換に踏み切った。</p>
     <div class="example">
-      <div class="product">Claude Managed Agents Memory（Anthropic 公式ブログ）</div>
-      <div class="approach">記憶をファイルとして保存し、監査ログ・ロールバック・スコープ別パーミッションを標準機能として提供</div>
-      <div class="detail">Rakuten は初回パス誤り率97%減・コスト27%減・レイテンシ34%減、Wisedocs は書類検証の速度を30%改善したと公式に報告している</div>
-      <a href="https://claude.com/blog/claude-managed-agents-memory">📄 一次ソース</a>
+      <div class="product">OpenAI dots（ChatGPT）</div>
+      <div class="approach">ユーザーごとに専用クラウドコンピュータを割り当て、チャネルをまたいで文脈と作業を継続させる</div>
+      <div class="detail">常駐エージェントという設計の消費者向け実例として最も具体的で、提供チャネル・料金まで公式発表に明記されている</div>
+      <a href="https://openai.com/index/introducing-dots/">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> コーディングエージェント基盤の上に長期メモリを足すなら、専用DBより先にファイル＋監査ログの構成を検討する。エンタープライズ導入の障壁は記憶の性能より追跡可能性であることが多い。</div>
+    <div class="takeaway"><strong>示唆:</strong> 単発の応答botではなく「担当者」として設計するなら、文脈をユーザーのセッションではなくエージェント側の永続状態として持たせる構造を最初から選ぶ。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 2: 静的に持たせず、必要な分だけ取りに行かせる</div>
+  <div class="section-title">📐 パターン 2: Google Interactions API GA — 「サーバー側状態」が正式な一等機能になった</div>
   <div class="theme-section">
-    <p>Cursor が公開した dynamic context discovery は、ツール定義や過去の会話、MCPサーバーのツール一覧をあらかじめすべてコンテキストに詰め込むのではなく、最小限の手がかりだけを常駐させ、必要になった時にエージェント自身が grep や <code>tail</code>、セマンティック検索で取りに行く設計だ。長い shell 出力や MCP の応答はファイルに書き出し、エージェントが <code>tail</code> で必要な分だけ読み進める。要約で失われた過去の会話も、検索可能なファイルとして残すことで後から引き出せるようにしている。</p><p>この方式が効くのは、MCPサーバーの数が増えるほど全ツール定義を毎回コンテキストに載せるコストが線形に膨らみ、しかも大半のターンでは使わないツールの説明が「使われない高コストな常駐者」になるからだ。Cursor は MCP ツールを呼び出したランに限定した計測で、この方式がエージェントの総トークン消費を46.9%削減したと公式に報告している。</p>
+    <p>GoogleはInteractions APIを正式版に引き上げ、サーバー側状態・バックグラウンド実行・ツール混在を単一エンドポイントの標準機能にした。有料ティアでは過去のやり取りを55日間保持でき、開発者は会話のたびに文脈を組み立て直す必要がなくなる。Antigravityのような長時間稼働するコーディングエージェントは、このAPI上でホスト型Linuxサンドボックスを使い続けることで、セッションをまたいでプロンプトキャッシュを効かせられるようになった。</p><p>開発者向けAPIがここまで踏み込んで状態管理を引き受けるのは珍しい。長時間タスクを任せるエージェントほど「毎回コンテキストを組み立て直すコスト」がボトルネックになるという共通認識が背景にあり、状態管理をアプリ側ではなくAPI側に寄せる設計が持続化パターンとして定着しつつある。</p>
     <div class="example">
-      <div class="product">Cursor（公式エンジニアリングブログ）</div>
-      <div class="approach">スキル定義・MCPツール一覧・過去の会話をデフォルトで最小化し、grep/tail/セマンティック検索でエージェントに必要な分だけ取得させる</div>
-      <div class="detail">MCPツールを呼び出したランに限定した計測で、動的発見によりエージェントの総トークン消費を46.9%削減したと報告している</div>
-      <a href="https://cursor.com/blog/dynamic-context-discovery">📄 一次ソース</a>
+      <div class="product">Google Interactions API（GA）</div>
+      <div class="approach">サーバー側状態・バックグラウンド実行を一等機能にし、有料ティアで55日間の履歴保持を提供する</div>
+      <div class="detail">開発者向けAPIが状態管理を自前実装させずに引き受けた点が、持続化アーキテクチャの開発者向け到達点として代表的</div>
+      <a href="https://blog.google/innovation-and-ai/technology/developers-tools/interactions-api-general-availability/">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> ツール定義やドキュメントを「念のため全部常駐させる」のをやめる。特に MCP サーバーが増えてきたら、ツール一覧はインデックスだけ持たせて詳細は呼び出し時に取得させる設計に切り替える。</div>
+    <div class="example">
+      <div class="product">Google Antigravity（antigravity-preview-09-2026）</div>
+      <div class="approach">Googleホストの隔離Linuxサンドボックス内で長時間稼働し、ランタイムハーネスのプロンプトキャッシュ最適化で再計算コストを抑える</div>
+      <div class="detail">Interactions APIの永続状態の上に構築された実例で、長時間セッションにおけるキャッシュ設計の重要性を示す</div>
+      <a href="https://ai.google.dev/gemini-api/docs/models/antigravity-preview-09-2026">📄 一次ソース</a>
+    </div>
+    <div class="takeaway"><strong>示唆:</strong> 長時間稼働するエージェントを作るなら、状態保持をアプリ側で自前実装する前に、使っているAPIがサーバー側状態・バックグラウンド実行を既に提供していないか確認する。車輪の再発明を避けられる。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 3: 短期はセッション、長期はグローバル — 境界は「書く前のチェック」で引く</div>
+  <div class="section-title">📐 パターン 3: Alibaba AgentCore — 組織知識を「エージェントごと」から「共有の永続層」へ</div>
   <div class="theme-section">
-    <p>OpenAI Agents SDK の実装例は、状態を Profile（構造化された既知情報）・Global Memory（セッションをまたぐ長期メモ）・Session Memory（今回限りの短期メモ）・Trip History に分けて管理する。長期メモへの書き込みは save_memory_note ツールを経由し、「複数回の利用を通じて成り立ちそうか（durable）」「実際にレコメンドや制約を変えるか（actionable）」の2条件を満たした場合のみ保存を許可する。セッション終了時には LLM 呼び出しでセッションメモをグローバルメモへ統合し、重複排除と競合解消（新しい情報を優先）を行う。会話履歴そのものの管理には、直近 N ターンだけを残す Trimming と、古いターンを要約に圧縮する Summarizing の2方式があり、前者は決定的でレイテンシ0、後者は長期文脈を保てる代わりに要約起因の情報汚染リスクを持つとされる。</p><p>この二層設計と書き込み時ガードレールが必要になるのは、「今回だけ窓側の席がいい」のような一回限りの要望と、「いつも通路側」のような恒常的な好みを同じ場所に書くと、次回以降のレコメンドが一回限りの要望に汚染されるからだ。OpenAI の実装は「セッションメモがグローバルメモに優先する」という明示的な優先順位ルールを持たせることで、この汚染を読み出し時ではなく書き込み・統合時に処理している。</p>
+    <p>AlibabaがApsara Conferenceで発表したAgentCoreは、エージェントのビルド・実行・運用のライフサイクル全体を管理する企業向けプラットフォームだ。中核にあるAgent Context（Context Engine）は、企業の文書・業務システム・チャット履歴・マルチモーダルデータを単一の永続コンテキスト基盤に統合し、個々のエージェントが都度データを読み込み直さずに参照できるようにする。</p><p>複数のエージェントが同じ組織知識を使う企業ユースケースでは、エージェントごとにコンテキストを持たせると同じ情報を何度も処理する無駄が積み上がる。Alibabaはこれを知識集約タスクでトークン消費を最大67%削減できると謳っており、永続化を単なる利便性ではなくコスト構造の問題として扱っている点が特徴だ。</p>
     <div class="example">
-      <div class="product">OpenAI Agents SDK（公式Cookbook, context personalization）</div>
-      <div class="approach">Global/Session の二層メモリを save_memory_note の durable/actionable チェックと統合時の重複排除・競合解消で運用</div>
-      <div class="detail">「SESSION memory overrides GLOBAL memory for this trip when they conflict」という明示的な優先順位ルールを実装コードごと公開している</div>
-      <a href="https://developers.openai.com/cookbook/examples/agents_sdk/context_personalization">📄 一次ソース</a>
+      <div class="product">Alibaba Cloud AgentCore / Agent Context</div>
+      <div class="approach">文書・業務システム・チャット履歴を単一の永続コンテキスト層に統合し、知識集約タスクのトークン消費を最大67%削減する</div>
+      <div class="detail">企業向けのマルチエージェント運用で、永続化がコスト最適化の手段として扱われている代表例</div>
+      <a href="https://www.alibabacloud.com/blog/alibaba-clouds-2026-apsara-conference-full-stack-ai-roadmap-along-with-global-market-expansion-plan_603598">📄 一次ソース</a>
     </div>
-    <div class="example">
-      <div class="product">OpenAI Agents SDK（公式Cookbook, session memory）</div>
-      <div class="approach">会話履歴の圧縮を Trimming（直近Nターン保持）と Summarizing（要約圧縮）の2方式で使い分ける実装を公開</div>
-      <div class="detail">Trimming は決定的でレイテンシ0だが古い文脈を失うリスク、Summarizing は長期文脈を保てるが要約起因の「context poisoning」リスクがあるとトレードオフを明記している</div>
-      <a href="https://developers.openai.com/cookbook/examples/agents_sdk/session_memory">📄 一次ソース</a>
-    </div>
-    <div class="takeaway"><strong>示唆:</strong> 長期メモを持たせるなら、書き込み時に「恒常的に成り立つか」「実際に挙動を変えるか」の2条件チェックを先に入れる。一回限りの要望と恒常的な好みを同じ場所に書かせると、次回以降の挙動が汚染される。</div>
+    <div class="takeaway"><strong>示唆:</strong> 複数エージェント・複数部門で同じ知識を使い回すなら、エージェントごとにコンテキストを持たせず、共有の永続コンテキスト層を1つ用意したほうが再計算コストを削れる。</div>
   </div>
   <div class="editorial">
     <span class="label">✍️ 編集後記</span>
-    3社の実装が揃って示すのは、エージェントのメモリ設計がもはや「何を保存するか」ではなく「どこに書き込みの境界線を引くか」の設計行為になっているということだ。Anthropic はファイル＋監査ログで追跡可能性を、Cursor は常駐させないことでトークン効率を、OpenAI は書き込み時ガードレールで汚染防止を、それぞれ別の軸で解いている。どれも「メモリを増やす」のではなく「メモリの粒度と境界を制御する」方向の工夫である点に注目したい。
+    消費者向け（dots）・開発者向け（Interactions API）・企業向け（AgentCore）という異なる市場で、ほぼ同じ1週間に「状態を持ち続ける」方向への転換が起きたのは偶然ではない。エージェントに長時間・複数ステップのタスクを任せるようになった以上、セッションの終わりに文脈を捨てる設計はコストにもUXにも見合わなくなった。次に注目すべきは、この永続状態をどこまでユーザーが制御・削除できるかというプライバシー側の設計だろう。
   </div>
 </div>
 
 <div class="section">
   <div class="section-title">🔗 今号の動向ピックアップ</div>
-  <div class="quick-link"><a href="https://www.anthropic.com/research/long-running-Claude">Anthropic、長時間タスクでは CHANGELOG.md が「失敗した試み」を記録する携行型長期メモリになると報告</a><span class="quick-summary">科学計算エージェントの事例で、進捗ファイルに失敗したアプローチとその理由を記録することで、次のセッションが同じ行き止まりを再試行しなくなると説明する。本文で扱った「何を書くかより何を書かないかを決める」設計と同じ発想の実例。</span></div>
-  <div class="quick-link"><a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents">Anthropic、長文脈エージェントの実務指針として compaction・構造化ノート・サブエージェント分離の3手法を整理</a><span class="quick-summary">コンテキストウィンドウを使い切る前に要約して引き継ぐ compaction、NOTES.md 的な外部メモリへの構造化ノート、サブエージェントが1000〜2000トークンの要約だけを返す設計を公式に解説する。本文セクション1・2で扱った「メモリの粒度を絞る」設計判断の上位概念として読める。</span></div>
+  <div class="quick-link"><a href="https://openai.com/index/devday-2026-recap/">OpenAI DevDay 2026 Recap</a><span class="quick-summary">dotsを含むDevDay 2026の発表全体をOpenAI自身がまとめた公式レポート。常駐エージェントが単発の目玉機能ではなく、Agents API公開ベータなど他の発表とセットの戦略であることが分かる。</span></div>
+  <div class="quick-link"><a href="https://help.openai.com/en/articles/20001530-getting-started-with-your-dot">Getting started with your dot</a><span class="quick-summary">dotの設定方法を説明する公式ヘルプ記事。ゴールの与え方・接続するアプリの選び方など、常駐エージェントに何を持たせ続けるかを利用者側が決める仕組みが分かる。</span></div>
+  <div class="quick-link"><a href="https://aistudio.google.com/learn/managed-agents-updated-harness-files-credentials">Gemini API Managed Agents Update: harness・Files・Credentials API</a><span class="quick-summary">Managed AgentsにファイルAPIと認証情報の永続管理APIが追加されたアナウンス。エージェントが毎回認証情報を渡されるのではなく自分の持ち物として保持できるようになる変化を示し、本文のInteractions API GAと地続きの更新。</span></div>
 </div>
 
 <div class="section">
   <div class="section-title">📚 過去号</div>
-  <div class="archive-item"><span class="week">2026-10-01</span><div class="body"><a href="../ai-trends.html">エージェントは「呼び出すたびに消える」から「状態を持ち続ける」へ — OpenAI・Google・Alibabaが同時に永続化レイヤーを足した</a><span class="sub">OpenAIの「dots」はユーザーごとに専用クラウドコンピュータを割り当て、ChatGPT・Slack・Teamsを横断して会話間の文脈を保持する常駐エージェント。</span></div></div>
   <div class="archive-item"><span class="week">2026-09-29</span><div class="body"><a href="2026-09-29.html">エージェントの長期記憶は「要約」をやめた — 編集可能なファイル、共有された手順、非破壊のグラフへ</a><span class="sub">Claudeは会話終了後の要約をやめ、対話中にトピック単位のファイルへ直接書き込み、ユーザーが個別に編集できる方式に切り替えた。</span></div></div>
   <div class="archive-item"><span class="week">2026-09-26</span><div class="body"><a href="2026-09-26.html">マルチエージェント協調は「並列に投げる」から「役割を絞った2体」に収束した — Fusion 型アーキテクチャが解いた失敗伝播問題</a><span class="sub">Cognitionは「分散マルチエージェントは前提の食い違いで失敗が伝播する」と自ら警告した後、lead+sidekickの2体だけに絞った制約付き構成「Fusion」を主力製品化し、2026年9月にローカル環境まで展開した。</span></div></div>
   <div class="archive-item"><span class="week">2026-09-24</span><div class="body"><a href="2026-09-24.html">カスタマー対応エージェントの設計は「決定木」から「自然言語手順×コードの二層構造」へ</a><span class="sub">Decagonは決定木を捨て、業務担当者が自然言語で書いた手順を構造化ロジックにする一方、返金などの機微操作だけコードで検証するAOPへ移行し、NG.CASHでは解決率が70%まで向上した。</span></div></div>
@@ -178,11 +178,12 @@ footer a{color:var(--primary-500);text-decoration:none}
   <div class="archive-item"><span class="week">2026-08-04</span><div class="body"><a href="2026-08-04.html">ワークフロー型 vs エージェント型 — 複雑さを足す前に何を確かめるか</a><span class="sub">Anthropic は「経路を誰が決めるか」で workflow と agent を定義し、単純な方から試すべきだと明言している。</span></div></div>
   <div class="archive-item"><span class="week">2026-08-01</span><div class="body"><a href="2026-08-01.html">コンテキストエンジニアリング — 「何を見せるか」ではなく「何を見せないか」を設計する</a><span class="sub">事前に全部読み込むのではなく、ファイルパスやURLなど軽量な参照を渡して実行時に取得する「Just-in-Time retrieval」がCursorやAnthropicの標準手法になった。</span></div></div>
   <div class="archive-item"><span class="week">2026-07-30</span><div class="body"><a href="2026-07-30.html">マルチエージェント協調 — 「書き込みを一本化する」が唯一の合意点になった理由</a><span class="sub">Cognition は2025年、複数エージェントの並行書き込みが矛盾した判断を生むとして「マルチエージェントを作るな」と主張したが、2026年4月に態度を転換し「書き込みは一本化し、エージェントは行動ではなく知性を提供する」構成に絞って実例を公開した</span></div></div>
+  <div class="archive-item"><span class="week">2026-07-28</span><div class="body"><a href="2026-07-28.html">エージェントのメモリ設計 — 保存容量ではなく「書き込みの境界線」を設計する</a><span class="sub">Anthropic は Claude Managed Agents の記憶をファイルとして保存し、監査ログ・ロールバック・スコープ別パーミッションを標準機能として public beta で提供している</span></div></div>
   <div class="archive-item"><span class="week">2026-W30</span><div class="body"><a href="2026-W30.html">エージェントの評価・観測性 — 「良さそう」を数値にする前に何を測らないかを決める</a><span class="sub">Anthropic は Claude Code の品質劣化が6週間、内部の eval・コードレビュー・単体テストをすべてすり抜けていたと自ら公表し、変更ごとの広範な eval とソーク期間の導入を表明した</span></div></div>
 </div>
 
 <footer>
-  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="../data/ai-trends/2026-07-28.json">data/ai-trends/2026-07-28.json</a>（このページは JSON からの生成物）</p>
+  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="../data/ai-trends/2026-10-01.json">data/ai-trends/2026-10-01.json</a>（このページは JSON からの生成物）</p>
   <p style="margin-top:.5rem"><a href="../">📰 日刊ダイジェストに戻る</a></p>
 </footer>
 </div>

@@ -1,0 +1,79 @@
+{
+  "issue": "2026-10-01",
+  "generated_at": "2026-10-01T07:00:00+09:00",
+  "theme": {
+    "title": "エージェントは「呼び出すたびに消える」から「状態を持ち続ける」へ — OpenAI・Google・Alibabaが同時に永続化レイヤーを足した",
+    "category": "agent-persistence",
+    "lede": "この1週間で、OpenAIの常駐エージェント「dots」、GoogleのInteractions API正式版、AlibabaのAgentCoreが相次いで発表された。共通するのは、エージェントを「リクエストのたびにゼロから起動するプロセス」ではなく「状態を保持し続ける存在」として設計し直した点だ。会話もサンドボックスも組織知識も、セッションをまたいで持ち越す前提に変わりつつある。消費者向け・開発者向け・企業向けという異なる市場でほぼ同時にこの設計へ収束したことが今号の論点だ。",
+    "tldr": [
+      "OpenAIの「dots」はユーザーごとに専用クラウドコンピュータを割り当て、ChatGPT・Slack・Teamsを横断して会話間の文脈を保持する常駐エージェント。",
+      "GoogleのInteractions APIはGA版で「サーバー側状態」を一等機能にし、有料ティアでは過去のやり取りを55日間保持できる。",
+      "AlibabaのAgentCoreは文書・業務システム・チャット履歴を単一の永続コンテキスト層に統合し、知識集約タスクのトークン消費を最大67%削減すると謳う。"
+    ],
+    "sections": [
+      {
+        "heading": "OpenAI dots — エージェントに「専用コンピュータ」を持たせる",
+        "body_html": "<p>dots はユーザーごとに専用のクラウドコンピュータとブラウザを割り当てられる常駐エージェントで、会話を終えてもプロセスは止まらない。ChatGPT・Slack・Microsoft Teams・音声通話のどこからアクセスしても同じ dot につながり、与えたゴールに向けて会話の合間も作業を進め続ける。</p><p>この設計が成り立つのは、状態を「会話」ではなく「エージェント自身」に紐づけたからだ。従来のチャットボットはセッションが終われば文脈も消える前提だったが、常駐させるなら文脈はエージェント側の永続状態として持たせるほかない。消費者向けプロダクトが先にこの転換に踏み切った。</p>",
+        "examples": [
+          {
+            "product": "OpenAI dots（ChatGPT）",
+            "approach": "ユーザーごとに専用クラウドコンピュータを割り当て、チャネルをまたいで文脈と作業を継続させる",
+            "detail": "常駐エージェントという設計の消費者向け実例として最も具体的で、提供チャネル・料金まで公式発表に明記されている",
+            "source_url": "https://openai.com/index/introducing-dots/"
+          }
+        ],
+        "takeaway": "単発の応答botではなく「担当者」として設計するなら、文脈をユーザーのセッションではなくエージェント側の永続状態として持たせる構造を最初から選ぶ。"
+      },
+      {
+        "heading": "Google Interactions API GA — 「サーバー側状態」が正式な一等機能になった",
+        "body_html": "<p>GoogleはInteractions APIを正式版に引き上げ、サーバー側状態・バックグラウンド実行・ツール混在を単一エンドポイントの標準機能にした。有料ティアでは過去のやり取りを55日間保持でき、開発者は会話のたびに文脈を組み立て直す必要がなくなる。Antigravityのような長時間稼働するコーディングエージェントは、このAPI上でホスト型Linuxサンドボックスを使い続けることで、セッションをまたいでプロンプトキャッシュを効かせられるようになった。</p><p>開発者向けAPIがここまで踏み込んで状態管理を引き受けるのは珍しい。長時間タスクを任せるエージェントほど「毎回コンテキストを組み立て直すコスト」がボトルネックになるという共通認識が背景にあり、状態管理をアプリ側ではなくAPI側に寄せる設計が持続化パターンとして定着しつつある。</p>",
+        "examples": [
+          {
+            "product": "Google Interactions API（GA）",
+            "approach": "サーバー側状態・バックグラウンド実行を一等機能にし、有料ティアで55日間の履歴保持を提供する",
+            "detail": "開発者向けAPIが状態管理を自前実装させずに引き受けた点が、持続化アーキテクチャの開発者向け到達点として代表的",
+            "source_url": "https://blog.google/innovation-and-ai/technology/developers-tools/interactions-api-general-availability/"
+          },
+          {
+            "product": "Google Antigravity（antigravity-preview-09-2026）",
+            "approach": "Googleホストの隔離Linuxサンドボックス内で長時間稼働し、ランタイムハーネスのプロンプトキャッシュ最適化で再計算コストを抑える",
+            "detail": "Interactions APIの永続状態の上に構築された実例で、長時間セッションにおけるキャッシュ設計の重要性を示す",
+            "source_url": "https://ai.google.dev/gemini-api/docs/models/antigravity-preview-09-2026"
+          }
+        ],
+        "takeaway": "長時間稼働するエージェントを作るなら、状態保持をアプリ側で自前実装する前に、使っているAPIがサーバー側状態・バックグラウンド実行を既に提供していないか確認する。車輪の再発明を避けられる。"
+      },
+      {
+        "heading": "Alibaba AgentCore — 組織知識を「エージェントごと」から「共有の永続層」へ",
+        "body_html": "<p>AlibabaがApsara Conferenceで発表したAgentCoreは、エージェントのビルド・実行・運用のライフサイクル全体を管理する企業向けプラットフォームだ。中核にあるAgent Context（Context Engine）は、企業の文書・業務システム・チャット履歴・マルチモーダルデータを単一の永続コンテキスト基盤に統合し、個々のエージェントが都度データを読み込み直さずに参照できるようにする。</p><p>複数のエージェントが同じ組織知識を使う企業ユースケースでは、エージェントごとにコンテキストを持たせると同じ情報を何度も処理する無駄が積み上がる。Alibabaはこれを知識集約タスクでトークン消費を最大67%削減できると謳っており、永続化を単なる利便性ではなくコスト構造の問題として扱っている点が特徴だ。</p>",
+        "examples": [
+          {
+            "product": "Alibaba Cloud AgentCore / Agent Context",
+            "approach": "文書・業務システム・チャット履歴を単一の永続コンテキスト層に統合し、知識集約タスクのトークン消費を最大67%削減する",
+            "detail": "企業向けのマルチエージェント運用で、永続化がコスト最適化の手段として扱われている代表例",
+            "source_url": "https://www.alibabacloud.com/blog/alibaba-clouds-2026-apsara-conference-full-stack-ai-roadmap-along-with-global-market-expansion-plan_603598"
+          }
+        ],
+        "takeaway": "複数エージェント・複数部門で同じ知識を使い回すなら、エージェントごとにコンテキストを持たせず、共有の永続コンテキスト層を1つ用意したほうが再計算コストを削れる。"
+      }
+    ]
+  },
+  "editorial": "消費者向け（dots）・開発者向け（Interactions API）・企業向け（AgentCore）という異なる市場で、ほぼ同じ1週間に「状態を持ち続ける」方向への転換が起きたのは偶然ではない。エージェントに長時間・複数ステップのタスクを任せるようになった以上、セッションの終わりに文脈を捨てる設計はコストにもUXにも見合わなくなった。次に注目すべきは、この永続状態をどこまでユーザーが制御・削除できるかというプライバシー側の設計だろう。",
+  "quick_picks": [
+    {
+      "title": "OpenAI DevDay 2026 Recap",
+      "summary": "dotsを含むDevDay 2026の発表全体をOpenAI自身がまとめた公式レポート。常駐エージェントが単発の目玉機能ではなく、Agents API公開ベータなど他の発表とセットの戦略であることが分かる。",
+      "url": "https://openai.com/index/devday-2026-recap/"
+    },
+    {
+      "title": "Getting started with your dot",
+      "summary": "dotの設定方法を説明する公式ヘルプ記事。ゴールの与え方・接続するアプリの選び方など、常駐エージェントに何を持たせ続けるかを利用者側が決める仕組みが分かる。",
+      "url": "https://help.openai.com/en/articles/20001530-getting-started-with-your-dot"
+    },
+    {
+      "title": "Gemini API Managed Agents Update: harness・Files・Credentials API",
+      "summary": "Managed AgentsにファイルAPIと認証情報の永続管理APIが追加されたアナウンス。エージェントが毎回認証情報を渡されるのではなく自分の持ち物として保持できるようになる変化を示し、本文のInteractions API GAと地続きの更新。",
+      "url": "https://aistudio.google.com/learn/managed-agents-updated-harness-files-credentials"
+    }
+  ]
+}

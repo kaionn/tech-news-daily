@@ -66,7 +66,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 <div class="container">
 <header>
   <h1>🧠 AI プロダクト動向</h1>
-  <p class="date">2026-09-29 発行（読了 6 分）</p>
+  <p class="date">2026-10-01 発行（読了 5 分）</p>
   <p class="tagline">実プロダクトのアーキテクチャ・使用例から AI 開発の現在地を週 3 回・1 号 1 テーマで深掘り</p>
   <nav class="site-nav">
     <a href="./">📰 日刊ダイジェスト</a>
@@ -77,81 +77,82 @@ footer a{color:var(--primary-500);text-decoration:none}
 </header>
 
 <div class="theme-hero">
-  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">AGENT-MEMORY</span></span>
-  <h2>エージェントの長期記憶は「要約」をやめた — 編集可能なファイル、共有された手順、非破壊のグラフへ</h2>
-  <p class="lede">個人アシスタントの記憶は「会話の要約」ではなく「編集可能な事実の集合」に置き換わりつつある。2026年8月、AnthropicはClaudeの記憶を会話終了後の要約ではなく、対話中にトピックごとのファイルへ書き込む方式に切り替えた。同年9月にはCursorが、プロジェクト単位でエージェント群が学んだ手順を共有ファイルに蓄積する仕組みを公開した。個人の事実、プロジェクトの手順、監査可能な事実の履歴——記憶の対象が違えば選ぶべき構造も違う。今号はその使い分けを、具体的な実装から追う。</p>
+  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">AGENT-PERSISTENCE</span></span>
+  <h2>エージェントは「呼び出すたびに消える」から「状態を持ち続ける」へ — OpenAI・Google・Alibabaが同時に永続化レイヤーを足した</h2>
+  <p class="lede">この1週間で、OpenAIの常駐エージェント「dots」、GoogleのInteractions API正式版、AlibabaのAgentCoreが相次いで発表された。共通するのは、エージェントを「リクエストのたびにゼロから起動するプロセス」ではなく「状態を保持し続ける存在」として設計し直した点だ。会話もサンドボックスも組織知識も、セッションをまたいで持ち越す前提に変わりつつある。消費者向け・開発者向け・企業向けという異なる市場でほぼ同時にこの設計へ収束したことが今号の論点だ。</p>
 </div>
 
 <div class="tldr">
   <div class="label">TL;DR — 3 行で</div>
   <ul>
-    <li>Claudeは会話終了後の要約をやめ、対話中にトピック単位のファイルへ直接書き込み、ユーザーが個別に編集できる方式に切り替えた。</li>
-    <li>Cursor Projectsは「個人の事実」ではなく「学んだ手順」を記憶の対象にし、コーディネーターとサブエージェント群がクラウド上の共有ファイルに蓄積し続ける。</li>
-    <li>Zepのようなフレームワーク層は「いつ真だったか」を保持する時間軸付きグラフを採用し、フラットな要約では扱えない監査要件に応える。</li>
+    <li>OpenAIの「dots」はユーザーごとに専用クラウドコンピュータを割り当て、ChatGPT・Slack・Teamsを横断して会話間の文脈を保持する常駐エージェント。</li>
+    <li>GoogleのInteractions APIはGA版で「サーバー側状態」を一等機能にし、有料ティアでは過去のやり取りを55日間保持できる。</li>
+    <li>AlibabaのAgentCoreは文書・業務システム・チャット履歴を単一の永続コンテキスト層に統合し、知識集約タスクのトークン消費を最大67%削減すると謳う。</li>
   </ul>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 1: 個人アシスタントの記憶は「要約」から「編集可能な事実」へ</div>
+  <div class="section-title">📐 パターン 1: OpenAI dots — エージェントに「専用コンピュータ」を持たせる</div>
   <div class="theme-section">
-    <p>2026年8月、Anthropicは Claude の記憶方式を変更した。それまで主流だった「会話終了後にモデルが全体を要約し、その要約を次回の context に差し込む」方式をやめ、対話中にトピックごとのファイルへ直接書き込むようにした。ユーザーは Memory 設定で Topics 一覧からファイルを個別に読み書き・削除でき、会社名の誤りのような事実を1ファイル訂正するだけで、以降の全会話に反映される。</p><p>この設計転換の背景には、要約ベースの記憶が抱えていた「訂正が効かない」問題がある。要約は生成のたびに作り直されるため、ユーザーが一度間違いを指摘しても次の要約で再び同じ誤りが復元されかねない。Letta が Sleep-Time Compute で採った解法は少し異なり、応答を返す主エージェントとは別に、アイドル時間帯だけ動く「Sleep-Time エージェント」が非同期に <code>memory block</code> を書き換える。目的は同じく編集の質を上げることだが、対話を止めずに記憶の整理コストを裏側に逃がす点に重心がある。</p>
+    <p>dots はユーザーごとに専用のクラウドコンピュータとブラウザを割り当てられる常駐エージェントで、会話を終えてもプロセスは止まらない。ChatGPT・Slack・Microsoft Teams・音声通話のどこからアクセスしても同じ dot につながり、与えたゴールに向けて会話の合間も作業を進め続ける。</p><p>この設計が成り立つのは、状態を「会話」ではなく「エージェント自身」に紐づけたからだ。従来のチャットボットはセッションが終われば文脈も消える前提だったが、常駐させるなら文脈はエージェント側の永続状態として持たせるほかない。消費者向けプロダクトが先にこの転換に踏み切った。</p>
     <div class="example">
-      <div class="product">Claude（Anthropic）</div>
-      <div class="approach">対話中にトピック単位のファイルへ直接書き込み、ユーザーが個別に編集・削除できる</div>
-      <div class="detail">会話終了後の要約生成をやめたことで、一度の訂正が以降の全会話に反映されるようになった。同時期にClaude ChatとCoworkの記憶も統合された。</div>
-      <a href="https://claude.com/blog/claudes-memory-works-everywhere-and-you-decide-whats-in-it">📄 一次ソース</a>
+      <div class="product">OpenAI dots（ChatGPT）</div>
+      <div class="approach">ユーザーごとに専用クラウドコンピュータを割り当て、チャネルをまたいで文脈と作業を継続させる</div>
+      <div class="detail">常駐エージェントという設計の消費者向け実例として最も具体的で、提供チャネル・料金まで公式発表に明記されている</div>
+      <a href="https://openai.com/index/introducing-dots/">📄 一次ソース</a>
     </div>
-    <div class="example">
-      <div class="product">Letta（旧MemGPT, Sleep-Time Compute）</div>
-      <div class="approach">応答を返す主エージェントとは別に、アイドル時間に動く専用エージェントが非同期にメモリブロックを編集する</div>
-      <div class="detail">会話をブロックせずに記憶の整理・矛盾解消を行える設計で、主エージェントより低速・高精度なモデルを整理役に充てられる。</div>
-      <a href="https://www.letta.com/blog/sleep-time-compute/">📄 一次ソース</a>
-    </div>
-    <div class="takeaway"><strong>示唆:</strong> エンドユーザーに記憶の中身を見せて訂正させたいならトピックファイル方式、対話のレイテンシを犠牲にせず記憶品質を上げたいなら非同期のバックグラウンド書き換え方式——ここは要件で決まる。</div>
+    <div class="takeaway"><strong>示唆:</strong> 単発の応答botではなく「担当者」として設計するなら、文脈をユーザーのセッションではなくエージェント側の永続状態として持たせる構造を最初から選ぶ。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 2: プロジェクト単位のエージェントは「学んだ手順」を共有ファイルに貯める</div>
+  <div class="section-title">📐 パターン 2: Google Interactions API GA — 「サーバー側状態」が正式な一等機能になった</div>
   <div class="theme-section">
-    <p>Cursor が2026年9月10日に公開した Projects は、記憶の対象を「個人の事実」から「プロジェクトの手順」に移した。コード自体は書かないコーディネーターエージェントが配下のサブエージェント群にタスクを振り、各エージェントが調べたコードベースの構造やテスト手順、作業の進め方の好みを共有ファイル群に書き足していく。あるエージェントがサービスのテスト方法を突き止めれば、以降に立ち上がる別のエージェントは同じ調査をやり直さずに済む。</p><p>この共有ファイルはクラウド上のマシンで永続し、ローカルの端末を閉じても止まらない。Slack やPRの監視、スケジュール実行のように、ユーザーが毎回プロンプトを打たなくても再開できる運用を前提にしているためで、Cursor は Projects を主に使うユーザーはマージするPR数が6倍になったと報告している。個人向け記憶が「誰か一人のための事実」を保持するのに対し、こちらは複数のエージェントインスタンスが横断で参照する共有ストックである点が構造的に異なる。</p>
+    <p>GoogleはInteractions APIを正式版に引き上げ、サーバー側状態・バックグラウンド実行・ツール混在を単一エンドポイントの標準機能にした。有料ティアでは過去のやり取りを55日間保持でき、開発者は会話のたびに文脈を組み立て直す必要がなくなる。Antigravityのような長時間稼働するコーディングエージェントは、このAPI上でホスト型Linuxサンドボックスを使い続けることで、セッションをまたいでプロンプトキャッシュを効かせられるようになった。</p><p>開発者向けAPIがここまで踏み込んで状態管理を引き受けるのは珍しい。長時間タスクを任せるエージェントほど「毎回コンテキストを組み立て直すコスト」がボトルネックになるという共通認識が背景にあり、状態管理をアプリ側ではなくAPI側に寄せる設計が持続化パターンとして定着しつつある。</p>
     <div class="example">
-      <div class="product">Cursor Projects</div>
-      <div class="approach">コーディネーター配下のサブエージェント群が学んだコードベース知識・テスト手順・作業の好みを、クラウド上で永続する共有ファイルに蓄積する</div>
-      <div class="detail">個人の事実ではなくプロジェクトの運用知識を記憶の対象にしている点が個人アシスタント型の記憶と異なる。Projects利用者はPRのマージ数が6倍という数字も公表されている。</div>
-      <a href="https://cursor.com/blog/projects">📄 一次ソース</a>
+      <div class="product">Google Interactions API（GA）</div>
+      <div class="approach">サーバー側状態・バックグラウンド実行を一等機能にし、有料ティアで55日間の履歴保持を提供する</div>
+      <div class="detail">開発者向けAPIが状態管理を自前実装させずに引き受けた点が、持続化アーキテクチャの開発者向け到達点として代表的</div>
+      <a href="https://blog.google/innovation-and-ai/technology/developers-tools/interactions-api-general-availability/">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> エージェントが単発の会話ではなく継続的にコードベースやシステムを運用する用途なら、記憶すべきは「ユーザーの好み」ではなく「エージェント自身が積み上げた運用知識」であり、複数インスタンス間で共有できる構造にする必要がある。</div>
+    <div class="example">
+      <div class="product">Google Antigravity（antigravity-preview-09-2026）</div>
+      <div class="approach">Googleホストの隔離Linuxサンドボックス内で長時間稼働し、ランタイムハーネスのプロンプトキャッシュ最適化で再計算コストを抑える</div>
+      <div class="detail">Interactions APIの永続状態の上に構築された実例で、長時間セッションにおけるキャッシュ設計の重要性を示す</div>
+      <a href="https://ai.google.dev/gemini-api/docs/models/antigravity-preview-09-2026">📄 一次ソース</a>
+    </div>
+    <div class="takeaway"><strong>示唆:</strong> 長時間稼働するエージェントを作るなら、状態保持をアプリ側で自前実装する前に、使っているAPIがサーバー側状態・バックグラウンド実行を既に提供していないか確認する。車輪の再発明を避けられる。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 3: 「いつ真だったか」を残す必要があるなら、要約ではなくグラフを選ぶ</div>
+  <div class="section-title">📐 パターン 3: Alibaba AgentCore — 組織知識を「エージェントごと」から「共有の永続層」へ</div>
   <div class="theme-section">
-    <p>Zepの Graphiti エンジンは、会話ログと構造化されたビジネスデータの両方を、時間軸を持つ知識グラフとして統合する。ノードとエッジで事実を表現し、event time（その事実がいつ現実に起きたか）と ingestion time（システムがいつそれを取り込んだか）を別々に持たせることで、過去のある時点で何が正しいとされていたかまで遡って再現できる。事実は上書きされるのではなく、有効期間が終わった時点で invalid と記録されるだけで、履歴自体は消えない。</p><p>フラットな要約やトピックファイルは「今何が正しいか」には強いが、「いつからいつまで正しかったか」は原理的に表現しづらい——要約し直すたびに古い版は失われるためだ。監査や契約変更の追跡のように、過去の状態そのものが問い合わせの対象になる業務データを扱うエージェントでは、この非破壊性が要件になる。Zepはこの設計でDeep Memory Retrievalベンチマークにおいて既存手法を上回る結果を報告している。</p>
+    <p>AlibabaがApsara Conferenceで発表したAgentCoreは、エージェントのビルド・実行・運用のライフサイクル全体を管理する企業向けプラットフォームだ。中核にあるAgent Context（Context Engine）は、企業の文書・業務システム・チャット履歴・マルチモーダルデータを単一の永続コンテキスト基盤に統合し、個々のエージェントが都度データを読み込み直さずに参照できるようにする。</p><p>複数のエージェントが同じ組織知識を使う企業ユースケースでは、エージェントごとにコンテキストを持たせると同じ情報を何度も処理する無駄が積み上がる。Alibabaはこれを知識集約タスクでトークン消費を最大67%削減できると謳っており、永続化を単なる利便性ではなくコスト構造の問題として扱っている点が特徴だ。</p>
     <div class="example">
-      <div class="product">Zep（Graphiti）</div>
-      <div class="approach">会話データと業務データを時間軸付きの知識グラフに統合し、event time / ingestion timeの二重タイムスタンプで事実の有効期間を管理する</div>
-      <div class="detail">事実を削除・上書きせずinvalid化するだけなので、過去のある時点で何が真だったかを後から再現できる。Deep Memory Retrievalベンチマークで既存手法を上回る結果を報告。</div>
-      <a href="https://blog.getzep.com/zep-a-temporal-knowledge-graph-architecture-for-agent-memory/">📄 一次ソース</a>
+      <div class="product">Alibaba Cloud AgentCore / Agent Context</div>
+      <div class="approach">文書・業務システム・チャット履歴を単一の永続コンテキスト層に統合し、知識集約タスクのトークン消費を最大67%削減する</div>
+      <div class="detail">企業向けのマルチエージェント運用で、永続化がコスト最適化の手段として扱われている代表例</div>
+      <a href="https://www.alibabacloud.com/blog/alibaba-clouds-2026-apsara-conference-full-stack-ai-roadmap-along-with-global-market-expansion-plan_603598">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> 「今の状態」だけでよいなら要約やトピックファイルで十分だが、監査・コンプライアンスのように過去の状態そのものが問われる用途では、非破壊で時間を刻めるグラフ構造を最初から選んでおく方が後から作り直すより安い。</div>
+    <div class="takeaway"><strong>示唆:</strong> 複数エージェント・複数部門で同じ知識を使い回すなら、エージェントごとにコンテキストを持たせず、共有の永続コンテキスト層を1つ用意したほうが再計算コストを削れる。</div>
   </div>
   <div class="editorial">
     <span class="label">✍️ 編集後記</span>
-    2026年の記憶実装が割れているのは「ベクトルDBを使うかどうか」ではなく、「いつ記憶を書き換えるか」と「壊れた記憶をどう訂正するか」だ。ライブ書き込み、非同期のバックグラウンド処理、非破壊のグラフ——どれも生の会話ログをそのまま貯めない点では一致している。次に来る論点は、この3層をまたいで記憶を移し替えるコスト——たとえば個人の記憶をプロジェクトの記憶に昇格させる境界線——になるはずだ。
+    消費者向け（dots）・開発者向け（Interactions API）・企業向け（AgentCore）という異なる市場で、ほぼ同じ1週間に「状態を持ち続ける」方向への転換が起きたのは偶然ではない。エージェントに長時間・複数ステップのタスクを任せるようになった以上、セッションの終わりに文脈を捨てる設計はコストにもUXにも見合わなくなった。次に注目すべきは、この永続状態をどこまでユーザーが制御・削除できるかというプライバシー側の設計だろう。
   </div>
 </div>
 
 <div class="section">
   <div class="section-title">🔗 今号の動向ピックアップ</div>
-  <div class="quick-link"><a href="https://openai.com/index/chatgpt-memory-dreaming/">ChatGPTの記憶システム「Dreaming」</a><span class="quick-summary">OpenAIが2026年6月に導入した、バックグラウンドで記憶の要約を再合成し続ける仕組み。「7月にシンガポールへ行く予定」を旅行後に自動で過去形へ書き換えるなど、Lettaの Sleep-Time Computeと同じく非同期の記憶整理という設計思想を共有する。</span></div>
-  <div class="quick-link"><a href="https://www.langchain.com/blog/launching-long-term-memory-support-in-langgraph">LangGraphの長期記憶ストア</a><span class="quick-summary">LangChainが公式発表した、スレッドをまたいで参照できる長期記憶用のstore機能。namespace区切りのJSONドキュメントというフラットな構造を選んでおり、本文中のグラフ型（Zep）や共有ファイル型（Cursor）とは異なる第三の選択肢にあたる。</span></div>
-  <div class="quick-link"><a href="https://www.letta.com/blog/memory-blocks/">LettaのMemory Blocks</a><span class="quick-summary">Sleep-Time Computeが書き換える対象である「メモリブロック」の設計思想を解説する記事。エージェントの記憶をコンテキストウィンドウ内に固定表示される編集可能な単位として扱う発想は、本文のClaudeのトピックファイルと近い。</span></div>
+  <div class="quick-link"><a href="https://openai.com/index/devday-2026-recap/">OpenAI DevDay 2026 Recap</a><span class="quick-summary">dotsを含むDevDay 2026の発表全体をOpenAI自身がまとめた公式レポート。常駐エージェントが単発の目玉機能ではなく、Agents API公開ベータなど他の発表とセットの戦略であることが分かる。</span></div>
+  <div class="quick-link"><a href="https://help.openai.com/en/articles/20001530-getting-started-with-your-dot">Getting started with your dot</a><span class="quick-summary">dotの設定方法を説明する公式ヘルプ記事。ゴールの与え方・接続するアプリの選び方など、常駐エージェントに何を持たせ続けるかを利用者側が決める仕組みが分かる。</span></div>
+  <div class="quick-link"><a href="https://aistudio.google.com/learn/managed-agents-updated-harness-files-credentials">Gemini API Managed Agents Update: harness・Files・Credentials API</a><span class="quick-summary">Managed AgentsにファイルAPIと認証情報の永続管理APIが追加されたアナウンス。エージェントが毎回認証情報を渡されるのではなく自分の持ち物として保持できるようになる変化を示し、本文のInteractions API GAと地続きの更新。</span></div>
 </div>
 
 <div class="section">
   <div class="section-title">📚 過去号</div>
+  <div class="archive-item"><span class="week">2026-09-29</span><div class="body"><a href="ai-trends/2026-09-29.html">エージェントの長期記憶は「要約」をやめた — 編集可能なファイル、共有された手順、非破壊のグラフへ</a><span class="sub">Claudeは会話終了後の要約をやめ、対話中にトピック単位のファイルへ直接書き込み、ユーザーが個別に編集できる方式に切り替えた。</span></div></div>
   <div class="archive-item"><span class="week">2026-09-26</span><div class="body"><a href="ai-trends/2026-09-26.html">マルチエージェント協調は「並列に投げる」から「役割を絞った2体」に収束した — Fusion 型アーキテクチャが解いた失敗伝播問題</a><span class="sub">Cognitionは「分散マルチエージェントは前提の食い違いで失敗が伝播する」と自ら警告した後、lead+sidekickの2体だけに絞った制約付き構成「Fusion」を主力製品化し、2026年9月にローカル環境まで展開した。</span></div></div>
   <div class="archive-item"><span class="week">2026-09-24</span><div class="body"><a href="ai-trends/2026-09-24.html">カスタマー対応エージェントの設計は「決定木」から「自然言語手順×コードの二層構造」へ</a><span class="sub">Decagonは決定木を捨て、業務担当者が自然言語で書いた手順を構造化ロジックにする一方、返金などの機微操作だけコードで検証するAOPへ移行し、NG.CASHでは解決率が70%まで向上した。</span></div></div>
   <div class="archive-item"><span class="week">2026-09-22</span><div class="body"><a href="ai-trends/2026-09-22.html">モデルルーティングが開発ツールの既定機能になった — 選ぶのは人間ではなく分類器</a><span class="sub">GitHub Copilotは9月にauto model selectionへ「efficiency/balance/intelligence」の3段階ティアを追加し、Cursorは60万件超の実利用データで学習した分類器（Cursor Router）でモデル選定を自動化した。</span></div></div>
@@ -182,7 +183,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 </div>
 
 <footer>
-  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="data/ai-trends/2026-09-29.json">data/ai-trends/2026-09-29.json</a>（このページは JSON からの生成物）</p>
+  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="data/ai-trends/2026-10-01.json">data/ai-trends/2026-10-01.json</a>（このページは JSON からの生成物）</p>
   <p style="margin-top:.5rem"><a href="./">📰 日刊ダイジェストに戻る</a></p>
 </footer>
 </div>
