@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-09-30</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="../feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-09-30 (Wed)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+      <nav class="site-nav">
+        <a href="../" class="active">📰 日刊ダイジェスト</a>
+        <a href="../trends.html">🔌 週次プラグイントレンド</a>
+        <a href="../ai-trends.html">🧠 AI プロダクト動向</a>
+        <a href="./">🗂 アーカイブ</a>
+      </nav>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 19 articles</span>
+      <span>🏷 6 categories</span>
+      <span>📡 16 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item">
+        <span class="number-value">1/5</span>
+        <span class="number-label">GPT-6.1 SolのAPI価格(Astra比)、性能はほぼ同等</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">1,000+</span>
+        <span class="number-label">AlloyDBがAIエージェント向けに自動スケールする読み取りレプリカ数</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">0.29秒</span>
+        <span class="number-label">Bendが1.28万定義のコードを型・証明チェックする時間(Isabelle/Agdaは5分超)</span>
+      </div>
+    </div>
+
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
+
+      <div class="card featured deep-dive">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://openai.com/index/introducing-dots/">DEEP DIVE: OpenAI、24時間自律稼働するエージェント「dots」を発表——専用仮想マシン上で常時稼働、逸脱率はAstraが2.4%で自社比最低</a></h3>
+        </div>
+        <div class="summary">OpenAIは9月29日のDevDayで、GPT-6 Astraを土台にした常時稼働型エージェント「dots」を発表した。従来のエージェントが都度指示して実行させる形だったのに対し、dotsはOpenAIのサーバー上に確保された専用の仮想マシン内で24時間稼働し続け、ユーザーがオフラインでも作業を進める。4,000以上の外部アプリと連携し、ChatGPT・Slack・Teams上から呼び出せるほか、音声通話や後からのテキスト送信にも対応する。エージェントの逸脱行動を測る「computer-use safety stress test」では、逸脱の発生率がAstraで2.4%、Opus 5.5で6.1%、Fable 5.1で9.5%と報告され、Astraが自社比で最も低い数値を示した。ただしこれはOpenAI自身が実施した内部ベンチマークであり、第三者機関による独立評価ではない。初期テスターの事例では、請求書作成をタスクとして与えると内容を自動生成した上でユーザー承認後に送信まで実行したという。展開はProプラン(月額100ドル)およびBusiness Premiumの対象地域から始まり、欧州・スイス・英国は当面対象外。最初の1エージェントは追加料金なしで利用でき、最初の1か月は利用上限を設けない。OpenAIは同日GPT-6.1 Solも発表しており、常時稼働の拡大と低コスト化を同時に進める方針が読み取れる。</div>
+        <div class="editorial">🧠 「常時稼働」型のエージェントは、ユーザーが監督しない時間帯に何を実行したかの説明責任をどう担保するかが実運用上の課題になる。今回示された安全性数値はOpenAI自身の内部テストであり、独立した第三者評価が伴わない限り「他社より安全」という主張をそのまま受け取ることはできない。ただし請求書送付のような実害を伴うタスクを承認フロー付きで自動化する設計は、単純な作業代行の延長ではなく判断を伴う代行に踏み込んだ点で、これまでのチャット型エージェントとは一線を画す。</div>
+        <div class="key-points">
+          <ul>
+            <li>computer-use safety stress testでの逸脱発生率はAstra 2.4%・Opus 5.5 6.1%・Fable 5.1 9.5%(OpenAI自社測定)</li>
+            <li>4,000以上のアプリと連携しChatGPT・Slack・Teams上で稼働、音声通話・テキスト送信にも対応</li>
+            <li>Proプラン(月100ドル)・Business Premiumの対象地域から展開開始(欧州・スイス・英国は対象外)、初回1エージェントは無料・初月は利用上限なし</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 バックグラウンドで長時間自律実行するエージェントの導入を検討するなら、承認フローの設計とログ監査の仕組みを合わせて用意しないと、意図しない実行結果への対応が後手に回る。</div>
+        <div class="meta">
+          <span>OpenAI</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-09-29</span>
+          <span class="engagement">▲ 444</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://openai.com/index/introducing-gpt-6-1-sol/">OpenAI、Astra比5分の1の価格で近い性能の「GPT-6.1 Sol」を発表——長時間コーディング評価でAstraにほぼ並ぶ</a></h3>
+        </div>
+        <div class="summary">OpenAIは9月29日のDevDayで、上位モデルGPT-6 Astra比で価格を5分の1に抑えた新モデル「GPT-6.1 Sol」を発表した。長時間のソフトウェア開発タスクを評価するDeepSWE v1.1ではAstraとほぼ同等の性能を、前モデルGPT-6 Solから6.4ポイント上回るスコアで達成した。コンピュータ操作を測るOSWorld 2.0は前モデルから7ポイント向上し、Astraとの差は2.1ポイントまで縮まった。Terminal-Bench Science 0.1ではタスクあたりの平均コストがSolで5.47ドル、Astraで23.80ドルとなりコスト効率の高さを示す一方、正答率自体はAstraが68.1%で依然上回る。API価格は入力100万トークンあたり2ドル・出力10ドルで、ChatGPT Work・Codex各プランでも即日利用可能となった。</div>
+        <div class="key-points">
+          <ul>
+            <li>DeepSWE v1.1でAstraとほぼ同等の性能、前モデルGPT-6 Solから6.4ポイント向上</li>
+            <li>Terminal-Bench Science 0.1のタスク平均コストはSol 5.47ドル・Astra 23.80ドル(正答率はAstraの68.1%が依然上回る)</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 Astra級の精度が必要ない日常的なコーディング用途では、Solへの切り替えでAPIコストを大きく圧縮できる余地がある。</div>
+        <div class="meta">
+          <span>OpenAI</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-29</span>
+          <span class="engagement">▲ 747</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">💰 ビジネス</span>
+          <h3><a href="https://techcrunch.com/2026/09/29/reco-raises-55m-as-ai-agent-security-startups-crowd-the-market/">AIエージェントセキュリティのReco、5,500万ドル追加調達——累計1億4,000万ドル、企業価値は半年で2倍以上に</a></h3>
+        </div>
+        <div class="summary">AIエージェントのセキュリティを専門とするRecoが9月29日、5,500万ドルの追加調達を発表した。2月発表のシリーズB(3,000万ドル)と合わせ累計調達額は1億4,000万ドルに達し、企業価値はシリーズB時から2倍以上に増加した。AT&amp;T Venturesが戦略投資家として参加し、Forestay・Quadrille Capitalが新規投資家として加わった。同社はコンテキストグラフでエージェントをアプリ・ユーザー・アカウント・権限に結びつけ、セキュリティチームがエージェントのアクセス範囲を可視化し不要なアクセスを遮断できるようにする製品を提供する。顧客は100社超に達し、その約4割を金融サービス企業が占める。</div>
+        <div class="key-points">
+          <ul>
+            <li>累計調達額1億4,000万ドル(2月のシリーズB3,000万ドル+今回5,500万ドル)、企業価値はシリーズB時から2倍以上に増加</li>
+            <li>コンテキストグラフでエージェントをアプリ・ユーザー・アカウント・権限に紐付け不要アクセスを遮断、顧客100社超のうち約4割が金融サービス企業</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 AIエージェントの社内導入が進むほど「エージェントが何にアクセスできるか」の可視化と権限管理が後回しになりがちで、専門ツール市場への投資拡大はその需要の裏返しといえる。</div>
+        <div class="meta">
+          <span>TechCrunch</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-29</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/google_cloudaipostgresqldbpostgresql_for_agents_in_alloydb.html">Google Cloud、AIエージェント専用の隔離DB環境「PostgreSQL for agents in AlloyDB」発表——1,000以上のリーダーへ自動スケール</a></h3>
+        </div>
+        <div class="summary">Google Cloudは9月29日、AIエージェント専用の隔離環境をAlloyDB上に構築する新機能を発表した。エージェントからの大量アクセス用にサンドボックス化されたデータベースインスタンスを数秒でプロビジョニングし、本番のプライマリDBの性能低下を防ぐ。需要に応じて1,000以上のリーダーへ自動スケールし、タスク終了後はゼロまで縮退する。ベクトル検索・全文検索・空間検索を含むSQL全機能に対応し、現在プレビュー登録受付中。</div>
+        <div class="key-points">
+          <ul>
+            <li>サンドボックス化されたDBインスタンスを数秒でプロビジョニングしプライマリDBから完全隔離、1,000以上のリーダーへ自動スケールしタスク終了後はゼロまで縮退</li>
+            <li>ベクトル検索・全文検索・空間検索を含むSQL全機能に対応、単一のAlloyDBサービスとして提供され現在プレビュー登録受付中</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-29</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/google_cloudgoogle_cloud_developer_plugin_for_ai_coding_agents.html">Google Cloud、コーディングエージェントに自社の専門知識を組み込む「Developer Plugin」発表——Agent Plugins 1.0.0仕様に準拠</a></h3>
+        </div>
+        <div class="summary">Google Cloudは9月29日、Claude CodeやGoogle Antigravityなどのコーディングエージェントに自社サービスの専門知識を組み込む「Google Cloud Developer Plugin for AI Coding Agents」を発表した。公式スキル群とMCPサーバー設定をまとめてエージェントに導入でき、Agent Plugins 1.0.0仕様への対応により異なるエージェント間でも共通の設定を使い回せる。GitHubリポジトリから直接導入できる。</div>
+        <div class="key-points">
+          <ul>
+            <li>GitHub上の公式スキル群とMCPサーバー設定を一括導入でき、Google Cloudサービスの組み合わせ方に関する知識不足を補う</li>
+            <li>Agent Plugins 1.0.0仕様に対応し、Claude Code・Google Antigravityなど異なるエージェント間で設定を共通化</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-09-29</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://frostyard.github.io/nsl/">Linux向け「WSL」を謳うツール「NSL」公開——systemd-nspawnコンテナでホストを汚さず7種のディストロを常駐</a></h3>
+        </div>
+        <div class="summary">「NSL(NSpawn Subsystem for Linux)」は、WindowsのWSLがWindows上で提供する体験をLinuxホスト上で再現するツールとして公開された。1つの小さなVM内でsystemd-nspawnコンテナとして各ディストロを動かし、ホストユーザーの権限のまま実行されるためホスト側にパッケージを追加する必要がない。ホームディレクトリと`/mnt`は`/mnt/host`としてマシン内から参照でき、マシン内で立てたサーバーはホストの127.0.0.1の同じポートでそのままアクセスできる。</div>
+        <div class="key-points">
+          <ul>
+            <li>Debian・Ubuntu・Fedora・CentOS Stream・Arch・openSUSE Tumbleweed/Leapなど7種の署名付きディストロに対応、ホストへの変更なしにユーザー権限で常駐</li>
+            <li>ホームディレクトリと`/mnt`を`/mnt/host`としてマシン内から参照可能、マシン内サーバーはホストの127.0.0.1の同一ポートでポート転送なしに到達可能</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub (frostyard)</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-09-29</span>
+          <span class="engagement">▲ 74</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://compiler.club/aho-corasick/">複数パターン同時マッチングの定石「Aho-Corasickオートマトン」の構築を図解</a></h3>
+        </div>
+        <div class="summary">複数の部分文字列を同時に検索するAho-Corasickオートマトンの構築手順を解説する記事。各ノードが根からのエッジ文字列を表すトライを土台に、マッチ失敗時の復帰先を示す「サフィックスリンク」で最長の一致プレフィックスへ飛び、あるパターンのサフィックスが別のパターンと一致する場合を扱う「アウトプットリンク」の連結リストで、マッチしたパターンとその末尾に含まれる短いパターンを同時に出力する仕組みを、トライから完全な決定性有限オートマトンへ変換する過程で示す。</div>
+        <div class="key-points">
+          <ul>
+            <li>根からのエッジ文字列を保持するトライを構築し、マッチ失敗時に最長の一致プレフィックスへ復帰する「サフィックスリンク」で状態遷移を補完</li>
+            <li>あるパターンのサフィックスが別パターンと一致する場合に両方を出力する「アウトプットリンク」の連結リストを併用し、トライを完全な決定性有限オートマトンへ変換</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>compiler.club</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-29</span>
+          <span class="engagement">▲ 36</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.tcl-lang.org/software/tcltk/9.1.html">Tcl/Tk 9.1.0を公開——スクリーンリーダー対応・Unicode正規化コマンドなどを追加</a></h3>
+        </div>
+        <div class="summary">Tcl/Tkプロジェクトは9月29日、次期安定版に向けた開発版「Tcl/Tk 9.1.0」を公開した。Tcl側ではUnicode正規化を扱う`unicode`コマンド、マイクロ秒単位の単調時計を返す`timer`コマンド、リスト項目を選別する`lfilter`コマンドなどを追加し、C99数学関数もexpr内で使えるようになった。Tk側はスクリーンリーダー対応のアクセシビリティ機能と双方向テキスト・RTL言語への初期対応が加わった。</div>
+        <div class="key-points">
+          <ul>
+            <li>Unicode正規化の`unicode`コマンド、マイクロ秒精度の単調時計を返す`timer`コマンド、リスト選別の`lfilter`コマンドを追加、C99数学関数もexpr内で利用可能に</li>
+            <li>Tk側にスクリーンリーダー対応のアクセシビリティ機能と双方向テキスト・RTL言語の初期対応、`ttk::toggleswitch`ウィジェットを追加</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Tcl/Tk</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-09-29</span>
+          <span class="engagement">▲ 229</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/oukayuka/articles/15years-git-then-jujutsu">15年使ったGitからJujutsuへ——AIコーディングエージェントとの相性を理由に移行を決断</a></h3>
+        </div>
+        <div class="summary">著者は15年使ってきたGitから、AIコーディングエージェントとの相性を理由にバージョン管理システムJujutsuへ移行した。作業ディレクトリの状態が直接commitになるためworking tree・インデックス・リポジトリの3段階操作が不要になり、`jj edit @---`で3つ前のcommitに移動して編集するだけで自動リベースが背景実行される。`.git/`と`.jj/`が共存しGitHub/GitLabとの連携も維持できる。</div>
+        <div class="key-points">
+          <ul>
+            <li>作業ディレクトリの状態が直接commitになりworking tree/インデックス/リポジトリの3段階操作が不要、`jj new`でのブランチ作成と`jj abandon`での破棄で実験コストが低い</li>
+            <li>`jj edit @---`で3つ前のcommitへ移動し編集するだけで自動リベースが背景実行、`.git/`と`.jj/`の共存でGitHub/GitLabとの連携を維持</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn (oukayuka)</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-29</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/aqyuki/articles/go-proposal-3939">Go 1.28でstring(int)が禁止に——`string(65)`が"A"を返す直感に反する挙動を廃止</a></h3>
+        </div>
+        <div class="summary">Go 1.28で承認された提案「spec: remove string(int) #3939」により、`string(65)`のような未型付き整数からの直接変換記法が禁止される。現状は65をUnicodeコードポイントとして解釈し"A"を返すため直感に反するうえ、`string(0xD800)`はコンパイルが通り無効なコードポイントは`�`に変換される一方、`string("\uD800")`は拒否されるという扱いの不一致もあった。変更後は`string(rune(n))`や`string(int32(n))`など型付き値のみが許可され、数値文字列化は`strconv.Itoa`を使う。go.modで1.27以前を指定していれば従来の挙動を維持できる。</div>
+        <div class="key-points">
+          <ul>
+            <li>`string(65)`はUnicodeコードポイント解釈で"A"を返し直感に反するうえ、`string(0xD800)`は許可・`string("\uD800")`は拒否という扱いの不一致があった</li>
+            <li>変更後は`string(rune(n))`/`string(int32(n))`など型付き値のみ許可、数値文字列化は`strconv.Itoa`使用、`go vet`の`stringintconv`で既存コードの該当箇所を検出可能</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn (aqyuki)</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-28</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://qiita.com/suwa_nobu/items/5749949156f8df6f728b">Claude Codeで選べる12モデルに同じ仕事をさせた——同一タスクで9.2倍の価格差、1年で速度は2.7倍に</a></h3>
+        </div>
+        <div class="summary">著者はClaude Codeで選べる12モデル全てに「テキストファイルからERRORを含む行数を数える」という単純なタスクを与え、各3回・計36回のコールド実行でコストと速度を比較した。最安はHaiku 4.5の中央値0.0302ドル(8.5秒)、最高額はFable 5の0.2790ドル(17.0秒)で同一タスクに9.2倍の価格差があった。1年前のSonnet 4.5(0.0874ドル・15.6秒)と現在のOpus 5.5(0.0884ドル・5.8秒)はほぼ同額ながら2.7倍速く、値下げでなく同じ予算で上位モデルに手が届くようになった点が進歩だと結論づける。</div>
+        <div class="key-points">
+          <ul>
+            <li>同一タスクでの価格差は最安Haiku 4.5(0.0302ドル)と最高額Fable 5(0.2790ドル)で9.2倍、世代内ではOpus 4.5→5.5で費用-38%・速度2.0倍</li>
+            <li>1年前のSonnet 4.5(0.0874ドル・15.6秒)と現在のOpus 5.5(0.0884ドル・5.8秒)はほぼ同額で2.7倍速く、価格改善よりモデル選択が費用を左右すると指摘</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita (suwa_nobu)</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-28</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://gigazine.net/news/20260930-bend-lang/">AIの誤りを「証明」でブロックする新言語「Bend」——1.28万定義のコード検証が0.29秒、Isabelle/Agdaは5分超</a></h3>
+        </div>
+        <div class="summary">新しいプログラミング言語「Bend」は、AIがコードを生成する際に犯しうる誤りを型・証明チェッカーで機械的にブロックすることを目指す。「LAWS.bend」で宣言した不変条件をAIの生成ルールとして数学的に保証し、ゲームの「勝利不可能」といった性質を破る変更を機械的に拒否できる。1万2,800定義規模のコードベースでの型・証明チェックは0.29秒で完了し、同規模でIsabelleやAgdaが5分以上かかるのと比べ大幅に高速だという。実行速度は単一コアでC言語並み、16コアやGPU利用時には最大100倍近くまで高速化する。</div>
+        <div class="key-points">
+          <ul>
+            <li>「LAWS.bend」で宣言した不変条件をAIのコード生成ルールとして数学的に保証、型チェッカーが証明チェッカーを兼ねる設計</li>
+            <li>1万2,800定義のコードベースの型・証明チェックが0.29秒で完了(Isabelle/Agdaは5分以上)、実行速度は単一コアでC言語並み・16コア/GPUで最大100倍近い高速化</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GIGAZINE</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-30</span>
+          <span class="engagement">🔖 11</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.com/mizchi/explainer">「理解が新しいボトルネック」に対応するツール「explainer」——読者ペルソナ起点で検証可能な解説を自動生成</a></h3>
+        </div>
+        <div class="summary">mizchi氏が公開した「explainer」は、AIが生成したコードや説明を人間が理解する速度がボトルネックになっている問題に対応するツール群。読者のペルソナから知識の不足分を特定し実行可能な例を添える「explainer」、章立てと演習を管理する「explainer-book」、ドラフト段階で複数の読者モデルに段落ごと評価させ理解の脱落箇所を検出する「first-reader」の3スキルで構成する。図解はMermaidやD2+ELK/dagreで生成し、コード出力の再実行照合やVLMによる図解検査で検証する。</div>
+        <div class="key-points">
+          <ul>
+            <li>ペルソナから知識の不足分を特定し実行可能な例を添える「explainer」、章立て教科書形式の「explainer-book」、ドラフトを読者モデルに段落評価させ理解の脱落を検出する「first-reader」の3スキル構成</li>
+            <li>検証パイプラインはコード出力の再実行照合・VLMによる図解検査・アクセシビリティチェックを含み、TLA+/Apalacheの反例検証にも対応</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub (mizchi)</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-09-29</span>
+          <span class="engagement">🔖 21</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://github.com/ninjahawk/livenerf">「Opus 5.5は劣化したのか」を30日間追跡するベンチマーク「livenerf」——正答率30〜70%の78問で統計的に検証</a></h3>
+        </div>
+        <div class="summary">「livenerf」はClaude Opus 5.5がリリース後に性能低下していないかを検証する30日間の継続ベンチマーク。GPQA Diamond・MMLU-Pro・競技数学から正答率30〜70%の問題78問を選定し、項目ペア比較と事前登録済みの決定ルールで統計的に判定する。検証段階では意図的な効果低減(トークン62%削減・正答率-8.3±4.5ポイント)を検出できる感度を確認した一方、78問中30問は曖昧、8問は正答自体に問題があったと透明性を示す。</div>
+        <div class="key-points">
+          <ul>
+            <li>正答率30〜70%の78問を事前キャリブレーションで選定、項目ペア比較と事前登録済み決定ルールで統計的に判定</li>
+            <li>意図的な効果低減(トークン62%削減・正答率-8.3±4.5ポイント)を検出できる感度を確認、78問中30問は曖昧・8問は正答に問題ありとデータ品質を開示</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub (ninjahawk)</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-29</span>
+          <span class="engagement">▲ 93</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
+
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://forest.watch.impress.co.jp/docs/news/2144293.html">「Windows 11 2026 Update」一般提供開始——24H2/25H2と共通コードでeKB適用による短時間切替に対応</a>
+        <span class="quick-summary">— 5回目の年次大型アップデートで、Home/Proは24か月、Enterprise/Educationは36か月サポートされる。</span>
+        <span class="meta">Impress Watch</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://forest.watch.impress.co.jp/docs/news/2143945.html">Microsoft Learnの公開ドキュメントリポジトリ、多くが2026年12月末までに廃止へ</a>
+        <span class="quick-summary">— 貢献の活発さやビジネス上の必要性を基準に小規模リポジトリから順次非公開化されるが、個人フォークへのアクセスは継続する。</span>
+        <span class="meta">Impress Watch</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://somethingbig.ai/computer">277,248個のNANDゲートだけで組んだコンピュータ「NAND-16」</a>
+        <span class="quick-summary">— 論理素子を単一種類のみに絞り込みながら完全なコンピュータシステムを構築した個人プロジェクト。</span>
+        <span class="meta">somethingbig.ai</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-oss">OSS</span>
+        <a href="https://cow-wm.codeberg.page/cow/">Wayland向けスタッキングウィンドウマネージャ「CoW」v0.3公開——90年代FVWM/MWM風の操作感を再現</a>
+        <span class="quick-summary">— Riverをコンポジタに採用し、IPCスクリプティングとルールベース制御によるカスタマイズに対応する。</span>
+        <span class="meta">Codeberg</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://lucumr.pocoo.org/2026/9/29/deser/">Serdeの限界に対する回答「Deser」——アダプター合成不可などの課題をminiserde着想の逆転アーキテクチャで解決</a>
+        <span class="quick-summary">— JSON読み込みは1割遅くなるがコンパイル時間は改善し、リリースビルドは約2.3倍高速になるという。</span>
+        <span class="meta">lucumr.pocoo.org</span>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="./" class="archive-link">🗂 過去のダイジェスト</a>
+    </footer>
+  </div>
+</body>
+</html>
