@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-10-01</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="../feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-10-01 (Thu)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+      <nav class="site-nav">
+        <a href="../" class="active">📰 日刊ダイジェスト</a>
+        <a href="../trends.html">🔌 週次プラグイントレンド</a>
+        <a href="../ai-trends.html">🧠 AI プロダクト動向</a>
+        <a href="./">🗂 アーカイブ</a>
+      </nav>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 23 articles</span>
+      <span>🏷 7 categories</span>
+      <span>📡 21 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item">
+        <span class="number-value">17.3兆行</span>
+        <span class="number-label">Microsoft内部分析基盤Titanで本来アクセス不能なはずだったレコード数(JWT署名未検証が原因)</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">23,000台</span>
+        <span class="number-label">Citrix NetScalerの2件のゼロデイに露出するインターネット公開デバイス数(Shadowserver調査)</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">100万トークン</span>
+        <span class="number-label">Gemini 4 Argonの最大出力トークン数(従来モデルの6.4万から拡大)</span>
+      </div>
+    </div>
+
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
+
+      <div class="card featured deep-dive">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon/">DEEP DIVE: Google、新型フロンティアモデル「Gemini 4 Argon」を発表——出力上限を6.4万から100万トークンに拡大、提供はサイバー防御組織限定</a></h3>
+        </div>
+        <div class="summary">Googleは9月30日、新型フロンティアモデル「Gemini 4 Argon」を発表した。命名は原子番号18の元素アルゴンに由来するとみられるが、同社は従来の「Pro」系統の後継とは位置づけず、理由も明らかにしていない。Argonは複雑で長時間にわたる業務ワークフローを継続的に処理する設計で、ソフトウェア移行や法務・財務・税務分野の調査、サイバーセキュリティの脆弱性検出・修正といった専門職の高度なタスクを想定する。ベンチマークでは、ソフトウェアエンジニアリング評価のDeepSWE v1.1で77.9%、業務自動化を測るAutomationBenchで51.3%とトップスコアを記録し、脆弱性修正評価のCWE-bench v1では68%で首位タイとなった。最大の変更点は出力トークン数の拡大で、従来モデルの6.4万トークンから100万トークンへと大幅に引き上げられ、長大な成果物を単一の応答で生成できるようになった。価格は導入期間中100万トークンあたり入力2ドル・出力10ドルで、キャッシュ済み入力トークンは95%割引となる。ただし一般提供は見送られ、当面は「Fairwind Program」を通じた信頼できるサイバー防御組織と米国政府機関に限定して提供される。開発者・企業・一般消費者への展開時期は、初期利用者のフィードバックに基づく安全性改善を経てから決定するという。</div>
+        <div class="editorial">🧠 サイバー防御組織限定という提供形態は、強力な脆弱性発見能力がそのまま攻撃側に渡ることへの警戒の表れだろう。ただしCWE-bench等の数値はGoogle自身の計測であり、修正提案自体の安全性や副作用まで第三者が検証したわけではない。一般提供の時期を明示しない慎重な姿勢は理解できるが、競合が同種のモデルを先に一般公開すれば、石橋を叩いている間に市場での先行者利益を譲る可能性もある。</div>
+        <div class="key-points">
+          <ul>
+            <li>DeepSWE v1.1で77.9%、AutomationBenchで51.3%とトップスコア、脆弱性修正評価のCWE-bench v1は68%で首位タイ</li>
+            <li>最大出力トークン数を6.4万から100万へ拡大、価格は導入期間中100万トークンあたり入力2ドル・出力10ドル、キャッシュ入力は95%割引</li>
+            <li>提供は「Fairwind Program」経由の信頼できるサイバー防御組織と米国政府機関に限定、開発者・企業・一般消費者への展開時期は未定</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 脆弱性の自動検出・修正性能はこの種のモデルの実用性を占う指標になるが、現時点では一般の開発者は利用できず、自社のセキュリティ運用に組み込めるのはごく一部の組織に限られる。</div>
+        <div class="meta">
+          <span>Google Blog</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-09-30</span>
+          <span class="engagement">▲ 872</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://blog.faav.net/how-i-couldve-accessed-17-trillion-microsoft-records">Microsoft内部分析基盤「Titan」で署名検証ゼロの認証バイパス発見——17.3兆行・DB17基にアクセス可能だった</a></h3>
+        </div>
+        <div class="summary">セキュリティ研究者Faav氏は、Microsoft社内の分析基盤「Titan」で認証バイパスを発見したと9月25日に公表した。TitanはログイントークンのJWTについてテナントやオーディエンスなど中身は検証する一方、最も重要な署名検証を一切行っていなかった。`"alg":"none"`の未署名JWTを作成し`upn`クレームを`admin`に設定するだけで、管理者権限を取得できたという。この経路でアクセス可能だった分析データベースは17基、保存行数は合計約17.3兆行に達し、アプリ利用者アカウント約2.5万件や従業員メール記録約1.8万件、Bing検索の分析データなどが含まれていた。研究者は意図的に検証範囲を限定し、実際の顧客データや個人情報には触れなかったとしている。8月25日に該当APIを発見してから9月5日に管理者権限取得、9月9日にMicrosoftがエンドポイントを閉鎖、9月17日に5,000ドルの報奨金が支払われ、9月25日に協調的開示として公表された。</div>
+        <div class="key-points">
+          <ul>
+            <li>`"alg":"none"`の未署名JWTで`upn`を`admin`に設定するだけで認証を突破、Titanは署名検証を一切実施していなかった</li>
+            <li>17基の分析DB・約17.3兆行にアクセス可能、発見(8/25)から管理者権限取得(9/5)・エンドポイント閉鎖(9/9)・報奨金5,000ドル(9/17)・開示(9/25)という経緯</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 内部分析基盤のような「表に出ない」システムほどJWT検証の実装を省略しがちで、自社のトークン検証ロジックにも署名検証漏れがないか再点検する価値がある。</div>
+        <div class="meta">
+          <span>blog.faav.net</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-25</span>
+          <span class="engagement">▲ 242</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/javascriptvite_10.html">JavaScript統合ツールチェーン「Vite+ 1.0」正式リリース——単一の`vp` CLIでランタイム・ビルド・リンターを統一</a></h3>
+        </div>
+        <div class="summary">JavaScriptツールチェーン開発元VoidZeroは9月30日、統合ツールチェーン「Vite+ 1.0」を正式リリースした。単一の`vp` CLIでNode.jsランタイム管理・パッケージマネージャー・ビルドツール(Vite)・リンター・フォーマッター・テストランナーを一つの設定でまとめて扱える。内部ではRust製の高速バンドラ「Rolldown」や、Vitest・Oxc・tsdownといった次世代ツール群を採用する。MITライセンスの無料オープンソースで、2026年6月にCloudflareに買収されたVoidZeroの開発体制のもとで提供が続く。</div>
+        <div class="key-points">
+          <ul>
+            <li>単一の`vp` CLIでNode.jsランタイム・パッケージマネージャー・ビルド・リンター・フォーマッター・テストランナーを統一設定で管理</li>
+            <li>Rust製バンドラ「Rolldown」やVitest・Oxc・tsdownを採用、MITライセンスの無料OSSで2026年6月のCloudflareによるVoidZero買収後も開発継続</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 複数ツールの個別設定に消耗している開発者は、移行コストと引き換えに設定ファイル数を大きく減らせる可能性がある。</div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-09-30</span>
+          <span class="engagement">🔖 21</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://bleepingcomputer.com/news/security/cisa-orders-feds-to-patch-exploited-citrix-flaws-by-wednesday">Citrix NetScalerの2件のゼロデイが実環境で悪用——CISAは連邦機関に9月30日までの修正を指示</a></h3>
+        </div>
+        <div class="summary">Citrixは9月下旬、NetScaler ADC/GatewayのゼロデイCVE-2026-88771とCVE-2026-88772が実環境で悪用されていることを確認した。前者はデフォルト構成全てに影響し、後者はDTLSが既定で有効なVPN仮想サーバーで影響を受ける。CISAは連邦機関に対し9月30日までの修正を指示した。</div>
+        <div class="key-points">
+          <ul>
+            <li>CVE-2026-88771は全デフォルト構成に影響、CVE-2026-88772はDTLS有効時(VPN仮想サーバーで既定有効)に影響し、いずれも実環境での悪用を確認</li>
+            <li>Shadowserverの調査で23,000台超のNetScalerがインターネットに露出(ADC約22,000台・Gateway約1,500台)、CISAは連邦機関に9月30日までの修正を指示</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>BleepingComputer</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-29</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/vercelnextjscloudflare_workersaws_lambdavercelvinext_10.html">Cloudflare、Next.jsをVercel以外へデプロイできる「Vinext 1.0」公開——TurbopackではなくViteを採用</a></h3>
+        </div>
+        <div class="summary">Cloudflareは9月30日、TurbopackではなくViteをビルドシステムに採用しNext.jsアプリをVercel以外の環境へデプロイ可能にする「Vinext 1.0」を公開した。App Router/Pages Routerの双方に対応し、SSG・SSR・ISRを組み合わせたハイブリッド構成を主要機能の99%互換で再現する。</div>
+        <div class="key-points">
+          <ul>
+            <li>TurbopackをViteに置き換えてビルドし、Cloudflare Workers・AWS Lambda・Netlifyなど非Vercel環境へのデプロイに対応</li>
+            <li>App Router/Pages Router双方・SSG/SSR/ISRのハイブリッド構成を主要機能の99%互換で再現、Cloudflare Workers向けにHyperdrive連携や画像最適化を簡略化</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-09-30</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/windowslinuxwsl_containersapi.html">Microsoft、サードパーティ不要のLinuxコンテナ実行「WSL Containers」を一般提供開始</a></h3>
+        </div>
+        <div class="summary">Microsoftは9月29日、サードパーティ不要でWSL上にLinuxコンテナを作成・実行できる「WSL Containers」を一般提供した。ファイルシステムにはvirtiofs、ネットワークには統合ネットワーク環境を提供する`consomme`モードを採用し、企業はIntuneやMicrosoft Defender for Endpointと連携して管理できる。</div>
+        <div class="key-points">
+          <ul>
+            <li>2026年6月のBuildで発表、7月にプレビュー、9月29日に一般提供開始。`wslc`コマンドでcontainer restart・network connect/disconnectなどを操作可能</li>
+            <li>virtiofsによる高速ファイルシステムと`consomme`ネットワークモードを採用、Intune・Microsoft Defender for Endpoint連携で企業の大規模管理に対応</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-09-30</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://earendil.com/posts/you-said-no-mcp/">「MCPは使わない」としていたPi開発元が方針転換——ハーネス側サンドボックス「Codemode」でツール呼び出しを調停</a></h3>
+        </div>
+        <div class="summary">AIハーネスPiの開発元Earendilは、かつて批判していたMCPを方針転換しコア機能として統合した。ハーネス側で動くJavaScriptサンドボックス「Codemode」がツール呼び出しを仲介し、MCPサーバーを単純なツール羅列ではなくOpenAPIに近い発見可能な形で扱えるようにする。</div>
+        <div class="key-points">
+          <ul>
+            <li>MCP自体の構成の難しさは残るとしつつ、「批判し続けるより取り込んで内側から改善する方が良い」という方針転換を説明</li>
+            <li>JevとLinear MCPをCodemode経由で連携させるデモでは、167件のissueのうち156件を中立・11件を軽度不満と判定するなどセッション状態を保った連携を実演</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>earendil.com</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-29</span>
+          <span class="engagement">▲ 597</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://nnethercote.github.io/2026/09/30/how-to-speed-up-the-rust-compiler-in-september-2026.html">Rustコンパイラ、2ヶ月で平均4.57%高速化——ClippyへのPGO導入で最大18%改善</a></h3>
+        </div>
+        <div class="summary">Rustコンパイラチームは7月29日から9月28日までの2ヶ月間の最適化成果をまとめた。629件のベンチマーク中555件が改善し平均ウォールタイムは4.57%短縮、ClippyへのPGO導入では最大18%の高速化を記録した。</div>
+        <div class="key-points">
+          <ul>
+            <li>ClippyへのPGO(プロファイル誘導最適化)導入で最良ケース18%高速化、LLVM 23への更新で全ベンチマーク平均1.2%短縮</li>
+            <li>cranelift-codegenクレートのcheckビルドではCFGトラバーサル方式の変更で約30%のウォールタイム短縮、新トレイトソルバー関連の改善で外れ値ケースが最大50%短縮</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>nnethercote.github.io</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-30</span>
+          <span class="engagement">▲ 66</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://www.netlify.com/blog/edge-functions-firecracker-microvms/">Netlify、Edge FunctionsをFirecracker microVMへ刷新——中央値レイテンシが約5倍短縮</a></h3>
+        </div>
+        <div class="summary">Netlifyはエッジ関数の実行基盤をV8分離実行(外部ホスト型サービス)から自社エッジネットワーク内で動くFirecracker microVMへ刷新した。中央値レイテンシは25〜40msから5〜6msへ約5倍短縮し、可用性は99.998%に達した。</div>
+        <div class="key-points">
+          <ul>
+            <li>p50レイテンシは25-40msから5-6msへ、p99 invocationは47.4%改善、ログ配信も5倍高速化</li>
+            <li>microVMはp99で2ms未満に起動、デプロイ単位で隔離されるため一方が侵害されても他顧客への影響を防ぐ設計。既存のURL import・npmパッケージ・netlify.toml設定などユーザー側の変更は不要</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Netlify Blog</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-29</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.com/nanaism/yomiyasu">AI生成文章の「不自然な日本語」を構造レベルで整形するAgent Skill「yomiyasu」公開</a></h3>
+        </div>
+        <div class="summary">nanaism氏は、AI生成文章特有の不自然な日本語(AI-Slop)を構造レベルで整形するAgent Skill「yomiyasu」を公開した。非情物主語+比喩動詞や過剰な名体言止め、根拠のない否定構文という3つの言語病理を検出し、SVOCM構造への再構成を促す。</div>
+        <div class="key-points">
+          <ul>
+            <li>「データが静かに壊れます」のような非情物主語の比喩動詞、過剰な名体言止めの複合名詞、根拠のない「〜ではなく」否定という3つの言語病理を識別</li>
+            <li>LLMによる生成的リライトと決定的バリデータの2段構成、正規表現ベースの`yomiyasu_lint.py`は160文書のテストで適合率100%を達成</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub (nanaism)</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-09-30</span>
+          <span class="engagement">🔖 104</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://syu-m-5151.hatenablog.com/entry/2026/09/29/161928">Codexを使うなら`/recap`・`/copy`・`/export`を押さえておきたい——`/recap`と`/compact`は役割が違う</a></h3>
+        </div>
+        <div class="summary">著者はCodex CLIの`/recap`・`/copy`・`/export`という3コマンドの使い分けを整理した。`/recap`は人間が作業状況を把握するための要約、`/compact`はAIの作業メモリ最適化が目的という役割の違いを明確にする。</div>
+        <div class="key-points">
+          <ul>
+            <li>`/recap`は`config.toml`の`auto_recap`設定で自動化可能、`/copy`は直近の完了済み出力のみが対象で実行中の応答はコピーされない</li>
+            <li>`/export`は会話全体をMarkdown化し、却下した仮説も含め意思決定の経緯を記録として残せる</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>syu-m-5151.hatenablog.com</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-29</span>
+          <span class="engagement">🔖 39</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://qiita.com/suwa_nobu/items/7067a7a0868676d350e9">Claude Sonnet 5.5の「最大30%安い」は、手順のある仕事でだけ再現した</a></h3>
+        </div>
+        <div class="summary">著者はAnthropicが謳う「Sonnet 5.5はタスクあたり最大30%安い」という主張を、手順の多いタスクと単純なタスクで比較検証した。複数ファイルを横断し集計する手順的タスクでは費用が平均31%減(中央値37%減)と公式見解にほぼ一致した。</div>
+        <div class="key-points">
+          <ul>
+            <li>手順的タスク(複数ファイルの金額集計)ではターン数中央値が10から5に半減し、費用は平均-31%・中央値-37%</li>
+            <li>ログのエラー行数を数えるだけの単純タスクでは速度が25%低下し費用削減は16%にとどまり、コスト優位は複数ステップの手順的タスクに限られると結論</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita (suwa_nobu)</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-30</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-frontend">Frontend</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/cybozu_frontend/articles/web_standards_trends_202609">Web標準動向2026年9月版——Scoped Custom Element Registriesが主要3ブラウザで出揃う</a></h3>
+        </div>
+        <div class="summary">Cybozuのフロントエンドチームは2026年9月の主要なWeb標準動向をまとめた。Scoped Custom Element RegistriesがFirefox 159に実装され、Safari・Chromeと合わせ主要3ブラウザで出揃った。HTML-in-CanvasはWHATWGでStage 3に進み、WebKitが実装に着手した。</div>
+        <div class="key-points">
+          <ul>
+            <li>`prefers-bold-text`メディアクエリの新提案やCSSWGでの`appearance: base`のデフォルトスタイル見直し、`aria-flowto`の非推奨化が進行</li>
+            <li>Unicode 18.0.0がリリースされ新規絵文字9種・西夏文字11,328字を追加、ブラウザのリリースサイクルはChrome/Firefox/Edgeとも2週間に統一</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn (cybozu_frontend)</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-30</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.com/magnitudedev/magnitude">端末固有にカーネルをチューニングするローカル推論エンジン「Magnitude」公開——Apple Siliconでllama.cpp比92%高速</a></h3>
+        </div>
+        <div class="summary">開発元は、ユーザーの実機ハードウェア向けにカーネルをその場でコンパイル・チューニングするローカル推論エンジン「Magnitude」を公開した。汎用最適化に頼るllama.cppやOllamaと異なり、セットアップ時の端末固有チューニングで性能を引き出す。</div>
+        <div class="key-points">
+          <ul>
+            <li>Apple SiliconのMetalアクセラレーションでllama.cpp比92%高速デコード、NVIDIA GPUでは19%高速化、メモリ使用量はエージェントあたり27%削減</li>
+            <li>macOS・Linux・Windowsで動作しApache2.0ライセンスで無料・トークン課金なし、複数セッション間でprefixキャッシュを共有</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub (magnitudedev)</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-10-01</span>
+          <span class="engagement">▲ 120</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.qt.io/blog/qt-6.12-released">5年サポートのLTS版「Qt 6.12」公開——EUサイバーレジリエンス法に準拠しSBOM同梱</a></h3>
+        </div>
+        <div class="summary">Qtプロジェクトは9月30日、5年間サポートのLTS版「Qt 6.12」を公開した。EUサイバーレジリエンス法(CRA)に準拠しSBOMを同梱、商用顧客向けに脆弱性対応のSLAを提供する。</div>
+        <div class="key-points">
+          <ul>
+            <li>GPU高速描画エンジン「Qt CanvasPainter」がテクニカルプレビューを終え正式機能に、HTML Canvas相当の新Canvas2D要素を追加</li>
+            <li>HarmonyOSが正式LTSプラットフォームに追加されIoT・車載・PC・タブレットへの展開を拡大、QML Engineにホットリロードを標準搭載</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qt Blog</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-09-30</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://github.com/edgcpp/compiler">商用C/C++パーサーの定番「EDGフロントエンド」が公開に——6万2,397コミットの開発履歴ごと公開</a></h3>
+        </div>
+        <div class="summary">長年商用コンパイラの基盤として使われてきた非公開のC/C++パーサー実装「EDGフロントエンド」が公開された。Clang・GCC・MSVCとの高い互換性と豊富なバグ再現性で知られ、6万2,397コミットに及ぶ開発履歴を含む。</div>
+        <div class="key-points">
+          <ul>
+            <li>C/C++コード生成バックエンドやテンプレートインスタンス化プリリンカ、名前デマングラなど周辺ツール群も同梱して公開</li>
+            <li>90件のオープンイシューを抱えつつ開発が継続中、商用品質のC/C++パーサーを研究・改変できる形で利用可能に</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub (edgcpp)</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-09-30</span>
+          <span class="engagement">▲ 134</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://www.nikkei.com/article/DGXZQOUC303V60Q6A930C2000000/">タイムズカー免許証画像流出、勝手にクレジットカード開設の恐れ——とるべき対策は</a>
+        <span class="quick-summary">— 運転免許証画像の流出で不正なクレジットカード開設の恐れがあると日本経済新聞が報じ、対象者への注意を呼びかけている。</span>
+        <span class="meta">日本経済新聞</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-infra">Infra</span>
+        <a href="https://www.backblaze.com/blog/backblaze-drive-stats-for-q2-2026/">Backblaze、2026年Q2のHDD故障率を公開——AFRが1.73%に上昇</a>
+        <span class="quick-summary">— 35万台超のHDDを分析した四半期故障率(AFR)が1.73%に上昇し、Seagate3機種が無故障を維持する一方2機種は8%超の故障率を記録した。</span>
+        <span class="meta">Backblaze Blog</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://buttondown.com/hillelwayne/archive/what-tla-can-and-cant-check/">形式手法TLA+が検出できる誤り・できない誤りの境界を整理</a>
+        <span class="quick-summary">— 仕様記述だけでは防げない実装バグの種類を具体例とともに示す。</span>
+        <span class="meta">buttondown.com</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://wolfgirl.dev/blog/2026-09-29-pining-for-arc-downcasting-in-rust/">Rustの`Arc`ダウンキャスト問題に`PinRef`で解決策を提案</a>
+        <span class="quick-summary">— `Pin<Arc<MustPin<V>>>`と生ポインタを組み合わせ、クローンなしで安全に内部型へ射影する手法を示す。</span>
+        <span class="meta">wolfgirl.dev</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://blog.jim-nielsen.com/2026/dear-software-makers/">「Dear Software Makers」——指標最適化への固執が創作の確信を損なうと論じるエッセイ</a>
+        <span class="quick-summary">— YouTubeを例に、A/Bテストによる指標追求が体験の共有性と創作の一貫性を損なうと主張する。</span>
+        <span class="meta">blog.jim-nielsen.com</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://www.mattkeeter.com/projects/halfspace/">距離場ベースのソリッドモデリング向け実験的IDE「Halfspace」公開</a>
+        <span class="quick-summary">— コード編集とビジュアル編集を統合する設計思想を示す個人プロジェクト。</span>
+        <span class="meta">mattkeeter.com</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://qiita.com/hamham999/items/ebee7540a82db6933854">荒れたテストケースをコード管理で立て直してみた</a>
+        <span class="quick-summary">— 肥大化し崩れたテストケース管理を、コードとして管理し直すことで立て直した知見を共有する。</span>
+        <span class="meta">Qiita (hamham999)</span>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="./" class="archive-link">🗂 過去のダイジェスト</a>
+    </footer>
+  </div>
+</body>
+</html>

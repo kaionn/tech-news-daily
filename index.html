@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tech News Daily — 2026-10-01</title>
+  <title>Tech News Daily — 2026-10-02</title>
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
   <link rel="icon" type="image/png" sizes="192x192" href="favicon.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -14,7 +14,7 @@
   <div class="container">
     <header>
       <h1>Tech News Daily</h1>
-      <div class="date">2026-10-01 (Thu)</div>
+      <div class="date">2026-10-02 (Fri)</div>
       <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
       <nav class="site-nav">
         <a href="./" class="active">📰 日刊ダイジェスト</a>
@@ -25,7 +25,7 @@
     </header>
 
     <div class="stats-bar">
-      <span>📰 23 articles</span>
+      <span>📰 22 articles</span>
       <span>🏷 7 categories</span>
       <span>📡 21 sources</span>
     </div>
@@ -40,17 +40,27 @@
 
     <div class="numbers-bar">
       <div class="number-item">
-        <span class="number-value">17.3兆行</span>
-        <span class="number-label">Microsoft内部分析基盤Titanで本来アクセス不能なはずだったレコード数(JWT署名未検証が原因)</span>
+        <span class="number-value">13.5倍</span>
+        <span class="number-label">Cloudflare Clef-flashの判定レイテンシ中央値(38.8ms)がJev(524.1ms)より高速</span>
       </div>
       <div class="number-item">
-        <span class="number-value">23,000台</span>
-        <span class="number-label">Citrix NetScalerの2件のゼロデイに露出するインターネット公開デバイス数(Shadowserver調査)</span>
+        <span class="number-value">1,339回</span>
+        <span class="number-label">AIコーディングエージェントによる`gh`コマンド実行回数(人間の80回に対し、tellme.tokyo調べ)</span>
       </div>
       <div class="number-item">
-        <span class="number-value">100万トークン</span>
-        <span class="number-label">Gemini 4 Argonの最大出力トークン数(従来モデルの6.4万から拡大)</span>
+        <span class="number-value">53%</span>
+        <span class="number-label">Weave Routerによる月間トークン費用の推定削減率(フロンティアモデル単独利用比)</span>
       </div>
+    </div>
+
+    <div class="weekly-keywords">
+      <div class="section-title">📊 今週のキーワード</div>
+      <div class="keyword-chips">
+        <span class="keyword-chip">判定モデル</span>
+        <span class="keyword-chip">AIエージェント基盤</span>
+        <span class="keyword-chip">非Vercel/非Big Tech依存</span>
+      </div>
+      <div class="keyword-summary">今週はJev・Clef・Laya・Weave Routerと「LLMより軽い判定モデル／ルーティング層」の発表が相次ぎ、AIエージェントの実行コストを下げる競争が本格化した。並行してVite+・Vinext・WSL Containersなど特定ベンダーへのロックインを避けるツールチェーンの独立リリースも目立ち、Microsoft Titanの認証バイパスやCitrix NetScalerの継続悪用が示すように、エージェント基盤の急拡大と足元のセキュリティ実装の粗さのギャップが今週の底流にあった。</div>
     </div>
 
     <div class="section" id="top-stories">
@@ -60,23 +70,45 @@
         <div class="card-header">
           <span class="tag tag-ai">AI</span>
           <span class="content-type">📦 リリース</span>
-          <h3><a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon/">DEEP DIVE: Google、新型フロンティアモデル「Gemini 4 Argon」を発表——出力上限を6.4万から100万トークンに拡大、提供はサイバー防御組織限定</a></h3>
+          <h3><a href="https://blog.cloudflare.com/clef-decision-models/">DEEP DIVE: Cloudflare、オープンウェイトの「判定モデル」Clefと強化学習ファインチューニング基盤を発表——Jev互換で画像分類にも対応</a></h3>
         </div>
-        <div class="summary">Googleは9月30日、新型フロンティアモデル「Gemini 4 Argon」を発表した。命名は原子番号18の元素アルゴンに由来するとみられるが、同社は従来の「Pro」系統の後継とは位置づけず、理由も明らかにしていない。Argonは複雑で長時間にわたる業務ワークフローを継続的に処理する設計で、ソフトウェア移行や法務・財務・税務分野の調査、サイバーセキュリティの脆弱性検出・修正といった専門職の高度なタスクを想定する。ベンチマークでは、ソフトウェアエンジニアリング評価のDeepSWE v1.1で77.9%、業務自動化を測るAutomationBenchで51.3%とトップスコアを記録し、脆弱性修正評価のCWE-bench v1では68%で首位タイとなった。最大の変更点は出力トークン数の拡大で、従来モデルの6.4万トークンから100万トークンへと大幅に引き上げられ、長大な成果物を単一の応答で生成できるようになった。価格は導入期間中100万トークンあたり入力2ドル・出力10ドルで、キャッシュ済み入力トークンは95%割引となる。ただし一般提供は見送られ、当面は「Fairwind Program」を通じた信頼できるサイバー防御組織と米国政府機関に限定して提供される。開発者・企業・一般消費者への展開時期は、初期利用者のフィードバックに基づく安全性改善を経てから決定するという。</div>
-        <div class="editorial">🧠 サイバー防御組織限定という提供形態は、強力な脆弱性発見能力がそのまま攻撃側に渡ることへの警戒の表れだろう。ただしCWE-bench等の数値はGoogle自身の計測であり、修正提案自体の安全性や副作用まで第三者が検証したわけではない。一般提供の時期を明示しない慎重な姿勢は理解できるが、競合が同種のモデルを先に一般公開すれば、石橋を叩いている間に市場での先行者利益を譲る可能性もある。</div>
+        <div class="summary">Cloudflareは10月1日、LLMのように文章を生成するのではなく、あらかじめ決められた選択肢から構造化された出力を高速・決定論的に返す「判定モデル」の新系列Clefを発表した。名称は文脈を定める音楽記号に由来する。先行する判定モデルTypesafe Jevとの違いは、テキストに加え画像分類にも対応する点と、コンテキスト窓がJevの32kに対し64kへ拡張されている点にある。アーキテクチャ面では、トークンを1つずつ生成する自己回帰方式を取らず、プリフィル1パスののち有効なスキーマ候補を並列にスコアリングする非自己回帰方式を採用し、生成特有の遅延を排除した。Qwen 3.8-27Bベースの高精度版「Clef」と、Qwen 3.5-9Bベースの高速版「Clef-flash」の2サイズをApache 2.0ライセンスでHugging Faceに公開し、Jevと互換のAPIでドロップイン置換できるようにした。性能面では、Typesafeの評価スイート4領域中3領域でJevを上回り、BFCLの完全一致率でClef-flashが98.76%、BANKING77のマクロF1でClefが94.20%を記録。合わせて発表した強化学習ファインチューニング基盤は、AI Gateway・Workers AI・Containers・新設のTrainerというCloudflare既存プリミティブを組み合わせ、顧客が自社データでClefを用途特化させられるようにする。現状はフォワード・デプロイド・エンジニアチームとの伴走提供で、セルフサーブ化は今後の計画としている。</div>
+        <div class="editorial">🧠 LLMを汎用知能として使い切るのではなく、構造化判定だけを軽量モデルに切り出す流れがJev・Laya・Clefと3陣営に広がったことは、エージェント運用コストの重心が「生成」から「判定」へ移りつつある兆候だろう。ただし今回の数値はCloudflare自身の計測であり、Jev側の計測条件と完全に揃っているかは不明だ。競合のLayaは中央値5.8msとClef-flashよりさらに速いが精度はBFCLで38.13%にとどまるとされ、速度と精度のトレードオフは依然解消されていない。RLファインチューニングの自社データ学習は、誤判定の学習的強化という新たなリスクも抱える点は留保が必要だ。</div>
         <div class="key-points">
           <ul>
-            <li>DeepSWE v1.1で77.9%、AutomationBenchで51.3%とトップスコア、脆弱性修正評価のCWE-bench v1は68%で首位タイ</li>
-            <li>最大出力トークン数を6.4万から100万へ拡大、価格は導入期間中100万トークンあたり入力2ドル・出力10ドル、キャッシュ入力は95%割引</li>
-            <li>提供は「Fairwind Program」経由の信頼できるサイバー防御組織と米国政府機関に限定、開発者・企業・一般消費者への展開時期は未定</li>
+            <li>Clef-flash(Qwen 3.5-9Bベース)の判定レイテンシは中央値38.8ms・P95 122.4ms、Jevの中央値524.1msに対し13.5倍高速</li>
+            <li>BFCL完全一致率はClef-flashが98.76%、BANKING77マクロF1はClefが94.20%、API-Bank精度はClef-flashが93.11%とTypesafe評価スイート4領域中3領域でJevを上回る</li>
+            <li>コンテキスト窓はJevの32kに対し64kへ拡張、画像分類にも対応しJev API互換のドロップイン置換が可能。RLファインチューニング基盤はAI Gateway・Workers AI・Containers・新設Trainerを統合</li>
           </ul>
         </div>
-        <div class="why-it-matters">💡 脆弱性の自動検出・修正性能はこの種のモデルの実用性を占う指標になるが、現時点では一般の開発者は利用できず、自社のセキュリティ運用に組み込めるのはごく一部の組織に限られる。</div>
+        <div class="why-it-matters">💡 判定系のタスク(分類・ルーティング・ガードレール)をLLMに丸投げしている場合、Clef-flashへの置き換えでレイテンシとコストを大きく下げられる可能性があるが、現時点では自社データでの精度検証が前提になる。</div>
         <div class="meta">
-          <span>Google Blog</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-09-30</span>
-          <span class="engagement">▲ 872</span>
+          <span>Cloudflare Blog</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-01</span>
+          <span class="engagement">▲ 405</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://earendil.com/posts/pi-1-0/">AIハーネス「Pi 1.0」が安定版に——長時間稼働の派生製品「Pi Durable」も同時公開</a></h3>
+        </div>
+        <div class="summary">AI開発ハーネスPiの開発元Earendilは10月1日、数ヶ月のコミュニティフィードバックを経て安定版「Pi 1.0」をリリースした。同社は流行の機能を安易に取り込まず効果が実証されるまで待つという最小主義を掲げ、Codemode経由のMCP連携・Jevのような非LLMモデルや画像モデルへのネイティブ対応・ツールの遅延読み込み・Anthropicモデル向けキャッシュウォーミングなどを1.0に取り込んだ。ターミナル中心の短時間コーディングに最適化されたPiの枠を超え、長時間稼働するエージェントアプリケーション向けに設計を広げた実験的な派生製品「Pi Durable」も同時公開した。</div>
+        <div class="key-points">
+          <ul>
+            <li>週あたり「数十万人」が利用すると公表、MITライセンスでコマンドラインから即導入可能</li>
+            <li>Codemode経由のMCP連携、非LLMモデル(Jev等)・画像モデルへのネイティブ対応、ツール遅延読み込み、会話途中でのシステムメッセージ注入などを新規搭載</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 短時間のターミナル作業に最適化されたPiと、長時間稼働を前提とするPi Durableが分離されたことで、用途に応じてハーネスを使い分ける判断が必要になる。</div>
+        <div class="meta">
+          <span>earendil.com</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-01</span>
+          <span class="engagement">▲ 669</span>
         </div>
       </div>
 
@@ -84,43 +116,20 @@
         <div class="card-header">
           <span class="tag tag-security">Security</span>
           <span class="content-type">🔒 セキュリティ</span>
-          <h3><a href="https://blog.faav.net/how-i-couldve-accessed-17-trillion-microsoft-records">Microsoft内部分析基盤「Titan」で署名検証ゼロの認証バイパス発見——17.3兆行・DB17基にアクセス可能だった</a></h3>
+          <h3><a href="https://thehackernews.com/2026/10/citrix-netscaler-post-exploitation.html">Citrix NetScalerゼロデイの侵害後、攻撃者はWebシェルをCSS風URLに偽装——管理者権限の裏口アカウントも作成</a></h3>
         </div>
-        <div class="summary">セキュリティ研究者Faav氏は、Microsoft社内の分析基盤「Titan」で認証バイパスを発見したと9月25日に公表した。TitanはログイントークンのJWTについてテナントやオーディエンスなど中身は検証する一方、最も重要な署名検証を一切行っていなかった。`"alg":"none"`の未署名JWTを作成し`upn`クレームを`admin`に設定するだけで、管理者権限を取得できたという。この経路でアクセス可能だった分析データベースは17基、保存行数は合計約17.3兆行に達し、アプリ利用者アカウント約2.5万件や従業員メール記録約1.8万件、Bing検索の分析データなどが含まれていた。研究者は意図的に検証範囲を限定し、実際の顧客データや個人情報には触れなかったとしている。8月25日に該当APIを発見してから9月5日に管理者権限取得、9月9日にMicrosoftがエンドポイントを閉鎖、9月17日に5,000ドルの報奨金が支払われ、9月25日に協調的開示として公表された。</div>
+        <div class="summary">9月のCVE-2026-88771(CVSS 9.5)の実環境悪用に続き、侵害後に投下される第2段ペイロードの詳細が明らかになった。Perlスクリプト「update_c08937.pl」はNetScalerの設定ファイルを書き換えて`sec_monitor`という名のローカルアカウントを作成しスーパーユーザー権限を付与するほか、PHP製Webシェルを`/var/netscaler/logon/LogonPoint/.local_journal`に設置し、Apache設定を改変して正規のNetScaler CSSリソースに酷似したURLへWebシェルをマッピングする。これにより通常のリクエストに紛れてコマンド実行を継続できる。</div>
         <div class="key-points">
           <ul>
-            <li>`"alg":"none"`の未署名JWTで`upn`を`admin`に設定するだけで認証を突破、Titanは署名検証を一切実施していなかった</li>
-            <li>17基の分析DB・約17.3兆行にアクセス可能、発見(8/25)から管理者権限取得(9/5)・エンドポイント閉鎖(9/9)・報奨金5,000ドル(9/17)・開示(9/25)という経緯</li>
+            <li>CVE-2026-88771の悪用に続く第2段ペイロードで、設定ファイル書き換えにより`sec_monitor`というスーパーユーザー権限のローカルアカウントを新規作成</li>
+            <li>PHP WebシェルをNetScaler純正CSSに酷似したURLへマッピングして偽装、外部C2サーバー3件・Pythonリバースシェルの投下も確認</li>
           </ul>
         </div>
-        <div class="why-it-matters">💡 内部分析基盤のような「表に出ない」システムほどJWT検証の実装を省略しがちで、自社のトークン検証ロジックにも署名検証漏れがないか再点検する価値がある。</div>
+        <div class="why-it-matters">💡 パッチ適用だけでは不十分で、認証ログに`pitboss`や`NSPPE`を含む不審ユーザー名がないか、設定ファイルに見覚えのないアカウントがないかの事後点検が必須になる。</div>
         <div class="meta">
-          <span>blog.faav.net</span>
+          <span>The Hacker News</span>
           <span>⏱ 3 min read</span>
-          <span>2026-09-25</span>
-          <span class="engagement">▲ 242</span>
-        </div>
-      </div>
-
-      <div class="card featured">
-        <div class="card-header">
-          <span class="tag tag-oss">OSS</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://www.publickey1.jp/blog/26/javascriptvite_10.html">JavaScript統合ツールチェーン「Vite+ 1.0」正式リリース——単一の`vp` CLIでランタイム・ビルド・リンターを統一</a></h3>
-        </div>
-        <div class="summary">JavaScriptツールチェーン開発元VoidZeroは9月30日、統合ツールチェーン「Vite+ 1.0」を正式リリースした。単一の`vp` CLIでNode.jsランタイム管理・パッケージマネージャー・ビルドツール(Vite)・リンター・フォーマッター・テストランナーを一つの設定でまとめて扱える。内部ではRust製の高速バンドラ「Rolldown」や、Vitest・Oxc・tsdownといった次世代ツール群を採用する。MITライセンスの無料オープンソースで、2026年6月にCloudflareに買収されたVoidZeroの開発体制のもとで提供が続く。</div>
-        <div class="key-points">
-          <ul>
-            <li>単一の`vp` CLIでNode.jsランタイム・パッケージマネージャー・ビルド・リンター・フォーマッター・テストランナーを統一設定で管理</li>
-            <li>Rust製バンドラ「Rolldown」やVitest・Oxc・tsdownを採用、MITライセンスの無料OSSで2026年6月のCloudflareによるVoidZero買収後も開発継続</li>
-          </ul>
-        </div>
-        <div class="why-it-matters">💡 複数ツールの個別設定に消耗している開発者は、移行コストと引き換えに設定ファイル数を大きく減らせる可能性がある。</div>
-        <div class="meta">
-          <span>Publickey</span>
-          <span>⏱ 2 min read</span>
-          <span>2026-09-30</span>
-          <span class="engagement">🔖 21</span>
+          <span>2026-10-01</span>
         </div>
       </div>
     </div>
@@ -130,41 +139,85 @@
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-security">Security</span>
-          <span class="content-type">🔒 セキュリティ</span>
-          <h3><a href="https://bleepingcomputer.com/news/security/cisa-orders-feds-to-patch-exploited-citrix-flaws-by-wednesday">Citrix NetScalerの2件のゼロデイが実環境で悪用——CISAは連邦機関に9月30日までの修正を指示</a></h3>
+          <span class="tag tag-frontend">Frontend</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://svelte.dev/blog/sveltekit-3-is-here">SvelteKit 3公開——設定ファイルは`vite.config.ts`へ統合、`$lib`エイリアスは`#lib`に変更</a></h3>
         </div>
-        <div class="summary">Citrixは9月下旬、NetScaler ADC/GatewayのゼロデイCVE-2026-88771とCVE-2026-88772が実環境で悪用されていることを確認した。前者はデフォルト構成全てに影響し、後者はDTLSが既定で有効なVPN仮想サーバーで影響を受ける。CISAは連邦機関に対し9月30日までの修正を指示した。</div>
+        <div class="summary">Svelteチームは10月1日、SvelteKit 3を公開した。大規模な刷新は避け、型安全性と細部の磨き込みに注力している。設定は`svelte.config.js`から`vite.config.ts`へ統合され、`$lib`エイリアスはNode.js標準のサブパスインポートに合わせ`#lib`へ変更された。サービスワーカーはボイラープレートを削減し実装が簡素化された。</div>
         <div class="key-points">
           <ul>
-            <li>CVE-2026-88771は全デフォルト構成に影響、CVE-2026-88772はDTLS有効時(VPN仮想サーバーで既定有効)に影響し、いずれも実環境での悪用を確認</li>
-            <li>Shadowserverの調査で23,000台超のNetScalerがインターネットに露出(ADC約22,000台・Gateway約1,500台)、CISAは連邦機関に9月30日までの修正を指示</li>
+            <li>設定を`vite.config.ts`に一本化、`$lib`を`#lib`に変更しNode.js標準のサブパスインポート規則に準拠</li>
+            <li>`npx sv migrate sveltekit-3 --tasks all --confirm`で自動移行、型安全なクライアント・サーバー間通信を担うRemote Functionsは実験的フラグのまま継続開発</li>
           </ul>
         </div>
         <div class="meta">
-          <span>BleepingComputer</span>
+          <span>Svelte Blog</span>
           <span>⏱ 3 min read</span>
-          <span>2026-09-29</span>
+          <span>2026-10-01</span>
+          <span class="engagement">▲ 90</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
           <span class="tag tag-dev">Dev</span>
-          <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://www.publickey1.jp/blog/26/vercelnextjscloudflare_workersaws_lambdavercelvinext_10.html">Cloudflare、Next.jsをVercel以外へデプロイできる「Vinext 1.0」公開——TurbopackではなくViteを採用</a></h3>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://blog.rust-lang.org/2026/10/01/Rust-1.99.0/">Rust 1.99.0リリース——C-ABIの可変長引数関数定義が安定化</a></h3>
         </div>
-        <div class="summary">Cloudflareは9月30日、TurbopackではなくViteをビルドシステムに採用しNext.jsアプリをVercel以外の環境へデプロイ可能にする「Vinext 1.0」を公開した。App Router/Pages Routerの双方に対応し、SSG・SSR・ISRを組み合わせたハイブリッド構成を主要機能の99%互換で再現する。</div>
+        <div class="summary">Rustチームは10月1日、Rust 1.99.0を公開した。従来`libc::printf`のような外部可変長引数関数を呼び出すことしかできなかったが、今回"C"・"C-unwind" ABIでの可変長引数関数の定義自体が可能になり、`VaList`型と`VaArgSafe`トレイトで安全に読み取れる型を制御する。生ポインタからレイアウト情報を取得する`Layout::for_value_raw`等3関数も安定化された。</div>
         <div class="key-points">
           <ul>
-            <li>TurbopackをViteに置き換えてビルドし、Cloudflare Workers・AWS Lambda・Netlifyなど非Vercel環境へのデプロイに対応</li>
-            <li>App Router/Pages Router双方・SSG/SSR/ISRのハイブリッド構成を主要機能の99%互換で再現、Cloudflare Workers向けにHyperdrive連携や画像最適化を簡略化</li>
+            <li>"C"・"C-unwind" ABIでの可変長引数関数定義が安定化、`VaList`型と`VaArgSafe`トレイトで読み取り可能な型を制限</li>
+            <li>`Box::into_non_null`・`Vec::into_parts`等を追加安定化、`Box::leak`後のメモリ解放はコンパイラ最適化と衝突しうるため非推奨に変更</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Publickey</span>
+          <span>Rust Blog</span>
           <span>⏱ 2 min read</span>
-          <span>2026-09-30</span>
+          <span>2026-10-01</span>
+          <span class="engagement">⭐ 49</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://blog.gitbutler.com/git-3-sha-256">「Git 3.0のSHA-256デフォルト化は高くつく失策」——GitButler創業者が異議</a></h3>
+        </div>
+        <div class="summary">GitButler創業者Scott Chacon氏は、Git 3.0で新規リポジトリのデフォルトハッシュがSHA-1からSHA-256に変わる方針を批判した。SHA-1は暗号学的に「破られている」が、偶然の衝突には1プロジェクトあたり約1.4じょう(septillion)個のランダムファイルが必要で実用上の脅威はほぼゼロである一方、SHA-1/SHA-256リポジトリは相互運用できずサブモジュールも同一形式でしか機能しないため、既存の署名・ツール・ドキュメント内のコミットリンクが大量に無効化されると指摘する。代案として、保存用にSHA-1・検証用にSHA-256を併記する「独立ツリーハッシュヘッダ」方式を提案し、Chromiumの3,500万ファイルでも独立ハッシュ計算は5秒で完了すると試算を示した。</div>
+        <div class="key-points">
+          <ul>
+            <li>SHA-1の偶発的衝突には1プロジェクトあたり約1.4じょう(1.4×10の24乗)個のランダムファイルが必要と算出、現実の侵害の大半はソーシャルエンジニアリングや依存パッケージ経由と指摘</li>
+            <li>SHA-1/SHA-256リポジトリは相互運用不可でサブモジュールも同一形式必須、代案の独立ツリーハッシュ計算はChromium(3,500万ファイル)で5秒・Linuxツリーで257ミリ秒と試算</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitButler Blog</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-10-01</span>
+          <span class="engagement">▲ 184</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-data">Data</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://turbopuffer.com/blog/rip-vector-database">turbopuffer、「ベクトルDBは終わった」とv3でANNインデックスを副次索引へ格下げ</a></h3>
+        </div>
+        <div class="summary">turbopufferは、ベクトルを主キーに据える設計がストレージ増幅・書き込み増幅・ブロックサイズ制約という3つの限界を抱えると指摘した。複数ベクトルを持つ文書では非ベクトルデータが重複し、1文書の更新が構造全体の再配置を連鎖させ、CPU効率の良い数千文書単位のクエリ処理もベクトル索引が100〜200文書規模のクラスタに制約してしまう。v3ではANN索引を主キーから「副次索引の一つ」に降格させ、多様なクエリパターンに合わせてストレージ層を最適化できるようにする。</div>
+        <div class="key-points">
+          <ul>
+            <li>現行ANN索引は1000億ベクトル規模で p99 200ms・1,000QPS超を達成済みだが、ベクトル主キー設計のままでは文書更新のたびに構造全体が再配置される</li>
+            <li>全文検索v2ではブロックサイズ最適化により索引サイズを10分の1、クエリを最大20倍高速化した実績があり、v3はANN索引を副次索引化してこの最適化をベクトル検索にも波及させる</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>turbopuffer Blog</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-01</span>
+          <span class="engagement">▲ 264</span>
         </div>
       </div>
 
@@ -172,81 +225,20 @@
         <div class="card-header">
           <span class="tag tag-infra">Infra</span>
           <span class="content-type">📦 リリース</span>
-          <h3><a href="https://www.publickey1.jp/blog/26/windowslinuxwsl_containersapi.html">Microsoft、サードパーティ不要のLinuxコンテナ実行「WSL Containers」を一般提供開始</a></h3>
+          <h3><a href="https://blog.cloudflare.com/cloudflare-k2-streams/">Cloudflare、R2上に構築したサーバーレスイベントストリーム「K2」を公開——耐久性11ナイン</a></h3>
         </div>
-        <div class="summary">Microsoftは9月29日、サードパーティ不要でWSL上にLinuxコンテナを作成・実行できる「WSL Containers」を一般提供した。ファイルシステムにはvirtiofs、ネットワークには統合ネットワーク環境を提供する`consomme`モードを採用し、企業はIntuneやMicrosoft Defender for Endpointと連携して管理できる。</div>
+        <div class="summary">CloudflareはR2オブジェクトストレージ上に耐久性のある順序付きログとしてイベントを保存するサーバーレスストリーミングサービス「K2」のパブリックベータを公開した。プロデューサーとコンシューマーの速度差を吸収するバッファとして機能し、作業分散方式とpub/subファンアウト方式の両方の消費パターンに対応、ack/nack/extendによるリース制御も備える。</div>
         <div class="key-points">
           <ul>
-            <li>2026年6月のBuildで発表、7月にプレビュー、9月29日に一般提供開始。`wslc`コマンドでcontainer restart・network connect/disconnectなどを操作可能</li>
-            <li>virtiofsによる高速ファイルシステムと`consomme`ネットワークモードを採用、Intune・Microsoft Defender for Endpoint連携で企業の大規模管理に対応</li>
+            <li>耐久性11ナイン、生成レイテンシはp99で約1秒、ベータ期間の上限は1ストリームあたりストレージ10GB・30MB/秒</li>
+            <li>ベータ期間は無料、正式提供後は生成$0.04/GB・消費$0.04/GB・保持$0.02/GB/月の従量課金を予定、Workers Paidプラン向けに提供</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Publickey</span>
+          <span>Cloudflare Blog</span>
           <span>⏱ 2 min read</span>
-          <span>2026-09-30</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-ai">AI</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://earendil.com/posts/you-said-no-mcp/">「MCPは使わない」としていたPi開発元が方針転換——ハーネス側サンドボックス「Codemode」でツール呼び出しを調停</a></h3>
-        </div>
-        <div class="summary">AIハーネスPiの開発元Earendilは、かつて批判していたMCPを方針転換しコア機能として統合した。ハーネス側で動くJavaScriptサンドボックス「Codemode」がツール呼び出しを仲介し、MCPサーバーを単純なツール羅列ではなくOpenAPIに近い発見可能な形で扱えるようにする。</div>
-        <div class="key-points">
-          <ul>
-            <li>MCP自体の構成の難しさは残るとしつつ、「批判し続けるより取り込んで内側から改善する方が良い」という方針転換を説明</li>
-            <li>JevとLinear MCPをCodemode経由で連携させるデモでは、167件のissueのうち156件を中立・11件を軽度不満と判定するなどセッション状態を保った連携を実演</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>earendil.com</span>
-          <span>⏱ 3 min read</span>
-          <span>2026-09-29</span>
-          <span class="engagement">▲ 597</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://nnethercote.github.io/2026/09/30/how-to-speed-up-the-rust-compiler-in-september-2026.html">Rustコンパイラ、2ヶ月で平均4.57%高速化——ClippyへのPGO導入で最大18%改善</a></h3>
-        </div>
-        <div class="summary">Rustコンパイラチームは7月29日から9月28日までの2ヶ月間の最適化成果をまとめた。629件のベンチマーク中555件が改善し平均ウォールタイムは4.57%短縮、ClippyへのPGO導入では最大18%の高速化を記録した。</div>
-        <div class="key-points">
-          <ul>
-            <li>ClippyへのPGO(プロファイル誘導最適化)導入で最良ケース18%高速化、LLVM 23への更新で全ベンチマーク平均1.2%短縮</li>
-            <li>cranelift-codegenクレートのcheckビルドではCFGトラバーサル方式の変更で約30%のウォールタイム短縮、新トレイトソルバー関連の改善で外れ値ケースが最大50%短縮</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>nnethercote.github.io</span>
-          <span>⏱ 3 min read</span>
-          <span>2026-09-30</span>
-          <span class="engagement">▲ 66</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-infra">Infra</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://www.netlify.com/blog/edge-functions-firecracker-microvms/">Netlify、Edge FunctionsをFirecracker microVMへ刷新——中央値レイテンシが約5倍短縮</a></h3>
-        </div>
-        <div class="summary">Netlifyはエッジ関数の実行基盤をV8分離実行(外部ホスト型サービス)から自社エッジネットワーク内で動くFirecracker microVMへ刷新した。中央値レイテンシは25〜40msから5〜6msへ約5倍短縮し、可用性は99.998%に達した。</div>
-        <div class="key-points">
-          <ul>
-            <li>p50レイテンシは25-40msから5-6msへ、p99 invocationは47.4%改善、ログ配信も5倍高速化</li>
-            <li>microVMはp99で2ms未満に起動、デプロイ単位で隔離されるため一方が侵害されても他顧客への影響を防ぐ設計。既存のURL import・npmパッケージ・netlify.toml設定などユーザー側の変更は不要</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Netlify Blog</span>
-          <span>⏱ 3 min read</span>
-          <span>2026-09-29</span>
+          <span>2026-10-01</span>
+          <span class="engagement">▲ 189</span>
         </div>
       </div>
     </div>
@@ -257,82 +249,81 @@
       <div class="card">
         <div class="card-header">
           <span class="tag tag-ai">AI</span>
-          <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://github.com/nanaism/yomiyasu">AI生成文章の「不自然な日本語」を構造レベルで整形するAgent Skill「yomiyasu」公開</a></h3>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/tksfjt1024/articles/25c0ab111c277c">Claude Code使用量はどう数えられているか実測——Max 20xの重みはAPI料金表と違っていた</a></h3>
         </div>
-        <div class="summary">nanaism氏は、AI生成文章特有の不自然な日本語(AI-Slop)を構造レベルで整形するAgent Skill「yomiyasu」を公開した。非情物主語+比喩動詞や過剰な名体言止め、根拠のない否定構文という3つの言語病理を検出し、SVOCM構造への再構成を促す。</div>
+        <div class="summary">著者はClaude CodeとAPIの間にプロキシを挟み、レート制限ヘッダーとトークン使用量を実測した。導出した計算式は「使用量=モデル重み×(input+cache write×1.25+output×5+cache read×0.025)」で、キャッシュ書き込み・読み込みの重みはAPI公式料金(書き込み2倍、読み込み0.025〜0.1倍)と異なっていた。</div>
         <div class="key-points">
           <ul>
-            <li>「データが静かに壊れます」のような非情物主語の比喩動詞、過剰な名体言止めの複合名詞、根拠のない「〜ではなく」否定という3つの言語病理を識別</li>
-            <li>LLMによる生成的リライトと決定的バリデータの2段構成、正規表現ベースの`yomiyasu_lint.py`は160文書のテストで適合率100%を達成</li>
+            <li>Max 20xのモデル重みはHaiku4.5:Sonnet:Opus5.5:Opus5:Fable=1:1.5:2.2:2.75:10で、API入力料金比の1:2:4:5:10より緩やかにしか消費されない</li>
+            <li>ヘッドレス実行(CLI/Agent SDK)は対話モード比2倍、ピーク時は2.86倍の制限消費。2026年9月中旬に出力重みが8倍から5倍へ予告なく変更されていた</li>
           </ul>
         </div>
         <div class="meta">
-          <span>GitHub (nanaism)</span>
-          <span>⏱ 2 min read</span>
-          <span>2026-09-30</span>
-          <span class="engagement">🔖 104</span>
+          <span>Zenn (tksfjt1024)</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-10-01</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
+          <span class="tag tag-infra">Infra</span>
           <span class="content-type">📜 解説</span>
-          <h3><a href="https://syu-m-5151.hatenablog.com/entry/2026/09/29/161928">Codexを使うなら`/recap`・`/copy`・`/export`を押さえておきたい——`/recap`と`/compact`は役割が違う</a></h3>
+          <h3><a href="https://zenn.dev/gonta_ganbareyo/articles/6256bf2008b2ef">terraform applyしたら1.5ヶ月前のコードが本番に出ていた——`ignore_changes`の落とし穴</a></h3>
         </div>
-        <div class="summary">著者はCodex CLIの`/recap`・`/copy`・`/export`という3コマンドの使い分けを整理した。`/recap`は人間が作業状況を把握するための要約、`/compact`はAIの作業メモリ最適化が目的という役割の違いを明確にする。</div>
+        <div class="summary">著者はCloud Runの環境変数削除後に`terraform apply`を実行したところ、本番サービスが1.5ヶ月前のコンテナイメージで起動していたインシデントを報告した。`lifecycle.ignore_changes`でイメージを除外していたが、これは「差分を変更として扱わない」設定であり「現在値を保持する」設定ではなかった。環境変数削除がtemplateブロック全体の再構築を誘発し、Terraformステートに残る初期プレースホルダ画像へ巻き戻った。</div>
         <div class="key-points">
           <ul>
-            <li>`/recap`は`config.toml`の`auto_recap`設定で自動化可能、`/copy`は直近の完了済み出力のみが対象で実行中の応答はコピーされない</li>
-            <li>`/export`は会話全体をMarkdown化し、却下した仮説も含め意思決定の経緯を記録として残せる</li>
+            <li>Honoベースのサービスは起動時の環境変数検証で即座に失敗した一方、Next.jsサービスは起動には成功しリクエスト処理時に500エラーを返すなど症状が分かれた</li>
+            <li>対策としてGitHub ActionsのコミットSHAをTerraform変数としてイメージタグに渡す方式へ変更し、Terraformに常に現在のデプロイ版を認識させるようにした</li>
           </ul>
         </div>
         <div class="meta">
-          <span>syu-m-5151.hatenablog.com</span>
-          <span>⏱ 3 min read</span>
-          <span>2026-09-29</span>
-          <span class="engagement">🔖 39</span>
+          <span>Zenn (gonta_ganbareyo)</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-09-30</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
           <span class="tag tag-ai">AI</span>
-          <span class="content-type">🔬 研究</span>
-          <h3><a href="https://qiita.com/suwa_nobu/items/7067a7a0868676d350e9">Claude Sonnet 5.5の「最大30%安い」は、手順のある仕事でだけ再現した</a></h3>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://qiita.com/suwa_nobu/items/cc0fb4a9e10100991bba">スキル名を「verify」にするだけでClaude Codeがコミット前に自動実行すると判明</a></h3>
         </div>
-        <div class="summary">著者はAnthropicが謳う「Sonnet 5.5はタスクあたり最大30%安い」という主張を、手順の多いタスクと単純なタスクで比較検証した。複数ファイルを横断し集計する手順的タスクでは費用が平均31%減(中央値37%減)と公式見解にほぼ一致した。</div>
+        <div class="summary">著者はClaude Code 2.1.286で、プロジェクト・ユーザースキルに「verify」という名前のスキルがあると、コミット直前に自動実行される挙動を検証した。公式の変更履歴には記載があるがスキル機能のドキュメントには明記されていない、名前のハードコード認識による特別扱いだという。30回の実行テストで、スキル名を「verify2」に変えると発火が0件になり、バージョン2.1.285では「verify」でも発火しなかった。</div>
         <div class="key-points">
           <ul>
-            <li>手順的タスク(複数ファイルの金額集計)ではターン数中央値が10から5に半減し、費用は平均-31%・中央値-37%</li>
-            <li>ログのエラー行数を数えるだけの単純タスクでは速度が25%低下し費用削減は16%にとどまり、コスト優位は複数ステップの手順的タスクに限られると結論</li>
+            <li>「verify」という名前は2.1.286以降でのみコミット直前に自動実行、「verify2」に変えると3回中0回しか実行されず命名のハードコード認識が裏付けられた</li>
+            <li>ドキュメントのみ・テストのみの変更では自動実行されず、コード変更があった場合にコミット完了の2〜3秒前に実行される</li>
           </ul>
         </div>
         <div class="meta">
           <span>Qiita (suwa_nobu)</span>
           <span>⏱ 3 min read</span>
-          <span>2026-09-30</span>
+          <span>2026-10-01</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-frontend">Frontend</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://zenn.dev/cybozu_frontend/articles/web_standards_trends_202609">Web標準動向2026年9月版——Scoped Custom Element Registriesが主要3ブラウザで出揃う</a></h3>
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://tellme.tokyo/post/2026/10/01/ai-agent-first-dotfiles/">AIエージェント優先のdotfilesに再設計——起動時間を0.5秒から0.01秒へ短縮</a></h3>
         </div>
-        <div class="summary">Cybozuのフロントエンドチームは2026年9月の主要なWeb標準動向をまとめた。Scoped Custom Element RegistriesがFirefox 159に実装され、Safari・Chromeと合わせ主要3ブラウザで出揃った。HTML-in-CanvasはWHATWGでStage 3に進み、WebKitが実装に着手した。</div>
+        <div class="summary">著者は`gh`コマンドの実行回数がAIエージェントで1,339回、人間で80回だったことから、人間向けに最適化されていた既存dotfilesの前提を転換した。TTY状態とAI環境変数の有無で判定し、デフォルトをAI向けとして人間側は明示的な有効化を必要とする設計に変更。対話的なcdツールや`cp -i`の確認プロンプトなどAIの実行をブロックする要因を除去し、Nixで各ツールの設定を1ファイルに集約してhuman.zsh・ai.zsh・env.zshの3つを生成するようにした。</div>
         <div class="key-points">
           <ul>
-            <li>`prefers-bold-text`メディアクエリの新提案やCSSWGでの`appearance: base`のデフォルトスタイル見直し、`aria-flowto`の非推奨化が進行</li>
-            <li>Unicode 18.0.0がリリースされ新規絵文字9種・西夏文字11,328字を追加、ブラウザのリリースサイクルはChrome/Firefox/Edgeとも2週間に統一</li>
+            <li>`gh`コマンドの実行回数はAIエージェントが1,339回・人間が80回、シェル起動時間は0.5秒から0.01秒へ短縮、AI向けスナップショットは14,284行から339行へ圧縮</li>
+            <li>`rm`は誤削除を防ぐ`gomi`ラッパーとして維持しつつ、それ以外の対話的エイリアスは標準コマンド挙動に統一</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Zenn (cybozu_frontend)</span>
+          <span>tellme.tokyo</span>
           <span>⏱ 3 min read</span>
-          <span>2026-09-30</span>
+          <span>2026-10-01</span>
+          <span class="engagement">🔖 49</span>
         </div>
       </div>
     </div>
@@ -344,61 +335,60 @@
         <div class="card-header">
           <span class="tag tag-ai">AI</span>
           <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://github.com/magnitudedev/magnitude">端末固有にカーネルをチューニングするローカル推論エンジン「Magnitude」公開——Apple Siliconでllama.cpp比92%高速</a></h3>
+          <h3><a href="https://weaveos.com/router">コーディングエージェント向けモデルルーター「Weave Router」公開——Astra級品質を保ちつつ月間トークン費用を53%削減</a></h3>
         </div>
-        <div class="summary">開発元は、ユーザーの実機ハードウェア向けにカーネルをその場でコンパイル・チューニングするローカル推論エンジン「Magnitude」を公開した。汎用最適化に頼るllama.cppやOllamaと異なり、セットアップ時の端末固有チューニングで性能を引き出す。</div>
+        <div class="summary">Weaveは、エージェントの各ターンの難易度をミリ秒単位で判定し、要件を満たす最安のモデルへ振り分けるオープンソースのルーティングツールを公開した。Claude・GPT・DeepSeek・GLM(Kimi)・Gemini・Llamaの間を切り替え、キャッシュ再構築コストが節約額を上回る場合は切り替えないキャッシュ考慮ルーティングや、停滞したタスクをフロンティアモデルへ自動エスカレーションする機能を備える。</div>
         <div class="key-points">
           <ul>
-            <li>Apple SiliconのMetalアクセラレーションでllama.cpp比92%高速デコード、NVIDIA GPUでは19%高速化、メモリ使用量はエージェントあたり27%削減</li>
-            <li>macOS・Linux・Windowsで動作しApache2.0ライセンスで無料・トークン課金なし、複数セッション間でprefixキャッシュを共有</li>
+            <li>pass@2タスク完了率62.1%、1試行あたりの費用は約2.31ドルでGPT-6 Astra単独利用の5.04ドルより安い</li>
+            <li>フラットレート契約のモデル枠を従量課金APIより優先利用し、月間トークン費用を約53%削減と試算。Claude Code・Codex・Cursorへ単一コマンドで導入可能</li>
           </ul>
         </div>
         <div class="meta">
-          <span>GitHub (magnitudedev)</span>
+          <span>weaveos.com</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-09-30</span>
+          <span class="engagement">▲ 74</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-data">Data</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/google_clouddbspanner_omni.html">Google Cloud、ローカルマシンで動く分散マルチモデルDB「Spanner Omni」正式版をリリース</a></h3>
+        </div>
+        <div class="summary">Google Cloudは、マネージドSpannerの独立ソフトウェア版「Spanner Omni」を正式リリースした。Google独自のColossusストレージやTrueTime同期をソフトウェア実装に置き換え、Linux(RHEL9・Ubuntu22)やmacOS(M1〜M3)、クラウドVM・Kubernetes Pod上でも動作する。リレーショナル・グラフ・キーバリュー・ベクトル検索・全文検索を単一DBで扱える。</div>
+        <div class="key-points">
+          <ul>
+            <li>Paxosコンセンサス・自動シャーディング・同期レプリケーションなどSpanner本体の技術を継承し、単一サーバーから数千ノード級クラスタまでスケール可能</li>
+            <li>無料のDeveloper Edition(非商用90日限定、4vCPU未満のシングルサーバーは無期限)と、vCPU課金の商用Commercial Editionの2種を提供</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
           <span>⏱ 2 min read</span>
           <span>2026-10-01</span>
-          <span class="engagement">▲ 120</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://www.qt.io/blog/qt-6.12-released">5年サポートのLTS版「Qt 6.12」公開——EUサイバーレジリエンス法に準拠しSBOM同梱</a></h3>
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://renderling.xyz/articles/wgsl-rs-beta-release.html">Rust→WGSLトランスパイラ「wgsl-rs」がベータ公開——Zedフォーク版エンジンgpui-ceが早速採用</a></h3>
         </div>
-        <div class="summary">Qtプロジェクトは9月30日、5年間サポートのLTS版「Qt 6.12」を公開した。EUサイバーレジリエンス法(CRA)に準拠しSBOMを同梱、商用顧客向けに脆弱性対応のSLAを提供する。</div>
+        <div class="summary">wgsl-rsはRustで書いたコードをWebGPUシェーディング言語WGSLへ変換するトランスパイラで、v0.1.0-betaがcrates.ioに公開された。二項演算子を全て括弧で囲み暗黙の型エラーを防ぐほか、Rustの真偽値による等価比較をWGSLのベクトルマスク結果へ変換するパスや、リテラルに正しい型サフィックスを付与する「アンカリングパス」を備える。</div>
         <div class="key-points">
           <ul>
-            <li>GPU高速描画エンジン「Qt CanvasPainter」がテクニカルプレビューを終え正式機能に、HTML Canvas相当の新Canvas2D要素を追加</li>
-            <li>HarmonyOSが正式LTSプラットフォームに追加されIoT・車載・PC・タブレットへの展開を拡大、QML Engineにホットリロードを標準搭載</li>
+            <li>関数呼び出しグラフを解析しシェーダーステージごとのバインディング可視性を判定、実行時にwgpuパイプラインを汎用IRから生成しバッファサイズも自動設定</li>
+            <li>Zedエディタのレンダリングcrateをフォークしたコミュニティ版「gpui-ce」(GitHub 1.2k star)が既に採用</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Qt Blog</span>
+          <span>renderling.xyz</span>
           <span>⏱ 2 min read</span>
-          <span>2026-09-30</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://github.com/edgcpp/compiler">商用C/C++パーサーの定番「EDGフロントエンド」が公開に——6万2,397コミットの開発履歴ごと公開</a></h3>
-        </div>
-        <div class="summary">長年商用コンパイラの基盤として使われてきた非公開のC/C++パーサー実装「EDGフロントエンド」が公開された。Clang・GCC・MSVCとの高い互換性と豊富なバグ再現性で知られ、6万2,397コミットに及ぶ開発履歴を含む。</div>
-        <div class="key-points">
-          <ul>
-            <li>C/C++コード生成バックエンドやテンプレートインスタンス化プリリンカ、名前デマングラなど周辺ツール群も同梱して公開</li>
-            <li>90件のオープンイシューを抱えつつ開発が継続中、商用品質のC/C++パーサーを研究・改変できる形で利用可能に</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>GitHub (edgcpp)</span>
-          <span>⏱ 2 min read</span>
-          <span>2026-09-30</span>
-          <span class="engagement">▲ 134</span>
+          <span>2026-10-01</span>
         </div>
       </div>
     </div>
@@ -408,51 +398,51 @@
 
       <div class="quick-link">
         <span class="tag tag-security">Security</span>
-        <a href="https://www.nikkei.com/article/DGXZQOUC303V60Q6A930C2000000/">タイムズカー免許証画像流出、勝手にクレジットカード開設の恐れ——とるべき対策は</a>
-        <span class="quick-summary">— 運転免許証画像の流出で不正なクレジットカード開設の恐れがあると日本経済新聞が報じ、対象者への注意を呼びかけている。</span>
-        <span class="meta">日本経済新聞</span>
+        <a href="https://cybersecuritynews.com/apple-zero-day-vulnerability-exploited/">Apple、標的型攻撃で悪用されたCoreGraphicsのゼロデイ(CVE-2026-86950)をiOS 26.7.1で修正</a>
+        <span class="quick-summary">— 悪意あるファイルを処理させるだけで任意コード実行が可能な脆弱性で、既に標的型攻撃での悪用が確認されている。</span>
+        <span class="meta">cybersecuritynews.com</span>
       </div>
 
       <div class="quick-link">
-        <span class="tag tag-infra">Infra</span>
-        <a href="https://www.backblaze.com/blog/backblaze-drive-stats-for-q2-2026/">Backblaze、2026年Q2のHDD故障率を公開——AFRが1.73%に上昇</a>
-        <span class="quick-summary">— 35万台超のHDDを分析した四半期故障率(AFR)が1.73%に上昇し、Seagate3機種が無故障を維持する一方2機種は8%超の故障率を記録した。</span>
-        <span class="meta">Backblaze Blog</span>
+        <span class="tag tag-security">Security</span>
+        <a href="https://bleepingcomputer.com/news/security/teamviewer-urges-users-to-patch-severe-flaws-as-soon-as-possible">TeamViewer、リモートセッションのアクセス制御を回避できる高深刻度の脆弱性(CVE-2026-92370)を公表し緊急パッチを呼びかけ</a>
+        <span class="quick-summary">— 悪用されれば攻撃者がリモートセッション経由で不正な操作を実行できる可能性がある。</span>
+        <span class="meta">BleepingComputer</span>
       </div>
 
       <div class="quick-link">
-        <span class="tag tag-dev">Dev</span>
-        <a href="https://buttondown.com/hillelwayne/archive/what-tla-can-and-cant-check/">形式手法TLA+が検出できる誤り・できない誤りの境界を整理</a>
-        <span class="quick-summary">— 仕様記述だけでは防げない実装バグの種類を具体例とともに示す。</span>
-        <span class="meta">buttondown.com</span>
+        <span class="tag tag-security">Security</span>
+        <a href="https://blog.cryptographyengineering.com/2026/09/30/is-sandboxing-sufficient-to-contain-rogue-agents/">暴走するAIエージェントはサンドボックスだけで封じ込められるのか、暗号研究者が限界を論じる</a>
+        <span class="quick-summary">— ネットワーク越しの副作用や人間を介した迂回など、サンドボックス単体では防げない経路を整理する。</span>
+        <span class="meta">blog.cryptographyengineering.com</span>
       </div>
 
       <div class="quick-link">
-        <span class="tag tag-dev">Dev</span>
-        <a href="https://wolfgirl.dev/blog/2026-09-29-pining-for-arc-downcasting-in-rust/">Rustの`Arc`ダウンキャスト問題に`PinRef`で解決策を提案</a>
-        <span class="quick-summary">— `Pin<Arc<MustPin<V>>>`と生ポインタを組み合わせ、クローンなしで安全に内部型へ射影する手法を示す。</span>
-        <span class="meta">wolfgirl.dev</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-product">Product</span>
-        <a href="https://blog.jim-nielsen.com/2026/dear-software-makers/">「Dear Software Makers」——指標最適化への固執が創作の確信を損なうと論じるエッセイ</a>
-        <span class="quick-summary">— YouTubeを例に、A/Bテストによる指標追求が体験の共有性と創作の一貫性を損なうと主張する。</span>
-        <span class="meta">blog.jim-nielsen.com</span>
+        <span class="tag tag-frontend">Frontend</span>
+        <a href="https://molily.de/web-dev-education/">「Web開発教育の死」——フレームワーク偏重のチュートリアルがHTML/CSS/JSの基礎理解を奪っていると指摘するエッセイ</a>
+        <span class="quick-summary">— React中心の教材が増える一方、基礎を飛ばした学習者がブラウザの挙動を理解できていない現状を論じる。</span>
+        <span class="meta">molily.de</span>
       </div>
 
       <div class="quick-link">
         <span class="tag tag-dev">Dev</span>
-        <a href="https://www.mattkeeter.com/projects/halfspace/">距離場ベースのソリッドモデリング向け実験的IDE「Halfspace」公開</a>
-        <span class="quick-summary">— コード編集とビジュアル編集を統合する設計思想を示す個人プロジェクト。</span>
-        <span class="meta">mattkeeter.com</span>
+        <a href="https://aaronmallen.me/writing/hanami-why-introductions">Rails代替のRubyフレームワーク「Hanami」入門——設計思想を解説する新連載が開始</a>
+        <span class="quick-summary">— クリーンアーキテクチャ志向のHanamiがRailsと何を変えるのかを連載形式で紹介する。</span>
+        <span class="meta">aaronmallen.me</span>
       </div>
 
       <div class="quick-link">
         <span class="tag tag-dev">Dev</span>
-        <a href="https://qiita.com/hamham999/items/ebee7540a82db6933854">荒れたテストケースをコード管理で立て直してみた</a>
-        <span class="quick-summary">— 肥大化し崩れたテストケース管理を、コードとして管理し直すことで立て直した知見を共有する。</span>
-        <span class="meta">Qiita (hamham999)</span>
+        <a href="https://www.rtl-sdr.com/various-projects-independently-find-hidden-sdr-capabilities-in-esp32-microcontrollers/">複数の独立プロジェクトがESP32マイコン内蔵の隠しSDR機能を発見</a>
+        <span class="quick-summary">— 安価なESP32チップが想定外のソフトウェア無線受信機として使える可能性を複数の開発者が別々に報告した。</span>
+        <span class="meta">rtl-sdr.com</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://arxiv.org/abs/2609.37725">「Context Language Models」論文が公開——文脈の扱い方そのものを学習対象にする新アプローチを提案</a>
+        <span class="quick-summary">— 固定長コンテキスト窓の制約を超え、文脈情報の取捨選択自体をモデルに学習させる設計を論じる。</span>
+        <span class="meta">arxiv.org</span>
       </div>
     </div>
 
