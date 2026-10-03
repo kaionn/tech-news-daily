@@ -16,6 +16,9 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const DEFAULT_DATA_DIR = path.join(ROOT, 'data/ai-trends');
 const ISSUE_FILENAME_RE = /^(\d{4}-W\d{2}|\d{4}-\d{2}-\d{2})\.json$/;
 const DATE_KEY_RE = /^\d{4}-\d{2}-\d{2}$/;
+const SITE_URL = 'https://tech-news.kaion-lab.com';
+const OG_DESCRIPTION_MAX = 120;
+const OG_DESCRIPTION_FALLBACK = 'AI プロダクト動向の解説';
 
 // 旧週次キー (2026-W30) と日付キー (2026-07-28) は素の文字列比較だと
 // "W" > 数字で週キーが常に後ろへ来てしまうため、週キーはその ISO 週の
@@ -276,6 +279,43 @@ function renderFooter(issue, fromIsLatest) {
 </footer>`;
 }
 
+// ---- html rendering: OGP / Twitter Card -----------------------------------------
+
+function truncateDescription(text, max) {
+  if (text.length <= max) return text;
+  let cut = text.slice(0, max - 1);
+  // サロゲートペアの前半だけが残らないようにする
+  if (/[\uD800-\uDBFF]$/.test(cut)) cut = cut.slice(0, -1);
+  return `${cut}…`;
+}
+
+function ogMetaTag(attr, name, value) {
+  return `<meta ${attr}="${name}" content="${escapeHtml(value)}">`;
+}
+
+function renderOgMeta(issue, fromIsLatest) {
+  const source = issue.theme.lede || issue.theme.tldr[0] || OG_DESCRIPTION_FALLBACK;
+  const description = truncateDescription(source.trim() || OG_DESCRIPTION_FALLBACK, OG_DESCRIPTION_MAX);
+  const url = fromIsLatest ? `${SITE_URL}/ai-trends.html` : `${SITE_URL}/ai-trends/${issue.week}.html`;
+  return [
+    ogMetaTag('name', 'description', description),
+    ogMetaTag('property', 'og:type', 'article'),
+    ogMetaTag('property', 'og:site_name', 'Tech News Daily'),
+    ogMetaTag('property', 'og:title', `${issue.theme.title} | AI プロダクト動向`),
+    ogMetaTag('property', 'og:description', description),
+    ogMetaTag('property', 'og:url', url),
+    ogMetaTag('property', 'og:image', `${SITE_URL}/apple-touch-icon.png`),
+    ogMetaTag('name', 'twitter:card', 'summary'),
+  ].join('\n');
+}
+
+function renderPlaceholderOgMeta() {
+  return [
+    ogMetaTag('property', 'og:title', 'AI プロダクト動向 | Tech News Daily'),
+    ogMetaTag('property', 'og:url', `${SITE_URL}/ai-trends.html`),
+  ].join('\n');
+}
+
 // ---- html rendering: page -------------------------------------------------------
 
 const PAGE_STYLE = `:root{--primary-600:#2250df;--primary-500:#2b70ef;--primary-50:#f0f5ff;--radius-lg:.75rem;--text-base:1.125rem;--bg:#fafafa;--surface:#fff;--text-primary:#1a1a2e;--text-secondary:#555570;--text-muted:#8888a0;--border:#e4e4ec;--accent-ai:#7c3aed;--accent-dev:#059669}
@@ -345,6 +385,7 @@ function renderPage(issue, allIssues, latestWeek, fromIsLatest) {
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI プロダクト動向 | Tech News Daily</title>
+${renderOgMeta(issue, fromIsLatest)}
 <link rel="icon" type="image/png" sizes="32x32" href="${fromIsLatest ? '' : '../'}favicon-32.png">
 <style>
 ${PAGE_STYLE}
@@ -378,6 +419,7 @@ function renderPlaceholderPage() {
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI プロダクト動向 | Tech News Daily</title>
+${renderPlaceholderOgMeta()}
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <style>
 ${PAGE_STYLE}
