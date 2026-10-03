@@ -66,7 +66,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 <div class="container">
 <header>
   <h1>🧠 AI プロダクト動向</h1>
-  <p class="date">2026-09-17 発行（読了 6 分）</p>
+  <p class="date">2026-10-03 発行（読了 6 分）</p>
   <p class="tagline">実プロダクトのアーキテクチャ・使用例から AI 開発の現在地を週 3 回・1 号 1 テーマで深掘り</p>
   <nav class="site-nav">
     <a href="../">📰 日刊ダイジェスト</a>
@@ -77,88 +77,94 @@ footer a{color:var(--primary-500);text-decoration:none}
 </header>
 
 <div class="theme-hero">
-  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">AGENTIC-SEARCH</span></span>
-  <h2>コード検索の設計が三方向に割れた — ベクトルDBを捨てる陣営、極める陣営、置き換える陣営</h2>
-  <p class="lede">「RAGはハイブリッド検索+リランカーが正解」という結論は一般的な文書検索では固まりつつあるが、コーディングエージェントの世界では事情が違う。Claude Code はベクトルインデックスを完全に捨てて grep/glob による反復探索に切り替え、Cursor と GitHub Copilot は逆に埋め込みの構築効率を磨き込み、Sourcegraph は検索そのものを静的解析に置き換える道を選んだ。同じ「コードを探す」という課題に、3社が3通りの答えを出している。</p>
+  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">AGENT-EVALUATION</span></span>
+  <h2>エージェントの評価は「最終出力」ではなく「軌跡」を見る設計に変わった — OpenAI・Anthropic・Replitが同時に評価基盤を公開</h2>
+  <p class="lede">エージェント型プロダクトが本番投入されるにつれ、「動いているように見える」と「実際に信頼できる」の差を埋める評価基盤の話が急増している。OpenAI・Anthropic・Replit・Braintrustが相次いで評価の内部設計を公開した。単発のLLM呼び出しの精度を測る評価と違い、エージェントは複数ステップの意思決定が連鎖するため、最終出力だけを見る評価では途中のどこで壊れたかが分からない。各社の投稿が共通して強調するのは、評価の単位を「出力」から意思決定の「軌跡（トラジェクトリ）」全体に広げ、本番で実際に起きた失敗をそのまま評価データセットの供給源にするという設計転換だ。</p>
 </div>
 
 <div class="tldr">
   <div class="label">TL;DR — 3 行で</div>
   <ul>
-    <li>Claude Code は埋め込みベースのRAGを捨て、grep/globの反復探索に完全移行——再インデックスの陳腐化とコードアップロードのセキュリティリスクを避けるため。</li>
-    <li>Cursor と GitHub Copilot は埋め込みを維持しつつ、Merkle木による差分再索引や新埋め込みモデルで構築・更新コストを下げる方向に投資している。</li>
-    <li>Sourcegraph は「答えが一意に決まるクエリ」を静的解析（SCIP）による確定的ルックアップに逃し、曖昧なクエリだけを検索に残す設計で精度を底上げした。</li>
+    <li>OpenAI・Anthropic・Replit・Braintrustが2026年に評価基盤の内部設計を相次いで公開した。</li>
+    <li>評価の単位は最終出力ではなく、途中の意思決定を含む「軌跡」全体に広がった。</li>
+    <li>本番トレースをそのまま評価データセット化し、失敗を再発防止のテストに変換する運用が共通して採用されている。</li>
   </ul>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 1: Claude Code はなぜベクトル検索をやめたのか</div>
+  <div class="section-title">📐 パターン 1: 評価の単位が「出力」から「軌跡」に広がった理由</div>
   <div class="theme-section">
-    <p>Claude Code の「エージェント検索」は、事前にコードベース全体をベクトル化してインデックスを作る代わりに、<code>grep</code> と <code>glob</code> による反復探索をエージェント自身に実行させる方式だ。クエリのたびにファイルを絞り込み、読み、必要なら検索語を変えて再検索する——人間のエンジニアがコードを探すのと同じ手順をツール呼び出しの連鎖として再現する。</p><p>Anthropicは当初、埋め込みベースのRAGパイプラインをClaude Codeに組み込んでいたが、後にエージェント検索へ完全に置き換えた。理由は精度だけでなく運用コストにある。ベクトルインデックスはコード変更のたびに再構築が必要で、ローカルの未コミット変更とはすぐにズレる。さらに社外のベクトルDBへコードをアップロードすること自体がセキュリティ上のリスクになる。エージェント検索はレイテンシとトークン消費の増加を引き受ける代わりに、この2つの負債を丸ごと回避した。</p>
+    <p>Anthropicの評価解説は、評価を tasks（課題設定）・trials（試行）・transcripts（エージェントが何をしたかの記録）・outcomes（環境が最終的にどうなったか）・graders（採点ロジック）・harness（実行基盤）の6要素に分解する。重要なのは transcript と outcome を別々に採点する点で、途中で遠回りしても最終的に正しい状態に到達すれば outcome は満点になり得るが、「たまたま正解に辿り着いただけ」の軌跡を見逃さないために transcript 側の採点を残す。OpenAI の Agent Skills 向け評価ガイドも同様に、成功基準を outcome（タスクが完了したか）・process（意図したツールを辿ったか）・style（出力の体裁が規約に沿っているか）の3カテゴリに分けてから Skill を書くよう求めている。</p><p>この収束の背景には、エージェントのステップ数が増えるほど「最終出力だけ一致していればOK」という評価が機能しなくなるという共通の失敗体験がある。途中のステップでツール選択を誤っても、後続のステップで帳尻を合わせて正解に見える出力を返すことがあり、出力一致だけの評価ではこの種の事故が蓄積してから発覚する。複数社が同時期に「軌跡を分解して採点する」設計を公開したのは、単発の思想ではなく本番運用で共通して踏んだ落とし穴への回答といえる。</p>
     <div class="example">
-      <div class="product">Claude Code（Anthropic）</div>
-      <div class="approach">grep/glob による反復探索でベクトルDBを完全代替</div>
-      <div class="detail">創業エンジニアのBoris Cherny はLatent Space のインタビューで、社内評価においてエージェント検索が「あらゆる面で圧倒的に(RAGを)上回った」と証言。埋め込みの再インデックス負債とコードアップロードのセキュリティリスクを避けるトレードオフとして、レイテンシとトークン消費の増加を受け入れたと説明している。</div>
-      <a href="https://www.latent.space/p/claude-code">📄 一次ソース</a>
+      <div class="product">Anthropic（評価基盤の内部設計を解説する工学ブログ）</div>
+      <div class="approach">評価を tasks・trials・transcripts・outcomes・graders・harness の6要素に分解し、「何をしたか」と「環境がどうなったか」を別々に採点する</div>
+      <div class="detail">transcriptとoutcomeを分離することで、結果的に正解した軌跡と、プロセスごと正しい軌跡を区別できるようにした点が、他社の評価設計にも共通する考え方の出どころになっている</div>
+      <a href="https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> コードベースが頻繁に変わる、または社外へのアップロードを避けたい場合は、精度より鮮度とセキュリティを優先してエージェント検索を検討する価値がある。ただしレイテンシとトークンコストの増加は事前に計測しておくこと。</div>
+    <div class="example">
+      <div class="product">OpenAI（Agent Skills の評価ガイド）</div>
+      <div class="approach">成功基準を outcome（完了）・process（手順）・style（体裁）の3カテゴリに分けてから Skill を書く</div>
+      <div class="detail">「実際の失敗がカバレッジを駆動する」という方針を掲げ、手動で直した不具合を都度テスト化してSkillの信頼性を積み上げる運用を推奨している</div>
+      <a href="https://developers.openai.com/blog/eval-skills">📄 一次ソース</a>
+    </div>
+    <div class="takeaway"><strong>示唆:</strong> 評価を書くときは「完了したか」「意図した手順を辿ったか」「体裁は規約通りか」を最初から別チェックとして分離し、最終出力の一致だけに頼らない。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 2: 埋め込みを手放さない陣営 — Cursor と GitHub Copilot は索引の構築効率に投資する</div>
+  <div class="section-title">📐 パターン 2: 本番トレースがそのまま評価データセットの供給源になった</div>
   <div class="theme-section">
-    <p>一方でCursorとGitHub Copilotは埋め込みベースの検索を手放していない。むしろ索引の構築・更新コストを下げる方向に工数を投じている。Cursorはファイルツリーをハッシュ差分で管理し、変更があったブランチだけを再索引する。新規メンバーが参加した際は、その人のコードベースと類似度の高い既存インデックスを組織内で探して再利用し、初回検索までの待ち時間を数秒からミリ秒単位に縮めた。GitHub Copilotも新しい埋め込みモデルを投入し、検索精度を約38%引き上げつつインデックスサイズを8分の1に圧縮している。</p><p>この2社が埋め込みを維持する理由は、Claude Codeとは前提が違うからだ。IDEに常駐して多数のユーザーが同じリポジトリに繰り返しアクセスする製品では、索引コストを一度払えば以後のクエリで償却できる。エージェント検索のように毎回ファイルシステムを探索するコストは、多人数・高頻度アクセスの場では割に合わない。</p>
+    <p>Replit は ViBench（Playwrightベースのeval agentがアプリを操作しながら仕様通りに動くか段階的に検証するオフラインベンチマーク）・本番A/Bテスト・Telescope（失敗した実行の軌跡を要約してベクトル化し、類似パターンをクラスタリングして可視化するシステム）の三層構成で評価基盤を運用している。Braintrustは、本番で見つかった不審なトレースをワンクリックで評価データセットのエントリに変換し、そのまま次回以降のデプロイで走る回帰テストにする機能を提供する。</p><p>両社に共通するのは、評価データセットを最初から網羅的に設計するのを諦め、本番トラフィックを「継続的に増え続けるテストケース集」として扱っている点だ。事前に書いたテストは想定した失敗しか捕まえられないが、本番トレースは実際に起きた失敗分布をそのまま反映する。スケールするほど人間が全トレースを目視確認できなくなるため、クラスタリングや自動変換によって「気づいた失敗を二度と起こさないテスト」に変換する仕組みが運用の中核になっている。</p>
     <div class="example">
-      <div class="product">Cursor</div>
-      <div class="approach">差分ハッシュによる部分再索引と組織内インデックス再利用でオンボーディングを高速化</div>
-      <div class="detail">ファイル変更をMerkle木のハッシュ差分で検出し、変更されたブランチだけを再索引する。新規参加者には組織内の類似コードベースの既存indexを再利用し、初回検索までの時間を7.87秒から525ミリ秒に短縮したと公式ブログで報告している。</div>
-      <a href="https://cursor.com/blog/secure-codebase-indexing">📄 一次ソース</a>
+      <div class="product">Replit（Replit Agent の評価基盤解説）</div>
+      <div class="approach">ViBench・本番A/Bテスト・Telescope（失敗トラジェクトリの要約→embedding→クラスタリング）の3層構成で評価を運用</div>
+      <div class="detail">スケールすると人間が全トレースを読めなくなるため、クラスタリングで問題パターンを集約し、エンジニアとエージェント双方が対処できる形にした点が示唆的</div>
+      <a href="https://replit.com/blog/evaluating-and-improving-agent-at-scale">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">GitHub Copilot</div>
-      <div class="approach">新しい埋め込みモデルで検索精度と索引効率を同時に改善</div>
-      <div class="detail">VS Code向けに投入した新埋め込みモデルで検索品質を37.6%向上、スループットを約2倍、インデックスサイズを8分の1に圧縮したと公式ブログで報告。C#開発者のコード採用率は+110.7%だったという。</div>
-      <a href="https://github.blog/news-insights/product-news/copilot-new-embedding-model-vs-code/">📄 一次ソース</a>
+      <div class="product">Braintrust（本番障害を回帰テストに変換する手法解説）</div>
+      <div class="approach">本番で見つかった不審なトレースをワンクリックでデータセットのエントリに変換し、そのまま回帰テストとして毎回のデプロイで実行する</div>
+      <div class="detail">修正を検知するために書いたスコアラーを、そのままデプロイ後の本番監視にも流用する設計が、評価と可観測性の境界を薄くしている</div>
+      <a href="https://www.braintrust.dev/articles/turn-llm-production-failures-into-regression-tests">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> 同一リポジトリに多数のユーザーが繰り返しアクセスする製品では、索引コストは償却できる投資になる。索引の鮮度そのものより、索引構築の効率化（差分更新・共有再利用）に工数を割く方が費用対効果が高い。</div>
+    <div class="takeaway"><strong>示唆:</strong> 評価データセットは最初から完成形を目指さず、本番の実障害をクラスタリングまたはワンクリック変換で回帰テストに取り込み続ける運用にする。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 3: 中間解 — Sourcegraph は『検索』の一部を確定的なコード解析に置き換える</div>
+  <div class="section-title">📐 パターン 3: 評価指標があったからこそ「大胆な単純化」に踏み切れた例</div>
   <div class="theme-section">
-    <p>SourcegraphのMCPサーバーは、キーワード検索とベクトル検索に加えて、SCIPという静的解析ベースのコードインデックスを使う13種類のツールをエージェントに公開する。シンボルの定義元や参照元を尋ねるクエリには、テキスト類似度に基づく確率的な検索ではなく、コンパイラ相当の精度を持つ確定的なルックアップで答える。</p><p>この使い分けが効くのは、クエリの種類によって「正解が一意に決まるか」が違うからだ。「この関数はどこで定義されているか」への答えは1つしかなく、検索より静的解析の方が向いている。Sourcegraph自身のベンチマークでは、MCPサーバー経由でのファイル再現率が0.127から0.277まで改善し、grepベースのベースラインではタイムアウトしていたタスクが制限時間内に完了する例もあったという。</p>
+    <p>Vercel社内のtext-to-SQLエージェント「d0」は当初、18個の専用ツール（スキーマ検索・クエリビルダー・検証系など）を組み合わせる構成で成功率80%だった。これを「bashコマンドを実行できる」ツール1個だけに置き換え、ファイルシステム経由で社内の意味レイヤー（Cubeの YAML定義）を直接読ませる構成に変えたところ、成功率は100%に上がり、実行時間は3.5倍短縮、トークン使用量は37%減、ステップ数は42%減少した。</p><p>この変更が「賭け」ではなく検証可能な意思決定になったのは、変更前から成功率・レイテンシ・トークン数を継続的に測る評価の仕組みが既にあったからだ。評価基盤がない状態でツールを18個から1個に削るのは根拠のない賭けだが、評価があれば「ツールを増やして安全側に倒す」のではなく「減らして数値で確認する」という逆方向の判断にも踏み切れる。</p>
     <div class="example">
-      <div class="product">Sourcegraph（Amp / MCP server）</div>
-      <div class="approach">SCIPベースの確定的コード解析をキーワード/セマンティック検索と併用</div>
-      <div class="detail">MCPサーバーが13種類のツールを公開し、シンボルの定義・参照解決はSCIPインデックスによる確定的ルックアップで返す。CodeScaleBenchでファイル再現率が0.127から0.277に改善したと公式ブログで報告している。</div>
-      <a href="https://sourcegraph.com/blog/context-engineering">📄 一次ソース</a>
+      <div class="product">Vercel（社内text-to-SQLエージェントd0のツール設計解説）</div>
+      <div class="approach">18個の専用ツールを1個の「bashコマンド実行」ツール（ファイルシステムへの直接アクセス）に置き換え</div>
+      <div class="detail">成功率80%→100%、実行時間3.5倍高速化、トークン37%減、ステップ数42%減という変化を定量比較できたのは、事前に成功率・レイテンシ・トークン数を継続計測する評価の仕組みがあったからだ</div>
+      <a href="https://vercel.com/blog/we-removed-80-percent-of-our-agents-tools">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> 検索精度を上げたいなら、まず『このクエリは一意の正解を持つか』を仕分けるとよい。一意に決まるクエリ（定義・参照・依存関係）は検索ではなく静的解析やAPI呼び出しに載せ替え、曖昧な自然言語クエリだけをキーワード/ベクトル検索に残すと、両方の精度が上がる。</div>
+    <div class="takeaway"><strong>示唆:</strong> 評価の仕組みが先にあれば、「ツールを増やす」だけでなく「減らす」方向の大胆な設計変更も数値で裏付けながら進められる。</div>
   </div>
   <div class="editorial">
     <span class="label">✍️ 編集後記</span>
-    RAGの標準装備として語られてきた「ハイブリッド検索+リランカー」は依然として有効だが、コーディングエージェントの世界ではそれが唯一の正解ではなくなった。Claude Codeはコストとセキュリティを理由に検索そのものを放棄し、CursorとCopilotは索引の償却コストが合う前提で埋め込みを磨き、Sourcegraphは「検索が要らないクエリ」を静的解析に逃がした。問われているのは「RAGを使うか」ではなく、自分のプロダクトがどの前提——鮮度、多人数償却、クエリの一意性——の上に成り立っているかだ。
+    各社に共通するのは、評価を「リリース前の一回きりの関門」ではなく「本番運用に継続的に埋め込まれた計測」として設計している点だ。エージェントの意思決定が長くなるほど最終出力の正誤だけを見る評価は役に立たなくなり、軌跡の分解と本番トレースの再利用が標準装備になりつつある。
   </div>
 </div>
 
 <div class="section">
   <div class="section-title">🔗 今号の動向ピックアップ</div>
-  <div class="quick-link"><a href="https://every.to/podcast/how-to-use-claude-code-like-the-people-who-built-it">Claude Codeチームが語る、ベクトル検索を捨てた本音</a><span class="quick-summary">Every.toのインタビューでCat WuとThariqが、埋め込みの再インデックス負債とセキュリティリスクを理由にエージェント検索へ移行した経緯を語る。本文で扱ったClaude Codeの意思決定の一次証言にあたる。</span></div>
-  <div class="quick-link"><a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents">Anthropic公式：『必要になるまで読み込まない』コンテキスト設計</a><span class="quick-summary">Anthropicのエンジニアリングブログが提唱するjust-in-time context loadingは、事前に全データを処理せずファイルパスなどの軽量な参照だけを保持し実行時に取得する設計思想。本文のエージェント検索がなぜ有効かを裏付ける原則になっている。</span></div>
-  <div class="quick-link"><a href="https://www.agentic-patterns.com/patterns/agentic-search-over-vector-embeddings/">パターンカタログ：ベクトル埋め込みの代わりにエージェント検索を使う</a><span class="quick-summary">コミュニティ主導のエージェント設計パターン集が「Agentic Search Over Vector Embeddings」を独立したパターンとして整理している。本文3社の実装がこのパターンのどの変種にあたるかを比較する際の参考になる。</span></div>
+  <div class="quick-link"><a href="https://sierra.ai/blog/benchmarking-ai-agents">Sierra、𝜏-benchでエージェント評価のデファクトベンチマークを作った経緯</a><span class="quick-summary">ユーザーとツールの両方をシミュレートしながらマルチターンでエージェントを評価するベンチマークの設計意図を解説する。本号の「出力ではなく軌跡を見る」評価設計と同じ問題意識から生まれている。</span></div>
+  <div class="quick-link"><a href="https://cognition.com/blog/frontier-code">Cognition、「マージされるコードか」を測るFrontierCodeを公開</a><span class="quick-summary">20社以上のOSSメンテナが40時間以上かけて作った実タスクで、テストを通るかではなく実際にマージされる品質かを採点する。単体テスト通過と「信頼できる」の間のギャップを埋めようとする点で本号のテーマと重なる。</span></div>
+  <div class="quick-link"><a href="https://arxiv.org/pdf/2609.20625">Chronicle: LLMエージェントの回帰テストを「途中から再実行」で軽くする手法</a><span class="quick-summary">モデル更新のたびにエージェント全体を最初から再実行するコストを避け、分岐点から再実行して回帰を検知する手法の論文。本号で扱った本番トレース活用の延長線上にある最適化。</span></div>
 </div>
 
 <div class="section">
   <div class="section-title">📚 過去号</div>
-  <div class="archive-item"><span class="week">2026-10-03</span><div class="body"><a href="../ai-trends.html">エージェントの評価は「最終出力」ではなく「軌跡」を見る設計に変わった — OpenAI・Anthropic・Replitが同時に評価基盤を公開</a><span class="sub">OpenAI・Anthropic・Replit・Braintrustが2026年に評価基盤の内部設計を相次いで公開した。</span></div></div>
   <div class="archive-item"><span class="week">2026-10-01</span><div class="body"><a href="2026-10-01.html">エージェントは「呼び出すたびに消える」から「状態を持ち続ける」へ — OpenAI・Google・Alibabaが同時に永続化レイヤーを足した</a><span class="sub">OpenAIの「dots」はユーザーごとに専用クラウドコンピュータを割り当て、ChatGPT・Slack・Teamsを横断して会話間の文脈を保持する常駐エージェント。</span></div></div>
   <div class="archive-item"><span class="week">2026-09-29</span><div class="body"><a href="2026-09-29.html">エージェントの長期記憶は「要約」をやめた — 編集可能なファイル、共有された手順、非破壊のグラフへ</a><span class="sub">Claudeは会話終了後の要約をやめ、対話中にトピック単位のファイルへ直接書き込み、ユーザーが個別に編集できる方式に切り替えた。</span></div></div>
   <div class="archive-item"><span class="week">2026-09-26</span><div class="body"><a href="2026-09-26.html">マルチエージェント協調は「並列に投げる」から「役割を絞った2体」に収束した — Fusion 型アーキテクチャが解いた失敗伝播問題</a><span class="sub">Cognitionは「分散マルチエージェントは前提の食い違いで失敗が伝播する」と自ら警告した後、lead+sidekickの2体だけに絞った制約付き構成「Fusion」を主力製品化し、2026年9月にローカル環境まで展開した。</span></div></div>
   <div class="archive-item"><span class="week">2026-09-24</span><div class="body"><a href="2026-09-24.html">カスタマー対応エージェントの設計は「決定木」から「自然言語手順×コードの二層構造」へ</a><span class="sub">Decagonは決定木を捨て、業務担当者が自然言語で書いた手順を構造化ロジックにする一方、返金などの機微操作だけコードで検証するAOPへ移行し、NG.CASHでは解決率が70%まで向上した。</span></div></div>
   <div class="archive-item"><span class="week">2026-09-22</span><div class="body"><a href="2026-09-22.html">モデルルーティングが開発ツールの既定機能になった — 選ぶのは人間ではなく分類器</a><span class="sub">GitHub Copilotは9月にauto model selectionへ「efficiency/balance/intelligence」の3段階ティアを追加し、Cursorは60万件超の実利用データで学習した分類器（Cursor Router）でモデル選定を自動化した。</span></div></div>
   <div class="archive-item"><span class="week">2026-09-19</span><div class="body"><a href="2026-09-19.html">エージェントの権限設計は「毎回確認」から「境界を先に固定する」へ移った</a><span class="sub">OpenAI CodexとAnthropicのClaude Codeは、サンドボックスの制限強度と確認ダイアログの要否を別軸にし、境界内の行為は原則自動承認する設計にそろえた。</span></div></div>
+  <div class="archive-item"><span class="week">2026-09-17</span><div class="body"><a href="2026-09-17.html">コード検索の設計が三方向に割れた — ベクトルDBを捨てる陣営、極める陣営、置き換える陣営</a><span class="sub">Claude Code は埋め込みベースのRAGを捨て、grep/globの反復探索に完全移行——再インデックスの陳腐化とコードアップロードのセキュリティリスクを避けるため。</span></div></div>
   <div class="archive-item"><span class="week">2026-09-15</span><div class="body"><a href="2026-09-15.html">エージェント実行基盤のマネージド化 — 3社が同時に「実行環境を貸す側」に回った</a><span class="sub">OpenAIが9月10日、Codexハーネスをagents/environments/sessions/eventsの4プリミティブに集約した Agents API を公開ベータで公開。基盤自体の追加課金はなくトークン・ツール実費のみ。</span></div></div>
   <div class="archive-item"><span class="week">2026-09-12</span><div class="body"><a href="2026-09-12.html">コンテキストは会話ログではない — Working Context / Session / Memory / Artifacts への分離が実装標準になった</a><span class="sub">Google ADKは2026年9月、コンテキストを Working Context・Session・Memory・Artifacts の4層に分離し、閾値到達で非同期に要約するcompactionを実装したと公式ブログで説明した。</span></div></div>
   <div class="archive-item"><span class="week">2026-09-10</span><div class="body"><a href="2026-09-10.html">Agent Skills という第3のレイヤー — プロンプトでもRAGでもなく「必要になるまで読まない」設計</a><span class="sub">Agent Skillsは「メタデータ(~100トークン)→本文(&lt;5000トークン推奨)→付随ファイル」の3段階でコンテキストに読み込む、プログレッシブディスクロージャー設計。</span></div></div>
@@ -184,7 +190,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 </div>
 
 <footer>
-  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="../data/ai-trends/2026-09-17.json">data/ai-trends/2026-09-17.json</a>（このページは JSON からの生成物）</p>
+  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="../data/ai-trends/2026-10-03.json">data/ai-trends/2026-10-03.json</a>（このページは JSON からの生成物）</p>
   <p style="margin-top:.5rem"><a href="../">📰 日刊ダイジェストに戻る</a></p>
 </footer>
 </div>
