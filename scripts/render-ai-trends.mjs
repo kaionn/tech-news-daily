@@ -295,7 +295,7 @@ function ogMetaTag(attr, name, value) {
 
 function renderOgMeta(issue, fromIsLatest) {
   const source = issue.theme.lede || issue.theme.tldr[0] || OG_DESCRIPTION_FALLBACK;
-  const description = truncateDescription(stripTags(source).trim() || OG_DESCRIPTION_FALLBACK, OG_DESCRIPTION_MAX);
+  const description = truncateDescription(source.trim() || OG_DESCRIPTION_FALLBACK, OG_DESCRIPTION_MAX);
   const url = fromIsLatest ? `${SITE_URL}/ai-trends.html` : `${SITE_URL}/ai-trends/${issue.week}.html`;
   return [
     ogMetaTag('name', 'description', description),

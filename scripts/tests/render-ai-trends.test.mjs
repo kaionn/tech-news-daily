@@ -127,7 +127,9 @@ test('og:description は 120 文字以下で、タグ除去・「…」切り詰
   assert.ok(desc.length <= 120, `length=${desc.length}`);
   assert.ok(desc.endsWith('…'));
   assert.ok(desc.startsWith('2026-08-03 のリード文'));
-  assert.ok(!desc.includes('<b>'));
+  // lede は本文と同じく平文として扱い、山括弧を含む文面も欠けずに escape されて残る
+  assert.ok(desc.includes('Vec<T>'));
+  assert.ok(metaContent(latest, 'og:description').includes('Vec&lt;T&gt;'));
   assert.equal(metaContent(latest, 'description'), metaContent(latest, 'og:description'));
   // 短い lede は切らずそのまま
   assert.equal(metaContent(readIssuePage('2026-08-01'), 'og:description'), '2026-08-01 のリード文');
