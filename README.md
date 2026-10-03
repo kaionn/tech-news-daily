@@ -11,3 +11,7 @@ https://tech-news.kaion-lab.com/
 1. Claude Code routine が毎朝 WebSearch でテックニュースを収集
 2. HTML を生成して `index.html` を上書き、前日分を `archive/` に退避
 3. push → GitHub Pages に自動デプロイ
+
+## テスト
+
+`node --test scripts/tests/*.test.mjs` で `scripts/render-ai-trends.mjs` のテストを実行する。
