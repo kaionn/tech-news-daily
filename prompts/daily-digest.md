@@ -93,6 +93,14 @@ Write a complete HTML file to `index.html` with this exact structure:
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tech News Daily — YYYY-MM-DD</title>
+  <meta name="description" content="{Top Stories 先頭 3 本の見出しを「 / 」で連結し 120 文字以内}">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech News Daily">
+  <meta property="og:title" content="Tech News Daily — YYYY-MM-DD">
+  <meta property="og:description" content="{description と同じ値}">
+  <meta property="og:url" content="https://tech-news.kaion-lab.com/">
+  <meta property="og:image" content="https://tech-news.kaion-lab.com/apple-touch-icon.png">
+  <meta name="twitter:card" content="summary">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
   <link rel="icon" type="image/png" sizes="192x192" href="favicon.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -147,6 +155,8 @@ Write a complete HTML file to `index.html` with this exact structure:
 </body>
 </html>
 ```
+
+The `description` / `og:description` value must be identical; HTML-escape any `"`, `<`, `&` inside it.
 
 The header's `site-nav` block must always be present exactly as shown. It is static cross-page navigation (daily digest ⇄ weekly plugin trends ⇄ AI product trends ⇄ archive) — not anchors, never changes day to day, and must not be removed or reworded.
 
@@ -353,11 +363,12 @@ Read the current archive/index.html. Add a new card entry at the top of the Past
 Re-read the generated index.html and feed.xml, and verify every point. Fix all violations before finishing (remember: you never run git — see Step 8):
 
 1. LINKS: every `<a href>` in a card or quick-link points to a specific article page (URL has a meaningful path). No top pages, no section pages, no aggregator roundup pages. Fix or drop violators (if dropping changes item counts, update the stats-bar).
-2. DATE: `<title>`, header `.date`, and feed.xml newest entry all show today's date.
+2. DATE: `<title>`, `og:title`, header `.date`, and feed.xml newest entry all show today's date.
 3. STRUCTURE: all 5 sections present with correct ids and emoji titles; stats-bar / toc (section anchors only) / header site-nav (with the trends.html, ai-trends.html, and archive/ links) / numbers-bar present; first Top Story has `deep-dive` class + `editorial`; only CSS classes defined above are used.
 4. NUMBERS: every number in numbers-bar (and key-points) appears in an actual collected article. Nothing invented.
 5. FEED: feed.xml is well-formed XML (`python3 -c "import xml.dom.minidom,sys;xml.dom.minidom.parse('feed.xml')"` must exit 0).
 6. DIVERSITY: at least 4 distinct tag types across all items.
+7. META: `og:description` and `<meta name="description">` have the same value, at most 120 characters, with no raw `"`, `<`, or `&` inside.
 
 ## Step 8: Done
 
