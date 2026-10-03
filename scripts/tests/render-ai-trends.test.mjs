@@ -89,3 +89,74 @@ test('存在しない data dir の現挙動（実測固定）: exit 0・警告�
   assert.deepEqual(readdirSync(o), ['ai-trends.html']);
   assert.match(readFileSync(path.join(o, 'ai-trends.html'), 'utf8'), /準備中/);
 });
+
+// ---- OGP / Twitter Card ----------------------------------------------------------
+
+function metaLines(html) {
+  return html.split('\n').filter((l) => /^<meta (property|name)="(?!viewport)/.test(l));
+}
+function metaContent(html, key) {
+  const line = metaLines(html).find((l) => l.includes(`="${key}" `));
+  assert.ok(line, `meta ${key} が無い`);
+  const m = /^<meta (?:property|name)="[^"]+" content="([^"]*)">$/.exec(line);
+  assert.ok(m, `meta ${key} の形式が不正: ${line}`);
+  return m[1];
+}
+function unescape(s) {
+  return s.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&amp;/g, '&');
+}
+const readIssuePage = (k) => readFileSync(path.join(out, 'ai-trends', `${k}.html`), 'utf8');
+
+test('og:title は最新号タイトルの escape 済み表現を含み、<title> は変わらない', () => {
+  const title = metaContent(latest, 'og:title');
+  assert.equal(title, 'XSS &lt;script&gt;alert(1)&lt;/script&gt; &quot;引用&quot; タイトル | AI プロダクト動向');
+  assert.ok(latest.includes('<title>AI プロダクト動向 | Tech News Daily</title>'));
+  assert.equal(metaContent(latest, 'og:type'), 'article');
+  assert.equal(metaContent(latest, 'og:site_name'), 'Tech News Daily');
+  assert.equal(metaContent(latest, 'twitter:card'), 'summary');
+});
+
+test('og:url は最新ページと号ページで異なる（週キーはそのまま）', () => {
+  assert.equal(metaContent(latest, 'og:url'), 'https://tech-news.kaion-lab.com/ai-trends.html');
+  assert.equal(metaContent(readIssuePage('2026-08-03'), 'og:url'), 'https://tech-news.kaion-lab.com/ai-trends/2026-08-03.html');
+  assert.equal(metaContent(readIssuePage('2026-W30'), 'og:url'), 'https://tech-news.kaion-lab.com/ai-trends/2026-W30.html');
+});
+
+test('og:description は 120 文字以下で、タグ除去・「…」切り詰め・description 同値', () => {
+  const desc = unescape(metaContent(latest, 'og:description'));
+  assert.ok(desc.length <= 120, `length=${desc.length}`);
+  assert.ok(desc.endsWith('…'));
+  assert.ok(desc.startsWith('2026-08-03 のリード文'));
+  assert.ok(!desc.includes('<b>'));
+  assert.equal(metaContent(latest, 'description'), metaContent(latest, 'og:description'));
+  // 短い lede は切らずそのまま
+  assert.equal(metaContent(readIssuePage('2026-08-01'), 'og:description'), '2026-08-01 のリード文');
+});
+
+test('og:image は https の絶対 URL', () => {
+  for (const html of [latest, readIssuePage('2026-08-01')]) {
+    assert.match(metaContent(html, 'og:image'), /^https:\/\/[^/]+\/apple-touch-icon\.png$/);
+  }
+});
+
+test('メタタグの属性値は escape され、生の <script> も content の閉じ漏れも無い', () => {
+  for (const html of [latest, readIssuePage('2026-08-03')]) {
+    const lines = metaLines(html);
+    assert.ok(lines.length >= 8);
+    for (const l of lines) {
+      assert.match(l, /^<meta (?:property|name)="[a-z:_]+" content="[^"<>]*">$/, l);
+      assert.ok(!l.includes('<script>'));
+    }
+    assert.ok(lines.some((l) => l.includes('&lt;script&gt;alert(1)&lt;/script&gt;')));
+    assert.ok(lines.some((l) => l.includes('&quot;引用&quot;')));
+  }
+});
+
+test('placeholder ページにも最小の og:title / og:url が入る', () => {
+  const o = tmp('render-ai-trends-out-');
+  const r = run(tmp('render-ai-trends-empty-'), o);
+  assert.equal(r.status, 0, r.stderr);
+  const html = readFileSync(path.join(o, 'ai-trends.html'), 'utf8');
+  assert.equal(metaContent(html, 'og:title'), 'AI プロダクト動向 | Tech News Daily');
+  assert.equal(metaContent(html, 'og:url'), 'https://tech-news.kaion-lab.com/ai-trends.html');
+});
