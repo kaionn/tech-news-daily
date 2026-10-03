@@ -79,6 +79,7 @@ YESTERDAY=$(TZ=Asia/Tokyo date -d 'yesterday' '+%Y-%m-%d' 2>/dev/null || TZ=Asia
 if [ -f index.html ] && [ ! -f "archive/${YESTERDAY}.html" ]; then
   cp index.html "archive/${YESTERDAY}.html"
   sed -i 's|href="favicon|href="../favicon|g; s|href="apple-touch-icon|href="../apple-touch-icon|g; s|href="style.css"|href="../style.css"|; s|href="feed.xml"|href="../feed.xml"|; s|href="./" class="active"|href="../" class="active"|; s|href="trends.html"|href="../trends.html"|g; s|href="ai-trends.html"|href="../ai-trends.html"|g; s|href="archive/"|href="./"|g' "archive/${YESTERDAY}.html"
+  sed -i "s|<meta property=\"og:url\" content=\"[^\"]*\">|<meta property=\"og:url\" content=\"https://tech-news.kaion-lab.com/archive/${YESTERDAY}.html\">|" "archive/${YESTERDAY}.html"
 fi
 ```
 
