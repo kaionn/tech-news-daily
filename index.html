@@ -3,7 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tech News Daily — 2026-10-03</title>
+  <title>Tech News Daily — 2026-10-04</title>
+  <meta name="description" content="Aleph Alpha「Kolibri」欧州主権モデル公開 / OpenAI安全性責任者「文化は壊れている」と退社 / 連邦判事、Flockの無令状検索に違憲判断">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech News Daily">
+  <meta property="og:title" content="Tech News Daily — 2026-10-04">
+  <meta property="og:description" content="Aleph Alpha「Kolibri」欧州主権モデル公開 / OpenAI安全性責任者「文化は壊れている」と退社 / 連邦判事、Flockの無令状検索に違憲判断">
+  <meta property="og:url" content="https://tech-news.kaion-lab.com/">
+  <meta property="og:image" content="https://tech-news.kaion-lab.com/apple-touch-icon.png">
+  <meta name="twitter:card" content="summary">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
   <link rel="icon" type="image/png" sizes="192x192" href="favicon.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -14,7 +22,7 @@
   <div class="container">
     <header>
       <h1>Tech News Daily</h1>
-      <div class="date">2026-10-03 (Sat)</div>
+      <div class="date">2026-10-04 (Sun)</div>
       <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
       <nav class="site-nav">
         <a href="./" class="active">📰 日刊ダイジェスト</a>
@@ -26,8 +34,8 @@
 
     <div class="stats-bar">
       <span>📰 22 articles</span>
-      <span>🏷 8 categories</span>
-      <span>📡 22 sources</span>
+      <span>🏷 5 categories</span>
+      <span>📡 18 sources</span>
     </div>
 
     <nav class="toc">
@@ -40,16 +48,16 @@
 
     <div class="numbers-bar">
       <div class="number-item">
-        <span class="number-value">$8,000未満</span>
-        <span class="number-label">Ataraxosの学習コスト、DeepNash($300万〜450万)の最大500分の1の計算量で人類最強プレイヤーに15勝</span>
+        <span class="number-value">1,313</span>
+        <span class="number-label">Debianが一括修正したカーネルCVE件数</span>
       </div>
       <div class="number-item">
-        <span class="number-value">24.7%</span>
-        <span class="number-label">Zig 0.17.0のSafeAllocatorで標準ライブラリテストのビルド時間を短縮(29.4秒→22.1秒)</span>
+        <span class="number-value">92.7%</span>
+        <span class="number-label">Kolibri の HumanEval+ スコア</span>
       </div>
       <div class="number-item">
-        <span class="number-value">54.3万件</span>
-        <span class="number-label">Truffle SecurityがGitHub公開リポジトリから発見した有効な認証情報の件数、最長16.1年有効</span>
+        <span class="number-value">294.9k★</span>
+        <span class="number-label">obra/superpowers の GitHub Stars</span>
       </div>
     </div>
 
@@ -59,65 +67,63 @@
       <div class="card featured deep-dive">
         <div class="card-header">
           <span class="tag tag-ai">AI</span>
-          <span class="content-type">🔬 研究</span>
-          <h3><a href="https://news.mit.edu/2026/game-playing-ai-stratego-new-champ-0930">DEEP DIVE: 学習コスト8,000ドル未満のAI「Ataraxos」、Stratego史上最強プレイヤーに15勝1敗4分——DeepNashの500分の1の計算量で人類の最後の聖域を破る</a></h3>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://aleph-alpha.com/en/blog/kolibri-has-landed-a-sovereign-open-weight-model/">DEEP DIVE: Aleph Alpha、欧州主権の新モデル「Kolibri」を公開</a></h3>
         </div>
-        <div class="summary">チェスや囲碁と異なり、相手の駒が見えない不完全情報ゲームのStrategoは長年AIに抵抗してきた最後の盤上ゲームの一つだった。Carnegie Mellon・NYU・Stanford・MITの研究チームが開発したAtaraxosは、Stratego史上最多の受賞歴を持つPim Niemeijer氏との20番勝負で15勝1敗4分を記録し、この牙城を崩した。技術的に注目すべきは学習コストで、H100 GPU16基を1週間使うだけで学習が完了し、総額は8,000ドルを下回る。これは2022年の前世代AI「DeepNash」の推定300万〜450万ドルと比べて計算量で約500分の1、自己対戦ゲーム数で約30分の1、学習データ数で約100分の1にまで圧縮された計算効率を意味する。研究チームはこの効率化を特定ゲーム向けの個別最適化ではなく汎用的なレシピとして設計した点を強調しており、同じ手法を使い勝ちルールの異なる「Barrage Stratego」に適用したところ、歴代世界チャンピオン3名を相手にした50試合制の対戦でも超人的な成績を記録、さらに協力ゲームのHanabiや中国のトランプゲーム斗地主でも最高性能を達成したという。不完全情報下での意思決定という共通構造を持つゲーム群に対し、同一の学習レシピが転用可能であることを示した点が、単発の記録更新以上の意味を持つ。</div>
-        <div class="editorial">🧠 500分の1という圧縮比は、強化学習のself-play系AIがもはや数百万ドル規模の予算を持つ研究機関の専有物ではなくなったことを示す好例だろう。ただし今回の数値はStratego・Barrage Stratego・Hanabi・斗地主という比較的ルールが明確なゲーム群での結果であり、現実世界の不確実性(ノイズの多い観測、連続的な行動空間)を含む問題への転用可能性はまだ検証されていない。論文の査読状況も現時点では不明で、追試による再現性の確認を待ちたい。</div>
+        <div class="summary">欧州にはEU AI Actやデータ主権の要件を満たす大規模言語モデルの選択肢がほとんどなく、企業や政府機関は米国製モデルへの依存を強いられてきた。ドイツのAleph Alphaは10月3日、この空白を埋める独英バイリンガルモデル「Kolibri」を公開した。Mixture-of-Expertsアーキテクチャを採用し、総パラメータ781億のうち1トークンあたり34.6億のみを384エキスパート中6個で活性化させる設計により、計算コストを抑えつつ性能を確保している。768基のB200 GPUで約24兆トークンを学習し、学習データの21.3%・4.3兆トークンをドイツ語で確保した点が特徴で、翻訳に頼らず自然なドイツ語を独自に収集した。ベンチマークではAIME 2025で英語96.9%・ドイツ語87.5%、HumanEval+で92.7%を記録し、アクティブパラメータが4倍の競合モデルと同水準の性能を主張する。「主権」の核は、データ取り込みから評価までの全工程をドイツ国内の自社管理下に置き、顧客がオンプレミスで推論を完結できる点にある。根拠のない回答を避けるため「わからない」と答える比率をAA-Omniscienceベンチマークで44%まで引き上げ、前モデルの14.8%から大きく改善した。重みはApache 2.0ライセンスでHugging Faceに公開されている。</div>
+        <div class="editorial">🧠 アクティブパラメータ34.6億で4倍規模の競合に伍すという主張は、MoEのルーティング効率が効いていれば十分にありうる数字だ。ただし今回のベンチマークはAleph Alpha自身の測定であり、第三者による再現評価はまだない。欧州の公的機関がデータ主権を理由にKolibriへ実際に乗り換えるかどうかは、性能よりも調達規定や既存クラウド契約との整合性で決まる可能性が高い。</div>
         <div class="key-points">
           <ul>
-            <li>20番勝負で15勝1敗4分、対戦相手はStratego史上最多の受賞歴を持つPim Niemeijer氏</li>
-            <li>学習はH100 GPU16基で1週間、コストは8,000ドル未満。DeepNash(推定300万〜450万ドル)と比べ計算量で約500分の1、自己対戦ゲーム数で約30分の1、学習データ数で約100分の1</li>
-            <li>同じレシピをBarrage Strategoに適用し歴代世界チャンピオン3名への50試合制で超人的成績、Hanabi・斗地主でも最高性能を記録</li>
+            <li>総パラメータ781億中34.6億のみ活性化する384エキスパート構成のMoEで、768基のB200 GPU・約24兆トークンで学習</li>
+            <li>HumanEval+ 92.7%、AIME 2025は英語96.9%・ドイツ語87.5%を記録し、アクティブパラメータ4倍のモデルと同水準の性能を主張</li>
+            <li>重みはApache 2.0でHugging Face「Aleph-Alpha/Kolibri-1」に公開、vLLMプラグイン経由でオンプレミス推論に対応</li>
           </ul>
         </div>
-        <div class="why-it-matters">💡 ゲーム特化のAI研究に限らず、不完全情報下での意思決定を扱うエージェント開発において、学習コストを数百分の1に抑える設計パターンが参考になる可能性がある。</div>
+        <div class="why-it-matters">💡 オンプレミス推論とApache 2.0ライセンスにより、GDPR対応が必須の金融・医療・行政システムでもベンダーロックインなしにLLMを組み込める。</div>
         <div class="meta">
-          <span>MIT News</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-09-30</span>
+          <span>Aleph Alpha Blog</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-10-03</span>
         </div>
       </div>
 
       <div class="card featured">
         <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://ziglang.org/download/0.17.0/release-notes.html">Zig 0.17.0公開——ビルドシステムを一新し新しい`SafeAllocator`でビルド時間24.7%短縮、インクリメンタルコンパイルが実用域に</a></h3>
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://techcrunch.com/2026/10/03/openai-safety-employee-resigns-claiming-the-companys-culture-is-broken/">OpenAI安全性責任者、「文化は壊れている」と退社</a></h3>
         </div>
-        <div class="summary">Zigチームは5ヶ月・206人のコントリビューターによる925コミットを経て0.17.0を公開した。ビルドシステムは設定ロジックと実行を分離する形で再構築され、IDE等がビルドグラフを監視・制御できるBuild Server Protocolを新設。設定はコンパクトなバイナリ形式でシリアライズされキャッシュヒット時の性能が向上した。改良されたELFリンカのおかげでx86_64-linux環境のインクリメンタルコンパイルが実用段階に達し、`-fincremental --watch`でほぼ即時の再ビルドが可能になった。1.0に向けては約25件の言語提案を採択、125件を却下している。</div>
+        <div class="summary">OpenAIで製品発表時の安全性レポート作成を担ってきたDavid Robinson氏が退社し、10月3日公開のThe Atlanticエッセイで同社の企業文化を批判した。在籍3年半は社内でも長い部類に入る。Robinson氏は、試行錯誤を前提とする開発手法は「その性質上、周期的な失敗を保証する」と指摘し、モデルの能力が上がるほど失敗の危険度も増すと警告した。原子力発電所や航空管制のように「多重の冗長性と時間をかけた計画」が必要だと述べている。退社はOpenAIが安全性担当の研究者3人を解雇した数日後のタイミングと重なった。</div>
         <div class="key-points">
           <ul>
-            <li>ビルド設定をバイナリ形式でキャッシュしキャッシュヒット時5-10%高速化。新ELFリンカがstatic/sharedライブラリ・GOT生成・DWARFに対応し`-fincremental --watch`での近インスタント再ビルドを実用化</li>
-            <li>`SafeAllocator`導入で標準ライブラリテストのビルドが29.4秒→22.1秒(24.7%短縮)、ピークメモリは2.24GB→1.11GB(50.3%減)。LLVM 22.1.8・glibc 2.44へ更新</li>
+            <li>在籍3年半、安全性レポート作成を主導してきた人物が離脱。公開は10月3日のThe Atlanticエッセイ</li>
+            <li>退社の数日前にOpenAIが安全性研究者3人を解雇したことが判明しており、人材流出が重なっている</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Zig Blog</span>
+          <span>TechCrunch</span>
           <span>⏱ 3 min read</span>
-          <span>2026-10-02</span>
-          <span class="engagement">▲ 186</span>
+          <span>2026-10-03</span>
         </div>
       </div>
 
       <div class="card featured">
         <div class="card-header">
           <span class="tag tag-security">Security</span>
-          <span class="content-type">👀 注目</span>
-          <h3><a href="https://www.eff.org/deeplinks/2026/10/court-agrees-eff-utahs-vpn-law-demands-technical-impossibility">ユタ州のVPN規制法に連邦地裁が待った——「完璧な位置情報特定は技術的に不可能」とEFFの主張を支持</a></h3>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://techcrunch.com/2026/10/03/federal-judge-calls-flock-indiscriminate-mass-surveillance/">連邦判事、Flockの無令状検索を「無差別な監視」と断罪</a></h3>
         </div>
-        <div class="summary">ユタ州法SB73は、対象サイトにVPN利用者を全面ブロックするか、全訪問者の位置を実質完璧に特定しユタ州在住者でないことを確認するかの二択を義務づけ、VPNの使い方を案内する行為自体も禁じていた。連邦地裁は「現時点でのジオロケーション精度の完璧化は不可能」と認定し、法の執行を差し止めた。</div>
+        <div class="summary">オクラホマ州タルサで、保安官助手が自動ナンバープレート認識カメラ網Flockの記録を令状なしで検索し、カリフォルニア州ナンバーという理由だけで女性の車両を追跡していた。連邦判事Sara Hillは10月3日、この検索が憲法修正第4条に違反すると判断し、検索を経て発見された91ポンドの覚醒剤を含む証拠を「毒樹の果実」として排除するよう命じた。判事はFlockの技術を「無差別な大量監視」と呼び、令状なしで居場所履歴を受動的に蓄積し続けられる点を問題視した。この判決の拘束力はオクラホマ州北部地区に限られるが、フロリダ州やテキサス州が利用規制に動き、サンダース上院議員が連邦機関によるFlock利用禁止法案を提出するなど、同社への逆風が強まる中での一例となる。</div>
         <div class="key-points">
           <ul>
-            <li>SB73は対象サイトにVPN利用者の完全ブロックか全訪問者の位置の実質完璧な特定の二択を義務化、VPN利用方法の案内提供自体も禁止していた</li>
-            <li>連邦地裁は「ジオロケーション精度の完璧化は不可能」と認定し執行を差し止め、事業者が全米でVPNアクセスを遮断するかユタ州から撤退するかの二択に追い込まれる懸念を解消</li>
+            <li>無令状検索で発見された覚醒剤91ポンドを含む証拠が「毒樹の果実」として排除された</li>
+            <li>フロリダ州・テキサス州が利用規制に動き、サンダース上院議員が連邦機関のFlock利用禁止法案を提出済み</li>
           </ul>
         </div>
         <div class="meta">
-          <span>EFF Deeplinks</span>
-          <span>⏱ 2 min read</span>
-          <span>2026-10-02</span>
-          <span class="engagement">▲ 452</span>
+          <span>TechCrunch</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-03</span>
         </div>
       </div>
     </div>
@@ -127,39 +133,19 @@
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://blog.rust-lang.org/inside-rust/2026/10/02/generic-const-args-and-you/">Rustの「Generic Const Args」提案を読む——`[u8; N + 1]`のような式がconst genericsに来る日はまだ遠い</a></h3>
-        </div>
-        <div class="summary">現状は`{N}`のような裸の値か完全に具体的な定数しかconst genericsで使えず、typenumクレートへの依存を強いてきた。GCA系機能は`gca!()`マクロ越しに式・構造体・enumをconstとして扱えるようにするが、記事は「どの機能もRFC提案に進められる完成度にはまだ達していない」と明言する。</div>
-        <div class="key-points">
-          <ul>
-            <li>`gca_adts`は配列・タプル・構造体・enumの生成をconst位置でサポート、`gca_const_items`は関連定数を含むconst項をサポートし`gca_min_const_items`は複雑性回避のため`gca!(..)`内での使用に限定</li>
-            <li>現状は`type BarWrapper&lt;const N: usize&gt; = Bar&lt;gca!(Foo { field: N })&gt;;`のようにすべて`gca!()`マクロで包む必要があり、安定化はまだRFC化前の段階</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Rust Blog (inside-rust)</span>
-          <span>⏱ 3 min read</span>
-          <span>2026-10-02</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
           <span class="tag tag-infra">Infra</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://loige.co/hidden-design-compromises-of-docker-layers/">Dockerイメージのレイヤーは「差分」のはずなのに、ローカルとOCI書き出しで別のファイルシステムになる——`.wh.`プレフィックスの落とし穴</a></h3>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://gvisor.dev/blog/2026/10/02/gvisor-cncf/">Google、コンテナサンドボックス「gVisor」をCNCFに寄贈</a></h3>
         </div>
-        <div class="summary">tarはファイルシステムの差分を表現する設計ではなく、OCIは`.wh.`プレフィックスを削除マーカーとして流用する約束事で対応している。BuildKitはローカルに文字どおり`.wh.*`という名前のファイルを含むイメージを作れてしまうが、OCI形式へのエクスポート・再インポートを経るとアンパッカーがそれを削除マーカーと誤認し消失する。</div>
+        <div class="summary">Googleは10月2日、ユーザー空間Linuxカーネル実装のサンドボックス型コンテナランタイムgVisorを、商標・コードベースを含めてCloud Native Computing Foundationへ寄贈した。I/O負荷の高いワークロードでの性能劣化や、Google単独所有ゆえにカーネル側の性能改善パッチが受け入れられない状況が主な動機という。まずCNCF Sandboxステージに入り、今後数ヶ月でIncubationへの移行とガバナンスの組織投票制移行を目指す。</div>
         <div class="key-points">
           <ul>
-            <li>OCIレイヤーは「それより前のレイヤーに適用されて初めて意味を持つファイルシステムの変更差分」であり、`.wh.oldfile`という名前のファイルが後続レイヤーにあると`oldfile`を削除する指示として解釈される</li>
-            <li>BuildKitでローカルに`.wh.foo`という名前のファイルを含むイメージを作成できても、OCI形式でエクスポート・再インポートするとアンパッカーが削除マーカーと解釈し消失、ローカルのスナップショットと書き出し後のイメージで異なるファイルシステムになる</li>
+            <li>Google、Ant Group、Modal、Tines、OpenAI、Anthropic、Tencentが既存ユーザーとして名を連ねる</li>
+            <li>CNCF Sandboxステージ入りは10月2日、Incubationへの移行は今後数ヶ月を予定</li>
           </ul>
         </div>
         <div class="meta">
-          <span>loige.co</span>
+          <span>gVisor Blog</span>
           <span>⏱ 3 min read</span>
           <span>2026-10-02</span>
         </div>
@@ -167,19 +153,19 @@
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-ai">AI</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://wagtail.org/blog/one-month-on-glm-53-flash/">WagtailコアチームがGLM 5.3 Flashだけで1ヶ月開発——目標の半分しか守れず、1つのMCPサーバーの試作で450Mトークン・150ドルを浪費</a></h3>
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://blog.cloudflare.com/next-git-platform-on-cloudflare/">Cloudflare、「AIエージェント向け次世代Gitプラットフォーム」開発コンペを開催</a></h3>
         </div>
-        <div class="summary">著者は2026年9月、安価なオープンモデルGLM 5.3 Flashのみで開発する実験を行った。前半は目標通り進み、成功タスクのコストは68ドル(電力消費4kWh、CO2排出365g)に収まったが、最適化不足のMCPサーバー試作で一晩のうちに450Mトークン・150ドルを消費し、プロバイダの容量制約でDeepSeek V4.1やQwen 3.8への切り替えを強いられた結果、20億トークンの半分しかGLM 5.3 Flashに回せなかった。</div>
+        <div class="summary">Cloudflareは、WorkersとArtifacts上でAIエージェントがコード協働する次世代Gitプラットフォームを開発者に競わせるコンペを開始した。ベータ公開中のArtifactsは数百万リポジトリ規模まで対応するバージョン管理ファイルシステムで、push・clone・forkイベントへのサブスクリプションや、米国・EUを選べるデータ主権設定を備える。参加には5〜10分のデモ動画とMIT/Apache/BSDライセンスでのオープンソース公開が必須で、締切は10月14日、優勝チームにはCloudflare Connect招待とクレジット2万5000ドルが贈られる。</div>
         <div class="key-points">
           <ul>
-            <li>成功タスクのコストは68ドル・電力4kWh・CO2排出365gで、日常的な開発作業であればflash級の安価なモデル1〜2種に絞る運用は十分成立すると結論</li>
-            <li>比較した14モデル中、DeepSeek V4.1 Flashが精度95%・電力14.9Wh・タスク当たり0.09ドルで最高評価、最終的に20億トークンの半分のみが当初目標のGLM 5.3 Flashに配分された</li>
+            <li>Artifactsは数百万リポジトリ規模に対応するバージョン管理ファイルシステム、米国・EUのデータ格納地を選択可能</li>
+            <li>締切10月14日、優勝はクレジット2万5000ドルとCloudflare Connect招待、Artifacts課金は10月15日開始</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Wagtail Blog</span>
+          <span>Cloudflare Blog</span>
           <span>⏱ 3 min read</span>
           <span>2026-10-01</span>
         </div>
@@ -187,43 +173,61 @@
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-ai">AI</span>
+          <span class="tag tag-dev">Dev</span>
           <span class="content-type">📜 解説</span>
-          <h3><a href="https://amoffat.github.io/blog/cognitive-load.html">AI生成コードのレビューが疲れる理由は「用語のミスマッチ」——命名をレビュアーの語彙に揃えるプロンプト術</a></h3>
+          <h3><a href="https://blog.python.org/2026/09/language-summit-2026-rust-for-cpython/">Python Language Summit、CPythonのRust移植第一弾にzlibモジュールを選定</a></h3>
         </div>
-        <div class="summary">著者は、AIが生成したコードに現れる`MutationIntent`のような非標準的な用語が、レビュアーに都度の意味確認を強い、見慣れない概念が数十個分積み重なると誤読のリスクが高まると指摘する。対策として、レビュー前にAIへ非標準用語の一覧化と意味の説明、代替語の提案をさせ、コードとドキュメント全体を一括で置換させる定型プロンプトを使う。</div>
+        <div class="summary">Python Language Summit 2026でDavid Hewitt氏が、Kirill Podoprigora氏・Emma Smith氏が主導する「Rust for CPython」提案を発表した。型関連クラッシュが2021年の82件から2026年には353件に増える見込みであることが動機で、最初の移植対象にはzlib-rsを使うことでpip installを高速化できるzlibモジュールを選んだ。Cargo依存関係の脆弱性管理が「showstopperになりうる」との懸念も出ており、Python 3.16でオプション採用、3.18以降で必須化という段階移行を計画している。</div>
         <div class="key-points">
           <ul>
-            <li>非標準用語が「数十個」分蓄積した時点でレビュアーの認知負荷が臨界点を超え、誤解釈のリスクが高まると指摘</li>
-            <li>レビュー前にAIへ非標準用語の洗い出しと定義付け・代替案の提示をさせ、コード・ドキュメント全体に一括で置換を適用させることでレビュアー自身の語彙に合わせる</li>
+            <li>型クラッシュは2021年82件→2026年予測353件に増加、CPythonのプラットフォーム対応は20種類でRustより広い</li>
+            <li>Python 3.16(2027年10月)でzlibをオプション移植、3.17でio/json/xml/parserへ拡大、3.18以降で必須化</li>
           </ul>
         </div>
         <div class="meta">
-          <span>amoffat.github.io</span>
-          <span>⏱ 2 min read</span>
+          <span>Python.org</span>
+          <span>⏱ 4 min read</span>
           <span>2026-10-02</span>
-          <span class="engagement">▲ 48</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://halide.cx/blog/wpd/">Rust製メモリセーフWebPデコーダ「wpd」、libwebpを最大3.19倍上回る</a></h3>
+        </div>
+        <div class="summary">2023年にCVE-2023-4863として数十億台のデバイスに影響したlibwebpのバッファオーバーフローを踏まえ、Rustとzerocopyクレートのみに依存する安全なunsafeコードでWebPデコーダ「wpd」が開発された。ベンチマークでは単一スレッドの非可逆圧縮で1.19倍、可逆圧縮で2.74倍、マルチスレッドではそれぞれ2.68倍・3.19倍libwebpを上回る。ブラウザの高深刻度バグの約70%がメモリ安全性由来とされる中、画像デコーダという攻撃面の広いコードを安全性と性能の両方で置き換えられることを示した。</div>
+        <div class="key-points">
+          <ul>
+            <li>マルチスレッド可逆圧縮でlibwebp比3.19倍、単一スレッド非可逆でも1.19倍高速</li>
+            <li>unsafeコードは検証済みのzerocopyクレートのみに限定、BSD 2-Clauseライセンスで公開</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Halide</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-03</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
           <span class="tag tag-dev">Dev</span>
-          <span class="content-type">👀 注目</span>
-          <h3><a href="https://www.oliverdunk.com/2026/09/30/iana-reply">example.comがHTML+別JSファイル構成に変わった理由をIANAが説明——「ほとんどの自動アクセスはJSを取得しない」</a></h3>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://orlp.net/blog/two-stack-sliding-window-aggregation/">逆元を持たない集約関数でもO(1)を実現する「二本スタック」のスライディングウィンドウ集約</a></h3>
         </div>
-        <div class="summary">IANA副社長Kim Davies氏は、予約ドメインexample.comへの大量の自動アクセスによる帯域消費を抑えるため、ページをベースのHTMLと別出しのJavaScriptファイルに分割したと説明した。自動アクセスの大半はJSを取得しないため、全体のデータ転送量が減る。IANAはexample.comのHTTP提供を「厚意」の範囲と位置づけ、汎用的な可用性テスト用途は想定していないと明言している。</div>
+        <div class="summary">最小値や浮動小数点加算のように逆演算が存在しない集約関数は、スライディングウィンドウ上の累積計算で古い値を単純に「取り消す」ことができない。二本スタック方式は、新しい値とその集約を積むスタックと、過去にポップされた要素の累積部分集約を保持するスタックを併用し、w回ごとに全要素を再走査して集約をやり直すことで、要素1個あたり償却O(1)・空間O(w)を維持する。最小値・最大値・平均・HyperLogLogスケッチなど任意の結合的集約関数に適用でき、各ウィンドウの出力がそのウィンドウ内の要素だけに依存するため誤差が長期的に蓄積しない。</div>
         <div class="key-points">
           <ul>
-            <li>ページをベースHTML + 別出しJSファイルへ分割し、自動アクセスの大半がJSを取得しないことを利用してデータ転送量を削減</li>
-            <li>IANAはexample.comのHTTP提供を「要件ではなく厚意」と位置づけ、設定ファイルのコピー忘れ目的での利用は把握しつつ汎用可用性テスト用途は非対応と明言</li>
+            <li>時間複雑度は償却O(1)、空間複雑度はウィンドウ幅wに対してO(w)</li>
+            <li>NaNや無限大が永続的に結果を汚染する浮動小数点特有の問題を回避できる</li>
           </ul>
         </div>
         <div class="meta">
-          <span>oliverdunk.com</span>
-          <span>⏱ 2 min read</span>
-          <span>2026-09-30</span>
-          <span class="engagement">▲ 137</span>
+          <span>orlp.net</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-10-02</span>
         </div>
       </div>
     </div>
@@ -235,37 +239,38 @@
         <div class="card-header">
           <span class="tag tag-ai">AI</span>
           <span class="content-type">📜 解説</span>
-          <h3><a href="https://qiita.com/nogataka/items/a2f89a94d243b1b715cb">Jev・Clef・d1・Jeff・Kev…「意思決定モデル」5種を構造で仕分ける——測定条件が違う数字は比べられないという注意書き</a></h3>
+          <h3><a href="https://note.com/npaka/n/n2b9c36c471b6">Codex SecurityとClaude Security、パターン検索型から「到達可能性」解析へ</a></h3>
         </div>
-        <div class="summary">著者は2026年10月時点の意思決定モデルを、ホスト型API(Jev・d1)、大規模ベース+LoRA(Clef 27B)、小規模ベース+LoRA(Clef-flash・Jeff・Kev)、エンコーダ型(Laya)の4構造に分類した。TypeSafeが公表したJevのレイテンシ上限500msに対し、Cloudflareの実測では524.1msと上限を超えており、測定主体が異なる数字の単純比較に注意を促している。</div>
+        <div class="summary">OpenAIのCodex SecurityとAnthropicのClaude Securityはいずれも、既知パターンに一致させる従来型スキャナと異なり、コードベース全体を読んで攻撃起点から重要データまでの到達可能性を調べる。Codex Securityはクラウド版・CLI版で脅威モデルを作成しCI/CDに組み込みやすい一方、Claude SecurityはClaude Code向けPluginや`/security-review`コマンドで認証・認可やビジネスロジックの脆弱性、複数コンポーネント間の問題検出に強みを持つ。著者はPR単位の差分チェックと定期的な全体スキャンを組み合わせ、Dependabotなど既存ツールと併用する運用を勧めている。</div>
         <div class="key-points">
           <ul>
-            <li>ホスト型API・大規模ベース+LoRA・小規模ベース+LoRA・エンコーダ型の4構造に分類、Jevの公称レイテンシ上限500msに対しCloudflare実測は524.1msと上限超え</li>
-            <li>料金モデルもJevは入力$0.042/MTok・出力無料、d1は無料枠ありと方式が異なり、「条件が異なる数字は直接比べられない」と注意を促す</li>
+            <li>Codex SecurityはCI/CD組み込み向けの脅威モデル生成、Claude SecurityはPluginと`/security-review`コマンドで差分検査</li>
+            <li>いずれもPR単位の新規変更チェックと定期的なリポジトリ全体スキャンの併用を推奨</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Qiita (nogataka)</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-10-02</span>
+          <span>note.com</span>
+          <span class="engagement">🔖 123</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-03</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
           <span class="tag tag-dev">Dev</span>
-          <span class="content-type">🔬 研究</span>
-          <h3><a href="https://qiita.com/suwa_nobu/items/981419874758372f65eb">Claude Code「mod」の対応バージョン、公式ドキュメントは1つ遅れていた——2.1.286で実際には動作</a></h3>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://qiita.com/chomado/items/8830d0e9f4b75a7ea2a5">GitHub Copilot SDK v2.0、ランタイムをTypeScriptからRustへ全面書き換え</a></h3>
         </div>
-        <div class="summary">著者はClaude Codeの新機能modについて同一タスクを複数バージョンで3回ずつ実行する検証を行い、公式ドキュメントが「v2.1.287以降対応」と記載する一方、実測では2.1.286でも3回とも動作し2.1.285では動かないことを確認した。modはサンドボックス化されずユーザー権限でファイルアクセスや処理実行が可能なため、`claude plugin validate`での事前確認を推奨している。</div>
+        <div class="summary">2026年6月にGA済みのGitHub Copilot SDKがv2.0でランタイムを根本的に再構築し、Microsoft Distinguished EngineerのStephen Toub氏主導で約14.5週間・128本のPRを経て本番コード約83万行をRustへ移植した。Node.js/V8の起動コストを除去し、SDKクライアントごとの言語ランタイム重複を排除、Tokioによるマルチスレッド処理にも対応した。TypeScript・Python・.NET・Go・Java・Rustの6言語から、Configure→Assemble→Infer→Authorize→Execute→Continueの6段階エージェントループを利用できる。</div>
         <div class="key-points">
           <ul>
-            <li>公式ドキュメントの「v2.1.287以降対応」表記に対し、実測では2.1.286で3回とも動作し2.1.285では0回しか動作せず、表記が1バージョン遅れていることが判明</li>
-            <li>modはサンドボックス化されずユーザー権限でファイル操作・プロセス実行が可能、`--safe-mode`フラグは3回すべてでmod機能を無効化した</li>
+            <li>約14.5週間・128本のPRで本番コード約83万行をRustへ移行、6言語のSDKに対応</li>
+            <li>エージェントループはConfigure/Assemble/Infer/Authorize/Execute/Continueの6段階で構成</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Qiita (suwa_nobu)</span>
+          <span>Qiita</span>
           <span>⏱ 3 min read</span>
           <span>2026-10-02</span>
         </div>
@@ -273,40 +278,41 @@
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-oss">OSS</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://qiita.com/KeyroIME/items/30c140aa79d3bd335841">Windows向け日本語IME「KeyroIME」がGPLv3でオープンソース化——C++のTSFコアとRust製辞書サービスを分離</a></h3>
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://qiita.com/yosshi_/items/7ed4f99fbe9b96e360e3">Kubernetesノード物理障害、NotReady表示から代替Pod起動までの秒数を実測</a></h3>
         </div>
-        <div class="summary">KeyroIME OpenCoreは、Windows TSF/COMテキストサービスをC++17で実装した`KeyroIME.dll`、辞書検索・候補処理をRustで実装した`keyro_service.exe`、通知領域UIの`keyro_tray.exe`の3プロセス構成でGNU GPLv3のもとに公開された。開発にAIエージェントを活用しているが、仕様決定・検証・公開の責任は人間が担うとし、候補生成は現状辞書ベースで生成AI機能ではないと明記している。</div>
+        <div class="summary">ノードが物理障害で応答不能になった場合、デフォルト設定ではNode Lifecycle ControllerがNodeMonitorGracePeriod（通常50秒）超過を検知した時点でReady ConditionをUnknownにし`NotReady`表示になる。TaintManagerはDefaultTolerationSeconds（デフォルト300秒）後の合計350秒時点でPod削除要求を出すが、応答不能ノード上のPodはTerminatingのまま残る。DeploymentやJobは旧Pod完了を待たず別ノードで即座に代替Podを作るが、StatefulSet（デフォルトOrderedReady）は同一Ordinalの実削除を待つため起動が遅れ、DaemonSetは無期限TolerationでEviction対象外になる。</div>
         <div class="key-points">
           <ul>
-            <li>Windows TSF/COMをC++17で実装した`KeyroIME.dll`、辞書検索・候補処理をRustで実装した`keyro_service.exe`、通知領域UIの`keyro_tray.exe`の3プロセスに分割</li>
-            <li>GNU GPLv3で利用・調査・改変・共有が可能、Windows依存を最小化する設計方針を掲げ、候補生成は辞書ベースで生成AIは使用していないと明記</li>
+            <li>NotReady判定は50秒後、Pod削除要求は合計350秒後というデフォルト値の内訳が明確化された</li>
+            <li>StatefulSetはOrderedReadyのため同一Ordinalの実削除待ちで代替Pod起動が遅れる</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Qiita (KeyroIME)</span>
+          <span>Qiita</span>
           <span>⏱ 3 min read</span>
-          <span>2026-10-01</span>
+          <span>2026-10-03</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-frontend">Frontend</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://zenn.dev/chot/articles/362b7a2420ef1a">Next.js 16の`use cache: private`、特定条件下でクッキー付きキャッシュがブラウザに残留すると判明</a></h3>
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://voluntas.ghost.io/2026-10-first-half-llm/">2026年10月前半のLLM利用実態、Ollama CloudとCursor併用でピーク時間帯を分散</a></h3>
         </div>
-        <div class="summary">`cacheComponents: true`と`partialPrefetching: true`を両方有効化し、キャッシュ有効期限を5分以上に設定した場合、同一ページへの2回目以降の遷移でブラウザに保存されたキャッシュが再利用されることが実験で確認された。クッキーを削除してもキャッシュ側の古い値が表示され続ける恐れがあるが、Server Action経由のクッキー削除時はNext.jsが自動的にページを再レンダリングして対応する仕様があるため、ログアウト処理では`window.location.href`での全体リロードが推奨される。</div>
+        <div class="summary">個人開発者の実運用報告によると、Ollama Cloud Teamプラン（月500ドル）でDeepSeek V4.1 FlashとGLM 5.3 Flashを使い分け、利用ピークが日本時間21時〜翌3時に集中するため営業時間帯の枠と重複せず実質利用枠が2倍になっているという。Cursor Teamでは複雑な作業にGrok 4.7 xhighを使い、CodexはChatGPT BusinessのPremium Seat年間契約でGPT 6.1 Sol Maxを調査・設計に充てる一方、Claude Codeは著者以外のメンバーが解約した。ローカルではLenovo ThinkStation PGX 2台でDeepSeek V4 Flash Vision ExpをvLLMで24時間365日稼働させ、電気代のみで運用している。</div>
         <div class="key-points">
           <ul>
-            <li>`cacheComponents: true`・`partialPrefetching: true`を両方有効化しキャッシュ期限が5分以上の条件でのみ、2回目以降の遷移時にブラウザ保存キャッシュが再利用される</li>
-            <li>クッキー削除後もキャッシュされた古い値が表示される恐れがあり、ログアウト時は`window.location.href`での全体リロードが回避策として推奨される</li>
+            <li>Ollama Cloud利用ピークが日本時間21時〜3時に集中し、営業時間帯の枠と重ならないため実質利用枠が2倍相当に</li>
+            <li>Lenovo ThinkStation PGX 2台でDeepSeek V4 Flash Vision ExpをvLLM運用、電気代のみで24時間365日稼働</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Zenn (chot)</span>
-          <span>⏱ 3 min read</span>
+          <span>voluntas</span>
+          <span class="engagement">🔖 65</span>
+          <span>⏱ 2 min read</span>
           <span>2026-10-02</span>
         </div>
       </div>
@@ -317,63 +323,64 @@
 
       <div class="card">
         <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.com/obra/superpowers">obra/superpowers、29万5000スター規模のコーディングエージェント向け開発手法フレームワーク</a></h3>
+        </div>
+        <div class="summary">superpowersは、要件のブレインストーミングから設計承認、git worktreeでの作業分離、RED-GREEN-REFACTORによるテスト駆動実装、コードレビューまでをスキルとして組み合わせた、コーディングエージェント向けの開発手法フレームワークだ。Claude Code、Cursor、Devin、Gemini、GitHub Copilotなど複数のエージェントにエージェント別の導入手順で対応する。</div>
+        <div class="key-points">
+          <ul>
+            <li>GitHub Stars約29万5000、Claude Code・Cursor・Devin・Gemini・GitHub Copilotなど複数エージェントに対応</li>
+            <li>brainstorming→plan→git worktree分離→RED-GREEN-REFACTOR TDD→コードレビューの順に進むワークフローを規定</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span class="engagement">⭐ 294.9k</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-10-03</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.com/addyosmani/agent-skills">addyosmani/agent-skills、Googleの開発プラクティスを9コマンドに圧縮したスキル集</a></h3>
+        </div>
+        <div class="summary">Googleのエンジニアリング手法（Hyrumの法則、テストピラミッド、トランクベース開発）を土台に、Define/Plan/Build/Verify/Review/Shipの6フェーズに整理した25種のスキルを収録する。`/spec`や`/build`、`/ship`など9個のスラッシュコマンドで起動し、コードレビュアー・セキュリティ監査・性能監査・テストエンジニアの4ペルソナや、アクセシビリティ・セキュリティ・可観測性の7チェックリストを備える。Claude Code、Cursor、Codex、Copilot、Clineなど70以上のエージェントにMarkdownファイルとして導入できる。</div>
+        <div class="key-points">
+          <ul>
+            <li>GitHub Stars約10万800、25スキル・9スラッシュコマンド・4ペルソナ・7チェックリストで構成</li>
+            <li>Markdownファイルとして70以上のエージェント（Claude Code、Cursor、Codex、Copilot、Clineなど）に導入可能</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span class="engagement">⭐ 100.8k</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-10-03</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
           <span class="tag tag-ai">AI</span>
           <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://github.com/antirez/ds4">Redis作者antirezの新作「DwarfStar 4 (ds4)」——非対称2bit量子化でDeepSeek V4をローカルMac/CUDA機に収める</a></h3>
+          <h3><a href="https://github.com/thedotmack/claude-mem">claude-mem、セッション間の文脈をAI圧縮して引き継ぐ永続メモリシステム</a></h3>
         </div>
-        <div class="summary">antirez(Salvatore Sanfilippo)がMITライセンスで公開したds4は、GGUF汎用ランナーのラッパーではなく、ロード・プロンプト生成・ツール呼び出し・KVキャッシュ管理・サーバーAPI・コーディングエージェントを自己完結で実装したC言語の推論エンジン。ルーティングするexpertを非対称2bit量子化で圧縮しつつ重要経路を保持し、長いプレフィックスをSSDへ退避してフル再計算なしに再開できる。</div>
+        <div class="summary">claude-memは、エージェントのセッション中の行動をライフサイクルフック5種で捕捉し、SQLiteとベクトルDBのChromaに保存、次回セッションへ関連文脈だけを注入する。「mem-search」スキルでは、まず50〜100トークン程度の圧縮済み要約を返し、必要な場合のみ詳細を取得する段階的開示を採用している。`npx claude-mem install`一行で導入でき、Claude Code・OpenClaw・Cursor・Grok Botなど複数環境に対応、最新バージョンは13.29.0。</div>
         <div class="key-points">
           <ul>
-            <li>Apple Silicon(96GB以上のRAM)・NVIDIA DGX Spark/CUDA・AMD ROCmの3バックエンドに対応、CLI・APIサーバー・コーディングエージェントの3インターフェースを提供</li>
-            <li>M5 Max 128GBでQ2量子化・2,048トークン時はプリフィル毎秒790トークン・生成毎秒39.4トークン、65,536トークンの長文脈ではプリフィル毎秒398.5トークン・生成毎秒27.6トークン</li>
+            <li>GitHub Stars約9万5600、最新バージョン13.29.0、`npx claude-mem install`一行導入</li>
+            <li>SQLite+ベクトルDB(Chroma)で保存し、mem-searchスキルが50〜100トークンの圧縮要約から段階的に詳細取得</li>
           </ul>
         </div>
         <div class="meta">
-          <span>GitHub (antirez/ds4)</span>
+          <span>GitHub</span>
+          <span class="engagement">⭐ 95.6k</span>
           <span>⏱ 2 min read</span>
-          <span>2026-10-02</span>
-          <span class="engagement">▲ 125</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-security">Security</span>
-          <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://blog.trailofbits.com/2026/10/02/sequencehash-multihashing-for-the-rest-of-us/">Trail of Bits、複数値をまとめて安全にハッシュする「SequenceHash」を公開——ゼロ知識証明での衝突リスクに対応</a></h3>
-        </div>
-        <div class="summary">SequenceHashは、SHA256やBLAKEなど任意のハッシュ関数の上に構築できるハッシュ非依存のマルチハッシュ構成で、Community Cryptography Specification Projectの一環としてRust・Go・Pythonの実装とテストベクタが公開された。各入力を128bit整数の長さサフィックスで符号化し入力境界を一意に確定させ、二重ハッシュ構成で長さ拡張攻撃にも耐性を持つ。</div>
-        <div class="key-points">
-          <ul>
-            <li>複数値を単純に連結してハッシュすると入力の境界が曖昧になり異なる入力列が同一ハッシュになり得るが、各入力に128bit長さサフィックスを付与して一意性を保証</li>
-            <li>二重ハッシュ構成で長さ拡張攻撃に耐性を持たせ、鍵付き認証版のSequenceMACは32バイト以上の鍵長とその長さ情報を組み込みHMAC型の鍵擬似衝突にも対応</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Trail of Bits Blog</span>
-          <span>⏱ 3 min read</span>
-          <span>2026-10-02</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-data">Data</span>
-          <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://docs.openpoiapi.com/">日本全国337万件のPOIを検索できる「OpenPOI API」公開——Overture Maps由来のオープンデータを統合</a></h3>
-        </div>
-        <div class="summary">OpenPOI APIは、Overture Maps Foundationと日本の食品営業施設データなど複数のオープンデータを統合し、飲食店・薬局・公園など337万件以上の施設をキーワードおよび位置(座標・矩形範囲)で検索できるAPI。OpenAPI 3.1仕様とMCP(Model Context Protocol)に対応し、検索結果を自前のデータベースへ保存して商用・非商用どちらでも利用できる。</div>
-        <div class="key-points">
-          <ul>
-            <li>`/v1/search`と`/v1/suggest`の2エンドポイントを提供、検索結果が自前DBへの保存を許可され商用・非商用問わず利用可能</li>
-            <li>Overture Maps Foundationと日本の食品営業施設データを統合し337万件以上を収録、MCP対応によりAIエージェントから直接問い合わせ可能</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>OpenPOI API Docs</span>
-          <span>⏱ 2 min read</span>
-          <span>2026-10-02</span>
-          <span class="engagement">🔖 214</span>
+          <span>2026-10-03</span>
         </div>
       </div>
     </div>
@@ -382,52 +389,52 @@
       <div class="section-title">🔗 Quick Links</div>
 
       <div class="quick-link">
+        <span class="tag tag-infra">Infra</span>
+        <a href="https://ftl-os.org/">FTL: OS機能をユーザー空間ライブラリとして実装する新OSアーキテクチャ</a>
+        <span class="quick-summary">— コンテナ内でプロセス・VFS・ネットワークをライブラリ化し、VM並みの分離をベアメタル不要で実現する。</span>
+        <span class="meta">FTL OS</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://pipod.dev/">Pi Pod、piコーディングエージェントを自前サーバーのサンドボックスで動かすセルフホスト基盤</a>
+        <span class="quick-summary">— ロールベースのセッション共有やブラウザ操作の自動化を備える。</span>
+        <span class="meta">Pi Pod</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-oss">OSS</span>
+        <a href="https://vxlang.org/">Vx、メモリ所在を型システムに組み込んだ新言語「One Language, Every Chip」</a>
+        <span class="quick-summary">— デバイスポインタの誤参照をコンパイルエラーとして検出、H100・MI300X・Apple M系向けのマシンファイルを提供する。</span>
+        <span class="meta">Vx Lang</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-infra">Infra</span>
+        <a href="https://www.phoronix.com/news/XDC-2026-Valve-Timur-AMDGPU">Valveのエンジニアが10年前のAMD GCN 1.0/1.1をAMDGPUドライバへ移行、Linux 6.19で性能30%向上</a>
+        <span class="quick-summary">— メーカーが力を入れない旧世代GPUの寿命をOSS側の努力で延ばす事例。</span>
+        <span class="meta">Phoronix</span>
+      </div>
+
+      <div class="quick-link">
         <span class="tag tag-security">Security</span>
-        <a href="https://www.bleepingcomputer.com/news/security/fortinet-warns-of-critical-fortimail-flaw-exploited-in-zero-day-attacks/">FortiMailの未修正ゼロデイ(CVSS 9.8)が実環境で悪用中——パストラバーサルで任意ファイル書き込み、修正版なし</a>
-        <span class="quick-summary">— 管理インターフェース経由の未認証攻撃者が任意ファイルを書き込める欠陥で、CISAが10月1日にKEVへ追加。回避策はID based暗号化機能の無効化か管理画面のインターネット遮断。</span>
+        <a href="https://www.bleepingcomputer.com/news/security/gitlab-warns-of-critical-rce-vulnerability-in-ai-gateway-service/">GitLab、自己管理版AI GatewayのCVSS 9.9 RCE脆弱性(CVE-2026-90970)を修正</a>
+        <span class="quick-summary">— Jinja2テンプレートのサンドボックスエスケープが原因、19.2.4/19.3.2/19.4.1で解消。</span>
         <span class="meta">BleepingComputer</span>
       </div>
 
       <div class="quick-link">
         <span class="tag tag-security">Security</span>
-        <a href="https://thehackernews.com/2026/09/attackers-exploit-zimbra-flaw-to-deploy.html">Zimbraの未認証RCE(CVE-2026-73570)、仕込んだメール1本で悪用可能——7月公開の修正版10.1.20未適用環境が標的</a>
-        <span class="quick-summary">— zimbra-snmpパッケージ有効時にSNMP通知処理の入力検証不備を突かれ、crafted SMTPリクエストだけでJSP Webシェルを設置される。</span>
-        <span class="meta">The Hacker News</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-security">Security</span>
-        <a href="https://cybersecuritynews.com/543699-unique-credentials-exposed/">Truffle Security、公開GitHubリポジトリに54万3,699件の有効な認証情報を発見——最長16.1年有効なまま</a>
-        <span class="quick-summary">— LLM学習用データセット「The Stack v3」を調査した結果、有効な認証情報の半数超がGitHubのPush Protection対象外の種別(DB接続文字列やGoogle APIキーなど)だった。</span>
+        <a href="https://cybersecuritynews.com/debian-1313-security-flaws/">Debian、Linuxカーネルの不具合1,313件を一括修正するDSA-6528-1を公開</a>
+        <span class="quick-summary">— 対象はTrixie向けソースパッケージ6.12.111-1、特権昇格・DoS・情報漏洩を防ぐ。</span>
         <span class="meta">Cyber Security News</span>
       </div>
 
       <div class="quick-link">
         <span class="tag tag-security">Security</span>
-        <a href="https://www.nikkei.com/article/DGXZQOUC027150S6A001C2000000/">ヤマト運輸「クロネコ代金後払い」に不正アクセス、氏名・住所など顧客情報が流出の可能性——サービスは停止中</a>
-        <span class="quick-summary">— クレジットカード情報やパスワードは対象外だが、氏名・住所・電話番号に加え請求金額や購買店舗名、担当従業員名まで流出した可能性がある。</span>
-        <span class="meta">日本経済新聞</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-product">Product</span>
-        <a href="https://www.waterfox.com/releases/6.7.5/">Waterfox 6.7.5公開——ブラウザ内蔵のRSSフィードリーダーとフィード管理機能を統合</a>
-        <span class="quick-summary">— `about:feeds`から購読を一覧・検索・フィルタできるほか、フィードURLを直接開くと生XMLではなく記事一覧と購読フォームが表示されるようになった。</span>
-        <span class="meta">Waterfox</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-ai">AI</span>
-        <a href="https://www.itmedia.co.jp/aiplus/article/2610/02/2000001965/">ELYZA、LLM-jp-4ベースの日本語特化モデル2種をApache 2.0で公開——一部ベンチで後継のLLM-jp-4.1超え</a>
-        <span class="quick-summary">— 33BとMoE版32B-a3Bの2モデルをHugging Faceで公開、「再帰的自己改善」研究に向けた新チーム「ELYZA RSI Research」の要素研究の一環という。</span>
-        <span class="meta">ITmedia</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-ai">AI</span>
-        <a href="https://blog.sshh.io/p/the-harness-is-the-company">「SaaSはモデルを包むハーネスになる」——人間はAIの判断に介入する場所の設計へ役割が移るという論</a>
-        <span class="quick-summary">— ソフトウェアを使って人間が仕事をする構図から、AIが仕事を遂行し人間が戦略的判断だけを担う構図への反転を論じ、ハーネスの内製化こそが競争優位になると主張する。</span>
-        <span class="meta">blog.sshh.io</span>
+        <a href="https://www.microsoft.com/en-us/corporate-responsibility/topics/cybersecurity/reports/microsoft-digital-defense-report/">Microsoft Digital Defense Report 2026公開</a>
+        <span class="quick-summary">— 国家支援型攻撃とAI悪用の動向を年次でまとめたレポート。</span>
+        <span class="meta">Microsoft</span>
       </div>
     </div>
 
