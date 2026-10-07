@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-10-06</title>
+  <meta name="description" content="Reflection AIがBeam公開(501Bパラメータ) / CloudflareコンテナAIエージェント向け刷新、起動6倍速 / Opus 5.5が磁性半導体候補を発見">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech News Daily">
+  <meta property="og:title" content="Tech News Daily — 2026-10-06">
+  <meta property="og:description" content="Reflection AIがBeam公開(501Bパラメータ) / CloudflareコンテナAIエージェント向け刷新、起動6倍速 / Opus 5.5が磁性半導体候補を発見">
+  <meta property="og:url" content="https://tech-news.kaion-lab.com/archive/2026-10-06.html">
+  <meta property="og:image" content="https://tech-news.kaion-lab.com/apple-touch-icon.png">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="../feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-10-06 (Tue)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+      <nav class="site-nav">
+        <a href="../" class="active">📰 日刊ダイジェスト</a>
+        <a href="../trends.html">🔌 週次プラグイントレンド</a>
+        <a href="../ai-trends.html">🧠 AI プロダクト動向</a>
+        <a href="./">🗂 アーカイブ</a>
+      </nav>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 21 articles</span>
+      <span>🏷 6 categories</span>
+      <span>📡 21 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item">
+        <span class="number-value">6x</span>
+        <span class="number-label">Cloudflareコンテナ起動が6倍速に</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">23B/501B</span>
+        <span class="number-label">Beamの活性/総パラメータ数</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">13x</span>
+        <span class="number-label">Homaの短文RPC遅延(TCP比)</span>
+      </div>
+    </div>
+
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
+
+      <div class="card featured deep-dive">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://reflection.ai/blog/introducing-beam">DEEP DIVE: Reflection AI、「Beam」公開——501BパラメータのオープンウェイトMoEモデル</a></h3>
+        </div>
+        <div class="summary">Reflection AIは、同社初となるオープンウェイトモデル「Beam」を発表した。背景には、コーディング・推論・エージェント向けの大規模モデルがクローズドな商用APIに集中し、オープンウェイトの選択肢が性能面で後塵を拝しているという状況がある。BeamはスパースMixture-of-Expertsアーキテクチャを採用し、総パラメータ501Bに対し推論時に活性化されるのは23Bのみ。学習は6,144基のNVIDIA GB300 NVL72 GPUを使い、Webおよびライセンス済みデータセット23.8兆トークンを4週間で事前学習した後、10.5K基のGB300 GPUで4週間にわたる強化学習を実施し、1億回を超えるロールアウトを生成した。アーキテクチャにはローカル/グローバル注意の交互配置、きめ細かいルーティングエキスパート、数値安定性を狙った残差ストリーム制御を組み込み、コンテキスト長は100万トークンまで拡張されている。ベンチマークではSWE-Bench Pro v2-Hardで77.2%、Terminal Bench v2.1で80.1%、AIME 2026で97.8%、GPQA Diamondで90.5%を記録し、推論計算量は同等スコアのモデルの3〜4分の1に抑えたという。重みと技術レポート、開発者向けツールはApache 2.0ライセンスで今月中に公開予定で、現在はplatform.reflection.aiでのウェイトリスト登録を通じたレッドチーミング段階の早期アクセスのみ提供されている。</div>
+        <div class="editorial">🧠 推論計算量を3〜4分の1に抑えながらQwen 3.8-Maxに迫る性能を主張する点は、スパースMoEの設計として筋が通っている。ただしベンチマーク数値はいずれも自社発表であり、第三者による再現評価はまだない。重み公開は「今月中」で現時点はレッドチーミング段階の限定アクセスにとどまり、実際にオープンに使えるようになるまでは評価を保留したい。</div>
+        <div class="key-points">
+          <ul>
+            <li>スパースMoE、総パラメータ501B・活性化パラメータ23B、コンテキスト長100万トークン</li>
+            <li>SWE-Bench Pro v2-Hard 77.2%、Terminal Bench v2.1 80.1%、AIME 2026 97.8%、GPQA Diamond 90.5%</li>
+            <li>6,144基のNVIDIA GB300 NVL72で23.8兆トークンを事前学習、Apache 2.0で今月中に重み公開予定</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 自前でオープンウェイトの大型コーディング/エージェントモデルを検討しているなら、Apache 2.0公開後の実機ベンチマークとQwen 3.8-Maxとの推論コスト比較を待つ価値がある。</div>
+        <div class="meta">
+          <span>Reflection AI</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-10-05</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/cloudflare_containersai6.html">Cloudflare Containers、AIエージェント向けに刷新——起動6倍速、ファイルシステムスナップショットもベータ公開</a></h3>
+        </div>
+        <div class="summary">CloudflareはAIエージェントの急増に合わせ、Containersサービスを刷新した。従来は人間の開発者が事前にサンドボックスイメージやインスタンス種別を設定する必要があったが、新方式ではエージェントが実行時に動的に選択できる。新しいスケジューリング方式により起動時間の中央値は4.049秒から648ミリ秒へ、約6倍短縮された。Debian Trixie SlimやNode.js 24 LTSを含む新しいベースイメージによりDockerfileなしで即時デプロイが可能になり、コンテナの状態を保存・復元できるファイルシステムスナップショット機能もベータで追加された。</div>
+        <div class="key-points">
+          <ul>
+            <li>新スケジューリング方式で起動時間の中央値が4.049秒→648ミリ秒、約6倍に短縮</li>
+            <li>ファイルシステムスナップショット機能(ベータ)でコンテナ状態を保存・復元、Debian Trixie Slim/Node.js 24 LTSの新ベースイメージでDockerfile不要の即時デプロイに対応</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-05</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://www.vals.ai/blogs/room-temperature-magnetic-semiconductors">Claude Opus 5.5が材料探索エージェントとして稼働——室温動作の磁性半導体候補2件を提示</a></h3>
+        </div>
+        <div class="summary">AI評価企業Vals AIは、Claude Opus 5.5エージェントが研究者Geby Jaffと共同で、スピントロニクス用メモリに向く室温動作の「Luttinger補償」磁性半導体候補を2件見つけたと発表した。新規化合物YBaMnFeO5は密度汎関数理論(HSE06)でバンドギャップ2.35eV、磁気秩序温度は約420〜490Kと予測されたが、900〜1300℃の通常の酸化物合成プロセスでは950K以上で構造が不安定化し合成が難しい。一方KV[Cr(CN)6]は1999年の文献で合成済みながらLuttinger補償としては認識されていなかった物質で、実測の磁気秩序温度376Kを持つ。計算コードと前提条件はGitHubで公開されている。</div>
+        <div class="key-points">
+          <ul>
+            <li>新規化合物YBaMnFeO5はバンドギャップ2.35eV・磁気秩序温度約420〜490Kと予測されるが、950K以上で構造不安定化し合成が難しい(理論のみ・未検証)</li>
+            <li>1999年に合成済みのKV[Cr(CN)6]は実測磁気秩序温度376K、Luttinger補償としての認識はAI解析で新たに判明</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Vals AI</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-05</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://gigazine.net/news/20261006-homa-protocol-replace-tcp/">TCPに代わる通信プロトコル「Homa」、AI時代のデータセンターに向けスタンフォード名誉教授が提唱</a></h3>
+        </div>
+        <div class="summary">スタンフォード大学名誉教授John OusterhoutらがRPC向けに設計したメッセージベースの通信プロトコル「Homa」を、Linuxカーネルへの統合も見据えて提唱している。TCPのストリーム型設計はAIデータセンターで大きなモデル重みの転送と小さなメタデータ要求が混在する場合に不利で、受信側主導の帯域制御と優先度付きキューイングにより短いメッセージの完了を早める。100Gbps・利用率80%環境での99パーセンタイル遅延は短いメッセージでTCPの1.2msに対しHomaは92マイクロ秒、約13倍速い。</div>
+        <div class="key-points">
+          <ul>
+            <li>受信側が明示的に許可を出す「GRANT」方式の帯域制御と、残りデータ量に基づく優先度付きキューイングを採用</li>
+            <li>100Gbps・利用率80%環境で短いメッセージの99パーセンタイル遅延がTCP比約13倍高速(1.2ms→92μs)、長いメッセージも約2倍速い</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GIGAZINE</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-10-06</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://dbushell.com/2026/10/03/deno-to-node/">「Denoと決別し、Nodeが一番の相棒になった」——ZSH統合不具合とJSRのレート制限に見切り</a></h3>
+        </div>
+        <div class="summary">開発者David BushellはDeno運用で数週間続いたZSH統合の不具合、JSRレジストリの過剰なレート制限(429 Too Many Requests)、同時リクエストでランタイムが固まるHTTP並行処理のバグに見切りをつけ、SvelteKitプロジェクトをNode v26.10.0に移行した。静的サイトジェネレータの移行後はビルドが15%高速化し、「今日Denoランタイムを使う理由はない」と結論づけた。</div>
+        <div class="key-points">
+          <ul>
+            <li>JSRレジストリの過剰なレート制限(429)と、同時リクエストでランタイムが固まるHTTP並行処理バグが移行の決定打</li>
+            <li>Node v26.10.0移行で静的サイトジェネレータのビルドが15%高速化</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>dbushell.com</span>
+          <span>▲ 62</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-03</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://gleam.run/news/gleam-doesnt-compile-to-erlang-source-anymore/">Gleam v1.19.0、Erlangソースコード生成をやめて中間表現「Erlang abstract forms」に直接コンパイル</a></h3>
+        </div>
+        <div class="summary">Gleamはv1.19.0でErlang向けコードジェネレータを再設計し、読める形のErlangソースコードを出力する方式から、ErlangコンパイラがVM向けに内部生成する中間バイナリ表現「Erlang abstract forms」を直接出力する方式に切り替えた。独自のBEAMバイトコード生成器を自作して保守し続けるコストを避け、既存のErlangインフラに乗る判断で、Elixirと同様の戦略を取る。100モジュールの標準ベンチマークでビルド時間はv1.17.0比で約50%短縮(約500ms→250ms)、クラッシュ時のスタックトレースの行番号もGleamの元ソースに対応するようになった。</div>
+        <div class="key-points">
+          <ul>
+            <li>独自BEAMバイトコード生成器を自作せず、Erlangコンパイラの中間表現を直接利用する設計に変更(Elixirと同様の戦略)</li>
+            <li>100モジュール標準ベンチマークでビルド時間が約50%短縮(約500ms→250ms)、スタックトレースの行番号もGleam原本に対応</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Gleam</span>
+          <span>▲ 76</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-05</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://www.bleepingcomputer.com/news/google/google-halts-open-source-bug-bounty-program-amid-ai-spam-surge/">Google、AI生成の「スロップ」報告が殺到しOSS脆弱性報奨金プログラムを一時停止——再開は2027年Q1目標</a></h3>
+        </div>
+        <div class="summary">Googleは10月1日付で、オープンソースソフトウェア脆弱性報奨金プログラム(OSS VRP)への製品脆弱性報告の新規受付を一時停止した。自動生成・AI生成の報告が急増し、その大半が無効だったためで、Googleのエンジニアやオープンソースのメンテナーが幻覚による架空の欠陥の処理に忙殺されていた。サプライチェーン関連の報告や既存の報告受付への影響はなく、再開の見通しは2027年第1四半期に示すとしている。Linuxメンテナーも1リリースあたり最大2,000件規模の偽CVE申請に悩まされ、Intelもバグバウンティを一時停止している。</div>
+        <div class="key-points">
+          <ul>
+            <li>10月1日付で製品脆弱性報告の新規受付を一時停止、サプライチェーン報告・既存案件は対象外、再開目標は2027年Q1</li>
+            <li>Linuxメンテナーも1リリース最大2,000件規模の偽CVE申請に直面、Intelも同様にバグバウンティを一時停止</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>BleepingComputer</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-05</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://blog.flatt.tech/entry/2026/10/06/021103">npmパッケージ「@subql/common」にサプライチェーン攻撃——GitHub Actions信頼済み公開機構を悪用</a></h3>
+        </div>
+        <div class="summary">10月5日、SubQueryのGitHubリポジトリへの書き込み権限を奪われ、`.github/workflows/publish.yml`が改変されてC2サーバーから悪性tarballを取得・差し替える処理が仕込まれた。改変後のワークフローはGitHub ActionsのOIDCによる信頼済み公開経路を通じて`@subql/common@5.8.3`として配布されたため正規リリースと区別が難しかった。`postinstall`フックで起動する悪性コードはAWS IAM認証情報・GitHubトークン・SSH鍵・Kubernetesシークレット・Vaultトークンを収集し、AWS SSM Parameter Store/Secrets Managerを17リージョンにわたって探索、GitHub Actionsランナーのプロセスメモリからもシークレットを抽出する。安全なバージョンは5.8.2。</div>
+        <div class="key-points">
+          <ul>
+            <li>悪性コードはAWS SSM Parameter Store/Secrets Managerを17リージョンで探索し、GitHub Actionsランナーのメモリからもシークレットを抽出</li>
+            <li>対象は`@subql/common@5.8.3`のみ(5.8.2は安全)。対策はAWS認証情報のローテーション、GitHub PAT再発行、`npm ci --ignore-scripts`の活用</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Flatt Security Blog</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-10-06</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://blog.hitsujin.jp/entry/2026/10/05/codex-cloud-git-author">Codex Cloudで個人開発中、PRに本名がGit Authorとして露出——プロフィールでなく登録情報を参照</a></h3>
+        </div>
+        <div class="summary">ハンドルネームでの匿名運用を前提に個人開発リポジトリをOpenAIのCodex Cloudで修正した筆者は、公開PRにGit Authorとして本名が記録されていたことに気づいた。原因はCodex Cloudがクラウド環境の初期化時にChatGPTのプロフィール表示名ではなくOpenAIアカウントの登録情報(本名)からGit Authorを自動設定する仕様にあった。筆者はforce pushで書き換えたが編集履歴が残るため、最終的にリポジトリを削除・再作成して対処した。</div>
+        <div class="key-points">
+          <ul>
+            <li>原因はCodex Cloudがプロフィールのハンドルではなくアカウント登録情報(本名)からGit Authorを自動設定する仕様</li>
+            <li>force pushでの書き換えは編集履歴が残るため不十分、最終的にリポジトリの削除・再作成で対処</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>hitsujin.jp</span>
+          <span>🔖 78</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-05</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://qiita.com/songchong/items/873b4f14d26296176cfd">AIエージェントにAPIキーを渡しても大丈夫か——6つの渡し方をClaude Code・Codex・Gemini CLI等で検証</a></h3>
+        </div>
+        <div class="summary">対話文への貼り付け・.envファイル・環境変数・MCP設定・OAuth・クラウドのシークレット管理という6つのAPIキー共有方法を、Claude Code・Codex・Gemini CLI・GitHub Copilot・Cursorで比較検証した。.envの読み取り拒否ルールはAIによる直接読み取りしか防げず、AIが起動したスクリプト経由のアクセスは素通りする。Codexは環境変数をデフォルトで全て子プロセスに渡し、Copilotはエージェントモードで.cursorignore相当の保護が効かない。公開MCPサーバーの53%が長期固定キーを使い、OAuthは8.5%に留まるという調査も引用し、対話文への貼り付けを避け、権限を絞った一時キー・OAuth優先・読み取り制限とサンドボックス化を推奨する。</div>
+        <div class="key-points">
+          <ul>
+            <li>.envの読み取り拒否ルールはAI自身の直接読み取りしか防げず、AIが起動した子プロセス・スクリプト経由のアクセスは素通りする</li>
+            <li>公開MCPサーバーの53%が長期固定キーを使用、OAuth採用はわずか8.5%という調査を引用</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-10-05</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/mizchi/articles/ai-coding-loop-formal">mizchi氏の「俺のAIプログラミング手法」——人間の役割は評価指標とフィードバックループの設計</a></h3>
+        </div>
+        <div class="summary">著者はAI支援開発における人間の役割を、モデル性能の評価、フィードバックループの構築、完了基準となるメトリクスの設計、失敗要因(コンテキスト不足・権限不足・能力限界)の診断に定義する。プロンプトは急速に陳腐化するため「頑張って」のような激励句ではなく「Node 24+を使う」「npmよりpnpmを優先する」といった意思決定基準を書くべきだと説く。ワークフローとしてはgit履歴から次の作業を導く単純な無限ループ「Ralph Loop」、目標達成まで自律実行する`/goal`、処理をコード断片に分解するdspy/RLMを使い分け、マルチエージェント構成は現状「実験的」と位置づける。</div>
+        <div class="key-points">
+          <ul>
+            <li>プロンプトは急速に陳腐化するため「頑張って」ではなく「Node 24+を使う」「npmよりpnpmを優先」など意思決定基準を明記すべきと主張</li>
+            <li>定量指標(性能・RSSメモリ・循環的複雑度・ミューテーションテスト検出率)がある領域は全自動化、主観判断が必要な領域は人間が介在</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-05</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://tech-blog.monotaro.com/entry/2026/10/06/090000">MonotaRO、技術力を測る社内「帯制度」をAIで爆速開発——1年で450の段位を授与</a></h3>
+        </div>
+        <div class="summary">MonotaROは、武道の帯のように黄帯・茶帯・黒帯で技術力を可視化する社内認定制度「帯制度」を、基盤刷新に必要なマイクロサービス開発スキルの育成を目的に導入した。開発担当者はJavaScript経験がほぼない状態でCursorの「Vibe Coding」を使い、約1カ月で3,000行超のGoogle Apps Scriptコードを実装。`create-quiz`や`create-capability`などのAIスキルで試験問題作成も効率化した。Google Forms・Apps Script・BigQueryを基盤に構築し、他業務と並行しながら実働約10人日で仕組みを完成させた。初年度(2025年Q3〜2026年Q2)で200人超が受験し、450件超の段位を授与した。</div>
+        <div class="key-points">
+          <ul>
+            <li>Cursorの「Vibe Coding」でJavaScript未経験から約1カ月・3,000行超のGoogle Apps Scriptを実装、実働約10人日で完成</li>
+            <li>初年度(2025年Q3〜2026年Q2)で受験者200人超、授与した段位は450件超</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>MonotaRO Tech Blog</span>
+          <span>🔖 11</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-10-06</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://github.com/rui314/mold/releases/tag/v3.0.0">高速リンカ「Mold」v3.0.0、C++からRustへ完全移植</a></h3>
+        </div>
+        <div class="summary">高速リンカmoldは、v3.0.0でC++からRustへの完全移植を完了した。ビルドシステムはCMakeからCargoに移行しRust 1.95以上が必要になったが、コマンドラインオプションは2.42.1と互換で出力も同等、リンク性能も2.42.1と同水準を維持する。Rust化により壊れた入力ファイルに対する境界チェックが働くようになり、C++版で発生し得たセグメンテーションフォルトを防げるようになった。バージョンスクリプトや静的リンク実行ファイルでのクラッシュ、`-r`(再配置可能出力)関連の多数の不具合も修正された。</div>
+        <div class="key-points">
+          <ul>
+            <li>C++からRustへ完全移植(v2.42.1がC++版最終リリース)、ビルドはCargo移行でRust 1.95以上が必要</li>
+            <li>コマンドラインオプション・出力は2.42.1と互換、リンク性能も同水準を維持しつつ壊れた入力への境界チェックでセグフォを防止</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>🔖 26</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-10-05</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://cognition.com/agent-memory-repo">Cognition、エージェント向け永続メモリの公開仕様「Agent Memory Repo」</a></h3>
+        </div>
+        <div class="summary">Cognitionは、AIエージェントがセッションを越えて記憶を保持するための公開仕様「Agent Memory Repo」を発表した。記憶はMarkdownファイル群として保存し、起点となる`MEMORY.md`から全エントリにリンクする。各セッションは「最新の記憶をclone→必要な情報を検索→学習内容を更新→変更をpush」という4段階のループに従い、複数エージェントが同じmemoryリポジトリを編集した場合の競合はGitのマージ機構に委ねる。専用の「Dreaming」エージェントが定期的にパターンを抽出し、重複除去や矛盾解消も行う。</div>
+        <div class="key-points">
+          <ul>
+            <li>記憶はMarkdownファイル群で管理、起点`MEMORY.md`から全エントリへリンクし、Git管理で複数エージェントの競合はマージに委ねる</li>
+            <li>専用の「Dreaming」エージェントが定期的にパターン抽出・重複除去・矛盾解消を実行</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Cognition</span>
+          <span>🔖 26</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-05</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://nullprogram.com/blog/2026/10/04/">15年使ったJekyllを捨て、C++20製の自作静的サイトジェネレータへ移行</a></h3>
+        </div>
+        <div class="summary">nullprogram.com管理者は、Jekyllのデプロイの煩雑さ——macOSでのRuby環境構築や60msのシェル起動遅延——に見切りをつけ、C++20製で外部依存ゼロ・libc不要のコアを持つ独自の静的サイトジェネレータに移行した。アセンブリ(WAT・AT&amp;T・Aarch64)やQBasic向けの独自シンタックスハイライト、動的なタグページ生成を備え、単一実行ファイルでWindows XPから現行環境まで動く。ブログ全体の生成はMacBookで150ミリ秒で完了する。開発は「Claude Desktop上のOpus 5.5」が約2時間で本番投入可能な約8,000行を生成した。</div>
+        <div class="key-points">
+          <ul>
+            <li>C++20製・外部依存ゼロ・libc不要のコアで、ブログ全体の生成がMacBookで150ミリ秒</li>
+            <li>「Claude Desktop上のOpus 5.5」が約2時間で本番投入可能な約8,000行のコードを生成</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>nullprogram.com</span>
+          <span>▲ 7</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-04</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://www.niemanlab.org/2026/10/chatgpt-is-adding-real-cartoonists-signatures-to-fake-new-yorker-cartoons/">ChatGPT生成の偽New Yorker風カートゥーンに実在漫画家15人超の署名が付与されていると判明</a>
+        <span class="quick-summary">— OpenAIとConde Nastの提携契約はカートゥーン学習を明示的に許可していないが、ペンネームの再現が止まっていない。</span>
+        <span class="meta">Nieman Lab</span>
+        <span class="engagement">▲ 264</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://www.texastribune.org/2026/10/05/texas-flock-cameras-two-million-public-records-information/">テキサス州の市、ナンバープレート監視カメラ「Flock」の情報公開請求に230万ドルを要求</a>
+        <span class="quick-summary">— 1テラバイト分の記録検索に時給15ドルで14年分の人件費を計上、他自治体は同種請求に無償対応した例もある。</span>
+        <span class="meta">Texas Tribune</span>
+        <span class="engagement">▲ 106</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://qlabs.sh/research/dust">逆伝播を使わずTransformerを事前学習する「Dust」、トークン単位の摂動で勾配を推定</a>
+        <span class="quick-summary">— 重み空間の進化戦略より桁違いに効率的で、10億トークン規模までbackpropの勾配とよく一致する。</span>
+        <span class="meta">qlabs.sh</span>
+        <span class="engagement">▲ 107</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://stratechery.com/2026/apple-and-a-hackers-future/">「Apple and a Hacker's Future」——プラットフォームの閉鎖性を再考するエッセイ</a>
+        <span class="quick-summary">— Appleの統制志向とハッカー文化の未来を対比し、規制・AIエージェント時代のプラットフォーム戦略を論じる。</span>
+        <span class="meta">Stratechery</span>
+        <span class="engagement">▲ 210</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://news.yahoo.co.jp/articles/e8c753300f37b0f2ba619bfe706422fe59ed0d6b">ランサム集団「キリン」中心メンバーを大阪で拘束、アサヒグループへの攻撃にも関与</a>
+        <span class="quick-summary">— 28歳のロシア人を5月に大阪で拘束、ドイツからの身柄引き渡し要請に基づき6月2日に引き渡し。</span>
+        <span class="meta">Yahoo!ニュース</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://newsdig.tbs.co.jp/articles/-/2990268">大阪公立大学、ランサムウェア攻撃か——基幹システム障害で全授業休講、対面授業は9日以降再開</a>
+        <span class="quick-summary">— 大学が謝罪、対面授業の再開は10月9日以降を予定。</span>
+        <span class="meta">TBS NEWS DIG</span>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="./" class="archive-link">🗂 過去のダイジェスト</a>
+    </footer>
+  </div>
+</body>
+</html>
