@@ -43,9 +43,13 @@ export function validateIssue(raw, issue) {
     for (const e of s.examples) if (!text(e.product) || !text(e.approach) || !https(e.source_url)) throw Error('invalid example');
   }
   if (!Array.isArray(raw.quick_picks) || raw.quick_picks.some(q => !text(q.title) || !https(q.url))) throw Error('invalid quick picks');
+  if (!raw.quick_picks.length && !raw.theme.sections.some(s => s.examples.length)) throw Error('at least one primary source is required');
   return raw;
 }
-function https(s) { try { return new URL(s).protocol === 'https:' && text(new URL(s).hostname); } catch { return false; } }
+function https(s) {
+  if (typeof s !== 'string' || !/^https:\/\/[^\s"'<>]+$/.test(s)) return false;
+  try { const u = new URL(s); return text(u.hostname) && !u.username && !u.password; } catch { return false; }
+}
 function visible(s) {
   return String(s ?? '').replace(/<!--[\s\S]*?-->/g, '').replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1>/gi, '').replace(/<[^>]*>/g, '').replace(/&nbsp;|&#(?:160|x[aA]0);/g, ' ').replace(/\s+/g, ' ').trim();
 }

@@ -2,7 +2,7 @@ name: Publication safeguards
 on:
   pull_request:
   push:
-    branches: ['kaionn/ai-publication-guard']
+    branches: ['main', 'kaionn/ai-publication-guard']
 permissions:
   contents: read
 jobs:

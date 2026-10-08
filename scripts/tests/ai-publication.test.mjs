@@ -160,3 +160,21 @@ test('bad timeline or outbox/state timestamp mismatch is rejected, never reporte
   failed.events[0].observed_at = '2026-10-06T01:31:00.000Z';
   assert.throws(() => obs(failed, '12:00:00', false), /event/);
 });
+
+
+test('source-free JSON and URLs renderer/publication cannot agree on are not normal reusable issues', async () => {
+  const empty = structuredClone(raw); empty.theme.sections.forEach(s => s.examples = []); empty.quick_picks = [];
+  assert.throws(() => validateIssue(empty, issue), /source/);
+  for (const bad of ['https://example.com/a b','HTTPS://example.com/article','https://example.com/"bad','https://example.com/<bad>','https://user:pass@example.com/article',' https://example.com/article']) {
+    const changed = structuredClone(raw); changed.theme.sections[0].examples[0].source_url = bad;
+    assert.throws(() => validateIssue(changed,issue), /example/);
+  }
+  const root = await mkdtemp(path.join(os.tmpdir(),'ai-source-free-'));
+  try {
+    await mkdir(path.join(root,'data/ai-trends'),{recursive:true});
+    await writeFile(path.join(root,`data/ai-trends/${issue}.json`), JSON.stringify(empty));
+    await assert.rejects(generationMode({issue,root,check:async()=>({published:false})}), /must not be overwritten.*source/);
+  } finally { await rm(root,{recursive:true}); }
+  const quickOnly = structuredClone(empty); quickOnly.quick_picks = [{title:'Primary',url:'https://example.com/article'}];
+  assert.equal(validateIssue(quickOnly,issue),quickOnly);
+});

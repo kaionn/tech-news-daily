@@ -45,7 +45,7 @@ Scheduled generation fixes the issue from the run's immutable REST `created_at`,
 - Normal JSON + absent/stale/unverified public article: render and deploy only, including a clean git tree after a prior deploy failure.
 - Absent JSON + already public target article: skip rather than regenerate.
 - Absent JSON + absent public article: generate exactly the fixed target JSON.
-- Existing invalid JSON: fail; never overwrite it automatically.
+- Existing invalid JSON (including zero curated sources or source URLs with whitespace, unsafe attribute characters, credentials or a scheme the renderer would drop): fail; never overwrite it automatically. At least one normal HTTPS example/quick-pick URL is required.
 
 Before commit, a fetch/cmp refuses a differing same-date JSON on main. A later non-fast-forward push/rebase conflict fails rather than overwriting main. The existing generation concurrency and model/Git-write tool bans remain. Renderer selects the newest JSON when repairing an older issue, so the top is not reset to that older issue.
 
