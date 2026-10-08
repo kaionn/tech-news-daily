@@ -1,0 +1,13 @@
+{
+  "$schema": "https://raw.githubusercontent.com/cloudflare/workers-sdk/main/packages/wrangler/config-schema.json",
+  "name": "tech-news-publication-monitor",
+  "main": "index.mjs",
+  "compatibility_date": "2026-10-08",
+  "workers_dev": false,
+  "preview_urls": false,
+  "triggers": { "crons": ["* * * * *"] },
+  "durable_objects": { "bindings": [{ "name": "MONITOR", "class_name": "NewsMonitor" }] },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["NewsMonitor"] }],
+  "vars": { "SLACK_TEAM_ID": "T0C6EM7M70E", "SLACK_CHANNEL_ID": "C0C6CBVA5TM" },
+  "observability": { "enabled": false }
+}
