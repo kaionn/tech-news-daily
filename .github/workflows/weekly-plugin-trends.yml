@@ -66,13 +66,9 @@ jobs:
           git push origin main
           echo "pushed=true" >> "$GITHUB_OUTPUT"
 
-      - name: Deploy to Cloudflare Pages
-        if: steps.commit.outputs.pushed == 'true'
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: |
-          set -euo pipefail
-          CLEAN=$(mktemp -d)
-          git archive HEAD | tar -x -C "$CLEAN"
-          npx --yes wrangler@4 pages deploy "$CLEAN" --project-name=tech-news-daily --branch=main
+  deploy:
+    needs: collect-and-deploy
+    uses: ./.github/workflows/deploy-current-site.yml
+    secrets:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

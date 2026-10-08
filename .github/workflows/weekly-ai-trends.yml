@@ -3,13 +3,18 @@ name: AI product trends (generate & deploy)
 # 日次 run (daily-digest.yml) ・プラグイントレンド (weekly-plugin-trends.yml) とは疎結合な独立 workflow。
 # claude-code-action は data/ai-trends/{ISSUE}.json のみを生成し（HTML は書かない）、
 # scripts/render-ai-trends.mjs が決定論的に ai-trends.html / ai-trends/{issue}.html を再生成する。
-# 号キーは実行日の日付（YYYY-MM-DD）。旧・週次時代の {YYYY-Www}.json も renderer がそのまま扱う。
+# 号キーは固定した配信対象日（YYYY-MM-DD）。旧・週次時代の {YYYY-Www}.json も renderer がそのまま扱う。
 # 撤退したい場合は本 workflow を disable するだけで良く、日次 run・プラグイントレンド run には一切影響しない。
 
 on:
   schedule:
     - cron: '0 22 * * 1,3,5' # 毎週火・木・土 07:00 JST（プラグイントレンドの月・水・金と交互）
   workflow_dispatch:
+    inputs:
+      issue_date:
+        description: 'Target issue date (YYYY-MM-DD, JST Tuesday/Thursday/Saturday; required for recovery)'
+        required: true
+        type: string
 
 permissions:
   contents: write
@@ -21,85 +26,66 @@ concurrency:
 
 jobs:
   generate-and-deploy:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    outputs:
+      deploy: ${{ steps.commit.outputs.deploy }}
     steps:
       - uses: actions/checkout@v4
         with:
           ref: main
 
-      - name: Compute issue date (JST)
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Resolve immutable issue date
         id: issue
-        run: |
-          ISSUE=$(TZ=Asia/Tokyo date '+%F')
-          echo "issue=$ISSUE" >> "$GITHUB_OUTPUT"
+        env:
+          TARGET_ISSUE: ${{ inputs.issue_date }}
+        run: node scripts/ai-generation-guard.mjs resolve
+
+      - name: Check existing JSON and published article
+        id: guard
+        run: node scripts/ai-generation-guard.mjs mode --issue "${{ steps.issue.outputs.issue }}"
 
       - name: Generate theme JSON with Claude Code
+        if: steps.guard.outputs.mode == 'generate'
         uses: anthropics/claude-code-action@v1
         env:
           ISSUE: ${{ steps.issue.outputs.issue }}
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          prompt: "Read prompts/weekly-ai-trends.md and follow its instructions exactly. The repository root is the current working directory. The ISSUE environment variable is already set to today's issue date."
+          prompt: "Read prompts/weekly-ai-trends.md and follow its instructions exactly. The repository root is the current working directory. The ISSUE environment variable is already fixed to the target issue date; do not compute today's date."
           claude_args: |
             --model claude-opus-5-5
             --allowedTools "WebSearch,WebFetch,Read,Write,Edit,Glob,Grep,Bash"
             --disallowedTools "Bash(git add:*),Bash(git commit:*),Bash(git push:*),Bash(git config:*),Bash(git remote:*),Bash(git reset:*),Bash(git rebase:*)"
 
-      - name: Validate generated JSON
-        env:
-          ISSUE: ${{ steps.issue.outputs.issue }}
-        run: |
-          set -euo pipefail
-          FILE="data/ai-trends/${ISSUE}.json"
-          if [ ! -f "$FILE" ]; then
-            echo "::error::$FILE が生成されていない"
-            exit 1
-          fi
-          jq -e --arg issue "$ISSUE" '.issue == $issue' "$FILE" > /dev/null || { echo "::error::issue フィールドが $ISSUE と一致しない"; exit 1; }
-          jq -e '.theme.title | length > 0' "$FILE" > /dev/null || { echo "::error::theme.title が空"; exit 1; }
-          jq -e '.theme.sections | length > 0' "$FILE" > /dev/null || { echo "::error::theme.sections が空"; exit 1; }
-          BAD_URLS=$(jq -r '
-            [ (.theme.sections[]?.examples[]?.source_url // empty), (.quick_picks[]?.url // empty) ]
-            | map(select(startswith("https://") | not))
-            | length
-          ' "$FILE")
-          if [ "$BAD_URLS" -gt 0 ]; then
-            echo "::error::https:// で始まらない URL が $BAD_URLS 件ある"
-            exit 1
-          fi
+      - name: Validate generated or existing JSON
+        if: steps.guard.outputs.mode != 'skip'
+        run: node scripts/ai-generation-guard.mjs validate --issue "${{ steps.issue.outputs.issue }}"
 
       - name: Render ai-trends.html
+        if: steps.guard.outputs.mode != 'skip'
         run: node scripts/render-ai-trends.mjs
 
-      - name: Commit and push
+      - name: Commit and push without replacing another issue
+        if: steps.guard.outputs.mode != 'skip'
         id: commit
         env:
           GITHUB_TOKEN: ${{ github.token }}
           ISSUE: ${{ steps.issue.outputs.issue }}
         run: |
           set -euo pipefail
-          # claude-code-action が git 認証設定を自分のトークンで上書きしたまま終了する
-          # （push 時点で失効し Invalid username or token になる）ため、GITHUB_TOKEN に張り直す
+          # Restore action auth (existing behavior); do not grant new permissions.
           git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-          if [ -z "$(git status --porcelain -- data/ai-trends/ ai-trends.html ai-trends/)" ]; then
-            echo "::error::生成物に変更がない"
-            exit 1
-          fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/ai-trends/ ai-trends.html ai-trends/
-          git commit -m "${ISSUE} の AI プロダクト動向"
-          git pull --rebase origin main
-          git push origin main
-          echo "pushed=true" >> "$GITHUB_OUTPUT"
+          bash scripts/publish-ai-trends.sh
 
-      - name: Deploy to Cloudflare Pages
-        if: steps.commit.outputs.pushed == 'true'
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: |
-          set -euo pipefail
-          CLEAN=$(mktemp -d)
-          git archive HEAD | tar -x -C "$CLEAN"
-          npx --yes wrangler@4 pages deploy "$CLEAN" --project-name=tech-news-daily --branch=main
+  deploy:
+    needs: generate-and-deploy
+    if: needs.generate-and-deploy.outputs.deploy == 'true'
+    uses: ./.github/workflows/deploy-current-site.yml
+    secrets:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
