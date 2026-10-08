@@ -1,0 +1,91 @@
+{
+  "issue": "2026-10-08",
+  "generated_at": "2026-10-08T07:00:00+09:00",
+  "theme": {
+    "title": "エージェントの UI は「誰が描くか」で二つに割れた — iframe で持ち込む MCP Apps、カタログで描かせる A2UI、そして会話の外へ",
+    "category": "agent-ui",
+    "lede": "エージェントの出力はずっとテキストとマークダウンだった。表を並べ替えたい、候補から一つ選びたい、ファイルを開いて直したい — こうした操作を「会話の往復」でこなすのは遅く、誤解も生む。2026年はここに標準が入った年だ。1月26日に MCP Apps が MCP 初の公式拡張として出て、ツールが HTML の UI を返し、ホストがそれを sandbox 付き iframe で描く形が Claude・VS Code・ChatGPT に広がった。一方 Google は A2UI で「コードではなくデータを送り、描くのはクライアント」という逆の設計を推し、8月に Gemini Enterprise で GA にした。そして 9月29日の OpenAI DevDay では、MCP Apps を土台に UI を会話の外 — サイドバー、横のパネル、ファイルビューア — へ出す拡張が発表された。論点は「UI を出すか」ではなく「誰が描き、どこに置くか」に移っている。",
+    "tldr": [
+      "MCP Apps はツールが ui:// の HTML リソースを返し、ホストが sandbox 付き iframe で描画する「持ち込み型」。Claude・VS Code・ChatGPT が同じ仕様に乗った。",
+      "A2UI はエージェントが宣言的な JSON だけを送り、クライアントが自前の承認済みコンポーネントで描く「カタログ型」。見た目と安全性の判断をクライアント側に残す。",
+      "OpenAI は MCP Apps を拡張し、UI の置き場所を会話の中から sidebar・会話横パネル・ファイルビューアへ広げた。UI は「回答の添付物」から「常駐する作業面」になりつつある。"
+    ],
+    "sections": [
+      {
+        "heading": "持ち込み型: ツールが HTML を返し、ホストが iframe に閉じ込める",
+        "body_html": "<p>MCP Apps の仕組みは単純だ。ツール定義の <code>_meta.ui.resourceUri</code> が <code>ui://</code> スキームのリソースを指し、そこに HTML/JavaScript がまとめて入っている。ホストはツール呼び出しに合わせてこのリソースを取得し、sandbox 付き iframe で描画する。iframe とホストは <code>postMessage</code> 上の JSON-RPC で双方向にやり取りし、ツールの入力・結果を UI に渡し、UI 側からのツール呼び出しやモデルへのコンテキスト更新を受け取る。サーバー開発者から見れば、自社の Web UI をほぼそのまま会話に持ち込める。</p><p>この形に各社がまとまった理由は、既存資産の流用と一回書けば複数ホストで動くことの二つだ。ChatGPT は独自の Apps SDK で先行していたが、ドキュメントでは「MCP Apps 標準を実装している」と明記し、独自キー <code>openai/outputTemplate</code> を互換エイリアスに格下げした。代わりに背負うのは安全性の負担で、公式発表は iframe sandbox・事前宣言テンプレートのレビュー・監査可能な JSON-RPC・UI 起点のツール呼び出しへのユーザー同意という 4 層で守る設計を示している。任意のコードを受け入れる以上、境界はホストが引くしかない。</p>",
+        "examples": [
+          {
+            "product": "MCP Apps（MCP 公式拡張）",
+            "approach": "ツールが ui:// の HTML リソースを宣言し、ホストが sandbox 付き iframe で描画、JSON-RPC over postMessage で双方向通信する",
+            "detail": "2026年1月26日に MCP 初の公式拡張として公開。Claude（Web・デスクトップ）、Goose、VS Code Insiders が初日から対応し、ChatGPT も同週から展開すると明記された。セキュリティは iframe sandbox・テンプレートの事前宣言・監査可能なメッセージ・ユーザー同意の 4 層で組まれている。",
+            "source_url": "https://blog.modelcontextprotocol.io/posts/2026-01-26-mcp-apps/"
+          },
+          {
+            "product": "VS Code（チャット内の MCP Apps 描画）",
+            "approach": "エージェントのツール呼び出し結果を、ドラッグで並べ替えるリストやフレームグラフとしてチャット内に表示する",
+            "detail": "VS Code チームは「MCP Apps を完全サポートした最初の主要 AI コードエディタ」とし、Storybook の MCP サーバーがコンポーネントのライブプレビューをチャットに出す例を挙げた。並べ替えを手で直すか、エージェントに頼むかを同じ UI で選べる点が、テキスト往復との違いだ。",
+            "source_url": "https://code.visualstudio.com/blogs/2026/01/26/mcp-apps-support"
+          }
+        ],
+        "takeaway": "既に Web UI を持つ SaaS が複数の AI ホストに顔を出すなら MCP Apps が最短経路。ただし UI からのツール呼び出しは同意フローを通る前提で設計し、UI に状態を閉じ込めず「ツールを呼べば同じ結果になる」形を保っておくと、UI 非対応ホストでも劣化して動く。"
+      },
+      {
+        "heading": "カタログ型: エージェントはデータだけを送り、描くのはクライアント",
+        "body_html": "<p>A2UI は逆側から設計されている。エージェントが送るのは「どのコンポーネントをどう並べ、どのデータを結びつけるか」を記述した宣言的な JSON で、実行可能なコードではない。クライアントは信頼済みのコンポーネントのカタログを持ち、エージェントはそこにあるものしか要求できない。v0.9 ではクライアント定義関数（入力検証などに使う）とクライアント→サーバーのデータ同期が加わり、ユーザーが UI で編集した状態をエージェントへ返せるようになった。描画は React・Flutter・Angular・Lit の公式レンダラーが担い、トランスポートは MCP・WebSocket・REST・A2A などを選ばない。</p><p>Google がこの道を選んだのは、iframe 方式のコストを嫌ったからだ。初版の発表は、外部の信頼できない送り手から UI を受け取るために HTML/JS を iframe に入れる方式を「重く、見た目がちぐはぐになりうる」と書き、LLM が生成した任意コードの実行をリスクとして挙げている。カタログ型なら見た目はアプリのデザインシステムに揃い、Web だけでなくモバイルのネイティブ UI にも描ける。その代わり、エージェントはカタログにない UI を出せない。Gemini Enterprise は 8月17日に A2UI エージェントの登録を GA にしたが、マネージド側の一部の登録経路は A2UI 描画にまだ対応していないとリリースノートに明記しており、エコシステムは MCP Apps より狭い。</p>",
+        "examples": [
+          {
+            "product": "A2UI v0.9（Google）",
+            "approach": "宣言的 JSON + クライアント側の承認済みコンポーネントカタログで描画し、v0.9 でクライアント定義関数と双方向データ同期を追加",
+            "detail": "2026年4月17日公開。既存のコンポーネントカタログでそのまま描けることを前面に出し、オプションのコンポーネント群の名前を「Standard」から「Basic」に変えて「新しい部品を用意する必要はない」と位置付け直した。MCP は依存先ではなく選べるトランスポートの一つで、MCP Apps との連携はロードマップ項目に入っている。",
+            "source_url": "https://developers.googleblog.com/a2ui-v0-9-generative-ui/"
+          },
+          {
+            "product": "A2UI 初版の設計意図（Google）",
+            "approach": "「データのように安全で、コードのように表現力がある」を掲げ、iframe 方式を明示的に退けた",
+            "detail": "2025年12月15日の初版発表は A2UI を「実行可能なコードではなく宣言的なデータ形式」と定義し、エージェントはクライアントの信頼済みカタログからしか部品を選べないとした。MCP Apps と比べたとき、安全性の担保を sandbox ではなく表現力の制限で得ている点が本質的な違いになる。",
+            "source_url": "https://developers.googleblog.com/introducing-a2ui-an-open-project-for-agent-driven-interfaces/"
+          }
+        ],
+        "takeaway": "自社アプリの中にエージェントを組み込み、見た目をデザインシステムに揃えたい、あるいはモバイルのネイティブ描画が要るならカタログ型が向く。判断基準は「描画ロジックを誰が持つか」で、UI を提供する側がホストの外にいるなら MCP Apps、自分がホストなら A2UI と考えると迷いにくい。"
+      },
+      {
+        "heading": "置き場所の拡張: UI が会話の中から sidebar・パネル・ファイルビューアへ出た",
+        "body_html": "<p>9月29日の DevDay で OpenAI が出した plugin extensions は、描画方式ではなく UI の置き場所を広げる拡張だ。各 UI は <code>ui://</code> リソースに結びついた MCP App のままで、ツールの <code>_meta</code> に entrypoint を足すだけで場所が変わる。<code>global</code> ならサイドバーから全画面で開くアプリ、<code>thread</code> なら会話の横に開くパネル、<code>file</code> なら指定した拡張子（例: <code>stl</code>）のファイルを開くビューア兼エディタになる。加えて ChatGPT と MCP App の間で双方向にコンテキストを共有する Model-App Context 拡張も用意された。</p><p>これまでの MCP Apps は「ツール呼び出しの回答に添付される UI」で、会話が進めば流れて消えた。パネルやファイルビューアは会話と並行して居座る作業面で、ユーザーは UI を操作しながらモデルと話し続ける。こうなると UI 側の状態をモデルにどう見せるかが設計の中心に移り、OpenAI が文脈同期を独立した拡張に切り出したのはそのためだと読める（推測）。初期実装として Canva（サイドバーとプレビュー）、Figma（デスクトップでの composer メンション）、Adobe（Acrobat・Photoshop のファイルハンドラ）が挙がっており、Codex にも同じ拡張が入る。仕様は MCP と MCP Apps を拡張するかたちで公開されたが、現時点では OpenAI 固有の拡張で、他ホストが追随するかは分からない。</p>",
+        "examples": [
+          {
+            "product": "ChatGPT plugin extensions（OpenAI MCP Extensions）",
+            "approach": "MCP App に global / thread / file の entrypoint を宣言させ、サイドバー・会話横パネル・ファイルビューアに配置する",
+            "detail": "UI 本体は MCP Apps のまま、置き場所だけを _meta で指定する設計で、既存の MCP App を作り直さずに常駐型へ移せる。composer メンションはデスクトップアプリ限定、Web の Free・Go プランへの提供は「近日」とされ、展開は段階的だ。",
+            "source_url": "https://developers.openai.com/plugins/build/extensions"
+          },
+          {
+            "product": "ChatGPT の UI 実装ガイド",
+            "approach": "まずインライン、必要なときだけ fullscreen や picture-in-picture に広げる。描画用ツールだけに resourceUri を付ける分離パターンを推奨",
+            "detail": "OpenAI は「ChatGPT は MCP Apps 標準を実装している」と明記し、データ取得ツールと描画ツールを分け、UI を出すツールだけに _meta.ui.resourceUri を付けるよう勧めている。UI を再マウントせずにデータだけ更新できるため、常駐型 UI の前提になる構成だ。",
+            "source_url": "https://developers.openai.com/plugins/build/chatgpt-ui"
+          }
+        ],
+        "takeaway": "UI を会話の外に常駐させるなら、「UI の現在の状態をモデルがいつ・どこまで見られるか」を最初に決める。データ取得と描画のツールを分けておけば、インライン・パネル・ファイルビューアのどこに置いても同じサーバー実装を使い回せる。"
+      }
+    ]
+  },
+  "editorial": "MCP Apps と A2UI の違いは、安全性を sandbox で買うか、表現力を絞ることで買うかの違いだ。どちらが勝つかより、UI が回答の添付物から常駐する作業面に変わりつつあることの方が設計への影響は大きい。会話ログしか見ていないエージェントは、ユーザーが今パネルで何を触っているかを知らない — 次に詰めるべきはそこになる。",
+  "quick_picks": [
+    {
+      "title": "OpenAI、ChatGPT と Codex に plugin extensions を追加（IT Brief）",
+      "summary": "OpenAI が TypeScript・Python の開発ツールと言語非依存のプロトコル仕様を公開し、Canva・Figma・Adobe が初期実装を出した。本文第3節の「UI の置き場所の拡張」が、パートナー各社でどう使われ始めたかを確認できる。",
+      "url": "https://itbrief.co.uk/story/openai-adds-plugin-extensions-across-chatgpt-codex"
+    },
+    {
+      "title": "OpenAI expands ChatGPT's plug-ins with app-like interfaces and automations（TechCrunch）",
+      "summary": "DevDay 2026 で発表されたサイドバー・インタラクティブパネル・ファイルビューアに加え、提案中の MCP Events 仕様で接続先アプリのイベントから自動化を起動できるようにすると報じた記事。UI の常駐化と並んで「ユーザーが話しかけなくても動く」方向が出ており、本文第3節の作業面化と対になる変化だ。",
+      "url": "https://techcrunch.com/2026/09/29/openai-expands-chatgpts-plugins-with-app-like-interfaces-and-automations/"
+    },
+    {
+      "title": "Google Releases A2UI v0.9: Portable, Framework-Agnostic Generative UI（InfoQ）",
+      "summary": "A2UI v0.9 の変更点を整理し、Google が A2UI を AG-UI・MCP Apps などの「下に敷く可搬な契約」と位置付けていることを伝える記事。本文第2節のカタログ型が MCP Apps と競合ではなく併用を狙っていることの裏付けになる。",
+      "url": "https://www.infoq.com/news/2026/07/google-a2ui-genui/"
+    }
+  ]
+}
