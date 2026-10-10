@@ -18,8 +18,7 @@ function harness(store = new Store(), options = {}) {
   const posts = []; const calls = []; let publication = false;
   const fetcher = async (url, init = {}) => {
     calls.push(String(url));
-    if (String(url).includes('/auth.test')) return json({ ok: true, bot_id: 'TESTBOT', team_id: options.team ?? TARGET.team });
-    if (String(url).includes('/conversations.info')) return json({ ok: true, channel: { id: TARGET.channel, name: options.name ?? TARGET.name, is_archived: false, is_member: options.member ?? true } });
+    if (String(url).includes('/auth.test')) return json(options.auth ?? { ok: true, bot_id: options.bot === undefined ? 'TESTBOT' : options.bot, user_id: options.user === undefined ? TARGET.botUser : options.user, team_id: options.team ?? TARGET.team });
     if (String(url).includes('/chat.postMessage')) {
       const post = JSON.parse(init.body); posts.push(post);
       if (options.throwPost) throw Error('lost response');
@@ -72,8 +71,8 @@ test('first positive after deadline reports monitoring uncertainty, never fabric
   assert.equal(h.posts.length, 1); assert.match(h.posts[0].text, /deadline_observation_unknown/);
   assert.equal((await h.store.get(`issue:${issue}`)).events.length, 0);
 });
-test('wrong configured/workspace/channel target or missing bot prevents all posts', async () => {
-  for (const options of [{ team: 'OTHER' }, { name: 'another-channel' }, { member: false }]) {
+test('wrong configured/workspace/bot identity or missing bot prevents all posts', async () => {
+  for (const options of [{ team: 'OTHER' }, { user: 'OTHER' }, { user: null }, { bot: null }, { bot: '' }, { bot: [] }, { auth: { ok: false } }]) {
     const h = harness(new Store(), options); await h.tick(at('10:30:00')); assert.equal(h.posts.length, 0);
   }
   for (const config of [{ ...env, SLACK_TEAM_ID: 'OTHER' }, { ...env, SLACK_CHANNEL_ID: 'OTHER' }, { ...env, SLACK_BOT_TOKEN: '' }]) {
@@ -103,7 +102,7 @@ test('crash after remote acceptance but before sent-state persist leaves attempt
 test('malformed, oversized, wrong-channel and server-error Slack responses are not acknowledged or resent', async () => {
   for (const postResponse of [() => new Response('not-json'), () => new Response('x'.repeat(16385)),
     () => json({ ok: true, channel: 'OTHER', ts: '1' }), () => new Response('error', { status: 500 }),
-    () => json({ ok: false, error: 'not_in_channel' })]) {
+    () => json({ ok: false, error: 'not_in_channel' }), () => json({ ok: false, error: 'is_archived' })]) {
     const h = harness(new Store(), { postResponse }); await h.tick(at('10:30:00'));
     const r = harness(h.store.restart()); await r.tick(at('10:35:00'));
     assert.equal((await r.store.get(`issue:${issue}`)).events[0].acked, false);
@@ -181,8 +180,8 @@ test('Slack timeout preserves unknown attempt and suppresses automatic retry', a
   const h = harness(); let timedOut = 0;
   const fetcher = async (url, init) => {
     if (!String(url).includes('chat.postMessage')) return String(url).includes('auth.test')
-      ? json({ ok: true, bot_id: 'TESTBOT', team_id: TARGET.team })
-      : json({ ok: true, channel: { id: TARGET.channel, name: TARGET.name, is_archived: false, is_member: true } });
+      ? json({ ok: true, bot_id: 'TESTBOT', user_id: TARGET.botUser, team_id: TARGET.team })
+      : Promise.reject(Error('unexpected Slack metadata request'));
     return new Promise((resolve, reject) => {
       const guard = setTimeout(() => reject(Error('test guard: abort missing')), 3000);
       init.signal.addEventListener('abort', () => { clearTimeout(guard); timedOut++; reject(init.signal.reason); }, { once: true });
@@ -200,12 +199,27 @@ test('Workers-compatible Slack fetch never follows redirects or sends credential
   const fetcher = async (url, init) => {
     // Actual workerd rejects redirect:error before making the request.
     assert.equal(init.redirect, 'manual'); paths.push(new URL(url).pathname);
-    if (String(url).includes('auth.test')) return json({ ok: true, bot_id: 'TESTBOT', team_id: TARGET.team });
-    if (String(url).includes('conversations.info')) return json({ ok: true, channel: { id: TARGET.channel, name: TARGET.name, is_archived: false, is_member: true } });
+    if (String(url).includes('auth.test')) return json({ ok: true, bot_id: 'TESTBOT', user_id: TARGET.botUser, team_id: TARGET.team });
     return new Response('', { status: 302, headers: { Location: 'https://foreign.invalid/collect' } });
   };
   await h.tick(at('10:30:00'), { fetcher });
   assert.equal((await h.store.get(`delivery:ai-trends:${issue}:failure`)).status, 'unknown');
   assert.ok(paths.includes('/api/chat.postMessage'));
   assert.ok(paths.every(p => p.startsWith('/api/')));
+});
+
+
+test('chat-only existing bot posts to the fixed channel without a channel metadata scope', async () => {
+  const h = harness(); await h.tick(at('10:30:00')); await h.tick(at('10:35:00'));
+  assert.equal(h.posts.filter(p => p.text.includes('公開期限超過')).length, 1);
+  assert.ok(h.posts.every(p => p.channel === 'C0C6CBVA5TM'));
+  assert.ok(h.calls.every(url => ['/api/auth.test', '/api/chat.postMessage'].includes(new URL(url).pathname)));
+  assert.equal((await h.store.get(`issue:${issue}`)).events[0].acked, true);
+});
+test('replacing the bot credential with a different bot in the same workspace blocks recovery', async () => {
+  const h = harness(); await h.tick(at('10:30:00'));
+  const r = harness(h.store.restart(), { user: 'U_DIFFERENT_BOT' }); r.publish();
+  await r.tick(at('10:35:00'), { env: { ...env, SLACK_BOT_TOKEN: 'other-synthetic-token' } });
+  assert.equal(r.posts.length, 0);
+  assert.equal((await r.store.get(`issue:${issue}`)).events[1].acked, false);
 });

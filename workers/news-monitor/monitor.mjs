@@ -1,7 +1,7 @@
 import { checkPublication, deadline, issueDate, newState, observe, validateState } from '../../scripts/ai-publication-core.mjs';
 
 // Resolved against the connected installation; never accept a channel name alone.
-export const TARGET = Object.freeze({ team: 'T0C6EM7M70E', channel: 'C0C6CBVA5TM', name: 'ci-alerts' });
+export const TARGET = Object.freeze({ team: 'T0C6EM7M70E', channel: 'C0C6CBVA5TM', name: 'ci-alerts', botUser: 'U0C6GSWNYH4' });
 export const LIMITS = Object.freeze({ ticks: 1800, observations: 600, sends: 16, issues: 1000, active: 16, stateBytes: 8192 });
 const bytes = value => new TextEncoder().encode(JSON.stringify(value)).byteLength;
 const iso = now => now.toISOString();
@@ -60,10 +60,10 @@ async function verifyTarget(env, fetcher) {
   validateTarget(env);
   const headers = { Authorization: `Bearer ${env.SLACK_BOT_TOKEN}` };
   const auth = await boundedJson('https://slack.com/api/auth.test', { headers }, fetcher);
-  if (auth.status !== 200 || auth.data.ok !== true || auth.data.team_id !== TARGET.team || !auth.data.bot_id) throw Error('Slack workspace/bot mismatch');
-  const info = await boundedJson(`https://slack.com/api/conversations.info?channel=${TARGET.channel}`, { headers }, fetcher);
-  const channel = info.data.channel;
-  if (info.status !== 200 || info.data.ok !== true || channel?.id !== TARGET.channel || channel?.name !== TARGET.name || channel.is_archived !== false || channel.is_member !== true) throw Error('Slack channel/membership mismatch');
+  if (auth.status !== 200 || auth.data.ok !== true || auth.data.team_id !== TARGET.team ||
+      auth.data.user_id !== TARGET.botUser || typeof auth.data.bot_id !== 'string' || !auth.data.bot_id.trim()) throw Error('Slack workspace/bot mismatch');
+  // Channel metadata is verified at activation. A rename keeps this fixed ID as the destination.
+  // Membership/archive changes are handled as posting errors without requesting channels:read.
 }
 function message(event) {
   if (event.kind === 'health') return `ニュース公開監視の異常: ${event.code} (${event.id})。通常成功通知・自動復旧は行いません。`;
