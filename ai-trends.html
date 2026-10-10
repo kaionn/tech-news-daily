@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI プロダクト動向 | Tech News Daily</title>
-<meta name="description" content="エージェントの出力はずっとテキストとマークダウンだった。表を並べ替えたい、候補から一つ選びたい、ファイルを開いて直したい — こうした操作を「会話の往復」でこなすのは遅く、誤解も生む。2026年はここに標準が入った年だ。1月26日に MC…">
+<meta name="description" content="2025年秋、エージェントに買い物をさせる仕組みは「チャットの中で決済まで完結させる」一本の流れとして語られていた。OpenAI と Stripe の ACP、Google の AP2、そして 2026年1月の UCP。どれが勝つかという…">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Tech News Daily">
-<meta property="og:title" content="エージェントの UI は「誰が描くか」で二つに割れた — iframe で持ち込む MCP Apps、カタログで描かせる A2UI、そして会話の外へ | AI プロダクト動向">
-<meta property="og:description" content="エージェントの出力はずっとテキストとマークダウンだった。表を並べ替えたい、候補から一つ選びたい、ファイルを開いて直したい — こうした操作を「会話の往復」でこなすのは遅く、誤解も生む。2026年はここに標準が入った年だ。1月26日に MC…">
+<meta property="og:title" content="エージェントコマースは「一つの決済プロトコル」をやめた — 発見・同意の証明・本人ログインを別レイヤーに切り分ける設計へ | AI プロダクト動向">
+<meta property="og:description" content="2025年秋、エージェントに買い物をさせる仕組みは「チャットの中で決済まで完結させる」一本の流れとして語られていた。OpenAI と Stripe の ACP、Google の AP2、そして 2026年1月の UCP。どれが勝つかという…">
 <meta property="og:url" content="https://tech-news.kaion-lab.com/ai-trends.html">
 <meta property="og:image" content="https://tech-news.kaion-lab.com/apple-touch-icon.png">
 <meta name="twitter:card" content="summary">
@@ -74,7 +74,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 <div class="container">
 <header>
   <h1>🧠 AI プロダクト動向</h1>
-  <p class="date">2026-10-08 発行（読了 8 分）</p>
+  <p class="date">2026-10-10 発行（読了 9 分）</p>
   <p class="tagline">実プロダクトのアーキテクチャ・使用例から AI 開発の現在地を週 3 回・1 号 1 テーマで深掘り</p>
   <nav class="site-nav">
     <a href="./">📰 日刊ダイジェスト</a>
@@ -85,93 +85,94 @@ footer a{color:var(--primary-500);text-decoration:none}
 </header>
 
 <div class="theme-hero">
-  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">AGENT-UI</span></span>
-  <h2>エージェントの UI は「誰が描くか」で二つに割れた — iframe で持ち込む MCP Apps、カタログで描かせる A2UI、そして会話の外へ</h2>
-  <p class="lede">エージェントの出力はずっとテキストとマークダウンだった。表を並べ替えたい、候補から一つ選びたい、ファイルを開いて直したい — こうした操作を「会話の往復」でこなすのは遅く、誤解も生む。2026年はここに標準が入った年だ。1月26日に MCP Apps が MCP 初の公式拡張として出て、ツールが HTML の UI を返し、ホストがそれを sandbox 付き iframe で描く形が Claude・VS Code・ChatGPT に広がった。一方 Google は A2UI で「コードではなくデータを送り、描くのはクライアント」という逆の設計を推し、8月に Gemini Enterprise で GA にした。そして 9月29日の OpenAI DevDay では、MCP Apps を土台に UI を会話の外 — サイドバー、横のパネル、ファイルビューア — へ出す拡張が発表された。論点は「UI を出すか」ではなく「誰が描き、どこに置くか」に移っている。</p>
+  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">AGENTIC-COMMERCE</span></span>
+  <h2>エージェントコマースは「一つの決済プロトコル」をやめた — 発見・同意の証明・本人ログインを別レイヤーに切り分ける設計へ</h2>
+  <p class="lede">2025年秋、エージェントに買い物をさせる仕組みは「チャットの中で決済まで完結させる」一本の流れとして語られていた。OpenAI と Stripe の ACP、Google の AP2、そして 2026年1月の UCP。どれが勝つかという構図で見られがちだったが、この 1 年で起きたのは勝敗ではなく分業だ。OpenAI は 3月にチャット内決済の初版から手を引き、ACP を商品発見の側へ広げた。Google と Mastercard は「何に同意したか」の証明を FIDO Alliance に預けた。10月6日には Google が UCP の Merchant Center ハブを米国で展開し始め、同じ日に Meta と Sierra がエージェントのログインと権限だけを扱う Personal Agent Protocol を発表、Agentic AI Foundation は「エージェントコマースのプロトコルは一つではない」と題した整理を出した。商品を見つけること、支払いに同意したと証明すること、誰の代理として店に入るかを示すこと — 三つは別の問題として、別の層で解かれ始めている。</p>
 </div>
 
 <div class="tldr">
   <div class="label">TL;DR — 3 行で</div>
   <ul>
-    <li>MCP Apps はツールが ui:// の HTML リソースを返し、ホストが sandbox 付き iframe で描画する「持ち込み型」。Claude・VS Code・ChatGPT が同じ仕様に乗った。</li>
-    <li>A2UI はエージェントが宣言的な JSON だけを送り、クライアントが自前の承認済みコンポーネントで描く「カタログ型」。見た目と安全性の判断をクライアント側に残す。</li>
-    <li>OpenAI は MCP Apps を拡張し、UI の置き場所を会話の中から sidebar・会話横パネル・ファイルビューアへ広げた。UI は「回答の添付物」から「常駐する作業面」になりつつある。</li>
+    <li>UCP は加盟店が /.well-known/ucp に能力を公開し、エージェント側と「共通する能力だけ」を交渉で残す設計。OpenAI も ACP の主軸をチャット内決済から商品カタログの受け渡しへ移し、決済は加盟店側に戻した。</li>
+    <li>支払いの同意は「スコープ付きトークン」と「署名付きの意図の記録」で証明する方向に収束した。Stripe の SPT は加盟店・金額・期限で縛り、AP2 と Mastercard の Verifiable Intent は FIDO Alliance で標準化が進む。</li>
+    <li>Meta と Sierra の Personal Agent Protocol は決済ではなく「エージェントが誰の代理で、何をしてよいか」を OAuth 上で扱う層として切り出した。API 単位の少額課金は MPP や x402 が別系統で担う。</li>
   </ul>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 1: 持ち込み型: ツールが HTML を返し、ホストが iframe に閉じ込める</div>
+  <div class="section-title">📐 パターン 1: 発見の層: 加盟店が能力を宣言し、エージェントは共通部分だけを使う</div>
   <div class="theme-section">
-    <p>MCP Apps の仕組みは単純だ。ツール定義の <code>_meta.ui.resourceUri</code> が <code>ui://</code> スキームのリソースを指し、そこに HTML/JavaScript がまとめて入っている。ホストはツール呼び出しに合わせてこのリソースを取得し、sandbox 付き iframe で描画する。iframe とホストは <code>postMessage</code> 上の JSON-RPC で双方向にやり取りし、ツールの入力・結果を UI に渡し、UI 側からのツール呼び出しやモデルへのコンテキスト更新を受け取る。サーバー開発者から見れば、自社の Web UI をほぼそのまま会話に持ち込める。</p><p>この形に各社がまとまった理由は、既存資産の流用と一回書けば複数ホストで動くことの二つだ。ChatGPT は独自の Apps SDK で先行していたが、ドキュメントでは「MCP Apps 標準を実装している」と明記し、独自キー <code>openai/outputTemplate</code> を互換エイリアスに格下げした。代わりに背負うのは安全性の負担で、公式発表は iframe sandbox・事前宣言テンプレートのレビュー・監査可能な JSON-RPC・UI 起点のツール呼び出しへのユーザー同意という 4 層で守る設計を示している。任意のコードを受け入れる以上、境界はホストが引くしかない。</p>
+    <p>UCP の仕様は、加盟店が <code>/.well-known/ucp</code> にプロファイルを置き、エージェント側のプラットフォームはリクエストごとに <code>UCP-Agent</code> ヘッダーで自分のプロファイル URL を示す形を取る。プロファイルには対応サービス、<code>dev.ucp.shopping.checkout</code> のような能力、決済ハンドラ、署名鍵が載り、両者が共に宣言した能力だけが残る「積集合」で交渉が決まる。親の能力が無い拡張は落とされ、各能力は両者が対応する最新版が選ばれる。トランスポートは REST・MCP・A2A・埋め込みの 4 種類で、仕様は「トランスポート定義は薄く保つ」と明記している。</p><p>この形に寄った理由は、エージェントごとに個別連携を書く負担を加盟店側が持てないからだ。能力を一度宣言すれば、どのエージェントも同じ入口から読みに来る。決済を同じ層に押し込まなかったことも効いている。OpenAI は 2026年3月、チャット内決済 Instant Checkout の初版から離れて加盟店が自前のチェックアウトを使える形にし、ACP を商品フィード（価格・在庫・配送）を受け渡す発見の層として広げた。Google の Merchant Center ハブも、加盟店サイトへのカート受け渡し・Google 上でのネイティブ決済・アカウント連携を個別に選ぶ作りになっており、「全部を代行する」一択ではない。</p>
     <div class="example">
-      <div class="product">MCP Apps（MCP 公式拡張）</div>
-      <div class="approach">ツールが ui:// の HTML リソースを宣言し、ホストが sandbox 付き iframe で描画、JSON-RPC over postMessage で双方向通信する</div>
-      <div class="detail">2026年1月26日に MCP 初の公式拡張として公開。Claude（Web・デスクトップ）、Goose、VS Code Insiders が初日から対応し、ChatGPT も同週から展開すると明記された。セキュリティは iframe sandbox・テンプレートの事前宣言・監査可能なメッセージ・ユーザー同意の 4 層で組まれている。</div>
-      <a href="https://blog.modelcontextprotocol.io/posts/2026-01-26-mcp-apps/">📄 一次ソース</a>
+      <div class="product">Universal Commerce Protocol（Google・Shopify ほか）</div>
+      <div class="approach">/.well-known/ucp のプロファイルと UCP-Agent ヘッダーで双方の能力を突き合わせ、共通部分だけで取引する</div>
+      <div class="detail">仕様の Overview は、バージョン選択と能力交渉を分け、能力は両者が宣言したものだけを残すと定めている。決済方式は payment_handlers に逆ドメイン名で登録し、デジタルウォレット・SCA 付き直接トークン化・AP2 経由の自律エージェントの 3 シナリオを想定する。名前空間の紐付けは「出所を保証するが信頼は保証しない」とも書き、信頼判断をクライアント側に残している。</div>
+      <a href="https://ucp.dev/specification/overview/">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">VS Code（チャット内の MCP Apps 描画）</div>
-      <div class="approach">エージェントのツール呼び出し結果を、ドラッグで並べ替えるリストやフレームグラフとしてチャット内に表示する</div>
-      <div class="detail">VS Code チームは「MCP Apps を完全サポートした最初の主要 AI コードエディタ」とし、Storybook の MCP サーバーがコンポーネントのライブプレビューをチャットに出す例を挙げた。並べ替えを手で直すか、エージェントに頼むかを同じ UI で選べる点が、テキスト往復との違いだ。</div>
-      <a href="https://code.visualstudio.com/blogs/2026/01/26/mcp-apps-support">📄 一次ソース</a>
+      <div class="product">Google Merchant Center の UCP 連携ハブ</div>
+      <div class="approach">カート受け渡し・ネイティブ決済・アカウント連携を加盟店が個別に選び、サンドボックスでプロファイルと API を検証してから公開する</div>
+      <div class="detail">ヘルプページは米国で段階的に展開中、オーストラリアとカナダは来年と記載している。先に UCP の実装を済ませ、関心フォームを出して選定を待つ流れで、誰でもすぐ使える状態ではない。決済を Google 上で完結させず、自社サイトへカートを渡す選択肢を正規の能力として持たせている点が、初期の「チャット内で買わせる」構想との違いだ。</div>
+      <a href="https://support.google.com/merchants/answer/16992327?hl=en">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> 既に Web UI を持つ SaaS が複数の AI ホストに顔を出すなら MCP Apps が最短経路。ただし UI からのツール呼び出しは同意フローを通る前提で設計し、UI に状態を閉じ込めず「ツールを呼べば同じ結果になる」形を保っておくと、UI 非対応ホストでも劣化して動く。</div>
+    <div class="takeaway"><strong>示唆:</strong> EC 側でエージェント対応を考えるなら、最初の一手は決済連携ではなく商品データと能力宣言の整備になる。チェックアウトを自社に残すか委ねるかは後から能力単位で選べる設計が主流なので、在庫・価格・返品条件を機械可読で出せる状態を先に作っておくと、どのプロトコルが広がっても流用が効く。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 2: カタログ型: エージェントはデータだけを送り、描くのはクライアント</div>
+  <div class="section-title">📐 パターン 2: 同意の層: カード番号を渡さず、「何に同意したか」を検証可能な形で残す</div>
   <div class="theme-section">
-    <p>A2UI は逆側から設計されている。エージェントが送るのは「どのコンポーネントをどう並べ、どのデータを結びつけるか」を記述した宣言的な JSON で、実行可能なコードではない。クライアントは信頼済みのコンポーネントのカタログを持ち、エージェントはそこにあるものしか要求できない。v0.9 ではクライアント定義関数（入力検証などに使う）とクライアント→サーバーのデータ同期が加わり、ユーザーが UI で編集した状態をエージェントへ返せるようになった。描画は React・Flutter・Angular・Lit の公式レンダラーが担い、トランスポートは MCP・WebSocket・REST・A2A などを選ばない。</p><p>Google がこの道を選んだのは、iframe 方式のコストを嫌ったからだ。初版の発表は、外部の信頼できない送り手から UI を受け取るために HTML/JS を iframe に入れる方式を「重く、見た目がちぐはぐになりうる」と書き、LLM が生成した任意コードの実行をリスクとして挙げている。カタログ型なら見た目はアプリのデザインシステムに揃い、Web だけでなくモバイルのネイティブ UI にも描ける。その代わり、エージェントはカタログにない UI を出せない。Gemini Enterprise は 8月17日に A2UI エージェントの登録を GA にしたが、マネージド側の一部の登録経路は A2UI 描画にまだ対応していないとリリースノートに明記しており、エコシステムは MCP Apps より狭い。</p>
+    <p>支払いの部分は、エージェントにカード情報を持たせない方向で各社がそろった。Stripe の Shared Payment Token（SPT）は、購入者が「買う」を押した時点で AI プラットフォームが発行するトークンで、特定の加盟店と決済総額に紐付き、期限や金額の上限を持ち、いつでも取り消せる。加盟店は SPT の ID を受け取って PaymentIntent を作るだけで、裏の認証情報には触れない。AP2 はさらに踏み込み、ユーザーが承認した内容そのものを暗号学的な証拠として残し、人がその場にいない決済でも後から検証できるようにする。</p><p>同意を独立した層にした理由は、エージェント経由の決済で最も揉めるのが「ユーザーは本当にこれを頼んだのか」という一点だからだ。Agentic AI Foundation の整理は「商品を見つけることと、支払いに同意したと証明することは同じ問題ではない」と書いている。2026年4月には Google が AP2 を、Mastercard が Google と共同開発した Verifiable Intent を FIDO Alliance に提供し、Mastercard と Visa が議長を務める決済作業部会の土台になった。パスキーで認証を標準化した団体に「意図の証明」を預けたことで、ここはベンダー間の競争領域から共通基盤の側に移りつつある。</p>
     <div class="example">
-      <div class="product">A2UI v0.9（Google）</div>
-      <div class="approach">宣言的 JSON + クライアント側の承認済みコンポーネントカタログで描画し、v0.9 でクライアント定義関数と双方向データ同期を追加</div>
-      <div class="detail">2026年4月17日公開。既存のコンポーネントカタログでそのまま描けることを前面に出し、オプションのコンポーネント群の名前を「Standard」から「Basic」に変えて「新しい部品を用意する必要はない」と位置付け直した。MCP は依存先ではなく選べるトランスポートの一つで、MCP Apps との連携はロードマップ項目に入っている。</div>
-      <a href="https://developers.googleblog.com/a2ui-v0-9-generative-ui/">📄 一次ソース</a>
+      <div class="product">Stripe Shared Payment Token</div>
+      <div class="approach">加盟店・金額・期限で範囲を絞ったトークンを発行し、エージェントにも加盟店にも生のカード情報を渡さない</div>
+      <div class="detail">Stripe は信頼を「明示的に付与し、範囲を絞り、コードで強制する」必要があると書き、SPT を加盟店単位・時間または金額の上限付き・取り消し可能・Webhook で監視可能な仕組みとして設計した。Stripe 以外で決済処理する加盟店も SPT を自社の決済代行へ転送できるため、決済代行の乗り換えを強いない点が採用の障壁を下げている。</div>
+      <a href="https://stripe.com/blog/introducing-our-agentic-commerce-solutions">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">A2UI 初版の設計意図（Google）</div>
-      <div class="approach">「データのように安全で、コードのように表現力がある」を掲げ、iframe 方式を明示的に退けた</div>
-      <div class="detail">2025年12月15日の初版発表は A2UI を「実行可能なコードではなく宣言的なデータ形式」と定義し、エージェントはクライアントの信頼済みカタログからしか部品を選べないとした。MCP Apps と比べたとき、安全性の担保を sandbox ではなく表現力の制限で得ている点が本質的な違いになる。</div>
-      <a href="https://developers.googleblog.com/introducing-a2ui-an-open-project-for-agent-driven-interfaces/">📄 一次ソース</a>
+      <div class="product">FIDO Alliance（AP2・Verifiable Intent の受け入れ）</div>
+      <div class="approach">Google の AP2 と Mastercard の Verifiable Intent を土台に、エージェント起点の決済とユーザー意図の検証を業界仕様にする</div>
+      <div class="detail">2026年4月28日の発表で、エージェント認証の作業部会（CVS Health・Google・OpenAI が議長）と決済作業部会（Mastercard・Visa が議長）が示された。重点領域は検証可能なユーザー指示・エージェント認証・取引の委任の 3 つ。Mastercard は Verifiable Intent を「決済エコシステム全体が頼れるユーザー意図の共通記録」と位置付けている。</div>
+      <a href="https://fidoalliance.org/fido-alliance-to-develop-standards-for-trusted-ai-agent-interactions/">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> 自社アプリの中にエージェントを組み込み、見た目をデザインシステムに揃えたい、あるいはモバイルのネイティブ描画が要るならカタログ型が向く。判断基準は「描画ロジックを誰が持つか」で、UI を提供する側がホストの外にいるなら MCP Apps、自分がホストなら A2UI と考えると迷いにくい。</div>
+    <div class="takeaway"><strong>示唆:</strong> エージェントに決済させる機能を作るなら、カード情報を保持させる設計は最初から外し、加盟店・金額・期限で縛ったトークンを都度発行する形にする。加えて「ユーザーが承認した文面と条件」を署名付きで残しておけば、チャージバックや問い合わせのときに説明できる。上限をエージェント自身に決めさせない（ユーザー操作か事前ポリシーで決める）ことも忘れずに。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 3: 置き場所の拡張: UI が会話の中から sidebar・パネル・ファイルビューアへ出た</div>
+  <div class="section-title">📐 パターン 3: 身元の層: 「誰の代理で、どこまでしてよいか」を決済と切り離して扱う</div>
   <div class="theme-section">
-    <p>9月29日の DevDay で OpenAI が出した plugin extensions は、描画方式ではなく UI の置き場所を広げる拡張だ。各 UI は <code>ui://</code> リソースに結びついた MCP App のままで、ツールの <code>_meta</code> に entrypoint を足すだけで場所が変わる。<code>global</code> ならサイドバーから全画面で開くアプリ、<code>thread</code> なら会話の横に開くパネル、<code>file</code> なら指定した拡張子（例: <code>stl</code>）のファイルを開くビューア兼エディタになる。加えて ChatGPT と MCP App の間で双方向にコンテキストを共有する Model-App Context 拡張も用意された。</p><p>これまでの MCP Apps は「ツール呼び出しの回答に添付される UI」で、会話が進めば流れて消えた。パネルやファイルビューアは会話と並行して居座る作業面で、ユーザーは UI を操作しながらモデルと話し続ける。こうなると UI 側の状態をモデルにどう見せるかが設計の中心に移り、OpenAI が文脈同期を独立した拡張に切り出したのはそのためだと読める（推測）。初期実装として Canva（サイドバーとプレビュー）、Figma（デスクトップでの composer メンション）、Adobe（Acrobat・Photoshop のファイルハンドラ）が挙がっており、Codex にも同じ拡張が入る。仕様は MCP と MCP Apps を拡張するかたちで公開されたが、現時点では OpenAI 固有の拡張で、他ホストが追随するかは分からない。</p>
+    <p>10月6日に Meta と Sierra が発表した Personal Agent Protocol は、決済ではなくエージェントの入店手続きを扱う。エージェントは企業のサイトで提供内容を見つけてユーザーのためにセッションを始め、在庫確認や返品条件の質問ならゲストのまま進める。アカウントに触れる作業では、ユーザーが企業のページでサインインするか、エージェントに保存した資格情報を使い、読み取りのみか書き込みも許すかを選ぶ。土台は OAuth で、サインイン前の質問と後の注文変更が同じセッションとして続く。経路はサイトの通常ページ、MCP や OpenAPI による API、企業側のエージェントの 3 つから企業が選ぶ。</p><p>この層が別に必要になったのは、エージェントによるサイト巡回をめぐって企業との摩擦が表に出てきたからだ。企業から見ると、来訪者が人なのか誰かの代理のエージェントなのか、代理なら何を許されているのかが分からない。決済トークンや意図の証明はお金の部分しか守らず、注文変更やアカウント情報の閲覧はその外にある。発表文は「消費者がエージェントに与えるアクセスを決め、企業がエージェントにできることの範囲を決める」を原則に掲げ、カード情報を共有しない決済対応は今後の拡張に回した。v0.1 仕様は今月後半の公開予定で、現時点ではまだ実装できない点には注意したい。</p>
     <div class="example">
-      <div class="product">ChatGPT plugin extensions（OpenAI MCP Extensions）</div>
-      <div class="approach">MCP App に global / thread / file の entrypoint を宣言させ、サイドバー・会話横パネル・ファイルビューアに配置する</div>
-      <div class="detail">UI 本体は MCP Apps のまま、置き場所だけを _meta で指定する設計で、既存の MCP App を作り直さずに常駐型へ移せる。composer メンションはデスクトップアプリ限定、Web の Free・Go プランへの提供は「近日」とされ、展開は段階的だ。</div>
-      <a href="https://developers.openai.com/plugins/build/extensions">📄 一次ソース</a>
+      <div class="product">Personal Agent Protocol（Meta・Sierra）</div>
+      <div class="approach">OAuth を土台に、ゲスト → 読み取り専用 → 書き込みの段階的なアクセスと、チャネルをまたぐセッション継続を定める</div>
+      <div class="detail">Bret Taylor と Clay Bavor の発表（2026年10月6日）で、Genesys・Instinct・Rocket・Shopify・Stripe・Walmart が協力企業に挙がった。企業はエージェントが顧客の代理で動いたことを把握でき、どの経路を開けるかを選べる。より細かい権限、プッシュ通知、カード情報を渡さない決済は今後の拡張として明記されている。</div>
+      <a href="https://sierra.ai/blog/introducing-personal-agent-protocol">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">ChatGPT の UI 実装ガイド</div>
-      <div class="approach">まずインライン、必要なときだけ fullscreen や picture-in-picture に広げる。描画用ツールだけに resourceUri を付ける分離パターンを推奨</div>
-      <div class="detail">OpenAI は「ChatGPT は MCP Apps 標準を実装している」と明記し、データ取得ツールと描画ツールを分け、UI を出すツールだけに _meta.ui.resourceUri を付けるよう勧めている。UI を再マウントせずにデータだけ更新できるため、常駐型 UI の前提になる構成だ。</div>
-      <a href="https://developers.openai.com/plugins/build/chatgpt-ui">📄 一次ソース</a>
+      <div class="product">Machine Payments Protocol（Stripe・Tempo）</div>
+      <div class="approach">エージェントが API や MCP サーバーにリクエスト → サービスが支払い要求を返す → エージェントが承認して資源を受け取る、という機械間の少額課金</div>
+      <div class="detail">人の買い物とは別系統の層として、2026年3月に Stripe と Tempo が共同で公開した。Browserbase はブラウザセッション単位、Parallel は API 呼び出し単位でエージェントに課金する例として挙がっている。法定通貨は SPT 経由、ステーブルコインも受け付け、入金は既存の Stripe 残高に入る。同じ用途を x402 が HTTP 402 を使って担っており、この層はまだ 2 系統が並走している。</div>
+      <a href="https://stripe.com/blog/machine-payments-protocol">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> UI を会話の外に常駐させるなら、「UI の現在の状態をモデルがいつ・どこまで見られるか」を最初に決める。データ取得と描画のツールを分けておけば、インライン・パネル・ファイルビューアのどこに置いても同じサーバー実装を使い回せる。</div>
+    <div class="takeaway"><strong>示唆:</strong> 自社サービスにエージェントを受け入れるなら、「エージェント用 API を作る」より先に、ゲストで許す操作・読み取りで許す操作・書き込みが要る操作の三段階に棚卸ししておくとよい。どの標準が広がっても、この区分がそのまま OAuth のスコープ設計になる。課金が呼び出し単位なら、人向けのチェックアウトとは別に MPP や x402 の層を検討する。</div>
   </div>
   <div class="editorial">
     <span class="label">✍️ 編集後記</span>
-    MCP Apps と A2UI の違いは、安全性を sandbox で買うか、表現力を絞ることで買うかの違いだ。どちらが勝つかより、UI が回答の添付物から常駐する作業面に変わりつつあることの方が設計への影響は大きい。会話ログしか見ていないエージェントは、ユーザーが今パネルで何を触っているかを知らない — 次に詰めるべきはそこになる。
+    一年前の議論は「どのプロトコルが勝つか」だったが、実際に起きたのは問題の分解だった。見つける、同意を証明する、代理として入る — それぞれに別の失敗の仕方があり、一つの仕様で全部を背負うと全部が遅れる。OpenAI がチャット内決済から一歩引いたのは後退ではなく、層の境界を引き直した結果と見るのが正確だと思う。
   </div>
 </div>
 
 <div class="section">
   <div class="section-title">🔗 今号の動向ピックアップ</div>
-  <div class="quick-link"><a href="https://itbrief.co.uk/story/openai-adds-plugin-extensions-across-chatgpt-codex">OpenAI、ChatGPT と Codex に plugin extensions を追加（IT Brief）</a><span class="quick-summary">OpenAI が TypeScript・Python の開発ツールと言語非依存のプロトコル仕様を公開し、Canva・Figma・Adobe が初期実装を出した。本文第3節の「UI の置き場所の拡張」が、パートナー各社でどう使われ始めたかを確認できる。</span></div>
-  <div class="quick-link"><a href="https://techcrunch.com/2026/09/29/openai-expands-chatgpts-plugins-with-app-like-interfaces-and-automations/">OpenAI expands ChatGPT&#39;s plug-ins with app-like interfaces and automations（TechCrunch）</a><span class="quick-summary">DevDay 2026 で発表されたサイドバー・インタラクティブパネル・ファイルビューアに加え、提案中の MCP Events 仕様で接続先アプリのイベントから自動化を起動できるようにすると報じた記事。UI の常駐化と並んで「ユーザーが話しかけなくても動く」方向が出ており、本文第3節の作業面化と対になる変化だ。</span></div>
-  <div class="quick-link"><a href="https://www.infoq.com/news/2026/07/google-a2ui-genui/">Google Releases A2UI v0.9: Portable, Framework-Agnostic Generative UI（InfoQ）</a><span class="quick-summary">A2UI v0.9 の変更点を整理し、Google が A2UI を AG-UI・MCP Apps などの「下に敷く可搬な契約」と位置付けていることを伝える記事。本文第2節のカタログ型が MCP Apps と競合ではなく併用を狙っていることの裏付けになる。</span></div>
+  <div class="quick-link"><a href="https://aaif.io/blog/there-is-no-one-agentic-commerce-protocol">Agentic AI Foundation「There Is No One Agentic Commerce Protocol」</a><span class="quick-summary">UCP・AP2・x402・A2A を「リレー」として整理し、Walmart が購入の全行程を追った結果「単一のプロトコルでは完結しない」と結論づけた事例を紹介している。本号の三層の見立てを、標準化団体の側から裏付ける記事だ。</span></div>
+  <div class="quick-link"><a href="https://cointelegraph.com/news/block-brings-bitcoin-lightning-payments-to-x402-for-ai-agents">Block が x402 Foundation に参加し、Bitcoin Lightning を決済手段に追加</a><span class="quick-summary">HTTP 402 でエージェントに支払いを求める x402 に、少額・高頻度向けの Lightning が加わった。本号で扱った機械間決済の層が、MPP と x402 の 2 系統でそれぞれ支払い手段を増やしている動きの一つ。</span></div>
+  <div class="quick-link"><a href="https://blog.google/products/ads-commerce/agentic-commerce-ai-tools-protocol-retailers-platforms/">Google、Universal Commerce Protocol を発表（2026年1月）</a><span class="quick-summary">UCP を発見から購入後サポートまでを覆う共通語彙として打ち出し、AP2・A2A・MCP との互換を明記した最初の発表。加盟店が販売者のまま残る前提を最初から置いていた点が、本号の「決済を加盟店に戻す」流れにつながっている。</span></div>
 </div>
 
 <div class="section">
   <div class="section-title">📚 過去号</div>
+  <div class="archive-item"><span class="week">2026-10-08</span><div class="body"><a href="ai-trends/2026-10-08.html">エージェントの UI は「誰が描くか」で二つに割れた — iframe で持ち込む MCP Apps、カタログで描かせる A2UI、そして会話の外へ</a><span class="sub">MCP Apps はツールが ui:// の HTML リソースを返し、ホストが sandbox 付き iframe で描画する「持ち込み型」。Claude・VS Code・ChatGPT が同じ仕様に乗った。</span></div></div>
   <div class="archive-item"><span class="week">2026-10-06</span><div class="body"><a href="ai-trends/2026-10-06.html">音声エージェントは「話す層」と「考える層」を分けた — カスケードか音声直結かの二択が終わった理由</a><span class="sub">OpenAI の GPT-Live-1 は会話の進行だけを担い、推論とツール実行は裏側のテキストモデルへ非同期に委譲する二層構成を採った。</span></div></div>
   <div class="archive-item"><span class="week">2026-10-03</span><div class="body"><a href="ai-trends/2026-10-03.html">エージェントの評価は「最終出力」ではなく「軌跡」を見る設計に変わった — OpenAI・Anthropic・Replitが同時に評価基盤を公開</a><span class="sub">OpenAI・Anthropic・Replit・Braintrustが2026年に評価基盤の内部設計を相次いで公開した。</span></div></div>
   <div class="archive-item"><span class="week">2026-10-01</span><div class="body"><a href="ai-trends/2026-10-01.html">エージェントは「呼び出すたびに消える」から「状態を持ち続ける」へ — OpenAI・Google・Alibabaが同時に永続化レイヤーを足した</a><span class="sub">OpenAIの「dots」はユーザーごとに専用クラウドコンピュータを割り当て、ChatGPT・Slack・Teamsを横断して会話間の文脈を保持する常駐エージェント。</span></div></div>
@@ -206,7 +207,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 </div>
 
 <footer>
-  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="data/ai-trends/2026-10-08.json">data/ai-trends/2026-10-08.json</a>（このページは JSON からの生成物）</p>
+  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="data/ai-trends/2026-10-10.json">data/ai-trends/2026-10-10.json</a>（このページは JSON からの生成物）</p>
   <p style="margin-top:.5rem"><a href="./">📰 日刊ダイジェストに戻る</a></p>
 </footer>
 </div>

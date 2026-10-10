@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-10-08</title>
+  <meta name="description" content="Claude Haiku 5.5発表、低コスト小型モデルが本体同等のタスクをこなす / IDCFクラウドにランサムウェア攻撃、495社・自治体に影響 / Docker、AIエージェント構築ツール「Docker Agent」をOSS公開">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech News Daily">
+  <meta property="og:title" content="Tech News Daily — 2026-10-08">
+  <meta property="og:description" content="Claude Haiku 5.5発表、低コスト小型モデルが本体同等のタスクをこなす / IDCFクラウドにランサムウェア攻撃、495社・自治体に影響 / Docker、AIエージェント構築ツール「Docker Agent」をOSS公開">
+  <meta property="og:url" content="https://tech-news.kaion-lab.com/archive/2026-10-08.html">
+  <meta property="og:image" content="https://tech-news.kaion-lab.com/apple-touch-icon.png">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="../feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-10-08 (Thu)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+      <nav class="site-nav">
+        <a href="../" class="active">📰 日刊ダイジェスト</a>
+        <a href="../trends.html">🔌 週次プラグイントレンド</a>
+        <a href="../ai-trends.html">🧠 AI プロダクト動向</a>
+        <a href="./">🗂 アーカイブ</a>
+      </nav>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 21 articles</span>
+      <span>🏷 7 categories</span>
+      <span>📡 14 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item">
+        <span class="number-value">90%</span>
+        <span class="number-label">Haiku 5.5 コスト減（〜10万トークン）</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">495</span>
+        <span class="number-label">IDCFランサム被害 企業・自治体数</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">17.2k★</span>
+        <span class="number-label">Rust製Photoshopクローン PhotoCraft</span>
+      </div>
+    </div>
+
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
+
+      <div class="card featured deep-dive">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.anthropic.com/claude-haiku-5-5">DEEP DIVE: Claude Haiku 5.5発表、低コスト小型モデルが本体同等のタスクをこなす</a></h3>
+        </div>
+        <div class="summary">Anthropicは10月7日、小型モデル「Claude Haiku 5.5」（モデルID claude-haiku-5-5）を発表した。小型モデルは要約やデータベース照合、分類など高頻度・低コストの処理を担う一方、精度の低さが導入の壁になってきた。Haiku 5.5はこの制約を、Haiku系で初めてとなる「Effort」設定で緩和する。Low・Med・High・Xhigh・Maxの5段階でコストと知能のトレードオフを呼び出し側が選べる構造で、タスクごとに精度とコストを調整できる。ベンチマークでは、OSWorld 2.1（オフラインsubset）がHaiku 4.5の15.7%から72.4%へ、Terminal-Bench 4.0が0.0%から39.2%へ上昇し、複雑なエージェント実行力が大きく底上げされた。価格は入力トークン10万以下で100万トークンあたり0.10ドル、出力0.50ドルとHaiku 4.5比で最大90%安い。Asanaはタスク完了のレイテンシが30%以上短縮、エージェント1ターンあたり最大2.5倍高速化したと報告した。AlphaSenseは週800万件のクエリ処理で評価スコアが0.76から0.84に上昇、Boxは同条件でHaiku 4.5比11ポイント高い精度を約半分のレイテンシで得たとする。Sonnet 5.5・Opus 5.5は複雑なエージェント型コーディングで依然優位とAnthropicは位置付けており、Haiku 5.5はサブエージェントとしての併用を想定した設計になっている。</div>
+        <div class="editorial">🧠 実質的な論点は、コストと精度のトレードオフそのものより、Effortレベルを動的に切り替える運用設計に移ったと見ていい。ただしAsanaやBoxが示す数値は各社固有のワークロードに基づくもので、同じ効果が他の用途でも再現するかは未検証だ。サブエージェント運用が前提になるほど、オーケストレーション側の設計ミスがコスト超過に直結するリスクも増す点は見落とされがちである。</div>
+        <div class="key-points">
+          <ul>
+            <li>Terminal-Bench 4.0は0.0%（Haiku 4.5）から39.2%へ、GDPval-AA v2.1 Eloは735から1620へ上昇</li>
+            <li>価格は10万トークン以下で入力0.10ドル/出力0.50ドル（100万トークンあたり）、Haiku 4.5比最大90%減</li>
+            <li>AWS・Google Cloud・Microsoft Azure・Claude Platformで同時提供開始、移行ガイドも公開</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 高頻度処理をHaiku 5.5に切り出せばSonnet/Opus呼び出しを減らしつつ速度とコストを改善できるが、Effort設定の誤りはサブエージェント特有のコスト増を招きやすい。</div>
+        <div class="meta">
+          <span>Anthropic</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-10-07</span>
+          <span class="engagement">▲ 638</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://www.itmedia.co.jp/news/article/2610/07/2000002107/">IDCFクラウドにランサムウェア攻撃、495社・自治体に影響</a></h3>
+        </div>
+        <div class="summary">IDCフロンティアは10月7日、同社「IDCFクラウド」の障害の原因が第三者によるランサムウェア攻撃だったと公表した。発生は同日午前3時40分ごろ、福島県白河市のデータセンター「東日本リージョン1」。影響は495の企業・自治体に及び、同社は安全確認のため他リージョンの管理コンソールも停止した。在庫管理ツール「らくらく在庫」の停止や、音声認識アプリ「UDトーク」の一部機能停止、「Movable Type クラウド版」のサーバ31台障害など、具体的な被害が相次いで報告されている。UDトーク運営元はIDCF側から「データの復元は難しい」と伝えられ、別のクラウド基盤での環境再構築に切り替えた。</div>
+        <div class="key-points">
+          <ul>
+            <li>障害発生は10月7日午前3時40分ごろ、福島県白河市のデータセンター「東日本リージョン1」</li>
+            <li>影響範囲は495の企業・自治体、Movable Typeクラウド版ではサーバ31台に障害</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>ITmedia</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-10-07</span>
+          <span class="engagement">🔖 81</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://github.com/docker/docker-agent">Docker、AIエージェント構築ツール「Docker Agent」をOSS公開</a></h3>
+        </div>
+        <div class="summary">Docker EngineeringはAIエージェントを宣言的なYAMLだけで定義・実行できるOSSツール「docker-agent」を公開した。Apache-2.0ライセンスのDocker CLIプラグイン（docker agentコマンド）として動作し、専門化したエージェント同士がタスクを委任し合うマルチエージェント構成を組める。ツール呼び出しはビルトインに加え、ローカル・リモート・Docker上のMCPサーバーを任意に組み合わせられ、think・todo・memoryの推論補助ツールも標準搭載する。モデル側はOpenAI・Anthropic・Gemini・AWS Bedrock・Mistral・xAIなど特定ベンダーに縛られず選べる。</div>
+        <div class="key-points">
+          <ul>
+            <li>Apache-2.0ライセンスのDocker CLIプラグイン、YAML宣言だけでマルチエージェント構成を定義可能</li>
+            <li>OpenAI・Anthropic・Gemini・AWS Bedrock・Mistral・xAI・Docker Model Runnerなど特定ベンダーに非依存</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-08</span>
+          <span class="engagement">⭐ 3.7k</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://daniel.haxx.se/blog/2026/10/07/twenty-two-pending-curl-vulnerabilities/">curl 8.23.0で22件の脆弱性を一挙修正、HIGH評価は2021年以降3件目</a></h3>
+        </div>
+        <div class="summary">curl開発者Daniel Stenbergは、10月14日リリース予定のcurl 8.23.0で22件の脆弱性を同時に修正すると明らかにした。うち1件（CVE-2026-92392）はLOW/MEDIUM/HIGH/CRITICALの4段階評価でHIGHとされ、2021年以降でHIGH認定は過去2件のみという基準では異例の重さを持つ。詳細は10月14日朝（欧州時間）まで非公開とし、事前にはdistros@openwallメーリングリストと有償サポート顧客にのみ連絡する。</div>
+        <div class="key-points">
+          <ul>
+            <li>curl 8.23.0は当初予定より数週間前倒しで10月14日リリース、Rock-solid curl版も同時更新</li>
+            <li>CVE-2026-92392はHIGH評価。2021年以降でHIGH認定はこれが3件目</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>curl Blog (daniel.haxx.se)</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-07</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://debasishg.github.io/blog/push-ifs-up-fors-down/">「ifを上げてforを下げる」——分岐とループを構造化する作法</a></h3>
+        </div>
+        <div class="summary">分岐（if）は呼び出し元に押し上げ、ループ（for）は呼び出し先に押し下げるという設計原則を扱う。frobnicate(walrus: Option&lt;Walrus&gt;)のように関数内部でNoneを判定する代わりに、呼び出し元でNone処理を済ませ、関数は素のWalrusだけを受け取るようにする。ループはfrobnicate_batch(walruses)のように関数側に閉じ込めることで、ベクトル化可能な分岐のない処理になる。データベースのクエリオプティマイザが選択・射影をJOINより先に押し上げ、ベクトル実行でまとめて行を処理するのも同じ発想だと論じる。</div>
+        <div class="key-points">
+          <ul>
+            <li>Option&lt;Walrus&gt;の分岐を呼び出し元に押し上げ、関数側はバッチ処理frobnicate_batch(walruses)に一本化</li>
+            <li>条件がループ内の各要素に依存しない場合に限り、ループの外へ押し上げられるという適用条件を明示</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>debasishg.github.io</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-10-07</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://blog.miguelgrinberg.com/post/how-fast-is-python-3-15">Python 3.15実測、3.14からほぼ横ばい——JITは約1.2倍、Free-threadingは最大4.5倍</a></h3>
+        </div>
+        <div class="summary">Miguel Grinberg氏が、フィボナッチ数列の再帰計算とバブルソートの2種のベンチマークでCPython 3.10〜3.15を実測した。標準ビルドの3.15は3.14と比べてほぼ横ばいで、4スレッドのフィボナッチではわずかに遅い結果も出た。一方、実験的なJITビルドは標準の3.15よりフィボナッチで約1.20倍、バブルソートで約1.27〜1.28倍速い。フリースレッディング（GIL無効化）ビルドは4スレッド実行でフィボナッチが約4.5倍、バブルソートが約1.74倍高速化した一方、単一スレッドではバブルソートが約26%遅くなった。著者は、JITは明確な伸びしろだが実験的機能なのでまだ本番投入は時期尚早と結論づけている。</div>
+        <div class="key-points">
+          <ul>
+            <li>3.15標準ビルドは3.14比でほぼ横ばい、4スレッドのフィボナッチはわずかに低下</li>
+            <li>フリースレッディングビルドは4スレッドのフィボナッチで約4.5倍高速化するが単一スレッドでは最大26%遅化</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Miguel Grinberg Blog</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-07</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-frontend">Frontend</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://developer.chrome.com/blog/jpeg-xl-in-chrome">Chrome 155がJPEG XLデコードに対応、JPEG比30-50%の圧縮改善</a></h3>
+        </div>
+        <div class="summary">Google ChromeはバージョンChrome 155で画像フォーマットJPEG XL（.jxl）のデコード対応を追加する。JPEG比で30〜50%の圧縮率改善に加え、可逆圧縮・HDR・JPEGからの可逆トランスコードに対応し、高精細・可逆写真での利用に向くとしている。デコーダはメモリ安全性の高いRust実装（jxl-rs）で書かれており、画像デコーダで多発するメモリ安全脆弱性を構造的に排除する狙いがある。</div>
+        <div class="key-points">
+          <ul>
+            <li>Chrome 155でJPEG XL（.jxl）のデコードに対応、JPEG比30-50%の圧縮改善</li>
+            <li>デコーダはRust製（jxl-rs）、メモリ安全性のない従来実装特有の脆弱性クラスを回避</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Chrome for Developers</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-07</span>
+          <span class="engagement">▲ 474</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://news.mit.edu/2026/margaret-hamilton-computing-pioneer-dies-1007">ソフトウェア工学の先駆者マーガレット・ハミルトン氏死去、90歳</a></h3>
+        </div>
+        <div class="summary">MIT Instrumentation LabでNASAアポロ計画の搭載ソフトウェアを率いたマーガレット・ハミルトン氏が9月30日、90歳で死去した。氏が設計した優先度ベースのソフトウェアは、アポロ11号の月着陸時にコンピュータが処理能力の限界を超えた際、優先度の低いタスクを自動で打ち切ることで着陸続行を可能にした。「ソフトウェアエンジニアリング」という言葉を定着させた人物の一人としても知られる。</div>
+        <div class="key-points">
+          <ul>
+            <li>アポロ11号着陸時、優先度ベースの設計が過負荷状態で低優先度タスクを自動破棄し着陸を継続させた</li>
+            <li>死去は2026年9月30日、90歳。MIT Instrumentation Labでの業績がMIT Newsの記事で改めて紹介された</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>MIT News</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-10-07</span>
+          <span class="engagement">▲ 519</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/edash_tech_blog/articles/c52409a3d6fa12">レビューの口伝を40ルールに棚卸しし、AIレビューに組み込んだ</a></h3>
+        </div>
+        <div class="summary">e-dashは半年分のマージ済みPR1,135件からGoファイルへのインラインコメント1,105件を収集し、Claudeで分類して36ルールを採用、2件を不採用、2件を保留とした。ルールごとに差分中の合図文字列を定め、その文字列が現れたときだけ該当ルールをAIレビューが評価する方式にし、無関係なコードまで読んでしまう問題を回避した。運用中にスキルは33回改訂され、約8KBから約19KBに成長している。</div>
+        <div class="key-points">
+          <ul>
+            <li>指摘なしでapproveされるPRの割合は64.5%から71.2%に上昇。一方PRは大きくなり、レビュー回数は2.73回から3.75回に増加</li>
+            <li>採否判断はlinter/CIで機械的に担保できるか、文脈依存で固定すると害が出るか、既存の書き方で足りるか、の3軸</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-10-07</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://qiita.com/suwa_nobu/items/be41c19295ef0e58e7f2">Claude CodeのExploreエージェント、Haikuから本体同一モデルへ変更でコスト最大35%減</a></h3>
+        </div>
+        <div class="summary">Claude Code 2.0.17まではHaikuで動いていたExploreサブエージェントは、2.1.198以降は本体と同じモデル（上限Opus）で動くようになった。著者が本体Opus 5.5のまま実測したところ、ファイル探索が重い課題ではExploreだけHaikuに固定するとコストが約35%減り、所要時間はほぼ変わらなかった。軽い課題では約21%減ったが、所要時間は約2.2倍に伸びた。戻すには`.claude/agents/Explore.md`にmodel: haikuと書いたサブエージェント定義を置けばよい。</div>
+        <div class="key-points">
+          <ul>
+            <li>重い調べもの（6,656ファイルからpackage.jsonを数える）でExploreをHaiku固定するとコストが約35%減、所要時間はほぼ同じ</li>
+            <li>Exploreはセッション費用の約45%を占めると著者は見積もる。ただし本体会話はOpusのままなので全体削減効果は限定的</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-07</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://tech.kickflow.co.jp/entry/2026/10/06/105939">手動テストケースを渡すだけでE2Eテストが完成する仕組みを構築</a></h3>
+        </div>
+        <div class="summary">kickflowのQAチームは、テスト管理ツール（KickRail）に登録したテストケースからPlaywrightのE2Eテストを作成しPRを出すまでをClaude Codeのスキルに任せる仕組みを作った。対象外とする条件（多言語表示・モバイル実機・プラン変更など）を表にしてスキルへ持たせ、テナント割り当てや承認ポイントを含む一連の流れを自動化した。導入後は2026年8月中旬の7機能・63テストから9月28日時点で20機能・116ファイル・346テストに増え、テストラン完了からE2EのPR作成までの中央値は2.5日だった。</div>
+        <div class="key-points">
+          <ul>
+            <li>テスト数は7機能・63テスト（8月中旬）から20機能・346テスト（9月28日）に増加</li>
+            <li>専有テナントの見直しで19から5に減少。テナントを機能単位で並列実行すると1〜4分で完了</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>kickflow Tech Blog</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-06</span>
+          <span class="engagement">🔖 61</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-data">Data</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/ryoya_cre8tor/articles/0cdc8623498f11">巨大SQLのOR条件でPostgreSQLのプランニング負荷が急増した話</a></h3>
+        </div>
+        <div class="summary">倉庫と商品のペアをORで1組ずつ連結した巨大SQLが原因で、PostgreSQLは実行前のplanningで条件ごとにインデックスパスを評価するため負荷が増大する。80万行のテーブルでの検証では、OR条件1,000件でplanning 0.20秒・メモリ25MBだったのが、16,000件では56秒・140MBまで悪化した。条件を倉庫ごとの商品ID配列にまとめ`= ANY(...)`へ書き換えると、同じ16,000商品でもplanningは約4ms・メモリ25MBまで改善した。</div>
+        <div class="key-points">
+          <ul>
+            <li>OR条件16,000件でplanning時間56秒・メモリ140MB。`= ANY(...)`への書き換えで約4ms・25MBまで改善</li>
+            <li>PostgreSQLのbind変数は1文あたり最大65,535個。jOOQ等は上限付近で値をSQL本文に展開しSQLが巨大化する場合がある</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-10-07</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.com/storytold/photocraft">Adobe Photoshopをクリーンルーム実装したRust製OSS「PhotoCraft」</a></h3>
+        </div>
+        <div class="summary">ArtCraftチームによる「PhotoCraft」は、Photoshopをクリーンルーム方式で再実装した純Rust製の画像編集ソフト。レイヤー・マスク・調整レイヤー・ベクトル形状・ブラシエンジンを備え、PSD/PSBの読み込み・編集・保存に対応する。wgpuベースのGPUコンポジタとマルチスレッドフィルタで処理し、UI・CLI・JSON制御チャネル・MCPサーバーを同じ500以上のコマンドレジストリで駆動するため、AIエージェントからの操作も可能。現時点では早期アルファ版で、AI機能や一部ツール・プラグイン互換に欠落があると開発チーム自身が明言している。</div>
+        <div class="key-points">
+          <ul>
+            <li>34種のツールと多数のフィルタ、RGB/Grayscale/CMYK/Labの8/16/32bit文書とICCカラー管理に対応</li>
+            <li>macOS・Windows・Linux・FreeBSD・WebAssembly（ブラウザ）を対象、MIT/Apache-2.0のデュアルライセンス</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-08</span>
+          <span class="engagement">⭐ 17.2k</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.com/szabadkai/c64-keyboard-font/">C64キーキャップの写真から復元したレトロフォント「C64 Keyboard」</a></h3>
+        </div>
+        <div class="summary">開発者szabadkai氏が自身の中欧仕様Commodore 64のキーキャップを撮影し、形状を整えて作ったフォント。TTF・OTF・WOFF2で配布され、大文字英数字・記号・矢印・£・π・一部アクセント付き文字（ハンガリー語含む）、f1〜f12キー表記、63種のPETSCIIグラフィック凡例を収録する。PETSCII部分はUltimate Commodore 64 Referenceの識別情報をもとに写真から形状を推定した再構成で、フォント本体・アウトライン・スクリプト・ドキュメントはCC0（パブリックドメイン）で公開されている。</div>
+        <div class="key-points">
+          <ul>
+            <li>現行バージョン1.112、コミット25件。小文字入力は大文字表示にマッピングされる仕様</li>
+            <li>Commodore社の公式承認を得ていない非公式の復元プロジェクトである旨を明記</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-10-08</span>
+          <span class="engagement">⭐ 479</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-frontend">Frontend</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://ascii.rest/">Webページ用アニメーションASCIIアートライブラリ「ascii.rest」</a></h3>
+        </div>
+        <div class="summary">依存ゼロの小さなTypeScriptモジュール191点を収録し、React・Next.js・Astro・素のHTMLのいずれでも組み込めるアニメーションASCIIアートのライブラリ。フルカラーシーン13点、プログラミング言語ロゴ27種、Linuxディストロロゴ22種、3D形状・物理シミュレーション・生成アートなどをカテゴリ別に用意する。HTMLでは1本のスクリプトと`<ascii-art>`タグだけで動き、画面外では再生を止め、reduced motion設定時は最初のフレームで静止するなどアクセシビリティにも配慮している。</div>
+        <div class="key-points">
+          <ul>
+            <li>191点のピースを13カテゴリに分類、HTML/React/Astro/素のTypeScriptの4通りの組み込み方法に対応</li>
+            <li>MITライセンスで無料公開、ビルドステップなしでHTMLに直接スクリプトタグを埋め込むだけで利用可能</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>ascii.rest</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-10-08</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://qiita.com/rana_kualu/items/323aecccca77ab3d308e">inotify監視だけでファイル操作情報が漏れる「File Notification Attacks」</a>
+        <span class="quick-summary">— ファイルの中身は見えなくても、ディレクトリ監視だけでWindowsでは閲覧サイト上位1000件の97.8%を識別できた例を紹介。</span>
+        <span class="meta">Qiita</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://qiita.com/YushiYamamoto/items/b02276053e240b8f3d2e">DifyのRAGで検索スコアを回答許可に使わない品質ゲート設計</a>
+        <span class="quick-summary">— 検索と「回答に使ってよいか」の判定を分離し、版違い・矛盾チャンクを機械的に弾くゲートを提案。</span>
+        <span class="meta">Qiita</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://zenn.dev/tetsuro731/articles/6efe77a20b8c1c">GraphRAGをナレッジグラフ・オントロジーの視点から解説</a>
+        <span class="quick-summary">— ベクトル検索の起点からナレッジグラフをたどり、オントロジーで関係ラベルの表記揺れを防ぐ仕組みを整理。</span>
+        <span class="meta">Zenn</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://bigwords.page/">URLそのものが表示になる全画面サイン「BIGWORDS.PAGE」</a>
+        <span class="quick-summary">— メッセージをURLフラグメントに埋め込み、サーバー保存なしで全画面サイン・タイマー・QRコードを表示できる無料ツール。</span>
+        <span class="meta">Show HN</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-oss">OSS</span>
+        <a href="https://github.com/Queuingtheorydotcom/11SquaresFormalized">正方形11個の最密充填、最適性証明をLean 4で形式検証</a>
+        <span class="quick-summary">— 7,920のLeanモジュールが無仮定で検証を通過し、数値計算部分はネイティブコンパイラによる証明書付きで確認。</span>
+        <span class="meta">GitHub</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://glinscott.github.io/how-machines-learned-precision/">浮動小数点演算が「正確さ」を積み上げてきた歴史を辿るエッセイ</a>
+        <span class="quick-summary">— 丸め誤差の扱いから現代の数値計算まで、精度という概念が計算機科学でどう発展したかを振り返る。</span>
+        <span class="meta">glinscott.github.io</span>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="./" class="archive-link">🗂 過去のダイジェスト</a>
+    </footer>
+  </div>
+</body>
+</html>

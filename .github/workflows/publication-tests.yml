@@ -2,7 +2,7 @@ name: Publication safeguards
 on:
   pull_request:
   push:
-    branches: ['main', 'kaionn/ai-publication-guard', 'kaionn/news-monitor-worker']
+    branches: ['main', 'kaionn/ai-publication-guard', 'kaionn/news-monitor-worker', 'kaionn/workers-static-assets', 'kaionn/workers-preview-ci']
 permissions:
   contents: read
 jobs:
@@ -15,5 +15,5 @@ jobs:
         with:
           node-version: '24'
       - run: node --test scripts/tests/*.test.mjs
-      - run: bash -n scripts/deploy-current-site.sh scripts/publish-ai-trends.sh
+      - run: bash -n scripts/deploy-current-site.sh scripts/deploy-workers-preview.sh scripts/publish-ai-trends.sh
       - run: git diff --check

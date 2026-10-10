@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-10-09</title>
+  <meta name="description" content="情報漏えい「発覚ラッシュ」の正体は検知の遅れ / ブックオフGHD会員情報643万件漏えいの可能性 / さくらのAI Engineプライベートエディション提供開始">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech News Daily">
+  <meta property="og:title" content="Tech News Daily — 2026-10-09">
+  <meta property="og:description" content="情報漏えい「発覚ラッシュ」の正体は検知の遅れ / ブックオフGHD会員情報643万件漏えいの可能性 / さくらのAI Engineプライベートエディション提供開始">
+  <meta property="og:url" content="https://tech-news.kaion-lab.com/archive/2026-10-09.html">
+  <meta property="og:image" content="https://tech-news.kaion-lab.com/apple-touch-icon.png">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="../feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-10-09 (Fri)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+      <nav class="site-nav">
+        <a href="../" class="active">📰 日刊ダイジェスト</a>
+        <a href="../trends.html">🔌 週次プラグイントレンド</a>
+        <a href="../ai-trends.html">🧠 AI プロダクト動向</a>
+        <a href="./">🗂 アーカイブ</a>
+      </nav>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 21 articles</span>
+      <span>🏷 6 categories</span>
+      <span>📡 15 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item">
+        <span class="number-value">643万件</span>
+        <span class="number-label">ブックオフGHD 漏えい可能性のある会員情報</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">64日</span>
+        <span class="number-label">Let's Encrypt証明書の新デフォルト有効期間</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">437倍</span>
+        <span class="number-label">DeepSeekのKVキャッシュ圧縮率（V1比）</span>
+      </div>
+    </div>
+
+    <div class="weekly-keywords">
+      <div class="section-title">📊 今週のキーワード</div>
+      <div class="keyword-chips">
+        <span class="keyword-chip">低コストAIモデル</span>
+        <span class="keyword-chip">情報漏えいの発覚ラッシュ</span>
+        <span class="keyword-chip">オープンウェイトLLM競争</span>
+      </div>
+      <div class="keyword-summary">今週はClaude Haiku 5.5やDeepSeek 4.1 Flashなど「十分に安くて十分に賢い」モデルの採算性が話題の中心だった。一方でIDCFクラウド・Times Car・ブックオフなど企業の情報漏えい公表が連日続き、SECURITY DRIVEの分析は公表ラッシュの正体を攻撃増加ではなく検知の遅れだと指摘した。Mistral「Large 4」やReflection AI「Beam」など1兆パラメータ級のオープンウェイトモデル公開も相次ぎ、フロンティア性能の民主化が進んだ一週間だった。</div>
+    </div>
+
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
+
+      <div class="card featured deep-dive">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://securitydrive.jp/column/0023/">DEEP DIVE: 情報漏えい「発覚ラッシュ」の正体は不正アクセスの増加ではなく検知の遅れ</a></h3>
+        </div>
+        <div class="summary">9月25日ごろから、タイムズカー・セイコーマート・東京メトロ・イー・プラス・日本郵便・ヤマト運輸・京王グループなど主要企業の情報漏えい公表が数日内に集中した。SECURITY DRIVEのコラムは、この集中を「攻撃が急増した」ではなく「侵入が週〜月単位で潜伏し、ログ点検のタイミングが重なって一斉に発覚した」結果だと分析する。背景として、スマホアプリの脆弱性調査をAI支援で安く行えるようになったことを挙げ、盗まれた本人確認書類の画像が不正契約やSIM乗っ取りの原資になる構図を指摘する。タイムズカーでは約660万件のアカウントに第三者アクセスがあり、うち最大160万件に運転免許証など本人確認書類の画像が含まれていた可能性がある。セイコーマートはアプリ会員サーバーへの不正アクセスで約57万件のアカウントが閲覧された可能性があり、発覚の経緯は不正なアカウント削除1件への気付きだったという。攻撃手法については、正規のアプリ・API経路を使って通常利用者を装いながらデータを引き出すため、失敗ログインを監視する従来型の検知では捕まりにくいという仮説を提示する。ある調査会社はアプリストア公開からわずか2時間で初回攻撃が観測された例を報告しており、iOSアプリへの攻撃頻度もAndroidとほぼ同水準になったとし、「iOSなら安全」という前提が崩れていると論じる。</div>
+        <div class="editorial">🧠 「発覚ラッシュ」を攻撃減少の兆しと読むのは早計で、むしろログを遡って初めて気付く組織が増えただけという見方のほうが実態に近いだろう。ただし著者自身も「すべての漏えいが同じ手口とは限らない」と留保しており、正規API経路の悪用という仮説は個々の事案で裏取りされたものではない。本人確認書類の画像を伴う漏えいは詐欺の原資になりやすい分、被害の潜在的な広がりは公表件数だけでは測れない。</div>
+        <div class="key-points">
+          <ul>
+            <li>タイムズカーは約660万件のアカウントに第三者アクセス、うち最大160万件に運転免許証等の画像が含まれていた可能性</li>
+            <li>セイコーマートはアプリ会員サーバーへの不正アクセスで約57万件が閲覧された可能性、発覚は不正なアカウント削除1件がきっかけ</li>
+            <li>ある調査会社はアプリストア公開から2時間以内の初回攻撃を観測、iOSへの攻撃頻度もAndroidとほぼ同水準と報告</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 失敗ログインの監視だけでは正規経路を装った大量データ取得は検知できないため、ユーザー単位のデータ取得量上限やAPIのアプリ正当性検証を今から見直す価値がある。</div>
+        <div class="meta">
+          <span>SECURITY DRIVE</span>
+          <span>⏱ 7 min read</span>
+          <span>2026-10-08</span>
+          <span class="engagement">🔖 102</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://news.web.nhk/newsweb/na/nd-20261009de56955">ブックオフGHD、子会社システムへの不正アクセスで会員情報最大643万件の漏えい可能性</a></h3>
+        </div>
+        <div class="summary">ブックオフグループホールディングスは10月9日、子会社が提供する会員情報管理システムへの不正アクセスにより、最大643万件の会員情報が漏えいした可能性があると発表した。中古書籍・古着などの買取・販売を手がける同社グループの会員基盤が対象で、漏えいした可能性のある情報の具体的な項目や調査の進捗、原因、再発防止策については発表時点で明らかにされていない。</div>
+        <div class="key-points">
+          <ul>
+            <li>漏えいの可能性がある会員情報は最大643万件、対象は子会社の会員情報管理システム</li>
+            <li>発表は2026年10月9日、原因や漏えい項目の詳細は公表文の冒頭時点では未確認</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>NHK News</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-09</span>
+          <span class="engagement">🔖 39</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/gpuai_engine.html">さくらインターネット、GPU専有で定額利用できる「さくらのAI Engineプライベートエディション」提供開始</a></h3>
+        </div>
+        <div class="summary">さくらインターネットは10月8日、既存の従量課金型AI基盤「さくらのAI Engine」を拡張し、GPUを専有して月額固定費で使える「プライベートエディション」の提供を開始した。トークン消費量を気にせず自社開発モデル・ファインチューニング済みモデル・オープンウェイトモデルを運用でき、国内データセンターで稼働し入力データやモデル資産を外部に出さない閉域接続にも対応する。GPUサーバーの構築・モデル導入・運用はさくらインターネットが担い、利用企業はアプリケーション開発に専念できる。想定用途は大量API利用でコストを予測可能にしたい企業、機密情報を扱う社内業務、自社AIサービスを構築する企業の3パターン。価格やGPU型番・台数は非公開で、利用には個別見積もりが必要。</div>
+        <div class="key-points">
+          <ul>
+            <li>課金方式はトークン従量からGPU単位の月額固定費に変更、価格は個別見積もり</li>
+            <li>国内データセンターで稼働し閉域接続に対応、モデル・入力データを環境外に出さない設計</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-08</span>
+          <span class="engagement">🔖 84</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://www.dgt.is/blog/2026-10-07-deepseek-freek-out/">DeepSeek 4.1 Flashで実感する「十分に良い」モデル論、クリーンアップ処理はフロンティア比1/300のコスト</a></h3>
+        </div>
+        <div class="summary">開発者が約1ヶ月・十数件のプロジェクトでDeepSeek 4.1 Flashを常用した結果、会話や作業品質、応答速度でAnthropic Opus 5.5と区別できない場面が多いと報告する。ファイル整理のようなクリーンアップ作業はDeepSeekで約0.003ドル、同じ作業をフロンティアモデルにやらせると約1ドルかかるとし、最終的なコードレビューだけOpus 5.5に任せて修正適用はDeepSeekに戻す運用を紹介する。DeepSeekはV1比でKVキャッシュを約437倍圧縮したという。</div>
+        <div class="key-points">
+          <ul>
+            <li>クリーンアップ作業はDeepSeek約0.003ドル対フロンティアモデル約1ドル、OpenCode Go月額10ドルで実質無制限運用</li>
+            <li>DeepSeekはV1比でKVキャッシュを約437倍圧縮、最終レビューのみOpus 5.5に残す二段運用を提案</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>dgt.is</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-07</span>
+          <span class="engagement">▲ 372</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/awsduckdbaurora_postgresqletl.html">AWS、DuckDBをAurora PostgreSQLに統合しデータレイクをETL不要で直接クエリ可能に</a></h3>
+        </div>
+        <div class="summary">AWSはAmazon Aurora PostgreSQLにDuckDBを統合し、Apache IcebergやParquet形式のデータレイクを直接読み書きできるようにしたと発表した。従来はS3上のデータレイク内容をPostgreSQLに取り込むためのETL処理が必要だったが、統合後はコピーや変換の工程なしにトランザクションデータとS3上の履歴データを1つのクエリで扱える。AWSのCEOはX上で「コピーもパイプラインの同期維持も不要」と説明し、AIエージェントがタスクに必要なデータだけを取得しやすくなる利点も挙げた。DuckDBの開発元DuckLabsは同年9月にAWS傘下入りしており、今回の統合はその最初の成果として位置付けられている。</div>
+        <div class="key-points">
+          <ul>
+            <li>Apache Iceberg・Parquet形式のデータレイクをAurora PostgreSQLから直接クエリ、ETL工程が不要になった</li>
+            <li>DuckDB開発元DuckLabsは2026年9月にAWS傘下入り、ライセンスはMITのままオープンソース継続</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-07</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-data">Data</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/dmmdata/articles/embulk-to-dlt-migration">ペタバイト規模（約8兆レコード）のDMMデータ基盤、EmbulkからdltへCloud Run Jobsで移行</a></h3>
+        </div>
+        <div class="summary">DMMは、開発元がメンテナンスモード移行を発表したEmbulkから、Python製OSSのdltへデータ取り込み基盤を移行した。約2,000本あったパイプライン全体が対象で、5名のチームが技術選定から検証・実装までを約3週間で進め、新旧並行稼働を経て移行開始から約4ヶ月で完了した。実行環境はCloud BuildからCloud Run Jobsに置き換え、VMやKubernetesクラスタの自前管理を不要にした。再実行やバックフィルはAirflowが制御し、dlt自体は同じ条件なら同じ結果になる冪等性を重視した設計にした。旧Embulk環境では文字化けしていた絵文字が、dltではそのまま保持されるようになったという副次効果も報告している。</div>
+        <div class="key-points">
+          <ul>
+            <li>対象パイプラインは約2,000本、5名体制で技術選定〜実装を3週間、移行完了まで約4ヶ月</li>
+            <li>rawデータセットのタイムトラベル保持期間をデフォルト7日から最小の2日に短縮しコストを抑制</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-10-08</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://letsencrypt.org/2026/10/07/64-day-certs.html">Let's Encrypt、証明書の既定有効期間を90日から64日に短縮——2027年2月開始</a></h3>
+        </div>
+        <div class="summary">Let's Encryptは証明書の既定有効期間を90日から64日に短縮すると発表した。2026年10月14日にステージング環境で先行利用可能になり、2027年2月10日から本番環境の既定値として適用される。最後の90日証明書は2027年5月11日ごろに失効する見込みで、さらに2028年には既定を45日へ、認可（オーソリゼーション）の再利用期間も7時間へ段階的に短縮する計画。鍵の侵害や誤発行のリスク低減が目的で、ACME Renewal Info（ARI）に対応したクライアントなら対応不要だが、更新日をハードコードしたcronやスクリプトは証明書寿命の約2/3のタイミングで更新するよう見直しが必要になる。</div>
+        <div class="key-points">
+          <ul>
+            <li>既定有効期間は90日→64日（2027年2月10日適用）、2028年にはさらに45日へ短縮予定</li>
+            <li>認可の再利用期間は30日→10日に短縮、2028年には7時間まで縮小する計画</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Let's Encrypt</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-07</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://openrouter.ai/stepfun/step-5-preview">StepFun「Step 5 Preview」、100万トークンコンテキストのMoEモデルがOpenRouterに登場</a></h3>
+        </div>
+        <div class="summary">中国のStepFunが開発した大規模MoE（Mixture of Experts）モデル「Step 5 Preview」がOpenRouter上に追加された。最大の特徴は100万トークンという広大なコンテキストウィンドウで、長大なコードベースやドキュメント全体を一度に扱えることを想定している。OpenRouter経由で他のモデルと同じインターフェースから呼び出せるため、既存のAPI統合をそのまま流用して試せる。</div>
+        <div class="key-points">
+          <ul>
+            <li>コンテキストウィンドウは100万トークン、MoEアーキテクチャの大規模モデル</li>
+            <li>OpenRouter経由で既存のAPIクライアントから切り替え可能</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>OpenRouter</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-10-09</span>
+          <span class="engagement">▲ 82</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/mizchi/articles/ai-coding-loop-formal">俺のAIプログラミング手法(2026/10/05)——評価指標の設計と形式手法を軸にしたエージェント運用術</a></h3>
+        </div>
+        <div class="summary">著者は、AIコーディングエージェント運用の要点を人間側の役割設計に集約する。性能評価・ループ構築・評価指標の作成・ログ確認・CIのチューニングを人間の仕事と位置付け、「深呼吸しろ」のような定番プロンプトは既に陳腐化したと切る。グローバルプロンプト（Agents.md）には選択肢がある場面の判断基準だけを書き、一般的な指示は書かない方針で、`/goal`で目標を再送し続けて自律ループを回す運用や、パフォーマンス計測にRSS・Fuelなど決定的指標を使う手法を紹介する。仕様の妥当性検証にはTLA+・Quint・Z3・Leanなどの形式手法を組み合わせ、迷ったらTLA+かZ3を使うと述べる。</div>
+        <div class="key-points">
+          <ul>
+            <li>グローバルプロンプトには判断基準のみ記載し一般的な指示は書かない、モデル知識は約半年遅れという前提に基づく</li>
+            <li>マイクロサービスやマルチスレッドのキャッシュ制御の検証にTLA+・Quint・Z3・Leanを使い分け</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 8 min read</span>
+          <span>2026-10-05</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/northward/articles/decline-of-tech-blogs">技術ブログはゆるやかに衰退している——Zenn約5.2万記事のLike分析</a></h3>
+        </div>
+        <div class="summary">著者はZennに2026年1〜8月に投稿された約5.2万記事を分析し、月間投稿数は5,000〜7,500件でほぼ横ばいな一方、月間合計Like数は3月の5万超から7月に3万未満まで落ち込んだと報告する。投稿数が変わらずLikeが減ったことから、閲覧数かLike率の低下、あるいは両方が起きていると推測し、表示アルゴリズム導入後（8月）はPublicationに属さない記事でLikeの偏りを示すジニ係数が上昇、0Like記事の割合が50%を超えたと指摘する。コメント欄では季節性や公開からの経過時間を考慮していない点を指摘され、著者自身も「Zennの減少から技術ブログ全体の衰退に一般化したのは不適切だった」とほぼ同意している。</div>
+        <div class="key-points">
+          <ul>
+            <li>月間合計Like数は3月に5万超のピーク、7月に3万未満まで低下。投稿数は5,000〜7,500件で横ばい</li>
+            <li>表示アルゴリズム導入後の8月、Publication外記事で0Like記事の割合が50%を超えジニ係数も上昇</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-10-08</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://qiita.com/suwa_nobu/items/1cc4989b0fdd47e4ea12">Jev互換の判断AI「Clef」とHaiku 5.5に同一の分類306問、自信度上位13%は95%正解</a></h3>
+        </div>
+        <div class="summary">著者はCloudflare Workers AIの判断特化モデル「Clef」と、ツール無効化したClaude Haiku 5.5に、livedoorニュースコーパスの見出し306件を9カテゴリへ分類させ正解率を比較した。全体正解率はHaiku 5.5が60.8%（186/306）、Clefが58.2%（178/306）とほぼ同水準。Clefが返す確信度（confidence）が0.8以上の項目（全体の13%）に限れば正解率95.1%に達し、Haikuの確信度0.9以上（全体の12%）の正解率89.2%を上回った。Clefの確信度0.5以上はHaikuに任せる併用方式では正解率61.4%とHaiku単独をわずかに上回りつつ、Haiku呼び出しを49%に抑えられたという。</div>
+        <div class="key-points">
+          <ul>
+            <li>全体正解率はHaiku 5.5が60.8%、Clefが58.2%。コストは306件あたりHaiku約0.146ドル対Clef約0.029ドル</li>
+            <li>Clefの確信度0.8以上（全体13%）は正解率95.1%、Haiku併用のハイブリッド方式でHaiku呼び出しを49%に削減</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-10-08</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/emuni/articles/ooui-agent-skill">オブジェクト指向UIデザインをAgent Skillにして、Claudeが作るUIの構造がどう変わるか検証</a></h3>
+        </div>
+        <div class="summary">著者は「オブジェクト指向UIデザイン」の原則をClaude CodeのAgent Skill「ooui-design」として1ファイルにまとめ、社内文書検索（RAG）管理画面の生成でSkillの有無を比較した。構造評価5観点の合計はSkillなし8/10に対しSkillあり10/10。メニュー分けはSkillなしが「文書一覧」「文書検索」など機能単位だったのに対し、Skillありは「文書」「利用者グループ」のオブジェクト単位になった。詳細表示もSkillなしはモーダルで他の文書へ移れなかったが、Skillありは一覧を残したまま右側に詳細を開き自由に移動できた。一方、指定した7機能の実装数や代表タスクの操作手数（3手）には差がなく、変化は主に画面構造に限られたとしている。</div>
+        <div class="key-points">
+          <ul>
+            <li>構造評価5観点の合計はSkillなし8/10からSkillあり10/10に改善、機能実装数・操作手数は7/7・3手で差なし</li>
+            <li>メニュー分けが機能単位（文書一覧/検索/アクセス権）からオブジェクト単位（文書/利用者グループ）に変化</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-08</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://bevy.org/news/bevy-0-20/">Rust製ゲームエンジンBevy 0.20リリース、despawn処理最大1.70倍高速化</a></h3>
+        </div>
+        <div class="summary">Bevy 0.20が10月8日にリリースされた。227人の貢献者による817件のPull Requestを取り込んでいる。パストレーシングレンダラ「Solari」はmacOS（Metal）対応を追加しつつ高速・高精度化し、ReSTIRは既定無効化（シーン単位で再有効化）、DLSS-RR 4.5対応でノイズ除去も改善した。新コマンド`despawn_all`はバルク削除をバッチ処理し、AMD Ryzen 9 9950X3D上の実測で1万エンティティの削除が254.9μsから149.7μsへ1.70倍高速化。列単位で変更追跡できる「Per-Column Change Ticks」はGPUメッシュ抽出処理で132倍の高速化を報告している。</div>
+        <div class="key-points">
+          <ul>
+            <li>新コマンドdespawn_allで1万エンティティのバルク削除が254.9μs→149.7μsへ1.70倍高速化</li>
+            <li>Per-Column Change Ticksにより列単位で変更追跡、GPUメッシュ抽出コードで132倍高速化と報告</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Bevy</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-08</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://github.com/jj-vcs/jj/releases/tag/v0.46.0">バージョン管理ツールjj (Jujutsu) 0.46.0、Git worktreeでワークスペースをcolocate可能に</a></h3>
+        </div>
+        <div class="summary">分散バージョン管理ツールjj（Jujutsu）の0.46.0がリリースされた。目玉機能は`jj workspace add --colocate`によるワークスペースのcolocate化で、内部的に`git worktree add --orphan`を使うため最低要求Gitバージョンが2.42.0に上がった（最低Rustバージョンも1.97.1に上昇）。新設の`jj workspace remove`はワークスペースとディレクトリを作業状態をスナップショットしつつ削除し、`jj file edit`/`jj file delete`は作業コピーを変えずに任意リビジョンのファイルを編集できる。`jj git push`は複数リモートへの同時pushにも対応した。</div>
+        <div class="key-points">
+          <ul>
+            <li>最低要求Gitが2.42.0、最低Rustが1.97.1に上昇。jj undo/redoは他ワークスペースの操作を既定で拒否するよう変更</li>
+            <li>新設jj workspace removeはスナップショット後にワークスペースとディレクトリを削除、jj git pushは複数リモートに対応</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-07</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://cactuscompute.com/blog/whistle">Cactus Compute、16.9MBのオンデバイス音声認識モデル「Whistle」を公開</a></h3>
+        </div>
+        <div class="summary">Cactus Computeは単一ファイル16.9MBの音声認識モデル「Whistle」を公開した。比較対象のWhisper base（145.3MB）やMoonshine tiny v2（41.9MB）より大幅に小さい。Apple M4 Pro CPU上で10秒音声を処理した場合、最初のトークンまでの時間は11.1msでWhisper baseの73.2ms・Moonshine tiny v2の22.8msより速く、デコード速度は毎秒1,319トークンで両モデルの5倍前後に達する。モバイル・ウェアラブル・ロボット・車載機器・マイコンでのオンデバイス音声認識を想定し、音声をデバイス外に出さない設計。同社の判断特化モデル「Needle」と連結すれば、音声からツール呼び出しまでを1つのバイナリで処理できる。</div>
+        <div class="key-points">
+          <ul>
+            <li>モデルサイズ16.9MB、Whisper base比約1/8.6。初回トークンまで11.1ms、デコード毎秒1,319トークン</li>
+            <li>LibriSpeech test-clean等で低WERを報告する一方、TED-LIUM・AMI・MLS平均ではWhisper baseが優位</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Cactus Compute</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-07</span>
+          <span class="engagement">▲ 504</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://forest.watch.impress.co.jp/docs/news/2146802.html">Google「SynthID Detector」が一般公開、OpenAI・NVIDIA・Kakaoの生成コンテンツに対応</a>
+        <span class="quick-summary">— 10月7日からGoogle/Apple/ChatGPTのアカウントで誰でも利用可能、Apple対応も予定。</span>
+        <span class="meta">Impress Watch</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-oss">OSS</span>
+        <a href="https://github.com/duckdb/ducklake">SQLとParquetだけで構築するオープンレイクハウス形式「DuckLake」</a>
+        <span class="quick-summary">— メタデータはPostgreSQL/SQLite等のカタログDBに置き、データ本体はParquetファイルで持つ設計、スナップショットによるタイムトラベルに対応。</span>
+        <span class="meta">GitHub</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://qiita.com/kikuziro/items/6191b5ad83520d181f38">判断特化AI「Jev」でベクトル未使用のGraphRAGを構築、抽出コストをLLM比1/20〜1/30に削減</a>
+        <span class="quick-summary">— エンティティの出現判定や関連判定をJevの0〜1confidenceに任せ、最終回答の文章生成だけHaiku 4.5が担う設計。</span>
+        <span class="meta">Qiita</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://refactoringenglish.com/blog/anti-patterns-software-blogging/">技術ブログにありがちなアンチパターン集</a>
+        <span class="quick-summary">— 冒頭の前置きが長い・用語説明を外部リンクに頼る・前回記事を読んでいる前提で書く、といった典型的な失敗を列挙。</span>
+        <span class="meta">refactoringenglish.com</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://mcmah309.github.io/posts/the-missing-piece-in-rust-error-handling/">Rustのエラー型に欠けている「合成可能性」、erosクレートが提案するerror set</a>
+        <span class="quick-summary">— 列挙型を新規定義せず関数シグネチャにタプルでエラー型を列挙でき、伝播時に型を広げたり回復時に除去できる。</span>
+        <span class="meta">mcmah309.github.io</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://bd103.dev/blog/2026-10-07-c-for-rust-programmers/">Rustプログラマーが驚くC言語の落とし穴解説</a>
+        <span class="quick-summary">— null終端文字列、errnoによる手動エラー処理、配列のポインタへの暗黙減退などメモリ安全性に関わる挙動を整理。</span>
+        <span class="meta">bd103.dev</span>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="./" class="archive-link">🗂 過去のダイジェスト</a>
+    </footer>
+  </div>
+</body>
+</html>

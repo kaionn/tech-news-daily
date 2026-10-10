@@ -6,11 +6,15 @@ tech-news-daily: 技術ニュースを毎日収集・整形し、Cloudflare Page
 
 ## デプロイパイプライン（GHA daily-digest: 生成→push→Cloudflare Pages）
 
+### Workers Static Assets 移行の準備（本番未切替）
+
+日刊・AI動向・週次プラグイントレンド・手動pushは共通 deploy-current-site.yml を呼ぶ。共有 site-deploy ロック取得後に最新 origin/main のsnapshotを配置する。repo variable SITE_DEPLOY_TARGET は未設定/空/pages で従来Pages、workers でassets-only Worker tech-news-daily-site、未知値で失敗する。生成cron・モデルは変えない。Workers公開アセットはallowlistで抽出し、repo全文を公開しない。ドメイン切替・権限追加・cloud previewは別承認操作。設定追加やmergeだけでは本番切替しない。[移行手順](docs/workers-static-assets.md) を参照。
+
 `.github/workflows/daily-digest.yml`（cron `8 21 * * *` = 06:08 JST、`workflow_dispatch` で手動実行可）が単一 workflow で完結する:
 
 1. **生成 (claude-code-action@v1)**: `prompts/daily-digest.md` の指示に従い Claude がファイルを生成・編集する。**Claude は git 操作を一切しない**（ファイル生成のみ）
 2. **反映 (workflow step)**: 生成物（`index.html` / `archive/` / `feed.xml`）に変更があり、`index.html` に当日日付が含まれることを検証してから `github-actions[bot]` 名義で `YYYY-MM-DD のテックニュースダイジェスト` として main へ commit/push する。変更ゼロ・日付不整合は run を fail させる（**失敗が必ず可視化される**のがこの構成の要）
-3. **デプロイ**: `GITHUB_TOKEN` push は `deploy-site.yml` を発火させないため、同 workflow が `wrangler pages deploy` を自前実行する（`git archive HEAD` のクリーンコピーから deploy し、untracked ファイルの公開事故を防ぐ）
+3. **デプロイ**: `GITHUB_TOKEN` push は `deploy-site.yml` を発火させないため、共通 deploy-current-site.yml を明示的に呼ぶ。既定は wrangler pages deploy、別承認の切替後は wrangler deploy。ロック取得後の最新 origin/main のクリーンコピーを使う
 
 認証は repo secret `CLAUDE_CODE_OAUTH_TOKEN`（Pro/Max サブスクの OAuth トークン、ローカルで `claude setup-token` を実行して生成・失効時も同コマンドで再発行）と、Cloudflare デプロイ用の `CLOUDFLARE_API_TOKEN` / `CLOUDFLARE_ACCOUNT_ID`（tech-learning-daily と同一の値）。PAT は不要。
 
