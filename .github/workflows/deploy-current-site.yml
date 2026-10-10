@@ -24,8 +24,12 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: main
-      - name: Deploy latest main to Cloudflare Pages
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Deploy latest main to selected static host
         env:
+          SITE_DEPLOY_TARGET: ${{ vars.SITE_DEPLOY_TARGET }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: bash scripts/deploy-current-site.sh
