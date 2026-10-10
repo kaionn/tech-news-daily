@@ -32,6 +32,10 @@ Local preview requires no cloud credentials: create a temporary directory, stage
 
 Cloud preview is a separate authorized operation after token-policy review. Use a distinct staging Worker with no production domain, Cron, secrets or DO bindings, or deliberately enable version URLs only for the assets-only site. Version URLs are public unless Cloudflare Access protects them; they share the version's resources and are not isolated environments. Do not reuse the monitor Worker. Record exact source SHA/version and do not run generation.
 
+The manual-only `deploy-workers-preview.yml` workflow deploys latest main to the fixed `tech-news-daily-site-preview` Worker, using the existing CI secrets. Dispatch it on main after review/merge: `gh workflow run deploy-workers-preview.yml --ref main`. It has a separate preview lock, a ten-minute timeout and no target inputs. It does not read/change SITE_DEPLOY_TARGET or attach a custom domain. The snapshot config must retain the reviewed assets-only shape; script, routes, Cron, bindings or a changed asset directory fail before upload. Wrangler is pinned to the locally verified 4.148.0. Do not enable shell tracing or print/export secret values. An authorization failure stops this verification without creating credentials, expanding scopes or falling back to Pages.
+
+A successful CI preview verifies deployment access for the credential actually bound in Actions; a local OAuth deployment alone does not. Compare the source SHA, public content and excluded-path 404s before preparing production. This dispatch uploads existing content and never runs a generator. The preview workflow is not a production cutover or a substitute for domain/TLS checks.
+
 ## Permissions and cost (not changed)
 
 CI references CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID, but names do not prove Workers access. No secret values or token policies were read. Verify account-scoped Workers Scripts write permission before upload; a Pages-only token may be insufficient. Stop for authorization if new credentials or broader permissions are needed. Keep DNS/zone writes out of routine content deploy; use an authorized operator for domain setup.
