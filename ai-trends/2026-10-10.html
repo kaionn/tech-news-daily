@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI プロダクト動向 | Tech News Daily</title>
-<meta name="description" content="音声エージェントの設計論争は長く「STT→LLM→TTS のカスケード構成」か「音声を音声のまま扱う speech-to-speech（S2S）」かの二択で語られてきた。カスケードは制御しやすく監査しやすいが遅い。S2S は速く自然だが、…">
+<meta name="description" content="2025年秋、エージェントに買い物をさせる仕組みは「チャットの中で決済まで完結させる」一本の流れとして語られていた。OpenAI と Stripe の ACP、Google の AP2、そして 2026年1月の UCP。どれが勝つかという…">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Tech News Daily">
-<meta property="og:title" content="音声エージェントは「話す層」と「考える層」を分けた — カスケードか音声直結かの二択が終わった理由 | AI プロダクト動向">
-<meta property="og:description" content="音声エージェントの設計論争は長く「STT→LLM→TTS のカスケード構成」か「音声を音声のまま扱う speech-to-speech（S2S）」かの二択で語られてきた。カスケードは制御しやすく監査しやすいが遅い。S2S は速く自然だが、…">
-<meta property="og:url" content="https://tech-news.kaion-lab.com/ai-trends/2026-10-06.html">
+<meta property="og:title" content="エージェントコマースは「一つの決済プロトコル」をやめた — 発見・同意の証明・本人ログインを別レイヤーに切り分ける設計へ | AI プロダクト動向">
+<meta property="og:description" content="2025年秋、エージェントに買い物をさせる仕組みは「チャットの中で決済まで完結させる」一本の流れとして語られていた。OpenAI と Stripe の ACP、Google の AP2、そして 2026年1月の UCP。どれが勝つかという…">
+<meta property="og:url" content="https://tech-news.kaion-lab.com/ai-trends/2026-10-10.html">
 <meta property="og:image" content="https://tech-news.kaion-lab.com/apple-touch-icon.png">
 <meta name="twitter:card" content="summary">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
@@ -74,7 +74,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 <div class="container">
 <header>
   <h1>🧠 AI プロダクト動向</h1>
-  <p class="date">2026-10-06 発行（読了 7 分）</p>
+  <p class="date">2026-10-10 発行（読了 9 分）</p>
   <p class="tagline">実プロダクトのアーキテクチャ・使用例から AI 開発の現在地を週 3 回・1 号 1 テーマで深掘り</p>
   <nav class="site-nav">
     <a href="../">📰 日刊ダイジェスト</a>
@@ -85,89 +85,95 @@ footer a{color:var(--primary-500);text-decoration:none}
 </header>
 
 <div class="theme-hero">
-  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">VOICE-AGENT-ARCHITECTURE</span></span>
-  <h2>音声エージェントは「話す層」と「考える層」を分けた — カスケードか音声直結かの二択が終わった理由</h2>
-  <p class="lede">音声エージェントの設計論争は長く「STT→LLM→TTS のカスケード構成」か「音声を音声のまま扱う speech-to-speech（S2S）」かの二択で語られてきた。カスケードは制御しやすく監査しやすいが遅い。S2S は速く自然だが、ツール呼び出しや推論の深さで劣る。9月にこの構図が動いた。OpenAI は 9月10日に全二重音声モデル GPT-Live-1 を API 公開し、推論とツール実行を裏側のテキストモデルへ委譲する二層構成を前面に出した。Google は 9月15日の Gemini 3.8 Live で非同期関数呼び出しを既定にし、同時期の論文も同じ分割を提案している。一方カスケード陣営は、ターン検出を独立モデルとして切り出す方向で応答品質を詰めている。</p>
+  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">AGENTIC-COMMERCE</span></span>
+  <h2>エージェントコマースは「一つの決済プロトコル」をやめた — 発見・同意の証明・本人ログインを別レイヤーに切り分ける設計へ</h2>
+  <p class="lede">2025年秋、エージェントに買い物をさせる仕組みは「チャットの中で決済まで完結させる」一本の流れとして語られていた。OpenAI と Stripe の ACP、Google の AP2、そして 2026年1月の UCP。どれが勝つかという構図で見られがちだったが、この 1 年で起きたのは勝敗ではなく分業だ。OpenAI は 3月にチャット内決済の初版から手を引き、ACP を商品発見の側へ広げた。Google と Mastercard は「何に同意したか」の証明を FIDO Alliance に預けた。10月6日には Google が UCP の Merchant Center ハブを米国で展開し始め、同じ日に Meta と Sierra がエージェントのログインと権限だけを扱う Personal Agent Protocol を発表、Agentic AI Foundation は「エージェントコマースのプロトコルは一つではない」と題した整理を出した。商品を見つけること、支払いに同意したと証明すること、誰の代理として店に入るかを示すこと — 三つは別の問題として、別の層で解かれ始めている。</p>
 </div>
 
 <div class="tldr">
   <div class="label">TL;DR — 3 行で</div>
   <ul>
-    <li>OpenAI の GPT-Live-1 は会話の進行だけを担い、推論とツール実行は裏側のテキストモデルへ非同期に委譲する二層構成を採った。</li>
-    <li>Google の Gemini 3.8 Live も非同期関数呼び出しを既定にし、「ツール実行中も会話を止めない」が音声直結モデルの標準要件になった。</li>
-    <li>カスケード構成側は、ターン検出を STT から独立した専用モデルに切り出し、ベンダー非依存で割り込み品質を担保する方向に進んでいる。</li>
+    <li>UCP は加盟店が /.well-known/ucp に能力を公開し、エージェント側と「共通する能力だけ」を交渉で残す設計。OpenAI も ACP の主軸をチャット内決済から商品カタログの受け渡しへ移し、決済は加盟店側に戻した。</li>
+    <li>支払いの同意は「スコープ付きトークン」と「署名付きの意図の記録」で証明する方向に収束した。Stripe の SPT は加盟店・金額・期限で縛り、AP2 と Mastercard の Verifiable Intent は FIDO Alliance で標準化が進む。</li>
+    <li>Meta と Sierra の Personal Agent Protocol は決済ではなく「エージェントが誰の代理で、何をしてよいか」を OAuth 上で扱う層として切り出した。API 単位の少額課金は MPP や x402 が別系統で担う。</li>
   </ul>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 1: 音声直結モデルは「会話の進行役」に専念し、推論は裏へ委譲する</div>
+  <div class="section-title">📐 パターン 1: 発見の層: 加盟店が能力を宣言し、エージェントは共通部分だけを使う</div>
   <div class="theme-section">
-    <p>GPT-Live-1 は「聞きながら話す」全二重モデルで、間・割り込み・相槌（バックチャネル）の処理を担う。検索や深い推論、ツール呼び出しが必要になると、別系統の非同期パスで裏側のテキストモデルやエージェントに処理を委譲し、その間も音声層はユーザーとの会話を続ける。エンドポイントは専用の <code>v1/live/sessions</code> のみで、料金は音声層が 1 分 0.05 ドル（秒課金）、裏側のモデル利用とツール実行は別課金だ。OpenAI の告知は、委譲先に自前の既存サービスを接続でき、権限とタスク状態を音声層とは独立に管理できる点、ユーザーが割り込んでも進行中の裏側の処理が自動でキャンセルされない点を明記している。9月16日に arXiv へ投稿された論文も同じ構造を提案しており、全二重の音声フロントエンドが「委譲トークン」を出力すると、ストリーミング ASR の書き起こしがテキストのバックエンド LLM に転送される。</p><p>この分割に各社が行き着いたのは、S2S モデル単体に会話の自然さと推論の深さを両立させるのが難しかったからだ。音声を直接生成するモデルは応答が速いぶん、複雑な判断やツールの正確な引数組み立てではテキストモデルに及ばない。逆にテキストモデルに会話のテンポを任せると、ターンごとに考え込む「間」が生じる。論文が「通常の全二重のターンテイキング・割り込み処理・低遅延をほぼ保ったまま、フロントエンドへの変更を最小限に抑えられる」と主張しているように、二層化は両者の弱点を役割分担で回避する設計であり、「カスケードか S2S か」ではなく「S2S を前段、テキストを後段に置くハイブリッド」が実質的な第三の選択肢になった。</p>
+    <p>UCP の仕様は、加盟店が <code>/.well-known/ucp</code> にプロファイルを置き、エージェント側のプラットフォームはリクエストごとに <code>UCP-Agent</code> ヘッダーで自分のプロファイル URL を示す形を取る。プロファイルには対応サービス、<code>dev.ucp.shopping.checkout</code> のような能力、決済ハンドラ、署名鍵が載り、両者が共に宣言した能力だけが残る「積集合」で交渉が決まる。親の能力が無い拡張は落とされ、各能力は両者が対応する最新版が選ばれる。トランスポートは REST・MCP・A2A・埋め込みの 4 種類で、仕様は「トランスポート定義は薄く保つ」と明記している。</p><p>この形に寄った理由は、エージェントごとに個別連携を書く負担を加盟店側が持てないからだ。能力を一度宣言すれば、どのエージェントも同じ入口から読みに来る。決済を同じ層に押し込まなかったことも効いている。OpenAI は 2026年3月、チャット内決済 Instant Checkout の初版から離れて加盟店が自前のチェックアウトを使える形にし、ACP を商品フィード（価格・在庫・配送）を受け渡す発見の層として広げた。Google の Merchant Center ハブも、加盟店サイトへのカート受け渡し・Google 上でのネイティブ決済・アカウント連携を個別に選ぶ作りになっており、「全部を代行する」一択ではない。</p>
     <div class="example">
-      <div class="product">OpenAI GPT-Live-1（Live API）</div>
-      <div class="approach">全二重の音声層が会話を担い、推論・ツール実行は裏側のテキストモデルや自前エージェントへ非同期に委譲する</div>
-      <div class="detail">音声層（1 分 0.05 ドル）と裏側のモデル利用を別課金にしている点に、「話す層」と「考える層」を別部品として扱う設計思想がそのまま表れている</div>
-      <a href="https://community.openai.com/t/introducing-gpt-live-1-in-the-api/1396471">📄 一次ソース</a>
+      <div class="product">Universal Commerce Protocol（Google・Shopify ほか）</div>
+      <div class="approach">/.well-known/ucp のプロファイルと UCP-Agent ヘッダーで双方の能力を突き合わせ、共通部分だけで取引する</div>
+      <div class="detail">仕様の Overview は、バージョン選択と能力交渉を分け、能力は両者が宣言したものだけを残すと定めている。決済方式は payment_handlers に逆ドメイン名で登録し、デジタルウォレット・SCA 付き直接トークン化・AP2 経由の自律エージェントの 3 シナリオを想定する。名前空間の紐付けは「出所を保証するが信頼は保証しない」とも書き、信頼判断をクライアント側に残している。</div>
+      <a href="https://ucp.dev/specification/overview/">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">全二重音声モデルのツール呼び出し向けフロントエンド／バックエンド構成（arXiv 2609.19334）</div>
-      <div class="approach">音声フロントエンドが委譲トークンを出すと、ストリーミング ASR の書き起こしをテキストのバックエンド LLM に渡してツールを実行させる</div>
-      <div class="detail">単発ターンのツール呼び出しで 92〜97% の再現率、ツール呼び出しの拒否判定で 81.2% の精度を報告しており、二層化が研究側でも検証可能な形で提案された例</div>
-      <a href="https://arxiv.org/abs/2609.19334">📄 一次ソース</a>
+      <div class="product">Google Merchant Center の UCP 連携ハブ</div>
+      <div class="approach">カート受け渡し・ネイティブ決済・アカウント連携を加盟店が個別に選び、サンドボックスでプロファイルと API を検証してから公開する</div>
+      <div class="detail">ヘルプページは米国で段階的に展開中、オーストラリアとカナダは来年と記載している。先に UCP の実装を済ませ、関心フォームを出して選定を待つ流れで、誰でもすぐ使える状態ではない。決済を Google 上で完結させず、自社サイトへカートを渡す選択肢を正規の能力として持たせている点が、初期の「チャット内で買わせる」構想との違いだ。</div>
+      <a href="https://support.google.com/merchants/answer/16992327?hl=en">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> 音声エージェントに業務ツールを持たせるなら、音声モデルにすべてを任せず、ツール実行と権限管理は既存のテキストエージェント側に残して音声層は会話の進行に絞る。こうしておけば、音声モデルを差し替えても業務ロジックに手を入れずに済む。</div>
+    <div class="takeaway"><strong>示唆:</strong> EC 側でエージェント対応を考えるなら、最初の一手は決済連携ではなく商品データと能力宣言の整備になる。チェックアウトを自社に残すか委ねるかは後から能力単位で選べる設計が主流なので、在庫・価格・返品条件を機械可読で出せる状態を先に作っておくと、どのプロトコルが広がっても流用が効く。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 2: 「ツール実行中も黙らない」が音声直結モデルの既定動作になった</div>
+  <div class="section-title">📐 パターン 2: 同意の層: カード番号を渡さず、「何に同意したか」を検証可能な形で残す</div>
   <div class="theme-section">
-    <p>Google は 9月15日、Live API 向けに音声→音声モデル Gemini 3.8 Live と Gemini 3.8 Live Extended Thinking を GA にした。標準版はリリースノートで「推論の遅延がない低遅延な音声エージェント向けの既定の選択肢」とされ、インターリーブ推論と非同期関数呼び出しを既定で備える。従来の同期（ブロッキング）呼び出しは後方互換のためにだけ残っている。Extended Thinking 版は、ライブ音声の対話中に裏で推論を回す「バックグラウンド推論」に対応した高推論モデルで、深い推論が必要なときに使うよう案内されている。</p><p>同期呼び出しでは、ツールの応答が返るまでモデルが音声を生成できず、ユーザーは数秒の無音を待たされる。テキストのチャットなら許容される待ち時間も、電話の向こうでは「切れたのか」と思われる長さになる。OpenAI が委譲を非同期パスに分けたのも、Google が非同期呼び出しを既定にしたのも、音声 UI では待ち時間を短くするより「待ち時間中に会話を続ける」設計のほうが効くという同じ判断に基づく。速い標準版と推論の深い版を別モデルとして並べた Google の構成も、一つのモデルに速さと深さの両方を求めない点で OpenAI の二層化と考え方が近い。</p>
+    <p>支払いの部分は、エージェントにカード情報を持たせない方向で各社がそろった。Stripe の Shared Payment Token（SPT）は、購入者が「買う」を押した時点で AI プラットフォームが発行するトークンで、特定の加盟店と決済総額に紐付き、期限や金額の上限を持ち、いつでも取り消せる。加盟店は SPT の ID を受け取って PaymentIntent を作るだけで、裏の認証情報には触れない。AP2 はさらに踏み込み、ユーザーが承認した内容そのものを暗号学的な証拠として残し、人がその場にいない決済でも後から検証できるようにする。</p><p>同意を独立した層にした理由は、エージェント経由の決済で最も揉めるのが「ユーザーは本当にこれを頼んだのか」という一点だからだ。Agentic AI Foundation の整理は「商品を見つけることと、支払いに同意したと証明することは同じ問題ではない」と書いている。2026年4月には Google が AP2 を、Mastercard が Google と共同開発した Verifiable Intent を FIDO Alliance に提供し、Mastercard と Visa が議長を務める決済作業部会の土台になった。パスキーで認証を標準化した団体に「意図の証明」を預けたことで、ここはベンダー間の競争領域から共通基盤の側に移りつつある。</p>
     <div class="example">
-      <div class="product">Google Gemini 3.8 Live（Gemini API Live API）</div>
-      <div class="approach">非同期関数呼び出しを既定にし、同期（ブロッキング）モードは後方互換のためだけに残す</div>
-      <div class="detail">前世代からの移行ガイドで既定値そのものを非同期に切り替えた。ツール実行中も音声を止めない挙動を、オプションではなく標準として位置づけた点が象徴的</div>
-      <a href="https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live">📄 一次ソース</a>
+      <div class="product">Stripe Shared Payment Token</div>
+      <div class="approach">加盟店・金額・期限で範囲を絞ったトークンを発行し、エージェントにも加盟店にも生のカード情報を渡さない</div>
+      <div class="detail">Stripe は信頼を「明示的に付与し、範囲を絞り、コードで強制する」必要があると書き、SPT を加盟店単位・時間または金額の上限付き・取り消し可能・Webhook で監視可能な仕組みとして設計した。Stripe 以外で決済処理する加盟店も SPT を自社の決済代行へ転送できるため、決済代行の乗り換えを強いない点が採用の障壁を下げている。</div>
+      <a href="https://stripe.com/blog/introducing-our-agentic-commerce-solutions">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> 音声エージェントのツールは「数秒かかる前提」で設計し、呼び出しは非同期にして、実行中に話す内容（進捗の伝達や確認の質問）を会話設計に組み込んでおく。同期呼び出しのまま応答を速くする最適化は、効果のわりに手間がかかる。</div>
+    <div class="example">
+      <div class="product">FIDO Alliance（AP2・Verifiable Intent の受け入れ）</div>
+      <div class="approach">Google の AP2 と Mastercard の Verifiable Intent を土台に、エージェント起点の決済とユーザー意図の検証を業界仕様にする</div>
+      <div class="detail">2026年4月28日の発表で、エージェント認証の作業部会（CVS Health・Google・OpenAI が議長）と決済作業部会（Mastercard・Visa が議長）が示された。重点領域は検証可能なユーザー指示・エージェント認証・取引の委任の 3 つ。Mastercard は Verifiable Intent を「決済エコシステム全体が頼れるユーザー意図の共通記録」と位置付けている。</div>
+      <a href="https://fidoalliance.org/fido-alliance-to-develop-standards-for-trusted-ai-agent-interactions/">📄 一次ソース</a>
+    </div>
+    <div class="takeaway"><strong>示唆:</strong> エージェントに決済させる機能を作るなら、カード情報を保持させる設計は最初から外し、加盟店・金額・期限で縛ったトークンを都度発行する形にする。加えて「ユーザーが承認した文面と条件」を署名付きで残しておけば、チャージバックや問い合わせのときに説明できる。上限をエージェント自身に決めさせない（ユーザー操作か事前ポリシーで決める）ことも忘れずに。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 3: カスケード構成はターン検出を独立モデルとして切り出した</div>
+  <div class="section-title">📐 パターン 3: 身元の層: 「誰の代理で、どこまでしてよいか」を決済と切り離して扱う</div>
   <div class="theme-section">
-    <p>カスケード構成の体感品質を最も左右するのは、ユーザーが話し終えたかどうかを判定するターン検出（エンドポインティング）だ。無音の長さだけで判定すると、言いよどみで話を遮るか、逆に応答が遅れる。LiveKit が 6月に公開した Turn Detector v1.0 は、書き起こしの意味（文として完結しているか）と音響的な手がかり（ピッチやイントネーション）を一つの予測に統合する。判定まで 300ms の設定で誤カットオフ率は 9.9%（比較対象は 12.9%）、600ms では 4.5% で、14 言語に対応する。6月30日の設定ガイドでは、相槌と本当の割り込みを音響的に区別する adaptive モードや、誤検知した割り込みのあとに発話を再開する <code>resume_false_interruption</code> などの調整項目を解説している。Sierra も、ノイズや複数話者の環境向けに調整した独自の発話区間検出（VAD）モデルを入れ、反応の遅れを数百ミリ秒縮めたと公表している。</p><p>LiveKit がこの判定を STT サービスの付属機能ではなくフレームワーク側の機能に置いた理由として挙げるのは、STT・LLM・TTS のどのベンダーを組み合わせてもターンテイキングの挙動を一定に保つためだ。カスケードの利点は部品を差し替えられる点にあるが、ターン検出を STT ベンダーに任せると、STT を替えるたびに会話の間合いまで変わってしまう。会話品質を決める判定を独立した部品として持つことで、差し替えやすさと品質の安定を両立させている。S2S 側が「会話の進行」を音声モデルに集約したのとは逆に、カスケード側は同じ機能を専用モデルに切り出しており、二つの陣営は異なる方法で同じ課題に取り組んでいる。</p>
+    <p>10月6日に Meta と Sierra が発表した Personal Agent Protocol は、決済ではなくエージェントの入店手続きを扱う。エージェントは企業のサイトで提供内容を見つけてユーザーのためにセッションを始め、在庫確認や返品条件の質問ならゲストのまま進める。アカウントに触れる作業では、ユーザーが企業のページでサインインするか、エージェントに保存した資格情報を使い、読み取りのみか書き込みも許すかを選ぶ。土台は OAuth で、サインイン前の質問と後の注文変更が同じセッションとして続く。経路はサイトの通常ページ、MCP や OpenAPI による API、企業側のエージェントの 3 つから企業が選ぶ。</p><p>この層が別に必要になったのは、エージェントによるサイト巡回をめぐって企業との摩擦が表に出てきたからだ。企業から見ると、来訪者が人なのか誰かの代理のエージェントなのか、代理なら何を許されているのかが分からない。決済トークンや意図の証明はお金の部分しか守らず、注文変更やアカウント情報の閲覧はその外にある。発表文は「消費者がエージェントに与えるアクセスを決め、企業がエージェントにできることの範囲を決める」を原則に掲げ、カード情報を共有しない決済対応は今後の拡張に回した。v0.1 仕様は今月後半の公開予定で、現時点ではまだ実装できない点には注意したい。</p>
     <div class="example">
-      <div class="product">LiveKit Turn Detector v1.0（LiveKit Agents）</div>
-      <div class="approach">意味と音響の手がかりを統合したターン検出モデルを、STT から独立したフレームワーク側の部品として提供する</div>
-      <div class="detail">フル版は LiveKit Cloud 上で無料、CPU で動く軽量版 v1-mini はオープンウェイトで SDK に同梱されており、どの STT と組み合わせても同じ判定ロジックを使える</div>
-      <a href="https://livekit.com/blog/solving-end-of-turn-detection">📄 一次ソース</a>
+      <div class="product">Personal Agent Protocol（Meta・Sierra）</div>
+      <div class="approach">OAuth を土台に、ゲスト → 読み取り専用 → 書き込みの段階的なアクセスと、チャネルをまたぐセッション継続を定める</div>
+      <div class="detail">Bret Taylor と Clay Bavor の発表（2026年10月6日）で、Genesys・Instinct・Rocket・Shopify・Stripe・Walmart が協力企業に挙がった。企業はエージェントが顧客の代理で動いたことを把握でき、どの経路を開けるかを選べる。より細かい権限、プッシュ通知、カード情報を渡さない決済は今後の拡張として明記されている。</div>
+      <a href="https://sierra.ai/blog/introducing-personal-agent-protocol">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">Sierra（顧客対応音声エージェント）</div>
-      <div class="approach">発話終了検出・推論・音声合成の 3 区間ごとに遅延を削り、指標は「話し終えてから最初の音声が出るまで」の Time to First Audio に統一する</div>
-      <div class="detail">独自の VAD モデルに加え、独立した処理の並列実行、複数プロバイダーへの同時リクエスト（ヘッジング）、定型句の音声キャッシュを組み合わせている。カスケードで遅延を詰める手法を一通り公開している数少ない例</div>
-      <a href="https://sierra.ai/blog/voice-latency">📄 一次ソース</a>
+      <div class="product">Machine Payments Protocol（Stripe・Tempo）</div>
+      <div class="approach">エージェントが API や MCP サーバーにリクエスト → サービスが支払い要求を返す → エージェントが承認して資源を受け取る、という機械間の少額課金</div>
+      <div class="detail">人の買い物とは別系統の層として、2026年3月に Stripe と Tempo が共同で公開した。Browserbase はブラウザセッション単位、Parallel は API 呼び出し単位でエージェントに課金する例として挙がっている。法定通貨は SPT 経由、ステーブルコインも受け付け、入金は既存の Stripe 残高に入る。同じ用途を x402 が HTTP 402 を使って担っており、この層はまだ 2 系統が並走している。</div>
+      <a href="https://stripe.com/blog/machine-payments-protocol">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> カスケードで組むなら、ターン検出を STT の付属機能に任せず独立した部品として選び、誤カットオフ率と判定遅延のトレードオフを自社の通話データで測ってから閾値を決める。体感品質の差は LLM の選定よりここで大きく開く。</div>
+    <div class="takeaway"><strong>示唆:</strong> 自社サービスにエージェントを受け入れるなら、「エージェント用 API を作る」より先に、ゲストで許す操作・読み取りで許す操作・書き込みが要る操作の三段階に棚卸ししておくとよい。どの標準が広がっても、この区分がそのまま OAuth のスコープ設計になる。課金が呼び出し単位なら、人向けのチェックアウトとは別に MPP や x402 の層を検討する。</div>
   </div>
   <div class="editorial">
     <span class="label">✍️ 編集後記</span>
-    音声エージェントの論点は「どのアーキテクチャを選ぶか」から「会話の進行をどこに置くか」に変わった。S2S 陣営は進行を音声モデルに任せて推論を裏へ逃がし、カスケード陣営は進行の判定を専用モデルに切り出した。どちらの陣営も、速さと賢さを一つの部品に背負わせない、という同じ結論に達している。
+    一年前の議論は「どのプロトコルが勝つか」だったが、実際に起きたのは問題の分解だった。見つける、同意を証明する、代理として入る — それぞれに別の失敗の仕方があり、一つの仕様で全部を背負うと全部が遅れる。OpenAI がチャット内決済から一歩引いたのは後退ではなく、層の境界を引き直した結果と見るのが正確だと思う。
   </div>
 </div>
 
 <div class="section">
   <div class="section-title">🔗 今号の動向ピックアップ</div>
-  <div class="quick-link"><a href="https://x.com/OpenAI/status/2102808325742322002">ChatGPT Voice がメール・カレンダー・Slack のプラグインと ChatGPT Work に対応</a><span class="quick-summary">OpenAI は 9月23日、ChatGPT Voice からプラグインを使い、GPT-6 系モデルを裏側に据えて ChatGPT Work のタスクまで音声で実行できるようにした。音声層が会話を担い、実作業は裏側のモデルとツールが担うという、本号で扱った二層構成を自社のコンシューマー製品に適用した例だ。</span></div>
-  <div class="quick-link"><a href="https://livekit.com/blog/turn-detection-and-interruption-handling">LiveKit Agents のターン検出と割り込み処理の設定ガイド</a><span class="quick-summary">ターン検出の 5 方式（音響＋意味モデル、STT 任せ、Realtime LLM 任せ、VAD のみ、手動）と、割り込み判定の調整項目を整理した公式ガイド。カスケードと音声直結モデルのどちらにターン判定を任せるかを、同じフレームワーク内で切り替えられる設計になっている。</span></div>
-  <div class="quick-link"><a href="https://sierra.ai/blog/how-voice-sims-work">Sierra の Voice Sims — 模擬通話で音声エージェントを回帰テストする</a><span class="quick-summary">目的・気分・言語・忍耐度を設定した模擬顧客に背景ノイズや割り込みを加え、同じ通話を何度でも再現して LLM 評価器で採点する仕組み。テキストの書き起こしだけでは見えない間合いや割り込み対応を評価対象にしており、本号で扱ったターン検出の品質を検証する手段にあたる。</span></div>
+  <div class="quick-link"><a href="https://aaif.io/blog/there-is-no-one-agentic-commerce-protocol">Agentic AI Foundation「There Is No One Agentic Commerce Protocol」</a><span class="quick-summary">UCP・AP2・x402・A2A を「リレー」として整理し、Walmart が購入の全行程を追った結果「単一のプロトコルでは完結しない」と結論づけた事例を紹介している。本号の三層の見立てを、標準化団体の側から裏付ける記事だ。</span></div>
+  <div class="quick-link"><a href="https://cointelegraph.com/news/block-brings-bitcoin-lightning-payments-to-x402-for-ai-agents">Block が x402 Foundation に参加し、Bitcoin Lightning を決済手段に追加</a><span class="quick-summary">HTTP 402 でエージェントに支払いを求める x402 に、少額・高頻度向けの Lightning が加わった。本号で扱った機械間決済の層が、MPP と x402 の 2 系統でそれぞれ支払い手段を増やしている動きの一つ。</span></div>
+  <div class="quick-link"><a href="https://blog.google/products/ads-commerce/agentic-commerce-ai-tools-protocol-retailers-platforms/">Google、Universal Commerce Protocol を発表（2026年1月）</a><span class="quick-summary">UCP を発見から購入後サポートまでを覆う共通語彙として打ち出し、AP2・A2A・MCP との互換を明記した最初の発表。加盟店が販売者のまま残る前提を最初から置いていた点が、本号の「決済を加盟店に戻す」流れにつながっている。</span></div>
 </div>
 
 <div class="section">
   <div class="section-title">📚 過去号</div>
-  <div class="archive-item"><span class="week">2026-10-10</span><div class="body"><a href="../ai-trends.html">エージェントコマースは「一つの決済プロトコル」をやめた — 発見・同意の証明・本人ログインを別レイヤーに切り分ける設計へ</a><span class="sub">UCP は加盟店が /.well-known/ucp に能力を公開し、エージェント側と「共通する能力だけ」を交渉で残す設計。OpenAI も ACP の主軸をチャット内決済から商品カタログの受け渡しへ移し、決済は加盟店側に戻した。</span></div></div>
   <div class="archive-item"><span class="week">2026-10-08</span><div class="body"><a href="2026-10-08.html">エージェントの UI は「誰が描くか」で二つに割れた — iframe で持ち込む MCP Apps、カタログで描かせる A2UI、そして会話の外へ</a><span class="sub">MCP Apps はツールが ui:// の HTML リソースを返し、ホストが sandbox 付き iframe で描画する「持ち込み型」。Claude・VS Code・ChatGPT が同じ仕様に乗った。</span></div></div>
+  <div class="archive-item"><span class="week">2026-10-06</span><div class="body"><a href="2026-10-06.html">音声エージェントは「話す層」と「考える層」を分けた — カスケードか音声直結かの二択が終わった理由</a><span class="sub">OpenAI の GPT-Live-1 は会話の進行だけを担い、推論とツール実行は裏側のテキストモデルへ非同期に委譲する二層構成を採った。</span></div></div>
   <div class="archive-item"><span class="week">2026-10-03</span><div class="body"><a href="2026-10-03.html">エージェントの評価は「最終出力」ではなく「軌跡」を見る設計に変わった — OpenAI・Anthropic・Replitが同時に評価基盤を公開</a><span class="sub">OpenAI・Anthropic・Replit・Braintrustが2026年に評価基盤の内部設計を相次いで公開した。</span></div></div>
   <div class="archive-item"><span class="week">2026-10-01</span><div class="body"><a href="2026-10-01.html">エージェントは「呼び出すたびに消える」から「状態を持ち続ける」へ — OpenAI・Google・Alibabaが同時に永続化レイヤーを足した</a><span class="sub">OpenAIの「dots」はユーザーごとに専用クラウドコンピュータを割り当て、ChatGPT・Slack・Teamsを横断して会話間の文脈を保持する常駐エージェント。</span></div></div>
   <div class="archive-item"><span class="week">2026-09-29</span><div class="body"><a href="2026-09-29.html">エージェントの長期記憶は「要約」をやめた — 編集可能なファイル、共有された手順、非破壊のグラフへ</a><span class="sub">Claudeは会話終了後の要約をやめ、対話中にトピック単位のファイルへ直接書き込み、ユーザーが個別に編集できる方式に切り替えた。</span></div></div>
@@ -201,7 +207,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 </div>
 
 <footer>
-  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="../data/ai-trends/2026-10-06.json">data/ai-trends/2026-10-06.json</a>（このページは JSON からの生成物）</p>
+  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="../data/ai-trends/2026-10-10.json">data/ai-trends/2026-10-10.json</a>（このページは JSON からの生成物）</p>
   <p style="margin-top:.5rem"><a href="../">📰 日刊ダイジェストに戻る</a></p>
 </footer>
 </div>

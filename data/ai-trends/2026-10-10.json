@@ -1,0 +1,91 @@
+{
+  "issue": "2026-10-10",
+  "generated_at": "2026-10-10T07:00:00+09:00",
+  "theme": {
+    "title": "エージェントコマースは「一つの決済プロトコル」をやめた — 発見・同意の証明・本人ログインを別レイヤーに切り分ける設計へ",
+    "category": "agentic-commerce",
+    "lede": "2025年秋、エージェントに買い物をさせる仕組みは「チャットの中で決済まで完結させる」一本の流れとして語られていた。OpenAI と Stripe の ACP、Google の AP2、そして 2026年1月の UCP。どれが勝つかという構図で見られがちだったが、この 1 年で起きたのは勝敗ではなく分業だ。OpenAI は 3月にチャット内決済の初版から手を引き、ACP を商品発見の側へ広げた。Google と Mastercard は「何に同意したか」の証明を FIDO Alliance に預けた。10月6日には Google が UCP の Merchant Center ハブを米国で展開し始め、同じ日に Meta と Sierra がエージェントのログインと権限だけを扱う Personal Agent Protocol を発表、Agentic AI Foundation は「エージェントコマースのプロトコルは一つではない」と題した整理を出した。商品を見つけること、支払いに同意したと証明すること、誰の代理として店に入るかを示すこと — 三つは別の問題として、別の層で解かれ始めている。",
+    "tldr": [
+      "UCP は加盟店が /.well-known/ucp に能力を公開し、エージェント側と「共通する能力だけ」を交渉で残す設計。OpenAI も ACP の主軸をチャット内決済から商品カタログの受け渡しへ移し、決済は加盟店側に戻した。",
+      "支払いの同意は「スコープ付きトークン」と「署名付きの意図の記録」で証明する方向に収束した。Stripe の SPT は加盟店・金額・期限で縛り、AP2 と Mastercard の Verifiable Intent は FIDO Alliance で標準化が進む。",
+      "Meta と Sierra の Personal Agent Protocol は決済ではなく「エージェントが誰の代理で、何をしてよいか」を OAuth 上で扱う層として切り出した。API 単位の少額課金は MPP や x402 が別系統で担う。"
+    ],
+    "sections": [
+      {
+        "heading": "発見の層: 加盟店が能力を宣言し、エージェントは共通部分だけを使う",
+        "body_html": "<p>UCP の仕様は、加盟店が <code>/.well-known/ucp</code> にプロファイルを置き、エージェント側のプラットフォームはリクエストごとに <code>UCP-Agent</code> ヘッダーで自分のプロファイル URL を示す形を取る。プロファイルには対応サービス、<code>dev.ucp.shopping.checkout</code> のような能力、決済ハンドラ、署名鍵が載り、両者が共に宣言した能力だけが残る「積集合」で交渉が決まる。親の能力が無い拡張は落とされ、各能力は両者が対応する最新版が選ばれる。トランスポートは REST・MCP・A2A・埋め込みの 4 種類で、仕様は「トランスポート定義は薄く保つ」と明記している。</p><p>この形に寄った理由は、エージェントごとに個別連携を書く負担を加盟店側が持てないからだ。能力を一度宣言すれば、どのエージェントも同じ入口から読みに来る。決済を同じ層に押し込まなかったことも効いている。OpenAI は 2026年3月、チャット内決済 Instant Checkout の初版から離れて加盟店が自前のチェックアウトを使える形にし、ACP を商品フィード（価格・在庫・配送）を受け渡す発見の層として広げた。Google の Merchant Center ハブも、加盟店サイトへのカート受け渡し・Google 上でのネイティブ決済・アカウント連携を個別に選ぶ作りになっており、「全部を代行する」一択ではない。</p>",
+        "examples": [
+          {
+            "product": "Universal Commerce Protocol（Google・Shopify ほか）",
+            "approach": "/.well-known/ucp のプロファイルと UCP-Agent ヘッダーで双方の能力を突き合わせ、共通部分だけで取引する",
+            "detail": "仕様の Overview は、バージョン選択と能力交渉を分け、能力は両者が宣言したものだけを残すと定めている。決済方式は payment_handlers に逆ドメイン名で登録し、デジタルウォレット・SCA 付き直接トークン化・AP2 経由の自律エージェントの 3 シナリオを想定する。名前空間の紐付けは「出所を保証するが信頼は保証しない」とも書き、信頼判断をクライアント側に残している。",
+            "source_url": "https://ucp.dev/specification/overview/"
+          },
+          {
+            "product": "Google Merchant Center の UCP 連携ハブ",
+            "approach": "カート受け渡し・ネイティブ決済・アカウント連携を加盟店が個別に選び、サンドボックスでプロファイルと API を検証してから公開する",
+            "detail": "ヘルプページは米国で段階的に展開中、オーストラリアとカナダは来年と記載している。先に UCP の実装を済ませ、関心フォームを出して選定を待つ流れで、誰でもすぐ使える状態ではない。決済を Google 上で完結させず、自社サイトへカートを渡す選択肢を正規の能力として持たせている点が、初期の「チャット内で買わせる」構想との違いだ。",
+            "source_url": "https://support.google.com/merchants/answer/16992327?hl=en"
+          }
+        ],
+        "takeaway": "EC 側でエージェント対応を考えるなら、最初の一手は決済連携ではなく商品データと能力宣言の整備になる。チェックアウトを自社に残すか委ねるかは後から能力単位で選べる設計が主流なので、在庫・価格・返品条件を機械可読で出せる状態を先に作っておくと、どのプロトコルが広がっても流用が効く。"
+      },
+      {
+        "heading": "同意の層: カード番号を渡さず、「何に同意したか」を検証可能な形で残す",
+        "body_html": "<p>支払いの部分は、エージェントにカード情報を持たせない方向で各社がそろった。Stripe の Shared Payment Token（SPT）は、購入者が「買う」を押した時点で AI プラットフォームが発行するトークンで、特定の加盟店と決済総額に紐付き、期限や金額の上限を持ち、いつでも取り消せる。加盟店は SPT の ID を受け取って PaymentIntent を作るだけで、裏の認証情報には触れない。AP2 はさらに踏み込み、ユーザーが承認した内容そのものを暗号学的な証拠として残し、人がその場にいない決済でも後から検証できるようにする。</p><p>同意を独立した層にした理由は、エージェント経由の決済で最も揉めるのが「ユーザーは本当にこれを頼んだのか」という一点だからだ。Agentic AI Foundation の整理は「商品を見つけることと、支払いに同意したと証明することは同じ問題ではない」と書いている。2026年4月には Google が AP2 を、Mastercard が Google と共同開発した Verifiable Intent を FIDO Alliance に提供し、Mastercard と Visa が議長を務める決済作業部会の土台になった。パスキーで認証を標準化した団体に「意図の証明」を預けたことで、ここはベンダー間の競争領域から共通基盤の側に移りつつある。</p>",
+        "examples": [
+          {
+            "product": "Stripe Shared Payment Token",
+            "approach": "加盟店・金額・期限で範囲を絞ったトークンを発行し、エージェントにも加盟店にも生のカード情報を渡さない",
+            "detail": "Stripe は信頼を「明示的に付与し、範囲を絞り、コードで強制する」必要があると書き、SPT を加盟店単位・時間または金額の上限付き・取り消し可能・Webhook で監視可能な仕組みとして設計した。Stripe 以外で決済処理する加盟店も SPT を自社の決済代行へ転送できるため、決済代行の乗り換えを強いない点が採用の障壁を下げている。",
+            "source_url": "https://stripe.com/blog/introducing-our-agentic-commerce-solutions"
+          },
+          {
+            "product": "FIDO Alliance（AP2・Verifiable Intent の受け入れ）",
+            "approach": "Google の AP2 と Mastercard の Verifiable Intent を土台に、エージェント起点の決済とユーザー意図の検証を業界仕様にする",
+            "detail": "2026年4月28日の発表で、エージェント認証の作業部会（CVS Health・Google・OpenAI が議長）と決済作業部会（Mastercard・Visa が議長）が示された。重点領域は検証可能なユーザー指示・エージェント認証・取引の委任の 3 つ。Mastercard は Verifiable Intent を「決済エコシステム全体が頼れるユーザー意図の共通記録」と位置付けている。",
+            "source_url": "https://fidoalliance.org/fido-alliance-to-develop-standards-for-trusted-ai-agent-interactions/"
+          }
+        ],
+        "takeaway": "エージェントに決済させる機能を作るなら、カード情報を保持させる設計は最初から外し、加盟店・金額・期限で縛ったトークンを都度発行する形にする。加えて「ユーザーが承認した文面と条件」を署名付きで残しておけば、チャージバックや問い合わせのときに説明できる。上限をエージェント自身に決めさせない（ユーザー操作か事前ポリシーで決める）ことも忘れずに。"
+      },
+      {
+        "heading": "身元の層: 「誰の代理で、どこまでしてよいか」を決済と切り離して扱う",
+        "body_html": "<p>10月6日に Meta と Sierra が発表した Personal Agent Protocol は、決済ではなくエージェントの入店手続きを扱う。エージェントは企業のサイトで提供内容を見つけてユーザーのためにセッションを始め、在庫確認や返品条件の質問ならゲストのまま進める。アカウントに触れる作業では、ユーザーが企業のページでサインインするか、エージェントに保存した資格情報を使い、読み取りのみか書き込みも許すかを選ぶ。土台は OAuth で、サインイン前の質問と後の注文変更が同じセッションとして続く。経路はサイトの通常ページ、MCP や OpenAPI による API、企業側のエージェントの 3 つから企業が選ぶ。</p><p>この層が別に必要になったのは、エージェントによるサイト巡回をめぐって企業との摩擦が表に出てきたからだ。企業から見ると、来訪者が人なのか誰かの代理のエージェントなのか、代理なら何を許されているのかが分からない。決済トークンや意図の証明はお金の部分しか守らず、注文変更やアカウント情報の閲覧はその外にある。発表文は「消費者がエージェントに与えるアクセスを決め、企業がエージェントにできることの範囲を決める」を原則に掲げ、カード情報を共有しない決済対応は今後の拡張に回した。v0.1 仕様は今月後半の公開予定で、現時点ではまだ実装できない点には注意したい。</p>",
+        "examples": [
+          {
+            "product": "Personal Agent Protocol（Meta・Sierra）",
+            "approach": "OAuth を土台に、ゲスト → 読み取り専用 → 書き込みの段階的なアクセスと、チャネルをまたぐセッション継続を定める",
+            "detail": "Bret Taylor と Clay Bavor の発表（2026年10月6日）で、Genesys・Instinct・Rocket・Shopify・Stripe・Walmart が協力企業に挙がった。企業はエージェントが顧客の代理で動いたことを把握でき、どの経路を開けるかを選べる。より細かい権限、プッシュ通知、カード情報を渡さない決済は今後の拡張として明記されている。",
+            "source_url": "https://sierra.ai/blog/introducing-personal-agent-protocol"
+          },
+          {
+            "product": "Machine Payments Protocol（Stripe・Tempo）",
+            "approach": "エージェントが API や MCP サーバーにリクエスト → サービスが支払い要求を返す → エージェントが承認して資源を受け取る、という機械間の少額課金",
+            "detail": "人の買い物とは別系統の層として、2026年3月に Stripe と Tempo が共同で公開した。Browserbase はブラウザセッション単位、Parallel は API 呼び出し単位でエージェントに課金する例として挙がっている。法定通貨は SPT 経由、ステーブルコインも受け付け、入金は既存の Stripe 残高に入る。同じ用途を x402 が HTTP 402 を使って担っており、この層はまだ 2 系統が並走している。",
+            "source_url": "https://stripe.com/blog/machine-payments-protocol"
+          }
+        ],
+        "takeaway": "自社サービスにエージェントを受け入れるなら、「エージェント用 API を作る」より先に、ゲストで許す操作・読み取りで許す操作・書き込みが要る操作の三段階に棚卸ししておくとよい。どの標準が広がっても、この区分がそのまま OAuth のスコープ設計になる。課金が呼び出し単位なら、人向けのチェックアウトとは別に MPP や x402 の層を検討する。"
+      }
+    ]
+  },
+  "editorial": "一年前の議論は「どのプロトコルが勝つか」だったが、実際に起きたのは問題の分解だった。見つける、同意を証明する、代理として入る — それぞれに別の失敗の仕方があり、一つの仕様で全部を背負うと全部が遅れる。OpenAI がチャット内決済から一歩引いたのは後退ではなく、層の境界を引き直した結果と見るのが正確だと思う。",
+  "quick_picks": [
+    {
+      "title": "Agentic AI Foundation「There Is No One Agentic Commerce Protocol」",
+      "summary": "UCP・AP2・x402・A2A を「リレー」として整理し、Walmart が購入の全行程を追った結果「単一のプロトコルでは完結しない」と結論づけた事例を紹介している。本号の三層の見立てを、標準化団体の側から裏付ける記事だ。",
+      "url": "https://aaif.io/blog/there-is-no-one-agentic-commerce-protocol"
+    },
+    {
+      "title": "Block が x402 Foundation に参加し、Bitcoin Lightning を決済手段に追加",
+      "summary": "HTTP 402 でエージェントに支払いを求める x402 に、少額・高頻度向けの Lightning が加わった。本号で扱った機械間決済の層が、MPP と x402 の 2 系統でそれぞれ支払い手段を増やしている動きの一つ。",
+      "url": "https://cointelegraph.com/news/block-brings-bitcoin-lightning-payments-to-x402-for-ai-agents"
+    },
+    {
+      "title": "Google、Universal Commerce Protocol を発表（2026年1月）",
+      "summary": "UCP を発見から購入後サポートまでを覆う共通語彙として打ち出し、AP2・A2A・MCP との互換を明記した最初の発表。加盟店が販売者のまま残る前提を最初から置いていた点が、本号の「決済を加盟店に戻す」流れにつながっている。",
+      "url": "https://blog.google/products/ads-commerce/agentic-commerce-ai-tools-protocol-retailers-platforms/"
+    }
+  ]
+}
