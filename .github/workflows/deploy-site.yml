@@ -1,6 +1,6 @@
 name: Deploy site (manual content push)
 
-# 手動 push（ローカルセッションからのサイトアセット変更）を Cloudflare Pages に反映する。
+# 手動 push（ローカルセッションからのサイトアセット変更）を選択済みの Cloudflare ホストに反映する。
 # 日次 run（daily-digest.yml）は GITHUB_TOKEN で push するため本 workflow は発火せず、
 # 二重デプロイにはならない（日次 run は自前で Cloudflare へ deploy する）。
 

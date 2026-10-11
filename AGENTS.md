@@ -2,19 +2,17 @@
 
 ## プロジェクト概要
 
-tech-news-daily: 技術ニュースを毎日収集・整形し、GitHub Pages で公開する静的サイト。GitHub Actions workflow `daily-digest.yml` が Codex-action で WebSearch → HTML 生成 → main push → Pages デプロイを毎日自動実行する（2026-07-05 に CCR routine から全面移行）。
+tech-news-daily: 技術ニュース・AI 動向・プラグイントレンドを生成し、Cloudflare Workers Static Assets で公開する静的サイト。ホストの設定・移行証跡・未確認事項は `docs/workers-static-assets.md` を参照。Pages project はロールバック用に維持する。
 
-## デプロイパイプライン（GHA daily-digest: 生成→push→Pages）
+## デプロイパイプライン（GitHub Actions: 生成→push→共通配置）
 
-`.github/workflows/daily-digest.yml`（cron `8 21 * * *` = 06:08 JST、`workflow_dispatch` で手動実行可）が単一 workflow で完結する:
+`daily-digest.yml` は cron `0 21 * * *`（06:00 JST）、AI 動向は `weekly-ai-trends.yml`、プラグイントレンドは `weekly-plugin-trends.yml`。workflow の有効状態は GitHub API で別途確認する（YAML の存在だけでは稼働を証明しない）。
 
-1. **生成 (Codex-action@v1)**: `prompts/daily-digest.md` の指示に従い Codex がファイルを生成・編集する。**Codex は git 操作を一切しない**（ファイル生成のみ）
-2. **反映 (workflow step)**: 生成物（`index.html` / `archive/` / `feed.xml`）に変更があり、`index.html` に当日日付が含まれることを検証してから `github-actions[bot]` 名義で `YYYY-MM-DD のテックニュースダイジェスト` として main へ commit/push する。変更ゼロ・日付不整合は run を fail させる（**失敗が必ず可視化される**のがこの構成の要）
-3. **デプロイ**: `GITHUB_TOKEN` push は `pages.yml` を発火させないため、同 workflow が `configure-pages` → `upload-pages-artifact` → `deploy-pages` を自前実行する
+1. **生成**: 各 prompt に従ってファイルを生成・編集する。生成エージェントは git 操作を行わない。
+2. **反映**: workflow が生成物を検証し、bot 名義で main に commit/push する。git 書き込み禁止ガードと、変更ゼロ・日付不整合を失敗にする既存検証を維持する。
+3. **配置**: 各 caller が `deploy-current-site.yml` を呼び、`site-deploy` ロック取得後の最新 `origin/main` を配置する。手動 main content push は `deploy-site.yml` が同じ処理を呼ぶ。`GITHUB_TOKEN` push は別 workflow を発火しないため、生成 workflow 自身が配置を呼ぶ。
 
-認証は repo secret `CLAUDE_CODE_OAUTH_TOKEN`（Pro/Max サブスクの OAuth トークン、ローカルで `Codex setup-token` を実行して生成・失効時も同コマンドで再発行）。PAT は不要。
-
-稼働確認: `gh run list --workflow=daily-digest.yml`。失敗時は `gh run view <id> --log-failed`。手動リトライは `gh workflow run daily-digest.yml`。
+`SITE_DEPLOY_TARGET=workers` は assets-only Worker `tech-news-daily-site` を選ぶ。未設定/空/`pages` は Pages、未知値は失敗し、自動 fallback はしない。通常配置に独自ドメイン/DNS・監視 Worker の変更を含めない。認証値や権限を変更せず、稼働確認は `gh run list --workflow=daily-digest.yml` と公開本文検証で行う。
 
 ### Codex の git 操作はツール層で禁止（2026-07-17 対策）
 
@@ -49,9 +47,9 @@ prompt は repo 内ファイルなので通常の Edit → commit → push で�
 2. `archive/index.html` に新エントリを追加
 3. `index.html` を新フォーマットで生成
 4. `feed.xml` に新エントリを追加（Atom フィード）
-5. commit → push（GitHub Pages が自動デプロイ）
+5. commit → push（main の content push は共通 Cloudflare 配置を起動）
 
-`daily-digest.yml` は 1-4 を Codex 生成で、5 を workflow step で自動実行する（「デプロイパイプライン」参照）。手動更新時は自分で main に commit → push すれば `pages.yml` が直接デプロイする。
+`daily-digest.yml` は 1-4 を Codex 生成で、5 を workflow step で自動実行する（「デプロイパイプライン」参照）。手動更新時は自分で main に commit → push すれば `deploy-site.yml` が共通配置を呼ぶ。
 
 ## サイトアセット変更は push まで完了させる
 
