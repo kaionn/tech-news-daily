@@ -1,0 +1,84 @@
+name: Verify Opus runtime (no publishing)
+
+# Temporary, branch-scoped probe. No schedules, articles, commits, deployments,
+# PR comments, or repository mutations. Only a fixed synthetic prompt is sent.
+on:
+  pull_request:
+    types: [opened]
+    paths: [.github/workflows/verify-opus-runtime.yml]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  verify:
+    if: >-
+      github.repository == 'kaionn/tech-news-daily' &&
+      github.actor == 'kaionn' &&
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      github.head_ref == 'codex/verify-opus55-no-publish'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Synthetic inference through production Claude action and OAuth
+        id: probe
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          # Override only GitHub authentication with a read-only token. Claude's
+          # Anthropic authentication is the same OAuth secret as production.
+          github_token: ${{ github.token }}
+          track_progress: false
+          classify_inline_comments: false
+          show_full_output: false
+          prompt: >-
+            This is a synthetic runtime probe, not an article generation task.
+            Use no tools and do not access files, services, or repository content.
+            Synthetic facts: Product A evaluates an agent's final answer.
+            Product B evaluates its intermediate tool-call trajectory.
+            If the evaluation targets differ, reply exactly OPUS55_RUNTIME_OK.
+            Do not include anything else in your reply.
+          claude_args: |
+            --model claude-opus-5-5
+            --max-turns 1
+            --tools ""
+            --strict-mcp-config
+            --mcp-config '{"mcpServers":{}}'
+            --disable-slash-commands
+      - name: Check response and model without printing raw execution data
+        env:
+          EXECUTION_FILE: ${{ steps.probe.outputs.execution_file }}
+          PROBE_CONCLUSION: ${{ steps.probe.outputs.conclusion }}
+        run: |
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          assert os.environ['PROBE_CONCLUSION'] == 'success', 'Inference failed'
+          raw = Path(os.environ['EXECUTION_FILE']).read_text()
+          try:
+              events = json.loads(raw)
+              events = events if isinstance(events, list) else [events]
+          except json.JSONDecodeError:
+              events = [json.loads(line) for line in raw.splitlines() if line.strip()]
+          expected = 'claude-opus-5-5'
+          initialized = [e.get('model') for e in events
+                         if e.get('type') == 'system' and e.get('subtype') == 'init']
+          responses = [e.get('message', {}).get('model') for e in events
+                       if e.get('type') == 'assistant' and isinstance(e.get('message'), dict)]
+          results = [e for e in events if e.get('type') == 'result']
+          assert results and results[-1].get('is_error') is not True, 'No successful result'
+          result = results[-1]
+          assert result.get('result', '').strip() == 'OPUS55_RUNTIME_OK', 'Unexpected response'
+          assert expected in initialized, 'Unexpected SDK initialization model'
+          assert expected in result.get('modelUsage', {}), 'No Opus usage evidence'
+          if responses:
+              assert all(model == expected for model in responses), 'Unexpected response model'
+          print('PASS: synthetic response OPUS55_RUNTIME_OK')
+          print('PASS: SDK initialization and result modelUsage = claude-opus-5-5')
+          print('Assistant response model verified' if responses else
+                'Assistant model fields unavailable; SDK/result evidence verified')
+          PY
