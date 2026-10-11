@@ -16,14 +16,21 @@ PRs [#8](https://github.com/kaionn/tech-news-daily/pull/8) and [#9](https://gith
 
 This supersedes PR #9's earlier credential failure and pending-host-variable status. Do not repeat credential setup or production upload based on that older text. The run proves upload through CI; its “No targets deployed” output does not establish the externally managed Custom Domain association, current DNS/TLS, or current workflow enabled states.
 
+Read-only production checks completed at approximately 2026-10-11 00:46 UTC in an existing Mac Chrome session (reported in [PR #10](https://github.com/kaionn/tech-news-daily/pull/10)):
+
+- The daily top page displayed the October 10 issue with 22 articles; `/ai-trends` displayed October 10; `/trends` displayed 2026-W41, October 9 collection and 16 tools.
+- Chrome network inspection of `/trends` showed HTTP 200, `text/html`, HTTP/3 and `securityState=secure`; certificate issuer WE1 and SAN `*.kaion-lab.com`.
+- Cloudflare's production domains page for `tech-news-daily-site` listed `tech-news.kaion-lab.com`.
+- GitHub's repository variable was `SITE_DEPLOY_TARGET=workers`. All four publishing callers (`daily-digest.yml`, `weekly-ai-trends.yml`, `weekly-plugin-trends.yml`, `deploy-site.yml`) were enabled, with “Disable workflow” available on each page.
+
+These observations require no variable, workflow-state or domain changes. They do not establish every response's exact bytes or the next scheduled publication's outcome.
+
 Remaining read-only acceptance checks:
 
-1. Verify `tech-news.kaion-lab.com` is associated with `tech-news-daily-site` in Cloudflare and TLS is valid. Inspect the existing association before considering any DNS/domain change.
-2. Compare public responses against the **deployed source snapshot**, including daily/AI/plugin pages, canonical redirects, media types and excluded-path 404s, using the command below.
-3. Read current `SITE_DEPLOY_TARGET` and all four publishing workflow states. They were temporarily disabled during cutover; a successful manual deploy alone does not prove that the three scheduled generators resumed.
-4. Observe the next natural scheduled publication and its shared Workers deployment. Do not dispatch generation solely to verify migration.
+1. Compare all 13 public samples against the **deployed source snapshot**, including bytes, media types and canonical URLs, and verify all 11 internal/nonexistent paths return 404 using the command below. The local 24-URL verification passed; the full live verification has not run.
+2. Observe the next natural scheduled publication and its shared Workers deployment. No post-migration natural scheduled run has yet been observed; do not dispatch generation solely to verify migration.
 
-The 2026-10-11 saved cloud environment could fetch Git and read Actions logs through the connector, but its network proxy denied direct production HTTPS and GitHub management API requests. Those live checks remain unverified, not failed site checks. No DNS, credentials, workflow state or production deployment was changed by this verification work.
+The saved cloud environment's proxy denied direct production HTTPS and GitHub management API requests. The separate Chrome session confirmed the production facts above, but blocked `/__workers-verification-missing__` and `/package.json` with `net::ERR_BLOCKED_BY_CLIENT`. Those client-side blocks do not prove a server 404, and were not bypassed. No DNS, credentials, workflow state or production deployment was changed by this verification work.
 
 ## Deployment contract
 
