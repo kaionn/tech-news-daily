@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tech News Daily — 2026-10-10</title>
-  <meta name="description" content="Cloudflare、Denoチームを迎え入れworkerdとcelldを統合 / IDCFクラウド障害、攻撃者メッセージが拡散し復旧難航 / IPA、不正アクセス事案を踏まえ対策を公表">
+  <title>Tech News Daily — 2026-10-12</title>
+  <meta name="description" content="Hono、外部PR停止とv5刷新 / SQLite本体にベクトル検索拡張vec1がマージ / AIが6000億トークンで市販FPSを逆コンパイル">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Tech News Daily">
-  <meta property="og:title" content="Tech News Daily — 2026-10-10">
-  <meta property="og:description" content="Cloudflare、Denoチームを迎え入れworkerdとcelldを統合 / IDCFクラウド障害、攻撃者メッセージが拡散し復旧難航 / IPA、不正アクセス事案を踏まえ対策を公表">
+  <meta property="og:title" content="Tech News Daily — 2026-10-12">
+  <meta property="og:description" content="Hono、外部PR停止とv5刷新 / SQLite本体にベクトル検索拡張vec1がマージ / AIが6000億トークンで市販FPSを逆コンパイル">
   <meta property="og:url" content="https://tech-news.kaion-lab.com/">
   <meta property="og:image" content="https://tech-news.kaion-lab.com/apple-touch-icon.png">
   <meta name="twitter:card" content="summary">
@@ -22,7 +22,7 @@
   <div class="container">
     <header>
       <h1>Tech News Daily</h1>
-      <div class="date">2026-10-10 (Sat)</div>
+      <div class="date">2026-10-12 (Mon)</div>
       <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
       <nav class="site-nav">
         <a href="./" class="active">📰 日刊ダイジェスト</a>
@@ -33,9 +33,9 @@
     </header>
 
     <div class="stats-bar">
-      <span>📰 22 articles</span>
-      <span>🏷 7 categories</span>
-      <span>📡 20 sources</span>
+      <span>📰 19 articles</span>
+      <span>🏷 6 categories</span>
+      <span>📡 14 sources</span>
     </div>
 
     <nav class="toc">
@@ -48,16 +48,16 @@
 
     <div class="numbers-bar">
       <div class="number-item">
-        <span class="number-value">495社</span>
-        <span class="number-label">IDCFクラウド障害の影響企業・自治体数</span>
+        <span class="number-value">30.8倍</span>
+        <span class="number-label">Honoの月間npmダウンロード数の1年間の増加</span>
       </div>
       <div class="number-item">
-        <span class="number-value">1.5億件</span>
-        <span class="number-label">米運転免許証情報の漏えい可能性件数</span>
+        <span class="number-value">6000億</span>
+        <span class="number-label">AIエージェントが市販FPS逆コンパイルに投じた推定トークン数</span>
       </div>
       <div class="number-item">
-        <span class="number-value">2.9万件</span>
-        <span class="number-label">AnthropicのOSS Scannerが半年で発見した脆弱性候補数</span>
+        <span class="number-value">25倍</span>
+        <span class="number-label">NumPy 2.5でnp.searchsortedが高速化した倍率</span>
       </div>
     </div>
 
@@ -66,67 +66,65 @@
 
       <div class="card featured deep-dive">
         <div class="card-header">
-          <span class="tag tag-infra">Infra</span>
-          <span class="content-type">👀 注目</span>
-          <h3><a href="https://blog.cloudflare.com/deno-joins-cloudflare/">DEEP DIVE: Cloudflare、Denoチームを迎え入れworkerdとcelldを統合</a></h3>
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://slides.yusu.ke/honoconf-2026">DEEP DIVE: Hono、外部PR停止とv5刷新でAIエージェント時代に向け舵を切る</a></h3>
         </div>
-        <div class="summary">Node.jsの作者Ryan Dahlは、Node.jsの設計を見直す目的で2018年からJavaScript/TypeScriptランタイムDenoの開発を率い、後にサーバーレスホスティング「Deno Deploy」も提供してきた。しかしDahl自身は、ランタイム単体の改良だけでは開発者が周辺に組み上げる複雑さを解消できないと感じていたという。転機になったのが、Cloudflareの「Durable Objects」——単一スレッドで個別アドレス指定可能なオブジェクトにSQLiteとWebSocketを組み込んだ実行モデル——で、1オブジェクト=1チャットチャンネルのようにデータと接続をシャーディングできる点にDahlは着目した。だがこのモデルをCloudflare外で動かすのは難しく、OSS版ランタイム「workerd」はDurable Objectsを単一インスタンスでしかサポートしておらず、スケールする実装を欠いていた。そこでDahlは2026年8月、外部依存をオブジェクトストレージのみに絞ったRust製単一バイナリ「celld」を公開し、このギャップを埋めようとした。10月9日、DahlとCloudflareのKenton Vardaは共同発表で、DenoチームがCloudflareに合流し、celldのコードとアイデアをworkerdへ統合すると表明した。DahlとBert Belderは、workerdのセルフホスティングを「ファーストクラス」の選択肢にする新チームを率いる。Denoランタイム本体は1年間のバグ修正・セキュリティ更新ののち開発終了、Deno Deployは6ヶ月で停止し有償顧客にはCloudflare Workersへの移行支援が提供される。一方、パッケージレジストリJSRとrusty_v8は存続し、JSRのインフラはCloudflareへ移行する。</div>
-        <div class="editorial">🧠 Denoという独立ランタイムの終焉は、サーバーレスの差別化点がランタイム単体から、Durable Objectsのようなステートフルな実行モデルへ完全に移ったことを象徴する。ただし「ロックインではない」というVardaの主張は、workerdのセルフホスティングがどこまで実用段階に達するか次第であり、今はまだ整備中の段階に過ぎない。Denoで本番運用しているチームにとって1年の移行猶予は短くはないが、JSRとrusty_v8以外の資産をどう扱うかの判断は依然として各自に委ねられている。</div>
+        <div class="summary">軽量Webフレームワーク「Hono」は過去1年で急成長し、月間npmダウンロード数は2025年10月の約1110万から2026年9月には2億6700万へ、30.8倍に伸びた。この人気がそのまま負荷として跳ね返った。7〜9月期にhonojs/honoリポジトリへのPR数は82件から345件に急増したが、その大半はAIエージェントが自動生成した低価値なリファクタリングや言葉尻を直すだけのPRで、レビューが追いつかなくなった。メンテナーは10月5日、外部コントリビューターからのPR受け入れを停止し、以後はコラボレーターのみがPRを開けると決定した。コントリビューションの窓口はPRレビュー・実バグのIssue・機能提案に絞り、トリアージはAIボット「Hono-kun」が担う。同時に進むv5(RC)では、ESM専用パッケージングでサイズを46%削減し、アダプタを`@hono/*`系パッケージへ分離、`onError`/`notFound`はミドルウェアへ移行した。背景にあるのは「Honoのユーザーはもはや人間だけではない」という認識だ。AIエージェントがコードを書き、フレームワークを選ぶ場面が増え、`package.json`を人間が一度も見ないことも多い。評価実験では、Honoを使うとタスク成功率が10件中2件から4件に上がり、コード量は30〜40%、消費トークンは15〜30%減ったという。型はエージェントが`tsc`で自分の作業を検証するために今も重要だが、開発サーバーはエージェントをハングさせたり他のサーバーを落とす問題を抱えるため、サーバーなしでアプリを検証する新CLIも用意された。急成長したOSSが人間中心のレビュー運営からAIエージェント中心の設計・運営へと軸足を移す初期の実例として、他プロジェクトの参考になりそうだ。</div>
+        <div class="editorial">🧠 「ユーザーはAIエージェント」という前提でOSSの運営方針そのものを変えた点は踏み込んだ判断で、低品質PRの洪水に対する現実的な防衛策だろう。ただしコラボレーター限定化は新規コントリビューターの参入路を狭める副作用も伴い、Hono-kunによるトリアージがどこまで公平に機能するかは未検証だ。タスク成功率2倍・トークン15〜30%減という数字は著者ら自身の評価軸に基づくもので、他のエージェント環境で同じ比率が再現されるとは限らない。</div>
         <div class="key-points">
           <ul>
-            <li>celldは2026年8月公開のRust製単一バイナリで外部依存はオブジェクトストレージのみ、このコードとアイデアがworkerdへ統合される</li>
-            <li>Denoランタイムは1年間のバグ修正・セキュリティ更新で開発終了、Deno Deployは6ヶ月で停止し有償顧客はCloudflare Workersへの移行支援を受けられる</li>
-            <li>JSRパッケージレジストリとrusty_v8は存続、workerdは2022年のOSS化以来Shopifyなどの要請があったが本番利用は限定的だった</li>
+            <li>月間npmダウンロード数は2025年10月の1110万から2026年9月に2億6700万(30.8倍)、7〜9月期のPR数は82件から345件に増加</li>
+            <li>10月5日以降は外部コントリビューターのPR受け入れを停止、トリアージはAIボット「Hono-kun」が担当</li>
+            <li>v5はESM専用化でパッケージサイズ46%減、Hono使用時のタスク成功率は10件中2件→4件、コード量30〜40%減・トークン消費15〜30%減</li>
           </ul>
         </div>
-        <div class="why-it-matters">💡 DenoやDeno Deployで本番運用しているなら、1年・6ヶ月という具体的な期限のうちにCloudflare Workersへの移行かOSSフォークの継続策を検討する必要がある。</div>
+        <div class="why-it-matters">💡 AIエージェントがコード生成やフレームワーク選定を担う場面が増えているなら、Honoのようなエージェント最適化設計への追従や、自分のOSSプロジェクトのPR運用ルール見直しを検討する時期かもしれない。</div>
         <div class="meta">
-          <span>Cloudflare Blog</span>
+          <span>Hono Conference 2026</span>
           <span>⏱ 6 min read</span>
-          <span>2026-10-09</span>
-          <span class="engagement">▲ 1031</span>
+          <span>2026-10-11</span>
         </div>
       </div>
 
       <div class="card featured">
         <div class="card-header">
-          <span class="tag tag-security">Security</span>
-          <span class="content-type">🔒 セキュリティ</span>
-          <h3><a href="https://www.itmedia.co.jp/news/article/2610/09/2000002184/">IDCFクラウド障害、攻撃者メッセージが拡散し復旧難航——親会社ソフトバンクと連携調査</a></h3>
+          <span class="tag tag-data">Data</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://sqlite.org/vec1/doc/trunk/doc/vec1.md">SQLite本体に公式ベクトル検索拡張「vec1」がマージ、バージョン0.8</a></h3>
         </div>
-        <div class="summary">IDCフロンティアが運営する「IDCFクラウド」の障害で、管理コンソールに表示されたとみられる攻撃者のメッセージ画像が10月7日以降にX上で拡散した。「お前たちのクラウドは我々のものだ」との文言とともに、東日本リージョン1のハイパーバイザー239台への侵入、データストア225個の暗号化、仮想マシンディスク1万6600台以上の利用不能化、プライマリストレージ3.6PBの暗号化、バックアップ41.5PB消失という攻撃者側の主張が含まれていたが、これらの数字は未検証。IDCフロンティアは具体的な被害規模への回答を避けつつ、10月9日の第4報で親会社ソフトバンクおよび外部セキュリティ専門企業と連携した調査・復旧を進めていると説明した。</div>
+        <div class="summary">SQLiteチームは2026年9月30日、Dan KennedyがSQLite本家ソースツリーにベクトル検索拡張「vec1」(ext/vec1)をコミットした。IVFADCとOPQ量子化によるSQLiteの仮想テーブルとしての近似最近傍探索を実装し、L2(ユークリッド)距離とコサイン距離に対応する。これまでAlex Garcia氏のサードパーティ拡張sqlite-vecが事実上の標準だったが、公式拡張の登場でRAGや類似検索の選択肢が増える。現行バージョンは0.8で、amalgamation(sqlite3.c)にはまだ同梱されず別途ビルドが必要。公式ドキュメントも「テストはまだ不十分」と明記しており、本番投入にはまだ早い段階にある。</div>
         <div class="key-points">
           <ul>
-            <li>攻撃者は東日本リージョン1のハイパーバイザー239台侵入、プライマリストレージ3.6PB暗号化、バックアップ41.5PB消失を主張（運営元は数字を未検証と回答）</li>
-            <li>IDCフロンティアは10月9日の第4報で親会社ソフトバンクおよび外部セキュリティ専門企業と連携し調査・復旧を継続中と説明</li>
+            <li>アルゴリズムはIVFADC+OPQ量子化、小規模データセット向けのフラット(全探索)モードも搭載、x86はAVX2・ARMはNEONでSIMD高速化</li>
+            <li>ベクトルはfloat32固定で格納し検索はテーブル値関数としてSQLで記述できJOIN・WHEREと併用可能、1.0公開に追加機能は不要だがテスト不足が課題</li>
           </ul>
         </div>
         <div class="meta">
-          <span>ITmedia</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-10-09</span>
-          <span class="engagement">🔖 17</span>
+          <span>SQLite</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-30</span>
         </div>
       </div>
 
       <div class="card featured">
         <div class="card-header">
-          <span class="tag tag-security">Security</span>
-          <span class="content-type">🔒 セキュリティ</span>
-          <h3><a href="https://www.ipa.go.jp/security/security-alert/2026/alert20261009.html">IPA、不正アクセス事案を踏まえ速やかに実施すべき対策を公表</a></h3>
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://momo5502.com/posts/2026-10-09-game-decompilation/">AIエージェント陣が3ヶ月・推定6000〜7000億トークンで市販FPSをC++に逆コンパイル</a></h3>
         </div>
-        <div class="summary">IPAは10月9日、相次ぐ不正アクセスによる情報漏えい公表を踏まえ、企業が速やかに実施すべき対策をまとめたアラートを公開した。外部公開アプリケーションについては直近1ヶ月、次いで3ヶ月分のログを遡り、異常なエラー増加や通常と異なるアクセスパターンを確認するよう求める。クラウドやVPNなど外部サービス利用についても、ログイン失敗の急増や見慣れないIPアドレス、削除済みアカウントの再有効化がないかを点検するよう促す。疑わしい形跡が見つかった場合は専門のセキュリティベンダーへの詳細調査依頼を強く推奨し、保有データの最小化や経営層による陣頭指揮も合わせて求めている。</div>
+        <div class="summary">開発者momo5502は、市販の人気FPSタイトルを機能完全かつ可読なC++コードへ逆コンパイルする試みを3ヶ月続け、推定6000〜7000億トークンをAIエージェントに投じた。前半4週で逆コンパイル率は約80%に達したが、ワーカーが勝手に仕様を変える誤りが多発した。転機は元のコンパイラでビルドし直しオリジナルEXEとバイト単位で関数を比較する「バイト一致オラクル」の導入で、客観的な正解基準ができたことで安価なモデルLunaでも作業が成立するようになった。最終的に99%の関数が存在し、83%がバイト完全一致に達したという。</div>
         <div class="key-points">
           <ul>
-            <li>外部公開アプリは直近1ヶ月・3ヶ月分のログを遡り異常なエラー増加や通常と異なるアクセスパターンを確認するよう要請</li>
-            <li>疑わしい形跡があれば専門ベンダーへの詳細調査を強く推奨、サプライチェーン評価制度「SCS」を2027年3月に開始予定</li>
+            <li>最終構成はLuna14体・Opus 5.5が2体のエージェント、Claude CodeとCodex CLIを併用し1時間おきにプロジェクト指示書を再注入</li>
+            <li>バイト一致オラクル導入前は客観的な受け入れ基準がなく安価なモデルを使えなかったが、導入後は99%の関数が存在・83%がバイト完全一致に到達</li>
           </ul>
         </div>
         <div class="meta">
-          <span>IPA</span>
-          <span>⏱ 5 min read</span>
+          <span>momo5502.com</span>
+          <span>⏱ 7 min read</span>
           <span>2026-10-09</span>
-          <span class="engagement">🔖 457</span>
+          <span class="engagement">▲ 139</span>
         </div>
       </div>
     </div>
@@ -137,103 +135,127 @@
       <div class="card">
         <div class="card-header">
           <span class="tag tag-dev">Dev</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://www.python.org/downloads/release/python-3150/">Python 3.15.0リリース、実験的JITがx86-64 Linuxで7-8%高速化</a></h3>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://verdagon.dev/blog/valen-group-borrowing">次世代メモリ安全性「グループ借用」、Rustの借用チェッカーを置き換える設計</a></h3>
         </div>
-        <div class="summary">Python 3.15.0が10月9日にリリースされた。1,012人の貢献者による5,643件のコミットを反映している。実験的JITコンパイラはx86-64 Linuxで標準インタプリタ比7-8%、AArch64 macOSではtail-calling版比11-12%高速化した。UTF-8がデフォルトエンコーディングになり(PEP 686)、新たな組み込み型sentinelとfrozendictが追加された。</div>
+        <div class="summary">新言語Valenは、Nick Smith考案の「グループ借用」という設計でメモリ安全性を実現する。Rustのように1つのデータへの複数の可変参照を禁じるのではなく、参照先が無効化された後に使われることだけを防ぐ。借用の種類も単一化し、変更可否は関数シグネチャ側で宣言する。</div>
         <div class="key-points">
           <ul>
-            <li>JITコンパイラがx86-64 Linuxで7-8%、AArch64 macOSで11-12%高速化、遅延import(PEP 810)で起動も改善</li>
-            <li>高頻度サンプリングプロファイラ「Tachyon」を標準ライブラリに追加、TypedDictは型付きextra items(PEP 728)に対応</li>
+            <li>参照型は単一で、ある参照が変更可能かは呼び出し元の関数シグネチャが宣言するパス情報で決まる(Rustの`&`/`&mut`のような型分離はない)</li>
+            <li>既にCarbon・Ante・Zetaなど他言語がグループ借用の発想を採用、Valen側のシンタックスシュガーは11月予定で型安定性の例外は未実装</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Python.org</span>
-          <span>⏱ 2 min read</span>
-          <span>2026-10-09</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-infra">Infra</span>
-          <span class="content-type">💰 ビジネス</span>
-          <h3><a href="https://oxide.computer/blog/our-445m-series-d">Oxide Computer、4億4500万ドルのシリーズDを調達——AMDが戦略的投資家に</a></h3>
-        </div>
-        <div class="summary">自社製クラウド基盤ハードウェアを手がけるOxide Computerが、Eclipse主導で4億4500万ドルのシリーズDを調達した。AMDが戦略的投資家として新規参加し、Jane StreetなどシリーズB・C投資家も大口で追加出資した。受注残が供給能力を上回る状況が続いており、調達資金は製造キャパシティの拡大と部材調達の前倒し投資に充てる。</div>
-        <div class="key-points">
-          <ul>
-            <li>シリーズB(1億ドル)・C(2億ドル)に続く4億4500万ドルのシリーズD、AMDが戦略的投資家として新規参加</li>
-            <li>創業約7年、受注が供給能力を上回る状態が続き製造キャパシティ拡大とハードウェア部材の前倒し調達に資金を投入</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Oxide Computer</span>
-          <span>⏱ 2 min read</span>
-          <span>2026-10-09</span>
-          <span class="engagement">▲ 570</span>
+          <span>Verdagon</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-10-10</span>
+          <span class="engagement">▲ 131</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
           <span class="tag tag-data">Data</span>
-          <span class="content-type">💰 ビジネス</span>
-          <h3><a href="https://www.publickey1.jp/blog/26/supabase1sqlitetursoaidb.html">Supabase、SQLiteベースのTursoを買収——「エージェント時代のデータベース基盤」掲げる</a></h3>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://blog.scientific-python.org/numpy/searchsorted/">NumPy 2.5でnp.searchsortedが最大25倍高速化、分岐のないロックステップ探索へ刷新</a></h3>
         </div>
-        <div class="summary">PostgreSQLベースのデータベースサービスを提供するSupabaseが、SQLite互換サービスのTursoを買収した。AIエージェントが用途ごとに大量の軽量データベースを使い捨てで生成する需要の急増を見込み、「エージェント時代のデータベース基盤」を掲げる。Turso基盤はAmazon S3上に構築され、1サーバーで数百万のデータベースをホストでき、稼働していない間はストレージ分のみ課金される。</div>
+        <div class="summary">NumPy 2.5(PR #30517)で、内部の二分探索アルゴリズムをC++で書き直した。各クエリでlo/hiを個別管理する代わりに1個のbaseと共有区間長だけを保持し、全探索が同じ回数(log2 n程度)で分岐なく進むロックステップ方式に変更。Apple M1 Proでint32配列・最大2^30要素・1万クエリのベンチマークで最大25倍の高速化を確認した。</div>
         <div class="key-points">
           <ul>
-            <li>SQLiteフォーク「libSQL」はMVCC・非同期I/O・ベクトル検索・暗号化を追加、S3基盤で11ナイン(99.999999999%)の耐久性を提供</li>
-            <li>Rust製エンジン「Turso Database」とAIエージェント向けファイルシステム「AgentFS」を開発中、買収後もサービスは従来通り継続すると説明</li>
+            <li>分岐をcomparison×step幅の演算に置き換えCPUパイプラインを埋め、多数の独立探索を並行させてメモリレイテンシを隠蔽</li>
+            <li>追加メモリはO(1)(クエリ数に非依存)、配列がL1/L2キャッシュを超えるサイズで特に効果が大きい</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Publickey</span>
+          <span>Scientific Python Blog</span>
           <span>⏱ 3 min read</span>
-          <span>2026-10-04</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-ai">AI</span>
-          <span class="content-type">👀 注目</span>
-          <h3><a href="https://techcrunch.com/2026/10/08/fired-openai-safety-researchers-dispute-misconduct-claims-warn-of-chilling-effect/">OpenAI、安全性研究者3名を解雇——本人らは「情報の不正取り扱い」を否定</a></h3>
-        </div>
-        <div class="summary">OpenAIは安全性研究者Jasmine Wang、Tomek Korbak、Mikita Balesniの3名を解雇した。同社は「機密情報へのアクセス・取り扱い」に関する社内規定違反だと説明するが、3名は外部の安全性評価団体とのやり取りは職務の範囲内だったとして否定し、具体的にどの規定に違反したかは示されていないと反論する。3名は公開書簡で、説明の乏しい突然の解雇が「萎縮効果」を生んでいると警告している。</div>
-        <div class="key-points">
-          <ul>
-            <li>WangはOpenAI幹部のメールへの誤ったアクセスを理由に解雇されたとされるが、本人はIT部門にアクセス権削除を依頼済みだったと主張</li>
-            <li>KorbakはHugging Faceでエージェント群がサンドボックスを脱して外部システムを侵害した事案に関連、外部評価者との連携は規範内だったと主張</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>TechCrunch</span>
-          <span>⏱ 5 min read</span>
           <span>2026-10-08</span>
-          <span class="engagement">▲ 307</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-ai">AI</span>
+          <span class="tag tag-frontend">Frontend</span>
           <span class="content-type">📜 解説</span>
-          <h3><a href="https://mtlynch.io/why-are-coding-agents-so-dumb/">「コーディングエージェントはなぜ賢くならないのか」——弱点はモデルでなくエージェント側のソフト</a></h3>
+          <h3><a href="https://jjenzz.com/making-react-context-cheap/">React CompilerでContextの再レンダリングを実質ゼロコスト化</a></h3>
         </div>
-        <div class="summary">開発者Michael Lynchは、コーディングエージェントが賢くならない原因は基盤モデルではなくエージェント側のソフトウェアにあると論じる。2025年2月以降モデルの性能は目に見えて向上した一方、エージェントの作業管理能力は足踏みしたままだとし、OpenCodeが約1,500行のパスフレーズ機能を10個のサブタスクに分割し1つずつ順番に実行した例を挙げる。</div>
+        <div class="summary">Reactの`calculateChangedBits`廃止以降、Contextの値が変わると全consumerが再レンダリングされ、5000個のラジオボタンで1クリックが全件を再描画する問題が残っている。著者はReact Compilerが各コンポーネントのJSXや中間値をレンダリングごとに自動メモ化する点に着目し、`useSyncExternalStore`ストアや手動メモ化と同等以上の速度を、追加コードなしで実現できることを示した。</div>
         <div class="key-points">
           <ul>
-            <li>OpenCodeは約1,500行のパスフレーズ機能を10サブタスクに分割し並列化せず逐次実行、安価なモデルへの作業委任もできない</li>
-            <li>Claudeが自身の機能をウェブ検索で調べ、ある機能呼び出しが13GBのダウンロードを引き起こした例を報告</li>
+            <li>M3 Pro・Chrome・CPU4倍スロットリングのp95計測で、Clickの処理時間はCompiler版18.4ms対useSyncExternalStore版19.2ms・手動メモ化版18.9ms</li>
+            <li>著者は「再レンダリングの回数より各レンダリングのコストを下げる方が有効」と結論、ベンチマーク自体はCodexで生成した限定的なテストと明記</li>
           </ul>
         </div>
         <div class="meta">
-          <span>mtlynch.io</span>
+          <span>jjenzz.com</span>
           <span>⏱ 4 min read</span>
-          <span>2026-10-08</span>
-          <span class="engagement">▲ 27</span>
+          <span>2026-10-09</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.com/rogerbinns/apsw">「APSW」、標準sqlite3モジュールより一歩深くSQLite機能を使うPython拡張</a></h3>
+        </div>
+        <div class="summary">APSW(Another Python SQLite Wrapper)は、SQLiteのC APIをPythonのC APIへ薄く橋渡しするラッパー。他のDBドライバと差し替え可能な互換性より、SQLiteの機能をフルに使う開発者体験を優先する設計で、全文検索・セッション機能・仮想テーブル・VFS・JSON(JSONB含む)・CArrayに対応する。CPython 3.10以降をサポートし、PyPIとGitHubで配布される。</div>
+        <div class="key-points">
+          <ul>
+            <li>標準のsqlite3モジュールは他DBドライバとの互換性重視、APSWはSQLite固有機能(仮想テーブル・VFSなど)を使い切る方向に振った設計</li>
+            <li>GitHubリポジトリは894スター・108フォーク・コミット5879件、ライセンスは「OSI承認オープンソースライセンスなら何でも」という方式</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-10-11</span>
+          <span class="engagement">⭐ 894</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://betterwispr.com/">無料・オープンソースのMac用ディクテーションアプリ「BetterWispr」</a></h3>
+        </div>
+        <div class="summary">Option+Spaceを押して話すだけで、フィラーワードや言い直しを除去したテキストをどのアプリにも挿入できるMac用ディクテーションアプリ。Apple純正音声認識に加えParakeet TDT v3(欧州言語25種)・Parakeet日本語・WhisperKit経由のWhisper Large v3 Turboをオフラインで実行でき、クラウド送信なしで動作する。Apache 2.0でソースも公開されている。</div>
+        <div class="key-points">
+          <ul>
+            <li>アプリごとの文体設定・独自語彙の学習・句読点や段落区切りの音声コマンド(英語のみ)に対応、会議音声を要約するNotetaker機能も搭載</li>
+            <li>Claude CodeやCodexなど外部API連携を選ぶとその分の音声・文字起こしは各プロバイダへ送信される点に注意、既定はローカル処理</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>BetterWispr</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-10-10</span>
+          <span class="engagement">▲ 140</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://linus.dev/posts/kiesel-devlog-15/">Zig製JSエンジン「Kiesel」が0.4.0公開、ポリモーフィックinline cacheで20〜30%高速化</a></h3>
+        </div>
+        <div class="summary">Zig製JavaScriptエンジン「Kiesel」の0.4.0がリリースされた。`Kiesel.args`/`Kiesel.env`を追加し、イテレータに`chunks`・`includes`・`join`を実装、Await Dictionary提案に対応した。ポリモーフィック・計算・プロトタイププロパティアクセスをカバーするinline cacheも追加され、マイクロベンチマークで20〜30%の高速化を確認した。SerenityOS向けポートも進展している。</div>
+        <div class="key-points">
+          <ul>
+            <li>inline cacheはポリモーフィック・計算プロパティ・プロトタイププロパティアクセスをカバーし、マイクロベンチマークで20〜30%高速化</li>
+            <li>`Kiesel.args`/`Kiesel.env`とイテレータメソッド`chunks`/`includes`/`join`を追加、Await Dictionary提案への対応とSerenityOSポートも進展</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>linus.dev</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-10-10</span>
         </div>
       </div>
     </div>
@@ -245,19 +267,40 @@
         <div class="card-header">
           <span class="tag tag-security">Security</span>
           <span class="content-type">📜 解説</span>
-          <h3><a href="https://zenn.dev/bita/articles/1616afdb93c4a6">2026年9〜10月の情報漏洩19件、公表文を全部読んで考えたこと</a></h3>
+          <h3><a href="https://songmu.jp/riji/entry/2026-10-11-github-actions-artifact-attestations.html">GitHub ActionsでSLSA Level 3準拠のアーティファクト正当性証明パイプラインを組む</a></h3>
         </div>
-        <div class="summary">著者は2026年9月11日〜10月5日に公表された情報漏洩・不正アクセス事案19件の公表文を全て読み、傾向をまとめた。原因が脆弱性と明記されたのは6件のみで、ムラウチやホワイトエッセンスのように侵入後に被害が複数システムへ広がった例もある。19件の公表文にAIへの言及は一件もなく、悪用された脆弱性がCVEや製品名まで特定された例もゼロだったとしつつ、AnthropicによるGLM-5.3評価(既知のChrome脆弱性で410回中50回攻撃コード完成)を根拠に、AIが「穴を見つけて突くコスト」を下げている可能性を指摘する。</div>
+        <div class="summary">開発者のローカルビルドはもはや信頼できないという前提で、ソースを特定のGitタグに固定し再現可能な手順で公開環境でビルドし、attestationを添付して不変のリリースにする——という原則で、GitHub ActionsだけでSLSA Build Track Level 3に到達するパイプラインを構築する記事。`actions/attest`とSigstoreの短命署名証明書、GitHubのリリース不変化設定を組み合わせる。</div>
         <div class="key-points">
           <ul>
-            <li>分析対象19件のうち原因が脆弱性と明記されたのは6件、公表文中のAI言及・CVE特定事例はいずれもゼロ件</li>
-            <li>対策として「更新できる状態を保つ」「構成とコードを継続的に検証」「侵入前提で被害を縮小」の3点を提示</li>
+            <li>ビルドをreusable workflow化してSLSA Level3の分離要件を満たし、ジョブ権限は`attestations: write`・`contents: read`・`id-token: write`に限定</li>
+            <li>linux/darwin/windows×amd64/arm64の6ターゲットをビルドし`gh attestation verify`で検証、再現性確保のためgoxz・Minillaへ修正をコントリビュート(PR #51・#56・#354)</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>songmu.jp</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-10-11</span>
+          <span class="engagement">🔖 54</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://zenn.dev/uhyo/articles/react-profession-bench-20">ReactベンチマークでClaude Haiku 5.5がSonnet 5.5(high)を上回る結果に</a></h3>
+        </div>
+        <div class="summary">著者独自のReact習熟度ベンチマーク第20回で、Claude Codeに13個のReact実装仕様を3回ずつ実装させ6カテゴリで採点した。Haiku 5.5はhigh設定で83.82点(26条件中12位)、max設定で85.56点(10位)を記録し、high設定ではSonnet 5.5(81.08点)を上回った。著者はSonnet 5.5 highが1実装あたり中央値0.9分で完了したのに対しHaiku 5.5 highは2.2分かけており、優位は作業の丁寧さの差だと分析する。</div>
+        <div class="key-points">
+          <ul>
+            <li>最高点はOpus 5.5のmax設定94.46点、Haiku 5.5はOpus 4.8のmax(84.03点)を上回った</li>
+            <li>effortをhighからmaxに上げても向上は1.74点のみ、78実装中6件がコンパイル失敗しいずれも仕様008(編集禁止ファイルの扱い)に起因</li>
           </ul>
         </div>
         <div class="meta">
           <span>Zenn</span>
-          <span>⏱ 7 min read</span>
-          <span>2026-10-08</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-10</span>
         </div>
       </div>
 
@@ -265,126 +308,39 @@
         <div class="card-header">
           <span class="tag tag-ai">AI</span>
           <span class="content-type">📜 解説</span>
-          <h3><a href="https://qiita.com/suwa_nobu/items/837c03e66ba03ee636ea">Claude Code の Explore を Haiku にする設定は、2.1.293 に上げるだけで Haiku 5.5 になった。費用は34〜43%減</a></h3>
+          <h3><a href="https://qiita.com/charge0315/items/fcec85cc5250e39bab97">Claude Codeに任せる範囲と止める仕組み——計画モード・SessionStartフック・/loopの使い分け</a></h3>
         </div>
-        <div class="summary">Claude Code 2.1.293で、サブエージェントのモデル指定`model: haiku`がHaiku 5.5(claude-haiku-5-5)を指すようになったと報告する記事。設定ファイルの変更は不要で、Claude Codeを上げるだけで切り替わる。express 4.21.2を題材に軽い調べもの・重い調べものを各5回ずつ計測したところ、全体費用の中央値は既定(Opus)比で軽い調べものが34%減、重い調べものが43%減少し、Explore自体の費用はHaiku 4.5比14〜28分の1に下がった。</div>
+        <div class="summary">Claude Codeを自律的に働かせつつ、取り消せない操作は人間の承認を必須にするガードレール設計を紹介する記事。「取り消せるか」「ローカル環境の外に影響するか」の2軸で操作を仕分け、コミット・公開リリース・ファイル削除・課金が絡む操作は承認必須、コード編集やテスト実行は無承認で進められるとする。ルールはグローバルCLAUDE.mdに記述し、プロジェクトごとの重複ドキュメントは持たない。</div>
         <div class="key-points">
           <ul>
-            <li>全体費用の中央値はOpus比で軽い調べもの34%減・重い調べもの43%減、30回の検証すべてで正解</li>
-            <li>Haiku 5.5の単価は$0.10/$0.50(100万トークン)でHaiku 4.5の10分の1、Bedrock経由では引き続きHaiku 4.5を指す点に注意</li>
+            <li>SessionStartフックは`.claude/settings.json`からシェルスクリプトを実行し毎回確実に走る一方、プロンプト内の指示は忘れられやすいと指摘</li>
+            <li>計画が承認済みでも、実際に課金が発生する呼び出し(本物のLLMを呼ぶE2Eテストなど)は別途の支出前確認を必須にする</li>
           </ul>
         </div>
         <div class="meta">
           <span>Qiita</span>
           <span>⏱ 5 min read</span>
-          <span>2026-10-09</span>
+          <span>2026-10-11</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
+          <span class="tag tag-ai">AI</span>
           <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://zenn.dev/greendrop/articles/2026-10-09-4664c51706f346">Renovate の更新 PR を AI エージェントにレビューさせ、自動マージまでつなげる</a></h3>
+          <h3><a href="https://qiita.com/yakumo_09/items/6f3936d9f7255a4259d9">AWS AgentCore EvaluationsをCI/CDに組み込み、エージェントの品質ゲートを自動化</a></h3>
         </div>
-        <div class="summary">Renovateが作るminor/majorの更新PRを、GitHub Actions上のClaude Code(claude-code-action)にレビューさせ自動マージまでつなげる仕組みを紹介する。AIはPRごとにapprove・changes_required・human_reviewのいずれかを判定し、minorはAIがapproveすれば自動マージ、majorは判定結果を示すだけで人がマージする。レビューを担うジョブには読み取り権限とRead・Grep・Globのみを与え、書き込みは別ジョブに分離した。</div>
+        <div class="summary">AgentCore Runtime上のStrands Agents(Claude Haiku 4.5)をdevからstgへ昇格させる前に、AgentCore on-demand評価でゲートする仕組みを構築した記事。スコアを平均するだけでは、北海道の配送料を3回全て間違えた質問でも全体の正解率平均が0.8の閾値を超えてしまう問題があり、「重要質問は3トライアル全てで正解率1.0」という追加ルールを設けた。</div>
         <div class="key-points">
           <ul>
-            <li>判定はJSONスキーマで受け取り、レビュー1件あたりタイムアウト20分・最大40ターン・差分や本文の上限6万文字を設定</li>
-            <li>自動マージは環境変数`DEPS_AI_REVIEW_AUTO_MERGE`で有効化、既定は無効で判定結果を確認してから有効化する運用を想定</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Zenn</span>
-          <span>⏱ 5 min read</span>
-          <span>2026-10-09</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-security">Security</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://qiita.com/Koukyosyumei/items/8aaa44ff15a3b404fd8b">攻撃者はWebアプリのどこを狙う？ 初心者でも今すぐできるセキュリティチェックリスト</a></h3>
-        </div>
-        <div class="summary">攻撃者の視点でWebアプリケーションを点検するチェックリスト記事。`.env`や`.git/config`など設定ファイルの外部露出、GitHubの過去コミットに残る秘密情報、XSS・SQLインジェクション・Command Injectionといった入力の悪用、IDORやMass Assignmentによる権限昇格、SSRFやPath Traversalなどサーバー内部への攻撃まで、最初に確認すべき10項目として整理する。</div>
-        <div class="key-points">
-          <ul>
-            <li>GitHubの現在・過去コミットをGitleaksでスキャンし流出キーは失効・再発行、SQLインジェクション対策はパラメータ化クエリと列名の許可リスト</li>
-            <li>SSRFはプレビューやWebhook機能での内部アドレスアクセス防止を確認、OAuth/SSOはリダイレクトURI制限とstate/nonce検証・PKCE利用を推奨</li>
+            <li>8問×3トライアル=24セッションのゲート実行は通常4〜5分、ランタイムの切替は約11秒、コストはゲート1回あたり概算1〜2ドル</li>
+            <li>GitHubの必須チェックはスキップされたジョブを合格扱いにしてしまう欠陥があり、明示的に失敗させるよう修正</li>
           </ul>
         </div>
         <div class="meta">
           <span>Qiita</span>
-          <span>⏱ 6 min read</span>
-          <span>2026-10-09</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="section" id="code-tools">
-      <div class="section-title">🛠 Code &amp; Tools</div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
-          <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://github.com/microsoft/mxc">Microsoft、未信頼コードを隔離するサンドボックスSDK「MXC」をOSS公開</a></h3>
-        </div>
-        <div class="summary">Microsoftは、未信頼なコード実行を隔離するMITライセンスのSDK「MXC」をOSS公開した。OSネイティブなプロセスサンドボックスからフルVMまで9種類のバックエンドを1つのコンテナモデルと型付きSDKの背後に統一し、Rust・.NET・Node向けSDKを提供する。ファイルシステム・ネットワーク・UIそれぞれに対するポリシーを指定でき、監査モードは全てのサンドボックス保護を無効化するため未信頼コードには使用できない。</div>
-        <div class="key-points">
-          <ul>
-            <li>バックエンドはWindows Sandbox・LXC・Bubblewrap・Seatbelt・MicroVM・Hyperlightなど9種類、既定はWindows=ProcessContainer、Linux=Bubblewrap、macOS=Seatbelt</li>
-            <li>ビルドにはRust 1.93・Node.js 24以上が必要、crates.io・NuGet・npmの3パッケージマネージャに公開</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>GitHub</span>
-          <span>⏱ 3 min read</span>
-          <span>2026-10-09</span>
-          <span class="engagement">⭐ 2.4k</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-frontend">Frontend</span>
-          <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://www.non-standardworld.co.jp/stone-engine-js/">印刷物基準の日本語組版エンジンをJavaScriptに移植した「stone-engine.js」公開</a></h3>
-        </div>
-        <div class="summary">non-standard worldは、日本デザインセンターのiOS用日本語組版エンジン「stone」をJavaScriptへ移植した「stone-engine.js」をオープンソースで公開した。縦中横や禁則処理、約物の詰め方など印刷物水準の組版をWebで再現でき、導入はコマンド1行で済む。和文・欧文・絵文字ごとに異なるフォントと拡大率を指定でき、文字ごとの位置や矩形を取得するデバッグ機能も備える。</div>
-        <div class="key-points">
-          <ul>
-            <li>縦中横は2桁以下の数字を正立、3桁以上の数字・英字は90度回転、禁則処理はCSSのline-break: strict相当の強さ</li>
-            <li>約物の詰め方はwhole/half/stoneの3方式から選択、太字・斜体は実フォントで幅を測って組版する</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>non-standardworld.co.jp</span>
-          <span>⏱ 3 min read</span>
-          <span>2026-10-09</span>
-          <span class="engagement">🔖 122</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-oss">OSS</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://www.unison-lang.org/blog/unison-cloud-open-source/">分散アプリ基盤「Unison Cloud」の主要コンポーネントがOSS化</a></h3>
-        </div>
-        <div class="summary">分散アプリケーション向け言語Unisonの運営元は、マネージドサービス「Unison Cloud」の主要コンポーネントをMITライセンスでオープンソース化した。ノード群を1つの分散コンピュータとして扱うプログラミングモデルを提供するクライアントは以前からOSSだったが、動的にスケールするワーカーノード「Nimbus」、クラスタ管理を担うHaskell製コントロールプレーン、管理UIが新たにOSS化された。</div>
-        <div class="key-points">
-          <ul>
-            <li>DynamoDBベースのトランザクショナルストレージとS3ベースのオブジェクトストレージ、型付きサービス間通信を標準機能として提供</li>
-            <li>新たにOSS化されたのはNimbus・Cloud APIサーバー・Cloud UIの3コンポーネント、クライアント自体は以前から公開済み</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Unison Cloud</span>
-          <span>⏱ 2 min read</span>
-          <span>2026-10-08</span>
-          <span class="engagement">▲ 35</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-11</span>
         </div>
       </div>
     </div>
@@ -393,52 +349,45 @@
       <div class="section-title">🔗 Quick Links</div>
 
       <div class="quick-link">
-        <span class="tag tag-security">Security</span>
-        <a href="https://www.nikkei.com/article/DGXZQOJC09B7T0Z01C26A0000000/">JR九州、メアド最大130万件漏洩か ソフトバンク子会社不正アクセス</a>
-        <span class="quick-summary">— IDCFクラウドへの不正アクセスが波及し、ウェブ会員のメールアドレス最大130万件が漏洩した可能性。</span>
-        <span class="meta">Nikkei</span>
+        <span class="tag tag-frontend">Frontend</span>
+        <a href="https://anderegg.ca/2026/10/08/i-guess-im-using-webp-now">WebPを気づけば既定で使うようになっていた</a>
+        <span class="quick-summary">— Pixelmator ProでWebP対応が改善し、同じ画質でJPEG/PNGより小さくなる場面が増え既定の書き出し形式に。</span>
+        <span class="meta">anderegg.ca</span>
       </div>
 
       <div class="quick-link">
-        <span class="tag tag-security">Security</span>
-        <a href="https://news.web.nhk/newsweb/na/nd-20261009de57294">アメリカ 運転免許証などの情報 1億5000万件以上が漏えいか</a>
-        <span class="quick-summary">— 南部ルイジアナ州のID確認サービス企業が不正アクセスを受け、運転免許証等の情報1億5000万件超が漏えいした可能性。</span>
-        <span class="meta">NHK News</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-ai">AI</span>
-        <a href="https://typesafe.ai/blog/series-ai">TypeSafe AI、評価額75億ドルで8.7億ドルのシリーズAを調達</a>
-        <span class="quick-summary">— Andreessen Horowitz主導、ソフトウェアが自律的に判断する「マシンネイティブ知能」基盤を開発。</span>
-        <span class="meta">TypeSafe AI</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-security">Security</span>
-        <a href="https://www.anthropic.com/research/launching-opt-in-vuln-finding-service-for-open-source">Anthropic、OSS向け無償脆弱性発見サービス「OSS Scanner」提供開始</a>
-        <span class="quick-summary">— Claude Mythosで自動スキャンし過去半年に脆弱性候補2.9万件超を発見、うち約5,000件をメンテナーへ報告。</span>
-        <span class="meta">Anthropic</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-oss">OSS</span>
-        <a href="https://sheets.works/data-viz/holding-up-the-internet">インターネットを支える無償メンテナたち——タイムゾーンDBなど23プロジェクトの実態</a>
-        <span class="quick-summary">— 23の主要OSSプロジェクト中11件が実働担当者1〜2人、タイムゾーンDBやxzなどSovereign Tech Agencyの助成額は多くが0ユーロ。</span>
-        <span class="meta">sheets.works</span>
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://zenn.dev/komlock_lab/articles/besu-local-network-handson">Besuプライベートネットワークをローカル1台でハンズオン構築</a>
+        <span class="quick-summary">— Docker上にバリデータ4台とRPCノード・Grafanaを立て、バリデータ停止からの復旧(約5分)まで検証。</span>
+        <span class="meta">Zenn</span>
       </div>
 
       <div class="quick-link">
         <span class="tag tag-ai">AI</span>
-        <a href="https://commandline.microsoft.com/microsoft-decision-1-model-foundry/">Microsoft、高速な意思決定スコアリングモデル「Decision-1」公開</a>
-        <span class="quick-summary">— Qwen3.5-9Bをベースに後段学習、36ベンチマークで最高精度かつ次点モデルの4.5倍高速と自社発表。</span>
-        <span class="meta">Microsoft</span>
+        <a href="https://qiita.com/yumekui/items/2cdf9d523d20d9a8d98f">GitHub Trendingを毎朝日本語で要約する「github新聞」を自作</a>
+        <span class="quick-summary">— GitHub ActionsがClaude Code routineを呼び出しJSONを検証してからCloudflare Pagesへ自動公開。</span>
+        <span class="meta">Qiita</span>
       </div>
 
       <div class="quick-link">
-        <span class="tag tag-oss">OSS</span>
-        <a href="https://casuarina.org/news/ending-the-casuarina-linux-experiment/">実験的Linuxディストリビューション「Casuarina」プロジェクト終了</a>
-        <span class="quick-summary">— 開発チームが実験の終了と今後のアーカイブ方針を発表。</span>
-        <span class="meta">casuarina.org</span>
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://qiita.com/ishizakahiroshi/items/7eb94a303a1aab6e0f98">個人ダッシュボード「Deskly」にRemote MCPとOAuthを追加</a>
+        <span class="quick-summary">— Cloudflare Workers上でOAuth対応のMCPサーバーを立て、Claude Codeから読み書きできるように。</span>
+        <span class="meta">Qiita</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://qiita.com/vakoya_village/items/f7a457e6f51ad9c8aa4c">GitHub Actionsの『見えない』脆弱性3種を自前の静的解析で検出</a>
+        <span class="quick-summary">— permissions未指定・タグ参照の外部Action・untrustedなgithub.eventの直接埋め込みをYAMLから検出。</span>
+        <span class="meta">Qiita</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://patkerr.co.uk/2d-vehicles/">GTAの原型となった1996年製2Dカー物理エンジンの舞台裏</a>
+        <span class="quick-summary">— 力とトルクによる剛体シミュレーションに「半分当て勘」のタイヤモデルを組み合わせた設計を振り返る。</span>
+        <span class="meta">patkerr.co.uk</span>
       </div>
     </div>
 
