@@ -1,0 +1,91 @@
+{
+  "issue": "2026-10-13",
+  "generated_at": "2026-10-13T07:00:00+09:00",
+  "theme": {
+    "title": "業務エージェントのグラウンディングは「文書検索」から「意味モデル」へ — 既存の業務設定と判断の履歴から、エージェント用の辞書を自動で組み立てる",
+    "category": "semantic-layer",
+    "lede": "社内データを LLM に見せる方法として、この 2 年は「文書をチャンクに切ってベクトル検索する」RAG が既定だった。ただ、CRM や契約管理のような業務システムに住むデータは、検索で見つけても使えないことが多い。列名が new_stage_cd のままでは何を指すのか分からないし、「アクティブな顧客」の定義は部署ごとに違う。9月25日に Microsoft が Business Applications in Work IQ を発表し、9月30日からプレビューを始めた。10月8日には Ironclad が Contract Knowledge Graph を出し、10月6日には SAP がスキルとタスクのグラフを持つ TechWolf の買収を発表した。6月の Snowflake Horizon Context と合わせて見ると、各社が足しているのは検索の精度ではない。データが何を意味するかという「意味モデル」の層であり、作り方・ドメイン別の分割・権限の扱いに共通の設計判断が見えてきた。",
+    "tldr": [
+      "Microsoft の Dataverse semantic model は、テーブル関係・ビュー・フォーム名・列の説明といった既存の設定から意味を自動で抽出し、12時間ごとに再生成する。人が書くのは推論できない社内用語の用語集だけで、Snowflake も既存の SQL や BI ファイルから semantic view を作る Autopilot を出した。",
+      "汎用の意味層では扱いきれない「過去にどう判断したか」は、ドメイン別のグラフとして切り出されている。Ironclad は条項・義務・承認済みの立場・過去の交渉判断を結ぶ契約グラフを、SAP は TechWolf のタスクとスキルのグラフを、エージェントのグラウンディング層として位置付けた。",
+      "権限は意味層の外で後からかけるのではなく、意味層の中で評価する方向にそろってきた。Snowflake は意味定義をガバナンスエンジンの内側に置いてクエリ時に強制すると明記し、Work IQ はテナント・環境・アプリの 3 段の設定と、ユーザー権限の範囲内に限った「governed actions」で書き込みを制御する。"
+    ],
+    "sections": [
+      {
+        "heading": "意味モデルは人が書くより、既存の業務設定から推論させる",
+        "body_html": "<p>Microsoft の Dataverse semantic model は 3 つの要素でできている。対象テーブルを絞った「データスコープ＋セマンティックインデックス」、システムが推論する「シグナル」、人が足す「用語集」だ。シグナルの中身は、テーブル間のリレーション、結合条件付きの公開ビューとサブグリッドビュー、フォームの表示名、テーブルと列の説明文、そして既定ではオフのサンプル行。Quick Find などのシステムビューと個人ビューは除外される。モデルは Copilot を有効にした時点で自動で用意され、12時間ごとに再生成される。人が書くのは、社内の略語や造語のように設定から推論できない語だけだ。Snowflake も Horizon Context で、既存の SQL・Tableau・Power BI のファイルから semantic view を生成する Semantic View Autopilot を発表している。</p><p>各社が「意味は人が定義するもの」という前提を捨てた理由は、セマンティックレイヤーを手で書く運用が BI の時代から続かなかったからだ。業務システムには、営業部門が日常的に使っているビューや、管理者が引いたリレーションという形で、組織の「何が重要か」がすでに書かれている。それを読めば初期構築のコストはほぼゼロになる。その代わり、放置された古いビューもそのまま意味として取り込まれる。Microsoft がシグナルを個別にオン・オフできる設定と除外の仕組みを最初から用意しているのは、その副作用への対策と読める。</p>",
+        "examples": [
+          {
+            "product": "Microsoft Dataverse semantic model（Business Applications in Work IQ）",
+            "approach": "リレーション・ビュー・フォーム名・列の説明から意味を自動抽出し、用語集で補う。12時間ごとに再生成",
+            "detail": "どのシグナルを使い、どのビューを除外するかまで公式ドキュメントに書かれている。複数のエージェントが同じ意味モデルを参照し、回答をそろえることを目的に挙げている点も、エージェント時代の設計として代表的だ。",
+            "source_url": "https://learn.microsoft.com/en-us/power-apps/maker/data-platform/semantic-model-overview"
+          },
+          {
+            "product": "Snowflake Horizon Context（Semantic View Autopilot / Semantic Studio）",
+            "approach": "既存の SQL・Tableau・Power BI ファイルから semantic view を作り、エージェントはまず semantic view を探してから生テーブルにフォールバックする",
+            "detail": "データ基盤側の意味モデルの代表例。エージェント CoCo の探索順を「semantic view が先、テーブルは後」と決め、semantic view を MCP 経由で Claude や Cursor にも公開する。",
+            "source_url": "https://www.snowflake.com/en/blog/horizon-context-governed-context/"
+          }
+        ],
+        "takeaway": "社内データ向けのエージェントを作るなら、最初に用語集を手で書き始めるより、既存のビュー・リレーション・ダッシュボード定義を意味の材料として棚卸しする方が早い。その際は、使われていないビューを先に掃除しておく。古いビューを消さずに有効化すると、古い定義がそのままエージェントの答えになる。"
+      },
+      {
+        "heading": "「過去にどう判断したか」は、ドメイン別のグラフとして切り出す",
+        "body_html": "<p>テーブルと列の意味が分かっても、契約レビューや人員配置のような業務では答えが出ない。必要なのは「この条項について自社はこれまでどの立場を承認してきたか」「この職務は実際にどのタスクで構成されているか」という、判断と実態の履歴だ。Ironclad の Contract Knowledge Graph は、条項・関係・義務・過去の判断を契約とワークフローをまたいで結び、Contract Review Agent は承認済みの立場と過去の判断、取引履歴を基準に契約書を赤入れする。SAP が買収を発表した TechWolf は、職務の中のタスク、人が持ち実際に使っているスキル、外部の労働市場の 3 つを、接続された HR・業務システムからモデル化する。</p><p>汎用の意味層にこれを載せない理由は、関係の種類がドメインによって根本的に違うからだ。「条項 A は先例 B を根拠に承認された」と「社員 C はタスク D でスキル E を使っている」を、同じスキーマで扱うのは無理がある。どちらも、担当者が辞めた後も組織に残る暗黙知を構造化し、エージェントがその場で推論し直さなくて済むようにすることを価値として打ち出している。SAP は、このグラウンディング層によってトークン使用が効率化され、エージェントの運用コストが下がるとも述べている（具体的な数値は示していない）。</p>",
+        "examples": [
+          {
+            "product": "Ironclad Agent / Contract Knowledge Graph",
+            "approach": "条項・義務・承認済みの立場・過去の交渉判断をグラフにし、レビュー用エージェントの判断基準にする",
+            "detail": "一般的な学習データではなく、自社の先例を根拠に赤入れさせる設計。あわせて RBAC に代わるポリシーベースのアクセス制御（PBAC）を導入しており、地域チームには関係する契約だけを見せる。",
+            "source_url": "https://ironcladapp.com/news/press-releases/ironclad-launches-new-ai-agents-grounded-in-commercial-context"
+          },
+          {
+            "product": "SAP / TechWolf（買収発表、2026年第4四半期にクロージング予定）",
+            "approach": "タスク・スキル・労働市場のグラフを、Joule の人事系エージェントのグラウンディング層にする",
+            "detail": "人事ドメイン専用のグラフを、汎用データ基盤ではなく買収で手に入れる判断。SAP の幹部は、このグラフを仕事とスキルの計画、タレントマネジメントに関するエージェントの問い合わせに対する優れたグラウンディング層だと説明している。",
+            "source_url": "https://news.sap.com/2026/10/sap-to-acquire-techwolf-evidence-based-work-age-of-ai/"
+          }
+        ],
+        "takeaway": "エージェントに求める答えが「データの値」なら意味モデルで足りる。「過去の判断との整合」まで求めるなら、判断そのものを結果と根拠のペアでノードとして保存する層が別に要る。後者を文書検索で代用すると、先例の「結論」は見つかっても「なぜそう決めたか」が欠けた答えになりやすい。"
+      },
+      {
+        "heading": "権限は意味層の外でかけず、意味層の中で評価する",
+        "body_html": "<p>意味モデルを複数のエージェントで共有すると、「誰に何を見せるか」をどこで判定するかが問題になる。Snowflake は Horizon Context について、意味定義はガバナンスエンジンの内側にあってクエリ時に強制され、コピーもキャッシュもされないと書いている。エージェントが使う Universal Search も、ランキングに利用頻度を、フィルタにアクセスポリシーを使う。Microsoft の Work IQ は、テナント（Microsoft 365 管理センター）、環境（Power Platform 管理センター）、アプリ（Power Apps のメーカーポータル）の 3 段の設定で、どのデータが Copilot と MCP クライアントに渡るかを決める。書き込みは「governed actions」として、変更案の提示、必要な承認、元レコードの更新という順で、ユーザーの権限の範囲内に限って実行される。</p><p>この形に収束したのは、意味層が実質的に「全社データへの新しい入口」になるからだ。意味モデルを抽出して別の場所にコピーすると、元システムで権限が変わってもコピー側には反映されない。だから各社は、意味を元のガバナンスの内側に置いたまま評価する構成を選んでいる。一方で、別の境界をまたぐ問題はまだ残る。Microsoft は、Dataverse のデータを Microsoft 365 Copilot が取り出して提示した時点で、元サービスの PCI DSS や HITRUST の認証範囲は自動では延長されないと注記している。さらに Work IQ は、9月30日以降に作成された新規の本番環境では既定でオンになり、11月からは既存環境にも広がる。既定オンの入口であることを前提にした棚卸しが必要になる。</p>",
+        "examples": [
+          {
+            "product": "Snowflake Horizon Context（Universal Search）",
+            "approach": "意味定義をガバナンスエンジン内に置き、クエリ時にポリシーを強制。検索はアクセスポリシーでフィルタする",
+            "detail": "「コピーもキャッシュもしない」と明言しており、後付けの意味レイヤー製品との違いをこの一点に置いている。権限の評価場所を設計の中心に据えた代表例。",
+            "source_url": "https://www.snowflake.com/en/blog/horizon-context-governed-context/"
+          },
+          {
+            "product": "Microsoft Business Applications in Work IQ（既定設定）",
+            "approach": "テナント・環境・アプリの 3 段の設定で公開範囲を決め、新規本番環境では既定でオンにする",
+            "detail": "EEA/EU、政府系、非本番環境を既定オンの例外とする、PCI DSS や FedRAMP の境界を越える可能性を明記する、など運用上の論点が一次資料にまとまっている。",
+            "source_url": "https://learn.microsoft.com/en-us/power-platform/admin/business-applications-work-iq/default-settings"
+          }
+        ],
+        "takeaway": "意味モデルを導入するときに最初に確認すべきなのは、権限が元システムの側で評価されるのか、意味層のコピーで評価されるのかだ。後者なら、権限変更が反映されるまでの遅延がそのまま情報漏えいの窓になる。"
+      }
+    ]
+  },
+  "editorial": "RAG が「関連する文書を探す」技術だったのに対し、意味モデルは「この組織でこの言葉が何を指すか」を固定する技術で、解いている問題が違う。面白いのは、各社がその意味を新しく書かせるのではなく、すでに業務で使われているビュー、先例、タスクの記録から掘り出している点だ。エージェントの賢さが、モデルの性能より、業務システムがどれだけ手入れされてきたかで決まる局面に入りつつある。",
+  "quick_picks": [
+    {
+      "title": "Microsoft、Work IQ を業務アプリへ拡張 — 意味モデル・Business skills・MCP サーバーをまとめて提供",
+      "summary": "Dynamics 365 ブログで、Work IQ に業務アプリのデータを取り込む構想と、9月30日開始のプレビュー、変更案・承認・更新の順で書き込む governed actions が説明された。本号の第1節と第3節で扱った意味モデルと権限設計の全体像を示す一次資料だ。",
+      "url": "https://www.microsoft.com/en-us/dynamics-365/blog/it-professional/2026/09/25/work-iq-business-and-workplace-intelligence-in-the-flow-of-work/"
+    },
+    {
+      "title": "Databricks、Genie One を GA — 中核に自己改善型の Genie Ontology",
+      "summary": "Databricks はデータ・ドキュメント・タグ・アプリ・人をまたぐ知識の網として Genie Ontology を位置付け、Slack や Jira などの 50 を超えるアプリから業務知識を継続的に抽出するとした。既存の業務記録から意味を掘り出すという本号の第1節と同じ方向の設計だ。",
+      "url": "https://www.databricks.com/company/newsroom/press-releases/databricks-launches-genie-one-all-new-agentic-coworker-every-team"
+    },
+    {
+      "title": "Open Semantic Interchange（OSI）の仕様が公開",
+      "summary": "Snowflake・Salesforce・dbt Labs などが進める、意味定義をツール間で受け渡すためのベンダー中立な仕様の初版が2026年1月に Apache 2.0 で公開され、ワーキンググループには Databricks なども加わった。意味モデルが特定ベンダーの中に閉じるかどうかを左右する標準で、Horizon Context もこの形式の取り込みに対応している。",
+      "url": "https://www.snowflake.com/ja/blog/open-semantic-interchanges-specs-finalized/"
+    }
+  ]
+}

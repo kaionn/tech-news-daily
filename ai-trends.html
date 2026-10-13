@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI プロダクト動向 | Tech News Daily</title>
-<meta name="description" content="2025年秋、エージェントに買い物をさせる仕組みは「チャットの中で決済まで完結させる」一本の流れとして語られていた。OpenAI と Stripe の ACP、Google の AP2、そして 2026年1月の UCP。どれが勝つかという…">
+<meta name="description" content="社内データを LLM に見せる方法として、この 2 年は「文書をチャンクに切ってベクトル検索する」RAG が既定だった。ただ、CRM や契約管理のような業務システムに住むデータは、検索で見つけても使えないことが多い。列名が new_sta…">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Tech News Daily">
-<meta property="og:title" content="エージェントコマースは「一つの決済プロトコル」をやめた — 発見・同意の証明・本人ログインを別レイヤーに切り分ける設計へ | AI プロダクト動向">
-<meta property="og:description" content="2025年秋、エージェントに買い物をさせる仕組みは「チャットの中で決済まで完結させる」一本の流れとして語られていた。OpenAI と Stripe の ACP、Google の AP2、そして 2026年1月の UCP。どれが勝つかという…">
+<meta property="og:title" content="業務エージェントのグラウンディングは「文書検索」から「意味モデル」へ — 既存の業務設定と判断の履歴から、エージェント用の辞書を自動で組み立てる | AI プロダクト動向">
+<meta property="og:description" content="社内データを LLM に見せる方法として、この 2 年は「文書をチャンクに切ってベクトル検索する」RAG が既定だった。ただ、CRM や契約管理のような業務システムに住むデータは、検索で見つけても使えないことが多い。列名が new_sta…">
 <meta property="og:url" content="https://tech-news.kaion-lab.com/ai-trends.html">
 <meta property="og:image" content="https://tech-news.kaion-lab.com/apple-touch-icon.png">
 <meta name="twitter:card" content="summary">
@@ -74,7 +74,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 <div class="container">
 <header>
   <h1>🧠 AI プロダクト動向</h1>
-  <p class="date">2026-10-10 発行（読了 9 分）</p>
+  <p class="date">2026-10-13 発行（読了 9 分）</p>
   <p class="tagline">実プロダクトのアーキテクチャ・使用例から AI 開発の現在地を週 3 回・1 号 1 テーマで深掘り</p>
   <nav class="site-nav">
     <a href="./">📰 日刊ダイジェスト</a>
@@ -85,93 +85,94 @@ footer a{color:var(--primary-500);text-decoration:none}
 </header>
 
 <div class="theme-hero">
-  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">AGENTIC-COMMERCE</span></span>
-  <h2>エージェントコマースは「一つの決済プロトコル」をやめた — 発見・同意の証明・本人ログインを別レイヤーに切り分ける設計へ</h2>
-  <p class="lede">2025年秋、エージェントに買い物をさせる仕組みは「チャットの中で決済まで完結させる」一本の流れとして語られていた。OpenAI と Stripe の ACP、Google の AP2、そして 2026年1月の UCP。どれが勝つかという構図で見られがちだったが、この 1 年で起きたのは勝敗ではなく分業だ。OpenAI は 3月にチャット内決済の初版から手を引き、ACP を商品発見の側へ広げた。Google と Mastercard は「何に同意したか」の証明を FIDO Alliance に預けた。10月6日には Google が UCP の Merchant Center ハブを米国で展開し始め、同じ日に Meta と Sierra がエージェントのログインと権限だけを扱う Personal Agent Protocol を発表、Agentic AI Foundation は「エージェントコマースのプロトコルは一つではない」と題した整理を出した。商品を見つけること、支払いに同意したと証明すること、誰の代理として店に入るかを示すこと — 三つは別の問題として、別の層で解かれ始めている。</p>
+  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">SEMANTIC-LAYER</span></span>
+  <h2>業務エージェントのグラウンディングは「文書検索」から「意味モデル」へ — 既存の業務設定と判断の履歴から、エージェント用の辞書を自動で組み立てる</h2>
+  <p class="lede">社内データを LLM に見せる方法として、この 2 年は「文書をチャンクに切ってベクトル検索する」RAG が既定だった。ただ、CRM や契約管理のような業務システムに住むデータは、検索で見つけても使えないことが多い。列名が new_stage_cd のままでは何を指すのか分からないし、「アクティブな顧客」の定義は部署ごとに違う。9月25日に Microsoft が Business Applications in Work IQ を発表し、9月30日からプレビューを始めた。10月8日には Ironclad が Contract Knowledge Graph を出し、10月6日には SAP がスキルとタスクのグラフを持つ TechWolf の買収を発表した。6月の Snowflake Horizon Context と合わせて見ると、各社が足しているのは検索の精度ではない。データが何を意味するかという「意味モデル」の層であり、作り方・ドメイン別の分割・権限の扱いに共通の設計判断が見えてきた。</p>
 </div>
 
 <div class="tldr">
   <div class="label">TL;DR — 3 行で</div>
   <ul>
-    <li>UCP は加盟店が /.well-known/ucp に能力を公開し、エージェント側と「共通する能力だけ」を交渉で残す設計。OpenAI も ACP の主軸をチャット内決済から商品カタログの受け渡しへ移し、決済は加盟店側に戻した。</li>
-    <li>支払いの同意は「スコープ付きトークン」と「署名付きの意図の記録」で証明する方向に収束した。Stripe の SPT は加盟店・金額・期限で縛り、AP2 と Mastercard の Verifiable Intent は FIDO Alliance で標準化が進む。</li>
-    <li>Meta と Sierra の Personal Agent Protocol は決済ではなく「エージェントが誰の代理で、何をしてよいか」を OAuth 上で扱う層として切り出した。API 単位の少額課金は MPP や x402 が別系統で担う。</li>
+    <li>Microsoft の Dataverse semantic model は、テーブル関係・ビュー・フォーム名・列の説明といった既存の設定から意味を自動で抽出し、12時間ごとに再生成する。人が書くのは推論できない社内用語の用語集だけで、Snowflake も既存の SQL や BI ファイルから semantic view を作る Autopilot を出した。</li>
+    <li>汎用の意味層では扱いきれない「過去にどう判断したか」は、ドメイン別のグラフとして切り出されている。Ironclad は条項・義務・承認済みの立場・過去の交渉判断を結ぶ契約グラフを、SAP は TechWolf のタスクとスキルのグラフを、エージェントのグラウンディング層として位置付けた。</li>
+    <li>権限は意味層の外で後からかけるのではなく、意味層の中で評価する方向にそろってきた。Snowflake は意味定義をガバナンスエンジンの内側に置いてクエリ時に強制すると明記し、Work IQ はテナント・環境・アプリの 3 段の設定と、ユーザー権限の範囲内に限った「governed actions」で書き込みを制御する。</li>
   </ul>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 1: 発見の層: 加盟店が能力を宣言し、エージェントは共通部分だけを使う</div>
+  <div class="section-title">📐 パターン 1: 意味モデルは人が書くより、既存の業務設定から推論させる</div>
   <div class="theme-section">
-    <p>UCP の仕様は、加盟店が <code>/.well-known/ucp</code> にプロファイルを置き、エージェント側のプラットフォームはリクエストごとに <code>UCP-Agent</code> ヘッダーで自分のプロファイル URL を示す形を取る。プロファイルには対応サービス、<code>dev.ucp.shopping.checkout</code> のような能力、決済ハンドラ、署名鍵が載り、両者が共に宣言した能力だけが残る「積集合」で交渉が決まる。親の能力が無い拡張は落とされ、各能力は両者が対応する最新版が選ばれる。トランスポートは REST・MCP・A2A・埋め込みの 4 種類で、仕様は「トランスポート定義は薄く保つ」と明記している。</p><p>この形に寄った理由は、エージェントごとに個別連携を書く負担を加盟店側が持てないからだ。能力を一度宣言すれば、どのエージェントも同じ入口から読みに来る。決済を同じ層に押し込まなかったことも効いている。OpenAI は 2026年3月、チャット内決済 Instant Checkout の初版から離れて加盟店が自前のチェックアウトを使える形にし、ACP を商品フィード（価格・在庫・配送）を受け渡す発見の層として広げた。Google の Merchant Center ハブも、加盟店サイトへのカート受け渡し・Google 上でのネイティブ決済・アカウント連携を個別に選ぶ作りになっており、「全部を代行する」一択ではない。</p>
+    <p>Microsoft の Dataverse semantic model は 3 つの要素でできている。対象テーブルを絞った「データスコープ＋セマンティックインデックス」、システムが推論する「シグナル」、人が足す「用語集」だ。シグナルの中身は、テーブル間のリレーション、結合条件付きの公開ビューとサブグリッドビュー、フォームの表示名、テーブルと列の説明文、そして既定ではオフのサンプル行。Quick Find などのシステムビューと個人ビューは除外される。モデルは Copilot を有効にした時点で自動で用意され、12時間ごとに再生成される。人が書くのは、社内の略語や造語のように設定から推論できない語だけだ。Snowflake も Horizon Context で、既存の SQL・Tableau・Power BI のファイルから semantic view を生成する Semantic View Autopilot を発表している。</p><p>各社が「意味は人が定義するもの」という前提を捨てた理由は、セマンティックレイヤーを手で書く運用が BI の時代から続かなかったからだ。業務システムには、営業部門が日常的に使っているビューや、管理者が引いたリレーションという形で、組織の「何が重要か」がすでに書かれている。それを読めば初期構築のコストはほぼゼロになる。その代わり、放置された古いビューもそのまま意味として取り込まれる。Microsoft がシグナルを個別にオン・オフできる設定と除外の仕組みを最初から用意しているのは、その副作用への対策と読める。</p>
     <div class="example">
-      <div class="product">Universal Commerce Protocol（Google・Shopify ほか）</div>
-      <div class="approach">/.well-known/ucp のプロファイルと UCP-Agent ヘッダーで双方の能力を突き合わせ、共通部分だけで取引する</div>
-      <div class="detail">仕様の Overview は、バージョン選択と能力交渉を分け、能力は両者が宣言したものだけを残すと定めている。決済方式は payment_handlers に逆ドメイン名で登録し、デジタルウォレット・SCA 付き直接トークン化・AP2 経由の自律エージェントの 3 シナリオを想定する。名前空間の紐付けは「出所を保証するが信頼は保証しない」とも書き、信頼判断をクライアント側に残している。</div>
-      <a href="https://ucp.dev/specification/overview/">📄 一次ソース</a>
+      <div class="product">Microsoft Dataverse semantic model（Business Applications in Work IQ）</div>
+      <div class="approach">リレーション・ビュー・フォーム名・列の説明から意味を自動抽出し、用語集で補う。12時間ごとに再生成</div>
+      <div class="detail">どのシグナルを使い、どのビューを除外するかまで公式ドキュメントに書かれている。複数のエージェントが同じ意味モデルを参照し、回答をそろえることを目的に挙げている点も、エージェント時代の設計として代表的だ。</div>
+      <a href="https://learn.microsoft.com/en-us/power-apps/maker/data-platform/semantic-model-overview">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">Google Merchant Center の UCP 連携ハブ</div>
-      <div class="approach">カート受け渡し・ネイティブ決済・アカウント連携を加盟店が個別に選び、サンドボックスでプロファイルと API を検証してから公開する</div>
-      <div class="detail">ヘルプページは米国で段階的に展開中、オーストラリアとカナダは来年と記載している。先に UCP の実装を済ませ、関心フォームを出して選定を待つ流れで、誰でもすぐ使える状態ではない。決済を Google 上で完結させず、自社サイトへカートを渡す選択肢を正規の能力として持たせている点が、初期の「チャット内で買わせる」構想との違いだ。</div>
-      <a href="https://support.google.com/merchants/answer/16992327?hl=en">📄 一次ソース</a>
+      <div class="product">Snowflake Horizon Context（Semantic View Autopilot / Semantic Studio）</div>
+      <div class="approach">既存の SQL・Tableau・Power BI ファイルから semantic view を作り、エージェントはまず semantic view を探してから生テーブルにフォールバックする</div>
+      <div class="detail">データ基盤側の意味モデルの代表例。エージェント CoCo の探索順を「semantic view が先、テーブルは後」と決め、semantic view を MCP 経由で Claude や Cursor にも公開する。</div>
+      <a href="https://www.snowflake.com/en/blog/horizon-context-governed-context/">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> EC 側でエージェント対応を考えるなら、最初の一手は決済連携ではなく商品データと能力宣言の整備になる。チェックアウトを自社に残すか委ねるかは後から能力単位で選べる設計が主流なので、在庫・価格・返品条件を機械可読で出せる状態を先に作っておくと、どのプロトコルが広がっても流用が効く。</div>
+    <div class="takeaway"><strong>示唆:</strong> 社内データ向けのエージェントを作るなら、最初に用語集を手で書き始めるより、既存のビュー・リレーション・ダッシュボード定義を意味の材料として棚卸しする方が早い。その際は、使われていないビューを先に掃除しておく。古いビューを消さずに有効化すると、古い定義がそのままエージェントの答えになる。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 2: 同意の層: カード番号を渡さず、「何に同意したか」を検証可能な形で残す</div>
+  <div class="section-title">📐 パターン 2: 「過去にどう判断したか」は、ドメイン別のグラフとして切り出す</div>
   <div class="theme-section">
-    <p>支払いの部分は、エージェントにカード情報を持たせない方向で各社がそろった。Stripe の Shared Payment Token（SPT）は、購入者が「買う」を押した時点で AI プラットフォームが発行するトークンで、特定の加盟店と決済総額に紐付き、期限や金額の上限を持ち、いつでも取り消せる。加盟店は SPT の ID を受け取って PaymentIntent を作るだけで、裏の認証情報には触れない。AP2 はさらに踏み込み、ユーザーが承認した内容そのものを暗号学的な証拠として残し、人がその場にいない決済でも後から検証できるようにする。</p><p>同意を独立した層にした理由は、エージェント経由の決済で最も揉めるのが「ユーザーは本当にこれを頼んだのか」という一点だからだ。Agentic AI Foundation の整理は「商品を見つけることと、支払いに同意したと証明することは同じ問題ではない」と書いている。2026年4月には Google が AP2 を、Mastercard が Google と共同開発した Verifiable Intent を FIDO Alliance に提供し、Mastercard と Visa が議長を務める決済作業部会の土台になった。パスキーで認証を標準化した団体に「意図の証明」を預けたことで、ここはベンダー間の競争領域から共通基盤の側に移りつつある。</p>
+    <p>テーブルと列の意味が分かっても、契約レビューや人員配置のような業務では答えが出ない。必要なのは「この条項について自社はこれまでどの立場を承認してきたか」「この職務は実際にどのタスクで構成されているか」という、判断と実態の履歴だ。Ironclad の Contract Knowledge Graph は、条項・関係・義務・過去の判断を契約とワークフローをまたいで結び、Contract Review Agent は承認済みの立場と過去の判断、取引履歴を基準に契約書を赤入れする。SAP が買収を発表した TechWolf は、職務の中のタスク、人が持ち実際に使っているスキル、外部の労働市場の 3 つを、接続された HR・業務システムからモデル化する。</p><p>汎用の意味層にこれを載せない理由は、関係の種類がドメインによって根本的に違うからだ。「条項 A は先例 B を根拠に承認された」と「社員 C はタスク D でスキル E を使っている」を、同じスキーマで扱うのは無理がある。どちらも、担当者が辞めた後も組織に残る暗黙知を構造化し、エージェントがその場で推論し直さなくて済むようにすることを価値として打ち出している。SAP は、このグラウンディング層によってトークン使用が効率化され、エージェントの運用コストが下がるとも述べている（具体的な数値は示していない）。</p>
     <div class="example">
-      <div class="product">Stripe Shared Payment Token</div>
-      <div class="approach">加盟店・金額・期限で範囲を絞ったトークンを発行し、エージェントにも加盟店にも生のカード情報を渡さない</div>
-      <div class="detail">Stripe は信頼を「明示的に付与し、範囲を絞り、コードで強制する」必要があると書き、SPT を加盟店単位・時間または金額の上限付き・取り消し可能・Webhook で監視可能な仕組みとして設計した。Stripe 以外で決済処理する加盟店も SPT を自社の決済代行へ転送できるため、決済代行の乗り換えを強いない点が採用の障壁を下げている。</div>
-      <a href="https://stripe.com/blog/introducing-our-agentic-commerce-solutions">📄 一次ソース</a>
+      <div class="product">Ironclad Agent / Contract Knowledge Graph</div>
+      <div class="approach">条項・義務・承認済みの立場・過去の交渉判断をグラフにし、レビュー用エージェントの判断基準にする</div>
+      <div class="detail">一般的な学習データではなく、自社の先例を根拠に赤入れさせる設計。あわせて RBAC に代わるポリシーベースのアクセス制御（PBAC）を導入しており、地域チームには関係する契約だけを見せる。</div>
+      <a href="https://ironcladapp.com/news/press-releases/ironclad-launches-new-ai-agents-grounded-in-commercial-context">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">FIDO Alliance（AP2・Verifiable Intent の受け入れ）</div>
-      <div class="approach">Google の AP2 と Mastercard の Verifiable Intent を土台に、エージェント起点の決済とユーザー意図の検証を業界仕様にする</div>
-      <div class="detail">2026年4月28日の発表で、エージェント認証の作業部会（CVS Health・Google・OpenAI が議長）と決済作業部会（Mastercard・Visa が議長）が示された。重点領域は検証可能なユーザー指示・エージェント認証・取引の委任の 3 つ。Mastercard は Verifiable Intent を「決済エコシステム全体が頼れるユーザー意図の共通記録」と位置付けている。</div>
-      <a href="https://fidoalliance.org/fido-alliance-to-develop-standards-for-trusted-ai-agent-interactions/">📄 一次ソース</a>
+      <div class="product">SAP / TechWolf（買収発表、2026年第4四半期にクロージング予定）</div>
+      <div class="approach">タスク・スキル・労働市場のグラフを、Joule の人事系エージェントのグラウンディング層にする</div>
+      <div class="detail">人事ドメイン専用のグラフを、汎用データ基盤ではなく買収で手に入れる判断。SAP の幹部は、このグラフを仕事とスキルの計画、タレントマネジメントに関するエージェントの問い合わせに対する優れたグラウンディング層だと説明している。</div>
+      <a href="https://news.sap.com/2026/10/sap-to-acquire-techwolf-evidence-based-work-age-of-ai/">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> エージェントに決済させる機能を作るなら、カード情報を保持させる設計は最初から外し、加盟店・金額・期限で縛ったトークンを都度発行する形にする。加えて「ユーザーが承認した文面と条件」を署名付きで残しておけば、チャージバックや問い合わせのときに説明できる。上限をエージェント自身に決めさせない（ユーザー操作か事前ポリシーで決める）ことも忘れずに。</div>
+    <div class="takeaway"><strong>示唆:</strong> エージェントに求める答えが「データの値」なら意味モデルで足りる。「過去の判断との整合」まで求めるなら、判断そのものを結果と根拠のペアでノードとして保存する層が別に要る。後者を文書検索で代用すると、先例の「結論」は見つかっても「なぜそう決めたか」が欠けた答えになりやすい。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 3: 身元の層: 「誰の代理で、どこまでしてよいか」を決済と切り離して扱う</div>
+  <div class="section-title">📐 パターン 3: 権限は意味層の外でかけず、意味層の中で評価する</div>
   <div class="theme-section">
-    <p>10月6日に Meta と Sierra が発表した Personal Agent Protocol は、決済ではなくエージェントの入店手続きを扱う。エージェントは企業のサイトで提供内容を見つけてユーザーのためにセッションを始め、在庫確認や返品条件の質問ならゲストのまま進める。アカウントに触れる作業では、ユーザーが企業のページでサインインするか、エージェントに保存した資格情報を使い、読み取りのみか書き込みも許すかを選ぶ。土台は OAuth で、サインイン前の質問と後の注文変更が同じセッションとして続く。経路はサイトの通常ページ、MCP や OpenAPI による API、企業側のエージェントの 3 つから企業が選ぶ。</p><p>この層が別に必要になったのは、エージェントによるサイト巡回をめぐって企業との摩擦が表に出てきたからだ。企業から見ると、来訪者が人なのか誰かの代理のエージェントなのか、代理なら何を許されているのかが分からない。決済トークンや意図の証明はお金の部分しか守らず、注文変更やアカウント情報の閲覧はその外にある。発表文は「消費者がエージェントに与えるアクセスを決め、企業がエージェントにできることの範囲を決める」を原則に掲げ、カード情報を共有しない決済対応は今後の拡張に回した。v0.1 仕様は今月後半の公開予定で、現時点ではまだ実装できない点には注意したい。</p>
+    <p>意味モデルを複数のエージェントで共有すると、「誰に何を見せるか」をどこで判定するかが問題になる。Snowflake は Horizon Context について、意味定義はガバナンスエンジンの内側にあってクエリ時に強制され、コピーもキャッシュもされないと書いている。エージェントが使う Universal Search も、ランキングに利用頻度を、フィルタにアクセスポリシーを使う。Microsoft の Work IQ は、テナント（Microsoft 365 管理センター）、環境（Power Platform 管理センター）、アプリ（Power Apps のメーカーポータル）の 3 段の設定で、どのデータが Copilot と MCP クライアントに渡るかを決める。書き込みは「governed actions」として、変更案の提示、必要な承認、元レコードの更新という順で、ユーザーの権限の範囲内に限って実行される。</p><p>この形に収束したのは、意味層が実質的に「全社データへの新しい入口」になるからだ。意味モデルを抽出して別の場所にコピーすると、元システムで権限が変わってもコピー側には反映されない。だから各社は、意味を元のガバナンスの内側に置いたまま評価する構成を選んでいる。一方で、別の境界をまたぐ問題はまだ残る。Microsoft は、Dataverse のデータを Microsoft 365 Copilot が取り出して提示した時点で、元サービスの PCI DSS や HITRUST の認証範囲は自動では延長されないと注記している。さらに Work IQ は、9月30日以降に作成された新規の本番環境では既定でオンになり、11月からは既存環境にも広がる。既定オンの入口であることを前提にした棚卸しが必要になる。</p>
     <div class="example">
-      <div class="product">Personal Agent Protocol（Meta・Sierra）</div>
-      <div class="approach">OAuth を土台に、ゲスト → 読み取り専用 → 書き込みの段階的なアクセスと、チャネルをまたぐセッション継続を定める</div>
-      <div class="detail">Bret Taylor と Clay Bavor の発表（2026年10月6日）で、Genesys・Instinct・Rocket・Shopify・Stripe・Walmart が協力企業に挙がった。企業はエージェントが顧客の代理で動いたことを把握でき、どの経路を開けるかを選べる。より細かい権限、プッシュ通知、カード情報を渡さない決済は今後の拡張として明記されている。</div>
-      <a href="https://sierra.ai/blog/introducing-personal-agent-protocol">📄 一次ソース</a>
+      <div class="product">Snowflake Horizon Context（Universal Search）</div>
+      <div class="approach">意味定義をガバナンスエンジン内に置き、クエリ時にポリシーを強制。検索はアクセスポリシーでフィルタする</div>
+      <div class="detail">「コピーもキャッシュもしない」と明言しており、後付けの意味レイヤー製品との違いをこの一点に置いている。権限の評価場所を設計の中心に据えた代表例。</div>
+      <a href="https://www.snowflake.com/en/blog/horizon-context-governed-context/">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">Machine Payments Protocol（Stripe・Tempo）</div>
-      <div class="approach">エージェントが API や MCP サーバーにリクエスト → サービスが支払い要求を返す → エージェントが承認して資源を受け取る、という機械間の少額課金</div>
-      <div class="detail">人の買い物とは別系統の層として、2026年3月に Stripe と Tempo が共同で公開した。Browserbase はブラウザセッション単位、Parallel は API 呼び出し単位でエージェントに課金する例として挙がっている。法定通貨は SPT 経由、ステーブルコインも受け付け、入金は既存の Stripe 残高に入る。同じ用途を x402 が HTTP 402 を使って担っており、この層はまだ 2 系統が並走している。</div>
-      <a href="https://stripe.com/blog/machine-payments-protocol">📄 一次ソース</a>
+      <div class="product">Microsoft Business Applications in Work IQ（既定設定）</div>
+      <div class="approach">テナント・環境・アプリの 3 段の設定で公開範囲を決め、新規本番環境では既定でオンにする</div>
+      <div class="detail">EEA/EU、政府系、非本番環境を既定オンの例外とする、PCI DSS や FedRAMP の境界を越える可能性を明記する、など運用上の論点が一次資料にまとまっている。</div>
+      <a href="https://learn.microsoft.com/en-us/power-platform/admin/business-applications-work-iq/default-settings">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> 自社サービスにエージェントを受け入れるなら、「エージェント用 API を作る」より先に、ゲストで許す操作・読み取りで許す操作・書き込みが要る操作の三段階に棚卸ししておくとよい。どの標準が広がっても、この区分がそのまま OAuth のスコープ設計になる。課金が呼び出し単位なら、人向けのチェックアウトとは別に MPP や x402 の層を検討する。</div>
+    <div class="takeaway"><strong>示唆:</strong> 意味モデルを導入するときに最初に確認すべきなのは、権限が元システムの側で評価されるのか、意味層のコピーで評価されるのかだ。後者なら、権限変更が反映されるまでの遅延がそのまま情報漏えいの窓になる。</div>
   </div>
   <div class="editorial">
     <span class="label">✍️ 編集後記</span>
-    一年前の議論は「どのプロトコルが勝つか」だったが、実際に起きたのは問題の分解だった。見つける、同意を証明する、代理として入る — それぞれに別の失敗の仕方があり、一つの仕様で全部を背負うと全部が遅れる。OpenAI がチャット内決済から一歩引いたのは後退ではなく、層の境界を引き直した結果と見るのが正確だと思う。
+    RAG が「関連する文書を探す」技術だったのに対し、意味モデルは「この組織でこの言葉が何を指すか」を固定する技術で、解いている問題が違う。面白いのは、各社がその意味を新しく書かせるのではなく、すでに業務で使われているビュー、先例、タスクの記録から掘り出している点だ。エージェントの賢さが、モデルの性能より、業務システムがどれだけ手入れされてきたかで決まる局面に入りつつある。
   </div>
 </div>
 
 <div class="section">
   <div class="section-title">🔗 今号の動向ピックアップ</div>
-  <div class="quick-link"><a href="https://aaif.io/blog/there-is-no-one-agentic-commerce-protocol">Agentic AI Foundation「There Is No One Agentic Commerce Protocol」</a><span class="quick-summary">UCP・AP2・x402・A2A を「リレー」として整理し、Walmart が購入の全行程を追った結果「単一のプロトコルでは完結しない」と結論づけた事例を紹介している。本号の三層の見立てを、標準化団体の側から裏付ける記事だ。</span></div>
-  <div class="quick-link"><a href="https://cointelegraph.com/news/block-brings-bitcoin-lightning-payments-to-x402-for-ai-agents">Block が x402 Foundation に参加し、Bitcoin Lightning を決済手段に追加</a><span class="quick-summary">HTTP 402 でエージェントに支払いを求める x402 に、少額・高頻度向けの Lightning が加わった。本号で扱った機械間決済の層が、MPP と x402 の 2 系統でそれぞれ支払い手段を増やしている動きの一つ。</span></div>
-  <div class="quick-link"><a href="https://blog.google/products/ads-commerce/agentic-commerce-ai-tools-protocol-retailers-platforms/">Google、Universal Commerce Protocol を発表（2026年1月）</a><span class="quick-summary">UCP を発見から購入後サポートまでを覆う共通語彙として打ち出し、AP2・A2A・MCP との互換を明記した最初の発表。加盟店が販売者のまま残る前提を最初から置いていた点が、本号の「決済を加盟店に戻す」流れにつながっている。</span></div>
+  <div class="quick-link"><a href="https://www.microsoft.com/en-us/dynamics-365/blog/it-professional/2026/09/25/work-iq-business-and-workplace-intelligence-in-the-flow-of-work/">Microsoft、Work IQ を業務アプリへ拡張 — 意味モデル・Business skills・MCP サーバーをまとめて提供</a><span class="quick-summary">Dynamics 365 ブログで、Work IQ に業務アプリのデータを取り込む構想と、9月30日開始のプレビュー、変更案・承認・更新の順で書き込む governed actions が説明された。本号の第1節と第3節で扱った意味モデルと権限設計の全体像を示す一次資料だ。</span></div>
+  <div class="quick-link"><a href="https://www.databricks.com/company/newsroom/press-releases/databricks-launches-genie-one-all-new-agentic-coworker-every-team">Databricks、Genie One を GA — 中核に自己改善型の Genie Ontology</a><span class="quick-summary">Databricks はデータ・ドキュメント・タグ・アプリ・人をまたぐ知識の網として Genie Ontology を位置付け、Slack や Jira などの 50 を超えるアプリから業務知識を継続的に抽出するとした。既存の業務記録から意味を掘り出すという本号の第1節と同じ方向の設計だ。</span></div>
+  <div class="quick-link"><a href="https://www.snowflake.com/ja/blog/open-semantic-interchanges-specs-finalized/">Open Semantic Interchange（OSI）の仕様が公開</a><span class="quick-summary">Snowflake・Salesforce・dbt Labs などが進める、意味定義をツール間で受け渡すためのベンダー中立な仕様の初版が2026年1月に Apache 2.0 で公開され、ワーキンググループには Databricks なども加わった。意味モデルが特定ベンダーの中に閉じるかどうかを左右する標準で、Horizon Context もこの形式の取り込みに対応している。</span></div>
 </div>
 
 <div class="section">
   <div class="section-title">📚 過去号</div>
+  <div class="archive-item"><span class="week">2026-10-10</span><div class="body"><a href="ai-trends/2026-10-10.html">エージェントコマースは「一つの決済プロトコル」をやめた — 発見・同意の証明・本人ログインを別レイヤーに切り分ける設計へ</a><span class="sub">UCP は加盟店が /.well-known/ucp に能力を公開し、エージェント側と「共通する能力だけ」を交渉で残す設計。OpenAI も ACP の主軸をチャット内決済から商品カタログの受け渡しへ移し、決済は加盟店側に戻した。</span></div></div>
   <div class="archive-item"><span class="week">2026-10-08</span><div class="body"><a href="ai-trends/2026-10-08.html">エージェントの UI は「誰が描くか」で二つに割れた — iframe で持ち込む MCP Apps、カタログで描かせる A2UI、そして会話の外へ</a><span class="sub">MCP Apps はツールが ui:// の HTML リソースを返し、ホストが sandbox 付き iframe で描画する「持ち込み型」。Claude・VS Code・ChatGPT が同じ仕様に乗った。</span></div></div>
   <div class="archive-item"><span class="week">2026-10-06</span><div class="body"><a href="ai-trends/2026-10-06.html">音声エージェントは「話す層」と「考える層」を分けた — カスケードか音声直結かの二択が終わった理由</a><span class="sub">OpenAI の GPT-Live-1 は会話の進行だけを担い、推論とツール実行は裏側のテキストモデルへ非同期に委譲する二層構成を採った。</span></div></div>
   <div class="archive-item"><span class="week">2026-10-03</span><div class="body"><a href="ai-trends/2026-10-03.html">エージェントの評価は「最終出力」ではなく「軌跡」を見る設計に変わった — OpenAI・Anthropic・Replitが同時に評価基盤を公開</a><span class="sub">OpenAI・Anthropic・Replit・Braintrustが2026年に評価基盤の内部設計を相次いで公開した。</span></div></div>
@@ -207,7 +208,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 </div>
 
 <footer>
-  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="data/ai-trends/2026-10-10.json">data/ai-trends/2026-10-10.json</a>（このページは JSON からの生成物）</p>
+  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="data/ai-trends/2026-10-13.json">data/ai-trends/2026-10-13.json</a>（このページは JSON からの生成物）</p>
   <p style="margin-top:.5rem"><a href="./">📰 日刊ダイジェストに戻る</a></p>
 </footer>
 </div>

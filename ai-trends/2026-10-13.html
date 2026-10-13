@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI プロダクト動向 | Tech News Daily</title>
+<meta name="description" content="社内データを LLM に見せる方法として、この 2 年は「文書をチャンクに切ってベクトル検索する」RAG が既定だった。ただ、CRM や契約管理のような業務システムに住むデータは、検索で見つけても使えないことが多い。列名が new_sta…">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Tech News Daily">
+<meta property="og:title" content="業務エージェントのグラウンディングは「文書検索」から「意味モデル」へ — 既存の業務設定と判断の履歴から、エージェント用の辞書を自動で組み立てる | AI プロダクト動向">
+<meta property="og:description" content="社内データを LLM に見せる方法として、この 2 年は「文書をチャンクに切ってベクトル検索する」RAG が既定だった。ただ、CRM や契約管理のような業務システムに住むデータは、検索で見つけても使えないことが多い。列名が new_sta…">
+<meta property="og:url" content="https://tech-news.kaion-lab.com/ai-trends/2026-10-13.html">
+<meta property="og:image" content="https://tech-news.kaion-lab.com/apple-touch-icon.png">
+<meta name="twitter:card" content="summary">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+<style>
+:root{--primary-600:#2250df;--primary-500:#2b70ef;--primary-50:#f0f5ff;--radius-lg:.75rem;--text-base:1.125rem;--bg:#fafafa;--surface:#fff;--text-primary:#1a1a2e;--text-secondary:#555570;--text-muted:#8888a0;--border:#e4e4ec;--accent-ai:#7c3aed;--accent-dev:#059669}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif;background:var(--bg);color:var(--text-primary);font-size:var(--text-base);line-height:1.8;padding:2rem 1rem}
+.container{max-width:720px;margin:0 auto}
+header{text-align:center;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border)}
+header h1{font-size:1.75rem;font-weight:700;letter-spacing:-.02em}
+header .date{color:var(--text-muted);font-size:.9rem;margin-top:.25rem}
+header .tagline{color:var(--text-secondary);font-size:.95rem;margin-top:.5rem}
+.site-nav{display:flex;justify-content:center;gap:.5rem;margin-top:.75rem;flex-wrap:wrap}
+.site-nav a{display:inline-block;padding:.25rem .6rem;font-size:.75rem;font-weight:600;color:var(--text-muted);text-decoration:none;border:1px solid var(--border);border-radius:9999px}
+.site-nav a:hover,.site-nav a.active{color:var(--primary-500);border-color:var(--primary-500)}
+.section{margin-bottom:2.25rem}
+.section-title{font-size:.8rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:.75rem;display:flex;align-items:center;gap:.5rem}
+.section-title::after{content:"";flex:1;height:1px;background:var(--border)}
+.tag{display:inline-block;font-size:.7rem;font-weight:600;padding:.15rem .5rem;border-radius:9999px;text-transform:uppercase;letter-spacing:.04em}
+.tag-ai{background:#f3e8ff;color:var(--accent-ai)}
+.theme-hero{background:linear-gradient(135deg,var(--primary-50),#f5f0ff);border-left:4px solid var(--primary-500);border-radius:var(--radius-lg);padding:1.5rem;margin-bottom:1rem}
+.theme-hero .kicker{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--primary-600)}
+.theme-hero h2{font-size:1.35rem;font-weight:700;line-height:1.5;margin:.35rem 0 .5rem}
+.theme-hero .lede{font-size:.95rem;color:var(--text-secondary);line-height:1.85}
+.tldr{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1rem 1.25rem;margin-bottom:2rem}
+.tldr .label{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--primary-600);margin-bottom:.35rem}
+.tldr ul{list-style:none}
+.tldr li{position:relative;padding-left:1.1rem;font-size:.88rem;color:var(--text-secondary);line-height:1.7;margin-bottom:.25rem}
+.tldr li::before{content:"•";position:absolute;left:0;color:var(--primary-500);font-weight:700}
+.theme-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.35rem;margin-bottom:.75rem}
+.theme-section h3{font-size:1.05rem;font-weight:600;margin-bottom:.6rem}
+.theme-section p{font-size:.92rem;color:var(--text-secondary);line-height:1.85;margin-bottom:.7rem}
+.theme-section p:last-child{margin-bottom:0}
+.example{margin-top:.8rem;padding:.8rem .95rem;background:var(--primary-50);border-radius:.5rem;font-size:.88rem;line-height:1.75}
+.example .product{font-weight:700;color:var(--text-primary)}
+.example .approach{color:var(--text-secondary);margin:.2rem 0 .3rem}
+.example .detail{color:var(--text-secondary);font-size:.84rem;border-top:1px dashed var(--border);padding-top:.4rem;margin-top:.4rem}
+.example a{color:var(--primary-500);text-decoration:none;font-size:.8rem}
+.example a:hover{text-decoration:underline}
+.takeaway{margin-top:.8rem;padding:.75rem .9rem;background:#fffbeb;border-radius:.5rem;font-size:.88rem;color:var(--text-secondary);line-height:1.75}
+.takeaway strong{color:var(--text-primary)}
+.editorial{margin-top:1rem;padding:.8rem .95rem;background:var(--primary-50);border-radius:.5rem;border-left:3px solid var(--primary-500);font-size:.88rem;color:var(--text-secondary);line-height:1.8}
+.editorial .label{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--primary-600);display:block;margin-bottom:.2rem}
+.quick-link{display:block;padding:.65rem 0;border-bottom:1px solid var(--border)}
+.quick-link:last-child{border-bottom:none}
+.quick-link a{font-size:.92rem;font-weight:600;color:var(--text-primary);text-decoration:none}
+.quick-link a:hover{color:var(--primary-500)}
+.quick-summary{font-size:.85rem;color:var(--text-secondary);line-height:1.7;display:block;margin-top:.1rem}
+.archive-item{display:flex;align-items:baseline;gap:.75rem;padding:.55rem 0;border-bottom:1px solid var(--border)}
+.archive-item:last-child{border-bottom:none}
+.archive-item .week{font-size:.78rem;color:var(--text-muted);flex-shrink:0;font-variant-numeric:tabular-nums}
+.archive-item .body a{font-size:.9rem;font-weight:600;color:var(--text-primary);text-decoration:none}
+.archive-item .body a:hover{color:var(--primary-500)}
+.archive-item .body .sub{font-size:.8rem;color:var(--text-muted);display:block}
+footer{text-align:center;margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border);color:var(--text-muted);font-size:.8rem}
+footer a{color:var(--primary-500);text-decoration:none}
+@media(max-width:600px){body{padding:1rem .75rem}header h1{font-size:1.4rem}.theme-hero{padding:1.1rem}.theme-hero h2{font-size:1.15rem}}
+@media(prefers-color-scheme:dark){:root{--bg:#0f0f1a;--surface:#1a1a2e;--text-primary:#e4e4ec;--text-secondary:#a0a0b8;--text-muted:#6b6b80;--border:#2a2a3e;--primary-50:#1a1a3e;--primary-600:#5b8af5;--primary-500:#6b9af5}.tag-ai{background:#2d1b69}.theme-hero{background:linear-gradient(135deg,#1a1a3e,#1f1a3e)}.takeaway{background:#2a2510}}
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+  <h1>🧠 AI プロダクト動向</h1>
+  <p class="date">2026-10-13 発行（読了 9 分）</p>
+  <p class="tagline">実プロダクトのアーキテクチャ・使用例から AI 開発の現在地を週 3 回・1 号 1 テーマで深掘り</p>
+  <nav class="site-nav">
+    <a href="../">📰 日刊ダイジェスト</a>
+    <a href="../trends.html">🔌 週次プラグイントレンド</a>
+    <a href="../ai-trends.html" class="active">🧠 AI プロダクト動向</a>
+    <a href="../archive/">🗂 アーカイブ</a>
+  </nav>
+</header>
+
+<div class="theme-hero">
+  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">SEMANTIC-LAYER</span></span>
+  <h2>業務エージェントのグラウンディングは「文書検索」から「意味モデル」へ — 既存の業務設定と判断の履歴から、エージェント用の辞書を自動で組み立てる</h2>
+  <p class="lede">社内データを LLM に見せる方法として、この 2 年は「文書をチャンクに切ってベクトル検索する」RAG が既定だった。ただ、CRM や契約管理のような業務システムに住むデータは、検索で見つけても使えないことが多い。列名が new_stage_cd のままでは何を指すのか分からないし、「アクティブな顧客」の定義は部署ごとに違う。9月25日に Microsoft が Business Applications in Work IQ を発表し、9月30日からプレビューを始めた。10月8日には Ironclad が Contract Knowledge Graph を出し、10月6日には SAP がスキルとタスクのグラフを持つ TechWolf の買収を発表した。6月の Snowflake Horizon Context と合わせて見ると、各社が足しているのは検索の精度ではない。データが何を意味するかという「意味モデル」の層であり、作り方・ドメイン別の分割・権限の扱いに共通の設計判断が見えてきた。</p>
+</div>
+
+<div class="tldr">
+  <div class="label">TL;DR — 3 行で</div>
+  <ul>
+    <li>Microsoft の Dataverse semantic model は、テーブル関係・ビュー・フォーム名・列の説明といった既存の設定から意味を自動で抽出し、12時間ごとに再生成する。人が書くのは推論できない社内用語の用語集だけで、Snowflake も既存の SQL や BI ファイルから semantic view を作る Autopilot を出した。</li>
+    <li>汎用の意味層では扱いきれない「過去にどう判断したか」は、ドメイン別のグラフとして切り出されている。Ironclad は条項・義務・承認済みの立場・過去の交渉判断を結ぶ契約グラフを、SAP は TechWolf のタスクとスキルのグラフを、エージェントのグラウンディング層として位置付けた。</li>
+    <li>権限は意味層の外で後からかけるのではなく、意味層の中で評価する方向にそろってきた。Snowflake は意味定義をガバナンスエンジンの内側に置いてクエリ時に強制すると明記し、Work IQ はテナント・環境・アプリの 3 段の設定と、ユーザー権限の範囲内に限った「governed actions」で書き込みを制御する。</li>
+  </ul>
+</div>
+
+<div class="section">
+  <div class="section-title">📐 パターン 1: 意味モデルは人が書くより、既存の業務設定から推論させる</div>
+  <div class="theme-section">
+    <p>Microsoft の Dataverse semantic model は 3 つの要素でできている。対象テーブルを絞った「データスコープ＋セマンティックインデックス」、システムが推論する「シグナル」、人が足す「用語集」だ。シグナルの中身は、テーブル間のリレーション、結合条件付きの公開ビューとサブグリッドビュー、フォームの表示名、テーブルと列の説明文、そして既定ではオフのサンプル行。Quick Find などのシステムビューと個人ビューは除外される。モデルは Copilot を有効にした時点で自動で用意され、12時間ごとに再生成される。人が書くのは、社内の略語や造語のように設定から推論できない語だけだ。Snowflake も Horizon Context で、既存の SQL・Tableau・Power BI のファイルから semantic view を生成する Semantic View Autopilot を発表している。</p><p>各社が「意味は人が定義するもの」という前提を捨てた理由は、セマンティックレイヤーを手で書く運用が BI の時代から続かなかったからだ。業務システムには、営業部門が日常的に使っているビューや、管理者が引いたリレーションという形で、組織の「何が重要か」がすでに書かれている。それを読めば初期構築のコストはほぼゼロになる。その代わり、放置された古いビューもそのまま意味として取り込まれる。Microsoft がシグナルを個別にオン・オフできる設定と除外の仕組みを最初から用意しているのは、その副作用への対策と読める。</p>
+    <div class="example">
+      <div class="product">Microsoft Dataverse semantic model（Business Applications in Work IQ）</div>
+      <div class="approach">リレーション・ビュー・フォーム名・列の説明から意味を自動抽出し、用語集で補う。12時間ごとに再生成</div>
+      <div class="detail">どのシグナルを使い、どのビューを除外するかまで公式ドキュメントに書かれている。複数のエージェントが同じ意味モデルを参照し、回答をそろえることを目的に挙げている点も、エージェント時代の設計として代表的だ。</div>
+      <a href="https://learn.microsoft.com/en-us/power-apps/maker/data-platform/semantic-model-overview">📄 一次ソース</a>
+    </div>
+    <div class="example">
+      <div class="product">Snowflake Horizon Context（Semantic View Autopilot / Semantic Studio）</div>
+      <div class="approach">既存の SQL・Tableau・Power BI ファイルから semantic view を作り、エージェントはまず semantic view を探してから生テーブルにフォールバックする</div>
+      <div class="detail">データ基盤側の意味モデルの代表例。エージェント CoCo の探索順を「semantic view が先、テーブルは後」と決め、semantic view を MCP 経由で Claude や Cursor にも公開する。</div>
+      <a href="https://www.snowflake.com/en/blog/horizon-context-governed-context/">📄 一次ソース</a>
+    </div>
+    <div class="takeaway"><strong>示唆:</strong> 社内データ向けのエージェントを作るなら、最初に用語集を手で書き始めるより、既存のビュー・リレーション・ダッシュボード定義を意味の材料として棚卸しする方が早い。その際は、使われていないビューを先に掃除しておく。古いビューを消さずに有効化すると、古い定義がそのままエージェントの答えになる。</div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">📐 パターン 2: 「過去にどう判断したか」は、ドメイン別のグラフとして切り出す</div>
+  <div class="theme-section">
+    <p>テーブルと列の意味が分かっても、契約レビューや人員配置のような業務では答えが出ない。必要なのは「この条項について自社はこれまでどの立場を承認してきたか」「この職務は実際にどのタスクで構成されているか」という、判断と実態の履歴だ。Ironclad の Contract Knowledge Graph は、条項・関係・義務・過去の判断を契約とワークフローをまたいで結び、Contract Review Agent は承認済みの立場と過去の判断、取引履歴を基準に契約書を赤入れする。SAP が買収を発表した TechWolf は、職務の中のタスク、人が持ち実際に使っているスキル、外部の労働市場の 3 つを、接続された HR・業務システムからモデル化する。</p><p>汎用の意味層にこれを載せない理由は、関係の種類がドメインによって根本的に違うからだ。「条項 A は先例 B を根拠に承認された」と「社員 C はタスク D でスキル E を使っている」を、同じスキーマで扱うのは無理がある。どちらも、担当者が辞めた後も組織に残る暗黙知を構造化し、エージェントがその場で推論し直さなくて済むようにすることを価値として打ち出している。SAP は、このグラウンディング層によってトークン使用が効率化され、エージェントの運用コストが下がるとも述べている（具体的な数値は示していない）。</p>
+    <div class="example">
+      <div class="product">Ironclad Agent / Contract Knowledge Graph</div>
+      <div class="approach">条項・義務・承認済みの立場・過去の交渉判断をグラフにし、レビュー用エージェントの判断基準にする</div>
+      <div class="detail">一般的な学習データではなく、自社の先例を根拠に赤入れさせる設計。あわせて RBAC に代わるポリシーベースのアクセス制御（PBAC）を導入しており、地域チームには関係する契約だけを見せる。</div>
+      <a href="https://ironcladapp.com/news/press-releases/ironclad-launches-new-ai-agents-grounded-in-commercial-context">📄 一次ソース</a>
+    </div>
+    <div class="example">
+      <div class="product">SAP / TechWolf（買収発表、2026年第4四半期にクロージング予定）</div>
+      <div class="approach">タスク・スキル・労働市場のグラフを、Joule の人事系エージェントのグラウンディング層にする</div>
+      <div class="detail">人事ドメイン専用のグラフを、汎用データ基盤ではなく買収で手に入れる判断。SAP の幹部は、このグラフを仕事とスキルの計画、タレントマネジメントに関するエージェントの問い合わせに対する優れたグラウンディング層だと説明している。</div>
+      <a href="https://news.sap.com/2026/10/sap-to-acquire-techwolf-evidence-based-work-age-of-ai/">📄 一次ソース</a>
+    </div>
+    <div class="takeaway"><strong>示唆:</strong> エージェントに求める答えが「データの値」なら意味モデルで足りる。「過去の判断との整合」まで求めるなら、判断そのものを結果と根拠のペアでノードとして保存する層が別に要る。後者を文書検索で代用すると、先例の「結論」は見つかっても「なぜそう決めたか」が欠けた答えになりやすい。</div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">📐 パターン 3: 権限は意味層の外でかけず、意味層の中で評価する</div>
+  <div class="theme-section">
+    <p>意味モデルを複数のエージェントで共有すると、「誰に何を見せるか」をどこで判定するかが問題になる。Snowflake は Horizon Context について、意味定義はガバナンスエンジンの内側にあってクエリ時に強制され、コピーもキャッシュもされないと書いている。エージェントが使う Universal Search も、ランキングに利用頻度を、フィルタにアクセスポリシーを使う。Microsoft の Work IQ は、テナント（Microsoft 365 管理センター）、環境（Power Platform 管理センター）、アプリ（Power Apps のメーカーポータル）の 3 段の設定で、どのデータが Copilot と MCP クライアントに渡るかを決める。書き込みは「governed actions」として、変更案の提示、必要な承認、元レコードの更新という順で、ユーザーの権限の範囲内に限って実行される。</p><p>この形に収束したのは、意味層が実質的に「全社データへの新しい入口」になるからだ。意味モデルを抽出して別の場所にコピーすると、元システムで権限が変わってもコピー側には反映されない。だから各社は、意味を元のガバナンスの内側に置いたまま評価する構成を選んでいる。一方で、別の境界をまたぐ問題はまだ残る。Microsoft は、Dataverse のデータを Microsoft 365 Copilot が取り出して提示した時点で、元サービスの PCI DSS や HITRUST の認証範囲は自動では延長されないと注記している。さらに Work IQ は、9月30日以降に作成された新規の本番環境では既定でオンになり、11月からは既存環境にも広がる。既定オンの入口であることを前提にした棚卸しが必要になる。</p>
+    <div class="example">
+      <div class="product">Snowflake Horizon Context（Universal Search）</div>
+      <div class="approach">意味定義をガバナンスエンジン内に置き、クエリ時にポリシーを強制。検索はアクセスポリシーでフィルタする</div>
+      <div class="detail">「コピーもキャッシュもしない」と明言しており、後付けの意味レイヤー製品との違いをこの一点に置いている。権限の評価場所を設計の中心に据えた代表例。</div>
+      <a href="https://www.snowflake.com/en/blog/horizon-context-governed-context/">📄 一次ソース</a>
+    </div>
+    <div class="example">
+      <div class="product">Microsoft Business Applications in Work IQ（既定設定）</div>
+      <div class="approach">テナント・環境・アプリの 3 段の設定で公開範囲を決め、新規本番環境では既定でオンにする</div>
+      <div class="detail">EEA/EU、政府系、非本番環境を既定オンの例外とする、PCI DSS や FedRAMP の境界を越える可能性を明記する、など運用上の論点が一次資料にまとまっている。</div>
+      <a href="https://learn.microsoft.com/en-us/power-platform/admin/business-applications-work-iq/default-settings">📄 一次ソース</a>
+    </div>
+    <div class="takeaway"><strong>示唆:</strong> 意味モデルを導入するときに最初に確認すべきなのは、権限が元システムの側で評価されるのか、意味層のコピーで評価されるのかだ。後者なら、権限変更が反映されるまでの遅延がそのまま情報漏えいの窓になる。</div>
+  </div>
+  <div class="editorial">
+    <span class="label">✍️ 編集後記</span>
+    RAG が「関連する文書を探す」技術だったのに対し、意味モデルは「この組織でこの言葉が何を指すか」を固定する技術で、解いている問題が違う。面白いのは、各社がその意味を新しく書かせるのではなく、すでに業務で使われているビュー、先例、タスクの記録から掘り出している点だ。エージェントの賢さが、モデルの性能より、業務システムがどれだけ手入れされてきたかで決まる局面に入りつつある。
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">🔗 今号の動向ピックアップ</div>
+  <div class="quick-link"><a href="https://www.microsoft.com/en-us/dynamics-365/blog/it-professional/2026/09/25/work-iq-business-and-workplace-intelligence-in-the-flow-of-work/">Microsoft、Work IQ を業務アプリへ拡張 — 意味モデル・Business skills・MCP サーバーをまとめて提供</a><span class="quick-summary">Dynamics 365 ブログで、Work IQ に業務アプリのデータを取り込む構想と、9月30日開始のプレビュー、変更案・承認・更新の順で書き込む governed actions が説明された。本号の第1節と第3節で扱った意味モデルと権限設計の全体像を示す一次資料だ。</span></div>
+  <div class="quick-link"><a href="https://www.databricks.com/company/newsroom/press-releases/databricks-launches-genie-one-all-new-agentic-coworker-every-team">Databricks、Genie One を GA — 中核に自己改善型の Genie Ontology</a><span class="quick-summary">Databricks はデータ・ドキュメント・タグ・アプリ・人をまたぐ知識の網として Genie Ontology を位置付け、Slack や Jira などの 50 を超えるアプリから業務知識を継続的に抽出するとした。既存の業務記録から意味を掘り出すという本号の第1節と同じ方向の設計だ。</span></div>
+  <div class="quick-link"><a href="https://www.snowflake.com/ja/blog/open-semantic-interchanges-specs-finalized/">Open Semantic Interchange（OSI）の仕様が公開</a><span class="quick-summary">Snowflake・Salesforce・dbt Labs などが進める、意味定義をツール間で受け渡すためのベンダー中立な仕様の初版が2026年1月に Apache 2.0 で公開され、ワーキンググループには Databricks なども加わった。意味モデルが特定ベンダーの中に閉じるかどうかを左右する標準で、Horizon Context もこの形式の取り込みに対応している。</span></div>
+</div>
+
+<div class="section">
+  <div class="section-title">📚 過去号</div>
+  <div class="archive-item"><span class="week">2026-10-10</span><div class="body"><a href="2026-10-10.html">エージェントコマースは「一つの決済プロトコル」をやめた — 発見・同意の証明・本人ログインを別レイヤーに切り分ける設計へ</a><span class="sub">UCP は加盟店が /.well-known/ucp に能力を公開し、エージェント側と「共通する能力だけ」を交渉で残す設計。OpenAI も ACP の主軸をチャット内決済から商品カタログの受け渡しへ移し、決済は加盟店側に戻した。</span></div></div>
+  <div class="archive-item"><span class="week">2026-10-08</span><div class="body"><a href="2026-10-08.html">エージェントの UI は「誰が描くか」で二つに割れた — iframe で持ち込む MCP Apps、カタログで描かせる A2UI、そして会話の外へ</a><span class="sub">MCP Apps はツールが ui:// の HTML リソースを返し、ホストが sandbox 付き iframe で描画する「持ち込み型」。Claude・VS Code・ChatGPT が同じ仕様に乗った。</span></div></div>
+  <div class="archive-item"><span class="week">2026-10-06</span><div class="body"><a href="2026-10-06.html">音声エージェントは「話す層」と「考える層」を分けた — カスケードか音声直結かの二択が終わった理由</a><span class="sub">OpenAI の GPT-Live-1 は会話の進行だけを担い、推論とツール実行は裏側のテキストモデルへ非同期に委譲する二層構成を採った。</span></div></div>
+  <div class="archive-item"><span class="week">2026-10-03</span><div class="body"><a href="2026-10-03.html">エージェントの評価は「最終出力」ではなく「軌跡」を見る設計に変わった — OpenAI・Anthropic・Replitが同時に評価基盤を公開</a><span class="sub">OpenAI・Anthropic・Replit・Braintrustが2026年に評価基盤の内部設計を相次いで公開した。</span></div></div>
+  <div class="archive-item"><span class="week">2026-10-01</span><div class="body"><a href="2026-10-01.html">エージェントは「呼び出すたびに消える」から「状態を持ち続ける」へ — OpenAI・Google・Alibabaが同時に永続化レイヤーを足した</a><span class="sub">OpenAIの「dots」はユーザーごとに専用クラウドコンピュータを割り当て、ChatGPT・Slack・Teamsを横断して会話間の文脈を保持する常駐エージェント。</span></div></div>
+  <div class="archive-item"><span class="week">2026-09-29</span><div class="body"><a href="2026-09-29.html">エージェントの長期記憶は「要約」をやめた — 編集可能なファイル、共有された手順、非破壊のグラフへ</a><span class="sub">Claudeは会話終了後の要約をやめ、対話中にトピック単位のファイルへ直接書き込み、ユーザーが個別に編集できる方式に切り替えた。</span></div></div>
+  <div class="archive-item"><span class="week">2026-09-26</span><div class="body"><a href="2026-09-26.html">マルチエージェント協調は「並列に投げる」から「役割を絞った2体」に収束した — Fusion 型アーキテクチャが解いた失敗伝播問題</a><span class="sub">Cognitionは「分散マルチエージェントは前提の食い違いで失敗が伝播する」と自ら警告した後、lead+sidekickの2体だけに絞った制約付き構成「Fusion」を主力製品化し、2026年9月にローカル環境まで展開した。</span></div></div>
+  <div class="archive-item"><span class="week">2026-09-24</span><div class="body"><a href="2026-09-24.html">カスタマー対応エージェントの設計は「決定木」から「自然言語手順×コードの二層構造」へ</a><span class="sub">Decagonは決定木を捨て、業務担当者が自然言語で書いた手順を構造化ロジックにする一方、返金などの機微操作だけコードで検証するAOPへ移行し、NG.CASHでは解決率が70%まで向上した。</span></div></div>
+  <div class="archive-item"><span class="week">2026-09-22</span><div class="body"><a href="2026-09-22.html">モデルルーティングが開発ツールの既定機能になった — 選ぶのは人間ではなく分類器</a><span class="sub">GitHub Copilotは9月にauto model selectionへ「efficiency/balance/intelligence」の3段階ティアを追加し、Cursorは60万件超の実利用データで学習した分類器（Cursor Router）でモデル選定を自動化した。</span></div></div>
+  <div class="archive-item"><span class="week">2026-09-19</span><div class="body"><a href="2026-09-19.html">エージェントの権限設計は「毎回確認」から「境界を先に固定する」へ移った</a><span class="sub">OpenAI CodexとAnthropicのClaude Codeは、サンドボックスの制限強度と確認ダイアログの要否を別軸にし、境界内の行為は原則自動承認する設計にそろえた。</span></div></div>
+  <div class="archive-item"><span class="week">2026-09-17</span><div class="body"><a href="2026-09-17.html">コード検索の設計が三方向に割れた — ベクトルDBを捨てる陣営、極める陣営、置き換える陣営</a><span class="sub">Claude Code は埋め込みベースのRAGを捨て、grep/globの反復探索に完全移行——再インデックスの陳腐化とコードアップロードのセキュリティリスクを避けるため。</span></div></div>
+  <div class="archive-item"><span class="week">2026-09-15</span><div class="body"><a href="2026-09-15.html">エージェント実行基盤のマネージド化 — 3社が同時に「実行環境を貸す側」に回った</a><span class="sub">OpenAIが9月10日、Codexハーネスをagents/environments/sessions/eventsの4プリミティブに集約した Agents API を公開ベータで公開。基盤自体の追加課金はなくトークン・ツール実費のみ。</span></div></div>
+  <div class="archive-item"><span class="week">2026-09-12</span><div class="body"><a href="2026-09-12.html">コンテキストは会話ログではない — Working Context / Session / Memory / Artifacts への分離が実装標準になった</a><span class="sub">Google ADKは2026年9月、コンテキストを Working Context・Session・Memory・Artifacts の4層に分離し、閾値到達で非同期に要約するcompactionを実装したと公式ブログで説明した。</span></div></div>
+  <div class="archive-item"><span class="week">2026-09-10</span><div class="body"><a href="2026-09-10.html">Agent Skills という第3のレイヤー — プロンプトでもRAGでもなく「必要になるまで読まない」設計</a><span class="sub">Agent Skillsは「メタデータ(~100トークン)→本文(&lt;5000トークン推奨)→付随ファイル」の3段階でコンテキストに読み込む、プログレッシブディスクロージャー設計。</span></div></div>
+  <div class="archive-item"><span class="week">2026-09-08</span><div class="body"><a href="2026-09-08.html">エージェント評価の再設計 — テキスト一致から状態検証、そして「修正がテストになる」仕組みへ</a><span class="sub">Anthropicはテキスト一致の判定から、環境の状態が実際に変わったかを見る outcome/state チェックへの転換を公式に推奨している。</span></div></div>
+  <div class="archive-item"><span class="week">2026-09-03</span><div class="body"><a href="2026-09-03.html">長時間稼働エージェントの状態管理 — 「会話の保存」から「プロセスの永続化」へ</a><span class="sub">Google ADKやMastraは、ツール呼び出しなどステップの境界ごとに実行状態をシリアライズして外部ストレージに書き込み、コンテナが落ちても直前のステップから再開できる設計に収束している。</span></div></div>
+  <div class="archive-item"><span class="week">2026-09-01</span><div class="body"><a href="2026-09-01.html">コードレビューエージェントの設計 — 差別化は検出率ではなく、文脈の取り方と『直すところまで』の範囲に移った</a><span class="sub">GitHub Copilot・Qodo・Cursor Bugbot・Cloudflareの内製ツールが、diff単体の解析から脱却し、リポジトリ全体・PR履歴・過去の指摘への反応まで動的に文脈を取りに行く設計へ収束している</span></div></div>
+  <div class="archive-item"><span class="week">2026-08-29</span><div class="body"><a href="2026-08-29.html">構造化出力は「お願い」から「強制」へ — 3社がグラマー制約デコーディングで足並みを揃えた2026年</a><span class="sub">OpenAI・Anthropic・Google の主要3社が、JSON Schema をトークン生成レベルで強制する「グラマー制約デコーディング」に共通で対応した</span></div></div>
+  <div class="archive-item"><span class="week">2026-08-27</span><div class="body"><a href="2026-08-27.html">マルチエージェント協調 — 割っていいのは「コンテキストの切れ目」だけ</a><span class="sub">Anthropic は Research 機能で並列サブエージェントを使い内部評価で90.2%の性能改善を報告するが、トークン消費は通常の約15倍になるとも明記している。</span></div></div>
+  <div class="archive-item"><span class="week">2026-08-25</span><div class="body"><a href="2026-08-25.html">エージェントのメモリ設計 — 生ログでも単一要約でもなく、書き換え可能な単位に分解する</a><span class="sub">Claude は2026年7月、記憶を単一のローリング要約から個別の書き換え可能なエントリへ移行。ChatGPT は非同期の「Dreaming」処理で古い事実を時制ごと書き換える。</span></div></div>
+  <div class="archive-item"><span class="week">2026-08-22</span><div class="body"><a href="2026-08-22.html">プロンプトキャッシュはコスト最適化ではない — 「プレフィックス固定」というアーキテクチャ制約</a><span class="sub">キャッシュ命中率はもはや副次指標ではなく、Manus はこれを「本番エージェントで最重要のメトリック」と明言している。</span></div></div>
+  <div class="archive-item"><span class="week">2026-08-20</span><div class="body"><a href="2026-08-20.html">接続ツールが増えるほど遅くなる問題 — コード実行と検索遅延ロードの2つの答え</a><span class="sub">Anthropicは公式エンジニアリングブログで、MCPツールをコードAPIとして提示しファイルシステム越しにオンデマンドで読み込ませる方式により、あるタスクのトークン消費を150,000から2,000（98.7%減）に削減したと報告した</span></div></div>
+  <div class="archive-item"><span class="week">2026-08-18</span><div class="body"><a href="2026-08-18.html">MCPエージェントの認可設計 — 同意画面を「増やす」実装と「無くす」実装に分岐した</a><span class="sub">MCPの権限設計は「サーバー単位のOAuth」から「ツールごとのスコープ」へ移り、WorkOSやCloudflareが個別ツール内での権限チェックを標準パターンとして提示している。</span></div></div>
+  <div class="archive-item"><span class="week">2026-08-15</span><div class="body"><a href="2026-08-15.html">エージェントの評価・観測性 — 「最終出力の一致」から「軌跡(トラジェクトリ)の妥当性」へ</a><span class="sub">Anthropic は Tasks/Graders/Transcripts の三要素でエージェント評価を構造化し、1回でも成功する確率 pass@k と毎回成功する確率 pass^k を分けて計測する運用を提示した。</span></div></div>
+  <div class="archive-item"><span class="week">2026-08-13</span><div class="body"><a href="2026-08-13.html">モデルルーティング — 1モデルに全部背負わせない設計が標準になった</a><span class="sub">Vercel AI GatewayやGitHub Copilot Autoは、ヒューリスティック分類→難易度ティア判定→プロバイダ違いのフォールバック、という二段構成のタスク別ルーティングをすでに標準実装にしている。</span></div></div>
+  <div class="archive-item"><span class="week">2026-08-11</span><div class="body"><a href="2026-08-11.html">コンテキスト圧縮はどこで行うべきか — API・モデル訓練・ハーネス、3層に割れた実装場所</a><span class="sub">Anthropic は compaction をサーバーサイド API のオプションとして実装し、モデル本体は変更していない</span></div></div>
+  <div class="archive-item"><span class="week">2026-08-08</span><div class="body"><a href="2026-08-08.html">エージェントのコード実行基盤 — サンドボックスは「重い専用マシン」と「軽いアイソレート」に分かれ始めた</a><span class="sub">Cloudflare Sandboxes と Vercel Sandbox はどちらも「持続する専用マシン」型サンドボックスをGA化し、スナップショット復元でコールドブート30秒を2秒程度まで縮めた。</span></div></div>
+  <div class="archive-item"><span class="week">2026-08-06</span><div class="body"><a href="2026-08-06.html">RAG 構成パターンの現在地 — 二段構成の次は、検索そのものをエージェントに埋め込む</a><span class="sub">Perplexity は Vespa 上で lexical・embedding のハイブリッド検索から cross-encoder rerank へ絞り込む多段構成を採り、Databricks は同じ構成を単一パラメータで追加できる機能として一般化した。</span></div></div>
+  <div class="archive-item"><span class="week">2026-08-04</span><div class="body"><a href="2026-08-04.html">ワークフロー型 vs エージェント型 — 複雑さを足す前に何を確かめるか</a><span class="sub">Anthropic は「経路を誰が決めるか」で workflow と agent を定義し、単純な方から試すべきだと明言している。</span></div></div>
+  <div class="archive-item"><span class="week">2026-08-01</span><div class="body"><a href="2026-08-01.html">コンテキストエンジニアリング — 「何を見せるか」ではなく「何を見せないか」を設計する</a><span class="sub">事前に全部読み込むのではなく、ファイルパスやURLなど軽量な参照を渡して実行時に取得する「Just-in-Time retrieval」がCursorやAnthropicの標準手法になった。</span></div></div>
+  <div class="archive-item"><span class="week">2026-07-30</span><div class="body"><a href="2026-07-30.html">マルチエージェント協調 — 「書き込みを一本化する」が唯一の合意点になった理由</a><span class="sub">Cognition は2025年、複数エージェントの並行書き込みが矛盾した判断を生むとして「マルチエージェントを作るな」と主張したが、2026年4月に態度を転換し「書き込みは一本化し、エージェントは行動ではなく知性を提供する」構成に絞って実例を公開した</span></div></div>
+  <div class="archive-item"><span class="week">2026-07-28</span><div class="body"><a href="2026-07-28.html">エージェントのメモリ設計 — 保存容量ではなく「書き込みの境界線」を設計する</a><span class="sub">Anthropic は Claude Managed Agents の記憶をファイルとして保存し、監査ログ・ロールバック・スコープ別パーミッションを標準機能として public beta で提供している</span></div></div>
+  <div class="archive-item"><span class="week">2026-W30</span><div class="body"><a href="2026-W30.html">エージェントの評価・観測性 — 「良さそう」を数値にする前に何を測らないかを決める</a><span class="sub">Anthropic は Claude Code の品質劣化が6週間、内部の eval・コードレビュー・単体テストをすべてすり抜けていたと自ら公表し、変更ごとの広範な eval とソーク期間の導入を表明した</span></div></div>
+</div>
+
+<footer>
+  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="../data/ai-trends/2026-10-13.json">data/ai-trends/2026-10-13.json</a>（このページは JSON からの生成物）</p>
+  <p style="margin-top:.5rem"><a href="../">📰 日刊ダイジェストに戻る</a></p>
+</footer>
+</div>
+</body>
+</html>
