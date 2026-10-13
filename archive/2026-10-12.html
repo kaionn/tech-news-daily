@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-10-12</title>
+  <meta name="description" content="Hono、外部PR停止とv5刷新 / SQLite本体にベクトル検索拡張vec1がマージ / AIが6000億トークンで市販FPSを逆コンパイル">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech News Daily">
+  <meta property="og:title" content="Tech News Daily — 2026-10-12">
+  <meta property="og:description" content="Hono、外部PR停止とv5刷新 / SQLite本体にベクトル検索拡張vec1がマージ / AIが6000億トークンで市販FPSを逆コンパイル">
+  <meta property="og:url" content="https://tech-news.kaion-lab.com/archive/2026-10-12.html">
+  <meta property="og:image" content="https://tech-news.kaion-lab.com/apple-touch-icon.png">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="../feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-10-12 (Mon)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+      <nav class="site-nav">
+        <a href="../" class="active">📰 日刊ダイジェスト</a>
+        <a href="../trends.html">🔌 週次プラグイントレンド</a>
+        <a href="../ai-trends.html">🧠 AI プロダクト動向</a>
+        <a href="./">🗂 アーカイブ</a>
+      </nav>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 19 articles</span>
+      <span>🏷 6 categories</span>
+      <span>📡 14 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item">
+        <span class="number-value">30.8倍</span>
+        <span class="number-label">Honoの月間npmダウンロード数の1年間の増加</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">6000億</span>
+        <span class="number-label">AIエージェントが市販FPS逆コンパイルに投じた推定トークン数</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">25倍</span>
+        <span class="number-label">NumPy 2.5でnp.searchsortedが高速化した倍率</span>
+      </div>
+    </div>
+
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
+
+      <div class="card featured deep-dive">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://slides.yusu.ke/honoconf-2026">DEEP DIVE: Hono、外部PR停止とv5刷新でAIエージェント時代に向け舵を切る</a></h3>
+        </div>
+        <div class="summary">軽量Webフレームワーク「Hono」は過去1年で急成長し、月間npmダウンロード数は2025年10月の約1110万から2026年9月には2億6700万へ、30.8倍に伸びた。この人気がそのまま負荷として跳ね返った。7〜9月期にhonojs/honoリポジトリへのPR数は82件から345件に急増したが、その大半はAIエージェントが自動生成した低価値なリファクタリングや言葉尻を直すだけのPRで、レビューが追いつかなくなった。メンテナーは10月5日、外部コントリビューターからのPR受け入れを停止し、以後はコラボレーターのみがPRを開けると決定した。コントリビューションの窓口はPRレビュー・実バグのIssue・機能提案に絞り、トリアージはAIボット「Hono-kun」が担う。同時に進むv5(RC)では、ESM専用パッケージングでサイズを46%削減し、アダプタを`@hono/*`系パッケージへ分離、`onError`/`notFound`はミドルウェアへ移行した。背景にあるのは「Honoのユーザーはもはや人間だけではない」という認識だ。AIエージェントがコードを書き、フレームワークを選ぶ場面が増え、`package.json`を人間が一度も見ないことも多い。評価実験では、Honoを使うとタスク成功率が10件中2件から4件に上がり、コード量は30〜40%、消費トークンは15〜30%減ったという。型はエージェントが`tsc`で自分の作業を検証するために今も重要だが、開発サーバーはエージェントをハングさせたり他のサーバーを落とす問題を抱えるため、サーバーなしでアプリを検証する新CLIも用意された。急成長したOSSが人間中心のレビュー運営からAIエージェント中心の設計・運営へと軸足を移す初期の実例として、他プロジェクトの参考になりそうだ。</div>
+        <div class="editorial">🧠 「ユーザーはAIエージェント」という前提でOSSの運営方針そのものを変えた点は踏み込んだ判断で、低品質PRの洪水に対する現実的な防衛策だろう。ただしコラボレーター限定化は新規コントリビューターの参入路を狭める副作用も伴い、Hono-kunによるトリアージがどこまで公平に機能するかは未検証だ。タスク成功率2倍・トークン15〜30%減という数字は著者ら自身の評価軸に基づくもので、他のエージェント環境で同じ比率が再現されるとは限らない。</div>
+        <div class="key-points">
+          <ul>
+            <li>月間npmダウンロード数は2025年10月の1110万から2026年9月に2億6700万(30.8倍)、7〜9月期のPR数は82件から345件に増加</li>
+            <li>10月5日以降は外部コントリビューターのPR受け入れを停止、トリアージはAIボット「Hono-kun」が担当</li>
+            <li>v5はESM専用化でパッケージサイズ46%減、Hono使用時のタスク成功率は10件中2件→4件、コード量30〜40%減・トークン消費15〜30%減</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 AIエージェントがコード生成やフレームワーク選定を担う場面が増えているなら、Honoのようなエージェント最適化設計への追従や、自分のOSSプロジェクトのPR運用ルール見直しを検討する時期かもしれない。</div>
+        <div class="meta">
+          <span>Hono Conference 2026</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-10-11</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-data">Data</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://sqlite.org/vec1/doc/trunk/doc/vec1.md">SQLite本体に公式ベクトル検索拡張「vec1」がマージ、バージョン0.8</a></h3>
+        </div>
+        <div class="summary">SQLiteチームは2026年9月30日、Dan KennedyがSQLite本家ソースツリーにベクトル検索拡張「vec1」(ext/vec1)をコミットした。IVFADCとOPQ量子化によるSQLiteの仮想テーブルとしての近似最近傍探索を実装し、L2(ユークリッド)距離とコサイン距離に対応する。これまでAlex Garcia氏のサードパーティ拡張sqlite-vecが事実上の標準だったが、公式拡張の登場でRAGや類似検索の選択肢が増える。現行バージョンは0.8で、amalgamation(sqlite3.c)にはまだ同梱されず別途ビルドが必要。公式ドキュメントも「テストはまだ不十分」と明記しており、本番投入にはまだ早い段階にある。</div>
+        <div class="key-points">
+          <ul>
+            <li>アルゴリズムはIVFADC+OPQ量子化、小規模データセット向けのフラット(全探索)モードも搭載、x86はAVX2・ARMはNEONでSIMD高速化</li>
+            <li>ベクトルはfloat32固定で格納し検索はテーブル値関数としてSQLで記述できJOIN・WHEREと併用可能、1.0公開に追加機能は不要だがテスト不足が課題</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>SQLite</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-30</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://momo5502.com/posts/2026-10-09-game-decompilation/">AIエージェント陣が3ヶ月・推定6000〜7000億トークンで市販FPSをC++に逆コンパイル</a></h3>
+        </div>
+        <div class="summary">開発者momo5502は、市販の人気FPSタイトルを機能完全かつ可読なC++コードへ逆コンパイルする試みを3ヶ月続け、推定6000〜7000億トークンをAIエージェントに投じた。前半4週で逆コンパイル率は約80%に達したが、ワーカーが勝手に仕様を変える誤りが多発した。転機は元のコンパイラでビルドし直しオリジナルEXEとバイト単位で関数を比較する「バイト一致オラクル」の導入で、客観的な正解基準ができたことで安価なモデルLunaでも作業が成立するようになった。最終的に99%の関数が存在し、83%がバイト完全一致に達したという。</div>
+        <div class="key-points">
+          <ul>
+            <li>最終構成はLuna14体・Opus 5.5が2体のエージェント、Claude CodeとCodex CLIを併用し1時間おきにプロジェクト指示書を再注入</li>
+            <li>バイト一致オラクル導入前は客観的な受け入れ基準がなく安価なモデルを使えなかったが、導入後は99%の関数が存在・83%がバイト完全一致に到達</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>momo5502.com</span>
+          <span>⏱ 7 min read</span>
+          <span>2026-10-09</span>
+          <span class="engagement">▲ 139</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://verdagon.dev/blog/valen-group-borrowing">次世代メモリ安全性「グループ借用」、Rustの借用チェッカーを置き換える設計</a></h3>
+        </div>
+        <div class="summary">新言語Valenは、Nick Smith考案の「グループ借用」という設計でメモリ安全性を実現する。Rustのように1つのデータへの複数の可変参照を禁じるのではなく、参照先が無効化された後に使われることだけを防ぐ。借用の種類も単一化し、変更可否は関数シグネチャ側で宣言する。</div>
+        <div class="key-points">
+          <ul>
+            <li>参照型は単一で、ある参照が変更可能かは呼び出し元の関数シグネチャが宣言するパス情報で決まる(Rustの`&`/`&mut`のような型分離はない)</li>
+            <li>既にCarbon・Ante・Zetaなど他言語がグループ借用の発想を採用、Valen側のシンタックスシュガーは11月予定で型安定性の例外は未実装</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Verdagon</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-10-10</span>
+          <span class="engagement">▲ 131</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-data">Data</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://blog.scientific-python.org/numpy/searchsorted/">NumPy 2.5でnp.searchsortedが最大25倍高速化、分岐のないロックステップ探索へ刷新</a></h3>
+        </div>
+        <div class="summary">NumPy 2.5(PR #30517)で、内部の二分探索アルゴリズムをC++で書き直した。各クエリでlo/hiを個別管理する代わりに1個のbaseと共有区間長だけを保持し、全探索が同じ回数(log2 n程度)で分岐なく進むロックステップ方式に変更。Apple M1 Proでint32配列・最大2^30要素・1万クエリのベンチマークで最大25倍の高速化を確認した。</div>
+        <div class="key-points">
+          <ul>
+            <li>分岐をcomparison×step幅の演算に置き換えCPUパイプラインを埋め、多数の独立探索を並行させてメモリレイテンシを隠蔽</li>
+            <li>追加メモリはO(1)(クエリ数に非依存)、配列がL1/L2キャッシュを超えるサイズで特に効果が大きい</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Scientific Python Blog</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-08</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-frontend">Frontend</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://jjenzz.com/making-react-context-cheap/">React CompilerでContextの再レンダリングを実質ゼロコスト化</a></h3>
+        </div>
+        <div class="summary">Reactの`calculateChangedBits`廃止以降、Contextの値が変わると全consumerが再レンダリングされ、5000個のラジオボタンで1クリックが全件を再描画する問題が残っている。著者はReact Compilerが各コンポーネントのJSXや中間値をレンダリングごとに自動メモ化する点に着目し、`useSyncExternalStore`ストアや手動メモ化と同等以上の速度を、追加コードなしで実現できることを示した。</div>
+        <div class="key-points">
+          <ul>
+            <li>M3 Pro・Chrome・CPU4倍スロットリングのp95計測で、Clickの処理時間はCompiler版18.4ms対useSyncExternalStore版19.2ms・手動メモ化版18.9ms</li>
+            <li>著者は「再レンダリングの回数より各レンダリングのコストを下げる方が有効」と結論、ベンチマーク自体はCodexで生成した限定的なテストと明記</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>jjenzz.com</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-10-09</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.com/rogerbinns/apsw">「APSW」、標準sqlite3モジュールより一歩深くSQLite機能を使うPython拡張</a></h3>
+        </div>
+        <div class="summary">APSW(Another Python SQLite Wrapper)は、SQLiteのC APIをPythonのC APIへ薄く橋渡しするラッパー。他のDBドライバと差し替え可能な互換性より、SQLiteの機能をフルに使う開発者体験を優先する設計で、全文検索・セッション機能・仮想テーブル・VFS・JSON(JSONB含む)・CArrayに対応する。CPython 3.10以降をサポートし、PyPIとGitHubで配布される。</div>
+        <div class="key-points">
+          <ul>
+            <li>標準のsqlite3モジュールは他DBドライバとの互換性重視、APSWはSQLite固有機能(仮想テーブル・VFSなど)を使い切る方向に振った設計</li>
+            <li>GitHubリポジトリは894スター・108フォーク・コミット5879件、ライセンスは「OSI承認オープンソースライセンスなら何でも」という方式</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-10-11</span>
+          <span class="engagement">⭐ 894</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://betterwispr.com/">無料・オープンソースのMac用ディクテーションアプリ「BetterWispr」</a></h3>
+        </div>
+        <div class="summary">Option+Spaceを押して話すだけで、フィラーワードや言い直しを除去したテキストをどのアプリにも挿入できるMac用ディクテーションアプリ。Apple純正音声認識に加えParakeet TDT v3(欧州言語25種)・Parakeet日本語・WhisperKit経由のWhisper Large v3 Turboをオフラインで実行でき、クラウド送信なしで動作する。Apache 2.0でソースも公開されている。</div>
+        <div class="key-points">
+          <ul>
+            <li>アプリごとの文体設定・独自語彙の学習・句読点や段落区切りの音声コマンド(英語のみ)に対応、会議音声を要約するNotetaker機能も搭載</li>
+            <li>Claude CodeやCodexなど外部API連携を選ぶとその分の音声・文字起こしは各プロバイダへ送信される点に注意、既定はローカル処理</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>BetterWispr</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-10-10</span>
+          <span class="engagement">▲ 140</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://linus.dev/posts/kiesel-devlog-15/">Zig製JSエンジン「Kiesel」が0.4.0公開、ポリモーフィックinline cacheで20〜30%高速化</a></h3>
+        </div>
+        <div class="summary">Zig製JavaScriptエンジン「Kiesel」の0.4.0がリリースされた。`Kiesel.args`/`Kiesel.env`を追加し、イテレータに`chunks`・`includes`・`join`を実装、Await Dictionary提案に対応した。ポリモーフィック・計算・プロトタイププロパティアクセスをカバーするinline cacheも追加され、マイクロベンチマークで20〜30%の高速化を確認した。SerenityOS向けポートも進展している。</div>
+        <div class="key-points">
+          <ul>
+            <li>inline cacheはポリモーフィック・計算プロパティ・プロトタイププロパティアクセスをカバーし、マイクロベンチマークで20〜30%高速化</li>
+            <li>`Kiesel.args`/`Kiesel.env`とイテレータメソッド`chunks`/`includes`/`join`を追加、Await Dictionary提案への対応とSerenityOSポートも進展</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>linus.dev</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-10-10</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://songmu.jp/riji/entry/2026-10-11-github-actions-artifact-attestations.html">GitHub ActionsでSLSA Level 3準拠のアーティファクト正当性証明パイプラインを組む</a></h3>
+        </div>
+        <div class="summary">開発者のローカルビルドはもはや信頼できないという前提で、ソースを特定のGitタグに固定し再現可能な手順で公開環境でビルドし、attestationを添付して不変のリリースにする——という原則で、GitHub ActionsだけでSLSA Build Track Level 3に到達するパイプラインを構築する記事。`actions/attest`とSigstoreの短命署名証明書、GitHubのリリース不変化設定を組み合わせる。</div>
+        <div class="key-points">
+          <ul>
+            <li>ビルドをreusable workflow化してSLSA Level3の分離要件を満たし、ジョブ権限は`attestations: write`・`contents: read`・`id-token: write`に限定</li>
+            <li>linux/darwin/windows×amd64/arm64の6ターゲットをビルドし`gh attestation verify`で検証、再現性確保のためgoxz・Minillaへ修正をコントリビュート(PR #51・#56・#354)</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>songmu.jp</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-10-11</span>
+          <span class="engagement">🔖 54</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://zenn.dev/uhyo/articles/react-profession-bench-20">ReactベンチマークでClaude Haiku 5.5がSonnet 5.5(high)を上回る結果に</a></h3>
+        </div>
+        <div class="summary">著者独自のReact習熟度ベンチマーク第20回で、Claude Codeに13個のReact実装仕様を3回ずつ実装させ6カテゴリで採点した。Haiku 5.5はhigh設定で83.82点(26条件中12位)、max設定で85.56点(10位)を記録し、high設定ではSonnet 5.5(81.08点)を上回った。著者はSonnet 5.5 highが1実装あたり中央値0.9分で完了したのに対しHaiku 5.5 highは2.2分かけており、優位は作業の丁寧さの差だと分析する。</div>
+        <div class="key-points">
+          <ul>
+            <li>最高点はOpus 5.5のmax設定94.46点、Haiku 5.5はOpus 4.8のmax(84.03点)を上回った</li>
+            <li>effortをhighからmaxに上げても向上は1.74点のみ、78実装中6件がコンパイル失敗しいずれも仕様008(編集禁止ファイルの扱い)に起因</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-10</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://qiita.com/charge0315/items/fcec85cc5250e39bab97">Claude Codeに任せる範囲と止める仕組み——計画モード・SessionStartフック・/loopの使い分け</a></h3>
+        </div>
+        <div class="summary">Claude Codeを自律的に働かせつつ、取り消せない操作は人間の承認を必須にするガードレール設計を紹介する記事。「取り消せるか」「ローカル環境の外に影響するか」の2軸で操作を仕分け、コミット・公開リリース・ファイル削除・課金が絡む操作は承認必須、コード編集やテスト実行は無承認で進められるとする。ルールはグローバルCLAUDE.mdに記述し、プロジェクトごとの重複ドキュメントは持たない。</div>
+        <div class="key-points">
+          <ul>
+            <li>SessionStartフックは`.claude/settings.json`からシェルスクリプトを実行し毎回確実に走る一方、プロンプト内の指示は忘れられやすいと指摘</li>
+            <li>計画が承認済みでも、実際に課金が発生する呼び出し(本物のLLMを呼ぶE2Eテストなど)は別途の支出前確認を必須にする</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-11</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://qiita.com/yakumo_09/items/6f3936d9f7255a4259d9">AWS AgentCore EvaluationsをCI/CDに組み込み、エージェントの品質ゲートを自動化</a></h3>
+        </div>
+        <div class="summary">AgentCore Runtime上のStrands Agents(Claude Haiku 4.5)をdevからstgへ昇格させる前に、AgentCore on-demand評価でゲートする仕組みを構築した記事。スコアを平均するだけでは、北海道の配送料を3回全て間違えた質問でも全体の正解率平均が0.8の閾値を超えてしまう問題があり、「重要質問は3トライアル全てで正解率1.0」という追加ルールを設けた。</div>
+        <div class="key-points">
+          <ul>
+            <li>8問×3トライアル=24セッションのゲート実行は通常4〜5分、ランタイムの切替は約11秒、コストはゲート1回あたり概算1〜2ドル</li>
+            <li>GitHubの必須チェックはスキップされたジョブを合格扱いにしてしまう欠陥があり、明示的に失敗させるよう修正</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-11</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
+
+      <div class="quick-link">
+        <span class="tag tag-frontend">Frontend</span>
+        <a href="https://anderegg.ca/2026/10/08/i-guess-im-using-webp-now">WebPを気づけば既定で使うようになっていた</a>
+        <span class="quick-summary">— Pixelmator ProでWebP対応が改善し、同じ画質でJPEG/PNGより小さくなる場面が増え既定の書き出し形式に。</span>
+        <span class="meta">anderegg.ca</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://zenn.dev/komlock_lab/articles/besu-local-network-handson">Besuプライベートネットワークをローカル1台でハンズオン構築</a>
+        <span class="quick-summary">— Docker上にバリデータ4台とRPCノード・Grafanaを立て、バリデータ停止からの復旧(約5分)まで検証。</span>
+        <span class="meta">Zenn</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://qiita.com/yumekui/items/2cdf9d523d20d9a8d98f">GitHub Trendingを毎朝日本語で要約する「github新聞」を自作</a>
+        <span class="quick-summary">— GitHub ActionsがClaude Code routineを呼び出しJSONを検証してからCloudflare Pagesへ自動公開。</span>
+        <span class="meta">Qiita</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://qiita.com/ishizakahiroshi/items/7eb94a303a1aab6e0f98">個人ダッシュボード「Deskly」にRemote MCPとOAuthを追加</a>
+        <span class="quick-summary">— Cloudflare Workers上でOAuth対応のMCPサーバーを立て、Claude Codeから読み書きできるように。</span>
+        <span class="meta">Qiita</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://qiita.com/vakoya_village/items/f7a457e6f51ad9c8aa4c">GitHub Actionsの『見えない』脆弱性3種を自前の静的解析で検出</a>
+        <span class="quick-summary">— permissions未指定・タグ参照の外部Action・untrustedなgithub.eventの直接埋め込みをYAMLから検出。</span>
+        <span class="meta">Qiita</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://patkerr.co.uk/2d-vehicles/">GTAの原型となった1996年製2Dカー物理エンジンの舞台裏</a>
+        <span class="quick-summary">— 力とトルクによる剛体シミュレーションに「半分当て勘」のタイヤモデルを組み合わせた設計を振り返る。</span>
+        <span class="meta">patkerr.co.uk</span>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="./" class="archive-link">🗂 過去のダイジェスト</a>
+    </footer>
+  </div>
+</body>
+</html>
