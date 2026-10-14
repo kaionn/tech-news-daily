@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-10-13</title>
+  <meta name="description" content="Deno開発元Cloudflareに合流、本体開発は1年で終了へ / 仏スーパー250店超で冷蔵庫サイバー攻撃、老朽機器が標的 / Codex CLIが無断で常駐デーモンを導入、Issueで批判">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech News Daily">
+  <meta property="og:title" content="Tech News Daily — 2026-10-13">
+  <meta property="og:description" content="Deno開発元Cloudflareに合流、本体開発は1年で終了へ / 仏スーパー250店超で冷蔵庫サイバー攻撃、老朽機器が標的 / Codex CLIが無断で常駐デーモンを導入、Issueで批判">
+  <meta property="og:url" content="https://tech-news.kaion-lab.com/archive/2026-10-13.html">
+  <meta property="og:image" content="https://tech-news.kaion-lab.com/apple-touch-icon.png">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="../feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-10-13 (Tue)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+      <nav class="site-nav">
+        <a href="../" class="active">📰 日刊ダイジェスト</a>
+        <a href="../trends.html">🔌 週次プラグイントレンド</a>
+        <a href="../ai-trends.html">🧠 AI プロダクト動向</a>
+        <a href="./">🗂 アーカイブ</a>
+      </nav>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 20 articles</span>
+      <span>🏷 8 categories</span>
+      <span>📡 12 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item">
+        <span class="number-value">$90,000</span>
+        <span class="number-label">GoogleのFlaskセッション脆弱性に支払われた報奨金</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">1億</span>
+        <span class="number-label">CrystalDiskInfoの累計ダウンロード数</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">7倍</span>
+        <span class="number-label">Maia 300のラックあたりトークン処理量(Maia 200比)</span>
+      </div>
+    </div>
+
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
+
+      <div class="card featured deep-dive">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/denocloudflaredenocloudflare_workersdurable_objects.html">DEEP DIVE: Deno開発元がCloudflareに合流、Deno本体の開発終了へ</a></h3>
+        </div>
+        <div class="summary">Deno Landは、Node.jsの作者Ryan Dahlが「Node.jsへの後悔」を踏まえて立ち上げたJavaScriptランタイムDenoの開発元で、エッジ実行サービスDeno Deployと2024年開始のパッケージレジストリJSRも運営していた。10月9日前後、Deno LandはCloudflareへ合流すると発表した。Deno本体は1年間マイナーなバグ修正とセキュリティ更新のみを受け、その後開発が停止する。オープンソースのため他者が引き継ぐ余地は残る。エッジサービスのDeno Deployは発表から6ヶ月で終了し、CloudflareはWorkersへの移行サービスを用意する。JSRはインフラをCloudflareに移して存続する。合流の核心はDurable Objectsだ。Cloudflare Workersはステートレスな実行環境で、状態はR2・Workers KV・D1・Durable Objectsのいずれかに持たせる必要がある。Durable Objectsは状態をメモリに保持するJavaScriptインスタンスで、Cloudflare基盤への依存が強くオープンソース化できていなかった。Deno Landは2026年8月、互換実装「celld」を独自に公開していた。合流後はDahlと共同創業者Bert Belderが、celldをCloudflareのオープンソースWorkers実装「workerd」へ統合し、セルフホスティングでも一級の選択肢にする取り組みを主導する。Cloudflare側のWorkers技術リードKenton Vardaは、これを経営難企業の救済ではなく、Cloudflareが欲しかったオープンソースDurable Objects実装とDeno Landが作っていたものが一致した結果だと説明している。</div>
+        <div class="editorial">🧠 Node.jsの反省から生まれたDenoが、今度は競合に接収される形で歴史に幕を引く構図は示唆的だ。ただし「救済ではない」という説明はCloudflare側の発表文に基づくもので、Deno Deploy利用者が実際にどれだけ円滑にWorkersへ移行できるかは未検証のまま6ヶ月のカウントダウンが始まっている。celldとworkerdの統合がセルフホスティングの一級の選択肢を生むかどうかは、今後のコード統合の進み方次第で評価が変わるだろう。</div>
+        <div class="key-points">
+          <ul>
+            <li>Deno本体は1年間バグ修正・セキュリティ更新のみで開発終了、Deno Deployは発表から6ヶ月で終了、JSRはCloudflareへ移行して存続</li>
+            <li>Durable ObjectsはCloudflare基盤依存でオープンソース化できず、Deno Landが2026年8月に公開した互換実装「celld」をworkerdへ統合する計画</li>
+            <li>Cloudflare WorkersはステートレスでR2・Workers KV・D1・Durable Objectsの4種のストレージから選ぶ設計、合流はDahlとBert Belderが主導</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 Deno Deployを使っているなら6ヶ月以内にWorkersへの移行計画を立てる必要があり、自前インフラでWorkersモデルを使いたい開発者はworkerd+celldの統合進捗を追う価値がある。</div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-10-13</span>
+          <span class="engagement">🔖 85</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://www.bleepingcomputer.com/news/security/cyberattack-shuts-down-refrigerators-at-french-supermarkets/">仏スーパー250〜350店舗で冷蔵庫サイバー攻撃、老朽Danfoss機器の脆弱性が標的に</a></h3>
+        </div>
+        <div class="summary">10月11日深夜から12日にかけ、Intermarché・コーペラティブU・Carrefour Market・Monoprix・Leclerc・Super Uなど仏スーパー各チェーンの冷蔵・冷凍設備がサイバー攻撃を受けた。報告されている被害店舗数はチェーンにより異なり仏国内で250〜350店規模とされる。攻撃者はDanfossの冷却コントローラ「AK-SM 8xxA」シリーズの旧版ソフトウェアを標的に、認証バイパス(CVE-2025-41450)とコマンドインジェクション(CVE-2025-41451)を突いて自動解凍機能を遠隔起動し、庫内温度を約6時間にわたり50℃まで上昇させた。研究者Baptiste Robertはネット上に露出したDanfossシステムを2,752台(うち仏国内1,590台)確認したと報告している。パリ検察が出火も含め捜査に着手した。</div>
+        <div class="key-points">
+          <ul>
+            <li>CVE-2025-41450(認証バイパス)・CVE-2025-41451(コマンドインジェクション)の2件の既知脆弱性を悪用、Danfoss製品は旧型で既にソフト・セキュリティ更新の提供が終了</li>
+            <li>露出していたDanfossシステムは全世界2,752台、うち仏国内1,590台を研究者が確認、庫内温度は約6時間50℃まで上昇</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>BleepingComputer</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-10-12</span>
+          <span class="engagement">▲ 456</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://github.com/openai/codex/issues/48195">Codex CLIが既定で常駐バックグラウンドデーモンを無断導入、Issueで批判集まる</a></h3>
+        </div>
+        <div class="summary">OpenAIのCLIエージェントCodex(バージョン0.157.0)は、対話セッションを開くと利用者の同意なしに常駐デーモン「app-server --managed-daemon」を起動する。デーモンは約374MBのパッケージを`~/.codex/packages/`以下へ複製して実行するためnpm版CLIとバージョンがずれ、起動5分後とその後1時間おきに新版をチェックして自動更新し、進行中のやり取りを60秒のドレイン猶予後に強制終了する場合がある。さらに起動時セッションの環境変数(プロキシ設定やGH_TOKENなど)を固定して保持し、以後のセッションに古い値を引き継いでしまう不具合も報告された。9月25日に立てられたIssue #48195は10月12日時点でメンテナーの応答がなく、Windows/WSL2利用者からは昇格権限の制約でデーモン起動がブロックされ実質使用不能という報告も上がっている。</div>
+        <div class="key-points">
+          <ul>
+            <li>デーモンは起動5分後・以後1時間おきに自動更新チェックし、進行中ターンを60秒のドレイン後に強制終了する場合がある、`daemon stop`後もアップデートループが約70秒残存する不具合も報告</li>
+            <li>起動時セッションの環境変数(GH_TOKENなど)を固定保持し後続セッションに古い値を引き継ぐ、npm/brew/pacman経由インストール時は複製・自動更新をしないことなどが要望されている</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-12</span>
+          <span class="engagement">▲ 477</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://aws.amazon.com/blogs/aws/announcing-aws-lambda-web-functions-for-fast-consistent-web-app-performance-anywhere/">AWS Lambda Web Functions発表、常駐HTTPサーバをそのままLambdaで動かす新形態</a></h3>
+        </div>
+        <div class="summary">AWSは10月12日、Lambdaの新しい実行形態「Web Functions」を発表した。Express・Hono・Fastify・Next.jsなどポートリスニング型のサーバをアダプタなしでそのままデプロイでき、1実行環境あたり最大128の同時リクエストを処理し、I/O待ちではなくCPU時間課金になる。`aws lambda-web deploy`一発で1分未満にHTTPSエンドポイントを発行し、`--regions`指定でマルチリージョン配信とレイテンシベースルーティングも自動化する。</div>
+        <div class="key-points">
+          <ul>
+            <li>1実行環境で最大128同時リクエストを処理、課金はCPU時間ベースでDB・API待ちのI/O時間は課金対象外</li>
+            <li>`aws lambda-web deploy`で1分未満にデプロイ完了、Node.js 24(Arm64)に対応、米東/米西/東京/アイルランドの5リージョンで利用可能</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>AWS Blog</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-12</span>
+          <span class="engagement">🔖 30</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-frontend">Frontend</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/javascriptvite_10.html">Vite開発元VoidZero、Node.js・パッケージ管理・ビルドを1つのCLIに統合する「Vite+ 1.0」正式リリース</a></h3>
+        </div>
+        <div class="summary">VoidZeroは9月28日、単一CLI `vp` でNode.jsランタイム・パッケージ管理・フロントエンドツールチェーンをまとめて扱う「Vite+ 1.0」を正式リリースした。内部はVite・Vitest・Rolldown(Rust製高速バンドラ)・Oxc・tsdownで構成され、設定ファイルも1つに統合。ローカル開発サーバ・パッケージ管理・バンドル・Lint・フォーマット・テスト実行を別ツールに分けずに済む。MITライセンスのOSSで、`vp create`での新規作成と既存プロジェクトへの移行の両方に対応する。</div>
+        <div class="key-points">
+          <ul>
+            <li>Vite・Vitest・Rolldown・Oxc・tsdownを単一CLI `vp` の下に統合、設定ファイルも1つに一元化</li>
+            <li>2026年6月のCloudflareによるVoidZero買収を背景に長期開発の継続性を担保、MITライセンスで新規・既存プロジェクトの両方に対応</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-28</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-frontend">Frontend</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/vercelnextjscloudflare_workersaws_lambdavercelvinext_10.html">CloudflareのVinext 1.0、Next.jsアプリをVercel以外のサーバレス基盤へ約99%機能互換でデプロイ可能に</a></h3>
+        </div>
+        <div class="summary">Cloudflareは、Next.jsアプリのビルドをTurbopackではなくViteで行う「Vinext 1.0」をリリースした。App Router/Pages Router・SSG/SSR/ISRのハイブリッド構成・キャッシュ・OpenTelemetryやSentryとの連携など、Next.jsの主要機能の約99%に対応すると説明している。ビルド後のアプリはCloudflare Workers・AWS Lambda・NetlifyなどVercel以外の基盤にデプロイでき、Cloudflare Workers向けにはHyperdrive経由のDB接続や画像最適化の統合も用意する。2026年6月のVoidZero買収を背景に、AI実験扱いだったツールを本番運用向けへ位置づけ直したリリースという。</div>
+        <div class="key-points">
+          <ul>
+            <li>Next.js主要機能の約99%に対応(App/Pages Router、SSG・SSR・ISRのハイブリッド構成、キャッシュ、OpenTelemetry/Sentry連携)</li>
+            <li>Cloudflare Workers・AWS Lambda・Netlifyなど複数のサーバレス基盤にデプロイ可能、Workers向けにHyperdriveのDB接続と画像最適化を統合</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-28</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/windowslinuxwsl_containersapi.html">Windows上でLinuxコンテナを直接実行する「WSL Containers」正式GA、Docker不要に</a></h3>
+        </div>
+        <div class="summary">Microsoftは9月29日、WSL上でLinuxコンテナを直接作成・実行できる「WSL Containers」を正式GAにした。従来Windows上でのLinuxコンテナ実行にはDocker等の別ソフトが必要だったが、`wslc`コマンドまたはAPIから直接操作できるようになり追加インストールが不要になる。デフォルトのファイルシステムはvirtiofs、ネットワークモードは"consomme"でWindowsアプリと同じネットワーク・セキュリティポリシー下で動く。GA版では`wslc container restart`や`wslc network connect/disconnect`などのコマンドが追加され、Intune・Microsoft Defender for Endpointとの連携で企業の集中管理にも対応する。複数コンテナをまとめて扱う`wslc compose`は開発中。</div>
+        <div class="key-points">
+          <ul>
+            <li>2026年6月のBuild発表→7月プレビュー→9月29日GAという経緯、デフォルトファイルシステムはvirtiofs・ネットワークモードは"consomme"</li>
+            <li>`wslc container restart`・`wslc network connect/disconnect`などをGA版で追加、Intune/Defender for Endpoint連携で企業管理に対応、`wslc compose`は開発中</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-29</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-data">Data</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/google_cloudaipostgresqldbpostgresql_for_agents_in_alloydb.html">AlloyDBにAIエージェント専用サンドボックスPostgreSQLインスタンス、本番DBへの負荷分離</a></h3>
+        </div>
+        <div class="summary">Google Cloudは9月24日、AlloyDBのプレビュー機能「PostgreSQL for agents」を発表した。AIエージェントは推論の過程で多数のクエリを発行し本番PostgreSQLの性能を落とすリスクがあるため、エージェント用の読み取り専用インスタンスを数秒で動的に起動し、クラスタ内のプライマリ・スタンバイ・リードレプリカから完全に分離する。インスタンスはエージェントの負荷に合わせて自動スケールし、タスク終了後はゼロまでスケールダウンする。フルSQLと全インデックス、ベクトル・全文・空間検索に対応し、Googleは秒間数百万クエリ・1,000台超のリーダーをオンデマンドで扱えると説明している。</div>
+        <div class="key-points">
+          <ul>
+            <li>読み取り専用インスタンスを数秒で動的プロビジョニングし本番のプライマリ・スタンバイ・リードレプリカから分離、タスク終了後はゼロへ自動スケールダウン</li>
+            <li>Googleは秒間数百万クエリ・オンデマンドで1,000台超のリーダーに対応すると説明(ベンダー発表値)、フルSQLとベクトル・全文・空間検索に対応</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-09-24</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://qiita.com/songchong/items/0d759f44eb26f332b897">AIエージェントにAPIキーを渡す5つの場面を51回の実験で「危険・要注意・安全」に分類</a></h3>
+        </div>
+        <div class="summary">編集チームは、Claude Code(Sonnet 5.5)・Antigravity CLI(Gemini 3.8 Flash/3.1 Pro)・Codex(GPT-5.6)の4エージェントに外部サービス連携やデータ登録を51回試させ、APIキーの扱いを「危険・要注意・安全」の5場面に分類した。キー存在確認では、チェックコマンドを明示しない指示だとGemini 3.1 Proが`env`などキー全文を出力するコマンドを6回中3回選択(50%)した一方、コマンドを明示した場合は両Gemini・Claude Sonnetともに全件で漏洩を回避した。MCPサーバー追加では、Gemini 3.1 Proがコマンドにキー値を直接書き込む危険なやり方を3回中3回選んだが、先に環境変数へ設定する指示に変えると0回中0回に改善した。</div>
+        <div class="key-points">
+          <ul>
+            <li>キー存在確認: チェックコマンド未指定だとGemini 3.1 Proが6回中3回(50%)キー全文出力コマンドを選択、コマンド明示後は全モデルで漏洩ゼロ</li>
+            <li>MCPサーバー追加: Gemini 3.1 Proはキー値をコマンドに直接書き込む危険な方法を3回中3回選択、環境変数を先に設定する指示に変えると0回中0回に改善</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-10-12</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/genda_jp/articles/haiku-5-5-subagent-roles">Haiku 5.5を機にClaude Codeサブエージェント3役割の設計を見直した</a></h3>
+        </div>
+        <div class="summary">GENDAの開発者は、Claude Codeのサブエージェント3役割をHaiku 5.5への切替を機に見直した。単価はSonnet 5.5比でOpus 5.5が200%、Haiku 4.5が50%、Haiku 5.5はプロンプト10万トークン以下で5%(10万超で25%)。判断を含まないtest-runner役はHaiku/lowへ完全移行、読み取り専用で調査するcode-explore役は回答品質がHaiku・Sonnet間で差がなかったがHaikuは調べる範囲が広がりツール呼び出しが増加、実装を任せるfast-worker役はTerminal-Bench 4.0スコアがHaiku 5.5 39.2%・Sonnet 5.5 70.6%のためSonnet/highを維持した。</div>
+        <div class="key-points">
+          <ul>
+            <li>Haiku 5.5はSonnet 5.5比で単価5%(プロンプト10万トークン超で25%)、判断を含まないtest-runner役はHaiku/lowに完全移行</li>
+            <li>Terminal-Bench 4.0スコアはHaiku 5.5が39.2%・Sonnet 5.5が70.6%で実装役はSonnet/high維持、調査役はHaikuの回答品質はSonnetと同等だがツール呼び出しが増加</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-12</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-product">Product</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/gpuai_engine.html">さくらインターネット、GPU専有で従量課金なしの「AI Engineプライベートエディション」提供開始</a></h3>
+        </div>
+        <div class="summary">さくらインターネットは10月8日、既存のAI Engine(マネージドLLM APIサービス)を1顧客専有のGPUで提供する「プライベートエディション」を発表した。料金はGPU台数に基づく月額固定制で、トークン消費量に関わらずコストが変わらない。自社開発LLM・ファインチューニング済みモデル・オープンウェイトモデルに対応し、インフラ構築・運用はさくらが担う。国内データセンターで稼働し、入力データとモデルは環境外に送信されず閉域接続にも対応する。大量API利用でコストを予測可能にしたい用途や、機密情報を扱う社内利用、自社サービスの私有環境での運用を想定する。</div>
+        <div class="key-points">
+          <ul>
+            <li>料金はトークン消費量に依存しないGPU台数ベースの月額固定制、料金自体は非公開で個別見積り</li>
+            <li>国内データセンターで稼働し入力データ・モデルを環境外へ送信せず閉域接続にも対応、自社開発LLM・ファインチューニング・オープンウェイトモデルに対応</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-08</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://pc.watch.impress.co.jp/docs/news/2147412.html">Microsoft、脱NVIDIA目指す第3世代AIアクセラレータ「Maia 300」発表</a></h3>
+        </div>
+        <div class="summary">Microsoftは10月12日、自社製AIアクセラレータの第3世代「Maia 300」を発表した。TSMC N2P(2nmクラス)のチップレット構成で、HBM4を288GB・帯域18TB/s搭載(前世代Maia 200はHBM3e 216GB・7TB/s)。演算性能はMXFP4で13.8POPS(前世代10.1)、FP8で6.9POPS(前世代5.1)、400GbEポートを32基備え3.2TB/sのスケールアップ帯域を持つ。TDPは950Wに上昇し、1ラックに最大96基搭載可能(前世代48基)。Microsoftはトークン処理効率がGPU比約40%向上、ラックあたりのトークン処理量はMaia 200比約7倍になると説明している。2027年にAzure・Microsoft 365向けデータセンターへ投入予定。</div>
+        <div class="key-points">
+          <ul>
+            <li>HBM4を288GB・帯域18TB/s搭載(Maia 200比でHBM3e 216GB・7TB/sから増強)、MXFP4演算性能13.8POPS・FP8 6.9POPS</li>
+            <li>1ラック最大96基でラックあたり電力約167kW、トークン処理量はMaia 200比約7倍とMicrosoftは説明(自社ベンチマーク)、2027年にAzure/M365向けデータセンターへ投入予定</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>PC Watch</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-12</span>
+          <span class="engagement">🔖 91</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.com/snuri00/ps2-web-recomp">市販PS2ゲームを静的再コンパイルしWebAssembly化する「ps2-web-recomp」</a></h3>
+        </div>
+        <div class="summary">`eerecomp`がPS2のR5900機械語を16KiB単位でC++へ翻訳し、Emscripten経由でWebAssemblyへコンパイルするツール。遅延スロットや128bitレジスタ、PS2 FPU特有の非IEEE丸めなどの挙動を保持する。EE側のOSはスレッド・セマフォ・割込みを高レベルエミュレートし、IOP側は実機のIRXモジュールをR3000インタプリタ上でそのまま動かす。GPU描画はWebGPUコンピュートシェーダで実装し、ソフトウェアラスタライザも参照実装として用意。グランツーリスモ4とゴッド・オブ・ウォーIIで動作確認済みで、後者はゲーム固有コードなしで動いた。</div>
+        <div class="key-points">
+          <ul>
+            <li>グランツーリスモ4(起動からレース可能)とゴッド・オブ・ウォーII(ゲーム固有コード不要)で動作確認、GPU描画はWebGPUコンピュートシェーダ実装</li>
+            <li>MITライセンス、ディスクイメージはHTTP Range要求でストリーミング、WebGPU非対応環境ではソフトウェアラスタライザが3D描画に力不足と明記</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-10-12</span>
+          <span class="engagement">▲ 275</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.com/jaisuriya-11/tsuzuri">Markdownファイルで動くブロック型ターミナルノートブック「tsuzuri」</a></h3>
+        </div>
+        <div class="summary">GoでBubble TeaとLip Glossを使って書かれた、単一バイナリで動くターミナル向けノートブックアプリ。ノートは純粋なMarkdownファイルとして保存されるためデータベースへのロックインがなく、gitやフォルダ同期、他エディタと併用できる。`/`コマンドで見出し・ToDo・テーブル・コードブロックなどを挿入するブロックメニュー、Vimライクなモーダル編集、ドラッグでのブロック並べ替え、ボード・カレンダー・ガントのようなビュー、Mermaid風フローチャートとLaTeX数式のUnicode描画、PDFエクスポートなどを搭載する。</div>
+        <div class="key-points">
+          <ul>
+            <li>MITライセンス、GitHub上で286スター・12フォーク、インストールはシェルスクリプト・PowerShell・Homebrew・`go install`に対応</li>
+            <li>`[[Note]]`形式の見出し/ブロック単位リンクとバックリンク・ズーム可能なグラフビューを搭載、カスタムJSONテーマを96種(ページ内表記は97種とも)同梱</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-12</span>
+          <span class="engagement">🔖 37</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://simonkoeck.com/writeups/google-devsite-flask-session-pickle-rce">Google開発者サイトのFlaskセッションに$90,000のRCE、署名鍵をpickle化オブジェクト内に同梱していた</a>
+        <span class="quick-summary">— OAuthのclient_secretをFlask署名鍵に使い回しセッションをpickleで復元していたため偽造セッション経由でRCEが可能だった。8月6日報告、10月7日修正。</span>
+        <span class="meta">simonkoeck.com</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://research.meta.ai/blog/muse-wonder">Meta、パーソナルAIエージェント向け新フロンティアモデル「Muse Wonder」を公開</a>
+        <span class="quick-summary">— 会話を跨いで文脈を保持する「Active Memory」と障害時に別アプローチを試す「Active Focus」を搭載、法律・金融・医療の専門知識にも対応。</span>
+        <span class="meta">Meta AI</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-data">Data</span>
+        <a href="https://www.publickey1.jp/blog/26/google_clouddbspanner_omni.html">Google Cloud、ローカル実行可能な分散マルチモデルDB「Spanner Omni」正式GA</a>
+        <span class="quick-summary">— Cloud SpannerのPaxos合意・自動シャーディングを維持しつつGoogle専用のColossus・TrueTimeを自社実装に置き換え、単一サーバからオンプレまで動作。</span>
+        <span class="meta">Publickey</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://crystalmark.info/ja/2026/10/11/crystaldiskinfo-100-million-downloads/">ディスク監視ツール「CrystalDiskInfo」が累計1億ダウンロード、開発18年の軌跡</a>
+        <span class="quick-summary">— 2007年のGoogleのHDD故障調査に着想を得て2008年に1.0公開、USB-NVMe対応や水晶雫キャラクター導入を経て2026年に18年目。</span>
+        <span class="meta">CrystalMark</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://lunarwatcher.codeberg.page/til/firefox/resumable-big-downloads.html">Firefoxの大容量ダウンロードを確実にレジュームさせる設定変更</a>
+        <span class="quick-summary">— about:configの`network.http.response.timeout`をFirefox 28以来の既定300秒から0または十分大きい値に変えるとレジュームが安定する(サーバ側対応が前提)。</span>
+        <span class="meta">lunarwatcher.codeberg.page</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://prophitt.me/writing/a-modern-web-app-in-c">OpenBSD+C+SQLiteの「BCHS」スタックだけで商用Webアプリを構築する実践記</a>
+        <span class="quick-summary">— フレームワークや別DBサーバを使わずhttpdのCGI実行とSQLite単一ファイル、libcurl・libsodium・libcjsonだけでStripe決済付き商用サービスを構築、デプロイは1ファイル差し替え。</span>
+        <span class="meta">prophitt.me</span>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="./" class="archive-link">🗂 過去のダイジェスト</a>
+    </footer>
+  </div>
+</body>
+</html>

@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tech News Daily — 2026-10-13</title>
-  <meta name="description" content="Deno開発元Cloudflareに合流、本体開発は1年で終了へ / 仏スーパー250店超で冷蔵庫サイバー攻撃、老朽機器が標的 / Codex CLIが無断で常駐デーモンを導入、Issueで批判">
+  <title>Tech News Daily — 2026-10-14</title>
+  <meta name="description" content="Anthropicがgitを捨て独自VCS「Scion」へ全面移行 / Google、新フロンティアモデル「Gemini 4 Argon」発表 / OpenAI社員、役員会議室への盗聴器設置容疑で逮捕">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Tech News Daily">
-  <meta property="og:title" content="Tech News Daily — 2026-10-13">
-  <meta property="og:description" content="Deno開発元Cloudflareに合流、本体開発は1年で終了へ / 仏スーパー250店超で冷蔵庫サイバー攻撃、老朽機器が標的 / Codex CLIが無断で常駐デーモンを導入、Issueで批判">
+  <meta property="og:title" content="Tech News Daily — 2026-10-14">
+  <meta property="og:description" content="Anthropicがgitを捨て独自VCS「Scion」へ全面移行 / Google、新フロンティアモデル「Gemini 4 Argon」発表 / OpenAI社員、役員会議室への盗聴器設置容疑で逮捕">
   <meta property="og:url" content="https://tech-news.kaion-lab.com/">
   <meta property="og:image" content="https://tech-news.kaion-lab.com/apple-touch-icon.png">
   <meta name="twitter:card" content="summary">
@@ -22,7 +22,7 @@
   <div class="container">
     <header>
       <h1>Tech News Daily</h1>
-      <div class="date">2026-10-13 (Tue)</div>
+      <div class="date">2026-10-14 (Wed)</div>
       <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
       <nav class="site-nav">
         <a href="./" class="active">📰 日刊ダイジェスト</a>
@@ -33,9 +33,9 @@
     </header>
 
     <div class="stats-bar">
-      <span>📰 20 articles</span>
-      <span>🏷 8 categories</span>
-      <span>📡 12 sources</span>
+      <span>📰 21 articles</span>
+      <span>🏷 7 categories</span>
+      <span>📡 19 sources</span>
     </div>
 
     <nav class="toc">
@@ -48,16 +48,16 @@
 
     <div class="numbers-bar">
       <div class="number-item">
-        <span class="number-value">$90,000</span>
-        <span class="number-label">GoogleのFlaskセッション脆弱性に支払われた報奨金</span>
+        <span class="number-value">200倍</span>
+        <span class="number-label">ScionのCPU・メモリ使用量削減(旧gitミラー基盤比)</span>
       </div>
       <div class="number-item">
-        <span class="number-value">1億</span>
-        <span class="number-label">CrystalDiskInfoの累計ダウンロード数</span>
+        <span class="number-value">288倍</span>
+        <span class="number-label">EmbeddingGemma Transcribeのリアルタイム比速度</span>
       </div>
       <div class="number-item">
-        <span class="number-value">7倍</span>
-        <span class="number-label">Maia 300のラックあたりトークン処理量(Maia 200比)</span>
+        <span class="number-value">11年</span>
+        <span class="number-label">Rustボローチェッカーの健全性バグが潜伏していた期間</span>
       </div>
     </div>
 
@@ -66,46 +66,46 @@
 
       <div class="card featured deep-dive">
         <div class="card-header">
-          <span class="tag tag-oss">OSS</span>
+          <span class="tag tag-dev">Dev</span>
           <span class="content-type">📜 解説</span>
-          <h3><a href="https://www.publickey1.jp/blog/26/denocloudflaredenocloudflare_workersdurable_objects.html">DEEP DIVE: Deno開発元がCloudflareに合流、Deno本体の開発終了へ</a></h3>
+          <h3><a href="https://www.anthropic.com/engineering/redesigning-source-control">DEEP DIVE: Anthropicがgitを捨て独自VCS「Scion」へ全面移行、マージ量12倍増に対応</a></h3>
         </div>
-        <div class="summary">Deno Landは、Node.jsの作者Ryan Dahlが「Node.jsへの後悔」を踏まえて立ち上げたJavaScriptランタイムDenoの開発元で、エッジ実行サービスDeno Deployと2024年開始のパッケージレジストリJSRも運営していた。10月9日前後、Deno LandはCloudflareへ合流すると発表した。Deno本体は1年間マイナーなバグ修正とセキュリティ更新のみを受け、その後開発が停止する。オープンソースのため他者が引き継ぐ余地は残る。エッジサービスのDeno Deployは発表から6ヶ月で終了し、CloudflareはWorkersへの移行サービスを用意する。JSRはインフラをCloudflareに移して存続する。合流の核心はDurable Objectsだ。Cloudflare Workersはステートレスな実行環境で、状態はR2・Workers KV・D1・Durable Objectsのいずれかに持たせる必要がある。Durable Objectsは状態をメモリに保持するJavaScriptインスタンスで、Cloudflare基盤への依存が強くオープンソース化できていなかった。Deno Landは2026年8月、互換実装「celld」を独自に公開していた。合流後はDahlと共同創業者Bert Belderが、celldをCloudflareのオープンソースWorkers実装「workerd」へ統合し、セルフホスティングでも一級の選択肢にする取り組みを主導する。Cloudflare側のWorkers技術リードKenton Vardaは、これを経営難企業の救済ではなく、Cloudflareが欲しかったオープンソースDurable Objects実装とDeno Landが作っていたものが一致した結果だと説明している。</div>
-        <div class="editorial">🧠 Node.jsの反省から生まれたDenoが、今度は競合に接収される形で歴史に幕を引く構図は示唆的だ。ただし「救済ではない」という説明はCloudflare側の発表文に基づくもので、Deno Deploy利用者が実際にどれだけ円滑にWorkersへ移行できるかは未検証のまま6ヶ月のカウントダウンが始まっている。celldとworkerdの統合がセルフホスティングの一級の選択肢を生むかどうかは、今後のコード統合の進み方次第で評価が変わるだろう。</div>
+        <div class="summary">Anthropicのモノレポは、Claude Codeなどエージェント経由の変更が主体となったことで2026年5月の日次マージ約2,500件から9月には3万件超へ急増し、人間向けに設計された開発者インフラがボトルネックになった。gitは分散・オフライン作業を前提とし、クローンごとに全履歴を持つ設計のため、常時オンラインのエージェント・CIジョブが大半を占める環境ではコストだけが増えていた。モノレポの履歴は100GB近く、圧縮済み作業コピーも25GBを超え、CIは1日約2,500万回のチェックアウトを処理する規模で、素朴な取得方式なら日600PB超のgitトラフィックが発生する計算になる。ミラー・シャロークローン・sparse checkoutなどで応急対応していたが、マージ増加に伴い運用限界に近づいた。そこでAnthropicは7人のエンジニアで、自社開発のバージョン管理システム「Scion」とコードレビューツール「Antique」を5か月で構築しgitを置き換えた。変更はchangesetという単位でwrite-ahead logに記録され、クライアントはルートツリーから必要なツリー・blobだけをサーバーへ要求するため、巨大なpackfileを丸ごと転送せず再開可能な転送になる。scion-daemon→scion-cache→scion-serverという階層構成を取り、各層のキャッシュヒット率は99%超を維持する。結果としてScionのCPU・メモリのフットプリントは旧gitミラー基盤比で約200倍小さくなり、CI・リサーチのチェックアウトは分単位から秒単位に短縮、CIのCPU容量は25%向上した。</div>
+        <div class="editorial">🧠 Anthropic自身がgitを置き換えるほどの規模にエージェント活用が達している事実は、巨大モノレポを抱える他社にとっても設計上の指針になりうる。ただし著者らも明記する通りScionは汎用のgit代替ではなく、数百人規模のエージェント運用を前提にした特化システムであり、中小チームがそのまま真似できる設計ではない。サーバーサイドRPCやパックファイルを使わない取得プロトコルをgitコミュニティへ還元する計画は語られているが、実際にgit本体やGitHub・GitLabへ反映されるかは未知数だ。</div>
         <div class="key-points">
           <ul>
-            <li>Deno本体は1年間バグ修正・セキュリティ更新のみで開発終了、Deno Deployは発表から6ヶ月で終了、JSRはCloudflareへ移行して存続</li>
-            <li>Durable ObjectsはCloudflare基盤依存でオープンソース化できず、Deno Landが2026年8月に公開した互換実装「celld」をworkerdへ統合する計画</li>
-            <li>Cloudflare WorkersはステートレスでR2・Workers KV・D1・Durable Objectsの4種のストレージから選ぶ設計、合流はDahlとBert Belderが主導</li>
+            <li>マージ量は2026年5月の日次約2,500件から9月に3万件超へ約12倍増、CIは1日約2,500万回のチェックアウトを処理し素朴な取得方式なら日600PB超のgitトラフィックが発生する計算</li>
+            <li>7人のエンジニアがScion・Antique等を5か月で構築、クライアントはルートツリーから必要なツリー・blobだけを要求しパックファイル全体を送らない設計で各層のキャッシュヒット率99%超</li>
+            <li>CPU・メモリのフットプリントはgitミラー基盤比で約200倍小さく、CI・リサーチのチェックアウトは分単位から秒単位に短縮、CIのCPU容量は25%向上</li>
           </ul>
         </div>
-        <div class="why-it-matters">💡 Deno Deployを使っているなら6ヶ月以内にWorkersへの移行計画を立てる必要があり、自前インフラでWorkersモデルを使いたい開発者はworkerd+celldの統合進捗を追う価値がある。</div>
+        <div class="why-it-matters">💡 巨大モノレポでAIエージェントを大量併走させる組織にとってgitの限界は他人事ではなく、サーバーサイドRPCや非パックファイル型の取得プロトコルといったScionの設計思想は、将来git本体やGitHub・GitLabが採用しうる方向性を示す。</div>
         <div class="meta">
-          <span>Publickey</span>
-          <span>⏱ 6 min read</span>
+          <span>Anthropic</span>
+          <span>⏱ 8 min read</span>
           <span>2026-10-13</span>
-          <span class="engagement">🔖 85</span>
+          <span class="engagement">▲ 481</span>
         </div>
       </div>
 
       <div class="card featured">
         <div class="card-header">
-          <span class="tag tag-security">Security</span>
-          <span class="content-type">🔒 セキュリティ</span>
-          <h3><a href="https://www.bleepingcomputer.com/news/security/cyberattack-shuts-down-refrigerators-at-french-supermarkets/">仏スーパー250〜350店舗で冷蔵庫サイバー攻撃、老朽Danfoss機器の脆弱性が標的に</a></h3>
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-argon/">Google、新フロンティアモデル「Gemini 4 Argon」発表、Antigravityのコード提出35%増</a></h3>
         </div>
-        <div class="summary">10月11日深夜から12日にかけ、Intermarché・コーペラティブU・Carrefour Market・Monoprix・Leclerc・Super Uなど仏スーパー各チェーンの冷蔵・冷凍設備がサイバー攻撃を受けた。報告されている被害店舗数はチェーンにより異なり仏国内で250〜350店規模とされる。攻撃者はDanfossの冷却コントローラ「AK-SM 8xxA」シリーズの旧版ソフトウェアを標的に、認証バイパス(CVE-2025-41450)とコマンドインジェクション(CVE-2025-41451)を突いて自動解凍機能を遠隔起動し、庫内温度を約6時間にわたり50℃まで上昇させた。研究者Baptiste Robertはネット上に露出したDanfossシステムを2,752台(うち仏国内1,590台)確認したと報告している。パリ検察が出火も含め捜査に着手した。</div>
+        <div class="summary">Googleは10月13日、Gemini 4ファミリー第1弾となるフロンティアモデル「Gemini 4 Argon」を発表した。コーディング・金融・法律・サイバーセキュリティ・科学分野での複数ステップのエージェント作業に対応し、社内ツールAntigravityでの利用ではエージェント経由のコード提出が35%増え、ロールバックは3割近く減ったという(自社計測)。金融・法律・税務・コーディングを測るValsインデックスで首位、身体性推論ベンチマークERQAで87%を記録した。API入出力合計で最大100万トークンのコンテキストに対応し、価格は入力100万トークンあたり2ドル・出力10ドルだが、11月30日以降は入力4ドル・出力20ドルに上がる。</div>
         <div class="key-points">
           <ul>
-            <li>CVE-2025-41450(認証バイパス)・CVE-2025-41451(コマンドインジェクション)の2件の既知脆弱性を悪用、Danfoss製品は旧型で既にソフト・セキュリティ更新の提供が終了</li>
-            <li>露出していたDanfossシステムは全世界2,752台、うち仏国内1,590台を研究者が確認、庫内温度は約6時間50℃まで上昇</li>
+            <li>Antigravityでのエージェント経由コード提出が35%増加・ロールバックが3割近く減少(自社計測)、ERQA(身体性推論)で87%、Valsインデックス首位</li>
+            <li>価格は導入時入力$2/出力$10(100万トークン当たり)、11月30日以降は入力$4/出力$20に倍増、API入出力合計で最大100万トークンのコンテキスト対応</li>
           </ul>
         </div>
         <div class="meta">
-          <span>BleepingComputer</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-10-12</span>
-          <span class="engagement">▲ 456</span>
+          <span>Google Blog</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-13</span>
+          <span class="engagement">▲ 917</span>
         </div>
       </div>
 
@@ -113,20 +113,20 @@
         <div class="card-header">
           <span class="tag tag-security">Security</span>
           <span class="content-type">👀 注目</span>
-          <h3><a href="https://github.com/openai/codex/issues/48195">Codex CLIが既定で常駐バックグラウンドデーモンを無断導入、Issueで批判集まる</a></h3>
+          <h3><a href="https://sfstandard.com/2026/10/13/openai-engineer-arrested-alleged-bugging-executive-conference-room/">OpenAI社員、役員会議室への盗聴器設置容疑で逮捕、配偶者名義アカウントから計画が露見</a></h3>
         </div>
-        <div class="summary">OpenAIのCLIエージェントCodex(バージョン0.157.0)は、対話セッションを開くと利用者の同意なしに常駐デーモン「app-server --managed-daemon」を起動する。デーモンは約374MBのパッケージを`~/.codex/packages/`以下へ複製して実行するためnpm版CLIとバージョンがずれ、起動5分後とその後1時間おきに新版をチェックして自動更新し、進行中のやり取りを60秒のドレイン猶予後に強制終了する場合がある。さらに起動時セッションの環境変数(プロキシ設定やGH_TOKENなど)を固定して保持し、以後のセッションに古い値を引き継いでしまう不具合も報告された。9月25日に立てられたIssue #48195は10月12日時点でメンテナーの応答がなく、Windows/WSL2利用者からは昇格権限の制約でデーモン起動がブロックされ実質使用不能という報告も上がっている。</div>
+        <div class="summary">OpenAIでプロダクトチームに所属していたサウジ国籍のエンジニア、Abdulrahman Alfozan容疑者(35)が、サンフランシスコ本社の役員会議室にUSB給電の録音機をトイレットペーパーで偽装して設置した容疑で逮捕された。検察によれば、9月24日から30日にかけて配偶者名義のチャットボット口座から録音機の設置・隠蔽・遠隔アクセス方法に関する質問が送られ、後にはMACアドレスまで言及されていた。9月30日にOpenAIが機器を発見、10月5日には容疑者が会議室のTVの裏を確認する場面が押さえられ、別室に置き忘れたバッグから2台目の録音機とIDが見つかった。OpenAIは逮捕当日に解雇し、モデルの重みやソースコード、顧客データへのアクセスを示す証拠はないとしている。</div>
         <div class="key-points">
           <ul>
-            <li>デーモンは起動5分後・以後1時間おきに自動更新チェックし、進行中ターンを60秒のドレイン後に強制終了する場合がある、`daemon stop`後もアップデートループが約70秒残存する不具合も報告</li>
-            <li>起動時セッションの環境変数(GH_TOKENなど)を固定保持し後続セッションに古い値を引き継ぐ、npm/brew/pacman経由インストール時は複製・自動更新をしないことなどが要望されている</li>
+            <li>容疑者は9月28日前後に設置、9月30日にOpenAIが発見、10月5日に会議室へ再侵入しTVの裏を確認した現場を押さえられた</li>
+            <li>有罪となれば最長禁錮5年・罰金25万ドル、10月19日に拘留審問を予定、OpenAIはモデル重み・ソースコード・顧客データへのアクセスの兆候はないと説明</li>
           </ul>
         </div>
         <div class="meta">
-          <span>GitHub</span>
-          <span>⏱ 5 min read</span>
-          <span>2026-10-12</span>
-          <span class="engagement">▲ 477</span>
+          <span>The San Francisco Standard</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-10-13</span>
+          <span class="engagement">▲ 343</span>
         </div>
       </div>
     </div>
@@ -136,22 +136,22 @@
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-infra">Infra</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://aws.amazon.com/blogs/aws/announcing-aws-lambda-web-functions-for-fast-consistent-web-app-performance-anywhere/">AWS Lambda Web Functions発表、常駐HTTPサーバをそのままLambdaで動かす新形態</a></h3>
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://github.com/rust-lang/rust/issues/164250">Rustボローチェッカーに11年前からの健全性バグ、共変フィールド代入がライフタイム境界を無視</a></h3>
         </div>
-        <div class="summary">AWSは10月12日、Lambdaの新しい実行形態「Web Functions」を発表した。Express・Hono・Fastify・Next.jsなどポートリスニング型のサーバをアダプタなしでそのままデプロイでき、1実行環境あたり最大128の同時リクエストを処理し、I/O待ちではなくCPU時間課金になる。`aws lambda-web deploy`一発で1分未満にHTTPSエンドポイントを発行し、`--regions`指定でマルチリージョン配信とレイテンシベースルーティングも自動化する。</div>
+        <div class="summary">Rustのボローチェッカーが、構造体フィールドの`'static`等のライフタイム境界を無視して短命な参照の代入を許す健全性バグが報告された。悪意ある`Drop`実装と組み合わせるとダングリング参照を使う未定義動作を引き起こせる。</div>
         <div class="key-points">
           <ul>
-            <li>1実行環境で最大128同時リクエストを処理、課金はCPU時間ベースでDB・API待ちのI/O時間は課金対象外</li>
-            <li>`aws lambda-web deploy`で1分未満にデプロイ完了、Node.js 24(Arm64)に対応、米東/米西/東京/アイルランドの5リージョンで利用可能</li>
+            <li>2017年のRust 1.18.0から再現し、現行stable 1.85.0以降とnightlyでも成立、修正PR #164277が提出済み</li>
+            <li>悪用には意図的に悪意ある`Drop`実装が必要、Rust Typesチームは健全性バグ修正を最優先事項と位置付け重要度ラベルP-criticalを一時付与</li>
           </ul>
         </div>
         <div class="meta">
-          <span>AWS Blog</span>
-          <span>⏱ 3 min read</span>
-          <span>2026-10-12</span>
-          <span class="engagement">🔖 30</span>
+          <span>GitHub</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-10-13</span>
+          <span class="engagement">▲ 656</span>
         </div>
       </div>
 
@@ -159,79 +159,82 @@
         <div class="card-header">
           <span class="tag tag-frontend">Frontend</span>
           <span class="content-type">📦 リリース</span>
-          <h3><a href="https://www.publickey1.jp/blog/26/javascriptvite_10.html">Vite開発元VoidZero、Node.js・パッケージ管理・ビルドを1つのCLIに統合する「Vite+ 1.0」正式リリース</a></h3>
+          <h3><a href="https://www.publickey1.jp/blog/26/websveltekit_3vite.html">設定統合・型安全強化のメジャーリリース「SvelteKit 3」公開</a></h3>
         </div>
-        <div class="summary">VoidZeroは9月28日、単一CLI `vp` でNode.jsランタイム・パッケージ管理・フロントエンドツールチェーンをまとめて扱う「Vite+ 1.0」を正式リリースした。内部はVite・Vitest・Rolldown(Rust製高速バンドラ)・Oxc・tsdownで構成され、設定ファイルも1つに統合。ローカル開発サーバ・パッケージ管理・バンドル・Lint・フォーマット・テスト実行を別ツールに分けずに済む。MITライセンスのOSSで、`vp create`での新規作成と既存プロジェクトへの移行の両方に対応する。</div>
+        <div class="summary">SvelteKit開発元が10月1日、メジャーリリース「SvelteKit 3」を公開した。新機能追加ではなく設定・型安全性・エラーハンドリングの整理が中心で、`svelte.config.js`を廃止しVite設定に統合、`$lib`エイリアスはNode.jsのsubpath importを使う`#lib`に置き換わった。</div>
         <div class="key-points">
           <ul>
-            <li>Vite・Vitest・Rolldown・Oxc・tsdownを単一CLI `vp` の下に統合、設定ファイルも1つに一元化</li>
-            <li>2026年6月のCloudflareによるVoidZero買収を背景に長期開発の継続性を担保、MITライセンスで新規・既存プロジェクトの両方に対応</li>
+            <li>データロード・フォーム処理・ルーティング・サーバー通信の型チェックが拡充され開発時に検出できるエラーが増加、移行スクリプトが自動化を支援</li>
+            <li>実験的機能のRemote FunctionsとAsync Svelteが安定化すればSvelteKit 4に進む見通し、サーバー専用コードの誤importを防ぐ安全機構を追加</li>
           </ul>
         </div>
         <div class="meta">
           <span>Publickey</span>
           <span>⏱ 3 min read</span>
-          <span>2026-09-28</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-frontend">Frontend</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://www.publickey1.jp/blog/26/vercelnextjscloudflare_workersaws_lambdavercelvinext_10.html">CloudflareのVinext 1.0、Next.jsアプリをVercel以外のサーバレス基盤へ約99%機能互換でデプロイ可能に</a></h3>
-        </div>
-        <div class="summary">Cloudflareは、Next.jsアプリのビルドをTurbopackではなくViteで行う「Vinext 1.0」をリリースした。App Router/Pages Router・SSG/SSR/ISRのハイブリッド構成・キャッシュ・OpenTelemetryやSentryとの連携など、Next.jsの主要機能の約99%に対応すると説明している。ビルド後のアプリはCloudflare Workers・AWS Lambda・NetlifyなどVercel以外の基盤にデプロイでき、Cloudflare Workers向けにはHyperdrive経由のDB接続や画像最適化の統合も用意する。2026年6月のVoidZero買収を背景に、AI実験扱いだったツールを本番運用向けへ位置づけ直したリリースという。</div>
-        <div class="key-points">
-          <ul>
-            <li>Next.js主要機能の約99%に対応(App/Pages Router、SSG・SSR・ISRのハイブリッド構成、キャッシュ、OpenTelemetry/Sentry連携)</li>
-            <li>Cloudflare Workers・AWS Lambda・Netlifyなど複数のサーバレス基盤にデプロイ可能、Workers向けにHyperdriveのDB接続と画像最適化を統合</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Publickey</span>
-          <span>⏱ 3 min read</span>
-          <span>2026-09-28</span>
+          <span>2026-10-13</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
           <span class="tag tag-infra">Infra</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://www.publickey1.jp/blog/26/windowslinuxwsl_containersapi.html">Windows上でLinuxコンテナを直接実行する「WSL Containers」正式GA、Docker不要に</a></h3>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://machinelearning.apple.com/research/distributed-gpu-cloud">Apple研究者、遊休Apple SiliconのGPUを束ねる分散推論クラウド「Minions」発表</a></h3>
         </div>
-        <div class="summary">Microsoftは9月29日、WSL上でLinuxコンテナを直接作成・実行できる「WSL Containers」を正式GAにした。従来Windows上でのLinuxコンテナ実行にはDocker等の別ソフトが必要だったが、`wslc`コマンドまたはAPIから直接操作できるようになり追加インストールが不要になる。デフォルトのファイルシステムはvirtiofs、ネットワークモードは"consomme"でWindowsアプリと同じネットワーク・セキュリティポリシー下で動く。GA版では`wslc container restart`や`wslc network connect/disconnect`などのコマンドが追加され、Intune・Microsoft Defender for Endpointとの連携で企業の集中管理にも対応する。複数コンテナをまとめて扱う`wslc compose`は開発中。</div>
+        <div class="summary">Appleの研究チームは、使われていないApple Silicon MacのGPUを束ねて推論ワークロードを動かす分散システム「Minions」を発表した。中央集権型のGPU基盤は高コストで弾力性に欠け待ち時間も長いとして、すでに手元にあるMac群で代替することを狙う。耐障害性と柔軟なタスク実行を備えるが、論文(arXiv:2610.12970)の詳細な構成やベンチマーク数値はこの発表ページには記載されていない。</div>
         <div class="key-points">
           <ul>
-            <li>2026年6月のBuild発表→7月プレビュー→9月29日GAという経緯、デフォルトファイルシステムはvirtiofs・ネットワークモードは"consomme"</li>
-            <li>`wslc container restart`・`wslc network connect/disconnect`などをGA版で追加、Intune/Defender for Endpoint連携で企業管理に対応、`wslc compose`は開発中</li>
+            <li>日常利用で空いているApple SiliconのGPUをクラスタ化し新規GPU購入なしで推論を実行、著者はJianhua Liら6名</li>
+            <li>フォールトトレラント設計と柔軟なタスク割り当てを備えるが、スループットやレイテンシ等の具体的な測定値は本ページでは非公開</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Publickey</span>
+          <span>Apple Machine Learning Research</span>
           <span>⏱ 3 min read</span>
-          <span>2026-09-29</span>
+          <span>2026-10-13</span>
+          <span class="engagement">▲ 216</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-data">Data</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://www.publickey1.jp/blog/26/google_cloudaipostgresqldbpostgresql_for_agents_in_alloydb.html">AlloyDBにAIエージェント専用サンドボックスPostgreSQLインスタンス、本番DBへの負荷分離</a></h3>
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://eg2.haku.sh/">音声用に訓練していないEmbeddingGemma 2を288倍速の音声認識モデルに転用</a></h3>
         </div>
-        <div class="summary">Google Cloudは9月24日、AlloyDBのプレビュー機能「PostgreSQL for agents」を発表した。AIエージェントは推論の過程で多数のクエリを発行し本番PostgreSQLの性能を落とすリスクがあるため、エージェント用の読み取り専用インスタンスを数秒で動的に起動し、クラスタ内のプライマリ・スタンバイ・リードレプリカから完全に分離する。インスタンスはエージェントの負荷に合わせて自動スケールし、タスク終了後はゼロまでスケールダウンする。フルSQLと全インデックス、ベクトル・全文・空間検索に対応し、Googleは秒間数百万クエリ・1,000台超のリーダーをオンデマンドで扱えると説明している。</div>
+        <div class="summary">開発者は、音声用途で訓練されていないEmbeddingGemma 2の音声エンコーダをそのまま使い、短い音声区間をテキスト埋め込み空間へ写す小さな「reader」だけを追加学習して音声認識モデル化した。約22.9万語の英語語彙から最近傍の単語を選んで文字起こしし、別の小モデルで句読点と大文字化を付与する。学習は8基のH100で2時間未満。</div>
         <div class="key-points">
           <ul>
-            <li>読み取り専用インスタンスを数秒で動的プロビジョニングし本番のプライマリ・スタンバイ・リードレプリカから分離、タスク終了後はゼロへ自動スケールダウン</li>
-            <li>Googleは秒間数百万クエリ・オンデマンドで1,000台超のリーダーに対応すると説明(ベンダー発表値)、フルSQLとベクトル・全文・空間検索に対応</li>
+            <li>M3 MacBook Air(8GB)のNeural Engineで約288倍速(1時間の音声を12.6秒で処理)、NVIDIA Parakeet TDT 0.6B v3のM4 Pro版156倍を上回る</li>
+            <li>単語誤り率は約5%で主要音声モデルの2〜3%にはまだ届かない、著者はreaderの訓練改善で差を縮められるとみる</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Publickey</span>
+          <span>haku.sh</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-10-13</span>
+          <span class="engagement">▲ 380</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://daniel.haxx.se/blog/2026/10/13/a-slightly-faster-slimmer-curl/">curl 8.23.0、Base64・URL解析・メモリ使用量を軒並み改善</a></h3>
+        </div>
+        <div class="summary">curlは8.23.0で、新設したパフォーマンステストに基づき速度とメモリ使用量を改善した。Base64エンコードは2倍以上、URLパーセントエンコードのデコードは2倍以上・エンコードは約4倍高速化し、日付解析や数値パースも最適化した。構造体サイズも縮小し、easy handleは4256バイトから3064バイトへ約28%小さくなった。</div>
+        <div class="key-points">
+          <ul>
+            <li>512MBのHTTPダウンロードでメモリ確保回数が100回から96回に減少、ダウンロードバッファを除くと使用メモリは15%減</li>
+            <li>URL解析は20〜30%高速化、printf()呼び出しは5〜15%高速化、テストはgitリポジトリに同梱され第三者が検証・改善できる</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>daniel.haxx.se</span>
           <span>⏱ 3 min read</span>
-          <span>2026-09-24</span>
+          <span>2026-10-13</span>
+          <span class="engagement">🔖 32</span>
         </div>
       </div>
     </div>
@@ -241,21 +244,43 @@
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-security">Security</span>
-          <span class="content-type">🔬 研究</span>
-          <h3><a href="https://qiita.com/songchong/items/0d759f44eb26f332b897">AIエージェントにAPIキーを渡す5つの場面を51回の実験で「危険・要注意・安全」に分類</a></h3>
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://blog.shibayu36.org/entry/2026/10/13/173000">shibayu36氏、miseの新機能`bootstrap`で私物・仕事Macの環境構築を一元化</a></h3>
         </div>
-        <div class="summary">編集チームは、Claude Code(Sonnet 5.5)・Antigravity CLI(Gemini 3.8 Flash/3.1 Pro)・Codex(GPT-5.6)の4エージェントに外部サービス連携やデータ登録を51回試させ、APIキーの扱いを「危険・要注意・安全」の5場面に分類した。キー存在確認では、チェックコマンドを明示しない指示だとGemini 3.1 Proが`env`などキー全文を出力するコマンドを6回中3回選択(50%)した一方、コマンドを明示した場合は両Gemini・Claude Sonnetともに全件で漏洩を回避した。MCPサーバー追加では、Gemini 3.1 Proがコマンドにキー値を直接書き込む危険なやり方を3回中3回選んだが、先に環境変数へ設定する指示に変えると0回中0回に改善した。</div>
+        <div class="summary">ブロガーのshibayu36氏は、私用・仕事用2台のMacの環境構築をmiseの新機能`mise bootstrap`で一元化した。パッケージ(Brewfile)・dotfilesのsymlink・macOS defaultsの3種類に分かれていた従来の非冪等なスクリプト群を、宣言的な設定ファイルと差分適用の仕組みに置き換えた。</div>
         <div class="key-points">
           <ul>
-            <li>キー存在確認: チェックコマンド未指定だとGemini 3.1 Proが6回中3回(50%)キー全文出力コマンドを選択、コマンド明示後は全モデルで漏洩ゼロ</li>
-            <li>MCPサーバー追加: Gemini 3.1 Proはキー値をコマンドに直接書き込む危険な方法を3回中3回選択、環境変数を先に設定する指示に変えると0回中0回に改善</li>
+            <li>共通設定ファイルに加え`miserc.local.toml`の`env`値だけをMacごとに変え、1Password・Chromeは個人用、Google Driveは仕事用の設定ファイルに限定</li>
+            <li>日々の同期は`git pull`後に`mise bootstrap`を実行するだけで完了、chezmoiやNixより既存ツールで完結する手軽さを評価</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Qiita</span>
-          <span>⏱ 6 min read</span>
-          <span>2026-10-12</span>
+          <span>shibayu36.org</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-10-13</span>
+          <span class="engagement">🔖 68</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://rea.tools/ja/blog/touhou-reconstruction/">AIエージェントの自律調査で東方シリーズのソース再構築が加速、TH08は1,107機能特定</a></h3>
+        </div>
+        <div class="summary">開発者N0zoM1z0氏は、AIエージェントに調査の自律性を持たせて東方シリーズのソース再構築を進めている。「不滅の夜」(TH08)は8月13日着手から8月19日までに1,107機能のソースを特定、「文花帖」(TH095)は9月7日までに697機能全てにソースを得て696個が厳密比較に合格した。</div>
+        <div class="key-points">
+          <ul>
+            <li>TH08では元の`128.0`が`0.0`に化けた浮動小数点定数バグでアイテム自動回収が誤発生、監査で1,548件の定数参照中12件の誤りが判明</li>
+            <li>正確なベースライン復元→元プラットフォームでの実行→セマンティクス再構築→64bit等のモダンポートという4段階の手法を採用、DOS版「東方紅魔郷」(TH04)は手動プレイで通常ルート完走を確認</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>rea.tools</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-13</span>
+          <span class="engagement">🔖 42</span>
         </div>
       </div>
 
@@ -263,60 +288,39 @@
         <div class="card-header">
           <span class="tag tag-ai">AI</span>
           <span class="content-type">📜 解説</span>
-          <h3><a href="https://zenn.dev/genda_jp/articles/haiku-5-5-subagent-roles">Haiku 5.5を機にClaude Codeサブエージェント3役割の設計を見直した</a></h3>
+          <h3><a href="https://qiita.com/quan_le/items/a33e331a2d7a42891f49">`text-embedding-3-small`はなぜ使われ続けるのか、OpenRouter利用統計6億6,000万リクエストで1位</a></h3>
         </div>
-        <div class="summary">GENDAの開発者は、Claude Codeのサブエージェント3役割をHaiku 5.5への切替を機に見直した。単価はSonnet 5.5比でOpus 5.5が200%、Haiku 4.5が50%、Haiku 5.5はプロンプト10万トークン以下で5%(10万超で25%)。判断を含まないtest-runner役はHaiku/lowへ完全移行、読み取り専用で調査するcode-explore役は回答品質がHaiku・Sonnet間で差がなかったがHaikuは調べる範囲が広がりツール呼び出しが増加、実装を任せるfast-worker役はTerminal-Bench 4.0スコアがHaiku 5.5 39.2%・Sonnet 5.5 70.6%のためSonnet/highを維持した。</div>
+        <div class="summary">Qiita記事は、OpenAIの`text-embedding-3-small`が性能面で最新ではないにもかかわらず使われ続ける理由を、OpenRouterの月間利用統計(約6億6,000万リクエストで1位)から分析した。英語MTEBベンチマークでは62.3%を記録し実用十分だが、多言語ベンチマークMIRACLでは44.0%にとどまる。</div>
         <div class="key-points">
           <ul>
-            <li>Haiku 5.5はSonnet 5.5比で単価5%(プロンプト10万トークン超で25%)、判断を含まないtest-runner役はHaiku/lowに完全移行</li>
-            <li>Terminal-Bench 4.0スコアはHaiku 5.5が39.2%・Sonnet 5.5が70.6%で実装役はSonnet/high維持、調査役はHaikuの回答品質はSonnetと同等だがツール呼び出しが増加</li>
+            <li>著者の社内チャットボットでは日本語・ベトナム語クエリの正解文書が60位前後に沈みリランカーでも救えなかったが、Gemini Embedding 2へ切り替えると上位5〜10位に浮上</li>
+            <li>価格は100万トークン0.02ドルと安く、既存データの再埋め込みコストも「動いているなら触らない」慣性を強める一因と分析</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Zenn</span>
+          <span>Qiita</span>
           <span>⏱ 5 min read</span>
-          <span>2026-10-12</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-product">Product</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://www.publickey1.jp/blog/26/gpuai_engine.html">さくらインターネット、GPU専有で従量課金なしの「AI Engineプライベートエディション」提供開始</a></h3>
-        </div>
-        <div class="summary">さくらインターネットは10月8日、既存のAI Engine(マネージドLLM APIサービス)を1顧客専有のGPUで提供する「プライベートエディション」を発表した。料金はGPU台数に基づく月額固定制で、トークン消費量に関わらずコストが変わらない。自社開発LLM・ファインチューニング済みモデル・オープンウェイトモデルに対応し、インフラ構築・運用はさくらが担う。国内データセンターで稼働し、入力データとモデルは環境外に送信されず閉域接続にも対応する。大量API利用でコストを予測可能にしたい用途や、機密情報を扱う社内利用、自社サービスの私有環境での運用を想定する。</div>
-        <div class="key-points">
-          <ul>
-            <li>料金はトークン消費量に依存しないGPU台数ベースの月額固定制、料金自体は非公開で個別見積り</li>
-            <li>国内データセンターで稼働し入力データ・モデルを環境外へ送信せず閉域接続にも対応、自社開発LLM・ファインチューニング・オープンウェイトモデルに対応</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Publickey</span>
-          <span>⏱ 3 min read</span>
-          <span>2026-10-08</span>
+          <span>2026-10-13</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
           <span class="tag tag-ai">AI</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://pc.watch.impress.co.jp/docs/news/2147412.html">Microsoft、脱NVIDIA目指す第3世代AIアクセラレータ「Maia 300」発表</a></h3>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://qiita.com/suwa_nobu/items/365d2561809fe1da8541">Claude Code、Shift-JISファイル編集で日本語が全部破損するバグが2.1.295まで存在</a></h3>
         </div>
-        <div class="summary">Microsoftは10月12日、自社製AIアクセラレータの第3世代「Maia 300」を発表した。TSMC N2P(2nmクラス)のチップレット構成で、HBM4を288GB・帯域18TB/s搭載(前世代Maia 200はHBM3e 216GB・7TB/s)。演算性能はMXFP4で13.8POPS(前世代10.1)、FP8で6.9POPS(前世代5.1)、400GbEポートを32基備え3.2TB/sのスケールアップ帯域を持つ。TDPは950Wに上昇し、1ラックに最大96基搭載可能(前世代48基)。Microsoftはトークン処理効率がGPU比約40%向上、ラックあたりのトークン処理量はMaia 200比約7倍になると説明している。2027年にAzure・Microsoft 365向けデータセンターへ投入予定。</div>
+        <div class="summary">Qiitaの検証記事によると、Claude Code 2.1.295まではShift-JISファイルをEditツールで1か所編集するだけで、UTF-8として扱えないバイト列が全て置換文字`�`(U+FFFD)に変わり元の日本語が失われていた。著者の例では261バイトが360バイトに変化し、Readで読み直しても壊れた状態がそのまま表示されるため気づきにくい。</div>
         <div class="key-points">
           <ul>
-            <li>HBM4を288GB・帯域18TB/s搭載(Maia 200比でHBM3e 216GB・7TB/sから増強)、MXFP4演算性能13.8POPS・FP8 6.9POPS</li>
-            <li>1ラック最大96基でラックあたり電力約167kW、トークン処理量はMaia 200比約7倍とMicrosoftは説明(自社ベンチマーク)、2027年にAzure/M365向けデータセンターへ投入予定</li>
+            <li>40回の試行でHaiku 5.5が3/3、Opus 5.5が2/3の確率で日本語を破損、Claude自身は破損後も「変更しました」と報告していた</li>
+            <li>2.1.296でUTF-8非互換ファイルへの書き込み自体を停止するよう修正、対処は上位バージョンへの更新と`git diff`での事前確認が有効</li>
           </ul>
         </div>
         <div class="meta">
-          <span>PC Watch</span>
+          <span>Qiita</span>
           <span>⏱ 5 min read</span>
-          <span>2026-10-12</span>
-          <span class="engagement">🔖 91</span>
+          <span>2026-10-13</span>
         </div>
       </div>
     </div>
@@ -328,20 +332,40 @@
         <div class="card-header">
           <span class="tag tag-oss">OSS</span>
           <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://github.com/snuri00/ps2-web-recomp">市販PS2ゲームを静的再コンパイルしWebAssembly化する「ps2-web-recomp」</a></h3>
+          <h3><a href="https://devlog.creusot.rs/v0-14-0/">Rust用形式検証ツールCreusot 0.14.0、半順序対応とrust-analyzer連携を強化</a></h3>
         </div>
-        <div class="summary">`eerecomp`がPS2のR5900機械語を16KiB単位でC++へ翻訳し、Emscripten経由でWebAssemblyへコンパイルするツール。遅延スロットや128bitレジスタ、PS2 FPU特有の非IEEE丸めなどの挙動を保持する。EE側のOSはスレッド・セマフォ・割込みを高レベルエミュレートし、IOP側は実機のIRXモジュールをR3000インタプリタ上でそのまま動かす。GPU描画はWebGPUコンピュートシェーダで実装し、ソフトウェアラスタライザも参照実装として用意。グランツーリスモ4とゴッド・オブ・ウォーIIで動作確認済みで、後者はゲーム固有コードなしで動いた。</div>
+        <div class="summary">Rust用の形式検証ツールCreusotが0.14.0をリリースした。`PartialOrd`の仕様が全順序を前提としていた制約を外し、新たな`PartialOrdLogic`トレイトで半順序に対応。`snapshot!`式に対する検証条件生成も追加され、ロジック関数をレンマとして呼び出しプルーバーの量化子推論に頼らず仕様の誤りを早期検出できるようになった。</div>
         <div class="key-points">
           <ul>
-            <li>グランツーリスモ4(起動からレース可能)とゴッド・オブ・ウォーII(ゲーム固有コード不要)で動作確認、GPU描画はWebGPUコンピュートシェーダ実装</li>
-            <li>MITライセンス、ディスクイメージはHTTP Range要求でストリーミング、WebGPU非対応環境ではソフトウェアラスタライザが3D描画に力不足と明記</li>
+            <li>全順序は`OrdLogic`の法則(`x&lt;y || x==y || y&lt;x`)として表現、既存の証明はこの変更の影響を受けなかった</li>
+            <li>rust-analyzerのPearlite仕様内でのgo-to-definitionに対応、トークンスパンを絞り込むことで無関係な参照先が出る問題を修正</li>
           </ul>
         </div>
         <div class="meta">
-          <span>GitHub</span>
+          <span>devlog.creusot.rs</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-13</span>
+          <span class="engagement">🔖 15</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://lix.systems/blog/2026-10-13-lix-2.96-release/">Nix実装Lix、7番目のメジャーリリース「2.96 Bingsu」公開</a></h3>
+        </div>
+        <div class="summary">Nix実装Lixの7番目のメジャーリリース「2.96 Bingsu」が10月13日に公開された。REPLバックエンドをeditlineからrustylineへ移行しUTF-8対応を改善、デバッガはスタックフレームを相対オフセット(`:st +l`等)で移動できるようになった。メモリアロケータにmimallocを採用し評価が5〜12%高速化した。</div>
+        <div class="key-points">
+          <ul>
+            <li>`ssh-ng://`ストアURIが安定版になりsshより厳格なセキュリティチェックを追加、未署名出力の信頼されないユーザーによるコピーを禁止、`ssh://`は非推奨化され2.97で削除予定</li>
+            <li>flake.nixの検証ルールを`outputs`外での関数呼び出し禁止のみに単純化、`floor`/`ceil`は精度を失う変換でエラーを出すよう変更</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>lix.systems</span>
           <span>⏱ 4 min read</span>
-          <span>2026-10-12</span>
-          <span class="engagement">▲ 275</span>
+          <span>2026-10-13</span>
         </div>
       </div>
 
@@ -349,20 +373,20 @@
         <div class="card-header">
           <span class="tag tag-oss">OSS</span>
           <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://github.com/jaisuriya-11/tsuzuri">Markdownファイルで動くブロック型ターミナルノートブック「tsuzuri」</a></h3>
+          <h3><a href="https://github.com/LargeModGames/spotatui">Spotify必須を前提にしないRust製ターミナル音楽プレイヤー「spotatui」</a></h3>
         </div>
-        <div class="summary">GoでBubble TeaとLip Glossを使って書かれた、単一バイナリで動くターミナル向けノートブックアプリ。ノートは純粋なMarkdownファイルとして保存されるためデータベースへのロックインがなく、gitやフォルダ同期、他エディタと併用できる。`/`コマンドで見出し・ToDo・テーブル・コードブロックなどを挿入するブロックメニュー、Vimライクなモーダル編集、ドラッグでのブロック並べ替え、ボード・カレンダー・ガントのようなビュー、Mermaid風フローチャートとLaTeX数式のUnicode描画、PDFエクスポートなどを搭載する。</div>
+        <div class="summary">Spotify依存を前提にしないRust製ターミナル音楽プレイヤー「spotatui」。spotify-tuiのフォークで、Spotify・ローカルファイル・Subsonic/Navidrome・インターネットラジオ・YouTube(yt-dlp経由)・Qobuz・macOS限定のApple Musicを`d`キーで切り替えながら再生できる。</div>
         <div class="key-points">
           <ul>
-            <li>MITライセンス、GitHub上で286スター・12フォーク、インストールはシェルスクリプト・PowerShell・Homebrew・`go install`に対応</li>
-            <li>`[[Note]]`形式の見出し/ブロック単位リンクとバックリンク・ズーム可能なグラフビューを搭載、カスタムJSONテーマを96種(ページ内表記は97種とも)同梱</li>
+            <li>Ratatui・rspotify・独自保守版librespot・tokio・clap構成、MITライセンスでGitHub上約1.5kスター・246フォーク</li>
+            <li>複数ソースを横断する再生キュー、マスタープレイリスト同期、Luaプラグイン、コーディングエージェント向けMCPサーバーを備えたAI DJ機能も搭載</li>
           </ul>
         </div>
         <div class="meta">
           <span>GitHub</span>
           <span>⏱ 3 min read</span>
-          <span>2026-10-12</span>
-          <span class="engagement">🔖 37</span>
+          <span>2026-10-13</span>
+          <span class="engagement">▲ 40</span>
         </div>
       </div>
     </div>
@@ -371,45 +395,45 @@
       <div class="section-title">🔗 Quick Links</div>
 
       <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://blog.thunderbird.net/2026/10/thunderbird-for-ios-a-first-look-at-the-native-iphone-email-app-in-development/">Thunderbirdチーム、新規開発のネイティブiOSメールアプリを発表</a>
+        <span class="quick-summary">— 既存コードを再利用せずゼロから開発、コードベースの約98.9%がSwift/SwiftUIで、数か月後のコミュニティテスト開始を目指す。</span>
+        <span class="meta">Thunderbird Blog</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://blog.character.ai/an-update-on-character-ai/">Character.ai、連邦破産法11条を申請し裁判所管理下での売却へ</a>
+        <span class="quick-summary">— 「法的・規制上・運用上の逆風」を理由に自主的にChapter 11を申請、11月末〜12月初旬の売却完了を目指し、買い手が付かない場合はサービス停止の可能性もある。</span>
+        <span class="meta">Character.AI Blog</span>
+      </div>
+
+      <div class="quick-link">
         <span class="tag tag-security">Security</span>
-        <a href="https://simonkoeck.com/writeups/google-devsite-flask-session-pickle-rce">Google開発者サイトのFlaskセッションに$90,000のRCE、署名鍵をpickle化オブジェクト内に同梱していた</a>
-        <span class="quick-summary">— OAuthのclient_secretをFlask署名鍵に使い回しセッションをpickleで復元していたため偽造セッション経由でRCEが可能だった。8月6日報告、10月7日修正。</span>
-        <span class="meta">simonkoeck.com</span>
+        <a href="https://www.bleepingcomputer.com/news/security/ledger-confirms-hardware-wallet-spy-implant-behind-crypto-thefts/">Ledgerハードウェアウォレットに盗聴用インプラント、再販業者経由の端末が標的</a>
+        <span class="quick-summary">— マレーシアの再販業者CryptoBilis経由で販売された一部端末に隠し基板が仕込まれシードフレーズをeSIM経由で外部送信、Ledgerは該当業者経由購入者に新デバイスへの移行を呼びかけ。</span>
+        <span class="meta">BleepingComputer</span>
       </div>
 
       <div class="quick-link">
-        <span class="tag tag-ai">AI</span>
-        <a href="https://research.meta.ai/blog/muse-wonder">Meta、パーソナルAIエージェント向け新フロンティアモデル「Muse Wonder」を公開</a>
-        <span class="quick-summary">— 会話を跨いで文脈を保持する「Active Memory」と障害時に別アプローチを試す「Active Focus」を搭載、法律・金融・医療の専門知識にも対応。</span>
-        <span class="meta">Meta AI</span>
+        <span class="tag tag-infra">Infra</span>
+        <a href="https://pc.watch.impress.co.jp/docs/news/2147744.html">Windows Update証明書が2027年失効、Microsoftが対応表を公開</a>
+        <span class="quick-summary">— Windows 11 24H2やWindows 10等は2027年6月19日までに2026年7月以降のセキュリティ更新適用が必要、放置すると証明書失効後に更新プログラムを受け取れなくなる。</span>
+        <span class="meta">PC Watch</span>
       </div>
 
       <div class="quick-link">
-        <span class="tag tag-data">Data</span>
-        <a href="https://www.publickey1.jp/blog/26/google_clouddbspanner_omni.html">Google Cloud、ローカル実行可能な分散マルチモデルDB「Spanner Omni」正式GA</a>
-        <span class="quick-summary">— Cloud SpannerのPaxos合意・自動シャーディングを維持しつつGoogle専用のColossus・TrueTimeを自社実装に置き換え、単一サーバからオンプレまで動作。</span>
-        <span class="meta">Publickey</span>
+        <span class="tag tag-product">Product</span>
+        <a href="https://www.itmedia.co.jp/news/article/2610/13/2000002234/">Getty Images、連邦破産法11条を申請、Shutterstock合併破談と負債21億ドルが背景</a>
+        <span class="quick-summary">— 2026年6月の合併断念と2026年6月末時点で約21億ドルの負債が背景、iStockの素材画像需要低迷にAI生成画像の普及が影響したとの見方もある(The Hollywood Reporter報道)。</span>
+        <span class="meta">ITmedia</span>
       </div>
 
       <div class="quick-link">
-        <span class="tag tag-dev">Dev</span>
-        <a href="https://crystalmark.info/ja/2026/10/11/crystaldiskinfo-100-million-downloads/">ディスク監視ツール「CrystalDiskInfo」が累計1億ダウンロード、開発18年の軌跡</a>
-        <span class="quick-summary">— 2007年のGoogleのHDD故障調査に着想を得て2008年に1.0公開、USB-NVMe対応や水晶雫キャラクター導入を経て2026年に18年目。</span>
-        <span class="meta">CrystalMark</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-dev">Dev</span>
-        <a href="https://lunarwatcher.codeberg.page/til/firefox/resumable-big-downloads.html">Firefoxの大容量ダウンロードを確実にレジュームさせる設定変更</a>
-        <span class="quick-summary">— about:configの`network.http.response.timeout`をFirefox 28以来の既定300秒から0または十分大きい値に変えるとレジュームが安定する(サーバ側対応が前提)。</span>
-        <span class="meta">lunarwatcher.codeberg.page</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-dev">Dev</span>
-        <a href="https://prophitt.me/writing/a-modern-web-app-in-c">OpenBSD+C+SQLiteの「BCHS」スタックだけで商用Webアプリを構築する実践記</a>
-        <span class="quick-summary">— フレームワークや別DBサーバを使わずhttpdのCGI実行とSQLite単一ファイル、libcurl・libsodium・libcjsonだけでStripe決済付き商用サービスを構築、デプロイは1ファイル差し替え。</span>
-        <span class="meta">prophitt.me</span>
+        <span class="tag tag-product">Product</span>
+        <a href="https://www.apple.com/jp/newsroom/2026/10/meet-apple-homeview-a-new-way-to-enjoy-entertainment-and-manage-the-home/">Apple、7インチディスプレイ搭載のホーム管理デバイス「HomeView」発表</a>
+        <span class="quick-summary">— 卓上・壁掛け両モデルとも米国価格299ドルで11月13日発売、最大6人の顔認識でパーソナライズし最大9台のカメラ映像を同時表示できる(日本での販売は未発表)。</span>
+        <span class="meta">Apple Newsroom</span>
       </div>
     </div>
 
