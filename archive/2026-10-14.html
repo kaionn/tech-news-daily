@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-10-14</title>
+  <meta name="description" content="Anthropicがgitを捨て独自VCS「Scion」へ全面移行 / Google、新フロンティアモデル「Gemini 4 Argon」発表 / OpenAI社員、役員会議室への盗聴器設置容疑で逮捕">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech News Daily">
+  <meta property="og:title" content="Tech News Daily — 2026-10-14">
+  <meta property="og:description" content="Anthropicがgitを捨て独自VCS「Scion」へ全面移行 / Google、新フロンティアモデル「Gemini 4 Argon」発表 / OpenAI社員、役員会議室への盗聴器設置容疑で逮捕">
+  <meta property="og:url" content="https://tech-news.kaion-lab.com/archive/2026-10-14.html">
+  <meta property="og:image" content="https://tech-news.kaion-lab.com/apple-touch-icon.png">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="../feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-10-14 (Wed)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+      <nav class="site-nav">
+        <a href="../" class="active">📰 日刊ダイジェスト</a>
+        <a href="../trends.html">🔌 週次プラグイントレンド</a>
+        <a href="../ai-trends.html">🧠 AI プロダクト動向</a>
+        <a href="./">🗂 アーカイブ</a>
+      </nav>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 21 articles</span>
+      <span>🏷 7 categories</span>
+      <span>📡 19 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item">
+        <span class="number-value">200倍</span>
+        <span class="number-label">ScionのCPU・メモリ使用量削減(旧gitミラー基盤比)</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">288倍</span>
+        <span class="number-label">EmbeddingGemma Transcribeのリアルタイム比速度</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">11年</span>
+        <span class="number-label">Rustボローチェッカーの健全性バグが潜伏していた期間</span>
+      </div>
+    </div>
+
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
+
+      <div class="card featured deep-dive">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://www.anthropic.com/engineering/redesigning-source-control">DEEP DIVE: Anthropicがgitを捨て独自VCS「Scion」へ全面移行、マージ量12倍増に対応</a></h3>
+        </div>
+        <div class="summary">Anthropicのモノレポは、Claude Codeなどエージェント経由の変更が主体となったことで2026年5月の日次マージ約2,500件から9月には3万件超へ急増し、人間向けに設計された開発者インフラがボトルネックになった。gitは分散・オフライン作業を前提とし、クローンごとに全履歴を持つ設計のため、常時オンラインのエージェント・CIジョブが大半を占める環境ではコストだけが増えていた。モノレポの履歴は100GB近く、圧縮済み作業コピーも25GBを超え、CIは1日約2,500万回のチェックアウトを処理する規模で、素朴な取得方式なら日600PB超のgitトラフィックが発生する計算になる。ミラー・シャロークローン・sparse checkoutなどで応急対応していたが、マージ増加に伴い運用限界に近づいた。そこでAnthropicは7人のエンジニアで、自社開発のバージョン管理システム「Scion」とコードレビューツール「Antique」を5か月で構築しgitを置き換えた。変更はchangesetという単位でwrite-ahead logに記録され、クライアントはルートツリーから必要なツリー・blobだけをサーバーへ要求するため、巨大なpackfileを丸ごと転送せず再開可能な転送になる。scion-daemon→scion-cache→scion-serverという階層構成を取り、各層のキャッシュヒット率は99%超を維持する。結果としてScionのCPU・メモリのフットプリントは旧gitミラー基盤比で約200倍小さくなり、CI・リサーチのチェックアウトは分単位から秒単位に短縮、CIのCPU容量は25%向上した。</div>
+        <div class="editorial">🧠 Anthropic自身がgitを置き換えるほどの規模にエージェント活用が達している事実は、巨大モノレポを抱える他社にとっても設計上の指針になりうる。ただし著者らも明記する通りScionは汎用のgit代替ではなく、数百人規模のエージェント運用を前提にした特化システムであり、中小チームがそのまま真似できる設計ではない。サーバーサイドRPCやパックファイルを使わない取得プロトコルをgitコミュニティへ還元する計画は語られているが、実際にgit本体やGitHub・GitLabへ反映されるかは未知数だ。</div>
+        <div class="key-points">
+          <ul>
+            <li>マージ量は2026年5月の日次約2,500件から9月に3万件超へ約12倍増、CIは1日約2,500万回のチェックアウトを処理し素朴な取得方式なら日600PB超のgitトラフィックが発生する計算</li>
+            <li>7人のエンジニアがScion・Antique等を5か月で構築、クライアントはルートツリーから必要なツリー・blobだけを要求しパックファイル全体を送らない設計で各層のキャッシュヒット率99%超</li>
+            <li>CPU・メモリのフットプリントはgitミラー基盤比で約200倍小さく、CI・リサーチのチェックアウトは分単位から秒単位に短縮、CIのCPU容量は25%向上</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 巨大モノレポでAIエージェントを大量併走させる組織にとってgitの限界は他人事ではなく、サーバーサイドRPCや非パックファイル型の取得プロトコルといったScionの設計思想は、将来git本体やGitHub・GitLabが採用しうる方向性を示す。</div>
+        <div class="meta">
+          <span>Anthropic</span>
+          <span>⏱ 8 min read</span>
+          <span>2026-10-13</span>
+          <span class="engagement">▲ 481</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-argon/">Google、新フロンティアモデル「Gemini 4 Argon」発表、Antigravityのコード提出35%増</a></h3>
+        </div>
+        <div class="summary">Googleは10月13日、Gemini 4ファミリー第1弾となるフロンティアモデル「Gemini 4 Argon」を発表した。コーディング・金融・法律・サイバーセキュリティ・科学分野での複数ステップのエージェント作業に対応し、社内ツールAntigravityでの利用ではエージェント経由のコード提出が35%増え、ロールバックは3割近く減ったという(自社計測)。金融・法律・税務・コーディングを測るValsインデックスで首位、身体性推論ベンチマークERQAで87%を記録した。API入出力合計で最大100万トークンのコンテキストに対応し、価格は入力100万トークンあたり2ドル・出力10ドルだが、11月30日以降は入力4ドル・出力20ドルに上がる。</div>
+        <div class="key-points">
+          <ul>
+            <li>Antigravityでのエージェント経由コード提出が35%増加・ロールバックが3割近く減少(自社計測)、ERQA(身体性推論)で87%、Valsインデックス首位</li>
+            <li>価格は導入時入力$2/出力$10(100万トークン当たり)、11月30日以降は入力$4/出力$20に倍増、API入出力合計で最大100万トークンのコンテキスト対応</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Google Blog</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-13</span>
+          <span class="engagement">▲ 917</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://sfstandard.com/2026/10/13/openai-engineer-arrested-alleged-bugging-executive-conference-room/">OpenAI社員、役員会議室への盗聴器設置容疑で逮捕、配偶者名義アカウントから計画が露見</a></h3>
+        </div>
+        <div class="summary">OpenAIでプロダクトチームに所属していたサウジ国籍のエンジニア、Abdulrahman Alfozan容疑者(35)が、サンフランシスコ本社の役員会議室にUSB給電の録音機をトイレットペーパーで偽装して設置した容疑で逮捕された。検察によれば、9月24日から30日にかけて配偶者名義のチャットボット口座から録音機の設置・隠蔽・遠隔アクセス方法に関する質問が送られ、後にはMACアドレスまで言及されていた。9月30日にOpenAIが機器を発見、10月5日には容疑者が会議室のTVの裏を確認する場面が押さえられ、別室に置き忘れたバッグから2台目の録音機とIDが見つかった。OpenAIは逮捕当日に解雇し、モデルの重みやソースコード、顧客データへのアクセスを示す証拠はないとしている。</div>
+        <div class="key-points">
+          <ul>
+            <li>容疑者は9月28日前後に設置、9月30日にOpenAIが発見、10月5日に会議室へ再侵入しTVの裏を確認した現場を押さえられた</li>
+            <li>有罪となれば最長禁錮5年・罰金25万ドル、10月19日に拘留審問を予定、OpenAIはモデル重み・ソースコード・顧客データへのアクセスの兆候はないと説明</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>The San Francisco Standard</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-10-13</span>
+          <span class="engagement">▲ 343</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://github.com/rust-lang/rust/issues/164250">Rustボローチェッカーに11年前からの健全性バグ、共変フィールド代入がライフタイム境界を無視</a></h3>
+        </div>
+        <div class="summary">Rustのボローチェッカーが、構造体フィールドの`'static`等のライフタイム境界を無視して短命な参照の代入を許す健全性バグが報告された。悪意ある`Drop`実装と組み合わせるとダングリング参照を使う未定義動作を引き起こせる。</div>
+        <div class="key-points">
+          <ul>
+            <li>2017年のRust 1.18.0から再現し、現行stable 1.85.0以降とnightlyでも成立、修正PR #164277が提出済み</li>
+            <li>悪用には意図的に悪意ある`Drop`実装が必要、Rust Typesチームは健全性バグ修正を最優先事項と位置付け重要度ラベルP-criticalを一時付与</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-10-13</span>
+          <span class="engagement">▲ 656</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-frontend">Frontend</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/websveltekit_3vite.html">設定統合・型安全強化のメジャーリリース「SvelteKit 3」公開</a></h3>
+        </div>
+        <div class="summary">SvelteKit開発元が10月1日、メジャーリリース「SvelteKit 3」を公開した。新機能追加ではなく設定・型安全性・エラーハンドリングの整理が中心で、`svelte.config.js`を廃止しVite設定に統合、`$lib`エイリアスはNode.jsのsubpath importを使う`#lib`に置き換わった。</div>
+        <div class="key-points">
+          <ul>
+            <li>データロード・フォーム処理・ルーティング・サーバー通信の型チェックが拡充され開発時に検出できるエラーが増加、移行スクリプトが自動化を支援</li>
+            <li>実験的機能のRemote FunctionsとAsync Svelteが安定化すればSvelteKit 4に進む見通し、サーバー専用コードの誤importを防ぐ安全機構を追加</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-13</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://machinelearning.apple.com/research/distributed-gpu-cloud">Apple研究者、遊休Apple SiliconのGPUを束ねる分散推論クラウド「Minions」発表</a></h3>
+        </div>
+        <div class="summary">Appleの研究チームは、使われていないApple Silicon MacのGPUを束ねて推論ワークロードを動かす分散システム「Minions」を発表した。中央集権型のGPU基盤は高コストで弾力性に欠け待ち時間も長いとして、すでに手元にあるMac群で代替することを狙う。耐障害性と柔軟なタスク実行を備えるが、論文(arXiv:2610.12970)の詳細な構成やベンチマーク数値はこの発表ページには記載されていない。</div>
+        <div class="key-points">
+          <ul>
+            <li>日常利用で空いているApple SiliconのGPUをクラスタ化し新規GPU購入なしで推論を実行、著者はJianhua Liら6名</li>
+            <li>フォールトトレラント設計と柔軟なタスク割り当てを備えるが、スループットやレイテンシ等の具体的な測定値は本ページでは非公開</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Apple Machine Learning Research</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-13</span>
+          <span class="engagement">▲ 216</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://eg2.haku.sh/">音声用に訓練していないEmbeddingGemma 2を288倍速の音声認識モデルに転用</a></h3>
+        </div>
+        <div class="summary">開発者は、音声用途で訓練されていないEmbeddingGemma 2の音声エンコーダをそのまま使い、短い音声区間をテキスト埋め込み空間へ写す小さな「reader」だけを追加学習して音声認識モデル化した。約22.9万語の英語語彙から最近傍の単語を選んで文字起こしし、別の小モデルで句読点と大文字化を付与する。学習は8基のH100で2時間未満。</div>
+        <div class="key-points">
+          <ul>
+            <li>M3 MacBook Air(8GB)のNeural Engineで約288倍速(1時間の音声を12.6秒で処理)、NVIDIA Parakeet TDT 0.6B v3のM4 Pro版156倍を上回る</li>
+            <li>単語誤り率は約5%で主要音声モデルの2〜3%にはまだ届かない、著者はreaderの訓練改善で差を縮められるとみる</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>haku.sh</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-10-13</span>
+          <span class="engagement">▲ 380</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://daniel.haxx.se/blog/2026/10/13/a-slightly-faster-slimmer-curl/">curl 8.23.0、Base64・URL解析・メモリ使用量を軒並み改善</a></h3>
+        </div>
+        <div class="summary">curlは8.23.0で、新設したパフォーマンステストに基づき速度とメモリ使用量を改善した。Base64エンコードは2倍以上、URLパーセントエンコードのデコードは2倍以上・エンコードは約4倍高速化し、日付解析や数値パースも最適化した。構造体サイズも縮小し、easy handleは4256バイトから3064バイトへ約28%小さくなった。</div>
+        <div class="key-points">
+          <ul>
+            <li>512MBのHTTPダウンロードでメモリ確保回数が100回から96回に減少、ダウンロードバッファを除くと使用メモリは15%減</li>
+            <li>URL解析は20〜30%高速化、printf()呼び出しは5〜15%高速化、テストはgitリポジトリに同梱され第三者が検証・改善できる</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>daniel.haxx.se</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-13</span>
+          <span class="engagement">🔖 32</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://blog.shibayu36.org/entry/2026/10/13/173000">shibayu36氏、miseの新機能`bootstrap`で私物・仕事Macの環境構築を一元化</a></h3>
+        </div>
+        <div class="summary">ブロガーのshibayu36氏は、私用・仕事用2台のMacの環境構築をmiseの新機能`mise bootstrap`で一元化した。パッケージ(Brewfile)・dotfilesのsymlink・macOS defaultsの3種類に分かれていた従来の非冪等なスクリプト群を、宣言的な設定ファイルと差分適用の仕組みに置き換えた。</div>
+        <div class="key-points">
+          <ul>
+            <li>共通設定ファイルに加え`miserc.local.toml`の`env`値だけをMacごとに変え、1Password・Chromeは個人用、Google Driveは仕事用の設定ファイルに限定</li>
+            <li>日々の同期は`git pull`後に`mise bootstrap`を実行するだけで完了、chezmoiやNixより既存ツールで完結する手軽さを評価</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>shibayu36.org</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-10-13</span>
+          <span class="engagement">🔖 68</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://rea.tools/ja/blog/touhou-reconstruction/">AIエージェントの自律調査で東方シリーズのソース再構築が加速、TH08は1,107機能特定</a></h3>
+        </div>
+        <div class="summary">開発者N0zoM1z0氏は、AIエージェントに調査の自律性を持たせて東方シリーズのソース再構築を進めている。「不滅の夜」(TH08)は8月13日着手から8月19日までに1,107機能のソースを特定、「文花帖」(TH095)は9月7日までに697機能全てにソースを得て696個が厳密比較に合格した。</div>
+        <div class="key-points">
+          <ul>
+            <li>TH08では元の`128.0`が`0.0`に化けた浮動小数点定数バグでアイテム自動回収が誤発生、監査で1,548件の定数参照中12件の誤りが判明</li>
+            <li>正確なベースライン復元→元プラットフォームでの実行→セマンティクス再構築→64bit等のモダンポートという4段階の手法を採用、DOS版「東方紅魔郷」(TH04)は手動プレイで通常ルート完走を確認</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>rea.tools</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-13</span>
+          <span class="engagement">🔖 42</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://qiita.com/quan_le/items/a33e331a2d7a42891f49">`text-embedding-3-small`はなぜ使われ続けるのか、OpenRouter利用統計6億6,000万リクエストで1位</a></h3>
+        </div>
+        <div class="summary">Qiita記事は、OpenAIの`text-embedding-3-small`が性能面で最新ではないにもかかわらず使われ続ける理由を、OpenRouterの月間利用統計(約6億6,000万リクエストで1位)から分析した。英語MTEBベンチマークでは62.3%を記録し実用十分だが、多言語ベンチマークMIRACLでは44.0%にとどまる。</div>
+        <div class="key-points">
+          <ul>
+            <li>著者の社内チャットボットでは日本語・ベトナム語クエリの正解文書が60位前後に沈みリランカーでも救えなかったが、Gemini Embedding 2へ切り替えると上位5〜10位に浮上</li>
+            <li>価格は100万トークン0.02ドルと安く、既存データの再埋め込みコストも「動いているなら触らない」慣性を強める一因と分析</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-13</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://qiita.com/suwa_nobu/items/365d2561809fe1da8541">Claude Code、Shift-JISファイル編集で日本語が全部破損するバグが2.1.295まで存在</a></h3>
+        </div>
+        <div class="summary">Qiitaの検証記事によると、Claude Code 2.1.295まではShift-JISファイルをEditツールで1か所編集するだけで、UTF-8として扱えないバイト列が全て置換文字`�`(U+FFFD)に変わり元の日本語が失われていた。著者の例では261バイトが360バイトに変化し、Readで読み直しても壊れた状態がそのまま表示されるため気づきにくい。</div>
+        <div class="key-points">
+          <ul>
+            <li>40回の試行でHaiku 5.5が3/3、Opus 5.5が2/3の確率で日本語を破損、Claude自身は破損後も「変更しました」と報告していた</li>
+            <li>2.1.296でUTF-8非互換ファイルへの書き込み自体を停止するよう修正、対処は上位バージョンへの更新と`git diff`での事前確認が有効</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-13</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://devlog.creusot.rs/v0-14-0/">Rust用形式検証ツールCreusot 0.14.0、半順序対応とrust-analyzer連携を強化</a></h3>
+        </div>
+        <div class="summary">Rust用の形式検証ツールCreusotが0.14.0をリリースした。`PartialOrd`の仕様が全順序を前提としていた制約を外し、新たな`PartialOrdLogic`トレイトで半順序に対応。`snapshot!`式に対する検証条件生成も追加され、ロジック関数をレンマとして呼び出しプルーバーの量化子推論に頼らず仕様の誤りを早期検出できるようになった。</div>
+        <div class="key-points">
+          <ul>
+            <li>全順序は`OrdLogic`の法則(`x&lt;y || x==y || y&lt;x`)として表現、既存の証明はこの変更の影響を受けなかった</li>
+            <li>rust-analyzerのPearlite仕様内でのgo-to-definitionに対応、トークンスパンを絞り込むことで無関係な参照先が出る問題を修正</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>devlog.creusot.rs</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-13</span>
+          <span class="engagement">🔖 15</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://lix.systems/blog/2026-10-13-lix-2.96-release/">Nix実装Lix、7番目のメジャーリリース「2.96 Bingsu」公開</a></h3>
+        </div>
+        <div class="summary">Nix実装Lixの7番目のメジャーリリース「2.96 Bingsu」が10月13日に公開された。REPLバックエンドをeditlineからrustylineへ移行しUTF-8対応を改善、デバッガはスタックフレームを相対オフセット(`:st +l`等)で移動できるようになった。メモリアロケータにmimallocを採用し評価が5〜12%高速化した。</div>
+        <div class="key-points">
+          <ul>
+            <li>`ssh-ng://`ストアURIが安定版になりsshより厳格なセキュリティチェックを追加、未署名出力の信頼されないユーザーによるコピーを禁止、`ssh://`は非推奨化され2.97で削除予定</li>
+            <li>flake.nixの検証ルールを`outputs`外での関数呼び出し禁止のみに単純化、`floor`/`ceil`は精度を失う変換でエラーを出すよう変更</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>lix.systems</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-10-13</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.com/LargeModGames/spotatui">Spotify必須を前提にしないRust製ターミナル音楽プレイヤー「spotatui」</a></h3>
+        </div>
+        <div class="summary">Spotify依存を前提にしないRust製ターミナル音楽プレイヤー「spotatui」。spotify-tuiのフォークで、Spotify・ローカルファイル・Subsonic/Navidrome・インターネットラジオ・YouTube(yt-dlp経由)・Qobuz・macOS限定のApple Musicを`d`キーで切り替えながら再生できる。</div>
+        <div class="key-points">
+          <ul>
+            <li>Ratatui・rspotify・独自保守版librespot・tokio・clap構成、MITライセンスでGitHub上約1.5kスター・246フォーク</li>
+            <li>複数ソースを横断する再生キュー、マスタープレイリスト同期、Luaプラグイン、コーディングエージェント向けMCPサーバーを備えたAI DJ機能も搭載</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-13</span>
+          <span class="engagement">▲ 40</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
+
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://blog.thunderbird.net/2026/10/thunderbird-for-ios-a-first-look-at-the-native-iphone-email-app-in-development/">Thunderbirdチーム、新規開発のネイティブiOSメールアプリを発表</a>
+        <span class="quick-summary">— 既存コードを再利用せずゼロから開発、コードベースの約98.9%がSwift/SwiftUIで、数か月後のコミュニティテスト開始を目指す。</span>
+        <span class="meta">Thunderbird Blog</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://blog.character.ai/an-update-on-character-ai/">Character.ai、連邦破産法11条を申請し裁判所管理下での売却へ</a>
+        <span class="quick-summary">— 「法的・規制上・運用上の逆風」を理由に自主的にChapter 11を申請、11月末〜12月初旬の売却完了を目指し、買い手が付かない場合はサービス停止の可能性もある。</span>
+        <span class="meta">Character.AI Blog</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://www.bleepingcomputer.com/news/security/ledger-confirms-hardware-wallet-spy-implant-behind-crypto-thefts/">Ledgerハードウェアウォレットに盗聴用インプラント、再販業者経由の端末が標的</a>
+        <span class="quick-summary">— マレーシアの再販業者CryptoBilis経由で販売された一部端末に隠し基板が仕込まれシードフレーズをeSIM経由で外部送信、Ledgerは該当業者経由購入者に新デバイスへの移行を呼びかけ。</span>
+        <span class="meta">BleepingComputer</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-infra">Infra</span>
+        <a href="https://pc.watch.impress.co.jp/docs/news/2147744.html">Windows Update証明書が2027年失効、Microsoftが対応表を公開</a>
+        <span class="quick-summary">— Windows 11 24H2やWindows 10等は2027年6月19日までに2026年7月以降のセキュリティ更新適用が必要、放置すると証明書失効後に更新プログラムを受け取れなくなる。</span>
+        <span class="meta">PC Watch</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://www.itmedia.co.jp/news/article/2610/13/2000002234/">Getty Images、連邦破産法11条を申請、Shutterstock合併破談と負債21億ドルが背景</a>
+        <span class="quick-summary">— 2026年6月の合併断念と2026年6月末時点で約21億ドルの負債が背景、iStockの素材画像需要低迷にAI生成画像の普及が影響したとの見方もある(The Hollywood Reporter報道)。</span>
+        <span class="meta">ITmedia</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://www.apple.com/jp/newsroom/2026/10/meet-apple-homeview-a-new-way-to-enjoy-entertainment-and-manage-the-home/">Apple、7インチディスプレイ搭載のホーム管理デバイス「HomeView」発表</a>
+        <span class="quick-summary">— 卓上・壁掛け両モデルとも米国価格299ドルで11月13日発売、最大6人の顔認識でパーソナライズし最大9台のカメラ映像を同時表示できる(日本での販売は未発表)。</span>
+        <span class="meta">Apple Newsroom</span>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="./" class="archive-link">🗂 過去のダイジェスト</a>
+    </footer>
+  </div>
+</body>
+</html>
