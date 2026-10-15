@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI プロダクト動向 | Tech News Daily</title>
+<meta name="description" content="社内システムを操作するエージェントは、これまで大半が「呼び出したユーザーのトークン」か「アプリ共通のサービスアカウント」で動いてきた。どちらでも動くことは動く。ただ監査ログには人間かアプリの名前しか残らず、ある一つのエージェントだけを止め…">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Tech News Daily">
+<meta property="og:title" content="エージェントの身元は「ユーザーの借り物」から「専用の ID」へ — 代理と自律の区別、ID を切る単位、受け手側での識別 | AI プロダクト動向">
+<meta property="og:description" content="社内システムを操作するエージェントは、これまで大半が「呼び出したユーザーのトークン」か「アプリ共通のサービスアカウント」で動いてきた。どちらでも動くことは動く。ただ監査ログには人間かアプリの名前しか残らず、ある一つのエージェントだけを止め…">
+<meta property="og:url" content="https://tech-news.kaion-lab.com/ai-trends/2026-10-15.html">
+<meta property="og:image" content="https://tech-news.kaion-lab.com/apple-touch-icon.png">
+<meta name="twitter:card" content="summary">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+<style>
+:root{--primary-600:#2250df;--primary-500:#2b70ef;--primary-50:#f0f5ff;--radius-lg:.75rem;--text-base:1.125rem;--bg:#fafafa;--surface:#fff;--text-primary:#1a1a2e;--text-secondary:#555570;--text-muted:#8888a0;--border:#e4e4ec;--accent-ai:#7c3aed;--accent-dev:#059669}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif;background:var(--bg);color:var(--text-primary);font-size:var(--text-base);line-height:1.8;padding:2rem 1rem}
+.container{max-width:720px;margin:0 auto}
+header{text-align:center;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border)}
+header h1{font-size:1.75rem;font-weight:700;letter-spacing:-.02em}
+header .date{color:var(--text-muted);font-size:.9rem;margin-top:.25rem}
+header .tagline{color:var(--text-secondary);font-size:.95rem;margin-top:.5rem}
+.site-nav{display:flex;justify-content:center;gap:.5rem;margin-top:.75rem;flex-wrap:wrap}
+.site-nav a{display:inline-block;padding:.25rem .6rem;font-size:.75rem;font-weight:600;color:var(--text-muted);text-decoration:none;border:1px solid var(--border);border-radius:9999px}
+.site-nav a:hover,.site-nav a.active{color:var(--primary-500);border-color:var(--primary-500)}
+.section{margin-bottom:2.25rem}
+.section-title{font-size:.8rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:.75rem;display:flex;align-items:center;gap:.5rem}
+.section-title::after{content:"";flex:1;height:1px;background:var(--border)}
+.tag{display:inline-block;font-size:.7rem;font-weight:600;padding:.15rem .5rem;border-radius:9999px;text-transform:uppercase;letter-spacing:.04em}
+.tag-ai{background:#f3e8ff;color:var(--accent-ai)}
+.theme-hero{background:linear-gradient(135deg,var(--primary-50),#f5f0ff);border-left:4px solid var(--primary-500);border-radius:var(--radius-lg);padding:1.5rem;margin-bottom:1rem}
+.theme-hero .kicker{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--primary-600)}
+.theme-hero h2{font-size:1.35rem;font-weight:700;line-height:1.5;margin:.35rem 0 .5rem}
+.theme-hero .lede{font-size:.95rem;color:var(--text-secondary);line-height:1.85}
+.tldr{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1rem 1.25rem;margin-bottom:2rem}
+.tldr .label{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--primary-600);margin-bottom:.35rem}
+.tldr ul{list-style:none}
+.tldr li{position:relative;padding-left:1.1rem;font-size:.88rem;color:var(--text-secondary);line-height:1.7;margin-bottom:.25rem}
+.tldr li::before{content:"•";position:absolute;left:0;color:var(--primary-500);font-weight:700}
+.theme-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.35rem;margin-bottom:.75rem}
+.theme-section h3{font-size:1.05rem;font-weight:600;margin-bottom:.6rem}
+.theme-section p{font-size:.92rem;color:var(--text-secondary);line-height:1.85;margin-bottom:.7rem}
+.theme-section p:last-child{margin-bottom:0}
+.example{margin-top:.8rem;padding:.8rem .95rem;background:var(--primary-50);border-radius:.5rem;font-size:.88rem;line-height:1.75}
+.example .product{font-weight:700;color:var(--text-primary)}
+.example .approach{color:var(--text-secondary);margin:.2rem 0 .3rem}
+.example .detail{color:var(--text-secondary);font-size:.84rem;border-top:1px dashed var(--border);padding-top:.4rem;margin-top:.4rem}
+.example a{color:var(--primary-500);text-decoration:none;font-size:.8rem}
+.example a:hover{text-decoration:underline}
+.takeaway{margin-top:.8rem;padding:.75rem .9rem;background:#fffbeb;border-radius:.5rem;font-size:.88rem;color:var(--text-secondary);line-height:1.75}
+.takeaway strong{color:var(--text-primary)}
+.editorial{margin-top:1rem;padding:.8rem .95rem;background:var(--primary-50);border-radius:.5rem;border-left:3px solid var(--primary-500);font-size:.88rem;color:var(--text-secondary);line-height:1.8}
+.editorial .label{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--primary-600);display:block;margin-bottom:.2rem}
+.quick-link{display:block;padding:.65rem 0;border-bottom:1px solid var(--border)}
+.quick-link:last-child{border-bottom:none}
+.quick-link a{font-size:.92rem;font-weight:600;color:var(--text-primary);text-decoration:none}
+.quick-link a:hover{color:var(--primary-500)}
+.quick-summary{font-size:.85rem;color:var(--text-secondary);line-height:1.7;display:block;margin-top:.1rem}
+.archive-item{display:flex;align-items:baseline;gap:.75rem;padding:.55rem 0;border-bottom:1px solid var(--border)}
+.archive-item:last-child{border-bottom:none}
+.archive-item .week{font-size:.78rem;color:var(--text-muted);flex-shrink:0;font-variant-numeric:tabular-nums}
+.archive-item .body a{font-size:.9rem;font-weight:600;color:var(--text-primary);text-decoration:none}
+.archive-item .body a:hover{color:var(--primary-500)}
+.archive-item .body .sub{font-size:.8rem;color:var(--text-muted);display:block}
+footer{text-align:center;margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border);color:var(--text-muted);font-size:.8rem}
+footer a{color:var(--primary-500);text-decoration:none}
+@media(max-width:600px){body{padding:1rem .75rem}header h1{font-size:1.4rem}.theme-hero{padding:1.1rem}.theme-hero h2{font-size:1.15rem}}
+@media(prefers-color-scheme:dark){:root{--bg:#0f0f1a;--surface:#1a1a2e;--text-primary:#e4e4ec;--text-secondary:#a0a0b8;--text-muted:#6b6b80;--border:#2a2a3e;--primary-50:#1a1a3e;--primary-600:#5b8af5;--primary-500:#6b9af5}.tag-ai{background:#2d1b69}.theme-hero{background:linear-gradient(135deg,#1a1a3e,#1f1a3e)}.takeaway{background:#2a2510}}
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+  <h1>🧠 AI プロダクト動向</h1>
+  <p class="date">2026-10-15 発行（読了 9 分）</p>
+  <p class="tagline">実プロダクトのアーキテクチャ・使用例から AI 開発の現在地を週 3 回・1 号 1 テーマで深掘り</p>
+  <nav class="site-nav">
+    <a href="../">📰 日刊ダイジェスト</a>
+    <a href="../trends.html">🔌 週次プラグイントレンド</a>
+    <a href="../ai-trends.html" class="active">🧠 AI プロダクト動向</a>
+    <a href="../archive/">🗂 アーカイブ</a>
+  </nav>
+</header>
+
+<div class="theme-hero">
+  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">AGENT-IDENTITY</span></span>
+  <h2>エージェントの身元は「ユーザーの借り物」から「専用の ID」へ — 代理と自律の区別、ID を切る単位、受け手側での識別</h2>
+  <p class="lede">社内システムを操作するエージェントは、これまで大半が「呼び出したユーザーのトークン」か「アプリ共通のサービスアカウント」で動いてきた。どちらでも動くことは動く。ただ監査ログには人間かアプリの名前しか残らず、ある一つのエージェントだけを止める手段もない。10月8日、Google は Gemini at Work 2026 で Gemini agent を発表し、常駐する coworker agent に専用の ID と @agents.company.com のメールアドレスを持たせると明記した。Microsoft Entra Agent ID はすでに agent identity・blueprint・agent&#39;s user account という 3 種類のディレクトリオブジェクトを定義しており、Okta は 8月に Agent SSO を GA にして、エージェントを社員と同じディレクトリに登録する形にした。受け手の側でも、Sierra が 10月8日に電話の相手が AI かどうかを判定する fleming-1 を出している。エージェントを「誰か」として扱うための設計が、発行側と受け手側の両方で具体的になってきた。</p>
+</div>
+
+<div class="tldr">
+  <div class="label">TL;DR — 3 行で</div>
+  <ul>
+    <li>Entra Agent ID はトークンの subject と actor を分ける。自律動作のときは subject がエージェント自身になり、ユーザーの代理のときは subject がユーザー、actor がエージェントになる。Google の coworker agent も「あなたではなく自分の ID で動き、共有されたものしか見ない」と定義され、操作は人ではなくエージェント名義で監査ログに残る。</li>
+    <li>ID をどの単位で作るかについて、Microsoft はエージェントの種類（blueprint）と信頼境界で切るよう指示し、スケールアウトのレプリカ・セッションごと・会議や文書ごとに ID を作るのは避けるべきパターンとしている。Okta Agent SSO は認可を各アプリから IdP に移し、保存したクレデンシャルの代わりに有効期限の短いトークンを発行する。</li>
+    <li>名乗らずにかけてくるエージェントは、受け手が見分けるしかない。Sierra の fleming-1 は通話音声を通話中にリアルタイムで採点し、Decagon も名乗らない個人エージェントの検出を Personal Agent Gateway に入れた。どちらも検出結果を「判断材料」として渡すだけで、遮断するかどうかは企業のポリシーに任せている。</li>
+  </ul>
+</div>
+
+<div class="section">
+  <div class="section-title">📐 パターン 1: 「誰として動くか」をトークンの subject と actor で分ける</div>
+  <div class="theme-section">
+    <p>Microsoft Entra の agent identity は特殊なサービスプリンシパルで、自分ではクレデンシャルを持たない。トークンは、テンプレートにあたる agent identity blueprint が federated identity credential などを使って代わりに取得する。取得の仕方は 2 通りある。自律エージェントはアプリトークンを取り、その subject はエージェント自身になる。ユーザーに呼び出された対話型エージェントはユーザートークンを取り、subject はユーザー、actor はエージェントになる。さらに Exchange や Teams のようにユーザーオブジェクトが必須のシステム向けには、agent identity と必ず 1 対 1 で対応する <code>agent's user account</code> を別に発行できる。Google が 10月8日に発表した Gemini agent も同じ線引きをしている。一つのタスクのためにその場で作るサブエージェントとは別に、役割を持って常駐する coworker agent には専用の ID とメールアドレスを与え、全操作をエージェント名義で監査ログに書く。</p><p>ユーザーのトークンをそのまま使い回す方式から各社が離れた理由は、監査と停止の単位にある。ユーザーのトークンで動いたエージェントの操作は、ログ上ではその人自身の操作と見分けがつかない。エージェントだけを止めるには、その人のセッションごと失効させるしかない。subject と actor を分ければ「誰の権限で」と「誰が実行したか」を別々に記録できる。自律エージェントに専用の ID を持たせれば、そのエージェントだけを無効化できる。Entra の agent identity に「sponsor」という欄があり、インシデント時に連絡する責任者の人間を記録するのも、エージェントの責任を最終的に人へ結びつけるための設計だ。</p>
+    <div class="example">
+      <div class="product">Microsoft Entra Agent ID（agent identity / agent&#39;s user account）</div>
+      <div class="approach">自律動作では subject をエージェント自身に、代理動作では subject をユーザー・actor をエージェントにする。クレデンシャルは blueprint 側だけが持つ</div>
+      <div class="detail">代理と自律の区別をトークンのレベルで定義している。ユーザーオブジェクトが必須の M365 系システムのために、agent identity と 1 対 1 で固定された user account を別に用意する点まで公式ドキュメントに明記されている。</div>
+      <a href="https://learn.microsoft.com/en-us/entra/agent-id/agent-identities">📄 一次ソース</a>
+    </div>
+    <div class="example">
+      <div class="product">Google Gemini agent（Gemini at Work 2026）</div>
+      <div class="approach">その場限りのサブエージェントと、専用の ID とメールを持って常駐する coworker agent を分け、全操作をエージェント名義で監査ログに残す</div>
+      <div class="detail">coworker agent は「あなたではなく自分の ID で動き、共有されたものしか見ない」と定義されている。各エージェントの ID は暗号的に証明され、社員と同じように最小権限で管理するとしており、ID の分離を製品仕様として打ち出した直近の例だ。</div>
+      <a href="https://cloud.google.com/blog/products/ai-machine-learning/welcome-to-gemini-at-work-2026">📄 一次ソース</a>
+    </div>
+    <div class="takeaway"><strong>示唆:</strong> エージェントを作るときは、まず「誰かの代理として動くのか、自分として動くのか」を決め、それをトークンの形に反映させる。代理ならユーザーの委任トークンに actor を記録し、ユーザーのトークンをそのまま渡すことは避ける。自律なら専用の ID と責任者を最初から用意しておく。</div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">📐 パターン 2: ID はエージェントの種類と信頼境界の単位で作り、認可は IdP に寄せる</div>
+  <div class="theme-section">
+    <p>エージェント専用の ID を導入すると、次に「いくつ作るか」が問題になる。Microsoft の Entra Agent ID 設計パターン集は、ID を切る単位を 2 つに絞っている。1 つはエージェントの種類で、同じ blueprint から作った ID には条件付きアクセスや無効化を一括でかけられる。もう 1 つは信頼境界で、別のランタイム・シークレット・チームにまたがるワーカーには別の blueprint を割り当て、1 か所の侵害がほかに波及しないようにする。逆に、スケールアウトのレプリカ、メモリのセッション分離、会議や文書ごとの ID 作成は、監査上の利点がないのに管理コストだけ増えるパターンとして避けるよう明記している。タスクの間だけ使う一時的な ID は認めているが、実行時に作るため遅延が読めない点を注意書きしている。</p><p>Okta は同じ問題を、認可をどこに置くかという面から整理した。8月24日に GA になった Agent SSO では、Cross App Access に対応したエージェントが社内アプリに接続した時点で、Okta がそのエージェントを社員と同じ Universal Directory に登録する。保存済みのクレデンシャルの代わりに、有効期限の短いトークンを発行する。基盤の Cross App Access は IETF で策定中の ID-JAG（Identity Assertion JWT Authorization Grant）で、IdP が発行した JWT を接続先の認可サーバーが自分のポリシーで評価してアクセストークンに引き換える。各アプリに個別に OAuth の同意を積み重ねる代わりに、人間の SSO と同じ場所でエージェントの権限を管理する。ID を細かく分けすぎない Microsoft と、IdP に一元化する Okta は、管理の単位をアプリやセッションではなく組織のディレクトリに置くという点で同じ方向を向いている。</p>
+    <div class="example">
+      <div class="product">Microsoft Entra Agent ID 設計パターン</div>
+      <div class="approach">ID は blueprint（エージェントの種類）と信頼境界で切る。レプリカ・セッション・オブジェクトごとの ID は避けるべきパターンとして明示</div>
+      <div class="detail">単体エージェント、逐次型マルチエージェント、オーケストレーター型、ユーザーごと、デジタルワーカーの 5 構成について、blueprint と ID の対応を具体的に示している。「何に ID を作らないか」まで書いた公式ガイドは珍しい。</div>
+      <a href="https://learn.microsoft.com/en-us/entra/agent-id/concept-agent-id-design-patterns">📄 一次ソース</a>
+    </div>
+    <div class="example">
+      <div class="product">Okta Agent SSO（Cross App Access）</div>
+      <div class="approach">接続時にエージェントを社員と同じディレクトリへ登録し、保存済みのクレデンシャルの代わりに有効期限の短いトークンを発行する</div>
+      <div class="detail">エージェントの認可を個々のアプリから企業の IdP に移す、と明言している。Anthropic（Claude）・Atlassian・Notion・Slack・Figma などが Cross App Access に標準で対応した状態で GA になった。</div>
+      <a href="https://www.okta.com/newsroom/press-releases/okta-brings-first-class-identity-to-ai-agents-with-agent-sso/">📄 一次ソース</a>
+    </div>
+    <div class="takeaway"><strong>示唆:</strong> エージェントの ID は「役割が違い、止めたい単位が違うもの」ごとに 1 つ作り、レプリカやセッションの数だけ作らない。エージェント用の API キーを各 SaaS に個別に発行し始めているなら、IdP 側で発行と失効を一元管理できる経路があるかを先に確認したほうがよい。</div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">📐 パターン 3: 名乗らないエージェントは、受け手が見分ける</div>
+  <div class="theme-section">
+    <p>発行側で ID を整えても、外から来るエージェントがすべて名乗るとは限らない。Sierra が 10月8日に出した fleming-1 は、電話の相手の音声をリアルタイムで解析し、AI が生成した音声の兆候を採点するモデルだ。人間の耳に自然に聞こえるかどうかではない手がかりを見るとし、ノイズの多い音声にも対応する。本物の人間を誤って AI と判定しないよう、既定では保守的な閾値に調整されている。Decagon も 10月1日の Personal Agent Gateway に、既存のチャネルで名乗らない個人エージェントを検出する機能と、エージェント専用の窓口を入れた。</p><p>両社に共通するのは、検出を「遮断」ではなく「判断材料」として扱っている点だ。Sierra は、検出結果をどう扱うかは企業が決めることだとし、銀行なら追加の本人確認を挟む、問い合わせの多い企業ならまずエージェントからの電話の割合を測るといった使い方を例に挙げている。消費者の代理エージェントからの問い合わせは正当な顧客の用件でもあるため、一律に拒否すれば顧客を失う。理想は相手が自分から名乗ることで、Sierra と Meta は 10月9日に Personal Agent Protocol の草案（Poppy）を公開し、セッションの冒頭でエージェントが必ず名乗る形を定めた。ただ全員がこれに従うまでの間は、名乗った相手を ID で認可し、名乗らない相手は推定で扱う二段構えになる。</p>
+    <div class="example">
+      <div class="product">Sierra fleming-1</div>
+      <div class="approach">通話中の音声を AI 生成の兆候でリアルタイムに採点し、AI の可能性が高い発信者に印を付ける。既定は誤検出を避ける保守的な設定</div>
+      <div class="detail">対処を決めるのは企業側だと明言し、検出と処置を分けている。Sierra 上の音声エージェントであれば有効化するだけで使える。精度の数値は公表されていない。</div>
+      <a href="https://sierra.ai/blog/caller-id-in-the-age-of-agents">📄 一次ソース</a>
+    </div>
+    <div class="example">
+      <div class="product">Decagon Personal Agent Gateway</div>
+      <div class="approach">既存チャネルでの名乗らない個人エージェントの検出と、エージェント専用の窓口を組み合わせ、顧客が定めた権限の範囲で対応する</div>
+      <div class="detail">検出（推定）と専用窓口（自己申告）の両方を 1 つの製品に入れた例だ。窓口を見つけて名乗り、顧客が何を許可したかを確認するための仕様も公開している。</div>
+      <a href="https://decagon.ai/blog/dialogues-2026">📄 一次ソース</a>
+    </div>
+    <div class="takeaway"><strong>示唆:</strong> 顧客接点にエージェントを置くなら、相手がエージェントかどうかで対応を変える分岐点を設計に入れておく。最初は遮断ではなく、エージェントからの接触を計測し、機微な操作の前にだけ追加の本人確認を挟むところから始めるのが無難だ。</div>
+  </div>
+  <div class="editorial">
+    <span class="label">✍️ 編集後記</span>
+    エージェントの ID 設計で一番問われているのは認証方式ではなく、「このエージェントがやったことの責任は誰にあるか」をログから辿れるかどうかだ。Entra の sponsor 欄、Okta の名前付きオーナー、Google のエージェント名義の監査ログは、どれもエージェントを自律させるほど、その先にいる人間を明確にしておく必要があるという同じ認識から来ている。
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">🔗 今号の動向ピックアップ</div>
+  <div class="quick-link"><a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-identity-assertion-authz-grant-04">IETF「Identity Assertion JWT Authorization Grant」draft-04</a><span class="quick-summary">企業の IdP が発行した JWT を、接続先の認可サーバーが自分のポリシーで評価してアクセストークンに引き換える仕組みを定めた OAuth WG のドラフト。Okta Agent SSO の基盤である Cross App Access の仕様そのもので、IdP 一元化の中身を確かめるならここが一次資料になる。</span></div>
+  <div class="quick-link"><a href="https://www.okta.com/newsroom/articles/okta-expands-ai-agent-security-to-any-idp/">Okta for AI Agents が Entra ID など他社 IdP と Amazon Bedrock AgentCore に対応</a><span class="quick-summary">人間の ID は既存の IdP に置いたまま、エージェントの ID だけを Okta で管理する構成を正式にサポートした。エージェントの ID を人間とは別の基盤で管理するという選択肢が、製品として成立していることを示す。</span></div>
+  <div class="quick-link"><a href="https://sierra.ai/blog/poppy">Sierra、Personal Agent Protocol の草案「Poppy」を公開</a><span class="quick-summary">/.well-known/poppy.json による窓口の発見、エージェントが必ず名乗るセッション、OAuth による権限付与などで構成される草案で、Adyen や Bank of America など 35 社が設計パートナーに加わった。fleming-1 の推定による検出と対になる、自己申告の側の仕組みだ。</span></div>
+</div>
+
+<div class="section">
+  <div class="section-title">📚 過去号</div>
+  <div class="archive-item"><span class="week">2026-10-13</span><div class="body"><a href="2026-10-13.html">業務エージェントのグラウンディングは「文書検索」から「意味モデル」へ — 既存の業務設定と判断の履歴から、エージェント用の辞書を自動で組み立てる</a><span class="sub">Microsoft の Dataverse semantic model は、テーブル関係・ビュー・フォーム名・列の説明といった既存の設定から意味を自動で抽出し、12時間ごとに再生成する。人が書くのは推論できない社内用語の用語集だけで、Snowflake も既存の SQL や BI ファイルから semantic view を作る Autopilot を出した。</span></div></div>
+  <div class="archive-item"><span class="week">2026-10-10</span><div class="body"><a href="2026-10-10.html">エージェントコマースは「一つの決済プロトコル」をやめた — 発見・同意の証明・本人ログインを別レイヤーに切り分ける設計へ</a><span class="sub">UCP は加盟店が /.well-known/ucp に能力を公開し、エージェント側と「共通する能力だけ」を交渉で残す設計。OpenAI も ACP の主軸をチャット内決済から商品カタログの受け渡しへ移し、決済は加盟店側に戻した。</span></div></div>
+  <div class="archive-item"><span class="week">2026-10-08</span><div class="body"><a href="2026-10-08.html">エージェントの UI は「誰が描くか」で二つに割れた — iframe で持ち込む MCP Apps、カタログで描かせる A2UI、そして会話の外へ</a><span class="sub">MCP Apps はツールが ui:// の HTML リソースを返し、ホストが sandbox 付き iframe で描画する「持ち込み型」。Claude・VS Code・ChatGPT が同じ仕様に乗った。</span></div></div>
+  <div class="archive-item"><span class="week">2026-10-06</span><div class="body"><a href="2026-10-06.html">音声エージェントは「話す層」と「考える層」を分けた — カスケードか音声直結かの二択が終わった理由</a><span class="sub">OpenAI の GPT-Live-1 は会話の進行だけを担い、推論とツール実行は裏側のテキストモデルへ非同期に委譲する二層構成を採った。</span></div></div>
+  <div class="archive-item"><span class="week">2026-10-03</span><div class="body"><a href="2026-10-03.html">エージェントの評価は「最終出力」ではなく「軌跡」を見る設計に変わった — OpenAI・Anthropic・Replitが同時に評価基盤を公開</a><span class="sub">OpenAI・Anthropic・Replit・Braintrustが2026年に評価基盤の内部設計を相次いで公開した。</span></div></div>
+  <div class="archive-item"><span class="week">2026-10-01</span><div class="body"><a href="2026-10-01.html">エージェントは「呼び出すたびに消える」から「状態を持ち続ける」へ — OpenAI・Google・Alibabaが同時に永続化レイヤーを足した</a><span class="sub">OpenAIの「dots」はユーザーごとに専用クラウドコンピュータを割り当て、ChatGPT・Slack・Teamsを横断して会話間の文脈を保持する常駐エージェント。</span></div></div>
+  <div class="archive-item"><span class="week">2026-09-29</span><div class="body"><a href="2026-09-29.html">エージェントの長期記憶は「要約」をやめた — 編集可能なファイル、共有された手順、非破壊のグラフへ</a><span class="sub">Claudeは会話終了後の要約をやめ、対話中にトピック単位のファイルへ直接書き込み、ユーザーが個別に編集できる方式に切り替えた。</span></div></div>
+  <div class="archive-item"><span class="week">2026-09-26</span><div class="body"><a href="2026-09-26.html">マルチエージェント協調は「並列に投げる」から「役割を絞った2体」に収束した — Fusion 型アーキテクチャが解いた失敗伝播問題</a><span class="sub">Cognitionは「分散マルチエージェントは前提の食い違いで失敗が伝播する」と自ら警告した後、lead+sidekickの2体だけに絞った制約付き構成「Fusion」を主力製品化し、2026年9月にローカル環境まで展開した。</span></div></div>
+  <div class="archive-item"><span class="week">2026-09-24</span><div class="body"><a href="2026-09-24.html">カスタマー対応エージェントの設計は「決定木」から「自然言語手順×コードの二層構造」へ</a><span class="sub">Decagonは決定木を捨て、業務担当者が自然言語で書いた手順を構造化ロジックにする一方、返金などの機微操作だけコードで検証するAOPへ移行し、NG.CASHでは解決率が70%まで向上した。</span></div></div>
+  <div class="archive-item"><span class="week">2026-09-22</span><div class="body"><a href="2026-09-22.html">モデルルーティングが開発ツールの既定機能になった — 選ぶのは人間ではなく分類器</a><span class="sub">GitHub Copilotは9月にauto model selectionへ「efficiency/balance/intelligence」の3段階ティアを追加し、Cursorは60万件超の実利用データで学習した分類器（Cursor Router）でモデル選定を自動化した。</span></div></div>
+  <div class="archive-item"><span class="week">2026-09-19</span><div class="body"><a href="2026-09-19.html">エージェントの権限設計は「毎回確認」から「境界を先に固定する」へ移った</a><span class="sub">OpenAI CodexとAnthropicのClaude Codeは、サンドボックスの制限強度と確認ダイアログの要否を別軸にし、境界内の行為は原則自動承認する設計にそろえた。</span></div></div>
+  <div class="archive-item"><span class="week">2026-09-17</span><div class="body"><a href="2026-09-17.html">コード検索の設計が三方向に割れた — ベクトルDBを捨てる陣営、極める陣営、置き換える陣営</a><span class="sub">Claude Code は埋め込みベースのRAGを捨て、grep/globの反復探索に完全移行——再インデックスの陳腐化とコードアップロードのセキュリティリスクを避けるため。</span></div></div>
+  <div class="archive-item"><span class="week">2026-09-15</span><div class="body"><a href="2026-09-15.html">エージェント実行基盤のマネージド化 — 3社が同時に「実行環境を貸す側」に回った</a><span class="sub">OpenAIが9月10日、Codexハーネスをagents/environments/sessions/eventsの4プリミティブに集約した Agents API を公開ベータで公開。基盤自体の追加課金はなくトークン・ツール実費のみ。</span></div></div>
+  <div class="archive-item"><span class="week">2026-09-12</span><div class="body"><a href="2026-09-12.html">コンテキストは会話ログではない — Working Context / Session / Memory / Artifacts への分離が実装標準になった</a><span class="sub">Google ADKは2026年9月、コンテキストを Working Context・Session・Memory・Artifacts の4層に分離し、閾値到達で非同期に要約するcompactionを実装したと公式ブログで説明した。</span></div></div>
+  <div class="archive-item"><span class="week">2026-09-10</span><div class="body"><a href="2026-09-10.html">Agent Skills という第3のレイヤー — プロンプトでもRAGでもなく「必要になるまで読まない」設計</a><span class="sub">Agent Skillsは「メタデータ(~100トークン)→本文(&lt;5000トークン推奨)→付随ファイル」の3段階でコンテキストに読み込む、プログレッシブディスクロージャー設計。</span></div></div>
+  <div class="archive-item"><span class="week">2026-09-08</span><div class="body"><a href="2026-09-08.html">エージェント評価の再設計 — テキスト一致から状態検証、そして「修正がテストになる」仕組みへ</a><span class="sub">Anthropicはテキスト一致の判定から、環境の状態が実際に変わったかを見る outcome/state チェックへの転換を公式に推奨している。</span></div></div>
+  <div class="archive-item"><span class="week">2026-09-03</span><div class="body"><a href="2026-09-03.html">長時間稼働エージェントの状態管理 — 「会話の保存」から「プロセスの永続化」へ</a><span class="sub">Google ADKやMastraは、ツール呼び出しなどステップの境界ごとに実行状態をシリアライズして外部ストレージに書き込み、コンテナが落ちても直前のステップから再開できる設計に収束している。</span></div></div>
+  <div class="archive-item"><span class="week">2026-09-01</span><div class="body"><a href="2026-09-01.html">コードレビューエージェントの設計 — 差別化は検出率ではなく、文脈の取り方と『直すところまで』の範囲に移った</a><span class="sub">GitHub Copilot・Qodo・Cursor Bugbot・Cloudflareの内製ツールが、diff単体の解析から脱却し、リポジトリ全体・PR履歴・過去の指摘への反応まで動的に文脈を取りに行く設計へ収束している</span></div></div>
+  <div class="archive-item"><span class="week">2026-08-29</span><div class="body"><a href="2026-08-29.html">構造化出力は「お願い」から「強制」へ — 3社がグラマー制約デコーディングで足並みを揃えた2026年</a><span class="sub">OpenAI・Anthropic・Google の主要3社が、JSON Schema をトークン生成レベルで強制する「グラマー制約デコーディング」に共通で対応した</span></div></div>
+  <div class="archive-item"><span class="week">2026-08-27</span><div class="body"><a href="2026-08-27.html">マルチエージェント協調 — 割っていいのは「コンテキストの切れ目」だけ</a><span class="sub">Anthropic は Research 機能で並列サブエージェントを使い内部評価で90.2%の性能改善を報告するが、トークン消費は通常の約15倍になるとも明記している。</span></div></div>
+  <div class="archive-item"><span class="week">2026-08-25</span><div class="body"><a href="2026-08-25.html">エージェントのメモリ設計 — 生ログでも単一要約でもなく、書き換え可能な単位に分解する</a><span class="sub">Claude は2026年7月、記憶を単一のローリング要約から個別の書き換え可能なエントリへ移行。ChatGPT は非同期の「Dreaming」処理で古い事実を時制ごと書き換える。</span></div></div>
+  <div class="archive-item"><span class="week">2026-08-22</span><div class="body"><a href="2026-08-22.html">プロンプトキャッシュはコスト最適化ではない — 「プレフィックス固定」というアーキテクチャ制約</a><span class="sub">キャッシュ命中率はもはや副次指標ではなく、Manus はこれを「本番エージェントで最重要のメトリック」と明言している。</span></div></div>
+  <div class="archive-item"><span class="week">2026-08-20</span><div class="body"><a href="2026-08-20.html">接続ツールが増えるほど遅くなる問題 — コード実行と検索遅延ロードの2つの答え</a><span class="sub">Anthropicは公式エンジニアリングブログで、MCPツールをコードAPIとして提示しファイルシステム越しにオンデマンドで読み込ませる方式により、あるタスクのトークン消費を150,000から2,000（98.7%減）に削減したと報告した</span></div></div>
+  <div class="archive-item"><span class="week">2026-08-18</span><div class="body"><a href="2026-08-18.html">MCPエージェントの認可設計 — 同意画面を「増やす」実装と「無くす」実装に分岐した</a><span class="sub">MCPの権限設計は「サーバー単位のOAuth」から「ツールごとのスコープ」へ移り、WorkOSやCloudflareが個別ツール内での権限チェックを標準パターンとして提示している。</span></div></div>
+  <div class="archive-item"><span class="week">2026-08-15</span><div class="body"><a href="2026-08-15.html">エージェントの評価・観測性 — 「最終出力の一致」から「軌跡(トラジェクトリ)の妥当性」へ</a><span class="sub">Anthropic は Tasks/Graders/Transcripts の三要素でエージェント評価を構造化し、1回でも成功する確率 pass@k と毎回成功する確率 pass^k を分けて計測する運用を提示した。</span></div></div>
+  <div class="archive-item"><span class="week">2026-08-13</span><div class="body"><a href="2026-08-13.html">モデルルーティング — 1モデルに全部背負わせない設計が標準になった</a><span class="sub">Vercel AI GatewayやGitHub Copilot Autoは、ヒューリスティック分類→難易度ティア判定→プロバイダ違いのフォールバック、という二段構成のタスク別ルーティングをすでに標準実装にしている。</span></div></div>
+  <div class="archive-item"><span class="week">2026-08-11</span><div class="body"><a href="2026-08-11.html">コンテキスト圧縮はどこで行うべきか — API・モデル訓練・ハーネス、3層に割れた実装場所</a><span class="sub">Anthropic は compaction をサーバーサイド API のオプションとして実装し、モデル本体は変更していない</span></div></div>
+  <div class="archive-item"><span class="week">2026-08-08</span><div class="body"><a href="2026-08-08.html">エージェントのコード実行基盤 — サンドボックスは「重い専用マシン」と「軽いアイソレート」に分かれ始めた</a><span class="sub">Cloudflare Sandboxes と Vercel Sandbox はどちらも「持続する専用マシン」型サンドボックスをGA化し、スナップショット復元でコールドブート30秒を2秒程度まで縮めた。</span></div></div>
+  <div class="archive-item"><span class="week">2026-08-06</span><div class="body"><a href="2026-08-06.html">RAG 構成パターンの現在地 — 二段構成の次は、検索そのものをエージェントに埋め込む</a><span class="sub">Perplexity は Vespa 上で lexical・embedding のハイブリッド検索から cross-encoder rerank へ絞り込む多段構成を採り、Databricks は同じ構成を単一パラメータで追加できる機能として一般化した。</span></div></div>
+  <div class="archive-item"><span class="week">2026-08-04</span><div class="body"><a href="2026-08-04.html">ワークフロー型 vs エージェント型 — 複雑さを足す前に何を確かめるか</a><span class="sub">Anthropic は「経路を誰が決めるか」で workflow と agent を定義し、単純な方から試すべきだと明言している。</span></div></div>
+  <div class="archive-item"><span class="week">2026-08-01</span><div class="body"><a href="2026-08-01.html">コンテキストエンジニアリング — 「何を見せるか」ではなく「何を見せないか」を設計する</a><span class="sub">事前に全部読み込むのではなく、ファイルパスやURLなど軽量な参照を渡して実行時に取得する「Just-in-Time retrieval」がCursorやAnthropicの標準手法になった。</span></div></div>
+  <div class="archive-item"><span class="week">2026-07-30</span><div class="body"><a href="2026-07-30.html">マルチエージェント協調 — 「書き込みを一本化する」が唯一の合意点になった理由</a><span class="sub">Cognition は2025年、複数エージェントの並行書き込みが矛盾した判断を生むとして「マルチエージェントを作るな」と主張したが、2026年4月に態度を転換し「書き込みは一本化し、エージェントは行動ではなく知性を提供する」構成に絞って実例を公開した</span></div></div>
+  <div class="archive-item"><span class="week">2026-07-28</span><div class="body"><a href="2026-07-28.html">エージェントのメモリ設計 — 保存容量ではなく「書き込みの境界線」を設計する</a><span class="sub">Anthropic は Claude Managed Agents の記憶をファイルとして保存し、監査ログ・ロールバック・スコープ別パーミッションを標準機能として public beta で提供している</span></div></div>
+  <div class="archive-item"><span class="week">2026-W30</span><div class="body"><a href="2026-W30.html">エージェントの評価・観測性 — 「良さそう」を数値にする前に何を測らないかを決める</a><span class="sub">Anthropic は Claude Code の品質劣化が6週間、内部の eval・コードレビュー・単体テストをすべてすり抜けていたと自ら公表し、変更ごとの広範な eval とソーク期間の導入を表明した</span></div></div>
+</div>
+
+<footer>
+  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="../data/ai-trends/2026-10-15.json">data/ai-trends/2026-10-15.json</a>（このページは JSON からの生成物）</p>
+  <p style="margin-top:.5rem"><a href="../">📰 日刊ダイジェストに戻る</a></p>
+</footer>
+</div>
+</body>
+</html>

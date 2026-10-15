@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI プロダクト動向 | Tech News Daily</title>
-<meta name="description" content="社内データを LLM に見せる方法として、この 2 年は「文書をチャンクに切ってベクトル検索する」RAG が既定だった。ただ、CRM や契約管理のような業務システムに住むデータは、検索で見つけても使えないことが多い。列名が new_sta…">
+<meta name="description" content="社内システムを操作するエージェントは、これまで大半が「呼び出したユーザーのトークン」か「アプリ共通のサービスアカウント」で動いてきた。どちらでも動くことは動く。ただ監査ログには人間かアプリの名前しか残らず、ある一つのエージェントだけを止め…">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Tech News Daily">
-<meta property="og:title" content="業務エージェントのグラウンディングは「文書検索」から「意味モデル」へ — 既存の業務設定と判断の履歴から、エージェント用の辞書を自動で組み立てる | AI プロダクト動向">
-<meta property="og:description" content="社内データを LLM に見せる方法として、この 2 年は「文書をチャンクに切ってベクトル検索する」RAG が既定だった。ただ、CRM や契約管理のような業務システムに住むデータは、検索で見つけても使えないことが多い。列名が new_sta…">
+<meta property="og:title" content="エージェントの身元は「ユーザーの借り物」から「専用の ID」へ — 代理と自律の区別、ID を切る単位、受け手側での識別 | AI プロダクト動向">
+<meta property="og:description" content="社内システムを操作するエージェントは、これまで大半が「呼び出したユーザーのトークン」か「アプリ共通のサービスアカウント」で動いてきた。どちらでも動くことは動く。ただ監査ログには人間かアプリの名前しか残らず、ある一つのエージェントだけを止め…">
 <meta property="og:url" content="https://tech-news.kaion-lab.com/ai-trends.html">
 <meta property="og:image" content="https://tech-news.kaion-lab.com/apple-touch-icon.png">
 <meta name="twitter:card" content="summary">
@@ -74,7 +74,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 <div class="container">
 <header>
   <h1>🧠 AI プロダクト動向</h1>
-  <p class="date">2026-10-13 発行（読了 9 分）</p>
+  <p class="date">2026-10-15 発行（読了 9 分）</p>
   <p class="tagline">実プロダクトのアーキテクチャ・使用例から AI 開発の現在地を週 3 回・1 号 1 テーマで深掘り</p>
   <nav class="site-nav">
     <a href="./">📰 日刊ダイジェスト</a>
@@ -85,93 +85,94 @@ footer a{color:var(--primary-500);text-decoration:none}
 </header>
 
 <div class="theme-hero">
-  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">SEMANTIC-LAYER</span></span>
-  <h2>業務エージェントのグラウンディングは「文書検索」から「意味モデル」へ — 既存の業務設定と判断の履歴から、エージェント用の辞書を自動で組み立てる</h2>
-  <p class="lede">社内データを LLM に見せる方法として、この 2 年は「文書をチャンクに切ってベクトル検索する」RAG が既定だった。ただ、CRM や契約管理のような業務システムに住むデータは、検索で見つけても使えないことが多い。列名が new_stage_cd のままでは何を指すのか分からないし、「アクティブな顧客」の定義は部署ごとに違う。9月25日に Microsoft が Business Applications in Work IQ を発表し、9月30日からプレビューを始めた。10月8日には Ironclad が Contract Knowledge Graph を出し、10月6日には SAP がスキルとタスクのグラフを持つ TechWolf の買収を発表した。6月の Snowflake Horizon Context と合わせて見ると、各社が足しているのは検索の精度ではない。データが何を意味するかという「意味モデル」の層であり、作り方・ドメイン別の分割・権限の扱いに共通の設計判断が見えてきた。</p>
+  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">AGENT-IDENTITY</span></span>
+  <h2>エージェントの身元は「ユーザーの借り物」から「専用の ID」へ — 代理と自律の区別、ID を切る単位、受け手側での識別</h2>
+  <p class="lede">社内システムを操作するエージェントは、これまで大半が「呼び出したユーザーのトークン」か「アプリ共通のサービスアカウント」で動いてきた。どちらでも動くことは動く。ただ監査ログには人間かアプリの名前しか残らず、ある一つのエージェントだけを止める手段もない。10月8日、Google は Gemini at Work 2026 で Gemini agent を発表し、常駐する coworker agent に専用の ID と @agents.company.com のメールアドレスを持たせると明記した。Microsoft Entra Agent ID はすでに agent identity・blueprint・agent&#39;s user account という 3 種類のディレクトリオブジェクトを定義しており、Okta は 8月に Agent SSO を GA にして、エージェントを社員と同じディレクトリに登録する形にした。受け手の側でも、Sierra が 10月8日に電話の相手が AI かどうかを判定する fleming-1 を出している。エージェントを「誰か」として扱うための設計が、発行側と受け手側の両方で具体的になってきた。</p>
 </div>
 
 <div class="tldr">
   <div class="label">TL;DR — 3 行で</div>
   <ul>
-    <li>Microsoft の Dataverse semantic model は、テーブル関係・ビュー・フォーム名・列の説明といった既存の設定から意味を自動で抽出し、12時間ごとに再生成する。人が書くのは推論できない社内用語の用語集だけで、Snowflake も既存の SQL や BI ファイルから semantic view を作る Autopilot を出した。</li>
-    <li>汎用の意味層では扱いきれない「過去にどう判断したか」は、ドメイン別のグラフとして切り出されている。Ironclad は条項・義務・承認済みの立場・過去の交渉判断を結ぶ契約グラフを、SAP は TechWolf のタスクとスキルのグラフを、エージェントのグラウンディング層として位置付けた。</li>
-    <li>権限は意味層の外で後からかけるのではなく、意味層の中で評価する方向にそろってきた。Snowflake は意味定義をガバナンスエンジンの内側に置いてクエリ時に強制すると明記し、Work IQ はテナント・環境・アプリの 3 段の設定と、ユーザー権限の範囲内に限った「governed actions」で書き込みを制御する。</li>
+    <li>Entra Agent ID はトークンの subject と actor を分ける。自律動作のときは subject がエージェント自身になり、ユーザーの代理のときは subject がユーザー、actor がエージェントになる。Google の coworker agent も「あなたではなく自分の ID で動き、共有されたものしか見ない」と定義され、操作は人ではなくエージェント名義で監査ログに残る。</li>
+    <li>ID をどの単位で作るかについて、Microsoft はエージェントの種類（blueprint）と信頼境界で切るよう指示し、スケールアウトのレプリカ・セッションごと・会議や文書ごとに ID を作るのは避けるべきパターンとしている。Okta Agent SSO は認可を各アプリから IdP に移し、保存したクレデンシャルの代わりに有効期限の短いトークンを発行する。</li>
+    <li>名乗らずにかけてくるエージェントは、受け手が見分けるしかない。Sierra の fleming-1 は通話音声を通話中にリアルタイムで採点し、Decagon も名乗らない個人エージェントの検出を Personal Agent Gateway に入れた。どちらも検出結果を「判断材料」として渡すだけで、遮断するかどうかは企業のポリシーに任せている。</li>
   </ul>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 1: 意味モデルは人が書くより、既存の業務設定から推論させる</div>
+  <div class="section-title">📐 パターン 1: 「誰として動くか」をトークンの subject と actor で分ける</div>
   <div class="theme-section">
-    <p>Microsoft の Dataverse semantic model は 3 つの要素でできている。対象テーブルを絞った「データスコープ＋セマンティックインデックス」、システムが推論する「シグナル」、人が足す「用語集」だ。シグナルの中身は、テーブル間のリレーション、結合条件付きの公開ビューとサブグリッドビュー、フォームの表示名、テーブルと列の説明文、そして既定ではオフのサンプル行。Quick Find などのシステムビューと個人ビューは除外される。モデルは Copilot を有効にした時点で自動で用意され、12時間ごとに再生成される。人が書くのは、社内の略語や造語のように設定から推論できない語だけだ。Snowflake も Horizon Context で、既存の SQL・Tableau・Power BI のファイルから semantic view を生成する Semantic View Autopilot を発表している。</p><p>各社が「意味は人が定義するもの」という前提を捨てた理由は、セマンティックレイヤーを手で書く運用が BI の時代から続かなかったからだ。業務システムには、営業部門が日常的に使っているビューや、管理者が引いたリレーションという形で、組織の「何が重要か」がすでに書かれている。それを読めば初期構築のコストはほぼゼロになる。その代わり、放置された古いビューもそのまま意味として取り込まれる。Microsoft がシグナルを個別にオン・オフできる設定と除外の仕組みを最初から用意しているのは、その副作用への対策と読める。</p>
+    <p>Microsoft Entra の agent identity は特殊なサービスプリンシパルで、自分ではクレデンシャルを持たない。トークンは、テンプレートにあたる agent identity blueprint が federated identity credential などを使って代わりに取得する。取得の仕方は 2 通りある。自律エージェントはアプリトークンを取り、その subject はエージェント自身になる。ユーザーに呼び出された対話型エージェントはユーザートークンを取り、subject はユーザー、actor はエージェントになる。さらに Exchange や Teams のようにユーザーオブジェクトが必須のシステム向けには、agent identity と必ず 1 対 1 で対応する <code>agent's user account</code> を別に発行できる。Google が 10月8日に発表した Gemini agent も同じ線引きをしている。一つのタスクのためにその場で作るサブエージェントとは別に、役割を持って常駐する coworker agent には専用の ID とメールアドレスを与え、全操作をエージェント名義で監査ログに書く。</p><p>ユーザーのトークンをそのまま使い回す方式から各社が離れた理由は、監査と停止の単位にある。ユーザーのトークンで動いたエージェントの操作は、ログ上ではその人自身の操作と見分けがつかない。エージェントだけを止めるには、その人のセッションごと失効させるしかない。subject と actor を分ければ「誰の権限で」と「誰が実行したか」を別々に記録できる。自律エージェントに専用の ID を持たせれば、そのエージェントだけを無効化できる。Entra の agent identity に「sponsor」という欄があり、インシデント時に連絡する責任者の人間を記録するのも、エージェントの責任を最終的に人へ結びつけるための設計だ。</p>
     <div class="example">
-      <div class="product">Microsoft Dataverse semantic model（Business Applications in Work IQ）</div>
-      <div class="approach">リレーション・ビュー・フォーム名・列の説明から意味を自動抽出し、用語集で補う。12時間ごとに再生成</div>
-      <div class="detail">どのシグナルを使い、どのビューを除外するかまで公式ドキュメントに書かれている。複数のエージェントが同じ意味モデルを参照し、回答をそろえることを目的に挙げている点も、エージェント時代の設計として代表的だ。</div>
-      <a href="https://learn.microsoft.com/en-us/power-apps/maker/data-platform/semantic-model-overview">📄 一次ソース</a>
+      <div class="product">Microsoft Entra Agent ID（agent identity / agent&#39;s user account）</div>
+      <div class="approach">自律動作では subject をエージェント自身に、代理動作では subject をユーザー・actor をエージェントにする。クレデンシャルは blueprint 側だけが持つ</div>
+      <div class="detail">代理と自律の区別をトークンのレベルで定義している。ユーザーオブジェクトが必須の M365 系システムのために、agent identity と 1 対 1 で固定された user account を別に用意する点まで公式ドキュメントに明記されている。</div>
+      <a href="https://learn.microsoft.com/en-us/entra/agent-id/agent-identities">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">Snowflake Horizon Context（Semantic View Autopilot / Semantic Studio）</div>
-      <div class="approach">既存の SQL・Tableau・Power BI ファイルから semantic view を作り、エージェントはまず semantic view を探してから生テーブルにフォールバックする</div>
-      <div class="detail">データ基盤側の意味モデルの代表例。エージェント CoCo の探索順を「semantic view が先、テーブルは後」と決め、semantic view を MCP 経由で Claude や Cursor にも公開する。</div>
-      <a href="https://www.snowflake.com/en/blog/horizon-context-governed-context/">📄 一次ソース</a>
+      <div class="product">Google Gemini agent（Gemini at Work 2026）</div>
+      <div class="approach">その場限りのサブエージェントと、専用の ID とメールを持って常駐する coworker agent を分け、全操作をエージェント名義で監査ログに残す</div>
+      <div class="detail">coworker agent は「あなたではなく自分の ID で動き、共有されたものしか見ない」と定義されている。各エージェントの ID は暗号的に証明され、社員と同じように最小権限で管理するとしており、ID の分離を製品仕様として打ち出した直近の例だ。</div>
+      <a href="https://cloud.google.com/blog/products/ai-machine-learning/welcome-to-gemini-at-work-2026">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> 社内データ向けのエージェントを作るなら、最初に用語集を手で書き始めるより、既存のビュー・リレーション・ダッシュボード定義を意味の材料として棚卸しする方が早い。その際は、使われていないビューを先に掃除しておく。古いビューを消さずに有効化すると、古い定義がそのままエージェントの答えになる。</div>
+    <div class="takeaway"><strong>示唆:</strong> エージェントを作るときは、まず「誰かの代理として動くのか、自分として動くのか」を決め、それをトークンの形に反映させる。代理ならユーザーの委任トークンに actor を記録し、ユーザーのトークンをそのまま渡すことは避ける。自律なら専用の ID と責任者を最初から用意しておく。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 2: 「過去にどう判断したか」は、ドメイン別のグラフとして切り出す</div>
+  <div class="section-title">📐 パターン 2: ID はエージェントの種類と信頼境界の単位で作り、認可は IdP に寄せる</div>
   <div class="theme-section">
-    <p>テーブルと列の意味が分かっても、契約レビューや人員配置のような業務では答えが出ない。必要なのは「この条項について自社はこれまでどの立場を承認してきたか」「この職務は実際にどのタスクで構成されているか」という、判断と実態の履歴だ。Ironclad の Contract Knowledge Graph は、条項・関係・義務・過去の判断を契約とワークフローをまたいで結び、Contract Review Agent は承認済みの立場と過去の判断、取引履歴を基準に契約書を赤入れする。SAP が買収を発表した TechWolf は、職務の中のタスク、人が持ち実際に使っているスキル、外部の労働市場の 3 つを、接続された HR・業務システムからモデル化する。</p><p>汎用の意味層にこれを載せない理由は、関係の種類がドメインによって根本的に違うからだ。「条項 A は先例 B を根拠に承認された」と「社員 C はタスク D でスキル E を使っている」を、同じスキーマで扱うのは無理がある。どちらも、担当者が辞めた後も組織に残る暗黙知を構造化し、エージェントがその場で推論し直さなくて済むようにすることを価値として打ち出している。SAP は、このグラウンディング層によってトークン使用が効率化され、エージェントの運用コストが下がるとも述べている（具体的な数値は示していない）。</p>
+    <p>エージェント専用の ID を導入すると、次に「いくつ作るか」が問題になる。Microsoft の Entra Agent ID 設計パターン集は、ID を切る単位を 2 つに絞っている。1 つはエージェントの種類で、同じ blueprint から作った ID には条件付きアクセスや無効化を一括でかけられる。もう 1 つは信頼境界で、別のランタイム・シークレット・チームにまたがるワーカーには別の blueprint を割り当て、1 か所の侵害がほかに波及しないようにする。逆に、スケールアウトのレプリカ、メモリのセッション分離、会議や文書ごとの ID 作成は、監査上の利点がないのに管理コストだけ増えるパターンとして避けるよう明記している。タスクの間だけ使う一時的な ID は認めているが、実行時に作るため遅延が読めない点を注意書きしている。</p><p>Okta は同じ問題を、認可をどこに置くかという面から整理した。8月24日に GA になった Agent SSO では、Cross App Access に対応したエージェントが社内アプリに接続した時点で、Okta がそのエージェントを社員と同じ Universal Directory に登録する。保存済みのクレデンシャルの代わりに、有効期限の短いトークンを発行する。基盤の Cross App Access は IETF で策定中の ID-JAG（Identity Assertion JWT Authorization Grant）で、IdP が発行した JWT を接続先の認可サーバーが自分のポリシーで評価してアクセストークンに引き換える。各アプリに個別に OAuth の同意を積み重ねる代わりに、人間の SSO と同じ場所でエージェントの権限を管理する。ID を細かく分けすぎない Microsoft と、IdP に一元化する Okta は、管理の単位をアプリやセッションではなく組織のディレクトリに置くという点で同じ方向を向いている。</p>
     <div class="example">
-      <div class="product">Ironclad Agent / Contract Knowledge Graph</div>
-      <div class="approach">条項・義務・承認済みの立場・過去の交渉判断をグラフにし、レビュー用エージェントの判断基準にする</div>
-      <div class="detail">一般的な学習データではなく、自社の先例を根拠に赤入れさせる設計。あわせて RBAC に代わるポリシーベースのアクセス制御（PBAC）を導入しており、地域チームには関係する契約だけを見せる。</div>
-      <a href="https://ironcladapp.com/news/press-releases/ironclad-launches-new-ai-agents-grounded-in-commercial-context">📄 一次ソース</a>
+      <div class="product">Microsoft Entra Agent ID 設計パターン</div>
+      <div class="approach">ID は blueprint（エージェントの種類）と信頼境界で切る。レプリカ・セッション・オブジェクトごとの ID は避けるべきパターンとして明示</div>
+      <div class="detail">単体エージェント、逐次型マルチエージェント、オーケストレーター型、ユーザーごと、デジタルワーカーの 5 構成について、blueprint と ID の対応を具体的に示している。「何に ID を作らないか」まで書いた公式ガイドは珍しい。</div>
+      <a href="https://learn.microsoft.com/en-us/entra/agent-id/concept-agent-id-design-patterns">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">SAP / TechWolf（買収発表、2026年第4四半期にクロージング予定）</div>
-      <div class="approach">タスク・スキル・労働市場のグラフを、Joule の人事系エージェントのグラウンディング層にする</div>
-      <div class="detail">人事ドメイン専用のグラフを、汎用データ基盤ではなく買収で手に入れる判断。SAP の幹部は、このグラフを仕事とスキルの計画、タレントマネジメントに関するエージェントの問い合わせに対する優れたグラウンディング層だと説明している。</div>
-      <a href="https://news.sap.com/2026/10/sap-to-acquire-techwolf-evidence-based-work-age-of-ai/">📄 一次ソース</a>
+      <div class="product">Okta Agent SSO（Cross App Access）</div>
+      <div class="approach">接続時にエージェントを社員と同じディレクトリへ登録し、保存済みのクレデンシャルの代わりに有効期限の短いトークンを発行する</div>
+      <div class="detail">エージェントの認可を個々のアプリから企業の IdP に移す、と明言している。Anthropic（Claude）・Atlassian・Notion・Slack・Figma などが Cross App Access に標準で対応した状態で GA になった。</div>
+      <a href="https://www.okta.com/newsroom/press-releases/okta-brings-first-class-identity-to-ai-agents-with-agent-sso/">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> エージェントに求める答えが「データの値」なら意味モデルで足りる。「過去の判断との整合」まで求めるなら、判断そのものを結果と根拠のペアでノードとして保存する層が別に要る。後者を文書検索で代用すると、先例の「結論」は見つかっても「なぜそう決めたか」が欠けた答えになりやすい。</div>
+    <div class="takeaway"><strong>示唆:</strong> エージェントの ID は「役割が違い、止めたい単位が違うもの」ごとに 1 つ作り、レプリカやセッションの数だけ作らない。エージェント用の API キーを各 SaaS に個別に発行し始めているなら、IdP 側で発行と失効を一元管理できる経路があるかを先に確認したほうがよい。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 3: 権限は意味層の外でかけず、意味層の中で評価する</div>
+  <div class="section-title">📐 パターン 3: 名乗らないエージェントは、受け手が見分ける</div>
   <div class="theme-section">
-    <p>意味モデルを複数のエージェントで共有すると、「誰に何を見せるか」をどこで判定するかが問題になる。Snowflake は Horizon Context について、意味定義はガバナンスエンジンの内側にあってクエリ時に強制され、コピーもキャッシュもされないと書いている。エージェントが使う Universal Search も、ランキングに利用頻度を、フィルタにアクセスポリシーを使う。Microsoft の Work IQ は、テナント（Microsoft 365 管理センター）、環境（Power Platform 管理センター）、アプリ（Power Apps のメーカーポータル）の 3 段の設定で、どのデータが Copilot と MCP クライアントに渡るかを決める。書き込みは「governed actions」として、変更案の提示、必要な承認、元レコードの更新という順で、ユーザーの権限の範囲内に限って実行される。</p><p>この形に収束したのは、意味層が実質的に「全社データへの新しい入口」になるからだ。意味モデルを抽出して別の場所にコピーすると、元システムで権限が変わってもコピー側には反映されない。だから各社は、意味を元のガバナンスの内側に置いたまま評価する構成を選んでいる。一方で、別の境界をまたぐ問題はまだ残る。Microsoft は、Dataverse のデータを Microsoft 365 Copilot が取り出して提示した時点で、元サービスの PCI DSS や HITRUST の認証範囲は自動では延長されないと注記している。さらに Work IQ は、9月30日以降に作成された新規の本番環境では既定でオンになり、11月からは既存環境にも広がる。既定オンの入口であることを前提にした棚卸しが必要になる。</p>
+    <p>発行側で ID を整えても、外から来るエージェントがすべて名乗るとは限らない。Sierra が 10月8日に出した fleming-1 は、電話の相手の音声をリアルタイムで解析し、AI が生成した音声の兆候を採点するモデルだ。人間の耳に自然に聞こえるかどうかではない手がかりを見るとし、ノイズの多い音声にも対応する。本物の人間を誤って AI と判定しないよう、既定では保守的な閾値に調整されている。Decagon も 10月1日の Personal Agent Gateway に、既存のチャネルで名乗らない個人エージェントを検出する機能と、エージェント専用の窓口を入れた。</p><p>両社に共通するのは、検出を「遮断」ではなく「判断材料」として扱っている点だ。Sierra は、検出結果をどう扱うかは企業が決めることだとし、銀行なら追加の本人確認を挟む、問い合わせの多い企業ならまずエージェントからの電話の割合を測るといった使い方を例に挙げている。消費者の代理エージェントからの問い合わせは正当な顧客の用件でもあるため、一律に拒否すれば顧客を失う。理想は相手が自分から名乗ることで、Sierra と Meta は 10月9日に Personal Agent Protocol の草案（Poppy）を公開し、セッションの冒頭でエージェントが必ず名乗る形を定めた。ただ全員がこれに従うまでの間は、名乗った相手を ID で認可し、名乗らない相手は推定で扱う二段構えになる。</p>
     <div class="example">
-      <div class="product">Snowflake Horizon Context（Universal Search）</div>
-      <div class="approach">意味定義をガバナンスエンジン内に置き、クエリ時にポリシーを強制。検索はアクセスポリシーでフィルタする</div>
-      <div class="detail">「コピーもキャッシュもしない」と明言しており、後付けの意味レイヤー製品との違いをこの一点に置いている。権限の評価場所を設計の中心に据えた代表例。</div>
-      <a href="https://www.snowflake.com/en/blog/horizon-context-governed-context/">📄 一次ソース</a>
+      <div class="product">Sierra fleming-1</div>
+      <div class="approach">通話中の音声を AI 生成の兆候でリアルタイムに採点し、AI の可能性が高い発信者に印を付ける。既定は誤検出を避ける保守的な設定</div>
+      <div class="detail">対処を決めるのは企業側だと明言し、検出と処置を分けている。Sierra 上の音声エージェントであれば有効化するだけで使える。精度の数値は公表されていない。</div>
+      <a href="https://sierra.ai/blog/caller-id-in-the-age-of-agents">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">Microsoft Business Applications in Work IQ（既定設定）</div>
-      <div class="approach">テナント・環境・アプリの 3 段の設定で公開範囲を決め、新規本番環境では既定でオンにする</div>
-      <div class="detail">EEA/EU、政府系、非本番環境を既定オンの例外とする、PCI DSS や FedRAMP の境界を越える可能性を明記する、など運用上の論点が一次資料にまとまっている。</div>
-      <a href="https://learn.microsoft.com/en-us/power-platform/admin/business-applications-work-iq/default-settings">📄 一次ソース</a>
+      <div class="product">Decagon Personal Agent Gateway</div>
+      <div class="approach">既存チャネルでの名乗らない個人エージェントの検出と、エージェント専用の窓口を組み合わせ、顧客が定めた権限の範囲で対応する</div>
+      <div class="detail">検出（推定）と専用窓口（自己申告）の両方を 1 つの製品に入れた例だ。窓口を見つけて名乗り、顧客が何を許可したかを確認するための仕様も公開している。</div>
+      <a href="https://decagon.ai/blog/dialogues-2026">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> 意味モデルを導入するときに最初に確認すべきなのは、権限が元システムの側で評価されるのか、意味層のコピーで評価されるのかだ。後者なら、権限変更が反映されるまでの遅延がそのまま情報漏えいの窓になる。</div>
+    <div class="takeaway"><strong>示唆:</strong> 顧客接点にエージェントを置くなら、相手がエージェントかどうかで対応を変える分岐点を設計に入れておく。最初は遮断ではなく、エージェントからの接触を計測し、機微な操作の前にだけ追加の本人確認を挟むところから始めるのが無難だ。</div>
   </div>
   <div class="editorial">
     <span class="label">✍️ 編集後記</span>
-    RAG が「関連する文書を探す」技術だったのに対し、意味モデルは「この組織でこの言葉が何を指すか」を固定する技術で、解いている問題が違う。面白いのは、各社がその意味を新しく書かせるのではなく、すでに業務で使われているビュー、先例、タスクの記録から掘り出している点だ。エージェントの賢さが、モデルの性能より、業務システムがどれだけ手入れされてきたかで決まる局面に入りつつある。
+    エージェントの ID 設計で一番問われているのは認証方式ではなく、「このエージェントがやったことの責任は誰にあるか」をログから辿れるかどうかだ。Entra の sponsor 欄、Okta の名前付きオーナー、Google のエージェント名義の監査ログは、どれもエージェントを自律させるほど、その先にいる人間を明確にしておく必要があるという同じ認識から来ている。
   </div>
 </div>
 
 <div class="section">
   <div class="section-title">🔗 今号の動向ピックアップ</div>
-  <div class="quick-link"><a href="https://www.microsoft.com/en-us/dynamics-365/blog/it-professional/2026/09/25/work-iq-business-and-workplace-intelligence-in-the-flow-of-work/">Microsoft、Work IQ を業務アプリへ拡張 — 意味モデル・Business skills・MCP サーバーをまとめて提供</a><span class="quick-summary">Dynamics 365 ブログで、Work IQ に業務アプリのデータを取り込む構想と、9月30日開始のプレビュー、変更案・承認・更新の順で書き込む governed actions が説明された。本号の第1節と第3節で扱った意味モデルと権限設計の全体像を示す一次資料だ。</span></div>
-  <div class="quick-link"><a href="https://www.databricks.com/company/newsroom/press-releases/databricks-launches-genie-one-all-new-agentic-coworker-every-team">Databricks、Genie One を GA — 中核に自己改善型の Genie Ontology</a><span class="quick-summary">Databricks はデータ・ドキュメント・タグ・アプリ・人をまたぐ知識の網として Genie Ontology を位置付け、Slack や Jira などの 50 を超えるアプリから業務知識を継続的に抽出するとした。既存の業務記録から意味を掘り出すという本号の第1節と同じ方向の設計だ。</span></div>
-  <div class="quick-link"><a href="https://www.snowflake.com/ja/blog/open-semantic-interchanges-specs-finalized/">Open Semantic Interchange（OSI）の仕様が公開</a><span class="quick-summary">Snowflake・Salesforce・dbt Labs などが進める、意味定義をツール間で受け渡すためのベンダー中立な仕様の初版が2026年1月に Apache 2.0 で公開され、ワーキンググループには Databricks なども加わった。意味モデルが特定ベンダーの中に閉じるかどうかを左右する標準で、Horizon Context もこの形式の取り込みに対応している。</span></div>
+  <div class="quick-link"><a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-identity-assertion-authz-grant-04">IETF「Identity Assertion JWT Authorization Grant」draft-04</a><span class="quick-summary">企業の IdP が発行した JWT を、接続先の認可サーバーが自分のポリシーで評価してアクセストークンに引き換える仕組みを定めた OAuth WG のドラフト。Okta Agent SSO の基盤である Cross App Access の仕様そのもので、IdP 一元化の中身を確かめるならここが一次資料になる。</span></div>
+  <div class="quick-link"><a href="https://www.okta.com/newsroom/articles/okta-expands-ai-agent-security-to-any-idp/">Okta for AI Agents が Entra ID など他社 IdP と Amazon Bedrock AgentCore に対応</a><span class="quick-summary">人間の ID は既存の IdP に置いたまま、エージェントの ID だけを Okta で管理する構成を正式にサポートした。エージェントの ID を人間とは別の基盤で管理するという選択肢が、製品として成立していることを示す。</span></div>
+  <div class="quick-link"><a href="https://sierra.ai/blog/poppy">Sierra、Personal Agent Protocol の草案「Poppy」を公開</a><span class="quick-summary">/.well-known/poppy.json による窓口の発見、エージェントが必ず名乗るセッション、OAuth による権限付与などで構成される草案で、Adyen や Bank of America など 35 社が設計パートナーに加わった。fleming-1 の推定による検出と対になる、自己申告の側の仕組みだ。</span></div>
 </div>
 
 <div class="section">
   <div class="section-title">📚 過去号</div>
+  <div class="archive-item"><span class="week">2026-10-13</span><div class="body"><a href="ai-trends/2026-10-13.html">業務エージェントのグラウンディングは「文書検索」から「意味モデル」へ — 既存の業務設定と判断の履歴から、エージェント用の辞書を自動で組み立てる</a><span class="sub">Microsoft の Dataverse semantic model は、テーブル関係・ビュー・フォーム名・列の説明といった既存の設定から意味を自動で抽出し、12時間ごとに再生成する。人が書くのは推論できない社内用語の用語集だけで、Snowflake も既存の SQL や BI ファイルから semantic view を作る Autopilot を出した。</span></div></div>
   <div class="archive-item"><span class="week">2026-10-10</span><div class="body"><a href="ai-trends/2026-10-10.html">エージェントコマースは「一つの決済プロトコル」をやめた — 発見・同意の証明・本人ログインを別レイヤーに切り分ける設計へ</a><span class="sub">UCP は加盟店が /.well-known/ucp に能力を公開し、エージェント側と「共通する能力だけ」を交渉で残す設計。OpenAI も ACP の主軸をチャット内決済から商品カタログの受け渡しへ移し、決済は加盟店側に戻した。</span></div></div>
   <div class="archive-item"><span class="week">2026-10-08</span><div class="body"><a href="ai-trends/2026-10-08.html">エージェントの UI は「誰が描くか」で二つに割れた — iframe で持ち込む MCP Apps、カタログで描かせる A2UI、そして会話の外へ</a><span class="sub">MCP Apps はツールが ui:// の HTML リソースを返し、ホストが sandbox 付き iframe で描画する「持ち込み型」。Claude・VS Code・ChatGPT が同じ仕様に乗った。</span></div></div>
   <div class="archive-item"><span class="week">2026-10-06</span><div class="body"><a href="ai-trends/2026-10-06.html">音声エージェントは「話す層」と「考える層」を分けた — カスケードか音声直結かの二択が終わった理由</a><span class="sub">OpenAI の GPT-Live-1 は会話の進行だけを担い、推論とツール実行は裏側のテキストモデルへ非同期に委譲する二層構成を採った。</span></div></div>
@@ -208,7 +209,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 </div>
 
 <footer>
-  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="data/ai-trends/2026-10-13.json">data/ai-trends/2026-10-13.json</a>（このページは JSON からの生成物）</p>
+  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="data/ai-trends/2026-10-15.json">data/ai-trends/2026-10-15.json</a>（このページは JSON からの生成物）</p>
   <p style="margin-top:.5rem"><a href="./">📰 日刊ダイジェストに戻る</a></p>
 </footer>
 </div>
