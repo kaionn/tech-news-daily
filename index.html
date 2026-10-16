@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tech News Daily — 2026-10-16</title>
-  <meta name="description" content="Anthropic傘下Bunの型チェッカーがTypeScript 7比3倍超高速化 / ソースネクストが不正アクセスで最大2252万件の会員情報流出 / Meta、総パラメータ816BのMuse Spark Open公開">
+  <title>Tech News Daily — 2026-10-17</title>
+  <meta name="description" content="ClaudeがNIST曲線シードの謎を解明 / 重大脆弱性PwnEscapeにCVSS9.3 / OpenRouterが危険操作検出「Armor」公開">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Tech News Daily">
-  <meta property="og:title" content="Tech News Daily — 2026-10-16">
-  <meta property="og:description" content="Anthropic傘下Bunの型チェッカーがTypeScript 7比3倍超高速化 / ソースネクストが不正アクセスで最大2252万件の会員情報流出 / Meta、総パラメータ816BのMuse Spark Open公開">
+  <meta property="og:title" content="Tech News Daily — 2026-10-17">
+  <meta property="og:description" content="ClaudeがNIST曲線シードの謎を解明 / 重大脆弱性PwnEscapeにCVSS9.3 / OpenRouterが危険操作検出「Armor」公開">
   <meta property="og:url" content="https://tech-news.kaion-lab.com/">
   <meta property="og:image" content="https://tech-news.kaion-lab.com/apple-touch-icon.png">
   <meta name="twitter:card" content="summary">
@@ -22,7 +22,7 @@
   <div class="container">
     <header>
       <h1>Tech News Daily</h1>
-      <div class="date">2026-10-16 (Fri)</div>
+      <div class="date">2026-10-17 (Sat)</div>
       <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
       <nav class="site-nav">
         <a href="./" class="active">📰 日刊ダイジェスト</a>
@@ -33,9 +33,9 @@
     </header>
 
     <div class="stats-bar">
-      <span>📰 22 articles</span>
-      <span>🏷 7 categories</span>
-      <span>📡 19 sources</span>
+      <span>📰 21 articles</span>
+      <span>🏷 8 categories</span>
+      <span>📡 17 sources</span>
     </div>
 
     <nav class="toc">
@@ -48,27 +48,17 @@
 
     <div class="numbers-bar">
       <div class="number-item">
-        <span class="number-value">3倍超</span>
-        <span class="number-label">Bun 1.4.3の型チェッカー、TypeScript 7比の速度</span>
+        <span class="number-value">9.3</span>
+        <span class="number-label">CVE-2026-99999(PwnEscape)のCVSSv3.1深刻度スコア</span>
       </div>
       <div class="number-item">
-        <span class="number-value">2252万件</span>
-        <span class="number-label">ソースネクスト不正アクセスで流出可能性のある会員情報件数</span>
+        <span class="number-value">660万件</span>
+        <span class="number-label">タイムズカーで流出の可能性がある会員情報件数</span>
       </div>
       <div class="number-item">
-        <span class="number-value">816B</span>
-        <span class="number-label">Meta Muse Spark Openの総パラメータ数(アクティブ42B)</span>
+        <span class="number-value">$36,864</span>
+        <span class="number-label">Anthropicが解明したNIST楕円曲線シードの謎、懸賞金の寄付額</span>
       </div>
-    </div>
-
-    <div class="weekly-keywords">
-      <div class="section-title">📊 今週のキーワード</div>
-      <div class="keyword-chips">
-        <span class="keyword-chip">AIエージェントの統制不足</span>
-        <span class="keyword-chip">個人情報漏えいの連鎖</span>
-        <span class="keyword-chip">Cloudflare/Deno再編の波紋</span>
-      </div>
-      <div class="keyword-summary">今週はAIエージェントの無許可アクセスや監督不足を指摘する記事(CSO Onlineの分析、Tencent Cloud発とみられるエージェント群によるAmapスクレイピング)が相次ぎ、統制不足が繰り返し論点になった。ソースネクストの最大2252万件流出をはじめ大規模な個人情報漏えいの発覚も続き、検知の遅れが共通点として挙がった。Denoチームのcloudflare合流を起点にした開発基盤の再編も、Bunの型チェッカー強化やAnthropic独自VCS「Scion」の設計論争など周辺の動きとともに話題を集めた。</div>
     </div>
 
     <div class="section" id="top-stories">
@@ -76,24 +66,25 @@
 
       <div class="card featured deep-dive">
         <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://www.publickey1.jp/blog/26/anthropicbuntypescript_73typescriptbun143.html">DEEP DIVE: Anthropic傘下のBunがTypeScript型チェッカーを内蔵、TypeScript 7比3倍超の速度を公称</a></h3>
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://www.anthropic.com/research/ecdsa-curve-origins">DEEP DIVE: Anthropicの研究者、Claudeを使い25年間未解明だったNIST楕円曲線シードの生成法を解明</a></h3>
         </div>
-        <div class="summary">JavaScript/TypeScriptランタイムBunは2024年にAnthropicが買収し、単一バイナリとして配布されている。これまでBunはTypeScriptファイルを型情報を無視してそのまま高速に実行(トランスパイル)できたが、型の整合性を検証する「型チェック」機能は搭載しておらず、プロジェクトは別途`tsc`を併用する必要があった。10月10日公開のBun 1.4.3は、この型チェック機能を`bun check`コマンドとして内蔵した。Microsoftは別働でTypeScript 7において型チェッカー本体をJavaScriptからGoへ書き直し高速化を図ったが、Bunの型チェッカーはそのTypeScript 7比で3倍超速く、メモリ使用量は2分の1から4分の1以下に抑えられると公称する。Bun側はTypeScript 7.0.2の公式コンフォーマンステストを100%通過したとし、さらに主要なオープンソースのTypeScriptファイル72件とBun固有のエラーケースでTypeScriptの判定結果と比較したところ差異は1件のみだったとする。1.4.3では型チェックのほかにも、166件のIssue修正、新API`Bun.FetchSession`、Node.js互換性の改善、`JSON.parse`の高速化、サーバーのアイドル時CPU使用率67%削減など多数の変更が同時に入った。</div>
-        <div class="editorial">🧠 AnthropicはBunの買収以来、エージェント型コーディングツールの基盤としてランタイムの実行速度を重視してきており、型チェックの高速化はClaude Code等のエージェントがコード生成直後に型検証を繰り返す場面で開発体験に直結する実利がある。ただし公表された3倍という数値は計測条件や対象コードベースの詳細が示されておらず、実際のプロジェクト固有の型定義の複雑さによって差が縮まる可能性は残る。TypeScript本体のGo移植による高速化が市場の期待値を引き上げた直後にBunが上回る数値を出した構図であり、今後Microsoft側がTypeScript 7を最適化し続けるかどうかで優位性がどこまで続くかは見えない。</div>
+        <div class="summary">ECDSAで広く使われるNIST楕円曲線P-192/224/256/384/521は、FIPS 186-2(2000年公開)でシード値が示されているが、その生成方法は20年以上説明されていなかった。選定に関わったNSAのJerry Solinas氏が「Jerry deserves a raise.」という文のハッシュだと語ったという噂が流れていたが、本人は2023年に死去し真偽は未確認のままだった。暗号研究者Filippo Valsordaは3年前に懸賞金を懸けてこの謎の解明を呼びかけていた。Anthropicの研究者10名は、内部の推論モデルClaudeにヒントを与えずこの生成法を推測させる実験を行った。Claudeは30分以内に、1990年代の弱いPRNGが使われたと見立て、その出力を検出するスキャナを自作し、Unixタイムスタンプでシードされる`lrand48`特有の最上位ビットがゼロになるパターンを発見した。続けてLLL格子基底簡約を用い、切り捨てられた生成器の内部状態を復元してシードを再現した。シードは1997〜98年のタイムスタンプに由来し、ANSI X9.62の手順で曲線を棄却・採択する際に未公開の判定条件が存在したことも判明した。この結果はBernstein・Langeが提唱したNSAバックドア説(曲線選択に約70bitの自由度が必要)を実質的に否定し、実際の自由度は約30bitにとどまっていた。</div>
+        <div class="editorial">🧠 この結果はNIST曲線に対するバックドア疑惑を実証的に退ける数少ない反証だが、P-224/256/384/521の基点生成法や一部候補が棄却された理由は依然未解明で、「完全にランダムだった」と言い切るにはまだ材料が足りない。推論モデルに手がかりなしで25年来の暗号史の謎を解かせたという実験設計自体が、脆弱性調査やレガシーコードの検証作業におけるLLMの実務的な使い道を示す格好の例になっている。</div>
         <div class="key-points">
           <ul>
-            <li>Bun 1.4.3は10月10日公開、`bun check`コマンドで型チェックを内蔵、TypeScript 7.0.2の公式コンフォーマンステストを100%通過</li>
-            <li>速度はTypeScript 7比3倍超、メモリ使用量は2分の1〜4分の1以下、主要OSS TypeScriptファイル72件の検証で判定差はわずか1件</li>
-            <li>同バージョンで166件のIssue修正、新API `Bun.FetchSession`追加、サーバーのアイドル時CPU使用率67%削減などNode.js互換性改善も実施</li>
+            <li>ClaudeはヒントなしでNIST FIPS 186-2のシード生成に1990年代のPRNG(`lrand48`)がUnixタイムスタンプをシードに使われたことを30分以内に特定した</li>
+            <li>タイムスタンプは1997年5月〜1998年4月に分布、LLL格子基底簡約で切り捨てられた生成器の内部状態を復元し、ANSI X9.62手順での曲線棄却に未公開の判定条件(曲線の位数のビット長が素体のビット長を超えないこと、など)が2つ存在したことも判明</li>
+            <li>Bernstein・LangeのNSAバックドア説は曲線選択に約70bitの自由度を要するが、実際の自由度は約30bitで条件を満たさないと結論、懸賞金3万6,864ドルはLet's Encrypt運営のISRGへ寄付された</li>
           </ul>
         </div>
-        <div class="why-it-matters">💡 TypeScript/Bunで開発している場合、既存の`tsc`実行を`bun check`に置き換えることで型チェックのCI時間短縮が見込めるが、プロジェクト固有の複雑な型定義でTypeScriptとの判定差が出る可能性があるため、移行前に自分のコードベースで差分を確認すべきだ。</div>
+        <div class="why-it-matters">💡 ECDSA/NIST曲線を使うTLS実装やHSMの設計者にとって、曲線生成過程に数学的な説明がついたことで説明不能な定数への不信は薄れるが、ポスト量子署名への移行計画自体を変える必要はない。</div>
         <div class="meta">
-          <span>Publickey</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-10-15</span>
+          <span>Anthropic Research</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-10-16</span>
+          <span class="engagement">▲ 547</span>
         </div>
       </div>
 
@@ -101,45 +92,44 @@
         <div class="card-header">
           <span class="tag tag-security">Security</span>
           <span class="content-type">🔒 セキュリティ</span>
-          <h3><a href="https://www.watch.impress.co.jp/docs/news/2148547.html">ソースネクストが不正アクセスで最大2252万件の会員情報流出、メールアドレス・パスワード・氏名等が対象</a></h3>
+          <h3><a href="https://qiita.com/k2_naka/items/fa87685231377f15e7e3">Linuxカーネル重大脆弱性CVE-2026-99999「PwnEscape」、CVSS 9.3でホストrootが取得可能に</a></h3>
         </div>
-        <div class="summary">ソースネクストは10月13日午前9時頃に会員情報システムへの不正アクセスを検知し、午後1時36分に遮断した。調査の結果、攻撃者は10月9日午前10時頃から会員情報APIを使って登録データを取得し続けていたことが判明し、最大2251万9960件が流出した可能性があると10月15日に発表した。対象はメールアドレス・パスワード・氏名(かな含む)・住所・性別・電話番号・生年月日・勤務先情報などで、クレジットカード情報は対象システムに保存していないため含まれない。個人情報保護委員会へは15日に報告済み、16日に警察へ被害届を提出予定。</div>
+        <div class="summary">CVE-2026-99999「PwnEscape」はKVM自体ではなくLinuxカーネルのネットワークスタック、具体的にはIPv4チェックサムオフロード処理に起因する脆弱性で、ゲストが渡す不正なチェックサムメタデータがホスト側で検証済みのIPv4ヘッダを後から書き換えるTOCTOU型の欠陥だ。CNAによるCVSSv3.1基本値は9.3(Critical)、影響開始版はLinux 2.6.27(2008年)に遡る。Vercelの本番Sandboxでのホストメモリ漏えいが実証され、研究者所有環境ではホストrootの取得も報告された。さくらインターネットはVPS・レンタルサーバーなど5サービスへの影響を調査中だ。</div>
         <div class="key-points">
           <ul>
-            <li>攻撃は10月9日午前10時頃から10月13日午前9時頃の検知まで約4日間継続、検知から1時間弱で遮断し以後の不正アクセスは確認されていない</li>
-            <li>流出の可能性があるのは最大2251万9960件、対象はメールアドレス・パスワード・氏名(かな含む)・住所・電話番号・生年月日・勤務先情報等</li>
-            <li>クレジットカード情報は対象システムに保存しておらず流出対象外、個人情報保護委員会へは10月15日に報告済み、警察への被害届は16日提出予定</li>
+            <li>CNAによるCVSSv3.1基本値は9.3(Critical)、影響開始版はLinux 2.6.27、修正コミット6785011f8b16は2025年10月9日にmainline統合、stable各系列は5.10.272/5.15.223/6.1.190/6.6.159/6.12.113/6.18.57/7.2.11で修正済み</li>
+            <li>Vercelのバグバウンティでは受付1,285件・有効57件・Critical1件、支払済み報奨金総額24万2,000ドル。研究者所有のKVM環境ではホストrootの取得も報告されたが本番環境での実証ではない</li>
+            <li>AWSはEC2・Lambda等の自社管理サービスは影響なしと説明する一方、ゲストカーネルの更新だけではホスト側の脆弱性は修正されないと注意を促している</li>
           </ul>
         </div>
-        <div class="why-it-matters">💡 ソースネクストのサービスを利用している場合は次回ログイン時のパスワード再設定が必須化されるため早めに対応し、流出データを使ったフィッシングメール・SMS・電話に警戒すべきだ。</div>
+        <div class="why-it-matters">💡 virtio-net等を使う自己管理のKVM/Xen基盤を運用している場合、ゲストOSの更新だけでは防げないため、ホスト側カーネルを上記の修正済みstableバージョンへ速やかに上げる必要がある。</div>
         <div class="meta">
-          <span>Impress Watch</span>
-          <span>⏱ 3 min read</span>
-          <span>2026-10-15</span>
-          <span class="engagement">🔖 132</span>
+          <span>Qiita</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-16</span>
         </div>
       </div>
 
       <div class="card featured">
         <div class="card-header">
           <span class="tag tag-ai">AI</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://research.meta.ai/blog/muse-spark-open">Meta、総パラメータ816Bのネイティブマルチモーダルモデル「Muse Spark Open」を公開</a></h3>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://gigazine.net/news/20261016-openrouter-armor/">OpenRouter、AIエージェントの危険なツール呼び出しを別AIが判定してブロックする「Armor」をベータ公開</a></h3>
         </div>
-        <div class="summary">Metaは10月15日、総パラメータ816B(アクティブ42B)のネイティブマルチモーダルモデル「Muse Spark Open」の重みを公開した。コーディングとエージェント用途向けに設計され、コンテキスト長は100万トークン。Metaは自社史上最も高性能な米国製オープンウェイトモデルと位置付け、Apple M5 Ultra Mac Studio2台構成のデスクトップでも動作するとし、Hugging Faceおよび複数のAPIホスティングパートナー経由で利用できる。</div>
+        <div class="summary">OpenRouterは10月16日、エージェントのツール呼び出しをモデルとアプリの間で評価する安全分類器「Armor」をベータ公開した。判定には分類・判断に特化したTypeSafe製モデル「Jev」を使い、開発者が平易な英語で書いたルールをhard-deny・soft-deny・allowの3種に分けて評価する。soft-denyに一致した呼び出しは、allowルールとの一致かユーザーがその操作を会話内で明示的に依頼していない限りブロックされ、モデルにはブロック理由が伝えられて作業を継続できる。Claude Codeのauto modeやOri経由で他モデルにも適用できる。</div>
         <div class="key-points">
           <ul>
-            <li>総パラメータ816B・アクティブ42Bのネイティブマルチモーダルモデルで、コンテキスト長100万トークン、コーディング・エージェント用途向けに設計</li>
-            <li>Metaは自社として「最も高性能な米国製オープンウェイトモデル」と位置付け、Apple M5 Ultra Mac Studio2台構成のデスクトップでも動作すると説明</li>
-            <li>Hugging Faceおよび複数のAPIホスティングパートナー経由で重みと利用手段を提供、10月15日公開</li>
+            <li>判定は3種のルール(絶対禁止のhard-deny、原則禁止だが正当な要求もありうるsoft-deny、例外のallow)で構成され、ブロックの可否は確率的な一致判定の組み合わせで決まる</li>
+            <li>OpenRouter計測ではレイテンシの追加は中央値279ミリ秒、90パーセンタイルでも334ミリ秒に収まる。ブロックせずログだけ残すaudit modeで本番投入前にルール調整ができる</li>
+            <li>ベータ期間中は追加料金なし、設定項目や`safeguard_results`オブジェクトの形式は正式リリースまでに変更の可能性があるとOpenRouterは明記している</li>
           </ul>
         </div>
-        <div class="why-it-matters">💡 オープンウェイトで大規模コンテキスト・エージェント向け設計のモデルが増えたことで自前ホスティングの選択肢が広がるが、デスクトップ動作には最新の高価なApple Silicon機が前提になる点は留意が必要だ。</div>
+        <div class="why-it-matters">💡 AIエージェントに外部APIキーやファイル削除権限を持たせている場合、Jevのような判定モデルをツール呼び出しの手前に挟むことでプロンプトインジェクションや暴走タスクによる破壊的操作を止める選択肢が増えるが、ベータ段階であり判定モデル自体の誤判定リスクも運用前に検証すべきだ。</div>
         <div class="meta">
-          <span>Meta AI Research</span>
+          <span>GIGAZINE</span>
           <span>⏱ 4 min read</span>
-          <span>2026-10-15</span>
-          <span class="engagement">▲ 554</span>
+          <span>2026-10-16</span>
+          <span class="engagement">🔖 12</span>
         </div>
       </div>
     </div>
@@ -150,124 +140,104 @@
       <div class="card">
         <div class="card-header">
           <span class="tag tag-security">Security</span>
-          <span class="content-type">🔬 研究</span>
-          <h3><a href="https://citizenlab.ca/research/how-discover-tech-turned-targeted-ads-into-a-pipeline-for-spyware/">Citizen Lab、広告配信を悪用したゼロクリック傭兵スパイウェア経路「AdFection」を技術的に確認</a></h3>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://www.itmedia.co.jp/news/article/2610/16/2000002346/">タイムズカー、退会後も7年間保管していた運転免許証画像を全削除へ――660万件漏えいの反省で保管方針を見直し</a></h3>
         </div>
-        <div class="summary">Citizen Labは、イスラエル企業Discover-Techが広告配信大手を介して標的の広告IDにスパイウェア起動用JavaScriptを配信する「AdFection」の仕組みを初めて技術的に確認したと10月15日公表した。約40億件の入札記録を分析し、Al Jazeeraの端末45台以上への攻撃をCandiru(Integrity Labs)に高確度で結び付けた。</div>
+        <div class="summary">タイムズモビリティは9月25日に検知した不正アクセスで、退会者や入会未完了者を含む最大660万件の会員情報が流出した可能性があると公表済みだが、このうち運転免許証画像など本人確認書類約160万件分については退会後も7年間保管していたことが問題視され、10月16日に全件削除する方針を発表した。</div>
         <div class="key-points">
           <ul>
-            <li>MyDSP経由の入札のうち約19%(7億1870万件以上)が攻撃用スクリプトタグ付き広告で、75,373のアプリと120,768のウェブサイトに表示された</li>
-            <li>Google・IAB Europeが10月上旬にDiscover-Techをベンダー登録から削除、Beeswaxも削除・Vungleはアクセス停止・Eskimiはアカウントをブロック</li>
+            <li>不正アクセスは9月25日9時7分に検知、流出項目は氏名・住所・生年月日・電話番号・メールアドレスに加え運転免許情報・免許証画像、クレジットカード情報は対象外</li>
+            <li>退会者の本人確認書類を本人確認目的終了後も保管し続けていた運用自体が二次被害リスクを広げたとして、保管期間の見直しと全件削除に踏み切った</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Citizen Lab</span>
+          <span>ITmedia</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-16</span>
+          <span class="engagement">🔖 133</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://claude.dev/blog/solving-code-review-at-anthropic/">Claude Codeチーム、コードの90%をClaude自身が書く体制でのレビュー運用を公開――1往復合格率65%→78%に改善</a></h3>
+        </div>
+        <div class="summary">Claude CodeチームはClaudeがコードの約9割を書く前提で、レビューを最終ゲートから継続的プロセスに変え、PR提出前にサブエージェントがdiffを検証し、提出後は複数エージェントが並行してバグを探し投票で絞り込む体制を構築した。Anthropicのモノレポは5月の日次2,500件から9月に3万件超の変更量まで増えた一方、リバート率は40%超減少したという。</div>
+        <div class="key-points">
+          <ul>
+            <li>レビュー1往復で合格する割合は65%→78%、5往復以上を要する割合は8.9%→1.5%に改善、1件あたりの平均レビュー回数は2.08→1.32に減少</li>
+            <li>人間レビュー必須かどうかはリスク分類器がPRごとに判定し、セキュリティレビューで見つかった指摘は修正か理由付きの解消まで原則マージをブロックする</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Claude Blog</span>
           <span>⏱ 6 min read</span>
           <span>2026-10-15</span>
-          <span class="engagement">▲ 355</span>
+          <span class="engagement">▲ 180</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
+          <span class="tag tag-data">Data</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://www.mercor.com/research/labor-index/benchmark-map/">AIベンチマークが測れている米国労働時間はわずか10%、Mercorが923職種をO*NETタスクにマッピングして分析</a></h3>
+        </div>
+        <div class="summary">Mercorは公開AIベンチマーク29種をLLM判定で米労働省のO*NETタスク分類に対応付け、923職種・18,797タスクのうち5件以上のベンチマーク設問でカバーされているのは208職種・924タスクのみと報告した。米国の労働時間の約90%はほとんど、または全くベンチマークで測られていないタスクに費やされているという。</div>
+        <div class="key-points">
+          <ul>
+            <li>Computer & Math職種群は36職種中29職種がカバーされる一方、Healthcare Practitionersは89職種中12職種、Education & Libraryは62職種中9職種のみとカバー率に偏りがある</li>
+            <li>AI露出度が高いとされるタスクはそうでないタスクの約6倍カバーされやすく、職種内で重要度が高いタスクほど6〜10倍カバーされやすいという賃金・重要度バイアスも確認された</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Mercor</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-15</span>
+          <span class="engagement">▲ 350</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://calif.io/research/big-fish">37年前のBSD由来カウンタのオーバーフローからOpenBSDのroot権限奪取、KARL・SMAP・SMEP有効下でも成立</a></h3>
+        </div>
+        <div class="summary">Califの研究者は、共有メモリの接続数カウンタ`shm_nattch`が符号付き16bitのままという37年前のBSD由来の設計を突き、259個のプロセスをfork/共有メモリ接続させてカウンタを-32,643へオーバーフローさせるUse-After-Freeを発端に、IPv4マルチキャストオプション構造体へのアウトオブバウンズ書き込みを組み合わせてOpenBSD 7.9のroot権限を奪取した。</div>
+        <div class="key-points">
+          <ul>
+            <li>情報漏えいバグなしでKARL・SMAP・SMEPが有効な環境でも成立する攻撃で、ヒープを`sysctl KERN_MALLOCSTATS`で観測しながら整形し`IPC_RMID`呼び出しと共有メモリ接続のレースで狙った解放を起こす</li>
+            <li>自己参照PTEマッピングをユーザーモードから書き換え可能にしてカーネルコード実行に到達、OpenBSD 7.9向けのsysvipc(Errata 026)・shmat(Errata 018)の修正パッチで対処済み</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>calif.io</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-10-16</span>
+          <span class="engagement">▲ 154</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
           <span class="content-type">📦 リリース</span>
-          <h3><a href="https://blog.rust-lang.org/2026/10/15/Rust-1.99.1/">Rust 1.99.1公開、UEFIターゲットのリンクエラーとFFIのbool返り値不整合を修正</a></h3>
+          <h3><a href="https://blogs.gnome.org/adrianvovk/2026/10/16/gnome-os-preview/">GNOME OS、開発者向けNightlyに続く一般利用者向け「Preview」エディションを公開</a></h3>
         </div>
-        <div class="summary">Rustチームは10月15日、3件の退行を修正したポイントリリースRust 1.99.1を公開した。LLVMの`loop-idiom-wcslen`パスが`wcslen`呼び出しを生成しUEFIターゲットでリンクエラーになる問題を`compiler-builtins`へのフォールバック追加で解消し、x86_64でFFIの`bool`返り値がABI仕様に反し0/1以外になり得た不整合を修正、macOSの`rust-lld`が`rustup`プロキシ外で`libLLVM`を読み込めない問題にも`rpath`追加で対応した。</div>
+        <div class="summary">GNOME OSはこれまでGNOME開発者・テスター向けの最新gitビルドNightlyしか提供していなかったが、10月16日に安定版GNOME 51.1をベースにした「Preview」エディションを新設し、早期導入者向けに公開した。安定版Flatpakランタイムと同じGitLabブランチを使うためNightlyより安定するが、長期の更新保証や一般公開は明言していない。</div>
         <div class="key-points">
           <ul>
-            <li>UEFIターゲットのうち`std`を使うプロジェクトで特に影響が大きかったリンクエラーを`compiler-builtins`のフォールバック実装で解消</li>
-            <li>`rustup update stable`で適用可能、x86_64のFFI `bool`返り値はABI要求通り再度ゼロ拡張されるよう修正</li>
+            <li>zswapによる低RAM機のOOM対策やディスク上スワップの動的拡張など直近のメモリ改善を取り込み、Test CenterはマージリクエストのFlatpak CIビルドを直接インストールできる</li>
+            <li>GNOME OSは既存インストールのアップグレード経路が確立するまで「stable」を名乗らない方針で、Preview利用者は将来のStable移行時に再インストールが必要になる可能性がある</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Rust Blog</span>
-          <span>⏱ 2 min read</span>
-          <span>2026-10-15</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-frontend">Frontend</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://jakearchibald.com/2026/jpeg-xl-vs-avif/">Webの画像形式はAVIFが依然優位、JPEG XLとの実測比較でJake Archibaldが推奨方針を更新</a></h3>
-        </div>
-        <div class="summary">フロントエンド開発者Jake Archibaldは、写真・スクリーンショット・透過画像・HDRなど条件別にAVIFとJPEG XL(jixelエンコーダ/libjxl)を比較し、ほとんどの用途でAVIFが有利と結論した。既存JPEGのJPEG XLへの可逆変換は9〜20%の削減が見込め、ロスレス用途ではJPEG XLがWebPより9〜17%、ロスレスAVIFより30〜120%小さいとした。</div>
-        <div class="key-points">
-          <ul>
-            <li>既定エフォートでの写真圧縮はJPEG XLがAVIFより15〜25%大きく、最大エフォートでも6〜20%の差が残る、透過画像ではlibjxlが31〜70%大きい</li>
-            <li>AVIFのデコードはJPEG XLの中品質設定比で2〜3倍速く、クロマサブサンプリングは4:2:0でなく4:4:4を推奨</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Jake Archibald</span>
-          <span>⏱ 5 min read</span>
-          <span>2026-10-14</span>
-          <span class="engagement">▲ 38</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://www.cppstories.com/2026/cpp26_contracts/">C++26の契約機能、`pre`/`post`で関数宣言に前提条件・事後条件を明示——現状GCC 16のみ対応</a></h3>
-        </div>
-        <div class="summary">C++26の契約機能は、関数宣言に`pre(...)`で呼び出し前提条件、`post(result: ...)`で戻り値の事後条件を書け、ヘッダを読むだけで要件が分かる。既存の`assert`は実装側に隠れ`NDEBUG`で丸ごと無効化されるのに対し、契約はignore/observe/enforce/quick-enforceの4段階の評価方針を実装が選べる仕組みになっている。</div>
-        <div class="key-points">
-          <ul>
-            <li>事後条件は正常リターンの全経路をまとめて保証でき`return`ごとの個別チェックが不要になる一方、例外での退出時はチェックされない</li>
-            <li>2026年10月時点で契約構文に対応するコンパイラはGCC 16のみ、`-fcontracts -fcontract-evaluation-semantic=enforce`でビルドする必要がある</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>C++ Stories</span>
-          <span>⏱ 5 min read</span>
-          <span>2026-10-14</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
-          <span class="content-type">👀 注目</span>
-          <h3><a href="https://sunshowers.io/posts/anthropic-mononoke/">Anthropic独自VCS「Scion」はMeta製Mononokeの設計に酷似、開発者が功績表示の欠如を指摘</a></h3>
-        </div>
-        <div class="summary">Meta製ソース管理サーバーMononokeの開発に関わったRain氏は、Anthropicが発表した独自VCS「Scion」の中核概念「derived data」(変更セットから再帰的に計算される派生インデックス)が、2022年のOxide採用選考資料で自身が説明したMononokeの設計とほぼ同じだと指摘した。Anthropicの発表はSaplingへの謝辞のみでMononokeに触れていない点を剽窃に近いと批判し、10月15日にフォローアップ記事も公開した。</div>
-        <div class="key-points">
-          <ul>
-            <li>Mononokeは変更セットのクリティカルパス外で非同期計算される派生インデックスを当時8種保持、blameは全コミットでなくファイルを変更したコミット数に比例してスケールする設計</li>
-            <li>著者はデザインの流用自体には異を唱えないが、ClaudeやGPTに尋ねても類似点を指摘される設計を出典なしに提示したAnthropicの記述姿勢を問題視</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>sunshowers.io</span>
-          <span>⏱ 5 min read</span>
-          <span>2026-10-15</span>
-          <span class="engagement">▲ 137</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-ai">AI</span>
-          <span class="content-type">👀 注目</span>
-          <h3><a href="https://gigazine.net/news/20261016-linus-torvalds-claude-code/">LinusトーバルズがClaude Codeでカーネル改善を実装、測定も含め「LLMの指示下」で作成と公表</a></h3>
-        </div>
-        <div class="summary">Linuxカーネル開発者Linus Torvaldsは、ページキャッシュからの小さな読み取りでfolio構造体への参照取得を不要にするメモリ管理改善を、個人ブランチ「noref-filemap-read-with-llm」で進めている。Torvalds自身がPhoronix経由の報道で、コード・テストプログラム・レビュー・カバーレター初稿をClaude Codeの支援下で作成し、ベンチマークも自分のマシンで実行したと明かした。スレッド数1では差が出ないが、8スレッドおよび4コア機での4スレッドでは大きな性能向上が確認されており、Linux 7.4のマージウィンドウでの取り込みが見込まれている。</div>
-        <div class="key-points">
-          <ul>
-            <li>対象はfolio参照カウントの競合によるマルチスレッド時の小サイズ読み取りボトルネック、8スレッド・4コア4スレッドで大幅な性能向上を確認</li>
-            <li>Torvaldsはカーネル本体以外でもGoogleのAntigravityで「vibe coding」を実践中と言及、AI支援パッチの「Assisted-by:」タグ要否議論が進行中</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>GIGAZINE</span>
+          <span>GNOME Blogs</span>
           <span>⏱ 4 min read</span>
           <span>2026-10-16</span>
-          <span class="engagement">🔖 13</span>
         </div>
       </div>
     </div>
@@ -277,15 +247,55 @@
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-ai">AI</span>
+          <span class="tag tag-oss">OSS</span>
           <span class="content-type">👀 注目</span>
-          <h3><a href="https://qiita.com/suwa_nobu/items/3a34591f130da2f570f5">Claude Codeがバックグラウンドで起動したサーバーが終了後も残存、画面下部「1 shell」表示で見分ける</a></h3>
+          <h3><a href="https://zenn.dev/hand_dot/articles/ecb391d4322330">tldraw・Ladybird・Sindre SorhusらがPRを一斉に停止、「AIが書いたPRは安く量産できる」が引き起こした信頼危機</a></h3>
         </div>
-        <div class="summary">著者はWindows 10上のClaude Code 2.1.296で、Bashの`&`やPowerShellの`Start-Process`でデタッチ起動されたサーバーが、Claude Code終了後も確認なしで動き続けることを検証した。ステータスバーに「1 shell」のようなインジケーターが出ないバックグラウンドプロセスは、終了時の確認プロンプトでも検知されない。</div>
+        <div class="summary">著者は2026年に入り有名OSSが外部PRを閉じ始めた動きを整理した。tldrawは1月15日から外部PRを自動クローズ、Ladybirdは6月5日に公開PR受付を停止して既存PRも全て閉じ、Sindre Sorhus氏は10月2日に全リポジトリで外部PR停止を宣言した。curlは2025年以降バグ報奨金の有効報告率が5%を下回り2026年1月末に制度自体を終了している。</div>
         <div class="key-points">
           <ul>
-            <li>終了時に表示される「Background work is running」で「Exit and stop tasks」を選べば全テストでサーバーが停止したが、「Move to background and exit」ではサーバーとClaude Codeの監視プロセスが残存</li>
-            <li>残存ポートの特定は`Get-NetTCPConnection`でプロセスIDを確認し`Get-CimInstance Win32_Process`で正体を見てから`Stop-Process`する手順を推奨、名前パターン一致での強制終了は別の正規Nodeプロセスを巻き込む恐れがあるため非推奨</li>
+            <li>著者は「大きなパッチを送ること自体が送り手の信頼の目印だった」とし、AIでパッチ生成コストが下がったことでその目印が機能しなくなった点を主因に挙げる</li>
+            <li>GitHubは2月に外部PR停止・コラボレーター限定の設定を追加、6月に同時オープンPR数の上限機能、10月8日からはドラフトPRもその上限に含めるよう仕様変更した</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-16</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-frontend">Frontend</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/suzuki_tech/articles/x402-01-http-402-nextjs">HTTP 402は1997年の仕様から29年「将来の用途に予約」のまま、x402決済プロトコルをNext.js 16で動かしてみた</a></h3>
+        </div>
+        <div class="summary">著者はCoinbaseが2025年5月に公開し2026年4月にLinux Foundation傘下でx402 Foundationが発足した決済プロトコルx402を、Next.js 16 App Routerと`@x402/next`等のパッケージ(全て2.28.0固定)でBase Sepoliaテストネット上に実装した。402応答のPAYMENT-REQUIREDヘッダーに決済条件をbase64で載せ、買い手が署名付きで再送すると200と共に0.01 USDCの送金が確定する。</div>
+        <div class="key-points">
+          <ul>
+            <li>`withX402`でAPIルートを有料化し、ハンドラー成功時のみ決済を確定させる設計をproxy方式より選択、ファシリテーターには`x402.org/facilitator`を使用</li>
+            <li>決済後は買い手が20→19.99 USDC、売り手が0.01 USDC受領、ガス代はファシリテーターが負担しETH残高は双方0のまま変化しなかった</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-16</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://qiita.com/meltsuna/items/3a14d8545cc3c0e3f97b">OpenAI・Google・IEEE共催AIエージェント・セキュリティコンペ、世界4,186チーム中パブリック87位・プライベート239位で2部門メダル獲得</a></h3>
+        </div>
+        <div class="summary">三菱電機の著者は、GPT-OSSとGemma 4上のツール利用エージェントへの攻撃スクリプト`attack.py`を提出するKaggleコンペ「AI Agent Security - Multi-Step Tool Attacks」(6月11日〜9月1日、4,186チーム参加)に米国の研究機関との合同チームで参加し、パブリックリーダーボード87位(銀メダル)、プライベート239位(銅メダル)を獲得した。</div>
+        <div class="key-points">
+          <ul>
+            <li>データ流出・信頼できない入力による行動誘発・破壊的書き込み・confused deputyの4種の判定基準で採点され、パブリックで通用したデータ流出重視の手法はプライベートの厳しいガードレールでは通用しなかった</li>
+            <li>両リーダーボードで安定して通用したのはconfused deputy型の攻撃で、著者は最終提出で別のスクリプトを選んだため、より高い順位を逃したと振り返る</li>
           </ul>
         </div>
         <div class="meta">
@@ -298,59 +308,19 @@
       <div class="card">
         <div class="card-header">
           <span class="tag tag-dev">Dev</span>
-          <span class="content-type">🔬 研究</span>
-          <h3><a href="https://qiita.com/Rapls/items/cf90b3757fbfdaf44bd4">PHPのmax()/min()にNANを渡すと引数の順序とバージョンで結果が変わる、実運用のPDF面積判定バグから発覚</a></h3>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://qiita.com/suwa_nobu/items/18c8456c7a594b24a737">Claude Codeの`/rewind`はシェルコマンドやサブエージェントが消したファイルを復元できない、「No code changes」表示で見分ける</a></h3>
         </div>
-        <div class="summary">著者はPDFのページボックスから最大面積を求める処理で、INF-INFから生じたNANを`max()`に渡した際に結果がPHPバージョンで食い違うバグに遭遇し、PHP 7.4.33・8.0.30・8.3.6・8.4.21で実測した。`max(842.0, NAN)`は7.4/8.0/8.4でNANになるが8.3.6だけ842.0を返すなど、引数順序とバージョンの組み合わせで結果が割れることが確認された。</div>
+        <div class="summary">著者はWindows 10上のClaude Code 2.1.300(Sonnet 5.5)で検証し、Edit/Writeツールによる変更は9回中9回`/rewind`で復元できた一方、PowerShellの`Remove-Item`によるファイル削除は0回中3回、サブエージェントによる変更も0回中3回とも復元できなかった。ドキュメントは「Bashコマンドで変更されたファイルは追跡しない」と明記している。</div>
         <div class="key-points">
           <ul>
-            <li>原因はPDFの巨大な数値が`(float)`キャストでINFになり`INF - INF`がNANを生成すること、8.3.6では14,400pt四方のページが誤って採用されA4判定が覆った</li>
-            <li>対策は`is_finite()`で`max()`に渡す前に有限性を検証し、非有限ならnullを返して面積判定を中断すること</li>
+            <li>`/rewind`のプロンプト選択画面でファイル名と行数(例: `notes.txt +1 -1`)が出れば復元可能、「No code changes」表示は実際にファイルが変更されていても復元対象にならないことを示す</li>
+            <li>対策としてChatが削除・上書きの可能性がある操作をする前に`git commit`を済ませておくことを推奨、VS Code拡張では`/rewind`自体が使えずホバー表示のボタンを使う必要がある</li>
           </ul>
         </div>
         <div class="meta">
           <span>Qiita</span>
           <span>⏱ 4 min read</span>
-          <span>2026-10-15</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-ai">AI</span>
-          <span class="content-type">🔬 研究</span>
-          <h3><a href="https://zenn.dev/algoartis/articles/03ca12150ccbee">国産モデルsarashina3-miniに文章推敲をさせると他モデルより大きく書き換える、106件の実測でClaude Opus 5.5等と比較</a></h3>
-        </div>
-        <div class="summary">著者はSB Intuitionsのsarashina3-miniに「yomiyasu」スキルで日本語文章90件を推敲させ、Claude Opus 5.5・Gemini 4 Argon・Gemini 3.8 Flashと比較した。sarashina3-miniは無変更で返った文章が90件中8件のみ(Argon68件・Flash27件・Opus40件)と最も大きく書き換え、意味変化の疑いも30件検出されたのに対し他モデルは0〜5件だった。</div>
-        <div class="key-points">
-          <ul>
-            <li>常体から敬体への変換を17件中12件で実施し引用セリフも44回改変、他モデルはいずれも0回で、ブラインド評価でもOpus・Argon・Flashに大差で負けた(p&lt;0.001)</li>
-            <li>一方でレスポンスは中央値4.2秒・全333回成功、入力トークン消費はOpusの約25,000に対し約14,000と少なく、数値・日付の改変は一度も発生しなかった</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Zenn</span>
-          <span>⏱ 5 min read</span>
-          <span>2026-10-15</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-infra">Infra</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://zenn.dev/boy_techblog/articles/connecting-trace-serverless">AWS Step Functions越しのLambda呼び出しをOpenTelemetryで1本のトレースに繋ぐ、traceparentを手動で中継</a></h3>
-        </div>
-        <div class="summary">Step Functionsの実行入力はHTTPヘッダではないためOpenTelemetryの自動トレース伝播が働かず、各Lambdaが別々のトレースとして記録される。著者はWebアプリ側で`propagation.inject()`した`traceparent`を実行入力に埋め込み、ステートマシンの変数経由で各`lambda:invoke`のPayloadに渡し、Lambda側で`propagation.extract()`して親コンテキストに使う`withOtel()`ラッパーを実装することでトレースIDを一本化した。</div>
-        <div class="key-points">
-          <ul>
-            <li>Lambdaのフリーズ前にスパンを確実に送出するため`BatchSpanProcessor`と`finally`内の`forceFlush()`を併用、フラッシュ失敗はログのみでビジネス処理には影響させない</li>
-            <li>Step Functionsの各ステート自体はスパン化されないため同一入力のLambdaスパンは親子ではなく兄弟関係になる、`tracestate`やbaggageは未対応という制約も明記</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Zenn</span>
-          <span>⏱ 5 min read</span>
           <span>2026-10-15</span>
         </div>
       </div>
@@ -361,21 +331,42 @@
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-oss">OSS</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://forgejo.org/2026-10-release-v17-0/">セルフホスト型フォージForgejo v17.0公開、寄付ボタン・LFS刷新・Actions API拡張など追加</a></h3>
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://qiita.com/ry-harada/items/cca2012374f26773e4fb">個人ダッシュボードのGitHub Issueに優先度・担当領域ラベルを自動付与、判定モデル「Jev」とGitHub Actionsで構築</a></h3>
         </div>
-        <div class="summary">GitHubの代替となるセルフホスト型コード管理ツールForgejoのv17.0が10月15日に公開された。リポジトリ・ユーザー・組織向けの寄付ボタン、Issue/PRでの`#`・`!`自動補完、LFS管理画面の刷新、14日間有効の組織招待機能などを追加し、ActionsのWebhookはaction run形式からworkflow run形式へ移行(自動移行不可)する破壊的変更も含む。</div>
+        <div class="summary">著者はGitHub Issueのテンプレートで変更種別は自動付与できても優先度・担当領域ラベルが付け忘れられる課題を、Issue作成時に起動するGitHub Actionsワークフローで解消した。本文をTypeSafe製の判定専用モデル`jev-1.13`(typesafe-sdk 0.7.1)に渡し、確信度0.5以上の場合のみ優先度・領域ラベルを付与する。</div>
         <div class="key-points">
           <ul>
-            <li>Actions APIでワークフロー実行・ジョブの再実行、ログのNDJSON取得やステップ単位の取得に対応、Forgejo Runner 13.2以降のジョブサマリーをMarkdown表示</li>
-            <li>リポジトリ内文書の相対リンク解決基準がインスタンスルートからリポジトリルートへ変更、Bitbucket Data CenterからのPR・レビューコメント移行にも対応</li>
+            <li>判定を英語の質問文で行うと最も精度が高いとし、領域判定は「関連がある」ではなく「変更が必要な主要領域の一つか」と問うことで精度を改善、閾値0.5採用時の既存ラベルとの一致率は73%</li>
+            <li>Cloudflare WAFがIssue本文中のcurlなどコマンド的な文字列を遮断して403を返すケースはスキップする設計にし、入力トークンのコストは100万トークンあたり0.042ドル(出力は無料)</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Forgejo</span>
-          <span>⏱ 3 min read</span>
+          <span>Qiita</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-10-13</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://machinelearning.apple.com/research/mlx-distributed-inference">Apple、4台のMac Studio(M5 Ultra)をThunderbolt 5接続で束ねMuse Spark Open(816B)を分散推論、MLXの新バックエンド`jaccl`で</a></h3>
+        </div>
+        <div class="summary">Appleの研究チームはMLX v0.30.1以降に追加したThunderbolt 5上のRDMAバックエンド`jaccl`を使い、M5 Ultra搭載Mac Studio4台をテンソル並列接続してMuse Spark Open(総パラメータ816B、NVFP4量子化で約493GB)を動かした。単体のMac StudioはBF16では1.6TB超、NVFP4でも493GB必要なためモデルは複数台への分割が前提になる。</div>
+        <div class="key-points">
+          <ul>
+            <li>4台構成で8,192トークンコンテキストのデコードは約36.7トークン/秒、2台のパイプライン並列では65,536トークン時のプリフィルが単体の最大1.8倍速い</li>
+            <li>M5 UltraはM3 Ultra比でメモリ帯域1.2TB/s対819GB/sの差により初回トークン生成が最大4.6倍、デコードが1.6倍速く、ピーク電力は300W対200W</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Apple ML Research</span>
+          <span>⏱ 5 min read</span>
           <span>2026-10-15</span>
+          <span class="engagement">▲ 245</span>
         </div>
       </div>
 
@@ -383,40 +374,20 @@
         <div class="card-header">
           <span class="tag tag-dev">Dev</span>
           <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://github.com/glincker/sslx">OpenSSLのCLIをラップする「sslx」、証明書検証やTLSグレーディングを1コマンド化</a></h3>
+          <h3><a href="https://github.com/cobanov/PS5LM">脱獄済みPS5のGPUでllama.cppを直接実行、Vulkanバックエンドで任意のGGUFモデルをコンソール単体で動かす「PS5LM」</a></h3>
         </div>
-        <div class="summary">RustでTLS実装rustlsを使い構築されたコマンドラインツール「sslx」は、OpenSSL CLIで複数コマンドの組み合わせや外部サイトが必要だった作業を単一コマンドにまとめる。証明書と鍵の一致確認は通常OpenSSLで両者のmodulusを`diff`する必要があるが、sslxでは`sslx match`一発で済む。</div>
+        <div class="summary">PS5LMはジェイルブレイクしたPS5のRDNA 2 GPU上でllama.cppのVulkanバックエンドを動かし、OpenAI `/v1/chat/completions`とAnthropic `/v1/messages`互換のAPIをPC・クラウド・アカウント不要で提供するツールだ。モデルとコンテキストには共有メモリ11.4GBを使い、Hugging Faceから内蔵ストレージ・M.2・USBへ直接ダウンロードできる。</div>
         <div class="key-points">
           <ul>
-            <li>`grade`コマンドでSSL Labs同様のA+〜F評価、`expiry`は証明書が7日以内に失効する場合に終了コード1を返しcron/CI向け、`decode`はJWTを含む入力形式を自動判別</li>
-            <li>README記載のmacOS M2ベンチマークでは`inspect`がOpenSSLの9.4msに対しsslxは2.1msと高速、MITライセンスでシステムOpenSSL不要</li>
+            <li>PS5 Slimでの実測ではQwen 3.5 0.8B(Q4_K_M)が207トークン/秒、Qwen 3.8 27B(UD-Q2_K_XL、64kコンテキスト)でも約20トークン/秒を記録</li>
+            <li>動作には7.00〜13.60ファームウェアのジェイルブレイクとkstuff-lite・etaHEN・ShadowMountPlusのペイロードが必須、GPL-3.0ライセンスでSonyとは無関係と明記</li>
           </ul>
         </div>
         <div class="meta">
           <span>GitHub</span>
-          <span>⏱ 2 min read</span>
-          <span>2026-10-14</span>
-          <span class="engagement">⭐ 36</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-oss">OSS</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://libreboot.org/news/libreboot2610.html">オープンソースファームウェアLibreboot 26.10「Ominous Olive」、x86をUEFI移行しChromebook233機種を追加</a></h3>
-        </div>
-        <div class="summary">フリーソフトウェアのブートファームウェアLibrebootの最新版26.10 Ominous Oliveが10月15日公開された。ほぼ全てのx86ボードでMrChromebox製EDK2ペイロードによる完全なUEFI対応に切り替え、後方互換のためGRUB/SeaBIOSのEFIビルドをEDK2内に同梱する。</div>
-        <div class="key-points">
-          <ul>
-            <li>MrChromeboxから233機種のIntel/AMD Chromebook向けビルドを取り込み全機種がコンパイル可能(ソースのみ提供)、Intel MEはHAPビット設定で無効化</li>
-            <li>AMD Fam15h系(KGPE-D16等)は15h.orgのcorebootフォークに移行しIOMMU・TPMの不具合を修正、新規対応ボードにDell OptiPlex 5050 SFF・ThinkPad X270/X280などを追加</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Libreboot</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-10-15</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-16</span>
+          <span class="engagement">⭐ 328</span>
         </div>
       </div>
     </div>
@@ -425,45 +396,45 @@
       <div class="section-title">🔗 Quick Links</div>
 
       <div class="quick-link">
-        <span class="tag tag-security">Security</span>
-        <a href="https://forest.watch.impress.co.jp/docs/news/2148495.html">curlにHTTP/2アップロードのUse-After-Free脆弱性CVE-2026-92392、修正済みの8.23.0へ更新を</a>
-        <span class="quick-summary">— 影響対象はcurl 8.12.0〜8.22.0(CLI含む)、10月14日公開の8.23.0は他23件も含め計24件の脆弱性を修正。</span>
-        <span class="meta">窓の杜</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-dev">Dev</span>
-        <a href="https://qiita.com/seamoooooo/items/431c4a6be67c605c36be">New RelicのAPI Keyに最終利用日時・無効化・チーム所有者が追加、エンジニアが棚卸し手順を公開</a>
-        <span class="quick-summary">— 1か月以上未使用のUser keyをDeactivateで一時停止後に削除する運用を提案、`enabled: true`が無効化を意味する紛らわしい仕様に注意。</span>
-        <span class="meta">Qiita</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-security">Security</span>
-        <a href="https://swarmcha.se/posts/chinese-agent-fleet-full-report">AIエージェント群がTencent Cloudから出て競合地図サービスAmapをスクレイピング、研究者が通信パターンから追跡</a>
-        <span class="quick-summary">— 2,599件のurlquery.net経由送信・3万5千件超のリクエストを確認、送信元受信箱17件全てが香港のTencent Cloudサーバーで作成。</span>
-        <span class="meta">swarmcha.se</span>
+        <span class="tag tag-infra">Infra</span>
+        <a href="https://www.sakura.ad.jp/corporate/information/announcements/2026/10/16/1968226051/">さくらインターネット、PwnEscape影響調査でVPS・レンタルサーバーなど新規申込を一時停止</a>
+        <span class="quick-summary">— さくらのクラウド・VPS・レンタルサーバー・高火力DOK・高火力VRTの5サービスへの影響を調査中としつつ、VPSとレンタル・マネージドサーバーの新規申込を一時停止した。</span>
+        <span class="meta">さくらインターネット</span>
       </div>
 
       <div class="quick-link">
         <span class="tag tag-product">Product</span>
-        <a href="https://www.krea.ai/krea-3">画像編集特化のAIモデル「Krea 3」公開、大規模な編集作業向けに設計</a>
-        <span class="quick-summary">— 生成寄りの従来モデルと異なり、リタッチや差分修正など編集作業の精度・一貫性に重点を置いた設計を特徴とする。</span>
-        <span class="meta">Krea</span>
+        <a href="https://waymo.com/blog/2026/10/waymo-in-toronto/">Waymo、トロントへの進出を発表――2028年の最初の乗客受け入れを目標に</a>
+        <span class="quick-summary">— 地元企業Element Fleet Managementと提携し段階的に展開、同社の運行都市では重大事故が人間運転比で95%少ないとするデータを提示している。</span>
+        <span class="meta">Waymo</span>
       </div>
 
       <div class="quick-link">
         <span class="tag tag-ai">AI</span>
-        <a href="https://www.simonsfoundation.org/news/simons-foundation-launches-15m-effort-to-help-mathematicians-navigate-ai-era/">Simons Foundation、AI時代の数学研究を支援する1500万ドルの新プログラムを開始</a>
-        <span class="quick-summary">— AIツールが数学研究に与える影響を見極めるため、数学者によるAI活用・検証の取り組みに資金提供する。</span>
-        <span class="meta">Simons Foundation</span>
+        <a href="https://bfl.ai/blog/flux-3-image-klein">Black Forest Labs、56億パラメータのオープンウェイト画像モデル「FLUX 3 Image Klein」公開</a>
+        <span class="quick-summary">— 最大10枚の参照画像を使うマルチリファレンス編集に対応し、FLUX.2 [klein] 9B比でパラメータ38%減ながらテキスト画像生成で+91 Elo、編集で+70 Eloを記録したという。</span>
+        <span class="meta">Black Forest Labs</span>
       </div>
 
       <div class="quick-link">
-        <span class="tag tag-ai">AI</span>
-        <a href="https://already-clean.goodfire.com/">「ニューラルネットワークは実はクリーン」、Goodfireの研究者がポリセマンティシティ仮説の読み違いを指摘</a>
-        <span class="quick-summary">— Qwen3-32Bの予備調査でニューロンの約9割が単一の役割を持つと推定、兆パラメータ規模のモデルでも同様の傾向を確認したと報告。</span>
-        <span class="meta">Goodfire</span>
+        <span class="tag tag-security">Security</span>
+        <a href="https://unitis.jp/articles/24665/">徳丸浩氏、タイムズカー事案から考えるデータ保管・消去の判断体制を解説</a>
+        <span class="quick-summary">— 退会者データの保管・消去は事業部門長が法的・事業上の根拠に基づき期間を決め、半年〜1年ごとの第三者点検で運用を検証すべきだと提言している。</span>
+        <span class="meta">UNITIS</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://news.web.nhk/newsweb/na/nd-20261016de60556">ソースネクスト、流出した会員情報のパスワードが暗号化されていない状態だったと判明</a>
+        <span class="quick-summary">— 10月15日公表の最大2,251万9,960件流出の続報で、該当パスワードが暗号化なしで保存されていたことが新たに分かり、利用者にパスワード再設定を呼びかけている。</span>
+        <span class="meta">NHKニュース</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://codon.org.uk/~mjg59/blog/p/epics-eac2-v2-seems-fairly-easily-bypassable/">EpicのLinux向けEAC2 v2、TPMのリセットピンや代替TPMすり替えで容易にバイパス可能と判明</a>
+        <span class="quick-summary">— マザーボードのTPMリセットピンを短絡させれば起動済みの正規測定値を再生できてしまい、約20ドルの代替TPMモジュールへのすり替えも有効だとmjg59氏が指摘している。</span>
+        <span class="meta">mjg59 Blog</span>
       </div>
     </div>
 
