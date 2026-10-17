@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI プロダクト動向 | Tech News Daily</title>
-<meta name="description" content="社内システムを操作するエージェントは、これまで大半が「呼び出したユーザーのトークン」か「アプリ共通のサービスアカウント」で動いてきた。どちらでも動くことは動く。ただ監査ログには人間かアプリの名前しか残らず、ある一つのエージェントだけを止め…">
+<meta name="description" content="AI がコードを書く量が増えるほど、人間がそれを読むことが開発のボトルネックになる。Anthropic は 10月15日、Claude Code チームのレビュー体制を公開した。Claude Code のコードの約 90% は Claud…">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Tech News Daily">
-<meta property="og:title" content="エージェントの身元は「ユーザーの借り物」から「専用の ID」へ — 代理と自律の区別、ID を切る単位、受け手側での識別 | AI プロダクト動向">
-<meta property="og:description" content="社内システムを操作するエージェントは、これまで大半が「呼び出したユーザーのトークン」か「アプリ共通のサービスアカウント」で動いてきた。どちらでも動くことは動く。ただ監査ログには人間かアプリの名前しか残らず、ある一つのエージェントだけを止め…">
+<meta property="og:title" content="AI コードレビューは「全部指摘する」から「確かめてから出す」へ — 発見と検証の分離、変更内容で決まるレビューの重さ、指摘数ではなく収束で測る評価 | AI プロダクト動向">
+<meta property="og:description" content="AI がコードを書く量が増えるほど、人間がそれを読むことが開発のボトルネックになる。Anthropic は 10月15日、Claude Code チームのレビュー体制を公開した。Claude Code のコードの約 90% は Claud…">
 <meta property="og:url" content="https://tech-news.kaion-lab.com/ai-trends.html">
 <meta property="og:image" content="https://tech-news.kaion-lab.com/apple-touch-icon.png">
 <meta name="twitter:card" content="summary">
@@ -74,7 +74,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 <div class="container">
 <header>
   <h1>🧠 AI プロダクト動向</h1>
-  <p class="date">2026-10-15 発行（読了 9 分）</p>
+  <p class="date">2026-10-17 発行（読了 8 分）</p>
   <p class="tagline">実プロダクトのアーキテクチャ・使用例から AI 開発の現在地を週 3 回・1 号 1 テーマで深掘り</p>
   <nav class="site-nav">
     <a href="./">📰 日刊ダイジェスト</a>
@@ -85,93 +85,94 @@ footer a{color:var(--primary-500);text-decoration:none}
 </header>
 
 <div class="theme-hero">
-  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">AGENT-IDENTITY</span></span>
-  <h2>エージェントの身元は「ユーザーの借り物」から「専用の ID」へ — 代理と自律の区別、ID を切る単位、受け手側での識別</h2>
-  <p class="lede">社内システムを操作するエージェントは、これまで大半が「呼び出したユーザーのトークン」か「アプリ共通のサービスアカウント」で動いてきた。どちらでも動くことは動く。ただ監査ログには人間かアプリの名前しか残らず、ある一つのエージェントだけを止める手段もない。10月8日、Google は Gemini at Work 2026 で Gemini agent を発表し、常駐する coworker agent に専用の ID と @agents.company.com のメールアドレスを持たせると明記した。Microsoft Entra Agent ID はすでに agent identity・blueprint・agent&#39;s user account という 3 種類のディレクトリオブジェクトを定義しており、Okta は 8月に Agent SSO を GA にして、エージェントを社員と同じディレクトリに登録する形にした。受け手の側でも、Sierra が 10月8日に電話の相手が AI かどうかを判定する fleming-1 を出している。エージェントを「誰か」として扱うための設計が、発行側と受け手側の両方で具体的になってきた。</p>
+  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">AI-CODE-REVIEW</span></span>
+  <h2>AI コードレビューは「全部指摘する」から「確かめてから出す」へ — 発見と検証の分離、変更内容で決まるレビューの重さ、指摘数ではなく収束で測る評価</h2>
+  <p class="lede">AI がコードを書く量が増えるほど、人間がそれを読むことが開発のボトルネックになる。Anthropic は 10月15日、Claude Code チームのレビュー体制を公開した。Claude Code のコードの約 90% は Claude が書いている。社内モノレポの変更は 5月の 1 日約 2,500 件から 9月には 3 万件を超えた。一方で、外部からの PR を受ける OSS 側では Ladybird が 6月に公開 PR の受け付けを止め、GitHub は 10月8日に PR 数の上限に下書き PR も含められるようにした。レビューを担う AI の作り方についても、Anthropic、Cursor、Cloudflare の公開資料は同じ方向を向いている。指摘を出す役と確かめる役を分けること、変更のリスクに応じてレビューの重さを変えること、そして「何件指摘したか」ではなく「直されたか」「何往復で終わったか」で評価することだ。</p>
 </div>
 
 <div class="tldr">
   <div class="label">TL;DR — 3 行で</div>
   <ul>
-    <li>Entra Agent ID はトークンの subject と actor を分ける。自律動作のときは subject がエージェント自身になり、ユーザーの代理のときは subject がユーザー、actor がエージェントになる。Google の coworker agent も「あなたではなく自分の ID で動き、共有されたものしか見ない」と定義され、操作は人ではなくエージェント名義で監査ログに残る。</li>
-    <li>ID をどの単位で作るかについて、Microsoft はエージェントの種類（blueprint）と信頼境界で切るよう指示し、スケールアウトのレプリカ・セッションごと・会議や文書ごとに ID を作るのは避けるべきパターンとしている。Okta Agent SSO は認可を各アプリから IdP に移し、保存したクレデンシャルの代わりに有効期限の短いトークンを発行する。</li>
-    <li>名乗らずにかけてくるエージェントは、受け手が見分けるしかない。Sierra の fleming-1 は通話音声を通話中にリアルタイムで採点し、Decagon も名乗らない個人エージェントの検出を Personal Agent Gateway に入れた。どちらも検出結果を「判断材料」として渡すだけで、遮断するかどうかは企業のポリシーに任せている。</li>
+    <li>Anthropic の Code Review は複数のエージェントが並列でバグを探し、別の検証役のグループが多数決で本物と判断した指摘だけを投稿する。Cursor Bugbot も初期は差分の順序を変えた 8 本の並列パスを多数決と validator モデルでふるいにかけ、その後エージェント型に移行した。</li>
+    <li>レビューの重さは書き手ではなく変更内容で決める。Cloudflare は差分の規模とパスで Trivial（2 体・平均 $0.20）から Full（7 体以上・$1.68）まで段階を分ける。Anthropic は分類器でリスクを判定し、人間の承認を 0〜2 人に振り分ける。エージェントの承認は人の承認として数えない。</li>
+    <li>評価指標は指摘の件数から結果に移った。Cursor は「マージ時に実際に直されたか」を測る resolution rate を 52% から 70% 超に上げた。Anthropic はレビューが 50 往復以上続いた事例をきっかけに往復回数の上限や差分だけの再レビューを入れ、1 往復で通る PR の割合を 65% から 78% に上げた。</li>
   </ul>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 1: 「誰として動くか」をトークンの subject と actor で分ける</div>
+  <div class="section-title">📐 パターン 1: 指摘を「見つける役」と「確かめる役」に分ける</div>
   <div class="theme-section">
-    <p>Microsoft Entra の agent identity は特殊なサービスプリンシパルで、自分ではクレデンシャルを持たない。トークンは、テンプレートにあたる agent identity blueprint が federated identity credential などを使って代わりに取得する。取得の仕方は 2 通りある。自律エージェントはアプリトークンを取り、その subject はエージェント自身になる。ユーザーに呼び出された対話型エージェントはユーザートークンを取り、subject はユーザー、actor はエージェントになる。さらに Exchange や Teams のようにユーザーオブジェクトが必須のシステム向けには、agent identity と必ず 1 対 1 で対応する <code>agent's user account</code> を別に発行できる。Google が 10月8日に発表した Gemini agent も同じ線引きをしている。一つのタスクのためにその場で作るサブエージェントとは別に、役割を持って常駐する coworker agent には専用の ID とメールアドレスを与え、全操作をエージェント名義で監査ログに書く。</p><p>ユーザーのトークンをそのまま使い回す方式から各社が離れた理由は、監査と停止の単位にある。ユーザーのトークンで動いたエージェントの操作は、ログ上ではその人自身の操作と見分けがつかない。エージェントだけを止めるには、その人のセッションごと失効させるしかない。subject と actor を分ければ「誰の権限で」と「誰が実行したか」を別々に記録できる。自律エージェントに専用の ID を持たせれば、そのエージェントだけを無効化できる。Entra の agent identity に「sponsor」という欄があり、インシデント時に連絡する責任者の人間を記録するのも、エージェントの責任を最終的に人へ結びつけるための設計だ。</p>
+    <p>現在の AI レビューは、1 回の推論で見つけた問題をそのまま投稿する作りにはなっていない。まず複数の発見役が独立にバグを探し、次に別の段階で一件ずつ本物かどうかを判定する二段構成をとる。Anthropic の Code Review では、複数のエージェントが並列にバグを探したあと、別の検証役のグループが各指摘に投票し、十分な数が「本物」と判断したものだけをインラインコメントにする。スタイル・診断・後片付けの類いの指摘は捨てる。このフィルタは自社の PR で A/B テストしてから採用した。残った指摘は <code>Important</code>・<code>Nit</code>・<code>Pre-existing</code> のタグ付きで重大度順に並ぶ。もとからあったバグが PR 作者のせいに見えないようにするためだ。Cloudflare の社内レビューでも、最大 7 体の専門レビュアーの結果をコーディネーターの judge パスがまとめ、重複の統合・推測にすぎない指摘や細かすぎる指摘の削除に加え、確信が持てなければソースを読み直して確かめる。</p><p>各社がこの構成に落ち着いたのは、レビューの価値を下げるのが見逃しより誤検知だからだ。根拠の薄い指摘が混ざると、人間は全部の指摘を疑って読むことになり、AI レビューを入れた意味がなくなる。LLM は同じ差分でも、読む順序や文脈によって出す指摘が揺れる。この揺れを逆に使い、複数のパスで繰り返し出てきた指摘だけを残せば、モデルを替えずに精度を上げられる。Anthropic がレビュアー向けの <code>REVIEW.md</code> に「名前からの推測ではなく、ファイルと行を証拠として挙げさせる」よう書くことを勧めているのも、検証できる形で指摘を出させるという同じ考え方だ。</p>
     <div class="example">
-      <div class="product">Microsoft Entra Agent ID（agent identity / agent&#39;s user account）</div>
-      <div class="approach">自律動作では subject をエージェント自身に、代理動作では subject をユーザー・actor をエージェントにする。クレデンシャルは blueprint 側だけが持つ</div>
-      <div class="detail">代理と自律の区別をトークンのレベルで定義している。ユーザーオブジェクトが必須の M365 系システムのために、agent identity と 1 対 1 で固定された user account を別に用意する点まで公式ドキュメントに明記されている。</div>
-      <a href="https://learn.microsoft.com/en-us/entra/agent-id/agent-identities">📄 一次ソース</a>
+      <div class="product">Anthropic Code Review（Claude Code チームの運用）</div>
+      <div class="approach">並列の発見エージェント → 検証役の多数決 → スタイル系を除外 → 重大度タグ付きで投稿</div>
+      <div class="detail">フィルタを自社 PR で A/B テストしてから採用した経緯と、Pre-existing タグで既存のバグを作者の責任から切り離す運用まで公開しており、二段構成の現行の実例として最も詳しい。</div>
+      <a href="https://claude.dev/blog/solving-code-review-at-anthropic/">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">Google Gemini agent（Gemini at Work 2026）</div>
-      <div class="approach">その場限りのサブエージェントと、専用の ID とメールを持って常駐する coworker agent を分け、全操作をエージェント名義で監査ログに残す</div>
-      <div class="detail">coworker agent は「あなたではなく自分の ID で動き、共有されたものしか見ない」と定義されている。各エージェントの ID は暗号的に証明され、社員と同じように最小権限で管理するとしており、ID の分離を製品仕様として打ち出した直近の例だ。</div>
-      <a href="https://cloud.google.com/blog/products/ai-machine-learning/welcome-to-gemini-at-work-2026">📄 一次ソース</a>
+      <div class="product">Cursor Bugbot</div>
+      <div class="approach">差分の順序を変えた 8 本の並列パス → 複数パスで出た指摘だけ残す → validator モデルで誤検知を除去 → その後エージェント型へ</div>
+      <div class="detail">固定パイプラインからエージェント型への移行を一つの記事で比べている。エージェント型の初期は慎重すぎて指摘が減ったため、怪しいパターンを積極的に挙げさせるプロンプトに変えたという調整の向きも書かれている。</div>
+      <a href="https://cursor.com/blog/building-bugbot">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> エージェントを作るときは、まず「誰かの代理として動くのか、自分として動くのか」を決め、それをトークンの形に反映させる。代理ならユーザーの委任トークンに actor を記録し、ユーザーのトークンをそのまま渡すことは避ける。自律なら専用の ID と責任者を最初から用意しておく。</div>
+    <div class="takeaway"><strong>示唆:</strong> 自前で AI レビューを組むなら、1 回の推論の結果をそのまま投稿しない。発見と検証を別の呼び出しに分け、検証側には「ファイルと行の根拠」を必須にする。それだけで誤検知の多くは落とせる。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 2: ID はエージェントの種類と信頼境界の単位で作り、認可は IdP に寄せる</div>
+  <div class="section-title">📐 パターン 2: レビューの重さは書き手ではなく変更内容で決める</div>
   <div class="theme-section">
-    <p>エージェント専用の ID を導入すると、次に「いくつ作るか」が問題になる。Microsoft の Entra Agent ID 設計パターン集は、ID を切る単位を 2 つに絞っている。1 つはエージェントの種類で、同じ blueprint から作った ID には条件付きアクセスや無効化を一括でかけられる。もう 1 つは信頼境界で、別のランタイム・シークレット・チームにまたがるワーカーには別の blueprint を割り当て、1 か所の侵害がほかに波及しないようにする。逆に、スケールアウトのレプリカ、メモリのセッション分離、会議や文書ごとの ID 作成は、監査上の利点がないのに管理コストだけ増えるパターンとして避けるよう明記している。タスクの間だけ使う一時的な ID は認めているが、実行時に作るため遅延が読めない点を注意書きしている。</p><p>Okta は同じ問題を、認可をどこに置くかという面から整理した。8月24日に GA になった Agent SSO では、Cross App Access に対応したエージェントが社内アプリに接続した時点で、Okta がそのエージェントを社員と同じ Universal Directory に登録する。保存済みのクレデンシャルの代わりに、有効期限の短いトークンを発行する。基盤の Cross App Access は IETF で策定中の ID-JAG（Identity Assertion JWT Authorization Grant）で、IdP が発行した JWT を接続先の認可サーバーが自分のポリシーで評価してアクセストークンに引き換える。各アプリに個別に OAuth の同意を積み重ねる代わりに、人間の SSO と同じ場所でエージェントの権限を管理する。ID を細かく分けすぎない Microsoft と、IdP に一元化する Okta は、管理の単位をアプリやセッションではなく組織のディレクトリに置くという点で同じ方向を向いている。</p>
+    <p>二つ目の共通点は、すべての PR を同じ重さでレビューしないことだ。Cloudflare の社内システムは、変更行数・ファイル数・セキュリティ上重要なパスかどうかで 3 段階に分ける。10 行以下の Trivial は 2 体だけで動かし、コーディネーターも Sonnet に落として平均 $0.20。100 行以下の Lite は 4 体で $0.67。それを超える場合やセキュリティ関連のパスは Full として 7 体以上で $1.68 かかる。モデルも役割で分け、Opus 4.7 や GPT-5.4 のような上位モデルはコーディネーターにだけ使う。3月10日〜4月9日の 1 か月で 5,169 リポジトリ・4 万 8,095 件の MR を処理し、1 レビューの平均コストは $1.19 だった。Anthropic は同じ考え方を人間の承認にも広げている。分類器が変更内容からリスクを判定し、ドキュメントやフラグの裏に隠れた追加は自動チェックが通れば承認不要、通常のプロダクト変更は 1 人、最もリスクの高いコードは 2 人の承認が必要になる。</p><p>リスクの判定基準を「誰が書いたか」から「何を変えたか」に移した背景には、書き手のほとんどが AI になったことがある。書き手の実績で信頼を測れないので、変更そのものの性質で判断するしかない。ただ、書き手が無関係になったわけではない。Anthropic でも軽い承認ルートを使えるのは信頼された作者だけで、エージェントの承認は人間の承認として数えない。エージェントに指示した人は必須レビュアーになり、承認は特定のコミットに対してだけ有効だ。自動化で人間の読む量を減らす一方、最終的な責任は必ず人間に結びつけておく。前号で扱ったエージェントの ID 設計と同じ線引きである。</p>
     <div class="example">
-      <div class="product">Microsoft Entra Agent ID 設計パターン</div>
-      <div class="approach">ID は blueprint（エージェントの種類）と信頼境界で切る。レプリカ・セッション・オブジェクトごとの ID は避けるべきパターンとして明示</div>
-      <div class="detail">単体エージェント、逐次型マルチエージェント、オーケストレーター型、ユーザーごと、デジタルワーカーの 5 構成について、blueprint と ID の対応を具体的に示している。「何に ID を作らないか」まで書いた公式ガイドは珍しい。</div>
-      <a href="https://learn.microsoft.com/en-us/entra/agent-id/concept-agent-id-design-patterns">📄 一次ソース</a>
+      <div class="product">Cloudflare 社内 AI コードレビュー（OpenCode ベース）</div>
+      <div class="approach">差分規模とパスで Trivial / Lite / Full に分け、体数とモデルの格を変える</div>
+      <div class="detail">段階ごとの平均コスト（$0.20 / $0.67 / $1.68）と 1 か月 13 万件超の実行実績が公開されており、レビューの重さを変える費用対効果を数字で確認できる。</div>
+      <a href="https://blog.cloudflare.com/ai-code-review/">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">Okta Agent SSO（Cross App Access）</div>
-      <div class="approach">接続時にエージェントを社員と同じディレクトリへ登録し、保存済みのクレデンシャルの代わりに有効期限の短いトークンを発行する</div>
-      <div class="detail">エージェントの認可を個々のアプリから企業の IdP に移す、と明言している。Anthropic（Claude）・Atlassian・Notion・Slack・Figma などが Cross App Access に標準で対応した状態で GA になった。</div>
-      <a href="https://www.okta.com/newsroom/press-releases/okta-brings-first-class-identity-to-ai-agents-with-agent-sso/">📄 一次ソース</a>
+      <div class="product">Anthropic（Claude Code リポジトリ）</div>
+      <div class="approach">分類器が変更内容からリスクを判定し、人間の承認を 0 / 1 / 2 人に振り分ける。リポジトリごとに Quick / Standard / Deep を設定</div>
+      <div class="detail">課金・自動アップデーター・CI ワークフローは常に人間が判断する領域として残しており、AI レビューの重さと人間の承認の重さを別々に設計している点が参考になる。</div>
+      <a href="https://claude.dev/blog/solving-code-review-at-anthropic/">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> エージェントの ID は「役割が違い、止めたい単位が違うもの」ごとに 1 つ作り、レプリカやセッションの数だけ作らない。エージェント用の API キーを各 SaaS に個別に発行し始めているなら、IdP 側で発行と失効を一元管理できる経路があるかを先に確認したほうがよい。</div>
+    <div class="takeaway"><strong>示唆:</strong> まずは「このパスは常に人間 2 人」「この規模以下は軽量レビュー」のように、パスと差分規模の 2 軸だけで段階を決めるとよい。分類器を作るのは、この単純なルールでは振り分けきれない変更が目立ってきてからで遅くない。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 3: 名乗らないエージェントは、受け手が見分ける</div>
+  <div class="section-title">📐 パターン 3: 指摘数ではなく「直されたか」「何往復で終わったか」で測る</div>
   <div class="theme-section">
-    <p>発行側で ID を整えても、外から来るエージェントがすべて名乗るとは限らない。Sierra が 10月8日に出した fleming-1 は、電話の相手の音声をリアルタイムで解析し、AI が生成した音声の兆候を採点するモデルだ。人間の耳に自然に聞こえるかどうかではない手がかりを見るとし、ノイズの多い音声にも対応する。本物の人間を誤って AI と判定しないよう、既定では保守的な閾値に調整されている。Decagon も 10月1日の Personal Agent Gateway に、既存のチャネルで名乗らない個人エージェントを検出する機能と、エージェント専用の窓口を入れた。</p><p>両社に共通するのは、検出を「遮断」ではなく「判断材料」として扱っている点だ。Sierra は、検出結果をどう扱うかは企業が決めることだとし、銀行なら追加の本人確認を挟む、問い合わせの多い企業ならまずエージェントからの電話の割合を測るといった使い方を例に挙げている。消費者の代理エージェントからの問い合わせは正当な顧客の用件でもあるため、一律に拒否すれば顧客を失う。理想は相手が自分から名乗ることで、Sierra と Meta は 10月9日に Personal Agent Protocol の草案（Poppy）を公開し、セッションの冒頭でエージェントが必ず名乗る形を定めた。ただ全員がこれに従うまでの間は、名乗った相手を ID で認可し、名乗らない相手は推定で扱う二段構えになる。</p>
+    <p>評価の指標も変わった。Cursor は Bugbot の主要指標を resolution rate にした。マージの時点で、指摘したバグが最終的なコードで実際に直されているかを LLM が判定する。判定結果は PR 作者への聞き取りで抜き取り確認している。40 回の大きな実験を重ねて、この値は 52% から 70% 超になり、1 PR あたりの「直されたバグ」は約 0.2 件から約 0.5 件に増えた。Anthropic は指摘への反応（直した・誤りだと言った・意図通りだと言った・どうでもいいと判断した）でノイズを測る。問題のない PR にもレビューをかけて誤検知を数える。さらに、過去にインシデントや revert を起こした PR をコードに詳しいエンジニアが確認して評価セットにし、レビュアーのプロンプト・ツール・モデルを変えるたびに全件で採点する。スコアが上がらない変更は採用しない。</p><p>Anthropic が強調するのは、修正を自動化すると「収束」という新しい問題が出てくることだ。ある CLI の PR は、夜のうちにレビューと修正を 50 往復以上繰り返した。git blame で調べると、レビュアーが指摘し続けていたものの約 59% は最初のパスの時点から存在したコードだった。対策として、3 往復を超えたらアプローチを見直すよう作者に促す上限、数往復目以降は差分だけを再レビューする方式、同じ指摘を繰り返さないルール、既存コードは夜間に別途レビューする運用を入れた。その結果、1 往復で通る PR は 65% から 78% に増え、5 往復以上かかる PR は 8.9% から 1.5% に減った。AI が書き AI がレビューする構成では、レビューの精度と同じくらい、ループを終わらせる設計が重要になる。</p>
     <div class="example">
-      <div class="product">Sierra fleming-1</div>
-      <div class="approach">通話中の音声を AI 生成の兆候でリアルタイムに採点し、AI の可能性が高い発信者に印を付ける。既定は誤検出を避ける保守的な設定</div>
-      <div class="detail">対処を決めるのは企業側だと明言し、検出と処置を分けている。Sierra 上の音声エージェントであれば有効化するだけで使える。精度の数値は公表されていない。</div>
-      <a href="https://sierra.ai/blog/caller-id-in-the-age-of-agents">📄 一次ソース</a>
+      <div class="product">Cursor Bugbot</div>
+      <div class="approach">マージ時に LLM で「指摘が実際に直されたか」を判定する resolution rate を主要指標にする</div>
+      <div class="detail">指摘数は増やせば増えるが、resolution rate は誤検知が増えると下がる。指摘を増やす方向と減らす方向の両方を一つの数字で評価できるため、実験の比較に使いやすい。</div>
+      <a href="https://cursor.com/blog/building-bugbot">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">Decagon Personal Agent Gateway</div>
-      <div class="approach">既存チャネルでの名乗らない個人エージェントの検出と、エージェント専用の窓口を組み合わせ、顧客が定めた権限の範囲で対応する</div>
-      <div class="detail">検出（推定）と専用窓口（自己申告）の両方を 1 つの製品に入れた例だ。窓口を見つけて名乗り、顧客が何を許可したかを確認するための仕様も公開している。</div>
-      <a href="https://decagon.ai/blog/dialogues-2026">📄 一次ソース</a>
+      <div class="product">Anthropic Code Review</div>
+      <div class="approach">インシデント PR を評価セットにして毎日実行し、往復上限と差分だけの再レビューで収束させる</div>
+      <div class="detail">レビューと修正の無限ループという、AI 同士で回したときに初めて表面化する失敗と、その対策の効果を前後比較の数字付きで公開している。</div>
+      <a href="https://claude.dev/blog/solving-code-review-at-anthropic/">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> 顧客接点にエージェントを置くなら、相手がエージェントかどうかで対応を変える分岐点を設計に入れておく。最初は遮断ではなく、エージェントからの接触を計測し、機微な操作の前にだけ追加の本人確認を挟むところから始めるのが無難だ。</div>
+    <div class="takeaway"><strong>示唆:</strong> AI レビューの効果は「何件指摘したか」で見ない。「マージ時に直されていた割合」と「合格までの往復回数」の 2 つを最初から記録しておく。修正まで自動化するなら、往復の上限を最初から決めておく。</div>
   </div>
   <div class="editorial">
     <span class="label">✍️ 編集後記</span>
-    エージェントの ID 設計で一番問われているのは認証方式ではなく、「このエージェントがやったことの責任は誰にあるか」をログから辿れるかどうかだ。Entra の sponsor 欄、Okta の名前付きオーナー、Google のエージェント名義の監査ログは、どれもエージェントを自律させるほど、その先にいる人間を明確にしておく必要があるという同じ認識から来ている。
+    AI レビューの設計で各社が工夫しているのは、指摘を増やすことよりも、人間が読まなくて済む範囲を根拠付きで広げることだ。発見と検証の分離も、リスクによる段階分けも、往復の上限も、そのための仕組みである。一方で外部からの PR を受ける OSS 側には、まだこの検証の層がない。そのため PR の受け付け自体を止めるしかない状況になっており、プロダクト側との差がはっきりしてきている。
   </div>
 </div>
 
 <div class="section">
   <div class="section-title">🔗 今号の動向ピックアップ</div>
-  <div class="quick-link"><a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-identity-assertion-authz-grant-04">IETF「Identity Assertion JWT Authorization Grant」draft-04</a><span class="quick-summary">企業の IdP が発行した JWT を、接続先の認可サーバーが自分のポリシーで評価してアクセストークンに引き換える仕組みを定めた OAuth WG のドラフト。Okta Agent SSO の基盤である Cross App Access の仕様そのもので、IdP 一元化の中身を確かめるならここが一次資料になる。</span></div>
-  <div class="quick-link"><a href="https://www.okta.com/newsroom/articles/okta-expands-ai-agent-security-to-any-idp/">Okta for AI Agents が Entra ID など他社 IdP と Amazon Bedrock AgentCore に対応</a><span class="quick-summary">人間の ID は既存の IdP に置いたまま、エージェントの ID だけを Okta で管理する構成を正式にサポートした。エージェントの ID を人間とは別の基盤で管理するという選択肢が、製品として成立していることを示す。</span></div>
-  <div class="quick-link"><a href="https://sierra.ai/blog/poppy">Sierra、Personal Agent Protocol の草案「Poppy」を公開</a><span class="quick-summary">/.well-known/poppy.json による窓口の発見、エージェントが必ず名乗るセッション、OAuth による権限付与などで構成される草案で、Adyen や Bank of America など 35 社が設計パートナーに加わった。fleming-1 の推定による検出と対になる、自己申告の側の仕組みだ。</span></div>
+  <div class="quick-link"><a href="https://ladybird.org/posts/changing-how-we-develop-ladybird/">Ladybird、公開 PR の受け付けを停止し既存の PR もすべてクローズ</a><span class="quick-summary">6月5日、ブラウザ開発の Ladybird は、コード変更をメンテナーだけが行う方式に切り替え、Issue やメールでパッチを送る抜け道も設けないと発表した。PR が「提出者について以前ほど多くを語らなくなった」という理由は、本号で扱った「書き手ではなく変更内容でリスクを判断する」流れを、検証の層を持たない OSS 側から見たものだ。</span></div>
+  <div class="quick-link"><a href="https://github.blog/changelog/2026-10-08-draft-pull-requests-count-toward-pull-request-limits">GitHub、PR 数の上限に下書き PR も含められるように</a><span class="quick-summary">10月8日の変更で、書き込み権限のない利用者が同時に開ける PR 数の上限に下書き PR も数えられるようになった。下書き経由のスパムが通知や CI の実行を増やしていた抜け穴をふさぐもので、レビューの手前で量を抑える入口側の対策にあたる。</span></div>
+  <div class="quick-link"><a href="https://github.blog/changelog/2026-02-13-new-repository-settings-for-configuring-pull-request-access/">GitHub、PR をコラボレーター限定にする・完全に無効化するリポジトリ設定を追加</a><span class="quick-summary">2月13日に追加された設定で、PR の作成を書き込み権限のある人だけに絞るか、PR 自体を止められるようになった。tldraw などが自動クローズで対応していた運用をプラットフォーム側が設定として取り込んだもので、AI レビューで検証しきれない量への最後の手段になっている。</span></div>
 </div>
 
 <div class="section">
   <div class="section-title">📚 過去号</div>
+  <div class="archive-item"><span class="week">2026-10-15</span><div class="body"><a href="ai-trends/2026-10-15.html">エージェントの身元は「ユーザーの借り物」から「専用の ID」へ — 代理と自律の区別、ID を切る単位、受け手側での識別</a><span class="sub">Entra Agent ID はトークンの subject と actor を分ける。自律動作のときは subject がエージェント自身になり、ユーザーの代理のときは subject がユーザー、actor がエージェントになる。Google の coworker agent も「あなたではなく自分の ID で動き、共有されたものしか見ない」と定義され、操作は人ではなくエージェント名義で監査ログに残る。</span></div></div>
   <div class="archive-item"><span class="week">2026-10-13</span><div class="body"><a href="ai-trends/2026-10-13.html">業務エージェントのグラウンディングは「文書検索」から「意味モデル」へ — 既存の業務設定と判断の履歴から、エージェント用の辞書を自動で組み立てる</a><span class="sub">Microsoft の Dataverse semantic model は、テーブル関係・ビュー・フォーム名・列の説明といった既存の設定から意味を自動で抽出し、12時間ごとに再生成する。人が書くのは推論できない社内用語の用語集だけで、Snowflake も既存の SQL や BI ファイルから semantic view を作る Autopilot を出した。</span></div></div>
   <div class="archive-item"><span class="week">2026-10-10</span><div class="body"><a href="ai-trends/2026-10-10.html">エージェントコマースは「一つの決済プロトコル」をやめた — 発見・同意の証明・本人ログインを別レイヤーに切り分ける設計へ</a><span class="sub">UCP は加盟店が /.well-known/ucp に能力を公開し、エージェント側と「共通する能力だけ」を交渉で残す設計。OpenAI も ACP の主軸をチャット内決済から商品カタログの受け渡しへ移し、決済は加盟店側に戻した。</span></div></div>
   <div class="archive-item"><span class="week">2026-10-08</span><div class="body"><a href="ai-trends/2026-10-08.html">エージェントの UI は「誰が描くか」で二つに割れた — iframe で持ち込む MCP Apps、カタログで描かせる A2UI、そして会話の外へ</a><span class="sub">MCP Apps はツールが ui:// の HTML リソースを返し、ホストが sandbox 付き iframe で描画する「持ち込み型」。Claude・VS Code・ChatGPT が同じ仕様に乗った。</span></div></div>
@@ -209,7 +210,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 </div>
 
 <footer>
-  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="data/ai-trends/2026-10-15.json">data/ai-trends/2026-10-15.json</a>（このページは JSON からの生成物）</p>
+  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="data/ai-trends/2026-10-17.json">data/ai-trends/2026-10-17.json</a>（このページは JSON からの生成物）</p>
   <p style="margin-top:.5rem"><a href="./">📰 日刊ダイジェストに戻る</a></p>
 </footer>
 </div>
