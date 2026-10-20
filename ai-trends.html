@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI プロダクト動向 | Tech News Daily</title>
-<meta name="description" content="AI がコードを書く量が増えるほど、人間がそれを読むことが開発のボトルネックになる。Anthropic は 10月15日、Claude Code チームのレビュー体制を公開した。Claude Code のコードの約 90% は Claud…">
+<meta name="description" content="コーディングエージェントはほぼ一手ごとに commit・push し、その push ごとに CI が clone を走らせる。人間の開発速度を前提にしたインフラは、この書き込み頻度を想定していない。10月6日、GitHub は Git …">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Tech News Daily">
-<meta property="og:title" content="AI コードレビューは「全部指摘する」から「確かめてから出す」へ — 発見と検証の分離、変更内容で決まるレビューの重さ、指摘数ではなく収束で測る評価 | AI プロダクト動向">
-<meta property="og:description" content="AI がコードを書く量が増えるほど、人間がそれを読むことが開発のボトルネックになる。Anthropic は 10月15日、Claude Code チームのレビュー体制を公開した。Claude Code のコードの約 90% は Claud…">
+<meta property="og:title" content="コーディングエージェントの書き込み量に、ソース管理と開発用 DB が作り替えられ始めた — 保存と配信の分離、ref 更新だけの協調、マージしない分岐 | AI プロダクト動向">
+<meta property="og:description" content="コーディングエージェントはほぼ一手ごとに commit・push し、その push ごとに CI が clone を走らせる。人間の開発速度を前提にしたインフラは、この書き込み頻度を想定していない。10月6日、GitHub は Git …">
 <meta property="og:url" content="https://tech-news.kaion-lab.com/ai-trends.html">
 <meta property="og:image" content="https://tech-news.kaion-lab.com/apple-touch-icon.png">
 <meta name="twitter:card" content="summary">
@@ -74,7 +74,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 <div class="container">
 <header>
   <h1>🧠 AI プロダクト動向</h1>
-  <p class="date">2026-10-17 発行（読了 8 分）</p>
+  <p class="date">2026-10-20 発行（読了 10 分）</p>
   <p class="tagline">実プロダクトのアーキテクチャ・使用例から AI 開発の現在地を週 3 回・1 号 1 テーマで深掘り</p>
   <nav class="site-nav">
     <a href="./">📰 日刊ダイジェスト</a>
@@ -85,93 +85,93 @@ footer a{color:var(--primary-500);text-decoration:none}
 </header>
 
 <div class="theme-hero">
-  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">AI-CODE-REVIEW</span></span>
-  <h2>AI コードレビューは「全部指摘する」から「確かめてから出す」へ — 発見と検証の分離、変更内容で決まるレビューの重さ、指摘数ではなく収束で測る評価</h2>
-  <p class="lede">AI がコードを書く量が増えるほど、人間がそれを読むことが開発のボトルネックになる。Anthropic は 10月15日、Claude Code チームのレビュー体制を公開した。Claude Code のコードの約 90% は Claude が書いている。社内モノレポの変更は 5月の 1 日約 2,500 件から 9月には 3 万件を超えた。一方で、外部からの PR を受ける OSS 側では Ladybird が 6月に公開 PR の受け付けを止め、GitHub は 10月8日に PR 数の上限に下書き PR も含められるようにした。レビューを担う AI の作り方についても、Anthropic、Cursor、Cloudflare の公開資料は同じ方向を向いている。指摘を出す役と確かめる役を分けること、変更のリスクに応じてレビューの重さを変えること、そして「何件指摘したか」ではなく「直されたか」「何往復で終わったか」で評価することだ。</p>
+  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">AGENT-SCALE-INFRA</span></span>
+  <h2>コーディングエージェントの書き込み量に、ソース管理と開発用 DB が作り替えられ始めた — 保存と配信の分離、ref 更新だけの協調、マージしない分岐</h2>
+  <p class="lede">コーディングエージェントはほぼ一手ごとに commit・push し、その push ごとに CI が clone を走らせる。人間の開発速度を前提にしたインフラは、この書き込み頻度を想定していない。10月6日、GitHub は Git 基盤の作り直しを公表した。2026年9月の commit 数は 73.8 億件で前年の 5 倍超、push は月 33.5 億件で 4.9 倍だ。10月13日には Anthropic が、社内モノレポのマージが 5月の 1 日約 2,500 件から 9月には 3 万件超に増え、Git をやめて自社製のバージョン管理システム Scion に移行したと公開した。10月8日には Databricks が、並列に動くエージェントごとに Postgres を分岐させる開発フローを紹介している。3 社の対応には共通点がある。データを永続的に保存する層と配信する層を分けること、全体で調整が必要な箇所を ref の更新 1 か所に絞ること、そして分岐はマージしない前提で安く大量に作ることだ。</p>
 </div>
 
 <div class="tldr">
   <div class="label">TL;DR — 3 行で</div>
   <ul>
-    <li>Anthropic の Code Review は複数のエージェントが並列でバグを探し、別の検証役のグループが多数決で本物と判断した指摘だけを投稿する。Cursor Bugbot も初期は差分の順序を変えた 8 本の並列パスを多数決と validator モデルでふるいにかけ、その後エージェント型に移行した。</li>
-    <li>レビューの重さは書き手ではなく変更内容で決める。Cloudflare は差分の規模とパスで Trivial（2 体・平均 $0.20）から Full（7 体以上・$1.68）まで段階を分ける。Anthropic は分類器でリスクを判定し、人間の承認を 0〜2 人に振り分ける。エージェントの承認は人の承認として数えない。</li>
-    <li>評価指標は指摘の件数から結果に移った。Cursor は「マージ時に実際に直されたか」を測る resolution rate を 52% から 70% 超に上げた。Anthropic はレビューが 50 往復以上続いた事例をきっかけに往復回数の上限や差分だけの再レビューを入れ、1 往復で通る PR の割合を 65% から 78% に上げた。</li>
+    <li>保存と配信を分けた。GitHub は 5 台のファイルサーバーに全量を複製する構成をやめ、正本を Azure Blob Storage に置いてキャッシュ付きのワーカーで配信する構成に移る。Anthropic の Scion はサーバー側にも完全な作業コピーを持たず、3 段のキャッシュでヒット率 99% 超、CI のチェックアウトを約 100 倍速くした。</li>
+    <li>全体で協調するのは ref の更新だけにした。GitHub はオブジェクトの保存・接続性の検証・シークレットスキャンを並列化し、社内ベンチマークで書き込みスループットが最大 35 倍になった。Anthropic は ref の更新を Spanner の 1 行に対する compare-and-swap にし、従来型のマージキューはやめて、マージ後とデプロイ前の自動テストで品質を守る。</li>
+    <li>分岐はデータの側で大量に作り、マージしない。Databricks は git worktree の post-checkout フックで、エージェントごとに 1 秒未満で DB ブランチを作り、スキーマ変更だけをマイグレーションとして本番に反映する。ただし Columbia 大学のベンチマークでは、分岐を数千単位で作る用途に今の分岐可能 DB はまだ追いついていない。</li>
   </ul>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 1: 指摘を「見つける役」と「確かめる役」に分ける</div>
+  <div class="section-title">📐 パターン 1: 永続化する層と配信する層を分ける</div>
   <div class="theme-section">
-    <p>現在の AI レビューは、1 回の推論で見つけた問題をそのまま投稿する作りにはなっていない。まず複数の発見役が独立にバグを探し、次に別の段階で一件ずつ本物かどうかを判定する二段構成をとる。Anthropic の Code Review では、複数のエージェントが並列にバグを探したあと、別の検証役のグループが各指摘に投票し、十分な数が「本物」と判断したものだけをインラインコメントにする。スタイル・診断・後片付けの類いの指摘は捨てる。このフィルタは自社の PR で A/B テストしてから採用した。残った指摘は <code>Important</code>・<code>Nit</code>・<code>Pre-existing</code> のタグ付きで重大度順に並ぶ。もとからあったバグが PR 作者のせいに見えないようにするためだ。Cloudflare の社内レビューでも、最大 7 体の専門レビュアーの結果をコーディネーターの judge パスがまとめ、重複の統合・推測にすぎない指摘や細かすぎる指摘の削除に加え、確信が持てなければソースを読み直して確かめる。</p><p>各社がこの構成に落ち着いたのは、レビューの価値を下げるのが見逃しより誤検知だからだ。根拠の薄い指摘が混ざると、人間は全部の指摘を疑って読むことになり、AI レビューを入れた意味がなくなる。LLM は同じ差分でも、読む順序や文脈によって出す指摘が揺れる。この揺れを逆に使い、複数のパスで繰り返し出てきた指摘だけを残せば、モデルを替えずに精度を上げられる。Anthropic がレビュアー向けの <code>REVIEW.md</code> に「名前からの推測ではなく、ファイルと行を証拠として挙げさせる」よう書くことを勧めているのも、検証できる形で指摘を出させるという同じ考え方だ。</p>
+    <p>従来のソース管理は、データを失わないための複製と、読み出しをさばくための複製に同じコピーを使っていた。GitHub の現行構成 Spokes では、各リポジトリの全量を複数台（既定で 5 台）のファイルサーバーに持ち、quorum を使う 3 フェーズコミットで書き込む。読み出し能力を上げるためにレプリカを足すと、書き込みのたびに更新すべき永続コピーも増え、push の速さは一番遅いレプリカで決まる。新しい構成では、正本を Azure Blob Storage に置き、読み出しはリポジトリのデータをキャッシュする軽量ワーカーが担う。ワーカーが落ちても、失うのはキャッシュだけになる。Anthropic の Scion はさらに進んで、クライアントを常時オンラインの薄い存在として扱う。履歴・blame・コミット・マージ・リベースはサーバーが持つ。各ノードの <code>scion-daemon</code>、リージョンの <code>scion-cache</code>、正本を Spanner やクラウドストレージから読む <code>scion-server</code> の 3 段構成で、クライアントは必要なツリーと blob だけを取りに行く。</p><p>この方向に進んだのは、エージェントと CI ジョブが常にオンラインで、手元に完全なコピーを必要としないからだ。Git はオフラインで作業するクライアントが全量を持つことを前提に設計されている。Anthropic の CI は 1 日約 2,500 万回チェックアウトしており、素直に fetch すれば 1 日 600 PB を超える転送量になる。shallow clone や sparse checkout で回避はできるが、そのぶん運用の負担が積み上がる。同社は数百台の Git ミラーを運用していたが、マージ量が増えるにつれて手に負えなくなった。GitHub も、読み出しはキャッシュとレプリカで比較的簡単に増やせるが、書き込みは永続化と一貫した可視化が終わるまで次に進めないため難しいと書いている。両社とも、読み出しの規模を永続化のコピー数から切り離すことで、この問題を解いた。</p>
     <div class="example">
-      <div class="product">Anthropic Code Review（Claude Code チームの運用）</div>
-      <div class="approach">並列の発見エージェント → 検証役の多数決 → スタイル系を除外 → 重大度タグ付きで投稿</div>
-      <div class="detail">フィルタを自社 PR で A/B テストしてから採用した経緯と、Pre-existing タグで既存のバグを作者の責任から切り離す運用まで公開しており、二段構成の現行の実例として最も詳しい。</div>
-      <a href="https://claude.dev/blog/solving-code-review-at-anthropic/">📄 一次ソース</a>
+      <div class="product">GitHub（Git 基盤の再構築）</div>
+      <div class="approach">全量を 5 台に複製して quorum で書く構成から、Azure Blob Storage を正本とし、キャッシュ付きの計算ワーカーで配信する構成へ</div>
+      <div class="detail">2025年9月から2026年8月で Git の月間イベント数は 2,182 億件から 4,733 億件に倍増し、最も混むリポジトリは 8月に約 10 億リクエストを受けた。新しい構成ではワーカーをトラフィックに合わせて増減でき、圧縮やガベージコレクションも配信ホストとは別のワーカーで実行する。</div>
+      <a href="https://github.blog/engineering/architecture-optimization/building-git-infrastructure-for-agent-scale-development/">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">Cursor Bugbot</div>
-      <div class="approach">差分の順序を変えた 8 本の並列パス → 複数パスで出た指摘だけ残す → validator モデルで誤検知を除去 → その後エージェント型へ</div>
-      <div class="detail">固定パイプラインからエージェント型への移行を一つの記事で比べている。エージェント型の初期は慎重すぎて指摘が減ったため、怪しいパターンを積極的に挙げさせるプロンプトに変えたという調整の向きも書かれている。</div>
-      <a href="https://cursor.com/blog/building-bugbot">📄 一次ソース</a>
+      <div class="product">Anthropic Scion（社内バージョン管理システム）</div>
+      <div class="approach">履歴はサーバーが持ち、クライアントは容量に上限のあるキャッシュだけを持つ。daemon → リージョンキャッシュ → サーバーの 3 段で、ヒット率は 99% 超</div>
+      <div class="detail">main の履歴は約 100 GB、圧縮後の作業コピーは 25 GB を超える。移行後、旧 Git ミラー構成と比べて CPU とメモリの使用量は約 200 分の 1、チェックアウトは約 100 倍速くなり、CI だけで CPU 容量に約 25% の余裕ができた。7 人のチームが 5 か月で移行した。同社自身は、Git の汎用的な代替にはならないと明記している。</div>
+      <a href="https://www.anthropic.com/engineering/redesigning-source-control">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> 自前で AI レビューを組むなら、1 回の推論の結果をそのまま投稿しない。発見と検証を別の呼び出しに分け、検証側には「ファイルと行の根拠」を必須にする。それだけで誤検知の多くは落とせる。</div>
+    <div class="takeaway"><strong>示唆:</strong> エージェントが CI やリポジトリに与える負荷を見積もるときは、書き込み量だけでなく、1 回の push のあとに発生する clone・fetch の回数を数える。読み出しの増加に永続化のレプリカを足して対応している構成は、書き込みを遅くする。まずは CI 用のキャッシュ層を一段挟めるかを検討するとよい。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 2: レビューの重さは書き手ではなく変更内容で決める</div>
+  <div class="section-title">📐 パターン 2: 全体で調整する箇所を ref の更新 1 か所に絞る</div>
   <div class="theme-section">
-    <p>二つ目の共通点は、すべての PR を同じ重さでレビューしないことだ。Cloudflare の社内システムは、変更行数・ファイル数・セキュリティ上重要なパスかどうかで 3 段階に分ける。10 行以下の Trivial は 2 体だけで動かし、コーディネーターも Sonnet に落として平均 $0.20。100 行以下の Lite は 4 体で $0.67。それを超える場合やセキュリティ関連のパスは Full として 7 体以上で $1.68 かかる。モデルも役割で分け、Opus 4.7 や GPT-5.4 のような上位モデルはコーディネーターにだけ使う。3月10日〜4月9日の 1 か月で 5,169 リポジトリ・4 万 8,095 件の MR を処理し、1 レビューの平均コストは $1.19 だった。Anthropic は同じ考え方を人間の承認にも広げている。分類器が変更内容からリスクを判定し、ドキュメントやフラグの裏に隠れた追加は自動チェックが通れば承認不要、通常のプロダクト変更は 1 人、最もリスクの高いコードは 2 人の承認が必要になる。</p><p>リスクの判定基準を「誰が書いたか」から「何を変えたか」に移した背景には、書き手のほとんどが AI になったことがある。書き手の実績で信頼を測れないので、変更そのものの性質で判断するしかない。ただ、書き手が無関係になったわけではない。Anthropic でも軽い承認ルートを使えるのは信頼された作者だけで、エージェントの承認は人間の承認として数えない。エージェントに指示した人は必須レビュアーになり、承認は特定のコミットに対してだけ有効だ。自動化で人間の読む量を減らす一方、最終的な責任は必ず人間に結びつけておく。前号で扱ったエージェントの ID 設計と同じ線引きである。</p>
+    <p>2 つ目の共通点は、書き込みのうち排他制御が必要な部分を最小にしたことだ。GitHub の新しい書き込み経路では、調整が必要なのは ref の更新だけになる。オブジェクトの保存、接続性の検証、シークレットスキャンは、他の書き込みと並列に進められる。push の完了までに直列で待つ処理が短くなり、社内ベンチマークでは書き込みスループットが最大 35 倍になった。Anthropic の Scion では、ref の更新は Spanner の 1 行に対する compare-and-swap で、changeset の作成とは分けて処理する。さらに、main とリリースブランチ以外の ref（ブランチやタグ）を作ることを推奨していない。すべてのサーバーが合意しなければならないグローバル状態は、それ自体がスケールの障害になるからだ。</p><p>この考え方は、マージキューの扱いにも及ぶ。マージキューは、単独では通る 2 つの変更が main 上で組み合わさって壊れるのを防ぐため、変更を直列に検証する。Anthropic は、テストを回している間に数百の変更が入ってくる規模では従来型のマージキューは成り立たないと判断した。キュー全体にリポジトリ単位のロックをかける方式も再現できなかった。代わりに、マージ後とデプロイ前の自動テストに投資し、同時に入った変更の衝突は Claude が人間より早く解消する運用にしている。人間のレビューは全行を読むことをやめ、変更の意図を確認する形に変わった。新しいレビューツール Antique は、コメントだけの変更と重要なロジックの変更を区別して承認ルールを変える。品質を守る仕組みを、マージの前からマージの後へ移したといえる。ただし、これは衝突を高速に直せるエージェントが常にいることを前提にした判断だ。</p>
     <div class="example">
-      <div class="product">Cloudflare 社内 AI コードレビュー（OpenCode ベース）</div>
-      <div class="approach">差分規模とパスで Trivial / Lite / Full に分け、体数とモデルの格を変える</div>
-      <div class="detail">段階ごとの平均コスト（$0.20 / $0.67 / $1.68）と 1 か月 13 万件超の実行実績が公開されており、レビューの重さを変える費用対効果を数字で確認できる。</div>
-      <a href="https://blog.cloudflare.com/ai-code-review/">📄 一次ソース</a>
+      <div class="product">GitHub（書き込み経路の縮小）</div>
+      <div class="approach">ref の更新だけを調整し、オブジェクトの保存・接続性検証・シークレットスキャンは並列に実行する</div>
+      <div class="detail">GitHub は、エージェント規模で問題になる圧力として、push 1 回の待ち時間、1 リポジトリへの書き込みの集中、単一 ref の取り合い、push 後の大量の読み出しを挙げている。そのうえで、ブランチ保護・必須レビュー・監査ログはそのまま残し、メンテナンスウィンドウなしで移行するとしている。</div>
+      <a href="https://github.blog/engineering/architecture-optimization/building-git-infrastructure-for-agent-scale-development/">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">Anthropic（Claude Code リポジトリ）</div>
-      <div class="approach">分類器が変更内容からリスクを判定し、人間の承認を 0 / 1 / 2 人に振り分ける。リポジトリごとに Quick / Standard / Deep を設定</div>
-      <div class="detail">課金・自動アップデーター・CI ワークフローは常に人間が判断する領域として残しており、AI レビューの重さと人間の承認の重さを別々に設計している点が参考になる。</div>
-      <a href="https://claude.dev/blog/solving-code-review-at-anthropic/">📄 一次ソース</a>
+      <div class="product">Anthropic（マージキューの廃止）</div>
+      <div class="approach">ref 更新は Spanner の 1 行への compare-and-swap、トランクベース開発、マージ前のキューの代わりにマージ後・デプロイ前の自動テスト</div>
+      <div class="detail">1 日 3 万件超のマージでは、テスト中に数百の変更が入るため、直列に検証するキューは追いつかない。検証をやめたのではなく、検証するタイミングを変えた事例だ。</div>
+      <a href="https://www.anthropic.com/engineering/redesigning-source-control">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> まずは「このパスは常に人間 2 人」「この規模以下は軽量レビュー」のように、パスと差分規模の 2 軸だけで段階を決めるとよい。分類器を作るのは、この単純なルールでは振り分けきれない変更が目立ってきてからで遅くない。</div>
+    <div class="takeaway"><strong>示唆:</strong> エージェントによる PR が増えてマージキューが詰まり始めたら、キューを速くする前に、どの不変条件をマージ前に守る必要があり、どれならマージ後のテストとロールバックに任せられるかを分けて考える。マージ後に任せる判断は、衝突を素早く直す手段とデプロイ前のテストがあって初めて成り立つ。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 3: 指摘数ではなく「直されたか」「何往復で終わったか」で測る</div>
+  <div class="section-title">📐 パターン 3: 分岐はデータの側で大量に作り、マージしない</div>
   <div class="theme-section">
-    <p>評価の指標も変わった。Cursor は Bugbot の主要指標を resolution rate にした。マージの時点で、指摘したバグが最終的なコードで実際に直されているかを LLM が判定する。判定結果は PR 作者への聞き取りで抜き取り確認している。40 回の大きな実験を重ねて、この値は 52% から 70% 超になり、1 PR あたりの「直されたバグ」は約 0.2 件から約 0.5 件に増えた。Anthropic は指摘への反応（直した・誤りだと言った・意図通りだと言った・どうでもいいと判断した）でノイズを測る。問題のない PR にもレビューをかけて誤検知を数える。さらに、過去にインシデントや revert を起こした PR をコードに詳しいエンジニアが確認して評価セットにし、レビュアーのプロンプト・ツール・モデルを変えるたびに全件で採点する。スコアが上がらない変更は採用しない。</p><p>Anthropic が強調するのは、修正を自動化すると「収束」という新しい問題が出てくることだ。ある CLI の PR は、夜のうちにレビューと修正を 50 往復以上繰り返した。git blame で調べると、レビュアーが指摘し続けていたものの約 59% は最初のパスの時点から存在したコードだった。対策として、3 往復を超えたらアプローチを見直すよう作者に促す上限、数往復目以降は差分だけを再レビューする方式、同じ指摘を繰り返さないルール、既存コードは夜間に別途レビューする運用を入れた。その結果、1 往復で通る PR は 65% から 78% に増え、5 往復以上かかる PR は 8.9% から 1.5% に減った。AI が書き AI がレビューする構成では、レビューの精度と同じくらい、ループを終わらせる設計が重要になる。</p>
+    <p>コードの側では分岐を減らす一方で、データの側では分岐を増やす動きが進んでいる。Databricks が 10月8日に紹介した Lakebase（Neon の技術を使った Postgres）のフローでは、git worktree で各エージェントに作業ディレクトリとブランチを与え、<code>post-checkout</code> フックで同じ名前の DB ブランチを自動で作る。PR を開くと、GitHub Actions が本番の子ブランチを作ってマイグレーションを流し、スキーマの差分を PR にコメントする。この DB ブランチは PR を閉じるかマージした時点で削除される。copy-on-write なので、DB のサイズに関係なく 1 秒未満で分岐でき、増えるストレージは差分の分だけだ。アイドル中のブランチは計算資源がゼロまで縮む。重要なのは、DB ブランチを親にマージしない点だ。本番に戻すのはコードとして管理したスキーマ変更（Drizzle、Flyway、Alembic などのマイグレーション）だけになる。</p><p>コードのブランチを減らす Anthropic と、DB のブランチを増やす Databricks は、逆のことをしているように見えるが、原則は同じだ。全体で合意が必要な状態を増やさないということだ。マージしない使い捨ての分岐は、作ってもグローバル状態を増やさないので安く量産できる。共有のステージング DB では、エージェント同士がスキーマ変更で衝突したり、モックで済ませたりしてしまうので、この分離は効果がある。ただし、分岐を大量に作る用途への対応はまだ途上だ。Columbia 大学 DAPLab の BranchBench では、Neon はブランチ内の読み出しや結合は速いものの、ブランチの作成が最大 25 倍、切り替えが最大 1,500 倍遅く、アクティブブランチ数の上限 20 にも達した。1,000 ステップの探索ワークロードでは、Neon は 33 ステップ、Dolt は 2 時間で 170 ステップしか進まなかった。</p>
     <div class="example">
-      <div class="product">Cursor Bugbot</div>
-      <div class="approach">マージ時に LLM で「指摘が実際に直されたか」を判定する resolution rate を主要指標にする</div>
-      <div class="detail">指摘数は増やせば増えるが、resolution rate は誤検知が増えると下がる。指摘を増やす方向と減らす方向の両方を一つの数字で評価できるため、実験の比較に使いやすい。</div>
-      <a href="https://cursor.com/blog/building-bugbot">📄 一次ソース</a>
+      <div class="product">Databricks Lakebase（エージェント別 DB ブランチ）</div>
+      <div class="approach">worktree の post-checkout フックでエージェントごとに DB ブランチを作り、PR ごとに本番の子ブランチを作って閉じたら削除する。ブランチはマージせず、マイグレーションだけを反映する</div>
+      <div class="detail">共有 DB の取り合いを、copy-on-write の分岐で避ける構成をコード例付きで示している。本番から分岐させると個人情報が開発環境に出るため、シード済みの DB から分岐させる運用が一般的だとも書いている。</div>
+      <a href="https://www.databricks.com/blog/lakebase-and-agentic-sdlc-branching-databases-coding-agents">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">Anthropic Code Review</div>
-      <div class="approach">インシデント PR を評価セットにして毎日実行し、往復上限と差分だけの再レビューで収束させる</div>
-      <div class="detail">レビューと修正の無限ループという、AI 同士で回したときに初めて表面化する失敗と、その対策の効果を前後比較の数字付きで公開している。</div>
-      <a href="https://claude.dev/blog/solving-code-review-at-anthropic/">📄 一次ソース</a>
+      <div class="product">BranchBench（Columbia 大学 DAPLab）</div>
+      <div class="approach">分岐・変更・評価・破棄を繰り返すエージェント型ワークロードで、Postgres の CoW クローン、Dolt、Neon などの分岐可能 DB を比較した</div>
+      <div class="detail">ブランチの管理を速くするとブランチ内の処理が遅くなり、その逆も起きるというトレードオフがあることを示し、安い分岐を数千個作れる DB はまだないと結論づけた。PR 単位の分岐は今でも実用になるが、探索のために大量に分岐させる用途は時期尚早だと判断する材料になる。</div>
+      <a href="https://daplab.cs.columbia.edu/general/2026/05/26/branchable-databases-arent-ready-for-agentic-workloads.html">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> AI レビューの効果は「何件指摘したか」で見ない。「マージ時に直されていた割合」と「合格までの往復回数」の 2 つを最初から記録しておく。修正まで自動化するなら、往復の上限を最初から決めておく。</div>
+    <div class="takeaway"><strong>示唆:</strong> 並列エージェントに開発用 DB を与えるなら、共有のステージング DB ではなく PR やエージェント単位の使い捨てブランチにし、本番に戻すのはマイグレーションだけにする。1 タスクで数十〜数千の分岐を作る設計は、使う DB の上限ブランチ数と切り替えコストを先に測ってから採用する。</div>
   </div>
   <div class="editorial">
     <span class="label">✍️ 編集後記</span>
-    AI レビューの設計で各社が工夫しているのは、指摘を増やすことよりも、人間が読まなくて済む範囲を根拠付きで広げることだ。発見と検証の分離も、リスクによる段階分けも、往復の上限も、そのための仕組みである。一方で外部からの PR を受ける OSS 側には、まだこの検証の層がない。そのため PR の受け付け自体を止めるしかない状況になっており、プロダクト側との差がはっきりしてきている。
+    3 社の対応を並べると、エージェント時代のインフラ設計は、作れるものは安く大量に作り、合意が必要なものは 1 か所に絞るという方針にまとまる。キャッシュ、使い捨てのブランチ、changeset は増やしてかまわないが、ref と本番スキーマは 1 つに保つ。自社のパイプラインで最初に詰まるのは、たいてい後者の「1 つしかないもの」を取り合う箇所だ。
   </div>
 </div>
 
 <div class="section">
   <div class="section-title">🔗 今号の動向ピックアップ</div>
-  <div class="quick-link"><a href="https://ladybird.org/posts/changing-how-we-develop-ladybird/">Ladybird、公開 PR の受け付けを停止し既存の PR もすべてクローズ</a><span class="quick-summary">6月5日、ブラウザ開発の Ladybird は、コード変更をメンテナーだけが行う方式に切り替え、Issue やメールでパッチを送る抜け道も設けないと発表した。PR が「提出者について以前ほど多くを語らなくなった」という理由は、本号で扱った「書き手ではなく変更内容でリスクを判断する」流れを、検証の層を持たない OSS 側から見たものだ。</span></div>
-  <div class="quick-link"><a href="https://github.blog/changelog/2026-10-08-draft-pull-requests-count-toward-pull-request-limits">GitHub、PR 数の上限に下書き PR も含められるように</a><span class="quick-summary">10月8日の変更で、書き込み権限のない利用者が同時に開ける PR 数の上限に下書き PR も数えられるようになった。下書き経由のスパムが通知や CI の実行を増やしていた抜け穴をふさぐもので、レビューの手前で量を抑える入口側の対策にあたる。</span></div>
-  <div class="quick-link"><a href="https://github.blog/changelog/2026-02-13-new-repository-settings-for-configuring-pull-request-access/">GitHub、PR をコラボレーター限定にする・完全に無効化するリポジトリ設定を追加</a><span class="quick-summary">2月13日に追加された設定で、PR の作成を書き込み権限のある人だけに絞るか、PR 自体を止められるようになった。tldraw などが自動クローズで対応していた運用をプラットフォーム側が設定として取り込んだもので、AI レビューで検証しきれない量への最後の手段になっている。</span></div>
+  <div class="quick-link"><a href="https://mergify.com/reports/state-of-merge-queues-2026">Mergify「State of Merge Queues 2026」— AI 支援の PR が main を壊した割合は 1.9%、それ以外の PR は 4.4%</a><span class="quick-summary">477 組織・20 万件超のマージを分析し、マージの約 94% は今も 1 件ずつキューを通っていること、40 人以上のチームでは約 8 件に 1 件が main を壊していることを示した。マージキューを手放した Anthropic とは逆に、人間規模のチームではバッチ処理と自動二分探索でキューを活かす余地がまだ大きいことがわかる。</span></div>
+  <div class="quick-link"><a href="https://blog.cloudflare.com/artifacts-git-for-agents-beta/">Cloudflare Artifacts — エージェント向けに数千万のリポジトリを作れる Git 互換ストレージ</a><span class="quick-summary">リポジトリごとに 1 つの Durable Object を割り当て、WASM で動く Git サーバーを載せた構成で、通常の Git クライアントからも REST API からも使える。GitHub や Anthropic とは違い、巨大な 1 つのリポジトリではなく、エージェントごとに小さなリポジトリを大量に作る方向で同じ書き込み負荷の問題に取り組んでいる。</span></div>
 </div>
 
 <div class="section">
   <div class="section-title">📚 過去号</div>
+  <div class="archive-item"><span class="week">2026-10-17</span><div class="body"><a href="ai-trends/2026-10-17.html">AI コードレビューは「全部指摘する」から「確かめてから出す」へ — 発見と検証の分離、変更内容で決まるレビューの重さ、指摘数ではなく収束で測る評価</a><span class="sub">Anthropic の Code Review は複数のエージェントが並列でバグを探し、別の検証役のグループが多数決で本物と判断した指摘だけを投稿する。Cursor Bugbot も初期は差分の順序を変えた 8 本の並列パスを多数決と validator モデルでふるいにかけ、その後エージェント型に移行した。</span></div></div>
   <div class="archive-item"><span class="week">2026-10-15</span><div class="body"><a href="ai-trends/2026-10-15.html">エージェントの身元は「ユーザーの借り物」から「専用の ID」へ — 代理と自律の区別、ID を切る単位、受け手側での識別</a><span class="sub">Entra Agent ID はトークンの subject と actor を分ける。自律動作のときは subject がエージェント自身になり、ユーザーの代理のときは subject がユーザー、actor がエージェントになる。Google の coworker agent も「あなたではなく自分の ID で動き、共有されたものしか見ない」と定義され、操作は人ではなくエージェント名義で監査ログに残る。</span></div></div>
   <div class="archive-item"><span class="week">2026-10-13</span><div class="body"><a href="ai-trends/2026-10-13.html">業務エージェントのグラウンディングは「文書検索」から「意味モデル」へ — 既存の業務設定と判断の履歴から、エージェント用の辞書を自動で組み立てる</a><span class="sub">Microsoft の Dataverse semantic model は、テーブル関係・ビュー・フォーム名・列の説明といった既存の設定から意味を自動で抽出し、12時間ごとに再生成する。人が書くのは推論できない社内用語の用語集だけで、Snowflake も既存の SQL や BI ファイルから semantic view を作る Autopilot を出した。</span></div></div>
   <div class="archive-item"><span class="week">2026-10-10</span><div class="body"><a href="ai-trends/2026-10-10.html">エージェントコマースは「一つの決済プロトコル」をやめた — 発見・同意の証明・本人ログインを別レイヤーに切り分ける設計へ</a><span class="sub">UCP は加盟店が /.well-known/ucp に能力を公開し、エージェント側と「共通する能力だけ」を交渉で残す設計。OpenAI も ACP の主軸をチャット内決済から商品カタログの受け渡しへ移し、決済は加盟店側に戻した。</span></div></div>
@@ -210,7 +210,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 </div>
 
 <footer>
-  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="data/ai-trends/2026-10-17.json">data/ai-trends/2026-10-17.json</a>（このページは JSON からの生成物）</p>
+  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="data/ai-trends/2026-10-20.json">data/ai-trends/2026-10-20.json</a>（このページは JSON からの生成物）</p>
   <p style="margin-top:.5rem"><a href="./">📰 日刊ダイジェストに戻る</a></p>
 </footer>
 </div>
