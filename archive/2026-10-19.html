@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-10-19</title>
+  <meta name="description" content="NIST楕円曲線シードの出自を29年ぶりに解明 / DeepSeekがSearch/Fetch APIを公開 / Microsoftが.NET管理ツール「dotnetup」公開">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech News Daily">
+  <meta property="og:title" content="Tech News Daily — 2026-10-19">
+  <meta property="og:description" content="NIST楕円曲線シードの出自を29年ぶりに解明 / DeepSeekがSearch/Fetch APIを公開 / Microsoftが.NET管理ツール「dotnetup」公開">
+  <meta property="og:url" content="https://tech-news.kaion-lab.com/archive/2026-10-19.html">
+  <meta property="og:image" content="https://tech-news.kaion-lab.com/apple-touch-icon.png">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="../feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-10-19 (Mon)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+      <nav class="site-nav">
+        <a href="../" class="active">📰 日刊ダイジェスト</a>
+        <a href="../trends.html">🔌 週次プラグイントレンド</a>
+        <a href="../ai-trends.html">🧠 AI プロダクト動向</a>
+        <a href="./">🗂 アーカイブ</a>
+      </nav>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 19 articles</span>
+      <span>🏷 7 categories</span>
+      <span>📡 13 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item">
+        <span class="number-value">6倍</span>
+        <span class="number-label">Anthropic社内で対話型AIエージェントが稼働した時間、社員の作業時間に対する倍率(8月時点)</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">$36,864</span>
+        <span class="number-label">NIST楕円曲線シードの出自を解明したAnthropicチームがISRGに寄付した賞金総額</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">2.6倍</span>
+        <span class="number-label">HybridAgentsの推論速度向上、フロンティアのテキスト/潜在エージェント比の最大値</span>
+      </div>
+    </div>
+
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
+
+      <div class="card featured deep-dive">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://words.filippo.io/seeds-solved/">DEEP DIVE: NIST楕円曲線の乱数シードの出自を29年ぶりに解明、「英文ハッシュ説」を覆す</a></h3>
+        </div>
+        <div class="summary">NIST楕円曲線(P-192/224/256/384/521)の乱数シードは、NSAのJerry Solinasが1997年に英文を一方向ハッシュして生成したとされてきたが、本人が文章を覚えていないまま2023年に死去し、出自不明のまま残っていた。暗号研究者Filippo Valsordaは3年前、解明者への賞金を設定していた。2026年10月15日01:07:51 UTC、Anthropicの研究者10名のチームが解を提出し、賞金(マッチング拠出込みで36,864ドル)をLet's Encryptの母体ISRGへ寄付した。実際の生成法は文章ハッシュではなく、1997年5月〜1998年4月の複数のUNIXタイムスタンプ(例: 871696354でP-256、863966734でP-192)をPOSIXのdrand48にシードとして渡し、X9.62の規則で無効な曲線を捨てながら候補値を引く手順だった。Valsorda自身がこの手順をGoで再実装し再現性を確認した。ただし未解明の棄却条件が1つ残り、公開シード数が有効候補のおよそ半分しかない理由も説明できていない。Bernstein & Lange(2017)が理論上指摘していた、シードの自由度約70ビットを使った弱い曲線へのすり替えの可能性は、実際の自由度が約30ビットしかないと判明したことで否定された。</div>
+        <div class="editorial">🧠 29年間「作者本人の記憶だより」だった暗号パラメータの正当性が、計算的な再現によって初めて検証可能になったのは大きい。ただし棄却条件がもう1つ残っており、「完全に解明した」と言うにはまだ早い。Valsorda自身はこの結果を受けてNIST曲線をCurve25519より推すとまで述べているが、それは今回の分析がシード生成の透明性を示したに過ぎず、実装レベルの安全性比較とは別の話だ。</div>
+        <div class="key-points">
+          <ul>
+            <li>解を提出したのは2026年10月15日01:07:51 UTC。Anthropicの研究者10名のチームが、1997年5月〜1998年4月のUNIXタイムスタンプをdrand48にシードとして与える生成法を特定した</li>
+            <li>賞金はマッチング拠出込みで36,864ドルに達し、全額をLet's Encryptの母体ISRGへ寄付した</li>
+            <li>Bernstein & Lange(2017)が指摘したシード自由度約70ビットを使った弱い曲線のすり替え可能性は、実際の自由度が約30ビットしかないため成立しないと判明した</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 暗号ライブラリでNIST曲線を使っている開発者にとって、曲線パラメータの出自が検証可能になったことは、2017年以来続く「バックドアの可能性」批判への実証的な反論材料になる。</div>
+        <div class="meta">
+          <span>filippo.io</span>
+          <span>⏱ 7 min read</span>
+          <span>2026-10-16</span>
+          <span class="engagement">▲ 131</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://api-docs.deepseek.com/guides/search/">DeepSeek、エージェント向けSearch/Fetch APIを公開、1,000件あたり0.75ドルで11月1日から課金開始</a></h3>
+        </div>
+        <div class="summary">DeepSeekはエージェント・RAG向けに、自社検索エンジンを使う生のJSON API「Search」(`/v1/tools/search`)と、指定URLをMarkdown化して返す「Fetch」(`/v1/tools/fetch`)を公開した。Searchは`site:`や期間指定(`after:`/`before:`)などの検索演算子に対応し、結果には品質指標`rerank_score`(0〜3、1.5以上が高品質)や出典の信頼度`authority`(0〜4)が付く。価格は成功したリクエスト1,000件あたり0.75ドルで、エラーや空結果は課金対象外。DeepSeek Harness・Claude Code・Codex経由の呼び出しは現在無料だが、2026年11月1日午前0時(北京時間)から通常課金に切り替わる。</div>
+        <div class="key-points">
+          <ul>
+            <li>SearchはPOST /v1/tools/search、FetchはPOST /v1/tools/fetchの2エンドポイント構成で、価格は両方とも成功1,000リクエストあたり0.75ドル</li>
+            <li>レート上限はSearch/Fetchとも1アカウントあたり5QPS、Fetchにはドメイン別のQPS上限も別途ある</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>DeepSeek API Docs</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-18</span>
+          <span class="engagement">▲ 515</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://devblogs.microsoft.com/dotnet/introducing-dotnetup/">Microsoft、.NET SDK/ランタイムをユーザー権限のまま管理する公式ツール「dotnetup」をパブリックプレビュー公開</a></h3>
+        </div>
+        <div class="summary">MicrosoftはrustupスタイルのSDKバージョン管理ツール「dotnetup」のパブリックプレビューを10月15日公開した。macOS/Linuxはシェルのブートストラップスクリプト、WindowsはPowerShellで導入し、管理者権限なしでユーザーのアカウント内に複数バージョンのSDK・ランタイムを共存させる。`global.json`のバージョン指定を自動で解決し、チャンネル追跡(例: `10.0`)で更新を自動化、更新後は不要になったコンポーネントを自動削除する。Windows向けの管理者権限インストールは今後のリリースで対応予定。</div>
+        <div class="key-points">
+          <ul>
+            <li>`dotnetup init`で最新安定版SDKを導入、`dotnetup sdk install preview`/`daily`でプレビュー版・デイリービルドも並行管理できる</li>
+            <li>署名・チェックサム検証と非対話モードを備え、CI環境での利用にも対応する</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>.NET Blog</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-10-15</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://aws.amazon.com/jp/about-aws/whats-new/2026/10/guardduty-rds-data-exfiltration/">Amazon GuardDuty RDS Protectionがデータの不正流出・破壊の検出に対応、Aurora/RDS PostgreSQLが対象</a></h3>
+        </div>
+        <div class="summary">Amazon GuardDuty RDS Protectionに、正規の認証情報を奪った上でのデータ不正流出・破壊を検知する「データアクティビティ監視」が追加された。機械学習ベースの異常検出でクエリパターンの基準から外れた操作を検出し、エージェント導入やインフラ変更は不要。対象はAurora PostgreSQLとRDS for PostgreSQL。</div>
+        <div class="key-points">
+          <ul>
+            <li>対象はAmazon Aurora PostgreSQLとAmazon RDS for PostgreSQL。コンソールからワンクリックで組織全体に有効化でき、API/SDK/CLI/CloudFormationにも対応する</li>
+            <li>アカウント・リージョンごとに30日間の無料トライアルがある</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>AWS</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-10-08</span>
+          <span class="engagement">🔖 10</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://arxiv.org/abs/2610.18861">潜在空間での推論とテキストでの行動を1回の生成過程で切り替える「HybridAgents」、トークン54.7%減で最大2.6倍高速</a></h3>
+        </div>
+        <div class="summary">テキストベースの推論は遅く、潜在空間での推論はツール呼び出しも検証もできないという二択に対し、本論文は両者を1回の生成過程内で切り替える「HybridAgents」を提案する。切り替えを担う軽量モジュールHybridLink、複数ターンをまたぐ連続ワーキングメモリ、協調を学習するHybridSFT/HybridRLの2段階後学習で構成する。</div>
+        <div class="key-points">
+          <ul>
+            <li>数学・科学・医療・検索・エージェント推論を含む11ベンチマークで、フロンティアのテキスト/潜在エージェントに対し平均10.4%の性能向上、トークン35.5〜54.7%減、推論1.8〜2.6倍高速、コスト2.7〜3.7倍削減を報告</li>
+            <li>潜在的な思考過程を検証可能な形で保持しつつツール呼び出しを維持する設計で、コードとデータは論文ページからリンクされている</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>arXiv</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-10-17</span>
+          <span class="engagement">▲ 101</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://qiita.com/katsuki_ono/items/e656aa1c7e7d70f4a1cd">DeepSpeed・ms-swiftに頼らずPyTorch標準FSDPで学習基盤を自作、公開8日後にQwen3.5-397B MoEの学習を開始</a></h3>
+        </div>
+        <div class="summary">共有クラスタ環境やMoEモデルとの相性が悪いDeepSpeed・ms-swiftの代わりに、PyTorch標準のFSDPの上に学習ループを自作し、MITライセンスで4リポジトリを公開した。Qwen3.5-397B-A17Bの重み公開(2/16)から8日後の2/24にSFT/DPO/GRPOの学習スクリプトが揃い、同日中に最初のGRPO学習を開始した。</div>
+        <div class="key-points">
+          <ul>
+            <li>対象モデルはQwen3-235B-A22B・Qwen3.5-397B-A17B・GLM-5-FP8・Qwen3-Next-80B-A3Bの4つで、235B版で作った基盤を他モデルへ移植して使い回している</li>
+            <li>H100クラスタをSlurmで運用し、GRPOでは推論用vLLMをノード間TP=16で実行する</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-18</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://qiita.com/maeda-kazutoshi/items/4674e080c2ce3d53c809">Lambdaが3種類に、Web FunctionsとMicroVMsを使ってチャット分析アプリを1日20円で動かしてみた</a></h3>
+        </div>
+        <div class="summary">従来のイベント駆動Lambdaは「Event Functions」に改称され、Webアプリをそのまま配置できる「Web Functions」(10月登場)、隔離VMを貸し出す「MicroVMs」(6月登場)が加わり3種類になった。CSVのS3配置をEvent Functionsで集計し、Web FunctionsのチャットUIからBedrock(Claude Haiku 4.5)がMicroVM上でpandasコードを実行して回答する構成を作り検証した。</div>
+        <div class="key-points">
+          <ul>
+            <li>MicroVMは10分無操作で一時停止、一時停止2時間で終了、最長稼働4時間。認証トークンは最長60分で4時間指定は拒否された</li>
+            <li>丸1日の利用料は約20セントで大半がMicroVM、Web/Event FunctionsとS3の合計は1セント未満だった</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-18</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://zenn.dev/nextbeat/articles/2026-10-syntax-locality-llm">LLMにとって書きやすい構文とは？ `end`と`end func foo`を1,800試行以上比較すると、深さ8のネストで正解率が0%と100%に分かれた</a></h3>
+        </div>
+        <div class="summary">独自の小さな言語で、閉じ方だけが違う構文(`{}`・`end`・`end func`・`end func foo`など)にLLMで同じプログラムを書かせ、構文木が完全一致するかを1,800試行以上のパイロットと追加実験で比較した。「依存関係が近いほど書きやすい」という当初仮説は支持されず、閉じ行に何を閉じたか書く冗長な情報が正答率を左右すると結論づけた。</div>
+        <div class="key-points">
+          <ul>
+            <li>深さ8のネストで`end`は24回中0回正解、名前付きの`end func foo`は24回中24回正解だった</li>
+            <li>深さ16の長いブロックでは`end func foo`が72回中62回正解、裸の`end`は15回にとどまった</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-18</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-product">Product</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://engineering.dena.com/blog/2026/10/ai-agent-onboarding/">オンボーディングをClaude Codeに任せたら、AIが演じる新人が初日シナリオで44件のリンク切れと`sudo rm -rf`を検出した</a></h3>
+        </div>
+        <div class="summary">DeNAのデータサイエンス部は、Confluence・Drive・Slackに散らばる手順と個人差の大きい環境構築を、GitHubリポジトリに集約しClaude Codeが伴走する仕組みに置き換えた。新規メンバー役をAIに演じさせ初日シナリオを6周検証したところ、生成リンク44件全てが切れていたことや、Drive上の外部スクリプトに`sudo rm -rf`が13行含まれていたことが判明した。</div>
+        <div class="key-points">
+          <ul>
+            <li>正本はConfluence等に残し、リポジトリにはID(`sources.yml`)と完了判定だけを置く設計で二重管理を避けた</li>
+            <li>中途入社者が約1か月でオンボーディングを完了、日報は毎営業日コミットされた</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>DeNA Engineering</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-10-18</span>
+          <span class="engagement">🔖 63</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-frontend">Frontend</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://azukiazusa.dev/blog/void-vite-cloudflare-deploy/">VoidZeroの新ツールキット「Void」でメモアプリを作り、importからリソースを自動推論してCloudflareへデプロイする</a></h3>
+        </div>
+        <div class="summary">VoidZeroが10月15日にMITライセンスで公開したフルスタックツールキット「Void」を使い、Vite+/React/D1でメモアプリを作ってCloudflareにデプロイするまでを追った。`void/db`のようなimportからD1のバインディングが必要と推論し、開発時はローカルDB、デプロイ時はD1を自動作成する。`npx void deploy`一発でビルド・マイグレーション適用・Worker公開までを行う。</div>
+        <div class="key-points">
+          <ul>
+            <li>APIルートを`void/client`のfetchで呼ぶとパス・メソッドの誤りをコンパイル時に検出できる</li>
+            <li>マイグレーションを生成せずデプロイするとドリフト検出で中止される。ロールバックはコードのみでマイグレーションは戻らないため事前の互換性確認が必要</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>azukiazusa.dev</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-17</span>
+          <span class="engagement">🔖 53</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://qiita.com/charge0315/items/9a4f9d6a373a18e0cd13">決着件数が20件に届くまで眠る「実測勝率ゲート」が32日目に初めて動き、短期候補8件を全て見送った</a></h3>
+        </div>
+        <div class="summary">個人開発の株式スクリーニングにClaude Codeで実装した安全装置は、同条件の過去候補の勝率が基準45%を下回ったら候補を見送るが、決着件数が20件に届くまでは判定自体をしない設計だった。実装9月11日から32日後の10月13日、決着件数が28件に達して初めて作動し、短期候補8件(勝率18%)を全て見送った。</div>
+        <div class="key-points">
+          <ul>
+            <li>10月6日・8日は勝率25.0%(12件中3件)・31.2%(16件中5件)と基準を下回っていたが、決着件数不足でゲートは動かなかった</li>
+            <li>見送り件数は10/13に16件、10/14に5件、10/15に3件、10/16に2件と続いた</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-10-18</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://sphinx-six-theta.vercel.app/">AIエージェントが書いたコードをpush前に「説明できるか」で検問するGitフック「Sphinx」</a></h3>
+        </div>
+        <div class="summary">Sphinxは、AIコーディングエージェントが書いたコードをpushする前に、変更の意図(失敗時の挙動など)を開発者本人に質問し、答えられなければpushを止めるGitフック。コーディングエージェントのチャットとは別の審査担当が差分を読んで質問を作り、誤答には新しい設問で返す。Codex・Claude Code・Cursor・OpenCode・Piに対応する。</div>
+        <div class="key-points">
+          <ul>
+            <li>`npm install -g sphinx-understand`でインストール、Node 22.19以上が必要でmacOS/Linux/WSLで動作する</li>
+            <li>回答内容はコーディングエージェントには送られず、`.env`や鍵ファイルは開かない。`sphinx yolo`で質問をスキップできるが全てログに残る</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-10-18</span>
+          <span class="engagement">▲ 237</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.com/teal-language/tl">Luaの型付き方言「Teal」がv0.24.8公開、`tl`コンパイラでLua 5.1〜5.4・LuaJITに型チェックを追加</a></h3>
+        </div>
+        <div class="summary">TealはLuaの型付き方言で、コンパイラ`tl`が型チェック後に型注釈を取り除いた素のLuaへ変換する。10月13日にv0.24.8を公開した。Lua 5.1〜5.4とLuaJITで動作し、ゲームエンジンDefoldでは既に拡張機能として統合され構文ハイライトと言語サーバーを提供している。</div>
+        <div class="key-points">
+          <ul>
+            <li>`tl check module.tl`で型チェックを実行し、エラーがあれば報告して終了する</li>
+            <li>Defold向けTeal拡張v1.4が2025年9月に公開済みで、ブレークポイント対応とランタイムAPIの型注釈は今後の計画</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-10-13</span>
+          <span class="engagement">▲ 152</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://www.getlazarus.org/dynamic/">Free Pascal/LazarusがIDE全体の再構築なしでプラグインを追加できる「動的パッケージ」に対応</a></h3>
+        </div>
+        <div class="summary">Free Pascal CompilerとLazarus IDEに、共有ライブラリとしてのパッケージをIDEやプログラムの実行中に差し替えられる「動的パッケージ」機能が初めて実装された。コンパイラが型情報をパッケージに埋め込み、`TPackageType`レコードを通じて実行時に読み込み・列挙・検索・解放ができる。Linux/Windows/macOSの共有ライブラリとして配布される。</div>
+        <div class="key-points">
+          <ul>
+            <li>ユニット名はパッケージ名と重複できず、生成ソースには`Package`が付与される(例: `ElectroToolsPackage.pas`)。ユニット名はインストール済み全パッケージで一意である必要がある</li>
+            <li>Lazarus側ではIDE起動前の変更パッケージ自動再構築や、フォーム/フレームをパレットに登録できるコンポーネント変換ツールが追加された</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Lazarus</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-18</span>
+          <span class="engagement">▲ 87</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
+
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://www.anthropic.com/research/employment-at-anthropic">Anthropic社内、対話型エージェントの作業時間が社員の6倍に、若手技術職の新規採用比率は27%→9%に縮小</a>
+        <span class="quick-summary">— 8月時点で対話型エージェントの作業時間が社員の作業時間の6倍に達し、技術職の若手採用比率は2025年初から27%→9%へ縮小したとAnthropicが報告した。</span>
+        <span class="meta">Anthropic <span class="engagement">🔖 10</span></span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://socprime.com/?p=54408">Windows Shellのゼロデイ(CVE-2026-96951, CVSS 8.8)が悪用済みと確認、Mark of the Webを回避</a>
+        <span class="quick-summary">— コマンドインジェクション(CWE-77)によりMark of the Web保護を回避できる脆弱性で、Microsoftが10月13日のPatch Tuesdayで修正、CISAは米連邦機関に10月16日までの対応を求めた。</span>
+        <span class="meta">SOC Prime</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-oss">OSS</span>
+        <a href="https://github.com/VikOlliver/RepRapMicron/wiki">1ミクロン単位で位置決めする自己複製型3Dプリンタ「RepRapMicron」、UV樹脂を4ミクロン単位で吐出</a>
+        <span class="quick-summary">— OpenFlexureの顕微鏡プラットフォームを土台に、最新のPIKA V0.02ビルドは約1µmの再現位置決めと10µm以下の精度を実現した。</span>
+        <span class="meta">GitHub <span class="engagement">▲ 308</span></span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://zenn.dev/sonicmoov/articles/oreilly-subscription-acm">年1〜2冊しか技術書を買わない人がO'Reillyサブスクを検証、ACM経由の初年度$150で契約してMCPも接続</a>
+        <span class="quick-summary">— 冊数で元を取るよりつまみ読みの価値を重視し、最安経路のACM経由での契約を選んだと報告している。</span>
+        <span class="meta">Zenn <span class="engagement">🔖 92</span></span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://zenn.dev/fusic/articles/a77ba348115364">日本語の個人情報マスキングをSDP・Bedrock Guardrails・Presidio+GiNZAで比較、初期設定では3〜5割が検出漏れ</a>
+        <span class="quick-summary">— 全角→半角の前処理と正規表現を加えるとSDPの再現率は約97%まで上がったが、漏れをゼロにするには人の最終確認が必要と結論づけている。</span>
+        <span class="meta">Zenn</span>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="./" class="archive-link">🗂 過去のダイジェスト</a>
+    </footer>
+  </div>
+</body>
+</html>

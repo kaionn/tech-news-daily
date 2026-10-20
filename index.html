@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tech News Daily — 2026-10-19</title>
-  <meta name="description" content="NIST楕円曲線シードの出自を29年ぶりに解明 / DeepSeekがSearch/Fetch APIを公開 / Microsoftが.NET管理ツール「dotnetup」公開">
+  <title>Tech News Daily — 2026-10-20</title>
+  <meta name="description" content="自動侵入ツール「ARTEX」が日本企業20社超を標的に / Mistral、時系列予測基盤モデル「Timestral」公開 / CERNとMistral、衝突物理向け基盤モデルで提携">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Tech News Daily">
-  <meta property="og:title" content="Tech News Daily — 2026-10-19">
-  <meta property="og:description" content="NIST楕円曲線シードの出自を29年ぶりに解明 / DeepSeekがSearch/Fetch APIを公開 / Microsoftが.NET管理ツール「dotnetup」公開">
+  <meta property="og:title" content="Tech News Daily — 2026-10-20">
+  <meta property="og:description" content="自動侵入ツール「ARTEX」が日本企業20社超を標的に / Mistral、時系列予測基盤モデル「Timestral」公開 / CERNとMistral、衝突物理向け基盤モデルで提携">
   <meta property="og:url" content="https://tech-news.kaion-lab.com/">
   <meta property="og:image" content="https://tech-news.kaion-lab.com/apple-touch-icon.png">
   <meta name="twitter:card" content="summary">
@@ -22,7 +22,7 @@
   <div class="container">
     <header>
       <h1>Tech News Daily</h1>
-      <div class="date">2026-10-19 (Mon)</div>
+      <div class="date">2026-10-20 (Tue)</div>
       <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
       <nav class="site-nav">
         <a href="./" class="active">📰 日刊ダイジェスト</a>
@@ -33,9 +33,9 @@
     </header>
 
     <div class="stats-bar">
-      <span>📰 19 articles</span>
+      <span>📰 20 articles</span>
       <span>🏷 7 categories</span>
-      <span>📡 13 sources</span>
+      <span>📡 16 sources</span>
     </div>
 
     <nav class="toc">
@@ -48,16 +48,16 @@
 
     <div class="numbers-bar">
       <div class="number-item">
-        <span class="number-value">6倍</span>
-        <span class="number-label">Anthropic社内で対話型AIエージェントが稼働した時間、社員の作業時間に対する倍率(8月時点)</span>
+        <span class="number-value">20社</span>
+        <span class="number-label">ARTEXが1つの攻撃基盤だけで標的にした日本企業数、うち9社が同業種</span>
       </div>
       <div class="number-item">
-        <span class="number-value">$36,864</span>
-        <span class="number-label">NIST楕円曲線シードの出自を解明したAnthropicチームがISRGに寄付した賞金総額</span>
+        <span class="number-value">4〜8倍</span>
+        <span class="number-label">拡散モデル「Mercury 3」がGPT-6 Luna等に対して発揮する生成速度の倍率</span>
       </div>
       <div class="number-item">
-        <span class="number-value">2.6倍</span>
-        <span class="number-label">HybridAgentsの推論速度向上、フロンティアのテキスト/潜在エージェント比の最大値</span>
+        <span class="number-value">90分→15分</span>
+        <span class="number-label">ミューテックス排除後にBlueskyのBloomフィルタ更新で短縮されたデプロイ時間</span>
       </div>
     </div>
 
@@ -67,24 +67,24 @@
       <div class="card featured deep-dive">
         <div class="card-header">
           <span class="tag tag-security">Security</span>
-          <span class="content-type">🔬 研究</span>
-          <h3><a href="https://words.filippo.io/seeds-solved/">DEEP DIVE: NIST楕円曲線の乱数シードの出自を29年ぶりに解明、「英文ハッシュ説」を覆す</a></h3>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://gmo-cybersecurity.com/blog/20261019/">DEEP DIVE: 自動侵入ツール「ARTEX」が日本企業20社超を標的に、GMOが新たに6つの攻撃基盤を確認</a></h3>
         </div>
-        <div class="summary">NIST楕円曲線(P-192/224/256/384/521)の乱数シードは、NSAのJerry Solinasが1997年に英文を一方向ハッシュして生成したとされてきたが、本人が文章を覚えていないまま2023年に死去し、出自不明のまま残っていた。暗号研究者Filippo Valsordaは3年前、解明者への賞金を設定していた。2026年10月15日01:07:51 UTC、Anthropicの研究者10名のチームが解を提出し、賞金(マッチング拠出込みで36,864ドル)をLet's Encryptの母体ISRGへ寄付した。実際の生成法は文章ハッシュではなく、1997年5月〜1998年4月の複数のUNIXタイムスタンプ(例: 871696354でP-256、863966734でP-192)をPOSIXのdrand48にシードとして渡し、X9.62の規則で無効な曲線を捨てながら候補値を引く手順だった。Valsorda自身がこの手順をGoで再実装し再現性を確認した。ただし未解明の棄却条件が1つ残り、公開シード数が有効候補のおよそ半分しかない理由も説明できていない。Bernstein & Lange(2017)が理論上指摘していた、シードの自由度約70ビットを使った弱い曲線へのすり替えの可能性は、実際の自由度が約30ビットしかないと判明したことで否定された。</div>
-        <div class="editorial">🧠 29年間「作者本人の記憶だより」だった暗号パラメータの正当性が、計算的な再現によって初めて検証可能になったのは大きい。ただし棄却条件がもう1つ残っており、「完全に解明した」と言うにはまだ早い。Valsorda自身はこの結果を受けてNIST曲線をCurve25519より推すとまで述べているが、それは今回の分析がシード生成の透明性を示したに過ぎず、実装レベルの安全性比較とは別の話だ。</div>
+        <div class="summary">2026年9月末、韓国の金融機関を狙った攻撃キャンペーンでCrowdStrikeがAI駆動の自律型侵入テストツール「ARTEX」の使用を報告した。GMOサイバーセキュリティは10月14日の記事で、フォレンジックログから日本企業への攻撃も同種の手法である可能性を指摘していたが、攻撃者の正体までは特定できていなかった。10月19日、GMOは攻撃元インフラの調査により実際にARTEXが使われていたことを確認したと発表した。調査した1つの攻撃基盤だけで約20社の日本企業が標的になっており、そのうち9社は同一業種に集中していた。さらに別の6つのAI駆動攻撃基盤を新たに発見し、それぞれがデジタルギフト・小売、教育・ギフト・印刷、ポイントギフト・マーケティング、保険・金融、EC・メディア・物流、ECという特定業種を狙っていた。観測された攻撃基盤はいずれも特定の国・業種に絞った狭い標的選定を特徴とし、キャンペーンごとに別の攻撃ホストを使い分けていた。標的となった企業のうち8社は9月から10月にかけて既にデータ漏洩を公表しており、GMOはこれが単一の攻撃グループによる一連の事件である可能性を示すとして、法執行機関への情報共有を進めている。日本と韓国以外にも被害が及んでいるかは現時点で未確認で、GMOは継続調査の結果を今後ブログで報告する方針だ。</div>
+        <div class="editorial">🧠 同業種に集中した標的選定は、人力の偵察よりも効率的に「刺さる」企業を選び出せることを示している。ただし今回確認できたのは攻撃基盤のログという間接証拠であり、ARTEXを開発・運用した主体の特定や、CrowdStrikeが「unknown threat actor」と呼ぶ攻撃者の国籍については未解明のままだ。日本と韓国以外の被害が今後明らかになるかどうかが、これが地域限定の実験的運用なのか、より広い展開の前段階なのかを分ける分水嶺になる。</div>
         <div class="key-points">
           <ul>
-            <li>解を提出したのは2026年10月15日01:07:51 UTC。Anthropicの研究者10名のチームが、1997年5月〜1998年4月のUNIXタイムスタンプをdrand48にシードとして与える生成法を特定した</li>
-            <li>賞金はマッチング拠出込みで36,864ドルに達し、全額をLet's Encryptの母体ISRGへ寄付した</li>
-            <li>Bernstein & Lange(2017)が指摘したシード自由度約70ビットを使った弱い曲線のすり替え可能性は、実際の自由度が約30ビットしかないため成立しないと判明した</li>
+            <li>調査対象の1つの攻撃基盤だけで日本企業約20社が標的になり、うち9社は同一業種に集中していた</li>
+            <li>新たに発見した6つの攻撃基盤は、デジタルギフト・小売や保険・金融などそれぞれ異なる業種を狙っていた</li>
+            <li>標的企業のうち8社が9月〜10月に既にデータ漏洩を公表しており、GMOは単一の攻撃グループによる一連の事件とみて法執行機関と情報共有している</li>
           </ul>
         </div>
-        <div class="why-it-matters">💡 暗号ライブラリでNIST曲線を使っている開発者にとって、曲線パラメータの出自が検証可能になったことは、2017年以来続く「バックドアの可能性」批判への実証的な反論材料になる。</div>
+        <div class="why-it-matters">💡 業種を絞った標的型攻撃を行う自律型侵入ツールが実運用されている以上、同業種で既に漏洩が報告された企業は自社ログを再確認し、GMOや業界との情報共有を急ぐべきだ。</div>
         <div class="meta">
-          <span>filippo.io</span>
+          <span>GMO Cybersecurity</span>
           <span>⏱ 7 min read</span>
-          <span>2026-10-16</span>
-          <span class="engagement">▲ 131</span>
+          <span>2026-10-19</span>
+          <span class="engagement">🔖 135</span>
         </div>
       </div>
 
@@ -92,40 +92,41 @@
         <div class="card-header">
           <span class="tag tag-ai">AI</span>
           <span class="content-type">📦 リリース</span>
-          <h3><a href="https://api-docs.deepseek.com/guides/search/">DeepSeek、エージェント向けSearch/Fetch APIを公開、1,000件あたり0.75ドルで11月1日から課金開始</a></h3>
+          <h3><a href="https://mistral.ai/news/timestral/">Mistral、時系列予測の基盤モデル「Timestral」公開、従来SOTAを3分の2のパラメータ数で上回る</a></h3>
         </div>
-        <div class="summary">DeepSeekはエージェント・RAG向けに、自社検索エンジンを使う生のJSON API「Search」(`/v1/tools/search`)と、指定URLをMarkdown化して返す「Fetch」(`/v1/tools/fetch`)を公開した。Searchは`site:`や期間指定(`after:`/`before:`)などの検索演算子に対応し、結果には品質指標`rerank_score`(0〜3、1.5以上が高品質)や出典の信頼度`authority`(0〜4)が付く。価格は成功したリクエスト1,000件あたり0.75ドルで、エラーや空結果は課金対象外。DeepSeek Harness・Claude Code・Codex経由の呼び出しは現在無料だが、2026年11月1日午前0時(北京時間)から通常課金に切り替わる。</div>
+        <div class="summary">Mistralは10月15日、時系列予測に特化した基盤モデル群「Timestral」を公開した。5M〜209Mパラメータの4サイズを同一アーキテクチャで提供し、32,768ステップのコンテキストと21分位の確率的予測に対応、GPU不要でCPU推論できる。209MモデルはGIFT-Eval・TIME・fev-benchの3ベンチマークで単一チェックポイントによるゼロショット首位となり、従来のSOTAを約3分の2のパラメータ数で上回った。28MモデルはGIFT-Eval・TIMEで、約4倍のパラメータ数を持つChronos-2を上回ったと報告されている。オープンウェイトでHugging FaceとGitHubから入手可能。</div>
         <div class="key-points">
           <ul>
-            <li>SearchはPOST /v1/tools/search、FetchはPOST /v1/tools/fetchの2エンドポイント構成で、価格は両方とも成功1,000リクエストあたり0.75ドル</li>
-            <li>レート上限はSearch/Fetchとも1アカウントあたり5QPS、Fetchにはドメイン別のQPS上限も別途ある</li>
+            <li>8スレッドのサーバーCPU上で、3週間分の15分間隔データから1日先を予測する処理が5Mモデルで10ms、209Mモデルで140msで完了する</li>
+            <li>マルチターゲット予測に加え、過去のみの共変量と未来既知の共変量の両方を入力に使える</li>
           </ul>
         </div>
         <div class="meta">
-          <span>DeepSeek API Docs</span>
+          <span>Mistral AI</span>
           <span>⏱ 3 min read</span>
-          <span>2026-10-18</span>
-          <span class="engagement">▲ 515</span>
+          <span>2026-10-15</span>
+          <span class="engagement">▲ 531</span>
         </div>
       </div>
 
       <div class="card featured">
         <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://devblogs.microsoft.com/dotnet/introducing-dotnetup/">Microsoft、.NET SDK/ランタイムをユーザー権限のまま管理する公式ツール「dotnetup」をパブリックプレビュー公開</a></h3>
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://home.cern/cern-and-mistral-join-forces-to-accelerate-ai-for-science/">CERNとMistral、衝突物理向け基盤モデル「Large Physics Model」の共同開発へ提携</a></h3>
         </div>
-        <div class="summary">MicrosoftはrustupスタイルのSDKバージョン管理ツール「dotnetup」のパブリックプレビューを10月15日公開した。macOS/Linuxはシェルのブートストラップスクリプト、WindowsはPowerShellで導入し、管理者権限なしでユーザーのアカウント内に複数バージョンのSDK・ランタイムを共存させる。`global.json`のバージョン指定を自動で解決し、チャンネル追跡(例: `10.0`)で更新を自動化、更新後は不要になったコンポーネントを自動削除する。Windows向けの管理者権限インストールは今後のリリースで対応予定。</div>
+        <div class="summary">CERNとフランスのAI企業Mistralは10月15日、科学的発見のための基盤モデル開発で長期的な戦略的提携の意向書に署名した。目標は、大型ハドロン衝突型加速器(LHC)で得た数十億件のシミュレーション陽子衝突データを使い、衝突の再構成・粒子識別・想定外信号の検知・将来の検出器設計評価までを単一モデルで担う「Large Physics Model」の構築。現在は専用アルゴリズムの連鎖で行っている再構成処理を、一つの基盤モデルに置き換えられるかを検証する。CERNは約1エクサバイトのLHCデータを保有し、2030年前後に稼働予定の高輝度LHC(HL-LHC)では衝突数が10倍に増える見通しだ。</div>
         <div class="key-points">
           <ul>
-            <li>`dotnetup init`で最新安定版SDKを導入、`dotnetup sdk install preview`/`daily`でプレビュー版・デイリービルドも並行管理できる</li>
-            <li>署名・チェックサム検証と非対話モードを備え、CI環境での利用にも対応する</li>
+            <li>目標は陽子衝突シミュレーションデータで学習した単一の基盤モデルによる衝突再構成・粒子識別・想定外信号検知の統合</li>
+            <li>署名はCERN最高情報責任者のEnrica Porcariと、MistralでAI for Engineering担当VPのJohannes Brandstetterが行った</li>
           </ul>
         </div>
         <div class="meta">
-          <span>.NET Blog</span>
-          <span>⏱ 4 min read</span>
+          <span>CERN</span>
+          <span>⏱ 2 min read</span>
           <span>2026-10-15</span>
+          <span class="engagement">▲ 308</span>
         </div>
       </div>
     </div>
@@ -135,103 +136,123 @@
 
       <div class="card">
         <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.minimax.io/blog/minimax-m31f">MiniMax、エージェント特化の軽量モデル「M3.1 Flash」公開、推論コストを70%削減</a></h3>
+        </div>
+        <div class="summary">MiniMaxは10月19日、エージェント作業・コーディング・コンピュータ操作に向けたモデル「M3.1 Flash」を発表した。ピーク時200トークン/秒超の出力速度を実現し、前モデル比で推論速度を約3倍、エージェント作業時のコストを70%削減したとしている。OSWorld V2で61.7、CyberGymで82%のスコアを報告し、重みは現時点で未公開という。</div>
+        <div class="key-points">
+          <ul>
+            <li>料金は入力100万トークンあたり0.15ドル、出力0.60ドルで、キャッシュ入力は0.015ドルまで下がる</li>
+            <li>より高性能な「Pro」版も今後リリース予定だが、公開時期は明示されていない</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>MiniMax</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-19</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.inceptionlabs.ai/blog/introducing-mercury-3">Inception、拡散モデル方式のLLM「Mercury 3」公開、GPT-6 Luna比4〜8倍速</a></h3>
+        </div>
+        <div class="summary">Inceptionは10月19日、拡散モデル方式のLLM「Mercury 3」を公開した。Mercury 1から40倍以上の規模拡大とベンチマーク性能約3倍向上を主張し、GPT-6 LunaやClaude Haiku 5.5を上回りながら4〜8倍速く生成できるとしている。NVIDIA GPU上で約1,068トークン/秒を記録し、コンテキストウィンドウは100万トークンに拡大した。</div>
+        <div class="key-points">
+          <ul>
+            <li>料金は入力100万トークンあたり0.20ドル・出力0.70ドルだが、発売記念で入力0.10ドル・出力0.35ドルの50%オフが適用される</li>
+            <li>50件のMind2Webタスクを使ったブラウザエージェント試験では、GPT-6.1-Solを上回る50%のタスクを完了した</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Inception Labs</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-19</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/linuxpwnescapecve-2026-99999linux_os.html">深刻脆弱性PwnEscape(CVSS 9.3)、さくらインターネットが新規申込一時停止で対応</a></h3>
+        </div>
+        <div class="summary">10月15日に技術詳細が公開されたLinuxカーネルの脱獄脆弱性PwnEscape(CVE-2026-99999、CVSS 9.3)を受け、さくらインターネットは10月16日、VPSやレンタルサーバーなど一部サービスの新規申し込みを一時停止すると発表した。AWSはEC2・Lambda・Fargateが影響を受けないとし、Amazon Linux 2には修正済みアップデートを既に提供したと説明している。</div>
+        <div class="key-points">
+          <ul>
+            <li>研究者は脆弱な設定では数週間、デフォルト設定でも約1か月で実働するエクスプロイトが出回ると予測している</li>
+            <li>さくらインターネットの一時停止は10月16日17時時点の対応で、他のLinux VM提供事業者の対応状況は今後の焦点になる</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-18</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="http://www.boredhackerblog.info/2026/10/plex-vulnerabilities-being-exploited-in.html">Plex Media Serverの脆弱性チェーン「plex2shell」が実際に悪用され、XMRigマイナーを展開</a></h3>
+        </div>
+        <div class="summary">Plexが9月1日に通知した複数の脆弱性(CVE-2026-96652/96654/96655/96656)を連鎖させる攻撃手法「plex2shell」の詳細が10月16日に公開され、翌17日にはハニーポットで実際の悪用が観測された。攻撃者はPlexのプレイヤータイムラインエンドポイントを悪用してサーバーに外部コンテンツを取得させ、XMRigマイナーと「myawesomeproxy」という名のプロキシツールを展開していた。</div>
+        <div class="key-points">
+          <ul>
+            <li>対象はPlex Media Server v1.43.2以前。悪用は複数のIPから観測され、Python-urllibのユーザーエージェントを使う手口だった</li>
+            <li>プロキシツールはトラフィックの外部転用を明示するバナーを出力し、研究者は住宅用IP経由で企業VPNへ到達する手口への悪用も懸念している</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>BoredHackerBlog</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-17</span>
+          <span class="engagement">▲ 138</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="http://peter.eisentraut.org/blog/2026/10/09/the-reverts-will-continue-until-morale-improves">PostgreSQL 19ベータで8〜10件の機能が撤回、「vibe codingのせいではない」と開発者が反論</a></h3>
+        </div>
+        <div class="summary">PostgreSQLコミッターのPeter Eisentrautは10月9日、PostgreSQL 19のベータ期間中に通常の数倍にあたる8〜10件の主要機能が撤回されたと報告した。原因として、コード品質の問題や作業の見積もり不足に加え、LLMによるコードレビューが従来より多くの細かいエッジケースの不具合を検出するようになったこと、4月〜8月の「Vulnpocalypse」でシニア開発者がセキュリティ修正に忙殺されレビューが薄くなったことを挙げている。</div>
+        <div class="key-points">
+          <ul>
+            <li>撤回の原因を「vibe coding」のせいだとする説を、該当コードがその流行以前に書かれていたことを根拠に否定している</li>
+            <li>REPACK CONCURRENTLYやシーケンスの論理レプリケーションなど一部機能は残り、撤回分の多くはPostgreSQL 20での再提出を見込んでいる</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Peter Eisentraut</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-10-09</span>
+          <span class="engagement">▲ 177</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
           <span class="tag tag-infra">Infra</span>
           <span class="content-type">📦 リリース</span>
-          <h3><a href="https://aws.amazon.com/jp/about-aws/whats-new/2026/10/guardduty-rds-data-exfiltration/">Amazon GuardDuty RDS Protectionがデータの不正流出・破壊の検出に対応、Aurora/RDS PostgreSQLが対象</a></h3>
+          <h3><a href="https://www.publickey1.jp/blog/26/aws_transformazure_functionsaws_lambdamicrosoft_azureaws.html">AWS Transform、Azure SDK使用の.NETアプリをAWS SDKへ自動変換する機能を追加</a></h3>
         </div>
-        <div class="summary">Amazon GuardDuty RDS Protectionに、正規の認証情報を奪った上でのデータ不正流出・破壊を検知する「データアクティビティ監視」が追加された。機械学習ベースの異常検出でクエリパターンの基準から外れた操作を検出し、エージェント導入やインフラ変更は不要。対象はAurora PostgreSQLとRDS for PostgreSQL。</div>
+        <div class="summary">AWSは10月、Azure SDKを使う.NETアプリケーションをAWS SDKベースのコードへ変換するAWS Transformの新機能を発表した。Azure FunctionsはLambdaへ、Blob StorageはS3へ、Queue StorageはSQSへ、Cosmos DBはDynamoDBへとそれぞれ対応づけて変換する。</div>
         <div class="key-points">
           <ul>
-            <li>対象はAmazon Aurora PostgreSQLとAmazon RDS for PostgreSQL。コンソールからワンクリックで組織全体に有効化でき、API/SDK/CLI/CloudFormationにも対応する</li>
-            <li>アカウント・リージョンごとに30日間の無料トライアルがある</li>
+            <li>直接対応するAWSサービスがないコードは変換せず、TODOコメントと別ファイルの移行手順書(Next Step)を生成する</li>
+            <li>Azureネイティブで構築した.NETアプリをAWSへ移したいチーム向けの機能で、AWS Transform上から利用できる</li>
           </ul>
         </div>
         <div class="meta">
-          <span>AWS</span>
+          <span>Publickey</span>
           <span>⏱ 2 min read</span>
-          <span>2026-10-08</span>
-          <span class="engagement">🔖 10</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-ai">AI</span>
-          <span class="content-type">🔬 研究</span>
-          <h3><a href="https://arxiv.org/abs/2610.18861">潜在空間での推論とテキストでの行動を1回の生成過程で切り替える「HybridAgents」、トークン54.7%減で最大2.6倍高速</a></h3>
-        </div>
-        <div class="summary">テキストベースの推論は遅く、潜在空間での推論はツール呼び出しも検証もできないという二択に対し、本論文は両者を1回の生成過程内で切り替える「HybridAgents」を提案する。切り替えを担う軽量モジュールHybridLink、複数ターンをまたぐ連続ワーキングメモリ、協調を学習するHybridSFT/HybridRLの2段階後学習で構成する。</div>
-        <div class="key-points">
-          <ul>
-            <li>数学・科学・医療・検索・エージェント推論を含む11ベンチマークで、フロンティアのテキスト/潜在エージェントに対し平均10.4%の性能向上、トークン35.5〜54.7%減、推論1.8〜2.6倍高速、コスト2.7〜3.7倍削減を報告</li>
-            <li>潜在的な思考過程を検証可能な形で保持しつつツール呼び出しを維持する設計で、コードとデータは論文ページからリンクされている</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>arXiv</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-10-17</span>
-          <span class="engagement">▲ 101</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-ai">AI</span>
-          <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://qiita.com/katsuki_ono/items/e656aa1c7e7d70f4a1cd">DeepSpeed・ms-swiftに頼らずPyTorch標準FSDPで学習基盤を自作、公開8日後にQwen3.5-397B MoEの学習を開始</a></h3>
-        </div>
-        <div class="summary">共有クラスタ環境やMoEモデルとの相性が悪いDeepSpeed・ms-swiftの代わりに、PyTorch標準のFSDPの上に学習ループを自作し、MITライセンスで4リポジトリを公開した。Qwen3.5-397B-A17Bの重み公開(2/16)から8日後の2/24にSFT/DPO/GRPOの学習スクリプトが揃い、同日中に最初のGRPO学習を開始した。</div>
-        <div class="key-points">
-          <ul>
-            <li>対象モデルはQwen3-235B-A22B・Qwen3.5-397B-A17B・GLM-5-FP8・Qwen3-Next-80B-A3Bの4つで、235B版で作った基盤を他モデルへ移植して使い回している</li>
-            <li>H100クラスタをSlurmで運用し、GRPOでは推論用vLLMをノード間TP=16で実行する</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Qiita</span>
-          <span>⏱ 5 min read</span>
-          <span>2026-10-18</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-infra">Infra</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://qiita.com/maeda-kazutoshi/items/4674e080c2ce3d53c809">Lambdaが3種類に、Web FunctionsとMicroVMsを使ってチャット分析アプリを1日20円で動かしてみた</a></h3>
-        </div>
-        <div class="summary">従来のイベント駆動Lambdaは「Event Functions」に改称され、Webアプリをそのまま配置できる「Web Functions」(10月登場)、隔離VMを貸し出す「MicroVMs」(6月登場)が加わり3種類になった。CSVのS3配置をEvent Functionsで集計し、Web FunctionsのチャットUIからBedrock(Claude Haiku 4.5)がMicroVM上でpandasコードを実行して回答する構成を作り検証した。</div>
-        <div class="key-points">
-          <ul>
-            <li>MicroVMは10分無操作で一時停止、一時停止2時間で終了、最長稼働4時間。認証トークンは最長60分で4時間指定は拒否された</li>
-            <li>丸1日の利用料は約20セントで大半がMicroVM、Web/Event FunctionsとS3の合計は1セント未満だった</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Qiita</span>
-          <span>⏱ 5 min read</span>
-          <span>2026-10-18</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-ai">AI</span>
-          <span class="content-type">🔬 研究</span>
-          <h3><a href="https://zenn.dev/nextbeat/articles/2026-10-syntax-locality-llm">LLMにとって書きやすい構文とは？ `end`と`end func foo`を1,800試行以上比較すると、深さ8のネストで正解率が0%と100%に分かれた</a></h3>
-        </div>
-        <div class="summary">独自の小さな言語で、閉じ方だけが違う構文(`{}`・`end`・`end func`・`end func foo`など)にLLMで同じプログラムを書かせ、構文木が完全一致するかを1,800試行以上のパイロットと追加実験で比較した。「依存関係が近いほど書きやすい」という当初仮説は支持されず、閉じ行に何を閉じたか書く冗長な情報が正答率を左右すると結論づけた。</div>
-        <div class="key-points">
-          <ul>
-            <li>深さ8のネストで`end`は24回中0回正解、名前付きの`end func foo`は24回中24回正解だった</li>
-            <li>深さ16の長いブロックでは`end func foo`が72回中62回正解、裸の`end`は15回にとどまった</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Zenn</span>
-          <span>⏱ 5 min read</span>
-          <span>2026-10-18</span>
+          <span>2026-10-20</span>
         </div>
       </div>
     </div>
@@ -241,63 +262,81 @@
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-product">Product</span>
+          <span class="tag tag-dev">Dev</span>
           <span class="content-type">📜 解説</span>
-          <h3><a href="https://engineering.dena.com/blog/2026/10/ai-agent-onboarding/">オンボーディングをClaude Codeに任せたら、AIが演じる新人が初日シナリオで44件のリンク切れと`sudo rm -rf`を検出した</a></h3>
+          <h3><a href="https://zenn.dev/ara_jlu/articles/per-task-review-dropped">Claude Codeのステップごとのレビューを既定から外した、8回の実験と16タスクの運用ログが根拠</a></h3>
         </div>
-        <div class="summary">DeNAのデータサイエンス部は、Confluence・Drive・Slackに散らばる手順と個人差の大きい環境構築を、GitHubリポジトリに集約しClaude Codeが伴走する仕組みに置き換えた。新規メンバー役をAIに演じさせ初日シナリオを6周検証したところ、生成リンク44件全てが切れていたことや、Drive上の外部スクリプトに`sudo rm -rf`が13行含まれていたことが判明した。</div>
+        <div class="summary">個人のClaude Code開発ハーネスで、各実装ステップ後のレビューと最終ブランチレビューの2層構成だったものを、ステップレビューをデフォルトから外しセキュリティ関連のステップのみに絞った。8月に4パターン×2回の実験を行った結果、唯一のCriticalバグはステップレビューありの構成で発生し、レビュー自体はそれを検出できなかった。</div>
         <div class="key-points">
           <ul>
-            <li>正本はConfluence等に残し、リポジトリにはID(`sources.yml`)と完了判定だけを置く設計で二重管理を避けた</li>
-            <li>中途入社者が約1か月でオンボーディングを完了、日報は毎営業日コミットされた</li>
+            <li>16タスクの運用ログでは、価値あった指摘4件は全て最終ブランチレビューから出ており、通常モード14タスクのステップレビューからの有効な指摘はゼロだった</li>
+            <li>レビューを外しつつ新鮮なサブエージェントでの分離は維持することで、トークン使用量を約20〜40%、コストを約10〜30%削減できたと報告している</li>
           </ul>
         </div>
         <div class="meta">
-          <span>DeNA Engineering</span>
+          <span>Zenn</span>
           <span>⏱ 6 min read</span>
-          <span>2026-10-18</span>
-          <span class="engagement">🔖 63</span>
+          <span>2026-10-19</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-frontend">Frontend</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://azukiazusa.dev/blog/void-vite-cloudflare-deploy/">VoidZeroの新ツールキット「Void」でメモアプリを作り、importからリソースを自動推論してCloudflareへデプロイする</a></h3>
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://zenn.dev/pksha/articles/0f9c11d1daea2e">Pyarmorの難読化オプション別にAI解析耐性を検証、フル装備でも単純なハッシュ関数は復元される</a></h3>
         </div>
-        <div class="summary">VoidZeroが10月15日にMITライセンスで公開したフルスタックツールキット「Void」を使い、Vite+/React/D1でメモアプリを作ってCloudflareにデプロイするまでを追った。`void/db`のようなimportからD1のバインディングが必要と推論し、開発時はローカルDB、デプロイ時はD1を自動作成する。`npx void deploy`一発でビルド・マイグレーション適用・Worker公開までを行う。</div>
+        <div class="summary">PKSHA Technologyの技術者がPyConJP 2026の発表を基に、Pyarmorの難読化オプション(mix-str・RFT・BCC・private/restrict)をAIによる解析耐性の観点で検証した。デフォルト設定ではAIが全コードをほぼ復元できたが、RFT+BCC+mix-str+privateのフル装備では関数名・定数・変数名を抽出できず復元に失敗した。一方、フル装備下でも`x % 251`のような単純なハッシュ関数は、入出力テストだけでAIに完全に特定された。</div>
         <div class="key-points">
           <ul>
-            <li>APIルートを`void/client`のfetchで呼ぶとパス・メソッドの誤りをコンパイル時に検出できる</li>
-            <li>マイグレーションを生成せずデプロイするとドリフト検出で中止される。ロールバックはコードのみでマイグレーションは戻らないため事前の互換性確認が必要</li>
+            <li>複雑な乗算・xorshiftハッシュ関数はフル装備下でAIが特定できず、`--private`による定数アクセス遮断とBCCによる命令列除去の組み合わせが効いたと分析している</li>
+            <li>外部生成AIサービスへHTTP経由で送るプロンプトはサービス側のログに残るため、難読化では保護できないと指摘している</li>
           </ul>
         </div>
         <div class="meta">
-          <span>azukiazusa.dev</span>
-          <span>⏱ 5 min read</span>
-          <span>2026-10-17</span>
-          <span class="engagement">🔖 53</span>
+          <span>Zenn</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-10-19</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
           <span class="tag tag-dev">Dev</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://qiita.com/charge0315/items/9a4f9d6a373a18e0cd13">決着件数が20件に届くまで眠る「実測勝率ゲート」が32日目に初めて動き、短期候補8件を全て見送った</a></h3>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://qiita.com/figueiredoluiz/items/9dae44b202aec123d7c4">AIが書いたVitestテスト139件を重複検出ツールで分析、コピペはゼロでも約7%は構造的重複だった</a></h3>
         </div>
-        <div class="summary">個人開発の株式スクリーニングにClaude Codeで実装した安全装置は、同条件の過去候補の勝率が基準45%を下回ったら候補を見送るが、決着件数が20件に届くまでは判定自体をしない設計だった。実装9月11日から32日後の10月13日、決着件数が28件に達して初めて作動し、短期候補8件(勝率18%)を全て見送った。</div>
+        <div class="summary">静的解析ツールvitest-dedupの開発者が、Claudeに2つのTypeScriptモジュールのテストを書かせた139件(手動追加10件を含め149件)を使い、ナイーブなトークン比較とvitest-dedup 0.4.0/0.5.0を比較検証した。ナイーブな手法は振る舞いの異なるテストを同一視する誤検出を出した一方、vitest-dedup 0.5.0は誤検出ゼロで18件のparameterization候補(31テスト分)を検出した。手動分類では139件中コピペの完全重複はゼロだったが、約10件(7%)は後続テストに包含される等の理由で削除可能だった。</div>
         <div class="key-points">
           <ul>
-            <li>10月6日・8日は勝率25.0%(12件中3件)・31.2%(16件中5件)と基準を下回っていたが、決着件数不足でゲートは動かなかった</li>
-            <li>見送り件数は10/13に16件、10/14に5件、10/15に3件、10/16に2件と続いた</li>
+            <li>「エッジケースを追加して」という2回目のプロンプトが、新規テストと同時に構造的な再テストも生成しており、冗長の大半はこの2回目セッション由来だった</li>
+            <li>誤検出を防ぐ`subsumed-test`ルールは3件検出中1件が誤りで、CIゲートには使えずレビュー支援用途止まりと結論づけている</li>
           </ul>
         </div>
         <div class="meta">
           <span>Qiita</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-10-18</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-19</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://qiita.com/tsuyoshi-otake/items/91ef586f1a1a689b0842">2,453円のESP32-P4ボードでLinux 7.2を起動、SSH接続時のフリーズ原因はメモリ破壊だった</a></h3>
+        </div>
+        <div class="summary">MMUなしRISC-VボードM5Stamp-P4でLinuxを動かす個人プロジェクトがv0.3.2でLinux 7.2.11へ到達し、Wi-Fi・SSH・MicroPythonが動作するようになった。約250コミットの大半をClaude CodeとDevinと共に行い、最大の難所だったSSH接続時のフリーズは2週間かけてループバック経由で再現し、割り込み状態が壊れる不具合を3つのカーネルパッチで解決した。</div>
+        <div class="key-points">
+          <ul>
+            <li>SDIOクロックを5MHzから40MHzに上げるとTCPスループットは約300KB/sから410〜440KB/sに向上するが、SSHは暗号化処理がシングルコアの360MHzを超えられず約250KB/sで頭打ちになる</li>
+            <li>デュアルコア(SMP)はLinux 7.2.11で10回中3回しか起動に成功せず、`isolcpus=1`指定で17回中17回成功したが2つ目のコアはほとんど仕事をしない状態</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-10-19</span>
         </div>
       </div>
     </div>
@@ -307,64 +346,43 @@
 
       <div class="card">
         <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.com/kksimp/Mac.apk">エミュレータなしでAndroidアプリをApple Silicon Mac上にネイティブ実行する「Mac.apk」</a></h3>
+        </div>
+        <div class="summary">「Mac.apk」は、エミュレータや仮想マシンを使わずAndroidアプリをmacOS上のネイティブプロセスとして動かすアルファ版プロジェクト。Android実行環境をmacOS上に再実装し、独自のarm64ローダーとBionicシム、ARM32向け再コンパイラを組み合わせ、GPUレンダリングとCPU実行をMac本体のリソースで行う。対応はApple Siliconのみで、macOS 26.4(Tahoe)以降が必要。</div>
+        <div class="key-points">
+          <ul>
+            <li>テスト済み65アプリのうち51本が完全動作、10本が部分動作、4本が未対応と公開されている</li>
+            <li>Androidアプリはmacユーザーの権限で実行され、スマホ版のようなサンドボックスはないため信頼できるAPKのみの導入を推奨している。ライセンスはAGPL-3.0</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-10-20</span>
+          <span class="engagement">▲ 238</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
           <span class="tag tag-dev">Dev</span>
           <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://sphinx-six-theta.vercel.app/">AIエージェントが書いたコードをpush前に「説明できるか」で検問するGitフック「Sphinx」</a></h3>
+          <h3><a href="https://github.com/carnot-tech/jinba-consulting-pptx-skill">コンサル風スライドをAIに作らせるClaude Code/Codex向けスキル、62種のHTMLパーツとレイアウト検査付き</a></h3>
         </div>
-        <div class="summary">Sphinxは、AIコーディングエージェントが書いたコードをpushする前に、変更の意図(失敗時の挙動など)を開発者本人に質問し、答えられなければpushを止めるGitフック。コーディングエージェントのチャットとは別の審査担当が差分を読んで質問を作り、誤答には新しい設問で返す。Codex・Claude Code・Cursor・OpenCode・Piに対応する。</div>
+        <div class="summary">Carnot AIが公開した「jinba-consulting-pptx-skill」は、コンサルティング風のPowerPointスライドをAIエージェントに作らせるためのルールブックとパーツライブラリ。16:9・1セクション1スライドのHTMLパーツを62種類(基本27・追加35)用意し、Chromeで印刷してPDF化する。ルール違反を検出する機械チェッカーと、要素の重なり・はみ出し・大きな余白を検出するレイアウトチェッカーを備える。</div>
         <div class="key-points">
           <ul>
-            <li>`npm install -g sphinx-understand`でインストール、Node 22.19以上が必要でmacOS/Linux/WSLで動作する</li>
-            <li>回答内容はコーディングエージェントには送られず、`.env`や鍵ファイルは開かない。`sphinx yolo`で質問をスキップできるが全てログに残る</li>
+            <li>推奨フローは、ルールブックを読む→パーツを組んで下書き→内容を埋める→機械チェック→デッキを作っていない別エージェントによるレビューの5段階</li>
+            <li>PowerPoint形式への変換はオプションで、既存ファイルへの追記時はマスターとスタイルを合わせて挿入できる。コードはMITライセンス</li>
           </ul>
         </div>
         <div class="meta">
           <span>GitHub</span>
           <span>⏱ 2 min read</span>
-          <span>2026-10-18</span>
-          <span class="engagement">▲ 237</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-oss">OSS</span>
-          <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://github.com/teal-language/tl">Luaの型付き方言「Teal」がv0.24.8公開、`tl`コンパイラでLua 5.1〜5.4・LuaJITに型チェックを追加</a></h3>
-        </div>
-        <div class="summary">TealはLuaの型付き方言で、コンパイラ`tl`が型チェック後に型注釈を取り除いた素のLuaへ変換する。10月13日にv0.24.8を公開した。Lua 5.1〜5.4とLuaJITで動作し、ゲームエンジンDefoldでは既に拡張機能として統合され構文ハイライトと言語サーバーを提供している。</div>
-        <div class="key-points">
-          <ul>
-            <li>`tl check module.tl`で型チェックを実行し、エラーがあれば報告して終了する</li>
-            <li>Defold向けTeal拡張v1.4が2025年9月に公開済みで、ブレークポイント対応とランタイムAPIの型注釈は今後の計画</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>GitHub</span>
-          <span>⏱ 2 min read</span>
-          <span>2026-10-13</span>
-          <span class="engagement">▲ 152</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-oss">OSS</span>
-          <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://www.getlazarus.org/dynamic/">Free Pascal/LazarusがIDE全体の再構築なしでプラグインを追加できる「動的パッケージ」に対応</a></h3>
-        </div>
-        <div class="summary">Free Pascal CompilerとLazarus IDEに、共有ライブラリとしてのパッケージをIDEやプログラムの実行中に差し替えられる「動的パッケージ」機能が初めて実装された。コンパイラが型情報をパッケージに埋め込み、`TPackageType`レコードを通じて実行時に読み込み・列挙・検索・解放ができる。Linux/Windows/macOSの共有ライブラリとして配布される。</div>
-        <div class="key-points">
-          <ul>
-            <li>ユニット名はパッケージ名と重複できず、生成ソースには`Package`が付与される(例: `ElectroToolsPackage.pas`)。ユニット名はインストール済み全パッケージで一意である必要がある</li>
-            <li>Lazarus側ではIDE起動前の変更パッケージ自動再構築や、フォーム/フレームをパレットに登録できるコンポーネント変換ツールが追加された</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Lazarus</span>
-          <span>⏱ 3 min read</span>
-          <span>2026-10-18</span>
-          <span class="engagement">▲ 87</span>
+          <span>2026-10-19</span>
+          <span class="engagement">🔖 27</span>
         </div>
       </div>
     </div>
@@ -373,38 +391,38 @@
       <div class="section-title">🔗 Quick Links</div>
 
       <div class="quick-link">
-        <span class="tag tag-product">Product</span>
-        <a href="https://www.anthropic.com/research/employment-at-anthropic">Anthropic社内、対話型エージェントの作業時間が社員の6倍に、若手技術職の新規採用比率は27%→9%に縮小</a>
-        <span class="quick-summary">— 8月時点で対話型エージェントの作業時間が社員の作業時間の6倍に達し、技術職の若手採用比率は2025年初から27%→9%へ縮小したとAnthropicが報告した。</span>
-        <span class="meta">Anthropic <span class="engagement">🔖 10</span></span>
-      </div>
-
-      <div class="quick-link">
         <span class="tag tag-security">Security</span>
-        <a href="https://socprime.com/?p=54408">Windows Shellのゼロデイ(CVE-2026-96951, CVSS 8.8)が悪用済みと確認、Mark of the Webを回避</a>
-        <span class="quick-summary">— コマンドインジェクション(CWE-77)によりMark of the Web保護を回避できる脆弱性で、Microsoftが10月13日のPatch Tuesdayで修正、CISAは米連邦機関に10月16日までの対応を求めた。</span>
-        <span class="meta">SOC Prime</span>
+        <a href="https://community.letsencrypt.org/t/lets-encrypt-is-adding-two-additional-remote-perspectives-for-domain-validation/252166">Let's Encrypt、ドメイン検証のリモート観測点を4から6に増強、11月10日に本番展開</a>
+        <span class="quick-summary">— BGPハイジャック耐性強化とCA/Browser Forum新基準(12月15日施行)への対応で、検証リクエストを計7回(主拠点1+リモート6)に拡張する。</span>
+        <span class="meta">Let's Encrypt Community <span class="engagement">▲ 237</span></span>
       </div>
 
       <div class="quick-link">
         <span class="tag tag-oss">OSS</span>
-        <a href="https://github.com/VikOlliver/RepRapMicron/wiki">1ミクロン単位で位置決めする自己複製型3Dプリンタ「RepRapMicron」、UV樹脂を4ミクロン単位で吐出</a>
-        <span class="quick-summary">— OpenFlexureの顕微鏡プラットフォームを土台に、最新のPIKA V0.02ビルドは約1µmの再現位置決めと10µm以下の精度を実現した。</span>
-        <span class="meta">GitHub <span class="engagement">▲ 308</span></span>
+        <a href="https://marc.info/?l=openbsd-ports&amp;m=179236125692175">OpenBSDにWineの新規ポートを提案、`%gs`レジスタ制約をソフトウェアエミュレーションで回避</a>
+        <span class="quick-summary">— The Witcher 3リマスターなど64bit Windowsアプリ数十本で動作確認済みだが、WoW64未対応のため32bitアプリは動かない。</span>
+        <span class="meta">OpenBSD Ports ML <span class="engagement">▲ 484</span></span>
       </div>
 
       <div class="quick-link">
-        <span class="tag tag-product">Product</span>
-        <a href="https://zenn.dev/sonicmoov/articles/oreilly-subscription-acm">年1〜2冊しか技術書を買わない人がO'Reillyサブスクを検証、ACM経由の初年度$150で契約してMCPも接続</a>
-        <span class="quick-summary">— 冊数で元を取るよりつまみ読みの価値を重視し、最安経路のACM経由での契約を選んだと報告している。</span>
-        <span class="meta">Zenn <span class="engagement">🔖 92</span></span>
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://lobste.rs/s/ggpwfi">Lobste.rsの「vibecoding」タグが無差別運用で逆効果に、分割か廃止を求める声</a>
+        <span class="quick-summary">— LLMが関わったと一言触れただけの投稿まで一律タグ付けされる運用が、技術記事を書く常連を遠ざけているとして分割か廃止を提案している。</span>
+        <span class="meta">Lobsters <span class="engagement">▲ 325</span></span>
       </div>
 
       <div class="quick-link">
-        <span class="tag tag-security">Security</span>
-        <a href="https://zenn.dev/fusic/articles/a77ba348115364">日本語の個人情報マスキングをSDP・Bedrock Guardrails・Presidio+GiNZAで比較、初期設定では3〜5割が検出漏れ</a>
-        <span class="quick-summary">— 全角→半角の前処理と正規表現を加えるとSDPの再現率は約97%まで上がったが、漏れをゼロにするには人の最終確認が必要と結論づけている。</span>
-        <span class="meta">Zenn</span>
+        <span class="tag tag-frontend">Frontend</span>
+        <a href="https://servo.org/blog/2026/10/09/august-in-servo/">Servoブラウザエンジン、CSS Gridを既定で有効化、8月は417コミットで前進</a>
+        <span class="quick-summary">— rustweek.orgなど複数サイトのレイアウト崩れを修正し、インタラクティブなテキスト選択やSpiderMonkey v153へのアップグレードも実現した。</span>
+        <span class="meta">Servo Blog</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-data">Data</span>
+        <a href="https://www.calabro.io/ohbf">ハッシュ関数1回で済む「One Hash Bloom Filter」、Blueskyのデプロイ時間を90分から15分に短縮</a>
+        <span class="quick-summary">— パーティションサイズを互いに素にして1回のハッシュから複数ビット位置を得る設計で、ミューテックス排除の副産物としてデプロイ時間が短縮された。</span>
+        <span class="meta">calabro.io <span class="engagement">▲ 38</span></span>
       </div>
     </div>
 
