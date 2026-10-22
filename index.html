@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tech News Daily — 2026-10-22</title>
-  <meta name="description" content="PHP緊急リリース、未認証RCE脆弱性2件を修正 / Anthropicが自律型AIエージェント「Claude Duet」公開 / DuckDB 2.0 LTS「Cinnamon Teal」リリース">
+  <title>Tech News Daily — 2026-10-23</title>
+  <meta name="description" content="eMudhraのCA秘密鍵、255通りの総当たりで解読可能だった / NVIDIA、自律AIエージェント向けサンドボックスランタイム公開 / Quad9、仏の差止命令で11月24日撤退">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Tech News Daily">
-  <meta property="og:title" content="Tech News Daily — 2026-10-22">
-  <meta property="og:description" content="PHP緊急リリース、未認証RCE脆弱性2件を修正 / Anthropicが自律型AIエージェント「Claude Duet」公開 / DuckDB 2.0 LTS「Cinnamon Teal」リリース">
+  <meta property="og:title" content="Tech News Daily — 2026-10-23">
+  <meta property="og:description" content="eMudhraのCA秘密鍵、255通りの総当たりで解読可能だった / NVIDIA、自律AIエージェント向けサンドボックスランタイム公開 / Quad9、仏の差止命令で11月24日撤退">
   <meta property="og:url" content="https://tech-news.kaion-lab.com/">
   <meta property="og:image" content="https://tech-news.kaion-lab.com/apple-touch-icon.png">
   <meta name="twitter:card" content="summary">
@@ -22,7 +22,7 @@
   <div class="container">
     <header>
       <h1>Tech News Daily</h1>
-      <div class="date">2026-10-22 (Thu)</div>
+      <div class="date">2026-10-23 (Fri)</div>
       <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
       <nav class="site-nav">
         <a href="./" class="active">📰 日刊ダイジェスト</a>
@@ -33,9 +33,9 @@
     </header>
 
     <div class="stats-bar">
-      <span>📰 21 articles</span>
+      <span>📰 20 articles</span>
       <span>🏷 7 categories</span>
-      <span>📡 13 sources</span>
+      <span>📡 17 sources</span>
     </div>
 
     <nav class="toc">
@@ -48,17 +48,27 @@
 
     <div class="numbers-bar">
       <div class="number-item">
-        <span class="number-value">CVSS 9.2</span>
-        <span class="number-label">PHP緊急リリースで修正された2件のRCE脆弱性の深刻度スコア</span>
+        <span class="number-value">256通り</span>
+        <span class="number-label">eMudhraのCA秘密鍵が総当たりで解読できた鍵空間の上限</span>
       </div>
       <div class="number-item">
-        <span class="number-value">12件</span>
-        <span class="number-label">GitLab 19.5.1緊急パッチが修正した脆弱性数（CVSS10.0の未認証RCEを含む）</span>
+        <span class="number-value">4000倍</span>
+        <span class="number-label">Bun 1.4.3のQPACK実装でHTTP/3リクエスト1件が生んだ最大のメモリ増幅率</span>
       </div>
       <div class="number-item">
-        <span class="number-value">98%減</span>
-        <span class="number-label">cronのclaude -p呼び出しのトークン消費を--safe-mode等で削減した実測値</span>
+        <span class="number-value">50</span>
+        <span class="number-label">著者がNode.js 10月セキュリティリリース対応で2日間で更新した管理リポジトリ数</span>
       </div>
+    </div>
+
+    <div class="weekly-keywords">
+      <div class="section-title">📊 今週のキーワード</div>
+      <div class="keyword-chips">
+        <span class="keyword-chip">緊急パッチ地獄</span>
+        <span class="keyword-chip">自律AIエージェント</span>
+        <span class="keyword-chip">PKIの機能不全</span>
+      </div>
+      <div class="keyword-summary">今週はPHPの未認証RCE2件、GitLabのCVSS10.0パッチ、Node.jsの10件のCVE修正に加え、eMudhraのCA秘密鍵が実質256通りしかなかった事案まで重なり、ソフトウェア基盤の信頼を支える仕組みそのものが立て続けに綻びを見せた週だった。一方でAnthropicの自律型エージェント「Claude Duet」やNVIDIAのサンドボックスランタイム「OpenShell」、並列稼働するClaude Codeを束ねるcmuxの選定記事が並び、自律的に動くAIエージェントをどう安全に運用するかという課題が急速に実務の関心事になっている。</div>
     </div>
 
     <div class="section" id="top-stories">
@@ -68,23 +78,23 @@
         <div class="card-header">
           <span class="tag tag-security">Security</span>
           <span class="content-type">🔒 セキュリティ</span>
-          <h3><a href="https://thephp.foundation/blog/2026/10/21/todays-php-security-release-and-how-were-strengthening-php-security/">DEEP DIVE: PHP緊急セキュリティリリース、未認証RCE脆弱性2件を修正</a></h3>
+          <h3><a href="https://scotthelme.co.uk/eight-bits-of-trust-emudhras-ca-keys-cracked-in-milliseconds/">DEEP DIVE: eMudhraのCA秘密鍵、256通りの総当たりで解読できる状態だった</a></h3>
         </div>
-        <div class="summary">PHP Foundationは2024年にOSTIFの資金提供でQuarkslabの外部監査を受けていたが、今回の脆弱性の芽はその後コア開発者が別の不具合を修正中に偶然見つけたOOM(メモリ不足)関連の挙動だった。対応案はいずれもDoSリスクや既存エクステンションへの影響を伴い、合意形成に基づくセキュリティチームの意思決定は数カ月にわたり停滞した。Foundation自身がブログでこれを「構造的な機能不全」と総括している。転機はOpenAIが6月に始めた脆弱性発見プログラム「Patch the Planet」で、セキュリティ企業CalifとWizがそれぞれ独立にPHPを調査し、8月11日と8月24日にOOM由来の根本原因を報告した。10月20日、CVE番号が公開予定より2日早く外部に漏れ、Foundationは事前通知を前倒しして公開を1日後ろにずらしたが、同日Califが誤ってPoC動画を公開し、10月21日07時41分(UTC)にはChainguardが協調開示の6時間以上前に修正済みビルドを公開して禁輸期間が崩れた。CVE-2026-109618はmemory_limitに達した瞬間に内部データが不完全なまま有効とみなされる問題で、Apache+mod_phpでは認証なしのリクエストがアプリケーションコード実行前にトリガーでき、研究者は既定設定でのフルRCEを実証した。CVE-2026-109619は致命的エラーの発生タイミングにより内部状態が前リクエストの解放済みメモリを指し続けるuse-after-freeで、同じワーカー上の後続リクエストから悪用できる。修正版はPHP 8.5.12・8.4.27・8.3.36・8.2.35の4ブランチ。CVSSスコアは9.2で、ネット上で広まった10.0は誤りだった。</div>
-        <div class="editorial">🧠 7月以降に15件のCVEを出し100件超の誤報を処理してきたPHPのセキュリティ運用は、ボランティア依存の体制の限界を露呈した形だ。AIエージェントによる発見が有効だったのは実測として確かだが、今回の禁輸崩れが示すように、情報を抱える関係者が増えるほど差分公開のリスクも増える。公開時点で実動するエクスプロイトが見つかっていなかったのは幸運に近く、今回の体制強化がこの種の「発見者側の事故」まで防げるかは未知数だ。</div>
+        <div class="summary">eMudhraはインドの認証機関で、ブラウザのルートストアに自社ルート証明書を持つ。2025年4月、同社はTLS発行用の中間CA6件(DV/OV/EVそれぞれ2世代)とコード署名CA2件を新規発行し、Sectigoの「AAA Certificate Services」ルートとクロス署名した。2026年10月17日、セキュリティ研究者がApple・Google・Microsoft・Mozilla・eMudhraに対し、これら8件の中間証明書の秘密鍵が危険な状態にあると報告した。同日夜にChromeがCRLSetで中間証明書をブロックし、数時間後にMozillaもOneCRLで追随、20日にはMozillaが事案を公表してNSSからeMudhraのルートを削除し、Chromeも次のRoot Store更新での削除を表明した。対象はP-384楕円曲線鍵で、安全性は秘密鍵dが384ビットの乱数であることに依存するが、eMudhraが生成した鍵は末尾1バイトを除く47バイトがすべてゼロで、dの値は実質0〜255の256通りしかなかった。公開鍵d×Gに対しG,2G,3G...と順に照合するだけでdが求まり、研究者は対象16件(eMudhra発行分とSectigo発行分のペア)すべての鍵を1秒未満で復元し、値は4・56・66・115・155・156・230・237だった。証明書自体は構造検証をすべて通過しており、鍵を実際に復元してみるまで異常は検出できなかった。秘密鍵は盗む必要がなく公開鍵さえあれば発行時点から事実上公開されていたことになり、約17ヶ月間悪用されたかどうかは誰にも分からない。</div>
+        <div class="editorial">🧠 CA(認証機関)の安全性は暗号理論そのものではなく、鍵生成スクリプトという地味な運用工程にかかっていることを改めて示した事例だ。eMudhraは発覚から14時間で失効させたと強調するが、公開鍵さえあれば鍵は推測不要という性質上、失効の速さは侵害の有無とは無関係である。ChromeはCertificate Transparencyログに不審な証明書が見当たらないと説明しているが、CTログを確認しないクライアントが依然多数派である以上、「実害は無かった」と断定するのは時期尚早だろう。</div>
         <div class="key-points">
           <ul>
-            <li>CVE-2026-109618(OOM由来のメモリ破壊)とCVE-2026-109619(use-after-free)はいずれもApache+mod_phpで未認証RCEが実証され、修正はPHP 8.5.12・8.4.27・8.3.36・8.2.35の4ブランチに適用された</li>
-            <li>脆弱性はOpenAIの「Patch the Planet」プログラムの一環でCalifが8月11日、Wizが8月24日に根本原因をPHPへ報告しており、AIエージェントによる発見という共通点を持つ</li>
-            <li>CVSSスコアは9.2(ネットで広まった10.0は誤報)で、10月20日のCVE早期流出と10月21日07時41分(UTC)のChainguardによる6時間超前のビルド公開という2つの禁輸崩れが重なった</li>
+            <li>秘密鍵は47バイトのゼロと末尾1バイトのみで構成され取り得る値は実質256通りに限られており、研究者は対象16件の鍵すべてを1秒未満で復元した</li>
+            <li>対象は2025年4月発行のTLS発行用中間CA6件(DV/OV/EV各2世代)とコード署名CA2件で、Sectigoの「AAA Certificate Services」ルートとクロス署名されていた</li>
+            <li>eMudhraは原因を鍵生成スクリプトの不具合と名称類似による取り違えの人的ミスと説明し、発覚から14時間で失効させたとして10月22日にSSL/TLS証明書事業からの撤退を発表した</li>
           </ul>
         </div>
-        <div class="why-it-matters">💡 Apache+mod_phpやPHP-FPM環境を運用しているチームは、既定設定でも未認証RCEが成立する以上、他の作業を止めてでも直ちにPHP 8.2.35以降へアップグレードすべきだ。</div>
+        <div class="why-it-matters">💡 curlの自動インストーラやCI/CDパイプライン、IoT機器など証明書失効やCTログを確認しないクライアントを運用しているチームは、OSやランタイムのCA証明書バンドルを今すぐ更新すべきだ。</div>
         <div class="meta">
-          <span>PHP Foundation</span>
-          <span>⏱ 7 min read</span>
-          <span>2026-10-21</span>
-          <span class="engagement">▲ 634</span>
+          <span>scotthelme.co.uk</span>
+          <span>⏱ 8 min read</span>
+          <span>2026-10-20</span>
+          <span class="engagement">▲ 75</span>
         </div>
       </div>
 
@@ -92,45 +102,41 @@
         <div class="card-header">
           <span class="tag tag-ai">AI</span>
           <span class="content-type">📦 リリース</span>
-          <h3><a href="https://claude.com/product/claude-duet">Anthropic、プロアクティブに動くAIエージェント「Claude Duet」を研究プレビュー公開</a></h3>
+          <h3><a href="https://github.com/NVIDIA/OpenShell">NVIDIA、自律型AIエージェント群向けサンドボックスランタイム「OpenShell」をApache 2.0で公開</a></h3>
         </div>
-        <div class="summary">Anthropicは、チャットを開くのを待たずに自律的に動くAIエージェント「Claude Duet」を研究プレビューとして公開した。朝に次の行動を示す概要を提示した後は静かに待機し、会議調整やダッシュボード作成のようなタスクを引き受けて完了後に報告する。Gmail・Slack・Stripe・QuickBooksなど6,000超のコネクタに接続でき、送信や支払いなど機微な操作の前には承認を求める仕組みを持つ。利用中のClaudeのメモリ・スキル・アプリを1つのスレッド内で使い回せる点が、都度コンテキストを渡す通常のチャットと異なる。現時点では米国のPro/Max利用者向けのウェイトリスト登録制で、Team/Enterpriseプランは対象外。バックグラウンドの作業はPro/Maxの利用枠を消費する。</div>
+        <div class="summary">NVIDIAは、ファイル操作やAPI呼び出し、認証情報の利用を伴う自律型AIエージェントを安全に動かすランタイム「OpenShell」をオープンソースで公開した。エージェントはゲートウェイ・スーパーバイザー・サンドボックスの3層構成で動き、各エージェントの許可範囲をポリシーとして宣言し、カーネルレベルの名前空間制御でファイルアクセスとシステムコールを制限する。認証情報は実際の値をエージェントに見せず、ランタイムが許可済みの宛先向けリクエストにだけ付与する。ポリシー変更は形式検証で危険な新規アクセスを検知し、人間のレビュー待ちにする仕組みを持つ。Python・TypeScript・Go・RustのSDKを提供し、Linux・Apple Silicon・WSL2(実験的)で動作する。</div>
         <div class="key-points">
           <ul>
-            <li>朝に次の行動を示す概要を提示した後は静かに待機し、スケジューリングやダッシュボード作成のようなタスクを完了後に報告する</li>
-            <li>Gmail・Slack・Stripe・QuickBooksを含む6,000超のコネクタ・プラグインに接続し、送信や支払いなど機微な操作の前には承認を求める</li>
-            <li>提供はiOS/Android単体アプリとclaude.aiのWeb版で、米国のPro/Max利用者向けウェイトリスト登録制、Team/Enterpriseは未対応</li>
+            <li>ゲートウェイ・スーパーバイザー・サンドボックスの3層アーキテクチャで、各エージェントはポリシーで宣言された範囲のファイル・ネットワーク・プロセスのみ操作でき、認証情報は実値を見せずリクエストにだけ付与される</li>
+            <li>ポリシー変更は形式検証で新規の認証情報付きアクセスなど危険な変更を検知し人間のレビューを要求する仕組みを持ち、v0.1.x系・Apache License 2.0で公開され、公開時点で17.7kスター・1.8kフォークを獲得している</li>
           </ul>
         </div>
-        <div class="why-it-matters">💡 Claude Codeなど既存のClaude連携を運用しているチームは、既存のメモリ・スキル設定がそのままDuetでも使われる点を踏まえ、まず機微操作の承認フローを確認してから試すとよい。</div>
         <div class="meta">
-          <span>Anthropic</span>
+          <span>GitHub</span>
           <span>⏱ 3 min read</span>
           <span>2026-10-21</span>
-          <span class="engagement">▲ 282</span>
+          <span class="engagement">▲ 263</span>
         </div>
       </div>
 
       <div class="card featured">
         <div class="card-header">
-          <span class="tag tag-data">Data</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://duckdb.org/2026/10/21/announcing-duckdb-200">DuckDB 2.0 LTS「Cinnamon Teal」リリース、約2万コミット分の機能を追加</a></h3>
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://quad9.net/news/blog/au-revoir-france/">DNSリゾルバQuad9、フランスの差止命令を受け11月24日に撤退</a></h3>
         </div>
-        <div class="summary">DuckDBチームは、1.5以降の約2万コミットを束ねた機能リリース「2.0.0 Cinnamon Teal」をLTSとして公開した。新しいQuackプロトコルと`CONNECT`文でPostgreSQL・MySQLなど外部データベースへ直接接続でき、Parquet/CSV/ネイティブストレージの読み込みは非同期I/Oで複数リクエストを同時に飛ばせるようになり、S3などオブジェクトストレージ越しの読み取りが速くなる。半構造化データ用のVARIANT型、デフォルトになった新PEGパーサ、コーディングエージェント向けに出力を簡潔なMarkdownへ切り替える「エージェントモード」も追加された。2.0形式で書いたDBファイルは旧バージョンから読めない点が最大の互換性注意点。</div>
+        <div class="summary">非営利のDNSリゾルバQuad9は、フランスでのサービス提供を2026年11月24日に終了すると発表した。カタールの放送事業者beINが起こした訴訟で、フランスの裁判所が特定ドメインのDNS解決をフランス国内ユーザー向けに遮断するよう命じ、違反1日あたり1,000ユーロ(当初58万ユーロから減額)の罰金を科したためだ。Quad9はユーザーの位置情報も登録情報も持たないため対象ユーザーを特定できず、グローバルな遮断はフランスの司法判断を全世界に適用することになるとして控訴中。フランス国内の政府機関や研究教育網、病院、エネルギー・運輸事業者を含む利用者は、サービス終了までに別のDNSプロバイダへ移行する必要がある。</div>
         <div class="key-points">
           <ul>
-            <li>Quackプロトコルの`CONNECT`文でPostgreSQL・MySQLなど外部DBに直接接続でき、Parquet/CSV/ネイティブ読み込みは非同期I/Oで多重リクエストに対応した</li>
-            <li>エージェントモードはTPC-Hの実験でエージェントが読むべき出力量を59%削減し、半構造化データ向けのVARIANT型やデフォルト化した新PEGパーサも追加された</li>
-            <li>2.0で書いたデータベースファイルは旧バージョンから読めない一方、旧ファイルは2.0からそのまま読める。LTSサポートは2027年10月まで、直前のLTSだった1.4は2026年11月まで</li>
+            <li>罰金は当初1日58万ユーロから1日1,000ユーロに減額されたが、Quad9はユーザーの位置情報を持たないため命令への遵守自体が技術的に不可能だと主張し控訴している</li>
+            <li>フランス国内では同種の訴訟が他に約20件、数百のドメインを対象に進行中で、Quad9は2021〜2023年のドイツでのSony Music訴訟でgeoIPブロックを導入した際にVPN経由で回避された上に法廷侮辱で罰金を科された前例がある</li>
           </ul>
         </div>
-        <div class="why-it-matters">💡 既存DBを2.0へ移行する前にシャドウ環境で読み書きを検証すべきで、C++17コンパイラ必須化やmacOS x86_64のサポート縮小などビルド環境側の変更点も事前に確認する必要がある。</div>
         <div class="meta">
-          <span>DuckDB</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-10-21</span>
-          <span class="engagement">▲ 350</span>
+          <span>Quad9</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-22</span>
+          <span class="engagement">▲ 934</span>
         </div>
       </div>
     </div>
@@ -142,20 +148,20 @@
         <div class="card-header">
           <span class="tag tag-security">Security</span>
           <span class="content-type">🔒 セキュリティ</span>
-          <h3><a href="https://docs.gitlab.com/releases/patches/patch-release-gitlab-19-5-1-released/">GitLab 19.5.1緊急パッチ、CVSS10.0の未認証RCEを含む12件の脆弱性を修正</a></h3>
+          <h3><a href="https://www.openwall.com/lists/oss-security/2026/10/21/18">musl libc、regcompの複数整数オーバーフロー(CVE-2026-107891)でヒープ破壊の恐れ</a></h3>
         </div>
-        <div class="summary">GitLabは10月21日、CE/EE向けに19.5.1などの緊急パッチをリリースし、12件の脆弱性を修正した。最も深刻なCVE-2026-110264は正規表現コンパイラの整数オーバーフローで、未認証での任意コード実行を許す可能性がありCVSS10.0と評価された。OmniAuth経由のLDAPアカウント乗っ取りやOAuth/OIDCディスカバリエンドポイントのキャッシュポイズニングなど、重大度の異なる脆弱性が他に11件含まれる。</div>
+        <div class="summary">musl libcのregcomp関数に複数の整数オーバーフローが見つかり、意図したより小さいヒープ領域が確保されて範囲外書き込みに至る恐れがある。脆弱性は正規表現のサイズや複雑さそのものに起因し、信頼できない入力から正規表現をregcompに渡すアプリケーションが対象となる。問題のコードはmusl 0.5.0から存在し、1.2.6までの全バージョンが影響を受ける。</div>
         <div class="key-points">
           <ul>
-            <li>CVE-2026-110264(CVSS10.0)は正規表現コンパイラの整数オーバーフローで、GitLab 7.0以降の全バージョンが対象の未認証RCE</li>
-            <li>修正版は19.5.1・19.4.3・19.3.6・19.2.9・19.1.9・19.0.10・18.11.13の7系統、GitLab.comは既に適用済みでCVE-2026-110264の検知ルールも別途公開された</li>
+            <li>整数オーバーフローはマッチ対象データではなく正規表現自体の構造で発生し、最低でもクラッシュによるサービス拒否、ヒープの使い方次第では任意コード実行につながる可能性がある</li>
+            <li>修正パッチが10月21日のoss-securityメーリングリストで公開され、1.2.7リリースまでの暫定対応として信頼できない正規表現をregcompに渡さない運用が推奨されている</li>
           </ul>
         </div>
         <div class="meta">
-          <span>GitLab</span>
-          <span>⏱ 3 min read</span>
+          <span>Openwall</span>
+          <span>⏱ 2 min read</span>
           <span>2026-10-21</span>
-          <span class="engagement">▲ 210</span>
+          <span class="engagement">▲ 50</span>
         </div>
       </div>
 
@@ -163,40 +169,20 @@
         <div class="card-header">
           <span class="tag tag-security">Security</span>
           <span class="content-type">🔒 セキュリティ</span>
-          <h3><a href="https://nodejs.org/en/blog/vulnerability/october-2026-security-releases">Node.js、10件のCVEを含むセキュリティリリース公開、Brotliデコーダのコード実行バグなどを修正</a></h3>
+          <h3><a href="https://foxio.io/blog/header-accordions-qpack-amplification-attacks-against-http-3-servers">HTTP/3のQPACK圧縮を悪用した「Header Accordions」攻撃、Bun 1.4.3で最大4000倍のメモリ増幅</a></h3>
         </div>
-        <div class="summary">Node.jsは10月21日、26.x・24.x・22.x系統でv26.12.1・v24.22.1・v22.23.4をリリースし10件のCVEを修正した。最高深刻度は「High」で、Brotliデコーダの境界外書き込みによる遠隔コード実行、全角数字を使ったIPアドレス表記でのTLS証明書ホスト名検証バイパスなど4件がHighに分類される。crypto.randomUUID()やrandomInt()のエントロピーキャッシュがスナップショットやSEAに保存され、同じ値を繰り返す問題もMediumとして含まれた。</div>
+        <div class="summary">研究者がHTTP/3のヘッダー圧縮方式QPACKを悪用し、小さなリクエスト1件でサーバーのメモリをワイヤ上のサイズの数百〜数千倍消費させる「Header Accordions」攻撃を公表した。10種類の実装を検証したところ7種が脆弱で、Bun 1.4.3では6万回の参照で2GiBコンテナをOOMキルできるほどの約4000倍の増幅が確認された。原因は復号前の圧縮サイズしか見ない、RFC 9114が定める1フィールドあたり32バイトのオーバーヘッドを数えない、既定で上限を設けない、設定した上限を実際には適用しないといった実装側の不備で、修正はデコード中に累積サイズの予算を強制する方式に統一された。</div>
         <div class="key-points">
           <ul>
-            <li>CVE-2026-111497はBrotliデコーダの境界外書き込みでRCEにつながる可能性があり、26.x・24.x・22.xの全系統が対象</li>
-            <li>全角数字で書かれたIPアドレスやホスト名がゆるく解決されるケースでTLS証明書のホスト名検証を回避できる脆弱性が2件(CVE-2026-105483, CVE-2026-106069)含まれ、EOL版も影響を受ける</li>
+            <li>lsquicは約600〜1800倍、quicheは約20倍、quic-goは約15倍の増幅が確認され、lsquic 4.9.0・quiche 0.29.3・quic-go 0.57.0・Wireshark 4.6.2/4.4.12でそれぞれ修正済みだが、Bun・aioquic/mitmproxy・h3(hyperium)は記事公開時点で未修正だった</li>
+            <li>開示は2025年11月から2026年7月にかけて進められ、IIS・Envoy・ngtcp2/nghttp3・Google quicheは影響を受けないと確認されている</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Node.js</span>
-          <span>⏱ 3 min read</span>
-          <span>2026-10-21</span>
-          <span class="engagement">▲ 12</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-security">Security</span>
-          <span class="content-type">🔒 セキュリティ</span>
-          <h3><a href="https://safedep.io/litellm-pypi-compromise-credential-stealer-backdoor/">LiteLLM 1.107.0のPyPI公開版が改竄され、認証情報窃取バックドアが混入</a></h3>
-        </div>
-        <div class="summary">AIゲートウェイ「LiteLLM」の1.107.0が10月21日にPyPIへ公開された際、ビルド工程でsite-packages配下に認証情報窃取コードとバックドアが混入した。cook.pyはSSH鍵・クラウド認証情報・CI/CDシークレット・LLMプロバイダキーなどを暗号化して外部サーバへ送信し、sitecustomize.pyは1時間おきに外部から取得したコードを実行する常駐プロセスを起動する。公開から約2時間後の13:40(UTC)にPyPIから削除された。</div>
-        <div class="key-points">
-          <ul>
-            <li>全7種のwheelとソース配布物に改竄が及び、cook.pyがSSH鍵・クラウド認証情報・CI/CDシークレット・ブラウザ保存パスワードまで収集してwww.litellm[.]devへ送信していた</li>
-            <li>11:39〜11:40(UTC)にPyPIへ公開され13:40に削除、1.106.2・1.107.0rc1・1.107.0rc2は無害と確認されている。導入環境ではsite-packages内のcook.py/cook.pth/sitecustomize.pyの有無を確認すべき</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>SafeDep</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-10-21</span>
+          <span>foxio.io</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-20</span>
+          <span class="engagement">▲ 7</span>
         </div>
       </div>
 
@@ -204,40 +190,62 @@
         <div class="card-header">
           <span class="tag tag-dev">Dev</span>
           <span class="content-type">📜 解説</span>
-          <h3><a href="https://google.github.io/styleguide/rustguide.html">Google、Rust公式スタイルガイドを公開、Android・Chromiumも準拠へ</a></h3>
+          <h3><a href="https://codeandcake.dev/posts/2026-10-22-docker-is-weird">「Dockerは奇妙だ」、コンテナの正体とGoランタイムがruncに課す制約を解説</a></h3>
         </div>
-        <div class="summary">Googleは、google3・Android・ChromeOS・Fuchsia・Chromeで使うRustの命名・API設計・実装規約を1つのスタイルガイドとして公開した。基本方針は公式のRustスタイルとAPIガイドラインに従い、ライブラリコードでは設計規約を遵守必須、アプリケーションコードでは単純さを優先する推奨とする二段構えを取る。Rc/Arcより一意所有権、`&amp;String`より`&amp;str`を受け取るシグネチャ、公開enum/structへの`#[non_exhaustive]`付与などを明文化した。Android・Chromiumは今後このガイドへの準拠を始める方針としている。</div>
+        <div class="summary">コンテナは専用のVM技術ではなく、Linuxカーネルのnamespace・cgroup・ネットワーク機能を組み合わせて制限を課した通常のプロセスであり、ホストの/procから直接見える。Dockerイメージはただのフォルダをchrootまたはpivot_rootでルートファイルシステムに差し替えたものに過ぎない。runcはGoで書かれているが、Goのマルチスレッドランタイムは一部のシステムコールが要求する単一スレッド実行と衝突するため、Goランタイム起動前に動くCモジュール「nsenter」を同梱し、forkの代わりに/proc/self/exeを特殊な引数付きで再実行する回避策を取っている。</div>
         <div class="key-points">
           <ul>
-            <li>設計規約はライブラリコードには遵守必須、アプリケーションコードには単純さ優先の推奨として扱う二段階のルールを採用する</li>
-            <li>`&amp;str`/`&amp;[T]`/`&amp;T`を関数シグネチャで優先し`&amp;String`/`&amp;Vec&lt;T&gt;`/`&amp;Box&lt;T&gt;`を避ける、`.clone()`より借用を優先するなど所有権に関する具体ルールを明文化した</li>
+            <li>「コンテナ」はLinuxの単一機能ではなく、namespaceによる可視範囲の分離とcgroupによるリソース制限、複数のネットワーク機構を組み合わせた概念である</li>
+            <li>Goはforkを使える形で提供していないため、runcは/proc/self/exeを再実行して子プロセスを作る手法で対処し、Dockerデーモンが長らくrootを要求してきたのもネットワーキング周りのカーネルAPIがrootを前提としていたことが主因である</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Google</span>
-          <span>⏱ 3 min read</span>
-          <span>2026-10-21</span>
-          <span class="engagement">▲ 153</span>
+          <span>codeandcake.dev</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-10-22</span>
+          <span class="engagement">▲ 15</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-oss">OSS</span>
-          <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://qiita.com/nogataka/items/170f99bb52ecd720d3ff">ngrok的HTTPトンネルを自前運用できるOSS「gridbase」、docker compose一発で構築</a></h3>
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://mjtsai.com/blog/2026/10/15/passkeys-attestation-trap/">パスキーの「アテステーション」機能、サイトが対応鍵を絞り込む余地を残すとの指摘</a></h3>
         </div>
-        <div class="summary">gridbaseは、手元のアプリを公開URLで見せるHTTPトンネルサービスを自分のサーバー上で動かせるOSSで、もとはSaaSとして提供していたものをオープンソース化した。`docker compose up`一発でcaddy・Go製トンネルサーバー・Next.js製管理画面・Directus(DB/API)の5サービスが起動し、管理画面でAPIキーとサブドメインを発行してクライアントを接続すると`http://foo.gridbase.localhost/`のようなURLでアクセスできる。現状はHTTPトンネルのみ対応でTCPトンネル・WebSocket・ストリーミング応答は未対応、同時リクエストは1トンネルにつき1件に制限される。</div>
+        <div class="summary">パスキーは本来パスワードやハードウェアキーと違って利用者が完全にコントロールできるはずだが、WebAuthnのアテステーション機能を使えばサイト側が特定ベンダーの認証器しか受け付けないよう絞り込める余地がある、との批判がブログで取り上げられた。Appleは現時点でパスキーのアテステーションに対応していない一方、既にアテステーションを要求し特定ベンダーを許可リスト化しているサイトもあると指摘されている。反論として、消費者向けサイトがアテステーションを必須化すれば自社の利用者の大半を締め出すため現実には起きにくいとの見方も示されている。</div>
         <div class="key-points">
           <ul>
-            <li>ビルドキャッシュがある状態でclone〜動作確認まで約2分半、本体はMITライセンスだが同梱のDirectus 11.17.4はBSL1.1で、直近12カ月の総収益等が500万ドルを超える場合は商用ライセンスが必要</li>
-            <li>WebSocket・Server-Sent Events・ストリーミング応答が未対応で1トンネルの同時処理は1件のみ、公開運用時はトンネルポートのTLS設定と既定の秘密値変更が必須</li>
+            <li>アテステーションは認証器の作成時の特性をリライング・パーティが検証する仕組みで、FIDO標準に組み込まれているため利用者の意思とは無関係にエコシステム側で有効化できる</li>
+            <li>Appleはアテステーションが同期型のパスキーと馴染まない設計だとして対応を見送っており、W3CとFIDOとの協議を進めていると説明している一方、企業向けのハードウェアセキュリティキー運用では既に利用されている</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Qiita</span>
+          <span>mjtsai.com</span>
           <span>⏱ 4 min read</span>
-          <span>2026-10-21</span>
+          <span>2026-10-15</span>
+          <span class="engagement">▲ 29</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-frontend">Frontend</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://firefox-source-docs.mozilla.org/devtools-user/local_mode/index.html">Firefox 153のDevTools「Local Mode」、ローカルファイルをカスタムhttps起点で配信</a></h3>
+        </div>
+        <div class="summary">Firefox 153のDevToolsに追加された「Local Mode」は、ローカルのフォルダを任意のhttps起点に割り当て、別途HTTPサーバーを立てずにSecure Context限定のWeb APIを含むページをテストできる機能である。マッピングはDevToolsを開いている間だけ有効で、file://のURLを開くと一時的な割り当てを作る「Try it」と永続化する「Add To Settings」のどちらかを選べる。設定はabout:configのdevtools.local-mode.mappingsキーで管理でき、プロファイル間の移行やスクリプト化にも対応する。</div>
+        <div class="key-points">
+          <ul>
+            <li>マッピングはDevTools Optionsパネルから追加でき、例えばhttps://firefox.localhostを/home/alex/appのようなローカルフォルダに割り当てられる</li>
+            <li>about:configのdevtools.local-mode.mappings.${index}.origin/path/disabledの3キーで管理するため、プロファイル間でのマッピング移行やスクリプトによる自動設定が可能になる</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Mozilla</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-20</span>
+          <span class="engagement">▲ 140</span>
         </div>
       </div>
     </div>
@@ -247,60 +255,40 @@
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-ai">AI</span>
+          <span class="tag tag-infra">Infra</span>
           <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://zenn.dev/yosiki/articles/claude-p-cron-token-diet">cronのclaude -pが「ok」だけで4万トークン消費、--safe-mode等で98%削減</a></h3>
+          <h3><a href="https://zenn.dev/yoshinani_dev/articles/0e6513a56eb629">Node.js 10月セキュリティリリースへ50リポジトリ対応、Vercelの実行環境は再デプロイしても旧版のまま</a></h3>
         </div>
-        <div class="summary">認証確認だけのため1日数回LaunchAgentから`claude -p "ok"`を呼ぶジョブが、CLAUDE.mdやフック注入・全ツール定義を毎回読み込み1回39,968トークンを消費していた。`--safe-mode`で16,798トークン(-58%)、`--tools ""`を加えて2,931トークン(-93%)、`--system-prompt`で既定プロンプトも置き換えて737トークン(-98%)まで削減できた。</div>
+        <div class="summary">著者は自身が管理する約50リポジトリに対し、Node.jsの2026年10月セキュリティリリース(Brotliデコーダの範囲外書き込みによるRCEを含むCVE10件)への対応をClaude Codeを使って約2日で終えた。Vercelの125プロジェクトを調べたところ、ルートのpackage.jsonにしかenginesを指定していなかった18件がNode 22でビルドされていたため、全リポジトリのenginesを24.x系に統一した。一方、再デプロイ後もVercelの関数実行環境自体は旧バージョン(24.21.0/22.23.2)のままだったため、無意味な再デプロイをやめて実行時バージョンを毎朝測定するタスクに切り替えた。Cloud RunはDockerfileをnode:24.22.1に固定して再ビルドし、古いリビジョンは約1分で0になった。</div>
         <div class="key-points">
           <ul>
-            <li>内訳は推定でCLAUDE.md・フック・スキル・MCP定義が約23,000トークン、組み込みツール定義が約13,900トークン、既定システムプロンプトが約2,200トークンを占めていた</li>
-            <li>`--tools ""`はMCPツールには効かずファイル読み取りが必要なら`--tools "Read"`のように個別指定が必要、`--effort low`で出力も106トークンから4トークンに減り1日4回の呼び出しなら週112万トークンが約2万トークンになる</li>
+            <li>一括作成した66本のPRのうち65本をマージしたが、Prismaの生成物がビルドキャッシュ復元時に再生成されず本番ビルドが失敗する問題が発生し、Turborepoにgenerateタスクを追加して解決した</li>
+            <li>Vercelの関数実行環境のバージョン更新はデプロイ側の操作では反映されないため、著者は配布完了を待つ間、毎朝バージョンを測定するタスクを設けて監視する方針に切り替えた</li>
           </ul>
         </div>
         <div class="meta">
           <span>Zenn</span>
           <span>⏱ 5 min read</span>
-          <span>2026-10-21</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-infra">Infra</span>
-          <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://zenn.dev/socialplus/articles/eks-graviton-arm64-migration">EKSにGravitonを導入、arm64/amd64混在運用でSpotコストを3〜6%削減</a></h3>
-        </div>
-        <div class="summary">amd64のみで運用していたRailsアプリのEKSクラスタに、Karpenterでarm64(Graviton)ノードを追加した。東京リージョンのオンデマンド価格は`t4g.large`が`t3.large`より約21%安く、Spot候補のインスタンスタイプも28種から38種に増えて確保しやすくなった。マルチアーキビルドはQEMUエミュレーションが遅すぎたためarm64/amd64それぞれのネイティブランナーでビルドし`docker buildx imagetools create`でマニフェストを統合、initContainerのamd64バイナリ直書きやArgo CDのJSバンドルハッシュ不一致といった個別の不具合に対処した。</div>
-        <div class="key-points">
-          <ul>
-            <li>2週間(9/30〜10/15)の実測でSpotノードの稼働時間の約51.5%がarm64となり、2通りの比較基準でSpotコストが約3〜6%下がった。レイテンシ差は数%以内でエラー率の有意差もなかった</li>
-            <li>initContainerやCronJobがkubectl等のamd64バイナリを固定ダウンロードしていた箇所は`uname -m`でアーキ判定する方式に変更、Argo CDはJSバンドルのハッシュ不一致でUIが空白になる問題が出たためarm64固定で運用している</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Zenn</span>
-          <span>⏱ 6 min read</span>
-          <span>2026-10-21</span>
+          <span>2026-10-22</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
           <span class="tag tag-security">Security</span>
-          <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://qiita.com/jiis-sasaki/items/fc4e677334d67ee1d472">GitHubへのAPIキー漏えいを防ぐ7段構え、.gitignore二重化からgit-filter-repoまで</a></h3>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/rakko_inc/articles/dependabot-cve-to-pr-flow">Next.jsの脆弱性にDependabotが反応せず、GHSA未掲載の数日間は自分でAdvisory Databaseを確認するしかなかった</a></h3>
         </div>
-        <div class="summary">GitHubへの秘密情報の誤pushを防ぐ記事は、対策を「入れない・止める・漏れたら対処する」の3段構えで整理している。ホームディレクトリの`core.excludesFile`とリポジトリの`.gitignore`を二重にし、既存の秘密はgitleaksで履歴全体を棚卸し、pre-commitフックとGitHubのpush protectionで二重にブロックする。漏えい後はまず秘密の失効・ローテーションを最優先し、`.gitignore`は追跡済みファイルに効かず削除コミットを作っても過去履歴から読めるため、履歴改変より先に鍵を無効化すべきと強調する。</div>
+        <div class="summary">2026年10月14日に公表されたNext.jsの脆弱性3件(Critical2件を含む)について、著者のリポジトリでは公表から数日経ってもDependabotのアラートもPRも出なかった。原因は、メンテナ側が出したリポジトリアドバイザリがGitHub Advisory Databaseにまだ掲載されておらず、各GHSA IDのページが404だったことで、Dependabotはレビュー済みのアドバイザリが追加されたタイミングでしか動かない。著者の調査では、Next.jsの過去68件のアドバイザリは公表からレビューまでの中央値が1.3日だったが、2026年8月以降は7〜14日に伸び、9月末の1件は20日経っても未掲載のままだった。</div>
         <div class="key-points">
           <ul>
-            <li>gitleaks(記事ではv8.30.1)の`gitleaks git -v --log-opts="--all"`で全ブランチの履歴を検査でき、誤検知は`.gitleaksignore`にフィンガープリントを登録して除外する</li>
-            <li>履歴からの完全な削除にはgit-filter-repo(2.47以降)を新規cloneした作業用コピーで実行し`git push --force --mirror`するが、それでも失効・ローテーションが最優先で、forkは持ち主ごとの対応が必要になる</li>
+            <li>2025年のNext.jsアドバイザリ14件はすべて1日以内にレビューされていたが、2026年に入り遅延が顕著になっており、著者は報告される脆弱性の増加にレビュー体制が追いついていないことが一因と推測している</li>
+            <li>セキュリティアップデートがDependabotで自動PR化されない要因は機能無効化・依存の不整合・PR数上限など複数あり、著者は公表直後はGHSA IDで直接Advisory Databaseを確認し自分で対応判断すべきだと結論づけている</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Qiita</span>
-          <span>⏱ 5 min read</span>
+          <span>Zenn</span>
+          <span>⏱ 4 min read</span>
           <span>2026-10-21</span>
         </div>
       </div>
@@ -308,20 +296,40 @@
       <div class="card">
         <div class="card-header">
           <span class="tag tag-ai">AI</span>
-          <span class="content-type">🔬 研究</span>
-          <h3><a href="https://zenn.dev/aws_japan/articles/bedrock-guardrails-japanese-tier">Amazon Bedrock GuardrailsをAnswerCarefullyで検証、日本語判定にはStandard Tier必須</a></h3>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://zenn.dev/singularity/articles/vibe-coding-mac-boot-20min">バイブコーディング6週間でMacの起動が20分に、原因は積み重なった99万件のClaude Code作業ファイル</a></h3>
         </div>
-        <div class="summary">Bedrock Guardrailsには判定方式の異なる2つのTierがあり、Tier未指定時の既定Classicは英語・フランス語・スペイン語のみに対応する。日本語の有害性を判定するにはContent filtersとDenied Topicsの両方でStandardを明示する必要があり、著者がLLM-jp公開のAnswerCarefully(有害性1,800件・デリケートな話題300件・境界的質問75件)で検証したところ、有害な質問のブロック率はClassicの0.4%からStandardで64.5%に上がった。一方でStandardはデリケートな話題や境界的質問の26.3%・38.7%を誤ってブロックし、Claude Sonnet 5.5経由で利用者に危険な応答が届く割合は2.7%から0.7%に下がった。</div>
+        <div class="summary">AIに安全策として毎回リポジトリをcloneさせ続けた結果、著者のMacは強制終了後の起動に約20分かかるようになった。Claude Codeに読み取り専用で調査させたところ、起動時にmacOSが一時ディレクトリ/private/tmpの掃除を待っていたことが判明し、同ディレクトリには起動から9.5時間後の時点で約99万ファイルが溜まっていた。大半はClaude Codeの作業用に複製されたnode_modules入りリポジトリで、安全でない終了が32回記録されていた。</div>
         <div class="key-points">
           <ul>
-            <li>Standard設定で有害性の種類別ブロック率はアダルト89%・個人情報漏えい80%・違法行為への加担77%だが誤情報拡散46%・メンタルヘルス43%と、既定のContent filtersが直接扱わない分野ほどDenied Topicsへの依存度が高い</li>
-            <li>デリケートな話題300件ではStandard化でSonnet 5.5の中立回答が237件→156件に減りブロックが2件→108件(36.0%)に増加、PROMPT_ATTACKのみ入力判定・残りは出力判定にする方式では過剰ブロックが16.0%/17.3%まで下がる一方、危険な応答到達率はSonnetで0.7%→1.5%に増えた</li>
+            <li>/private/tmp内のファイルはプロジェクトAが約47万・Bが約27万・Cが約20万で、主因はnode_modulesを含むリポジトリ全体の複製の蓄積だった</li>
+            <li>メモリ使用量は約47GBで圧縮もスワップも発生しておらず、ロードアベレージ26〜28までCPUが飽和していたため、著者は買い替えより先に一時ファイルの整理が有効と推定している(整理後の改善効果は未検証)</li>
           </ul>
         </div>
         <div class="meta">
           <span>Zenn</span>
-          <span>⏱ 7 min read</span>
+          <span>⏱ 4 min read</span>
           <span>2026-10-21</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://zenn.dev/yoshi47/articles/cmux-after-agent-ides">並列10本のClaude Codeを束ねるため、エージェント用IDE3つを試してcmuxに戻る</a></h3>
+        </div>
+        <div class="summary">著者はClaude Codeを常時10本近く並列実行しており、Orca・Superset・T3 Codeの3つのエージェント用IDEを試した末、以前使うのをやめていたcmuxに戻った。3ツール共通の問題は、セッションのまとめ単位がgit worktree前提になっている点で、調査だけの軽いセッションでも1セッション1worktreeを強制されるとディスクを圧迫する。cmuxはworktreeを自動では作らず、縦に並ぶサイドバーでワークスペースをグループ化できる上、以前離脱した原因だった通知による並び替えもreorderOnNotificationをoffにすれば止められる。</div>
+        <div class="key-points">
+          <ul>
+            <li>T3 CodeはタブがなくCLAUDE_CONFIG_DIRで仕事用・個人用を分けている著者の環境では設定が混ざり認証エラーが発生し、Supersetはセッションのグループ化は使いやすい一方ターミナルのスクロールが粗かった</li>
+            <li>cmuxはcmux guideによる手順書やCMUX_WORKSPACE_IDなどの環境変数、cmux agent messageによるエージェント間通信といった機能が本体に組み込まれているが、作業完了を示す青い未読表示はワークスペースを開くと消えるため確認箇所を見失いやすいという課題が残る</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-22</span>
         </div>
       </div>
     </div>
@@ -331,61 +339,63 @@
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-security">Security</span>
+          <span class="tag tag-oss">OSS</span>
           <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://zenn.dev/turquoise123/articles/df481032f6b405">AIペネトレーションテストツール「Strix」を試す、30分$19.77でHigh1件・Medium5件を検出</a></h3>
+          <h3><a href="https://uberblok.storagebits.workers.dev/">OpenZFS内部を可視化する「インタラクティブ博物館」公開、uberblockからZILまで解説</a></h3>
         </div>
-        <div class="summary">オープンソースのAI自律型ペネトレーションテストツール「Strix」を、脆弱性入りのRails ECデモアプリに対してブラックボックス(URLのみ指定)で試した記事。偵察・攻撃・検証の役割を持つ複数エージェントが協調し、疑わしい挙動ではなく実際のリクエストで確認できたものだけを報告する設計で、Dockerサンドボックス内でCaidoプロキシやブラウザ操作・シェルを使う。GPT-5.4で約30分・$19.77かけて実行した結果、High1件(POST /diagnostics/pingのOSコマンドインジェクション)とMedium5件(IDOR、投稿欄の格納型XSS、CSRF、ログインのブラインドSQLi、登録時のエラーメッセージからのアカウント列挙)を検出した。</div>
+        <div class="summary">zfs-2.4.4のソースコードに直接リンクしながらOpenZFSの内部構造を解説する、インタラクティブな「博物館」サイトが公開された。uberblockやコピーオンライトのツリー構造、トランザクショングループ、RAID-Z、ARC、ZIL/SLOGなど各コンポーネントを「展示室」単位でアニメーション付きで解説する。各ディスクラベルは128KiBのuberblockリング(セクタサイズによって16〜128スロット)を持ち、インポート時にZFSは全スロットを読んで最大のトランザクショングループ番号を持つuberblockを採用する、といった実装の細部まで踏み込んでいる。</div>
         <div class="key-points">
           <ul>
-            <li>各報告にはリクエスト/レスポンスの証拠と再現手順・修正案が付き、チェックして見つからなかった範囲も自己申告する「カバレッジの棚卸し」が付属していた</li>
-            <li>隠しパラメータによるマス・アサインメント、管理者限定検索へのSQLi、UIから到達できないパスのパストラバーサルなど、ブラックボックスでは見つけられない脆弱性も複数あり、著者は`--instruction`での誘導やソースコードを渡すグレーボックス運用を推奨している</li>
+            <li>ashift 9(512バイトセクタ)では1ラベルあたり128スロット、ashift 12(4Kセクタ)では32スロットとなり、multihost=on時はマルチホスト保護(MMP)用に1スロットが予約される</li>
+            <li>全てのuberblockは先頭にマジックナンバー0x00bab10cを持ち、インポート時はラベル4つ全てのスロットを読んで最も新しいトランザクショングループのuberblockを有効なものとして採用する</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Zenn</span>
+          <span>uberblok (Show HN)</span>
           <span>⏱ 6 min read</span>
-          <span>2026-10-21</span>
+          <span>2026-10-22</span>
+          <span class="engagement">▲ 69</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-ai">AI</span>
-          <span class="content-type">🔬 研究</span>
-          <h3><a href="https://zenn.dev/canly/articles/9c19bb123e208c">Devinに問い合わせ一次調査を任せ約700件を分類、DB読み取り権限があれば解決率73%に</a></h3>
+          <span class="tag tag-product">Product</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.dcrainmaker.com/2026/10/garmin-connect-api-revamps-connect-developer.html">Garmin、閉鎖していたConnect Developer APIを3段階の新プログラムで再開</a></h3>
         </div>
-        <div class="summary">カスタマーサポートの一次調査をAIエージェントDevinに任せている会社が、過去の解決済み約700件をLLMで分類した。原因はバグ40%・仕様確認22%・顧客データや設定の状態20%・外部サービスの事情14%で、非バグ案件は全体の約56%を占める。決め手となった根拠は知識/過去事例33%・DBデータ29%・外部サービス状態17%・ログ9%・コード2%の順で、Devinは本番DBへの読み取り権限を持たない。</div>
+        <div class="summary">GarminはAI生成アプリによる申請の急増を理由に3月から新規受付を止めていたConnect Developer APIプログラムを、Personal・Startup・Enterpriseの3段階で再開した。Personalは個人が自分のデータにアクセスするだけの用途で鍵発行は約8秒、Startupは最大1,000ユーザーまで対応しCourses &amp; Training APIも使える。いずれも無料だが、EnterpriseはJSON要約と完全な.FITファイルに加え履歴データの一括取得やサポートが付き、初期費用1,000ドルに月間アクティブユーザー課金が発生し、課金開始は2027年4月1日からとなる。</div>
         <div class="key-points">
           <ul>
-            <li>知識・コード・ログだけで判断できる現状でも非バグ案件の約44%をDevinが解決可能だが、読み取り専用DBアクセスを許すと解決率の上限は約73%まで上がると試算されている</li>
-            <li>他社6社の公開事例を調べたところ本番DBへ問い合わせる設計は見つからず、著者はread-only DBユーザー・行数制限付きビュー・列マスキング・確信度の明示といった安全策を講じた上での導入を提案している</li>
+            <li>Garmin Connectは2019年に以前の5,000ドルの参加料を撤廃して無料化した経緯があり、既存パートナーはEnterpriseへ自動移行し1,000ドルの初期費用は免除される</li>
+            <li>完了したアクティビティをGarmin Connectへプッシュする機能は一部の戦略的パートナーに限定されたままで、大半のサードパーティは依然利用できない</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Zenn</span>
+          <span>DC Rainmaker</span>
           <span>⏱ 5 min read</span>
-          <span>2026-10-21</span>
+          <span>2026-10-22</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
+          <span class="tag tag-oss">OSS</span>
           <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://qiita.com/kobayashi-fuuki/items/a7fbba06bb158dae0e11">AIの「直しました」に証拠を要求、pstackをClaude Codeへ導入した運用例</a></h3>
+          <h3><a href="https://globus.software/blog/2026/10/16/cutting-map-polygons/">地図ポリゴン370万件を489msで三角形分割、earcutより高速な新ライブラリ「earstrip」公開</a></h3>
         </div>
-        <div class="summary">AIエージェントが検証なしに「修正しました」と報告する問題に対し、Cursorエンジニアpoteto氏が公開した作業手順集「pstack」をClaude Code向けに移植して導入した記事。23種類のプレイブックから選んだ手順をTODOリスト化し、Bug fix・Feature・Perfの各プレイブックは実際に動くアプリやコマンドでの確認を完了条件に含める。検証に失敗した場合はそのまま「失敗」として報告させる設計で、著者は「信頼するのは、エージェントではなく成果物」という原則を核に据えている。</div>
+        <div class="summary">地図タイルのポリゴンを三角形分割するOSSライブラリ「earstrip」(ISCライセンス)が公開され、ズームレベル13の374万ポリゴンをM4 Pro1コアで489ms、従来の制約付きドロネー分割の2,931msから約6倍に高速化した。凹んだ頂点(dent)だけを耳判定の対象にする、凸ポリゴンの耳判定を全スキップする、三角形ストリップとして出力してインデックス数を6,450万から3,580万に削減する、頂点数の多いポリゴンではdentをバウンディングボックスの長辺方向にバケット分割するなど、個別に効果を計測した複数の最適化を積み重ねている。</div>
         <div class="key-points">
           <ul>
-            <li>FastAPIの500エラー修正例では、修正前のコミットで5つの全エンドポイント失敗を再現してから10個のハンドラをasync化し26件のHTTPテストを追加、15件が修正前に失敗・修正後に通過したことを確認している</li>
-            <li>`claude plugin marketplace add cursor/plugins`→`claude plugin install pstack@cursor-plugins`→`/pstack:setup-pstack`で導入し、サブエージェントや複数モデルによるレビューはトークンを追加消費するため重要な作業に限定して使うことが推奨されている</li>
+            <li>ネイティブC++ではearcut.hppの557msに対しearstripは489ms(約14%高速)、穴が最大11,675個ある世界地図タイルではearcut.hppの2,892msに対しearstripは459msと差が拡大する</li>
+            <li>WebAssembly版はV8上でearcut.hppの約930msに対しearstripは約601ms、ブラウザ向けパッケージはearcut.jsの1.4〜2.1倍の速度で、128個以上の穴を持つポリゴンでは制約付きドロネー分割にフォールバックする</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Qiita</span>
-          <span>⏱ 5 min read</span>
-          <span>2026-10-21</span>
+          <span>Globus Software</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-10-16</span>
+          <span class="engagement">▲ 197</span>
         </div>
       </div>
     </div>
@@ -394,45 +404,38 @@
       <div class="section-title">🔗 Quick Links</div>
 
       <div class="quick-link">
-        <span class="tag tag-product">Product</span>
-        <a href="https://blog.joinmastodon.org/2026/10/5.0-a-closer-look/">Mastodon 5.0、ポップアウト投稿欄と新配色テーマを導入</a>
-        <span class="quick-summary">— 投稿欄を埋め込み式からポップアウト式に変更し下書きを保ちながら最小化できるようにした他、10周年に合わせデザインシステムをトークン化し新しい配色テーマを追加した。</span>
-        <span class="meta">Mastodon Blog <span class="engagement">▲ 44</span></span>
+        <span class="tag tag-security">Security</span>
+        <a href="https://pepsipu.com/blog/2026-10-switch2-jailbreak-ns2jb/">Switch 2向け初のソフトウェアのみの脱獄「ns2jb」公開、ファームウェア23.0.1が対象</a>
+        <span class="quick-summary">— Switch 1用ゲームのBASICインタプリタの整数オーバーフローとfsシステムモジュールの欠陥を連結し、任意のシステムモジュール権限でネイティブコードを実行できる有線接続前提の脱獄。</span>
+        <span class="meta">pepsipu.com <span class="engagement">▲ 685</span></span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://www.modelcompare.ai/blog/ai-models-controversial-take-on-humans">12種のAIモデルに「人間についての最も物議を呼ぶ意見」を聞くと29/35件が同じ答えに</a>
+        <span class="quick-summary">— システムプロンプトなしで3回ずつ尋ねた結果、大半が「人は真実より所属や忠誠を優先し後から理由をこじつける」という趣旨の回答で一致した。</span>
+        <span class="meta">ModelCompare <span class="engagement">▲ 190</span></span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://www.biograph.com/newsroom/biograph-completes-first-u.s.-study-with-caristo-diagnostics%E2%80%99-ai-powered-coronary-inflammation-detection-finding-risk-in-over-42-of-asymptomatic-patients">AI診断ツールCaRi-Heartの米国初試験、無症状の低リスク成人の42.9%に冠動脈炎症を検出</a>
+        <span class="quick-summary">— 通常の血液検査では見つからず、プラークや血管狭窄が無いケースでも炎症が検出され、ルーチンの心臓CT画像から判定するFDA認可済みのAIツールだという。</span>
+        <span class="meta">Biograph <span class="engagement">▲ 72</span></span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://www.axelmagn.com/blog/202610-zig-traits/">Zigで「自宅版トレイト」、関数をまとめたcomptime structで静的ポリモーフィズムを実現する提案</a>
+        <span class="quick-summary">— OCamlのモジュールに着想を得て、ランタイムのvtableを使わずコンパイル時に関連関数をまとめたstructを明示的に渡すことで、インライン化可能な多態性を得る設計。</span>
+        <span class="meta">axelmagn.com <span class="engagement">▲ 2</span></span>
       </div>
 
       <div class="quick-link">
         <span class="tag tag-security">Security</span>
-        <a href="https://daniel.haxx.se/blog/2026/10/20/do-minor-curl-vulnerabilities-in-the-open/">curl、軽度〜中度の脆弱性報告を10月26日から原則公開のGitHub Issueに変更</a>
-        <span class="quick-summary">— AIツールによる報告の急増でメンテナが対応しきれなくなったための方針転換で、過去の報告の9割超がHIGH未満だったことが根拠に挙げられている。</span>
-        <span class="meta">daniel.haxx.se <span class="engagement">▲ 55</span></span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-dev">Dev</span>
-        <a href="https://zenn.dev/flinters_blog/articles/3b377ce568d676">AIにリバースエンジニアリングさせるMCPツール「REA」を試す、証拠付きで進める考え方が持ち帰り</a>
-        <span class="quick-summary">— CLI単体では機能の絞り込みに手間がかかりMCP前提の設計だと感じつつも、根拠と限界を必ず添えるREAの設計思想はエージェントへの指示そのものに使えると結論づけている。</span>
-        <span class="meta">Zenn</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-dev">Dev</span>
-        <a href="https://zigtools.org/zls/releases/0.17.0/">Zig言語サーバーzls 0.17.0リリース、リネームがエイリアスを辿らないよう修正</a>
-        <span class="quick-summary">— const経由のエイリアス名をリネームしても呼び出し元とconst名だけが変わり元のfn定義には影響しない一方、Zig 0.17のビルドシステム変更に起因するbuild.zig内のimport解決やWindowsのファイル監視の不具合は未解決。</span>
-        <span class="meta">Zig Tools</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-security">Security</span>
-        <a href="https://blog.railway.com/p/security-disclosure-wednesday-october-21st">Railway、環境変数を保管するシステムへの不審アクセスを検知し全利用者にローテーションを推奨</a>
-        <span class="quick-summary">— 一部利用者の暗号化環境変数が復号された状態で取得された可能性があり、AI推論プロバイダーを狙う一連の攻撃の一部と見ているとして全デプロイを一時停止した。</span>
-        <span class="meta">Railway Blog</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-dev">Dev</span>
-        <a href="https://zenn.dev/matasuke_t/articles/50bd0bee5b6a3a">ブラウザ起点の長時間処理をサーバー側実行に移行、画面を閉じても完了する設計に</a>
-        <span class="quick-summary">— フロントエンドはターゲット一覧を送るだけになり、サーバーが同じループを引き継いで実行することでPWAを閉じたりスマホがスリープしても処理が止まらなくなった。</span>
-        <span class="meta">Zenn</span>
+        <a href="https://www.digital.go.jp/press/a0a8f66c-b32d-4695-9372-bcd5d4280f22">デジタル庁ホームページ運営の委託先Studioで不正アクセス、問い合わせフォーム最大1.3万件超が漏えいの可能性</a>
+        <span class="quick-summary">— 2021〜2023年に受け付けた一般意見・採用・接種証明書関連などの問い合わせ最大8,833件超に加え、デジタル庁職員ら35件のStudioアカウント情報も対象に含まれる。</span>
+        <span class="meta">デジタル庁 <span class="engagement">🔖 30</span></span>
       </div>
     </div>
 
