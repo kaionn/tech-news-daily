@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-10-24</title>
+  <meta name="description" content="パナソニックHD、生成AIに33万人分の情報を誤送信 / Railway侵害、最大10万ワークスペースに影響 / Kimi K3.1 Pro公開">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech News Daily">
+  <meta property="og:title" content="Tech News Daily — 2026-10-24">
+  <meta property="og:description" content="パナソニックHD、生成AIに33万人分の情報を誤送信 / Railway侵害、最大10万ワークスペースに影響 / Kimi K3.1 Pro公開">
+  <meta property="og:url" content="https://tech-news.kaion-lab.com/archive/2026-10-24.html">
+  <meta property="og:image" content="https://tech-news.kaion-lab.com/apple-touch-icon.png">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="../feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-10-24 (Sat)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+      <nav class="site-nav">
+        <a href="../" class="active">📰 日刊ダイジェスト</a>
+        <a href="../trends.html">🔌 週次プラグイントレンド</a>
+        <a href="../ai-trends.html">🧠 AI プロダクト動向</a>
+        <a href="./">🗂 アーカイブ</a>
+      </nav>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 20 articles</span>
+      <span>🏷 7 categories</span>
+      <span>📡 17 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item">
+        <span class="number-value">33万人</span>
+        <span class="number-label">パナソニックHDが禁止の生成AIに送信してしまった従業員・退職者・家族らの対象人数</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">10万</span>
+        <span class="number-label">Railwayのセキュリティ侵害で環境変数が流出した可能性のあるワークスペース数(全体の最大1.85%)</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">85%</span>
+        <span class="number-label">マイクロソフトの新シェーダー配信技術でAvowedの起動時間が短縮された割合</span>
+      </div>
+    </div>
+
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
+
+      <div class="card featured deep-dive">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://www.nikkei.com/article/DGXZQOUF237Z60T21C26A0000000/">DEEP DIVE: パナソニックHD、禁止の生成AIに従業員・家族ら33万人分の情報を送信</a></h3>
+        </div>
+        <div class="summary">パナソニックホールディングスは10月23日、社内で使用を禁止している外部の生成AIサービスに、従業員・退職者とその家族ら合計約33万人分の個人情報が送信されていたと発表した。同社はこれを外部からの攻撃ではなく、社内規定に違反した従業員1人による行為だと説明している。問題が起きたのは、人事情報システムをグループ会社と統合するプロジェクトで、担当者が業務効率化のために対象データを無断で生成AIへアップロードしたことだった。アップロードは9月下旬に行われ、会社は9月29日に個人情報保護委員会へ報告している。流出した情報は氏名そのものではなく、住所・電話番号・メールアドレス・社員番号で、クレジットカード情報など決済情報は含まれていない。対象は現役従業員約7.5万人、緊急連絡先として登録された家族約5.5万人、1978年以降に退職したOB・OG約17.8万人、2016年以降に退職した従業員の家族約2.6万人の4グループに分かれる。会社は該当社員がチャット履歴と端末上のデータを削除したことを確認し、専用の問い合わせ窓口を設置した。利用された生成AIサービスは学習データへの利用機能が無効化された契約設定だったため、他の利用者への応答にこの情報が混入する経路は塞がれているとパナソニックHDは説明する。ただしこれは「拡散していない」ことの証明ではなく、サービス提供企業側のログにデータが残っている可能性までは否定できない。会社はアップロードされたデータを10月25日以降に完全削除する方針を示している。</div>
+        <div class="editorial">🧠 今回の実害は「学習に使われていない」という設定上の歯止めに支えられているが、これは契約条件の確認であって技術的な証明ではない。社内規定で生成AIの利用を禁止していても、業務を効率化したいという現場の動機そのものは消えないため、禁止ルール一本では再発を防げないだろう。未検証だが、個人データを扱う業務フローにDLP(データ漏えい防止)やブラウザ拡張の監視といった技術的な壁を組み込む企業ほど、今後こうした事案は減っていくはずだ。</div>
+        <div class="key-points">
+          <ul>
+            <li>流出対象は現役従業員約7.5万人、家族約5.5万人、1978年以降の退職者約17.8万人、退職者家族約2.6万人の合計約33万人で、流出情報は住所・電話番号・メールアドレス・社員番号</li>
+            <li>原因は外部攻撃ではなく、グループ会社との人事システム統合プロジェクトに関わった社員1人が社内規定に違反し、業務データを無断で外部の生成AIにアップロードしたこと</li>
+            <li>アップロードは9月下旬に発生し、会社は9月29日に個人情報保護委員会へ報告、利用された生成AIは学習データへの利用機能が無効化された設定だったため他利用者への流出は確認されていない</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 社内で生成AIの利用を禁止している企業でも、業務効率化を求める現場がルールを迂回する以上、DLPやブラウザ拡張による技術的な監視と組み合わせない限り同種の事案は防げない。</div>
+        <div class="meta">
+          <span>Nikkei</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-10-23</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://blog.railway.com/p/preliminary-report-october-security-incident">Railway、セキュリティ侵害の予備報告を公開 影響は最大1.85%・約10万ワークスペースと判明</a></h3>
+        </div>
+        <div class="summary">Railwayは10月20日に検知した不審アクセスについて予備報告書を公開し、攻撃者がビルド基盤で権限昇格を行い、暗号化された環境変数を取得、侵害したCI認証情報の一部を使って復号したと説明した。狙いはAIプロバイダーのAPIキーで、蒸留攻撃への悪用が疑われる。攻撃は10月20日13時58分(UTC)の異常なレイテンシ検知から始まり、21日未明に環境変数へのアクセスが発生、22日未明までに攻撃者のアクセスを遮断した。環境変数が流出した可能性があるのは全ワークスペースの最大1.85%、約10万件で、ユーザーアカウント自体への侵入は確認されていない。</div>
+        <div class="key-points">
+          <ul>
+            <li>環境変数が流出した可能性があるのは全ワークスペースの最大1.85%・約10万件で、ユーザーアカウントそのものへのアクセスは確認されていないが、ソースコードへのアクセスは否定されていない</li>
+            <li>攻撃者はビルド基盤で権限昇格した後、暗号化済みの秘密情報を取得し、侵害したCI認証情報を使って一部を復号した。目的はAIプロバイダーのAPIキーで、蒸留攻撃への利用が疑われている</li>
+            <li>Railwayは10月21日20時台にユーザーセッションを無効化し開示を公開、22日3時32分(UTC)に攻撃者のアクセス遮断を確認、内部鍵・ストレージ認証情報・GitHub App連携をすべてローテーションした</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 Railwayを使っている場合は環境変数の値、特にAIプロバイダーのAPIキーとデータベース接続情報を全ローテーションし、GitHubとレジストリの監査ログを確認すべきだ。</div>
+        <div class="meta">
+          <span>Railway Blog</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-22</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.kimi.ai/blog/kimi-k3-1-pro">Moonshot AI、Kimi K3.1 Proを公開 長時間タスクのハルシネーション率を23.4%→8.3%に改善</a></h3>
+        </div>
+        <div class="summary">Moonshot AIはK3.1シリーズ初のモデル「Kimi K3.1 Pro」と、2〜3倍高速な「K3.1 Pro Highspeed」を公開した。コンテキスト長は100万トークンで、Unity・Unreal Engine・Godotを使ったゲーム開発やCAD/Blenderスクリプティングなど長時間タスクでのエージェント的な作業に対応する。社内ベンチマークのKimi Hallu Bench Hard(申告レベルのハルシネーション率)はK3の23.4%から8.3%に改善したという。Terminal-Bench 4.0では65.7%を記録し、GPT-6 Astra(58.2%)を上回りClaude Opus 5.5(66.4%)にわずかに届かなかった。サイバー関連の学習データは除去し、攻撃能力がフロンティアの商用モデルを下回る水準に留まるよう設計したとしている。</div>
+        <div class="key-points">
+          <ul>
+            <li>Kimi Hallu Bench Hardの申告レベルハルシネーション率はK3の23.4%からK3.1 Proで8.3%に改善(ただし同ベンチマークはストレステストであり通常のエラー率を示すものではないと明記されている)</li>
+            <li>Terminal-Bench 4.0で65.7%、Kimi Code Bench 3.0のLong-horizon評価でK3の55.95%から61.2%に向上、BenchCAD(ツール利用時)は92.7%を記録</li>
+            <li>コンテキスト長100万トークン、API名はkimi-k3.1-proとkimi-k3.1-pro-highspeed、Kimi Enterpriseでは管理者が組織単位で有効化するまで既定オフ、フルウェイトは11月4日公開予定</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Kimi.ai</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-10-22</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://automaton-media.com/articles/newsjp/20261023-475245/">マイクロソフトの「シェーダーコンパイル不要」技術、NVIDIAグラボにも対応 Avowedは起動時間85%短縮</a></h3>
+        </div>
+        <div class="summary">マイクロソフトのシェーダー配信技術「Advanced Shader Delivery」が、これまでのAMD限定からAMD・Intel・NVIDIA・Qualcomm GPU対応へ10月21日に拡大した。開発者が収集したシェーダーデータ(SODB)をGPUベンダー側がハードウェア別のプリコンパイル済みデータベース(PSDB)に変換し、ゲーム本体と一緒に配布することで初回起動時の一括コンパイルを省略する仕組みだ。NVIDIAはGeForce Game Ready Driver 621.01で対応し、現時点ではMicrosoft StoreとXbox PCアプリのタイトルが対象でSteam・Epic対応は準備中。</div>
+        <div class="key-points">
+          <ul>
+            <li>Avowedの起動時間が最大85%短縮、Forza Horizon 6のロード時間は約1.5分から4秒に短縮したと報告されている</li>
+            <li>ドライバー更新時はシェーダーキャッシュが自動更新される仕組みで、Steam版Monster Hunter Wildsなど対応店舗外のタイトルは現時点で非対応</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>AUTOMATON</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-23</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://alexsci.com/blog/uuidv7-is-weird/">UUIDv7に「順序通り」「タイムスタンプ正確」を期待するのは誤り、RFC上は保証されていない</a></h3>
+        </div>
+        <div class="summary">UUIDv7が保証するのは一意性と衝突耐性のみで、順序通りに生成される・埋め込みタイムスタンプが正確・クロックが後退しても安全、といった広く信じられている性質はRFC上保証されていないと指摘する記事。著者はPythonのuuid.uuid7()でシステム時刻を1時間遡らせて検証し、タイムスタンプが実時刻より約3,695〜3,994秒先行したまま高負荷下では増え続ける挙動を確認した。ノードをまたいだ厳密な順序保証はクロック同期の精度上そもそも不可能であり、再起動時に最後のタイムスタンプを永続化していない実装では、クロック後退後の再起動で順序が崩れるとしている。</div>
+        <div class="key-points">
+          <ul>
+            <li>RFC上のカウンタは最小12bitで1ノード・1ミリ秒あたり4,096件まで生成できるが、カウンタが溢れるとタイムスタンプを強制的に進める実装があり、これがタイムスタンプ固定時の問題になる</li>
+            <li>埋め込みタイムスタンプを共有すると生成時刻の高精度な情報が漏れるため、プロフィールURLなど画面には表示していない作成時刻が間接的に露出する場合がある</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>alexsci.com</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-10-21</span>
+          <span class="engagement">▲ 101</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-data">Data</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://david.lequin.dev/blog/bi-software-is-dead/">$150kのLookerをAI生成HTMLダッシュボードで置き換え、構築コストは8ヶ月で約12分の1</a></h3>
+        </div>
+        <div class="summary">ある企業のデータチームが、年間15万ドルのLooker契約の代わりに、S3でホストするAI生成HTMLダッシュボードを内製した。各ダッシュボードはサンドボックス化されたiframe内でSnowflakeのOAuthトークンを使い閲覧者自身の権限でSQLを実行し、権限管理はSnowflakeのロールに委ねる。構築コストは8ヶ月で約8,300ドル(Claudeトークン6,400ドル、AWS1,900ドル)で、同期間のLooker相当コスト約10万ドルの約12分の1。公開は人間の確認を経るドラフト方式で、Claude chat・Claude Code・Slack・社内エージェントが同じMCPコネクタ経由で投稿する。</div>
+        <div class="key-points">
+          <ul>
+            <li>週間利用者は3月の23人から6月に136人へ増加し、Looker利用は約3分の1減少したが、初期のダッシュボードはセッション起源を共有しておりセキュリティを事後的に作り直す必要があった</li>
+            <li>ダッシュボード1件あたり約100万トークンを消費し、新しいモデルへの切替後はコストが1件あたり約2.50ドルから0.50ドルに下がった。エンジニア3人が8ヶ月投じた人件費はこのコスト比較に含まれていない</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>david.lequin.dev</span>
+          <span>⏱ 7 min read</span>
+          <span>2026-10-20</span>
+          <span class="engagement">▲ 111</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-product">Product</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://www.techlicious.com/blog/google-gmail-photos-insights-ads/">Google、Gmail・Google Photosのデータを広告に使い始める AI Mode内のテストで「使わない」方針を撤回</a></h3>
+        </div>
+        <div class="summary">Googleは10月16日付のプライバシーポリシー改定で、利用者が明示的に連携を許可した場合、Gmail・Google Photos・Google Driveのデータを検索やGeminiなどのパーソナライズ機能・広告に利用できる例外を追加した。これまでは「この種のコンテンツに基づくパーソナライズ広告は表示しない」としていた約束の撤回に当たる。AI Mode内では、連携したGmail・Photosから生成された要約や推論を広告表示に使うテストが始まっており、Googleは広告主がメールや写真データへ直接アクセスすることはなく、人種・宗教・性的指向・健康などのセンシティブな分類には基づかないと説明している。</div>
+        <div class="key-points">
+          <ul>
+            <li>3月時点でGoogleはAI Mode連携ユーザーに広告は表示されないと説明していたが、10月19〜20日の報道でその方針が変更されたことが明らかになった</li>
+            <li>対象の地域・配信される広告フォーマット・広告主側の設定やレポート有無についてGoogleは明らかにしておらず、広告はメールや写真の内容から直接ではなく要約・推論を経由して生成されるとされる</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Techlicious</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-10-19</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://zenn.dev/actbe_tech/articles/8b4a9991d5365d">「読みにくいDB」はClaude Codeのコストを1.9倍にする、命名と外部キーの有無で実測比較</a></h3>
+        </div>
+        <div class="summary">著者はLaravel+MySQLで同一のビジネスロジックを持つECデータベースを「読みやすい版」(英語命名・カラムコメント・外部キーあり)と「読みにくい版」(ord・sts=9のような省略名・外部キーなし・日付がchar(14)の文字列)の2パターン用意し、claude -p(モデル固定)に同じ集計クエリを書かせて5回ずつ計測した。読みにくい版はターン数が18.8→26.2(1.4倍)、出力トークンが7,050→13,215(1.9倍)、コストが0.21ドル→0.41ドル(1.9倍)、所要時間が60秒→109秒(1.8倍)に増加し、正答率も5/5から4/5に低下した。原因はスキーマから読み取れない情報(タイムゾーンなど)をAIが推測で補うことと、ライブDBへの確認コマンド(Bash呼び出し)が増えたことだと分析している。</div>
+        <div class="key-points">
+          <ul>
+            <li>読みにくい版ではBash呼び出し(主にライブDBの確認)が5.0回から11.8回に増加し、出力トークンは7,050から13,215(1.9倍)、コストは0.21ドルから0.41ドル(1.9倍)に増えた</li>
+            <li>唯一の誤答は月の境界をUTCに変換する際にタイムゾーンを誤って推測したもので、スキーマに明記されていない前提をAIが「ありそうな値」で埋めた結果だった(試行数は各条件5回のみで統計的検定は行っていない)</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-23</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/cutlet_of_pork/articles/calamine-excel-read-alias-package-import">Excel読込をcalamineで18.9秒→4.9秒に高速化したら、別名パッケージ経由のimportだけ壊れた</a></h3>
+        </div>
+        <div class="summary">著者はpandasのExcel読込エンジンをopenpyxlからpython-calamineに切り替え、22,267行×88列のシートの読込時間を18.91秒から4.92秒に短縮した(ZIP署名チェック付きでcalamine未対応時はopenpyxlにフォールバック)。しかし本番統合後、ホストアプリが提供モジュールのsrcフォルダを別名の名前空間(_legacy_provider_&lt;hash&gt;)としてロードする構成だけで、from src.core.excel_loaderのインポートがホスト側の別のsrcパッケージに解決されてしまい失敗した。提供モジュール側の204件のテストはsrcをトップレベル名として実行していたため、この別名経路は一度も検証されていなかった。</div>
+        <div class="key-points">
+          <ul>
+            <li>読込時間は18.91秒から4.92秒(Python 3.14・pandas 3.0.5・python-calamine 0.8.3)に短縮され、出力の差はフィルタ対象外の2つのタイムスタンプ列で3セルのみだった</li>
+            <li>修正はtry/exceptによるImportErrorフォールバックをやめ、__package__の有無でパッケージ実行時は相対import・直接実行時はパスベースimportを切り替える方式に変更し、別名経路を再現するsubprocessテストを追加した</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-23</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://zenn.dev/edash_tech_blog/articles/5b90aa33bd8d49">Claude CodeのPR待ち時間、CIを18分から4分45秒に短縮 ボトルネックはDB構築とjsdomの全面適用</a></h3>
+        </div>
+        <div class="summary">著者のチームではClaude CodeのPRごとのCI時間が2ヶ月で7分から18分超に伸びていた。原因を調べると、テスト本体の実行時間は全体の14%に過ぎず、残りは全テストをjsdom環境で動かすオーバーヘッドと、2CPUランナーでVitestのワーカーが1つしか動いていないことだった。対策として、.tsテストはNode環境・.tsxのみjsdom環境に分離し、ワーカー数をCPU数に合わせ、マイグレーション済みDBをpg_dumpでActionsキャッシュに保存して復元する方式に変更した。ユニットテストとDB依存の統合テストをジョブ分割・シャーディングし、node_modulesもキャッシュから復元してnpm ciを省略した。</div>
+        <div class="key-points">
+          <ul>
+            <li>DB構築は約5分から2分15秒(約55%減)、テスト関連の待ち時間は9分39秒から5分15秒(約46%減)に短縮され、CI全体では直近20回の中央値で約15分から約4分45秒(約69%減)に改善した</li>
+            <li>Actionsキャッシュの合計サイズが10GB上限に対し11.9GBに達してDBキャッシュが退避されていた問題もあり、Dockerキャッシュのmode=min化などでPRあたりのキャッシュ使用量を推定1.7GBから673MBに削減した</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-22</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://gigazine.net/news/20261023-ondrej-sury-interview/">「この男に何かあったら終わり」PHPパッチを独りで支えるボランティア、Ondřej Surý氏とは</a></h3>
+        </div>
+        <div class="summary">10月に発覚した未認証RCE2件「PHP2Shell」の対応で名前が挙がったOndřej Surý氏は、PHP Foundationに所属せず、本業は非営利団体ISC(Internet Systems Consortium)のDNSエンジニアリング部門長というボランティアだ。PHPのソースコードを各ディストリビューション向けのインストール可能パッケージに変換する作業を20年以上自動化しており、この作業がなければ管理者は自前でビルドするほかなく、数百〜数千台のサーバーへの一括配布が成立しない。同氏は自身がPHPを一切運用していないため今回も対応の時間を確保できたと語り、後任としてFreexianのRaphaël Hertzog氏との引き継ぎ計画も話し合っているという。寄付は事案発覚後に急増したが、同氏はオープンソースのメンテナが利益を得ている企業から正当に報酬を受け取るべきだと訴えている。</div>
+        <div class="key-points">
+          <ul>
+            <li>PHPはウェブサイトの約7割で使われており、脆弱性はOpenAIのモデルを使ったセキュリティ研究者が発見したと報じられ、詳細が修正公開前にフォーラムに流出したため公開が2日前倒しされた</li>
+            <li>Surý氏は旧バージョンのPHPも依然パッチ可能であり「ネットの3分の1が永久に脆弱」との説が誤りだと主張し、後任体制としてFreexianのRaphaël Hertzog氏との引き継ぎ案を検討している</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Gigazine</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-23</span>
+          <span class="engagement">🔖 24</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-product">Product</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://edjefferson.com/localwiki/">「半径30分圏内のWikipedia」Local Wikipediaが公開、位置情報はブラウザ内に留めて共有</a></h3>
+        </div>
+        <div class="summary">地名・ランドマーク・郵便番号または現在地から、徒歩30分圏内にある位置情報付きのWikipedia記事だけを一覧表示する非公式サイト「Local Wikipedia」が公開された。表示件数が25件未満の場合は半径約6マイル以内の最も近い25件にフォールバックし、500件を超える場合は近い500件に絞る。ランダム記事表示やA–Z索引も備える。位置情報はブラウザ内にのみ保持され、リンクを共有しても位置情報自体は含まれない。</div>
+        <div class="key-points">
+          <ul>
+            <li>表示対象はWikipediaの位置情報付き(geocoded)記事に限定され、近隣が25件未満なら半径約6マイルへ、500件を超える場合は近い500件までに絞るロジックで件数を調整する</li>
+            <li>Hacker News上で1,100点超を獲得し反響を呼んだが、裏側の技術スタックは記事中で明らかにされていない</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>edjefferson.com (Show HN)</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-10-23</span>
+          <span class="engagement">▲ 1187</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://github.com/openssl/openssl/releases/tag/openssl-4.1.0">OpenSSL 4.1.0リリース、DTLS 1.3とGREASEに対応 ppc64le/x86_64向けのPQC高速化も</a></h3>
+        </div>
+        <div class="summary">OpenSSLのフィーチャーリリース4.1.0が公開された。DTLS 1.3(RFC 9147)とTLSの拡張性を保つGREASE(RFC 8701)への対応、SSLリスナーAPIでのDTLS対応、IKEv2向けKDF対応などが追加された。性能面ではppc64le向けML-DSA/ML-KEMのNTT演算、x86_64向けML-DSA、AVX-512によるML-DSA用SHAKE x4、AVX-512/VAESによるAES-CBC復号を最適化した。設定オプションではno-ecdsa/no-ecdhが実際には無効化できていなかったため削除され、楕円曲線を無効化する場合はno-ecを使う形に統一された。</div>
+        <div class="key-points">
+          <ul>
+            <li>既知の問題としてDTLS 1.3のKeyUpdate処理が再送バッファからNewSessionTicketなど未処理レコードを落とす不具合(#32878)が残り、修正は今後のリリースに持ち越された</li>
+            <li>tsgetユーティリティは保守終了したWWW::Curl::Easyから Net::Curl::Easyへ移行したため、アップグレード前にNet::Curl::Easyのインストールが必要になる</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-22</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://forest.watch.impress.co.jp/docs/news/2150751.html">Mermaid図を描けるMarkdownエディター「MerMark Editor」、v0.8.1で日本語UIに対応</a></h3>
+        </div>
+        <div class="summary">Tauri製のデスクトップMarkdownエディター「MerMark Editor」(MITライセンス、Windows/macOS/Linux対応)が、有志の貢献により10月12日公開のv0.8.1で日本語UIに対応した。コードとプレビューの並列表示、WYSIWYG編集、Marpスライド対応、複数ルートのワークスペース管理、AIアシスタントによる文章・図の編集補助などの機能を持つ。日本語化のプルリクエストを作成した貢献者は、その過程をZenn記事として公開している。</div>
+        <div class="key-points">
+          <ul>
+            <li>日本語UIは設定画面の「Appearance」タブから選択でき、文書はローカルに保存される。ドキュメントはMermaid図とMarpスライドの両方をサポートする</li>
+            <li>日本語化の貢献はプロジェクト本体のメンテナではなく有志のプルリクエストによって実現し、対応過程はZenn記事として公開されている</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Impress Watch</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-10-23</span>
+          <span class="engagement">🔖 123</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://www.nikkei.com/article/DGXZQOUC231CP0T21C26A0000000/">タイムズカー情報漏えいで「お見舞い金」3,000円を支払いへ 対象は免許証画像流出の146万人</a>
+        <span class="quick-summary">— 2026年9月に発覚した660万件の会員情報漏えいのうち、ID画像が外部送信された146万人へ現金または商品券で支払う方針。総額は単純計算で約44億円、特別損失は約55億円を見込む。</span>
+        <span class="meta">Nikkei</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://news.web.nhk/newsweb/na/nd-20261023de64388">モスバーガー運営のモスフードサービス、プリペイドカード情報約57万件が流出</a>
+        <span class="quick-summary">— 店舗・ネット決済に使えるプリペイドカードの情報に不正アクセスがあり、約57万件が対象。利用者には身に覚えのない利用履歴がないか確認するよう呼びかけている。</span>
+        <span class="meta">NHKニュース</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://blog.calif.io/p/iphone">パリのHexaconでiPhoneの「ワンクリック侵害」デモ公開、技術詳細は非開示のまま</a>
+        <span class="quick-summary">— Signalとデフォルトのメッセージアプリを対象にしたワンクリック攻撃を実演したとする未検証の発表で、具体的な脆弱性や対象OSバージョンは「近日公開」として明らかにされていない。</span>
+        <span class="meta">blog.calif.io <span class="engagement">▲ 695</span></span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://kn.itmedia.co.jp/kn/article/2610/23/2000002506/">「パスキーはワナだ、使うな」論に専門家が反論 争点はセキュリティでなく「鍵の選択権」</a>
+        <span class="quick-summary">— 批判の核心はパスキーの安全性ではなく、リモートアテステーションにより将来サービス側が特定ベンダーの認証器しか受け付けなくなる懸念であり、著者自身もフィッシング耐性の高さは認めている。</span>
+        <span class="meta">ITmedia</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://block.xyz/dessa">Block、テキストを一切使わず学習した全二重会話AI「Dessa」を公開</a>
+        <span class="quick-summary">— 音声のみで学習し相手の話を遮りながら相槌を打てる発話モデルで、学習にはNVIDIA GB200 NVL72を1台使用、推論はMacBook Pro M4 Max上でリアルタイムより高速に動作する。</span>
+        <span class="meta">Block (Square) <span class="engagement">▲ 176</span></span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://qiita.com/shahin0809/items/81e6a6737b2254bdc6ed">VS Code 1.142のプレビュー機能「Canvases」、エージェントと同じ画面を人間がUIで直接編集できる</a>
+        <span class="quick-summary">— chat.canvases.enabledを有効にして/create-canvasと指示すると専用拡張機能が生成され、人間がUIで加えた変更をエージェント側がget_board等のアクションで読み取れる(現時点ではCopilotハーネスのローカルセッション限定)。</span>
+        <span class="meta">Qiita</span>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="./" class="archive-link">🗂 過去のダイジェスト</a>
+    </footer>
+  </div>
+</body>
+</html>
