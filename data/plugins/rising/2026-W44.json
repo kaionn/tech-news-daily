@@ -1,0 +1,112 @@
+{
+  "week": "2026-W44",
+  "generated_at": "2026-10-25T23:43:02.975Z",
+  "items": [
+    {
+      "full_name": "Jakeschincariol/day-trader-skill",
+      "name": "day-trader-skill",
+      "url": "https://github.com/Jakeschincariol/day-trader-skill",
+      "description": "11 Claude skills for day trading: scan thousands of charts, track breaking news, time every entry and exit, and replay every outcome before you risk a dollar.",
+      "language": "Python",
+      "topics": [
+        "backtesting",
+        "claude",
+        "claude-skills",
+        "day-trading",
+        "stock-market"
+      ],
+      "created_at": "2026-10-20T14:17:54Z",
+      "stars": 1591,
+      "weekly_delta": 1591,
+      "weekly_delta_estimated": true,
+      "blurb_ja": "Claude Skillsとして11個束ねたデイトレード支援パッケージで、数千件のチャートから候補をスキャンし、監視銘柄の速報ニュースを追い、エントリーとストップ・利確のタイミングを提示する。特徴は「Time Machine」というバックテスト機能で、発注前に銘柄直近の値動きと過去に同じセットアップが出た日のデータを使い残り時間の展開を1万回シミュレートして勝率を出し、実際の注文は常にユーザーの承認が必要でデフォルトはペーパートレードに固定されている。無料・MITでYahoo FinanceやSEC EDGARなど公開データのみを使い、APIキー登録なしでClaude Codeのプラグインとしてそのまま導入できる手軽さが、公開直後からの伸びを支えている。"
+    },
+    {
+      "full_name": "cranebeaker/coop-anything",
+      "name": "coop-anything",
+      "url": "https://github.com/cranebeaker/coop-anything",
+      "description": "Co-op Anything: point your AI agent at any single-player game and play it with friends (online and/or splitscreen!). MCP server and playbook to let you reverse engineer, fix, test, ship and share what it learns.",
+      "language": "Python",
+      "topics": [],
+      "created_at": "2026-10-16T11:12:03Z",
+      "stars": 1372,
+      "weekly_delta": 1009,
+      "weekly_delta_estimated": true,
+      "blurb_ja": "単体プレイ専用のPCゲームをAIコーディングエージェントに調べさせ、必要ならゲーム本体やエンジンをリバースエンジニアリングして協力プレイ用の改造を作らせ、ゲーム内でボットを使ってテストさせた上で、友人がSteam経由でポート開放なしに参加できる形までパッケージ化するリポジトリ。特徴は特定ゲーム向けのMODではなく「どのゲームにも使える手順書（プレイブック）＋MCPサーバー」という汎用の形を取っている点で、Deus ExやFallout: New Vegas、Zelda: Ocarina of Timeなど対応中のゲームが並行して増え続けている。AIエージェントにこのリポジトリを指し示すだけで着手できる敷居の低さが、対応ゲームの数が次々と増えている背景にあると見られる。"
+    },
+    {
+      "full_name": "Sam-Hui-dot/mcd-budget-meal",
+      "name": "mcd-budget-meal",
+      "url": "https://github.com/Sam-Hui-dot/mcd-budget-meal",
+      "description": "麦麦预算餐：基于麦当劳 MCP 的真实核价、预算比较与餐品替换 Skill",
+      "language": "HTML",
+      "topics": [
+        "mcdonalds",
+        "mcp",
+        "python",
+        "skill",
+        "workbuddy"
+      ],
+      "created_at": "2026-10-11T08:25:55Z",
+      "stars": 1433,
+      "weekly_delta": 685,
+      "weekly_delta_estimated": true,
+      "blurb_ja": "麦当劳（マクドナルド中国）の公式MCPを使い、予算と食べたいメニューを伝えるだけで、実際に核価（確定価格）済みの組み合わせを最大3パターン比較して提示するSkill。リアルタイムの価格照会や注文自体は行わず、過去に核価した履歴データを使ったオフラインのインタラクティブHTMLレポートで予算調整や差額確認ができる点が特徴で、サードパーティ依存ゼロ・トークン不要で試せるようになっている。詳細は明記されていないが、workbuddyというトピックが付いていることから、既存のAIエージェント連携の枠組みと組み合わせて使われることを想定した位置づけだと考えられる。"
+    },
+    {
+      "full_name": "Alejandros17487/ai-jailbreaks",
+      "name": "ai-jailbreaks",
+      "url": "https://github.com/Alejandros17487/ai-jailbreaks",
+      "description": "AI jailbreaks: 35 paste-ready AI jailbreak prompts for 25+ frontier and open-weight models - system prompts, AGENTS.md specs, and Ollama Modelfiles. Built for AI security research and red-team testing.",
+      "language": null,
+      "topics": [
+        "ai",
+        "ai-safety",
+        "jailbreak",
+        "jailbreaking",
+        "privacy",
+        "safety",
+        "security"
+      ],
+      "created_at": "2026-10-21T14:44:06Z",
+      "stars": 483,
+      "weekly_delta": 483,
+      "weekly_delta_estimated": true,
+      "blurb_ja": "25以上のフロンティアモデル・オープンウェイトモデル向けに、システムプロンプトやAGENTS.md形式の仕様書、Ollama Modelfileなど、そのまま貼って使える35種のジェイルブレイク（制限回避）プロンプトをまとめたリポジトリ。単なるプロンプト集ではなく、AIセーフティ・レッドチーム検証向けという用途を明示してprivacy・securityといったトピックを付けている点が、既存のジェイルブレイク集との違いになっている。複数モデルにまたがってすぐ使える素材が公開されたことが、公開から短期間での注目度上昇につながったと見られる。"
+    },
+    {
+      "full_name": "dragonked2/alphacode",
+      "name": "alphacode",
+      "url": "https://github.com/dragonked2/alphacode",
+      "description": "Free MIT AI coding agent — no API key needed. Built-in free model, or bring Claude, GPT, Gemini, DeepSeek, Ollama +50 more. Swarm mode, 40+ tools, browser & desktop automation, built in Rust.",
+      "language": "Rust",
+      "topics": [
+        "agentic-ai",
+        "ai",
+        "ai-agent",
+        "ai-agents",
+        "ai-coding",
+        "ai-coding-assistant",
+        "ai-tools",
+        "autonomous-agents",
+        "cli",
+        "code-assistant",
+        "coding-agent",
+        "developer-tools",
+        "free-ai",
+        "llm",
+        "llm-agent",
+        "no-api-key",
+        "ollama",
+        "openai-compatible",
+        "rust",
+        "terminal"
+      ],
+      "created_at": "2026-09-01T09:57:03Z",
+      "stars": 462,
+      "weekly_delta": 48,
+      "weekly_delta_estimated": false,
+      "blurb_ja": "ターミナルで動く無料のAIコーディングエージェントで、APIキーなしで使える内蔵モデルに加えて、Claude・GPT・Gemini・DeepSeek・Ollamaなど50以上のモデルを切り替えて使える。Rust実装で、コード編集やテスト実行だけでなくFirefoxやデスクトップアプリの操作まで自動化でき、複数エージェントを同時に動かすSwarmモードを備えている点が通常のコーディングエージェントとの違いになっている。既存の主要プロバイダに加えてローカルモデルやOpenAI互換APIまで幅広く対応し、無料で試せる間口の広さが伸びの背景にあると考えられる。"
+    }
+  ]
+}
