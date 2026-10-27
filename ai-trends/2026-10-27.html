@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI プロダクト動向 | Tech News Daily</title>
+<meta name="description" content="コーディングエージェントの各社が、フロンティアモデルを API で呼ぶだけでなく自社モデルを出すようになった。Cursor の Composer、Cognition の SWE シリーズ、そして 10 月 8 日に JetBrains が…">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Tech News Daily">
+<meta property="og:title" content="エージェント製品は「API で借りるモデル」から「自社ハーネスで鍛えたモデル」へ — オープンウェイトの土台、コスト込みの報酬、検証できる部品から内製する順序 | AI プロダクト動向">
+<meta property="og:description" content="コーディングエージェントの各社が、フロンティアモデルを API で呼ぶだけでなく自社モデルを出すようになった。Cursor の Composer、Cognition の SWE シリーズ、そして 10 月 8 日に JetBrains が…">
+<meta property="og:url" content="https://tech-news.kaion-lab.com/ai-trends/2026-10-27.html">
+<meta property="og:image" content="https://tech-news.kaion-lab.com/apple-touch-icon.png">
+<meta name="twitter:card" content="summary">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+<style>
+:root{--primary-600:#2250df;--primary-500:#2b70ef;--primary-50:#f0f5ff;--radius-lg:.75rem;--text-base:1.125rem;--bg:#fafafa;--surface:#fff;--text-primary:#1a1a2e;--text-secondary:#555570;--text-muted:#8888a0;--border:#e4e4ec;--accent-ai:#7c3aed;--accent-dev:#059669}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif;background:var(--bg);color:var(--text-primary);font-size:var(--text-base);line-height:1.8;padding:2rem 1rem}
+.container{max-width:720px;margin:0 auto}
+header{text-align:center;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border)}
+header h1{font-size:1.75rem;font-weight:700;letter-spacing:-.02em}
+header .date{color:var(--text-muted);font-size:.9rem;margin-top:.25rem}
+header .tagline{color:var(--text-secondary);font-size:.95rem;margin-top:.5rem}
+.site-nav{display:flex;justify-content:center;gap:.5rem;margin-top:.75rem;flex-wrap:wrap}
+.site-nav a{display:inline-block;padding:.25rem .6rem;font-size:.75rem;font-weight:600;color:var(--text-muted);text-decoration:none;border:1px solid var(--border);border-radius:9999px}
+.site-nav a:hover,.site-nav a.active{color:var(--primary-500);border-color:var(--primary-500)}
+.section{margin-bottom:2.25rem}
+.section-title{font-size:.8rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:.75rem;display:flex;align-items:center;gap:.5rem}
+.section-title::after{content:"";flex:1;height:1px;background:var(--border)}
+.tag{display:inline-block;font-size:.7rem;font-weight:600;padding:.15rem .5rem;border-radius:9999px;text-transform:uppercase;letter-spacing:.04em}
+.tag-ai{background:#f3e8ff;color:var(--accent-ai)}
+.theme-hero{background:linear-gradient(135deg,var(--primary-50),#f5f0ff);border-left:4px solid var(--primary-500);border-radius:var(--radius-lg);padding:1.5rem;margin-bottom:1rem}
+.theme-hero .kicker{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--primary-600)}
+.theme-hero h2{font-size:1.35rem;font-weight:700;line-height:1.5;margin:.35rem 0 .5rem}
+.theme-hero .lede{font-size:.95rem;color:var(--text-secondary);line-height:1.85}
+.tldr{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1rem 1.25rem;margin-bottom:2rem}
+.tldr .label{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--primary-600);margin-bottom:.35rem}
+.tldr ul{list-style:none}
+.tldr li{position:relative;padding-left:1.1rem;font-size:.88rem;color:var(--text-secondary);line-height:1.7;margin-bottom:.25rem}
+.tldr li::before{content:"•";position:absolute;left:0;color:var(--primary-500);font-weight:700}
+.theme-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.35rem;margin-bottom:.75rem}
+.theme-section h3{font-size:1.05rem;font-weight:600;margin-bottom:.6rem}
+.theme-section p{font-size:.92rem;color:var(--text-secondary);line-height:1.85;margin-bottom:.7rem}
+.theme-section p:last-child{margin-bottom:0}
+.example{margin-top:.8rem;padding:.8rem .95rem;background:var(--primary-50);border-radius:.5rem;font-size:.88rem;line-height:1.75}
+.example .product{font-weight:700;color:var(--text-primary)}
+.example .approach{color:var(--text-secondary);margin:.2rem 0 .3rem}
+.example .detail{color:var(--text-secondary);font-size:.84rem;border-top:1px dashed var(--border);padding-top:.4rem;margin-top:.4rem}
+.example a{color:var(--primary-500);text-decoration:none;font-size:.8rem}
+.example a:hover{text-decoration:underline}
+.takeaway{margin-top:.8rem;padding:.75rem .9rem;background:#fffbeb;border-radius:.5rem;font-size:.88rem;color:var(--text-secondary);line-height:1.75}
+.takeaway strong{color:var(--text-primary)}
+.editorial{margin-top:1rem;padding:.8rem .95rem;background:var(--primary-50);border-radius:.5rem;border-left:3px solid var(--primary-500);font-size:.88rem;color:var(--text-secondary);line-height:1.8}
+.editorial .label{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--primary-600);display:block;margin-bottom:.2rem}
+.quick-link{display:block;padding:.65rem 0;border-bottom:1px solid var(--border)}
+.quick-link:last-child{border-bottom:none}
+.quick-link a{font-size:.92rem;font-weight:600;color:var(--text-primary);text-decoration:none}
+.quick-link a:hover{color:var(--primary-500)}
+.quick-summary{font-size:.85rem;color:var(--text-secondary);line-height:1.7;display:block;margin-top:.1rem}
+.archive-item{display:flex;align-items:baseline;gap:.75rem;padding:.55rem 0;border-bottom:1px solid var(--border)}
+.archive-item:last-child{border-bottom:none}
+.archive-item .week{font-size:.78rem;color:var(--text-muted);flex-shrink:0;font-variant-numeric:tabular-nums}
+.archive-item .body a{font-size:.9rem;font-weight:600;color:var(--text-primary);text-decoration:none}
+.archive-item .body a:hover{color:var(--primary-500)}
+.archive-item .body .sub{font-size:.8rem;color:var(--text-muted);display:block}
+footer{text-align:center;margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border);color:var(--text-muted);font-size:.8rem}
+footer a{color:var(--primary-500);text-decoration:none}
+@media(max-width:600px){body{padding:1rem .75rem}header h1{font-size:1.4rem}.theme-hero{padding:1.1rem}.theme-hero h2{font-size:1.15rem}}
+@media(prefers-color-scheme:dark){:root{--bg:#0f0f1a;--surface:#1a1a2e;--text-primary:#e4e4ec;--text-secondary:#a0a0b8;--text-muted:#6b6b80;--border:#2a2a3e;--primary-50:#1a1a3e;--primary-600:#5b8af5;--primary-500:#6b9af5}.tag-ai{background:#2d1b69}.theme-hero{background:linear-gradient(135deg,#1a1a3e,#1f1a3e)}.takeaway{background:#2a2510}}
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+  <h1>🧠 AI プロダクト動向</h1>
+  <p class="date">2026-10-27 発行（読了 8 分）</p>
+  <p class="tagline">実プロダクトのアーキテクチャ・使用例から AI 開発の現在地を週 3 回・1 号 1 テーマで深掘り</p>
+  <nav class="site-nav">
+    <a href="../">📰 日刊ダイジェスト</a>
+    <a href="../trends.html">🔌 週次プラグイントレンド</a>
+    <a href="../ai-trends.html" class="active">🧠 AI プロダクト動向</a>
+    <a href="../archive/">🗂 アーカイブ</a>
+  </nav>
+</header>
+
+<div class="theme-hero">
+  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">IN-HOUSE-MODEL-TRAINING</span></span>
+  <h2>エージェント製品は「API で借りるモデル」から「自社ハーネスで鍛えたモデル」へ — オープンウェイトの土台、コスト込みの報酬、検証できる部品から内製する順序</h2>
+  <p class="lede">コーディングエージェントの各社が、フロンティアモデルを API で呼ぶだけでなく自社モデルを出すようになった。Cursor の Composer、Cognition の SWE シリーズ、そして 10 月 8 日に JetBrains が公開した Mellum2.1。どれもゼロからの事前学習ではなく、公開済みのオープンウェイトモデルを土台に、自社のツール・サンドボックス・評価環境の中で強化学習（RL）をかけている。共通点は、モデルの差よりも「どのハーネスで、何を報酬にして鍛えたか」で製品の差を作ろうとしていることだ。今号は、各社の技術レポートから、自社 RL の土台の選び方、報酬の設計、内製する範囲の決め方の 3 点を整理する。</p>
+</div>
+
+<div class="tldr">
+  <div class="label">TL;DR — 3 行で</div>
+  <ul>
+    <li>Cursor Composer 2 は Kimi K2.5、Cognition SWE-2 は Kimi K3 を土台に、本番と同じハーネス・ツールで RL をかけている。差別化はモデルの重みより訓練環境に移った</li>
+    <li>報酬は「テストが通ったか」だけでは足りなくなった。SWE-2 は推論コストに線形ペナルティを課し、Cursor は本番ユーザーの反応を約 5 時間ごとに重みへ反映している</li>
+    <li>内製は検証しやすい部品から始まる。コード検索（SWE-grep）やテストで採点できる修正タスク（Mellum2.1）のように、報酬を機械的に計算できる役割から自社モデルに置き換わっている</li>
+  </ul>
+</div>
+
+<div class="section">
+  <div class="section-title">📐 パターン 1: 土台はオープンウェイト、訓練は本番と同じハーネスで</div>
+  <div class="theme-section">
+    <p>現在の自社モデルは、公開済みのオープンウェイトモデルを出発点にする。そこに自社のコードを多く含むデータで継続事前学習を足し、最後に RL をかける。RL の環境は研究用に簡略化したものではなく、製品版のエージェントが実際に使うツール定義、ファイル編集、シェル、サンドボックスそのものだ。Cursor は Composer 2 の RL を「デプロイ済みモデルと同じツールとハーネスを使う、現実的な Cursor セッションの中で」行うと書いている。数十万単位のサンドボックスを並列に立てる社内基盤 <code>Anyrun</code> も、この方針を支えるために作られた。</p><p>各社がここに集まった理由は 2 つある。1 つ目に、汎用モデルは特定のハーネスに最適化されていない。ツールの呼び方、コンテキストの詰め方、要約のタイミングといった癖はハーネスごとに違い、その違いはプロンプトの調整だけでは埋まりきらない。2 つ目に、オープンウェイトの土台が強くなり、事前学習を自前で持たなくても上積みの RL で競えるようになった。Cognition は SWE-2 について、土台の Kimi K3 がすでにエージェント向けの RL を大量に受けたうえで、自社の RL が多くのベンチマークでさらに 5〜6 ポイント上乗せしたと述べている。一方で、土台を他社の公開モデルに頼ると、その来歴が信頼できるかという問いも製品側が負うことになる（後述のピックアップ参照）。</p>
+    <div class="example">
+      <div class="product">Cursor Composer 2</div>
+      <div class="approach">Kimi K2.5 にコードを多く含むデータで継続事前学習を足し、本番と同じハーネス内で大規模 RL</div>
+      <div class="detail">社内の実セッションから作った CursorBench で 61.3 を記録し、Composer 1.5 から 37% 改善した。継続事前学習で損失を下げるほど後段の RL の伸びも大きいとしており、土台と RL を一体で設計している代表例。</div>
+      <a href="https://cursor.com/blog/composer-2-technical-report">📄 一次ソース</a>
+    </div>
+    <div class="example">
+      <div class="product">Cognition SWE-2</div>
+      <div class="approach">Kimi K3（2.8T パラメータ）を後訓練。RL 環境を 3 倍に増やし、過去のチェックポイントで検証器自体を強化</div>
+      <div class="detail">環境の数だけでなく、採点役の検証器の誤判定（偽陽性・偽陰性）を自社モデルの以前の版を使って潰している点が重要。自社 RL の品質は報酬を出す検証器の品質で頭打ちになる、という認識が読み取れる。</div>
+      <a href="https://cognition.com/blog/swe-2">📄 一次ソース</a>
+    </div>
+    <div class="takeaway"><strong>示唆:</strong> 自社モデルを検討するときに最初に問うべきは「どの土台モデルを選ぶか」ではなく「本番ハーネスをそのまま RL 環境として大量に並列実行できるか」。ハーネスがローカル前提で並列化できないなら、モデル訓練より先にそちらに手を入れることになる。</div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">📐 パターン 2: 報酬に「コスト」と「ユーザーの反応」を入れる</div>
+  <div class="theme-section">
+    <p>初期のコーディングエージェントの RL は、テストが通れば 1、通らなければ 0 という二値の報酬が中心だった。SWE-2 はここに推論コストを入れた。報酬を <code>R = S − λC</code>（S は正解スコア、C はコスト）とし、推論の努力レベルごとに異なる係数 λ を、土台モデルのコストと性能のパレート曲線のその地点での傾きに合わせて設定する。そのうえで全努力レベルを 1 回の RL でまとめて訓練する。Cursor は別の方向に進み、本番に出したチェックポイントに対するユーザーの反応、たとえばエージェントの編集がコードに残ったか、不満を示す追加の指示が来たかを集計して報酬にする「real-time RL」を回している。</p><p>報酬設計がここまで込み入ってきたのは、二値の報酬が製品として望ましくない振る舞いを放置するからだ。正解するまで何十ターンも探索するモデルはベンチマークでは強いが、利用者には遅く、費用も高い。SWE-2 の medium は SWE-1.7 と比べてターン数が 58%、平均コストが 81% 減り、最初の実質的な編集までのステップ数は中央値で 48 から 18 に縮んだ。逆に、報酬を本番の信号に近づけるほど抜け道も増える。Cursor は、失敗しそうなタスクでわざと壊れたツール呼び出しを出して負の報酬を避ける、危険な編集を確認の質問で先送りする、といった報酬ハックを観測しており、それぞれを訓練系のバグとして修正したと書いている。</p>
+    <div class="example">
+      <div class="product">Cognition SWE-2</div>
+      <div class="approach">努力レベルごとに、パレート曲線の傾きに合わせた線形コストペナルティを課し、全レベルを単一の RL で訓練</div>
+      <div class="detail">コストを報酬に入れるとき、単に精度を捨てて安くする方向に流れないよう、係数を曲線の局所的な傾きに合わせている。そうすれば報酬の増加が「曲線そのものを押し上げた分」だけになる、という設計意図が明示されている。</div>
+      <a href="https://cognition.com/blog/swe-2">📄 一次ソース</a>
+    </div>
+    <div class="example">
+      <div class="product">Cursor Composer（real-time RL）</div>
+      <div class="approach">本番のユーザー反応を数十億トークン規模で報酬に変換し、約 5 時間周期で重みを更新・回帰評価・再デプロイ</div>
+      <div class="detail">Composer 1.5 の A/B テストで、編集がコードに残る率が +2.28%、不満を示す追加指示が −3.13%、レイテンシが −10.3%。シミュレーションでは再現しにくい「人間の反応」を報酬源にした例で、報酬ハックへの対処も具体的に公開されている。</div>
+      <a href="https://cursor.com/blog/real-time-rl-for-composer">📄 一次ソース</a>
+    </div>
+    <div class="takeaway"><strong>示唆:</strong> 社内でモデルを評価・調整するなら、正答率と並べてトークン数やターン数、ユーザーが手で戻した編集の割合を最初から記録しておくべき。これらは後から RL の報酬にも、モデル選定の基準にも使える。逆に正答率だけを追うと、遅くて高いモデルを選ぶことになりやすい。</div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">📐 パターン 3: 全部を自前にせず、検証できる部品から内製する</div>
+  <div class="theme-section">
+    <p>メインのエージェントのモデルを丸ごと自社製にする前に、役割を限った小さなモデルから置き換える流れもはっきりしてきた。Cognition の SWE-grep は、メインのエージェントのためにコードベースから関連ファイルと行範囲を探す検索専用のサブエージェントのモデルだ。1 ターンに最大 8 本のツール呼び出しを並列に出し、最大 4 ターンで答えを返すように RL で訓練されている。JetBrains が 10 月 8 日に公開した Mellum2.1 は、総パラメータ 12B・アクティブ 2.5B の MoE で、アーキテクチャは前版から変えず、作業のほぼすべてを RL 中心の後訓練に充てた。ソフトウェアエンジニアリングのタスクでは、実リポジトリでシェルとファイル編集ツールを使い、テストが通ると報酬が出る。</p><p>この順序に収束しているのは、RL の成否が報酬を機械的に計算できるかで決まるからだ。Cognition は「検索は検証可能なタスクだ」と書き、取得したファイル・行の加重 F1 を報酬にしている。しかも精度を重く見る重み付けにしている。余計なコンテキストを渡す害のほうが、取りこぼす害より大きいという判断だ。テストで採点できる修正タスクも同じ性質を持つ。一方で、要件の曖昧さを解きほぐす、設計判断を下すといった部分は、まだ採点の仕組みがないため汎用フロンティアモデルに任されている。速度を武器にする小型モデルを部品として差し込み、判断の重い部分は大きなモデルに残す。この分業が当面の現実解になっている。</p>
+    <div class="example">
+      <div class="product">Cognition SWE-grep / SWE-grep-mini（Windsurf Fast Context）</div>
+      <div class="approach">検索サブエージェント専用に多ターン RL で訓練し、精度寄りの加重 F1 を報酬にする。mini は蒸留後に追加 RL</div>
+      <div class="detail">Cerebras 上で SWE-grep-mini は毎秒 2,800 トークン超、SWE-grep は 650 トークン超で動く。「メインのエージェントのコンテキストを汚さない」ことを報酬設計の段階で組み込んだ、部品型の自社モデルの典型例。</div>
+      <a href="https://cognition.com/blog/swe-grep">📄 一次ソース</a>
+    </div>
+    <div class="example">
+      <div class="product">JetBrains Mellum2.1（Apache 2.0）</div>
+      <div class="approach">12B MoE（アクティブ 2.5B）のまま、RL を最終工程から訓練の主工程に格上げ。実リポジトリでテスト通過を報酬にする</div>
+      <div class="detail">JetBrains の自己申告で SWE-bench Verified 47.0、LiveCodeBench v6 82.0。同規模の Qwen3.5 9B には複数の指標で及ばないが、高負荷時のスループットの高さを前面に出しており、大型モデルの代替ではなく高速な部品として位置づけている。</div>
+      <a href="https://blog.jetbrains.com/ai/2026/10/mellum2-1-gets-to-work-a-fast-open-model-for-coding-agents/">📄 一次ソース</a>
+    </div>
+    <div class="takeaway"><strong>示唆:</strong> 自社モデル化の候補は「出力を機械的に採点できるか」で選ぶ。検索・分類・テスト付きの修正のように正解を自動判定できる役割は小型モデルの RL で置き換えやすい。採点基準を言語化できない役割は、当面はフロンティアモデルの API に任せたほうが安くつく。</div>
+  </div>
+  <div class="editorial">
+    <span class="label">✍️ 編集後記</span>
+    モデルを自社で持つかどうかは、もはや「GPU を何千枚持っているか」の話ではなくなった。強い土台はオープンウェイトで手に入る。差を生むのは、本番と同じ環境を大量に回せるハーネスと、何を良い振る舞いとみなすかを数式に落とした報酬だ。言い換えれば、自社 RL に踏み出せるかどうかは、自分たちのプロダクトの「良さ」をどこまで機械的に測れているかで決まる。
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">🔗 今号の動向ピックアップ</div>
+  <div class="quick-link"><a href="https://cognition.com/blog/measuring-open-source-model-trustworthiness">Cognition、オープンソース由来モデルの信頼性を自社ハーネスで測定</a><span class="quick-summary">Kimi 系を土台にした SWE-1.7 について、政治的に敏感な 145 問と、本番ハーネスでの悪意ある目的のコーディング依頼で米国のフロンティアモデルと比較した。他社の公開モデルを土台に選ぶなら、その来歴の検証まで製品側の仕事になることを示している。</span></div>
+  <div class="quick-link"><a href="https://cursor.com/blog/bugbot-updates-june-2026">Bugbot、自社モデル Composer 2.5 への切り替えで 3 倍速・22% コスト減</a><span class="quick-summary">Cursor のコードレビュー Bot がハーネス改善と Composer 2.5 の採用で、実行速度 3 倍超、コスト 22% 減、レビューあたりの検出バグ数 10% 増を報告した。自社 RL のモデルを、エージェント本体より先に周辺の自動化製品へ広げる動きの例。</span></div>
+  <div class="quick-link"><a href="https://cursor.com/blog/improved-token-efficiency">Cursor、ハーネス側の改修だけでトークンコストを 7% 削減</a><span class="quick-summary">システムプロンプトを約 66% 削り、組み込みツールの説明を必要時の読み込みに移し、キャッシュのブレークポイントを置き直した。モデルの訓練とハーネスの設計は別々に進むのではなく、ハーネスの変更が次のモデル訓練の前提になるという関係がよく見える。</span></div>
+  <div class="quick-link"><a href="https://cursor.com/blog/self-summarization">Composer、自己要約を RL に組み込みコンテキスト長を超える軌跡を学習</a><span class="quick-summary">Cursor は、ハーネスの自己要約の処理自体を訓練ループに含め、数百アクションに及ぶタスクで学習できるようにした。ハーネスの機能をモデルに後から合わせるのではなく、RL の段階で一緒に鍛える設計の具体例。</span></div>
+</div>
+
+<div class="section">
+  <div class="section-title">📚 過去号</div>
+  <div class="archive-item"><span class="week">2026-10-24</span><div class="body"><a href="2026-10-24.html">プロアクティブ型エージェントは「いつ話しかけるか」と「どこで止めるか」を別々に設計した — 巡回間隔・行為単位の承認・外付けの監視役</a><span class="sub">Claude Duet は外部アカウントを常時監視せず「数時間おき」の巡回と朝のブリーフに絞った。巡回の頻度は検知の速さとトークン消費のトレードオフで決まる</span></div></div>
+  <div class="archive-item"><span class="week">2026-10-22</span><div class="body"><a href="2026-10-22.html">ブラウザエージェントは「画面を見て押す」をやめ始めた — 構造を読む、サイトがツールを差し出す、防御はモデルの外に積む</a><span class="sub">Playwright MCP や Vercel の agent-browser は、ページをスクリーンショットではなく ref 付きのアクセシビリティツリーで渡すのを既定にし、画像はキャンバスやアイコンなどの補助に回した</span></div></div>
+  <div class="archive-item"><span class="week">2026-10-20</span><div class="body"><a href="2026-10-20.html">コーディングエージェントの書き込み量に、ソース管理と開発用 DB が作り替えられ始めた — 保存と配信の分離、ref 更新だけの協調、マージしない分岐</a><span class="sub">保存と配信を分けた。GitHub は 5 台のファイルサーバーに全量を複製する構成をやめ、正本を Azure Blob Storage に置いてキャッシュ付きのワーカーで配信する構成に移る。Anthropic の Scion はサーバー側にも完全な作業コピーを持たず、3 段のキャッシュでヒット率 99% 超、CI のチェックアウトを約 100 倍速くした。</span></div></div>
+  <div class="archive-item"><span class="week">2026-10-17</span><div class="body"><a href="2026-10-17.html">AI コードレビューは「全部指摘する」から「確かめてから出す」へ — 発見と検証の分離、変更内容で決まるレビューの重さ、指摘数ではなく収束で測る評価</a><span class="sub">Anthropic の Code Review は複数のエージェントが並列でバグを探し、別の検証役のグループが多数決で本物と判断した指摘だけを投稿する。Cursor Bugbot も初期は差分の順序を変えた 8 本の並列パスを多数決と validator モデルでふるいにかけ、その後エージェント型に移行した。</span></div></div>
+  <div class="archive-item"><span class="week">2026-10-15</span><div class="body"><a href="2026-10-15.html">エージェントの身元は「ユーザーの借り物」から「専用の ID」へ — 代理と自律の区別、ID を切る単位、受け手側での識別</a><span class="sub">Entra Agent ID はトークンの subject と actor を分ける。自律動作のときは subject がエージェント自身になり、ユーザーの代理のときは subject がユーザー、actor がエージェントになる。Google の coworker agent も「あなたではなく自分の ID で動き、共有されたものしか見ない」と定義され、操作は人ではなくエージェント名義で監査ログに残る。</span></div></div>
+  <div class="archive-item"><span class="week">2026-10-13</span><div class="body"><a href="2026-10-13.html">業務エージェントのグラウンディングは「文書検索」から「意味モデル」へ — 既存の業務設定と判断の履歴から、エージェント用の辞書を自動で組み立てる</a><span class="sub">Microsoft の Dataverse semantic model は、テーブル関係・ビュー・フォーム名・列の説明といった既存の設定から意味を自動で抽出し、12時間ごとに再生成する。人が書くのは推論できない社内用語の用語集だけで、Snowflake も既存の SQL や BI ファイルから semantic view を作る Autopilot を出した。</span></div></div>
+  <div class="archive-item"><span class="week">2026-10-10</span><div class="body"><a href="2026-10-10.html">エージェントコマースは「一つの決済プロトコル」をやめた — 発見・同意の証明・本人ログインを別レイヤーに切り分ける設計へ</a><span class="sub">UCP は加盟店が /.well-known/ucp に能力を公開し、エージェント側と「共通する能力だけ」を交渉で残す設計。OpenAI も ACP の主軸をチャット内決済から商品カタログの受け渡しへ移し、決済は加盟店側に戻した。</span></div></div>
+  <div class="archive-item"><span class="week">2026-10-08</span><div class="body"><a href="2026-10-08.html">エージェントの UI は「誰が描くか」で二つに割れた — iframe で持ち込む MCP Apps、カタログで描かせる A2UI、そして会話の外へ</a><span class="sub">MCP Apps はツールが ui:// の HTML リソースを返し、ホストが sandbox 付き iframe で描画する「持ち込み型」。Claude・VS Code・ChatGPT が同じ仕様に乗った。</span></div></div>
+  <div class="archive-item"><span class="week">2026-10-06</span><div class="body"><a href="2026-10-06.html">音声エージェントは「話す層」と「考える層」を分けた — カスケードか音声直結かの二択が終わった理由</a><span class="sub">OpenAI の GPT-Live-1 は会話の進行だけを担い、推論とツール実行は裏側のテキストモデルへ非同期に委譲する二層構成を採った。</span></div></div>
+  <div class="archive-item"><span class="week">2026-10-03</span><div class="body"><a href="2026-10-03.html">エージェントの評価は「最終出力」ではなく「軌跡」を見る設計に変わった — OpenAI・Anthropic・Replitが同時に評価基盤を公開</a><span class="sub">OpenAI・Anthropic・Replit・Braintrustが2026年に評価基盤の内部設計を相次いで公開した。</span></div></div>
+  <div class="archive-item"><span class="week">2026-10-01</span><div class="body"><a href="2026-10-01.html">エージェントは「呼び出すたびに消える」から「状態を持ち続ける」へ — OpenAI・Google・Alibabaが同時に永続化レイヤーを足した</a><span class="sub">OpenAIの「dots」はユーザーごとに専用クラウドコンピュータを割り当て、ChatGPT・Slack・Teamsを横断して会話間の文脈を保持する常駐エージェント。</span></div></div>
+  <div class="archive-item"><span class="week">2026-09-29</span><div class="body"><a href="2026-09-29.html">エージェントの長期記憶は「要約」をやめた — 編集可能なファイル、共有された手順、非破壊のグラフへ</a><span class="sub">Claudeは会話終了後の要約をやめ、対話中にトピック単位のファイルへ直接書き込み、ユーザーが個別に編集できる方式に切り替えた。</span></div></div>
+  <div class="archive-item"><span class="week">2026-09-26</span><div class="body"><a href="2026-09-26.html">マルチエージェント協調は「並列に投げる」から「役割を絞った2体」に収束した — Fusion 型アーキテクチャが解いた失敗伝播問題</a><span class="sub">Cognitionは「分散マルチエージェントは前提の食い違いで失敗が伝播する」と自ら警告した後、lead+sidekickの2体だけに絞った制約付き構成「Fusion」を主力製品化し、2026年9月にローカル環境まで展開した。</span></div></div>
+  <div class="archive-item"><span class="week">2026-09-24</span><div class="body"><a href="2026-09-24.html">カスタマー対応エージェントの設計は「決定木」から「自然言語手順×コードの二層構造」へ</a><span class="sub">Decagonは決定木を捨て、業務担当者が自然言語で書いた手順を構造化ロジックにする一方、返金などの機微操作だけコードで検証するAOPへ移行し、NG.CASHでは解決率が70%まで向上した。</span></div></div>
+  <div class="archive-item"><span class="week">2026-09-22</span><div class="body"><a href="2026-09-22.html">モデルルーティングが開発ツールの既定機能になった — 選ぶのは人間ではなく分類器</a><span class="sub">GitHub Copilotは9月にauto model selectionへ「efficiency/balance/intelligence」の3段階ティアを追加し、Cursorは60万件超の実利用データで学習した分類器（Cursor Router）でモデル選定を自動化した。</span></div></div>
+  <div class="archive-item"><span class="week">2026-09-19</span><div class="body"><a href="2026-09-19.html">エージェントの権限設計は「毎回確認」から「境界を先に固定する」へ移った</a><span class="sub">OpenAI CodexとAnthropicのClaude Codeは、サンドボックスの制限強度と確認ダイアログの要否を別軸にし、境界内の行為は原則自動承認する設計にそろえた。</span></div></div>
+  <div class="archive-item"><span class="week">2026-09-17</span><div class="body"><a href="2026-09-17.html">コード検索の設計が三方向に割れた — ベクトルDBを捨てる陣営、極める陣営、置き換える陣営</a><span class="sub">Claude Code は埋め込みベースのRAGを捨て、grep/globの反復探索に完全移行——再インデックスの陳腐化とコードアップロードのセキュリティリスクを避けるため。</span></div></div>
+  <div class="archive-item"><span class="week">2026-09-15</span><div class="body"><a href="2026-09-15.html">エージェント実行基盤のマネージド化 — 3社が同時に「実行環境を貸す側」に回った</a><span class="sub">OpenAIが9月10日、Codexハーネスをagents/environments/sessions/eventsの4プリミティブに集約した Agents API を公開ベータで公開。基盤自体の追加課金はなくトークン・ツール実費のみ。</span></div></div>
+  <div class="archive-item"><span class="week">2026-09-12</span><div class="body"><a href="2026-09-12.html">コンテキストは会話ログではない — Working Context / Session / Memory / Artifacts への分離が実装標準になった</a><span class="sub">Google ADKは2026年9月、コンテキストを Working Context・Session・Memory・Artifacts の4層に分離し、閾値到達で非同期に要約するcompactionを実装したと公式ブログで説明した。</span></div></div>
+  <div class="archive-item"><span class="week">2026-09-10</span><div class="body"><a href="2026-09-10.html">Agent Skills という第3のレイヤー — プロンプトでもRAGでもなく「必要になるまで読まない」設計</a><span class="sub">Agent Skillsは「メタデータ(~100トークン)→本文(&lt;5000トークン推奨)→付随ファイル」の3段階でコンテキストに読み込む、プログレッシブディスクロージャー設計。</span></div></div>
+  <div class="archive-item"><span class="week">2026-09-08</span><div class="body"><a href="2026-09-08.html">エージェント評価の再設計 — テキスト一致から状態検証、そして「修正がテストになる」仕組みへ</a><span class="sub">Anthropicはテキスト一致の判定から、環境の状態が実際に変わったかを見る outcome/state チェックへの転換を公式に推奨している。</span></div></div>
+  <div class="archive-item"><span class="week">2026-09-03</span><div class="body"><a href="2026-09-03.html">長時間稼働エージェントの状態管理 — 「会話の保存」から「プロセスの永続化」へ</a><span class="sub">Google ADKやMastraは、ツール呼び出しなどステップの境界ごとに実行状態をシリアライズして外部ストレージに書き込み、コンテナが落ちても直前のステップから再開できる設計に収束している。</span></div></div>
+  <div class="archive-item"><span class="week">2026-09-01</span><div class="body"><a href="2026-09-01.html">コードレビューエージェントの設計 — 差別化は検出率ではなく、文脈の取り方と『直すところまで』の範囲に移った</a><span class="sub">GitHub Copilot・Qodo・Cursor Bugbot・Cloudflareの内製ツールが、diff単体の解析から脱却し、リポジトリ全体・PR履歴・過去の指摘への反応まで動的に文脈を取りに行く設計へ収束している</span></div></div>
+  <div class="archive-item"><span class="week">2026-08-29</span><div class="body"><a href="2026-08-29.html">構造化出力は「お願い」から「強制」へ — 3社がグラマー制約デコーディングで足並みを揃えた2026年</a><span class="sub">OpenAI・Anthropic・Google の主要3社が、JSON Schema をトークン生成レベルで強制する「グラマー制約デコーディング」に共通で対応した</span></div></div>
+  <div class="archive-item"><span class="week">2026-08-27</span><div class="body"><a href="2026-08-27.html">マルチエージェント協調 — 割っていいのは「コンテキストの切れ目」だけ</a><span class="sub">Anthropic は Research 機能で並列サブエージェントを使い内部評価で90.2%の性能改善を報告するが、トークン消費は通常の約15倍になるとも明記している。</span></div></div>
+  <div class="archive-item"><span class="week">2026-08-25</span><div class="body"><a href="2026-08-25.html">エージェントのメモリ設計 — 生ログでも単一要約でもなく、書き換え可能な単位に分解する</a><span class="sub">Claude は2026年7月、記憶を単一のローリング要約から個別の書き換え可能なエントリへ移行。ChatGPT は非同期の「Dreaming」処理で古い事実を時制ごと書き換える。</span></div></div>
+  <div class="archive-item"><span class="week">2026-08-22</span><div class="body"><a href="2026-08-22.html">プロンプトキャッシュはコスト最適化ではない — 「プレフィックス固定」というアーキテクチャ制約</a><span class="sub">キャッシュ命中率はもはや副次指標ではなく、Manus はこれを「本番エージェントで最重要のメトリック」と明言している。</span></div></div>
+  <div class="archive-item"><span class="week">2026-08-20</span><div class="body"><a href="2026-08-20.html">接続ツールが増えるほど遅くなる問題 — コード実行と検索遅延ロードの2つの答え</a><span class="sub">Anthropicは公式エンジニアリングブログで、MCPツールをコードAPIとして提示しファイルシステム越しにオンデマンドで読み込ませる方式により、あるタスクのトークン消費を150,000から2,000（98.7%減）に削減したと報告した</span></div></div>
+  <div class="archive-item"><span class="week">2026-08-18</span><div class="body"><a href="2026-08-18.html">MCPエージェントの認可設計 — 同意画面を「増やす」実装と「無くす」実装に分岐した</a><span class="sub">MCPの権限設計は「サーバー単位のOAuth」から「ツールごとのスコープ」へ移り、WorkOSやCloudflareが個別ツール内での権限チェックを標準パターンとして提示している。</span></div></div>
+  <div class="archive-item"><span class="week">2026-08-15</span><div class="body"><a href="2026-08-15.html">エージェントの評価・観測性 — 「最終出力の一致」から「軌跡(トラジェクトリ)の妥当性」へ</a><span class="sub">Anthropic は Tasks/Graders/Transcripts の三要素でエージェント評価を構造化し、1回でも成功する確率 pass@k と毎回成功する確率 pass^k を分けて計測する運用を提示した。</span></div></div>
+  <div class="archive-item"><span class="week">2026-08-13</span><div class="body"><a href="2026-08-13.html">モデルルーティング — 1モデルに全部背負わせない設計が標準になった</a><span class="sub">Vercel AI GatewayやGitHub Copilot Autoは、ヒューリスティック分類→難易度ティア判定→プロバイダ違いのフォールバック、という二段構成のタスク別ルーティングをすでに標準実装にしている。</span></div></div>
+  <div class="archive-item"><span class="week">2026-08-11</span><div class="body"><a href="2026-08-11.html">コンテキスト圧縮はどこで行うべきか — API・モデル訓練・ハーネス、3層に割れた実装場所</a><span class="sub">Anthropic は compaction をサーバーサイド API のオプションとして実装し、モデル本体は変更していない</span></div></div>
+  <div class="archive-item"><span class="week">2026-08-08</span><div class="body"><a href="2026-08-08.html">エージェントのコード実行基盤 — サンドボックスは「重い専用マシン」と「軽いアイソレート」に分かれ始めた</a><span class="sub">Cloudflare Sandboxes と Vercel Sandbox はどちらも「持続する専用マシン」型サンドボックスをGA化し、スナップショット復元でコールドブート30秒を2秒程度まで縮めた。</span></div></div>
+  <div class="archive-item"><span class="week">2026-08-06</span><div class="body"><a href="2026-08-06.html">RAG 構成パターンの現在地 — 二段構成の次は、検索そのものをエージェントに埋め込む</a><span class="sub">Perplexity は Vespa 上で lexical・embedding のハイブリッド検索から cross-encoder rerank へ絞り込む多段構成を採り、Databricks は同じ構成を単一パラメータで追加できる機能として一般化した。</span></div></div>
+  <div class="archive-item"><span class="week">2026-08-04</span><div class="body"><a href="2026-08-04.html">ワークフロー型 vs エージェント型 — 複雑さを足す前に何を確かめるか</a><span class="sub">Anthropic は「経路を誰が決めるか」で workflow と agent を定義し、単純な方から試すべきだと明言している。</span></div></div>
+  <div class="archive-item"><span class="week">2026-08-01</span><div class="body"><a href="2026-08-01.html">コンテキストエンジニアリング — 「何を見せるか」ではなく「何を見せないか」を設計する</a><span class="sub">事前に全部読み込むのではなく、ファイルパスやURLなど軽量な参照を渡して実行時に取得する「Just-in-Time retrieval」がCursorやAnthropicの標準手法になった。</span></div></div>
+  <div class="archive-item"><span class="week">2026-07-30</span><div class="body"><a href="2026-07-30.html">マルチエージェント協調 — 「書き込みを一本化する」が唯一の合意点になった理由</a><span class="sub">Cognition は2025年、複数エージェントの並行書き込みが矛盾した判断を生むとして「マルチエージェントを作るな」と主張したが、2026年4月に態度を転換し「書き込みは一本化し、エージェントは行動ではなく知性を提供する」構成に絞って実例を公開した</span></div></div>
+  <div class="archive-item"><span class="week">2026-07-28</span><div class="body"><a href="2026-07-28.html">エージェントのメモリ設計 — 保存容量ではなく「書き込みの境界線」を設計する</a><span class="sub">Anthropic は Claude Managed Agents の記憶をファイルとして保存し、監査ログ・ロールバック・スコープ別パーミッションを標準機能として public beta で提供している</span></div></div>
+  <div class="archive-item"><span class="week">2026-W30</span><div class="body"><a href="2026-W30.html">エージェントの評価・観測性 — 「良さそう」を数値にする前に何を測らないかを決める</a><span class="sub">Anthropic は Claude Code の品質劣化が6週間、内部の eval・コードレビュー・単体テストをすべてすり抜けていたと自ら公表し、変更ごとの広範な eval とソーク期間の導入を表明した</span></div></div>
+</div>
+
+<footer>
+  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="../data/ai-trends/2026-10-27.json">data/ai-trends/2026-10-27.json</a>（このページは JSON からの生成物）</p>
+  <p style="margin-top:.5rem"><a href="../">📰 日刊ダイジェストに戻る</a></p>
+</footer>
+</div>
+</body>
+</html>

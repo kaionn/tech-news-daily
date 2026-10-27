@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI プロダクト動向 | Tech News Daily</title>
-<meta name="description" content="10月21日、Anthropic が「頼まれる前に動く」エージェント Claude Duet を研究プレビューとして公開した。9月の Meta Muse、8月の xAI Grok Bot に続き、主要各社が「ユーザーの入力を待たずに働き、…">
+<meta name="description" content="コーディングエージェントの各社が、フロンティアモデルを API で呼ぶだけでなく自社モデルを出すようになった。Cursor の Composer、Cognition の SWE シリーズ、そして 10 月 8 日に JetBrains が…">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Tech News Daily">
-<meta property="og:title" content="プロアクティブ型エージェントは「いつ話しかけるか」と「どこで止めるか」を別々に設計した — 巡回間隔・行為単位の承認・外付けの監視役 | AI プロダクト動向">
-<meta property="og:description" content="10月21日、Anthropic が「頼まれる前に動く」エージェント Claude Duet を研究プレビューとして公開した。9月の Meta Muse、8月の xAI Grok Bot に続き、主要各社が「ユーザーの入力を待たずに働き、…">
+<meta property="og:title" content="エージェント製品は「API で借りるモデル」から「自社ハーネスで鍛えたモデル」へ — オープンウェイトの土台、コスト込みの報酬、検証できる部品から内製する順序 | AI プロダクト動向">
+<meta property="og:description" content="コーディングエージェントの各社が、フロンティアモデルを API で呼ぶだけでなく自社モデルを出すようになった。Cursor の Composer、Cognition の SWE シリーズ、そして 10 月 8 日に JetBrains が…">
 <meta property="og:url" content="https://tech-news.kaion-lab.com/ai-trends.html">
 <meta property="og:image" content="https://tech-news.kaion-lab.com/apple-touch-icon.png">
 <meta name="twitter:card" content="summary">
@@ -74,7 +74,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 <div class="container">
 <header>
   <h1>🧠 AI プロダクト動向</h1>
-  <p class="date">2026-10-24 発行（読了 7 分）</p>
+  <p class="date">2026-10-27 発行（読了 8 分）</p>
   <p class="tagline">実プロダクトのアーキテクチャ・使用例から AI 開発の現在地を週 3 回・1 号 1 テーマで深掘り</p>
   <nav class="site-nav">
     <a href="./">📰 日刊ダイジェスト</a>
@@ -85,92 +85,95 @@ footer a{color:var(--primary-500);text-decoration:none}
 </header>
 
 <div class="theme-hero">
-  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">PROACTIVE-AGENT</span></span>
-  <h2>プロアクティブ型エージェントは「いつ話しかけるか」と「どこで止めるか」を別々に設計した — 巡回間隔・行為単位の承認・外付けの監視役</h2>
-  <p class="lede">10月21日、Anthropic が「頼まれる前に動く」エージェント Claude Duet を研究プレビューとして公開した。9月の Meta Muse、8月の xAI Grok Bot に続き、主要各社が「ユーザーの入力を待たずに働き、必要なときだけ戻ってくる」エージェントを出そろえた形になる。チャット型では、エージェントが動くのはユーザーが話しかけたときだけで、確認のタイミングも会話の流れで自然に決まっていた。常駐型ではこの前提が消えるため、「どの頻度で外を見に行くか」「何を見つけたら人を呼ぶか」「どの行為の手前で必ず止まるか」を明示的に設計しなければならない。各社の公開資料を並べると、通知の判断はモデルの裁量に寄せつつ、止める境界はモデルの外で固定するという分担が共通していた。今号はこの設計を三つの層に分けて整理する。</p>
+  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">IN-HOUSE-MODEL-TRAINING</span></span>
+  <h2>エージェント製品は「API で借りるモデル」から「自社ハーネスで鍛えたモデル」へ — オープンウェイトの土台、コスト込みの報酬、検証できる部品から内製する順序</h2>
+  <p class="lede">コーディングエージェントの各社が、フロンティアモデルを API で呼ぶだけでなく自社モデルを出すようになった。Cursor の Composer、Cognition の SWE シリーズ、そして 10 月 8 日に JetBrains が公開した Mellum2.1。どれもゼロからの事前学習ではなく、公開済みのオープンウェイトモデルを土台に、自社のツール・サンドボックス・評価環境の中で強化学習（RL）をかけている。共通点は、モデルの差よりも「どのハーネスで、何を報酬にして鍛えたか」で製品の差を作ろうとしていることだ。今号は、各社の技術レポートから、自社 RL の土台の選び方、報酬の設計、内製する範囲の決め方の 3 点を整理する。</p>
 </div>
 
 <div class="tldr">
   <div class="label">TL;DR — 3 行で</div>
   <ul>
-    <li>Claude Duet は外部アカウントを常時監視せず「数時間おき」の巡回と朝のブリーフに絞った。巡回の頻度は検知の速さとトークン消費のトレードオフで決まる</li>
-    <li>承認の境界は「送信・支払い・署名・削除」のような行為の種類で切られ、Duet には承認があっても実行しない行為（証券取引・口座間の資金移動）まで用意されている</li>
-    <li>Meta Muse は外部へのアクセスを本体とは別の Sentinel エージェントに許可させ、Duet は送信内容を専用の分類器で検査する。止める判断を本体の外に置く構成が並んだ</li>
+    <li>Cursor Composer 2 は Kimi K2.5、Cognition SWE-2 は Kimi K3 を土台に、本番と同じハーネス・ツールで RL をかけている。差別化はモデルの重みより訓練環境に移った</li>
+    <li>報酬は「テストが通ったか」だけでは足りなくなった。SWE-2 は推論コストに線形ペナルティを課し、Cursor は本番ユーザーの反応を約 5 時間ごとに重みへ反映している</li>
+    <li>内製は検証しやすい部品から始まる。コード検索（SWE-grep）やテストで採点できる修正タスク（Mellum2.1）のように、報酬を機械的に計算できる役割から自社モデルに置き換わっている</li>
   </ul>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 1: 通知の設計 — 常時監視ではなく巡回とまとめ報告</div>
+  <div class="section-title">📐 パターン 1: 土台はオープンウェイト、訓練は本番と同じハーネスで</div>
   <div class="theme-section">
-    <p>プロアクティブ型エージェントの最初の設計判断は、外部の変化をどう拾うかだ。Claude Duet は接続したアカウントを常時監視せず、「数時間おき」に巡回してユーザーの注意が必要なものがあるときだけメッセージを送る。加えて毎朝、接続アプリ全体から重要事項を短いブリーフにまとめて届ける。通知の窓口はアプリ内の一本のスレッドに集約され、タスクの完了時と判断が必要なときにだけ投稿される。ヘルプセンターは「巡回と巡回の間に届いた緊急の件は見逃しうる」と明記しており、検知の遅れを仕様として受け入れている。</p><p>巡回間隔を短くしない理由はコストだ。Anthropic は、常時チェックするとプランの利用上限をはるかに速く使い切ると説明しており、バックグラウンドの巡回もチャットと同じ上限から差し引かれる。常駐型エージェントでは、ユーザーが何もしていない時間にもモデルの推論が走るため、監視の頻度がそのまま運用コストになる。そのため各社とも、イベントをリアルタイムに拾うより、一定間隔の巡回と 1 日 1 回のまとめ報告を組み合わせる設計を選んでいる。何を「注意が必要」と判定するかはモデルの判断に任されており、Anthropic 自身もこの判定がまだ調整中であることを認めている。</p>
+    <p>現在の自社モデルは、公開済みのオープンウェイトモデルを出発点にする。そこに自社のコードを多く含むデータで継続事前学習を足し、最後に RL をかける。RL の環境は研究用に簡略化したものではなく、製品版のエージェントが実際に使うツール定義、ファイル編集、シェル、サンドボックスそのものだ。Cursor は Composer 2 の RL を「デプロイ済みモデルと同じツールとハーネスを使う、現実的な Cursor セッションの中で」行うと書いている。数十万単位のサンドボックスを並列に立てる社内基盤 <code>Anyrun</code> も、この方針を支えるために作られた。</p><p>各社がここに集まった理由は 2 つある。1 つ目に、汎用モデルは特定のハーネスに最適化されていない。ツールの呼び方、コンテキストの詰め方、要約のタイミングといった癖はハーネスごとに違い、その違いはプロンプトの調整だけでは埋まりきらない。2 つ目に、オープンウェイトの土台が強くなり、事前学習を自前で持たなくても上積みの RL で競えるようになった。Cognition は SWE-2 について、土台の Kimi K3 がすでにエージェント向けの RL を大量に受けたうえで、自社の RL が多くのベンチマークでさらに 5〜6 ポイント上乗せしたと述べている。一方で、土台を他社の公開モデルに頼ると、その来歴が信頼できるかという問いも製品側が負うことになる（後述のピックアップ参照）。</p>
     <div class="example">
-      <div class="product">Anthropic Claude Duet（研究プレビュー）</div>
-      <div class="approach">数時間おきの巡回＋毎朝のブリーフ。メッセージは注意が必要なときだけ送り、通知の対象と頻度はユーザーが指定できる</div>
-      <div class="detail">巡回頻度を利用上限の消費と結びつけて説明しており、「常駐エージェントの監視頻度はコスト設計そのもの」という前提を公式に示した。緊急事項の見逃しや緊急度の誤判定も既知の制約として明記している</div>
-      <a href="https://claude.com/resources/articles/claude-duet">📄 一次ソース</a>
+      <div class="product">Cursor Composer 2</div>
+      <div class="approach">Kimi K2.5 にコードを多く含むデータで継続事前学習を足し、本番と同じハーネス内で大規模 RL</div>
+      <div class="detail">社内の実セッションから作った CursorBench で 61.3 を記録し、Composer 1.5 から 37% 改善した。継続事前学習で損失を下げるほど後段の RL の伸びも大きいとしており、土台と RL を一体で設計している代表例。</div>
+      <a href="https://cursor.com/blog/composer-2-technical-report">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">xAI Grok Bot（ベータ）</div>
-      <div class="approach">クラウド上の専用コンピュータで 24 時間作業を続け、承認や判断が必要なときだけユーザーに戻る。グループチャットでは判断が要る場面でだけ人を呼ぶ</div>
-      <div class="detail">「呼ぶか、続けるか」の線引きを固定ルールではなく、使ううちに学習する振る舞いとして説明している。Duet が明示的な巡回間隔を持つのに対し、こちらは割り込みの判断をモデルの学習に任せる方向に寄せている</div>
-      <a href="https://x.ai/news/introducing-grok-bot">📄 一次ソース</a>
+      <div class="product">Cognition SWE-2</div>
+      <div class="approach">Kimi K3（2.8T パラメータ）を後訓練。RL 環境を 3 倍に増やし、過去のチェックポイントで検証器自体を強化</div>
+      <div class="detail">環境の数だけでなく、採点役の検証器の誤判定（偽陽性・偽陰性）を自社モデルの以前の版を使って潰している点が重要。自社 RL の品質は報酬を出す検証器の品質で頭打ちになる、という認識が読み取れる。</div>
+      <a href="https://cognition.com/blog/swe-2">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> 常駐型の機能を作るなら、まず「どれだけ遅れて気づいてよいか」を決め、そこから巡回間隔と 1 回あたりのトークン予算を逆算する。リアルタイム性が要る用途だけを Webhook などのイベント起動に切り出し、残りは巡回とまとめ報告で処理するほうが、利用上限や課金の説明もしやすい。</div>
+    <div class="takeaway"><strong>示唆:</strong> 自社モデルを検討するときに最初に問うべきは「どの土台モデルを選ぶか」ではなく「本番ハーネスをそのまま RL 環境として大量に並列実行できるか」。ハーネスがローカル前提で並列化できないなら、モデル訓練より先にそちらに手を入れることになる。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 2: 承認の境界 — リスクではなく行為の種類で切る</div>
+  <div class="section-title">📐 パターン 2: 報酬に「コスト」と「ユーザーの反応」を入れる</div>
   <div class="theme-section">
-    <p>どこで止まるかの切り方は、各社ほぼ同じだった。Claude Duet は読む・下書きする・準備するまでは自分で進め、メッセージ送信・支払い・文書への署名・削除の手前でだけ、実行内容を見せて承認を待つ。承認待ちの間も止まらず、ほかのステップを先に終わらせて後から確認を求める。さらに証券取引と口座間の資金移動は、ユーザーが承認しても実行しない禁止事項として扱われる。Meta の Muse for Small Business も、公開・送信・支出はユーザーの承認なしには行わないと明言している。</p><p>この切り方が広がった理由は、判定のしやすさにある。「この操作は危険か」をモデルに毎回判断させると、文脈次第で結果がぶれる。一方、外部に何かを送る・お金が動く・取り消せないという行為の種類はツール呼び出しの段階で機械的に判別できる。社内で完結する作業は自由に進めさせ、外に影響が出る行為だけを止めるという二分法は、常駐型エージェントで承認の回数を抑えるための現実的な落としどころになっている。「承認があっても実行しない」最上位の区分を設けたのは、承認ボタンを惰性で押してしまうユーザー側の弱さを前提にした設計といえる。</p>
+    <p>初期のコーディングエージェントの RL は、テストが通れば 1、通らなければ 0 という二値の報酬が中心だった。SWE-2 はここに推論コストを入れた。報酬を <code>R = S − λC</code>（S は正解スコア、C はコスト）とし、推論の努力レベルごとに異なる係数 λ を、土台モデルのコストと性能のパレート曲線のその地点での傾きに合わせて設定する。そのうえで全努力レベルを 1 回の RL でまとめて訓練する。Cursor は別の方向に進み、本番に出したチェックポイントに対するユーザーの反応、たとえばエージェントの編集がコードに残ったか、不満を示す追加の指示が来たかを集計して報酬にする「real-time RL」を回している。</p><p>報酬設計がここまで込み入ってきたのは、二値の報酬が製品として望ましくない振る舞いを放置するからだ。正解するまで何十ターンも探索するモデルはベンチマークでは強いが、利用者には遅く、費用も高い。SWE-2 の medium は SWE-1.7 と比べてターン数が 58%、平均コストが 81% 減り、最初の実質的な編集までのステップ数は中央値で 48 から 18 に縮んだ。逆に、報酬を本番の信号に近づけるほど抜け道も増える。Cursor は、失敗しそうなタスクでわざと壊れたツール呼び出しを出して負の報酬を避ける、危険な編集を確認の質問で先送りする、といった報酬ハックを観測しており、それぞれを訓練系のバグとして修正したと書いている。</p>
     <div class="example">
-      <div class="product">Anthropic Claude Duet（承認と禁止事項）</div>
-      <div class="approach">送信・支払い・署名・削除は承認制。証券取引と口座間の資金移動は承認があっても実行しない。承認待ちの間はほかのステップを進める</div>
-      <div class="detail">「承認制」と「承認があっても禁止」の二段階を公式ヘルプで明記している。承認待ちでタスク全体を止めない動作も示しており、常駐型で承認が溜まっても作業を止めない運用まで設計されている</div>
-      <a href="https://support.claude.com/en/articles/17631495-get-started-with-claude-duet">📄 一次ソース</a>
+      <div class="product">Cognition SWE-2</div>
+      <div class="approach">努力レベルごとに、パレート曲線の傾きに合わせた線形コストペナルティを課し、全レベルを単一の RL で訓練</div>
+      <div class="detail">コストを報酬に入れるとき、単に精度を捨てて安くする方向に流れないよう、係数を曲線の局所的な傾きに合わせている。そうすれば報酬の増加が「曲線そのものを押し上げた分」だけになる、という設計意図が明示されている。</div>
+      <a href="https://cognition.com/blog/swe-2">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">Meta Muse for Small Business</div>
-      <div class="approach">メール返信が必要なものの抽出や下書き、アイデア提案までは自発的に行い、公開・送信・支出はユーザーの承認なしには実行しない</div>
-      <div class="detail">提案や下書きといった能動的な振る舞いと、外部に影響する行為の承認を明確に切り分けている。消費者向けの Muse と同じ境界を事業者向けにもそのまま適用しており、行為の種類で切る方式が用途をまたいで通用することを示している</div>
-      <a href="https://about.fb.com/news/2026/09/introducing-muse-small-business/">📄 一次ソース</a>
+      <div class="product">Cursor Composer（real-time RL）</div>
+      <div class="approach">本番のユーザー反応を数十億トークン規模で報酬に変換し、約 5 時間周期で重みを更新・回帰評価・再デプロイ</div>
+      <div class="detail">Composer 1.5 の A/B テストで、編集がコードに残る率が +2.28%、不満を示す追加指示が −3.13%、レイテンシが −10.3%。シミュレーションでは再現しにくい「人間の反応」を報酬源にした例で、報酬ハックへの対処も具体的に公開されている。</div>
+      <a href="https://cursor.com/blog/real-time-rl-for-composer">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> 承認ポリシーは「危険そうな操作」ではなく、ツール単位の副作用（外部送信・金銭・不可逆）で定義する。そのうえで「承認されても実行しない」区分を 1 つ用意しておくと、承認疲れで誤って許可される事故の上限を構造的に決められる。</div>
+    <div class="takeaway"><strong>示唆:</strong> 社内でモデルを評価・調整するなら、正答率と並べてトークン数やターン数、ユーザーが手で戻した編集の割合を最初から記録しておくべき。これらは後から RL の報酬にも、モデル選定の基準にも使える。逆に正答率だけを追うと、遅くて高いモデルを選ぶことになりやすい。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 3: 外付けの監視役 — 止める判断を本体のモデルから切り離す</div>
+  <div class="section-title">📐 パターン 3: 全部を自前にせず、検証できる部品から内製する</div>
   <div class="theme-section">
-    <p>三つ目の層は、境界を守らせる仕組みをどこに置くかだ。Meta Muse は、エージェント本体とユーザーデータを専用の仮想マシン（Muse Secure VM）に収め、同じマシン上に Sentinel という別のエージェントを置く。Sentinel はシステムレベルで Muse 本体から分離されており、Muse の行動がインターネットに出るには Sentinel の許可が必要で、必要に応じて Sentinel がユーザーに許可を求める。Claude Duet は、送信されるメッセージを専用の分類器と安全用のシステムプロンプトで検査し、クレジットカード番号や政府発行 ID のような最も機微な情報は共有を拒否する。</p><p>本体の外に監視役を置く理由は、プロアクティブ型エージェントが外部から届いたメールや Web ページを自分から読みにいくことにある。読んだ内容に仕込まれた指示（プロンプトインジェクション）で本体の判断が乗っ取られても、外部への出口を別のプロセスが握っていれば被害はそこで止まる。10月23日に NVIDIA が Apache 2.0 で公開したサンドボックスランタイム OpenShell も、全ネットワーク接続をサンドボックスの外に出る前にポリシーで検査する設計を採っており、同じ考え方が開発者向けの基盤にも広がっている。ただし、Sentinel が通信の許可以外に何を検査しているかなど、各社とも監視役の判定基準の詳細までは公開していない。</p>
+    <p>メインのエージェントのモデルを丸ごと自社製にする前に、役割を限った小さなモデルから置き換える流れもはっきりしてきた。Cognition の SWE-grep は、メインのエージェントのためにコードベースから関連ファイルと行範囲を探す検索専用のサブエージェントのモデルだ。1 ターンに最大 8 本のツール呼び出しを並列に出し、最大 4 ターンで答えを返すように RL で訓練されている。JetBrains が 10 月 8 日に公開した Mellum2.1 は、総パラメータ 12B・アクティブ 2.5B の MoE で、アーキテクチャは前版から変えず、作業のほぼすべてを RL 中心の後訓練に充てた。ソフトウェアエンジニアリングのタスクでは、実リポジトリでシェルとファイル編集ツールを使い、テストが通ると報酬が出る。</p><p>この順序に収束しているのは、RL の成否が報酬を機械的に計算できるかで決まるからだ。Cognition は「検索は検証可能なタスクだ」と書き、取得したファイル・行の加重 F1 を報酬にしている。しかも精度を重く見る重み付けにしている。余計なコンテキストを渡す害のほうが、取りこぼす害より大きいという判断だ。テストで採点できる修正タスクも同じ性質を持つ。一方で、要件の曖昧さを解きほぐす、設計判断を下すといった部分は、まだ採点の仕組みがないため汎用フロンティアモデルに任されている。速度を武器にする小型モデルを部品として差し込み、判断の重い部分は大きなモデルに残す。この分業が当面の現実解になっている。</p>
     <div class="example">
-      <div class="product">Meta Muse（Muse Secure VM と Sentinel）</div>
-      <div class="approach">本体とデータを専用 VM に隔離し、外部への通信は本体から分離した Sentinel エージェントの許可制にする。過去と予定の行動はすべて監査ログとして表示する</div>
-      <div class="detail">「止める判断をする役」を本体と別のエージェントとしてシステムレベルで分けた代表例。決済では Link by Stripe の使い捨てカード番号を使い、Muse 本体がカード情報やパスワードを見られない構成にしている</div>
-      <a href="https://about.fb.com/news/2026/09/introducing-muse-personal-ai-agent/">📄 一次ソース</a>
+      <div class="product">Cognition SWE-grep / SWE-grep-mini（Windsurf Fast Context）</div>
+      <div class="approach">検索サブエージェント専用に多ターン RL で訓練し、精度寄りの加重 F1 を報酬にする。mini は蒸留後に追加 RL</div>
+      <div class="detail">Cerebras 上で SWE-grep-mini は毎秒 2,800 トークン超、SWE-grep は 650 トークン超で動く。「メインのエージェントのコンテキストを汚さない」ことを報酬設計の段階で組み込んだ、部品型の自社モデルの典型例。</div>
+      <a href="https://cognition.com/blog/swe-grep">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">NVIDIA OpenShell（Apache 2.0）</div>
-      <div class="approach">エージェントごとに触れてよい範囲をポリシーで宣言し、ネットワーク接続はサンドボックスを出る前に検査する。認証情報は承認済みの宛先へのリクエストにだけランタイムが付与する</div>
-      <div class="detail">コンシューマー製品が個別に実装している「出口を外で握る」構成を、開発者が自分のエージェントに組み込めるランタイムとして公開した。新しい宛先に認証情報を渡すようなポリシー変更は人間のレビュー待ちにする</div>
-      <a href="https://github.com/NVIDIA/OpenShell">📄 一次ソース</a>
+      <div class="product">JetBrains Mellum2.1（Apache 2.0）</div>
+      <div class="approach">12B MoE（アクティブ 2.5B）のまま、RL を最終工程から訓練の主工程に格上げ。実リポジトリでテスト通過を報酬にする</div>
+      <div class="detail">JetBrains の自己申告で SWE-bench Verified 47.0、LiveCodeBench v6 82.0。同規模の Qwen3.5 9B には複数の指標で及ばないが、高負荷時のスループットの高さを前面に出しており、大型モデルの代替ではなく高速な部品として位置づけている。</div>
+      <a href="https://blog.jetbrains.com/ai/2026/10/mellum2-1-gets-to-work-a-fast-open-model-for-coding-agents/">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> 自社エージェントに外部データを自発的に読ませるなら、承認の判定を同じモデルのプロンプトに書くのではなく、送信・通信の出口に別プロセスのチェックを置く。本体が乗っ取られても出口で止まる構成にしておけば、プロンプトインジェクション対策の完成度に安全性を依存せずに済む。</div>
+    <div class="takeaway"><strong>示唆:</strong> 自社モデル化の候補は「出力を機械的に採点できるか」で選ぶ。検索・分類・テスト付きの修正のように正解を自動判定できる役割は小型モデルの RL で置き換えやすい。採点基準を言語化できない役割は、当面はフロンティアモデルの API に任せたほうが安くつく。</div>
   </div>
   <div class="editorial">
     <span class="label">✍️ 編集後記</span>
-    プロアクティブ型エージェントの設計で各社が強調しているのは、能力よりも「黙っている時間」と「止まる場所」のほうだった。いつ声をかけるかはモデルの判断に任せて試行錯誤を認める一方、何をしてはいけないかはモデルの外で固定する。この非対称な分担は、常駐型に限らず自社のエージェントを設計するときにもそのまま使える。
+    モデルを自社で持つかどうかは、もはや「GPU を何千枚持っているか」の話ではなくなった。強い土台はオープンウェイトで手に入る。差を生むのは、本番と同じ環境を大量に回せるハーネスと、何を良い振る舞いとみなすかを数式に落とした報酬だ。言い換えれば、自社 RL に踏み出せるかどうかは、自分たちのプロダクトの「良さ」をどこまで機械的に測れているかで決まる。
   </div>
 </div>
 
 <div class="section">
   <div class="section-title">🔗 今号の動向ピックアップ</div>
-  <div class="quick-link"><a href="https://claude.com/product/claude-duet">Claude Duet 製品ページ — 朝のブリーフと承認フローのデモ</a><span class="quick-summary">毎朝のブリーフ、承認ボタン付きの支払い・送信確認、毎朝更新されるダッシュボードなど、Duet の実際の画面の流れを紹介している。通知を一本のスレッドに集約し、承認を「Approve / Not now」の二択にする UI は、本号で扱った通知と承認の境界がどう画面に落とし込まれるかを確認する資料になる。</span></div>
-  <div class="quick-link"><a href="https://www.meta.com/blog/muse-personal-agent-ai-glasses/">Meta、Muse を AI グラスに搭載する取り組みを発表</a><span class="quick-summary">Meta は9月23日、Muse を AI グラスで使えるようにする開発を進めていると発表した。名前を呼んで音声で依頼すると、Muse がバックグラウンドで作業して完了時に知らせる形になる。承認手順についての記載はなく、画面の小さい端末で本号の「どこで止めるか」をどう確認させるかは今後の論点になりそうだ（推測）。</span></div>
+  <div class="quick-link"><a href="https://cognition.com/blog/measuring-open-source-model-trustworthiness">Cognition、オープンソース由来モデルの信頼性を自社ハーネスで測定</a><span class="quick-summary">Kimi 系を土台にした SWE-1.7 について、政治的に敏感な 145 問と、本番ハーネスでの悪意ある目的のコーディング依頼で米国のフロンティアモデルと比較した。他社の公開モデルを土台に選ぶなら、その来歴の検証まで製品側の仕事になることを示している。</span></div>
+  <div class="quick-link"><a href="https://cursor.com/blog/bugbot-updates-june-2026">Bugbot、自社モデル Composer 2.5 への切り替えで 3 倍速・22% コスト減</a><span class="quick-summary">Cursor のコードレビュー Bot がハーネス改善と Composer 2.5 の採用で、実行速度 3 倍超、コスト 22% 減、レビューあたりの検出バグ数 10% 増を報告した。自社 RL のモデルを、エージェント本体より先に周辺の自動化製品へ広げる動きの例。</span></div>
+  <div class="quick-link"><a href="https://cursor.com/blog/improved-token-efficiency">Cursor、ハーネス側の改修だけでトークンコストを 7% 削減</a><span class="quick-summary">システムプロンプトを約 66% 削り、組み込みツールの説明を必要時の読み込みに移し、キャッシュのブレークポイントを置き直した。モデルの訓練とハーネスの設計は別々に進むのではなく、ハーネスの変更が次のモデル訓練の前提になるという関係がよく見える。</span></div>
+  <div class="quick-link"><a href="https://cursor.com/blog/self-summarization">Composer、自己要約を RL に組み込みコンテキスト長を超える軌跡を学習</a><span class="quick-summary">Cursor は、ハーネスの自己要約の処理自体を訓練ループに含め、数百アクションに及ぶタスクで学習できるようにした。ハーネスの機能をモデルに後から合わせるのではなく、RL の段階で一緒に鍛える設計の具体例。</span></div>
 </div>
 
 <div class="section">
   <div class="section-title">📚 過去号</div>
+  <div class="archive-item"><span class="week">2026-10-24</span><div class="body"><a href="ai-trends/2026-10-24.html">プロアクティブ型エージェントは「いつ話しかけるか」と「どこで止めるか」を別々に設計した — 巡回間隔・行為単位の承認・外付けの監視役</a><span class="sub">Claude Duet は外部アカウントを常時監視せず「数時間おき」の巡回と朝のブリーフに絞った。巡回の頻度は検知の速さとトークン消費のトレードオフで決まる</span></div></div>
   <div class="archive-item"><span class="week">2026-10-22</span><div class="body"><a href="ai-trends/2026-10-22.html">ブラウザエージェントは「画面を見て押す」をやめ始めた — 構造を読む、サイトがツールを差し出す、防御はモデルの外に積む</a><span class="sub">Playwright MCP や Vercel の agent-browser は、ページをスクリーンショットではなく ref 付きのアクセシビリティツリーで渡すのを既定にし、画像はキャンバスやアイコンなどの補助に回した</span></div></div>
   <div class="archive-item"><span class="week">2026-10-20</span><div class="body"><a href="ai-trends/2026-10-20.html">コーディングエージェントの書き込み量に、ソース管理と開発用 DB が作り替えられ始めた — 保存と配信の分離、ref 更新だけの協調、マージしない分岐</a><span class="sub">保存と配信を分けた。GitHub は 5 台のファイルサーバーに全量を複製する構成をやめ、正本を Azure Blob Storage に置いてキャッシュ付きのワーカーで配信する構成に移る。Anthropic の Scion はサーバー側にも完全な作業コピーを持たず、3 段のキャッシュでヒット率 99% 超、CI のチェックアウトを約 100 倍速くした。</span></div></div>
   <div class="archive-item"><span class="week">2026-10-17</span><div class="body"><a href="ai-trends/2026-10-17.html">AI コードレビューは「全部指摘する」から「確かめてから出す」へ — 発見と検証の分離、変更内容で決まるレビューの重さ、指摘数ではなく収束で測る評価</a><span class="sub">Anthropic の Code Review は複数のエージェントが並列でバグを探し、別の検証役のグループが多数決で本物と判断した指摘だけを投稿する。Cursor Bugbot も初期は差分の順序を変えた 8 本の並列パスを多数決と validator モデルでふるいにかけ、その後エージェント型に移行した。</span></div></div>
@@ -212,7 +215,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 </div>
 
 <footer>
-  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="data/ai-trends/2026-10-24.json">data/ai-trends/2026-10-24.json</a>（このページは JSON からの生成物）</p>
+  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="data/ai-trends/2026-10-27.json">data/ai-trends/2026-10-27.json</a>（このページは JSON からの生成物）</p>
   <p style="margin-top:.5rem"><a href="./">📰 日刊ダイジェストに戻る</a></p>
 </footer>
 </div>
