@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-10-26</title>
+  <meta name="description" content="GMO不正アクセス、攻撃者が27日正午期限のPC乗っ取りを予告 / DuckDB 2.0 LTSがAWS傘下化後初のメジャーリリース / JetBrains、エージェント型IDE「ThinkRail」公開">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech News Daily">
+  <meta property="og:title" content="Tech News Daily — 2026-10-26">
+  <meta property="og:description" content="GMO不正アクセス、攻撃者が27日正午期限のPC乗っ取りを予告 / DuckDB 2.0 LTSがAWS傘下化後初のメジャーリリース / JetBrains、エージェント型IDE「ThinkRail」公開">
+  <meta property="og:url" content="https://tech-news.kaion-lab.com/archive/2026-10-26.html">
+  <meta property="og:image" content="https://tech-news.kaion-lab.com/apple-touch-icon.png">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="../feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-10-26 (Mon)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+      <nav class="site-nav">
+        <a href="../" class="active">📰 日刊ダイジェスト</a>
+        <a href="../trends.html">🔌 週次プラグイントレンド</a>
+        <a href="../ai-trends.html">🧠 AI プロダクト動向</a>
+        <a href="./">🗂 アーカイブ</a>
+      </nav>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 23 articles</span>
+      <span>🏷 8 categories</span>
+      <span>📡 18 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item">
+        <span class="number-value">8x</span>
+        <span class="number-label">CloudflareのRust製TypeScript型チェッカー「tsrs」がTypeScript 7比で記録した最大高速化率</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">62%</span>
+        <span class="number-label">10年前のCNNが皮膚病変の診断で記録した正答率(GPT-6 Astra・Claude Fable 5.1はいずれも42%)</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">11x</span>
+        <span class="number-label">プロンプトキャッシュが失効した直後のターンで発生したコスト倍率(Claude Code実測)</span>
+      </div>
+    </div>
+
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
+
+      <div class="card featured deep-dive">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://www.nikkei.com/article/DGXZQOUC250PP0V21C26A0000000/">DEEP DIVE: GMOへの攻撃者、27日正午までの不払いなら利用者PC乗っ取りを予告 政府に緊急対応要請</a></h3>
+        </div>
+        <div class="summary">GMOインターネットグループが運営する投資家向けクラウドサービスへの不正アクセスは、10月24日に新たな段階に入った。攻撃者を名乗る人物が自身のウェブサイト上に要求を公開し、10月27日正午までにGMOが応じなければサービス利用者のPCを乗っ取ると予告した。さらに乗っ取ったPC内の個人情報を拡散する可能性にも言及し、GMO側への圧力を強めている。GMOはこの投稿を受け、同じ10月24日に政府へ「能動的サイバー防御」の実施を緊急要請した。能動的サイバー防御は、攻撃が実行される前に通信情報を分析し侵入元のサーバーなどへ事前に対処する枠組みで、2026年に施行された制度に基づく。NHKの報道では、GMOが利用者に対してパスワード変更とデータバックアップを呼びかける対応を強化したことも伝えられている。これまでの報道では「利用者が覚えのない取引が確認された」とされているが、流出した情報の範囲や対象ユーザー数、攻撃者の要求額といった具体的な数字は10月25日時点では公開されていない。攻撃者の予告が実際にPCを乗っ取れる技術的な裏付けを持つのか、交渉を有利に進めるための脅迫に過ぎないのかは、現時点の公開情報からは判断できない。</div>
+        <div class="editorial">🧠 「能動的サイバー防御」の緊急要請は、攻撃者の脅迫に対抗する手段を国家レベルに求めた格好だが、この制度は攻撃の予防的な通信解析を主眼としており、進行中の恐喝そのものを止める効果が及ぶかどうかは未知数だ。期限が27日正午に設定されている以上、GMOは交渉に応じるか政府の対応を待つかの二択を迫られている構図であり、どちらを選んでも利用者のPCが乗っ取られるリスクは消えないだろう。ただし乗っ取りが技術的に実行可能という根拠は今のところ示されておらず、単なる脅迫の誇張である可能性も排除できない。</div>
+        <div class="key-points">
+          <ul>
+            <li>攻撃者は10月24日に自身のサイト上で要求を公開し、10月27日正午を支払い期限に設定、期限内に応じなければサービス利用者のPCを乗っ取ると予告した</li>
+            <li>GMOは同日(10月24日)、政府に「能動的サイバー防御」の実施を緊急要請し、利用者にはパスワード変更とデータバックアップを呼びかける対応を強化した</li>
+            <li>流出範囲や対象ユーザー数、攻撃者側の要求額など具体的な数字は10月25日時点の報道では明らかにされていない</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 GMOの投資家向けクラウドサービスを利用している場合は、27日正午の期限を待たずパスワードを変更し、重要データのバックアップを取っておくべきだ。</div>
+        <div class="meta">
+          <span>Nikkei</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-10-25</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-data">Data</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/duckdb_20_ltsquack.html">DuckDB 2.0 LTS「Cinnamon Teal」が正式リリース、AWS子会社化後初のメジャー版</a></h3>
+        </div>
+        <div class="summary">DuckDB Foundationは長期サポート版「DuckDB 2.0.0(Cinnamon Teal)」を正式リリースした。開発元DuckLabsは2026年8月にAWSに買収されており、今回がAWS傘下化後初のメジャーリリースとなる。新しいPEGベースのSQLパーサーを採用し、独自方言DuckSQLを維持したまま構文追加を容易にした。半構造化データ向けのスキーマレス型VARIANTはJSONベースの旧方式より圧縮率とクエリ速度が向上し、挿入・更新・削除時に処理を自動実行するトリガーも追加された。非同期I/Oによりクエリ処理とI/Oが独立してスケールし、S3などのリモート読み込みが高速化している。サポート期間は2027年10月まで。</div>
+        <div class="key-points">
+          <ul>
+            <li>DuckLabsは2026年8月にAWSへ買収され、DuckDB 2.0はAWS傘下化後初のメジャーリリースでサポートは2027年10月まで続く</li>
+            <li>新PEGベースパーサーでDuckSQL方言を維持しつつ構文拡張を容易化、半構造化データ向けVARIANT型はJSONベースの旧方式より圧縮率とクエリ速度を改善した</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-25</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-product">Product</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://github.com/JetBrains/thinkrail">JetBrains、エージェント型IDE「ThinkRail」をOSSで公開 コーディングエージェントpiをGitワークツリーで並列実行</a></h3>
+        </div>
+        <div class="summary">JetBrainsはインキュベータープロジェクトとして、コーディングエージェント「pi」を包み込むオープンソース(Apache-2.0)のエージェント型IDE「ThinkRail」を公開した。各ワークスペースはGitワークツリー(専用ブランチ)として分離され、複数のpiセッションが並行作業してもメインの作業ツリーを汚さない。GitHub上のPRのオープン・マージ・更新もIDE内から直接行える。プロジェクト知識は`SPEC.md`のグラフとして保持され、専用ツールでエージェントが維持管理する。ポータブルなAgent SkillsやMCPサーバー連携にも対応し、macOS(Apple Silicon)・Windows x64・Linux x64/ARM64向けのデスクトップアプリとブラウザでアプリを開く`thinkrail` CLIの両方を提供する。</div>
+        <div class="key-points">
+          <ul>
+            <li>各ワークスペースを独立したGitワークツリー(専用ブランチ)として分離し、複数のpiセッションを並列実行してもメインの作業ツリーを汚さない設計</li>
+            <li>プロジェクト知識を`SPEC.md`ファイルのグラフとして保持し専用ツールでエージェントが維持管理、ポータブルなAgent SkillsとMCPサーバー連携にも対応する</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-25</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://www.cerebras.ai/blog/how-we-deploy-trillion-parameter-frontier-models-on-cerebras">Cerebras、3兆パラメータ級モデルをウェハ59枚のパイプラインで配信する仕組みを解説</a></h3>
+        </div>
+        <div class="summary">Cerebrasは、オープンソースの3兆パラメータモデルKimi K3を自社のウェハスケールチップ(WSE-3T、オンチップメモリ44GB)59枚に分散配信する構成を解説した。69層の線形注意層を2層ずつ35枚のウェハに、24層の密層を1層ごとに24枚のウェハに割り当て、4bit量子化で重みを配置する。ウェハ間はアクティベーションのみをRDMA経由で約2マイクロ秒/ホップで転送し、重みそのものは移動させない。</div>
+        <div class="key-points">
+          <ul>
+            <li>4bit量子化・8bit KVキャッシュの前提で、3兆パラメータのKimi K3を線形注意層35枚+密層24枚の合計59枚のウェハへ分散配置する</li>
+            <li>ウェハ間はアクティベーションのみをRDMA経由で約2マイクロ秒/ホップ転送し、生成速度は1,000〜2,000トークン/秒超を記録</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Cerebras Blog</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-24</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/cloudflaretypescriptrusttsrstypescript_7708lsptypescript.html">Cloudflare、TypeScriptをRustに移植した型チェッカー「tsrs」を発表 TypeScript 7比で最大8倍高速</a></h3>
+        </div>
+        <div class="summary">CloudflareはVoidZeroと共同で、TypeScriptコンパイラをRustで再実装した「tsrs」を発表した。公式のフォークではなくTypeScriptチームと連携して開発したと説明している。型チェックのベンチマークではGo実装のTypeScript 7に対して最大8倍高速、メモリ使用量は約70%少ない。WebAssemblyにコンパイルできるため、ブラウザやCloudflare Workers上でも実行可能。LSPを含む全機能のサポートは今後の計画で、Oxcツールチェーンへの統合も予定している。</div>
+        <div class="key-points">
+          <ul>
+            <li>型チェックのベンチマークでGo実装のTypeScript 7比で最大8倍高速、メモリ使用量は約70%少ない。ベータ版TypeScript 7.1はTypeScript 7比で約2.5倍高速とされ、tsrsはそれを上回る</li>
+            <li>WebAssemblyにコンパイルしてブラウザ・Cloudflare Workers上で実行可能だが、LSPを含む全機能対応は計画段階でまだ完了していない</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-21</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://isburmistrov.substack.com/p/all-you-need-is-wide-events-not-metrics">「メトリクス・ログ・トレースは不要、必要なのはWide Eventsだけ」というobservability論</a></h3>
+        </div>
+        <div class="summary">著者は、メトリクス・ログ・トレースという従来の3本柱を別々に収集・保存する運用が冗長であり、1リクエストあたり構造化された「Wide Event」1本に集約すれば同等以上の分析ができると論じる。Wide Eventは数十〜数百のフィールドを持つ単一の構造化ログで、集計すればメトリクス相当の情報を再現でき、トレースの文脈はフィールドとして埋め込める。3種のデータストアを別々に運用・相関させる負荷が減る一方、クエリエンジン側には高カーディナリティデータを高速に扱う性能が要求される。</div>
+        <div class="key-points">
+          <ul>
+            <li>メトリクス・ログ・トレースを別々のシステムで持つ代わりに、1リクエスト1イベントの構造化ログ(Wide Event)に集約し、集計によってメトリクス相当の情報を事後的に再現する</li>
+            <li>Wide Eventのフィールド数は数十〜数百に及び、3種のデータを個別に相関させる運用コストを減らす一方、クエリエンジンには高カーディナリティ処理の性能が要求される</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Substack</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-10-24</span>
+          <span class="engagement">▲ 76</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://yossarian.net/til/post/posix-wordexp-3-is-dangerous/">tilde展開に便利なPOSIX wordexp(3)、WRDE_NOCMDを付けてもコマンド実行を防げない</a></h3>
+        </div>
+        <div class="summary">wordexp(3)はシェル風展開を行うPOSIX関数で、チルダ展開の実装に使われることがあるが、既定ではコマンド置換も有効になり`$(whoami)/foo`のような入力でコマンドが実行される。これを防ぐはずの`WRDE_NOCMD`フラグについて、著者はLinux(musl libc)とmacOSの実装がシステムシェルへの委譲に依存した簡易スキャンでコマンド置換を検出しており、Bashが受理する一部のパターンがこのスキャンを通過してしまうと指摘する。著者の結論は、信頼できない入力に対しては`WRDE_NOCMD`付きでもwordexp(3)自体を使わないことだ。</div>
+        <div class="key-points">
+          <ul>
+            <li>musl libc・macOS libcはいずれもシステムシェルへ処理を委譲する簡易スキャンで`WRDE_NOCMD`のコマンド置換検出を実装しており、Bashが受理する一部パターンがスキャンを通過する</li>
+            <li>macOSでは2023年に同種のバイパスが報告済みで、著者は現行シェル(zsh)での再現は未検証としている。信頼できない入力には`WRDE_NOCMD`付きでもwordexp(3)自体の使用を避けるべきとしている</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>yossarian.net</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-10-23</span>
+          <span class="engagement">▲ 43</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://lynchlab.net/llm-skin-cancer">10年前のCNNが皮膚がん診断でGPT-6 AstraとClaude Fable 5.1を上回る 正答率62%対42%</a></h3>
+        </div>
+        <div class="summary">皮膚科医Magnus Lynch氏は、2015年公開のCNN「Inception v3」をISICアーカイブの画像68,011枚でファインチューニングし、MILK10kから抽出した生検確定済み200例(悪性100例・良性100例)の皮膚病変診断でGPT-6 AstraおよびClaude Fable 5.1と比較した。第一候補の正答率はCNNが62%(125/200)、Claude Fable 5.1とGPT-6 Astraはいずれも42%(84〜85/200)だった。退院可否の判断では、2つのLLMは良性病変の退院許可をCNNの既定閾値より大幅に少なく出し、メラノーマの退院許可数もCNNより少なかった。</div>
+        <div class="key-points">
+          <ul>
+            <li>第一候補の正答率はCNN(Inception v3)が62%(125/200)、Claude Fable 5.1とGPT-6 Astraがいずれも42%(84〜85/200)で、上位2候補まで含めるとCNN 173・Claude 138・GPT-6 Astra 134</li>
+            <li>30例のメラノーマの第一候補正答数はCNN 13例、Claude 11例、GPT-6 Astra 8例。生検確定済みの病変に限った検証で、通常のアーカイブ画像ではCNNの判別性能(AUC 0.96)はさらに高いとされる</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>lynchlab.net</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-23</span>
+          <span class="engagement">▲ 349</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://qiita.com/devoctane/items/eb3ac408041b2f04c780">Claude Codeの「rm -rfをブロック」フックを1ヶ月信じていたら、実は何も止めていなかった</a></h3>
+        </div>
+        <div class="summary">著者はCLAUDE.mdに「PreToolUseフックが`rm -rf`・`git push --force`・`git reset --hard`をブロックする」と記していたが、2026年10月25日に検証すると1ヶ月間一度もブロックが機能していなかったことが判明した。原因は2つの不具合の重複で、スクリプトがフック入力をstdinのJSONではなく空の環境変数`CLAUDE_TOOL_INPUT`から読んでいたこと、さらに終了コードを非ブロックの`exit 1`にしていたことだった(ブロックには終了コード2かJSON拒否応答が必要)。加えて`git add .`がブロック対象から漏れていた。</div>
+        <div class="key-points">
+          <ul>
+            <li>フックは入力をstdinのJSONではなく空の環境変数`CLAUDE_TOOL_INPUT`から読み取り、終了コードも非ブロックの`exit 1`を使っていたため1ヶ月間一度も`rm -rf`等を止めていなかった</li>
+            <li>修正後は11件の模擬入力(8件ブロック・3件許可)と`claude -p`での実コマンドテストで動作を確認し、見落としていた`git add .`もブロック対象に追加した</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-10-25</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://qiita.com/songchong/items/235bed0f8c72f268477e">AIに資料を毎回貼るな、ファイル・SKILL・AGENTS.md活用でトークン課金を最大6割減</a></h3>
+        </div>
+        <div class="summary">IT連携マップ編集部は、AIエージェントへ資料や指示を渡す6通りの方法をClaude CodeとAntigravity CLI上でClaude Sonnet 5.5・Gemini 3.8 Flashを使い比較した。チャットへ毎ターン資料を貼り続ける方法は、1ターン目だけ貼ってタイトル参照するベースラインに対し入力コストが最大173%増加した。再貼り付けをやめるだけでClaude Codeの入力コストは約58%、Gemini長時間セッションでは約63%下がった。共有ルールをAGENTS.md(Claude Codeでは`CLAUDE.md`)に置く方法はベースラインとほぼ同コストで、セッション開始時に読み込まれ追加のファイル読み込みが発生しないためだった。</div>
+        <div class="key-points">
+          <ul>
+            <li>毎ターン資料を再貼り付けする方法はベースライン比で入力コストが最大173%増加し、やめるだけでClaude Codeは約58%・Gemini長時間セッションは約63%のコスト減につながった</li>
+            <li>SKILLや外部ファイルはAIが都度読み込むたびにトークンを消費し節約にはならず、節約目的ではなく要約後の再読み込み用途で使うべきとされる。共有ルールはAGENTS.md/CLAUDE.mdに置くとベースラインと同等のコストで済む</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-26</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://qiita.com/songchong/items/7144594b0ad9529a168b">プロンプトキャッシュ失効後の1手は11倍のコスト、保持時間はClaude Codeで約1時間</a></h3>
+        </div>
+        <div class="summary">同編集部は、プロンプトキャッシュの読み取り・書き込み・非キャッシュ入力の内訳を実測した。Claude Sonnet 5.5のキャッシュ読み取りは通常料金の0.05倍(95%引き)、書き込みは1時間保持で2倍。約53,800トークンの入力のうち93%がキャッシュから読まれたターンでも、コストの75%はキャッシュ書き込みが占めた。65分の間隔を空けた次のターンではキャッシュが失効し、約43,400トークンを書き直すコストはキャッシュヒット時の11倍に達したが、休憩前に`/compact`を実行しておくとこのコストを57%抑えられた。</div>
+        <div class="key-points">
+          <ul>
+            <li>Claude Sonnet 5.5のキャッシュ読み取りは通常料金の0.05倍、書き込みは1時間保持で2倍。65分空けた次ターンはキャッシュが失効し約43,400トークンの書き直しでヒット時の11倍のコストが発生した</li>
+            <li>休憩前に`/compact`を実行しておけば失効後ターンのコストを57%抑えられる。計測ではClaude Codeのキャッシュ保持は約30〜58分でヒット・61分以降でミスとなり、タイムスタンプ行の追加やMCPサーバー追加・モデル切替もキャッシュミスを引き起こした</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-26</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://zenn.dev/hii_chi/articles/claude-code-gh-token-wrapper">Claude CodeにghコマンドをGH_TOKENをコンテナ環境変数に置かずに使わせるdevcontainer構成</a></h3>
+        </div>
+        <div class="summary">著者は、`env`出力や`docker inspect`で漏洩しうるコンテナ環境変数にGH_TOKENを置かず、Claude Codeからghコマンドを安全に使わせるdevcontainer構成を公開した。Dockerfileでチェックサム検証済みのgh 2.102.1をPATH外にインストールし、ホストのトークンファイルをCompose secretとして`/run/secrets/gh_token`にマウント、ラッパースクリプトが呼び出し時だけトークンを読み込んでghプロセスにのみ環境変数を渡す。リポジトリの`.secrets/`はtmpfsで覆い、バインドマウント経由での露出も防ぐ。</div>
+        <div class="key-points">
+          <ul>
+            <li>Dockerfileでチェックサム検証済みのgh 2.102.1をPATH外にインストールし、ホストのトークンをCompose secretとして`/run/secrets/gh_token`にマウント、ラッパースクリプトがghプロセス呼び出し時のみGH_TOKENを渡す</li>
+            <li>Compose secretのファイルは既定でmode 0444のためコンテナ内の他プロセスからの読み取り自体は防げず、著者はClaude Codeのdenyルールを併用しつつBashルールは安全境界ではないと注記している</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-10-25</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://www.itmedia.co.jp/business/articles/2610/24/news009.html">「もうプロンプトは書かない」 Claude Code生みの親が明かす「ループエンジニアリング」</a></h3>
+        </div>
+        <div class="summary">AnthropicでClaude Codeを生み出したBoris Cherny氏は、2026年序盤から一行もコードを手で書いておらず、スマートフォンからAI生成のプルリクエストを承認するのが主な作業になったと語る。Cherny氏が説くのは、都度プロンプトを書くのではなく、AIエージェントが自律的に動く「ループ」を設計する考え方で、記事はこれを「ループエンジニアリング」と呼ぶ。Googleのエンジニアリングリード Addy Osmani氏の同名エッセイが概念を明確化し、OpenAIのPeter Steinberger氏の関連投稿は24時間で約500万回表示されたと報じられている。</div>
+        <div class="key-points">
+          <ul>
+            <li>Boris Cherny氏は2026年序盤以降コードを手で書いておらず、AI生成のプルリクエストをスマートフォンから承認するのが主な作業になったと説明</li>
+            <li>Googleのエンジニアリングリード Addy Osmani氏が「ループエンジニアリング」を定義するエッセイを発表し、Peter Steinberger氏の関連投稿は24時間で約500万回表示されたと報じられている</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>ITmedia</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-24</span>
+          <span class="engagement">🔖 186</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://aardappel.github.io/goose/">メモリ安全だがGCもライフタイム注釈も無いシステム言語「Goose」、C++比3.5倍高速</a></h3>
+        </div>
+        <div class="summary">Goose言語はCにコンパイルされる新しいシステムプログラミング言語で、ヒープもガベージコレクタもライフタイム注釈も持たない。動的な値はコンパイラが管理するデータスタック上に置かれ、スコープの終了とともに単純なストア操作で解放される。コンパイラは各参照がどこにルートされているかを推論し、所有者より長く生存しうる参照を拒否するため`unsafe`が存在しない。16本のベンチマークの幾何平均では、イディオム的なC++比で約3.5倍高速・ピークメモリ使用量は約1.9倍少なく、手最適化されたC++や安全なRustとの比較では約1.1〜1.3倍の差に縮まる。設計はWouter van Oortmerssen氏によるもので、コンパイラ実装自体はAIが大部分を担ったと説明されている。</div>
+        <div class="key-points">
+          <ul>
+            <li>イディオム的なC++比で約3.5倍高速・ピークメモリ使用量は約1.9倍少なく、手最適化されたC++や安全なRustとの比較では約1.1〜1.3倍の差に縮まる(16本のベンチマークの幾何平均)</li>
+            <li>相対参照は1・2・4バイトのオフセットとして保存され位置独立なバイト列となるため、構造体をそのまま保存・復元できる</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>aardappel.github.io</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-10-25</span>
+          <span class="engagement">▲ 561</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-frontend">Frontend</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://charliegerard.dev/blog/overgrown-extension/">放置タブに植物が生い茂るChrome拡張「Overgrown」、鉈かチェーンソーで蔓を払うまで操作不可に</a></h3>
+        </div>
+        <div class="summary">開発者Charlie Gerard氏が公開したChrome拡張「Overgrown」は、タブを見ていない時間だけ進む放置時計に応じてタブ上に植物のSVGが生い茂っていく。5%以上生い茂るとスクロールはできるがクリック・選択・ドラッグができなくなり、鉈・チェーンソー・火炎放射器でドラッグして蔓を払うまで操作が復旧しない。背景ワーカー・コンテンツスクリプト・ポップアップの3部構成で実装されており、生い茂る速度や武器の種類は設定で変更できる。</div>
+        <div class="key-points">
+          <ul>
+            <li>放置時計はタブが非表示の間だけ進み、5%以上生い茂るとクリック・選択・ドラッグが不可になり鉈・チェーンソー・火炎放射器でドラッグして蔓を払うまで復旧しない</li>
+            <li>実装は背景ワーカー・コンテンツスクリプト(SVG描画・生育管理・音声再生)・ポップアップ(設定UI)の3部構成で、GitHub上でオープンソース公開されている</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>charliegerard.dev</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-10-24</span>
+          <span class="engagement">▲ 57</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://isdown.app/status/dreamhost/incidents/675722-file-manager-interface-service-disruption">DreamHost、File Managerとウェブメールの障害でメール・FTPアカウントのパスワードを一括リセット</a>
+        <span class="quick-summary">— 10月23日に発生した接続障害を受け、対象のメール・FTP/SFTPアカウントのパスワードを予防的に一括リセット、パネルから新しいパスワードを設定するよう呼びかけている。</span>
+        <span class="meta">DreamHost Status</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://qiita.com/softbase/items/fb72de63c975fcbbd2f6">「コードレビューは死ぬ、ターミナルも消える」 著名エンジニアが示すAI時代の16の予測</a>
+        <span class="quick-summary">— ソフトウェアエンジニアThorsten Ball氏の予測をQiitaが要約、レビューはコード単位でなくシステムの振る舞い単位になり、人は大量のAI生成コードの欠陥を確実には見つけられなくなるとする。</span>
+        <span class="meta">Qiita</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-infra">Infra</span>
+        <a href="https://zenn.dev/yskszk63/articles/codepipeline-zip-dostime">git archiveのzipをAWS CodePipelineのソースに使うとタイムスタンプが9時間先読みされmakeが壊れる</a>
+        <span class="quick-summary">— zipが持つタイムゾーン無しのDOSタイムスタンプをCodePipelineがmtimeとして採用するため、JSTで作成するとファイルが未来時刻に見え、TZ=UTCでzipを作成することで回避できる。</span>
+        <span class="meta">Zenn</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://www.dailycal.org/news/campus/academics/ai-use-leads-uc-berkeley-math-professor-to-see-no-point-in-grading-homework/article_bdf1eae2-c08b-491f-b9f1-81a7cea177de.html">フィールズ賞受賞者のUCバークレー教授、AI利用の広がりで宿題の正誤採点を取りやめ</a>
+        <span class="quick-summary">— Richard Borcherds教授はAIで満点を取る学生が増え採点代を払う意味がないと判断し、完成度のみで評価する方式に切り替えたが、これも良い仕組みではないと認めている。</span>
+        <span class="meta">The Daily Californian</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-data">Data</span>
+        <a href="https://gigazine.net/news/20261025-seeing-theory/">確率と統計を視覚的なアニメーションで理解できる「Seeing Theory」</a>
+        <span class="quick-summary">— ブラウン大学発の学習サイトで、パラメータを操作しながらグラフの変化を見て確率・統計の概念を直感的に理解できる。</span>
+        <span class="meta">Gigazine</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://note.com/npaka/n/na5ad6472d68c">ソフトウェアの脆弱性情報をいち早く入手する方法、CVE・CISA KEV・JPCERT/CC・OSVの使い分け</a>
+        <span class="quick-summary">— 網羅性にはCVE、悪用確認済みの優先対応にはCISA KEV、日本語の重要情報にはJPCERT/CC、OSSライブラリにはOSVを組み合わせ、利用製品のベンダー公式情報も監視すべきとしている。</span>
+        <span class="meta">note.com</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://blog.habets.se/2026/10/Attention-people-who-think-UB-is-fine.html">未定義動作は「予測可能な結果かせいぜいセグフォルト」で済むという主張への反論</a>
+        <span class="quick-summary">— GCCの例では一度も呼ばれない関数explode()がコンパイラにより到達不能とみなされてもコードが生成・実行されてしまい、ヌル参照も版によって挙動が食い違うと指摘する。</span>
+        <span class="meta">blog.habets.se <span class="engagement">▲ 76</span></span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-oss">OSS</span>
+        <a href="https://yurinchi2525.com/20261025emdash/">さよならWordPress、PHP2Shell騒動を機にCloudflare製CMS「EmDash」へ移行</a>
+        <span class="quick-summary">— CVSS 9.2のPHP2Shell脆弱性公開を機にWordPressへの依存リスクを見直し、Claude Codeを使い1日でAstra製CMS「EmDash」への移行を完了、ページビュー72万超・いいね268件を引き継いだ。</span>
+        <span class="meta">yurinchi2525.com <span class="engagement">🔖 223</span></span>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="./" class="archive-link">🗂 過去のダイジェスト</a>
+    </footer>
+  </div>
+</body>
+</html>
