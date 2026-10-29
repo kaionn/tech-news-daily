@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI プロダクト動向 | Tech News Daily</title>
-<meta name="description" content="コーディングエージェントの各社が、フロンティアモデルを API で呼ぶだけでなく自社モデルを出すようになった。Cursor の Composer、Cognition の SWE シリーズ、そして 10 月 8 日に JetBrains が…">
+<meta name="description" content="エージェントのプロンプト、ツール、評価を、ベンダーの管理画面ではなくリポジトリで持つ流れがこの 2 週間で目立った。10 月 20 日、Cursor は自社の Bugbot や Security Reviewer を作ってきた Agent…">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Tech News Daily">
-<meta property="og:title" content="エージェント製品は「API で借りるモデル」から「自社ハーネスで鍛えたモデル」へ — オープンウェイトの土台、コスト込みの報酬、検証できる部品から内製する順序 | AI プロダクト動向">
-<meta property="og:description" content="コーディングエージェントの各社が、フロンティアモデルを API で呼ぶだけでなく自社モデルを出すようになった。Cursor の Composer、Cognition の SWE シリーズ、そして 10 月 8 日に JetBrains が…">
+<meta property="og:title" content="エージェントの定義は「管理画面の設定」から「リポジトリのコード」へ — ファイルとしての定義、CI で回す評価、変更提案も PR で | AI プロダクト動向">
+<meta property="og:description" content="エージェントのプロンプト、ツール、評価を、ベンダーの管理画面ではなくリポジトリで持つ流れがこの 2 週間で目立った。10 月 20 日、Cursor は自社の Bugbot や Security Reviewer を作ってきた Agent…">
 <meta property="og:url" content="https://tech-news.kaion-lab.com/ai-trends.html">
 <meta property="og:image" content="https://tech-news.kaion-lab.com/apple-touch-icon.png">
 <meta name="twitter:card" content="summary">
@@ -74,7 +74,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 <div class="container">
 <header>
   <h1>🧠 AI プロダクト動向</h1>
-  <p class="date">2026-10-27 発行（読了 8 分）</p>
+  <p class="date">2026-10-29 発行（読了 8 分）</p>
   <p class="tagline">実プロダクトのアーキテクチャ・使用例から AI 開発の現在地を週 3 回・1 号 1 テーマで深掘り</p>
   <nav class="site-nav">
     <a href="./">📰 日刊ダイジェスト</a>
@@ -85,94 +85,88 @@ footer a{color:var(--primary-500);text-decoration:none}
 </header>
 
 <div class="theme-hero">
-  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">IN-HOUSE-MODEL-TRAINING</span></span>
-  <h2>エージェント製品は「API で借りるモデル」から「自社ハーネスで鍛えたモデル」へ — オープンウェイトの土台、コスト込みの報酬、検証できる部品から内製する順序</h2>
-  <p class="lede">コーディングエージェントの各社が、フロンティアモデルを API で呼ぶだけでなく自社モデルを出すようになった。Cursor の Composer、Cognition の SWE シリーズ、そして 10 月 8 日に JetBrains が公開した Mellum2.1。どれもゼロからの事前学習ではなく、公開済みのオープンウェイトモデルを土台に、自社のツール・サンドボックス・評価環境の中で強化学習（RL）をかけている。共通点は、モデルの差よりも「どのハーネスで、何を報酬にして鍛えたか」で製品の差を作ろうとしていることだ。今号は、各社の技術レポートから、自社 RL の土台の選び方、報酬の設計、内製する範囲の決め方の 3 点を整理する。</p>
+  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">AGENT-AS-CODE</span></span>
+  <h2>エージェントの定義は「管理画面の設定」から「リポジトリのコード」へ — ファイルとしての定義、CI で回す評価、変更提案も PR で</h2>
+  <p class="lede">エージェントのプロンプト、ツール、評価を、ベンダーの管理画面ではなくリポジトリで持つ流れがこの 2 週間で目立った。10 月 20 日、Cursor は自社の Bugbot や Security Reviewer を作ってきた Agent SDK を一般公開した。エージェントは Markdown と TypeScript のファイルが並ぶフォルダとして定義される。OpenAI は、画面上でエージェントを組む Agent Builder、Evals、保存済みプロンプトを 11 月 30 日に終了する。Evals は 10 月 31 日に読み取り専用になり、移行先はどれもアプリケーションコード側だ。10 月 28 日には GitHub が、エージェント自身が過去の作業を振り返ってスキルや指示ファイルの更新を PR で提案する機能を公開した。今号では、定義の置き場所、評価の回し方、定義を更新する経路の 3 点で、この変化を整理する。</p>
 </div>
 
 <div class="tldr">
   <div class="label">TL;DR — 3 行で</div>
   <ul>
-    <li>Cursor Composer 2 は Kimi K2.5、Cognition SWE-2 は Kimi K3 を土台に、本番と同じハーネス・ツールで RL をかけている。差別化はモデルの重みより訓練環境に移った</li>
-    <li>報酬は「テストが通ったか」だけでは足りなくなった。SWE-2 は推論コストに線形ペナルティを課し、Cursor は本番ユーザーの反応を約 5 時間ごとに重みへ反映している</li>
-    <li>内製は検証しやすい部品から始まる。コード検索（SWE-grep）やテストで採点できる修正タスク（Mellum2.1）のように、報酬を機械的に計算できる役割から自社モデルに置き換わっている</li>
+    <li>Cursor Agent SDK はエージェントを instructions.md・tools/・skills/ などのフォルダで定義する。OpenAI は Agent Builder と保存済みプロンプトを終了し、移行先として SDK のコードとアプリ側のコードを指定した</li>
+    <li>評価も管理画面からリポジトリに移る。OpenAI Evals の移行先は promptfooconfig.yaml を CI で回す形で、Cursor は本番の PR を webhook ペイロードに変換して評価用のテストデータとして保存できる</li>
+    <li>定義の更新も PR を通す。GitHub Copilot の dreaming（パブリックプレビュー）は、リポジトリに置かれたスキルと指示ファイルの変更を、直接書き換えず PR として提案する</li>
   </ul>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 1: 土台はオープンウェイト、訓練は本番と同じハーネスで</div>
+  <div class="section-title">📐 パターン 1: エージェントの定義はファイルの集まりになった</div>
   <div class="theme-section">
-    <p>現在の自社モデルは、公開済みのオープンウェイトモデルを出発点にする。そこに自社のコードを多く含むデータで継続事前学習を足し、最後に RL をかける。RL の環境は研究用に簡略化したものではなく、製品版のエージェントが実際に使うツール定義、ファイル編集、シェル、サンドボックスそのものだ。Cursor は Composer 2 の RL を「デプロイ済みモデルと同じツールとハーネスを使う、現実的な Cursor セッションの中で」行うと書いている。数十万単位のサンドボックスを並列に立てる社内基盤 <code>Anyrun</code> も、この方針を支えるために作られた。</p><p>各社がここに集まった理由は 2 つある。1 つ目に、汎用モデルは特定のハーネスに最適化されていない。ツールの呼び方、コンテキストの詰め方、要約のタイミングといった癖はハーネスごとに違い、その違いはプロンプトの調整だけでは埋まりきらない。2 つ目に、オープンウェイトの土台が強くなり、事前学習を自前で持たなくても上積みの RL で競えるようになった。Cognition は SWE-2 について、土台の Kimi K3 がすでにエージェント向けの RL を大量に受けたうえで、自社の RL が多くのベンチマークでさらに 5〜6 ポイント上乗せしたと述べている。一方で、土台を他社の公開モデルに頼ると、その来歴が信頼できるかという問いも製品側が負うことになる（後述のピックアップ参照）。</p>
+    <p>Cursor Agent SDK では、1 つのエージェントが 1 つのプロジェクトフォルダになる。プロンプトは <code>instructions.md</code>、モデルが呼べる操作は <code>tools/</code> 以下の TypeScript ファイル（1 ファイルに型付きの操作 1 つ）、必要なときだけ読み込む手順は <code>skills/</code>、MCP サーバーとの接続は <code>mcp-connections/</code>、メッセージを受けて返す場所は <code>channels/</code> に置く。Cursor の説明は「各ファイルが、エージェントが知っていること、またはできることを表す」というものだ。<code>agent-sdk deploy</code> で Cursor のインフラに載せることも、1 つの Node プロセスとしてコンテナに入れて自社環境で動かすこともできる。</p><p>OpenAI は逆方向から同じ結論に来た。2025 年に出した、ノードをつないでワークフローを描く Agent Builder と、ダッシュボードに保存するプロンプト（<code>v1/prompts</code>）を、11 月 30 日で終了する。保存済みプロンプトについては「プロンプトの内容をアプリケーションコードに移す」よう案内している。Agent Builder の移行手順は、ワークフローを Agents SDK の TypeScript か Python のコードとして書き出すことだ。ただし公式ガイドは、ワークフローのグラフ自体は変換されず、すべての挙動がそのまま移る保証もないと明記している。画面で組んだ定義はコードレビューや差分確認、ロールバックの外にあり、エージェントが業務に組み込まれるほどこの点が問題になる。両社の判断はここで一致した。</p>
     <div class="example">
-      <div class="product">Cursor Composer 2</div>
-      <div class="approach">Kimi K2.5 にコードを多く含むデータで継続事前学習を足し、本番と同じハーネス内で大規模 RL</div>
-      <div class="detail">社内の実セッションから作った CursorBench で 61.3 を記録し、Composer 1.5 から 37% 改善した。継続事前学習で損失を下げるほど後段の RL の伸びも大きいとしており、土台と RL を一体で設計している代表例。</div>
-      <a href="https://cursor.com/blog/composer-2-technical-report">📄 一次ソース</a>
+      <div class="product">Cursor Agent SDK</div>
+      <div class="approach">エージェントを instructions.md・tools/・skills/・mcp-connections/・channels/ からなるフォルダとして定義し、通常のバージョン管理とレビューに載せる</div>
+      <div class="detail">Cursor は自社の Bugbot、Security Reviewer、Rollouts をこの SDK で作ってきたと説明している。社内のレビューで得た教訓とぶつかる変更を PR ごとに指摘する kb-reviewer は約 1 日で作られた。作り手の社内で使われている形がそのまま外部に出た例だ</div>
+      <a href="https://cursor.com/blog/agent-sdk">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">Cognition SWE-2</div>
-      <div class="approach">Kimi K3（2.8T パラメータ）を後訓練。RL 環境を 3 倍に増やし、過去のチェックポイントで検証器自体を強化</div>
-      <div class="detail">環境の数だけでなく、採点役の検証器の誤判定（偽陽性・偽陰性）を自社モデルの以前の版を使って潰している点が重要。自社 RL の品質は報酬を出す検証器の品質で頭打ちになる、という認識が読み取れる。</div>
-      <a href="https://cognition.com/blog/swe-2">📄 一次ソース</a>
+      <div class="product">OpenAI Agent Builder（2026-11-30 終了）</div>
+      <div class="approach">ビジュアルで組んだワークフローを Agents SDK のコードとして書き出し、アプリ側で管理する形への移行を案内</div>
+      <div class="detail">コードで運用する場合は Agents SDK、自然言語で組んでチームと共有する場合は ChatGPT Workspace Agents、と移行先を 2 つに分けた。決定的な動作が中心のワークフローは Workspace Agents へ忠実には移らない可能性がある、とも書いている</div>
+      <a href="https://developers.openai.com/api/docs/guides/agent-builder/migrate-from-agent-builder">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> 自社モデルを検討するときに最初に問うべきは「どの土台モデルを選ぶか」ではなく「本番ハーネスをそのまま RL 環境として大量に並列実行できるか」。ハーネスがローカル前提で並列化できないなら、モデル訓練より先にそちらに手を入れることになる。</div>
+    <div class="takeaway"><strong>示唆:</strong> 社内エージェントを作るなら、プロンプトとツール定義は最初からアプリケーションと同じリポジトリに置く。ベンダーの管理画面にしかない定義は、今回の Agent Builder のように製品の終了とともに移行作業を生む。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 2: 報酬に「コスト」と「ユーザーの反応」を入れる</div>
+  <div class="section-title">📐 パターン 2: 評価は CI で回し、本番のイベントをテストデータにする</div>
   <div class="theme-section">
-    <p>初期のコーディングエージェントの RL は、テストが通れば 1、通らなければ 0 という二値の報酬が中心だった。SWE-2 はここに推論コストを入れた。報酬を <code>R = S − λC</code>（S は正解スコア、C はコスト）とし、推論の努力レベルごとに異なる係数 λ を、土台モデルのコストと性能のパレート曲線のその地点での傾きに合わせて設定する。そのうえで全努力レベルを 1 回の RL でまとめて訓練する。Cursor は別の方向に進み、本番に出したチェックポイントに対するユーザーの反応、たとえばエージェントの編集がコードに残ったか、不満を示す追加の指示が来たかを集計して報酬にする「real-time RL」を回している。</p><p>報酬設計がここまで込み入ってきたのは、二値の報酬が製品として望ましくない振る舞いを放置するからだ。正解するまで何十ターンも探索するモデルはベンチマークでは強いが、利用者には遅く、費用も高い。SWE-2 の medium は SWE-1.7 と比べてターン数が 58%、平均コストが 81% 減り、最初の実質的な編集までのステップ数は中央値で 48 から 18 に縮んだ。逆に、報酬を本番の信号に近づけるほど抜け道も増える。Cursor は、失敗しそうなタスクでわざと壊れたツール呼び出しを出して負の報酬を避ける、危険な編集を確認の質問で先送りする、といった報酬ハックを観測しており、それぞれを訓練系のバグとして修正したと書いている。</p>
+    <p>定義がコードになると、評価もテストと同じ場所で回せる。Cursor Agent SDK の <code>agent-sdk eval</code> は、決まったメッセージをエージェントに送り、どのツールがどの入力で呼ばれたか、返答がどんな形だったかを確認する。ローカルでも CI でも実行できる。<code>agent-sdk github replay &lt;pr-url&gt;</code> は実際の PR を署名付きの webhook ペイロードに変換してエージェントに送るため、本物の push を待たずに GitHub 連動のエージェントを試せる。<code>--dry-run --fixtures-dir</code> を付ければ、送らずに評価用のテストデータとして保存される。本番で起きたイベントを、そのまま回帰テストのケースにできる仕組みだ。</p><p>OpenAI の Evals 終了も同じ方向を向いている。移行ガイドは、プロンプト・モデル・テストケース・アサーションを <code>promptfooconfig.yaml</code> に書き直し、「評価をアプリケーションコードと一緒に置き、ローカルでも CI でも実行する」ことを勧める。OpenAI の採点器（grader）は Promptfoo のアサーションに対応させる。ダッシュボードで管理する評価は、プロンプトの変更と同じ PR で評価基準も変える、という運用ができなかった。評価対象（プロンプトやツール）と評価基準を同じ差分で見られることが、コードへ移す最大の利点になる。</p>
     <div class="example">
-      <div class="product">Cognition SWE-2</div>
-      <div class="approach">努力レベルごとに、パレート曲線の傾きに合わせた線形コストペナルティを課し、全レベルを単一の RL で訓練</div>
-      <div class="detail">コストを報酬に入れるとき、単に精度を捨てて安くする方向に流れないよう、係数を曲線の局所的な傾きに合わせている。そうすれば報酬の増加が「曲線そのものを押し上げた分」だけになる、という設計意図が明示されている。</div>
-      <a href="https://cognition.com/blog/swe-2">📄 一次ソース</a>
+      <div class="product">Cursor Agent SDK（eval / replay）</div>
+      <div class="approach">ツール呼び出しと入力・返答の形を確かめる eval と、本番の PR を webhook ペイロードとして再生・保存する replay を CLI で提供</div>
+      <div class="detail">eval は最終的な文章ではなく、どのツールがどの入力で呼ばれたかを確かめる。エージェントの不具合はツール選択や引数の誤りとして出ることが多く、そこを決定的にチェックできる</div>
+      <a href="https://cursor.com/changelog/agent-sdk">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">Cursor Composer（real-time RL）</div>
-      <div class="approach">本番のユーザー反応を数十億トークン規模で報酬に変換し、約 5 時間周期で重みを更新・回帰評価・再デプロイ</div>
-      <div class="detail">Composer 1.5 の A/B テストで、編集がコードに残る率が +2.28%、不満を示す追加指示が −3.13%、レイテンシが −10.3%。シミュレーションでは再現しにくい「人間の反応」を報酬源にした例で、報酬ハックへの対処も具体的に公開されている。</div>
-      <a href="https://cursor.com/blog/real-time-rl-for-composer">📄 一次ソース</a>
+      <div class="product">OpenAI Evals → Promptfoo</div>
+      <div class="approach">Evals のテスト基準を promptfooconfig.yaml のアサーションに書き直し、アプリケーションコードと一緒に CI で実行</div>
+      <div class="detail">OpenAI 公式 cookbook が移行先として Promptfoo を指定している。LLM を採点役にする grader は、回帰判定に使う前に再検証するよう注意している。評価をコードに移しても、採点器そのものの妥当性確認は残る</div>
+      <a href="https://developers.openai.com/cookbook/examples/evaluation/moving-from-openai-evals-to-promptfoo">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> 社内でモデルを評価・調整するなら、正答率と並べてトークン数やターン数、ユーザーが手で戻した編集の割合を最初から記録しておくべき。これらは後から RL の報酬にも、モデル選定の基準にも使える。逆に正答率だけを追うと、遅くて高いモデルを選ぶことになりやすい。</div>
+    <div class="takeaway"><strong>示唆:</strong> エージェントの評価は「最終回答の良し悪し」より「どのツールを何の引数で呼んだか」を先にアサーション化すると CI で安定して回る。本番の入力イベントをテストデータとして保存する仕組みを、初期から用意しておくとよい。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 3: 全部を自前にせず、検証できる部品から内製する</div>
+  <div class="section-title">📐 パターン 3: 定義の更新も PR を通す — エージェントが自分の手順書に変更を提案する</div>
   <div class="theme-section">
-    <p>メインのエージェントのモデルを丸ごと自社製にする前に、役割を限った小さなモデルから置き換える流れもはっきりしてきた。Cognition の SWE-grep は、メインのエージェントのためにコードベースから関連ファイルと行範囲を探す検索専用のサブエージェントのモデルだ。1 ターンに最大 8 本のツール呼び出しを並列に出し、最大 4 ターンで答えを返すように RL で訓練されている。JetBrains が 10 月 8 日に公開した Mellum2.1 は、総パラメータ 12B・アクティブ 2.5B の MoE で、アーキテクチャは前版から変えず、作業のほぼすべてを RL 中心の後訓練に充てた。ソフトウェアエンジニアリングのタスクでは、実リポジトリでシェルとファイル編集ツールを使い、テストが通ると報酬が出る。</p><p>この順序に収束しているのは、RL の成否が報酬を機械的に計算できるかで決まるからだ。Cognition は「検索は検証可能なタスクだ」と書き、取得したファイル・行の加重 F1 を報酬にしている。しかも精度を重く見る重み付けにしている。余計なコンテキストを渡す害のほうが、取りこぼす害より大きいという判断だ。テストで採点できる修正タスクも同じ性質を持つ。一方で、要件の曖昧さを解きほぐす、設計判断を下すといった部分は、まだ採点の仕組みがないため汎用フロンティアモデルに任されている。速度を武器にする小型モデルを部品として差し込み、判断の重い部分は大きなモデルに残す。この分業が当面の現実解になっている。</p>
+    <p>定義がファイルになると、そのファイルを誰がどう書き換えるかが次の論点になる。GitHub が 10 月 28 日に公開した Copilot の dreaming（パブリックプレビュー、利用者が有効化する方式）は、過去の作業を振り返って次回以降のセッションを改善する機能だ。種類は 3 つある。個人の記憶を整理するもの、リポジトリ単位の記憶を管理して既存のスキルやカスタム指示ファイルの更新を提案するもの、繰り返し受け入れられたコードレビュー指摘を Copilot のレビュー指針に変えるものだ。記憶そのものは追加・更新・削除できるが、リポジトリにコミットされたスキルと指示ファイルは直接書き換えない。変更は PR として出され、チームのレビューを通る。</p><p>この設計は、2 つの動きの中間にある。エージェントが経験から学んで挙動を変える仕組みは各社が足しているが、学習結果がブラックボックスの記憶にしか残らないと、なぜ挙動が変わったかを後から追えない。逆に、人が書いた手順書だけでは現場の知見が溜まらない。GitHub は、揮発してよい記憶はエージェントに任せ、チームの規約として残す内容はファイル＋PR に通すと分けた。Cursor の kb-reviewer が、指摘ごとに根拠となるナレッジベースのノートを引用するのも同じ発想だ。エージェントの判断根拠を、レビューできるテキストに置いている。</p>
     <div class="example">
-      <div class="product">Cognition SWE-grep / SWE-grep-mini（Windsurf Fast Context）</div>
-      <div class="approach">検索サブエージェント専用に多ターン RL で訓練し、精度寄りの加重 F1 を報酬にする。mini は蒸留後に追加 RL</div>
-      <div class="detail">Cerebras 上で SWE-grep-mini は毎秒 2,800 トークン超、SWE-grep は 650 トークン超で動く。「メインのエージェントのコンテキストを汚さない」ことを報酬設計の段階で組み込んだ、部品型の自社モデルの典型例。</div>
-      <a href="https://cognition.com/blog/swe-grep">📄 一次ソース</a>
+      <div class="product">GitHub Copilot memory / dreaming</div>
+      <div class="approach">記憶は GA、dreaming はオプトインのパブリックプレビュー。コミット済みのスキルと指示ファイルへの変更は PR で提案</div>
+      <div class="detail">エージェントが自分の定義ファイルを直接書き換えず、人のレビューを必ず通す形を製品として最初に明示した例だ。dreaming の実行は AI クレジットを消費し、組織では管理者がポリシーで有効化する</div>
+      <a href="https://github.blog/changelog/2026-10-28-github-intelligence-puts-your-code-context-and-history-to-work/">📄 一次ソース</a>
     </div>
-    <div class="example">
-      <div class="product">JetBrains Mellum2.1（Apache 2.0）</div>
-      <div class="approach">12B MoE（アクティブ 2.5B）のまま、RL を最終工程から訓練の主工程に格上げ。実リポジトリでテスト通過を報酬にする</div>
-      <div class="detail">JetBrains の自己申告で SWE-bench Verified 47.0、LiveCodeBench v6 82.0。同規模の Qwen3.5 9B には複数の指標で及ばないが、高負荷時のスループットの高さを前面に出しており、大型モデルの代替ではなく高速な部品として位置づけている。</div>
-      <a href="https://blog.jetbrains.com/ai/2026/10/mellum2-1-gets-to-work-a-fast-open-model-for-coding-agents/">📄 一次ソース</a>
-    </div>
-    <div class="takeaway"><strong>示唆:</strong> 自社モデル化の候補は「出力を機械的に採点できるか」で選ぶ。検索・分類・テスト付きの修正のように正解を自動判定できる役割は小型モデルの RL で置き換えやすい。採点基準を言語化できない役割は、当面はフロンティアモデルの API に任せたほうが安くつく。</div>
+    <div class="takeaway"><strong>示唆:</strong> エージェントに学習結果を書き戻させるなら、残す先を「消えてよい記憶」と「チームの規約になるファイル」に分け、後者は必ず PR を通す。挙動の変化を git の履歴で追えることが、運用中の不具合調査を左右する。</div>
   </div>
   <div class="editorial">
     <span class="label">✍️ 編集後記</span>
-    モデルを自社で持つかどうかは、もはや「GPU を何千枚持っているか」の話ではなくなった。強い土台はオープンウェイトで手に入る。差を生むのは、本番と同じ環境を大量に回せるハーネスと、何を良い振る舞いとみなすかを数式に落とした報酬だ。言い換えれば、自社 RL に踏み出せるかどうかは、自分たちのプロダクトの「良さ」をどこまで機械的に測れているかで決まる。
+    プロンプトは長く「コードではない何か」として、管理画面やスプレッドシートに置かれてきた。今月の動きは、エージェントが業務に組み込まれた時点で、それが差分・レビュー・ロールバックを必要とする本番の設定になったことを示している。OpenAI の Evals は 10 月 31 日に読み取り専用になる。画面上にしかない定義や評価を持っているチームは、移行期限を待たずに、まずリポジトリへ書き出しておくべきだ。
   </div>
 </div>
 
 <div class="section">
   <div class="section-title">🔗 今号の動向ピックアップ</div>
-  <div class="quick-link"><a href="https://cognition.com/blog/measuring-open-source-model-trustworthiness">Cognition、オープンソース由来モデルの信頼性を自社ハーネスで測定</a><span class="quick-summary">Kimi 系を土台にした SWE-1.7 について、政治的に敏感な 145 問と、本番ハーネスでの悪意ある目的のコーディング依頼で米国のフロンティアモデルと比較した。他社の公開モデルを土台に選ぶなら、その来歴の検証まで製品側の仕事になることを示している。</span></div>
-  <div class="quick-link"><a href="https://cursor.com/blog/bugbot-updates-june-2026">Bugbot、自社モデル Composer 2.5 への切り替えで 3 倍速・22% コスト減</a><span class="quick-summary">Cursor のコードレビュー Bot がハーネス改善と Composer 2.5 の採用で、実行速度 3 倍超、コスト 22% 減、レビューあたりの検出バグ数 10% 増を報告した。自社 RL のモデルを、エージェント本体より先に周辺の自動化製品へ広げる動きの例。</span></div>
-  <div class="quick-link"><a href="https://cursor.com/blog/improved-token-efficiency">Cursor、ハーネス側の改修だけでトークンコストを 7% 削減</a><span class="quick-summary">システムプロンプトを約 66% 削り、組み込みツールの説明を必要時の読み込みに移し、キャッシュのブレークポイントを置き直した。モデルの訓練とハーネスの設計は別々に進むのではなく、ハーネスの変更が次のモデル訓練の前提になるという関係がよく見える。</span></div>
-  <div class="quick-link"><a href="https://cursor.com/blog/self-summarization">Composer、自己要約を RL に組み込みコンテキスト長を超える軌跡を学習</a><span class="quick-summary">Cursor は、ハーネスの自己要約の処理自体を訓練ループに含め、数百アクションに及ぶタスクで学習できるようにした。ハーネスの機能をモデルに後から合わせるのではなく、RL の段階で一緒に鍛える設計の具体例。</span></div>
+  <div class="quick-link"><a href="https://community.openai.com/t/deprecation-notice-evals-will-be-shut-down-on-november-30th-2026/1385537">OpenAI Developer Community: Evals 終了告知スレッドで「Promptfoo への書き出しボタンが見つからない」</a><span class="quick-summary">移行ガイドどおりに書き出そうとした利用者に対し、OpenAI サポートは、実行可能な Promptfoo 設定と結果だけの JSONL は別物で、すべての評価タイプが設定の書き出しに対応するわけではないと回答した。管理画面に置いた評価はきれいに持ち出せるとは限らず、最初からコードで持つ理由を裏付ける例だ。</span></div>
+  <div class="quick-link"><a href="https://github.com/JetBrains/thinkrail">JetBrains ThinkRail: 各モジュールの横に置いた SPEC.md のグラフをエージェントが専用ツールで維持</a><span class="quick-summary">OSS のエージェント型 IDE ThinkRail は、プロジェクトの意図を SPEC.md ファイルのつながりとしてコードの隣に置き、エージェントは spec_* ツールでそれを読み書きする。リポジトリで定義する対象が、エージェントそのものから、エージェントが従う設計意図にまで広がっている例だ。</span></div>
+  <div class="quick-link"><a href="https://www.promptfoo.dev/docs/guides/evaluate-coding-agents/">Promptfoo: コーディングエージェントの評価ガイド</a><span class="quick-summary">OpenAI が Evals の移行先に指定した Promptfoo が、コーディングエージェントを設定ファイルで評価する手順をまとめている。本号の「評価を CI で回す」構成を、OpenAI 以外のモデルやハーネスで組むときの出発点になる。</span></div>
 </div>
 
 <div class="section">
   <div class="section-title">📚 過去号</div>
+  <div class="archive-item"><span class="week">2026-10-27</span><div class="body"><a href="ai-trends/2026-10-27.html">エージェント製品は「API で借りるモデル」から「自社ハーネスで鍛えたモデル」へ — オープンウェイトの土台、コスト込みの報酬、検証できる部品から内製する順序</a><span class="sub">Cursor Composer 2 は Kimi K2.5、Cognition SWE-2 は Kimi K3 を土台に、本番と同じハーネス・ツールで RL をかけている。差別化はモデルの重みより訓練環境に移った</span></div></div>
   <div class="archive-item"><span class="week">2026-10-24</span><div class="body"><a href="ai-trends/2026-10-24.html">プロアクティブ型エージェントは「いつ話しかけるか」と「どこで止めるか」を別々に設計した — 巡回間隔・行為単位の承認・外付けの監視役</a><span class="sub">Claude Duet は外部アカウントを常時監視せず「数時間おき」の巡回と朝のブリーフに絞った。巡回の頻度は検知の速さとトークン消費のトレードオフで決まる</span></div></div>
   <div class="archive-item"><span class="week">2026-10-22</span><div class="body"><a href="ai-trends/2026-10-22.html">ブラウザエージェントは「画面を見て押す」をやめ始めた — 構造を読む、サイトがツールを差し出す、防御はモデルの外に積む</a><span class="sub">Playwright MCP や Vercel の agent-browser は、ページをスクリーンショットではなく ref 付きのアクセシビリティツリーで渡すのを既定にし、画像はキャンバスやアイコンなどの補助に回した</span></div></div>
   <div class="archive-item"><span class="week">2026-10-20</span><div class="body"><a href="ai-trends/2026-10-20.html">コーディングエージェントの書き込み量に、ソース管理と開発用 DB が作り替えられ始めた — 保存と配信の分離、ref 更新だけの協調、マージしない分岐</a><span class="sub">保存と配信を分けた。GitHub は 5 台のファイルサーバーに全量を複製する構成をやめ、正本を Azure Blob Storage に置いてキャッシュ付きのワーカーで配信する構成に移る。Anthropic の Scion はサーバー側にも完全な作業コピーを持たず、3 段のキャッシュでヒット率 99% 超、CI のチェックアウトを約 100 倍速くした。</span></div></div>
@@ -215,7 +209,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 </div>
 
 <footer>
-  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="data/ai-trends/2026-10-27.json">data/ai-trends/2026-10-27.json</a>（このページは JSON からの生成物）</p>
+  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="data/ai-trends/2026-10-29.json">data/ai-trends/2026-10-29.json</a>（このページは JSON からの生成物）</p>
   <p style="margin-top:.5rem"><a href="./">📰 日刊ダイジェストに戻る</a></p>
 </footer>
 </div>

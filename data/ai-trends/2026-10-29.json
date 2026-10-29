@@ -1,0 +1,85 @@
+{
+  "issue": "2026-10-29",
+  "generated_at": "2026-10-29T07:00:00+09:00",
+  "theme": {
+    "title": "エージェントの定義は「管理画面の設定」から「リポジトリのコード」へ — ファイルとしての定義、CI で回す評価、変更提案も PR で",
+    "category": "agent-as-code",
+    "lede": "エージェントのプロンプト、ツール、評価を、ベンダーの管理画面ではなくリポジトリで持つ流れがこの 2 週間で目立った。10 月 20 日、Cursor は自社の Bugbot や Security Reviewer を作ってきた Agent SDK を一般公開した。エージェントは Markdown と TypeScript のファイルが並ぶフォルダとして定義される。OpenAI は、画面上でエージェントを組む Agent Builder、Evals、保存済みプロンプトを 11 月 30 日に終了する。Evals は 10 月 31 日に読み取り専用になり、移行先はどれもアプリケーションコード側だ。10 月 28 日には GitHub が、エージェント自身が過去の作業を振り返ってスキルや指示ファイルの更新を PR で提案する機能を公開した。今号では、定義の置き場所、評価の回し方、定義を更新する経路の 3 点で、この変化を整理する。",
+    "tldr": [
+      "Cursor Agent SDK はエージェントを instructions.md・tools/・skills/ などのフォルダで定義する。OpenAI は Agent Builder と保存済みプロンプトを終了し、移行先として SDK のコードとアプリ側のコードを指定した",
+      "評価も管理画面からリポジトリに移る。OpenAI Evals の移行先は promptfooconfig.yaml を CI で回す形で、Cursor は本番の PR を webhook ペイロードに変換して評価用のテストデータとして保存できる",
+      "定義の更新も PR を通す。GitHub Copilot の dreaming（パブリックプレビュー）は、リポジトリに置かれたスキルと指示ファイルの変更を、直接書き換えず PR として提案する"
+    ],
+    "sections": [
+      {
+        "heading": "エージェントの定義はファイルの集まりになった",
+        "body_html": "<p>Cursor Agent SDK では、1 つのエージェントが 1 つのプロジェクトフォルダになる。プロンプトは <code>instructions.md</code>、モデルが呼べる操作は <code>tools/</code> 以下の TypeScript ファイル（1 ファイルに型付きの操作 1 つ）、必要なときだけ読み込む手順は <code>skills/</code>、MCP サーバーとの接続は <code>mcp-connections/</code>、メッセージを受けて返す場所は <code>channels/</code> に置く。Cursor の説明は「各ファイルが、エージェントが知っていること、またはできることを表す」というものだ。<code>agent-sdk deploy</code> で Cursor のインフラに載せることも、1 つの Node プロセスとしてコンテナに入れて自社環境で動かすこともできる。</p><p>OpenAI は逆方向から同じ結論に来た。2025 年に出した、ノードをつないでワークフローを描く Agent Builder と、ダッシュボードに保存するプロンプト（<code>v1/prompts</code>）を、11 月 30 日で終了する。保存済みプロンプトについては「プロンプトの内容をアプリケーションコードに移す」よう案内している。Agent Builder の移行手順は、ワークフローを Agents SDK の TypeScript か Python のコードとして書き出すことだ。ただし公式ガイドは、ワークフローのグラフ自体は変換されず、すべての挙動がそのまま移る保証もないと明記している。画面で組んだ定義はコードレビューや差分確認、ロールバックの外にあり、エージェントが業務に組み込まれるほどこの点が問題になる。両社の判断はここで一致した。</p>",
+        "examples": [
+          {
+            "product": "Cursor Agent SDK",
+            "approach": "エージェントを instructions.md・tools/・skills/・mcp-connections/・channels/ からなるフォルダとして定義し、通常のバージョン管理とレビューに載せる",
+            "detail": "Cursor は自社の Bugbot、Security Reviewer、Rollouts をこの SDK で作ってきたと説明している。社内のレビューで得た教訓とぶつかる変更を PR ごとに指摘する kb-reviewer は約 1 日で作られた。作り手の社内で使われている形がそのまま外部に出た例だ",
+            "source_url": "https://cursor.com/blog/agent-sdk"
+          },
+          {
+            "product": "OpenAI Agent Builder（2026-11-30 終了）",
+            "approach": "ビジュアルで組んだワークフローを Agents SDK のコードとして書き出し、アプリ側で管理する形への移行を案内",
+            "detail": "コードで運用する場合は Agents SDK、自然言語で組んでチームと共有する場合は ChatGPT Workspace Agents、と移行先を 2 つに分けた。決定的な動作が中心のワークフローは Workspace Agents へ忠実には移らない可能性がある、とも書いている",
+            "source_url": "https://developers.openai.com/api/docs/guides/agent-builder/migrate-from-agent-builder"
+          }
+        ],
+        "takeaway": "社内エージェントを作るなら、プロンプトとツール定義は最初からアプリケーションと同じリポジトリに置く。ベンダーの管理画面にしかない定義は、今回の Agent Builder のように製品の終了とともに移行作業を生む。"
+      },
+      {
+        "heading": "評価は CI で回し、本番のイベントをテストデータにする",
+        "body_html": "<p>定義がコードになると、評価もテストと同じ場所で回せる。Cursor Agent SDK の <code>agent-sdk eval</code> は、決まったメッセージをエージェントに送り、どのツールがどの入力で呼ばれたか、返答がどんな形だったかを確認する。ローカルでも CI でも実行できる。<code>agent-sdk github replay &lt;pr-url&gt;</code> は実際の PR を署名付きの webhook ペイロードに変換してエージェントに送るため、本物の push を待たずに GitHub 連動のエージェントを試せる。<code>--dry-run --fixtures-dir</code> を付ければ、送らずに評価用のテストデータとして保存される。本番で起きたイベントを、そのまま回帰テストのケースにできる仕組みだ。</p><p>OpenAI の Evals 終了も同じ方向を向いている。移行ガイドは、プロンプト・モデル・テストケース・アサーションを <code>promptfooconfig.yaml</code> に書き直し、「評価をアプリケーションコードと一緒に置き、ローカルでも CI でも実行する」ことを勧める。OpenAI の採点器（grader）は Promptfoo のアサーションに対応させる。ダッシュボードで管理する評価は、プロンプトの変更と同じ PR で評価基準も変える、という運用ができなかった。評価対象（プロンプトやツール）と評価基準を同じ差分で見られることが、コードへ移す最大の利点になる。</p>",
+        "examples": [
+          {
+            "product": "Cursor Agent SDK（eval / replay）",
+            "approach": "ツール呼び出しと入力・返答の形を確かめる eval と、本番の PR を webhook ペイロードとして再生・保存する replay を CLI で提供",
+            "detail": "eval は最終的な文章ではなく、どのツールがどの入力で呼ばれたかを確かめる。エージェントの不具合はツール選択や引数の誤りとして出ることが多く、そこを決定的にチェックできる",
+            "source_url": "https://cursor.com/changelog/agent-sdk"
+          },
+          {
+            "product": "OpenAI Evals → Promptfoo",
+            "approach": "Evals のテスト基準を promptfooconfig.yaml のアサーションに書き直し、アプリケーションコードと一緒に CI で実行",
+            "detail": "OpenAI 公式 cookbook が移行先として Promptfoo を指定している。LLM を採点役にする grader は、回帰判定に使う前に再検証するよう注意している。評価をコードに移しても、採点器そのものの妥当性確認は残る",
+            "source_url": "https://developers.openai.com/cookbook/examples/evaluation/moving-from-openai-evals-to-promptfoo"
+          }
+        ],
+        "takeaway": "エージェントの評価は「最終回答の良し悪し」より「どのツールを何の引数で呼んだか」を先にアサーション化すると CI で安定して回る。本番の入力イベントをテストデータとして保存する仕組みを、初期から用意しておくとよい。"
+      },
+      {
+        "heading": "定義の更新も PR を通す — エージェントが自分の手順書に変更を提案する",
+        "body_html": "<p>定義がファイルになると、そのファイルを誰がどう書き換えるかが次の論点になる。GitHub が 10 月 28 日に公開した Copilot の dreaming（パブリックプレビュー、利用者が有効化する方式）は、過去の作業を振り返って次回以降のセッションを改善する機能だ。種類は 3 つある。個人の記憶を整理するもの、リポジトリ単位の記憶を管理して既存のスキルやカスタム指示ファイルの更新を提案するもの、繰り返し受け入れられたコードレビュー指摘を Copilot のレビュー指針に変えるものだ。記憶そのものは追加・更新・削除できるが、リポジトリにコミットされたスキルと指示ファイルは直接書き換えない。変更は PR として出され、チームのレビューを通る。</p><p>この設計は、2 つの動きの中間にある。エージェントが経験から学んで挙動を変える仕組みは各社が足しているが、学習結果がブラックボックスの記憶にしか残らないと、なぜ挙動が変わったかを後から追えない。逆に、人が書いた手順書だけでは現場の知見が溜まらない。GitHub は、揮発してよい記憶はエージェントに任せ、チームの規約として残す内容はファイル＋PR に通すと分けた。Cursor の kb-reviewer が、指摘ごとに根拠となるナレッジベースのノートを引用するのも同じ発想だ。エージェントの判断根拠を、レビューできるテキストに置いている。</p>",
+        "examples": [
+          {
+            "product": "GitHub Copilot memory / dreaming",
+            "approach": "記憶は GA、dreaming はオプトインのパブリックプレビュー。コミット済みのスキルと指示ファイルへの変更は PR で提案",
+            "detail": "エージェントが自分の定義ファイルを直接書き換えず、人のレビューを必ず通す形を製品として最初に明示した例だ。dreaming の実行は AI クレジットを消費し、組織では管理者がポリシーで有効化する",
+            "source_url": "https://github.blog/changelog/2026-10-28-github-intelligence-puts-your-code-context-and-history-to-work/"
+          }
+        ],
+        "takeaway": "エージェントに学習結果を書き戻させるなら、残す先を「消えてよい記憶」と「チームの規約になるファイル」に分け、後者は必ず PR を通す。挙動の変化を git の履歴で追えることが、運用中の不具合調査を左右する。"
+      }
+    ]
+  },
+  "editorial": "プロンプトは長く「コードではない何か」として、管理画面やスプレッドシートに置かれてきた。今月の動きは、エージェントが業務に組み込まれた時点で、それが差分・レビュー・ロールバックを必要とする本番の設定になったことを示している。OpenAI の Evals は 10 月 31 日に読み取り専用になる。画面上にしかない定義や評価を持っているチームは、移行期限を待たずに、まずリポジトリへ書き出しておくべきだ。",
+  "quick_picks": [
+    {
+      "title": "OpenAI Developer Community: Evals 終了告知スレッドで「Promptfoo への書き出しボタンが見つからない」",
+      "summary": "移行ガイドどおりに書き出そうとした利用者に対し、OpenAI サポートは、実行可能な Promptfoo 設定と結果だけの JSONL は別物で、すべての評価タイプが設定の書き出しに対応するわけではないと回答した。管理画面に置いた評価はきれいに持ち出せるとは限らず、最初からコードで持つ理由を裏付ける例だ。",
+      "url": "https://community.openai.com/t/deprecation-notice-evals-will-be-shut-down-on-november-30th-2026/1385537"
+    },
+    {
+      "title": "JetBrains ThinkRail: 各モジュールの横に置いた SPEC.md のグラフをエージェントが専用ツールで維持",
+      "summary": "OSS のエージェント型 IDE ThinkRail は、プロジェクトの意図を SPEC.md ファイルのつながりとしてコードの隣に置き、エージェントは spec_* ツールでそれを読み書きする。リポジトリで定義する対象が、エージェントそのものから、エージェントが従う設計意図にまで広がっている例だ。",
+      "url": "https://github.com/JetBrains/thinkrail"
+    },
+    {
+      "title": "Promptfoo: コーディングエージェントの評価ガイド",
+      "summary": "OpenAI が Evals の移行先に指定した Promptfoo が、コーディングエージェントを設定ファイルで評価する手順をまとめている。本号の「評価を CI で回す」構成を、OpenAI 以外のモデルやハーネスで組むときの出発点になる。",
+      "url": "https://www.promptfoo.dev/docs/guides/evaluate-coding-agents/"
+    }
+  ]
+}
