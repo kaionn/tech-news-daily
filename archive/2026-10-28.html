@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-10-28</title>
+  <meta name="description" content="Anthropic、教授著書を違法入手しClaude学習に使用と報道 / Tailscale SSHに権限昇格の脆弱性 / 有限単純群の分類をLeanで完全形式化">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech News Daily">
+  <meta property="og:title" content="Tech News Daily — 2026-10-28">
+  <meta property="og:description" content="Anthropic、教授著書を違法入手しClaude学習に使用と報道 / Tailscale SSHに権限昇格の脆弱性 / 有限単純群の分類をLeanで完全形式化">
+  <meta property="og:url" content="https://tech-news.kaion-lab.com/archive/2026-10-28.html">
+  <meta property="og:image" content="https://tech-news.kaion-lab.com/apple-touch-icon.png">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="../feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-10-28 (Wed)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+      <nav class="site-nav">
+        <a href="../" class="active">📰 日刊ダイジェスト</a>
+        <a href="../trends.html">🔌 週次プラグイントレンド</a>
+        <a href="../ai-trends.html">🧠 AI プロダクト動向</a>
+        <a href="./">🗂 アーカイブ</a>
+      </nav>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 22 articles</span>
+      <span>🏷 6 categories</span>
+      <span>📡 19 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item">
+        <span class="number-value">26000倍</span>
+        <span class="number-label">ChromiumのArray.prototype.lastIndexOf、packed double配列での不一致検索の最大高速化倍率</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">1.5億円</span>
+        <span class="number-label">GMOが不正アクセス実行犯の情報提供に用意した懸賞金総額(100万ドル)</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">4310万行</span>
+        <span class="number-label">有限単純群の分類定理をLeanで完全形式化した「CFSG in Lean」プロジェクトのコード規模</span>
+      </div>
+    </div>
+
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
+
+      <div class="card featured deep-dive">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://stanforddaily.com/2026/10/27/professors-books-pirated-to-train-claude/">DEEP DIVE: Anthropic、スタンフォード大学教授らの著書を海賊版サイトから入手しClaude学習に使用と報道</a></h3>
+        </div>
+        <div class="summary">Stanford Dailyが10月27日に報じたところによると、Anthropicは著作権侵害訴訟でAI企業が被告となった事件のうち最大規模の和解案となった「Bartz対Anthropic」訴訟に関連し、スタンフォード大学の教授10人以上の著作物を無断でClaudeの学習に使ったとされる。原告側の主張では、AnthropicはLibGenやPiLiMiといった海賊版書籍サイトから著作物を無断でダウンロード・複製し、恒久的な「中央図書館」としてサーバーに保存していたという。担当したWilliam Alsup判事は、合法的に入手した書籍での学習は人間が読書から文体やテーマを吸収する行為に類すると比較して公正利用(フェアユース)と認めた一方、海賊版書籍を使った恒久ライブラリの構築については違法と判断した。名前が挙がった教授にはTobias Wolff氏、Abraham Verghese氏、Chang-Rae Lee氏らが含まれ、Wolff氏は自著10作品が無断で学習に使われたと述べている。Bartz訴訟の和解金15億ドルは登録著作物約50万件の著者・出版社に配分されるが、Wolff氏らはこれを不十分とみて和解対象から外れ、5月に別訴訟「Cruz対Anthropic」を提起、作品1件あたり最大15万ドルの法定損害賠償と陪審審理を求めている。AI企業を相手にした著作権侵害訴訟はこの2件を含めて70件を超えており、ニューヨーク・タイムズやGettyも別訴訟を起こしている。大量スクレイピングによる学習データ収集の扱いは、業界全体で引き続き争われる論点として残る。</div>
+        <div class="editorial">🧠 公正利用か違法かの線引きが「入手方法」にあるという判断は明快だが、実務上はAI企業が学習データの出自をどこまで厳密に追跡・開示すべきかという別の課題を残す。Bartz和解の1作品あたり約3000ドルという配分額とCruz訴訟が求める最大15万ドルの法定損害賠償の差は大きく、後者が認められればAI企業の学習データ調達コストの前提が変わりかねない。ただしCruz訴訟はまだ提訴段階で、実際の賠償額や他社への波及は判決を待つ必要がある。</div>
+        <div class="key-points">
+          <ul>
+            <li>原告側はAnthropicがLibGen・PiLiMiなどの海賊版サイトから教授らの著作物を無断で入手し、恒久的な「中央図書館」としてサーバーに保存していたと主張</li>
+            <li>Bartz対Anthropicの和解金15億ドルは登録著作物約50万件に配分(1作品あたり約3000ドル相当)される一方、Wolff氏ら28人は和解対象から外れ、作品1件あたり最大15万ドルの法定損害賠償を求める別訴訟「Cruz対Anthropic」を5月に提起</li>
+            <li>AI企業を相手にした著作権侵害訴訟はBartz・Cruzを含めて70件超に達し、ニューヨーク・タイムズやGettyも別途提訴している</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 Claudeなど大規模言語モデルを業務に組み込む企業にとって、学習データの出自に起因する法的リスクはベンダー選定時に確認すべき項目として重みを増している。</div>
+        <div class="meta">
+          <span>Stanford Daily</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-27</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://tailscale.com/ssh-investigation-update">Tailscale SSHに複数の権限昇格の脆弱性、パッチ版クライアントを緊急準備</a></h3>
+        </div>
+        <div class="summary">Tailscaleは10月26日、Tailscale SSHに関する複数の脆弱性を調査中であると公表した。問題の大半は権限昇格に関するもので、Tailscale SSH経由の接続を許可された既承認のユーザーやデバイスが、設定済みのローカルユーザーの権限を超えて操作できる可能性があるという。実際に悪用できるかどうかは付与された権限やシステム設定など複数の条件に左右され、同社は深刻な問題と位置づけている。大半の問題への修正は実装済みでテスト中、10月27日中にパッチ版クライアントを公開する計画を明らかにした。転送機能が不要な環境では、`tailscaled`サービスの環境変数に`TS_SSH_DISABLE_FORWARDING=1`を設定して再起動することで、深刻な問題の一部を無効化せずに緩和できるとしている。</div>
+        <div class="key-points">
+          <ul>
+            <li>既承認のユーザー・デバイスが設定済みローカルユーザーの権限を超えて操作できる権限昇格の問題が複数あり、悪用可否は付与された権限やシステム設定に依存する</li>
+            <li>大半の修正は実装済みでテスト中、10月27日中のパッチ版クライアント公開を目標とする。転送不要な環境では`TS_SSH_DISABLE_FORWARDING=1`の設定による緩和を推奨</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Tailscale</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-26</span>
+          <span class="engagement">▲ 168</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://cfsg.axiommath.ai/">有限単純群の分類定理、証明支援系Leanで完全形式化完了 4300万行規模</a></h3>
+        </div>
+        <div class="summary">「CFSG in Lean」プロジェクトが、20世紀数学の大きな成果の一つである有限単純群の分類定理(全ての有限単純群は素数位数の巡回群・交代群・リー型・26個の散在型のいずれかに分類されるという定理)の第一世代証明を、証明支援系Leanで完全に形式化したと発表した。元の証明は数百人の数学者が数十年かけて書いた数千ページに及ぶ論文群で構成されており、今回Leanのカーネルがすべての論理的手順を検証したことで、人間のレビューだけに頼らない機械的な検証が得られた。形式化の過程で、既発表の「Unbalanced Group Theorem」の証明に使われていた閉包性の主張に反例が見つかり、Solomonの1976年の極大2成分理論に基づく別の証明を新たに与える論文も同時に公開された。</div>
+        <div class="key-points">
+          <ul>
+            <li>形式化の規模はLeanコード約4310万行・宣言約205万件・参照した論文・書籍139件に及ぶ。元の証明は数百人の数学者が数十年かけて書いた数千ページ規模</li>
+            <li>形式化の過程で既発表の「Unbalanced Group Theorem」証明の閉包性の主張に反例を発見、Solomonの1976年の極大2成分理論に基づく代替証明を与える論文(arXiv 2610.00575)を新たに公開した</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>CFSG in Lean</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-10-27</span>
+          <span class="engagement">▲ 155</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://zenn.dev/dinii/articles/2f66b147007cf8">Chromium(V8)のArray.prototype.lastIndexOfを最大約26000倍高速化</a></h3>
+        </div>
+        <div class="summary">V8コントリビューターでDinii所属の21歳エンジニアAmemiya Riya氏が、配列の`Array.prototype.lastIndexOf`の高速パスを最適化した。従来実装は要素種別を問わず単一のループで`StrictEqual`比較を行い、double配列では要素ごとにヒープ上へボックス化していたため、100万要素の走査で最大100万個のオブジェクトを生成していた。新実装は要素種別と検索値の型でループを分岐し、double配列は`float64`同士を直接比較してボックス化を排除、`NaN`や非数値の検索値は即座に`-1`を返す。</div>
+        <div class="key-points">
+          <ul>
+            <li>arm64リリースビルドでの計測で、packed double配列を文字列で検索し不一致となるケースは約26000倍、`NaN`検索は約21000倍高速化。数値同士の不一致探索でも約2.3〜3.2倍の改善</li>
+            <li>double配列は検索値を`float64`に一度変換してから生ループで比較しボックス化を排除、タグ付き配列(Smi/オブジェクト)は`TaggedEqual`によるポインタ比較を先に試し数値同士のときだけ`float64`比較に切り替える</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-10-27</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://lwn.net/SubscriberLink/1102102/0c00e4d550f25f8c/">Pythonの実験的JIT、標準化PEPの取り下げでメインブランチから削除へ</a></h3>
+        </div>
+        <div class="summary">CPython 3.13でBrandt Bucher氏が導入した実験的JITコンパイラが、メインブランチから削除される見通しになった。Python運営評議会は2026年6月、正式な標準化PEPが承認されない限りJITをメインブランチに置けないとし、6か月の期限を設けていた。Bucher氏らは7月に標準化PEP「PEP 836」を提出したが、評議会は9月21日、保守方針・互換性審査の時期・性能評価基準の具体性が不十分と判断。10月19日、共著者のSavannah Ostrowski氏が自身の稼働時間の制約を理由にPEP 836を取り下げ、Brett Cannon氏はメインリポジトリでの開発停止を表明した。</div>
+        <div class="key-points">
+          <ul>
+            <li>評議会は2026年6月にJIT開発を一時停止、標準化PEPが承認されなければメインから削除すると通告。7月提出のPEP 836は9月21日に「保守方針・性能評価基準・互換性審査の時期が不十分」として受理されず</li>
+            <li>10月19日、共著者Ostrowski氏が稼働時間不足を理由にPEP 836を取り下げ。開発者らは参照実装を公開する予定だが、メインブランチでの開発自体は停止する</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>LWN.net</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-10-23</span>
+          <span class="engagement">▲ 433</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/shinagawa_web/articles/hpa-reverts-manual-scale">KubernetesのHPAは`kubectl scale`での手動変更を5分以内に元へ戻す</a></h3>
+        </div>
+        <div class="summary">HorizontalPodAutoscaler(HPA)が付いたDeploymentで`kubectl scale`によりPod数を手動で増やしても、数分後に元の数へ戻ることがある。著者の検証(kind上のKubernetes v1.37.0)では、2台から4台に増やした約5分後に2台へ戻った。原因は、起動直後のPodにmetrics-serverの値がない間はHPAが使用率100%とみなして手動台数を維持するが、メトリクスが出た後は計算値が0になり、過去5分間の最大値を下限とする仕組みにより5分経過時点で下限の`minReplicas`まで縮小されるため。`kubectl get deploy -o yaml --show-managed-fields`で`spec.replicas`の書き込み元を確認できる。</div>
+        <div class="key-points">
+          <ul>
+            <li>原因は縮小時に過去5分間の計算値の最大を下限とする仕組み。起動直後のPodはmetrics-serverの値がなく使用率100%とみなされ手動台数が一時的に保たれるが、5分の時間窓を過ぎると`minReplicas`まで縮小される</li>
+            <li>対策は`minReplicas`自体を上げる方法が推奨。`kubectl patch hpa &lt;name&gt; --type=merge -p '{"spec":{"minReplicas":4}}'`で即座に反映でき、負荷増加時はHPAがさらに増やせる</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-10-27</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://www.benjoffe.com/fast-floordiv">定数での符号付き64bit floor除算を高速化する新手法、ARM64で従来比10〜20%高速</a></h3>
+        </div>
+        <div class="summary">開発者Ben Joffe氏が、定数による符号付き64bit floor除算(負の無限大方向に切り捨てる除算)を高速化する新手法「符号選択乗数」を公開した。C/C++など多くの言語は0方向への切り捨て除算しか提供せず、floor除算への変換は従来低速だった。新手法はコンパイル時に計算した2つの乗数のうち`x`の符号に応じて一方を選び、128bit幅の乗算とシフト1回だけで結果を得る。除算86400の場合、分岐やあまりの計算なしに128bit乗算とシフトで完結する。著者は、符号無視のfloor除算実装がTensorFlowで4年以上発見されなかったオーバーフローバグを生んだ例を挙げ、自作の除算処理を十分な検証なしに書く危険性を指摘する。</div>
+        <div class="key-points">
+          <ul>
+            <li>コンパイル時に計算した2つの乗数を`x`の符号に応じて切り替え、128bit幅の乗算とシフト1回だけで結果を得る。ARM64(M4 Pro・Snapdragon X1)では既存手法比で10〜20%高いスループットを確認</li>
+            <li>x86(Ryzen 9 9950X3D等)では正の64bit除数の約80%・負の除数の約60%でスループットが向上する一方、一部の除数やレイテンシではRobison法が優位。タイムスタンプの日数換算や周期パターンの計算に応用できる</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>benjoffe.com</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-27</span>
+          <span class="engagement">▲ 44</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://tweedegolf.nl/en/blog/242/finding-panics-with-call-graph-analyzer/">Rustのpanic発生箇所を依存先まで含めて検出する静的解析ツール「Call Graph Analyzer」公開</a></h3>
+        </div>
+        <div class="summary">MicrosoftのOpen Device Partnershipのもとで開発された「Call Graph Analyzer」(CGA)は、単相化されたMIR(RustのMid-level IR)からコールグラフを抽出し、コンパイル済みバイナリ中でpanicし得る関数を検出するCargoサブコマンドである。`main`やexternシンボルなどのエントリポイントを起点にMIR上の呼び出しをすべて追跡し、`dyn`オブジェクトは全vtableエントリが呼ばれる可能性があるとみなし、関数ポインタは生成されれば将来呼ばれるものとみなす。ELF/DWARF解析やリンカベースの検出ではインライン化や削除で情報が失われるのに対し、MIR解析は依存クレートや標準ライブラリの内部まで追跡できる点が利点とされる。`cga.toml`でpanicしないと信頼する関数のホワイトリストや、ファイルシステム・ネットワークなどへの到達を禁止するブラックリストを設定できる。</div>
+        <div class="key-points">
+          <ul>
+            <li>単相化されたMIRからコールグラフを抽出し依存クレートや標準ライブラリ内部のpanic発生箇所まで検出可能。`dyn`オブジェクトは全vtableエントリ、生成済み関数ポインタは将来呼ばれる前提で解析する</li>
+            <li>`cga.toml`でpanic耐性を信頼するホワイトリストと、`std::fs`等への到達を禁止するブラックリストを設定可能。解析速度は`cargo check`の約2〜3倍遅く、専用のrustcバージョンへの依存など運用上の制約もある</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>tweedegolf.nl</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-27</span>
+          <span class="engagement">▲ 10</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/nrs/articles/c777388530aa84">コードを読まずにマージするために必要なこと</a></h3>
+        </div>
+        <div class="summary">著者は、AIがプルリクエストを量産する時代に人間がすべての差分を読み続けるレビューの行列が膨張する問題を指摘し、「コードを読まずにマージする」ための条件を整理する。前提として、テストによる振る舞いの確認・設計やセキュリティ観点のAIレビュー・修正後の再検証・未解決の指摘が残る場合のマージ阻止といった自動品質チェックが欠かせないとする。Ship/Show/Askの「Show」practiceを引用し、自動チェック通過後にマージし共有・議論は事後に回す分離を提案。人間の承認を外す条件として、障害発生時に個人を責めず組織としてプロセス改善を引き受ける合意、設計相談やコミュニケーションといったレビューの他の役割の代替先確保、全PRを同じ扱いにしない選別運用を挙げる。</div>
+        <div class="key-points">
+          <ul>
+            <li>自動品質チェック(テスト・AIレビュー・修正後の再検証・未解決指摘のマージ阻止)を前提に、Ship/Show/Askの「Show」practiceを踏まえ自動チェック通過後にマージし共有・議論は事後に回す運用を提案</li>
+            <li>人間承認を外す条件として、障害時に個人を責めず組織として改善を引き受ける合意と、設計相談・コミュニケーションなどレビューが担っていた他の役割の代替先確保、PRごとの選別運用を挙げる</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-27</span>
+          <span class="engagement">🔖 92</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://www.itmedia.co.jp/news/article/2610/27/2000002642/">GMO、「お名前.com デスクトップクラウド」への不正アクセス実行犯の情報提供に懸賞金1.5億円</a></h3>
+        </div>
+        <div class="summary">GMOインターネットグループは10月27日、FX自動売買用VPS「お名前.com デスクトップクラウド」への不正アクセス事件に関して、実行犯や関係者の特定につながる情報提供者に総額100万ドル(約1.5億円)の懸賞金を用意すると発表した。受付は10月28日正午から専用窓口で開始し、国内外の企業・個人を問わず応募できる。対象情報は、実行犯・共犯者・指示役の身元や居場所の特定につながる情報、使用されたサーバー・ドメイン・IP・アカウントに関する情報、暗号資産アドレスや送金記録など資金の流れに関する情報、攻撃指示や役割分担など指揮系統に関する情報の4分類。推測や公開情報の転載は対象外で、実行犯やその関係者からの情報、脅迫など違法な手段で得た情報も対象外とする。</div>
+        <div class="key-points">
+          <ul>
+            <li>懸賞金は総額100万ドル(約1.5億円)で、受付は10月28日正午から専用窓口で開始。対象は身元・関係先サーバーやアカウント・資金の流れ・指揮系統に関する情報の4分類</li>
+            <li>推測や公開情報の転載、実行犯関係者からの情報、違法な手段で得た情報は対象外。独自の危険な調査や被疑者への接触は控えるよう呼びかけている</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>ITmedia</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-10-27</span>
+          <span class="engagement">🔖 217</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://zenn.dev/ymotongpoo/articles/20261027-buildkit-traces-tempo">Dockerのビルドを遅くしたコミットをGrafana Tempoのトレースで見つける</a></h3>
+        </div>
+        <div class="summary">Grafana LabsのDeveloper Advocateが、BuildKitのOpenTelemetryトレースをGrafana Tempoに蓄積し複数ビルドをまとめて分析する手法を検証した。検証環境はDocker Engine 29.0.0・buildx v0.29.1・BuildKit v0.33.1で、ビルドのたびに`OTEL_RESOURCE_ATTRIBUTES`でコミットIDをタグ付けする。検証用のGoサーバーでは、キャッシュマウントを外し依存解決前に`COPY . .`を行う「整理」コミットを混入させたところ、ビルド時間が約2秒から約20〜22秒に悪化し二度と戻らなくなった。Claude Code 2.1.303とmcp-grafanaを使ったAIエージェントにも同じ調査を行わせたところ、原因コミットを正しく特定し、キャッシュマウントとレイヤー順序を復元して再ビルド後の時間を2.31秒まで戻すところまで一連の対応を完了できた。</div>
+        <div class="key-points">
+          <ul>
+            <li>キャッシュマウント削除と依存解決前の`COPY . .`移動を含む「整理」コミットにより、ビルド時間が約2秒から約20〜22秒へ悪化し元に戻らなくなった。TraceQLの`max_over_time(duration)`クエリで悪化タイミング(約07:09 UTC)と原因コミットを特定</li>
+            <li>Claude Code 2.1.303とmcp-grafanaによるAIエージェントが同じ調査を代行し、原因コミットの特定からキャッシュマウント復元・再ビルドまでを実行、ビルド時間を2.31秒まで回復させた</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-27</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://gram-editor.com/posts/release-3.4.0/">オープンソースエディタ「Gram 3.4.0」リリース、eMudhra関連のTLS証明書ライブラリ脆弱性を緊急修正</a></h3>
+        </div>
+        <div class="summary">オープンソースのコードエディタ「Gram」がv3.4.0をリリースした。今回のリリースはeMudhra中間CA問題の影響を受けた`rustls-webpki`・`webpki-roots`パッケージの脆弱性修正が主目的で、開発者は全ユーザーに早期更新を推奨している。合わせてGitパネルに差分のサイドバイサイド表示・コミット履歴表示・コミット作者ごとの色分けを追加し、タブバーの複数行折り返しやTypst・TOML言語サポートも加わった。一方、拡張機能が提供する言語サーバーやデバッグアダプタの無断ダウンロードを今回から明示的な許可制に変更し、開発者自身も許可UIの完成度がまだ低いことを認めている。</div>
+        <div class="key-points">
+          <ul>
+            <li>eMudhra中間CA問題の影響を受けた`rustls-webpki`・`webpki-roots`パッケージの脆弱性を修正。旧バージョンを使い続ける場合は更新済みwebpkiパッケージでソースから再ビルドする必要がある</li>
+            <li>Gitパネルに差分のサイドバイサイド表示・コミット履歴・作者別の色分けを追加。拡張機能による言語サーバー等の無断ダウンロードを許可制に変更し、同梱の軽量な拡張機構への移行も検討中</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Gram</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-23</span>
+          <span class="engagement">▲ 71</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://astral.sh/blog/tar-codec">uv開発元Astral、tarパーサ間の解釈の不一致を防ぐ新実装「tar-codec」を公開</a></h3>
+        </div>
+        <div class="summary">Pythonパッケージツール「uv」を開発するAstralが、tar形式の読み書きを行うRust実装「tar-codec」を公開し、uv 0.13からソース配布物(sdist)の展開に採用した。背景には、既存実装astral-tokio-tarに対する複数のセキュリティ報告があり、その多くはuvとpipなど別のツールが同じtarファイルから異なる内容を読み取ってしまう「パーサ間の解釈の不一致」だった。tar-codecはUStar/pax系とGNU系を最初のブロックで判定し混在するアーカイブを拒否するなど、曖昧・矛盾した入力は推測せず拒否する設計を取る。uvのベンチマークでは旧実装の約2倍の速度を達成し、ファイルシステムへの展開はcap-stdでディレクトリ外へのリンク・パストラバーサルを防止している。</div>
+        <div class="key-points">
+          <ul>
+            <li>異なるツールが同じtarファイルを読んで内容が食い違う「パーサ間の解釈の不一致」を防ぐため、曖昧・矛盾した入力を推測せず拒否する設計を採用。UStar/pax系とGNU系が混在するアーカイブも拒否する</li>
+            <li>uvのベンチマークで旧実装astral-tokio-tar比で約2倍速。ファイルシステムへの展開にはcap-stdを使い、単一ディレクトリ外へのリンク・パストラバーサルを防止する</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Astral</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-10-27</span>
+          <span class="engagement">▲ 41</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://www.brangus.io/survival-llm">オフラインで動く無料のAI防災アシスタント「Survival LLM」公開、Wikipedia約93万記事などを内蔵</a></h3>
+        </div>
+        <div class="summary">停電や災害時などインターネットに接続できない状況を想定した、完全オフライン動作の無料AIアシスタント「Survival LLM」が公開された。セットアップ時にのみオンラインでAIエンジンとハードウェアに合わせたモデル、参考資料ライブラリをダウンロードし、以降は全てローカルで動作、質問内容は一切外部へ送信されない。ライブラリにはよく読まれるWikipedia記事約93万件、WikiMedなどの医療参考資料、FEMA・CDCの災害対応情報、米軍のサバイバルマニュアル、iFixitなどの修理情報が含まれ、回答には出典記事と該当箇所のハイライトが添えられる。搭載モデルはメモリ容量に応じて自動選択され、128GB以上のMacではNVIDIA Nemotron 3.5 Super(80GB)が使われ22問中21問の防災テストに正答したという。</div>
+        <div class="key-points">
+          <ul>
+            <li>Wikipedia記事約93万件・医療参考資料・FEMA/CDCの災害対応情報・米軍サバイバルマニュアル・iFixitなどを内蔵し、回答には出典記事と該当箇所のハイライトを提示してユーザー自身の検証を可能にする</li>
+            <li>メモリ容量に応じてモデルを自動選択し、128GB以上のMacではNVIDIA Nemotron 3.5 Super(80GB)で22問中21問の防災テストに正答。回答中はMacBook Proで約100W消費し満充電で約100〜300回答が可能という</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>brangus.io</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-10-27</span>
+          <span class="engagement">▲ 146</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://ghostty.org/docs/install/release-notes/1-4-0">ターミナルエミュレータ「Ghostty 1.4.0」リリース、Kitty画像プロトコルのアニメーション対応やスクロールバック圧縮を追加</a>
+        <span class="quick-summary">— Kitty画像プロトコルがアニメーションと相対配置に対応し仕様準拠も修正、アイドル時のスクロールバックをmacOS/64bit Linuxで圧縮しデフォルト上限を10MBから50MBに拡大した。</span>
+        <span class="meta">Ghostty <span class="engagement">▲ 680</span></span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://deepmind.google/blog/genie-4-a-new-generation-of-world-simulation/">Google DeepMind、音声もネイティブ生成するリアルタイム世界モデル「Genie 4」発表</a>
+        <span class="quick-summary">— テキストプロンプトで天候や物体をリアルタイムに変更できる対話型の世界シミュレーションモデルで、環境音・音楽・対話音声を映像と同時に生成する初のリアルタイム世界モデルとする。現在は信頼されたテスターへの研究プレビュー。</span>
+        <span class="meta">Google DeepMind <span class="engagement">▲ 676</span></span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://discord.com/blog/making-content-from-discoverable-servers-easier-to-discover">Discord、公開サーバーのメッセージをWeb検索結果で見つけられるように</a>
+        <span class="quick-summary">— メンバー数1000人以上などの条件を満たす「Discoverableサーバー」限定で、11月16日からサーバーのWebページに会話の要約が表示され、12月中旬からはユーザー名を伏せたチャンネルメッセージも段階的に検索結果へ表示される。</span>
+        <span class="meta">Discord <span class="engagement">▲ 213</span></span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://www.liquid.ai/blog/lfm3">Liquid AI、エッジ向け新世代モデル「LFM3」発表 1.7Bで旧世代2.6B超える性能</a>
+        <span class="quick-summary">— テキスト・画像・音声・オムニの4モダリティを共有バックボーンで扱う新世代モデルで、22兆トークンで事前学習したLFM3-1.7Bは35%少ないパラメータ数で前世代LFM2.5-2.6Bを上回るとする。4bit量子化で約1GBに収まり、オンデバイス推論は比較対象モデルより1.8〜2.8倍速いという。</span>
+        <span class="meta">Liquid AI <span class="engagement">▲ 110</span></span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://projectzero.google/2026/10/fuzzing-v-AI.html">Google Project Zero、V8のバグ発見でAIエージェントBigSleepとファザーFuzzilliを比較</a>
+        <span class="quick-summary">— 2026年4〜9月の実運用データでは、実際に修正につながった脆弱性がBigSleep45件・Fuzzilli37件とほぼ同数だったが重複は約25%に留まり、両者は補完関係にあるとして併用を推奨している。</span>
+        <span class="meta">Google Project Zero</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-infra">Infra</span>
+        <a href="https://www.publickey1.jp/blog/26/oracle_cloudgoogle_tpu2027oracle_ai_world_2026.html">Oracle Cloud、2027年にGoogle製TPUを導入 NVIDIA依存からの転換図る</a>
+        <span class="quick-summary">— Oracle AI World 2026の基調講演で発表され、電力・冷却・データセンターネットワークをOracleが提供する形でTPUを自社クラウドに展開する。AWS・Azure・Google Cloudに続く独自AIチップ対応で、NVIDIA集中からの脱却を狙う。</span>
+        <span class="meta">Publickey</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://www.apple.com/in/newsroom/2026/10/apple-introduces-the-new-14-inch-macbook-pro-with-m6/">Apple、M6搭載の新型14インチMacBook Pro発表 バッテリー最大24時間</a>
+        <span class="quick-summary">— CPU12コア・GPU12コア(各Neural Accelerator搭載)のM6チップを搭載し、M5比でグラフィックス最大30%・オンデバイスAI処理最大25%高速化。バッテリーはMac史上最長の最大24時間で、予約受付は10月28日、発売は11月6日。</span>
+        <span class="meta">Apple</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://spectrum.ieee.org/wikipedia-wikiproject-ai-writing-cleanup">Wikipediaボランティア団体「WikiProject AI Cleanup」、AI生成記事の検出手法を進化させる</a>
+        <span class="quick-summary">— AI検出企業Pangramの分析では2025年末に新規記事・草稿の約20%がAI生成と判定されたが2026年初めには約15〜16%に低下、定型句の検出から「3つ組」構造など微妙な文体パターンの検出へ手法を進化させている。</span>
+        <span class="meta">IEEE Spectrum <span class="engagement">▲ 431</span></span>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="./" class="archive-link">🗂 過去のダイジェスト</a>
+    </footer>
+  </div>
+</body>
+</html>
