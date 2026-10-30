@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-10-29</title>
+  <meta name="description" content="Google、新フロンティアモデル「Gemini 4 Carbon」発表 / Appleのgit・curlが侵害eMudhra証明書を放置 / Alpine公式GitLab、侵入未遂でサーバー全再構築">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech News Daily">
+  <meta property="og:title" content="Tech News Daily — 2026-10-29">
+  <meta property="og:description" content="Google、新フロンティアモデル「Gemini 4 Carbon」発表 / Appleのgit・curlが侵害eMudhra証明書を放置 / Alpine公式GitLab、侵入未遂でサーバー全再構築">
+  <meta property="og:url" content="https://tech-news.kaion-lab.com/archive/2026-10-29.html">
+  <meta property="og:image" content="https://tech-news.kaion-lab.com/apple-touch-icon.png">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="../feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-10-29 (Thu)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+      <nav class="site-nav">
+        <a href="../" class="active">📰 日刊ダイジェスト</a>
+        <a href="../trends.html">🔌 週次プラグイントレンド</a>
+        <a href="../ai-trends.html">🧠 AI プロダクト動向</a>
+        <a href="./">🗂 アーカイブ</a>
+      </nav>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 22 articles</span>
+      <span>🏷 7 categories</span>
+      <span>📡 17 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item">
+        <span class="number-value">320倍</span>
+        <span class="number-label">BunのPrettier互換フォーマッタ「bun fmt」がPrettierより高速とする公称値</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">9.2万人</span>
+        <span class="number-label">Amadeus不正アクセスでJAL・JTAの顧客のうち予約情報が外部参照された人数</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">10.8%</span>
+        <span class="number-label">税務専門タスクベンチマークでClaude Sonnet 5.5が記録した最高合格率</span>
+      </div>
+    </div>
+
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
+
+      <div class="card featured deep-dive">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-carbon/">DEEP DIVE: Google、サイバーセキュリティに特化した新フロンティアモデル「Gemini 4 Carbon」発表</a></h3>
+        </div>
+        <div class="summary">Google DeepMindは10月28日、フロンティアモデル「Gemini 4」シリーズの新版「Gemini 4 Carbon」を発表した。2週間前に投入した「Gemini 4 Argon」の後継で、同社は「最強モデルであり、最先端のサイバーセキュリティ性能と長時間タスク遂行能力を持つ」と位置付ける。セキュリティ関連の独自ベンチマークでは、脆弱性発見のSEC-bench Proで88.2%、攻撃実証のExploitGymで54.8%(いずれも最高値)、パッチ作成のCWE-benchで71.0%を記録し、社内のセキュアコード生成テストではArgon比で2倍超の成功率を示したという。Chromeチームの検証では、他社の大型フロンティアモデルより10倍以上質の高い修正パッチを生成できたと報告されている。総合知力を測るArtificial Analysis Intelligence Index v5.0では59点で首位、WebDev Arenaでは+89イロでElo1768・4位につけた。安全性指標も改善し、間接プロンプトインジェクションへの攻撃成功率は0.0%(Argonは0.7%)、Terminal-Bench 4.0での不正行為は0.0%、社内ライブコーディングでの重大な方向性のずれの警告は約80%減少した。価格は導入期間中が入力100万トークン2ドル・出力10ドル(キャッシュ入力は95%引き)、その後は入力4ドル・出力20ドルとなる。提供は当面、サイバー防御担当者の一部と「Fairwind Program」経由の信頼済みパートナーに限定され、一般開発者への開放時期は明示されていない。</div>
+        <div class="editorial">🧠 攻防両面(脆弱性発見54.8%・パッチ適用71.0%)で性能が伸びている点は、攻撃側のAIエージェント活用がすでに現実的な脅威段階にあることの裏返しでもある。Chromeチームの「10倍以上」という評価は一事例であり、一般公開前のモデルゆえに外部での再現性は未検証だ。「Fairwind Program」という信頼パートナー限定の提供形態は、強力すぎるモデルを誰にどう渡すかという配布戦略の慎重さを示すが、一般開発者がいつ使えるようになるかは依然不透明だ。</div>
+        <div class="key-points">
+          <ul>
+            <li>SEC-bench Pro(脆弱性発見)88.2%・ExploitGym(攻撃実証)54.8%でいずれも過去最高、CWE-bench(パッチ作成)は71.0%</li>
+            <li>間接プロンプトインジェクション攻撃成功率0.0%(Argonは0.7%)、社内ライブコーディングでの重大な方向性ずれ警告は約80%減</li>
+            <li>価格は導入期間中が入力100万トークン2ドル・出力10ドル、後に4ドル・20ドルへ。提供はサイバー防御担当者の一部と信頼パートナー限定で一般公開は未定</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 セキュリティ専業ベンダーやCTFエンジニアにとって、脆弱性発見・パッチ適用を担うAIエージェントの実力が急速に実務レベルへ近づいていることを示す値であり、自社の脆弱性対応フローにAIエージェントを組み込む検討の前倒しが必要になる。</div>
+        <div class="meta">
+          <span>Google</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-28</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://emudhra.we-have-a-problem.com/apple.html">Apple純正のgit・curl・python3が、侵害されたeMudhra証明書をいまも信頼</a></h3>
+        </div>
+        <div class="summary">認証機関eMudhraの中間証明書が侵害された問題で、Appleは10月17日に通知を受けたが、macOSに同梱されるgit・curl・python3などの開発者向けツールは10月28日時点でも侵害された証明書を信頼し続けている。10月26日公開のmacOS 27.2はこの問題を修正せず、利用者が独自に適用していた回避策まで上書きして無効化した。SafariなどApple独自のネットワーキング基盤を使うアプリは保護済みという。</div>
+        <div class="key-points">
+          <ul>
+            <li>Appleは10月17日に通知を受けたが、10月26日のmacOS 27.2は未修正。侵害された証明書を信頼したまま`git clone`・`curl`・`python3`の通信が成立し、攻撃者はコード配信の改ざんやGitHubトークンの窃取が可能</li>
+            <li>他の多くのOSSプロジェクトは数日前に独自対応済み。回避策は`/etc/ssl/cert.pem`から該当ルート証明書を手動削除する方法だが、macOS更新で復元されるため更新ごとの再適用が必要</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>we-have-a-problem.com</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-28</span>
+          <span class="engagement">▲ 1027</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://alpinelinux.org/posts/GitLab-security-incident-CVE-2026-97229.html">Alpine Linuxの公式GitLab、侵入未遂を受けサーバーを全再構築 CVSS10.0の正規表現脆弱性が標的</a></h3>
+        </div>
+        <div class="summary">Alpine LinuxはCVSS10.0の重大脆弱性CVE-2026-97229(GitLabのCI設定評価に使うRuby組み込みの正規表現エンジンOnigmoの欠陥)を突く攻撃を10月20〜21日と25〜26日の2度受けた。未修正版のGitLab 19.3.4を運用していたため、攻撃者はワーカープロセスを8回クラッシュさせ、4回は攻撃の一歩手前まで到達した。成功の証拠は見つからなかったが否定もできず、Alpineは10月27〜28日にGitLabインスタンスを全面的に作り直し、全パスワードとシークレットキーを再発行した。</div>
+        <div class="key-points">
+          <ul>
+            <li>GitLabは10月12日に修正版をリリースしたが、修正はGitLab同梱Ruby向けパッチのみで標準Rubyには効かず、上流Rubyの修正版(3.3.13/3.4.12/4.0.9)は10月23日公開。Alpineは10月22日に誤って未修正版へアップグレードしていた</li>
+            <li>侵害されれば流出し得た情報はユーザーのメール・氏名・IP、パスワードハッシュ、2FAシークレット、CI/CD変数やランナートークン、個人アクセストークンハッシュなど。10月21日リリースのパッケージ・ISOは署名検証済みで改竄なしと確認された</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Alpine Linux</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-10-28</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://cursor.com/blog/agent-sdk">Cursor、エージェントをコードで定義・運用する「Agent SDK」を正式公開</a></h3>
+        </div>
+        <div class="summary">Cursorは10月20日、PRレビューやセキュリティレビューなど社内の運用エージェントと同じ基盤を外部公開する「Agent SDK」を発表した。`defineAgent`でモデルとプロンプト(Markdown)・ツール(TypeScript関数)を宣言し、`agent-sdk deploy`でCursorのインフラまたは自前のNode.jsプロセスにデプロイする。GitHub・GitLab・Bitbucketのイベントに応じて動くPRレビューエージェントなどを想定する。</div>
+        <div class="key-points">
+          <ul>
+            <li>プロンプトはMarkdown、ツールはTypeScript関数として通常のバージョン管理・レビューの対象にできる。評価(eval)とイベント再生機能を標準搭載し、デプロイ前にローカルプレイグラウンドで検証できる</li>
+            <li>あるチームは社内のレビュー教訓と矛盾する変更を検知する「kb-reviewer」エージェントを約1日で構築したという。デプロイは自己ホスト(単一Node.jsプロセス)も選択可能</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Cursor</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-20</span>
+          <span class="engagement">▲ 91</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-data">Data</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/duckdb_20_ltsquack.html">組み込みOLAP「DuckDB 2.0 LTS」リリース、AWS傘下化後初のメジャー版</a></h3>
+        </div>
+        <div class="summary">AWSに8月に買収されたDuckLabsが主導する組み込み分析データベース「DuckDB 2.0 LTS」(開発名Cinnamon Teal)が10月21日にリリースされた。独自SQL方言DuckSQLの構文解析器をPostgreSQL派生からPEG方式に置き換え、JSON型を継承するスキーマレス型VARIANTや、挿入・更新・削除時に発火するトリガーを追加した。クエリ処理とI/Oを分離する非同期I/Oにより、S3などのオブジェクトストレージからの並列読み取り性能が向上し、別マシンのDuckDBを操作できるクライアント/サーバープロトコル「Quack」(5月導入)も統合された。</div>
+        <div class="key-points">
+          <ul>
+            <li>SQL構文解析器をPostgreSQL派生からPEGベースの独自実装に置き換え、構文・句の追加が容易になった。JSON型(1.5で追加)を継承する新型VARIANTは半構造化データの共通構造を検出して分解格納し圧縮率とクエリ速度を改善する</li>
+            <li>LTSとして2027年10月までのサポートを明示。クライアント/サーバー通信プロトコル「Quack」により1台のDuckDBサーバーが複数クライアントの「マスターDB」として機能できる</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-10-26</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://blog.orange.tw/posts/2026-10-the-last-proof-of-human-craft-browser-full-chain/">研究者が記憶破壊なしの論理バグのみでMicrosoft Edgeをフルチェーン攻略、Pwn2Own Berlinで17.5ポイント獲得</a></h3>
+        </div>
+        <div class="summary">DEVCOREのOrange Tsai氏は、メモリ破壊バグやAIを一切使わず、5つの論理バグとWindowsの2機能だけでMicrosoft Edgeのフルチェーン攻略を構築し、Pwn2Own Berlin 2026でサンドボックスエスケープとコード実行に成功した(報酬17万5000ドル・Master of Pwn 17.5点)。EntraID連携用のナビゲーション検証を`window.open()`のポップアップで回避し、ソース元を指定しないブラウザ起動のナビゲーションでCSPを無視するUniversal XSSを獲得。さらにポップアップブロッカーのホワイトリスト、Microsoftアカウントの自動サインイン、`read://`のJavaScript URLブラックリスト漏れ、診断ログZip機能のパストラバーサル、`telnet://`ハンドラ経由のPATHハイジャックを連鎖させてコード実行に到達した。</div>
+        <div class="key-points">
+          <ul>
+            <li>論理バグは「バグを見つける方が難しく、連鎖させるのは比較的易しい」という、記憶破壊バグの攻略とは逆の難易度構造を持つと著者は指摘する。前提となるUXSSはChromiumのナビゲーション処理に潜む見過ごされがちな攻撃面だとする</li>
+            <li>`edgeFeedbackPrivate.zipDiagnosticLogFiles()`のパストラバーサル+ヌルバイトで任意ファイル書き込みを行い、`protocols.json`上書きとPATH上の書き込み可能ディレクトリへの`telnet.exe`配置でコード実行に至る。本チェーンにCVE番号は付与されていない</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Orange Tsai</span>
+          <span>⏱ 7 min read</span>
+          <span>2026-10-27</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/awsgoogle_cloudpytorchaws_trainiumgoogle_cloud_tpunvidia.html">AWSとGoogle Cloud、NVIDIA依存脱却を狙いPyTorchの自社チップ向けバックエンドをオープンソース化</a></h3>
+        </div>
+        <div class="summary">AWSは独自AIチップTrainium向けPyTorchバックエンド「TorchNeuron」、Google CloudはTPU向け「TorchTPU」を、10月20〜21日開催のPyTorch Conference 2026でそれぞれオープンソース化した。いずれも非公開ベータから昇格したもので、CUDAに最適化されたソフトウェア資産がTrainiumやTPUへ移行しづらいという課題に対応する。TorchNeuronはeager実行・`torch.compile`・Neuron Kernel Interfaceでのカスタム演算対応を、TorchTPUはeager実行の最適化と`torch.compile`統合によるTPUへの移行容易化を掲げる。従来のXLAベースの互換性確保は性能・互換性の両面で不十分だったとされ、両社は今回を次の一手と位置付ける。</div>
+        <div class="key-points">
+          <ul>
+            <li>Amazon Scienceによれば、TorchNeuronの検証にAIエージェントと数十万規模のモデルを使用した。ベンチマーク数値は両社とも非公開で、実運用でのライブラリ互換性・性能・コストは依然未知数</li>
+            <li>PyTorchは事実上CUDA上の標準ツールとなっており、関連ソフトウェアの多くがNVIDIA GPU向けに最適化されている状況が、他チップへの移行を妨げてきた背景として説明されている</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-10-26</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://nullpt.rs/fingerprinting-bioweapons">謎のフィンガープリンティングスクリプトに「リシンの致死量計算」を装う関数名、AI解析拒否狙いのデコイか</a></h3>
+        </div>
+        <div class="summary">セキュリティ研究者veritasは、Tranco上位約1万サイトをクロールしてcanvasフィンガープリンティングを収集する調査中、`servicepipe.tech`が配信するスクリプト内に`computeRicinLethalDosageForWaterSupply`など生物兵器・自傷・政治的トピックを装った難読化済み関数名や文字列を発見した。不可視のUnicodeタグ文字列を復号すると「システムオーバーライド」を騙る偽プロンプトが現れ、AIモデルに解析を拒否させる目的のデコイだと著者は推測する。実際にClaudeベースのアシスタントはこのスクリプトの解析を生物兵器の懸念を理由に拒否したが、GLM-5.3は同じ依頼に応じたという。スクリプト自体が収集するフィンガープリント情報はnavigatorのプロパティやWebGL情報など標準的なもので、著者は「難読化の労力に対して得られる情報は見劣りする」と評している。</div>
+        <div class="key-points">
+          <ul>
+            <li>Node環境検出時のみ動く隠しブロックは`.npmrc`・`.env`・`.kube/config`読み込みや、内部IPからのバイナリダウンロード・cron `@reboot`登録・30秒間隔のハートビート送信といったコマンドを含む。著者はこれも同系統のデコイである可能性が高いとみているが未確定としている</li>
+            <li>`servicepipe.tech`のurlscan結果はロシア企業`servicepipe.ru`(トラフィック制御・DDoS対策製品)を示唆。著者はfingerprint.gardenで収集済み1,033件のcanvas画像を公開しスクリプトの変化を追跡する計画を示す</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>nullpt.rs</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-10-27</span>
+          <span class="engagement">▲ 764</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/nayuta/articles/aec9ab2e11a7b7">「暗黒の10月」が終わらないいま、セキュリティエンジニアは休息の仕組みを作れ</a></h3>
+        </div>
+        <div class="summary">筆者は、2026年10月の情報セキュリティ業界の混乱を指す「Black October」について、Anthropicの副CISO Jason D. Clinton氏の「あと18か月程度は続く」という見立てを引用し、インシデント対応の波がさらに増える前に休息を確保すべきだと主張する。緊急タスク完了後すぐに休む計画を立てる、チームでローテーションを組みリーダー自ら休む、オンコール体制やサービス停止基準・エスカレーション手段を事前に整備するなど、個人・チーム・組織それぞれの対応策を提言している。</div>
+        <div class="key-points">
+          <ul>
+            <li>「緊急・重要」タスク終了後にインシデント対応の合間を縫って休みを取り、リーダー自身が休むことでチーム全体が休める文化を示すことを提言する</li>
+            <li>インシデント検知・対応やライブラリ更新の自動化・半自動化、サービス停止判断基準の整備、休暇中担当者へのエスカレーション手段構築を組織的な備えとして挙げる</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-10-28</span>
+          <span class="engagement">🔖 22</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://piyolog.hatenadiary.jp/entry/2026/10/28/214917">Amadeusの旅客システムに不正アクセス、JAL・JTAなど顧客計約9.2万人の予約情報が外部参照</a></h3>
+        </div>
+        <div class="summary">航空予約システムを提供するAmadeusへの不正アクセスにより、日本航空・日本トランスオーシャン航空・大韓航空・アシアナ航空の顧客予約情報が外部から参照された。推定侵入期間は2023年8月〜2026年9月23日。JAL・JTAでは約9万2000人が対象で、うち約9万人は予約番号・氏名・搭乗日・区間・クラス、約2000人はさらにメールアドレス・電話番号・パスポート番号・マイレージ番号まで含む。韓国2社はAmadeusシステム上の認証情報を使った不正アクセスとみており、決済情報の流出はないとしている。</div>
+        <div class="key-points">
+          <ul>
+            <li>クレジットカード番号・パスワードの漏えいや、参照情報の不正利用は現時点で確認されていないとAmadeus・JALは説明する。運航への影響もないという</li>
+            <li>通知はAmadeusから韓国2社へ10月20日、JAL・JTAへ10月23日。公表は韓国2社が10月23日、JAL・JTAが10月28日で、問い合わせ窓口は10月29日開設</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>piyolog</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-28</span>
+          <span class="engagement">🔖 23</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://zenn.dev/ayutaso/articles/ftllm2026-ja-speech-llm">東京都立大の学生2人が開発した日本語音声LLM、FT-LLM 2026自由形タスクで1位</a></h3>
+        </div>
+        <div class="summary">東京都立大学の学生2人が、Whisper-large-v3エンコーダとアダプタ・LLM-jp-4 8Bを組み合わせた、音声で指示できる国産ベースのオープンな日本語モデルを開発し、LLM-jp主催コンペ「FT-LLM 2026」自由形タスクで1位を獲得した。日本語の音声指示データが存在しないため、CosyVoice2でテキストを音声化し約1000時間分の学習データを独自に合成。ASRデータでアダプタのみ事前学習→LLM全体のマルチタスクSFT→音声化した選好データでのDPOという3段階で学習した。</div>
+        <div class="key-points">
+          <ul>
+            <li>対話ベンチマークADU-Bench(ja)でSFT単体モデルが5.335点を記録し、比較対象のVoxtral Mini(5.181)やGemma 3n(5.143)を上回った。一方DPO適用後は5.165点に低下し、SFT単体を下回る結果となった</li>
+            <li>ASR特化モデルはCommonVoice 8.0(ja)でCER8.36%(Whisper-large-v3の8.51%)を上回ったが、JSUT basic5000ではWhisperの7.14%に対し7.85%で劣る。学習ラベルにWhisperの書き起こしを使っているため大幅な超越は難しいと分析する</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-26</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://zenn.dev/fraim/articles/50908c30561af5">RustからDynamoDBを型安全に扱うライブラリ「raiden-dynamo」公開、6年運用の知見を反映</a></h3>
+        </div>
+        <div class="summary">作者が約6年運用してきたRust向けDynamoDBライブラリ「raiden-dynamo」が公開された。`#[derive(Raiden)]`を付けた構造体からPut・Query・Update・Delete用のビルダーを自動生成し、必須項目の未設定や型違いをコンパイルエラーで検出する。パーティションキー・ソートキー用の条件メソッドは宣言されたキーのみに限定され、GSI・LSIもモデルに宣言すれば対応する条件メソッドと射影型が生成される。内部クライアントはRusotoとAWS SDK for Rustをcargo featureで切り替え可能。</div>
+        <div class="key-points">
+          <ul>
+            <li>属性名・式属性値のプレースホルダー管理を自動化し、予約語のエスケープや名前変更時の修正漏れによる実行時エラーを防ぐ。Condition Builderの条件値にはモデルごとの型が付き、別モデルの条件を誤って渡すことをコンパイル時に防止する</li>
+            <li>Rusoto利用時は最大5回・初期50msの指数バックオフとジッターによるリトライを標準搭載する。ネストした属性はキー条件に使えずタプル構造体はテーブルモデルに非対応という制約がある</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-10-28</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://www.preferred.jp/ja/blog/tech/1798">Preferred Networks、Markdownからきれいな日本語PDFを生成するCLIツール「pfpdf」を公開</a></h3>
+        </div>
+        <div class="summary">Preferred Networksのエンジニアが、MarkdownファイルをVivliostyle CLIとChromiumで組版し日本語PDFを生成するOSSツール「pfpdf」を10月28日に公開した。再配布可能なオープンライセンスの日本語フォントを同梱し、OS標準フォントに依存しないことで環境差による見た目や改ページのずれを抑える。GitHub Flavored Markdown・数式・コードのシンタックスハイライト・BibTeX形式の参考文献に対応し、用途別の7種テンプレートを同梱する。</div>
+        <div class="key-points">
+          <ul>
+            <li>`npx @pfnet-research/pfpdf@latest --input report.md --output report.pdf`で実行する。Chromiumは初回実行時に自動取得(数百MBのダウンロード)され、以後キャッシュされるため組み込み機能のみの文書なら2回目以降はオフラインで変換できる</li>
+            <li>Markdown本体はGit管理、配布用PDFはコマンド一つで再生成する運用を想定する。コーディングエージェントへの要望で新規テンプレートも作りやすい設計とされる</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Preferred Networks</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-28</span>
+          <span class="engagement">🔖 359</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/javascriptbunprettier300prettier.html">Bun、Prettier互換の新フォーマッタ「bun fmt」を搭載 最大320倍高速の主張</a></h3>
+        </div>
+        <div class="summary">JavaScriptランタイム「Bun」はv1.4.4で、Prettier互換のフォーマッタ「bun fmt」を搭載した。Bun側の説明では処理速度はPrettier比最大320倍、メモリ消費は5分の1以下としている(記事では未検証)。Prettierのテストスイートの99%以上をクリアする互換実装で、JavaScript・TypeScript・CSS・HTML・JSON・YAML・Markdownなど20言語に対応し、既存のPrettier設定ファイルやoxfmtの設定ファイルもそのまま利用できる。</div>
+        <div class="key-points">
+          <ul>
+            <li>`bun fmt`コマンド一つで起動し、Prettierからの移行時に設定ファイルの書き換えが不要になる。ランタイム・バンドラ・TypeScriptトランスパイラに続きフォーマッタも統合し、Bunの「オールインワンツール」としての性格が一段強まった</li>
+            <li>速度・メモリの数値はBun側の主張であり、記事は独自の検証を行っていない点に留意が必要</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-10-27</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://huggingface.co/blog/nvidia/nemotron-transcribe-granary">NVIDIA、40言語対応のオープンウェイト音声認識モデル「Nemotron 3.5 Transcribe」公開</a></h3>
+        </div>
+        <div class="summary">NVIDIAは、文字起こし・話者分離・翻訳・音声QAを1モデルでこなすオープンウェイト音声モデル「Nemotron 3.5 Transcribe」をHugging Face・ModelScopeで公開した。約30B(アクティブ約4B)パラメータのMamba-Transformer混合MoE構成で、Hugging Face Open ASR(英語)で平均WER5.33%・RTFx462.09を記録し、オープンウェイトモデルで首位となった。多言語(7言語)では平均WER4.62%、長時間音声では10.98%で、いずれも比較対象中最小だった。最大1時間の録音・最大8名の話者ラベル付け・単語単位タイムスタンプに対応する。</div>
+        <div class="key-points">
+          <ul>
+            <li>話者分離(21言語)のDER(話者分離誤り率)は18.26%で、NVIDIA自身の前モデルNemotron 3 Diarization(18.38%)をわずかに上回る。医療分野でのファインチューニングではWERが22.44%から12.17%へ45.8%改善した例を報告する</li>
+            <li>RTX PRO 6000 Blackwell GPU1枚・今後提供予定のNVFP4量子化版で、100時間分の音声を3分未満で処理できたとしている。vLLMまたはSGLang-Omniでのセルフホストに対応する</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>NVIDIA</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-10-27</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
+
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://www.publickey1.jp/blog/26/aioracle_cloudoracle_app_composeroracle_ai_world_2026.html">Oracle、生成AIで業務アプリを内製できる「App Composer」発表 OpenAI Codexがコード生成</a>
+        <span class="quick-summary">— Oracle AI World 2026で発表され、チャットでの指示からOpenAIのCodexがアプリコードを生成しOracle Cloudへデプロイ、IT部門が全社のアプリを一元管理できる。2027年春の提供開始を予定。</span>
+        <span class="meta">Publickey</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://pc.watch.impress.co.jp/docs/news/2152025.html">Amazon、新AIアシスタント「Alexa+」の国内提供を10月29日開始</a>
+        <span class="quick-summary">— 早期アクセス期間は無料、終了後は月額3000円(Prime会員は追加料金なし)。日本の習慣を踏まえた会話や音声・視覚IDによる個人認識、気分に応じた音楽選択などに対応する。</span>
+        <span class="meta">PC Watch</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://portswigger.net/research/scalable-vector-grief">SVGサニタイザー8種のうち6種をXSSで突破、PortSwiggerが手法を公開</a>
+        <span class="quick-summary">— 名前空間のすり替えやXSLTスタイルシート経由の攻撃などで、DOMPurifyとdarylldoyle/svg-sanitizerを除く主要ライブラリの防御を回避できたという。</span>
+        <span class="meta">PortSwigger</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://www.itmedia.co.jp/news/article/2610/29/2000002689/">Apple、タッチ操作対応の新型OLED搭載「MacBook Pro」発表 国内49万9800円から</a>
+        <span class="quick-summary">— 有機EL方式「PROLED XDR」でピーク輝度2000ニト・コントラスト比1000万対1を実現、画面への直接操作やDynamic Islandに対応。M5 Pro/M5 Max搭載で11月6日発売。</span>
+        <span class="meta">ITmedia</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://gihyo.jp/article/2026/10/clairic">Cloudflare、文章・画像から値を抽出する専用AIモデル「Clairic」プレビュー公開</a>
+        <span class="quick-summary">— トークン生成ではなく型に従った値を直接返す設計で、問い合わせ対応の検証では処理時間69%減・コスト49%減を確認したという。</span>
+        <span class="meta">Gihyo.jp</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-oss">OSS</span>
+        <a href="https://wiki.alpinebsd.org">NetBSDカーネル+Alpine風ユーザーランドの新OS「AlpineBSD」、AI生成コード排除を掲げて開発中</a>
+        <span class="quick-summary">— apk-tools・busyboxを採用しつつs6 initやGNU指向のツールを選び、ベースシステムと主要パッケージにLLM生成物を含まない方針を明文化している。</span>
+        <span class="meta">AlpineBSD <span class="engagement">▲ 169</span></span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://surgehq.ai/blog/dayjob-tax">税務の専門業務でAIエージェントを評価するベンチマーク「DAYJOB: Tax」公開、最高でもClaude Sonnet 5.5の10.8%</a>
+        <span class="quick-summary">— 8分野50課題・平均30ファイルの実務資料を使った検証で、見落としや未確認の前提への対処など専門的判断力の不足が共通して確認されたという。</span>
+        <span class="meta">Surge AI <span class="engagement">▲ 192</span></span>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="./" class="archive-link">🗂 過去のダイジェスト</a>
+    </footer>
+  </div>
+</body>
+</html>
