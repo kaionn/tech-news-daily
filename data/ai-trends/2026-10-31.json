@@ -1,0 +1,85 @@
+{
+  "issue": "2026-10-31",
+  "generated_at": "2026-10-31T07:00:00+09:00",
+  "theme": {
+    "title": "エージェントの拡張機能は「マーケットプレイスを信じる」をやめ始めた — 配布経路ごとの検証、組織が絞る入口、実行時の外付け境界",
+    "category": "agent-extension-supply-chain",
+    "lede": "10月29日、Cursor の拡張マーケットプレイスで「Anthropic.claude-code」の名を持つ改ざん版（2.1.312 / 2.1.313）が約11時間配布され、SSH バックドアを仕込んだ。拡張の名前も発行元も公式のままで、入っていたのは Anthropic が作っていないコードだった。コーディングエージェントはいま、IDE 拡張・プラグイン・MCP サーバー・Skills と、外から取り込むコードを一気に増やしている。その一方で、受け入れ側の設計は「公式マーケットプレイスにあるなら安全」という前提のままのことが多い。同じ月に GitHub は Actions の依存を commit 単位で固定するロックファイルを GA にし、Copilot の管理設定でプラグインの入手元を組織が絞れるようにした。Microsoft はエージェントの外側に OS の封じ込め層 MXC を置いた。拡張の信頼をどこで担保するかの設計は、配布・入口・実行時の三層に分かれ始めている。",
+    "tldr": [
+      "Cursor の事例では、公式拡張と同じ名前のまま中身だけが別物になった。拡張の信頼は名前ではなく「どの配布経路のどの版か」で確かめる必要がある",
+      "GitHub は Copilot のプラグインを組織の許可リスト（strictKnownMarketplaces）で絞り、Actions の依存をロックファイルで commit に固定する。入口を組織側で狭め、版を固定する方向にそろってきた",
+      "Microsoft MXC は「エージェントは自分自身のセキュリティ権限者になれない」として、ファイル・ネットワーク・UI のポリシーをエージェントの外で強制する。入れてしまった拡張が悪性でも被害範囲を限る層になる"
+    ],
+    "sections": [
+      {
+        "heading": "公式の名前でも、配布経路が違えば別物になる",
+        "body_html": "<p>今回 Cursor のマーケットプレイスで配られた改ざん版では、<code>extension.js</code> の先頭に即時実行関数が差し込まれていた。Node がファイルを読み込んだ時点で動くため、拡張の <code>activate</code> より前に実行され、ユーザーの操作は要らない。中身は <code>~/.ssh/authorized_keys</code> への攻撃者鍵の追記、リバース SSH トンネル、OS ごとの永続化（macOS は <code>com.apple.*</code> を装った LaunchAgent）、ホスト情報の送信だった。Cursor は検知後にマーケットプレイス全体を一時停止し、鍵をローテーションして再構築した。ただし、改ざん版がどう登録されたかは公表していない。</p><p>この事例が設計上の論点になるのは、同じ拡張が Open VSX・VS Code Marketplace・npm・各 IDE ベンダーのマーケットプレイスと、別々の配布経路に並んでいるからだ。Socket が Open VSX の変更フィードと npm のメタデータを確認したところ、2.1.313 はどちらにも記録がなかった。つまり「公式チャネルには存在しない版が、ミラー側にだけ現れた」ことになる。発行元の名前で信頼を判断する仕組みでは、この差は見えない。拡張の検証単位は「名前」ではなく「配布経路 × 版 × 時間帯」に分ける必要がある、というのがこの件の教訓だ。</p>",
+        "examples": [
+          {
+            "product": "Cursor（拡張マーケットプレイス）",
+            "approach": "改ざん版 2.1.312 / 2.1.313 を削除して配布を止め、マーケットプレイス全体を停止したうえで鍵ローテーションと再構築を実施",
+            "detail": "影響期間（10月29日 2:27am〜1:35pm PT）と対象 OS（macOS / Windows）を明記し、アンインストールだけでは除去できないとして IoC と復旧手順を公開した。侵入経路は未公表で、今後の配布・検証プロセスの変更にも触れていない",
+            "source_url": "https://cursor.com/blog/claude-code-extension-security-notice"
+          },
+          {
+            "product": "Socket（サプライチェーン分析）",
+            "approach": "Open VSX の変更フィード 3,392 件と npm の版履歴を照合し、2.1.313 が公式系の経路に存在しなかったことを確認",
+            "detail": "Cursor のマーケットプレイスを「独立した配布経路」として扱い、調査はマーケットプレイス・版・時間帯の組で絞るべきだと整理した。スクリーンショットや版番号の欠番は根拠にならないとも指摘している",
+            "source_url": "https://socket.dev/blog/claude-code-extension-compromise"
+          }
+        ],
+        "takeaway": "自社のエージェントや IDE に拡張を入れさせるなら、まず「どのマーケットプレイスから入るか」を棚卸しする。同じ拡張名でも、ミラーや IDE 独自ストア経由の版は公式版と別物として扱い、インシデント時に経路と版で影響範囲を引けるよう、導入ログに入手元を残しておく。"
+      },
+      {
+        "heading": "入口は組織が絞り、版は commit で固定する",
+        "body_html": "<p>GitHub Copilot の企業向け管理設定（<code>.github-private</code> リポジトリの <code>copilot/managed-settings.json</code>）では、<code>strictKnownMarketplaces</code> でプラグインを入手できるマーケットプレイスを企業が明示したものだけに絞れる。空配列にすると完全に閉じる。<code>enabledPlugins</code> の管理値はリポジトリ既定やメンバー個人の設定より優先され、リポジトリ側から「ポリシーが禁じるプラグインやマーケットプレイス」を有効にすることはできない。8月に入った <code>autoUpdate</code> も、許可リストに含まれるマーケットプレイスにしか効かない。同じ考え方は CI 側にもある。10月28日に GA となった Actions のロックファイル（<code>.github/workflows/actions.lock</code>）は、タグ参照のまま、実際に動かす commit を推移的な依存まで記録して固定する。</p><p>両者に共通するのは、「何を信じるか」を利用者個人の判断から組織のポリシーへ移し、そのうえで版を動かないものにする設計だ。拡張やアクションは、内部でさらに別の依存を呼ぶ。トップレベルだけを固定しても、内側の依存が書き換えられれば防げない。ロックファイルが推移的な依存まで辿るのはそのためだ。ただし GitHub 自身が「ロックファイルは予期しない変更を防ぐが、依存が安全かどうかは判断しない」と書いているとおり、固定は検証の代わりにならない。固定する時点で中身を見たかどうかが残る課題だ。</p>",
+        "examples": [
+          {
+            "product": "GitHub Copilot（企業向け管理設定）",
+            "approach": "strictKnownMarketplaces で入手元を企業指定に限定し、enabledPlugins の管理値をリポジトリ既定より優先させる",
+            "detail": "許可リストは複数の設定元の和集合ではなく積集合で決まり（permissions.allow や allowedMcpServers）、下位の設定で権限を広げられない。プラグインと MCP サーバーの両方で「入口を絞る側が勝つ」順位になっている",
+            "source_url": "https://docs.github.com/en/enterprise-cloud@latest/copilot/reference/enterprise-managed-settings-reference"
+          },
+          {
+            "product": "GitHub Actions（ワークフローロックファイル）",
+            "approach": "タグ参照を残したまま、実行する commit を推移的な依存まで actions.lock に記録して固定",
+            "detail": "Require lockfile ポリシーを企業・組織・リポジトリ単位で強制でき、Dependabot の更新 PR でロックファイルも同時に再生成される。エージェントが CI を書き換える時代に、依存の差し替えをレビュー対象の差分として表に出す仕組みになる",
+            "source_url": "https://github.blog/changelog/2026-10-28-github-actions-workflow-lockfiles-are-generally-available/"
+          }
+        ],
+        "takeaway": "エージェント向けのプラグインや MCP サーバーを社内で解禁するときは、「許可リストで入口を絞る」「版を固定する」「自動更新は許可リスト内に限る」の三点を先に決める。自動更新を全面的に許すと、今回のようなミラー側の改ざん版が数時間で全端末に届く。"
+      },
+      {
+        "heading": "入れてしまった後の境界は、エージェントの外に置く",
+        "body_html": "<p>Microsoft が10月7日に Windows 11 で GA にした Microsoft Execution Containers（MXC）は、エージェントや信頼できないワークロードを、ポリシーで定めた境界の中で動かす仕組みだ。ポリシーは起動コマンドと環境、ファイルシステム（書き込み可・読み取りのみ・アクセス不可）、ネットワーク（ループバック経由の到達も含む）、デスクトップ UI への接触を対象にする。封じ込めの方式は、プラットフォームのサンドボックス（AppContainer / Seatbelt / Bubblewrap）を使うプロセスコンテナ、別アカウント・別セッションで動かすセッションコンテナ、WSL コンテナ、実験段階の MicroVM から選ぶ。開発者は JSON スキーマで必要な資源を宣言し、組織はそれより厳しい制約を上から重ねられる。</p><p>Microsoft はこの設計の根拠を「エージェントは自分自身のセキュリティ権限者になれない」と説明する。モデルが判断しようと、生成コードやプラグインやツールが何をしようと、境界はワークロードの外で保たれるべきだという立場だ。配布経路の検証や許可リストは「悪いものを入れない」ための層だが、Cursor の件のように公式名のまま中身が差し替わると、すり抜ける。そのとき被害を <code>~/.ssh</code> や任意の外向き通信まで広げないのが実行時の境界になる。GitHub Copilot、OpenAI Codex、Replit などが統合済みで、Claude Code も対応予定に挙がっている。エージェント製品の側が自前のサンドボックスを抱えるのではなく、OS が提供する境界に乗る流れが出てきた（今後どこまで広がるかは推測の段階）。</p>",
+        "examples": [
+          {
+            "product": "Microsoft Execution Containers（Windows 11 / macOS / Linux）",
+            "approach": "ファイル・ネットワーク・UI・起動プロセスのポリシーをエージェントの外で強制し、Learning / Permissive モードで拒否された操作を JSON の活動レポートに記録",
+            "detail": "開発者の宣言と組織ポリシーの二段で権限を決め、組織側はより厳しくしかできない。資源がブロックされたらエージェントは黙って失敗せず、説明するか許可を求めるべき、という UX 上の要求まで明文化している",
+            "source_url": "https://blogs.windows.com/windowsdeveloper/2026/10/07/microsoft-execution-containers-policy-driven-containment-for-ai-agents/"
+          }
+        ],
+        "takeaway": "拡張やツールを取り込むエージェントは、入口の検証が破られる前提で設計する。最低限、ホームディレクトリの認証情報（~/.ssh、クラウドの資格情報）への書き込みと任意宛先への外向き通信は、エージェント自身の設定ではなく OS かコンテナの層で拒否しておく。"
+      }
+    ]
+  },
+  "editorial": "10月の三つの動きは、それぞれ別の層を担っている。配布経路ごとの検証、組織による入口の制限と版の固定、そして実行時の外付け境界だ。どれか一層で足りるという設計はもう成り立たない。Cursor の件で効いたのは、マーケットプレイスを止めて鍵を回せる運用体制だった。逆に効かなかったのは「公式の名前」で、拡張の数が増えるほど、この差は大きくなる。",
+  "quick_picks": [
+    {
+      "title": "Phorion、改ざん版 Claude Code 拡張のペイロードを解析",
+      "summary": "activate 前に動く IIFE、svc-telemetry 鍵の追記、ポート 8099 へのビーコン、OS 別の永続化手順と、アンインストール後も残る痕跡の除去手順をまとめた技術アドバイザリ。実行時の境界で何を拒否すべきかを具体的に洗い出す材料になる。",
+      "url": "https://phorion.io/blog/offical-claude-code-vsx-compromise/"
+    },
+    {
+      "title": "MXC の封じ込め方式と対応プラットフォーム",
+      "summary": "プロセス・セッション・WSL・MicroVM の各コンテナが、どの OS で使えて何を分離するかを整理した公式ドキュメント。エージェントの外に境界を置く設計を、自社の対象 OS に合わせて選ぶときの基準になる。",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/mxc/platform-support"
+    },
+    {
+      "title": "Copilot の管理設定でプラグインマーケットプレイスの autoUpdate が可能に",
+      "summary": "extraKnownMarketplaces の各エントリに autoUpdate: true を付けると、Copilot アプリ・CLI・VS Code がそのマーケットプレイスのプラグインを自動更新する。許可リスト（strictKnownMarketplaces）の外では効かない設計で、自動更新と入口制限をどう両立させるかの一例になる。",
+      "url": "https://github.blog/changelog/2026-08-26-enterprise-managed-settings-now-support-autoupdate-for-plugin-marketplaces/"
+    }
+  ]
+}

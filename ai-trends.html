@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI プロダクト動向 | Tech News Daily</title>
-<meta name="description" content="エージェントのプロンプト、ツール、評価を、ベンダーの管理画面ではなくリポジトリで持つ流れがこの 2 週間で目立った。10 月 20 日、Cursor は自社の Bugbot や Security Reviewer を作ってきた Agent…">
+<meta name="description" content="10月29日、Cursor の拡張マーケットプレイスで「Anthropic.claude-code」の名を持つ改ざん版（2.1.312 / 2.1.313）が約11時間配布され、SSH バックドアを仕込んだ。拡張の名前も発行元も公式のまま…">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Tech News Daily">
-<meta property="og:title" content="エージェントの定義は「管理画面の設定」から「リポジトリのコード」へ — ファイルとしての定義、CI で回す評価、変更提案も PR で | AI プロダクト動向">
-<meta property="og:description" content="エージェントのプロンプト、ツール、評価を、ベンダーの管理画面ではなくリポジトリで持つ流れがこの 2 週間で目立った。10 月 20 日、Cursor は自社の Bugbot や Security Reviewer を作ってきた Agent…">
+<meta property="og:title" content="エージェントの拡張機能は「マーケットプレイスを信じる」をやめ始めた — 配布経路ごとの検証、組織が絞る入口、実行時の外付け境界 | AI プロダクト動向">
+<meta property="og:description" content="10月29日、Cursor の拡張マーケットプレイスで「Anthropic.claude-code」の名を持つ改ざん版（2.1.312 / 2.1.313）が約11時間配布され、SSH バックドアを仕込んだ。拡張の名前も発行元も公式のまま…">
 <meta property="og:url" content="https://tech-news.kaion-lab.com/ai-trends.html">
 <meta property="og:image" content="https://tech-news.kaion-lab.com/apple-touch-icon.png">
 <meta name="twitter:card" content="summary">
@@ -74,7 +74,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 <div class="container">
 <header>
   <h1>🧠 AI プロダクト動向</h1>
-  <p class="date">2026-10-29 発行（読了 8 分）</p>
+  <p class="date">2026-10-31 発行（読了 8 分）</p>
   <p class="tagline">実プロダクトのアーキテクチャ・使用例から AI 開発の現在地を週 3 回・1 号 1 テーマで深掘り</p>
   <nav class="site-nav">
     <a href="./">📰 日刊ダイジェスト</a>
@@ -85,87 +85,88 @@ footer a{color:var(--primary-500);text-decoration:none}
 </header>
 
 <div class="theme-hero">
-  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">AGENT-AS-CODE</span></span>
-  <h2>エージェントの定義は「管理画面の設定」から「リポジトリのコード」へ — ファイルとしての定義、CI で回す評価、変更提案も PR で</h2>
-  <p class="lede">エージェントのプロンプト、ツール、評価を、ベンダーの管理画面ではなくリポジトリで持つ流れがこの 2 週間で目立った。10 月 20 日、Cursor は自社の Bugbot や Security Reviewer を作ってきた Agent SDK を一般公開した。エージェントは Markdown と TypeScript のファイルが並ぶフォルダとして定義される。OpenAI は、画面上でエージェントを組む Agent Builder、Evals、保存済みプロンプトを 11 月 30 日に終了する。Evals は 10 月 31 日に読み取り専用になり、移行先はどれもアプリケーションコード側だ。10 月 28 日には GitHub が、エージェント自身が過去の作業を振り返ってスキルや指示ファイルの更新を PR で提案する機能を公開した。今号では、定義の置き場所、評価の回し方、定義を更新する経路の 3 点で、この変化を整理する。</p>
+  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">AGENT-EXTENSION-SUPPLY-CHAIN</span></span>
+  <h2>エージェントの拡張機能は「マーケットプレイスを信じる」をやめ始めた — 配布経路ごとの検証、組織が絞る入口、実行時の外付け境界</h2>
+  <p class="lede">10月29日、Cursor の拡張マーケットプレイスで「Anthropic.claude-code」の名を持つ改ざん版（2.1.312 / 2.1.313）が約11時間配布され、SSH バックドアを仕込んだ。拡張の名前も発行元も公式のままで、入っていたのは Anthropic が作っていないコードだった。コーディングエージェントはいま、IDE 拡張・プラグイン・MCP サーバー・Skills と、外から取り込むコードを一気に増やしている。その一方で、受け入れ側の設計は「公式マーケットプレイスにあるなら安全」という前提のままのことが多い。同じ月に GitHub は Actions の依存を commit 単位で固定するロックファイルを GA にし、Copilot の管理設定でプラグインの入手元を組織が絞れるようにした。Microsoft はエージェントの外側に OS の封じ込め層 MXC を置いた。拡張の信頼をどこで担保するかの設計は、配布・入口・実行時の三層に分かれ始めている。</p>
 </div>
 
 <div class="tldr">
   <div class="label">TL;DR — 3 行で</div>
   <ul>
-    <li>Cursor Agent SDK はエージェントを instructions.md・tools/・skills/ などのフォルダで定義する。OpenAI は Agent Builder と保存済みプロンプトを終了し、移行先として SDK のコードとアプリ側のコードを指定した</li>
-    <li>評価も管理画面からリポジトリに移る。OpenAI Evals の移行先は promptfooconfig.yaml を CI で回す形で、Cursor は本番の PR を webhook ペイロードに変換して評価用のテストデータとして保存できる</li>
-    <li>定義の更新も PR を通す。GitHub Copilot の dreaming（パブリックプレビュー）は、リポジトリに置かれたスキルと指示ファイルの変更を、直接書き換えず PR として提案する</li>
+    <li>Cursor の事例では、公式拡張と同じ名前のまま中身だけが別物になった。拡張の信頼は名前ではなく「どの配布経路のどの版か」で確かめる必要がある</li>
+    <li>GitHub は Copilot のプラグインを組織の許可リスト（strictKnownMarketplaces）で絞り、Actions の依存をロックファイルで commit に固定する。入口を組織側で狭め、版を固定する方向にそろってきた</li>
+    <li>Microsoft MXC は「エージェントは自分自身のセキュリティ権限者になれない」として、ファイル・ネットワーク・UI のポリシーをエージェントの外で強制する。入れてしまった拡張が悪性でも被害範囲を限る層になる</li>
   </ul>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 1: エージェントの定義はファイルの集まりになった</div>
+  <div class="section-title">📐 パターン 1: 公式の名前でも、配布経路が違えば別物になる</div>
   <div class="theme-section">
-    <p>Cursor Agent SDK では、1 つのエージェントが 1 つのプロジェクトフォルダになる。プロンプトは <code>instructions.md</code>、モデルが呼べる操作は <code>tools/</code> 以下の TypeScript ファイル（1 ファイルに型付きの操作 1 つ）、必要なときだけ読み込む手順は <code>skills/</code>、MCP サーバーとの接続は <code>mcp-connections/</code>、メッセージを受けて返す場所は <code>channels/</code> に置く。Cursor の説明は「各ファイルが、エージェントが知っていること、またはできることを表す」というものだ。<code>agent-sdk deploy</code> で Cursor のインフラに載せることも、1 つの Node プロセスとしてコンテナに入れて自社環境で動かすこともできる。</p><p>OpenAI は逆方向から同じ結論に来た。2025 年に出した、ノードをつないでワークフローを描く Agent Builder と、ダッシュボードに保存するプロンプト（<code>v1/prompts</code>）を、11 月 30 日で終了する。保存済みプロンプトについては「プロンプトの内容をアプリケーションコードに移す」よう案内している。Agent Builder の移行手順は、ワークフローを Agents SDK の TypeScript か Python のコードとして書き出すことだ。ただし公式ガイドは、ワークフローのグラフ自体は変換されず、すべての挙動がそのまま移る保証もないと明記している。画面で組んだ定義はコードレビューや差分確認、ロールバックの外にあり、エージェントが業務に組み込まれるほどこの点が問題になる。両社の判断はここで一致した。</p>
+    <p>今回 Cursor のマーケットプレイスで配られた改ざん版では、<code>extension.js</code> の先頭に即時実行関数が差し込まれていた。Node がファイルを読み込んだ時点で動くため、拡張の <code>activate</code> より前に実行され、ユーザーの操作は要らない。中身は <code>~/.ssh/authorized_keys</code> への攻撃者鍵の追記、リバース SSH トンネル、OS ごとの永続化（macOS は <code>com.apple.*</code> を装った LaunchAgent）、ホスト情報の送信だった。Cursor は検知後にマーケットプレイス全体を一時停止し、鍵をローテーションして再構築した。ただし、改ざん版がどう登録されたかは公表していない。</p><p>この事例が設計上の論点になるのは、同じ拡張が Open VSX・VS Code Marketplace・npm・各 IDE ベンダーのマーケットプレイスと、別々の配布経路に並んでいるからだ。Socket が Open VSX の変更フィードと npm のメタデータを確認したところ、2.1.313 はどちらにも記録がなかった。つまり「公式チャネルには存在しない版が、ミラー側にだけ現れた」ことになる。発行元の名前で信頼を判断する仕組みでは、この差は見えない。拡張の検証単位は「名前」ではなく「配布経路 × 版 × 時間帯」に分ける必要がある、というのがこの件の教訓だ。</p>
     <div class="example">
-      <div class="product">Cursor Agent SDK</div>
-      <div class="approach">エージェントを instructions.md・tools/・skills/・mcp-connections/・channels/ からなるフォルダとして定義し、通常のバージョン管理とレビューに載せる</div>
-      <div class="detail">Cursor は自社の Bugbot、Security Reviewer、Rollouts をこの SDK で作ってきたと説明している。社内のレビューで得た教訓とぶつかる変更を PR ごとに指摘する kb-reviewer は約 1 日で作られた。作り手の社内で使われている形がそのまま外部に出た例だ</div>
-      <a href="https://cursor.com/blog/agent-sdk">📄 一次ソース</a>
+      <div class="product">Cursor（拡張マーケットプレイス）</div>
+      <div class="approach">改ざん版 2.1.312 / 2.1.313 を削除して配布を止め、マーケットプレイス全体を停止したうえで鍵ローテーションと再構築を実施</div>
+      <div class="detail">影響期間（10月29日 2:27am〜1:35pm PT）と対象 OS（macOS / Windows）を明記し、アンインストールだけでは除去できないとして IoC と復旧手順を公開した。侵入経路は未公表で、今後の配布・検証プロセスの変更にも触れていない</div>
+      <a href="https://cursor.com/blog/claude-code-extension-security-notice">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">OpenAI Agent Builder（2026-11-30 終了）</div>
-      <div class="approach">ビジュアルで組んだワークフローを Agents SDK のコードとして書き出し、アプリ側で管理する形への移行を案内</div>
-      <div class="detail">コードで運用する場合は Agents SDK、自然言語で組んでチームと共有する場合は ChatGPT Workspace Agents、と移行先を 2 つに分けた。決定的な動作が中心のワークフローは Workspace Agents へ忠実には移らない可能性がある、とも書いている</div>
-      <a href="https://developers.openai.com/api/docs/guides/agent-builder/migrate-from-agent-builder">📄 一次ソース</a>
+      <div class="product">Socket（サプライチェーン分析）</div>
+      <div class="approach">Open VSX の変更フィード 3,392 件と npm の版履歴を照合し、2.1.313 が公式系の経路に存在しなかったことを確認</div>
+      <div class="detail">Cursor のマーケットプレイスを「独立した配布経路」として扱い、調査はマーケットプレイス・版・時間帯の組で絞るべきだと整理した。スクリーンショットや版番号の欠番は根拠にならないとも指摘している</div>
+      <a href="https://socket.dev/blog/claude-code-extension-compromise">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> 社内エージェントを作るなら、プロンプトとツール定義は最初からアプリケーションと同じリポジトリに置く。ベンダーの管理画面にしかない定義は、今回の Agent Builder のように製品の終了とともに移行作業を生む。</div>
+    <div class="takeaway"><strong>示唆:</strong> 自社のエージェントや IDE に拡張を入れさせるなら、まず「どのマーケットプレイスから入るか」を棚卸しする。同じ拡張名でも、ミラーや IDE 独自ストア経由の版は公式版と別物として扱い、インシデント時に経路と版で影響範囲を引けるよう、導入ログに入手元を残しておく。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 2: 評価は CI で回し、本番のイベントをテストデータにする</div>
+  <div class="section-title">📐 パターン 2: 入口は組織が絞り、版は commit で固定する</div>
   <div class="theme-section">
-    <p>定義がコードになると、評価もテストと同じ場所で回せる。Cursor Agent SDK の <code>agent-sdk eval</code> は、決まったメッセージをエージェントに送り、どのツールがどの入力で呼ばれたか、返答がどんな形だったかを確認する。ローカルでも CI でも実行できる。<code>agent-sdk github replay &lt;pr-url&gt;</code> は実際の PR を署名付きの webhook ペイロードに変換してエージェントに送るため、本物の push を待たずに GitHub 連動のエージェントを試せる。<code>--dry-run --fixtures-dir</code> を付ければ、送らずに評価用のテストデータとして保存される。本番で起きたイベントを、そのまま回帰テストのケースにできる仕組みだ。</p><p>OpenAI の Evals 終了も同じ方向を向いている。移行ガイドは、プロンプト・モデル・テストケース・アサーションを <code>promptfooconfig.yaml</code> に書き直し、「評価をアプリケーションコードと一緒に置き、ローカルでも CI でも実行する」ことを勧める。OpenAI の採点器（grader）は Promptfoo のアサーションに対応させる。ダッシュボードで管理する評価は、プロンプトの変更と同じ PR で評価基準も変える、という運用ができなかった。評価対象（プロンプトやツール）と評価基準を同じ差分で見られることが、コードへ移す最大の利点になる。</p>
+    <p>GitHub Copilot の企業向け管理設定（<code>.github-private</code> リポジトリの <code>copilot/managed-settings.json</code>）では、<code>strictKnownMarketplaces</code> でプラグインを入手できるマーケットプレイスを企業が明示したものだけに絞れる。空配列にすると完全に閉じる。<code>enabledPlugins</code> の管理値はリポジトリ既定やメンバー個人の設定より優先され、リポジトリ側から「ポリシーが禁じるプラグインやマーケットプレイス」を有効にすることはできない。8月に入った <code>autoUpdate</code> も、許可リストに含まれるマーケットプレイスにしか効かない。同じ考え方は CI 側にもある。10月28日に GA となった Actions のロックファイル（<code>.github/workflows/actions.lock</code>）は、タグ参照のまま、実際に動かす commit を推移的な依存まで記録して固定する。</p><p>両者に共通するのは、「何を信じるか」を利用者個人の判断から組織のポリシーへ移し、そのうえで版を動かないものにする設計だ。拡張やアクションは、内部でさらに別の依存を呼ぶ。トップレベルだけを固定しても、内側の依存が書き換えられれば防げない。ロックファイルが推移的な依存まで辿るのはそのためだ。ただし GitHub 自身が「ロックファイルは予期しない変更を防ぐが、依存が安全かどうかは判断しない」と書いているとおり、固定は検証の代わりにならない。固定する時点で中身を見たかどうかが残る課題だ。</p>
     <div class="example">
-      <div class="product">Cursor Agent SDK（eval / replay）</div>
-      <div class="approach">ツール呼び出しと入力・返答の形を確かめる eval と、本番の PR を webhook ペイロードとして再生・保存する replay を CLI で提供</div>
-      <div class="detail">eval は最終的な文章ではなく、どのツールがどの入力で呼ばれたかを確かめる。エージェントの不具合はツール選択や引数の誤りとして出ることが多く、そこを決定的にチェックできる</div>
-      <a href="https://cursor.com/changelog/agent-sdk">📄 一次ソース</a>
+      <div class="product">GitHub Copilot（企業向け管理設定）</div>
+      <div class="approach">strictKnownMarketplaces で入手元を企業指定に限定し、enabledPlugins の管理値をリポジトリ既定より優先させる</div>
+      <div class="detail">許可リストは複数の設定元の和集合ではなく積集合で決まり（permissions.allow や allowedMcpServers）、下位の設定で権限を広げられない。プラグインと MCP サーバーの両方で「入口を絞る側が勝つ」順位になっている</div>
+      <a href="https://docs.github.com/en/enterprise-cloud@latest/copilot/reference/enterprise-managed-settings-reference">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">OpenAI Evals → Promptfoo</div>
-      <div class="approach">Evals のテスト基準を promptfooconfig.yaml のアサーションに書き直し、アプリケーションコードと一緒に CI で実行</div>
-      <div class="detail">OpenAI 公式 cookbook が移行先として Promptfoo を指定している。LLM を採点役にする grader は、回帰判定に使う前に再検証するよう注意している。評価をコードに移しても、採点器そのものの妥当性確認は残る</div>
-      <a href="https://developers.openai.com/cookbook/examples/evaluation/moving-from-openai-evals-to-promptfoo">📄 一次ソース</a>
+      <div class="product">GitHub Actions（ワークフローロックファイル）</div>
+      <div class="approach">タグ参照を残したまま、実行する commit を推移的な依存まで actions.lock に記録して固定</div>
+      <div class="detail">Require lockfile ポリシーを企業・組織・リポジトリ単位で強制でき、Dependabot の更新 PR でロックファイルも同時に再生成される。エージェントが CI を書き換える時代に、依存の差し替えをレビュー対象の差分として表に出す仕組みになる</div>
+      <a href="https://github.blog/changelog/2026-10-28-github-actions-workflow-lockfiles-are-generally-available/">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> エージェントの評価は「最終回答の良し悪し」より「どのツールを何の引数で呼んだか」を先にアサーション化すると CI で安定して回る。本番の入力イベントをテストデータとして保存する仕組みを、初期から用意しておくとよい。</div>
+    <div class="takeaway"><strong>示唆:</strong> エージェント向けのプラグインや MCP サーバーを社内で解禁するときは、「許可リストで入口を絞る」「版を固定する」「自動更新は許可リスト内に限る」の三点を先に決める。自動更新を全面的に許すと、今回のようなミラー側の改ざん版が数時間で全端末に届く。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 3: 定義の更新も PR を通す — エージェントが自分の手順書に変更を提案する</div>
+  <div class="section-title">📐 パターン 3: 入れてしまった後の境界は、エージェントの外に置く</div>
   <div class="theme-section">
-    <p>定義がファイルになると、そのファイルを誰がどう書き換えるかが次の論点になる。GitHub が 10 月 28 日に公開した Copilot の dreaming（パブリックプレビュー、利用者が有効化する方式）は、過去の作業を振り返って次回以降のセッションを改善する機能だ。種類は 3 つある。個人の記憶を整理するもの、リポジトリ単位の記憶を管理して既存のスキルやカスタム指示ファイルの更新を提案するもの、繰り返し受け入れられたコードレビュー指摘を Copilot のレビュー指針に変えるものだ。記憶そのものは追加・更新・削除できるが、リポジトリにコミットされたスキルと指示ファイルは直接書き換えない。変更は PR として出され、チームのレビューを通る。</p><p>この設計は、2 つの動きの中間にある。エージェントが経験から学んで挙動を変える仕組みは各社が足しているが、学習結果がブラックボックスの記憶にしか残らないと、なぜ挙動が変わったかを後から追えない。逆に、人が書いた手順書だけでは現場の知見が溜まらない。GitHub は、揮発してよい記憶はエージェントに任せ、チームの規約として残す内容はファイル＋PR に通すと分けた。Cursor の kb-reviewer が、指摘ごとに根拠となるナレッジベースのノートを引用するのも同じ発想だ。エージェントの判断根拠を、レビューできるテキストに置いている。</p>
+    <p>Microsoft が10月7日に Windows 11 で GA にした Microsoft Execution Containers（MXC）は、エージェントや信頼できないワークロードを、ポリシーで定めた境界の中で動かす仕組みだ。ポリシーは起動コマンドと環境、ファイルシステム（書き込み可・読み取りのみ・アクセス不可）、ネットワーク（ループバック経由の到達も含む）、デスクトップ UI への接触を対象にする。封じ込めの方式は、プラットフォームのサンドボックス（AppContainer / Seatbelt / Bubblewrap）を使うプロセスコンテナ、別アカウント・別セッションで動かすセッションコンテナ、WSL コンテナ、実験段階の MicroVM から選ぶ。開発者は JSON スキーマで必要な資源を宣言し、組織はそれより厳しい制約を上から重ねられる。</p><p>Microsoft はこの設計の根拠を「エージェントは自分自身のセキュリティ権限者になれない」と説明する。モデルが判断しようと、生成コードやプラグインやツールが何をしようと、境界はワークロードの外で保たれるべきだという立場だ。配布経路の検証や許可リストは「悪いものを入れない」ための層だが、Cursor の件のように公式名のまま中身が差し替わると、すり抜ける。そのとき被害を <code>~/.ssh</code> や任意の外向き通信まで広げないのが実行時の境界になる。GitHub Copilot、OpenAI Codex、Replit などが統合済みで、Claude Code も対応予定に挙がっている。エージェント製品の側が自前のサンドボックスを抱えるのではなく、OS が提供する境界に乗る流れが出てきた（今後どこまで広がるかは推測の段階）。</p>
     <div class="example">
-      <div class="product">GitHub Copilot memory / dreaming</div>
-      <div class="approach">記憶は GA、dreaming はオプトインのパブリックプレビュー。コミット済みのスキルと指示ファイルへの変更は PR で提案</div>
-      <div class="detail">エージェントが自分の定義ファイルを直接書き換えず、人のレビューを必ず通す形を製品として最初に明示した例だ。dreaming の実行は AI クレジットを消費し、組織では管理者がポリシーで有効化する</div>
-      <a href="https://github.blog/changelog/2026-10-28-github-intelligence-puts-your-code-context-and-history-to-work/">📄 一次ソース</a>
+      <div class="product">Microsoft Execution Containers（Windows 11 / macOS / Linux）</div>
+      <div class="approach">ファイル・ネットワーク・UI・起動プロセスのポリシーをエージェントの外で強制し、Learning / Permissive モードで拒否された操作を JSON の活動レポートに記録</div>
+      <div class="detail">開発者の宣言と組織ポリシーの二段で権限を決め、組織側はより厳しくしかできない。資源がブロックされたらエージェントは黙って失敗せず、説明するか許可を求めるべき、という UX 上の要求まで明文化している</div>
+      <a href="https://blogs.windows.com/windowsdeveloper/2026/10/07/microsoft-execution-containers-policy-driven-containment-for-ai-agents/">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> エージェントに学習結果を書き戻させるなら、残す先を「消えてよい記憶」と「チームの規約になるファイル」に分け、後者は必ず PR を通す。挙動の変化を git の履歴で追えることが、運用中の不具合調査を左右する。</div>
+    <div class="takeaway"><strong>示唆:</strong> 拡張やツールを取り込むエージェントは、入口の検証が破られる前提で設計する。最低限、ホームディレクトリの認証情報（~/.ssh、クラウドの資格情報）への書き込みと任意宛先への外向き通信は、エージェント自身の設定ではなく OS かコンテナの層で拒否しておく。</div>
   </div>
   <div class="editorial">
     <span class="label">✍️ 編集後記</span>
-    プロンプトは長く「コードではない何か」として、管理画面やスプレッドシートに置かれてきた。今月の動きは、エージェントが業務に組み込まれた時点で、それが差分・レビュー・ロールバックを必要とする本番の設定になったことを示している。OpenAI の Evals は 10 月 31 日に読み取り専用になる。画面上にしかない定義や評価を持っているチームは、移行期限を待たずに、まずリポジトリへ書き出しておくべきだ。
+    10月の三つの動きは、それぞれ別の層を担っている。配布経路ごとの検証、組織による入口の制限と版の固定、そして実行時の外付け境界だ。どれか一層で足りるという設計はもう成り立たない。Cursor の件で効いたのは、マーケットプレイスを止めて鍵を回せる運用体制だった。逆に効かなかったのは「公式の名前」で、拡張の数が増えるほど、この差は大きくなる。
   </div>
 </div>
 
 <div class="section">
   <div class="section-title">🔗 今号の動向ピックアップ</div>
-  <div class="quick-link"><a href="https://community.openai.com/t/deprecation-notice-evals-will-be-shut-down-on-november-30th-2026/1385537">OpenAI Developer Community: Evals 終了告知スレッドで「Promptfoo への書き出しボタンが見つからない」</a><span class="quick-summary">移行ガイドどおりに書き出そうとした利用者に対し、OpenAI サポートは、実行可能な Promptfoo 設定と結果だけの JSONL は別物で、すべての評価タイプが設定の書き出しに対応するわけではないと回答した。管理画面に置いた評価はきれいに持ち出せるとは限らず、最初からコードで持つ理由を裏付ける例だ。</span></div>
-  <div class="quick-link"><a href="https://github.com/JetBrains/thinkrail">JetBrains ThinkRail: 各モジュールの横に置いた SPEC.md のグラフをエージェントが専用ツールで維持</a><span class="quick-summary">OSS のエージェント型 IDE ThinkRail は、プロジェクトの意図を SPEC.md ファイルのつながりとしてコードの隣に置き、エージェントは spec_* ツールでそれを読み書きする。リポジトリで定義する対象が、エージェントそのものから、エージェントが従う設計意図にまで広がっている例だ。</span></div>
-  <div class="quick-link"><a href="https://www.promptfoo.dev/docs/guides/evaluate-coding-agents/">Promptfoo: コーディングエージェントの評価ガイド</a><span class="quick-summary">OpenAI が Evals の移行先に指定した Promptfoo が、コーディングエージェントを設定ファイルで評価する手順をまとめている。本号の「評価を CI で回す」構成を、OpenAI 以外のモデルやハーネスで組むときの出発点になる。</span></div>
+  <div class="quick-link"><a href="https://phorion.io/blog/offical-claude-code-vsx-compromise/">Phorion、改ざん版 Claude Code 拡張のペイロードを解析</a><span class="quick-summary">activate 前に動く IIFE、svc-telemetry 鍵の追記、ポート 8099 へのビーコン、OS 別の永続化手順と、アンインストール後も残る痕跡の除去手順をまとめた技術アドバイザリ。実行時の境界で何を拒否すべきかを具体的に洗い出す材料になる。</span></div>
+  <div class="quick-link"><a href="https://learn.microsoft.com/en-us/windows/apps/develop/mxc/platform-support">MXC の封じ込め方式と対応プラットフォーム</a><span class="quick-summary">プロセス・セッション・WSL・MicroVM の各コンテナが、どの OS で使えて何を分離するかを整理した公式ドキュメント。エージェントの外に境界を置く設計を、自社の対象 OS に合わせて選ぶときの基準になる。</span></div>
+  <div class="quick-link"><a href="https://github.blog/changelog/2026-08-26-enterprise-managed-settings-now-support-autoupdate-for-plugin-marketplaces/">Copilot の管理設定でプラグインマーケットプレイスの autoUpdate が可能に</a><span class="quick-summary">extraKnownMarketplaces の各エントリに autoUpdate: true を付けると、Copilot アプリ・CLI・VS Code がそのマーケットプレイスのプラグインを自動更新する。許可リスト（strictKnownMarketplaces）の外では効かない設計で、自動更新と入口制限をどう両立させるかの一例になる。</span></div>
 </div>
 
 <div class="section">
   <div class="section-title">📚 過去号</div>
+  <div class="archive-item"><span class="week">2026-10-29</span><div class="body"><a href="ai-trends/2026-10-29.html">エージェントの定義は「管理画面の設定」から「リポジトリのコード」へ — ファイルとしての定義、CI で回す評価、変更提案も PR で</a><span class="sub">Cursor Agent SDK はエージェントを instructions.md・tools/・skills/ などのフォルダで定義する。OpenAI は Agent Builder と保存済みプロンプトを終了し、移行先として SDK のコードとアプリ側のコードを指定した</span></div></div>
   <div class="archive-item"><span class="week">2026-10-27</span><div class="body"><a href="ai-trends/2026-10-27.html">エージェント製品は「API で借りるモデル」から「自社ハーネスで鍛えたモデル」へ — オープンウェイトの土台、コスト込みの報酬、検証できる部品から内製する順序</a><span class="sub">Cursor Composer 2 は Kimi K2.5、Cognition SWE-2 は Kimi K3 を土台に、本番と同じハーネス・ツールで RL をかけている。差別化はモデルの重みより訓練環境に移った</span></div></div>
   <div class="archive-item"><span class="week">2026-10-24</span><div class="body"><a href="ai-trends/2026-10-24.html">プロアクティブ型エージェントは「いつ話しかけるか」と「どこで止めるか」を別々に設計した — 巡回間隔・行為単位の承認・外付けの監視役</a><span class="sub">Claude Duet は外部アカウントを常時監視せず「数時間おき」の巡回と朝のブリーフに絞った。巡回の頻度は検知の速さとトークン消費のトレードオフで決まる</span></div></div>
   <div class="archive-item"><span class="week">2026-10-22</span><div class="body"><a href="ai-trends/2026-10-22.html">ブラウザエージェントは「画面を見て押す」をやめ始めた — 構造を読む、サイトがツールを差し出す、防御はモデルの外に積む</a><span class="sub">Playwright MCP や Vercel の agent-browser は、ページをスクリーンショットではなく ref 付きのアクセシビリティツリーで渡すのを既定にし、画像はキャンバスやアイコンなどの補助に回した</span></div></div>
@@ -209,7 +210,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 </div>
 
 <footer>
-  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="data/ai-trends/2026-10-29.json">data/ai-trends/2026-10-29.json</a>（このページは JSON からの生成物）</p>
+  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="data/ai-trends/2026-10-31.json">data/ai-trends/2026-10-31.json</a>（このページは JSON からの生成物）</p>
   <p style="margin-top:.5rem"><a href="./">📰 日刊ダイジェストに戻る</a></p>
 </footer>
 </div>
