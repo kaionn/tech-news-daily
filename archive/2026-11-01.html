@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-11-01</title>
+  <meta name="description" content="GMO不正アクセスで攻撃者が約80億円要求、バウンティに270件情報提供 / ChatGPT公開共有のXSS連鎖でアカウント乗っ取り可能に / Jepsen分析でAI向けDB ParticleDBに96件の不整合">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech News Daily">
+  <meta property="og:title" content="Tech News Daily — 2026-11-01">
+  <meta property="og:description" content="GMO不正アクセスで攻撃者が約80億円要求、バウンティに270件情報提供 / ChatGPT公開共有のXSS連鎖でアカウント乗っ取り可能に / Jepsen分析でAI向けDB ParticleDBに96件の不整合">
+  <meta property="og:url" content="https://tech-news.kaion-lab.com/archive/2026-11-01.html">
+  <meta property="og:image" content="https://tech-news.kaion-lab.com/apple-touch-icon.png">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="../feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-11-01 (Sun)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+      <nav class="site-nav">
+        <a href="../" class="active">📰 日刊ダイジェスト</a>
+        <a href="../trends.html">🔌 週次プラグイントレンド</a>
+        <a href="../ai-trends.html">🧠 AI プロダクト動向</a>
+        <a href="./">🗂 アーカイブ</a>
+      </nav>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 20 articles</span>
+      <span>🏷 6 categories</span>
+      <span>📡 16 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item">
+        <span class="number-value">約80億円</span>
+        <span class="number-label">GMO「お名前.comデスクトップクラウド」事件で攻撃者が要求した恐喝額</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">CVSS 9.8</span>
+        <span class="number-label">Red Hatが格上げしたLinuxカーネルtcp UAF(CVE-2026-98432)の深刻度</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">96件</span>
+        <span class="number-label">Jepsenの分析でAI向けDB「ParticleDB」に見つかった不整合の数</span>
+      </div>
+    </div>
+
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
+
+      <div class="card featured deep-dive">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://www.onamae.com/news/article/11623">DEEP DIVE: GMO「お名前.comデスクトップクラウド」不正アクセス、攻撃者が約80億円を要求 バウンティに270件の情報提供</a></h3>
+        </div>
+        <div class="summary">GMOインターネットが運営する仮想PCサービス「お名前.comデスクトップクラウド」で、10月20日に顧客サーバーへの不正アクセスが発覚した。同社は21日にサービスを緊急停止し、ほぼ同時に攻撃者から約80億円を要求する恐喝メールを受け取った。公表された情報によれば影響の可能性があるサーバーは2万6,739台に及び、証券会社・FX会社の取引ツールが保存するログイン情報もその対象に含まれていたため、窃取した認証情報を使った不正なFX取引が実際に発生したとの報告もある。同社は24日、全顧客への一律見舞金5,000円の支払い、不正取引による損失の補償、代替サービスの提供を決定し、関係省庁にアクティブサイバーディフェンスの適用も要請した。27日には攻撃者が一部顧客情報をサイト上で公開し、同日正午にランサムウェア攻撃を実行すると予告したため、利用者にPCのネットワーク切断・電源オフを求める異例の対応となった。その後28日に公開サイトは閉鎖され、同社は同日、上限100万ドル(約1.5億円)の「GMOサイバー犯罪バウンティ」を開始、29日時点で270件の情報提供が寄せられた。ホワイトハットチームは攻撃者の特定につながりうる情報を既に入手し、警察など関係機関への提供を進めているという。同社は恐喝要求への支払いを明確に拒否し、理由としてデータ削除が保証されないことと、犯罪組織への資金供与リスクを挙げている。</div>
+        <div class="editorial">🧠 身代金を支払わないという判断自体は、データ削除の保証がない以上合理的だ。ただし公式発表は一貫して「影響の可能性があるサーバー2万6,739台」という推定値に留まり、実際に漏えいしたデータの範囲や件数は10月29日時点でも確定情報として示されていない。バウンティに270件の情報提供が集まったことは攻撃者特定への追い風だが、情報の「数」と「質」は別問題であり、逮捕に直結するかは未知数だ。</div>
+        <div class="key-points">
+          <ul>
+            <li>影響の可能性があるサーバーは2万6,739台、証券・FX会社の取引ツールに保存されたログイン情報を含み、実際の不正FX取引の報告もある</li>
+            <li>攻撃者の要求額は約80億円。GMOは24日に一律見舞金5,000円・不正取引補償・代替サービス提供を決定し支払い拒否を表明</li>
+            <li>28日に攻撃者サイトが閉鎖、同日開始の上限100万ドル「サイバー犯罪バウンティ」には29日時点で270件の情報提供が集まった</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 お名前.comデスクトップクラウド利用者は、証券・FX口座のパスワード変更・二段階認証の設定・接続中セッションの切断を直ちに確認すべきだ。</div>
+        <div class="meta">
+          <span>GMOインターネット</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-10-29</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://www.parameter.ai/labs/we-found-a-gap-at-openai">ChatGPT公開共有のXSS連鎖でアカウント乗っ取りが可能に、OpenAIは10月26日に修正完了</a></h3>
+        </div>
+        <div class="summary">セキュリティ企業Parameter Securityは、ChatGPTの公開共有(Public Share)機能を悪用したアカウント乗っ取りの脆弱性チェーンを発見したと報告した。共有会話内の数式グラフ機能がMathLiveライブラリを読み込む際、フレーム間メッセージの送信元を検証せずに生HTMLをページへ挿入できる欠陥があり、そこからサンドボックス属性なしの`iframe`を生成させてchatgpt.com自身の権限でスクリプトを実行させた。ChatGPTのCSPはYouTubeのoEmbed JSONPエンドポイントを経由することで回避された。被害者は共有リンクを開くだけで被害に遭い、検証の最終版では自動発火も確認されたという。攻撃者は被害者の会話一覧の取得や、共有していない非公開の会話の読み取りが可能だったとされる。OpenAIは10月18日の報告受理後、深刻度をP2からP1に引き上げ、10月26日に両方のフロントエンドで修正を完了、報奨金5,000ドルを支払った。</div>
+        <div class="key-points">
+          <ul>
+            <li>MathLiveのリスナーがキーボードレイアウト更新メッセージ内の生HTMLを検証せず挿入し、サンドボックスなしiframeがchatgpt.comの権限で発火する点が攻撃チェーンの核心</li>
+            <li>報告受理から修正完了まで8日間。同時に2系統あったWebフロントエンドの一方だけ先に直った期間はCSP変更で部分的に攻撃経路を塞いだという</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Parameter Security</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-31</span>
+          <span class="engagement">▲ 297</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-data">Data</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://jepsen.io/analyses/particledb-1.1.4">Jepsen分析、AI向けDB「ParticleDB」で96件の不整合 「新規導入の停止」を勧告</a></h3>
+        </div>
+        <div class="summary">分散システム検証会社Jepsenは、AI向けマルチモデルDB「ParticleDB」(Orkes社)の委託分析を公開した。単一ノード構成のv1.1.4〜1.1.18.11.rc-22を対象に、障害注入なしでも再現する問題を含め96件の不整合を報告した。デフォルトの`occ`トランザクションモードでは約2万キーに対する31件の確定済み書き込みロストを確認し、`strict-serializable`を指定した場合でも約30万トランザクションに1回の割合でstale readが発生した。WALのビット反転やmisdirected writeを模したフォルト注入では、テーブルとWAL内容が完全に消失するケースも見つかった。公式サイトは「Full ACID. 159K TPS.」と謳うが、同じページがsnapshot isolationとも説明しており完全な分離性ではないとJepsenは指摘する。Orkesは全問題を修正したとする1.1.19-rc.13を提供したが、Jepsenはこの修正内容を未検証としている。</div>
+        <div class="key-points">
+          <ul>
+            <li>「formally proven」とTLA+形式検証を謳うが仕様書自体は提供されず、`NOT NULL`・`UNIQUE`・主キー制約も検証中に守られないケースが見つかった</li>
+            <li>Jepsenは本番導入済みユーザーに対し「ParticleDBの新規導入停止と他DBへの移行」を勧告。修正版1.1.19-rc.13の効果はJepsen側で未検証</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Jepsen</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-31</span>
+          <span class="engagement">▲ 174</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://devblogs.microsoft.com/oldnewthing/20261029-00/?p=112808/">Windows 3.1「画面が真っ黒」問い合わせの真相、原因はユーザー自身が全配色を黒に設定したこと</a></h3>
+        </div>
+        <div class="summary">Microsoftのレトロ連載Old New Thingは、Windows 3.1で「起動ロゴが消えた後、画面が真っ黒になる」という問い合わせの実例を紹介した。原因はハードウェア障害ではなく、ユーザーがColorsコントロールパネルで壁紙・タイトルバー・ボタン・ウィンドウ背景と文字色まで全て黒に設定していたことだった。</div>
+        <div class="key-points">
+          <ul>
+            <li>サポート担当者が設定変更の経緯を聞き出して原因を特定、復旧にはMS-DOSから`win.ini`を編集し`[colors]`セクションを削除する方法が使われたとみられる</li>
+            <li>著者は長押しシャットダウン後の黒画面を分析する部署に所属し、黒画面の原因はハードウェアやドライバだけでなくユーザー自身の設定にもあり得ると教訓を述べる</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Microsoft</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-29</span>
+          <span class="engagement">▲ 59</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://smoores.dev/post/no_npm_estee_is_not_a_typo/">npmパッケージ名「estee」が誤判定でブロック、タイポスクワット対策の編集距離しきい値を検証</a></h3>
+        </div>
+        <div class="summary">Storytellerチームはnpmパッケージ名`estee`の公開を試みたところ、既存パッケージ`testem`・`espree`と「似すぎている」との理由で拒否された。著者はnpmの判定が編集距離2以下を基準にしているとみられると分析し、この閾値では4文字名の空間の大半が将来的にブロック対象になり得ると指摘した。</div>
+        <div class="key-points">
+          <ul>
+            <li>4文字名の組み合わせは29^4=707,281通りだが、既存名から編集距離2以内を累積的にブロックすると上限は29^2=841通り(全体の0.12%)に収まる計算になる</li>
+            <li>同じ基準では`preact`(react類似)や`estree`(espree類似)など実在する正規パッケージ名も本来ブロック対象になってしまう矛盾があるという</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>smoores.dev</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-10-30</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://matklad.github.io/2026/10/29/pub-calls-pub.html">「公開関数が公開関数を呼ぶ」設計はAPIを劣化させる、非公開ヘルパーへの切り出しを提案</a></h3>
+        </div>
+        <div class="summary">プログラマのmatklad氏は、公開関数が別の公開関数を呼ぶ設計はAPIの劣化を招くと論じた。`foo`が内部目的で`bar`にオプションを渡すと、そのオプションが`bar`の公開APIとして外部にも見えてしまうためだ。</div>
+        <div class="key-points">
+          <ul>
+            <li>解決策は共有ロジックを非公開のヘルパー関数に切り出し、`foo`と`bar`双方がそこを呼ぶ構成にすること。ヘルパーは非公開なので署名を自由に変更できる</li>
+            <li>例外は「短縮API」(他の公開APIの呼び出し列をまとめたもの)で、これは逆に非公開呼び出しを持たないほうが「正直な短縮」として機能するという</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>matklad</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-29</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://atlasum.net/blog/cve-2026-98432-linux-ipv4-tcp-uaf">Linuxカーネルtcp UAF、Anthropicが実働exploit作成 Red Hatは深刻度をCriticalへ格上げ</a></h3>
+        </div>
+        <div class="summary">LinuxカーネルのIPv4 TCPハンドシェイク処理に見つかったuse-after-free「CVE-2026-98432」について、Anthropicは認証情報なしでroot権限のコマンド実行に至る実働exploitを作成したと説明した。Red Hatは10月30日に深刻度評価をImportant(8.1)からCritical(9.8)へ引き上げた。</div>
+        <div class="key-points">
+          <ul>
+            <li>悪用にはMultipath TCP(MPTCP)のリスナーが必要だが、Go 1.24以降はlistenソケットでMPTCPが既定有効なため対象環境が広がっている。10月31日時点でGitHub上に脆弱性へ言及するリポジトリが36件、うち少なくとも6件がレース条件の再現コードを含む</li>
+            <li>Ubuntu・RHEL(8/9/10)は10月31日時点で未修正。パッチ以外の緩和策はnftables/iptablesでIPオプション付きIPv4 TCPパケットを破棄するルールやMPTCP無効化だが、いずれも再起動で失効する一時対策とされる</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>atlasum.net</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-31</span>
+          <span class="engagement">▲ 265</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://qiita.com/jnchito/items/636c519c0b1d347c79b7">AIにありがちな「イマイチなコードコメント」9パターンをjnchito氏が整理</a></h3>
+        </div>
+        <div class="summary">Qiitaでソフトウェアエンジニアのjnchito氏は、AIが書くコードコメントに共通する9パターンの問題点を整理した。コードをそのまま言い換えるだけのコメントや、呼び出し元の詳細を書いて陳腐化しやすいコメントなど、具体例を挙げて指摘する。</div>
+        <div class="key-points">
+          <ul>
+            <li>変更履歴やメソッド呼び出し元の詳細はコメントに書くと陳腐化するため、コミットメッセージやプルリクエスト・コール側に書くべきだと主張</li>
+            <li>`CLAUDE.md`のようなコーディングルールはAIのダメなコメントを減らせるが完全には防げず、人間によるレビューが依然必要だと結論する</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-10-31</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://qiita.com/yukihayama/items/ccfccdd1970291a9a834">Claude CodeのMCP呼び出しが60秒タイムアウト、「幽霊二重実行」を止めるジョブ投入パターン</a></h3>
+        </div>
+        <div class="summary">Qiitaでyukihayama氏はClaude CodeのMCPツール呼び出しが60秒でタイムアウトし、AIが再試行することで同一ジョブが二重実行される「幽霊二重実行」の対策を解説した。90秒かかるPDF変換ジョブで出力ファイルが壊れた実例から、ジョブ投入+ステータスポーリング+重複排除の3段構成に置き換えた。</div>
+        <div class="key-points">
+          <ul>
+            <li>ジョブ投入はほぼ1秒以内に`job_id`を返し、同一対象への再投入は実行中のジョブIDを返すことで二重実行を防ぐ。実装はPython(FastMCP)でスレッドセーフな`JobStore`を約40行で構築</li>
+            <li>サーバー再起動でジョブ状態が失われる制約があり、今後はSQLiteへの永続化とAIによるエラー要約を次の改善点に挙げている</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-30</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://zenn.dev/layerx/articles/a277f83a93d300">LayerXの内製リモートコーディングエージェント環境「yoro」、Kata ContainersとeBPFで隔離・監視</a></h3>
+        </div>
+        <div class="summary">LayerXのAi Workforce事業部は、Cursor Cloud AgentやDevinの代替として内製したリモートコーディングエージェント環境「yoro」を紹介した。各エンジニアのコーディングエージェントはAKS上のPodで動くKata Containers(軽量VM)で隔離され、CiliumとAzure Firewallで許可通信のみに制限される。</div>
+        <div class="key-points">
+          <ul>
+            <li>2026年9月25日〜10月24日の1ヶ月でリクエストは週55件から週387件まで増加、自動PRレビュー開始(10月12日の週)後に加速し合計656件に達した</li>
+            <li>Kata VM内はeBPFが制限されるため、ホスト側でvirtiofsdのファイルオープンを監視する独自eBPFツールを実装。あるマネージャーはyoro導入後3週間でPR数が約3倍になったという</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-31</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-frontend">Frontend</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://qiita.com/ocean6954/items/3e826fbb5b26aedbc887">iOS Safariのタブバー背後まで描画し続けるJSライブラリ「under-liquid-glass」公開、依存ゼロで2.8kB</a></h3>
+        </div>
+        <div class="summary">個人開発者がnpmに、iOS Safariのタブバー裏にもウェブコンテンツを表示し続けるためのライブラリ「under-liquid-glass」を公開した。`data-ulg-*`属性でレイアウトを指定するだけで、スクロール位置に関わらずタブバー背後の見た目を維持できる。</div>
+        <div class="key-points">
+          <ul>
+            <li>対象はiOS Safariのみで他環境には変更を適用しない設計。依存ライブラリなしでJS本体は約2.8kB(gzip)、デフォルトの余白`edgeSpace`は140pxだがiPhone実機では60〜120pxで十分と著者は報告</li>
+            <li>`position: fixed`の直接使用やネイティブの`window.scrollY`操作は破綻の原因になるため、専用のoverlay属性とコントローラAPI(`scrollTo`・`refresh`等)経由の操作を推奨している</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-30</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://karpathy.bearblog.dev/hacker-tube/">Karpathy氏、HNコメント推薦動画だけのYouTube代替「HackerTube」をAIで約2時間で構築</a></h3>
+        </div>
+        <div class="summary">AI研究者Andrej Karpathy氏は、Hacker Newsのコメントで推薦されたYouTube動画だけを集めたサイト「HackerTube」を公開した。全HNコメントをダウンロードしClaude Opusでフィルタし、Sonnetによるワークフローでスパムや低品質な推薦を除去して約4万件の推薦コメントまで絞り込んだ。</div>
+        <div class="key-points">
+          <ul>
+            <li>収録動画は6,454本、2007年から2026年までの推薦をカバーし150トピックに整理。アカウント不要の「ForYou」レコメンドはブラウザのセッションに状態を保存する</li>
+            <li>Karpathy氏はClaude Opusにクローン自体のコードを書かせ、構築に要した時間は約2時間だったと説明。サイトデータはエクスポート可能で、他のAIエージェントに渡して独自版を作らせる想定だという</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Bear Blog</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-31</span>
+          <span class="engagement">▲ 512</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://qiita.com/satouyoshiaki/items/4b0b174a9e370f1ead53">AIアシスタント「Muse」で5日間に9.5億トークン消費、入力が出力の約200倍で無料枠を使い切った実測記録</a>
+        <span class="quick-summary">— 常時読み込まれるメモリ・ルールファイルを圧縮して1ターンあたり約1,131トークン(7.6%)削減したが、想定より効果は小さかったという。</span>
+        <span class="meta">Qiita</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://zenn.dev/cscloud_blog/articles/a987163efae5d8">AIで攻撃も脆弱性発見も高速化する時代のセキュリティ再設計、SSH全廃とS3+CloudFrontへの静的配信移行を提案</a>
+        <span class="quick-summary">— GuardDutyの誤検知を減らすチューニング不足が重大アラートを埋没させるリスクも指摘する。</span>
+        <span class="meta">Zenn</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://www.publickey1.jp/blog/26/cloudflaretypescriptrusttsrstypescript_7708lsptypescript.html">CloudflareがTypeScriptコンパイラのRust移植「tsrs」発表、型チェックでTypeScript 7比最大8倍高速</a>
+        <span class="quick-summary">— メモリ使用量は約7割減、WebAssemblyコンパイルでブラウザやCloudflare Workers上での実行も視野に入れる。</span>
+        <span class="meta">Publickey</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://xoranth.net/gcc-switch/">GCCのswitch文コンパイル戦略を解説、ジャンプテーブル・ビットテスト・二分木をコスト計算で自動選択</a>
+        <span class="quick-summary">— 等間隔の値(0,8,16,24,40など)を除算で簡約する最適化は行わず、比較木のまま出力される点を指摘。</span>
+        <span class="meta">xoranth.net</span>
+        <span class="engagement">▲ 196</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://pivotlake.io/blog/its-the-memory-latency-stupid/">CPU使用率100%でもメモリ待ちかもしれない、ハッシュテーブルのパーティション分割でDRAMアクセスを3分の1に削減</a>
+        <span class="quick-summary">— ClickBenchの9900万行データでradixパーティション化によりメモリ待ちサイクル比率が50.1%から23.5%に低下。</span>
+        <span class="meta">pivotlake.io</span>
+        <span class="engagement">▲ 99</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://github.com/kerlenton/bootgpt">ブートセクタ512バイトに収まる文字レベル言語モデル「bootgpt」、BIOS呼び出しだけでフェイクのLinuxブートログを生成</a>
+        <span class="quick-summary">— int8量子化とpower-of-two scaleで整数演算のみの推論を実装、モデル本体は約11.5KB。</span>
+        <span class="meta">GitHub</span>
+        <span class="engagement">▲ 45</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://sizu.me/hayatosc/posts/oxi9cff8k2bn">GMO・Sourcenext・Medley等の相次ぐ漏洩を受け、1Passwordへの移行とAIエージェントへのパスワード非共有運用を勧める考察</a>
+        <span class="quick-summary">— 開発者向けCLIでAPIキーをローカルファイルに残さず参照だけ渡す運用を、コーディングエージェント対策として紹介。</span>
+        <span class="meta">sizu.me</span>
+        <span class="engagement">🔖 174</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-oss">OSS</span>
+        <a href="https://www.enlightenment.org/news/2026-10-31-enlightenment-0.28.0">軽量ウィンドウマネージャ「Enlightenment 0.28.0」リリース、NetworkManager統合とPipeWireネイティブミキサーを追加</a>
+        <span class="quick-summary">— EFL 1.29.0以降が必須、per-desktop/per-screenのプロファイル機能は本バージョンで廃止された。</span>
+        <span class="meta">Enlightenment</span>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="./" class="archive-link">🗂 過去のダイジェスト</a>
+    </footer>
+  </div>
+</body>
+</html>
