@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-11-02</title>
+  <meta name="description" content="GitHub Copilot Fusion正式リリース、AIモデルを自動選択 / Microsoftが最大6万人に早期退職提案「VEO」 / フロントエンドAIコストを12フレームワークで比較">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech News Daily">
+  <meta property="og:title" content="Tech News Daily — 2026-11-02">
+  <meta property="og:description" content="GitHub Copilot Fusion正式リリース、AIモデルを自動選択 / Microsoftが最大6万人に早期退職提案「VEO」 / フロントエンドAIコストを12フレームワークで比較">
+  <meta property="og:url" content="https://tech-news.kaion-lab.com/archive/2026-11-02.html">
+  <meta property="og:image" content="https://tech-news.kaion-lab.com/apple-touch-icon.png">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="../feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-11-02 (Mon)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+      <nav class="site-nav">
+        <a href="../" class="active">📰 日刊ダイジェスト</a>
+        <a href="../trends.html">🔌 週次プラグイントレンド</a>
+        <a href="../ai-trends.html">🧠 AI プロダクト動向</a>
+        <a href="./">🗂 アーカイブ</a>
+      </nav>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 22 articles</span>
+      <span>🏷 7 categories</span>
+      <span>📡 17 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item">
+        <span class="number-value">6万人</span>
+        <span class="number-label">Microsoftが早期退職プログラム「VEO」で対象とし得る従業員数(全社員の約27%)</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">2.75倍</span>
+        <span class="number-label">Claude Codeで/compactを毎ターン実行した場合のトークン代の増加率</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">最大35倍</span>
+        <span class="number-label">新ターミナルエミュレータ「Kwi」がKonsole比で達成した速度向上</span>
+      </div>
+    </div>
+
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
+
+      <div class="card featured deep-dive">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/githubcopilot_fusionaigithub_universe_2026.html">DEEP DIVE: GitHub Copilot Fusion正式リリース、タスクに応じてAIモデルを自動選択・組み合わせ</a></h3>
+        </div>
+        <div class="summary">GitHubは10月28日からサンフランシスコで開催した年次イベント「GitHub Universe 2026」で新機能「Copilot Fusion」を発表し、同日中に正式リリースした。従来のCopilotはユーザーが単一のAIモデルを都度選び、タスクの難易度や予算に応じて自分で切り替える必要があった。Fusionはこの選択自体を自動化し、推論・コード生成・デバッグ・ツール利用の必要度を判定した上で、単一モデルだけで解くか複数モデルを組み合わせて解くかを動的に決める。組み合わせ方には3パターンがある。「Single」は選定した1モデルのみで完結させる方式、「Cascade」は効率重視の軽量モデルがまず草案を作り、品質チェック用モデルが検証し、必要と判断した場合のみより高性能なモデルへ処理をエスカレーションする方式、「Critique」は1モデルが草案を作り、別系統のモデルファミリーが独立にレビューし、草案側がそのフィードバックを基に1回だけ修正する方式だ。さらに用途別に「Standard」「High」「Max」「Fast」の4つのeffortレベルを用意し、コスト・品質・待ち時間のバランスを調整できるようにした。Fastは自動選択のみでユーザーは選べない。Standard枠内では、ローカルにインストールした軽量モデル「MAI Code 1.1 Flash」や「Qwen3.8 Flash Next」をパブリックプレビューとして試すこともできる。</div>
+        <div class="editorial">🧠 モデル選択を自動化するという方向性自体は妥当で、チームごとに「どのモデルを使うか」を議論する時間を減らせる可能性はある。ただし公式発表にはベンチマークやコスト削減率の具体的な数値が一切示されておらず、Cascadeのエスカレーション判定がどの程度の精度で「もっと良いモデルが必要か」を見極められるのかは未検証のままだ。判定を誤って毎回Maxへエスカレーションすれば、むしろ単一モデル運用よりコストが増える可能性もあり、実際の効果は利用チームからの実測レポートを待つ必要がある。</div>
+        <div class="key-points">
+          <ul>
+            <li>3つのオーケストレーション方式(Single/Cascade/Critique)と4つのeffortレベル(Standard/High/Max/Fast)を用意、Fastはユーザーが選択不可で自動適用のみ</li>
+            <li>Standard枠ではローカル実行の軽量モデル「MAI Code 1.1 Flash」「Qwen3.8 Flash Next」をパブリックプレビューとして利用可能</li>
+            <li>発表はGitHub Universe 2026(10月28日〜29日、サンフランシスコ)に合わせて行われ同日中に正式リリース(GA)。使用するクラウドモデル名やベンチマーク数値は非公開</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 モデル選定の手間をFusionに委ねられる一方、effortレベルの設定次第でコストが跳ね上がるリスクもあるため、導入初期はコスト上限や使用量ダッシュボードを必ず確認すべきだ。</div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-11-02</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-product">Product</span>
+          <span class="content-type">💰 ビジネス</span>
+          <h3><a href="https://www.itmedia.co.jp/pcuser/articles/2611/02/news029.html">Microsoft、最大6万人に早期退職を提案する「VEO」発表 Xbox・Windows・AI部門が対象</a></h3>
+        </div>
+        <div class="summary">Microsoftは10月26日(現地時間)、最大約6万人(全社員22.3万人の約27%)を対象とした早期退職プログラム「Voluntary Exit Offer(VEO)」を発表した。対象はレベル70以下の従業員で、Xbox/Gaming、Windows and Devices、Copilot/CoreAI/AI Experiences、Commercial Business Managementの4部門に限定される。28日発表の2027年度第1四半期決算ではAzure単体の売上高を初めて開示し約332億ドルとなった一方、クラウド全体の粗利益率はAzureの比率上昇により66%まで低下しており、AI投資を優先するコスト構造の転換が背景にあるとみられる。</div>
+        <div class="key-points">
+          <ul>
+            <li>対象はレベル70以下、Xbox/Gaming・Windows and Devices・Copilot/CoreAI/AI Experiences・Commercial Business Managementの4部門。全社員22.3万人のうち最大約6万人(約27%)が対象になり得る</li>
+            <li>同時期発表の2027年度Q1決算ではAzure売上高を単体で初開示(約332億ドル)、Microsoft 365商用クラウドは約238億ドル、クラウド全体の粗利益率は66%に低下</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>ITmedia</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-11-02</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-frontend">Frontend</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://nolanlawson.com/2026/10/28/the-ai-cost-of-javascript-frameworks/">AIエージェントでのフロントエンド開発コストを12フレームワークで比較、最安はHono+htmxの$2.67</a></h3>
+        </div>
+        <div class="summary">フロントエンド開発者のNolan Lawson氏は、12種類のフレームワーク構成(Hono+htmx、Astro、Nuxt、Vanilla、Next.js、Qwik、TanStack Start、SolidStart、React Router、SvelteKit、Gracile+Lit、Angular)それぞれについて、Claude Opus 5.5(high effort)に同じPokémon図鑑アプリを5回ずつ実装させ、API相当コスト・所要時間・トークン数・Lighthouse品質・コード行数を比較した。公式MCP/Skillは利用可能な場合に導入し、静的HTMLの事前生成は禁止した。最安はHono+htmx($2.67、所要8.6分)、最高はAngular($4.97、17.2分)で、トークン数も最少のNuxt(385万)から最大のAngular(976万)まで差が出た。著者はMCP/Skillの使用がむしろ悪影響を与えている可能性を指摘し、エージェント時代のスタック選定も実測に基づくべきだと論じる。</div>
+        <div class="key-points">
+          <ul>
+            <li>API相当コストはHono+htmx $2.67・Astro $2.76・Nuxt $2.82が最安、Angular $4.97・Gracile+Lit $4.65・SvelteKit $4.28が最高。所要時間もAstro 8.2分・Hono+htmx 8.6分に対しAngular 17.2分</li>
+            <li>JS転送量はAstro 0KiB・Vanilla 7KiB・Hono+htmx 18KiBに対しNext.js 142KiB。Nuxtの公式MCPは5回の試行で一度も使われず、Next.jsのSkillファイルも5回中1回しか読まれなかった</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>nolanlawson.com</span>
+          <span>⏱ 7 min read</span>
+          <span>2026-10-28</span>
+          <span class="engagement">▲ 282</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://blogs.kde.org/2026/11/01/introducing-kwi/">KDEが新ターミナルエミュレータ「Kwi」実験公開、Konsole比で最大35倍速</a></h3>
+        </div>
+        <div class="summary">KDE開発者Eike Hein氏は、Vulkan/OpenGLでGPUアクセラレーション描画する新ターミナルエミュレータ「Kwi」を実験として公開した。Ghostty由来のlibghostty-vtで端末パース処理を行い、ベンチマークによってはKonsole比で3〜35倍高速という。Qt Quick/QMLモジュールとして他のKDEアプリへ組み込み可能な点も特徴。</div>
+        <div class="key-points">
+          <ul>
+            <li>GPUアクセラレーション描画とWaylandのフラクショナルスケーリング対応、Kittyの画像/キーボードプロトコルなど新しい端末プロトコルもサポート</li>
+            <li>正式なv0.1.0はまだ無くKDE Invent上のnightly Flatpakのみ提供、基盤のlibghostty-vtは4〜6ヶ月以内にv1.0到達を見込む</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>KDE</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-11-01</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://github.com/ivankovic/omnidiff">Rust製のコンテンツ認識diffツール「OmniDiff」、25言語の構造的diffとgit difftool統合に対応</a></h3>
+        </div>
+        <div class="summary">開発者ivankovic氏は、ファイルの種類ごとに内容を認識して比較するdiffツール「OmniDiff」をRustで公開した。tree-sitterで25言語の構造的diffに対応し、画像・アーカイブ・フォント・PDFなど非テキストファイルの差分表示もできる。git difftool・GIT_EXTERNAL_DIFF・Jujutsu(jj)のバックエンドとして統合可能。</div>
+        <div class="key-points">
+          <ul>
+            <li>2,302件のテストケースでdiff処理時間は中央値4.2ms・99パーセンタイル177ms。44万2,530件のコードファイルペアのうち99.95%が時間・メモリ制限内に収まった</li>
+            <li>正確性の目標は未達で、`--full`モードでは完全一致(不一致バイトゼロ)が60.0%(目標90%)、`--minimal`モードは69.6%。ライセンスはAGPL-3.0、商用ライセンスはGitHub Sponsors経由</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-11-01</span>
+          <span class="engagement">⭐ 299</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://tibleiz.net/copper/">C言語の後継を目指す低レベル言語「Copper」、型継承とジェネリクスを備えミニマルさを最重視</a></h3>
+        </div>
+        <div class="summary">開発者Marc Kerbiquet氏は、C言語の代替を目指す新言語「Copper」を公開した。任意の型への型継承やジェネリクス、複数戻り値、ヘッダー不要のインポートシステムなどを備えつつ、作者は「最も重要な機能はミニマルさそのもの」だと述べ、構文の単純さと明示性を優先する設計方針を掲げる。</div>
+        <div class="key-points">
+          <ul>
+            <li>Ruby風の構文を採用し、`attr`でのフィールド定義・`init`コンストラクタ・`self`でのプロパティ更新など、オブジェクト指向的な記法をCベースの言語に持ち込む</li>
+            <li>オプション型やdeferred文、シンプルなイテレータも標準機能として用意。ライセンスはBSD、公式サイトにはチートシートとコンパイラ・標準ライブラリのソースも公開</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>tibleiz.net</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-11-01</span>
+          <span class="engagement">▲ 118</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://arxiv.org/abs/2610.39302">JEPAで「プラトン的表象仮説」を初めて定理として証明、テキストJEPAが画像エンコーダと高精度に整合</a></h3>
+        </div>
+        <div class="summary">研究者らは、異なるモダリティで別々に訓練したモデルがスケールに伴い同じ世界表象へ収束するという「プラトン的表象仮説(PRH)」について、これまで証明がなかった状態から、JEPA(Joint-Embedding Predictive Architecture)の枠組みで初めて定理として証明したと報告した。同一シーンの2視点のような「良いビュー」を正例ペアに使うJEPAは、モダリティ数に関わらず単一の回転変換を除いて同じ表象を学習するという。次トークン予測は1つの文書の一部を使う「悪いビュー」のJEPAとみなせ、言語モデルが画像表象とスケールでしか整合しない理由を説明するとしている。</div>
+        <div class="key-points">
+          <ul>
+            <li>良いビューを使うJEPAは次トークン予測に比べ42分の1の学習サンプル数で同等の整合度に達し、109Mパラメータのテキスト専用JEPAが72Bまでの既存言語モデル全てより高精度にDINOv2・CLIPの画像エンコーダと整合した</li>
+            <li>単一の回転変換だけで別々に訓練したエンコーダをペア無しの画像キャプション生成器に転用でき、COCOでCIDEr 0.838を記録。ペア無しゼロショットのImageNet-100でもテキストJEPAは64%のtop-5精度を達成し、8B以下の言語モデル(最大56%)を上回った</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>arXiv</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-30</span>
+          <span class="engagement">▲ 101</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://lemire.me/blog/2026/10/31/beating-the-compiler-at-signed-32-bit-division/">符号付き32bit除算でコンパイラに勝つ、不要な補正ステップを削り最大20%高速化</a></h3>
+        </div>
+        <div class="summary">性能解析で知られるDaniel Lemire氏は、定数による符号付き32bit整数除算で、GCCやLLVMが自動生成する「補正ステップ」を省略できる最適化手法を示した。33bit相当の乗数が64bit符号付き整数の範囲に収まるという「使われていない1ビット」に着目し、3〜1000の除数のうち38%(376/990件)で発生する補正コードを排除できるという。</div>
+        <div class="key-points">
+          <ul>
+            <li>Intel Emerald Rapidsでは除数7・60・365でレイテンシが10サイクルから8サイクルに短縮、Clangではスループットが20%以上向上。Apple M4でも除数7でスループット0.34→0.29ns(約12%改善)</li>
+            <li>実行時除数向けのfastmodライブラリも分岐なしの符号付き64bit乗算に変更し、Intel/GCC環境でスループットが3.07nsから0.77nsへ改善。著者は「なぜコンパイラがこれをやらないのか分からない」と述べている</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>lemire.me</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-10-31</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://slides.yusu.ke/foss4g-2026">Hono作者、外部からのPRを完全停止 「実績作りのための修正」が3倍に増加</a></h3>
+        </div>
+        <div class="summary">Cloudflareのシニアデベロッパーアドボケイトで、Webフレームワーク「Hono」の作者であるYusuke Wada氏は、FOSS4G 2026のセッションで10月5日以降honojs/honoへの外部PRを受け付けなくなった経緯を説明した。背景にはAIによってコードが書けること自体の価値低下と、Hacktoberfestやバグ報奨金目当ての「実績作りのためのPR」増加があり、PR数は2025年7-9月の82件から2026年7-9月には345件へ増加したという。</div>
+        <div class="key-points">
+          <ul>
+            <li>Honoは2021年12月に開発開始、現在約32,000 GitHub stars・月間npmダウンロード約2.67億件(2026年9月時点)。今後は外部コントリビューターをissue経由の提案やフォークブランチのリンクへ誘導する方針</li>
+            <li>10月5日以降に開かれた34件のissueのうち17件がフォークブランチを含んでいた。著者はコード品質自体は向上していると認めつつ「直す必要のない修正」を履歴書・GitHubプロフィール目的で送る行為を問題視している</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>FOSS4G 2026</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-11-01</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/nttdata_tech/articles/6a06f484ebfab7">AIエージェントに設計書レビューを任せたら指摘の8割は妥当、でも全体の負担は変わらなかった</a></h3>
+        </div>
+        <div class="summary">NTTデータのチームはGitHub Copilotのカスタムエージェントを使い、設計書(主にMarkdown)をレビュワーに送る前にAIでレビューする仕組みを試した。最初は誤字や記法のばらつきなど形式面のみを見ていたが、設計内容や根拠まで判定できるようAIへ渡すルールをレビュワーの暗黙知から明文化していった。結果、AIの指摘の約8割は妥当と判定され、レビュワー側の確認作業は1時間程度から数分〜数十分に短縮されたが、プロジェクト全体の作業量は著者作成側に負担が移っただけで、むしろ増えたケースもあったという。</div>
+        <div class="key-points">
+          <ul>
+            <li>1文書あたり40件を超える指摘が出ることがあり、これまでレビュワーが行っていた優先度付けの作業が設計書の作成者側に移っただけという課題が残った</li>
+            <li>AIはプロジェクトの文脈を欠くため、意図的な設計(例: 合意済みで削除予定の連携機能)を誤検知する例もあり、人間がAIの指摘を無批判に受け入れたり逆に正しい指摘を棄却したりするリスクも確認された</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-11-01</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://zenn.dev/6uclz1/articles/43e803ec9d54dd">自宅Mac miniのPWAをTailscale Serveだけで配布、証明書も認証コードも書かずに運用</a></h3>
+        </div>
+        <div class="summary">個人開発者は、自宅のMac miniで動かす動画・EPUB書庫・RSSリーダーの3つの自作PWAを、Tailscale Serveでtailnet内にHTTPS公開するだけでiPad/iPhoneから利用できるようにした構成を紹介した。アプリは`127.0.0.1`でのみlistenし、Tailscaleが`ts.net`ドメインの証明書を自動発行するため自己署名証明書の管理が不要になり、tailnet外からは到達できないため認証画面も不要になった。</div>
+        <div class="key-points">
+          <ul>
+            <li>動画アプリはffmpegでAV1 240pへ転コードし1時間あたり約70MB(通常420pで300〜400MB)に圧縮、オフライン視聴用に単一MP4としてService Worker経由でCache Storageへ保存する</li>
+            <li>RSSリーダーは15分おきにMac miniがフィードを取得しWeb Pushで通知、iOSでは`Notification.requestPermission()`をタップ操作内で呼ぶ必要があるなど複数の実装上の落とし穴も共有されている</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-11-01</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://dev.classmethod.jp/articles/try-amazon-ecs-gateway/">Amazon ECS Gateway検証、1つのALBを最大25サービスで共有してコスト削減</a></h3>
+        </div>
+        <div class="summary">クラスメソッドのエンジニアは10月20日発表の新機能「Amazon ECS Gateway」を東京リージョンで検証した。ECSがALBとその関連リソースを管理し、1つのALBを最大25サービスで共有できる仕組みで、パブリック・プライベート2種のゲートウェイを作成しFargate上のnginxサービスと接続、生成されたFQDNとDNS応答を確認した。</div>
+        <div class="key-points">
+          <ul>
+            <li>ゲートウェイ作成直後は`currentAlbCount`が0で、サービス接続後約12秒でALBが自動生成される。サービスURLは`sv-&lt;32桁の16進数&gt;.ecs.&lt;region&gt;.on.aws`形式でサービス再作成時にURLが変わる</li>
+            <li>Express Modeと似た構成(HTTPS 443リスナー・ホストヘッダールーティング・ACM証明書自動発行)だが、Express Modeのサービスはゲートウェイに接続できず同一VPCでも別ALBになる。on.aws向けACM証明書は追加費用なしで発行可能</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>DevelopersIO</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-10-21</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.com/nishikawaakira/waf-dojo">AWS WAFを実戦形式で学ぶ学習ゲーム「waf-dojo」公開、Log4Shellなど41本の脆弱性演習</a></h3>
+        </div>
+        <div class="summary">個人開発者Akira Nishikawa氏は、実際の攻撃を防ぎながらAWS WAFを学べるハンズオン教材「waf-dojo」を公開した。SQLインジェクションやXSS、レート制限など6種のチュートリアルに加え、Log4ShellやSpring4Shell、ProxyLogonなど41本の脆弱性演習、攻撃内容だけが与えられルールを自作するゲームモード6ステージを備える。バックエンドはGo、インフラはTerraformで構築されている。</div>
+        <div class="key-points">
+          <ul>
+            <li>誤検知(正規ユーザーのブロック)にはペナルティを課すスコアリング方式で、ランク・実績・リーダーボード・コンテストモードを搭載</li>
+            <li>ライセンスはPolyForm Shield 1.0.0で個人学習・社内研修・学校での利用は許可されるが、競合する有料研修サービスとしての提供は不可</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-11-01</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.com/sahenjp/RustXNG">ローカルAIエージェント向けのSearXNG互換検索エンジン「RustXNG」、Rustで再実装しSSRF対策も強化</a></h3>
+        </div>
+        <div class="summary">開発者は、ローカルで動くAIエージェント向けにAPIキー不要で使える自己ホスト型検索・groundingエンジン「RustXNG」をRustで公開した。SearXNGの226種のエンジン定義をポーティングしつつ、用語カバレッジや正規サイトの権威性を考慮した独自ランキング、公開IPのみへのアクセスに限定するSSRFガードを追加している。</div>
+        <div class="key-points">
+          <ul>
+            <li>100問のベンチマークでHit@1が79〜83(ExaのHit@1は77、Tavilyは34)、1リクエストあたり約32,000文字のページ本文を返す(Exaは約9,000文字、Tavilyは約1,200文字)</li>
+            <li>キャッシュ済みクエリの応答は約0.01秒だがコールドクエリは0.8〜1.6秒でExaの約0.6秒より遅い。ライセンスはAGPL-3.0-or-later、Rust 1.85以降が必要</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-11-01</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-product">Product</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://hackerbooks.org">HackerTubeの書籍版「HackerBooks」公開、Hacker Newsコメントで言及された本だけを集約</a></h3>
+        </div>
+        <div class="summary">開発者roansh氏は、Hacker Newsのコメントで言及された書籍だけを集めたサイト「HackerBooks」を公開した。先日話題になった動画版「HackerTube」と同じ発想で、HNコメントのオープンデータとOpen Libraryの書誌情報を組み合わせ、全期間の人気・急上昇・個人向けおすすめなどの切り口で書籍を探索できる。</div>
+        <div class="key-points">
+          <ul>
+            <li>Top all-time・Most recommended・Rising・Trends・For Youなど複数のビューと、書名・著者での検索、キーボードショートカット操作に対応</li>
+            <li>データソースはopen-index/hacker-newsのHNコメントアーカイブとOpen Libraryの書誌メタデータ。Y CombinatorやHacker Newsとは非公式・無関係であることを明記している</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>HackerBooks</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-11-02</span>
+          <span class="engagement">▲ 809</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://zenn.dev/nrs/articles/c777388530aa84">「コードを読まずにマージ」に必要な条件、技術面より組織の責任分担が壁</a>
+        <span class="quick-summary">— 自動チェック通過後に無条件でマージするには、見逃しが起きた際の責任を個人でなく組織が負う合意が前提になると論じる。</span>
+        <span class="meta">Zenn</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://qiita.com/songchong/items/ac9779bb8e8838b546b9">Claude Codeの/compact、タイミング次第でトークン代が57%減から2.75倍まで変動</a>
+        <span class="quick-summary">— 作業の合間に1回だけ圧縮すれば57%減だが、毎ターン圧縮すると逆に2.75倍に増えると実測で示す。</span>
+        <span class="meta">Qiita</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://qiita.com/nabe2030/items/0b89543adbf2ba60bf25">Qwenの「外部送信」報道を受け、OS・ネットワーク層でAIエージェントを5層で封じ込める設計</a>
+        <span class="quick-summary">— LLM自身はネットに出られないが、ハーネス経由のツール実行が危険の本体だとし、nftablesでのegress遮断を推奨する。</span>
+        <span class="meta">Qiita</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://gigazine.net/news/20261101-wikipedia-ai-content/">Wikipedia編集者はAI生成文章をどう見つけているか、新規記事の最大20%がAI生成と判定された時期も</a>
+        <span class="quick-summary">— 文章の言い回しや投稿パターン、出典の信頼性などを人手で確認する体制が中心で、自動フィルタだけには頼っていない。</span>
+        <span class="meta">GIGAZINE</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://dataswamp.org/~solene/2026-11-01-braindead-local-intelligence.html">ローカルAIを数コマンドで試せるツール「braindead-local-intelligence」、AMD GPU対応でpodman一発構築</a>
+        <span class="quick-summary">— チャット・画像生成・Web検索をOpenAI互換APIでまとめて提供し、使うモデルだけを自動で読み込み・解放する。</span>
+        <span class="meta">dataswamp.org</span>
+        <span class="engagement">▲ 3</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-infra">Infra</span>
+        <a href="https://www.theregister.com/networks/2026/11/01/landline_phones_will_switch_off_across_britland_in_100_days_no_extensions_openreach/5306673">英国の固定電話網、2027年1月31日に完全終了 延期なしとOpenreachが通告</a>
+        <span class="quick-summary">— 高齢者向け通報装置や店舗の決済端末など移行が終わっていない利用者も多く、周知不足を懸念する声が出ている。</span>
+        <span class="meta">The Register</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://outcrop.rocks/">カメラを景色に向けるだけで地質を解説するアプリ「Outcrop」公開、オフライン動作</a>
+        <span class="quick-summary">— MacrostratやUSGSのデータを使い、画面中央の岩石の年代や形成過程を表示する。</span>
+        <span class="meta">outcrop.rocks</span>
+        <span class="engagement">▲ 143</span>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="./" class="archive-link">🗂 過去のダイジェスト</a>
+    </footer>
+  </div>
+</body>
+</html>
