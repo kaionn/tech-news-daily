@@ -4,3 +4,9 @@
 
 # ローカル作業ファイル
 tmp/
+
+# エージェントのセッション状態（公開 repo に載せない）
+.claude/memory/
+.claude/sessions/
+.claude/state/
+.harness-mem/

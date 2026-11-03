@@ -22,7 +22,7 @@ tech-news-daily: 技術ニュース・AI 動向・プラグイントレンドを
 
 ### 旧構成（CCR routine、2026-07-05 停止）
 
-旧構成は CCR routine (`trig_01LvUYkX4UXHkv8KDLsFH9eL`) が `Codex/**` ブランチに commit → ハーネスが自動 push → `auto-merge-digest.yml` が main へ取り込む方式だった。2026-07-03 からハーネスの branch push が**サイレントに失敗**する障害（5 run 連続、routine 側は毎回正常完了・ログにエラーなし・Codex GitHub App 設定も正常）が続いたため GHA へ全面移行し、routine は Codex.ai 側で pause した。障害は Anthropic に報告済み。`auto-merge-digest.yml` は routine を誤って再開した場合の受け皿として残置している。sandbox は `persist_session: false` のため push されなかった digest は復元不可（2026-07-03〜05 号は欠番）。
+旧構成は CCR routine (`trig_01LvUYkX4UXHkv8KDLsFH9eL`) が `claude/**` ブランチに commit → ハーネスが自動 push → `auto-merge-digest.yml` が main へ取り込む方式だった。2026-07-03 からハーネスの branch push が**サイレントに失敗**する障害（5 run 連続、routine 側は毎回正常完了・ログにエラーなし・Codex GitHub App 設定も正常）が続いたため GHA へ全面移行し、routine は Codex.ai 側で pause した。障害は Anthropic に報告済み。`auto-merge-digest.yml` は、2026-11-03 に旧 routine が trigger API で 404 となることを確認して削除した。sandbox は `persist_session: false` のため push されなかった digest は復元不可（2026-07-03〜05 号は欠番）。
 
 ## HTML 構造と生成 prompt の同期
 

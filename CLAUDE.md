@@ -2,19 +2,19 @@
 
 ## プロジェクト概要
 
-tech-news-daily: 技術ニュースを毎日収集・整形し、Cloudflare Pages で公開する静的サイト（https://tech-news.kaion-lab.com/ ）。GitHub Actions workflow `daily-digest.yml` が claude-code-action で WebSearch → HTML 生成 → main push → Cloudflare Pages デプロイを毎日自動実行する（2026-07-05 に CCR routine から全面移行、2026-07-18 に GitHub Pages から Cloudflare Pages へ移行し、同日カスタムドメイン tech-news.kaion-lab.com を割り当て。旧 https://tech-news-daily-cfo.pages.dev/ も併存して有効なまま）。
+tech-news-daily: 技術ニュースを毎日収集・整形し、Cloudflare Workers Static Assets で公開する静的サイト（https://tech-news.kaion-lab.com/ ）。GitHub Actions workflow `daily-digest.yml` が claude-code-action で WebSearch → HTML 生成 → main push → Cloudflare デプロイを毎日自動実行する（2026-07-05 に CCR routine から全面移行、2026-07-18 に GitHub Pages から Cloudflare Pages へ移行し、同日カスタムドメイン tech-news.kaion-lab.com を割り当て。その後 Workers へ切替え、Pages project はロールバック用に保持）。
 
-## デプロイパイプライン（GHA daily-digest: 生成→push→Cloudflare Pages）
+## デプロイパイプライン（GHA daily-digest: 生成→push→Cloudflare）
 
-### Workers Static Assets 移行の準備（本番未切替）
+### Workers Static Assets（本番切替済み）
 
-日刊・AI動向・週次プラグイントレンド・手動pushは共通 deploy-current-site.yml を呼ぶ。共有 site-deploy ロック取得後に最新 origin/main のsnapshotを配置する。repo variable SITE_DEPLOY_TARGET は未設定/空/pages で従来Pages、workers でassets-only Worker tech-news-daily-site、未知値で失敗する。生成cron・モデルは変えない。Workers公開アセットはallowlistで抽出し、repo全文を公開しない。ドメイン切替・権限追加・cloud previewは別承認操作。設定追加やmergeだけでは本番切替しない。[移行手順](docs/workers-static-assets.md) を参照。
+日刊・AI動向・週次プラグイントレンド・手動pushは共通 deploy-current-site.yml を呼ぶ。共有 site-deploy ロック取得後に最新 origin/main のsnapshotを配置する。repo variable SITE_DEPLOY_TARGET は現在 workers で assets-only Worker tech-news-daily-site へ配置する。未設定/空/pages は Pages、未知値は失敗する。Workers公開アセットはallowlistで抽出し、repo全文を公開しない。ホスト設定・ドメイン・権限・cloud preview の変更は別承認操作。[移行状況](docs/workers-static-assets.md) を参照。
 
-`.github/workflows/daily-digest.yml`（cron `8 21 * * *` = 06:08 JST、`workflow_dispatch` で手動実行可）が単一 workflow で完結する:
+`.github/workflows/daily-digest.yml`（cron `0 21 * * *` = 06:00 JST、`workflow_dispatch` で手動実行可）が単一 workflow で完結する:
 
 1. **生成 (claude-code-action@v1)**: `prompts/daily-digest.md` の指示に従い Claude がファイルを生成・編集する。**Claude は git 操作を一切しない**（ファイル生成のみ）
 2. **反映 (workflow step)**: 生成物（`index.html` / `archive/` / `feed.xml`）に変更があり、`index.html` に当日日付が含まれることを検証してから `github-actions[bot]` 名義で `YYYY-MM-DD のテックニュースダイジェスト` として main へ commit/push する。変更ゼロ・日付不整合は run を fail させる（**失敗が必ず可視化される**のがこの構成の要）
-3. **デプロイ**: `GITHUB_TOKEN` push は `deploy-site.yml` を発火させないため、共通 deploy-current-site.yml を明示的に呼ぶ。既定は wrangler pages deploy、別承認の切替後は wrangler deploy。ロック取得後の最新 origin/main のクリーンコピーを使う
+3. **デプロイ**: `GITHUB_TOKEN` push は `deploy-site.yml` を発火させないため、共通 deploy-current-site.yml を明示的に呼ぶ。現行の SITE_DEPLOY_TARGET=workers では wrangler deploy、未設定時の既定は wrangler pages deploy。ロック取得後の最新 origin/main のクリーンコピーを使う
 
 認証は repo secret `CLAUDE_CODE_OAUTH_TOKEN`（Pro/Max サブスクの OAuth トークン、ローカルで `claude setup-token` を実行して生成・失効時も同コマンドで再発行）と、Cloudflare デプロイ用の `CLOUDFLARE_API_TOKEN` / `CLOUDFLARE_ACCOUNT_ID`（tech-learning-daily と同一の値）。PAT は不要。
 
@@ -28,7 +28,7 @@ tech-news-daily: 技術ニュースを毎日収集・整形し、Cloudflare Page
 
 ### 旧構成（CCR routine、2026-07-05 停止）
 
-旧構成は CCR routine が `claude/**` ブランチへ commit → ハーネス自動 push → `auto-merge-digest.yml` で main 取り込みだったが、branch push がサイレント失敗する障害（5 run 連続）が続き GHA へ全面移行した。`auto-merge-digest.yml` は routine 誤再開時の受け皿として残置。
+旧構成は CCR routine が `claude/**` ブランチへ commit → ハーネス自動 push → `auto-merge-digest.yml` で main 取り込みだったが、branch push がサイレント失敗する障害（5 run 連続）が続き GHA へ全面移行した。`auto-merge-digest.yml` は、2026-11-03 に旧 routine が trigger API で 404 となることを確認して削除した。
 
 ## GHA 実行時の参照スコープ（prompt 管理）
 
@@ -62,7 +62,7 @@ prompt は repo 内ファイルなので通常の Edit → commit → push で�
 2. `archive/index.html` に新エントリを追加
 3. `index.html` を新フォーマットで生成
 4. `feed.xml` に新エントリを追加（Atom フィード）
-5. commit → push（`deploy-site.yml` が Cloudflare Pages へ自動デプロイ）
+5. commit → push（`deploy-site.yml` が選択中の Cloudflare ホストへ自動デプロイ）
 
 `daily-digest.yml` は 1-4 を Claude 生成で、5 を workflow step で自動実行する（「デプロイパイプライン」参照）。手動更新時は自分で main に commit → push すれば `deploy-site.yml`（サイトアセットの paths フィルタ付き）がデプロイする。
 
