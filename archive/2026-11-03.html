@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-11-03</title>
+  <meta name="description" content="Astra が LLM に重みを直接編集させる / Ubuntu LTS の CVSS 9.8 未修正 / Oracle 200 億ドル調達">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech News Daily">
+  <meta property="og:title" content="Tech News Daily — 2026-11-03">
+  <meta property="og:description" content="Astra が LLM に重みを直接編集させる / Ubuntu LTS の CVSS 9.8 未修正 / Oracle 200 億ドル調達">
+  <meta property="og:url" content="https://tech-news.kaion-lab.com/archive/2026-11-03.html">
+  <meta property="og:image" content="https://tech-news.kaion-lab.com/apple-touch-icon.png">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="../feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-11-03 (Tue)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+      <nav class="site-nav">
+        <a href="../" class="active">📰 日刊ダイジェスト</a>
+        <a href="../trends.html">🔌 週次プラグイントレンド</a>
+        <a href="../ai-trends.html">🧠 AI プロダクト動向</a>
+        <a href="./">🗂 アーカイブ</a>
+      </nav>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 18 articles</span>
+      <span>🏷 8 categories</span>
+      <span>📡 17 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item"><span class="number-value">$20B</span><span class="number-label">Oracle の株式・社債発行規模</span></div>
+      <div class="number-item"><span class="number-value">48.1%</span><span class="number-label">重み編集後の Qwen3.5-0.8B の MATH-500</span></div>
+      <div class="number-item"><span class="number-value">-86%</span><span class="number-label">Cloudflare DNS ビルドのメモリ削減</span></div>
+    </div>
+
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
+      <div class="card featured deep-dive">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://rikiyat.github.io/blog/weight-space-programming/">DEEP DIVE: LLM がニューラルネットの重みを直接読み書きする「Weight-Space Programming」（GPT-6 Astra）</a></h3>
+        </div>
+        <div class="summary">MIT CSAIL の著者らが、フロンティア LLM に自然言語の目標を与えるだけで、ネットワークの重みを勾配降下なしで読み書きさせる手法を報告した。モデルは「GPT-6 Astra」で、各層が何を計算しているか、何を計算すべきかを推論し、重みを直接書き換える。読み取りでは、Breakout・Pong・Pac-Man・Freeway の 4 つの 17,253 重みのポリシーネットがどのゲームで学習されたかを言い当て、7.16M パラメータの文字モデルについても中間層だけから言語（Python・ローマ字・英語）を特定し、コピーヘッドを偽陽性なしで見つけた。修正では、Qwen3.5-0.8B の 131,072 重み（全体の 0.016%）を編集しただけで MATH-500 が 7.9% から 48.1%、GSM8K が 13.8% から 67.1%、IFEval が 21.0% から 62.3% に上がった。ゼロから書く実験では、MinAtar Breakout のスコアが PPO（500M ステップ）の 25.3 に対し 517.4 だった。一方、Seaquest（53.1 対 88.9）と Asterix（53.2 対 55.2）では PPO に届いていない。Gemma 3 270M の追従性（sycophancy）修正は、重みだけでは 4 回とも失敗し、自分で書いたテキスト上の注意パターンを見られるようにして初めて成功した。著者自身も結果を「ごく初期」と位置づけている。</div>
+        <div class="editorial">🧠 報告された Qwen の改善は、ループ（同じ出力の反復）する癖の除去に由来するところが大きく、推論力そのものを足したわけではない。著者も Gemma 270M で改善が出なかったことを認めている。ただし、重みを人が読める形に翻訳して直すという発想は、解釈可能性研究に実用的な評価軸を与える。再現実験が出るまでは、MIT CSAIL 自身の報告値として扱うのが妥当だ。</div>
+        <div class="key-points">
+          <ul>
+            <li>Qwen3.5-0.8B：131,072 重み（0.016%）の編集で MATH-500 7.9%→48.1%、GSM8K 13.8%→67.1%</li>
+            <li>MinAtar Breakout：学習なしで 517.4 点（PPO 100M ステップは 15.8、500M は 25.3）</li>
+            <li>Gemma 3 270M では MATH-500 が 6.8〜7.7% のまま。編集は障害の除去はできても、無い能力は足せない</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 小型モデルのデバッグを勾配なしの「重み編集」で済ませられる可能性があるが、効くのは既存能力を阻害する癖の除去に限られる前提で読むこと。</div>
+        <div class="meta">
+          <span>rikiyat.github.io</span>
+          <span class="engagement">▲ 2009</span>
+          <span>⏱ 10 min read</span>
+          <span>2026-11-02</span>
+        </div>
+      </div>
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://freenode.net/article/ubuntu-lts-kernels-still-unfixed-for-critical-cve-2026-98432">Ubuntu LTS カーネル、CVSS 9.8 の CVE-2026-98432 に約 3 週間パッチなし</a></h3>
+        </div>
+        <div class="summary">Ubuntu 22.04・24.04・26.04 の各 LTS で、重大脆弱性 CVE-2026-98432（CVSS 9.8）を修正したカーネルがまだ配布されていない。記事は 10 月 31 日付で、Ubuntu 側から修正時期の案内は出ていない。HN のタイトルは公開から約 3 週間経過と指摘している。記事は脆弱性の種類や攻撃条件の詳細を示しておらず、管理者の選択肢は、ストックカーネルのまま受け入れる、カーネル外の緩和策を探す、修正済みのカーネルへ移行する、の 3 つとしている。</div>
+        <div class="key-points">
+          <ul>
+            <li>対象は Ubuntu 22.04 / 24.04 / 26.04 の LTS カーネル（修正済みパッケージなし）</li>
+            <li>CVSS 9.8。インターネット公開ホストやマルチテナント環境の分離境界に影響する</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 Ubuntu LTS で自前ホスティングしているなら、公式の修正が出るまでの間、公開面の縮小とカーネル更新の監視を今日から運用に入れること。</div>
+        <div class="meta">
+          <span>freenode.net</span>
+          <span class="engagement">▲ 349</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-11-02</span>
+        </div>
+      </div>
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-product">Product</span>
+          <span class="content-type">💰 ビジネス</span>
+          <h3><a href="https://www.cnbc.com/2026/11/02/oracle-files-to-sell-20-billion-in-new-stock-bonds-to-finance-ai-buildout.html">Oracle、AI 設備投資向けに 200 億ドルの株式・社債発行を申請</a></h3>
+        </div>
+        <div class="summary">Oracle は AI 向けインフラ構築の資金として、普通株 100 億ドルと上位債 100 億ドルの計 200 億ドルを売り出す書類を提出した。先週の投資家向けイベントで予告されていた内容だが、月曜の株価は 8.8% 下落した。2027〜2030 会計年度の追加資本市場調達は 200 億ドルが上限で、2030 年度の売上は 2,250 億ドル以上を見込む。フリーキャッシュフローの黒字化は 2028 年後半の見通しだ。</div>
+        <div class="key-points">
+          <ul>
+            <li>負債残高は 8 月 31 日時点で 1,253.4 億ドル。5 年 CDS は 292 で、1 年で 265% 上昇</li>
+            <li>S&amp;P は 7 月に BBB-（投資適格の最下位）へ格下げ。株価は年初来 33% 安</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 OCI や Oracle 上の AI 基盤に依存する場合、同社の資金調達余力は長期契約の継続リスクとして追跡する価値がある。</div>
+        <div class="meta">
+          <span>CNBC</span>
+          <span class="engagement">▲ 164</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-11-02</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://blog.cloudflare.com/dns-targeted-zone-builds/">Cloudflare DNS、ビルド遅延を半減しメモリを 85% 削減</a></h3>
+        </div>
+        <div class="summary">Cloudflare の権威 DNS 用 Zone Builder は、ゾーン設定が変わるたびにゾーン全体を再構築していた。2,000 万レコード超のゾーンでは負荷が大きく、2022 年に毎秒約 250 件だったレコード変更も約 700 件へ増えていた。イベントに変更フィールドを載せ、プランナーが 5 種類のビルドから最小のものを選ぶ方式に変え、結果が全体ビルドとバイト単位で一致しなければ全体ビルドにフォールバックする。</div>
+        <div class="key-points">
+          <ul>
+            <li>全体ビルドの比率は 11.88% から 7.04% に低下。平均ワーキングセットは 49GiB→7GiB（-86%）</li>
+            <li>ビルド完了遅延の中央値は約 7.7 秒→約 3.3 秒。p99 の最大スパイクは 14.6 分→1.21 分</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Cloudflare Blog</span>
+          <span class="engagement">▲ 147</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-11-02</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-data">Data</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="http://rhaas.blogspot.com/2026/10/postgres-19-is-late-and-its-ais-fault.html">Postgres 19 の遅れの原因は LLM によるバグ発見の急増</a></h3>
+        </div>
+        <div class="summary">PostgreSQL コミッターの Robert Haas 氏が、PostgreSQL 19 のリリースが通常の 9 月中旬〜10 月中旬から 11 月にずれ込む見通しを説明した。LLM を使ったバグ報告が急増し、修正をバックパッチする作業とセキュリティ対応が、リリース内容のレビューを圧迫したという。LLM が書く修正案は仕様に沿わないことが多く、人間のレビューが要る点も遅れの要因だ。</div>
+        <div class="key-points">
+          <ul>
+            <li>REL_19_STABLE へのバックパッチは 1,169 件（REL_18 は 724 件、約 61% 増）</li>
+            <li>FOR PORTION OF・SQL/PGQ・パーティション MERGE/SPLIT が 8/27〜9/15 に差し戻された</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>rhaas.blogspot.com</span>
+          <span class="engagement">▲ Lobsters 45</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-11-02</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://qiita.com/suwa_nobu/items/3cd02fa0f1cec7ea979c">Cursor 経由の Claude Code 拡張 2.1.312/2.1.313 改ざん、Windows での確認手順</a></h3>
+        </div>
+        <div class="summary">10 月 29 日 18:27〜30 日 05:35（JST）の間、Cursor の拡張マーケットプレイスが、SSH バックドアの設置を試みる改ざん版の Claude Code 拡張 2.1.312・2.1.313 を配布していた。Anthropic が作ったビルドではなく、バージョン番号が正規と同じなので番号だけでは判別できない。筆者は extension.js のハッシュと、svc-telemetry 鍵・SysMon タスクなどの痕跡を調べる読み取り専用の PowerShell を公開し、自分の PC では痕跡なしと確認した。</div>
+        <div class="key-points">
+          <ul>
+            <li>正規の最新は 2.1.314（npm・VS Code Marketplace、10/30）。Open VSX は 2.1.316 まで公開</li>
+            <li>Cursor の案内は認証情報のローテーションと、場合によってはマシンの再構築を推奨</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-11-02</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-frontend">Frontend</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/javascriptbunprettier300prettier.html">Bun v1.4.4、Prettier 互換のフォーマッタ bun fmt を追加</a></h3>
+        </div>
+        <div class="summary">Bun v1.4.4（10 月 22 日）に、Prettier 互換のフォーマッタ `bun fmt` が入った。Prettier の設定ファイルをそのまま読み込み、oxfmt の設定にも対応する。JavaScript・TypeScript・CSS・HTML・JSON・YAML・Markdown を含む 20 言語を扱う。</div>
+        <div class="key-points">
+          <ul>
+            <li>Prettier の最大 320 倍高速、メモリは 5 分の 1 未満（Bun 公称）</li>
+            <li>Prettier のテストスイートの 99% 以上を通過</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-11-02</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/luvtechno/articles/isucon2026-competition-day">ISUCON2026 優勝記（当日編）：Claude 自律エージェントで 625,857 点</a></h3>
+        </div>
+        <div class="summary">ISUCON2026 に Yoshinori Kawasaki 氏が単独で参加し、起動後は指示を出さない自律コーディングエージェントで優勝した。題材は 4 台構成（asia 2・europe・america）の写真 SNS ISUReal で、拠点間遅延は約 100ms。各サーバーがメモリ上にデータの写しを持ち、書き込みを asia2 が順序付けしたログで全台に複製する構成へ書き換えた。</div>
+        <div class="key-points">
+          <ul>
+            <li>最終スコア 625,857（競技中のベストは 629,638）。初期 4,173 から段階的に改善</li>
+            <li>JPEG の二重デコード検証を除去して 388,921→483,958、GOGC 400→200 で POST /api/posts の p99 を約 20 秒→約 8 秒に</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span class="engagement">🔖 245</span>
+          <span>⏱ 8 min read</span>
+          <span>2026-11-02</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/tokium_dev/articles/adr-authoring-guideline">AI が書く読みづらい ADR を防ぐガイドライン作成（TOKIUM）</a></h3>
+        </div>
+        <div class="summary">TOKIUM は AI に ADR を下書きさせた結果、読みづらい文書が増えたため、34 件の ADR 変更 PR と 830 件のレビューコメントから 32 の繰り返し指摘を抽出し、ルール化した。移行計画やタスク表の混入、背景が単独で読めないこと、実装詳細が決定に紛れ込むことが主な失敗パターンだ。</div>
+        <div class="key-points">
+          <ul>
+            <li>判定基準 D-4：採用した実装を別物に差し替えたとき ADR の文面を直す必要があるなら、その記述は仕様側に置く</li>
+            <li>ガイドラインは ADR 起案スキル・パス限定ルール・CI の AI レビュアーが共通で参照し、レビュアーはルール ID を引用する</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span class="engagement">🔖 117</span>
+          <span>⏱ 7 min read</span>
+          <span>2026-11-02</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://zenn.dev/koheiwada/articles/houritsu-japanese-laws-as-git">日本の全法令を git の履歴にした「houritsu」</a></h3>
+        </div>
+        <div class="summary">e-Gov 法令 API v2 から取得した日本の法令を、1 法令 1 Markdown ファイルとして管理し、改正法の施行ごとに 1 コミットを作る。コミット日は施行日にしてあり、公布済みで未施行の改正は upcoming ブランチにある。Rust 製の houritsu-builder が毎朝 e-Gov から差分を取り込む。</div>
+        <div class="key-points">
+          <ul>
+            <li>8,982 法令ファイル・main に 23,338 コミット。データは CC BY 4.0、builder は MIT</li>
+            <li>1970 年より前の施行日（317 コミット）は git の制約で 1970-01-02 に寄せ、実日付は Enforced トレーラーに保存</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span class="engagement">🔖 223</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-11-02</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://momentic.ai/">Launch HN: Momentic（YC W24）、アプリを実際に操作してバグを見つけるエージェント</a></h3>
+        </div>
+        <div class="summary">YC W24 の Momentic が、実際にアプリを操作して不具合を検出するエージェントを Launch HN で公開した。エージェントが画面を操作して検証する方式。</div>
+        <div class="key-points">
+          <ul>
+            <li>公式ページは momentic.ai。HN で 130 ポイントを集めた</li>
+            <li>詳細な料金・対応環境は公式ページで確認が必要（本ダイジェストでは未確認）</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>momentic.ai</span>
+          <span class="engagement">▲ 130</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-11-02</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.com/aaitor/skill-video-studio">skill-video-studio：プロダクト紹介動画を作るエージェントスキル</a></h3>
+        </div>
+        <div class="summary">GitHub の aaitor/skill-video-studio は、プロダクト動画の制作を エージェントスキルとして提供するリポジトリ。HN で 70 ポイントを獲得した。</div>
+        <div class="key-points">
+          <ul>
+            <li>スキルとして配布され、エージェントに動画制作の手順を与える形式</li>
+            <li>詳細な出力形式・依存関係はリポジトリの README を参照</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span class="engagement">▲ 70</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-11-02</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
+      <div class="quick-link">
+        <span class="tag tag-oss">OSS</span>
+        <a href="https://www.undeadly.org/cgi?action=article;sid=20261101115637">OpenBSD 向け GEFS（Good Enough File System）の開発が進行</a>
+        <span class="quick-summary">— OpenBSD のファイルシステム開発の経過報告。</span>
+        <span class="meta">undeadly.org <span class="engagement">Lobsters 89</span></span>
+      </div>
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://vinipsmaker.github.io/blog/article/pratt-parsing-is-a-black-box/">Pratt parsing is a black box</a>
+        <span class="quick-summary">— Pratt パーサーを内部まで追わず部品として扱う考え方。</span>
+        <span class="meta">vinipsmaker.github.io <span class="engagement">Lobsters 40</span></span>
+      </div>
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://blog.nns.ee/2026/11/02/renault-hack/">Jailbreaking my car's navigation system just so I can change the time</a>
+        <span class="quick-summary">— ルノー車のナビをジェイルブレイクして時刻設定を変える話。</span>
+        <span class="meta">blog.nns.ee <span class="engagement">Lobsters 77</span></span>
+      </div>
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://www.nist.gov/news-events/news/2026/11/self-employed-solopreneur-nist-has-cybersecurity-guide-just-you">NIST が個人事業主向けのサイバーセキュリティガイドを公開</a>
+        <span class="quick-summary">— 自営業・ソロ起業家を対象にした NIST の手引き。</span>
+        <span class="meta">NIST <span class="engagement">▲ 110</span></span>
+      </div>
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://finance.yahoo.com/markets/article/the-intel-stock-collapse-is-getting-worse--and-the-37-trillion-chip-rout-is-spreading-212154947.html">Intel 株の下落が拡大、3.5 兆ドル規模の半導体株売りが波及</a>
+        <span class="quick-summary">— 半導体セクター全体に売りが広がっていると報じた記事。</span>
+        <span class="meta">Yahoo Finance <span class="engagement">▲ 91</span></span>
+      </div>
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://alangrow.com/blog/a-decade-of-kill-bugs">A Decade of Kill Bugs</a>
+        <span class="quick-summary">— 10 年にわたる「kill bug」運用の振り返り。</span>
+        <span class="meta">alangrow.com <span class="engagement">Lobsters 24</span></span>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="./" class="archive-link">🗂 過去のダイジェスト</a>
+    </footer>
+  </div>
+</body>
+</html>
