@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tech News Daily — 2026-11-04</title>
-  <meta name="description" content="Postman が AI プラグインを無断導入 / GitHub が 180 倍のスループットへ / Android「SMS of Death」">
+  <title>Tech News Daily — 2026-11-05</title>
+  <meta name="description" content="PHP2Shell：AIが軽微なバグを実用エクスプロイトに / Android TV 130万台にバックドア / クラウド市場1,680億ドル">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Tech News Daily">
-  <meta property="og:title" content="Tech News Daily — 2026-11-04">
-  <meta property="og:description" content="Postman が AI プラグインを無断導入 / GitHub が 180 倍のスループットへ / Android「SMS of Death」">
+  <meta property="og:title" content="Tech News Daily — 2026-11-05">
+  <meta property="og:description" content="PHP2Shell：AIが軽微なバグを実用エクスプロイトに / Android TV 130万台にバックドア / クラウド市場1,680億ドル">
   <meta property="og:url" content="https://tech-news.kaion-lab.com/">
   <meta property="og:image" content="https://tech-news.kaion-lab.com/apple-touch-icon.png">
   <meta name="twitter:card" content="summary">
@@ -22,7 +22,7 @@
   <div class="container">
     <header>
       <h1>Tech News Daily</h1>
-      <div class="date">2026-11-04 (Wed)</div>
+      <div class="date">2026-11-05 (Thu)</div>
       <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
       <nav class="site-nav">
         <a href="./" class="active">📰 日刊ダイジェスト</a>
@@ -33,331 +33,379 @@
     </header>
 
     <div class="stats-bar">
-      <span>📰 18 articles</span>
-      <span>🏷 8 categories</span>
-      <span>📡 18 sources</span>
-    </div>
+  <span>📰 22 articles</span>
+  <span>🏷 7 categories</span>
+  <span>📡 17 sources</span>
+</div>
 
-    <nav class="toc">
-      <a href="#top-stories">🔥 Top Stories</a>
-      <a href="#dev-engineering">⚡ Dev</a>
-      <a href="#jp-community">🇯🇵 日本語</a>
-      <a href="#code-tools">🛠 Tools</a>
-      <a href="#quick-links">🔗 Quick</a>
-    </nav>
+<nav class="toc">
+  <a href="#top-stories">🔥 Top Stories</a>
+  <a href="#dev-engineering">⚡ Dev</a>
+  <a href="#jp-community">🇯🇵 日本語</a>
+  <a href="#code-tools">🛠 Tools</a>
+  <a href="#quick-links">🔗 Quick</a>
+</nav>
 
-    <div class="numbers-bar">
-      <div class="number-item"><span class="number-value">180x</span><span class="number-label">GitHub の新アーキテクチャによるスループット向上</span></div>
-      <div class="number-item"><span class="number-value">7,200/秒</span><span class="number-label">AI エージェント 5,000 体が 1 リポジトリに書き込んだ件数</span></div>
-      <div class="number-item"><span class="number-value">$3.2T</span><span class="number-label">米大手テックの隠れた AI 債務（6 か月で 90% 増）</span></div>
-    </div>
+<div class="numbers-bar">
+  <div class="number-item"><span class="number-value">1,680億ドル</span><span class="number-label">2026年Q3のクラウドインフラ市場</span></div>
+  <div class="number-item"><span class="number-value">130万台</span><span class="number-label">バックドア入りAndroid TV端末</span></div>
+  <div class="number-item"><span class="number-value">2億2,500万人</span><span class="number-label">GitHubの開発者数</span></div>
+</div>
 
-    <div class="section" id="top-stories">
-      <div class="section-title">🔥 Top Stories</div>
-      <div class="card featured deep-dive">
-        <div class="card-header">
-          <span class="tag tag-security">Security</span>
-          <span class="content-type">🔒 セキュリティ</span>
-          <h3><a href="https://github.com/postmanlabs/postman-app-support/issues/14370">DEEP DIVE: Postman デスクトップが AI エージェント用プラグインを無断で自動導入</a></h3>
-        </div>
-        <div class="summary">GitHub Issue #14370 で、Postman 12.33.4（macOS）を起動しただけで、Codex プラグイン 1.1.0、Claude Code プラグイン 2.0.1、Postman CLI が利用者の同意なしに入ったと報告された（10 月 25 日付）。ログの導入元は「auto-existing-upgrade」で、既存ユーザーを対象にした自動アップグレード経路だ。Codex の設定には Postman のマーケットプレイスが追加されてプラグインが有効化され、SessionStart フックが「API エンジニアリングに関わる作業では postman:api-engineer スキルを読み込め」という指示をエージェントに注入する。対象は Postman を明示的に頼んだ場面にとどまらず、API が絡む作業全般に広がる。さらに導入処理は、自社フックの trusted_hash を自分で書き込んで承認済みにしており、利用者の判断を経ずにフックが信頼される。11 月 3 日には 12.35.1 でも同じ挙動が再現され、Cursor 向けプラグインの導入も確認された。データの送信は確認されていない。別の利用者の検証では、フックの信頼記録はローカルのプロセスから書き換えられ、Claude Code のプロジェクトフックは非対話実行でも発火した。Postman 側はセットアップ簡略化のための同梱と説明し、既存ユーザー向けのオプトインを明確にすると回答したが、全員オプトインを求める声が多く、Bruno や Insomnia への乗り換えを挙げる人も出た。</div>
-        <div class="editorial">🧠 今回の核心は導入そのものより、フックを自己承認する設計にある。エージェントの信頼モデルは「利用者が承認したフックだけが動く」に依存しており、その前提を導入側が迂回できてしまう。データ送信の証拠は出ておらず、実害は未確認だ。ただし Postman の回答は説明にとどまり、承認処理の修正時期は示されていない。修正が出るまでは、同種のデスクトップアプリ全般を疑う根拠になる。</div>
-        <div class="key-points">
-          <ul>
-            <li>Postman 12.33.4 / 12.35.1 で再現。Codex 1.1.0・Claude Code 2.0.1 プラグインと CLI が起動だけで導入される</li>
-            <li>導入処理が trusted_hash を自前で書いてフックを承認済みにするため、フックの信頼確認ダイアログを通らない</li>
-            <li>SessionStart フックが API 関連の作業全般でスキルの読み込みを指示する。リモート MCP（mcp.postman.com）は認証エラーで失敗</li>
-          </ul>
-        </div>
-        <div class="why-it-matters">💡 Postman を入れている開発機では、~/.codex の設定と Claude Code のプラグイン一覧を確認し、意図しない項目を外すこと。社内の標準ツールが他ツールの設定を書き換えていないかの棚卸しにもなる。</div>
-        <div class="meta">
-          <span>GitHub Issues</span>
-          <span class="engagement">▲ 998</span>
-          <span>⏱ 8 min read</span>
-          <span>2026-11-03</span>
-        </div>
-      </div>
-      <div class="card featured">
-        <div class="card-header">
-          <span class="tag tag-infra">Infra</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://www.publickey1.jp/blog/26/github180aigithub_universe_2026.html">GitHub、従来比 180 倍のスループットを来年初頭に提供へ（GitHub Universe 2026）</a></h3>
-        </div>
-        <div class="summary">GitHub は、AI エージェントの増加で書き込み負荷が急増していることを受け、Git の基盤を再設計した。計算とストレージを分離し、コードは Azure Blob Storage に置き、Git サーバーは一時キャッシュだけを持つ。書き込みロックをリポジトリ単位からブランチ単位に変えたことで、別ブランチで動くエージェントが並列に作業できる。5,000 体のエージェントが 1 つのリポジトリに毎秒 7,200 件書き込む試験を処理した。</div>
-        <div class="key-points">
-          <ul>
-            <li>従来は 1 リポジトリへの push が毎秒数十件までだったが、新設計は毎秒数千件を目標にする</li>
-            <li>ブランチ単位ロックだけで 3〜4 倍。残るボトルネックは参照トランザクションで、専用ログサービスが処理する</li>
-            <li>今年だけで CPU コア 400 万、ストレージ 160PB、帯域 50Tb/s を追加。Azure への移行は来年初頭に完了予定</li>
-          </ul>
-        </div>
-        <div class="why-it-matters">💡 エージェントで 1 リポジトリに大量 push する運用は、来年初頭まではレート制限に当たりやすい前提で設計し、ブランチを分けて並列化しておくと新方式の恩恵を受けやすい。</div>
-        <div class="meta">
-          <span>Publickey</span>
-          <span class="engagement">🔖 22</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-11-03</span>
-        </div>
-      </div>
-      <div class="card featured">
-        <div class="card-header">
-          <span class="tag tag-security">Security</span>
-          <span class="content-type">🔒 セキュリティ</span>
-          <h3><a href="https://rocket-boys.co.jp/security-measures-lab/android-sms-of-death-cve-2026-58882-zero-click-dos/">Android「SMS of Death」（CVE-2026-58882）、SMS 受信だけで通話切断・再起動ループ</a></h3>
-        </div>
-        <div class="summary">WAP Push 形式のメッセージを処理する WapPushOverSms.decodeWapPdu() がヘッダー長を十分に検証せず、配列確保で例外が出て電話機能の com.android.phone プロセスが停止する。ユーザー操作は不要で、受信トレイに表示される前に影響が出る。研究者は Pixel と Galaxy で確認し、約 20 通のメッセージで長時間の不安定化を再現した。Google は 11 月 2 日のセキュリティ速報で Critical の DoS として掲載した。</div>
-        <div class="key-points">
-          <ul>
-            <li>修正対象は AOSP の Android 14・15・16・16 QPR2・17。確認基準はセキュリティパッチレベル 2026-11-05 以降</li>
-            <li>Android 12・13 は速報の対象外。機種ごとのメーカー対応を確認する必要がある</li>
-            <li>実環境での悪用は未確認。情報窃取ではなく通信の可用性への影響</li>
-          </ul>
-        </div>
-        <div class="why-it-matters">💡 業務端末を Android で配っているなら、MDM でパッチレベル 2026-11-05 以降への更新を確認し、Android 12・13 の残存端末は入れ替え計画に載せること。</div>
-        <div class="meta">
-          <span>ロケットボーイズ</span>
-          <span class="engagement">🔖 31</span>
-          <span>⏱ 5 min read</span>
-          <span>2026-11-03</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="section" id="dev-engineering">
-      <div class="section-title">⚡ Dev &amp; Engineering</div>
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-ai">AI</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://www.publickey1.jp/blog/26/githubcopilot_code_review_maxgithub_universe_2026.html">GitHub、「Copilot Code Review Max」をパブリックプレビューで発表</a></h3>
-        </div>
-        <div class="summary">既存の Copilot Code Review に、Lite・Balanced に続く新しい労力レベル「Max」が加わった。複数の独立したレビューエージェントが異なる AI モデル上で動き、集約エージェントが出力の食い違いを調整し、報告前に正確性を再検証する。モデルごとの得意と死角が補い合う設計だ。</div>
-        <div class="key-points">
-          <ul>
-            <li>GitHub によると、ReviewBench の高重大度の問題検出で最高の F1 スコア</li>
-            <li>料金は記事中で言及なし。AI 生成 PR の増加に対するレビュー側の対策として位置づけ</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Publickey</span>
-          <span class="engagement">🔖 21</span>
-          <span>⏱ 3 min read</span>
-          <span>2026-11-03</span>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
-          <span class="content-type">🔬 研究</span>
-          <h3><a href="https://nicholas.carlini.com/writing/2026/algorithmic-improvements-chess.html">1996 年の Pentium で現代のチェスエンジンはカスバロフに勝てたか</a></h3>
-        </div>
-        <div class="summary">Nicholas Carlini 氏が、200MHz の Pentium Pro・64MB RAM で、1996 年版 Crafty に現代の探索手法とニューラルネット評価を移植し、Stockfish も低速機向けに調整して強さを測った。Deep Blue が 30 プロセッサと 480 個の専用チップを使ったのに対し、ソフトウェア側の改良だけで上回れるかを検証している。コードの多くは言語モデルが書いたという。</div>
-        <div class="key-points">
-          <ul>
-            <li>Crafty は約 1999 から約 2718 Elo（1 手 1 秒）へ。Stockfish は 1 秒で約 2846、30 秒で 3180 Elo</li>
-            <li>持ち時間の長い対局では約 3300 と推定。カスバロフの 2800 弱を大きく上回る</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Carlini</span>
-          <span class="engagement">▲ 442</span>
-          <span>⏱ 8 min read</span>
-          <span>2026-11-03</span>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-frontend">Frontend</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://webkit.org/blog/18541/introducing-adaptive-dark-mode/">Safari 27.3 beta に Adaptive Dark Mode、明るいサイトを自動で暗色化</a></h3>
-        </div>
-        <div class="summary">Safari が明るいページの色を解析し、輝度を反転しつつ色相を保って暗色表示にする。ダークモード対応済みのサイトには手を加えない。WCAG の 4.5:1 のコントラストを目標にし、グラデーションや SVG も変換する。サイト側は color-scheme: light dark で対応を宣言すれば対象外にできる。</div>
-        <div class="key-points">
-          <ul>
-            <li>ダークモード利用者はページ読み込みの約 40%だが、対応サイトは約 10%</li>
-            <li>light only は beta 1 では未対応。canvas は変換されず、JS から色を読むと元の値が返る</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>WebKit Blog</span>
-          <span class="engagement">▲ 258</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-11-03</span>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-security">Security</span>
-          <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://blog.cloudflare.com/zero-wire/">Cloudflare、重大な脆弱性の調査ハブ「Zero Wire」を公開</a></h3>
-        </div>
-        <div class="summary">Cloudflare Radar のセキュリティ欄に、インターネット公開ソフトウェアの重大 CVE に絞った情報フィードが加わった。各ブリーフィングは平易な説明、調査すべきチーム、推奨アクション、証拠へのリンクを持つ。Cloudflare の顧客でなくても使える。</div>
-        <div class="key-points">
-          <ul>
-            <li>「Needs attention」（悪用確認や指針が流動的）と「Reference」（指針が安定）の 2 区分で、最終確認日も表示</li>
-            <li>影響確認用の読み取り専用 AI プロンプトを同梱。WAF ルールは補完策で、パッチの代わりにはならないと明記</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Cloudflare Blog</span>
-          <span class="engagement">🔖 13</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-11-03</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="section" id="jp-community">
-      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://blog.kuniwak.com/entry/e2ebok">E2Eテスト大全：E2E テスト周辺の理論を体系化</a></h3>
-        </div>
-        <div class="summary">E2E テストの定義、利点、限界、分類、実装パターンを長編でまとめた記事。単体テストとの役割分担を軸に、欠陥を正当性違反と妥当性違反に分けて整理し、AI 時代でも組み合わせ爆発などの数理的制約は変わらないと説く。</div>
-        <div class="key-points">
-          <ul>
-            <li>単体テストはミリ秒、E2E は数十秒で 4〜5 桁の差。仕様変更時の修正範囲は単体 4 件に対し E2E は最大 1,024 件（N=4, M=4, K=4 のモデル）</li>
-            <li>失敗率 0.1% の要素を直列に 100 個並べると成功率は約 90.5%（独立と仮定）</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>blog.kuniwak.com</span>
-          <span class="engagement">🔖 159</span>
-          <span>⏱ 15 min read</span>
-          <span>2026-11-03</span>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-security">Security</span>
-          <span class="content-type">👀 注目</span>
-          <h3><a href="https://www.itmedia.co.jp/news/article/2611/04/2000002847/">Aterm の設定画面が「.php」なのは PHP を使っているからか、NEC に聞いた</a></h3>
-        </div>
-        <div class="summary">Aterm の設定画面の URL に「index.php」が出る機種があり、10 月 22 日公表の PHP 脆弱性との関係が話題になった。NEC は 10 月 26 日の告知で影響なしとし、取材には、PHP の一部仕様を参考にした独自ソフトウェアが管理画面向けに文法の一部を解釈していると答えた。</div>
-        <div class="key-points">
-          <ul>
-            <li>PHP 本体や一般の PHP 実行環境は不使用。「過去の名残」との見方も否定</li>
-            <li>文法が PHP 準拠のため拡張子が .php。PHP 本体の実装は流用しておらず、脆弱性の該当処理もない</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>ITmedia</span>
-          <span class="engagement">🔖 138</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-11-03</span>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-data">Data</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://zenn.dev/ncdc/articles/c47df2c1f32e0c">Aurora・DynamoDB・Timestream・BigQuery を 2,400 万レコードで性能比較</a></h3>
-        </div>
-        <div class="summary">1 秒ごとに温度・圧力などを記録する電車 10 両×28 日分、約 2,419 万行で 4 つの DB を比べた。Lambda 内の処理時間を 10 回の中央値で測っており、キャッシュやクライアント実装の条件が DB ごとに異なる点を筆者は注意書きしている。</div>
-        <div class="key-points">
-          <ul>
-            <li>特定車両の最新 1 件は Aurora 4.2ms・DynamoDB 5.2ms、全件読み取りは BigQuery 468ms に対し DynamoDB 21.75 秒（集計機能なし）</li>
-            <li>Aurora 8 ACU 固定は月約 860 ドル、InfluxDB は約 200 ドル。InfluxDB Core は 1 クエリ 1,024 ファイル上限で全期間読み取りが失敗</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Zenn</span>
-          <span>⏱ 8 min read</span>
-          <span>2026-11-03</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="section" id="code-tools">
-      <div class="section-title">🛠 Code &amp; Tools</div>
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-ai">AI</span>
-          <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://azukiazusa.dev/blog/agent-desktop-computer-use-cli/">agent-desktop：AI エージェントがアクセシビリティツリー経由でデスクトップアプリを操作する CLI</a></h3>
-        </div>
-        <div class="summary">Vercel Labs の Rust 製 CLI で、スクリーンショットとピクセル座標ではなく OS のアクセシビリティツリー（macOS は AX、Windows は UIA、Linux は AT-SPI）を読んで操作する。snapshot ごとに要素へ ref を振り、観察→操作→確認のループで動かす。</div>
-        <div class="key-points">
-          <ul>
-            <li>Claude Code による検証は 30 ターン・約 130 秒で、合計金額の不具合を発見・修正・再確認</li>
-            <li>1.0.0（10/28）で Linux に対応。ref は snapshot 限りで、古いと STALE_REF、複数一致は AMBIGUOUS_TARGET で拒否</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>azukiazusa.dev</span>
-          <span class="engagement">🔖 29</span>
-          <span>⏱ 6 min read</span>
-          <span>2026-11-03</span>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-oss">OSS</span>
-          <span class="content-type">👀 注目</span>
-          <h3><a href="https://neufangled.com/">Stringman：800 ドルのオープンソース部屋サイズ・ワイヤー駆動グリッパーロボット</a></h3>
-        </div>
-        <div class="summary">天井の四隅に固定した 4 本のワイヤーでグリッパーを吊り、散らかった床まで部屋の中を移動して物を掴む。機構の CAD・基板・制御ソフトが公開され、OSHWA 認証を受けている。ローカル環境だけで動かすこともできる。</div>
-        <div class="key-points">
-          <ul>
-            <li>価格 795 ドル。可搬重量は平均 1.9kg、作業体積 147m³、移動速度約 0.4m/s</li>
-            <li>LeRobot ベースで、モデルによっては約 50 エピソードの学習で動作を覚える。実家庭での試験は約 1,000 時間</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>neufangled.com</span>
-          <span class="engagement">▲ 353</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-11-03</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="section" id="quick-links">
-      <div class="section-title">🔗 Quick Links</div>
-      <div class="quick-link">
-        <span class="tag tag-ai">AI</span>
-        <a href="https://honnibal.dev/blog/astra-read-write-misleading">The 'Astra can read and write weights to improve Qwen' post is misleading</a>
-        <span class="quick-summary">— 昨日取り上げた Weight-Space Programming の報告に対する批判記事。</span>
-        <span class="meta">honnibal.dev <span class="engagement">▲ 886</span></span>
-      </div>
-      <div class="quick-link">
-        <span class="tag tag-oss">OSS</span>
-        <a href="https://www.netbsd.org/releases/formal-11/NetBSD-11.1.html">NetBSD 11.1 リリース</a>
-        <span class="quick-summary">— 11 系の最初のメンテナンス更新。OpenSSH 10.6、unbound 1.26.1 などを更新。</span>
-        <span class="meta">netbsd.org <span class="engagement">Lobsters 12</span></span>
-      </div>
-      <div class="quick-link">
-        <span class="tag tag-frontend">Frontend</span>
-        <a href="https://dbushell.com/2026/11/03/xslt-rip/">Death comes for XSLT</a>
-        <span class="quick-summary">— ブラウザからの XSLT 廃止を受けた追悼記事。</span>
-        <span class="meta">dbushell.com <span class="engagement">Lobsters 61</span></span>
-      </div>
-      <div class="quick-link">
-        <span class="tag tag-product">Product</span>
-        <a href="https://asia.nikkei.com/business/technology/artificial-intelligence/us-tech-giants-hidden-ai-debt-swells-90-to-3-2tn-in-6-months">US tech giants' hidden AI debt swells 90% to $3.2T in 6 months</a>
-        <span class="quick-summary">— 米大手テックの隠れた AI 債務が 6 か月で 90% 増の 3.2 兆ドルに。</span>
-        <span class="meta">Nikkei Asia <span class="engagement">▲ 202</span></span>
-      </div>
-      <div class="quick-link">
-        <span class="tag tag-product">Product</span>
-        <a href="https://flipper.net/pages/flipper-one">Preparing for the Flipper One Kickstarter and opening pre-orders</a>
-        <span class="quick-summary">— Flipper One の Kickstarter 準備と予約受付の開始。</span>
-        <span class="meta">flipper.net <span class="engagement">▲ 167</span></span>
-      </div>
-      <div class="quick-link">
-        <span class="tag tag-data">Data</span>
-        <a href="https://www.interdb.jp/pg/index.html">The Internals of PostgreSQL</a>
-        <span class="quick-summary">— PostgreSQL の内部構造を解説する日本語の無料オンライン書籍。</span>
-        <span class="meta">interdb.jp <span class="engagement">▲ 79</span></span>
-      </div>
-    </div>
-
-    <footer>
-      <p>Generated by Claude Code routine</p>
-      <a href="archive/" class="archive-link">🗂 過去のダイジェスト</a>
-    </footer>
+<div class="section" id="top-stories">
+<div class="section-title">🔥 Top Stories</div>
+<div class="card featured deep-dive">
+  <div class="card-header">
+    <span class="tag tag-security">Security</span>
+    <span class="content-type">🔒 セキュリティ</span>
+    <h3><a href="https://spectrum.ieee.org/ai-in-cybersecurity-php2shell-vulnerability">DEEP DIVE: PHP2Shell：AIが20年前の「軽微なクラッシュ」を実用エクスプロイトに変えた</a></h3>
   </div>
+  <div class="summary">2026年10月下旬に公表されたPHPの重大脆弱性「PHP2Shell」は、機密データの読み取りとサーバー上での任意コード実行を可能にする。根にあるのはメモリ不足（OOM）エラーで、2024年にPHP Foundationへ報告された時点では「軽微なクラッシュ」として扱われていた。転機は、OpenAIが支援する監査プロジェクトに参加したCalifの研究者が、AIツールを使ってこのバグを2週間足らずで動作するエクスプロイトに仕上げたことだ。対象はWordPressやDrupalで構築されたサイトを含む広範なPHP環境に及ぶ。修正パッチは4人のチームが2か月かけて作成し、悪用の報告が出る前に公開された。IEEE Spectrumは、人間が書いた数十年分のレガシーコードにAIが次々と実用的な攻撃経路を見つけ出す段階に入った、と位置づける。暗号研究者のMatthew Greenは、大規模な資金投入は今より深刻なインシデントが起きた後、早ければ2027年初頭になると予測している。Hacker Newsでも1,045ポイントを集め、今日最大の議論になった。</div>
+  <div class="editorial">🧠 事実として確かなのは、「脆弱性の深刻度の見積もり」がAIで大きく覆ったことだ。クラッシュとして放置されたバグが悪用可能と判明する構図は、PHP以外の古いコードベースにも当てはまる。ただし、AIがどの工程をどこまで担ったかは記事からは切り分けられず、人間の研究者の寄与は未検証だ。</div>
+  <div class="key-points">
+    <ul>
+      <li>OOMエラーは2024年にPHP Foundationへ報告済みだったが、軽微なクラッシュとして分類されていた</li>
+      <li>Califの研究者がAIツールで、監査開始から2週間でクラッシュを任意コード実行まで発展させた</li>
+      <li>パッチは4人チームが約2か月で作成し、悪用報告より前に公開</li>
+    </ul>
+  </div>
+  <div class="why-it-matters">💡 PHPを運用しているなら、ディストリビューション版・CMS同梱版を含めて最新のセキュリティ更新を確認すること。</div>
+  <div class="meta">
+    <span>IEEE Spectrum</span>
+    <span class="engagement">▲ 1045</span>
+    <span>⏱ 8 min read</span>
+    <span>2026-11-05</span>
+  </div>
+</div>
+<div class="card featured">
+  <div class="card-header">
+    <span class="tag tag-security">Security</span>
+    <span class="content-type">🔒 セキュリティ</span>
+    <h3><a href="https://www.itmedia.co.jp/news/article/2611/04/2000002884/">Google、Android TV端末130万台超に出荷時バックドア。Videostrongと取引停止</a></h3>
+  </div>
+  <div class="summary">Googleは11月3日（現地時間）、中国・深圳のOEM/ODMメーカーVideostrong Technologyが製造したAndroid TV端末などに不正ソフト「x.cpe」が出荷時から組み込まれていたと発表し、同社との取引を停止した。認証時のセキュリティテストを回避するため、初回起動後に不正コードを読み込む仕組みで、削除しても再起動で再インストールされる。感染端末は「XCPE」ボットネットを形成し、住宅用プロキシや広告詐欺に使われていた。</div>
+  <div class="key-points">
+    <ul>
+      <li>感染は130万台超。1台に最大3種類のプロキシ用不正ソフトが入っていた例もある</li>
+      <li>初回起動後に不正コードをロードして認証テストを回避し、Google Play プロテクトも無効化</li>
+      <li>10月最終週に警察庁などと協力してXCPEの運用を妨害。別経路で感染した1000万台以上も遮断できる見込み</li>
+    </ul>
+  </div>
+  <div class="why-it-matters">💡 安価なAndroid TV/STBを自宅回線に接続している場合、住宅用プロキシに使われる恐れがある。メーカー不明の端末はネットワークを分離したい。</div>
+  <div class="meta">
+    <span>ITmedia</span>
+    <span class="engagement">🔖 308</span>
+    <span>⏱ 4 min read</span>
+    <span>2026-11-05</span>
+  </div>
+</div>
+<div class="card featured">
+  <div class="card-header">
+    <span class="tag tag-infra">Infra</span>
+    <span class="content-type">💰 ビジネス</span>
+    <h3><a href="https://www.publickey1.jp/blog/26/aws26google_cloud1620263synergy_research.html">クラウド市場シェア：AWSは26%に後退、Google Cloudは16%に上昇（2026年Q3）</a></h3>
+  </div>
+  <div class="summary">Synergy Researchの2026年第3四半期調査によると、クラウドインフラ市場は1,680億ドルに達し、前年同期比55%増と過去最高の成長率を記録した。AWSのシェアは2ポイント低下の26%、Microsoft Azureは1ポイント低下の19%、Google Cloudは1ポイント上昇の16%。AIワークロード特化の「ネオクラウド」も急成長しており、開始したばかりのSpaceXSIが収益面でトップ10入りしたとされる。</div>
+  <div class="key-points">
+    <ul>
+      <li>市場規模は1,680億ドル、前年同期比55%増</li>
+      <li>AWS 26%（-2pt）、Azure 19%（-1pt）、Google Cloud 16%（+1pt）</li>
+      <li>ネオクラウドの台頭でシェアが分散</li>
+    </ul>
+  </div>
+  <div class="why-it-matters">💡 ベンダー選定ではAI向けGPU供給の確保状況が価格以上に効いてくる。マルチクラウド前提の設計を見直す材料になる。</div>
+  <div class="meta">
+    <span>Publickey</span>
+    <span class="engagement">🔖 17</span>
+    <span>⏱ 3 min read</span>
+    <span>2026-11-05</span>
+  </div>
+</div>
+</div>
+<div class="section" id="dev-engineering">
+<div class="section-title">⚡ Dev &amp; Engineering</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-dev">Dev</span>
+    <span class="content-type">📦 リリース</span>
+    <h3><a href="https://go.dev/blog/jsonv2">Go 1.27：encoding/json/v2 が安定版に。Unmarshal は最大10倍高速</a></h3>
+  </div>
+  <div class="summary">Go 1.27で encoding/json/v2 と encoding/json/jsontext が正式提供された。Go 1.25で実験導入されたものが安定化した形だ。v2は不正なUTF-8や重複キーをエラーとして扱い、構造体フィールドの照合は大文字小文字を区別する。v1もv2の互換オプション上で実装されており、両者は共存できる。</div>
+  <div class="key-points">
+    <ul>
+      <li>Unmarshalは最大10倍高速、Marshalはv1とほぼ同等</li>
+      <li>nilスライス/mapは空配列/空オブジェクトとして出力され、time.Durationはデフォルトでエラー</li>
+      <li>MarshalJSONTo / UnmarshalJSONFrom でストリーミング処理が可能</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>go.dev</span>
+    <span class="engagement">▲ 215</span>
+    <span>⏱ 6 min read</span>
+    <span>2026-11-05</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-security">Security</span>
+    <span class="content-type">🔒 セキュリティ</span>
+    <h3><a href="https://lists.debian.org/debian-security-announce/2026/msg00526.html">Debian apt に中間者攻撃で root 権限のコード実行（DSA-6607-1）</a></h3>
+  </div>
+  <div class="summary">DebianはaptのセキュリティアドバイザリDSA-6607-1（CVE-2026-109518）を公開した。HTTPリダイレクトで2つのパッケージ取得が同一URIになると、aptがそれらを統合してしまい、ダウンロード再開時の処理不備により、検証後のパッケージを中間者が差し替えられる。結果としてroot権限で任意コードが実行される。</div>
+  <div class="key-points">
+    <ul>
+      <li>trixie（stable）では apt 3.0.4 で修正</li>
+      <li>同更新で複数の範囲外アクセスも修正（個別CVEなし）</li>
+      <li>HTTP経由のミラーを使う環境は特に影響を受ける</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>Debian Security</span>
+    <span class="engagement">▲ 28</span>
+    <span>⏱ 3 min read</span>
+    <span>2026-11-05</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-oss">OSS</span>
+    <span class="content-type">👀 注目</span>
+    <h3><a href="https://www.publickey1.jp/blog/26/github2typescriptrustosscc_switchomarchygithub_octoverse_2026.html">GitHub Octoverse 2026：TypeScriptが2年連続1位、PR増加率はRust</a></h3>
+  </div>
+  <div class="summary">GitHubの年次レポートによると、開発者数は2億2,500万人。国別では米国3,830万人、インド3,200万人、中国1,240万人、ブラジル1,020万人で、日本は715万人で5位。急成長OSSはコントリビューター数でCC Switch、Awesome MCP Servers、Omarchyが上位に入った。</div>
+  <div class="key-points">
+    <ul>
+      <li>言語別利用はTypeScript、Python、JavaScriptの順</li>
+      <li>PR数の前年比増加はRustが最大</li>
+      <li>CC SwitchはAIプロバイダーをワンクリックで切り替えるツール</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>Publickey</span>
+    <span class="engagement">🔖 21</span>
+    <span>⏱ 3 min read</span>
+    <span>2026-11-05</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-dev">Dev</span>
+    <span class="content-type">📜 解説</span>
+    <h3><a href="https://utcc.utoronto.ca/~cks/space/blog/linux/Ubuntu2604RustSudoNotCompatible">Ubuntu 26.04 の Rust 製 sudo は標準 sudo と互換性がない</a></h3>
+  </div>
+  <div class="summary">Chris Siebenmannが、Ubuntu 26.04に採用されたRust実装のsudoが従来のsudoと挙動で互換でない点を報告している。既存の運用スクリプトや設定がそのまま動くとは限らず、アップグレード前の確認が必要になる。</div>
+  <div class="key-points">
+    <ul>
+      <li>標準sudoとの非互換を実環境の観察から指摘</li>
+      <li>sudoersやオプション依存のスクリプトは要検証</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>Chris's Wiki</span>
+    <span class="engagement">▲ 79</span>
+    <span>⏱ 3 min read</span>
+    <span>2026-11-05</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-oss">OSS</span>
+    <span class="content-type">📦 リリース</span>
+    <h3><a href="https://ziglang.org/news/0.17.1-released/">Zig 0.17.1 リリース</a></h3>
+  </div>
+  <div class="summary">Zigのパッチリリース0.17.1が公開された。同じ日のLobstersでは、Zig製libcの書き換えでSQLiteが大幅に遅くなった事例も話題になっており、Zig周辺の動向を追う価値がある。</div>
+  <div class="key-points">
+    <ul>
+      <li>0.17系のバグ修正リリース</li>
+      <li>詳細は公式リリースノートを参照</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>ziglang.org</span>
+    <span class="engagement">▲ 40</span>
+    <span>⏱ 2 min read</span>
+    <span>2026-11-05</span>
+  </div>
+</div>
+</div>
+<div class="section" id="jp-community">
+<div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-ai">AI</span>
+    <span class="content-type">📦 リリース</span>
+    <h3><a href="https://www.publickey1.jp/blog/26/github_copilot_dreaminggithub_universe_2026.html">「GitHub Copilot Dreaming」発表：作業を振り返りメモリとガイダンスを自動整理</a></h3>
+  </div>
+  <div class="summary">GitHub Universe 2026で発表された新機能で、パブリックプレビューとして提供される。作業内容を振り返り、古くなった指示やパーソナルメモリをバックグラウンドで整理・更新する。</div>
+  <div class="key-points">
+    <ul>
+      <li>パーソナルメモリとガイダンスをバックグラウンドで更新</li>
+      <li>パブリックプレビューで提供</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>Publickey</span>
+    <span>⏱ 2 min read</span>
+    <span>2026-11-05</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-dev">Dev</span>
+    <span class="content-type">📜 解説</span>
+    <h3><a href="https://zenn.dev/loglass/articles/a89a8d4ee86559">GitHubのruleset移行で注意：environment secretのブランチ保護仕様</a></h3>
+  </div>
+  <div class="summary">ブランチ保護からrulesetへ移行する際、environment secretの扱いに差が出る点を整理した記事。移行後にワークフローがsecretを参照できなくなる事態を避けるための確認ポイントを示す。</div>
+  <div class="key-points">
+    <ul>
+      <li>旧ブランチ保護とrulesetでenvironment secretの仕様が異なる</li>
+      <li>移行前にデプロイ用ワークフローの動作確認が必要</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>Zenn</span>
+    <span>⏱ 5 min read</span>
+    <span>2026-11-05</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-security">Security</span>
+    <span class="content-type">👀 注目</span>
+    <h3><a href="https://zenn.dev/nanana_sk/articles/nikke-launcher-incident">NIKKE PCランチャーのサプライチェーン攻撃をIT学生が自分のPCで調査</a></h3>
+  </div>
+  <div class="summary">NIKKE PCランチャーを経由したサプライチェーン攻撃について、IT学生が自身の環境を調べた過程をまとめた記事。感染有無の確認手順を具体的に追える。</div>
+  <div class="key-points">
+    <ul>
+      <li>自分のPCで感染有無を確認する手順を紹介</li>
+      <li>ランチャー経由の配布経路が攻撃面になった</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>Zenn</span>
+    <span>⏱ 6 min read</span>
+    <span>2026-11-05</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-dev">Dev</span>
+    <span class="content-type">🔬 研究</span>
+    <h3><a href="https://zenn.dev/trbx304/articles/34fec79781e39c">C/Rust/Julia/Go/Java/JS/PyPy/LuaJIT 実行速度ベンチマーク</a></h3>
+  </div>
+  <div class="summary">競技プログラミングと科学計算の中間にあたる処理で、8種類の言語・処理系の実行速度を比較したベンチマーク記事。</div>
+  <div class="key-points">
+    <ul>
+      <li>C、Rust、Julia、Go、Java、JS、PyPy、LuaJITの8処理系を比較</li>
+      <li>競プロ寄りと科学計算寄りの両方の観点で測定</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>Zenn</span>
+    <span>⏱ 7 min read</span>
+    <span>2026-11-05</span>
+  </div>
+</div>
+</div>
+<div class="section" id="code-tools">
+<div class="section-title">🛠 Code &amp; Tools</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-ai">AI</span>
+    <span class="content-type">📦 リリース</span>
+    <h3><a href="https://huggingface.co/moonshotai/Kimi-K3.1-Pro">Kimi K3.1 Pro のモデル重みが公開</a></h3>
+  </div>
+  <div class="summary">Moonshot AIがKimi K3.1 ProのモデルウェイトをHugging Faceで公開した。Hacker Newsでは355ポイントを集めた。</div>
+  <div class="key-points">
+    <ul>
+      <li>重みはHugging Faceから取得可能</li>
+      <li>同日にRipple-65B Previewなどオープンウェイト系の発表が続いた</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>Hugging Face</span>
+    <span class="engagement">▲ 355</span>
+    <span>⏱ 3 min read</span>
+    <span>2026-11-05</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-data">Data</span>
+    <span class="content-type">🛠 ツール</span>
+    <h3><a href="https://gigazine.net/news/20261104-project-nomad/">Project NOMAD：Wikipedia・教科書・地図・AIアシスタントを備えたオフライン知識検索</a></h3>
+  </div>
+  <div class="summary">ネット接続なしでWikipedia、教科書、地図を検索でき、AIアシスタントも使えるオフライン向けツール「Project NOMAD」をGIGAZINEが紹介した。</div>
+  <div class="key-points">
+    <ul>
+      <li>Wikipedia・教科書・地図をオフラインで検索</li>
+      <li>AIアシスタントを同梱</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>GIGAZINE</span>
+    <span class="engagement">🔖 50</span>
+    <span>⏱ 4 min read</span>
+    <span>2026-11-05</span>
+  </div>
+</div>
+</div>
+<div class="section" id="quick-links">
+<div class="section-title">🔗 Quick Links</div>
+<div class="quick-link">
+  <span class="tag tag-frontend">Frontend</span>
+  <a href="https://dbushell.com/2026/11/03/xslt-rip/">Death comes for XSLT</a>
+  <span class="quick-summary">— ブラウザでのXSLT廃止を巡る議論。</span>
+  <span class="meta">dbushell.com</span>
+</div>
+<div class="quick-link">
+  <span class="tag tag-dev">Dev</span>
+  <a href="https://andreasfertig.com/blog/2026/11/cpp26-dis-failed-how-does-cpp-survive/">C++26 Disapproved</a>
+  <span class="quick-summary">— C++26のDISが否決され、規格の今後が議論に。</span>
+  <span class="meta">Andreas Fertig</span>
+</div>
+<div class="quick-link">
+  <span class="tag tag-ai">AI</span>
+  <a href="https://www.anthropic.com/research/provable-inference">Progress on provable inference for large language models</a>
+  <span class="quick-summary">— LLM推論の検証可能性に関するAnthropicの研究進捗。</span>
+  <span class="meta">Anthropic</span>
+</div>
+<div class="quick-link">
+  <span class="tag tag-product">Product</span>
+  <a href="https://openai.com/index/openai-to-acquire-pierre/">OpenAI to acquire Pierre Computer Company</a>
+  <span class="quick-summary">— OpenAIがPierre Computer Companyの買収を発表。</span>
+  <span class="meta">OpenAI</span>
+</div>
+<div class="quick-link">
+  <span class="tag tag-dev">Dev</span>
+  <a href="https://nnethercote.github.io/2026/11/04/how-to-speed-up-the-rust-compiler-in-november-2026.html">How to speed up the Rust compiler in November 2026</a>
+  <span class="quick-summary">— Rustコンパイラ高速化の最新状況。</span>
+  <span class="meta">Nicholas Nethercote</span>
+</div>
+<div class="quick-link">
+  <span class="tag tag-oss">OSS</span>
+  <a href="https://dennisforbes.ca/blog/microblog/2026/10/the_accidental_12000x_sqlite_slowdown/">Shlemiel the Painter Is Back: How Zig's libc Rewrite Made SQLite Slower</a>
+  <span class="quick-summary">— Zig製libcの書き換えでSQLiteが約12000倍遅くなった事例。</span>
+  <span class="meta">dennisforbes.ca</span>
+</div>
+<div class="quick-link">
+  <span class="tag tag-security">Security</span>
+  <a href="https://k-tai.watch.impress.co.jp/docs/news/2153688.html">MUJIアプリの情報漏えい、MUJIカード情報含む2726万件に拡大</a>
+  <span class="quick-summary">— 漏えい件数が2,726万件に拡大。</span>
+  <span class="meta">ケータイ Watch</span>
+</div>
+<div class="quick-link">
+  <span class="tag tag-ai">AI</span>
+  <a href="https://www.publickey1.jp/blog/26/githubcopilot_fusionaigithub_universe_2026.html">GitHub、Copilot Fusionを正式リリース</a>
+  <span class="quick-summary">— タスクに応じて最適なAIモデルを選択し性能とコストを両立。</span>
+  <span class="meta">Publickey</span>
+</div>
+</div>
+
+<footer>
+  <p>Generated by Claude Code routine</p>
+  <a href="archive/" class="archive-link">🗂 過去のダイジェスト</a>
+</footer>
+</div>
 </body>
 </html>
