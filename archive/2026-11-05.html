@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-11-05</title>
+  <meta name="description" content="PHP2Shell：AIが軽微なバグを実用エクスプロイトに / Android TV 130万台にバックドア / クラウド市場1,680億ドル">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech News Daily">
+  <meta property="og:title" content="Tech News Daily — 2026-11-05">
+  <meta property="og:description" content="PHP2Shell：AIが軽微なバグを実用エクスプロイトに / Android TV 130万台にバックドア / クラウド市場1,680億ドル">
+  <meta property="og:url" content="https://tech-news.kaion-lab.com/archive/2026-11-05.html">
+  <meta property="og:image" content="https://tech-news.kaion-lab.com/apple-touch-icon.png">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="../feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-11-05 (Thu)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+      <nav class="site-nav">
+        <a href="../" class="active">📰 日刊ダイジェスト</a>
+        <a href="../trends.html">🔌 週次プラグイントレンド</a>
+        <a href="../ai-trends.html">🧠 AI プロダクト動向</a>
+        <a href="./">🗂 アーカイブ</a>
+      </nav>
+    </header>
+
+    <div class="stats-bar">
+  <span>📰 22 articles</span>
+  <span>🏷 7 categories</span>
+  <span>📡 17 sources</span>
+</div>
+
+<nav class="toc">
+  <a href="#top-stories">🔥 Top Stories</a>
+  <a href="#dev-engineering">⚡ Dev</a>
+  <a href="#jp-community">🇯🇵 日本語</a>
+  <a href="#code-tools">🛠 Tools</a>
+  <a href="#quick-links">🔗 Quick</a>
+</nav>
+
+<div class="numbers-bar">
+  <div class="number-item"><span class="number-value">1,680億ドル</span><span class="number-label">2026年Q3のクラウドインフラ市場</span></div>
+  <div class="number-item"><span class="number-value">130万台</span><span class="number-label">バックドア入りAndroid TV端末</span></div>
+  <div class="number-item"><span class="number-value">2億2,500万人</span><span class="number-label">GitHubの開発者数</span></div>
+</div>
+
+<div class="section" id="top-stories">
+<div class="section-title">🔥 Top Stories</div>
+<div class="card featured deep-dive">
+  <div class="card-header">
+    <span class="tag tag-security">Security</span>
+    <span class="content-type">🔒 セキュリティ</span>
+    <h3><a href="https://spectrum.ieee.org/ai-in-cybersecurity-php2shell-vulnerability">DEEP DIVE: PHP2Shell：AIが20年前の「軽微なクラッシュ」を実用エクスプロイトに変えた</a></h3>
+  </div>
+  <div class="summary">2026年10月下旬に公表されたPHPの重大脆弱性「PHP2Shell」は、機密データの読み取りとサーバー上での任意コード実行を可能にする。根にあるのはメモリ不足（OOM）エラーで、2024年にPHP Foundationへ報告された時点では「軽微なクラッシュ」として扱われていた。転機は、OpenAIが支援する監査プロジェクトに参加したCalifの研究者が、AIツールを使ってこのバグを2週間足らずで動作するエクスプロイトに仕上げたことだ。対象はWordPressやDrupalで構築されたサイトを含む広範なPHP環境に及ぶ。修正パッチは4人のチームが2か月かけて作成し、悪用の報告が出る前に公開された。IEEE Spectrumは、人間が書いた数十年分のレガシーコードにAIが次々と実用的な攻撃経路を見つけ出す段階に入った、と位置づける。暗号研究者のMatthew Greenは、大規模な資金投入は今より深刻なインシデントが起きた後、早ければ2027年初頭になると予測している。Hacker Newsでも1,045ポイントを集め、今日最大の議論になった。</div>
+  <div class="editorial">🧠 事実として確かなのは、「脆弱性の深刻度の見積もり」がAIで大きく覆ったことだ。クラッシュとして放置されたバグが悪用可能と判明する構図は、PHP以外の古いコードベースにも当てはまる。ただし、AIがどの工程をどこまで担ったかは記事からは切り分けられず、人間の研究者の寄与は未検証だ。</div>
+  <div class="key-points">
+    <ul>
+      <li>OOMエラーは2024年にPHP Foundationへ報告済みだったが、軽微なクラッシュとして分類されていた</li>
+      <li>Califの研究者がAIツールで、監査開始から2週間でクラッシュを任意コード実行まで発展させた</li>
+      <li>パッチは4人チームが約2か月で作成し、悪用報告より前に公開</li>
+    </ul>
+  </div>
+  <div class="why-it-matters">💡 PHPを運用しているなら、ディストリビューション版・CMS同梱版を含めて最新のセキュリティ更新を確認すること。</div>
+  <div class="meta">
+    <span>IEEE Spectrum</span>
+    <span class="engagement">▲ 1045</span>
+    <span>⏱ 8 min read</span>
+    <span>2026-11-05</span>
+  </div>
+</div>
+<div class="card featured">
+  <div class="card-header">
+    <span class="tag tag-security">Security</span>
+    <span class="content-type">🔒 セキュリティ</span>
+    <h3><a href="https://www.itmedia.co.jp/news/article/2611/04/2000002884/">Google、Android TV端末130万台超に出荷時バックドア。Videostrongと取引停止</a></h3>
+  </div>
+  <div class="summary">Googleは11月3日（現地時間）、中国・深圳のOEM/ODMメーカーVideostrong Technologyが製造したAndroid TV端末などに不正ソフト「x.cpe」が出荷時から組み込まれていたと発表し、同社との取引を停止した。認証時のセキュリティテストを回避するため、初回起動後に不正コードを読み込む仕組みで、削除しても再起動で再インストールされる。感染端末は「XCPE」ボットネットを形成し、住宅用プロキシや広告詐欺に使われていた。</div>
+  <div class="key-points">
+    <ul>
+      <li>感染は130万台超。1台に最大3種類のプロキシ用不正ソフトが入っていた例もある</li>
+      <li>初回起動後に不正コードをロードして認証テストを回避し、Google Play プロテクトも無効化</li>
+      <li>10月最終週に警察庁などと協力してXCPEの運用を妨害。別経路で感染した1000万台以上も遮断できる見込み</li>
+    </ul>
+  </div>
+  <div class="why-it-matters">💡 安価なAndroid TV/STBを自宅回線に接続している場合、住宅用プロキシに使われる恐れがある。メーカー不明の端末はネットワークを分離したい。</div>
+  <div class="meta">
+    <span>ITmedia</span>
+    <span class="engagement">🔖 308</span>
+    <span>⏱ 4 min read</span>
+    <span>2026-11-05</span>
+  </div>
+</div>
+<div class="card featured">
+  <div class="card-header">
+    <span class="tag tag-infra">Infra</span>
+    <span class="content-type">💰 ビジネス</span>
+    <h3><a href="https://www.publickey1.jp/blog/26/aws26google_cloud1620263synergy_research.html">クラウド市場シェア：AWSは26%に後退、Google Cloudは16%に上昇（2026年Q3）</a></h3>
+  </div>
+  <div class="summary">Synergy Researchの2026年第3四半期調査によると、クラウドインフラ市場は1,680億ドルに達し、前年同期比55%増と過去最高の成長率を記録した。AWSのシェアは2ポイント低下の26%、Microsoft Azureは1ポイント低下の19%、Google Cloudは1ポイント上昇の16%。AIワークロード特化の「ネオクラウド」も急成長しており、開始したばかりのSpaceXSIが収益面でトップ10入りしたとされる。</div>
+  <div class="key-points">
+    <ul>
+      <li>市場規模は1,680億ドル、前年同期比55%増</li>
+      <li>AWS 26%（-2pt）、Azure 19%（-1pt）、Google Cloud 16%（+1pt）</li>
+      <li>ネオクラウドの台頭でシェアが分散</li>
+    </ul>
+  </div>
+  <div class="why-it-matters">💡 ベンダー選定ではAI向けGPU供給の確保状況が価格以上に効いてくる。マルチクラウド前提の設計を見直す材料になる。</div>
+  <div class="meta">
+    <span>Publickey</span>
+    <span class="engagement">🔖 17</span>
+    <span>⏱ 3 min read</span>
+    <span>2026-11-05</span>
+  </div>
+</div>
+</div>
+<div class="section" id="dev-engineering">
+<div class="section-title">⚡ Dev &amp; Engineering</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-dev">Dev</span>
+    <span class="content-type">📦 リリース</span>
+    <h3><a href="https://go.dev/blog/jsonv2">Go 1.27：encoding/json/v2 が安定版に。Unmarshal は最大10倍高速</a></h3>
+  </div>
+  <div class="summary">Go 1.27で encoding/json/v2 と encoding/json/jsontext が正式提供された。Go 1.25で実験導入されたものが安定化した形だ。v2は不正なUTF-8や重複キーをエラーとして扱い、構造体フィールドの照合は大文字小文字を区別する。v1もv2の互換オプション上で実装されており、両者は共存できる。</div>
+  <div class="key-points">
+    <ul>
+      <li>Unmarshalは最大10倍高速、Marshalはv1とほぼ同等</li>
+      <li>nilスライス/mapは空配列/空オブジェクトとして出力され、time.Durationはデフォルトでエラー</li>
+      <li>MarshalJSONTo / UnmarshalJSONFrom でストリーミング処理が可能</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>go.dev</span>
+    <span class="engagement">▲ 215</span>
+    <span>⏱ 6 min read</span>
+    <span>2026-11-05</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-security">Security</span>
+    <span class="content-type">🔒 セキュリティ</span>
+    <h3><a href="https://lists.debian.org/debian-security-announce/2026/msg00526.html">Debian apt に中間者攻撃で root 権限のコード実行（DSA-6607-1）</a></h3>
+  </div>
+  <div class="summary">DebianはaptのセキュリティアドバイザリDSA-6607-1（CVE-2026-109518）を公開した。HTTPリダイレクトで2つのパッケージ取得が同一URIになると、aptがそれらを統合してしまい、ダウンロード再開時の処理不備により、検証後のパッケージを中間者が差し替えられる。結果としてroot権限で任意コードが実行される。</div>
+  <div class="key-points">
+    <ul>
+      <li>trixie（stable）では apt 3.0.4 で修正</li>
+      <li>同更新で複数の範囲外アクセスも修正（個別CVEなし）</li>
+      <li>HTTP経由のミラーを使う環境は特に影響を受ける</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>Debian Security</span>
+    <span class="engagement">▲ 28</span>
+    <span>⏱ 3 min read</span>
+    <span>2026-11-05</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-oss">OSS</span>
+    <span class="content-type">👀 注目</span>
+    <h3><a href="https://www.publickey1.jp/blog/26/github2typescriptrustosscc_switchomarchygithub_octoverse_2026.html">GitHub Octoverse 2026：TypeScriptが2年連続1位、PR増加率はRust</a></h3>
+  </div>
+  <div class="summary">GitHubの年次レポートによると、開発者数は2億2,500万人。国別では米国3,830万人、インド3,200万人、中国1,240万人、ブラジル1,020万人で、日本は715万人で5位。急成長OSSはコントリビューター数でCC Switch、Awesome MCP Servers、Omarchyが上位に入った。</div>
+  <div class="key-points">
+    <ul>
+      <li>言語別利用はTypeScript、Python、JavaScriptの順</li>
+      <li>PR数の前年比増加はRustが最大</li>
+      <li>CC SwitchはAIプロバイダーをワンクリックで切り替えるツール</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>Publickey</span>
+    <span class="engagement">🔖 21</span>
+    <span>⏱ 3 min read</span>
+    <span>2026-11-05</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-dev">Dev</span>
+    <span class="content-type">📜 解説</span>
+    <h3><a href="https://utcc.utoronto.ca/~cks/space/blog/linux/Ubuntu2604RustSudoNotCompatible">Ubuntu 26.04 の Rust 製 sudo は標準 sudo と互換性がない</a></h3>
+  </div>
+  <div class="summary">Chris Siebenmannが、Ubuntu 26.04に採用されたRust実装のsudoが従来のsudoと挙動で互換でない点を報告している。既存の運用スクリプトや設定がそのまま動くとは限らず、アップグレード前の確認が必要になる。</div>
+  <div class="key-points">
+    <ul>
+      <li>標準sudoとの非互換を実環境の観察から指摘</li>
+      <li>sudoersやオプション依存のスクリプトは要検証</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>Chris's Wiki</span>
+    <span class="engagement">▲ 79</span>
+    <span>⏱ 3 min read</span>
+    <span>2026-11-05</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-oss">OSS</span>
+    <span class="content-type">📦 リリース</span>
+    <h3><a href="https://ziglang.org/news/0.17.1-released/">Zig 0.17.1 リリース</a></h3>
+  </div>
+  <div class="summary">Zigのパッチリリース0.17.1が公開された。同じ日のLobstersでは、Zig製libcの書き換えでSQLiteが大幅に遅くなった事例も話題になっており、Zig周辺の動向を追う価値がある。</div>
+  <div class="key-points">
+    <ul>
+      <li>0.17系のバグ修正リリース</li>
+      <li>詳細は公式リリースノートを参照</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>ziglang.org</span>
+    <span class="engagement">▲ 40</span>
+    <span>⏱ 2 min read</span>
+    <span>2026-11-05</span>
+  </div>
+</div>
+</div>
+<div class="section" id="jp-community">
+<div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-ai">AI</span>
+    <span class="content-type">📦 リリース</span>
+    <h3><a href="https://www.publickey1.jp/blog/26/github_copilot_dreaminggithub_universe_2026.html">「GitHub Copilot Dreaming」発表：作業を振り返りメモリとガイダンスを自動整理</a></h3>
+  </div>
+  <div class="summary">GitHub Universe 2026で発表された新機能で、パブリックプレビューとして提供される。作業内容を振り返り、古くなった指示やパーソナルメモリをバックグラウンドで整理・更新する。</div>
+  <div class="key-points">
+    <ul>
+      <li>パーソナルメモリとガイダンスをバックグラウンドで更新</li>
+      <li>パブリックプレビューで提供</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>Publickey</span>
+    <span>⏱ 2 min read</span>
+    <span>2026-11-05</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-dev">Dev</span>
+    <span class="content-type">📜 解説</span>
+    <h3><a href="https://zenn.dev/loglass/articles/a89a8d4ee86559">GitHubのruleset移行で注意：environment secretのブランチ保護仕様</a></h3>
+  </div>
+  <div class="summary">ブランチ保護からrulesetへ移行する際、environment secretの扱いに差が出る点を整理した記事。移行後にワークフローがsecretを参照できなくなる事態を避けるための確認ポイントを示す。</div>
+  <div class="key-points">
+    <ul>
+      <li>旧ブランチ保護とrulesetでenvironment secretの仕様が異なる</li>
+      <li>移行前にデプロイ用ワークフローの動作確認が必要</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>Zenn</span>
+    <span>⏱ 5 min read</span>
+    <span>2026-11-05</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-security">Security</span>
+    <span class="content-type">👀 注目</span>
+    <h3><a href="https://zenn.dev/nanana_sk/articles/nikke-launcher-incident">NIKKE PCランチャーのサプライチェーン攻撃をIT学生が自分のPCで調査</a></h3>
+  </div>
+  <div class="summary">NIKKE PCランチャーを経由したサプライチェーン攻撃について、IT学生が自身の環境を調べた過程をまとめた記事。感染有無の確認手順を具体的に追える。</div>
+  <div class="key-points">
+    <ul>
+      <li>自分のPCで感染有無を確認する手順を紹介</li>
+      <li>ランチャー経由の配布経路が攻撃面になった</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>Zenn</span>
+    <span>⏱ 6 min read</span>
+    <span>2026-11-05</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-dev">Dev</span>
+    <span class="content-type">🔬 研究</span>
+    <h3><a href="https://zenn.dev/trbx304/articles/34fec79781e39c">C/Rust/Julia/Go/Java/JS/PyPy/LuaJIT 実行速度ベンチマーク</a></h3>
+  </div>
+  <div class="summary">競技プログラミングと科学計算の中間にあたる処理で、8種類の言語・処理系の実行速度を比較したベンチマーク記事。</div>
+  <div class="key-points">
+    <ul>
+      <li>C、Rust、Julia、Go、Java、JS、PyPy、LuaJITの8処理系を比較</li>
+      <li>競プロ寄りと科学計算寄りの両方の観点で測定</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>Zenn</span>
+    <span>⏱ 7 min read</span>
+    <span>2026-11-05</span>
+  </div>
+</div>
+</div>
+<div class="section" id="code-tools">
+<div class="section-title">🛠 Code &amp; Tools</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-ai">AI</span>
+    <span class="content-type">📦 リリース</span>
+    <h3><a href="https://huggingface.co/moonshotai/Kimi-K3.1-Pro">Kimi K3.1 Pro のモデル重みが公開</a></h3>
+  </div>
+  <div class="summary">Moonshot AIがKimi K3.1 ProのモデルウェイトをHugging Faceで公開した。Hacker Newsでは355ポイントを集めた。</div>
+  <div class="key-points">
+    <ul>
+      <li>重みはHugging Faceから取得可能</li>
+      <li>同日にRipple-65B Previewなどオープンウェイト系の発表が続いた</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>Hugging Face</span>
+    <span class="engagement">▲ 355</span>
+    <span>⏱ 3 min read</span>
+    <span>2026-11-05</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-data">Data</span>
+    <span class="content-type">🛠 ツール</span>
+    <h3><a href="https://gigazine.net/news/20261104-project-nomad/">Project NOMAD：Wikipedia・教科書・地図・AIアシスタントを備えたオフライン知識検索</a></h3>
+  </div>
+  <div class="summary">ネット接続なしでWikipedia、教科書、地図を検索でき、AIアシスタントも使えるオフライン向けツール「Project NOMAD」をGIGAZINEが紹介した。</div>
+  <div class="key-points">
+    <ul>
+      <li>Wikipedia・教科書・地図をオフラインで検索</li>
+      <li>AIアシスタントを同梱</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>GIGAZINE</span>
+    <span class="engagement">🔖 50</span>
+    <span>⏱ 4 min read</span>
+    <span>2026-11-05</span>
+  </div>
+</div>
+</div>
+<div class="section" id="quick-links">
+<div class="section-title">🔗 Quick Links</div>
+<div class="quick-link">
+  <span class="tag tag-frontend">Frontend</span>
+  <a href="https://dbushell.com/2026/11/03/xslt-rip/">Death comes for XSLT</a>
+  <span class="quick-summary">— ブラウザでのXSLT廃止を巡る議論。</span>
+  <span class="meta">dbushell.com</span>
+</div>
+<div class="quick-link">
+  <span class="tag tag-dev">Dev</span>
+  <a href="https://andreasfertig.com/blog/2026/11/cpp26-dis-failed-how-does-cpp-survive/">C++26 Disapproved</a>
+  <span class="quick-summary">— C++26のDISが否決され、規格の今後が議論に。</span>
+  <span class="meta">Andreas Fertig</span>
+</div>
+<div class="quick-link">
+  <span class="tag tag-ai">AI</span>
+  <a href="https://www.anthropic.com/research/provable-inference">Progress on provable inference for large language models</a>
+  <span class="quick-summary">— LLM推論の検証可能性に関するAnthropicの研究進捗。</span>
+  <span class="meta">Anthropic</span>
+</div>
+<div class="quick-link">
+  <span class="tag tag-product">Product</span>
+  <a href="https://openai.com/index/openai-to-acquire-pierre/">OpenAI to acquire Pierre Computer Company</a>
+  <span class="quick-summary">— OpenAIがPierre Computer Companyの買収を発表。</span>
+  <span class="meta">OpenAI</span>
+</div>
+<div class="quick-link">
+  <span class="tag tag-dev">Dev</span>
+  <a href="https://nnethercote.github.io/2026/11/04/how-to-speed-up-the-rust-compiler-in-november-2026.html">How to speed up the Rust compiler in November 2026</a>
+  <span class="quick-summary">— Rustコンパイラ高速化の最新状況。</span>
+  <span class="meta">Nicholas Nethercote</span>
+</div>
+<div class="quick-link">
+  <span class="tag tag-oss">OSS</span>
+  <a href="https://dennisforbes.ca/blog/microblog/2026/10/the_accidental_12000x_sqlite_slowdown/">Shlemiel the Painter Is Back: How Zig's libc Rewrite Made SQLite Slower</a>
+  <span class="quick-summary">— Zig製libcの書き換えでSQLiteが約12000倍遅くなった事例。</span>
+  <span class="meta">dennisforbes.ca</span>
+</div>
+<div class="quick-link">
+  <span class="tag tag-security">Security</span>
+  <a href="https://k-tai.watch.impress.co.jp/docs/news/2153688.html">MUJIアプリの情報漏えい、MUJIカード情報含む2726万件に拡大</a>
+  <span class="quick-summary">— 漏えい件数が2,726万件に拡大。</span>
+  <span class="meta">ケータイ Watch</span>
+</div>
+<div class="quick-link">
+  <span class="tag tag-ai">AI</span>
+  <a href="https://www.publickey1.jp/blog/26/githubcopilot_fusionaigithub_universe_2026.html">GitHub、Copilot Fusionを正式リリース</a>
+  <span class="quick-summary">— タスクに応じて最適なAIモデルを選択し性能とコストを両立。</span>
+  <span class="meta">Publickey</span>
+</div>
+</div>
+
+<footer>
+  <p>Generated by Claude Code routine</p>
+  <a href="./" class="archive-link">🗂 過去のダイジェスト</a>
+</footer>
+</div>
+</body>
+</html>
