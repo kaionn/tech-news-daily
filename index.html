@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tech News Daily — 2026-11-06</title>
-  <meta name="description" content="Alpine OpenSSH認証バイパス / GPT-6 Cyber発表 / Claude Codeメール漏えい報告">
+  <title>Tech News Daily — 2026-11-07</title>
+  <meta name="description" content="GitHub新Git基盤 毎秒7,200 push / ドコモ最大29万件の情報流出 / Gemini Omni 1.2 Flash">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Tech News Daily">
-  <meta property="og:title" content="Tech News Daily — 2026-11-06">
-  <meta property="og:description" content="Alpine OpenSSH認証バイパス / GPT-6 Cyber発表 / Claude Codeメール漏えい報告">
+  <meta property="og:title" content="Tech News Daily — 2026-11-07">
+  <meta property="og:description" content="GitHub新Git基盤 毎秒7,200 push / ドコモ最大29万件の情報流出 / Gemini Omni 1.2 Flash">
   <meta property="og:url" content="https://tech-news.kaion-lab.com/">
   <meta property="og:image" content="https://tech-news.kaion-lab.com/apple-touch-icon.png">
   <meta name="twitter:card" content="summary">
@@ -22,7 +22,7 @@
   <div class="container">
     <header>
       <h1>Tech News Daily</h1>
-      <div class="date">2026-11-06 (Fri)</div>
+      <div class="date">2026-11-07 (Sat)</div>
       <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
       <nav class="site-nav">
         <a href="./" class="active">📰 日刊ダイジェスト</a>
@@ -33,9 +33,9 @@
     </header>
 
     <div class="stats-bar">
-      <span>📰 22 articles</span>
+      <span>📰 18 articles</span>
       <span>🏷 8 categories</span>
-      <span>📡 19 sources</span>
+      <span>📡 17 sources</span>
     </div>
 
     <nav class="toc">
@@ -48,95 +48,87 @@
 
     <div class="numbers-bar">
       <div class="number-item">
-        <span class="number-value">81件</span>
-        <span class="number-label">GPT-6 Cyber が Firefox で見つけた未知の脆弱性</span>
+        <span class="number-value">7,200/s</span>
+        <span class="number-label">GitHub 新基盤での単一リポジトリ push 数</span>
       </div>
       <div class="number-item">
-        <span class="number-value">12,000x</span>
-        <span class="number-label">Zig の libc 書き換えによる SQLite の低速化</span>
+        <span class="number-value">294,839</span>
+        <span class="number-label">ドコモ流出の最大回線数</span>
       </div>
       <div class="number-item">
-        <span class="number-value">257B</span>
-        <span class="number-label">Alpine sshd を突破できる最小のパスワード長</span>
+        <span class="number-value">96.1%</span>
+        <span class="number-label">Replit が回避した Linux CVE の割合</span>
       </div>
-    </div>
-
-    <div class="weekly-keywords">
-      <div class="section-title">📊 今週のキーワード</div>
-      <div class="keyword-chips">
-        <span class="keyword-chip">AIエージェント</span>
-        <span class="keyword-chip">GitHub Universe</span>
-        <span class="keyword-chip">AI×セキュリティ</span>
-      </div>
-      <div class="keyword-summary">GitHub Universe で Copilot の新機能が相次ぎ、AI がコードを書く前提の基盤強化が進んだ。週末にかけては GPT-6 Cyber や PHP2Shell など AI による脆弱性発見が話題となり、一方で Claude Code のメール漏えい報告のようにエージェントの挙動管理も論点になった。</div>
     </div>
 
     <div class="section" id="top-stories">
       <div class="section-title">🔥 Top Stories</div>
+
       <div class="card featured deep-dive">
         <div class="card-header">
-          <span class="tag tag-security">Security</span>
-          <span class="content-type">🔒 セキュリティ</span>
-          <h3><a href="https://alpinelinux.org/posts/2026-11-05-openssh-password-authentication-bypass/">DEEP DIVE: Alpine Linux の OpenSSH にパスワード認証バイパス、257バイト超のパスワードで1接続でログイン可能</a></h3>
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://github.blog/engineering/architecture-optimization/inside-githubs-new-git-storage-architecture/">DEEP DIVE: GitHub の新 Git ストレージ設計 — 5,000 エージェントが 1 リポジトリへ同時 push</a></h3>
         </div>
-        <div class="summary">Alpine Linux は 11/5、PAM なしでビルドされた openssh-server（および UsePAM no の openssh-server-pam）に、パスワードなしで SSH ログインできる脆弱性を公表した。原因は musl の crypt() の仕様にある。sshd は PAM を使わない場合、入力されたパスワードを crypt() でハッシュ化して保存値と比較する。musl の crypt() は 256 バイトを超える鍵に対してエラー値として文字列 "*" を返す。一方、パスワード未設定のアカウント（base image の root、鍵認証専用ユーザー、ディレクトリサービス経由のユーザーなど）は保存値が "*" になっており、両者が一致して認証が通ってしまう。さらに保存値が短くソルトを保持できないアカウントでは、別アカウントのソルトを借用する実装も関係する。攻撃条件は、PasswordAuthentication が yes（既定値）であること、"*" のアカウントが 1 つ以上あること、$5$ または $6$ のハッシュを持つローカルアカウントが 1 つ以上あること、そして 257〜1024 バイトのパスワードを送ることである。試行は 1 接続で毎回成功する。影響は Alpine 3.21〜3.24 と edge、サポート外の 3.16〜3.20 で、公式 tiny-cloud イメージ（3.18.11〜3.24.3）も $6$ ハッシュが存在すれば悪用可能になる。修正版は 3.21.10、3.22.8、3.23.8、3.24.4 以降で、edge は 10.6_p2-r0。CVE は執筆時点で未割り当てだ。</div>
-        <div class="editorial">🧠 比較関数に「エラー値」と「正当な値」が同じ文字列で表現されていたという、古典的だが見落とされやすい設計ミスだ。実害は sshd をインターネットへ公開した Alpine に限られるが、1 接続で毎回成功するため、CVE 未割り当てでもスキャンが先行する可能性が高い。一方で、一般的なコンテナ用途では sshd 自体を入れない構成が多く、実際の露出範囲は未知数だ。</div>
+        <div class="summary">GitHub が AI エージェントの大量並行 push に耐えるため、Git ストレージを作り直した。11/4 の Universe 関連報道では「従来比 180 倍のスループット」という目標値だけが伝えられたが、GitHub Engineering Blog が設計の中身を公開した。出発点は、AI エージェントの増加で 1 つの忙しいリポジトリのリクエスト数が 3 月から 5 月で約 4 倍になったことだ。従来のようにサーバのローカルディスクを正本とする構成では、書き込みの調整コストがボトルネックになる。新設計（Project Rubicon）は「調整を最小化する」と「ストレージとコンピュートの分離」を原則とする。Git オブジェクトは不変なので、書き手同士が合意しなくても保存できる。順序付けが必要なのは参照（ref）の更新だけである。リクエストは使い捨ての仮想レプリカ（Spokes 経由）に振り分けられ、ローカルディスクはキャッシュにすぎない。パックは Azure Blob Storage に置き、参照とパックのマニフェストは Ref-CAS という複製ログが持つ。書き込みは「パックを Blob にアップロードし、Ref-CAS で 1 トランザクションをコミット」の 2 手順で済む。Ref-CAS は quorum による compare-and-swap で、触る参照だけをロックし、オブジェクト本体は保持せず、毎秒数万オペレーションを処理する。社内テストでは 5,000 の並行エージェントが単一リポジトリへ毎秒 7,200 push を送り、読み取りレイテンシは低いままだった。単一 blob の write-ahead log は毎秒数百書き込み止まりで、シャード分割では読み取りが遅くなったため採用を見送った。バックグラウンドのノードがシャードごとのリースでセグメントを封じ、パックを階層的にマージして、push 増加時もパック数を一定に保つ。現状は限定プライベートプレビューで、全体展開は来年初頭の見込みである。</div>
+        <div class="editorial">🧠 「オブジェクトは不変、順序が要るのは ref だけ」という整理は、Git の性質をそのままスケール設計に使っており筋が良い。ただし 7,200 push/s は社内ベンチマークの値で、実際のエージェントの push パターンや巨大モノレポで再現するかは未検証だ。ブランチ単位ロックで 3〜4 倍という別報道の数字と合わせても、利用者が体感する差は来年の展開後にしか分からない。</div>
         <div class="key-points">
           <ul>
-            <li>257〜1024 バイトのパスワードで 1 接続・再試行なしで認証成功。musl の crypt() が 256 バイト超で返すエラー値 "*" が、未設定アカウントの保存値 "*" と一致する</li>
-            <li>修正は openssh 3.21.10 / 3.22.8 / 3.23.8 / 3.24.4 以降。パッケージ更新だけでは稼働中のデーモンは置き換わらず、sshd の再起動が必要</li>
-            <li>回避策は PasswordAuthentication no にして sshd を再起動</li>
+            <li>5,000 並行エージェントから単一リポジトリへ毎秒 7,200 push、読み取りレイテンシは低位を維持</li>
+            <li>単一 blob の WAL は毎秒数百書き込みで頭打ち。Ref-CAS は触る参照だけをロックして毎秒数万オペレーションを達成</li>
+            <li>Azure Blob Storage + 使い捨てレプリカ構成。限定プライベートプレビュー中で、広範な展開は来年初頭</li>
           </ul>
         </div>
-        <div class="why-it-matters">💡 Alpine ベースのコンテナ・クラウドイメージで sshd を公開している場合は、更新と再起動を待たず PasswordAuthentication no を先に適用すること。</div>
+        <div class="why-it-matters">💡 エージェントで同一リポジトリに大量 push する運用は今後ホスティング側が受け止める前提になるが、それまでは push 頻度とブランチ分割の設計を自前で考えておくこと。</div>
         <div class="meta">
-          <span>Alpine Linux</span>
-          <span class="engagement">▲ 577</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-11-05</span>
-        </div>
-      </div>
-      <div class="card featured">
-        <div class="card-header">
-          <span class="tag tag-ai">AI</span>
-          <span class="content-type">🔬 研究</span>
-          <h3><a href="https://www.itmedia.co.jp/news/article/2611/06/2000002931/">OpenAI、サイバーセキュリティ特化型「GPT-6 Cyber」発表　Firefoxの未知の脆弱性81件を発見</a></h3>
-        </div>
-        <div class="summary">OpenAI は 11/5、GPT-6 Astra をベースに脆弱性発見・エクスプロイト開発・Web アプリのペネトレーションテストへ強化学習で特化させた GPT-6 Cyber を発表した。ExploitGym（既知脆弱性の実動エクスプロイト生成）で 48.5%（前世代 GPT-5.6 Cyber は 32.1%）。Firefox では未知の高深刻度脆弱性 81 件を発見し、Linux カーネルでは 948 件の脆弱性に対して動作するエクスプロイトを開発した。提供は防御者向けプログラム Daybreak Red の承認ユーザーに限定される。</div>
-        <div class="key-points">
-          <ul>
-            <li>ExploitGym 48.5%（GPT-5.6 Cyber は 32.1%）、ソース非公開の Web 脆弱性探索は 40.3%（Astra は 32.0%）</li>
-            <li>スコープ逸脱率は GPT-5.6 Cyber の 5.51% から 0.07% へ低下。一方、停止指示への従順率は 73.0%で Astra の 78.38% より低い</li>
-            <li>API と Codex で承認済み Daybreak Red ユーザーに提供し、本人確認と MFA・SSO を要求</li>
-          </ul>
-        </div>
-        <div class="why-it-matters">💡 脆弱性発見の自動化が防御側に先に配られる形だが、停止指示への従順率が Astra より下がっている点は、自社環境で使う前に検証すべき留意点である。</div>
-        <div class="meta">
-          <span>ITmedia</span>
-          <span class="engagement">🔖 36</span>
-          <span>⏱ 5 min read</span>
+          <span>GitHub Blog</span>
+          <span>⏱ 10 min read</span>
           <span>2026-11-06</span>
         </div>
       </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://www.watch.impress.co.jp/docs/news/2154508.html">NTT ドコモで不正アクセス、最大 294,839 回線の顧客情報が流出</a></h3>
+        </div>
+        <div class="summary">ドコモは 11/6、ドコモオンラインショップと My docomo への不正アクセスで顧客情報が流出したと発表した。流出対象は氏名・住所・生年月日・電話番号・本人確認書類番号・料金プランやオプションで、一部は法定代理人の連絡先、勤務先・法人情報、銀行口座情報も含む。対象は最大 294,839 回線（個人 204,157、法人 90,682）。攻撃者は連携する複数システムをたどり、ユーザー情報を自動で検索・取得した。ドコモは API 攻撃ではなく、システム設計の悪用であり単一システムの欠陥ではないと説明している。11/4 に検知し、11/5 に流出を確認した。</div>
+        <div class="key-points">
+          <ul>
+            <li>最大 294,839 回線（個人 204,157・法人 90,682）、本人確認書類番号や一部で銀行口座情報を含む</li>
+            <li>個別システムの脆弱性ではなく、連携システムを連鎖的にたどる設計上の弱点が悪用された</li>
+            <li>11/4 検知、11/5 確認、11/6 公表。同期間に別件で 5G SA 障害（最大約 159 万人、コアスイッチのメモリ障害）も発生</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 システム単体の脆弱性診断では見つからないため、複数システムを連携させる設計では「連鎖して辿れる参照範囲」と大量取得の検知を設計時にレビューすること。</div>
+        <div class="meta">
+          <span>Impress Watch</span>
+          <span class="engagement">🔖 153</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-11-06</span>
+        </div>
+      </div>
+
       <div class="card featured">
         <div class="card-header">
           <span class="tag tag-ai">AI</span>
-          <span class="content-type">👀 注目</span>
-          <h3><a href="https://github.com/anthropics/claude-code/issues/107757">Claude Code が Web 検索時に User-Agent へユーザーのメールアドレスを含めるとの報告</a></h3>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://blog.google/innovation-and-ai/technology/developers-tools/introducing-gemini-omni-1-2-flash/">Google、動画生成・編集モデル Gemini Omni 1.2 Flash を GA</a></h3>
         </div>
-        <div class="summary">GitHub issue #107757 で、Claude Code 2.1.318（macOS）が Web リクエストの User-Agent ヘッダーにユーザーのメールアドレスを載せたと報告された。Anthropic のコントリビューターは設計された機能ではなくモデルの挙動だと説明している。例として、Wikipedia がスクリプトクライアントに連絡先メールの記載を求めるため、モデルが curl の User-Agent にメールを入れた。Anthropic は v2.1.317 以降で、この挙動を決定論的に遮断する組み込み mod「cc-plugin-privacy」を既定で有効にしている。</div>
+        <div class="summary">Google DeepMind が 11/5 に Gemini Omni 1.2 Flash を発表した。動画の生成と編集を 1 モデルで行い、最大長は Omni 1.1 の 10 秒から 15 秒に伸びた。360p / 720p でドラフトを作ってから 1080p / 4K へアップスケールでき、キャラクター・商品・スタイルの参照画像、3 秒までのモーションクリップ、音声キューを入力にできる。背景やライティングの差し替えをクリップ全体の再生成なしで対話的に行える。料金は Omni 1.1 比で約 30% 安く、720p が 1 秒あたり 0.07 ドル。Gemini API と Google Cloud で一般提供され、Google Vids では追加費用なしで 15 秒クリップを生成できる。出力には SynthID 透かしが入る。</div>
         <div class="key-points">
           <ul>
-            <li>v2.1.317 以降は cc-plugin-privacy が既定で有効。/plugins から無効化できる</li>
-            <li>2.1.318 でも /plugins に表示されないとの報告があり、未解決</li>
-            <li>報告者はスパム被害を主張するが、因果関係は issue 上では立証されていない</li>
+            <li>最大 15 秒（3〜15 秒を 1 秒刻み）、720p で 1 秒 0.07 ドル、Omni 1.1 比約 30% 値下げ</li>
+            <li>低解像度ドラフト → 1080p / 4K アップスケールの 2 段構成で、試行コストを抑える設計</li>
+            <li>Gemini API / Google Cloud（Provisioned Throughput）で GA、Gemini アプリは AI Ultra 向けに順次展開</li>
           </ul>
         </div>
-        <div class="why-it-matters">💡 エージェントに外部アクセスさせる場合、メールなどの個人情報が CLAUDE.md や環境から漏れる経路になりうるため、許可するサイトを CLAUDE.md で明示しておくとよい。</div>
+        <div class="why-it-matters">💡 15 秒の 720p は約 1.05 ドルなので、プロトタイプでは低解像度ドラフトで試行を回し、確定したものだけアップスケールする運用にするとコストを抑えられる。</div>
         <div class="meta">
-          <span>GitHub</span>
-          <span class="engagement">▲ 440</span>
-          <span>⏱ 3 min read</span>
+          <span>Google Blog</span>
+          <span class="engagement">▲ 291</span>
+          <span>⏱ 5 min read</span>
           <span>2026-11-05</span>
         </div>
       </div>
@@ -144,281 +136,249 @@
 
     <div class="section" id="dev-engineering">
       <div class="section-title">⚡ Dev &amp; Engineering</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://pwn.ai/blog/firecracker-escape">Firecracker VM Escape: PwnEscape Part 2</a></h3>
+        </div>
+        <div class="summary">microVM モニタ Firecracker のゲストからホストへ脱出し、ホスト上で root としてコードを実行する手法の解説。Part 1 で得たホストメモリのプリミティブを使い、ゲストページに仕込んだ nonce を EPT 変換経由でホストメモリ上から探し、Firecracker プロセスのロードベースを特定する。KVM_RUN で止まった vCPU スレッドの保存済みレジスタを書き換え、ゲストのシリアルポートへの 1 バイト書き込みで write(2) を呼ばせる。</div>
+        <div class="key-points">
+          <ul>
+            <li>検証環境は Firecracker v1.16.1（x86-64）、ホストカーネル 7.0.0-1011-aws。jailer 無しで実施し、権限降格・namespace・seccomp の効果は未評価</li>
+            <li>脱出後も Firecracker プロセス（PID 2936）とゲスト SSH は稼働を継続。修正状況は記事中に記載なし</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>pwn.ai</span>
+          <span class="engagement">▲ 151</span>
+          <span>⏱ 12 min read</span>
+          <span>2026-11-06</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://frontier.replit.com/sandbox-engine-microvms-part-1/">Replit、サンドボックスエンジンを microVM で再構築</a></h3>
+        </div>
+        <div class="summary">Replit は各サンドボックスに専用 Linux カーネルを与える構成へ移行した（Cloud Hypervisor + KVM）。数億規模のプロジェクトをデータ損失なしで移行したという。ゲストカーネルは tinyconfig から始め、不要なドライバとモジュールロードを無効化して攻撃面を削っている。</div>
+        <div class="key-points">
+          <ul>
+            <li>Linux CNA の CVE 6,211 件を精査し 5,969 件（96.1%）を上流修正または設定除外で回避。設定による除外だけで 676 件</li>
+            <li>ウォームプールにより、ボリューム付きサンドボックスを約 500ms で取得。セキュリティ更新はマージから 15 分以内に本番へ反映</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Replit Frontier</span>
+          <span class="engagement">▲ 54</span>
+          <span>⏱ 9 min read</span>
+          <span>2026-11-06</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-data">Data</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://hightouch.com/blog/llm-judges-identity-resolution">安価な判定モデルが必要時だけ Opus に相談、精度を保ちコスト 1/4</a></h3>
+        </div>
+        <div class="summary">Hightouch は、名寄せ（identity resolution）の出力を安価な判定モデルで採点できるか検証した。問題は 1 つの ID に複数人のレコードが混ざる過剰統合で、1,000 件の ID でベンチマークを作った。判定モデルが先に採点し、確信度が中間帯の ID だけを Opus に回すハイブリッドで、精度とコストを両立させている。</div>
+        <div class="key-points">
+          <ul>
+            <li>難問では Opus 95.1%（1,000 件 5.39 ドル）に対し、ハイブリッド Jev は 95.3% で 2.94 ドル</li>
+            <li>Jev は誤りが確信度 50% 付近に集まるため振り分けが効く。Luna は過信気味で誤りが検出されにくく、ハイブリッドでも 91.6%</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Hightouch</span>
+          <span class="engagement">▲ 292</span>
+          <span>⏱ 7 min read</span>
+          <span>2026-11-06</span>
+        </div>
+      </div>
+
       <div class="card">
         <div class="card-header">
           <span class="tag tag-dev">Dev</span>
           <span class="content-type">📜 解説</span>
-          <h3><a href="https://dennisforbes.ca/blog/microblog/2026/10/the_accidental_12000x_sqlite_slowdown/">Shlemiel the Painter Is Back: Zig の libc 書き換えで SQLite が最大 12,000 倍遅くなった</a></h3>
+          <h3><a href="https://www.datadoghq.com/blog/engineering/continuous-formal-spec-validation/">Datadog、TLA+ 仕様を本番の実行監視に変換する FETCh</a></h3>
         </div>
-        <div class="summary">Rust 製チェスサービスが JSON を SQLite に保存しており、Linux ビルドで cargo-zigbuild（zig cc）を使っていた。Zig が C の文字列関数を Zig で書き直した実装は、呼び出しのたびに入力文字列全体の長さを測る。トークナイザは巨大な文字列の残りに対して空白スキップなどでこれらを繰り返し呼ぶため、毎回末尾まで走査して全体が二乗時間になる。</div>
+        <div class="summary">Datadog は TLA+ 仕様を Rust のランタイムモニタに変換し、本番の挙動を形式仕様と照合する FETCh を作った。イベントデータベース Husky の配置ロジック変更で、衝突する配置が約 1 年残っていたが、テストとレビューは見逃し、FETCh が検出した。衝突は配置全体の 0.01% 未満だが、データ損失時に 2 件重なるとバックフィルが落ちうる。</div>
         <div class="key-points">
           <ul>
-            <li>約 4 万レコードの挿入が数分間 CPU 1 コアを占有。1.2MB の JSON トークナイズが従来比で約 12,000 倍遅い</li>
-            <li>同じパターンが strcspn・strpbrk・strstr にも存在すると指摘</li>
-            <li>Zig を使わない Mac ビルドは影響なし。筆者は Linux ビルドをコンテナ化して回避</li>
+            <li>1,300 以上の Pod で p90 CPU 約 2%、メモリ 0.2% 未満のオーバーヘッド</li>
+            <li>制約: TLA+ の一部のみ対応で、事前条件は現在状態に対してのみ検査</li>
           </ul>
         </div>
         <div class="meta">
-          <span>dennisforbes.ca</span>
-          <span class="engagement">▲ 100</span>
-          <span>⏱ 5 min read</span>
-          <span>2026-11-04</span>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-frontend">Frontend</span>
-          <span class="content-type">👀 注目</span>
-          <h3><a href="https://noteflakes.com/articles/2026-11-04-datastar">A Look at Datastar</a></h3>
-        </div>
-        <div class="summary">ハイパーメディア系フロントエンドライブラリ Datastar を実際に試した個人ブログ記事。Lobsters のホットエントリに入っている。サーバー駆動の UI 更新に関心がある場合の参考になる。</div>
-        <div class="key-points">
-          <ul>
-            <li>Lobsters スコア 16 の新着エントリ（2026-11-04 公開）</li>
-            <li>htmx 系のサーバー主導 UI 設計との比較材料になる</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>noteflakes</span>
-          <span>⏱ 6 min read</span>
-          <span>2026-11-04</span>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
-          <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://wiredream.com/anagram-fun/">11 nanoseconds per word: Ridiculously Over-Optimizing Anagrams</a></h3>
-        </div>
-        <div class="summary">アナグラム検索を 1 語あたり 11 ナノ秒まで最適化した過程を記録したブログ記事。低レベルの最適化手法の読み物として Lobsters で話題になっている。</div>
-        <div class="key-points">
-          <ul>
-            <li>1 語あたり 11 ns という処理速度を達成</li>
-            <li>Lobsters スコア 25（2026-11-05）</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>wiredream.com</span>
-          <span>⏱ 8 min read</span>
-          <span>2026-11-05</span>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-security">Security</span>
-          <span class="content-type">🔒 セキュリティ</span>
-          <h3><a href="https://www.cve.org/CVERecord?id=CVE-2026-83844">MS Paint にリモートコード実行の脆弱性（CVE-2026-83844）</a></h3>
-        </div>
-        <div class="summary">CVE-2026-83844 として MS Paint のリモートコード実行脆弱性が登録され、Hacker News で 293 ポイントを集めた。CVE レコードのページから詳細は取得できなかったため、影響範囲と修正状況は公式アドバイザリで確認が必要だ。</div>
-        <div class="key-points">
-          <ul>
-            <li>CVE ID は CVE-2026-83844</li>
-            <li>HN 前面ページで 293 ポイント</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>CVE.org</span>
-          <span class="engagement">▲ 293</span>
-          <span>⏱ 1 min read</span>
-          <span>2026-11-05</span>
+          <span>Datadog</span>
+          <span>⏱ 10 min read</span>
+          <span>2026-11-06</span>
         </div>
       </div>
     </div>
 
     <div class="section" id="jp-community">
       <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+
       <div class="card">
         <div class="card-header">
           <span class="tag tag-dev">Dev</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://blog.mudatobunka.org/entry/2026/11/05/100000">自作AIエージェントの開発をやめた - 無駄と文化</a></h3>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://zenn.dev/xin9le/articles/9a1cf8e10494d6">[破壊的変更] 明治時代の開始日が変更になって単体テストが失敗した件</a></h3>
         </div>
-        <div class="summary">Google ADK で作ったデータ分析エージェントの開発をやめ、事前集計データと指標の知識を返す「分析 MCP」へ作り直した体験記。UI・認証・メモリー・スキル管理を全て自作する負担と、メモリー機能の難しさが理由として挙げられている。</div>
+        <div class="summary">CI の ubuntu-latest が 24.04 から 26.04 に切り替わったのを境に、明治の開始日をフォーマットする C# の単体テストが ArgumentOutOfRangeException で失敗した。原因は Ubuntu 26.04 の ICU に含まれる CLDR データ修正で、旧データが太陰太陽暦の日付をグレゴリオ暦として扱っていた誤りが直された。</div>
         <div class="key-points">
           <ul>
-            <li>FastMCP を採用。ADK も FastMCP も FastAPI ベースで既存コードの多くを流用できた</li>
-            <li>生データを渡しても平凡な洞察しか出ず、指標の定義合意・日次の事前集計・収集方法の見直しが効果を出した</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>無駄と文化</span>
-          <span class="engagement">🔖 187</span>
-          <span>⏱ 6 min read</span>
-          <span>2026-11-05</span>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-frontend">Frontend</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://zenn.dev/jtcc/articles/riverpod-generator-migration">手書き Provider 261 件を @riverpod へ全面移行した進め方</a></h3>
-        </div>
-        <div class="summary">Flutter の状態管理 Riverpod で、手書きの Provider 261 件をコード生成方式の @riverpod へ全面移行した進め方を共有した Zenn 記事。大規模な一括移行の手順が主題。</div>
-        <div class="key-points">
-          <ul>
-            <li>対象は手書き Provider 261 件</li>
-            <li>コード生成（riverpod_generator）への全面移行</li>
+            <li>明治開始日が 1868/9/8 から 1868/10/23 へ変更。.NET 11 Preview 1 以降は JapaneseCalendar.MinSupportedDateTime も同値に変更（.NET 10 以前は旧値）</li>
+            <li>対処はテストの日付を 1868/10/23 に直し、期待値を「明治元年10月23日」にすること</li>
           </ul>
         </div>
         <div class="meta">
           <span>Zenn</span>
+          <span class="engagement">🔖 83</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-11-06</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-frontend">Frontend</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/cybozu_frontend/articles/web-standards-trends-202610">Web 標準動向 2026年10月版</a></h3>
+        </div>
+        <div class="summary">サイボウズのフロントエンドチームによる月次の標準化動向まとめ。HTML ではフォーカス喪失を通知する focusreset イベントが Chrome でプロトタイプ案となり、Chrome 157 で HTML-in-Canvas が安定版入りする。CSS は論理プロパティのショートハンドに !logical 構文を採用する方向で決まった。</div>
+        <div class="key-points">
+          <ul>
+            <li>Custom Highlight API で opacity と CSS アニメーションが使えるようになる</li>
+            <li>ECMA-262: Composite が Stage 2、deferred re-exports が Stage 2.7、BigInt の指数表記が Stage 2 へ</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn（サイボウズ）</span>
           <span>⏱ 8 min read</span>
-          <span>2026-11-05</span>
+          <span>2026-11-06</span>
         </div>
       </div>
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-data">Data</span>
-          <span class="content-type">🔬 研究</span>
-          <h3><a href="https://developers.freee.co.jp/entry/lean-formal-verification-tax-law-qa">税法を定理証明支援系 Lean で書いて、プロダクト実装を「全入力で」確かめる</a></h3>
-        </div>
-        <div class="summary">freee が税法のルールを定理証明支援系 Lean で記述し、プロダクト側の実装が全入力で一致するかを検証する取り組みを紹介した。テストでは網羅できない入力空間を形式的に確かめる狙い。</div>
-        <div class="key-points">
-          <ul>
-            <li>税法を Lean で形式記述</li>
-            <li>実装を「全入力」で検証するアプローチ</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>freee Developers Hub</span>
-          <span class="engagement">🔖 8</span>
-          <span>⏱ 10 min read</span>
-          <span>2026-11-04</span>
-        </div>
-      </div>
+
       <div class="card">
         <div class="card-header">
           <span class="tag tag-frontend">Frontend</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://zenn.dev/sun_asterisk/articles/d4e4bc24974b99">AI生成コードを本番品質に保つためのフロントエンド開発の仕組み</a></h3>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/javascriptbunprettier300prettier.html">Bun がPrettier互換で300倍以上高速なフォーマッタを搭載</a></h3>
         </div>
-        <div class="summary">AI が生成したフロントエンドコードを本番品質に保つための開発上の仕組みを整理した Zenn 記事。</div>
+        <div class="summary">Bun v1.4.4（10/22 リリース）に Prettier 互換のフォーマッタ bun fmt が入った。Prettier の設定ファイルに加え、別のフォーマッタ oxfmt の設定ファイルもそのまま使える。</div>
         <div class="key-points">
           <ul>
-            <li>AI 生成コードの品質担保が主題</li>
-            <li>フロントエンド開発のプロセス設計に焦点</li>
+            <li>Prettier のテストスイートの 99% 以上をクリア、実行速度は最大 320 倍、メモリは 1/5 以下</li>
+            <li>対応言語は JavaScript / TypeScript / CSS / HTML / JSON / YAML / Markdown など 20 種類</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Zenn</span>
-          <span>⏱ 7 min read</span>
-          <span>2026-11-05</span>
+          <span>Publickey</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-10-27</span>
         </div>
       </div>
     </div>
 
     <div class="section" id="code-tools">
       <div class="section-title">🛠 Code &amp; Tools</div>
+
       <div class="card">
         <div class="card-header">
           <span class="tag tag-oss">OSS</span>
           <span class="content-type">📦 リリース</span>
-          <h3><a href="https://servo.org/blog/2026/11/05/september-in-servo/">Servo 0.7.0：9月の527コミット、progress 要素と roundRect() に対応</a></h3>
+          <h3><a href="https://mitchellh.com/writing/libghostty-1-0">libghostty-vt 1.0 リリース — Ghostty から切り出した端末エミュレーション C ライブラリ</a></h3>
         </div>
-        <div class="summary">ブラウザエンジン Servo が 9 月の進捗を公開した。SpiderMonkey v153.3 に更新し、<progress> 要素、user-select、CanvasRenderingContext2D の roundRect() などを追加した。埋め込み API には破壊的変更がある。</div>
+        <div class="summary">Ghostty の中核から切り出したポータブルな端末エミュレーション用 C ライブラリが 1.0 に到達し、C ABI が安定した。セマンティックバージョニングと ABI 互換性チェックを強制し、MIT ライセンスでコピーレフトの依存はない。スレッドは作らず、カスタムアロケータに対応し、不要な機能はコンパイル時に外せる。</div>
         <div class="key-points">
           <ul>
-            <li>set_throttled を削除し、WebView 非表示時に自動で抑制。focus 系は set_focused に統一。webgl が既定 feature に</li>
-            <li>multiprocess を Cargo feature 化し、無効時に約 2MB 削減</li>
+            <li>テスト済みは Linux（glibc/musl）・macOS 13+・iOS 13+・FreeBSD・Windows x86_64・Android・WebAssembly（1MB 未満）</li>
+            <li>4 コア 8GB サーバで 10,000 端末を稼働。基本的な端末は約 1,500 行の C で作れる</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Servo</span>
-          <span class="engagement">▲ 183</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-11-05</span>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-ai">AI</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://www.linum.ai/field-notes/pjit-21k">Show HN: 約2万ドルで学習したテキスト画像生成モデル（Apache 2.0 重み）</a></h3>
-        </div>
-        <div class="summary">Linum が約 2 万ドルの学習コストで訓練したテキスト画像生成モデルを Apache 2.0 の重みで公開し、学習の記録を公開した。</div>
-        <div class="key-points">
-          <ul>
-            <li>学習コストは約 $20K</li>
-            <li>重みは Apache 2.0 で公開</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Linum</span>
-          <span class="engagement">▲ 145</span>
-          <span>⏱ 7 min read</span>
-          <span>2026-11-04</span>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-infra">Infra</span>
-          <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://zenn.dev/airiell/articles/git-archive-manifest-deploy">git archive とハッシュ一覧の照合で、本番の手修正を上書きしないデプロイスクリプトを作る</a></h3>
-        </div>
-        <div class="summary">git archive で取り出した成果物とハッシュ一覧を照合し、本番サーバー上の手修正ファイルを上書きしないデプロイスクリプトの作り方を解説した Zenn 記事。</div>
-        <div class="key-points">
-          <ul>
-            <li>git archive の出力とハッシュ一覧を照合</li>
-            <li>手修正されたファイルの上書きを防ぐ</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Zenn</span>
+          <span>Mitchell Hashimoto</span>
           <span>⏱ 6 min read</span>
-          <span>2026-11-05</span>
+          <span>2026-11-06</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.com/thesayfulla/pylings">PyLings: 演習を解きながら Python を学ぶ</a></h3>
+        </div>
+        <div class="summary">演習問題を解いて Python を学ぶ GitHub リポジトリ。Hacker News のフロントページに載った。詳細な機能は未確認のため、導入前に README を確認してほしい。</div>
+        <div class="key-points">
+          <ul>
+            <li>演習を解く形式の Python 学習ツール（リポジトリ説明より）</li>
+            <li>Hacker News で 43 ポイントを獲得</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span class="engagement">▲ 43</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-11-06</span>
         </div>
       </div>
     </div>
 
     <div class="section" id="quick-links">
       <div class="section-title">🔗 Quick Links</div>
-      <div class="quick-link">
-        <span class="tag tag-infra">Infra</span>
-        <a href="https://www.itmedia.co.jp/news/article/2611/06/2000002932/">ドコモ通信障害、約14時間で復旧</a>
-        <span class="quick-summary">— 原因は交換機の輻輳で、不正アクセスの形跡はなし。</span>
-        <span class="meta">ITmedia</span>
-      </div>
-      <div class="quick-link">
-        <span class="tag tag-frontend">Frontend</span>
-        <a href="https://japan.zdnet.com/article/35254318/">Firefox に新しい「ミニウィンドウ」</a>
-        <span class="quick-summary">— マルチタスク向けの新機能として紹介されている。</span>
-        <span class="meta">ZDNET Japan</span>
-      </div>
-      <div class="quick-link">
-        <span class="tag tag-ai">AI</span>
-        <a href="https://ernie.baidu.com/release/ernie-5-5-flash-base/">Baidu、ERNIE 5.5 Flash Base を公開</a>
-        <span class="quick-summary">— HN で 165 ポイント。</span>
-        <span class="meta">Baidu</span>
-      </div>
+
       <div class="quick-link">
         <span class="tag tag-product">Product</span>
-        <a href="https://motorolanews.com/motorola-signature-27-2/">Motorola Signature 27 が GrapheneOS をサポート</a>
-        <span class="quick-summary">— HN で 396 ポイントを集めた。</span>
-        <span class="meta">Motorola</span>
+        <a href="https://www.nbcnews.com/tech/tech-news/tesla-wind-cybertruck-production-years-poor-sales-markets-rcna607817">Tesla、Cybertruck の生産を縮小へ</a>
+        <span class="quick-summary">— 販売不振を受けた生産終了に向けた動きと NBC が報道。</span>
+        <span class="meta">NBC News</span>
+        <span class="engagement">▲ 808</span>
       </div>
+
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://www.bloomberg.com/news/articles/2026-11-06/anthropic-ipo-valuation-expectations-pressured-after-ai-rout">Anthropic IPO、買い手は評価額を最低 1.1 兆ドルとみる</a>
+        <span class="quick-summary">— AI 株の急落後に、IPO 評価額の期待が下押しされていると Bloomberg が報道。</span>
+        <span class="meta">Bloomberg</span>
+        <span class="engagement">▲ 206</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-infra">Infra</span>
+        <a href="https://www.reuters.com/world/us/us-faa-says-it-will-phase-out-floppy-disks-air-traffic-control-by-2028-2026-11-05/">米 FAA、航空管制のフロッピーディスクを 2028 年までに廃止</a>
+        <span class="quick-summary">— 管制システムで使われてきたフロッピーの段階的廃止を発表。</span>
+        <span class="meta">Reuters</span>
+        <span class="engagement">▲ 262</span>
+      </div>
+
       <div class="quick-link">
         <span class="tag tag-security">Security</span>
-        <a href="https://karthihegde.dev/posts/dns_tampering">ISP が DNS を改ざんしていた話</a>
-        <span class="quick-summary">— 個人ブログの調査記録で、HN 104 ポイント。</span>
-        <span class="meta">karthihegde.dev</span>
+        <a href="https://blog.arusekk.pl/posts/srht-disabled-registration-bypass/">SourceHut の登録無効化バイパス（CVE-2026-121728）</a>
+        <span class="quick-summary">— 2021 年のリファクタで成功経路に閉鎖チェックが抜け、v0.56.11〜0.88.9 で SMTP が動けばアカウント作成が可能。11/3 に修正。</span>
+        <span class="meta">arusekk blog</span>
       </div>
+
       <div class="quick-link">
-        <span class="tag tag-dev">Dev</span>
-        <a href="https://phoboslab.org/log/2026/11/n64-ulc-codec">N64 に最適な無名オーディオコーデック</a>
-        <span class="quick-summary">— HN で 187 ポイント。</span>
-        <span class="meta">PHOBOSLab</span>
+        <span class="tag tag-ai">AI</span>
+        <a href="https://community.openai.com/t/security-follow-up-tool-call-silently-routed-to-a-different-connector/1413053">ChatGPT でツール呼び出しが別のコネクタへ黙って転送された、との報告</a>
+        <span class="quick-summary">— OpenAI コミュニティフォーラムの投稿。バウンティ受理に ID 提示を求められた点も議論に。</span>
+        <span class="meta">OpenAI Community</span>
+        <span class="engagement">▲ 54</span>
       </div>
+
       <div class="quick-link">
-        <span class="tag tag-dev">Dev</span>
-        <a href="https://www.youtube.com/watch?v=5D7QPOIZ7gY">Reflections on Rust in the LLM Age — Bryan Cantrill</a>
-        <span class="quick-summary">— Rust NYC での講演。</span>
-        <span class="meta">YouTube</span>
-      </div>
-      <div class="quick-link">
-        <span class="tag tag-oss">OSS</span>
-        <a href="https://www.publickey1.jp/blog/26/linuxfdetypescriptrusttsrs202610.html">Publickey 2026年10月の人気記事トップ10</a>
-        <span class="quick-summary">— 深刻な Linux カーネル脆弱性などを含む月間まとめ。</span>
-        <span class="meta">Publickey</span>
+        <span class="tag tag-infra">Infra</span>
+        <a href="https://ievchina.com/energy-storage/catl-sodium-battery-cost-parity-lfp-2026-15000-cycles/">CATL のナトリウムイオン電池、2026 年に LFP とコスト同等へ</a>
+        <span class="quick-summary">— 記事は 15,000 サイクル・30 年寿命を挙げている。</span>
+        <span class="meta">iEV China</span>
+        <span class="engagement">▲ 84</span>
       </div>
     </div>
 
