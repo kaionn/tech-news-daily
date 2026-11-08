@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tech News Daily — 2026-11-07</title>
-  <meta name="description" content="GitHub新Git基盤 毎秒7,200 push / ドコモ最大29万件の情報流出 / Gemini Omni 1.2 Flash">
+  <title>Tech News Daily — 2026-11-08</title>
+  <meta name="description" content="Alpine OpenSSH 認証バイパス / Discord が Rust 製クライアントへ移行 / Microsoft Research AI Frontiers 終了">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Tech News Daily">
-  <meta property="og:title" content="Tech News Daily — 2026-11-07">
-  <meta property="og:description" content="GitHub新Git基盤 毎秒7,200 push / ドコモ最大29万件の情報流出 / Gemini Omni 1.2 Flash">
+  <meta property="og:title" content="Tech News Daily — 2026-11-08">
+  <meta property="og:description" content="Alpine OpenSSH 認証バイパス / Discord が Rust 製クライアントへ移行 / Microsoft Research AI Frontiers 終了">
   <meta property="og:url" content="https://tech-news.kaion-lab.com/">
   <meta property="og:image" content="https://tech-news.kaion-lab.com/apple-touch-icon.png">
   <meta name="twitter:card" content="summary">
@@ -22,7 +22,7 @@
   <div class="container">
     <header>
       <h1>Tech News Daily</h1>
-      <div class="date">2026-11-07 (Sat)</div>
+      <div class="date">2026-11-08 (Sun)</div>
       <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
       <nav class="site-nav">
         <a href="./" class="active">📰 日刊ダイジェスト</a>
@@ -35,7 +35,7 @@
     <div class="stats-bar">
       <span>📰 18 articles</span>
       <span>🏷 8 categories</span>
-      <span>📡 17 sources</span>
+      <span>📡 14 sources</span>
     </div>
 
     <nav class="toc">
@@ -48,16 +48,16 @@
 
     <div class="numbers-bar">
       <div class="number-item">
-        <span class="number-value">7,200/s</span>
-        <span class="number-label">GitHub 新基盤での単一リポジトリ push 数</span>
+        <span class="number-value">257B</span>
+        <span class="number-label">Alpine sshd を突破できるパスワード長（下限）</span>
       </div>
       <div class="number-item">
-        <span class="number-value">294,839</span>
-        <span class="number-label">ドコモ流出の最大回線数</span>
+        <span class="number-value">55%</span>
+        <span class="number-label">2026 Q3 クラウドインフラ市場の前年比成長率</span>
       </div>
       <div class="number-item">
-        <span class="number-value">96.1%</span>
-        <span class="number-label">Replit が回避した Linux CVE の割合</span>
+        <span class="number-value">290MB</span>
+        <span class="number-label">Discord Rust 版の RAM（2 アカウント同時）</span>
       </div>
     </div>
 
@@ -66,46 +66,46 @@
 
       <div class="card featured deep-dive">
         <div class="card-header">
-          <span class="tag tag-infra">Infra</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://github.blog/engineering/architecture-optimization/inside-githubs-new-git-storage-architecture/">DEEP DIVE: GitHub の新 Git ストレージ設計 — 5,000 エージェントが 1 リポジトリへ同時 push</a></h3>
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://www.alpinelinux.org/posts/2026-11-05-openssh-password-authentication-bypass/">DEEP DIVE: Alpine Linux の openssh-server にパスワード認証バイパス、257 バイト超のパスワードで突破</a></h3>
         </div>
-        <div class="summary">GitHub が AI エージェントの大量並行 push に耐えるため、Git ストレージを作り直した。11/4 の Universe 関連報道では「従来比 180 倍のスループット」という目標値だけが伝えられたが、GitHub Engineering Blog が設計の中身を公開した。出発点は、AI エージェントの増加で 1 つの忙しいリポジトリのリクエスト数が 3 月から 5 月で約 4 倍になったことだ。従来のようにサーバのローカルディスクを正本とする構成では、書き込みの調整コストがボトルネックになる。新設計（Project Rubicon）は「調整を最小化する」と「ストレージとコンピュートの分離」を原則とする。Git オブジェクトは不変なので、書き手同士が合意しなくても保存できる。順序付けが必要なのは参照（ref）の更新だけである。リクエストは使い捨ての仮想レプリカ（Spokes 経由）に振り分けられ、ローカルディスクはキャッシュにすぎない。パックは Azure Blob Storage に置き、参照とパックのマニフェストは Ref-CAS という複製ログが持つ。書き込みは「パックを Blob にアップロードし、Ref-CAS で 1 トランザクションをコミット」の 2 手順で済む。Ref-CAS は quorum による compare-and-swap で、触る参照だけをロックし、オブジェクト本体は保持せず、毎秒数万オペレーションを処理する。社内テストでは 5,000 の並行エージェントが単一リポジトリへ毎秒 7,200 push を送り、読み取りレイテンシは低いままだった。単一 blob の write-ahead log は毎秒数百書き込み止まりで、シャード分割では読み取りが遅くなったため採用を見送った。バックグラウンドのノードがシャードごとのリースでセグメントを封じ、パックを階層的にマージして、push 増加時もパック数を一定に保つ。現状は限定プライベートプレビューで、全体展開は来年初頭の見込みである。</div>
-        <div class="editorial">🧠 「オブジェクトは不変、順序が要るのは ref だけ」という整理は、Git の性質をそのままスケール設計に使っており筋が良い。ただし 7,200 push/s は社内ベンチマークの値で、実際のエージェントの push パターンや巨大モノレポで再現するかは未検証だ。ブランチ単位ロックで 3〜4 倍という別報道の数字と合わせても、利用者が体感する差は来年の展開後にしか分からない。</div>
+        <div class="summary">Alpine Linux は 11 月 5 日、openssh-server のパスワード認証を無効のまま通過できる脆弱性を公表した。PAM を使わない構成では、sshd が入力パスワードを crypt() でハッシュ化し、保存済みハッシュと比較して認証する。musl の crypt() は 256 バイトを超える入力に対し、エラー値として文字列 "*" を返す。パスワード未設定のアカウントも /etc/shadow に "*" を保存しているため、両者が一致して認証が通ってしまう。攻撃者に必要なのは 257〜1024 バイトのパスワードを 1 回送ることだけだ。ただし成立には、PasswordAuthentication が有効であること、"*" のアカウント（root や alpine など）が存在すること、$5$ または $6$ ハッシュを持つ別のローカルアカウントがあることが揃う必要がある。影響は Alpine 3.21〜3.24 と edge、サポート終了済みの 3.16〜3.20、3.18.11〜3.24.3 の tiny-cloud イメージに及ぶ。修正版は 3.21.10、3.22.8、3.23.8、3.24.4 で、edge は 10.6_p2-r0。`apk upgrade -U -a` のあと `rc-service sshd restart` を実行する。更新できない場合は PasswordAuthentication を no にし、鍵ログインを確認してからセッションを閉じる。CVE は本稿時点で未割り当てだ。</div>
+        <div class="editorial">🧠 原因は OpenSSH 本体ではなく、musl の crypt() が「失敗」と「ロック済みアカウント」を同じ文字列で表す設計にある。この種の番兵値の衝突は、他の libc 依存ソフトでも同じ形で出うる。軽量コンテナで Alpine の sshd を使い、パスワード認証を残している環境は多くないはずだが、tiny-cloud イメージは既定設定を確認するまで安全と言えない。未検証だが、/var/log/messages に root など無パスワードアカウントへのパスワードログイン成功が残っていれば、侵害済みとして扱うべきだ。</div>
         <div class="key-points">
           <ul>
-            <li>5,000 並行エージェントから単一リポジトリへ毎秒 7,200 push、読み取りレイテンシは低位を維持</li>
-            <li>単一 blob の WAL は毎秒数百書き込みで頭打ち。Ref-CAS は触る参照だけをロックして毎秒数万オペレーションを達成</li>
-            <li>Azure Blob Storage + 使い捨てレプリカ構成。限定プライベートプレビュー中で、広範な展開は来年初頭</li>
+            <li>musl の crypt() が 256 バイト超でエラー値 "*" を返し、無パスワードアカウントの "*" と一致して認証成功</li>
+            <li>修正版は 3.21.10 / 3.22.8 / 3.23.8 / 3.24.4、edge は 10.6_p2-r0。CVE は未割り当て</li>
+            <li>回避策は PasswordAuthentication no。PAM 構成でも UsePAM no なら対象</li>
           </ul>
         </div>
-        <div class="why-it-matters">💡 エージェントで同一リポジトリに大量 push する運用は今後ホスティング側が受け止める前提になるが、それまでは push 頻度とブランチ分割の設計を自前で考えておくこと。</div>
+        <div class="why-it-matters">💡 Alpine ベースのサーバーで sshd を動かしているなら、今すぐ apk upgrade するか、パスワード認証を切ること。</div>
         <div class="meta">
-          <span>GitHub Blog</span>
-          <span>⏱ 10 min read</span>
-          <span>2026-11-06</span>
+          <span>Alpine Linux</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-11-05</span>
         </div>
       </div>
 
       <div class="card featured">
         <div class="card-header">
-          <span class="tag tag-security">Security</span>
-          <span class="content-type">🔒 セキュリティ</span>
-          <h3><a href="https://www.watch.impress.co.jp/docs/news/2154508.html">NTT ドコモで不正アクセス、最大 294,839 回線の顧客情報が流出</a></h3>
+          <span class="tag tag-frontend">Frontend</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://www.windowslatest.com/2026/11/06/every-windows-11-app-should-kill-electron-and-discord-just-showed-why-no-starting-screen-and-70-less-ram-even-with-two-accounts-signed-in/">Discord、Electron を捨てて GPUI 製 Rust クライアントへ。RAM は約 70% 減</a></h3>
         </div>
-        <div class="summary">ドコモは 11/6、ドコモオンラインショップと My docomo への不正アクセスで顧客情報が流出したと発表した。流出対象は氏名・住所・生年月日・電話番号・本人確認書類番号・料金プランやオプションで、一部は法定代理人の連絡先、勤務先・法人情報、銀行口座情報も含む。対象は最大 294,839 回線（個人 204,157、法人 90,682）。攻撃者は連携する複数システムをたどり、ユーザー情報を自動で検索・取得した。ドコモは API 攻撃ではなく、システム設計の悪用であり単一システムの欠陥ではないと説明している。11/4 に検知し、11/5 に流出を確認した。</div>
+        <div class="summary">Discord がデスクトップ版を Electron から Rust 製クライアント（タスクマネージャー上の名称は Discord Phoenix）へ置き換えている。UI は Zed エディタの GPU 描画フレームワーク GPUI で、HTML を使わずに描く。Tauri は採用していない。モバイルは React Native をやめ、Web 版はロジックを WebAssembly へ移す。非公開テスト段階で、公開日は未定。</div>
         <div class="key-points">
           <ul>
-            <li>最大 294,839 回線（個人 204,157・法人 90,682）、本人確認書類番号や一部で銀行口座情報を含む</li>
-            <li>個別システムの脆弱性ではなく、連携システムを連鎖的にたどる設計上の弱点が悪用された</li>
-            <li>11/4 検知、11/5 確認、11/6 公表。同期間に別件で 5G SA 障害（最大約 159 万人、コアスイッチのメモリ障害）も発生</li>
+            <li>2 アカウント同時ログインで 290.2MB。記事は Electron の 1GB 目安から約 70% 減と見積もる</li>
+            <li>コールドスタートでは Rust 版が約 1 秒でウィンドウ表示し、Electron は約 5 秒で UI に到達</li>
+            <li>同一条件のベンチは未公開。早期ビルドのスナップショットである</li>
           </ul>
         </div>
-        <div class="why-it-matters">💡 システム単体の脆弱性診断では見つからないため、複数システムを連携させる設計では「連鎖して辿れる参照範囲」と大量取得の検知を設計時にレビューすること。</div>
+        <div class="why-it-matters">💡 Electron アプリを抱えるチームは、メモリ比較の指標が「1GB を切るか」から変わりうる点を意識しておきたい。ただし数値は第三者の計測で、GPUI の成熟度は別問題だ。</div>
         <div class="meta">
-          <span>Impress Watch</span>
-          <span class="engagement">🔖 153</span>
-          <span>⏱ 4 min read</span>
+          <span>Windows Latest</span>
+          <span class="engagement">▲ 191</span>
+          <span>⏱ 5 min read</span>
           <span>2026-11-06</span>
         </div>
       </div>
@@ -113,23 +113,23 @@
       <div class="card featured">
         <div class="card-header">
           <span class="tag tag-ai">AI</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://blog.google/innovation-and-ai/technology/developers-tools/introducing-gemini-omni-1-2-flash/">Google、動画生成・編集モデル Gemini Omni 1.2 Flash を GA</a></h3>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://hunch.net/?p=13764006">Microsoft Research「AI Frontiers」グループが終了、リーダーの Langford 氏が離脱</a></h3>
         </div>
-        <div class="summary">Google DeepMind が 11/5 に Gemini Omni 1.2 Flash を発表した。動画の生成と編集を 1 モデルで行い、最大長は Omni 1.1 の 10 秒から 15 秒に伸びた。360p / 720p でドラフトを作ってから 1080p / 4K へアップスケールでき、キャラクター・商品・スタイルの参照画像、3 秒までのモーションクリップ、音声キューを入力にできる。背景やライティングの差し替えをクリップ全体の再生成なしで対話的に行える。料金は Omni 1.1 比で約 30% 安く、720p が 1 秒あたり 0.07 ドル。Gemini API と Google Cloud で一般提供され、Google Vids では追加費用なしで 15 秒クリップを生成できる。出力には SynthID 透かしが入る。</div>
+        <div class="summary">約 50 人規模の Microsoft Research 内組織 AI Frontiers（AIF）が終了した。ChatGPT 公開後に発足し、9 月初旬に Microsoft AI（MAI）へ再編されていた。リーダーの John Langford 氏は、スケーリング重視で研究を避ける MAI の方針と合わず、創設メンバーも同様の結論に至ったと書く。AIF は Autogen や Fara などエージェント基盤を手がけてきた。</div>
         <div class="key-points">
           <ul>
-            <li>最大 15 秒（3〜15 秒を 1 秒刻み）、720p で 1 秒 0.07 ドル、Omni 1.1 比約 30% 値下げ</li>
-            <li>低解像度ドラフト → 1080p / 4K アップスケールの 2 段構成で、試行コストを抑える設計</li>
-            <li>Gemini API / Google Cloud（Provisioned Throughput）で GA、Gemini アプリは AI Ultra 向けに順次展開</li>
+            <li>AIF は約 50 人。9 月初旬に MAI へ再編され、今回終了を表明</li>
+            <li>成果は Autogen、コンピュータ操作エージェント Fara、Dion3（改良版 Muon）など</li>
+            <li>来年度は AIF チームでのインターンを予定していない</li>
           </ul>
         </div>
-        <div class="why-it-matters">💡 15 秒の 720p は約 1.05 ドルなので、プロトタイプでは低解像度ドラフトで試行を回し、確定したものだけアップスケールする運用にするとコストを抑えられる。</div>
+        <div class="why-it-matters">💡 Autogen を使っている場合、メンテ体制が変わる可能性がある。なお本稿は当事者の一方的な見解で、Microsoft の公式見解は確認できていない。</div>
         <div class="meta">
-          <span>Google Blog</span>
-          <span class="engagement">▲ 291</span>
-          <span>⏱ 5 min read</span>
-          <span>2026-11-05</span>
+          <span>hunch.net</span>
+          <span class="engagement">▲ 327</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-11-07</span>
         </div>
       </div>
     </div>
@@ -139,84 +139,82 @@
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-security">Security</span>
-          <span class="content-type">🔬 研究</span>
-          <h3><a href="https://pwn.ai/blog/firecracker-escape">Firecracker VM Escape: PwnEscape Part 2</a></h3>
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://sizu.me/laiso/posts/k59is4cnd77f">ISUCON2026 を Claude Code が優勝、3 か月かけたハーネスが約 8 時間自律稼働</a></h3>
         </div>
-        <div class="summary">microVM モニタ Firecracker のゲストからホストへ脱出し、ホスト上で root としてコードを実行する手法の解説。Part 1 で得たホストメモリのプリミティブを使い、ゲストページに仕込んだ nonce を EPT 変換経由でホストメモリ上から探し、Firecracker プロセスのロードベースを特定する。KVM_RUN で止まった vCPU スレッドの保存済みレジスタを書き換え、ゲストのシリアルポートへの 1 バイト書き込みで write(2) を呼ばせる。</div>
+        <div class="summary">元 Wantedly CTO の Kawasy 氏が、素の Claude Code に Herdr と Ralph 型ループ、監査エージェントを組み合わせて参戦し、約 8 時間止まらず走らせて優勝したと laiso 氏が伝える。本人の証言に基づく二次情報で、スコアは公式ブログ参照とされている。</div>
         <div class="key-points">
           <ul>
-            <li>検証環境は Firecracker v1.16.1（x86-64）、ホストカーネル 7.0.0-1011-aws。jailer 無しで実施し、権限降格・namespace・seccomp の効果は未評価</li>
-            <li>脱出後も Firecracker プロセス（PID 2936）とゲスト SSH は稼働を継続。修正状況は記事中に記載なし</li>
+            <li>PostgreSQL を廃止し、書き込みをイベント化してリーダーが順序付け、全サーバーのメモリへ同順に適用</li>
+            <li>期待値からベンチ打ち切りを判断するツールで、スコア履歴と残り時間を元に無駄な実行を止めた</li>
           </ul>
         </div>
         <div class="meta">
-          <span>pwn.ai</span>
-          <span class="engagement">▲ 151</span>
-          <span>⏱ 12 min read</span>
-          <span>2026-11-06</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-infra">Infra</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://frontier.replit.com/sandbox-engine-microvms-part-1/">Replit、サンドボックスエンジンを microVM で再構築</a></h3>
-        </div>
-        <div class="summary">Replit は各サンドボックスに専用 Linux カーネルを与える構成へ移行した（Cloud Hypervisor + KVM）。数億規模のプロジェクトをデータ損失なしで移行したという。ゲストカーネルは tinyconfig から始め、不要なドライバとモジュールロードを無効化して攻撃面を削っている。</div>
-        <div class="key-points">
-          <ul>
-            <li>Linux CNA の CVE 6,211 件を精査し 5,969 件（96.1%）を上流修正または設定除外で回避。設定による除外だけで 676 件</li>
-            <li>ウォームプールにより、ボリューム付きサンドボックスを約 500ms で取得。セキュリティ更新はマージから 15 分以内に本番へ反映</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Replit Frontier</span>
-          <span class="engagement">▲ 54</span>
-          <span>⏱ 9 min read</span>
-          <span>2026-11-06</span>
+          <span>sizu.me (laiso)</span>
+          <span class="engagement">🔖 126</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-11-07</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
           <span class="tag tag-data">Data</span>
-          <span class="content-type">🔬 研究</span>
-          <h3><a href="https://hightouch.com/blog/llm-judges-identity-resolution">安価な判定モデルが必要時だけ Opus に相談、精度を保ちコスト 1/4</a></h3>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/github2typescriptrustosscc_switchomarchygithub_octoverse_2026.html">GitHub Octoverse 2026: TypeScript が 2 年連続首位、PR 増加率は Rust</a></h3>
         </div>
-        <div class="summary">Hightouch は、名寄せ（identity resolution）の出力を安価な判定モデルで採点できるか検証した。問題は 1 つの ID に複数人のレコードが混ざる過剰統合で、1,000 件の ID でベンチマークを作った。判定モデルが先に採点し、確信度が中間帯の ID だけを Opus に回すハイブリッドで、精度とコストを両立させている。</div>
+        <div class="summary">GitHub の年次レポートによると、開発者数は 2 億 2,500 万人。貢献者数の言語別では TypeScript が 2 年連続 1 位で、Python が僅差の 2 位。プルリクエストの伸びが最も大きいのは Rust だった。</div>
         <div class="key-points">
           <ul>
-            <li>難問では Opus 95.1%（1,000 件 5.39 ドル）に対し、ハイブリッド Jev は 95.3% で 2.94 ドル</li>
-            <li>Jev は誤りが確信度 50% 付近に集まるため振り分けが効く。Luna は過信気味で誤りが検出されにくく、ハイブリッドでも 91.6%</li>
+            <li>国別は米国 3,830 万人、インド 3,200 万人、中国 1,240 万人。日本は 5 位の 715 万人</li>
+            <li>貢献者の増加が速い OSS は CC Switch、Awesome MCP Servers、Omarchy の順</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Hightouch</span>
-          <span class="engagement">▲ 292</span>
-          <span>⏱ 7 min read</span>
-          <span>2026-11-06</span>
+          <span>Publickey</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-11-04</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://www.datadoghq.com/blog/engineering/continuous-formal-spec-validation/">Datadog、TLA+ 仕様を本番の実行監視に変換する FETCh</a></h3>
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">💰 ビジネス</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/aws26google_cloud1620263synergy_research.html">クラウドインフラ市場 2026 Q3: AWS は 26% に後退、Google Cloud は 16% へ</a></h3>
         </div>
-        <div class="summary">Datadog は TLA+ 仕様を Rust のランタイムモニタに変換し、本番の挙動を形式仕様と照合する FETCh を作った。イベントデータベース Husky の配置ロジック変更で、衝突する配置が約 1 年残っていたが、テストとレビューは見逃し、FETCh が検出した。衝突は配置全体の 0.01% 未満だが、データ損失時に 2 件重なるとバックフィルが落ちうる。</div>
+        <div class="summary">Synergy Research によると、Q3 の市場規模は 1,680 億ドルで、前年比 55% 増と過去最高の成長率を記録した。上位 3 社のシェア合計は 61%。</div>
         <div class="key-points">
           <ul>
-            <li>1,300 以上の Pod で p90 CPU 約 2%、メモリ 0.2% 未満のオーバーヘッド</li>
-            <li>制約: TLA+ の一部のみ対応で、事前条件は現在状態に対してのみ検査</li>
+            <li>AWS 26%（2 ポイント減）、Azure 19%（1 ポイント減）、Google Cloud 16%（1 ポイント増）</li>
+            <li>シェアが落ちても市場全体が拡大しており、AWS の売上自体が減ったことを意味しない</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Datadog</span>
-          <span>⏱ 10 min read</span>
-          <span>2026-11-06</span>
+          <span>Publickey</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-11-04</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/github_copilot_dreaminggithub_universe_2026.html">GitHub Copilot Dreaming 発表、古くなった AI 指示とメモリを裏で自動整理</a></h3>
+        </div>
+        <div class="summary">GitHub Universe 2026（10 月 28〜29 日）でパブリックプレビューとして発表された。過去の作業を振り返り、コードやモデルの変化で陳腐化した指示ファイルと Copilot Memory を更新する。</div>
+        <div class="key-points">
+          <ul>
+            <li>Copilot との会話と PR レビューから学習し、修正を PR として提案</li>
+            <li>デモでは Java から Svelte への書き換え後、指示ファイルを Svelte 向けに書き直す PR を作成</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-11-04</span>
         </div>
       </div>
     </div>
@@ -226,62 +224,64 @@
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
-          <span class="content-type">👀 注目</span>
-          <h3><a href="https://zenn.dev/xin9le/articles/9a1cf8e10494d6">[破壊的変更] 明治時代の開始日が変更になって単体テストが失敗した件</a></h3>
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://zenn.dev/tomipetit/articles/zero-wire-github-actions">Cloudflare Zero Wire × GitHub Actions × Claude で公開サーバーの脆弱性チェックを自動化</a></h3>
         </div>
-        <div class="summary">CI の ubuntu-latest が 24.04 から 26.04 に切り替わったのを境に、明治の開始日をフォーマットする C# の単体テストが ArgumentOutOfRangeException で失敗した。原因は Ubuntu 26.04 の ICU に含まれる CLDR データ修正で、旧データが太陰太陽暦の日付をグレゴリオ暦として扱っていた誤りが直された。</div>
+        <div class="summary">Cloudflare Radar の脆弱性フィード Zero Wire の RSS を毎日取得し、サーバーの棚卸し結果と照合して Issue を起票する構成。バージョン比較はコードに、影響判断は Claude に分担させている。</div>
         <div class="key-points">
           <ul>
-            <li>明治開始日が 1868/9/8 から 1868/10/23 へ変更。.NET 11 Preview 1 以降は JapaneseCalendar.MinSupportedDateTime も同値に変更（.NET 10 以前は旧値）</li>
-            <li>対処はテストの日付を 1868/10/23 に直し、期待値を「明治元年10月23日」にすること</li>
+            <li>Claude に照合させると「要確認」で止まりがちだったため、修正済み判定を機械処理へ移した</li>
+            <li>Claude には Bash を渡さず、ターン上限は 40。Node.js 本体の未修正 19 件を検出し v24.22.1 以上で解消と判定</li>
           </ul>
         </div>
         <div class="meta">
           <span>Zenn</span>
-          <span class="engagement">🔖 83</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-11-06</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-frontend">Frontend</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://zenn.dev/cybozu_frontend/articles/web-standards-trends-202610">Web 標準動向 2026年10月版</a></h3>
-        </div>
-        <div class="summary">サイボウズのフロントエンドチームによる月次の標準化動向まとめ。HTML ではフォーカス喪失を通知する focusreset イベントが Chrome でプロトタイプ案となり、Chrome 157 で HTML-in-Canvas が安定版入りする。CSS は論理プロパティのショートハンドに !logical 構文を採用する方向で決まった。</div>
-        <div class="key-points">
-          <ul>
-            <li>Custom Highlight API で opacity と CSS アニメーションが使えるようになる</li>
-            <li>ECMA-262: Composite が Stage 2、deferred re-exports が Stage 2.7、BigInt の指数表記が Stage 2 へ</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Zenn（サイボウズ）</span>
+          <span class="engagement">🔖 31</span>
           <span>⏱ 8 min read</span>
-          <span>2026-11-06</span>
+          <span>2026-11-07</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-frontend">Frontend</span>
-          <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://www.publickey1.jp/blog/26/javascriptbunprettier300prettier.html">Bun がPrettier互換で300倍以上高速なフォーマッタを搭載</a></h3>
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://www.ipa.go.jp/digital/kaihatsu/youkyu-kanri.html">IPA「AI 時代の要求管理ハンドブック」Ver.1.0.0 公開</a></h3>
         </div>
-        <div class="summary">Bun v1.4.4（10/22 リリース）に Prettier 互換のフォーマッタ bun fmt が入った。Prettier の設定ファイルに加え、別のフォーマッタ oxfmt の設定ファイルもそのまま使える。</div>
+        <div class="summary">IPA が 11 月 5 日に公開した。要求を一度定義して終わりにせず、業務・データ・システム・ルール・評価・運用までつなげて継続管理する方法を、開発者以外の経営・法務・調達も想定して解説する。</div>
         <div class="key-points">
           <ul>
-            <li>Prettier のテストスイートの 99% 以上をクリア、実行速度は最大 320 倍、メモリは 1/5 以下</li>
-            <li>対応言語は JavaScript / TypeScript / CSS / HTML / JSON / YAML / Markdown など 20 種類</li>
+            <li>全 5 部構成。要求管理の基礎、AI 時代の変化、モデリングとトレーサビリティ、法令対応、組織への定着</li>
+            <li>PDF は 4.8MB。継続的な改訂を前提に意見受付窓口を設置</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Publickey</span>
-          <span>⏱ 3 min read</span>
-          <span>2026-10-27</span>
+          <span>IPA</span>
+          <span class="engagement">🔖 110</span>
+          <span>⏱ 10 min read</span>
+          <span>2026-11-05</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://www.pospome.work/entry/2026/11/07/192125">AI 時代に求められる優秀な TechLead の振る舞い</a></h3>
+        </div>
+        <div class="summary">TechLead Conference 2026 Autumn の登壇資料紹介。筆者が IC、TechLead、VPoE と役割を変えてきた経験から、AI がコードを書く時代に TechLead が出すべき価値を考える。具体的な振る舞いはスライド側に記載される。</div>
+        <div class="key-points">
+          <ul>
+            <li>想定読者は現役の TechLead と、これから目指す人</li>
+            <li>ブログ本文は概要のみで、詳細は Speaker Deck の資料を参照</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>pospome.work</span>
+          <span class="engagement">🔖 164</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-11-07</span>
         </div>
       </div>
     </div>
@@ -291,42 +291,42 @@
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-oss">OSS</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://mitchellh.com/writing/libghostty-1-0">libghostty-vt 1.0 リリース — Ghostty から切り出した端末エミュレーション C ライブラリ</a></h3>
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.com/hedgerow-dev/coldframe">coldframe: スーパーの冷凍機コントローラーを装う低対話型ハニーポット</a></h3>
         </div>
-        <div class="summary">Ghostty の中核から切り出したポータブルな端末エミュレーション用 C ライブラリが 1.0 に到達し、C ABI が安定した。セマンティックバージョニングと ABI 互換性チェックを強制し、MIT ライセンスでコピーレフトの依存はない。スレッドは作らず、カスタムアロケータに対応し、不要な機能はコンパイル時に外せる。</div>
+        <div class="summary">Danfoss AK-SM 800A と Dixell XWEB 500 を模倣し、接続元、試行された認証情報、使われた公開エクスプロイトを記録する。実データは一切返さない。標準ライブラリのみの Python 単一ファイルで、MIT ライセンス。</div>
         <div class="key-points">
           <ul>
-            <li>テスト済みは Linux（glibc/musl）・macOS 13+・iOS 13+・FreeBSD・Windows x86_64・Android・WebAssembly（1MB 未満）</li>
-            <li>4 コア 8GB サーバで 10,000 端末を稼働。基本的な端末は約 1,500 行の C で作れる</li>
+            <li>HTTP/HTTPS と Danfoss XML API を再現。Modbus TCP は既定で無効</li>
+            <li>コンテナは read-only・非 root・権限なしで動作し、JSON 行ログを出力</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Mitchell Hashimoto</span>
-          <span>⏱ 6 min read</span>
-          <span>2026-11-06</span>
+          <span>GitHub</span>
+          <span class="engagement">▲ 177</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-11-07</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
-          <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://github.com/thesayfulla/pylings">PyLings: 演習を解きながら Python を学ぶ</a></h3>
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://op.tngl.io/meridian/">Meridian: Servo と GPUI で作る実験的な macOS ブラウザ</a></h3>
         </div>
-        <div class="summary">演習問題を解いて Python を学ぶ GitHub リポジトリ。Hacker News のフロントページに載った。詳細な機能は未確認のため、導入前に README を確認してほしい。</div>
+        <div class="summary">Rust 製。ブラウザ UI を GPUI（Zed 由来）で描き、Web コンテンツは Servo が担う。両者をつなぐ gpui-servo は別ライブラリとして切り出されている。JavaScript や複雑なレイアウトに依存しないサイト向けの初期段階。</div>
         <div class="key-points">
           <ul>
-            <li>演習を解く形式の Python 学習ツール（リポジトリ説明より）</li>
-            <li>Hacker News で 43 ポイントを獲得</li>
+            <li>アドレスバー補完、縦横タブ、ブックマーク、履歴、リーダーモード、サイト別ズームを実装</li>
+            <li>リポジトリは Tangled にあり、Nix で試せる</li>
           </ul>
         </div>
         <div class="meta">
-          <span>GitHub</span>
-          <span class="engagement">▲ 43</span>
+          <span>Tangled</span>
           <span>⏱ 2 min read</span>
-          <span>2026-11-06</span>
+          <span>2026-11-07</span>
         </div>
       </div>
     </div>
@@ -335,50 +335,47 @@
       <div class="section-title">🔗 Quick Links</div>
 
       <div class="quick-link">
-        <span class="tag tag-product">Product</span>
-        <a href="https://www.nbcnews.com/tech/tech-news/tesla-wind-cybertruck-production-years-poor-sales-markets-rcna607817">Tesla、Cybertruck の生産を縮小へ</a>
-        <span class="quick-summary">— 販売不振を受けた生産終了に向けた動きと NBC が報道。</span>
-        <span class="meta">NBC News</span>
-        <span class="engagement">▲ 808</span>
+        <span class="tag tag-security">Security</span>
+        <a href="https://apiiro.com/blog/coding-agents-leaking-secrets-github-dont-ask-again">Claude Code の「Don't Ask Again」が 1,122 の公開 GitHub ファイルにパスワードを露出</a>
+        <span class="quick-summary">— Apiiro の調査。HN で議論中（本文は未確認、見出しの数値のみ）</span>
+        <span class="meta">Apiiro</span>
+        <span class="engagement">▲ 106</span>
       </div>
 
       <div class="quick-link">
-        <span class="tag tag-product">Product</span>
-        <a href="https://www.bloomberg.com/news/articles/2026-11-06/anthropic-ipo-valuation-expectations-pressured-after-ai-rout">Anthropic IPO、買い手は評価額を最低 1.1 兆ドルとみる</a>
-        <span class="quick-summary">— AI 株の急落後に、IPO 評価額の期待が下押しされていると Bloomberg が報道。</span>
-        <span class="meta">Bloomberg</span>
-        <span class="engagement">▲ 206</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-infra">Infra</span>
-        <a href="https://www.reuters.com/world/us/us-faa-says-it-will-phase-out-floppy-disks-air-traffic-control-by-2028-2026-11-05/">米 FAA、航空管制のフロッピーディスクを 2028 年までに廃止</a>
-        <span class="quick-summary">— 管制システムで使われてきたフロッピーの段階的廃止を発表。</span>
-        <span class="meta">Reuters</span>
-        <span class="engagement">▲ 262</span>
+        <span class="tag tag-oss">OSS</span>
+        <a href="https://asahilinux.org/2026/11/progress-report-7-3/">Asahi Linux 進捗レポート: Linux 7.3 対応</a>
+        <span class="quick-summary">— Apple Silicon 向け Linux の最新状況</span>
+        <span class="meta">Asahi Linux</span>
+        <span class="engagement">▲ 302</span>
       </div>
 
       <div class="quick-link">
         <span class="tag tag-security">Security</span>
-        <a href="https://blog.arusekk.pl/posts/srht-disabled-registration-bypass/">SourceHut の登録無効化バイパス（CVE-2026-121728）</a>
-        <span class="quick-summary">— 2021 年のリファクタで成功経路に閉鎖チェックが抜け、v0.56.11〜0.88.9 で SMTP が動けばアカウント作成が可能。11/3 に修正。</span>
-        <span class="meta">arusekk blog</span>
+        <a href="https://www.bitdefender.com/en-us/blog/labs/ghostmap-android">GhostMap: アプリを開く前に端末をクラッシュさせる Android の欠陥</a>
+        <span class="quick-summary">— Bitdefender Labs による脆弱性解説</span>
+        <span class="meta">Bitdefender</span>
       </div>
 
       <div class="quick-link">
-        <span class="tag tag-ai">AI</span>
-        <a href="https://community.openai.com/t/security-follow-up-tool-call-silently-routed-to-a-different-connector/1413053">ChatGPT でツール呼び出しが別のコネクタへ黙って転送された、との報告</a>
-        <span class="quick-summary">— OpenAI コミュニティフォーラムの投稿。バウンティ受理に ID 提示を求められた点も議論に。</span>
-        <span class="meta">OpenAI Community</span>
-        <span class="engagement">▲ 54</span>
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://docs.github.com/en/actions/concepts/security/workflow-dependency-lockfiles">GitHub Actions の Workflow dependency lockfiles</a>
+        <span class="quick-summary">— ワークフロー依存のバージョン固定に関する公式ドキュメント</span>
+        <span class="meta">GitHub Docs</span>
       </div>
 
       <div class="quick-link">
-        <span class="tag tag-infra">Infra</span>
-        <a href="https://ievchina.com/energy-storage/catl-sodium-battery-cost-parity-lfp-2026-15000-cycles/">CATL のナトリウムイオン電池、2026 年に LFP とコスト同等へ</a>
-        <span class="quick-summary">— 記事は 15,000 サイクル・30 年寿命を挙げている。</span>
-        <span class="meta">iEV China</span>
-        <span class="engagement">▲ 84</span>
+        <span class="tag tag-oss">OSS</span>
+        <a href="https://chimera-linux.org/news/2026/11/musl-nvidia.html">Chimera Linux: musl とプロプライエタリ NVIDIA ドライバの両立</a>
+        <span class="quick-summary">— musl 環境で NVIDIA ドライバを動かす取り組み</span>
+        <span class="meta">Chimera Linux</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://www.publickey1.jp/blog/26/githubcopilot_fusionaigithub_universe_2026.html">GitHub「Copilot Fusion」正式リリース</a>
+        <span class="quick-summary">— タスクに応じて最適な AI モデルを選び、性能とコストを両立</span>
+        <span class="meta">Publickey</span>
       </div>
     </div>
 
