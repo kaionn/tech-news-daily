@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-11-08</title>
+  <meta name="description" content="Alpine OpenSSH 認証バイパス / Discord が Rust 製クライアントへ移行 / Microsoft Research AI Frontiers 終了">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech News Daily">
+  <meta property="og:title" content="Tech News Daily — 2026-11-08">
+  <meta property="og:description" content="Alpine OpenSSH 認証バイパス / Discord が Rust 製クライアントへ移行 / Microsoft Research AI Frontiers 終了">
+  <meta property="og:url" content="https://tech-news.kaion-lab.com/archive/2026-11-08.html">
+  <meta property="og:image" content="https://tech-news.kaion-lab.com/apple-touch-icon.png">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="../feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-11-08 (Sun)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+      <nav class="site-nav">
+        <a href="../" class="active">📰 日刊ダイジェスト</a>
+        <a href="../trends.html">🔌 週次プラグイントレンド</a>
+        <a href="../ai-trends.html">🧠 AI プロダクト動向</a>
+        <a href="./">🗂 アーカイブ</a>
+      </nav>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 18 articles</span>
+      <span>🏷 8 categories</span>
+      <span>📡 14 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item">
+        <span class="number-value">257B</span>
+        <span class="number-label">Alpine sshd を突破できるパスワード長（下限）</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">55%</span>
+        <span class="number-label">2026 Q3 クラウドインフラ市場の前年比成長率</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">290MB</span>
+        <span class="number-label">Discord Rust 版の RAM（2 アカウント同時）</span>
+      </div>
+    </div>
+
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
+
+      <div class="card featured deep-dive">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://www.alpinelinux.org/posts/2026-11-05-openssh-password-authentication-bypass/">DEEP DIVE: Alpine Linux の openssh-server にパスワード認証バイパス、257 バイト超のパスワードで突破</a></h3>
+        </div>
+        <div class="summary">Alpine Linux は 11 月 5 日、openssh-server のパスワード認証を無効のまま通過できる脆弱性を公表した。PAM を使わない構成では、sshd が入力パスワードを crypt() でハッシュ化し、保存済みハッシュと比較して認証する。musl の crypt() は 256 バイトを超える入力に対し、エラー値として文字列 "*" を返す。パスワード未設定のアカウントも /etc/shadow に "*" を保存しているため、両者が一致して認証が通ってしまう。攻撃者に必要なのは 257〜1024 バイトのパスワードを 1 回送ることだけだ。ただし成立には、PasswordAuthentication が有効であること、"*" のアカウント（root や alpine など）が存在すること、$5$ または $6$ ハッシュを持つ別のローカルアカウントがあることが揃う必要がある。影響は Alpine 3.21〜3.24 と edge、サポート終了済みの 3.16〜3.20、3.18.11〜3.24.3 の tiny-cloud イメージに及ぶ。修正版は 3.21.10、3.22.8、3.23.8、3.24.4 で、edge は 10.6_p2-r0。`apk upgrade -U -a` のあと `rc-service sshd restart` を実行する。更新できない場合は PasswordAuthentication を no にし、鍵ログインを確認してからセッションを閉じる。CVE は本稿時点で未割り当てだ。</div>
+        <div class="editorial">🧠 原因は OpenSSH 本体ではなく、musl の crypt() が「失敗」と「ロック済みアカウント」を同じ文字列で表す設計にある。この種の番兵値の衝突は、他の libc 依存ソフトでも同じ形で出うる。軽量コンテナで Alpine の sshd を使い、パスワード認証を残している環境は多くないはずだが、tiny-cloud イメージは既定設定を確認するまで安全と言えない。未検証だが、/var/log/messages に root など無パスワードアカウントへのパスワードログイン成功が残っていれば、侵害済みとして扱うべきだ。</div>
+        <div class="key-points">
+          <ul>
+            <li>musl の crypt() が 256 バイト超でエラー値 "*" を返し、無パスワードアカウントの "*" と一致して認証成功</li>
+            <li>修正版は 3.21.10 / 3.22.8 / 3.23.8 / 3.24.4、edge は 10.6_p2-r0。CVE は未割り当て</li>
+            <li>回避策は PasswordAuthentication no。PAM 構成でも UsePAM no なら対象</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 Alpine ベースのサーバーで sshd を動かしているなら、今すぐ apk upgrade するか、パスワード認証を切ること。</div>
+        <div class="meta">
+          <span>Alpine Linux</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-11-05</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-frontend">Frontend</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://www.windowslatest.com/2026/11/06/every-windows-11-app-should-kill-electron-and-discord-just-showed-why-no-starting-screen-and-70-less-ram-even-with-two-accounts-signed-in/">Discord、Electron を捨てて GPUI 製 Rust クライアントへ。RAM は約 70% 減</a></h3>
+        </div>
+        <div class="summary">Discord がデスクトップ版を Electron から Rust 製クライアント（タスクマネージャー上の名称は Discord Phoenix）へ置き換えている。UI は Zed エディタの GPU 描画フレームワーク GPUI で、HTML を使わずに描く。Tauri は採用していない。モバイルは React Native をやめ、Web 版はロジックを WebAssembly へ移す。非公開テスト段階で、公開日は未定。</div>
+        <div class="key-points">
+          <ul>
+            <li>2 アカウント同時ログインで 290.2MB。記事は Electron の 1GB 目安から約 70% 減と見積もる</li>
+            <li>コールドスタートでは Rust 版が約 1 秒でウィンドウ表示し、Electron は約 5 秒で UI に到達</li>
+            <li>同一条件のベンチは未公開。早期ビルドのスナップショットである</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 Electron アプリを抱えるチームは、メモリ比較の指標が「1GB を切るか」から変わりうる点を意識しておきたい。ただし数値は第三者の計測で、GPUI の成熟度は別問題だ。</div>
+        <div class="meta">
+          <span>Windows Latest</span>
+          <span class="engagement">▲ 191</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-11-06</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://hunch.net/?p=13764006">Microsoft Research「AI Frontiers」グループが終了、リーダーの Langford 氏が離脱</a></h3>
+        </div>
+        <div class="summary">約 50 人規模の Microsoft Research 内組織 AI Frontiers（AIF）が終了した。ChatGPT 公開後に発足し、9 月初旬に Microsoft AI（MAI）へ再編されていた。リーダーの John Langford 氏は、スケーリング重視で研究を避ける MAI の方針と合わず、創設メンバーも同様の結論に至ったと書く。AIF は Autogen や Fara などエージェント基盤を手がけてきた。</div>
+        <div class="key-points">
+          <ul>
+            <li>AIF は約 50 人。9 月初旬に MAI へ再編され、今回終了を表明</li>
+            <li>成果は Autogen、コンピュータ操作エージェント Fara、Dion3（改良版 Muon）など</li>
+            <li>来年度は AIF チームでのインターンを予定していない</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 Autogen を使っている場合、メンテ体制が変わる可能性がある。なお本稿は当事者の一方的な見解で、Microsoft の公式見解は確認できていない。</div>
+        <div class="meta">
+          <span>hunch.net</span>
+          <span class="engagement">▲ 327</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-11-07</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://sizu.me/laiso/posts/k59is4cnd77f">ISUCON2026 を Claude Code が優勝、3 か月かけたハーネスが約 8 時間自律稼働</a></h3>
+        </div>
+        <div class="summary">元 Wantedly CTO の Kawasy 氏が、素の Claude Code に Herdr と Ralph 型ループ、監査エージェントを組み合わせて参戦し、約 8 時間止まらず走らせて優勝したと laiso 氏が伝える。本人の証言に基づく二次情報で、スコアは公式ブログ参照とされている。</div>
+        <div class="key-points">
+          <ul>
+            <li>PostgreSQL を廃止し、書き込みをイベント化してリーダーが順序付け、全サーバーのメモリへ同順に適用</li>
+            <li>期待値からベンチ打ち切りを判断するツールで、スコア履歴と残り時間を元に無駄な実行を止めた</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>sizu.me (laiso)</span>
+          <span class="engagement">🔖 126</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-11-07</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-data">Data</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/github2typescriptrustosscc_switchomarchygithub_octoverse_2026.html">GitHub Octoverse 2026: TypeScript が 2 年連続首位、PR 増加率は Rust</a></h3>
+        </div>
+        <div class="summary">GitHub の年次レポートによると、開発者数は 2 億 2,500 万人。貢献者数の言語別では TypeScript が 2 年連続 1 位で、Python が僅差の 2 位。プルリクエストの伸びが最も大きいのは Rust だった。</div>
+        <div class="key-points">
+          <ul>
+            <li>国別は米国 3,830 万人、インド 3,200 万人、中国 1,240 万人。日本は 5 位の 715 万人</li>
+            <li>貢献者の増加が速い OSS は CC Switch、Awesome MCP Servers、Omarchy の順</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-11-04</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">💰 ビジネス</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/aws26google_cloud1620263synergy_research.html">クラウドインフラ市場 2026 Q3: AWS は 26% に後退、Google Cloud は 16% へ</a></h3>
+        </div>
+        <div class="summary">Synergy Research によると、Q3 の市場規模は 1,680 億ドルで、前年比 55% 増と過去最高の成長率を記録した。上位 3 社のシェア合計は 61%。</div>
+        <div class="key-points">
+          <ul>
+            <li>AWS 26%（2 ポイント減）、Azure 19%（1 ポイント減）、Google Cloud 16%（1 ポイント増）</li>
+            <li>シェアが落ちても市場全体が拡大しており、AWS の売上自体が減ったことを意味しない</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-11-04</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/github_copilot_dreaminggithub_universe_2026.html">GitHub Copilot Dreaming 発表、古くなった AI 指示とメモリを裏で自動整理</a></h3>
+        </div>
+        <div class="summary">GitHub Universe 2026（10 月 28〜29 日）でパブリックプレビューとして発表された。過去の作業を振り返り、コードやモデルの変化で陳腐化した指示ファイルと Copilot Memory を更新する。</div>
+        <div class="key-points">
+          <ul>
+            <li>Copilot との会話と PR レビューから学習し、修正を PR として提案</li>
+            <li>デモでは Java から Svelte への書き換え後、指示ファイルを Svelte 向けに書き直す PR を作成</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-11-04</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://zenn.dev/tomipetit/articles/zero-wire-github-actions">Cloudflare Zero Wire × GitHub Actions × Claude で公開サーバーの脆弱性チェックを自動化</a></h3>
+        </div>
+        <div class="summary">Cloudflare Radar の脆弱性フィード Zero Wire の RSS を毎日取得し、サーバーの棚卸し結果と照合して Issue を起票する構成。バージョン比較はコードに、影響判断は Claude に分担させている。</div>
+        <div class="key-points">
+          <ul>
+            <li>Claude に照合させると「要確認」で止まりがちだったため、修正済み判定を機械処理へ移した</li>
+            <li>Claude には Bash を渡さず、ターン上限は 40。Node.js 本体の未修正 19 件を検出し v24.22.1 以上で解消と判定</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span class="engagement">🔖 31</span>
+          <span>⏱ 8 min read</span>
+          <span>2026-11-07</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://www.ipa.go.jp/digital/kaihatsu/youkyu-kanri.html">IPA「AI 時代の要求管理ハンドブック」Ver.1.0.0 公開</a></h3>
+        </div>
+        <div class="summary">IPA が 11 月 5 日に公開した。要求を一度定義して終わりにせず、業務・データ・システム・ルール・評価・運用までつなげて継続管理する方法を、開発者以外の経営・法務・調達も想定して解説する。</div>
+        <div class="key-points">
+          <ul>
+            <li>全 5 部構成。要求管理の基礎、AI 時代の変化、モデリングとトレーサビリティ、法令対応、組織への定着</li>
+            <li>PDF は 4.8MB。継続的な改訂を前提に意見受付窓口を設置</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>IPA</span>
+          <span class="engagement">🔖 110</span>
+          <span>⏱ 10 min read</span>
+          <span>2026-11-05</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://www.pospome.work/entry/2026/11/07/192125">AI 時代に求められる優秀な TechLead の振る舞い</a></h3>
+        </div>
+        <div class="summary">TechLead Conference 2026 Autumn の登壇資料紹介。筆者が IC、TechLead、VPoE と役割を変えてきた経験から、AI がコードを書く時代に TechLead が出すべき価値を考える。具体的な振る舞いはスライド側に記載される。</div>
+        <div class="key-points">
+          <ul>
+            <li>想定読者は現役の TechLead と、これから目指す人</li>
+            <li>ブログ本文は概要のみで、詳細は Speaker Deck の資料を参照</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>pospome.work</span>
+          <span class="engagement">🔖 164</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-11-07</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.com/hedgerow-dev/coldframe">coldframe: スーパーの冷凍機コントローラーを装う低対話型ハニーポット</a></h3>
+        </div>
+        <div class="summary">Danfoss AK-SM 800A と Dixell XWEB 500 を模倣し、接続元、試行された認証情報、使われた公開エクスプロイトを記録する。実データは一切返さない。標準ライブラリのみの Python 単一ファイルで、MIT ライセンス。</div>
+        <div class="key-points">
+          <ul>
+            <li>HTTP/HTTPS と Danfoss XML API を再現。Modbus TCP は既定で無効</li>
+            <li>コンテナは read-only・非 root・権限なしで動作し、JSON 行ログを出力</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span class="engagement">▲ 177</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-11-07</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://op.tngl.io/meridian/">Meridian: Servo と GPUI で作る実験的な macOS ブラウザ</a></h3>
+        </div>
+        <div class="summary">Rust 製。ブラウザ UI を GPUI（Zed 由来）で描き、Web コンテンツは Servo が担う。両者をつなぐ gpui-servo は別ライブラリとして切り出されている。JavaScript や複雑なレイアウトに依存しないサイト向けの初期段階。</div>
+        <div class="key-points">
+          <ul>
+            <li>アドレスバー補完、縦横タブ、ブックマーク、履歴、リーダーモード、サイト別ズームを実装</li>
+            <li>リポジトリは Tangled にあり、Nix で試せる</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Tangled</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-11-07</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://apiiro.com/blog/coding-agents-leaking-secrets-github-dont-ask-again">Claude Code の「Don't Ask Again」が 1,122 の公開 GitHub ファイルにパスワードを露出</a>
+        <span class="quick-summary">— Apiiro の調査。HN で議論中（本文は未確認、見出しの数値のみ）</span>
+        <span class="meta">Apiiro</span>
+        <span class="engagement">▲ 106</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-oss">OSS</span>
+        <a href="https://asahilinux.org/2026/11/progress-report-7-3/">Asahi Linux 進捗レポート: Linux 7.3 対応</a>
+        <span class="quick-summary">— Apple Silicon 向け Linux の最新状況</span>
+        <span class="meta">Asahi Linux</span>
+        <span class="engagement">▲ 302</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://www.bitdefender.com/en-us/blog/labs/ghostmap-android">GhostMap: アプリを開く前に端末をクラッシュさせる Android の欠陥</a>
+        <span class="quick-summary">— Bitdefender Labs による脆弱性解説</span>
+        <span class="meta">Bitdefender</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://docs.github.com/en/actions/concepts/security/workflow-dependency-lockfiles">GitHub Actions の Workflow dependency lockfiles</a>
+        <span class="quick-summary">— ワークフロー依存のバージョン固定に関する公式ドキュメント</span>
+        <span class="meta">GitHub Docs</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-oss">OSS</span>
+        <a href="https://chimera-linux.org/news/2026/11/musl-nvidia.html">Chimera Linux: musl とプロプライエタリ NVIDIA ドライバの両立</a>
+        <span class="quick-summary">— musl 環境で NVIDIA ドライバを動かす取り組み</span>
+        <span class="meta">Chimera Linux</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://www.publickey1.jp/blog/26/githubcopilot_fusionaigithub_universe_2026.html">GitHub「Copilot Fusion」正式リリース</a>
+        <span class="quick-summary">— タスクに応じて最適な AI モデルを選び、性能とコストを両立</span>
+        <span class="meta">Publickey</span>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="./" class="archive-link">🗂 過去のダイジェスト</a>
+    </footer>
+  </div>
+</body>
+</html>
