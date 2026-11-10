@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tech News Daily — 2026-11-09</title>
-  <meta name="description" content="Outlook.com が DMARC 未設定ドメインを拒否 / Goldman が Claude Code を制限 / AWS 請求 4.3 億円の誤課金">
+  <title>Tech News Daily — 2026-11-10</title>
+  <meta name="description" content="Claude Fable 5.2 と Mythos 5.2 公開 / Google が Agent Substrate を CNCF に寄贈 / Meta が最小モデル Muse Ember">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Tech News Daily">
-  <meta property="og:title" content="Tech News Daily — 2026-11-09">
-  <meta property="og:description" content="Outlook.com が DMARC 未設定ドメインを拒否 / Goldman が Claude Code を制限 / AWS 請求 4.3 億円の誤課金">
+  <meta property="og:title" content="Tech News Daily — 2026-11-10">
+  <meta property="og:description" content="Claude Fable 5.2 と Mythos 5.2 公開 / Google が Agent Substrate を CNCF に寄贈 / Meta が最小モデル Muse Ember">
   <meta property="og:url" content="https://tech-news.kaion-lab.com/">
   <meta property="og:image" content="https://tech-news.kaion-lab.com/apple-touch-icon.png">
   <meta name="twitter:card" content="summary">
@@ -22,7 +22,7 @@
   <div class="container">
     <header>
       <h1>Tech News Daily</h1>
-      <div class="date">2026-11-09 (Mon)</div>
+      <div class="date">2026-11-10 (Tue)</div>
       <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
       <nav class="site-nav">
         <a href="./" class="active">📰 日刊ダイジェスト</a>
@@ -34,7 +34,7 @@
 
     <div class="stats-bar">
       <span>📰 18 articles</span>
-      <span>🏷 7 categories</span>
+      <span>🏷 8 categories</span>
       <span>📡 15 sources</span>
     </div>
 
@@ -47,341 +47,311 @@
     </nav>
 
     <div class="numbers-bar">
-      <div class="number-item">
-        <span class="number-value">$2.78M</span>
-        <span class="number-label">OpenSearch Serverless の 10 月請求額（49 ファイル・約 75MB の処理）</span>
-      </div>
-      <div class="number-item">
-        <span class="number-value">284B</span>
-        <span class="number-label">GPU なし・64GB RAM で動かす DeepSeek-V4-Flash のパラメータ数</span>
-      </div>
-      <div class="number-item">
-        <span class="number-value">180+</span>
-        <span class="number-label">Rust 対応が始まった systemd のバイナリ数</span>
-      </div>
+      <div class="number-item"><span class="number-value">2.5x</span><span class="number-label">Fast mode の出力速度（Fable 5.2）</span></div>
+      <div class="number-item"><span class="number-value">10x</span><span class="number-label">Agent Substrate のエージェント密度</span></div>
+      <div class="number-item"><span class="number-value">$0.10</span><span class="number-label">Muse Ember 入力 100 万トークン</span></div>
     </div>
 
     <div class="section" id="top-stories">
       <div class="section-title">🔥 Top Stories</div>
-
-      <div class="card featured deep-dive">
-        <div class="card-header">
-          <span class="tag tag-security">Security</span>
-          <span class="content-type">🔒 セキュリティ</span>
-          <h3><a href="https://mailroute.net/blog/outlook-rejecting-email-without-dmarc">DEEP DIVE: Outlook.com が DMARC 未設定ドメインのメールを黙って拒否し始めた</a></h3>
-        </div>
-        <div class="summary">MailRoute の報告によると、11 月 5 日から Outlook.com、Hotmail、Live、MSN が、DMARC レコードを持たないドメインのメールの一部を拒否している。Microsoft の高ボリューム送信者規則（2025 年 5 月、1 日 5,000 通超が対象）とは別で、小規模・低頻度の送信者にも及ぶ。ただし Microsoft はこの変更を告知しておらず、11 月 6 日時点で postmaster への通知もサービス正常性の掲示もない。バウンスは一部のメッセージだけで起きるため、「届いたから大丈夫」とは判断できない。エラーは「550 5.7.1 Message rejected: Message lacks SPF/DKIM/DMARC Auth Records」で、末尾の AS コードはメッセージごとの ID だ。初日は AS コードなしの 550 5.7.1 も出ていた。従来のバルク送信者向け拒否は 550 5.7.515 で、失敗した検査が一覧で返る。対処は `dig +short TXT _dmarc.yourdomain.com` で DMARC の有無を確認し、無ければ `_dmarc` の TXT に `v=DMARC1; p=none` を追加する。p=none は他の受信側の挙動を変えない。さらに From ドメインで SPF か DKIM が通り、アラインメントが取れている必要がある。Microsoft 365 では既定の DKIM 署名が onmicrosoft.com のドメインなので、自社ドメインの DKIM を有効にしないと DMARC に寄与しない。</div>
-        <div class="editorial">🧠 Google と Yahoo の 2024 年の要件変更と同じ流れで、受信側が認証を必須化する方向は止まらないだろう。一方で今回は公式告知がなく、規則として固定されたのか、段階導入中の実験なのかは分からない。単一の報告ブログが根拠なので、自社ドメインのバウンスログで 550 5.7.1 を実測するまでは断定を避けたい。確認に数分、p=none の追加は他社宛配信に影響しないため、様子見の理由は薄い。</div>
-        <div class="key-points">
-          <ul>
-            <li>11 月 5 日以降、DMARC を持たない送信元ドメインのメールの一部が 550 5.7.1 で拒否される</li>
-            <li>最低限の対処は `_dmarc` TXT に `v=DMARC1; p=none` を追加。SPF/DKIM のアラインメントも必要</li>
-            <li>Microsoft 365 は既定署名が onmicrosoft.com のため、独自ドメインの DKIM 有効化が必要</li>
-          </ul>
-        </div>
-        <div class="why-it-matters">💡 自社ドメインから Outlook.com 宛にメールを送るサービスを運用しているなら、今日中に DMARC レコードの有無を確認すること。</div>
-        <div class="meta">
-          <span>MailRoute</span>
-          <span class="engagement">▲ 205</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-11-06</span>
-        </div>
-      </div>
-
-      <div class="card featured">
-        <div class="card-header">
-          <span class="tag tag-ai">AI</span>
-          <span class="content-type">💰 ビジネス</span>
-          <h3><a href="https://www.thestateofai.com/news/goldman-sachs-claude-code-traders-bankers">Goldman Sachs、トレーダーとバンカーから Claude Code を引き上げ</a></h3>
-        </div>
-        <div class="summary">Bloomberg の報道を引く記事によると、Goldman の 10 月の社内指針で、Claude Code と GitHub のツールはエンジニア中心の利用に限られ、大半のトレーダーとバンカーは使えなくなった。トレーダーは顧客の取引フロー監視や市場モデルの作成に使っていた。コーディングエージェントはユーザーの権限で動き、レビューを迂回でき、情報隔壁と衝突しうる点が懸念とされる。一方、バックオフィス向けのエージェント開発では Anthropic との協業を続ける。</div>
-        <div class="key-points">
-          <ul>
-            <li>Goldman は全従業員約 47,000 人のうち約 12,000 人のエンジニア向けにツールを展開済み。7 月には CIO が非技術職の「バイブコーディング」を称賛していた</li>
-            <li>Goldman と Morgan Stanley は Anthropic IPO の主幹事で、S-1 は 10 月 26 日提出と同記事は伝える</li>
-            <li>Barclays は逆に開発者への Claude Code 展開を拡大している</li>
-          </ul>
-        </div>
-        <div class="why-it-matters">💡 金融・規制業種でエージェントを導入する場合、権限・レビュー・情報隔壁の統制をツール選定より先に設計しておく必要がある。なお一次情報は Bloomberg で、本稿は二次記事である。</div>
-        <div class="meta">
-          <span>The State of AI</span>
-          <span class="engagement">▲ 550</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-11-08</span>
-        </div>
-      </div>
-
-      <div class="card featured">
-        <div class="card-header">
-          <span class="tag tag-infra">Infra</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://zenn.dev/tsumita7/articles/aoss-intelligent-ingestion-billing-202610">AWS から 4.3 億円の課金が…バグと思われる高額請求された際にまずすること</a></h3>
-        </div>
-        <div class="summary">筆者が OpenSearch Serverless の Intelligent ingestion で画像入り PDF 49 ファイル（約 75MB）を処理したところ、10 月の請求が 2,777,528.09 ドル（約 4.3 億円）になった。筆者は Nova 2 Lite のトークン使用量が 100 万倍で計上されたと分析している。正しく再計算すると約 2.53 ドルになる。</div>
-        <div class="key-points">
-          <ul>
-            <li>内訳は出力トークン 2,344,311.19 ドル、入力トークン 179,529.24 ドル。9 月の請求は 31.90 ドル</li>
-            <li>初動は AWS Support に英語のチャットで連絡。Web 経由の非同期サポートは約 2 週間かかった</li>
-            <li>2026 年 2 月の Bedrock Mantle でも単位計上ミスで約 1,400 万円の請求が起き、解決に 16 日かかった</li>
-          </ul>
-        </div>
-        <div class="why-it-matters">💡 従量課金の新サービスを試す前に、Budgets のアラートと請求の単位×使用量の突き合わせ手順を用意しておくこと。原因は筆者の推定で、AWS の公式見解は記事にない。</div>
-        <div class="meta">
-          <span>Zenn</span>
-          <span>⏱ 8 min read</span>
-          <span>2026-11-08</span>
-        </div>
-      </div>
+<div class="card featured deep-dive">
+  <div class="card-header">
+    <span class="tag tag-ai">AI</span>
+    <span class="content-type">📦 リリース</span>
+    <h3><a href="https://www.anthropic.com/claude-fable-and-mythos-5-2">DEEP DIVE: Anthropic が Claude Fable 5.2 と Mythos 5.2 を公開、FrontierSWE v2 で 69.9%</a></h3>
+  </div>
+  <div class="summary">Anthropic は 11 月 9 日、同一の基盤モデルから Fable 5.2 と Mythos 5.2 を公開した。Fable 5.2 はサイバーとバイオの安全策を備えて全ユーザーに開放され、Mythos 5.2 はサイバー・ライフサイエンスの検証プログラムを通過した組織だけが使える。API モデル ID は claude-fable-5-2 で、AWS・Google Cloud・Azure でも同日に利用できる。価格は入力 100 万トークンあたり $8、出力 $40。出力速度を最大 2.5 倍にする Fast mode は $16 / $80 である。性能は Opus 5.5 比で FrontierCode 2.0 が 45.5% から 49.1%、FrontierSWE v2 が 62.3% から 69.9%、AutomationBench が 42.5% から 51.4%、Remote Labor Index が 21.3% から 41.3% と伸びた。効率面では Medium effort のトークン消費が Fable 5.1 より少なく、High effort では Opus 5.5 の FrontierCode 最高スコアにほぼ並びつつ 1 タスクあたりのコストは約半分とされる。大きなモデルが方針を決め小さなモデルへ作業を委ねる Orchestrator 運用と、小さなモデルの相談役となる Advisor 運用の両方に対応する。安全面では、Fable 5.1 と比べ誤ブロックが約 55% 減り、蒸留対策で収集されるデータは 90〜99% 減ったという。Mythos 5.2 は社内の CVE 再発見評価で 89.6% を記録した。</div>
+  <div class="editorial">🧠 数字は自社評価が中心で、独立検証は始まったばかりだ。HN では Artificial Analysis が 65 点と過去最高を付けたという投稿が伸びており、第三者の裏付けは出つつある。ただし単価は Opus 5.5 より高い前提なので、「タスクあたり半額」は High effort という条件付きの話にすぎない。未検証だが、Orchestrator 運用で小モデルへ委譲できる比率が実コストを左右するとみている。</div>
+  <div class="key-points">
+    <ul>
+      <li>FrontierSWE v2 は 69.9%（Opus 5.5 は 62.3%）、Remote Labor Index は 41.3%（同 21.3%）</li>
+      <li>価格は $8 / $40（100 万トークン）。Fast mode は最大 2.5 倍速で $16 / $80</li>
+      <li>Claude Code の既定である Medium effort で、Fable 5.1 よりトークン消費が減る</li>
+    </ul>
+  </div>
+  <div class="why-it-matters">💡 Claude Code や API で Opus 5.5 を使っているなら、High effort で同等スコアが半額で得られるか自分のタスクで測る価値がある。</div>
+  <div class="meta">
+    <span>Anthropic</span>
+    <span class="engagement">▲ 212</span>
+    <span>⏱ 8 min read</span>
+    <span>2026-11-10</span>
+  </div>
+</div>
+<div class="card featured">
+  <div class="card-header">
+    <span class="tag tag-infra">Infra</span>
+    <span class="content-type">📦 リリース</span>
+    <h3><a href="https://www.publickey1.jp/blog/26/googlekubernetes10aiagent_sustrategvisorcncf.html">Google、Kubernetes で AI エージェントを 10 倍高密度に動かす「Agent Substrate」と gVisor を CNCF に寄贈</a></h3>
+  </div>
+  <div class="summary">AI エージェントは実行時間の 90〜95% を、モデル推論や外部 API の応答、人間の承認の待機に使う。その間も Pod はリソースを握り続ける。Agent Substrate は待機中のエージェント状態をスナップショットとして高速ストレージに退避し、再開時にコールドスタートなしで復元する。Google は従来比 10 倍の密度で動かせるとしている。サンドボックスの gVisor も合わせて CNCF へ寄贈され、GKE では Agent Substrate が正式サービスになった。</div>
+  <div class="key-points">
+    <ul>
+      <li>待機が実行時間の 90〜95% を占めるため、アイドル中の状態退避で Pod の占有を減らす</li>
+      <li>密度は従来比 10 倍（Google 発表値）</li>
+      <li>GKE で正式サービス化、gVisor は実行環境の分離を担う</li>
+    </ul>
+  </div>
+  <div class="why-it-matters">💡 エージェント基盤を自前で Kubernetes 上に組んでいるなら、アイドル時のリソース占有が最大のコスト要因になる。CNCF 標準になるかを注視したい。</div>
+  <div class="meta">
+    <span>Publickey</span>
+    <span>⏱ 4 min read</span>
+    <span>2026-11-10</span>
+  </div>
+</div>
+<div class="card featured">
+  <div class="card-header">
+    <span class="tag tag-ai">AI</span>
+    <span class="content-type">📦 リリース</span>
+    <h3><a href="https://research.meta.ai/blog/muse-ember">Meta が最小モデル「Muse Ember」を公開、入力 $0.10 / 100 万トークン</a></h3>
+  </div>
+  <div class="summary">Meta は、ツール呼び出しやルーティング、抽出、長文解析などエージェントの下回りを想定した最小モデル Muse Ember を公開した。Artificial Analysis のスコアで Claude Haiku 5.5 に並びつつ、コストは約 3 分の 1 だという。コンテキストは 100 万トークン、出力は最大 51.2 万トークンで、Muse Code と Meta Model API から muse-ember-1.0 として使える。</div>
+  <div class="key-points">
+    <ul>
+      <li>入力 $0.10、キャッシュ入力 $0.004、出力 $0.50（各 100 万トークン）</li>
+      <li>AutomationBench-AA は 37.8%（GPT-6 Luna は 20.2%）、Terminal-Bench 4.0 は 40.9%（Haiku 5.5 は 39.2%）</li>
+      <li>1 タスクあたり約 $0.14（Artificial Analysis 測定）</li>
+    </ul>
+  </div>
+  <div class="why-it-matters">💡 大量のサブタスクを回すエージェントなら、安価なモデルへの振り分けで請求額を大きく下げられる。ベンチマークは Meta 自身の公表値である点に注意。</div>
+  <div class="meta">
+    <span>Meta Research</span>
+    <span class="engagement">▲ 258</span>
+    <span>⏱ 3 min read</span>
+    <span>2026-11-10</span>
+  </div>
+</div>
     </div>
 
     <div class="section" id="dev-engineering">
       <div class="section-title">⚡ Dev &amp; Engineering</div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://amutable.com/blog/systemd-loves-rust">systemd が Rust サポートをマージ、まずはリーフコンポーネントから</a></h3>
-        </div>
-        <div class="summary">Brauner 氏と Poettering 氏の投稿で、systemd 本体に Rust を取り込んだことが示された。180 以上あるバイナリのうち、単体のリーフコンポーネントでのみ Rust を認め、中核の libsystemd-shared.so は対象外とする。Rust なしのビルドは引き続きサポートされる。</div>
-        <div class="key-points">
-          <ul>
-            <li>ビルドは Meson のまま Cargo を使わず、no-std Rust と独自の失敗可能なアロケータで libc のみにリンク。他の依存は dlopen()</li>
-            <li>中核への採用を阻むのは、安定した共有ライブラリ ABI（rfcs issue 600）と fd 中心のファイル操作</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Amutable</span>
-          <span class="engagement">🔖 33</span>
-          <span>⏱ 5 min read</span>
-          <span>2026-11-03</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-infra">Infra</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://blog.nspawn.org/posts/nspawn-3-0-a-docker-compatible-engine-api-for-systemd-nspawn-containers/">Nspawn 3.0: systemd-nspawn に Docker 互換の Engine API</a></h3>
-        </div>
-        <div class="summary">systemd-nspawn のコンテナを Docker API 経由で操作できるようになった。ソケットは /run/nspawn/api.sock で、パッケージは無効状態で配布される。DOCKER_HOST にこのソケットを指定すれば docker コマンドが動く。</div>
-        <div class="key-points">
-          <ul>
-            <li>API 1.51 を模倣し、1.24 までのクライアントに対応。GitLab Runner の docker executor も利用可能</li>
-            <li>ソケットを rw でマウントしたマシンはコンテナの作成・削除ができる。:ro なら参照・ログ・kill のみ。org.nspawn.manage を持つユーザーは実質ホストの root</li>
-            <li>build / load / push などは 501 を返し、docker build は使えない（nspawn build は可）</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>nspawn.org</span>
-          <span class="engagement">🔖 12</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-11-08</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-oss">OSS</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://www.publickey1.jp/blog/26/mcpmcpruby_sdkmcp_sdk_tier_1.html">MCP 公式 Ruby SDK が「Tier 1」に到達、仕様を完全サポート</a></h3>
-        </div>
-        <div class="summary">Linux Foundation 傘下の AAIF が策定する MCP 仕様について、公式 Ruby SDK が全プロトコル実装を満たす Tier 1 になった。Ruby SDK は 7 月に 1.0 となったが、その時点では Tier 2 だった。ステートレス接続などが新たに対応した。</div>
-        <div class="key-points">
-          <ul>
-            <li>非推奨と記載された 2 機能を除き、サーバーとクライアントの両方が準拠</li>
-            <li>Tier 1 は TypeScript、Python、C#、Go、Rust に Ruby が加わる。次の仕様（2027 年 3 月下旬予定）にも追従予定</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Publickey</span>
-          <span>⏱ 2 min read</span>
-          <span>2026-11-09</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://linebender.org/blog/jit-bitmap-text/">マイコンでビットマップ文字を JIT 描画、RP2350 で 1 ピクセル 6 サイクル以内</a></h3>
-        </div>
-        <div class="summary">RP2350 上の 1980 年代風ホームコンピュータ vic-2350 向けに、文字列を走査線ごとに機械語へ JIT コンパイルして描く方式を解説する。筆者は Rust では 6 サイクル/ピクセルの予算を満たせないとして、Cortex-M33 向けのアセンブリ系言語で実装した。</div>
-        <div class="key-points">
-          <ul>
-            <li>グリフが 32 ピクセル境界をまたがない配置で、1 行を 32 ビット 1 回の読み出しにした。フォントは 1140 から 960 バイトへ縮小</li>
-            <li>デモの JIT コンパイルは約 21k サイクル、実行は約 42k サイクル。1 コアの約 2.6% で、100µs 未満でスキャンアウトに間に合う</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Linebender</span>
-          <span class="engagement">▲ 92</span>
-          <span>⏱ 8 min read</span>
-          <span>2026-11-08</span>
-        </div>
-      </div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-infra">Infra</span>
+    <span class="content-type">📦 リリース</span>
+    <h3><a href="https://blog.google/innovation-and-ai/infrastructure-and-cloud/global-network/tpu-8i-max-and-8tx/">Google が TPU 8tx と TPU 8i Max を発表、1 年で 4 つ目の TPU システム</a></h3>
+  </div>
+  <div class="summary">TPU 8tx は TPU 8t と同じシリコンに AMD EPYC ホストを組み合わせ、機密性の高い推論と小規模学習でデータとモデル重みを隔離する。TPU 8i Max は TPU 8i を 2 チップ載せ、既存ラック内でシリコン量を倍にした。</div>
+  <div class="key-points">
+    <ul>
+      <li>TPU 8tx は TPU 8t 比で最大 2 倍低レイテンシ</li>
+      <li>TPU 8i Max は計算・SRAM・HBM 帯域が TPU 8i の 2 倍</li>
+      <li>参考: TPU 8t は前世代比で学習性能が最大 2.7 倍</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>Google Blog</span>
+    <span class="engagement">▲ 219</span>
+    <span>⏱ 4 min read</span>
+    <span>2026-11-10</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-data">Data</span>
+    <span class="content-type">🔬 研究</span>
+    <h3><a href="https://e-means.github.io/">Meta FAIR の E-means、k-means の約 10 分の 1 のエポックで同等の損失に</a></h3>
+  </div>
+  <div class="summary">E-means は k-means のミニバッチ版置き換えで、Faiss にオープンソース化された。指数移動平均で重心を更新し、バッチ幅とステップ幅はスケーリング則から自動で決まる。大きなクラスタを分割して死んだクラスタを復活させる。</div>
+  <div class="key-points">
+    <ul>
+      <li>Lloyd 法の 25 エポック分の損失に約 1.2〜3 エポックで到達</li>
+      <li>GPU で Flash-KMeans の 10〜45 倍、CPU で Faiss の 8〜15 倍高速</li>
+      <li>トイ実験では悪い局所解から抜ける頻度も Lloyd 法より高い</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>e-means.github.io</span>
+    <span class="engagement">▲ 286</span>
+    <span>⏱ 5 min read</span>
+    <span>2026-11-10</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-security">Security</span>
+    <span class="content-type">🔒 セキュリティ</span>
+    <h3><a href="https://shubs.io/unlocking-any-car-from-x-brand-in-most-of-the-world/">ナンバープレートだけで車を遠隔解錠、複数の脆弱性を連鎖</a></h3>
+  </div>
+  <div class="summary">Shubham Shah 氏と Sam Curry 氏は、自動車メーカーのバックエンドに存在する複数の弱点をつなぎ、ナンバープレートの情報だけで車両を遠隔解錠できることを示した。ブランド名は記事内で伏せられている。</div>
+  <div class="key-points">
+    <ul>
+      <li>JavaScript バンドルに埋まった OpenIDM の管理者資格情報をハードコード</li>
+      <li>パストラバーサルで WAF を回避し、豪州環境では MFA の手順も飛ばせた</li>
+      <li>豪州・米国・カナダで車両へのコマンド送信が可能、調査期間は約 2 週間</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>shubs.io</span>
+    <span class="engagement">▲ 79</span>
+    <span>⏱ 8 min read</span>
+    <span>2026-11-10</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-data">Data</span>
+    <span class="content-type">📜 解説</span>
+    <h3><a href="https://postalpro.usps.com/zcb">USPS が公式の ZIP コード境界ポリゴンを提供開始</a></h3>
+  </div>
+  <div class="summary">USPS は配達住所データから作った全米の ZIP コード境界を、GeoJSON のサンプル付きで提供する。配達先の増減に応じて境界は動くため、四半期ごとに更新される。</div>
+  <div class="key-points">
+    <ul>
+      <li>Internal・Enterprise・Publication の 3 版を用意し、各版とも年 4 回更新</li>
+      <li>四半期ごとに更新され、配達先の変更に合わせて境界が動く</li>
+      <li>利用にはライセンス契約と注文フォームが必要</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>USPS PostalPro</span>
+    <span class="engagement">▲ 504</span>
+    <span>⏱ 3 min read</span>
+    <span>2026-11-10</span>
+  </div>
+</div>
     </div>
 
     <div class="section" id="jp-community">
       <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-data">Data</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://zenn.dev/naokisuzuki27/articles/cb1a5ac0e23763">SELECT しかしていないのに、PostgreSQL のマイグレーションがロック待ちで失敗した話</a></h3>
-        </div>
-        <div class="summary">Aurora PostgreSQL 16 で、リリース時の REINDEX だけが失敗した事例。会話処理が SELECT のあと外部 API を待つ間もトランザクションを閉じず、idle in transaction のまま ACCESS SHARE ロックを持ち続けていた。</div>
-        <div class="key-points">
-          <ul>
-            <li>CONCURRENTLY なしの REINDEX は ACCESS EXCLUSIVE を要求して待ちに入り、後続の通常 SELECT もその待ち行列で止まる</li>
-            <li>根本対処は外部 API の待機をトランザクション外へ出すこと。保険に idle_in_transaction_session_timeout を既定 24 時間から 3 分へ変更</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Zenn</span>
-          <span>⏱ 6 min read</span>
-          <span>2026-11-08</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-ai">AI</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://hiraoku.dev/blog/mcp-cli-cloud/">MCP はなぜ復権したのか: CLI が支持された理由と、流れを変えた仕様変更</a></h3>
-        </div>
-        <div class="summary">CLI が好まれたのは、必要な説明だけを読める、出力をモデルに渡す前に絞れる、既存ツールを再利用できる、という実用面の利点があったためだと整理する。MCP 側の不満の一部は、初期化とセッション依存というプロトコル設計に由来していた。</div>
-        <div class="key-points">
-          <ul>
-            <li>2026-07-28 版仕様は initialize と Mcp-Session-Id を撤去し、各要求の _meta にプロトコル版を載せる。完了結果には ttlMs と cacheScope が必須</li>
-            <li>Roots、Sampling、Logging は非推奨。ローカル加工は CLI、複数 AI アプリから業務サービスを使うならリモート MCP が候補</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Hiraoku.dev</span>
-          <span class="engagement">🔖 233</span>
-          <span>⏱ 43 min read</span>
-          <span>2026-11-08</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-ai">AI</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://atmarkit.itmedia.co.jp/ait/articles/2611/08/news001.html">【図解あり】マルチエージェント設計「15 のパターン」</a></h3>
-        </div>
-        <div class="summary">GitHub、Google、Siemens の公開事例から、マルチエージェント設計の 15 パターンを整理した @IT の記事。GitHub の型付きスキーマとアクションスキーマ、Google の逐次パイプライン、並列ファンアウト、生成と批評の分離などを含む。</div>
-        <div class="key-points">
-          <ul>
-            <li>内訳は GitHub 2、Google（2025-12-16 公開）8、Google for Startups 4、Siemens 1</li>
-            <li>高価なモデルを呼ぶ前の段階的ルーティングや、検証付きのフォールバックモデルなど、コスト制御系のパターンも含む</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>@IT</span>
-          <span class="engagement">🔖 193</span>
-          <span>⏱ 8 min read</span>
-          <span>2026-11-08</span>
-        </div>
-      </div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-ai">AI</span>
+    <span class="content-type">📜 解説</span>
+    <h3><a href="https://zenn.dev/mappy55/articles/rulebook-rag-01">少年団の役員向け RAG、条文単位に切り直しただけで正答 52%→72%</a></h3>
+  </div>
+  <div class="summary">架空クラブの文書と評価 32 問で RAG を検証した記事。固定長 400 文字の分割を条文単位へ変えると、平均正答が 16.7 問から 23.0 問に上がった。ハイブリッド検索は効かなかった。</div>
+  <div class="key-points">
+    <ul>
+      <li>同一設定でも 3 回の測定で 1〜2 問ぶれるため、3 問以内の差は改善と言えない</li>
+      <li>4B のローカル回答モデルでは正答が 7.7 問・6.7 問まで低下</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>Zenn</span>
+    <span>⏱ 6 min read</span>
+    <span>2026-11-10</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-frontend">Frontend</span>
+    <span class="content-type">👀 注目</span>
+    <h3><a href="https://zenn.dev/mixi/articles/b0ea64fded9503">なぜ mixi2 は iPhone Duo の発売初日から最適化できたのか</a></h3>
+  </div>
+  <div class="summary">Flutter 製の mixi2 は、ボトムタブが標準部品ではなく独自実装だったため縦配置へ変えやすかった。Duo では画面を左右に分け、左に選択中のタブ、右に「みんなの今」を表示する。</div>
+  <div class="key-points">
+    <ul>
+      <li>iOS から verticalBarEdge と occlusion を取得して配置を計算し、Row を Flex に変更</li>
+      <li>発売前は実機で確認できず、シミュレーターだけで出荷した</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>Zenn</span>
+    <span>⏱ 5 min read</span>
+    <span>2026-11-10</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-dev">Dev</span>
+    <span class="content-type">📦 リリース</span>
+    <h3><a href="https://www.publickey1.jp/blog/26/150uiblazorinfragisticssyncfusion.html">Microsoft、150 以上の OSS UI コンポーネントが Blazor に寄贈されたと発表</a></h3>
+  </div>
+  <div class="summary">Infragistics が 50 以上、Syncfusion が 100 以上のコンポーネントを寄贈した。グリッド、チャート、カレンダー、ダイアログなどが含まれ、Blazor WebAssembly と Blazor Server の両方で動く。</div>
+  <div class="key-points">
+    <ul>
+      <li>全て MIT ライセンスで、商用利用・改変・再配布が可能</li>
+      <li>業務 Web アプリでの .NET の存在感を高める狙い</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>Publickey</span>
+    <span>⏱ 3 min read</span>
+    <span>2026-11-10</span>
+  </div>
+</div>
     </div>
 
     <div class="section" id="code-tools">
       <div class="section-title">🛠 Code &amp; Tools</div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-oss">OSS</span>
-          <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://github.com/synchopate/llama-modchip">llama-modchip: GPU なし 64GB RAM で 284B の DeepSeek-V4-Flash を動かす</a></h3>
-        </div>
-        <div class="summary">llama.cpp のカーネルパッチと量子化ツール群。DeepSeek-V4-Flash（総 284B、アクティブ 13.17B）を 76.87GiB から 56.56GiB（1.71 bit/重み）に圧縮し、256K コンテキストを 64GB に収める。速度はすべて作者の自己申告で、独自形式のため素の llama.cpp や Ollama では読めない。</div>
-        <div class="key-points">
-          <ul>
-            <li>Ryzen 9 9955HX で prefill 約 43〜44 tok/s、デコード 9〜10 tok/s。n-gram 投機デコードで 11.5〜14.7 tok/s</li>
-            <li>AVX-512 のタイリングと、専門家重みが L3 の KV キャッシュを追い出さない non-temporal ヒントを使用。Apache-2.0</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>GitHub</span>
-          <span class="engagement">▲ 345</span>
-          <span>⏱ 6 min read</span>
-          <span>2026-11-08</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-ai">AI</span>
-          <span class="content-type">🔬 研究</span>
-          <h3><a href="https://zenn.dev/koheidisney/articles/729394f8be42c5">古代のグラボ（GTX 1080）でも動くローカル LLM を動かしてみた</a></h3>
-        </div>
-        <div class="summary">VRAM 8GB の GTX 1080 で 7 つのローカルモデルに、ドラえもんの秘密道具を選ばせて精度を比べた。ツール説明 27 件を渡すと平均正解率は約 8% から約 40% に上がるが、ひっかけ問題では逆に落ちた。</div>
-        <div class="key-points">
-          <ul>
-            <li>ツール情報なしの最高は Gemma 4 E4B の 25%、Claude Sonnet 5.5 は 65%。レベル 4（特殊ルール）はローカル平均 17% から 6% へ低下</li>
-            <li>ローカル回答 168 件中 93 件が、渡していない存在しないツールを答えた。最速は Qwen3.5 4B の 46.0 tok/s</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Zenn</span>
-          <span>⏱ 7 min read</span>
-          <span>2026-11-09</span>
-        </div>
-      </div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-frontend">Frontend</span>
+    <span class="content-type">🛠 ツール</span>
+    <h3><a href="https://github.com/expo/exact">Expo の Exact、1 つのコードで Web・macOS・iOS・Linux にネイティブ描画</a></h3>
+  </div>
+  <div class="summary">UI は宣言型言語 Contract で記述し、データ処理は TypeScript か Rust で書く。各プラットフォームが自前の描画機構で動き、webview も JavaScript ブリッジも使わない。AI エージェントが 10 の共通操作でビルド・実行・テストできる。</div>
+  <div class="key-points">
+    <ul>
+      <li>MIT ライセンス、GitHub スター約 1.0k、1.0 前で API は頻繁に変わる</li>
+      <li>Windows 対応は未完成、Android は初期段階</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>GitHub</span>
+    <span class="engagement">⭐ 1.0k</span>
+    <span>⏱ 3 min read</span>
+    <span>2026-11-10</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-oss">OSS</span>
+    <span class="content-type">📦 リリース</span>
+    <h3><a href="https://www.publickey1.jp/blog/26/libghostty_10windowsrex.html">ターミナル用ライブラリ「Libghostty 1.0」リリース</a></h3>
+  </div>
+  <div class="summary">Ghostty の中核を C ライブラリ化したもので、macOS・Linux・Windows・FreeBSD・Android・iOS・WebAssembly の 7 環境に対応する。JetBrains IDE、Neovim（libvterm の置き換えがマージ済み）、KDE の Kwi、Turborepo が採用している。</div>
+  <div class="key-points">
+    <ul>
+      <li>Ghostty 本体は macOS と Linux のみで、Windows 版はロードマップから外れた</li>
+      <li>Mitchell Hashimoto 氏の Superlogical が開発するマルチプレクサ Rex の Windows クライアントは数週間内に alpha 見込み</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>Publickey</span>
+    <span>⏱ 3 min read</span>
+    <span>2026-11-10</span>
+  </div>
+</div>
     </div>
 
     <div class="section" id="quick-links">
       <div class="section-title">🔗 Quick Links</div>
-
-      <div class="quick-link">
-        <span class="tag tag-dev">Dev</span>
-        <a href="https://zenn.dev/wakame_atsushi/articles/8c45ac07bac534">Go の defer の動きをちょっと調べてみた</a>
-        <span class="quick-summary">— go1.27.3 で検証。引数は登録時に固定され、os.Exit と log.Fatal では defer が走らない</span>
-        <span class="meta">Zenn</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-security">Security</span>
-        <a href="https://opensourcesecurity.io/2026/10-embargo/">Dear Open Source Developers: It's OK not to embargo</a>
-        <span class="quick-summary">— OSS の脆弱性対応でエンバーゴを必須にしない主張（本文は未確認、見出しのみ）</span>
-        <span class="meta">opensourcesecurity.io</span>
-        <span class="engagement">▲ 33</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-dev">Dev</span>
-        <a href="https://sunshowers.io/posts/sshole/">*sshole, or when are we finally going to get rid of C?</a>
-        <span class="quick-summary">— C 言語の置き換えを論じるブログ（本文は未確認、見出しのみ）</span>
-        <span class="meta">sunshowers.io</span>
-        <span class="engagement">▲ 56</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-infra">Infra</span>
-        <a href="https://vincent.bernat.ch/en/blog/2026-bunny-geodns">Scriptable GeoDNS: leaving AWS for Bunny</a>
-        <span class="quick-summary">— Route 53 から Bunny への GeoDNS 移行記（本文は未確認、見出しのみ）</span>
-        <span class="meta">vincent.bernat.ch</span>
-        <span class="engagement">▲ 25</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-security">Security</span>
-        <a href="https://note.com/npaka/n/nae09bd9ce37d">Mac のセキュリティの仕組み - 標準機能と安全に使うための対策</a>
-        <span class="quick-summary">— macOS 標準のセキュリティ機能と対策の整理（本文は未確認）</span>
-        <span class="meta">note (npaka)</span>
-        <span class="engagement">🔖 146</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-product">Product</span>
-        <a href="https://www.watch.impress.co.jp/docs/news/2154571.html">Meta、「Muse」で自分専用アプリを作れる新機能「スペース」</a>
-        <span class="quick-summary">— 対話で自分用アプリを作る機能（本文は未確認、見出しのみ）</span>
-        <span class="meta">Impress Watch</span>
-        <span class="engagement">🔖 112</span>
-      </div>
+<div class="quick-link">
+  <span class="tag tag-ai">AI</span>
+  <a href="https://platform.claude.com/docs/ja/build-with-claude/prompt-engineering/prompting-claude-fable-5-2">Claude Fable 5.2 向けプロンプティングガイド</a>
+  <span class="quick-summary">— 公式ドキュメント、はてブ 81</span>
+  <span class="meta">Claude Docs</span>
+</div>
+<div class="quick-link">
+  <span class="tag tag-product">Product</span>
+  <a href="https://www.payments.ca/canada-launches-real-time-rail-bringing-247-payment-infrastructure-national-economy">カナダの即時決済基盤 Real-Time Rail が稼働</a>
+  <span class="quick-summary">— 24 時間 365 日の決済インフラが開始、HN 481 pt</span>
+  <span class="meta">Payments Canada</span>
+</div>
+<div class="quick-link">
+  <span class="tag tag-dev">Dev</span>
+  <a href="https://benmandrew.com/articles/what-is-malloc-doing-anyway">What is malloc doing, anyway?</a>
+  <span class="quick-summary">— malloc の内部動作を追う解説、HN 229 pt</span>
+  <span class="meta">benmandrew.com</span>
+</div>
+<div class="quick-link">
+  <span class="tag tag-dev">Dev</span>
+  <a href="https://isocpp.org/files/papers/P4454R0.pdf">Herb Sutter: C++26 post-DIS と言語作者・所有者の対立</a>
+  <span class="quick-summary">— C++26 の進め方に関する提案文書、Lobsters 57</span>
+  <span class="meta">ISO C++</span>
+</div>
+<div class="quick-link">
+  <span class="tag tag-security">Security</span>
+  <a href="https://maurycyz.com/projects/badcert/">Horrible public key tricks</a>
+  <span class="quick-summary">— 証明書まわりの奇妙な手口を紹介、Lobsters 79</span>
+  <span class="meta">maurycyz.com</span>
+</div>
+<div class="quick-link">
+  <span class="tag tag-infra">Infra</span>
+  <a href="https://jmmv.dev/2026/11/zkeys-intro.html">Unattended reboots with encrypted disks</a>
+  <span class="quick-summary">— 暗号化ディスクでの無人再起動を扱う、Lobsters 31</span>
+  <span class="meta">jmmv.dev</span>
+</div>
     </div>
 
     <footer>
