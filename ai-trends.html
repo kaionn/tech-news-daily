@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI プロダクト動向 | Tech News Daily</title>
-<meta name="description" content="11月5日、OpenAI は脆弱性研究向けの GPT-6 Cyber を承認済みの利用者に限って公開した。同社の研究者はこのモデルで Firefox の未知の高深刻度脆弱性 81 件を見つけ、Linux カーネルの 948 件の脆弱性につ…">
+<meta name="description" content="コーディングエージェントのメモリと指示ファイルは、この 1 年で「あるのが当たり前」になった。そのぶん次の問題がはっきりしてきた。書いた時点では正しかった記述が、リファクタやフレームワークの置き換えで静かに古くなり、エージェントはそれを自…">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Tech News Daily">
-<meta property="og:title" content="AI の脆弱性発見は「見つけた数」から「再現と修正を添えて渡す」へ — 動かない仮説は捨てる、受け手の処理量に合わせる、攻撃能力は範囲で縛って配る | AI プロダクト動向">
-<meta property="og:description" content="11月5日、OpenAI は脆弱性研究向けの GPT-6 Cyber を承認済みの利用者に限って公開した。同社の研究者はこのモデルで Firefox の未知の高深刻度脆弱性 81 件を見つけ、Linux カーネルの 948 件の脆弱性につ…">
+<meta property="og:title" content="エージェントの記憶は「溜める」から「手入れする」へ — 読む時に根拠を確かめる、棚卸しはセッションの外で、共有ファイルは PR で直す | AI プロダクト動向">
+<meta property="og:description" content="コーディングエージェントのメモリと指示ファイルは、この 1 年で「あるのが当たり前」になった。そのぶん次の問題がはっきりしてきた。書いた時点では正しかった記述が、リファクタやフレームワークの置き換えで静かに古くなり、エージェントはそれを自…">
 <meta property="og:url" content="https://tech-news.kaion-lab.com/ai-trends.html">
 <meta property="og:image" content="https://tech-news.kaion-lab.com/apple-touch-icon.png">
 <meta name="twitter:card" content="summary">
@@ -74,7 +74,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 <div class="container">
 <header>
   <h1>🧠 AI プロダクト動向</h1>
-  <p class="date">2026-11-07 発行（読了 9 分）</p>
+  <p class="date">2026-11-10 発行（読了 8 分）</p>
   <p class="tagline">実プロダクトのアーキテクチャ・使用例から AI 開発の現在地を週 3 回・1 号 1 テーマで深掘り</p>
   <nav class="site-nav">
     <a href="./">📰 日刊ダイジェスト</a>
@@ -85,87 +85,88 @@ footer a{color:var(--primary-500);text-decoration:none}
 </header>
 
 <div class="theme-hero">
-  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">AI-VULN-RESEARCH</span></span>
-  <h2>AI の脆弱性発見は「見つけた数」から「再現と修正を添えて渡す」へ — 動かない仮説は捨てる、受け手の処理量に合わせる、攻撃能力は範囲で縛って配る</h2>
-  <p class="lede">11月5日、OpenAI は脆弱性研究向けの GPT-6 Cyber を承認済みの利用者に限って公開した。同社の研究者はこのモデルで Firefox の未知の高深刻度脆弱性 81 件を見つけ、Linux カーネルの 948 件の脆弱性について動作するエクスプロイトを作ったという。10月21日には、AI を使った監査で見つかった PHP2Shell の修正版が出た。同じ日、PostgreSQL コミッターの Robert Haas 氏は、LLM によるバグ報告が増えすぎて PostgreSQL 19 のリリースが 11 月にずれ込むと書いている。見つける速さはもう問題になっていない。いま各プロジェクトが作り直しているのは、発見のあとの工程だ。動く再現コードがない仮説は報告前に捨てる。修正案と再現手順を添えて、受け手が処理できる形で渡す。攻撃に使える能力を持つモデルは、許可された範囲を守らせたうえで配る。</p>
+  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">MEMORY-HYGIENE</span></span>
+  <h2>エージェントの記憶は「溜める」から「手入れする」へ — 読む時に根拠を確かめる、棚卸しはセッションの外で、共有ファイルは PR で直す</h2>
+  <p class="lede">コーディングエージェントのメモリと指示ファイルは、この 1 年で「あるのが当たり前」になった。そのぶん次の問題がはっきりしてきた。書いた時点では正しかった記述が、リファクタやフレームワークの置き換えで静かに古くなり、エージェントはそれを自信を持って守り続ける。10 月 28 日、GitHub は Copilot Memory の GA と同時に、過去の作業を振り返ってメモリと AGENTS.md / CLAUDE.md などを整理する「Copilot Dreaming」をパブリックプレビューで出した。OpenAI Codex も Claude Code も、記憶を「どう保存するか」より「古くなったものをどう見つけて直すか」に仕組みを足している。今号は、各社が記憶の手入れをどこで・誰の権限で行うようにしたかを並べる。</p>
 </div>
 
 <div class="tldr">
   <div class="label">TL;DR — 3 行で</div>
   <ul>
-    <li>Mozilla のハーネスは、モデルに再現用のテストケースを作らせて実際に走らせ、再現しない推測を捨ててから報告する。PHP2Shell では、2024 年の監査で悪用可能性を示せずに放置されたバグが、AI を使った調査で動作する RCE の PoC になり、PHP 側が再現を確認してから修正が進んだ</li>
-    <li>ボトルネックは発見から修正とレビューに移った。PostgreSQL では次期安定版ブランチへのコミットが前年の 724 件から 1,169 件に増えた。Linux カーネルは AI で見つけたバグを公開扱いにし、動作確認済みの再現コードと修正パッチ、平文の簡潔な報告を求める</li>
-    <li>GPT-6 Cyber は承認制の Daybreak Red 利用者に API と Codex 経由でだけ提供される。OpenAI は、許可範囲を外れた行動が評価の 0.07% だったと説明している。前世代の GPT-5.6 Cyber は 5.51% だった</li>
+    <li>記憶の正しさは書いた時点では決まらない。GitHub はメモリにコード位置の引用を付け、読み出す時にエージェントが根拠を確かめる方式を採った</li>
+    <li>古い記憶の整理は会話の外で走らせる流れになった。Copilot Dreaming と Codex はいずれもバックグラウンドで処理し、Codex は作業中の会話を避けるためアイドルになるまで待つ</li>
+    <li>直してよい範囲は変更対象で分ける。Copilot Dreaming はメモリを直接書き換え、リポジトリに置かれた指示ファイルは PR で提案する。Claude Code の指示監査は報告だけでファイルを変えない</li>
   </ul>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 1: 再現しない仮説は報告前に捨てる</div>
+  <div class="section-title">📐 パターン 1: 書いた時点の正しさを信じない — 読み出す時に根拠を確かめる</div>
   <div class="theme-section">
-    <p>Mozilla が 5 月に公開した Firefox のハーネスでは、内側のループは「このコードのこのあたりにバグがある。見つけてテストケースを作れ」という指示だけでできている。調べる対象のファイルや関数は、人の判断と自動のシグナルを組み合わせて選ぶ。対象ファイルごとに使い捨ての VM を立てて並列に走らせ、結果はバケットに書き戻す。中心にあるのは、モデルが再現用のテストケースを作って自分で実行し、バグの仮説を動的に確かめられることだ。Mozilla はこれで「再現できない推測を捨てられる」と書いている。そのあとに既知の問題との重複除去、トリアージ、修正の出荷が続く。サンドボックス脱出を探す場合は、モデルに Firefox のソースを書き換えさせるが、書き換えたコードはサンドボックス内のプロセスでしか動かないよう制限している。</p><p>この形に落ち着いたのは、「怪しい箇所の指摘」には受け手が使える情報がほとんどないからだ。Mozilla によれば、GPT-4 や Sonnet 3.5 の頃の LLM 監査は誤検知が多く、規模を広げられなかった。PHP2Shell も同じ構図だった。Calif によると、2024 年の OSTIF / Quarkslab の監査は関連するメモリ不足（OOM）のバグを見つけていたが、悪用できることを示せず、バグは修正されないまま残った。2026 年 8 月、Calif の研究者は LLM と一緒に <code>post_max_size</code> の迂回や空アップロードによるメモリ枯渇の経路をたどり、mod_php と PHP-FPM で確実に動くエクスプロイトにした。8 月 14 日に RCE の PoC を PHP に渡し、PHP は翌日に再現を確認している。研究者は、最初の発見に特別なハーネスも制限付きモデルも使わなかったとしつつ、「単純なプロンプトで全バグを掘り出せるモデルはない」とも書いている。どこを掘るかは人が対象の脆弱性の歴史を知ったうえで指示した、という説明だ。</p>
+    <p>メモリの陳腐化に対する最初の答えは、記憶そのものに「根拠の場所」を持たせ、使う直前に照合することだ。GitHub Copilot のメモリは、各事実を裏付けるコード位置への参照（citation）付きで保存される。エージェントは記憶を読み出すたびに参照先のコードを確かめ、コードと食い違っていたり参照先が存在しなかったりすれば、新しい証拠に基づく修正版を書き直す。古い記憶を消す専用の仕組みを持たず、「使われる記憶ほど検証される」状態を作って誤りを自己修復させる設計である。</p><p>この方式が選ばれたのは、陳腐化の原因が記憶の外、つまりコードの変更にあるからだ。<code>src/legacy/</code> を消すリファクタが入った時点で、それに触れた記憶はすべて怪しくなる。しかし書き込み側はその変更を知らない。記録したエージェントではなく現在のコードを正とし、照合のコストを実際に読まれる記憶だけに払う。ここでの割り切りは、全件を定期的に洗い直すよりも安く、しかも外れた記憶を確実に拾える点にある。</p>
     <div class="example">
-      <div class="product">Mozilla（Firefox のセキュリティハーネス）</div>
-      <div class="approach">モデルに再現用テストケースを作らせて実行し、再現しない推測を捨ててから重複除去とトリアージに回す</div>
-      <div class="detail">2026 年 4 月に修正したセキュリティバグ 423 件のうち 271 件が Claude Mythos Preview によるもので、Firefox 150 で出荷した。他プロジェクトへの助言は「簡単なプロンプトから始める」「モデルは部品にすぎないので周りのパイプラインを作る」「新しいモデルに差し替えやすくしておく」の三つ。次の段階としてパッチ単位のスキャンを見込んでいる</div>
-      <a href="https://hacks.mozilla.org/2026/05/behind-the-scenes-hardening-firefox/">📄 一次ソース</a>
+      <div class="product">GitHub Copilot Memory（citation 付きメモリ）</div>
+      <div class="approach">メモリをコード位置の引用付きで保存し、読み出し時にエージェントが引用先を検証して食い違えば修正版を保存する</div>
+      <div class="detail">2026 年 1 月の GitHub 公式エンジニアリング記事。コードと矛盾する記憶と無関係な引用を意図的に仕込んだ検証で、エージェントが引用を確かめて矛盾を見つけ、記憶を更新したと報告している。A/B テストでは coding agent の PR マージ率が 83% から 90% に上がった。オフラインの整理サービスは、GitHub の規模では実装の複雑さと LLM コストが大きく、しかも読み出し時の突き合わせも結局必要になるとして見送った経緯も書かれている</div>
+      <a href="https://github.blog/ai-and-ml/github-copilot/building-an-agentic-memory-system-for-github-copilot/">📄 一次ソース</a>
     </div>
-    <div class="example">
-      <div class="product">Calif（PHP2Shell、OpenAI の Patch the Planet の一環）</div>
-      <div class="approach">2024 年に悪用可能性を示せず放置された OOM バグを、LLM と組んで動作する RCE の PoC にし、PHP の再現確認を経て修正につなげた</div>
-      <div class="detail">見つけたバグのパターンを SKILL.md にまとめてエージェントに渡し、セッションのアップロード進捗機能に別の問題を見つけている。最初のバグの報告は 8 月 11 日で、修正版は 10 月 21 日に出た。WordPress・Drupal・Joomla・MediaWiki などで認証前の RCE を確認したとしている</div>
-      <a href="https://calif.io/php2shell">📄 一次ソース</a>
-    </div>
-    <div class="takeaway"><strong>示唆:</strong> 社内で AI による脆弱性探索を回すなら、成果物を「指摘」ではなく「サニタイザやテストで再現するテストケース」と定義する。再現しない指摘を人に回さないことが、誤検知の仕分けを減らすいちばん確かな方法になる。</div>
+    <div class="takeaway"><strong>示唆:</strong> 自前でエージェントのメモリを作るなら、記憶 1 件ごとに根拠（ファイルパス・行・コミット）を持たせ、読み出し時に照合して食い違えば書き直すことから始める。根拠を持たない記憶は、正しいかどうかを後から判定する手がかりがない。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 2: 詰まるのは発見ではなく、修正とレビューの側</div>
+  <div class="section-title">📐 パターン 2: 棚卸しはセッションの外で走らせる</div>
   <div class="theme-section">
-    <p>Robert Haas 氏によれば、4 月 8 日から 9 月 25 日までのコミット数は、master が前年の 1,037 件から 1,443 件に増えた。リリース準備中の安定版ブランチは REL_18_STABLE の 724 件に対して REL_19_STABLE が 1,169 件で、6 割以上の増加だ。一つ前のリリースへのバックパッチも 248 件から 433 件に増えた。同氏は、コミッターのミスが増えたのではなく、LLM がそのミスを素早く見つけるようになった結果だとみている。バグを見つけるのは格段に楽になったが、LLM が書く修正案は必ずしも正しくなく、PostgreSQL のコーディング規約にも沿っていない。結局、人がレビューしてコミットする必要がある。レビュー担当の時間はセキュリティ対応と旧ブランチのバグに取られ、FOR PORTION OF、SQL/PGQ、パーティションの MERGE/SPLIT は 8 月 27 日から 9 月 15 日にかけて差し戻された。</p><p>受け手の側は、報告の形式を指定する方向に動いている。Linux カーネルの <code>security-bugs</code> 文書には AI を使ったバグ発見の節が加わった。AI の助けで見つけたバグは、複数の研究者が同じ日に見つけることが多いので公開扱いとし、再現コードは公開せず「ある」とだけ書く。報告は平文で、要約を先頭に置いた人間らしい簡潔なものにする。ツールに再現コードを作らせて自分で十分に試し、修正パッチも作らせてテストし、バグを入れたコミットを <code>Fixes:</code> タグで示す。影響は確かめられた事実だけを書く。OpenAI の Patch the Planet も、セキュリティ技術者がメンテナと組んで脆弱性の疑いを検証する仕組みとして 6 月に始まった。どれも、見つけた側が検証と修正案の作成まで引き受け、メンテナには判断だけを残す設計になっている。</p>
+    <p>読み出し時の検証では拾えないものもある。一度も読まれずに残り続ける重複、互いに矛盾する指示、別のフレームワーク向けに書かれたままの指示ファイルなどだ。そこで各社は、会話中のエージェントとは別に、過去のセッションを振り返って記憶を統合・削除する処理をバックグラウンドで持ち始めた。GitHub は 10 月 28 日に Copilot Dreaming をパブリックプレビューで公開した。対象は個人メモリ、リポジトリの設定（指示ファイル・スキル）、コードレビュー用ガイダンスの 3 種で、会話を開いていなくても動く。OpenAI Codex のメモリも会話終了の直後ではなくバックグラウンドで更新し、作業途中の内容を要約しないように、会話が十分アイドルになるまで待つ。</p><p>会話の外に出す理由は 2 つある。1 つは対象の性質だ。作業中のセッションは結論が固まっておらず、ここから記憶を作ると途中の思い込みまで残る。もう 1 つはコストの切り分けである。整理処理はトークンを使うので、ユーザーの操作待ちと切り離し、量と頻度を別に制御したい。Copilot Dreaming は変更がなかった実行や非アクティブなリポジトリでも AI クレジットを消費すると明記し、先に支出上限を設定するよう求めている。Codex はレート制限の残量が閾値を下回ると処理を飛ばす設定を持つ。1 月に GitHub が「オフライン整理はコストが高い」として見送った処理が、10 月にオプトインかつユーザー課金の機能として出てきた形で、整理のコストを誰が負担するかが製品設計の論点になった。</p>
     <div class="example">
-      <div class="product">PostgreSQL（Robert Haas 氏、Databricks）</div>
-      <div class="approach">LLM によるバグ報告の増加で、バックパッチとセキュリティ対応がリリース前レビューの時間を食い、主要機能 3 件の差し戻しとリリース延期に至った</div>
-      <div class="detail">修正の自動化は発見の自動化ほど進んでいないことを、ブランチごとのコミット数で示した記録。受け手の人数が変わらない限り、発見が増えるほどレビュー待ちが積み上がる</div>
-      <a href="https://neon.com/blog/postgres-19-is-late-and-its-ais-fault">📄 一次ソース</a>
+      <div class="product">GitHub Copilot Dreaming（パブリックプレビュー）</div>
+      <div class="approach">同期済みセッションと PR レビューのフィードバックを分析し、古いガイダンスの修正と重複メモリの削除をバックグラウンドで行う</div>
+      <div class="detail">公式ドキュメントによれば、変更するのはコンテキストであって基盤モデルではない。オプトイン方式で、組織ポリシーか個人設定で有効にする。実行ごとに AI クレジットを消費し、無効化しても過去の変更の取り消しや、削除済みメモリの復元は行われない</div>
+      <a href="https://docs.github.com/en/copilot/concepts/prompting-and-context/copilot-dreaming">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">Linux カーネル（security-bugs 文書の AI 節）</div>
-      <div class="approach">AI で見つけたバグは公開扱いにし、動作確認済みの再現コード・テスト済みの修正パッチ・平文の簡潔な報告をそろえることを求める</div>
-      <div class="detail">AI 支援の報告がセキュリティ報告の大半を占め、長い・書式が崩れている・推測が多い・再現コードや修正がない報告がメンテナを圧迫していることを理由に挙げる。報告前に脅威モデルと AI コーディング支援のガイドを AI 自身に読ませる手順まで書いている</div>
-      <a href="https://docs.kernel.org/process/security-bugs.html">📄 一次ソース</a>
+      <div class="product">OpenAI Codex（Memories）</div>
+      <div class="approach">過去の会話からローカルのメモリファイルを作る処理を、会話がアイドルになってからバックグラウンドで実行する</div>
+      <div class="detail">公式ドキュメントでは、進行中や短時間のセッションを対象外にし、生成時にシークレットをマスクする。抽出と全体統合（consolidation）でモデルを別々に指定でき、レート制限の残量が閾値を下回れば処理をスキップする。記憶の作成と統合を別工程にした構成がそのまま設定項目に表れている</div>
+      <a href="https://learn.chatgpt.com/docs/customization/memories">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> OSS に AI で見つけたバグを報告する前に、相手プロジェクトのセキュリティ文書を確認し、再現コードと修正パッチを自分で試しておく。自社がメンテナ側なら、報告に求める項目を文書化しておくと、AI 経由の報告をそのまま突き返せる基準になる。</div>
+    <div class="takeaway"><strong>示唆:</strong> 記憶の整理処理を入れるなら、対象は「アイドルになった・閉じた」セッションに限り、実行頻度と予算の上限を整理処理とは別の設定として持たせる。会話中のエージェントに整理まで任せると、作業途中の推測が記憶に混ざり、コストも作業本体と区別できなくなる。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 3: 攻撃に使えるモデルは「許可範囲」を守らせて配る</div>
+  <div class="section-title">📐 パターン 3: 直してよい範囲を変更対象で分ける</div>
   <div class="theme-section">
-    <p>GPT-6 Cyber は GPT-6 Astra をもとに脆弱性研究向けに特化したモデルで、当初は承認済みの Daybreak Red 利用者に API と Codex 経由でだけ提供される。Daybreak Red はペネトレーションテストやレッドチーム演習のような攻撃寄りの作業向けの区分だ。OpenAI はこのモデルを、許可された範囲にとどまり、制限を守り、結果を正確に報告するよう訓練したと説明している。範囲外のサービスを攻撃しないかを見る評価では 99% 超で手を出さず、訓練課題の想定範囲を外れた例は 0.07% だった。前世代の GPT-5.6 Cyber では 5.51% だったという。既知の脆弱性から動作するエクスプロイトを作る ExploitGym のスコアは、32.1% から 48.5% に上がった。</p><p>範囲を守るかどうかが評価の中心に置かれたのは、能力が上がるほど「課題を最後までやり遂げる」ことと「許された範囲で止まる」ことがぶつかるからだ。The Register によれば、OpenAI は GPT-6.1 Astra の公開を見送っている。課題を追う力は上がったが、許可された範囲にとどまる力が落ちたためだという。OpenAI はこのモデルを準備態勢フレームワークのサイバー分野で最上位の「Critical」と評価した。そのうえで、配布先を絞り、範囲を守る挙動を訓練と評価で確かめる。この二つを組み合わせて公開している。ただし、0.07% の中で何が起きたのか、実環境で事故があったのかについて、OpenAI は答えていない。これは同社自身の評価である点にも注意が要る。</p>
+    <p>記憶の手入れで各社の設計が最も揃っているのは、権限の切り分けだ。エージェントが自分のために持つメモリは自動で追加・更新・削除してよい。一方、チームで共有しリポジトリに置かれた指示ファイルは、人間のレビューを通してしか変えない。Copilot Dreaming はメモリを変更ごとの承認なしで更新するが、<code>AGENTS.md</code>・<code>CLAUDE.md</code>・<code>.github/copilot-instructions.md</code>・<code>.github/skills/**</code> などへの変更は PR として提案し、マージされるまでファイルは変わらない。Claude Code の <code>/doctor prompt-audit</code> はさらに慎重で、古いモデル向けの指示、存在しないファイルやコマンドへの参照、ファイル間の矛盾を洗い出して修正案付きのレポートを返すが、ユーザーが頼むまで何も書き換えない。</p><p>この線引きは、記憶と指示の役割の違いから来ている。Codex のドキュメントは、必ず守らせたいチームの方針は <code>AGENTS.md</code> やリポジトリ内の文書に書き、メモリは「便利な想起の層」として扱って、常に適用すべきルールの唯一の置き場にしないよう明記している。メモリが間違っても影響は 1 人のセッションの効率にとどまる。指示ファイルが間違えば、チーム全員のエージェントが同じ誤りを繰り返す。影響範囲が大きいものほど自動書き換えから遠ざける、という順序付けである。Claude Code は自動メモリにも書き込み時の制約を課している。<code>MEMORY.md</code> はセッション開始時に先頭 200 行または 25KB までしか読み込まれず、上限に近づくと 1 行 1 項目に保ち古い項目を統合・削除するよう促し、超えた場合は索引を書き直すようエラーを返す。</p>
     <div class="example">
-      <div class="product">OpenAI GPT-6 Cyber（Daybreak Red）</div>
-      <div class="approach">承認済み利用者に API と Codex でだけ提供し、範囲外のサービスに手を出さないかを評価指標として公開した</div>
-      <div class="detail">Linux カーネルの 948 件のうち 588 件は未知のバグで、修正案を添えてメンテナのレビューに回しているとされる。第 2 節で見た「再現と修正を添えて渡す」流れを、モデル提供者自身がなぞっている例でもある。今後数週間で Daybreak Red の全利用者に広げる予定</div>
-      <a href="https://www.theregister.com/security/2026/11/05/openai-releases-gpt-6-cyber-and-promises-this-one-stays-within-rules-of-engagement/5307855">📄 一次ソース</a>
+      <div class="product">Claude Code（/doctor prompt-audit と自動メモリの上限）</div>
+      <div class="approach">指示ファイルの陳腐化・矛盾は修正案付きレポートで返すだけで、自動メモリは読み込み上限で肥大化を止める</div>
+      <div class="detail">公式ドキュメントは、矛盾する指示があると Claude がどちらかを任意に選ぶ可能性があるとして、CLAUDE.md と .claude/rules/ の定期的な見直しを勧めている。その見直しを機械に手伝わせる一方、書き換えの判断は人に残す設計になっている。自動メモリ側は、書き込み直後にサイズを測って整理を促す「書き込み時の手入れ」を担う</div>
+      <a href="https://code.claude.com/docs/en/memory">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> 社内でセキュリティ用のエージェントを動かすなら、対象範囲を設定として明示し、範囲外のホストに触れていないかをログで確かめる仕組みを先に作る。モデルが範囲を守るという提供元の数字は、自社環境での確認の代わりにはならない。</div>
+    <div class="example">
+      <div class="product">GitHub Copilot Dreaming（変更経路の分離）</div>
+      <div class="approach">メモリとコードレビュー用ガイダンスは直接更新し、リポジトリに置かれた指示・スキルの変更は PR で提案する</div>
+      <div class="detail">10 月 28 日の公式 changelog は、Dreaming の種類を個人メモリの整理・リポジトリのカスタマイズ・コードレビューのカスタマイズの 3 つに分けている。そのうえで、メモリは追加・更新・削除できる一方、リポジトリに置かれたスキルと指示への変更は「チームがレビューする PR として提案される」と明記する。共有ファイルの陳腐化は自動で見つけ、反映は既存のコードレビューの流れに乗せる形である</div>
+      <a href="https://github.blog/changelog/2026-10-28-github-intelligence-puts-your-code-context-and-history-to-work">📄 一次ソース</a>
+    </div>
+    <div class="takeaway"><strong>示唆:</strong> 自動整理を入れる前に、書き換え対象を「個人・エージェント専用の記憶」と「チームで共有する指示」に分け、後者は必ず PR かレポート経由にする。消去は特に慎重に扱い、少なくとも共有物は自動で消さない。必ず守らせたいルールはメモリではなく、レビューを通るファイルに置く。</div>
   </div>
   <div class="editorial">
     <span class="label">✍️ 編集後記</span>
-    AI による脆弱性発見が増えたことで、セキュリティ研究で前から求められてきた「動く PoC と修正案を添えて報告する」作法の重みが変わった。以前は優れた研究者の心得だったものが、いまは報告を受け付ける条件になっている。見つける能力はモデルの更新ごとに上がる。差がつくのは、その結果を受け手が処理できる量と形に整える工程のほうだ。
+    記憶を持つエージェントの品質は、どれだけ覚えたかより、どれだけ古いものを捨てられたかで決まり始めている。読み出し時の検証、セッション外での棚卸し、共有ファイルの PR 経由の修正は、それぞれ別の種類の陳腐化に対応する。3 つは代替ではなく組み合わせる前提で考えたほうがよい。気がかりなのは、Dreaming のような整理処理自体が AI の判断で記憶を消す点だ。「整合している」ことと「正しい」ことは別なので、何を消したかを後から追える記録が次の論点になるとみている。
   </div>
 </div>
 
 <div class="section">
   <div class="section-title">🔗 今号の動向ピックアップ</div>
-  <div class="quick-link"><a href="https://spectrum.ieee.org/ai-in-cybersecurity-php2shell-vulnerability">IEEE Spectrum：PHP2Shell と、AI が古いコードの攻撃経路を掘り起こす段階</a><span class="quick-summary">20 年前から続く「軽微なクラッシュ」の系譜が、AI を使った調査で実用的なエクスプロイトになった経緯と、修正側の負担を解説している。本号第 1 節の「悪用可能性を示せないバグは放置される」問題を、業界側から見た記事だ。</span></div>
-  <div class="quick-link"><a href="https://www.techzine.eu/blogs/security/142390/openai-tackles-open-source-vulnerabilities-with-patch-the-planet/">OpenAI、OSS メンテナ支援の Patch the Planet を開始（Techzine）</a><span class="quick-summary">セキュリティ技術者がメンテナと組んで脆弱性の疑いを検証する取り組みで、Go・Python・cURL などが参加する。発見した側が検証まで引き受けるという、本号第 2 節の流れを組織として制度にした例だ。</span></div>
-  <div class="quick-link"><a href="https://www.publickey1.jp/blog/26/githubcopilot_code_review_maxgithub_universe_2026.html">GitHub、Copilot Code Review Max をパブリックプレビューで発表</a><span class="quick-summary">異なるモデル上の独立したレビューエージェントの出力を集約エージェントが突き合わせ、報告前に正しさを再検証する。脆弱性探索と同じく「出す前に確かめる」工程を製品の既定動作にした例だ。</span></div>
+  <div class="quick-link"><a href="https://arxiv.org/abs/2608.07429">TEPA: 矛盾する新しい証拠で古い記憶を「失効」させる</a><span class="quick-summary">観測をキー付きの前例として保存し、同じキーで矛盾する証拠が来たら前例を失効させる（監査用に履歴は残す）手法。追記のみのメモリは状況が完全に反転すると 0.21 まで落ち、メモリなし（0.31）を下回った。本号第 1 節の「書いた時点の正しさを信じない」を定量的に裏付ける結果だ。</span></div>
+  <div class="quick-link"><a href="https://arxiv.org/abs/2608.20664">DreamBench-SWE: 複数セッションにまたがる記憶衛生のベンチマーク</a><span class="quick-summary">前のセッションの証拠に依存する後続タスクを、隠しテストで採点するソフトウェアエージェント向けベンチマーク。メモリありの条件はいずれもメモリなし（21/180）を有意に上回ったが、整理方式どうしの優劣は示せなかったと著者自身が書いている。棚卸し処理の効果を測る方法は、まだ固まっていない。</span></div>
+  <div class="quick-link"><a href="https://github.com/tigerless-labs/agent-memory">agent-memory: 無人の整理処理は追加と更新まで、削除は人の承認待ち</a><span class="quick-summary">Markdown を正本とし、Claude Code と Codex で同じ記憶ストアを共有する OSS のメモリランタイム。スリープ時の整理パスは記憶の追加・更新はできるが、削除は必ず提案として出して人が確定する。本号第 3 節の「直してよい範囲を分ける」を、削除という操作の単位で実装した例である。</span></div>
 </div>
 
 <div class="section">
   <div class="section-title">📚 過去号</div>
+  <div class="archive-item"><span class="week">2026-11-07</span><div class="body"><a href="ai-trends/2026-11-07.html">AI の脆弱性発見は「見つけた数」から「再現と修正を添えて渡す」へ — 動かない仮説は捨てる、受け手の処理量に合わせる、攻撃能力は範囲で縛って配る</a><span class="sub">Mozilla のハーネスは、モデルに再現用のテストケースを作らせて実際に走らせ、再現しない推測を捨ててから報告する。PHP2Shell では、2024 年の監査で悪用可能性を示せずに放置されたバグが、AI を使った調査で動作する RCE の PoC になり、PHP 側が再現を確認してから修正が進んだ</span></div></div>
   <div class="archive-item"><span class="week">2026-11-05</span><div class="body"><a href="ai-trends/2026-11-05.html">E2E テストのエージェント化は「毎回モデルに操作させる」をやめ始めた — 操作は記録して再生、判定は別系統で確かめる、CI には決定論的なテストを残す</a><span class="sub">e2e と Bug0 QA Agent は、エージェントが一度成功させた操作を記録し、次回以降はモデルを呼ばずに再生する。UI が変わって再生が失敗したときだけエージェントを呼び直す</span></div></div>
   <div class="archive-item"><span class="week">2026-11-03</span><div class="body"><a href="ai-trends/2026-11-03.html">エージェントのコスト管理は「月末の請求書」から「実行単位の計量と停止」へ — 誰の・どのセッションかで計る、止めずに一時停止する、高い経路は設定で閉じる</a><span class="sub">Anthropic の新しい分析 API は、コストを actor（ユーザー / サービスアカウント / キー）や Managed Agents のセッション単位で引ける。ただしデータの反映は通常 4 時間以内で、リアルタイムの制御には使えない</span></div></div>
   <div class="archive-item"><span class="week">2026-10-31</span><div class="body"><a href="ai-trends/2026-10-31.html">エージェントの拡張機能は「マーケットプレイスを信じる」をやめ始めた — 配布経路ごとの検証、組織が絞る入口、実行時の外付け境界</a><span class="sub">Cursor の事例では、公式拡張と同じ名前のまま中身だけが別物になった。拡張の信頼は名前ではなく「どの配布経路のどの版か」で確かめる必要がある</span></div></div>
@@ -213,7 +214,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 </div>
 
 <footer>
-  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="data/ai-trends/2026-11-07.json">data/ai-trends/2026-11-07.json</a>（このページは JSON からの生成物）</p>
+  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="data/ai-trends/2026-11-10.json">data/ai-trends/2026-11-10.json</a>（このページは JSON からの生成物）</p>
   <p style="margin-top:.5rem"><a href="./">📰 日刊ダイジェストに戻る</a></p>
 </footer>
 </div>
