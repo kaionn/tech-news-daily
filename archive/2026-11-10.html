@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-11-10</title>
+  <meta name="description" content="Claude Fable 5.2 と Mythos 5.2 公開 / Google が Agent Substrate を CNCF に寄贈 / Meta が最小モデル Muse Ember">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech News Daily">
+  <meta property="og:title" content="Tech News Daily — 2026-11-10">
+  <meta property="og:description" content="Claude Fable 5.2 と Mythos 5.2 公開 / Google が Agent Substrate を CNCF に寄贈 / Meta が最小モデル Muse Ember">
+  <meta property="og:url" content="https://tech-news.kaion-lab.com/archive/2026-11-10.html">
+  <meta property="og:image" content="https://tech-news.kaion-lab.com/apple-touch-icon.png">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="../feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-11-10 (Tue)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+      <nav class="site-nav">
+        <a href="../" class="active">📰 日刊ダイジェスト</a>
+        <a href="../trends.html">🔌 週次プラグイントレンド</a>
+        <a href="../ai-trends.html">🧠 AI プロダクト動向</a>
+        <a href="./">🗂 アーカイブ</a>
+      </nav>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 18 articles</span>
+      <span>🏷 8 categories</span>
+      <span>📡 15 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item"><span class="number-value">2.5x</span><span class="number-label">Fast mode の出力速度（Fable 5.2）</span></div>
+      <div class="number-item"><span class="number-value">10x</span><span class="number-label">Agent Substrate のエージェント密度</span></div>
+      <div class="number-item"><span class="number-value">$0.10</span><span class="number-label">Muse Ember 入力 100 万トークン</span></div>
+    </div>
+
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
+<div class="card featured deep-dive">
+  <div class="card-header">
+    <span class="tag tag-ai">AI</span>
+    <span class="content-type">📦 リリース</span>
+    <h3><a href="https://www.anthropic.com/claude-fable-and-mythos-5-2">DEEP DIVE: Anthropic が Claude Fable 5.2 と Mythos 5.2 を公開、FrontierSWE v2 で 69.9%</a></h3>
+  </div>
+  <div class="summary">Anthropic は 11 月 9 日、同一の基盤モデルから Fable 5.2 と Mythos 5.2 を公開した。Fable 5.2 はサイバーとバイオの安全策を備えて全ユーザーに開放され、Mythos 5.2 はサイバー・ライフサイエンスの検証プログラムを通過した組織だけが使える。API モデル ID は claude-fable-5-2 で、AWS・Google Cloud・Azure でも同日に利用できる。価格は入力 100 万トークンあたり $8、出力 $40。出力速度を最大 2.5 倍にする Fast mode は $16 / $80 である。性能は Opus 5.5 比で FrontierCode 2.0 が 45.5% から 49.1%、FrontierSWE v2 が 62.3% から 69.9%、AutomationBench が 42.5% から 51.4%、Remote Labor Index が 21.3% から 41.3% と伸びた。効率面では Medium effort のトークン消費が Fable 5.1 より少なく、High effort では Opus 5.5 の FrontierCode 最高スコアにほぼ並びつつ 1 タスクあたりのコストは約半分とされる。大きなモデルが方針を決め小さなモデルへ作業を委ねる Orchestrator 運用と、小さなモデルの相談役となる Advisor 運用の両方に対応する。安全面では、Fable 5.1 と比べ誤ブロックが約 55% 減り、蒸留対策で収集されるデータは 90〜99% 減ったという。Mythos 5.2 は社内の CVE 再発見評価で 89.6% を記録した。</div>
+  <div class="editorial">🧠 数字は自社評価が中心で、独立検証は始まったばかりだ。HN では Artificial Analysis が 65 点と過去最高を付けたという投稿が伸びており、第三者の裏付けは出つつある。ただし単価は Opus 5.5 より高い前提なので、「タスクあたり半額」は High effort という条件付きの話にすぎない。未検証だが、Orchestrator 運用で小モデルへ委譲できる比率が実コストを左右するとみている。</div>
+  <div class="key-points">
+    <ul>
+      <li>FrontierSWE v2 は 69.9%（Opus 5.5 は 62.3%）、Remote Labor Index は 41.3%（同 21.3%）</li>
+      <li>価格は $8 / $40（100 万トークン）。Fast mode は最大 2.5 倍速で $16 / $80</li>
+      <li>Claude Code の既定である Medium effort で、Fable 5.1 よりトークン消費が減る</li>
+    </ul>
+  </div>
+  <div class="why-it-matters">💡 Claude Code や API で Opus 5.5 を使っているなら、High effort で同等スコアが半額で得られるか自分のタスクで測る価値がある。</div>
+  <div class="meta">
+    <span>Anthropic</span>
+    <span class="engagement">▲ 212</span>
+    <span>⏱ 8 min read</span>
+    <span>2026-11-10</span>
+  </div>
+</div>
+<div class="card featured">
+  <div class="card-header">
+    <span class="tag tag-infra">Infra</span>
+    <span class="content-type">📦 リリース</span>
+    <h3><a href="https://www.publickey1.jp/blog/26/googlekubernetes10aiagent_sustrategvisorcncf.html">Google、Kubernetes で AI エージェントを 10 倍高密度に動かす「Agent Substrate」と gVisor を CNCF に寄贈</a></h3>
+  </div>
+  <div class="summary">AI エージェントは実行時間の 90〜95% を、モデル推論や外部 API の応答、人間の承認の待機に使う。その間も Pod はリソースを握り続ける。Agent Substrate は待機中のエージェント状態をスナップショットとして高速ストレージに退避し、再開時にコールドスタートなしで復元する。Google は従来比 10 倍の密度で動かせるとしている。サンドボックスの gVisor も合わせて CNCF へ寄贈され、GKE では Agent Substrate が正式サービスになった。</div>
+  <div class="key-points">
+    <ul>
+      <li>待機が実行時間の 90〜95% を占めるため、アイドル中の状態退避で Pod の占有を減らす</li>
+      <li>密度は従来比 10 倍（Google 発表値）</li>
+      <li>GKE で正式サービス化、gVisor は実行環境の分離を担う</li>
+    </ul>
+  </div>
+  <div class="why-it-matters">💡 エージェント基盤を自前で Kubernetes 上に組んでいるなら、アイドル時のリソース占有が最大のコスト要因になる。CNCF 標準になるかを注視したい。</div>
+  <div class="meta">
+    <span>Publickey</span>
+    <span>⏱ 4 min read</span>
+    <span>2026-11-10</span>
+  </div>
+</div>
+<div class="card featured">
+  <div class="card-header">
+    <span class="tag tag-ai">AI</span>
+    <span class="content-type">📦 リリース</span>
+    <h3><a href="https://research.meta.ai/blog/muse-ember">Meta が最小モデル「Muse Ember」を公開、入力 $0.10 / 100 万トークン</a></h3>
+  </div>
+  <div class="summary">Meta は、ツール呼び出しやルーティング、抽出、長文解析などエージェントの下回りを想定した最小モデル Muse Ember を公開した。Artificial Analysis のスコアで Claude Haiku 5.5 に並びつつ、コストは約 3 分の 1 だという。コンテキストは 100 万トークン、出力は最大 51.2 万トークンで、Muse Code と Meta Model API から muse-ember-1.0 として使える。</div>
+  <div class="key-points">
+    <ul>
+      <li>入力 $0.10、キャッシュ入力 $0.004、出力 $0.50（各 100 万トークン）</li>
+      <li>AutomationBench-AA は 37.8%（GPT-6 Luna は 20.2%）、Terminal-Bench 4.0 は 40.9%（Haiku 5.5 は 39.2%）</li>
+      <li>1 タスクあたり約 $0.14（Artificial Analysis 測定）</li>
+    </ul>
+  </div>
+  <div class="why-it-matters">💡 大量のサブタスクを回すエージェントなら、安価なモデルへの振り分けで請求額を大きく下げられる。ベンチマークは Meta 自身の公表値である点に注意。</div>
+  <div class="meta">
+    <span>Meta Research</span>
+    <span class="engagement">▲ 258</span>
+    <span>⏱ 3 min read</span>
+    <span>2026-11-10</span>
+  </div>
+</div>
+    </div>
+
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-infra">Infra</span>
+    <span class="content-type">📦 リリース</span>
+    <h3><a href="https://blog.google/innovation-and-ai/infrastructure-and-cloud/global-network/tpu-8i-max-and-8tx/">Google が TPU 8tx と TPU 8i Max を発表、1 年で 4 つ目の TPU システム</a></h3>
+  </div>
+  <div class="summary">TPU 8tx は TPU 8t と同じシリコンに AMD EPYC ホストを組み合わせ、機密性の高い推論と小規模学習でデータとモデル重みを隔離する。TPU 8i Max は TPU 8i を 2 チップ載せ、既存ラック内でシリコン量を倍にした。</div>
+  <div class="key-points">
+    <ul>
+      <li>TPU 8tx は TPU 8t 比で最大 2 倍低レイテンシ</li>
+      <li>TPU 8i Max は計算・SRAM・HBM 帯域が TPU 8i の 2 倍</li>
+      <li>参考: TPU 8t は前世代比で学習性能が最大 2.7 倍</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>Google Blog</span>
+    <span class="engagement">▲ 219</span>
+    <span>⏱ 4 min read</span>
+    <span>2026-11-10</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-data">Data</span>
+    <span class="content-type">🔬 研究</span>
+    <h3><a href="https://e-means.github.io/">Meta FAIR の E-means、k-means の約 10 分の 1 のエポックで同等の損失に</a></h3>
+  </div>
+  <div class="summary">E-means は k-means のミニバッチ版置き換えで、Faiss にオープンソース化された。指数移動平均で重心を更新し、バッチ幅とステップ幅はスケーリング則から自動で決まる。大きなクラスタを分割して死んだクラスタを復活させる。</div>
+  <div class="key-points">
+    <ul>
+      <li>Lloyd 法の 25 エポック分の損失に約 1.2〜3 エポックで到達</li>
+      <li>GPU で Flash-KMeans の 10〜45 倍、CPU で Faiss の 8〜15 倍高速</li>
+      <li>トイ実験では悪い局所解から抜ける頻度も Lloyd 法より高い</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>e-means.github.io</span>
+    <span class="engagement">▲ 286</span>
+    <span>⏱ 5 min read</span>
+    <span>2026-11-10</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-security">Security</span>
+    <span class="content-type">🔒 セキュリティ</span>
+    <h3><a href="https://shubs.io/unlocking-any-car-from-x-brand-in-most-of-the-world/">ナンバープレートだけで車を遠隔解錠、複数の脆弱性を連鎖</a></h3>
+  </div>
+  <div class="summary">Shubham Shah 氏と Sam Curry 氏は、自動車メーカーのバックエンドに存在する複数の弱点をつなぎ、ナンバープレートの情報だけで車両を遠隔解錠できることを示した。ブランド名は記事内で伏せられている。</div>
+  <div class="key-points">
+    <ul>
+      <li>JavaScript バンドルに埋まった OpenIDM の管理者資格情報をハードコード</li>
+      <li>パストラバーサルで WAF を回避し、豪州環境では MFA の手順も飛ばせた</li>
+      <li>豪州・米国・カナダで車両へのコマンド送信が可能、調査期間は約 2 週間</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>shubs.io</span>
+    <span class="engagement">▲ 79</span>
+    <span>⏱ 8 min read</span>
+    <span>2026-11-10</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-data">Data</span>
+    <span class="content-type">📜 解説</span>
+    <h3><a href="https://postalpro.usps.com/zcb">USPS が公式の ZIP コード境界ポリゴンを提供開始</a></h3>
+  </div>
+  <div class="summary">USPS は配達住所データから作った全米の ZIP コード境界を、GeoJSON のサンプル付きで提供する。配達先の増減に応じて境界は動くため、四半期ごとに更新される。</div>
+  <div class="key-points">
+    <ul>
+      <li>Internal・Enterprise・Publication の 3 版を用意し、各版とも年 4 回更新</li>
+      <li>四半期ごとに更新され、配達先の変更に合わせて境界が動く</li>
+      <li>利用にはライセンス契約と注文フォームが必要</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>USPS PostalPro</span>
+    <span class="engagement">▲ 504</span>
+    <span>⏱ 3 min read</span>
+    <span>2026-11-10</span>
+  </div>
+</div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-ai">AI</span>
+    <span class="content-type">📜 解説</span>
+    <h3><a href="https://zenn.dev/mappy55/articles/rulebook-rag-01">少年団の役員向け RAG、条文単位に切り直しただけで正答 52%→72%</a></h3>
+  </div>
+  <div class="summary">架空クラブの文書と評価 32 問で RAG を検証した記事。固定長 400 文字の分割を条文単位へ変えると、平均正答が 16.7 問から 23.0 問に上がった。ハイブリッド検索は効かなかった。</div>
+  <div class="key-points">
+    <ul>
+      <li>同一設定でも 3 回の測定で 1〜2 問ぶれるため、3 問以内の差は改善と言えない</li>
+      <li>4B のローカル回答モデルでは正答が 7.7 問・6.7 問まで低下</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>Zenn</span>
+    <span>⏱ 6 min read</span>
+    <span>2026-11-10</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-frontend">Frontend</span>
+    <span class="content-type">👀 注目</span>
+    <h3><a href="https://zenn.dev/mixi/articles/b0ea64fded9503">なぜ mixi2 は iPhone Duo の発売初日から最適化できたのか</a></h3>
+  </div>
+  <div class="summary">Flutter 製の mixi2 は、ボトムタブが標準部品ではなく独自実装だったため縦配置へ変えやすかった。Duo では画面を左右に分け、左に選択中のタブ、右に「みんなの今」を表示する。</div>
+  <div class="key-points">
+    <ul>
+      <li>iOS から verticalBarEdge と occlusion を取得して配置を計算し、Row を Flex に変更</li>
+      <li>発売前は実機で確認できず、シミュレーターだけで出荷した</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>Zenn</span>
+    <span>⏱ 5 min read</span>
+    <span>2026-11-10</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-dev">Dev</span>
+    <span class="content-type">📦 リリース</span>
+    <h3><a href="https://www.publickey1.jp/blog/26/150uiblazorinfragisticssyncfusion.html">Microsoft、150 以上の OSS UI コンポーネントが Blazor に寄贈されたと発表</a></h3>
+  </div>
+  <div class="summary">Infragistics が 50 以上、Syncfusion が 100 以上のコンポーネントを寄贈した。グリッド、チャート、カレンダー、ダイアログなどが含まれ、Blazor WebAssembly と Blazor Server の両方で動く。</div>
+  <div class="key-points">
+    <ul>
+      <li>全て MIT ライセンスで、商用利用・改変・再配布が可能</li>
+      <li>業務 Web アプリでの .NET の存在感を高める狙い</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>Publickey</span>
+    <span>⏱ 3 min read</span>
+    <span>2026-11-10</span>
+  </div>
+</div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-frontend">Frontend</span>
+    <span class="content-type">🛠 ツール</span>
+    <h3><a href="https://github.com/expo/exact">Expo の Exact、1 つのコードで Web・macOS・iOS・Linux にネイティブ描画</a></h3>
+  </div>
+  <div class="summary">UI は宣言型言語 Contract で記述し、データ処理は TypeScript か Rust で書く。各プラットフォームが自前の描画機構で動き、webview も JavaScript ブリッジも使わない。AI エージェントが 10 の共通操作でビルド・実行・テストできる。</div>
+  <div class="key-points">
+    <ul>
+      <li>MIT ライセンス、GitHub スター約 1.0k、1.0 前で API は頻繁に変わる</li>
+      <li>Windows 対応は未完成、Android は初期段階</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>GitHub</span>
+    <span class="engagement">⭐ 1.0k</span>
+    <span>⏱ 3 min read</span>
+    <span>2026-11-10</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-oss">OSS</span>
+    <span class="content-type">📦 リリース</span>
+    <h3><a href="https://www.publickey1.jp/blog/26/libghostty_10windowsrex.html">ターミナル用ライブラリ「Libghostty 1.0」リリース</a></h3>
+  </div>
+  <div class="summary">Ghostty の中核を C ライブラリ化したもので、macOS・Linux・Windows・FreeBSD・Android・iOS・WebAssembly の 7 環境に対応する。JetBrains IDE、Neovim（libvterm の置き換えがマージ済み）、KDE の Kwi、Turborepo が採用している。</div>
+  <div class="key-points">
+    <ul>
+      <li>Ghostty 本体は macOS と Linux のみで、Windows 版はロードマップから外れた</li>
+      <li>Mitchell Hashimoto 氏の Superlogical が開発するマルチプレクサ Rex の Windows クライアントは数週間内に alpha 見込み</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>Publickey</span>
+    <span>⏱ 3 min read</span>
+    <span>2026-11-10</span>
+  </div>
+</div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
+<div class="quick-link">
+  <span class="tag tag-ai">AI</span>
+  <a href="https://platform.claude.com/docs/ja/build-with-claude/prompt-engineering/prompting-claude-fable-5-2">Claude Fable 5.2 向けプロンプティングガイド</a>
+  <span class="quick-summary">— 公式ドキュメント、はてブ 81</span>
+  <span class="meta">Claude Docs</span>
+</div>
+<div class="quick-link">
+  <span class="tag tag-product">Product</span>
+  <a href="https://www.payments.ca/canada-launches-real-time-rail-bringing-247-payment-infrastructure-national-economy">カナダの即時決済基盤 Real-Time Rail が稼働</a>
+  <span class="quick-summary">— 24 時間 365 日の決済インフラが開始、HN 481 pt</span>
+  <span class="meta">Payments Canada</span>
+</div>
+<div class="quick-link">
+  <span class="tag tag-dev">Dev</span>
+  <a href="https://benmandrew.com/articles/what-is-malloc-doing-anyway">What is malloc doing, anyway?</a>
+  <span class="quick-summary">— malloc の内部動作を追う解説、HN 229 pt</span>
+  <span class="meta">benmandrew.com</span>
+</div>
+<div class="quick-link">
+  <span class="tag tag-dev">Dev</span>
+  <a href="https://isocpp.org/files/papers/P4454R0.pdf">Herb Sutter: C++26 post-DIS と言語作者・所有者の対立</a>
+  <span class="quick-summary">— C++26 の進め方に関する提案文書、Lobsters 57</span>
+  <span class="meta">ISO C++</span>
+</div>
+<div class="quick-link">
+  <span class="tag tag-security">Security</span>
+  <a href="https://maurycyz.com/projects/badcert/">Horrible public key tricks</a>
+  <span class="quick-summary">— 証明書まわりの奇妙な手口を紹介、Lobsters 79</span>
+  <span class="meta">maurycyz.com</span>
+</div>
+<div class="quick-link">
+  <span class="tag tag-infra">Infra</span>
+  <a href="https://jmmv.dev/2026/11/zkeys-intro.html">Unattended reboots with encrypted disks</a>
+  <span class="quick-summary">— 暗号化ディスクでの無人再起動を扱う、Lobsters 31</span>
+  <span class="meta">jmmv.dev</span>
+</div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="./" class="archive-link">🗂 過去のダイジェスト</a>
+    </footer>
+  </div>
+</body>
+</html>

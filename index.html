@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tech News Daily — 2026-11-10</title>
-  <meta name="description" content="Claude Fable 5.2 と Mythos 5.2 公開 / Google が Agent Substrate を CNCF に寄贈 / Meta が最小モデル Muse Ember">
+  <title>Tech News Daily — 2026-11-11</title>
+  <meta name="description" content="AlphaProof Code が Signal を形式検証 / Glasswing の成果に VulnCheck が疑義 / .NET 11 正式リリース">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Tech News Daily">
-  <meta property="og:title" content="Tech News Daily — 2026-11-10">
-  <meta property="og:description" content="Claude Fable 5.2 と Mythos 5.2 公開 / Google が Agent Substrate を CNCF に寄贈 / Meta が最小モデル Muse Ember">
+  <meta property="og:title" content="Tech News Daily — 2026-11-11">
+  <meta property="og:description" content="AlphaProof Code が Signal を形式検証 / Glasswing の成果に VulnCheck が疑義 / .NET 11 正式リリース">
   <meta property="og:url" content="https://tech-news.kaion-lab.com/">
   <meta property="og:image" content="https://tech-news.kaion-lab.com/apple-touch-icon.png">
   <meta name="twitter:card" content="summary">
@@ -22,7 +22,7 @@
   <div class="container">
     <header>
       <h1>Tech News Daily</h1>
-      <div class="date">2026-11-10 (Tue)</div>
+      <div class="date">2026-11-11 (Wed)</div>
       <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
       <nav class="site-nav">
         <a href="./" class="active">📰 日刊ダイジェスト</a>
@@ -33,9 +33,9 @@
     </header>
 
     <div class="stats-bar">
-      <span>📰 18 articles</span>
-      <span>🏷 8 categories</span>
-      <span>📡 15 sources</span>
+      <span>📰 22 articles</span>
+      <span>🏷 7 categories</span>
+      <span>📡 20 sources</span>
     </div>
 
     <nav class="toc">
@@ -47,311 +47,399 @@
     </nav>
 
     <div class="numbers-bar">
-      <div class="number-item"><span class="number-value">2.5x</span><span class="number-label">Fast mode の出力速度（Fable 5.2）</span></div>
-      <div class="number-item"><span class="number-value">10x</span><span class="number-label">Agent Substrate のエージェント密度</span></div>
-      <div class="number-item"><span class="number-value">$0.10</span><span class="number-label">Muse Ember 入力 100 万トークン</span></div>
+      <div class="number-item">
+        <span class="number-value">600万行</span>
+        <span class="number-label">Signal 検証で生成された Lean コード</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">55.9%</span>
+        <span class="number-label">curl に届いた Anthropic 報告の誤検知率</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">37,966</span>
+        <span class="number-label">Glasswing の報告件数（修正済みは 217）</span>
+      </div>
     </div>
 
     <div class="section" id="top-stories">
       <div class="section-title">🔥 Top Stories</div>
-<div class="card featured deep-dive">
-  <div class="card-header">
-    <span class="tag tag-ai">AI</span>
-    <span class="content-type">📦 リリース</span>
-    <h3><a href="https://www.anthropic.com/claude-fable-and-mythos-5-2">DEEP DIVE: Anthropic が Claude Fable 5.2 と Mythos 5.2 を公開、FrontierSWE v2 で 69.9%</a></h3>
-  </div>
-  <div class="summary">Anthropic は 11 月 9 日、同一の基盤モデルから Fable 5.2 と Mythos 5.2 を公開した。Fable 5.2 はサイバーとバイオの安全策を備えて全ユーザーに開放され、Mythos 5.2 はサイバー・ライフサイエンスの検証プログラムを通過した組織だけが使える。API モデル ID は claude-fable-5-2 で、AWS・Google Cloud・Azure でも同日に利用できる。価格は入力 100 万トークンあたり $8、出力 $40。出力速度を最大 2.5 倍にする Fast mode は $16 / $80 である。性能は Opus 5.5 比で FrontierCode 2.0 が 45.5% から 49.1%、FrontierSWE v2 が 62.3% から 69.9%、AutomationBench が 42.5% から 51.4%、Remote Labor Index が 21.3% から 41.3% と伸びた。効率面では Medium effort のトークン消費が Fable 5.1 より少なく、High effort では Opus 5.5 の FrontierCode 最高スコアにほぼ並びつつ 1 タスクあたりのコストは約半分とされる。大きなモデルが方針を決め小さなモデルへ作業を委ねる Orchestrator 運用と、小さなモデルの相談役となる Advisor 運用の両方に対応する。安全面では、Fable 5.1 と比べ誤ブロックが約 55% 減り、蒸留対策で収集されるデータは 90〜99% 減ったという。Mythos 5.2 は社内の CVE 再発見評価で 89.6% を記録した。</div>
-  <div class="editorial">🧠 数字は自社評価が中心で、独立検証は始まったばかりだ。HN では Artificial Analysis が 65 点と過去最高を付けたという投稿が伸びており、第三者の裏付けは出つつある。ただし単価は Opus 5.5 より高い前提なので、「タスクあたり半額」は High effort という条件付きの話にすぎない。未検証だが、Orchestrator 運用で小モデルへ委譲できる比率が実コストを左右するとみている。</div>
-  <div class="key-points">
-    <ul>
-      <li>FrontierSWE v2 は 69.9%（Opus 5.5 は 62.3%）、Remote Labor Index は 41.3%（同 21.3%）</li>
-      <li>価格は $8 / $40（100 万トークン）。Fast mode は最大 2.5 倍速で $16 / $80</li>
-      <li>Claude Code の既定である Medium effort で、Fable 5.1 よりトークン消費が減る</li>
-    </ul>
-  </div>
-  <div class="why-it-matters">💡 Claude Code や API で Opus 5.5 を使っているなら、High effort で同等スコアが半額で得られるか自分のタスクで測る価値がある。</div>
-  <div class="meta">
-    <span>Anthropic</span>
-    <span class="engagement">▲ 212</span>
-    <span>⏱ 8 min read</span>
-    <span>2026-11-10</span>
-  </div>
-</div>
-<div class="card featured">
-  <div class="card-header">
-    <span class="tag tag-infra">Infra</span>
-    <span class="content-type">📦 リリース</span>
-    <h3><a href="https://www.publickey1.jp/blog/26/googlekubernetes10aiagent_sustrategvisorcncf.html">Google、Kubernetes で AI エージェントを 10 倍高密度に動かす「Agent Substrate」と gVisor を CNCF に寄贈</a></h3>
-  </div>
-  <div class="summary">AI エージェントは実行時間の 90〜95% を、モデル推論や外部 API の応答、人間の承認の待機に使う。その間も Pod はリソースを握り続ける。Agent Substrate は待機中のエージェント状態をスナップショットとして高速ストレージに退避し、再開時にコールドスタートなしで復元する。Google は従来比 10 倍の密度で動かせるとしている。サンドボックスの gVisor も合わせて CNCF へ寄贈され、GKE では Agent Substrate が正式サービスになった。</div>
-  <div class="key-points">
-    <ul>
-      <li>待機が実行時間の 90〜95% を占めるため、アイドル中の状態退避で Pod の占有を減らす</li>
-      <li>密度は従来比 10 倍（Google 発表値）</li>
-      <li>GKE で正式サービス化、gVisor は実行環境の分離を担う</li>
-    </ul>
-  </div>
-  <div class="why-it-matters">💡 エージェント基盤を自前で Kubernetes 上に組んでいるなら、アイドル時のリソース占有が最大のコスト要因になる。CNCF 標準になるかを注視したい。</div>
-  <div class="meta">
-    <span>Publickey</span>
-    <span>⏱ 4 min read</span>
-    <span>2026-11-10</span>
-  </div>
-</div>
-<div class="card featured">
-  <div class="card-header">
-    <span class="tag tag-ai">AI</span>
-    <span class="content-type">📦 リリース</span>
-    <h3><a href="https://research.meta.ai/blog/muse-ember">Meta が最小モデル「Muse Ember」を公開、入力 $0.10 / 100 万トークン</a></h3>
-  </div>
-  <div class="summary">Meta は、ツール呼び出しやルーティング、抽出、長文解析などエージェントの下回りを想定した最小モデル Muse Ember を公開した。Artificial Analysis のスコアで Claude Haiku 5.5 に並びつつ、コストは約 3 分の 1 だという。コンテキストは 100 万トークン、出力は最大 51.2 万トークンで、Muse Code と Meta Model API から muse-ember-1.0 として使える。</div>
-  <div class="key-points">
-    <ul>
-      <li>入力 $0.10、キャッシュ入力 $0.004、出力 $0.50（各 100 万トークン）</li>
-      <li>AutomationBench-AA は 37.8%（GPT-6 Luna は 20.2%）、Terminal-Bench 4.0 は 40.9%（Haiku 5.5 は 39.2%）</li>
-      <li>1 タスクあたり約 $0.14（Artificial Analysis 測定）</li>
-    </ul>
-  </div>
-  <div class="why-it-matters">💡 大量のサブタスクを回すエージェントなら、安価なモデルへの振り分けで請求額を大きく下げられる。ベンチマークは Meta 自身の公表値である点に注意。</div>
-  <div class="meta">
-    <span>Meta Research</span>
-    <span class="engagement">▲ 258</span>
-    <span>⏱ 3 min read</span>
-    <span>2026-11-10</span>
-  </div>
-</div>
+
+      <div class="card featured deep-dive">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://deepmind.google/blog/introducing-alphaproof-code/">DEEP DIVE: Google DeepMind の AlphaProof Code、Signal の暗号プロトコル実装を 4 週間で形式検証</a></h3>
+        </div>
+        <div class="summary">Google DeepMind は 11 月 10 日、ソフトウェアの形式検証を担うマルチ LLM のエージェント基盤「AlphaProof Code」を発表した。対象は Signal と Google Messages が使う Signal の暗号プロトコルで、通信中の端末が一時的に侵害された後でもメッセージが守られる性質など、設計ではなくデバイス上で動くコンパイル済みコードに対して証明を与えている。DeepMind はこれを、広く使われる暗号プロトコルの実装を AI で、さらに言えば手法を問わず形式検証した初の事例だとしている。手順は 3 段階である。まず Signal のセキュリティ目標を複数モデルで形式仕様に翻訳し、人間の専門家が各仕様をレビューする。次にコンパイル済みの機械語を Lean 上のプロセッサモデルで実行できる形にし、Gemini Carbon を使うエージェントが証明を書く。別のエージェントが証明を監査して人間の確認が必要な箇所に印を付け、最終的な正しさは Lean が機械的に検査する。生成された Lean コードは 600 万行を超え、人間へ回されたのはコードベースの約 1% だった。過去に修正済みのバグ 2 件を隔離環境に再混入させたところ、いずれも「このコードは安全でない」という検証済みの証明が得られた。形式検証の成果物は google-deepmind.github.io/code-verification で公開され、技術論文も出ている。</div>
+        <div class="editorial">🧠 4 週間という数字は、数年かかるとされてきた形式検証の工数を桁で変える可能性を示す。ただし対象は Signal という、仕様が明確で検証資源を投じる価値の高い例で、普通の業務コードに同じ比率が当てはまるかは未検証だ。バグ再混入の実験が 2 件にとどまる点と、仕様の正しさは依然として人間のレビューに依存する点も割り引いて読むべきだろう。それでも「AI が書いた証明を Lean が検査する」構図は、AI 生成コードの信頼性問題に対する数少ない具体的な解だ。</div>
+        <div class="key-points">
+          <ul>
+            <li>生成された Lean コードは 600 万行超。人間のレビューに回されたのは約 1%</li>
+            <li>仕様は人間がレビューし、証明は Gemini Carbon 搭載エージェントが作成、最終検査は Lean が実施</li>
+            <li>過去のバグ 2 件を再混入した版で、いずれも脆弱であることの機械検査済み証明が出力された</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 暗号・認証など誤りの許されないコードを扱うなら、検証成果物（google-deepmind.github.io/code-verification）と論文を読み、自社コードへ適用できる範囲を見積もる価値がある。</div>
+        <div class="meta">
+          <span>Google DeepMind</span>
+          <span class="engagement">▲ 571</span>
+          <span>⏱ 10 min read</span>
+          <span>2026-11-10</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://www.vulncheck.com/blog/anthropic-glasswing-november-update">7 か月後の Glasswing、メンテナを圧倒するも成果は期待に届かずと VulnCheck</a></h3>
+        </div>
+        <div class="summary">VulnCheck は Anthropic の脆弱性探索プロジェクト Glasswing の 11 月時点の台帳を分析した。報告は 5 月の 23,019 件から 37,966 件へ増えた一方、修正済みは 217 件で、9 月以降に報告が約 11,800 件増える間に修正は 15 件しか増えていない。curl のメンテナには 45 件が届き、公開済み 34 件のうち 19 件は脆弱性ではなく、誤検知率は 55.9% に達した。報告の一部はモデル生成のままで人間の確認を経ていないため、検証の手間がメンテナ側に移っている。なお VulnCheck は商用の脅威インテリジェンス企業で、これは同社独自の集計であり第三者監査ではない。</div>
+        <div class="key-points">
+          <ul>
+            <li>報告 37,966 件のうち公開 7,349 件（19.4%）、修正済み 217 件、重複約 1,650 件</li>
+            <li>Anthropic 起因とみられる CVE は 7 か月で 442 件で、今年の CVE 93,450 件の約 0.5%。悪用確認は 2 件のみ</li>
+            <li>9 月の調査では、Claude が重大・高と評価した割合は 91.5%、メンテナ評価では 51.3%</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 OSS メンテナなら AI 由来の報告を受ける窓口と優先度付けの方針を先に決めておき、AI で脆弱性を探す側なら提出前に人間が再現確認する運用を組み込むとよい。</div>
+        <div class="meta">
+          <span>VulnCheck</span>
+          <span class="engagement">▲ 142</span>
+          <span>⏱ 8 min read</span>
+          <span>2026-11-10</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://devblogs.microsoft.com/dotnet/announcing-dotnet-11/">.NET 11 正式リリース、C# 15 に共用型（union types）を導入</a></h3>
+        </div>
+        <div class="summary">Microsoft は .NET 11 を公開した。C# 15 の union types は、値が宣言した複数のケース型のいずれかであることを型で表し、switch 式で網羅性をコンパイラが検査する。JIT は冗長な境界チェックと分岐を削り、devirtualization と定数畳み込みも強化された。Native AOT ではインターフェイス呼び出しの共有ヘルパーで呼び出し側のコードが減る。SDK は Native AOT の CLI ホストが既定になり、help や version などでマネージド CLI の起動を省く。</div>
+        <div class="key-points">
+          <ul>
+            <li>.NET 11 は STS（2 年サポート）で、LTS を求める場合は .NET 10 が選択肢</li>
+            <li>.NET 8 と .NET 9 は 11 月 10 日にサポート終了</li>
+            <li>MSBuild サーバーが呼び出し間で常駐し、Linux/macOS の SDK インストーラは重複アセンブリ排除で小型化</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 .NET 8/9 を使っているなら、すでにサポート外なので 11 ではなく LTS の .NET 10 への移行計画を先に立てるのが現実的だ。</div>
+        <div class="meta">
+          <span>.NET Blog</span>
+          <span class="engagement">▲ 238</span>
+          <span>⏱ 7 min read</span>
+          <span>2026-11-10</span>
+        </div>
+      </div>
     </div>
 
     <div class="section" id="dev-engineering">
       <div class="section-title">⚡ Dev &amp; Engineering</div>
-<div class="card">
-  <div class="card-header">
-    <span class="tag tag-infra">Infra</span>
-    <span class="content-type">📦 リリース</span>
-    <h3><a href="https://blog.google/innovation-and-ai/infrastructure-and-cloud/global-network/tpu-8i-max-and-8tx/">Google が TPU 8tx と TPU 8i Max を発表、1 年で 4 つ目の TPU システム</a></h3>
-  </div>
-  <div class="summary">TPU 8tx は TPU 8t と同じシリコンに AMD EPYC ホストを組み合わせ、機密性の高い推論と小規模学習でデータとモデル重みを隔離する。TPU 8i Max は TPU 8i を 2 チップ載せ、既存ラック内でシリコン量を倍にした。</div>
-  <div class="key-points">
-    <ul>
-      <li>TPU 8tx は TPU 8t 比で最大 2 倍低レイテンシ</li>
-      <li>TPU 8i Max は計算・SRAM・HBM 帯域が TPU 8i の 2 倍</li>
-      <li>参考: TPU 8t は前世代比で学習性能が最大 2.7 倍</li>
-    </ul>
-  </div>
-  <div class="meta">
-    <span>Google Blog</span>
-    <span class="engagement">▲ 219</span>
-    <span>⏱ 4 min read</span>
-    <span>2026-11-10</span>
-  </div>
-</div>
-<div class="card">
-  <div class="card-header">
-    <span class="tag tag-data">Data</span>
-    <span class="content-type">🔬 研究</span>
-    <h3><a href="https://e-means.github.io/">Meta FAIR の E-means、k-means の約 10 分の 1 のエポックで同等の損失に</a></h3>
-  </div>
-  <div class="summary">E-means は k-means のミニバッチ版置き換えで、Faiss にオープンソース化された。指数移動平均で重心を更新し、バッチ幅とステップ幅はスケーリング則から自動で決まる。大きなクラスタを分割して死んだクラスタを復活させる。</div>
-  <div class="key-points">
-    <ul>
-      <li>Lloyd 法の 25 エポック分の損失に約 1.2〜3 エポックで到達</li>
-      <li>GPU で Flash-KMeans の 10〜45 倍、CPU で Faiss の 8〜15 倍高速</li>
-      <li>トイ実験では悪い局所解から抜ける頻度も Lloyd 法より高い</li>
-    </ul>
-  </div>
-  <div class="meta">
-    <span>e-means.github.io</span>
-    <span class="engagement">▲ 286</span>
-    <span>⏱ 5 min read</span>
-    <span>2026-11-10</span>
-  </div>
-</div>
-<div class="card">
-  <div class="card-header">
-    <span class="tag tag-security">Security</span>
-    <span class="content-type">🔒 セキュリティ</span>
-    <h3><a href="https://shubs.io/unlocking-any-car-from-x-brand-in-most-of-the-world/">ナンバープレートだけで車を遠隔解錠、複数の脆弱性を連鎖</a></h3>
-  </div>
-  <div class="summary">Shubham Shah 氏と Sam Curry 氏は、自動車メーカーのバックエンドに存在する複数の弱点をつなぎ、ナンバープレートの情報だけで車両を遠隔解錠できることを示した。ブランド名は記事内で伏せられている。</div>
-  <div class="key-points">
-    <ul>
-      <li>JavaScript バンドルに埋まった OpenIDM の管理者資格情報をハードコード</li>
-      <li>パストラバーサルで WAF を回避し、豪州環境では MFA の手順も飛ばせた</li>
-      <li>豪州・米国・カナダで車両へのコマンド送信が可能、調査期間は約 2 週間</li>
-    </ul>
-  </div>
-  <div class="meta">
-    <span>shubs.io</span>
-    <span class="engagement">▲ 79</span>
-    <span>⏱ 8 min read</span>
-    <span>2026-11-10</span>
-  </div>
-</div>
-<div class="card">
-  <div class="card-header">
-    <span class="tag tag-data">Data</span>
-    <span class="content-type">📜 解説</span>
-    <h3><a href="https://postalpro.usps.com/zcb">USPS が公式の ZIP コード境界ポリゴンを提供開始</a></h3>
-  </div>
-  <div class="summary">USPS は配達住所データから作った全米の ZIP コード境界を、GeoJSON のサンプル付きで提供する。配達先の増減に応じて境界は動くため、四半期ごとに更新される。</div>
-  <div class="key-points">
-    <ul>
-      <li>Internal・Enterprise・Publication の 3 版を用意し、各版とも年 4 回更新</li>
-      <li>四半期ごとに更新され、配達先の変更に合わせて境界が動く</li>
-      <li>利用にはライセンス契約と注文フォームが必要</li>
-    </ul>
-  </div>
-  <div class="meta">
-    <span>USPS PostalPro</span>
-    <span class="engagement">▲ 504</span>
-    <span>⏱ 3 min read</span>
-    <span>2026-11-10</span>
-  </div>
-</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-product">Product</span>
+          <span class="content-type">💰 ビジネス</span>
+          <h3><a href="https://blog.val.town/winding-down">Val Town がサービス終了へ、2027 年 2 月に OSS 化</a></h3>
+        </div>
+        <div class="summary">Val Town は、クラウド市場で競争できないことを理由に事業を畳むと発表した。新規登録は 11 月 10 日に停止し、課金は止まって既存サブスクリプションは無料で継続する。年額プランの前払い分は一部返金される。</div>
+        <div class="key-points">
+          <ul>
+            <li>12 月 10 日に読み取り専用化（SQLite と blob ストレージを除く）、2027 年 1 月 10 日に全サービス終了</li>
+            <li>2027 年 2 月 1 日にソースを OSS として公開。Cloudflare・Vercel・Netlify・Render 向け移行ガイドあり</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Val Town Blog</span>
+          <span class="engagement">▲ 297</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-11-10</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.blender.org/download/releases/5-3/">Blender 5.3 公開、Gaussian Splat の取り込みと Vulkan 既定化</a></h3>
+        </div>
+        <div class="summary">Blender 5.3 は PLY・SPZ・glTF の 3D Gaussian Splat をポイントクラウドとして読み込み、EEVEE・Cycles・Workbench で描画できる。Principled BSDF に分散（Dispersion）が加わり、ガラスや宝石の虹色表現が可能になった。</div>
+        <div class="key-points">
+          <ul>
+            <li>EEVEE は Vulkan が既定。Cycles は DLSS 4.5 Ray Reconstruction をデノイザーに追加（NVIDIA ドライバ 620 以上が必要）</li>
+            <li>コンポジターの Anisotropic Kuwahara は Apple GPU で最大 10 倍、NVIDIA GPU で 2 倍高速化</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Blender</span>
+          <span class="engagement">▲ 421</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-11-10</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/net_maui_11xamarinmonocoreclr.html">.NET MAUI 11、Xamarin 由来の Mono ランタイムを脱し CoreCLR に統一</a></h3>
+        </div>
+        <div class="summary">Publickey によると、.NET MAUI 11 は Xamarin 由来の Mono ランタイムから離れ、CoreCLR に統一された。.NET 本体の改善を MAUI アプリも同じランタイムで受けられるようになる。.NET 11 の公式発表では、MAUI 向け Native AOT はオプトインで、Android 対応は実験的とされている。</div>
+        <div class="key-points">
+          <ul>
+            <li>MAUI のランタイムが Mono から CoreCLR に一本化された</li>
+            <li>Native AOT は MAUI ではオプトインで、Android 対応は実験段階</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-11-10</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://lwn.net/SubscriberLink/1102549/acbc92e00cee3a3f/">Synaptics の特許主張で DisplayLink ドライバの開発が停止</a></h3>
+        </div>
+        <div class="summary">LWN は、Synaptics が特許を主張したことで、オープンソースの DisplayLink ドライバの作業が止まったと伝えている。USB 接続のディスプレイアダプタで DisplayLink を使う Linux ユーザーには、今後の対応に影響しうる話題だ。</div>
+        <div class="key-points">
+          <ul>
+            <li>特許主張を受けて DisplayLink ドライバの開発作業が停止</li>
+            <li>Hacker News で 281 ポイント、Lobsters でも話題になった</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>LWN.net</span>
+          <span class="engagement">▲ 281</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-11-10</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://evanxmerz.com/post/ai-usage-generates-a-fragile-codebase/">AI の利用は脆いコードベースを生む、という論考</a></h3>
+        </div>
+        <div class="summary">AI でコードを量産することがコードベースの脆さにつながるという議論で、Hacker News では 358 ポイントを集めた。DeepMind の形式検証事例と並べて読むと、「生成」と「検証」のどちらにコストを払うかという論点が見えてくる。</div>
+        <div class="key-points">
+          <ul>
+            <li>Hacker News 358 ポイントで、前日の注目記事の一つ</li>
+            <li>AI 生成コードの保守性を巡る議論の一例として読める</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>evanxmerz.com</span>
+          <span class="engagement">▲ 358</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-11-10</span>
+        </div>
+      </div>
     </div>
 
     <div class="section" id="jp-community">
       <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
-<div class="card">
-  <div class="card-header">
-    <span class="tag tag-ai">AI</span>
-    <span class="content-type">📜 解説</span>
-    <h3><a href="https://zenn.dev/mappy55/articles/rulebook-rag-01">少年団の役員向け RAG、条文単位に切り直しただけで正答 52%→72%</a></h3>
-  </div>
-  <div class="summary">架空クラブの文書と評価 32 問で RAG を検証した記事。固定長 400 文字の分割を条文単位へ変えると、平均正答が 16.7 問から 23.0 問に上がった。ハイブリッド検索は効かなかった。</div>
-  <div class="key-points">
-    <ul>
-      <li>同一設定でも 3 回の測定で 1〜2 問ぶれるため、3 問以内の差は改善と言えない</li>
-      <li>4B のローカル回答モデルでは正答が 7.7 問・6.7 問まで低下</li>
-    </ul>
-  </div>
-  <div class="meta">
-    <span>Zenn</span>
-    <span>⏱ 6 min read</span>
-    <span>2026-11-10</span>
-  </div>
-</div>
-<div class="card">
-  <div class="card-header">
-    <span class="tag tag-frontend">Frontend</span>
-    <span class="content-type">👀 注目</span>
-    <h3><a href="https://zenn.dev/mixi/articles/b0ea64fded9503">なぜ mixi2 は iPhone Duo の発売初日から最適化できたのか</a></h3>
-  </div>
-  <div class="summary">Flutter 製の mixi2 は、ボトムタブが標準部品ではなく独自実装だったため縦配置へ変えやすかった。Duo では画面を左右に分け、左に選択中のタブ、右に「みんなの今」を表示する。</div>
-  <div class="key-points">
-    <ul>
-      <li>iOS から verticalBarEdge と occlusion を取得して配置を計算し、Row を Flex に変更</li>
-      <li>発売前は実機で確認できず、シミュレーターだけで出荷した</li>
-    </ul>
-  </div>
-  <div class="meta">
-    <span>Zenn</span>
-    <span>⏱ 5 min read</span>
-    <span>2026-11-10</span>
-  </div>
-</div>
-<div class="card">
-  <div class="card-header">
-    <span class="tag tag-dev">Dev</span>
-    <span class="content-type">📦 リリース</span>
-    <h3><a href="https://www.publickey1.jp/blog/26/150uiblazorinfragisticssyncfusion.html">Microsoft、150 以上の OSS UI コンポーネントが Blazor に寄贈されたと発表</a></h3>
-  </div>
-  <div class="summary">Infragistics が 50 以上、Syncfusion が 100 以上のコンポーネントを寄贈した。グリッド、チャート、カレンダー、ダイアログなどが含まれ、Blazor WebAssembly と Blazor Server の両方で動く。</div>
-  <div class="key-points">
-    <ul>
-      <li>全て MIT ライセンスで、商用利用・改変・再配布が可能</li>
-      <li>業務 Web アプリでの .NET の存在感を高める狙い</li>
-    </ul>
-  </div>
-  <div class="meta">
-    <span>Publickey</span>
-    <span>⏱ 3 min read</span>
-    <span>2026-11-10</span>
-  </div>
-</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://www.ryuzee.com/contents/blog/14628">「自分の仕事はここまで」はどこから来るのか（資料公開）</a></h3>
+        </div>
+        <div class="summary">開発現場で職務の境界を決めてしまう意識がどこから生まれるかを扱う、登壇資料の公開記事。はてなブックマークの IT ホットエントリで 140 ブックマークを集めた。</div>
+        <div class="key-points">
+          <ul>
+            <li>はてブ IT ホットエントリで 140 ブックマーク</li>
+            <li>チーム開発の役割分担と越境がテーマ</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>ryuzee.com</span>
+          <span class="engagement">🔖 140</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-11-10</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://zenn.dev/sun_asterisk/articles/1d1c65b1fe409a">週間制限に 3 日で到達していた Claude が、Model と Effort の使い分けで 5 日持つようになった話</a></h3>
+        </div>
+        <div class="summary">Claude の週間利用制限に 3 日で届いていた筆者が、モデルと Effort の使い分けで 5 日持たせられるようになった運用の記録。重い設定を常用しないことで消費を抑える考え方を示している。</div>
+        <div class="key-points">
+          <ul>
+            <li>週間制限への到達が 3 日から 5 日に延びた</li>
+            <li>タスクに応じてモデルと Effort を切り替える運用</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-11-08</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/aws_japan/articles/ac9ae548d57323">LiteLLM Adaptive Router を検証する（前編）：モデル選択と学習の仕組み</a></h3>
+        </div>
+        <div class="summary">AWS Japan の記事で、LiteLLM の Adaptive Router がどうモデルを選び、どう学習していくかを検証している。後編では学習シグナルと運用上の注意を扱っており、2 本セットで読める。</div>
+        <div class="key-points">
+          <ul>
+            <li>前編はモデル選択と学習の仕組み、後編は学習シグナルと運用上の注意</li>
+            <li>LLM ゲートウェイでのルーティング最適化に関する検証</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn (AWS Japan)</span>
+          <span>⏱ 8 min read</span>
+          <span>2026-11-10</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/garasubo/articles/72340052cdd871">脆弱性問題を解決するために Rust に移行するべきなのか？</a></h3>
+        </div>
+        <div class="summary">脆弱性対策として Rust へ移行すべきかを問う Zenn の記事。メモリ安全性が防ぐ種類のバグと、言語を変えても残る問題を切り分けて考える視点を提供する。</div>
+        <div class="key-points">
+          <ul>
+            <li>Rust への移行を脆弱性対策として評価する論点整理</li>
+            <li>Zenn の新着で 11 月 9 日に公開</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 7 min read</span>
+          <span>2026-11-09</span>
+        </div>
+      </div>
     </div>
 
     <div class="section" id="code-tools">
       <div class="section-title">🛠 Code &amp; Tools</div>
-<div class="card">
-  <div class="card-header">
-    <span class="tag tag-frontend">Frontend</span>
-    <span class="content-type">🛠 ツール</span>
-    <h3><a href="https://github.com/expo/exact">Expo の Exact、1 つのコードで Web・macOS・iOS・Linux にネイティブ描画</a></h3>
-  </div>
-  <div class="summary">UI は宣言型言語 Contract で記述し、データ処理は TypeScript か Rust で書く。各プラットフォームが自前の描画機構で動き、webview も JavaScript ブリッジも使わない。AI エージェントが 10 の共通操作でビルド・実行・テストできる。</div>
-  <div class="key-points">
-    <ul>
-      <li>MIT ライセンス、GitHub スター約 1.0k、1.0 前で API は頻繁に変わる</li>
-      <li>Windows 対応は未完成、Android は初期段階</li>
-    </ul>
-  </div>
-  <div class="meta">
-    <span>GitHub</span>
-    <span class="engagement">⭐ 1.0k</span>
-    <span>⏱ 3 min read</span>
-    <span>2026-11-10</span>
-  </div>
-</div>
-<div class="card">
-  <div class="card-header">
-    <span class="tag tag-oss">OSS</span>
-    <span class="content-type">📦 リリース</span>
-    <h3><a href="https://www.publickey1.jp/blog/26/libghostty_10windowsrex.html">ターミナル用ライブラリ「Libghostty 1.0」リリース</a></h3>
-  </div>
-  <div class="summary">Ghostty の中核を C ライブラリ化したもので、macOS・Linux・Windows・FreeBSD・Android・iOS・WebAssembly の 7 環境に対応する。JetBrains IDE、Neovim（libvterm の置き換えがマージ済み）、KDE の Kwi、Turborepo が採用している。</div>
-  <div class="key-points">
-    <ul>
-      <li>Ghostty 本体は macOS と Linux のみで、Windows 版はロードマップから外れた</li>
-      <li>Mitchell Hashimoto 氏の Superlogical が開発するマルチプレクサ Rex の Windows クライアントは数週間内に alpha 見込み</li>
-    </ul>
-  </div>
-  <div class="meta">
-    <span>Publickey</span>
-    <span>⏱ 3 min read</span>
-    <span>2026-11-10</span>
-  </div>
-</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-frontend">Frontend</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.com/GoogleChrome/modern-web-guidance">modern-web-guidance: コーディングエージェントを 2019 年の JavaScript から脱却させる</a></h3>
+        </div>
+        <div class="summary">Chrome チームが公開した、Edge・Firefox・MDN の各チームと運営するプロジェクト。学習データに多い古いパターンをエージェントが書く問題に対し、最新のブラウザ API を使うガイドを CLI でコンテキストに渡す。</div>
+        <div class="key-points">
+          <ul>
+            <li>250 の Web 機能と 203 のユースケースを収録。npx modern-web-guidance@latest install で導入</li>
+            <li>legacy-scan が既存コードの古いパターンを検出。Claude・Codex・Cursor 向けプラグインあり（Apache-2.0）</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span class="engagement">⭐ 3.2k</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-11-10</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.com/microsoft/Procexp-Mac">Procexp-Mac: macOS 向けの Process Explorer</a></h3>
+        </div>
+        <div class="summary">Microsoft が GitHub に公開した、Windows の Process Explorer の macOS 版。Hacker News では 132 ポイントを集めた。</div>
+        <div class="key-points">
+          <ul>
+            <li>Windows の定番ツール Process Explorer を macOS 向けに提供</li>
+            <li>Microsoft の公式 GitHub リポジトリで公開</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span class="engagement">▲ 132</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-11-09</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://gigazine.net/news/20261110-leantime/">無料のプロジェクト管理ツール「Leantime」</a></h3>
+        </div>
+        <div class="summary">GIGAZINE が紹介した、無料で使えるプロジェクト管理ツール Leantime の解説記事。はてなブックマークでは 42 ブックマークだった。</div>
+        <div class="key-points">
+          <ul>
+            <li>無料で使えるプロジェクト管理ツール</li>
+            <li>はてブ IT ホットエントリで 42 ブックマーク</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GIGAZINE</span>
+          <span class="engagement">🔖 42</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-11-10</span>
+        </div>
+      </div>
     </div>
 
     <div class="section" id="quick-links">
       <div class="section-title">🔗 Quick Links</div>
-<div class="quick-link">
-  <span class="tag tag-ai">AI</span>
-  <a href="https://platform.claude.com/docs/ja/build-with-claude/prompt-engineering/prompting-claude-fable-5-2">Claude Fable 5.2 向けプロンプティングガイド</a>
-  <span class="quick-summary">— 公式ドキュメント、はてブ 81</span>
-  <span class="meta">Claude Docs</span>
-</div>
-<div class="quick-link">
-  <span class="tag tag-product">Product</span>
-  <a href="https://www.payments.ca/canada-launches-real-time-rail-bringing-247-payment-infrastructure-national-economy">カナダの即時決済基盤 Real-Time Rail が稼働</a>
-  <span class="quick-summary">— 24 時間 365 日の決済インフラが開始、HN 481 pt</span>
-  <span class="meta">Payments Canada</span>
-</div>
-<div class="quick-link">
-  <span class="tag tag-dev">Dev</span>
-  <a href="https://benmandrew.com/articles/what-is-malloc-doing-anyway">What is malloc doing, anyway?</a>
-  <span class="quick-summary">— malloc の内部動作を追う解説、HN 229 pt</span>
-  <span class="meta">benmandrew.com</span>
-</div>
-<div class="quick-link">
-  <span class="tag tag-dev">Dev</span>
-  <a href="https://isocpp.org/files/papers/P4454R0.pdf">Herb Sutter: C++26 post-DIS と言語作者・所有者の対立</a>
-  <span class="quick-summary">— C++26 の進め方に関する提案文書、Lobsters 57</span>
-  <span class="meta">ISO C++</span>
-</div>
-<div class="quick-link">
-  <span class="tag tag-security">Security</span>
-  <a href="https://maurycyz.com/projects/badcert/">Horrible public key tricks</a>
-  <span class="quick-summary">— 証明書まわりの奇妙な手口を紹介、Lobsters 79</span>
-  <span class="meta">maurycyz.com</span>
-</div>
-<div class="quick-link">
-  <span class="tag tag-infra">Infra</span>
-  <a href="https://jmmv.dev/2026/11/zkeys-intro.html">Unattended reboots with encrypted disks</a>
-  <span class="quick-summary">— 暗号化ディスクでの無人再起動を扱う、Lobsters 31</span>
-  <span class="meta">jmmv.dev</span>
-</div>
+
+      <div class="quick-link">
+        <span class="tag tag-infra">Infra</span>
+        <a href="https://neil.fraser.name/news/2026/11/10/">.name Grandfathered</a>
+        <span class="quick-summary">— .name ドメインを巡る告知で、Hacker News で 667 ポイント。</span>
+        <span class="meta">neil.fraser.name</span>
+      </div>
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://9to5mac.com/2026/11/10/apple-has-new-mac-app-coming-to-make-running-local-ai-models-easy/">Apple、ローカル AI モデルを簡単に動かせる Mac アプリを準備</a>
+        <span class="quick-summary">— 9to5Mac が報じた。</span>
+        <span class="meta">9to5Mac</span>
+      </div>
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://chipsandcheese.com/p/amds-zen-6-family-feeding-the-beast">AMD's Zen 6 Family: Feeding the Beast</a>
+        <span class="quick-summary">— Zen 6 の設計を扱う Chips and Cheese の解説。</span>
+        <span class="meta">Chips and Cheese</span>
+      </div>
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://starlink.com/mini-2">Starlink Mini 2</a>
+        <span class="quick-summary">— Starlink の小型端末の新モデルが公開された。</span>
+        <span class="meta">Starlink</span>
+      </div>
+      <div class="quick-link">
+        <span class="tag tag-oss">OSS</span>
+        <a href="https://daniel.haxx.se/blog/2026/11/11/30-years-of-internet-transfers-with-curl/">30 years of Internet transfers with curl</a>
+        <span class="quick-summary">— curl 開発者 Daniel Stenberg による 30 年の振り返り。</span>
+        <span class="meta">daniel.haxx.se</span>
+      </div>
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://forge-blog.github.io/posts/rust-std-memory-safety/">Memory Safety Bugs in Rust Standard Library</a>
+        <span class="quick-summary">— Rust 標準ライブラリのメモリ安全性バグを扱った記事。</span>
+        <span class="meta">forge-blog</span>
+      </div>
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://pc.watch.impress.co.jp/docs/news/2155269.html">Windows に挑む AI ネイティブ OS「KORA」、元 Cyanogen 創業者らが発表</a>
+        <span class="quick-summary">— PC Watch が伝えた新 OS の発表。</span>
+        <span class="meta">PC Watch</span>
+      </div>
     </div>
 
     <footer>
