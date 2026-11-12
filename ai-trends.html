@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI プロダクト動向 | Tech News Daily</title>
-<meta name="description" content="コーディングエージェントのメモリと指示ファイルは、この 1 年で「あるのが当たり前」になった。そのぶん次の問題がはっきりしてきた。書いた時点では正しかった記述が、リファクタやフレームワークの置き換えで静かに古くなり、エージェントはそれを自…">
+<meta name="description" content="エージェントに頼む仕事が「質問に答える」から「調べて、書いて、確かめる」へ広がるにつれ、1 本の ReAct ループの弱点がはっきりしてきた。長いツール呼び出しが 1 つ入るとループ全体が止まり、その間ユーザーは話しかけられず、ほかの仕事…">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Tech News Daily">
-<meta property="og:title" content="エージェントの記憶は「溜める」から「手入れする」へ — 読む時に根拠を確かめる、棚卸しはセッションの外で、共有ファイルは PR で直す | AI プロダクト動向">
-<meta property="og:description" content="コーディングエージェントのメモリと指示ファイルは、この 1 年で「あるのが当たり前」になった。そのぶん次の問題がはっきりしてきた。書いた時点では正しかった記述が、リファクタやフレームワークの置き換えで静かに古くなり、エージェントはそれを自…">
+<meta property="og:title" content="エージェントは「終わるまで待つ」をやめ始めた — 窓口と作業者を分ける、ツール結果は後から返す、走っている作業に指示を足す | AI プロダクト動向">
+<meta property="og:description" content="エージェントに頼む仕事が「質問に答える」から「調べて、書いて、確かめる」へ広がるにつれ、1 本の ReAct ループの弱点がはっきりしてきた。長いツール呼び出しが 1 つ入るとループ全体が止まり、その間ユーザーは話しかけられず、ほかの仕事…">
 <meta property="og:url" content="https://tech-news.kaion-lab.com/ai-trends.html">
 <meta property="og:image" content="https://tech-news.kaion-lab.com/apple-touch-icon.png">
 <meta name="twitter:card" content="summary">
@@ -74,7 +74,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 <div class="container">
 <header>
   <h1>🧠 AI プロダクト動向</h1>
-  <p class="date">2026-11-10 発行（読了 8 分）</p>
+  <p class="date">2026-11-12 発行（読了 9 分）</p>
   <p class="tagline">実プロダクトのアーキテクチャ・使用例から AI 開発の現在地を週 3 回・1 号 1 テーマで深掘り</p>
   <nav class="site-nav">
     <a href="./">📰 日刊ダイジェスト</a>
@@ -85,87 +85,87 @@ footer a{color:var(--primary-500);text-decoration:none}
 </header>
 
 <div class="theme-hero">
-  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">MEMORY-HYGIENE</span></span>
-  <h2>エージェントの記憶は「溜める」から「手入れする」へ — 読む時に根拠を確かめる、棚卸しはセッションの外で、共有ファイルは PR で直す</h2>
-  <p class="lede">コーディングエージェントのメモリと指示ファイルは、この 1 年で「あるのが当たり前」になった。そのぶん次の問題がはっきりしてきた。書いた時点では正しかった記述が、リファクタやフレームワークの置き換えで静かに古くなり、エージェントはそれを自信を持って守り続ける。10 月 28 日、GitHub は Copilot Memory の GA と同時に、過去の作業を振り返ってメモリと AGENTS.md / CLAUDE.md などを整理する「Copilot Dreaming」をパブリックプレビューで出した。OpenAI Codex も Claude Code も、記憶を「どう保存するか」より「古くなったものをどう見つけて直すか」に仕組みを足している。今号は、各社が記憶の手入れをどこで・誰の権限で行うようにしたかを並べる。</p>
+  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">ASYNC-AGENTS</span></span>
+  <h2>エージェントは「終わるまで待つ」をやめ始めた — 窓口と作業者を分ける、ツール結果は後から返す、走っている作業に指示を足す</h2>
+  <p class="lede">エージェントに頼む仕事が「質問に答える」から「調べて、書いて、確かめる」へ広がるにつれ、1 本の ReAct ループの弱点がはっきりしてきた。長いツール呼び出しが 1 つ入るとループ全体が止まり、その間ユーザーは話しかけられず、ほかの仕事も後ろに並ぶ。LangChain は 11 月 5 日の記事「Agents Are Going Async」で、ユーザーと話すオーケストレーター 1 体と、裏で長い作業を進めるワーカー群という構成に業界が収束しつつあると書いた。Claude Code はサブエージェントを既定でバックグラウンド起動し、OpenAI はモデル API に非同期ツール呼び出しを入れ、常時稼働型の dots は作業を背景のエージェントに渡す。今号は、各社が「待たないエージェント」をどの層で実装し、結果の受け取りと途中の指示変更をどう設計したかを並べる。</p>
 </div>
 
 <div class="tldr">
   <div class="label">TL;DR — 3 行で</div>
   <ul>
-    <li>記憶の正しさは書いた時点では決まらない。GitHub はメモリにコード位置の引用を付け、読み出す時にエージェントが根拠を確かめる方式を採った</li>
-    <li>古い記憶の整理は会話の外で走らせる流れになった。Copilot Dreaming と Codex はいずれもバックグラウンドで処理し、Codex は作業中の会話を避けるためアイドルになるまで待つ</li>
-    <li>直してよい範囲は変更対象で分ける。Copilot Dreaming はメモリを直接書き換え、リポジトリに置かれた指示ファイルは PR で提案する。Claude Code の指示監査は報告だけでファイルを変えない</li>
+    <li>会話の窓口と長い作業を別のループに分ける構成が標準になりつつある。LangChain Deep Agents は起動した瞬間にタスク ID を返す 5 つのツールを持ち、Claude Code はサブエージェントを既定でバックグラウンドで走らせる</li>
+    <li>非同期はモデル API の層にも降りてきた。OpenAI の async tool calling ではツールに async: true を付けるとモデルが結果を待たずに先へ進み、アプリは後から call_id を合わせて結果を返す</li>
+    <li>走っている作業への指示変更と承認の経路が新しい設計対象になった。Deep Agents は「中断して再実行」か「後ろに積む」かを選ばせ、承認待ちはサブエージェント側のスレッドで答える。dots は Activity 画面で委任先の作業を個別に止められる</li>
   </ul>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 1: 書いた時点の正しさを信じない — 読み出す時に根拠を確かめる</div>
+  <div class="section-title">📐 パターン 1: 会話の窓口と長い作業を別のループに分ける</div>
   <div class="theme-section">
-    <p>メモリの陳腐化に対する最初の答えは、記憶そのものに「根拠の場所」を持たせ、使う直前に照合することだ。GitHub Copilot のメモリは、各事実を裏付けるコード位置への参照（citation）付きで保存される。エージェントは記憶を読み出すたびに参照先のコードを確かめ、コードと食い違っていたり参照先が存在しなかったりすれば、新しい証拠に基づく修正版を書き直す。古い記憶を消す専用の仕組みを持たず、「使われる記憶ほど検証される」状態を作って誤りを自己修復させる設計である。</p><p>この方式が選ばれたのは、陳腐化の原因が記憶の外、つまりコードの変更にあるからだ。<code>src/legacy/</code> を消すリファクタが入った時点で、それに触れた記憶はすべて怪しくなる。しかし書き込み側はその変更を知らない。記録したエージェントではなく現在のコードを正とし、照合のコストを実際に読まれる記憶だけに払う。ここでの割り切りは、全件を定期的に洗い直すよりも安く、しかも外れた記憶を確実に拾える点にある。</p>
+    <p>非同期エージェントの基本形は、ユーザーと話すオーケストレーターが長い作業をサブエージェントに渡し、完了を待たずに会話へ戻る構成だ。LangChain Deep Agents の async subagents では、オーケストレーターが <code>start_async_task</code>・<code>check_async_task</code>・<code>update_async_task</code>・<code>cancel_async_task</code>・<code>list_async_tasks</code> の 5 つのツールを持つ。<code>start_async_task</code> はサブエージェントを独立したスレッドで起動してすぐに返り、タスク ID はそのままスレッド ID になる。Claude Code も、何も設定しなければメイン会話から起動されたサブエージェントはバックグラウンドで始まり、結果は後のターンに「完了通知」として届く。通知はユーザーの発言ではなく自動イベントとして区別され、進捗を聞かれた時点で終わっていなければ「まだ実行中」と答える。</p><p>この形に収束した理由は、応答性と処理量を 1 本のループで両立できないからだ。同期型のループでは、10 分かかる調査を走らせればその 10 分はユーザーの訂正も受け付けられない。ループを分ければ、窓口は常に空いていて、処理量はループの長さではなくワーカーの数で決まる。その代わり、タスクの状態を会話履歴とは別に持つ必要が出てくる。Deep Agents はタスクのメタデータを <code>async_tasks</code> という専用の state チャネルに置き、履歴が要約されても未完了タスクを見失わないようにしている。Claude Code は同時実行数を既定で 20 に制限し、超えると <code>Concurrent subagent limit reached</code> で起動を失敗させる。ワーカーを増やせることと、増やしすぎを止めることが同じ設計の中に入っている。</p>
     <div class="example">
-      <div class="product">GitHub Copilot Memory（citation 付きメモリ）</div>
-      <div class="approach">メモリをコード位置の引用付きで保存し、読み出し時にエージェントが引用先を検証して食い違えば修正版を保存する</div>
-      <div class="detail">2026 年 1 月の GitHub 公式エンジニアリング記事。コードと矛盾する記憶と無関係な引用を意図的に仕込んだ検証で、エージェントが引用を確かめて矛盾を見つけ、記憶を更新したと報告している。A/B テストでは coding agent の PR マージ率が 83% から 90% に上がった。オフラインの整理サービスは、GitHub の規模では実装の複雑さと LLM コストが大きく、しかも読み出し時の突き合わせも結局必要になるとして見送った経緯も書かれている</div>
-      <a href="https://github.blog/ai-and-ml/github-copilot/building-an-agentic-memory-system-for-github-copilot/">📄 一次ソース</a>
+      <div class="product">LangChain Deep Agents（async subagents）</div>
+      <div class="approach">オーケストレーターに起動・確認・更新・取消・一覧の 5 ツールを持たせ、各サブエージェントを独立スレッドで走らせる</div>
+      <div class="detail">11 月 5 日の公式ブログでは、Claude Code の背景サブエージェント、OpenAI dots、DeepSeek Harness のルーターを例に、業界が「1 体の窓口 + 背景ワーカー」に収束していると整理した。公式ドキュメントによると、サブエージェントは Agent Protocol サーバー上で動き、同一デプロイ内に置くか別サーバーに分けるかを選べる。通知と update_strategy は beta で、API は変わる可能性がある</div>
+      <a href="https://www.langchain.com/blog/agents-are-going-async">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> 自前でエージェントのメモリを作るなら、記憶 1 件ごとに根拠（ファイルパス・行・コミット）を持たせ、読み出し時に照合して食い違えば書き直すことから始める。根拠を持たない記憶は、正しいかどうかを後から判定する手がかりがない。</div>
+    <div class="example">
+      <div class="product">Claude Code（バックグラウンドサブエージェント）</div>
+      <div class="approach">サブエージェントを既定でバックグラウンド起動し、結果を完了通知として後のターンで受け取る</div>
+      <div class="detail">公式ドキュメントによれば、バックグラウンドのサブエージェントは前面実行より小さい組み込みツールセットで動き、同時実行数は CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS（既定 20）で制限される。API エラーで失敗した場合も最後の出力を通知に含め、途中までの成果が失われないようにしている。待たせたい場合は CLAUDE_CODE_FORK_SUBAGENT=0 などの設定で同期実行に戻せる</div>
+      <a href="https://code.claude.com/docs/en/sub-agents">📄 一次ソース</a>
+    </div>
+    <div class="takeaway"><strong>示唆:</strong> 長い作業を持つエージェントを作るなら、窓口のループと作業のループを最初から分け、タスクの状態（ID・状態・開始時刻）は会話履歴とは別の場所に保存する。同時実行数の上限も同じタイミングで決めておく。履歴の中だけでタスクを管理すると、要約や圧縮のたびに未完了の仕事を見失う。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 2: 棚卸しはセッションの外で走らせる</div>
+  <div class="section-title">📐 パターン 2: ツール結果を後から返す — 非同期をモデル API の層に下ろす</div>
   <div class="theme-section">
-    <p>読み出し時の検証では拾えないものもある。一度も読まれずに残り続ける重複、互いに矛盾する指示、別のフレームワーク向けに書かれたままの指示ファイルなどだ。そこで各社は、会話中のエージェントとは別に、過去のセッションを振り返って記憶を統合・削除する処理をバックグラウンドで持ち始めた。GitHub は 10 月 28 日に Copilot Dreaming をパブリックプレビューで公開した。対象は個人メモリ、リポジトリの設定（指示ファイル・スキル）、コードレビュー用ガイダンスの 3 種で、会話を開いていなくても動く。OpenAI Codex のメモリも会話終了の直後ではなくバックグラウンドで更新し、作業途中の内容を要約しないように、会話が十分アイドルになるまで待つ。</p><p>会話の外に出す理由は 2 つある。1 つは対象の性質だ。作業中のセッションは結論が固まっておらず、ここから記憶を作ると途中の思い込みまで残る。もう 1 つはコストの切り分けである。整理処理はトークンを使うので、ユーザーの操作待ちと切り離し、量と頻度を別に制御したい。Copilot Dreaming は変更がなかった実行や非アクティブなリポジトリでも AI クレジットを消費すると明記し、先に支出上限を設定するよう求めている。Codex はレート制限の残量が閾値を下回ると処理を飛ばす設定を持つ。1 月に GitHub が「オフライン整理はコストが高い」として見送った処理が、10 月にオプトインかつユーザー課金の機能として出てきた形で、整理のコストを誰が負担するかが製品設計の論点になった。</p>
+    <p>サブエージェントの非同期化はフレームワーク側の工夫だが、OpenAI は同じ考え方を Responses API のツール呼び出しに入れた。関数ツールかカスタムツールの定義に <code>"async": true</code> を付けると、モデルはそのツールを結果待ちが要らない呼び出しとして扱う。<code>function_call</code> を出したあとも、依存しない部分の回答を同じレスポンスの中で続ける。アプリケーションはジョブを自前で走らせ、終わったら <code>previous_response_id</code> に最新のレスポンス ID を入れた新しいリクエストを送り、元の <code>call_id</code> に合わせた <code>function_call_output</code> を返す。ガイドには、async tool は実行を OpenAI 側に移すものでも、バックグラウンドジョブを管理するものでもないと明記されている。</p><p>ここで決まっているのは役割の分担だ。モデルは「どの結果が先に必要か」を判断し、ジョブの実行・保持・再試行はアプリの責任のまま残る。次の手順が保留中の結果に依存する場合は、アプリ側で <code>wait_for_tasks</code> のような同期ツールを定義し、モデルにそれを呼ばせて待たせる。ユーザーへの質問も非同期ツールとして定義できるが、レスポンスは回答を待って開いたままにはならないので、答えが必要な手順の前で待つようモデルに指示する必要がある。制約もはっきりしている。対象はアプリが実行する関数ツールとカスタムツールに限られ、ホスト型の組み込みツールは含まれない。Multi-agent モードでは並列ツール呼び出しと組み合わせられず、タスクハンドルは完了済みのものも含めて会話全体で一意にしなければならない。非同期をモデルに任せるほど、ID の対応付けの正しさはアプリ側で保証することになる。</p>
     <div class="example">
-      <div class="product">GitHub Copilot Dreaming（パブリックプレビュー）</div>
-      <div class="approach">同期済みセッションと PR レビューのフィードバックを分析し、古いガイダンスの修正と重複メモリの削除をバックグラウンドで行う</div>
-      <div class="detail">公式ドキュメントによれば、変更するのはコンテキストであって基盤モデルではない。オプトイン方式で、組織ポリシーか個人設定で有効にする。実行ごとに AI クレジットを消費し、無効化しても過去の変更の取り消しや、削除済みメモリの復元は行われない</div>
-      <a href="https://docs.github.com/en/copilot/concepts/prompting-and-context/copilot-dreaming">📄 一次ソース</a>
+      <div class="product">OpenAI Responses API（async tool calling）</div>
+      <div class="approach">ツール定義に async: true を付けるとモデルが結果を待たずに進み、アプリは後のリクエストで call_id を合わせて結果を返す</div>
+      <div class="detail">公式ガイドでは、レスポンス生成そのものを非同期にする Background mode とは別の機能と位置付けている。待機用ツール（wait_for_tasks）やユーザー入力用ツール（request_user_input_async）は組み込みではなく、アプリ側で定義するパターンとして示されている。対応モデルは GPT-6 Astra 以降</div>
+      <a href="https://developers.openai.com/api/docs/guides/async-tool-calling">📄 一次ソース</a>
     </div>
-    <div class="example">
-      <div class="product">OpenAI Codex（Memories）</div>
-      <div class="approach">過去の会話からローカルのメモリファイルを作る処理を、会話がアイドルになってからバックグラウンドで実行する</div>
-      <div class="detail">公式ドキュメントでは、進行中や短時間のセッションを対象外にし、生成時にシークレットをマスクする。抽出と全体統合（consolidation）でモデルを別々に指定でき、レート制限の残量が閾値を下回れば処理をスキップする。記憶の作成と統合を別工程にした構成がそのまま設定項目に表れている</div>
-      <a href="https://learn.chatgpt.com/docs/customization/memories">📄 一次ソース</a>
-    </div>
-    <div class="takeaway"><strong>示唆:</strong> 記憶の整理処理を入れるなら、対象は「アイドルになった・閉じた」セッションに限り、実行頻度と予算の上限を整理処理とは別の設定として持たせる。会話中のエージェントに整理まで任せると、作業途中の推測が記憶に混ざり、コストも作業本体と区別できなくなる。</div>
+    <div class="takeaway"><strong>示唆:</strong> モデル API の非同期ツールを使う場合、ジョブの実行キュー・タスクハンドルと call_id の対応表・タイムアウト時に返す「結果なし」の扱いは、すべて自分のアプリで持つ前提で設計する。API が非同期に対応しても、ジョブ管理まで肩代わりしてくれるわけではない。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 3: 直してよい範囲を変更対象で分ける</div>
+  <div class="section-title">📐 パターン 3: 走っている作業への指示と承認をどこで受けるか</div>
   <div class="theme-section">
-    <p>記憶の手入れで各社の設計が最も揃っているのは、権限の切り分けだ。エージェントが自分のために持つメモリは自動で追加・更新・削除してよい。一方、チームで共有しリポジトリに置かれた指示ファイルは、人間のレビューを通してしか変えない。Copilot Dreaming はメモリを変更ごとの承認なしで更新するが、<code>AGENTS.md</code>・<code>CLAUDE.md</code>・<code>.github/copilot-instructions.md</code>・<code>.github/skills/**</code> などへの変更は PR として提案し、マージされるまでファイルは変わらない。Claude Code の <code>/doctor prompt-audit</code> はさらに慎重で、古いモデル向けの指示、存在しないファイルやコマンドへの参照、ファイル間の矛盾を洗い出して修正案付きのレポートを返すが、ユーザーが頼むまで何も書き換えない。</p><p>この線引きは、記憶と指示の役割の違いから来ている。Codex のドキュメントは、必ず守らせたいチームの方針は <code>AGENTS.md</code> やリポジトリ内の文書に書き、メモリは「便利な想起の層」として扱って、常に適用すべきルールの唯一の置き場にしないよう明記している。メモリが間違っても影響は 1 人のセッションの効率にとどまる。指示ファイルが間違えば、チーム全員のエージェントが同じ誤りを繰り返す。影響範囲が大きいものほど自動書き換えから遠ざける、という順序付けである。Claude Code は自動メモリにも書き込み時の制約を課している。<code>MEMORY.md</code> はセッション開始時に先頭 200 行または 25KB までしか読み込まれず、上限に近づくと 1 行 1 項目に保ち古い項目を統合・削除するよう促し、超えた場合は索引を書き直すようエラーを返す。</p>
+    <p>作業を裏に回すと、同期型では起きなかった問いが 2 つ出てくる。実行中のタスクに新しい指示が来たらどうするか。タスクが承認を求めたとき、誰がどこで答えるか。Deep Agents は <code>update_async_task</code> に <code>update_strategy</code> を持たせ、既定の <code>"interrupt"</code> は現在の実行を止めて新しい指示で再実行し、<code>"enqueue"</code> は今の実行が終わるまで指示を積んでおく。前者は方向の訂正に、後者は追加の依頼に向く。承認が必要になったサブエージェントは <code>waiting</code> 状態になり、ユーザーはオーケストレーターではなくサブエージェント自身のスレッドで答える。Slack 上の Managed Deep Agents では、承認の依頼が元のスレッドに投稿され、そこへの返信で再開する。Claude Code は逆に、バックグラウンドのサブエージェントの権限確認をメインのセッションに出し、どのサブエージェントからの依頼かを名前で示す。</p><p>承認をどこに出すかで設計が分かれているのは、何を守るかの優先順位が違うからだ。Deep Agents は窓口の会話を承認待ちで止めないことを優先し、承認を作業側のスレッドに閉じ込めた。Claude Code は承認を 1 か所に集め、ユーザーが見落とさないことを優先した。その分、セッション全体に及ぶ許可を 1 回与えると、メイン会話にも同じ許可が適用される。OpenAI dots はさらに、どの種類の更新をどのチャネル（ChatGPT・Slack・Teams）に送るかをユーザーが決められる。Activity 画面では、メインのタスクの一時停止と、委任先のタスクや定期タスクの停止・取消を別々に操作できる。共通しているのは、止めても取り消せないという前提だ。dots のドキュメントは、タスクを止めても完了済みの操作は元に戻らないと明記し、Deep Agents も取消は実行中の run を止めるだけである。</p>
     <div class="example">
-      <div class="product">Claude Code（/doctor prompt-audit と自動メモリの上限）</div>
-      <div class="approach">指示ファイルの陳腐化・矛盾は修正案付きレポートで返すだけで、自動メモリは読み込み上限で肥大化を止める</div>
-      <div class="detail">公式ドキュメントは、矛盾する指示があると Claude がどちらかを任意に選ぶ可能性があるとして、CLAUDE.md と .claude/rules/ の定期的な見直しを勧めている。その見直しを機械に手伝わせる一方、書き換えの判断は人に残す設計になっている。自動メモリ側は、書き込み直後にサイズを測って整理を促す「書き込み時の手入れ」を担う</div>
-      <a href="https://code.claude.com/docs/en/memory">📄 一次ソース</a>
+      <div class="product">OpenAI dots（常時稼働エージェント）</div>
+      <div class="approach">背景のエージェントや Codex タスクに作業を渡し、通知チャネルの振り分けと委任先ごとの停止を利用者に持たせる</div>
+      <div class="detail">公式ドキュメントによると、dots は専用のクラウド上のコンピューターとブラウザで動くため、ユーザーの端末がオフでも作業が続く。作業中も話しかけて新しい情報や優先順位を渡せ、作業を最初からやり直す必要はない。アカウントに影響する操作や情報共有の前には自動の承認チェックが入り、進めるか、承認を求めるか、ユーザーに引き渡すかを判定する。Pro と Business Premium の対象アカウントに段階的に展開している</div>
+      <a href="https://learn.chatgpt.com/docs/dots">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">GitHub Copilot Dreaming（変更経路の分離）</div>
-      <div class="approach">メモリとコードレビュー用ガイダンスは直接更新し、リポジトリに置かれた指示・スキルの変更は PR で提案する</div>
-      <div class="detail">10 月 28 日の公式 changelog は、Dreaming の種類を個人メモリの整理・リポジトリのカスタマイズ・コードレビューのカスタマイズの 3 つに分けている。そのうえで、メモリは追加・更新・削除できる一方、リポジトリに置かれたスキルと指示への変更は「チームがレビューする PR として提案される」と明記する。共有ファイルの陳腐化は自動で見つけ、反映は既存のコードレビューの流れに乗せる形である</div>
-      <a href="https://github.blog/changelog/2026-10-28-github-intelligence-puts-your-code-context-and-history-to-work">📄 一次ソース</a>
+      <div class="product">LangChain Deep Agents（update_strategy と waiting 状態）</div>
+      <div class="approach">実行中タスクへの追加指示を interrupt / enqueue で選ばせ、承認待ちはサブエージェントのスレッドで解決する</div>
+      <div class="detail">公式ドキュメントには端のケースまで書かれている。enqueue で積んだ指示は、開始前に現在の実行が一時停止すると破棄される。waiting 中のタスクを更新すると保留中の承認依頼は消え、取消は状態を cancelled にするだけになる。アイドル中のオーケストレーターを起こすのは完了か失敗の通知だけで、承認待ちでは起こさない</div>
+      <a href="https://docs.langchain.com/oss/python/deepagents/async-subagents">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> 自動整理を入れる前に、書き換え対象を「個人・エージェント専用の記憶」と「チームで共有する指示」に分け、後者は必ず PR かレポート経由にする。消去は特に慎重に扱い、少なくとも共有物は自動で消さない。必ず守らせたいルールはメモリではなく、レビューを通るファイルに置く。</div>
+    <div class="takeaway"><strong>示唆:</strong> 背景タスクを持つエージェントでは、「実行中に指示が来たら止めるか積むか」と「承認依頼を窓口に集めるか作業側に置くか」を仕様として先に決め、UI で見分けられるようにする。どちらにしても、停止は完了済みの操作を戻さないことをユーザーに見える形で伝える。</div>
   </div>
   <div class="editorial">
     <span class="label">✍️ 編集後記</span>
-    記憶を持つエージェントの品質は、どれだけ覚えたかより、どれだけ古いものを捨てられたかで決まり始めている。読み出し時の検証、セッション外での棚卸し、共有ファイルの PR 経由の修正は、それぞれ別の種類の陳腐化に対応する。3 つは代替ではなく組み合わせる前提で考えたほうがよい。気がかりなのは、Dreaming のような整理処理自体が AI の判断で記憶を消す点だ。「整合している」ことと「正しい」ことは別なので、何を消したかを後から追える記録が次の論点になるとみている。
+    非同期化で一番難しいのは並列実行そのものより、「いま何が走っていて、誰の返事を待っているか」を窓口が正しく把握し続けることだと各社の設計から読み取れる。タスクの状態を会話の外に保存すること、承認の行き先を決めること、止めても戻らないと明示すること。どれも従来のジョブキュー設計で使われてきた答えで、エージェントはそれを会話の中に持ち込み始めたところだ。
   </div>
 </div>
 
 <div class="section">
   <div class="section-title">🔗 今号の動向ピックアップ</div>
-  <div class="quick-link"><a href="https://arxiv.org/abs/2608.07429">TEPA: 矛盾する新しい証拠で古い記憶を「失効」させる</a><span class="quick-summary">観測をキー付きの前例として保存し、同じキーで矛盾する証拠が来たら前例を失効させる（監査用に履歴は残す）手法。追記のみのメモリは状況が完全に反転すると 0.21 まで落ち、メモリなし（0.31）を下回った。本号第 1 節の「書いた時点の正しさを信じない」を定量的に裏付ける結果だ。</span></div>
-  <div class="quick-link"><a href="https://arxiv.org/abs/2608.20664">DreamBench-SWE: 複数セッションにまたがる記憶衛生のベンチマーク</a><span class="quick-summary">前のセッションの証拠に依存する後続タスクを、隠しテストで採点するソフトウェアエージェント向けベンチマーク。メモリありの条件はいずれもメモリなし（21/180）を有意に上回ったが、整理方式どうしの優劣は示せなかったと著者自身が書いている。棚卸し処理の効果を測る方法は、まだ固まっていない。</span></div>
-  <div class="quick-link"><a href="https://github.com/tigerless-labs/agent-memory">agent-memory: 無人の整理処理は追加と更新まで、削除は人の承認待ち</a><span class="quick-summary">Markdown を正本とし、Claude Code と Codex で同じ記憶ストアを共有する OSS のメモリランタイム。スリープ時の整理パスは記憶の追加・更新はできるが、削除は必ず提案として出して人が確定する。本号第 3 節の「直してよい範囲を分ける」を、削除という操作の単位で実装した例である。</span></div>
+  <div class="quick-link"><a href="https://github.com/langchain-ai/async-deep-agents">LangChain、async subagents の参照実装リポジトリを公開</a><span class="quick-summary">ユーザーと話すスーパーバイザーが、researcher と coder の 2 つのサブエージェントを背景ジョブとして起動・確認・取消する構成を、Python と TypeScript の両方で実装したリポジトリ。窓口とワーカーを分ける本号第 1 節の構成を、手元の LangGraph サーバーで動かして確かめられる。</span></div>
+  <div class="quick-link"><a href="https://docs.langchain.com/langsmith/python/managed-deep-agents-subagents">Managed Deep Agents、サブエージェントの非同期化を 1 フィールドで</a><span class="quick-summary">subagents の定義に &quot;async&quot;: True を足すだけで非同期になり、配信中のエージェントには general-purpose サブエージェントの非同期版が自動で付く。Slack 上では承認依頼が元のスレッドに届き、返信で再開する設計で、本号第 3 節の「承認をどこで受けるか」の具体例になっている。</span></div>
 </div>
 
 <div class="section">
   <div class="section-title">📚 過去号</div>
+  <div class="archive-item"><span class="week">2026-11-10</span><div class="body"><a href="ai-trends/2026-11-10.html">エージェントの記憶は「溜める」から「手入れする」へ — 読む時に根拠を確かめる、棚卸しはセッションの外で、共有ファイルは PR で直す</a><span class="sub">記憶の正しさは書いた時点では決まらない。GitHub はメモリにコード位置の引用を付け、読み出す時にエージェントが根拠を確かめる方式を採った</span></div></div>
   <div class="archive-item"><span class="week">2026-11-07</span><div class="body"><a href="ai-trends/2026-11-07.html">AI の脆弱性発見は「見つけた数」から「再現と修正を添えて渡す」へ — 動かない仮説は捨てる、受け手の処理量に合わせる、攻撃能力は範囲で縛って配る</a><span class="sub">Mozilla のハーネスは、モデルに再現用のテストケースを作らせて実際に走らせ、再現しない推測を捨ててから報告する。PHP2Shell では、2024 年の監査で悪用可能性を示せずに放置されたバグが、AI を使った調査で動作する RCE の PoC になり、PHP 側が再現を確認してから修正が進んだ</span></div></div>
   <div class="archive-item"><span class="week">2026-11-05</span><div class="body"><a href="ai-trends/2026-11-05.html">E2E テストのエージェント化は「毎回モデルに操作させる」をやめ始めた — 操作は記録して再生、判定は別系統で確かめる、CI には決定論的なテストを残す</a><span class="sub">e2e と Bug0 QA Agent は、エージェントが一度成功させた操作を記録し、次回以降はモデルを呼ばずに再生する。UI が変わって再生が失敗したときだけエージェントを呼び直す</span></div></div>
   <div class="archive-item"><span class="week">2026-11-03</span><div class="body"><a href="ai-trends/2026-11-03.html">エージェントのコスト管理は「月末の請求書」から「実行単位の計量と停止」へ — 誰の・どのセッションかで計る、止めずに一時停止する、高い経路は設定で閉じる</a><span class="sub">Anthropic の新しい分析 API は、コストを actor（ユーザー / サービスアカウント / キー）や Managed Agents のセッション単位で引ける。ただしデータの反映は通常 4 時間以内で、リアルタイムの制御には使えない</span></div></div>
@@ -214,7 +214,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 </div>
 
 <footer>
-  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="data/ai-trends/2026-11-10.json">data/ai-trends/2026-11-10.json</a>（このページは JSON からの生成物）</p>
+  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="data/ai-trends/2026-11-12.json">data/ai-trends/2026-11-12.json</a>（このページは JSON からの生成物）</p>
   <p style="margin-top:.5rem"><a href="./">📰 日刊ダイジェストに戻る</a></p>
 </footer>
 </div>
