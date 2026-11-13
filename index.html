@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tech News Daily — 2026-11-12</title>
-  <meta name="description" content="AWS Emulator が CC0 で公開 / Gemini Decisions API / C++26 が国別投票で否決">
+  <title>Tech News Daily — 2026-11-13</title>
+  <meta name="description" content="NVIDIA ジェンスン・フアン氏が CEO 辞任 / Gemini 4 Hydrogen 発表 / GitHub Actions 狙いのサプライチェーン攻撃">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Tech News Daily">
-  <meta property="og:title" content="Tech News Daily — 2026-11-12">
-  <meta property="og:description" content="AWS Emulator が CC0 で公開 / Gemini Decisions API / C++26 が国別投票で否決">
+  <meta property="og:title" content="Tech News Daily — 2026-11-13">
+  <meta property="og:description" content="NVIDIA ジェンスン・フアン氏が CEO 辞任 / Gemini 4 Hydrogen 発表 / GitHub Actions 狙いのサプライチェーン攻撃">
   <meta property="og:url" content="https://tech-news.kaion-lab.com/">
   <meta property="og:image" content="https://tech-news.kaion-lab.com/apple-touch-icon.png">
   <meta name="twitter:card" content="summary">
@@ -22,7 +22,7 @@
   <div class="container">
     <header>
       <h1>Tech News Daily</h1>
-      <div class="date">2026-11-12 (Thu)</div>
+      <div class="date">2026-11-13 (Fri)</div>
       <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
       <nav class="site-nav">
         <a href="./" class="active">📰 日刊ダイジェスト</a>
@@ -34,8 +34,8 @@
 
     <div class="stats-bar">
       <span>📰 19 articles</span>
-      <span>🏷 7 categories</span>
-      <span>📡 17 sources</span>
+      <span>🏷 6 categories</span>
+      <span>📡 15 sources</span>
     </div>
 
     <nav class="toc">
@@ -47,305 +47,308 @@
     </nav>
 
     <div class="numbers-bar">
-      <div class="number-item"><span class="number-value">200+</span><span class="number-label">AWS Emulator が再現する AWS サービス数</span></div>
-      <div class="number-item"><span class="number-value">150–250ms</span><span class="number-label">Gemini Decisions API のレイテンシ</span></div>
-      <div class="number-item"><span class="number-value">12/20</span><span class="number-label">C++26 の賛成 P メンバー（必要は 3 分の 2）</span></div>
+      <div class="number-item"><span class="number-value">60,000+</span><span class="number-label">GitHub Actions 攻撃で囮 PR が作られたリポジトリ数</span></div>
+      <div class="number-item"><span class="number-value">27.26M</span><span class="number-label">無印良品で不正アクセスの可能性がある顧客データ件数</span></div>
+      <div class="number-item"><span class="number-value">$1.50</span><span class="number-label">Gemini 4 Hydrogen の入力 100 万トークン単価</span></div>
+    </div>
+
+    <div class="weekly-keywords">
+      <div class="section-title">📊 今週のキーワード</div>
+      <div class="keyword-chips">
+        <span class="keyword-chip">AI エージェント実行基盤</span>
+        <span class="keyword-chip">サプライチェーン攻撃</span>
+        <span class="keyword-chip">脆弱性パッチ</span>
+      </div>
+      <div class="keyword-summary">今週は AWS Nitro Sandboxes や Antigravity の remote agents など、エージェントをクラウドの隔離環境で動かす基盤が相次いだ。一方で GitHub Actions を狙う攻撃や Node.js・PostgreSQL の大量 CVE 修正が続き、CI と実行環境の権限設計が問われた週だった。</div>
     </div>
 
     <div class="section" id="top-stories">
       <div class="section-title">🔥 Top Stories</div>
+
       <div class="card featured deep-dive">
         <div class="card-header">
-          <span class="tag tag-infra">Infra</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://www.allthingsdistributed.com/2026/11/aws-emulator-and-the-engineers-job-when-agents-write-the-code.html">DEEP DIVE: AWS が 200 超のサービスを再現する「AWS Emulator」を CC0 で公開</a></h3>
+          <span class="tag tag-product">Product</span>
+          <span class="content-type">💰 ビジネス</span>
+          <h3><a href="https://nvidianews.nvidia.com/news/nvidia-announces-ceo-transition">DEEP DIVE: NVIDIA のジェンスン・フアン氏が CEO・取締役を辞任、CFO のコレット・クレス氏が暫定 CEO に</a></h3>
         </div>
-        <div class="summary">AWS は 11 月 11 日、コーディングエージェントがローカルで AWS 相手のテストを回せるようにする AWS Emulator を公開した。400 超の API モデルから生成した 200 超のサービスのエミュレーションを備え、無料・オフラインで動作し、ライセンスは CC0（パブリックドメイン）である。注目すべきは作り方で、コードの記述とテストはすべてエージェントが担い、実際の AWS との挙動差は複数のエージェントチームが照合して検証している。変更はセキュリティレビュー担当を含むマージゲートを通過しない限り取り込まれない。著者の Swami Sivasubramanian 氏は、エージェントがコードを書く時代にエンジニアの仕事は「全行を書くこと」から「エージェントの周囲にガードレールを設計すること」へ移ると論じる。ガードレールとは仕様、実 AWS に対する忠実度テスト、マージゲートを指す。例として、あるレプリケーションエンジンの再実装は初回に約 4 か月かかったが、仕様とテスト環境が揃った状態ではエージェントが約 2 時間で終えたという。インフラをコーディングのループ内に置けば、エージェントは書いた直後に自分の成果物を検証できる。クラウド課金や認証情報を使わずに IAM や S3 の挙動を繰り返し試せるため、CI のコストと待ち時間にも効く。</div>
-        <div class="editorial">🧠 エミュレータの価値は忠実度で決まる。公開された「実 AWS との照合」がどの範囲まで通るかは未検証で、IAM の細かい挙動や結果整合性の再現度が採用の分かれ目になるだろう。一方で CC0 の公開は、LocalStack など既存の選択肢との比較を一気に促す。</div>
+        <div class="summary">NVIDIA は 11 月 12 日、共同創業者のジェンスン・フアン氏が社長・CEO・取締役を即日辞任したと発表した。在任は 33 年。後任が決まるまでは 2013 年 9 月に入社し財務部門を率いてきた CFO のコレット・クレス氏が CFO を兼務したまま暫定 CEO を務める。取締役会は社内外から恒久的な後継者を探す。同時に、Synopsys の元 CEO で 30 年以上の経営・投資経験を持つハーベイ・ジョーンズ氏が、同社初の取締役会議長に就任した。リリースは辞任の理由を述べておらず、「辞任した」とだけ記している。取締役会の独立取締役による声明の日付は 11 月 10 日である。直近の予定として、2027 会計年度第 3 四半期の決算発表が 11 月 17 日（太平洋時間 13:20）に控える。クレス氏は「顧客、パートナー、開発者、株主への貢献に集中する」とコメントした。HN では 2,900 ポイント超を集め、同日の最多得点記事になった。AI 向け GPU の供給と CUDA エコシステムの両方を一人の創業者が牽引してきた会社の最高意思決定者が、決算の 5 日前に交代する異例の局面である。</div>
+        <div class="editorial">🧠 理由が非開示である以上、背景の推測には根拠がない。確認できる事実は、暫定体制、初の議長設置、決算前の発表という 3 点だけだ。ただし、決算 5 日前という時期は、17 日の説明の中身が通常の「ガイダンスと需要」から「経営体制と継続性」に比重を移す可能性を示す。開発者にとっての実害は短期にはなさそうだが、CUDA や次世代 GPU のロードマップ方針が変わるかどうかは、後任の人選と決算コールを見るまで未知数だ。</div>
         <div class="key-points">
           <ul>
-            <li>400 超の API モデルから 200 超の AWS サービスをローカルで再現。無料かつオフライン動作</li>
-            <li>CC0 で公開。実装・テストはエージェントが担当し、実 AWS との忠実度を別のエージェントチームが照合</li>
-            <li>全変更がセキュリティレビュー担当を含むマージゲートを通過する運用</li>
+            <li>フアン氏は 33 年務めた社長・CEO・取締役を即日辞任。暫定 CEO はクレス CFO（CFO 兼務）</li>
+            <li>初の取締役会議長にハーベイ・ジョーンズ氏（元 Synopsys CEO）。恒久 CEO は社内外から選考</li>
+            <li>第 3 四半期決算は 11 月 17 日（太平洋時間 13:20）、電話会議は 14:00</li>
           </ul>
         </div>
-        <div class="why-it-matters">💡 エージェントが実 AWS を叩かずに自己検証できるため、課金・認証情報・待ち時間なしでテストを反復できる。</div>
+        <div class="why-it-matters">💡 NVIDIA の GPU や CUDA に開発計画を依存している場合は、17 日の決算コールでロードマップの継続性に関する言及があるかを確認しておきたい。</div>
         <div class="meta">
-          <span>All Things Distributed</span>
-          <span class="engagement">▲ 671</span>
-          <span>⏱ 6 min read</span>
-          <span>2026-11-11</span>
+          <span>NVIDIA Newsroom</span>
+          <span class="engagement">▲ 2926</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-11-12</span>
         </div>
       </div>
+
       <div class="card featured">
         <div class="card-header">
           <span class="tag tag-ai">AI</span>
           <span class="content-type">📦 リリース</span>
-          <h3><a href="https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/">Google、閉じた選択肢の判定に特化した「Gemini Decisions API」を公開</a></h3>
+          <h3><a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/">Google が Gemini 4 Hydrogen を発表、日常のエージェント作業向けに 100 万トークン文脈で $1.50/$7.50</a></h3>
         </div>
-        <div class="summary">Google は、yes/no、多肢選択、ルーブリック採点といった閉集合の判断に特化した Gemini Decisions API（モデル gemini-decision-1）を発表した。1 回の入力（テキスト・画像・音声・動画・PDF、最大 256K トークン）に対し最大 1,000 問を投げられ、各回答に 0〜1 の信頼度が付く。モデルは回答テキストを生成せず、候補を 1 回の順伝播でスコアリングするため、エンドツーエンドで 150〜250 ms を実現する。入力 100 万トークンあたり 0.10 ドルで、出力トークンの課金はない。Google は共通ベンチマークで Gemini 3.5 Flash-Lite（Interactions API）の約 5 分の 1 のコストと説明している。</div>
+        <div class="summary">Google は 11 月 12 日、Gemini 4 Hydrogen を公開した。フロンティア級の Carbon・Argon の下に位置する「日常使いのエージェント向けモデル」で、思考レベルは low / medium / high（既定）に加えて新たに xhigh を備える。Artificial Analysis の Intelligence Index は high で 51（Argon は 50）、xhigh で 54。Terminal-Bench 4.1 は 57% で、Gemini 3.8 Flash の 18.2% から大きく伸びた。入力 100 万トークンまで同一単価で、料金は入力 $1.50 / 出力 $7.50（100 万トークンあたり）。Gemini API、AI Studio、Android Studio、Antigravity（AI Pro/Ultra）で使える。</div>
         <div class="key-points">
           <ul>
-            <li>1 リクエストで最大 1,000 問、入力は最大 256K トークンのマルチモーダル</li>
-            <li>生成せず 1 回の順伝播でスコア化し、150〜250 ms。入力 $0.10/100 万トークン、出力課金なし</li>
-            <li>Gemini API / AI Studio で利用可（無料枠あり）。OpenRouter・LangChain・Vercel 連携を順次展開</li>
+            <li>Terminal-Bench 4.1 で 57%（Gemini 3.8 Flash は 18.2%）。high 設定で 3.8 Flash より約 2.5 倍速く完了</li>
+            <li>入出力とも最大 100 万トークン。価格は文脈長に関わらず一律の $1.50 / $7.50</li>
+            <li>Antigravity の Orchestrator が Carbon と Hydrogen をセッション内で切替え、Terminal-Bench 4.0 でクォータ 24% 減・完了 19% 短縮</li>
           </ul>
         </div>
-        <div class="why-it-matters">💡 コンテンツ分類やモデレーションで LLM に生成させて後段で解析している場合、信頼度付きの判定に置き換えれば人手レビューへの振り分けを閾値で制御できる。</div>
+        <div class="why-it-matters">💡 長い文脈を使うエージェントでも単価が跳ねないため、現行モデルとのコスト比較を自分のタスクで実測する価値がある（数値はすべて Google 公表値）。</div>
         <div class="meta">
           <span>Google Blog</span>
-          <span class="engagement">▲ 274</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-11-11</span>
+          <span class="engagement">▲ 460</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-11-12</span>
         </div>
       </div>
+
       <div class="card featured">
         <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
-          <span class="content-type">👀 注目</span>
-          <h3><a href="https://herecomesthemoon.net/2026/11/cpp26-failed-the-national-bodies/">C++26 が国別投票で否決、C++ 標準として初</a></h3>
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://blog.flatt.tech/entry/github_actions_widespread_supply_chain_attack">GitHub Actions を狙う大規模サプライチェーン攻撃、囮 PR は 6 万超のリポジトリに</a></h3>
         </div>
-        <div class="summary">ブログによれば、C++26 は ISO の国別投票で承認に至らなかった。承認には参加 P メンバーの 3 分の 2 以上の賛成と、全投票メンバーの反対 4 分の 1 以下が必要だが、P メンバーは 20 中 12 が賛成（60%）、22 メンバー中 9 が反対（41%）だった。争点は事前条件・事後条件の実行時チェックを標準化する Contracts で、委員会内では支持が強かったものの、Stroustrup 氏らが反対し、複数の国がセーフティと設計への懸念を示した。Profiles は C++26 に入らなかった。次の委員会会合は 11 月 16〜21 日だが、解決には 1 年ほどかかる可能性がある。</div>
+        <div class="summary">GMO Flatt Security は、11 月 10〜12 日に確認された GitHub Actions 狙いの攻撃を報告した。「docs: dependency audit notes」という題の囮 PR が `wfx-docs` ブランチから送られ、乗っ取られたとみられるアカウントが使われている。続けて既存ワークフローへのステップ追加や、`package.json` の postinstall 経由で情報窃取スクリプトを実行させる変更が入る。CI 内のシークレット、AWS・Azure・GCP の認証情報、AI プロバイダの API キー、SSH/GPG 鍵、OIDC トークンが収集され、tgz にまとめて IP 直指定のエンドポイントか Telegram Bot API へ送信された。</div>
         <div class="key-points">
           <ul>
-            <li>賛成 12/20 の P メンバー（60%）で 3 分の 2 に届かず、反対 9/22（41%）で上限 25% を超過</li>
-            <li>争点は Contracts。Profiles は C++26 に未収録</li>
-            <li>次回会合は 11 月 16〜21 日、決着まで約 1 年の見込み</li>
+            <li>囮 PR が作られたリポジトリは 6 万超。コミットメッセージは「ci: refresh build cache」「chore: add ci helper」など</li>
+            <li>AWS の IAM ロール信頼ポリシーや Azure のフェデレーション資格情報の改変も試みており、キーのローテーションだけでは不十分</li>
+            <li>PR タイトル・ブランチ名（chore/ + ランダム 8 文字）で痕跡を検索し、該当時は CI 環境を隔離して全資格情報を再発行</li>
           </ul>
         </div>
-        <div class="why-it-matters">💡 C++26 を前提にしたコードベースは、機能の取り込み範囲が変わる可能性がある。コンパイラの実装済み機能を基準に採用を判断したい（記述は筆者の見解を含む）。</div>
+        <div class="why-it-matters">💡 GitHub 上に公開リポジトリや CI を持つなら、過去 3 日分の PR とワークフロー変更を検索し、クラウド側の信頼設定の差分も確認すること。</div>
         <div class="meta">
-          <span>herecomesthemoon</span>
-          <span class="engagement">🔖 Lobsters 15</span>
-          <span>⏱ 7 min read</span>
-          <span>2026-11-11</span>
+          <span>GMO Flatt Security</span>
+          <span>⏱ 8 min read</span>
+          <span>2026-11-12</span>
         </div>
       </div>
     </div>
 
     <div class="section" id="dev-engineering">
       <div class="section-title">⚡ Dev &amp; Engineering</div>
+
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-infra">Infra</span>
+          <span class="tag tag-dev">Dev</span>
           <span class="content-type">📦 リリース</span>
-          <h3><a href="https://www.publickey1.jp/blog/26/awsaiec2vmaws_nitro_sandboxes.html">AWS が AI エージェント向け軽量 VM「Nitro Sandboxes」を発表</a></h3>
+          <h3><a href="https://blog.rust-lang.org/2026/11/12/Rust-1.100.0/">Rust 1.100.0 リリース、never 型 `!` と Allocator trait が安定化</a></h3>
         </div>
-        <div class="summary">AWS は 11 月 12 日、信頼できない AI 生成コードを実行する軽量 VM「Nitro Sandboxes」を発表した。Nitro System のハードウェアレベル分離を使い、各サンドボックスは独立した OS を持つため、システムコールがゲストカーネルの外に届かない。EC2 上のほか、ECS と EKS の Pod としても動かせる。</div>
+        <div class="summary">Rust 1.100.0 で never 型 `!` が安定化され、`Result&lt;T, !&gt;` のように任意の位置で書ける。`Infallible` は `!` の別名になった。`Allocator` trait も安定化し、`Vec` や `Box` と併用できる。Cargo は `[lints.cargo]` で未使用依存を警告し、`global-min-publish-age` で公開直後のバージョンを避けられる。</div>
         <div class="key-points">
           <ul>
-            <li>EKS Auto Mode で有効化すると Pod が Nitro Sandbox VM に変換される</li>
-            <li>既存のコンテナイメージ・デプロイパイプライン・Helm チャートを変更せず利用可能</li>
+            <li>2024 以前の edition では never 型フォールバックが `()` から `!` に変わり、一部コードに影響する</li>
+            <li>`DropGuard`、`bool::toggle`、`str::trim_prefix`/`trim_suffix`、`Vec::from_fn` などの API も安定化</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Publickey</span>
-          <span>⏱ 3 min read</span>
+          <span>Rust Blog</span>
+          <span class="engagement">▲ 413</span>
+          <span>⏱ 6 min read</span>
           <span>2026-11-12</span>
         </div>
       </div>
+
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-frontend">Frontend</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://www.publickey1.jp/blog/26/playwrightbun.html">Playwright v1.65 がテストランナーの Bun 実行を正式サポート</a></h3>
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://www.itmedia.co.jp/news/article/2611/13/2000003161/">Microsoft 365 で大規模障害、Exchange Online を中心に Teams・Copilot も影響</a></h3>
         </div>
-        <div class="summary">Playwright v1.65.0 で、テストランナーを Node.js に加えて Bun 上で実行することが正式にサポートされた。Bun が TypeScript のテストファイルを自前でトランスパイルするため、Babel とコンパイルキャッシュは使われない。Bun 1.4（8 月）の互換性改善で非公式に動いていた構成が公式になった。</div>
+        <div class="summary">11 月 12〜13 日、Exchange Online のメールボックスに Outlook（Web・デスクトップ・モバイル）から接続できない障害が発生した。Microsoft は当初「高負荷」としたが、後に多数のサーバーが応答せずヘルスチェックに失敗し、残りの基盤へ負荷が移ったと訂正した。</div>
         <div class="key-points">
           <ul>
-            <li>Watch Mode は非対応、UI Mode はファイル変更時に自動再実行しない</li>
-            <li>`--only-changed` は制限付き、`--tsconfig` は無効</li>
+            <li>影響は Teams、SharePoint Online、Microsoft 365 Copilot、Defender XDR、Purview（DLP など）に波及</li>
+            <li>全デプロイを停止し、トラフィック分散とサーバー再起動を実施。日本時間 6:00 時点で一部サーバーが回復</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Publickey</span>
-          <span>⏱ 3 min read</span>
-          <span>2026-11-11</span>
+          <span>ITmedia</span>
+          <span class="engagement">▲ 491</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-11-13</span>
         </div>
       </div>
+
       <div class="card">
         <div class="card-header">
           <span class="tag tag-security">Security</span>
           <span class="content-type">🔒 セキュリティ</span>
-          <h3><a href="https://hugovk.dev/blog/2026/lock-github-actions/">GitHub Actions のワークフローをロックファイルで固定する</a></h3>
+          <h3><a href="https://mehmetince.net/part-3-6-how-i-ended-up-turning-a-22-year-old-postgresql-type-confusion-primitive-into-rce-cve-2026-6460/">22 年前から存在した PostgreSQL の型混同を RCE に発展させた解析（CVE-2026-6460）</a></h3>
         </div>
-        <div class="summary">GitHub Actions がワークフローのロックファイルに対応したことを受け、Hugo van Kemenade 氏が導入手順を解説した。`vX.Y.Z` の読みやすいタグで指定しつつ、実際のコミット SHA はロックファイルに記録できる。サプライチェーン攻撃対策として SHA 固定を行いたい場合の可読性の問題を解消する。</div>
+        <div class="summary">`ALTER TYPE ... ALTER ATTRIBUTE` は複合型の属性型を変えても、プリペアド文が保持する既存のバイナリ値を書き換えない。その結果、16 バイトの UUID が `bytea` として読まれ、先頭バイトが拡張オブジェクトのヘッダとポインタとして解釈される。この値を偽造して実行を乗っ取る。</div>
         <div class="key-points">
           <ul>
-            <li>`gh actions-lock` で `.github/workflows/actions.lock` を生成し、CI では `--verify` で検証</li>
-            <li>Renovate / Dependabot が対応。静的解析の zizmor は v1.32.0 からロックファイルに対応</li>
+            <li>可変な行型の挙動は 2004 年、悪用された拡張オブジェクトのコールバックは 2015 年のコミットに由来</li>
+            <li>権限の低いログインロールでクラッシュを起こせる。修正は 11 月 9 日の更新（新規 52 CVE 規模）に含まれる</li>
           </ul>
         </div>
         <div class="meta">
-          <span>hugovk.dev</span>
-          <span class="engagement">▲ 121</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-11-11</span>
+          <span>mehmetince.net</span>
+          <span class="engagement">▲ 143</span>
+          <span>⏱ 15 min read</span>
+          <span>2026-11-12</span>
         </div>
       </div>
+
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-oss">OSS</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://daniel.haxx.se/blog/2026/11/11/30-years-of-internet-transfers-with-curl/">curl の 30 年：100 行の httpget から 300 億インストールへ</a></h3>
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/google_antigravityaiai.html">Google Antigravity に「remote agents」、PC を閉じてもクラウド VM でエージェントが作業継続</a></h3>
         </div>
-        <div class="summary">1996 年 11 月 11 日、Rafael Sagula 氏が 100 行強の C で httpget 0.1 を公開したのが curl の始まりで、Daniel Stenberg 氏が節目を振り返った。1998 年の curl 4.0 は 3,300 行・24 オプション・3 プロトコルで、2000 年 8 月に最初の libcurl が登場した。</div>
+        <div class="summary">Antigravity の remote agents は、タスクを Google 管理の独立したクラウド VM で実行する。作業中に PC を閉じても継続し、権限確認などはスマートフォンから応答できる。入力元には GitHub リポジトリ、Google Drive のファイル、端末からのアップロードを指定できる。</div>
         <div class="key-points">
           <ul>
-            <li>当時のインターネット利用者は約 3,600 万人、スウェーデンの家庭回線は 30 kbps。現在は 60〜70 億人、平均約 200 Mbps</li>
-            <li>libcurl は推定 300 億のインストールで稼働</li>
+            <li>現時点では個人の Google アカウントの AI Pro / AI Ultra プランに限定</li>
+            <li>ローカルではなくクラウド VM 上で実行されるため、ローカル環境の設定や秘密情報はそのままでは使えない</li>
           </ul>
         </div>
         <div class="meta">
-          <span>daniel.haxx.se</span>
-          <span class="engagement">🔖 Lobsters 35</span>
-          <span>⏱ 5 min read</span>
-          <span>2026-11-11</span>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-oss">OSS</span>
-          <span class="content-type">👀 注目</span>
-          <h3><a href="https://discuss.python.org/t/in-memoriam-tim-peters-1952-2026/110028">Python コミュニティが Tim Peters 氏を追悼</a></h3>
-        </div>
-        <div class="summary">Python の長年のコア開発者 Tim Peters 氏（1952–2026）の訃報が Python のディスカッションフォーラムで共有された。HN では 873 ポイントを集め、この日のフロントページで最上位級の反応となった。</div>
-        <div class="key-points">
-          <ul>
-            <li>1952–2026。Python コミュニティの追悼スレッドが公開</li>
-            <li>HN 873 ポイント、Lobsters でも 71 点</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>discuss.python.org</span>
-          <span class="engagement">▲ 873</span>
+          <span>Publickey</span>
           <span>⏱ 3 min read</span>
-          <span>2026-11-11</span>
+          <span>2026-11-13</span>
         </div>
       </div>
     </div>
 
     <div class="section" id="jp-community">
       <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+
       <div class="card">
         <div class="card-header">
           <span class="tag tag-security">Security</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://www.jpcert.or.jp/ir_report_checklist_20261111.html">JPCERT/CC が「インシデント調査報告書チェックリスト」を公開</a></h3>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://www.itmedia.co.jp/news/article/2611/12/2000003144/">無印良品、2021 年まで保存の 109 万件のカード番号が閲覧された可能性、社長が謝罪</a></h3>
         </div>
-        <div class="summary">JPCERT/CC は 11 月 11 日、インシデント調査報告書のチェックリストを GitHub 上で公開した。被害組織と報告書作成者の間で共通認識を持ち、調査を円滑に進めるのが目的である。初めてインシデント対応をする組織が、外部委託した調査の妥当性や「いつ収束とみなせるか」を判断しづらい問題を想定している。</div>
+        <div class="summary">良品計画は 11 月 12 日の会見で、MUJI Card 会員約 109 万人のクレジットカード番号が閲覧された可能性を説明した。2021 年 7 月にカード番号による会員識別をやめた際、一部の番号が削除されず、マスキングも暗号化もされないまま残っていた。</div>
         <div class="key-points">
           <ul>
-            <li>外部調査の発注時と、報告書の作成・レビュー時の両方で使える</li>
-            <li>公開形態は GitHub</li>
+            <li>10 月 30 日に最大 2,726 万件の顧客データ流出の可能性を公表。11 月 4 日にカード番号 109 万件を追加</li>
+            <li>削除漏れが人為ミスかシステム不具合かは調査中。カード再発行手数料は同社が負担</li>
           </ul>
         </div>
         <div class="meta">
-          <span>JPCERT/CC</span>
-          <span class="engagement">🔖 226</span>
-          <span>⏱ 3 min read</span>
-          <span>2026-11-11</span>
+          <span>ITmedia</span>
+          <span class="engagement">🔖 765</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-11-12</span>
         </div>
       </div>
+
       <div class="card">
         <div class="card-header">
           <span class="tag tag-dev">Dev</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://zenn.dev/luvtechno/articles/isucon2026-preparation">ISUCON2026 で優勝しました（準備編）</a></h3>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/net_11cjitaot.html">.NET 11 が正式リリース、C# 15 の union 型とネイティブ async を搭載</a></h3>
         </div>
-        <div class="summary">ISUCON2026 優勝者による、大会前の準備をまとめた Zenn 記事。Zenn のトレンドに入っている。当日のスコア改善の前に、チームで何を整えたかが主題で、競技に参加する予定がなくても性能改善の準備の型として参考になる。</div>
+        <div class="summary">.NET Conf 2026 で .NET 11 が公開された。奇数バージョンのため STS（サポート 2 年）で、企業向けには LTS の .NET 10 が推奨されている。ランタイムは async をコンパイラ生成のステートマシンに頼らず直接実行する。</div>
         <div class="key-points">
           <ul>
-            <li>準備編として、当日前の事前整備が主題</li>
-            <li>当日の改善内容は別記事（後編）で扱われる見込み</li>
+            <li>C# 15 の union 型は、定義済みの型集合のうち 1 つだけを保持し、switch の網羅性をコンパイラが検査</li>
+            <li>論理プロセッサ 1,024 個の上限を撤廃（CPU セットを動的に割り当て）。Pentium 4 や Athlon 64 などの旧 CPU は非対応に</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-11-10</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/sae_eng/articles/0e9ed7205ebc41">Claude Code に早めに忘れさせたら、トークン使用量が 4 割減った</a></h3>
+        </div>
+        <div class="summary">auto-compact の閾値を約 97 万から 50 万トークンに下げ、離席時にも圧縮するようにした実測報告。ツール呼び出しのたびに会話全体が再送されるため、長い会話ほど 1 リクエストのコストが膨らむ。</div>
+        <div class="key-points">
+          <ul>
+            <li>1 リクエストの平均トークンが 432k → 263k（39% 減）。日次の API 換算コストは $483 → $336</li>
+            <li>1 時間のキャッシュが切れた後の復帰で会話全体が書き込み単価（$8/100 万）で再処理され、1 回 $3.83 かかる例があった</li>
           </ul>
         </div>
         <div class="meta">
           <span>Zenn</span>
           <span>⏱ 8 min read</span>
-          <span>2026-11-11</span>
+          <span>2026-11-12</span>
         </div>
       </div>
+
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-frontend">Frontend</span>
-          <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://zenn.dev/tellernovel_inc/articles/expo-exact-first-impression">Rust 製の Expo 新フレームワーク「Exact」を試す</a></h3>
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/rakko_inc/articles/nodejs-security-nov-2026-proxy">Node.js 22/24/26 の脆弱性、自分のアプリが影響を受けるか確認する方法</a></h3>
         </div>
-        <div class="summary">Rust で作られた Expo の新フレームワーク「Exact」で、モバイル・Web・デスクトップアプリを作ってみた Zenn 記事。実際に動かした第一印象がまとめられている。React Native 系の選択肢が広がる中で、導入前に雰囲気をつかむ用途に向く。</div>
+        <div class="summary">11 月 11 日の Node.js セキュリティリリースは 16 件の CVE を修正した（High 7、Medium 6、Low 3）。High は HTTP/2 と TLS に集中しており、Node.js 自身が TLS 終端や HTTP/2 を担う場合に限り影響する。</div>
         <div class="key-points">
           <ul>
-            <li>Rust 製で、モバイル・Web・デスクトップの 3 ターゲットを扱う</li>
-            <li>執筆者による初期の使用感レポート</li>
+            <li>修正版は v22.23.5 / v24.22.3 / v26.13.1。EOL の系列には修正が提供されない</li>
+            <li>ALB や nginx 1.29.7 以降が HTTP/1.1 で転送する構成なら High の影響は受けにくい。`http2: true`（Fastify）や `https.createServer` の使用を検索して確認する</li>
           </ul>
         </div>
         <div class="meta">
           <span>Zenn</span>
-          <span>⏱ 7 min read</span>
-          <span>2026-11-10</span>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-frontend">Frontend</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://sterfield.co.jp/blog/blog-44/">2026 年、すべての主要ブラウザで使えるようになった CSS 機能</a></h3>
-        </div>
-        <div class="summary">2026 年にすべての主要ブラウザで使えるようになった CSS 機能を整理した記事。はてブで 45 ブックマークを集めた。ポリフィルや回避策を外せる機能を洗い出す際の一覧として使える。</div>
-        <div class="key-points">
-          <ul>
-            <li>主要ブラウザ全対応になった機能が対象</li>
-            <li>はてブ 45 ブックマーク</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Sterfield</span>
-          <span class="engagement">🔖 45</span>
-          <span>⏱ 5 min read</span>
-          <span>2026-11-11</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-11-12</span>
         </div>
       </div>
     </div>
 
     <div class="section" id="code-tools">
       <div class="section-title">🛠 Code &amp; Tools</div>
+
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
+          <span class="tag tag-oss">OSS</span>
           <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://blog.atuin.sh/threads-agent-sessions/">Atuin Threads：全マシンのエージェントセッションを横断管理</a></h3>
+          <h3><a href="https://github.com/hyperionaidev/smolmaxxing/">smolmaxxing: 古い TV ボックスや iPad Air（2013）で LLM を動かす llama.cpp パッチ集</a></h3>
         </div>
-        <div class="summary">シェル履歴ツール Atuin が、複数マシンにまたがるコーディングエージェントのセッションを一元管理する「Threads」を発表した。HN で 191 ポイント。マシンを切り替えても作業の続きを辿れる。</div>
+        <div class="summary">使われていない低スペック端末で可能な限り大きいモデルを動かす、llama.cpp 上のパッチ集（MIT）。MoE モデルでは頻出エキスパートだけを RAM に置き、残りをフラッシュから先読みで読み込む。</div>
         <div class="key-points">
           <ul>
-            <li>エージェントのセッションを全マシンで共有</li>
-            <li>Atuin の履歴同期の仕組みの延長として提供</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Atuin Blog</span>
-          <span class="engagement">▲ 191</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-11-11</span>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-ai">AI</span>
-          <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://github.com/FrigadeHQ/yogurt">Yogurt：Granola の無料・プライベート・OSS 代替</a></h3>
-        </div>
-        <div class="summary">会議メモアプリ Granola の代替をうたう OSS「Yogurt」が Show HN に登場した。無料でプライバシーを重視するとしている。HN で 169 ポイント。</div>
-        <div class="key-points">
-          <ul>
-            <li>無料・プライベート・オープンソースを標榜</li>
-            <li>GitHub: FrigadeHQ/yogurt</li>
+            <li>Xiaomi TV Box S（RAM 1.9GB）で Qwen3.5-2B が 7.7 tok/s、16B MoE が 5.1 tok/s</li>
+            <li>iPad Air（2013、RAM 1GB）で 1 ビットの Bonsai-1.7B が 24〜26 tok/s。160 件の実験記録を公開</li>
           </ul>
         </div>
         <div class="meta">
           <span>GitHub</span>
-          <span class="engagement">▲ 169</span>
-          <span>⏱ 3 min read</span>
+          <span class="engagement">▲ 278</span>
+          <span class="engagement">⭐ 291</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-11-12</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://makepad.github.io/relax/">Relax: Rust 用の実験的ライブコンパイラ兼 JIT、rustc・LLVM・リンカなしで実行</a></h3>
+        </div>
+        <div class="summary">Cargo パッケージをソースから直接実行し、関数を初回呼び出し時にコンパイルする開発用ランタイム。保存した変更は実行中のプロセスへパッチとして適用される。リリースビルドには使わず、`cargo build --release` を使う前提。</div>
+        <div class="key-points">
+          <ul>
+            <li>大規模な 3D ゲームで初回フレームまで約 11 秒（cargo + rustc は約 3 分）。2 回目は 1.15 秒</li>
+            <li>生成コードは `--release` 比で x64 が 1.12 倍、arm64 が 1.24 倍の時間（21 ワークロードの幾何平均）。Windows は未検証</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Makepad</span>
+          <span class="engagement">▲ 116</span>
+          <span>⏱ 4 min read</span>
           <span>2026-11-11</span>
         </div>
       </div>
@@ -353,35 +356,42 @@
 
     <div class="section" id="quick-links">
       <div class="section-title">🔗 Quick Links</div>
-      <div class="quick-link">
-        <span class="tag tag-dev">Dev</span>
-        <a href="https://go.dev/blog/17years">Go Turns 17</a>
-        <span class="quick-summary">— Go チームが 17 周年を振り返った。</span>
-        <span class="meta">Go Blog</span>
-      </div>
+
       <div class="quick-link">
         <span class="tag tag-oss">OSS</span>
-        <a href="https://blog.rust-lang.org/2026/11/11/gsoc-2026-results/">Google Summer of Code 2026 results</a>
-        <span class="quick-summary">— Rust プロジェクトが GSoC 2026 の結果を公開。</span>
-        <span class="meta">Rust Blog</span>
+        <a href="https://github.com/chocoford/ExcalidrawZ">ExcalidrawZ</a>
+        <span class="quick-summary">— Excalidraw を macOS/iOS 向けにネイティブ化し、ローカルで動かせるアプリ。</span>
+        <span class="meta">GitHub</span>
+      </div>
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://blog.janestreet.com/software-engineering-interviews-are-changing-a-little/">Our software engineering interviews are changing a little</a>
+        <span class="quick-summary">— Jane Street がソフトウェアエンジニア採用の面接の進め方を一部変更。</span>
+        <span class="meta">Jane Street Blog</span>
       </div>
       <div class="quick-link">
         <span class="tag tag-product">Product</span>
-        <a href="https://discussions.apple.com/welcome">The Apple Support Community will permanently close on November 20, 2026</a>
-        <span class="quick-summary">— Apple サポートコミュニティが 11 月 20 日に閉鎖される。</span>
-        <span class="meta">Apple</span>
+        <a href="https://developer.apple.com/foundation-models-framework/">Foundation Models framework</a>
+        <span class="quick-summary">— Apple が端末上のモデルを呼び出す Foundation Models framework の開発者向けページを公開。</span>
+        <span class="meta">Apple Developer</span>
       </div>
       <div class="quick-link">
-        <span class="tag tag-ai">AI</span>
-        <a href="https://www.cbsnews.com/news/united-airlines-bans-ai-agents-booking-flights/">United Airlines bans AI agents from booking flights on behalf of travelers</a>
-        <span class="quick-summary">— ユナイテッド航空が AI エージェントによる代理予約を禁止。</span>
-        <span class="meta">CBS News</span>
+        <span class="tag tag-oss">OSS</span>
+        <a href="https://www.moddb.com/mods/openq4/downloads/openq4-0141-windows-x64">OpenQ4 0.14.1</a>
+        <span class="quick-summary">— 未完に終わった Quake 4 の拡張が有志の手で完成し、プレイ可能に。</span>
+        <span class="meta">ModDB</span>
       </div>
       <div class="quick-link">
-        <span class="tag tag-frontend">Frontend</span>
-        <a href="https://av.github.io/safe-sand/">Hyper-Realistic Sand with WebGL2</a>
-        <span class="quick-summary">— WebGL2 で砂を写実的に描画するデモ。</span>
-        <span class="meta">av.github.io</span>
+        <span class="tag tag-product">Product</span>
+        <a href="https://japan.cnet.com/article/35254763/">Apple サポートコミュニティが 11 月 20 日に終了</a>
+        <span class="quick-summary">— 約 30 年続いたユーザー同士の Q&amp;A の場が閉鎖される。</span>
+        <span class="meta">CNET Japan</span>
+      </div>
+      <div class="quick-link">
+        <span class="tag tag-infra">Infra</span>
+        <a href="https://chipsandcheese.com/p/talking-zen-6-with-mike-clark-at">Talking Zen 6 with Mike Clark at AMD</a>
+        <span class="quick-summary">— AMD の Mike Clark 氏への Zen 6 アーキテクチャに関するインタビュー。</span>
+        <span class="meta">Chips and Cheese</span>
       </div>
     </div>
 
