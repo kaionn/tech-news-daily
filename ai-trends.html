@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI プロダクト動向 | Tech News Daily</title>
-<meta name="description" content="エージェントに頼む仕事が「質問に答える」から「調べて、書いて、確かめる」へ広がるにつれ、1 本の ReAct ループの弱点がはっきりしてきた。長いツール呼び出しが 1 つ入るとループ全体が止まり、その間ユーザーは話しかけられず、ほかの仕事…">
+<meta name="description" content="エージェントの中には、文章を書かずに「選ぶだけ」の判断が多い。このクエリで Web 検索を走らせるか、どのモデルに回すか、ツールの出力にプロンプトインジェクションが紛れていないか。これまではこうした判断も生成型 LLM に JSON で答…">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Tech News Daily">
-<meta property="og:title" content="エージェントは「終わるまで待つ」をやめ始めた — 窓口と作業者を分ける、ツール結果は後から返す、走っている作業に指示を足す | AI プロダクト動向">
-<meta property="og:description" content="エージェントに頼む仕事が「質問に答える」から「調べて、書いて、確かめる」へ広がるにつれ、1 本の ReAct ループの弱点がはっきりしてきた。長いツール呼び出しが 1 つ入るとループ全体が止まり、その間ユーザーは話しかけられず、ほかの仕事…">
+<meta property="og:title" content="「選ぶだけ」の判断は生成モデルから外れ始めた — 選択肢を一度に採点する専用モデル、確率で決める閾値、ルーティングと検査への配置 | AI プロダクト動向">
+<meta property="og:description" content="エージェントの中には、文章を書かずに「選ぶだけ」の判断が多い。このクエリで Web 検索を走らせるか、どのモデルに回すか、ツールの出力にプロンプトインジェクションが紛れていないか。これまではこうした判断も生成型 LLM に JSON で答…">
 <meta property="og:url" content="https://tech-news.kaion-lab.com/ai-trends.html">
 <meta property="og:image" content="https://tech-news.kaion-lab.com/apple-touch-icon.png">
 <meta name="twitter:card" content="summary">
@@ -74,7 +74,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 <div class="container">
 <header>
   <h1>🧠 AI プロダクト動向</h1>
-  <p class="date">2026-11-12 発行（読了 9 分）</p>
+  <p class="date">2026-11-14 発行（読了 10 分）</p>
   <p class="tagline">実プロダクトのアーキテクチャ・使用例から AI 開発の現在地を週 3 回・1 号 1 テーマで深掘り</p>
   <nav class="site-nav">
     <a href="./">📰 日刊ダイジェスト</a>
@@ -85,86 +85,87 @@ footer a{color:var(--primary-500);text-decoration:none}
 </header>
 
 <div class="theme-hero">
-  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">ASYNC-AGENTS</span></span>
-  <h2>エージェントは「終わるまで待つ」をやめ始めた — 窓口と作業者を分ける、ツール結果は後から返す、走っている作業に指示を足す</h2>
-  <p class="lede">エージェントに頼む仕事が「質問に答える」から「調べて、書いて、確かめる」へ広がるにつれ、1 本の ReAct ループの弱点がはっきりしてきた。長いツール呼び出しが 1 つ入るとループ全体が止まり、その間ユーザーは話しかけられず、ほかの仕事も後ろに並ぶ。LangChain は 11 月 5 日の記事「Agents Are Going Async」で、ユーザーと話すオーケストレーター 1 体と、裏で長い作業を進めるワーカー群という構成に業界が収束しつつあると書いた。Claude Code はサブエージェントを既定でバックグラウンド起動し、OpenAI はモデル API に非同期ツール呼び出しを入れ、常時稼働型の dots は作業を背景のエージェントに渡す。今号は、各社が「待たないエージェント」をどの層で実装し、結果の受け取りと途中の指示変更をどう設計したかを並べる。</p>
+  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">DECISION-MODELS</span></span>
+  <h2>「選ぶだけ」の判断は生成モデルから外れ始めた — 選択肢を一度に採点する専用モデル、確率で決める閾値、ルーティングと検査への配置</h2>
+  <p class="lede">エージェントの中には、文章を書かずに「選ぶだけ」の判断が多い。このクエリで Web 検索を走らせるか、どのモデルに回すか、ツールの出力にプロンプトインジェクションが紛れていないか。これまではこうした判断も生成型 LLM に JSON で答えさせるのが普通で、出力トークンの課金、数百ミリ秒から数秒の待ち時間、表記揺れのパースを毎回払っていた。11 月 11 日に Google が Gemini Decisions API を、12 日に Perplexity が Decider v1.3 を公開し、9 月に Jev を出した TypeSafe AI を含め、3 社が「閉じた選択肢を採点して確率を返す」専用モデルを揃えた。今号は、判定を生成から切り離す設計がどの層で実装され、返ってきた確率をどう使い、パイプラインのどこに置かれているかを並べる。</p>
 </div>
 
 <div class="tldr">
   <div class="label">TL;DR — 3 行で</div>
   <ul>
-    <li>会話の窓口と長い作業を別のループに分ける構成が標準になりつつある。LangChain Deep Agents は起動した瞬間にタスク ID を返す 5 つのツールを持ち、Claude Code はサブエージェントを既定でバックグラウンドで走らせる</li>
-    <li>非同期はモデル API の層にも降りてきた。OpenAI の async tool calling ではツールに async: true を付けるとモデルが結果を待たずに先へ進み、アプリは後から call_id を合わせて結果を返す</li>
-    <li>走っている作業への指示変更と承認の経路が新しい設計対象になった。Deep Agents は「中断して再実行」か「後ろに積む」かを選ばせ、承認待ちはサブエージェント側のスレッドで答える。dots は Activity 画面で委任先の作業を個別に止められる</li>
+    <li>判定専用モデルは文章を生成せず、事前に与えた選択肢を採点して確率を返す。Gemini Decisions API は 1 リクエストで最大 1,000 問を共有入力に対して評価し、出力トークンは常に 0。Perplexity Decider は複数の質問を 1 回の forward pass で答える</li>
+    <li>確率が返る以上、どこで切るかはアプリ側の設計になる。Google のドキュメントは confidence が 0.7 未満なら人のレビューに回す例を示し、閾値は自分のトラフィックのラベル付きデータで決めるよう求めている。数値の多くはベンダー自身の評価で、自社データでの検証が前提</li>
+    <li>置き場所はモデルルーティング、ツール出力の安全検査、エージェントログの見直しに集まっている。Perplexity は 7,000 セッション分のログを 1 日で読ませてセキュリティルールの見落としを洗い出したが、ルール修正の承認は人が行う</li>
   </ul>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 1: 会話の窓口と長い作業を別のループに分ける</div>
+  <div class="section-title">📐 パターン 1: 判定を生成から切り離す — 選択肢を一度に採点する</div>
   <div class="theme-section">
-    <p>非同期エージェントの基本形は、ユーザーと話すオーケストレーターが長い作業をサブエージェントに渡し、完了を待たずに会話へ戻る構成だ。LangChain Deep Agents の async subagents では、オーケストレーターが <code>start_async_task</code>・<code>check_async_task</code>・<code>update_async_task</code>・<code>cancel_async_task</code>・<code>list_async_tasks</code> の 5 つのツールを持つ。<code>start_async_task</code> はサブエージェントを独立したスレッドで起動してすぐに返り、タスク ID はそのままスレッド ID になる。Claude Code も、何も設定しなければメイン会話から起動されたサブエージェントはバックグラウンドで始まり、結果は後のターンに「完了通知」として届く。通知はユーザーの発言ではなく自動イベントとして区別され、進捗を聞かれた時点で終わっていなければ「まだ実行中」と答える。</p><p>この形に収束した理由は、応答性と処理量を 1 本のループで両立できないからだ。同期型のループでは、10 分かかる調査を走らせればその 10 分はユーザーの訂正も受け付けられない。ループを分ければ、窓口は常に空いていて、処理量はループの長さではなくワーカーの数で決まる。その代わり、タスクの状態を会話履歴とは別に持つ必要が出てくる。Deep Agents はタスクのメタデータを <code>async_tasks</code> という専用の state チャネルに置き、履歴が要約されても未完了タスクを見失わないようにしている。Claude Code は同時実行数を既定で 20 に制限し、超えると <code>Concurrent subagent limit reached</code> で起動を失敗させる。ワーカーを増やせることと、増やしすぎを止めることが同じ設計の中に入っている。</p>
+    <p>判定専用モデルの入出力は、生成型 LLM の構造化出力とは形が違う。Gemini Decisions API（モデル <code>gemini-decision-1</code>）は、共有の <code>input</code> と、キーごとの <code>questions</code> を受け取る。質問の型は yes/no の <code>noul</code>、選択肢から選ぶ <code>choice</code>（2〜255 択）、順序付きルーブリックで採点する <code>score</code> の 3 つだ。応答は質問ごとに確率と <code>confidence</code> を返し、<code>usage</code> の <code>total_output_tokens</code> は常に 0 になる。モデルはトークンを 1 つずつデコードせず、選択肢をまとめて採点する。Perplexity の Decider v1.3 も同じ形をとる。各質問の末尾にマーカートークンを置き、そこから決定ヘッドが選択肢のスコアを読み出すので、同じ入力に対する複数の質問を 1 回の forward pass で答えられる。v1.3 では、共有された状態はすべての質問を参照し、各質問は状態と自分のトークンだけを参照する。質問どうしが直接影響し合わない構成にして、結果を安定させている。</p><p>この形に収束した理由は、判定の呼び出し回数が生成の呼び出し回数を大きく上回るからだ。1 つのユーザー入力に対して、検索の要否、モデルの選択、安全性、ツールの選択と、問いは複数並ぶ。生成型で答えれば、問いの数だけ出力を待ち、パースし、表記揺れを処理することになる。Google は共有入力を 1 リクエストにつき 1 回だけ課金し、質問 1〜100 問の範囲で遅延がほぼ一定（16K トークンまでの文脈で end-to-end 150〜250 ms）だとしている。出力の型が選択肢に閉じているので、パースの失敗もない。代わりに失うのは自由記述で、理由の説明や新しい選択肢の提案はできない。判定に理由が必要な場面では、生成モデルが引き続き担当する。</p>
     <div class="example">
-      <div class="product">LangChain Deep Agents（async subagents）</div>
-      <div class="approach">オーケストレーターに起動・確認・更新・取消・一覧の 5 ツールを持たせ、各サブエージェントを独立スレッドで走らせる</div>
-      <div class="detail">11 月 5 日の公式ブログでは、Claude Code の背景サブエージェント、OpenAI dots、DeepSeek Harness のルーターを例に、業界が「1 体の窓口 + 背景ワーカー」に収束していると整理した。公式ドキュメントによると、サブエージェントは Agent Protocol サーバー上で動き、同一デプロイ内に置くか別サーバーに分けるかを選べる。通知と update_strategy は beta で、API は変わる可能性がある</div>
-      <a href="https://www.langchain.com/blog/agents-are-going-async">📄 一次ソース</a>
+      <div class="product">Google Gemini Decisions API（gemini-decision-1）</div>
+      <div class="approach">共有入力 1 つに最大 1,000 問を投げ、yes/no・多肢選択・ルーブリック採点を確率付きで返す。出力トークンは課金されない</div>
+      <div class="detail">公式ドキュメントによると、入力は最大 262,144 トークンをテキスト・画像・音声・動画・PDF で共有でき、質問はその文脈枠の範囲で 1〜1,000 問を指定できる。価格は入力 100 万トークンあたり $0.10、出力は $0。Google は Gemini 3.5 Flash-Lite を Interactions API で使う場合と比べて、同じベンチマーク群でほぼ 5 分の 1 のコストだとしている。遅延と較正誤差の数値は Google 自身の評価</div>
+      <a href="https://aistudio.google.com/docs/decisions-api">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">Claude Code（バックグラウンドサブエージェント）</div>
-      <div class="approach">サブエージェントを既定でバックグラウンド起動し、結果を完了通知として後のターンで受け取る</div>
-      <div class="detail">公式ドキュメントによれば、バックグラウンドのサブエージェントは前面実行より小さい組み込みツールセットで動き、同時実行数は CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS（既定 20）で制限される。API エラーで失敗した場合も最後の出力を通知に含め、途中までの成果が失われないようにしている。待たせたい場合は CLAUDE_CODE_FORK_SUBAGENT=0 などの設定で同期実行に戻せる</div>
-      <a href="https://code.claude.com/docs/en/sub-agents">📄 一次ソース</a>
+      <div class="product">Perplexity Decider v1.3 / Decider Flash v1.3</div>
+      <div class="approach">Qwen3.8-27B ベースの判定モデルと、Qwen3.5-4B に蒸留した Flash 版を Apache ライセンスの重みで公開。複数の質問を 1 回の forward pass で答える</div>
+      <div class="detail">11 月 12 日の公式ブログによると、v1.3 は分類に加えて、固有表現や PII の位置を文字オフセットで返す locate を追加した。実運用 100 万リクエストの試算では、Decider v1.3 が $26.47、Flash が $13.24、Jev 1.14 が $68.10、DeepSeek V4.1 Flash が $349.48。ただし Decider はローカル実行で、ハードウェアコストの計上方法は明示されておらず、遅延をそろえた比較でもないと本文自身が断っている</div>
+      <a href="https://www.perplexity.ai/hub/blog/perplexity-decider">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> 長い作業を持つエージェントを作るなら、窓口のループと作業のループを最初から分け、タスクの状態（ID・状態・開始時刻）は会話履歴とは別の場所に保存する。同時実行数の上限も同じタイミングで決めておく。履歴の中だけでタスクを管理すると、要約や圧縮のたびに未完了の仕事を見失う。</div>
+    <div class="takeaway"><strong>示唆:</strong> エージェントのコードの中で「LLM に JSON で enum を返させている箇所」を洗い出すと、判定専用モデルに置き換えられる候補がそのまま一覧になる。同じ入力に対して複数の判定をしているなら、1 リクエストにまとめられるかを先に確認する。理由の説明が要る判定は、生成モデルに残す。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 2: ツール結果を後から返す — 非同期をモデル API の層に下ろす</div>
+  <div class="section-title">📐 パターン 2: 確率が返るなら、閾値と逃がし先は自分で決める</div>
   <div class="theme-section">
-    <p>サブエージェントの非同期化はフレームワーク側の工夫だが、OpenAI は同じ考え方を Responses API のツール呼び出しに入れた。関数ツールかカスタムツールの定義に <code>"async": true</code> を付けると、モデルはそのツールを結果待ちが要らない呼び出しとして扱う。<code>function_call</code> を出したあとも、依存しない部分の回答を同じレスポンスの中で続ける。アプリケーションはジョブを自前で走らせ、終わったら <code>previous_response_id</code> に最新のレスポンス ID を入れた新しいリクエストを送り、元の <code>call_id</code> に合わせた <code>function_call_output</code> を返す。ガイドには、async tool は実行を OpenAI 側に移すものでも、バックグラウンドジョブを管理するものでもないと明記されている。</p><p>ここで決まっているのは役割の分担だ。モデルは「どの結果が先に必要か」を判断し、ジョブの実行・保持・再試行はアプリの責任のまま残る。次の手順が保留中の結果に依存する場合は、アプリ側で <code>wait_for_tasks</code> のような同期ツールを定義し、モデルにそれを呼ばせて待たせる。ユーザーへの質問も非同期ツールとして定義できるが、レスポンスは回答を待って開いたままにはならないので、答えが必要な手順の前で待つようモデルに指示する必要がある。制約もはっきりしている。対象はアプリが実行する関数ツールとカスタムツールに限られ、ホスト型の組み込みツールは含まれない。Multi-agent モードでは並列ツール呼び出しと組み合わせられず、タスクハンドルは完了済みのものも含めて会話全体で一意にしなければならない。非同期をモデルに任せるほど、ID の対応付けの正しさはアプリ側で保証することになる。</p>
+    <p>判定モデルの出力は「答え」ではなく「確率分布」なので、どこで切るかはアプリ側の仕事になる。Gemini Decisions API の <code>confidence</code> は「最上位の答えが正しい確率の推定値」で、yes/no では <code>max(noul, 1 - noul)</code> に等しい。ドキュメントの例では、<code>confidence</code> が 0.7 未満なら <code>"human_review"</code> に回す。閾値は自分のトラフィックからラベル付きの例を集め、偽陽性と偽陰性のコストを比べて決めるよう書かれている。選択肢の設計にも注意書きがある。<code>choice</code> は必ず選択肢のどれかに確率を配るので、範囲外の入力には <code>"other"</code> のような受け皿を用意するか、先に yes/no で対象かどうかを確かめる。選択肢はアルファベット順に並べ替えられるため、<code>"none_of_the_above"</code> のように位置に意味を持たせたキーは避ける。</p><p>ここに設計が集まるのは、判定モデルの価値が確率の信頼性にかかっているからだ。生成型 LLM に「自信度」を数字で書かせても、その数字が正答率と対応する保証はない。TypeSafe AI は Jev を Reinforcement Learning for Calibrated Decisions（RLCD）で訓練し、確信度が高いほど正答率も高くなるよう較正したと主張する。Perplexity は、選択肢の並べ替え・ラベルの付け替え・ラベル名の変更をしても意味上の答えが変わった割合を測り、Decider v1.3 が 0.27%、Jev 1.14 が 2.69〜4.84% だったと報告した。ただし、どの数値もベンダー自身の評価だ。Perplexity も閾値は固定値を仮定せず、小さく代表的なラベル付き開発セットで調整するよう勧めている。各社とも、確率をそのまま信じてよいとは書いていない。</p>
     <div class="example">
-      <div class="product">OpenAI Responses API（async tool calling）</div>
-      <div class="approach">ツール定義に async: true を付けるとモデルが結果を待たずに進み、アプリは後のリクエストで call_id を合わせて結果を返す</div>
-      <div class="detail">公式ガイドでは、レスポンス生成そのものを非同期にする Background mode とは別の機能と位置付けている。待機用ツール（wait_for_tasks）やユーザー入力用ツール（request_user_input_async）は組み込みではなく、アプリ側で定義するパターンとして示されている。対応モデルは GPT-6 Astra 以降</div>
-      <a href="https://developers.openai.com/api/docs/guides/async-tool-calling">📄 一次ソース</a>
+      <div class="product">TypeSafe AI Jev（System One Models）</div>
+      <div class="approach">自由記述を生成せず、事前に定義した型の値を較正済みの確率付きで返す判定モデル。出力は無料、入力は 100 万トークンあたり $0.042</div>
+      <div class="detail">公式ブログは end-to-end 70〜500 ms、System One 型の問いで最先端 LLM より 40〜200 倍速いと主張する。速度測定は創業者の西海岸のノート PC から行ったものだと明記し、評価の参照解答に他社の最先端モデル 2 つの平均を使ったため OpenAI と Anthropic のモデルに有利な偏りがありうると認めている。Perplexity は Decider をこの Jev に着想を得たと書いており、この設計パターンの起点にあたる</div>
+      <a href="https://typesafe.ai/blog/introducing-system-one-models-and-jev">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> モデル API の非同期ツールを使う場合、ジョブの実行キュー・タスクハンドルと call_id の対応表・タイムアウト時に返す「結果なし」の扱いは、すべて自分のアプリで持つ前提で設計する。API が非同期に対応しても、ジョブ管理まで肩代わりしてくれるわけではない。</div>
+    <div class="takeaway"><strong>示唆:</strong> 判定モデルを入れるときは、モデルより先に「本番トラフィックから抜いた数百件のラベル付きデータ」を用意する。閾値・範囲外入力の受け皿・低確信度のときの逃がし先（人のレビュー、上位モデル、既定値）の 3 点を決めずに導入すると、確率が返ってきても結局 argmax を使うだけになる。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 3: 走っている作業への指示と承認をどこで受けるか</div>
+  <div class="section-title">📐 パターン 3: 判定モデルを置く場所 — ルーティング、ツール出力の検査、ログの見直し</div>
   <div class="theme-section">
-    <p>作業を裏に回すと、同期型では起きなかった問いが 2 つ出てくる。実行中のタスクに新しい指示が来たらどうするか。タスクが承認を求めたとき、誰がどこで答えるか。Deep Agents は <code>update_async_task</code> に <code>update_strategy</code> を持たせ、既定の <code>"interrupt"</code> は現在の実行を止めて新しい指示で再実行し、<code>"enqueue"</code> は今の実行が終わるまで指示を積んでおく。前者は方向の訂正に、後者は追加の依頼に向く。承認が必要になったサブエージェントは <code>waiting</code> 状態になり、ユーザーはオーケストレーターではなくサブエージェント自身のスレッドで答える。Slack 上の Managed Deep Agents では、承認の依頼が元のスレッドに投稿され、そこへの返信で再開する。Claude Code は逆に、バックグラウンドのサブエージェントの権限確認をメインのセッションに出し、どのサブエージェントからの依頼かを名前で示す。</p><p>承認をどこに出すかで設計が分かれているのは、何を守るかの優先順位が違うからだ。Deep Agents は窓口の会話を承認待ちで止めないことを優先し、承認を作業側のスレッドに閉じ込めた。Claude Code は承認を 1 か所に集め、ユーザーが見落とさないことを優先した。その分、セッション全体に及ぶ許可を 1 回与えると、メイン会話にも同じ許可が適用される。OpenAI dots はさらに、どの種類の更新をどのチャネル（ChatGPT・Slack・Teams）に送るかをユーザーが決められる。Activity 画面では、メインのタスクの一時停止と、委任先のタスクや定期タスクの停止・取消を別々に操作できる。共通しているのは、止めても取り消せないという前提だ。dots のドキュメントは、タスクを止めても完了済みの操作は元に戻らないと明記し、Deep Agents も取消は実行中の run を止めるだけである。</p>
+    <p>公開された事例は、置き場所がおおむね 3 つに分かれる。1 つめはモデルルーティングで、Gemini Notebook は Decisions API でクエリを適切なモデル階層と思考レベルに振り分け、日常的なクエリの遅延を最大 40% 下げたと Google は発表している。Perplexity は埋め込みモデルの上に複数の分類ヘッドを載せ、そのうち 1 つでクエリが Web 検索を必要とするかを決める。2 つめはツール出力の検査で、Google 検索は MCP ツール向けの安全レイヤーにこの API を使い、Perplexity もツール出力に含まれるフィッシングやプロンプトインジェクションの検出を用途に挙げる。3 つめはオフラインの見直しだ。Perplexity はエージェントのログをルールベースのチェックで監視し、Decider に「フラグが立たなかった記録にルールの見落としはないか」「立ったアラームは誤検知ではないか」を判定させた。</p><p>3 つに共通するのは、エージェントの本体ではなく、本体の前後や外側に置かれていることだ。どれも 1 回あたりの判断は単純だが件数が多く、生成型 LLM で回すとコストと遅延が積み上がる。Perplexity の例では、Decider は 1 日で 7,000 セッション・10 億トークンのログを読み、14 件のルール修正につながる欠陥を見つけ、うち 6 件が 2 日以内に承認・反映された。1 週間分のログで再生すると、最も件数の多いルールの発報量は 52% 減った。ただし、修正案を作るのは別のエージェントで、反映にはセキュリティチームのメンバーの承認が要る。判定モデルは大量に読んで候補を絞る役で、ルールを書き換える権限は持っていない。</p>
     <div class="example">
-      <div class="product">OpenAI dots（常時稼働エージェント）</div>
-      <div class="approach">背景のエージェントや Codex タスクに作業を渡し、通知チャネルの振り分けと委任先ごとの停止を利用者に持たせる</div>
-      <div class="detail">公式ドキュメントによると、dots は専用のクラウド上のコンピューターとブラウザで動くため、ユーザーの端末がオフでも作業が続く。作業中も話しかけて新しい情報や優先順位を渡せ、作業を最初からやり直す必要はない。アカウントに影響する操作や情報共有の前には自動の承認チェックが入り、進めるか、承認を求めるか、ユーザーに引き渡すかを判定する。Pro と Business Premium の対象アカウントに段階的に展開している</div>
-      <a href="https://learn.chatgpt.com/docs/dots">📄 一次ソース</a>
+      <div class="product">Perplexity（Decider によるセキュリティルールの見直し）</div>
+      <div class="approach">ルールベースの監視が出した結果と出さなかった結果の両方を Decider に読ませ、見落としと誤検知を洗い出す。修正の承認は人が行う</div>
+      <div class="detail">公式ブログによると、ルールが外れた記録はトリアージ用のエージェントに渡り、そこでルール修正案を作り、セキュリティチームのメンバーが承認する。社内では他に、クエリ分類（63 タスクで本番の分類器より平均 6.54 ポイント高い正解率）、検索結果の再ランキング、クロールしたページの品質フィルタ、強化学習のロールアウト監視にも使っている。精度の比較はいずれも自社のテストスイートによる</div>
+      <a href="https://www.perplexity.ai/hub/blog/perplexity-decider">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">LangChain Deep Agents（update_strategy と waiting 状態）</div>
-      <div class="approach">実行中タスクへの追加指示を interrupt / enqueue で選ばせ、承認待ちはサブエージェントのスレッドで解決する</div>
-      <div class="detail">公式ドキュメントには端のケースまで書かれている。enqueue で積んだ指示は、開始前に現在の実行が一時停止すると破棄される。waiting 中のタスクを更新すると保留中の承認依頼は消え、取消は状態を cancelled にするだけになる。アイドル中のオーケストレーターを起こすのは完了か失敗の通知だけで、承認待ちでは起こさない</div>
-      <a href="https://docs.langchain.com/oss/python/deepagents/async-subagents">📄 一次ソース</a>
+      <div class="product">Google（Gemini Notebook のルーティング / 検索の MCP ツール安全レイヤー）</div>
+      <div class="approach">同じ判定 API を、前段のモデル選択と、MCP ツールを通る入出力の安全検査の両方に使う</div>
+      <div class="detail">11 月 11 日の発表によると、Gemini Notebook はクエリをモデル階層と思考レベルに振り分けて日常的なクエリの遅延を最大 40% 下げ、Google 検索は MCP ツールの敵対的な挙動やコンテンツの検出に使っている。LangChain・LiteLLM・Vercel・Pydantic AI・Pipecat・LiveKit などとの連携も順次提供中で、Google Cloud 上の Gemini での提供は「近日」とされている</div>
+      <a href="https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> 背景タスクを持つエージェントでは、「実行中に指示が来たら止めるか積むか」と「承認依頼を窓口に集めるか作業側に置くか」を仕様として先に決め、UI で見分けられるようにする。どちらにしても、停止は完了済みの操作を戻さないことをユーザーに見える形で伝える。</div>
+    <div class="takeaway"><strong>示唆:</strong> 判定モデルは、件数が多く、1 回の誤りが致命的でない判断から入れる。ルーティングとツール出力の一次スクリーニングが最初の候補になる。権限の付与やルールの変更のように、誤りの影響が大きい判断では、判定モデルを候補を絞る役に限り、最終決定は人か別の検証段に残す。</div>
   </div>
   <div class="editorial">
     <span class="label">✍️ 編集後記</span>
-    非同期化で一番難しいのは並列実行そのものより、「いま何が走っていて、誰の返事を待っているか」を窓口が正しく把握し続けることだと各社の設計から読み取れる。タスクの状態を会話の外に保存すること、承認の行き先を決めること、止めても戻らないと明示すること。どれも従来のジョブキュー設計で使われてきた答えで、エージェントはそれを会話の中に持ち込み始めたところだ。
+    判定専用モデルの登場で目立つのは、速さや安さより「LLM に何を書かせないか」が設計の対象になったことだ。選ぶだけの判断を生成から外すと、残った生成の呼び出しは理由の説明や文章の作成といった、本当に文章が要る仕事に絞られる。ただし、確率が返ってきても閾値を引くのはこちら側で、そのためのラベル付きデータを用意するのは、どのベンダーも代わりにやってくれない。
   </div>
 </div>
 
 <div class="section">
   <div class="section-title">🔗 今号の動向ピックアップ</div>
-  <div class="quick-link"><a href="https://github.com/langchain-ai/async-deep-agents">LangChain、async subagents の参照実装リポジトリを公開</a><span class="quick-summary">ユーザーと話すスーパーバイザーが、researcher と coder の 2 つのサブエージェントを背景ジョブとして起動・確認・取消する構成を、Python と TypeScript の両方で実装したリポジトリ。窓口とワーカーを分ける本号第 1 節の構成を、手元の LangGraph サーバーで動かして確かめられる。</span></div>
-  <div class="quick-link"><a href="https://docs.langchain.com/langsmith/python/managed-deep-agents-subagents">Managed Deep Agents、サブエージェントの非同期化を 1 フィールドで</a><span class="quick-summary">subagents の定義に &quot;async&quot;: True を足すだけで非同期になり、配信中のエージェントには general-purpose サブエージェントの非同期版が自動で付く。Slack 上では承認依頼が元のスレッドに届き、返信で再開する設計で、本号第 3 節の「承認をどこで受けるか」の具体例になっている。</span></div>
+  <div class="quick-link"><a href="https://docs.litellm.ai/docs/adaptive_router">LiteLLM、ユーザーの反応から学習するモデルルーター「Adaptive Router」をベータ提供</a><span class="quick-summary">リクエストを 7 種類に分類し、種類ごと・モデルごとの品質推定を、ユーザーの「ありがとう」や言い直しといった反応で更新する。分類も反応の検出も正規表現ベースで LLM の判定器は使っておらず、判定専用モデルを使うルーティングとは逆に、判定のコストを極限まで削った設計の例になる。</span></div>
+  <div class="quick-link"><a href="https://zenn.dev/aws_japan/articles/ac9ae548d57323">LiteLLM Adaptive Router を検証する（前編）：モデル選択と学習の仕組み</a><span class="quick-summary">v1.106.2 のソースを読み、分類が英語の正規表現 16 個による先勝ちで、日本語だけのプロンプトはすべて general に落ちることを確かめた検証記事。ルーティングの判定を安価な仕組みで済ませると多言語で何が起きるかの具体例で、判定専用モデルの多言語評価を自社データで確かめる理由にもなる。</span></div>
 </div>
 
 <div class="section">
   <div class="section-title">📚 過去号</div>
+  <div class="archive-item"><span class="week">2026-11-12</span><div class="body"><a href="ai-trends/2026-11-12.html">エージェントは「終わるまで待つ」をやめ始めた — 窓口と作業者を分ける、ツール結果は後から返す、走っている作業に指示を足す</a><span class="sub">会話の窓口と長い作業を別のループに分ける構成が標準になりつつある。LangChain Deep Agents は起動した瞬間にタスク ID を返す 5 つのツールを持ち、Claude Code はサブエージェントを既定でバックグラウンドで走らせる</span></div></div>
   <div class="archive-item"><span class="week">2026-11-10</span><div class="body"><a href="ai-trends/2026-11-10.html">エージェントの記憶は「溜める」から「手入れする」へ — 読む時に根拠を確かめる、棚卸しはセッションの外で、共有ファイルは PR で直す</a><span class="sub">記憶の正しさは書いた時点では決まらない。GitHub はメモリにコード位置の引用を付け、読み出す時にエージェントが根拠を確かめる方式を採った</span></div></div>
   <div class="archive-item"><span class="week">2026-11-07</span><div class="body"><a href="ai-trends/2026-11-07.html">AI の脆弱性発見は「見つけた数」から「再現と修正を添えて渡す」へ — 動かない仮説は捨てる、受け手の処理量に合わせる、攻撃能力は範囲で縛って配る</a><span class="sub">Mozilla のハーネスは、モデルに再現用のテストケースを作らせて実際に走らせ、再現しない推測を捨ててから報告する。PHP2Shell では、2024 年の監査で悪用可能性を示せずに放置されたバグが、AI を使った調査で動作する RCE の PoC になり、PHP 側が再現を確認してから修正が進んだ</span></div></div>
   <div class="archive-item"><span class="week">2026-11-05</span><div class="body"><a href="ai-trends/2026-11-05.html">E2E テストのエージェント化は「毎回モデルに操作させる」をやめ始めた — 操作は記録して再生、判定は別系統で確かめる、CI には決定論的なテストを残す</a><span class="sub">e2e と Bug0 QA Agent は、エージェントが一度成功させた操作を記録し、次回以降はモデルを呼ばずに再生する。UI が変わって再生が失敗したときだけエージェントを呼び直す</span></div></div>
@@ -214,7 +215,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 </div>
 
 <footer>
-  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="data/ai-trends/2026-11-12.json">data/ai-trends/2026-11-12.json</a>（このページは JSON からの生成物）</p>
+  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="data/ai-trends/2026-11-14.json">data/ai-trends/2026-11-14.json</a>（このページは JSON からの生成物）</p>
   <p style="margin-top:.5rem"><a href="./">📰 日刊ダイジェストに戻る</a></p>
 </footer>
 </div>
