@@ -113,7 +113,7 @@ test('og:title は最新号タイトルの escape 済み表現を含み、<title
   assert.ok(latest.includes('<title>AI プロダクト動向 | Tech News Daily</title>'));
   assert.equal(metaContent(latest, 'og:type'), 'article');
   assert.equal(metaContent(latest, 'og:site_name'), 'Tech News Daily');
-  assert.equal(metaContent(latest, 'twitter:card'), 'summary');
+  assert.equal(metaContent(latest, 'twitter:card'), 'summary_large_image');
 });
 
 test('og:url は最新ページと号ページで異なる（週キーはそのまま）', () => {
@@ -137,7 +137,7 @@ test('og:description は 120 文字以下で、タグ除去・「…」切り詰
 
 test('og:image は https の絶対 URL', () => {
   for (const html of [latest, readIssuePage('2026-08-01')]) {
-    assert.match(metaContent(html, 'og:image'), /^https:\/\/[^/]+\/apple-touch-icon\.png$/);
+    assert.match(metaContent(html, 'og:image'), /^https:\/\/[^/]+\/og\.png$/);
   }
 });
 

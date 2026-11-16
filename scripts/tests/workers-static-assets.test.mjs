@@ -9,7 +9,7 @@ import { stageAssets } from '../stage-static-assets.mjs';
 const root = path.resolve('.');
 const write = (base, name, text) => { mkdirSync(path.dirname(path.join(base, name)), { recursive: true }); writeFileSync(path.join(base, name), text); };
 function fixture(base) {
-  for (const name of ['index.html','trends.html','ai-trends.html','style.css','feed.xml','favicon-32.png','favicon.png','apple-touch-icon.png']) write(base, name, name);
+  for (const name of ['index.html','trends.html','ai-trends.html','style.css','feed.xml','favicon-32.png','favicon.png','apple-touch-icon.png','og.png']) write(base, name, name);
   for (const name of ['archive/index.html','archive/2026-10-09.html','ai-trends/2026-10-10.html','data/ai-trends/2026-10-10.json','data/plugins/trends.json']) write(base,name,name);
 }
 function files(base, prefix = '') {
@@ -74,7 +74,7 @@ test('delayed Workers caller deploys latest main public snapshot/config, preserv
     fixture(producer); write(producer,'index.html','old digest');
     for (const name of ['wrangler.jsonc','scripts/stage-static-assets.mjs']) { mkdirSync(path.dirname(path.join(producer,name)),{recursive:true}); cpSync(path.join(root,name),path.join(producer,name)); }
     write(producer,'.claude/state/private.json','not public');
-    git(producer,'add','index.html','trends.html','ai-trends.html','style.css','feed.xml','favicon-32.png','favicon.png','apple-touch-icon.png','archive','ai-trends','data','wrangler.jsonc','scripts/stage-static-assets.mjs','.claude/state/private.json');
+    git(producer,'add','index.html','trends.html','ai-trends.html','style.css','feed.xml','favicon-32.png','favicon.png','apple-touch-icon.png','og.png','archive','ai-trends','data','wrangler.jsonc','scripts/stage-static-assets.mjs','.claude/state/private.json');
     git(producer,'commit','-m','old'); git(producer,'remote','add','origin',bare); git(producer,'push','-u','origin','main'); git(dir,'clone','--branch','main',bare,old);
     write(producer,'index.html','new digest'); write(producer,'data/plugins/trends.json','new plugin metrics');
     git(producer,'add','index.html','data/plugins/trends.json'); git(producer,'commit','-m','new'); git(producer,'push');

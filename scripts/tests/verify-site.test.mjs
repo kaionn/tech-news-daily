@@ -8,7 +8,7 @@ import { verifySite } from '../verify-site.mjs';
 async function fixture(fn) {
   const root = await mkdtemp(path.join(tmpdir(), 'site-check-test-'));
   const files = ['index.html', 'trends.html', 'ai-trends.html', 'style.css', 'feed.xml',
-    'favicon-32.png', 'favicon.png', 'apple-touch-icon.png', 'archive/index.html',
+    'favicon-32.png', 'favicon.png', 'apple-touch-icon.png', 'og.png', 'archive/index.html',
     'archive/2026-10-09.html', 'ai-trends/2026-10-10.html',
     'data/ai-trends/2026-10-10.json', 'data/plugins/trends.json'];
   const served = new Map();
@@ -32,7 +32,7 @@ const options = fetchImpl => ({ fetchImpl, log: () => {} });
 test('checks all publications, canonical redirects, media, bytes and excluded paths without credentials', async () => {
   await fixture(async (root, served, fetchImpl) => {
     const result = await verifySite(root, 'https://site.example', options(fetchImpl));
-    assert.equal(result.checked, 24); assert.equal(result.staged.files, 13);
+    assert.equal(result.checked, 25); assert.equal(result.staged.files, 14);
   });
 });
 test('rejects stale content, wrong media, HTML fallback and noncanonical routes', async () => {

@@ -16,6 +16,7 @@ on:
       - ai-trends.html
       - 'ai-trends/**'
       - 'data/**'
+      - og.png
   workflow_dispatch: # 一時エラー等で再デプロイしたい時の手動リトライ用
 
 permissions:

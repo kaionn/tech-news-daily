@@ -6,7 +6,7 @@ import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 const ROOT_FILES = ['index.html', 'trends.html', 'ai-trends.html', 'style.css', 'feed.xml',
-  'favicon-32.png', 'favicon.png', 'apple-touch-icon.png'];
+  'favicon-32.png', 'favicon.png', 'apple-touch-icon.png', 'og.png'];
 const PUBLIC_TREES = { archive: '.html', 'ai-trends': '.html', data: '.json' };
 const MAX_FILES = 20000, MAX_BYTES = 25 * 1024 * 1024;
 
