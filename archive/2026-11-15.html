@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-11-15</title>
+  <meta name="description" content="Lovable 製アプリの DB 未認証読み取り / Project Zero が Full 90 へ / Antigravity /teamwork">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech News Daily">
+  <meta property="og:title" content="Tech News Daily — 2026-11-15">
+  <meta property="og:description" content="Lovable 製アプリの DB 未認証読み取り / Project Zero が Full 90 へ / Antigravity /teamwork">
+  <meta property="og:url" content="https://tech-news.kaion-lab.com/archive/2026-11-15.html">
+  <meta property="og:image" content="https://tech-news.kaion-lab.com/apple-touch-icon.png">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="../feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-11-15 (Sun)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+      <nav class="site-nav">
+        <a href="../" class="active">📰 日刊ダイジェスト</a>
+        <a href="../trends.html">🔌 週次プラグイントレンド</a>
+        <a href="../ai-trends.html">🧠 AI プロダクト動向</a>
+        <a href="./">🗂 アーカイブ</a>
+      </nav>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 17 articles</span>
+      <span>🏷 7 categories</span>
+      <span>📡 17 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item">
+        <span class="number-value">24,664</span>
+        <span class="number-label">未認証で DB を返した Lovable 製サイト</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">Full 90</span>
+        <span class="number-label">Project Zero の新開示期限（日）</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">2.55 ms</span>
+        <span class="number-label">Kiri のコンテナ起動（Docker Desktop は 213 ms）</span>
+      </div>
+    </div>
+
+<div class="section" id="top-stories">
+<div class="section-title">🔥 Top Stories</div>
+<div class="card featured deep-dive">
+  <div class="card-header">
+    <span class="tag tag-security">Security</span>
+    <span class="content-type">🔒 セキュリティ</span>
+    <h3><a href="https://www.crissyfield.de/research/lovable-en/">DEEP DIVE: Lovable 製アプリの Supabase DB が未認証で読める状態、2 万 4 千サイトがデータを返す</a></h3>
+  </div>
+  <div class="summary">Crissy Field が Handelsblatt と共同で、AI でアプリを生成する Lovable 製の 159,041 プロジェクト（Common Crawl の 2025 年 12 月〜2026 年 9 月分）を調べた。うち 34,545 件が Supabase を使っており、24,664 サイトは読み込みと同時にログインなしでデータベースのレコードを返していた。同じ API キーによる読み取り専用リクエストを重ねると、さらに多くの内容が取得できた。7,403 サイト（30%）の 10,560 テーブルにメールアドレスを含むレコードがあった。内訳は、フォーラムの 8 万件超のプロフィールと 20 万件超のチャット、1,000 件超のパスポート番号など身分証情報、チケット・飲食店の販売記録、テナントや所有者に関する社内メールの AI 要約など。手口の詳細は伏せられているが、各アプリのデータベース連携が似たパターンで作られているため、1 つで通る手法が他にも通りやすいという。ただし 30% は漏えい率の確定値ではなく、公開前提の連絡先やテストデータも含む。サンプルは Lovable 全体を代表せず、取得も一部に限られる。Handelsblatt が Lovable に連絡したが、ページ上では同社の回答は示されていない。</div>
+  <div class="editorial">🧠 事実として確認できたのは「未認証で読めるテーブルが大量にある」ことまでで、実害の有無は報告も確認できていない。構造的な原因は、生成 AI が画面を動かすことを優先し、権限設計を後回しにしたまま公開まで到達できる点にある。実測では 30% が連絡先を含んでいたが、これは公開前提のデータも混ざった数字だ。それでも、非エンジニアが作ったアプリが個人情報を扱う現状では、プラットフォーム側の既定値を安全側に倒す以外に抜本策はないだろう。</div>
+  <div class="key-points">
+    <ul>
+      <li>未認証の読み取りが可能だったのは 24,664 サイト（調査対象 34,545 件の Supabase 利用プロジェクトのうち）</li>
+      <li>メール含有テーブルは 7,403 サイトの 10,560 件。パスポート番号を含む 1,000 件超のレコードも確認</li>
+      <li>利用規約は責任を顧客側に置く一方、マーケティングはセキュリティが自動で担保される印象を与える、と報告は指摘</li>
+    </ul>
+  </div>
+  <div class="why-it-matters">💡 Lovable や同種の生成ツールで本番公開しているなら、テーブルごとのアクセス制御（Supabase なら RLS）を未ログイン状態で実際に読めないか確認し、変更のたびに再点検すること。</div>
+  <div class="meta">
+    <span>crissyfield.de</span>
+    <span class="engagement">▲ 596</span>
+    <span>⏱ 8 min read</span>
+    <span>2026-11-14</span>
+  </div>
+</div>
+<div class="card featured">
+  <div class="card-header">
+    <span class="tag tag-security">Security</span>
+    <span class="content-type">📜 解説</span>
+    <h3><a href="https://projectzero.google/2026/11/disclosure-policy.html">Project Zero が開示ポリシーを「Full 90」に変更、2028 年 1 月には 30 日へ短縮</a></h3>
+  </div>
+  <div class="summary">Google Project Zero は 2021 年から続けた「90 + 30」を廃止し、報告から X 日後に公開する「Full X」へ移行した。11 月 13 日から Full 90、2027 年 2 月 2 日に Full 60、2028 年 1 月 3 日に Full 30 となる。猶予期間とバリアント扱いも廃止された。理由は、LLM によって脆弱性の発見と悪用が速くなり、複数の主体が同じバグを見つけやすくなったことと、攻撃者がパッチを短時間でリバースできるため、修正後の待機が秘匿の錯覚になりかねないことだという。</div>
+  <div class="key-points">
+    <ul>
+      <li>修正の有無は開示日を左右しない。未修正のバグは追跡して公表するが、日付は動かさない</li>
+      <li>実際に悪用されているバグは Google のアプリケーション向け開示ポリシーに従う</li>
+      <li>Project Zero の発見数は年数件から週に数件へ増え、個別の猶予交渉が回らなくなった</li>
+    </ul>
+  </div>
+  <div class="why-it-matters">💡 自社製品の脆弱性対応は、報告から 30 日で公開される前提の体制へ段階的に寄せる必要がある。OSS メンテナも 2027 年 2 月以降は 60 日で計画すること。</div>
+  <div class="meta">
+    <span>Project Zero</span>
+    <span class="engagement">▲ 135</span>
+    <span>⏱ 4 min read</span>
+    <span>2026-11-13</span>
+  </div>
+</div>
+</div>
+
+<div class="section" id="dev-engineering">
+<div class="section-title">⚡ Dev &amp; Engineering</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-ai">AI</span>
+    <span class="content-type">🔬 研究</span>
+    <h3><a href="https://research.google/blog/advancing-science-engineering-with-antigravitys-teamwork-feature/">Google Antigravity の /teamwork が数学証明から Rust 移植まで成果を公開</a></h3>
+  </div>
+  <div class="summary">Google Research は、Antigravity のマルチエージェント機能 /teamwork の成果を公開した。2013 年の Courtade–Kumar 予想の証明、Weil 予想の約 180 万行の Lean 形式化（サブエージェント呼び出し 28,800 回）、libgav1 の約 17 万行の Rust 移植などを挙げている。人間の専門家が全工程に関与した成果である。</div>
+  <div class="key-points">
+    <ul>
+      <li>libgav1 の Rust 移植は C++ 比で当初 4 倍遅かったが、最終的に 20〜30% 高速になり、出力は 100% ビット一致</li>
+      <li>NMR 構造推定は 30 エージェントのループと物理シミュレータで top-1 一致 95%、単一エージェントの約 2 倍</li>
+      <li>Gemini 4 搭載の /teamwork は Antigravity で提供中。学術研究者 1 万人に 6 か月の無償枠</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>Google Research</span>
+    <span class="engagement">▲ 155</span>
+    <span>⏱ 7 min read</span>
+    <span>2026-11-13</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-ai">AI</span>
+    <span class="content-type">📜 解説</span>
+    <h3><a href="https://claude.com/resources/articles/building-always-on-agents">Claude 公式「常時稼働エージェントの作り方」: 受信箱・タイマー・記憶・権限・送信箱の 5 部品</a></h3>
+  </div>
+  <div class="summary">常時稼働エージェントは大半の時間を眠り、イベントごとに短い「run」で起きて状態を保存する。run の間はトークンを消費しない。設計は、耐久性のあるイベント受信箱、自己設定の期限と定期実行を持つタイマー、永続ストレージ上の記憶、無人実行向けの権限、送信箱の 5 部品に分かれる。</div>
+  <div class="key-points">
+    <ul>
+      <li>受信箱は 1 受信箱につき有効ワーカー 1 つとし、ソース ID で重複排除、連続メッセージは 1 run にまとめる</li>
+      <li>権限は資格情報プロキシ、リスク行動を分類器で審査する auto mode、ツール呼び出しの保留で守る</li>
+      <li>同記事の長期コーディングベンチでは Opus 5.5 が Opus 5 より解決タスク当たり 78% 安く、通常負荷では 40% 安い</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>Claude</span>
+    <span class="engagement">🔖 86</span>
+    <span>⏱ 6 min read</span>
+    <span>2026-11-14</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-oss">OSS</span>
+    <span class="content-type">📦 リリース</span>
+    <h3><a href="https://blog.pypi.org/posts/2026-11-06-ui-updates-complete/">PyPI のプロジェクトページが刷新、Security タブで来歴（provenance）を確認可能に</a></h3>
+  </div>
+  <div class="summary">PyPI が再設計したプロジェクトページを公開した。リリースごとの Security タブで、Trusted Publisher の PyPI Publish と SLSA Build Provenance の 2 種類の attestation をファイル単位で確認できる。全ファイルに付いていれば「Full」、1 つもなければ「No provenance」と表示される。</div>
+  <div class="key-points">
+    <ul>
+      <li>Incomplete / Inconsistent / Change of Provenance / Loss of Provenance の 4 種類の警告で不審な来歴を示す</li>
+      <li>リリースから 14 日超でアップロードされたファイルに警告アイコン。PyPI は 2026 年 7 月から 14 日超の追加を拒否している</li>
+      <li>OpenSSF の資金で Kabu Creative が実装</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>PyPI Blog</span>
+    <span class="engagement">▲ 196</span>
+    <span>⏱ 4 min read</span>
+    <span>2026-11-06</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-product">Product</span>
+    <span class="content-type">💰 ビジネス</span>
+    <h3><a href="https://www.reuters.com/world/italy-fines-meta-887-million-over-android-users-data-access-2026-11-14/">イタリアが Meta に 8 億 8,700 万ドルの制裁金、Android ユーザーのデータアクセスを巡り</a></h3>
+  </div>
+  <div class="summary">Reuters は、イタリアが Android ユーザーのデータへのアクセスを巡って Meta に 8 億 8,700 万ドルの制裁金を科したと報じた。本文は取得できず、確認できたのは見出しの範囲に限られる。</div>
+  <div class="key-points">
+    <ul>
+      <li>制裁金額は 8 億 8,700 万ドル</li>
+      <li>対象は Android ユーザーのデータアクセスに関する行為</li>
+      <li>詳細な根拠は Reuters の記事で確認が必要</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>Reuters</span>
+    <span class="engagement">▲ 313</span>
+    <span>⏱ 3 min read</span>
+    <span>2026-11-14</span>
+  </div>
+</div>
+</div>
+
+<div class="section" id="jp-community">
+<div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-infra">Infra</span>
+    <span class="content-type">🔒 セキュリティ</span>
+    <h3><a href="https://dev.classmethod.jp/articles/cognito-self-signup-agentic-attack/">Cognito の自己サインアップが有効だと誰でも AWS の一時認証情報を取得できる、AI 攻撃ツール ARTEX の事例</a></h3>
+  </div>
+  <div class="summary">Datadog が 2026 年 11 月 9 日付で報告した事例を DevelopersIO が解説している。攻撃エージェント ARTEX は、公開された Cognito ユーザープールに自己サインアップし、ID プールが発行する一時認証情報で AWS を探索した。脆弱性ではなく設定の組み合わせで成立する点が特徴で、自己サインアップの有効化、アプリクライアント ID の露出、そのユーザープールを認証元とする ID プールが揃うと起こる。</div>
+  <div class="key-points">
+    <ul>
+      <li>確認 3 点: AllowAdminCreateUserOnly を true にする / 認可用属性（custom:isAdmin など）を WriteAttributes から外す（null のままだと全属性が書き換え可） / 認証済みロールの権限と RoleMappings を絞る</li>
+      <li>10 月 26・27 日に 1 つの IP から SignUp が急増。S3 一覧や Secrets Manager 一覧は権限不足で失敗した</li>
+      <li>検知は CloudTrail 管理イベントの SignUp 急増。S3 オブジェクト操作の追跡にはデータイベント（追加料金）が必要</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>DevelopersIO</span>
+    <span class="engagement">🔖 63</span>
+    <span>⏱ 6 min read</span>
+    <span>2026-11-14</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-ai">AI</span>
+    <span class="content-type">🛠 ツール</span>
+    <h3><a href="https://zenn.dev/caphtech/articles/qwen38-zh-ban">Qwen3.8 Flash Next に混ざる中国語を出力層の書き換えで消した: 27% から 0%、他の重みは無変更</a></h3>
+  </div>
+  <div class="summary">日本語で応答させた際に混入する中国語を、出力層の書き換えだけで 27% から 0% に抑えた実験記録。他の重みは 1 バイトも変えていない。</div>
+  <div class="key-points">
+    <ul>
+      <li>中国語の混入率は 27% から 0%</li>
+      <li>変更箇所は出力層のみで、他の重みは不変</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>Zenn</span>
+    <span class="engagement">🔖 60</span>
+    <span>⏱ 5 min read</span>
+    <span>2026-11-13</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-ai">AI</span>
+    <span class="content-type">📜 解説</span>
+    <h3><a href="https://speakerdeck.com/minorun365/jouji-kadou-ejento-no-tsukurikata">常時稼働エージェントの作り方（Claude 公式ブログを資料化）</a></h3>
+  </div>
+  <div class="summary">Claude 公式の「Building always-on agents」を日本語のスライドにまとめた資料。受信箱・タイマー・記憶・権限・送信箱という構成を、図で追える。原文を読む前の全体像の把握に向く。</div>
+  <div class="key-points">
+    <ul>
+      <li>元記事は同日公開の Claude 公式ブログ（Dev &amp; Engineering 欄で紹介）</li>
+      <li>日本語でイベント駆動設計の流れを確認できる</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>Speaker Deck</span>
+    <span class="engagement">🔖 116</span>
+    <span>⏱ 5 min read</span>
+    <span>2026-11-14</span>
+  </div>
+</div>
+</div>
+
+<div class="section" id="code-tools">
+<div class="section-title">🛠 Code &amp; Tools</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-infra">Infra</span>
+    <span class="content-type">🛠 ツール</span>
+    <h3><a href="https://github.com/libracoder/kiri">Kiri: Rust 製の小型コンテナランタイム、docker CLI と Compose がそのまま使える</a></h3>
+  </div>
+  <div class="summary">macOS・Windows・Linux 向けのコンテナランタイムで、小さな Linux VM（Linux では直接カーネル）上で動き、Docker Engine API を公開する。Docker Desktop や OrbStack の軽量な代替を狙う。</div>
+  <div class="key-points">
+    <ul>
+      <li>alpine で true を実行して削除する中央値は API 経由 2.55 ms（Docker Desktop 213 ms、OrbStack 380 ms）。作者自身の 30 回計測</li>
+      <li>常駐デーモンは約 15 MB、VM は 60 秒の無操作で休止。単一ノード Kubernetes も 1 コマンド</li>
+      <li>Apache-2.0、Star は約 3.7k</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>GitHub</span>
+    <span class="engagement">⭐ 3.7k</span>
+    <span>⏱ 3 min read</span>
+    <span>2026-11-08</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-dev">Dev</span>
+    <span class="content-type">🛠 ツール</span>
+    <h3><a href="https://zenn.dev/shougo/articles/ng-nvim-simple-gui">ng: Go 製の Neovim 向けシンプルな Linux GUI、キー入力から表示まで中央値 7.95 ms</a></h3>
+  </div>
+  <div class="summary">Shougo 氏による Neovim の GUI。新しいエディタではなく、ext_linegrid だけで TUI と同じ描画を窓に出す。X11 と Wayland に対応し、MIT ライセンス。</div>
+  <div class="key-points">
+    <ul>
+      <li>176 回のキー入力で全体の中央値 7.95 ms、p90 8.46 ms。20 ms 超の 3 件はすべて Neovim 側の処理</li>
+      <li>設定ファイルを持たず guifont と g:ng_* 変数で設定。ng --server で落ちた窓の後も Neovim に再接続</li>
+      <li>SDL3・FreeType・fontconfig を cgo から直接呼ぶ。IME は文字入力モードのみ有効</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>Zenn</span>
+    <span>⏱ 4 min read</span>
+    <span>2026-11-13</span>
+  </div>
+</div>
+</div>
+
+<div class="section" id="quick-links">
+<div class="section-title">🔗 Quick Links</div>
+<div class="quick-link">
+  <span class="tag tag-infra">Infra</span>
+  <a href="https://www.publickey1.jp/blog/26/googlekubernetes10aiagent_sustrategvisorcncf.html">Google が Agent Sustrate と gVisor を CNCF に寄贈</a>
+  <span class="quick-summary">— Kubernetes 上で AI エージェントを 10 倍の密度で実行できるという。</span>
+  <span class="meta">Publickey</span>
+</div>
+<div class="quick-link">
+  <span class="tag tag-product">Product</span>
+  <a href="https://www.spacex.com/launches/starship-flight-15">SpaceX が Starship Flight 15 でスターシップを回収</a>
+  <span class="quick-summary">— Flight 15 の締めくくりに機体のキャッチに成功した。</span>
+  <span class="meta">SpaceX</span>
+</div>
+<div class="quick-link">
+  <span class="tag tag-ai">AI</span>
+  <a href="https://github.com/Vaibhaav-Tiwari/deepseek-v3-jax">Show HN: DeepSeek V3 を約 200 行の純 Jax で実装</a>
+  <span class="quick-summary">— 学習用に読みやすい最小実装として HN で 150 ポイント。</span>
+  <span class="meta">GitHub</span>
+</div>
+<div class="quick-link">
+  <span class="tag tag-product">Product</span>
+  <a href="https://www.eff.org/deeplinks/2026/11/tech-companies-are-trying-shift-entire-concept-privacy-again">EFF: テック企業がプライバシーの概念を再び動かそうとしている</a>
+  <span class="quick-summary">— HN で 441 ポイントを集めた論考。</span>
+  <span class="meta">EFF</span>
+</div>
+<div class="quick-link">
+  <span class="tag tag-product">Product</span>
+  <a href="https://www.cbc.ca/news/canada/linkedin-monster-take-down-over-1-000-fake-job-postings-after-cbc-investigation-9.7415379">LinkedIn と Monster が CBC の調査後に偽求人 1,000 件超を削除</a>
+  <span class="quick-summary">— 調査報道を受けた対応で、HN では 168 ポイント。</span>
+  <span class="meta">CBC</span>
+</div>
+<div class="quick-link">
+  <span class="tag tag-data">Data</span>
+  <a href="https://www.techspot.com/news/114558-nvidia-deliberately-kept-gpu-prices-high-through-circular.html">Nvidia が循環取引で GPU 価格を高止まりさせたとの報道</a>
+  <span class="quick-summary">— TechSpot が報じ、HN で 79 ポイント。</span>
+  <span class="meta">TechSpot</span>
+</div>
+</div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="./" class="archive-link">🗂 過去のダイジェスト</a>
+    </footer>
+  </div>
+</body>
+</html>
