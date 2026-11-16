@@ -37,7 +37,7 @@ test('old caller uploads newest public snapshot only to preview; upload failure 
     git(dir, 'init', '--bare', bare); git(producer, 'init', '-b', 'main');
     git(producer, 'config', 'user.name', 'Test'); git(producer, 'config', 'user.email', 'test@example.invalid');
     git(producer, 'config', 'commit.gpgsign', 'false');
-    for (const name of ['index.html', 'trends.html', 'ai-trends.html', 'style.css', 'feed.xml', 'favicon-32.png', 'favicon.png', 'apple-touch-icon.png']) write(producer, name, 'old');
+    for (const name of ['index.html', 'trends.html', 'ai-trends.html', 'style.css', 'feed.xml', 'favicon-32.png', 'favicon.png', 'apple-touch-icon.png', 'og.png']) write(producer, name, 'old');
     for (const name of ['archive/index.html', 'ai-trends/2026-10-10.html', 'data/plugins/trends.json']) write(producer, name, name);
     for (const name of ['wrangler.jsonc', 'scripts/stage-static-assets.mjs']) {
       mkdirSync(path.dirname(path.join(producer, name)), { recursive: true }); cpSync(path.join(root, name), path.join(producer, name));

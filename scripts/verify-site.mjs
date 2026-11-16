@@ -32,7 +32,7 @@ export async function verifySite(source, origin, { fetchImpl = fetch, log = cons
       return `${directory}/${name}`;
     }
     const files = ['index.html', 'trends.html', 'ai-trends.html', 'style.css', 'feed.xml',
-      'favicon-32.png', 'favicon.png', 'apple-touch-icon.png', 'archive/index.html',
+      'favicon-32.png', 'favicon.png', 'apple-touch-icon.png', 'og.png', 'archive/index.html',
       await latest('archive', /^\d{4}-\d{2}-\d{2}\.html$/),
       await latest('ai-trends', /^\d{4}-\d{2}-\d{2}\.html$/),
       await latest('data/ai-trends', /^\d{4}-\d{2}-\d{2}\.json$/), 'data/plugins/trends.json'];

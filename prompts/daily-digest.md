@@ -100,8 +100,8 @@ Write a complete HTML file to `index.html` with this exact structure:
   <meta property="og:title" content="Tech News Daily — YYYY-MM-DD">
   <meta property="og:description" content="{description と同じ値}">
   <meta property="og:url" content="https://tech-news.kaion-lab.com/">
-  <meta property="og:image" content="https://tech-news.kaion-lab.com/apple-touch-icon.png">
-  <meta name="twitter:card" content="summary">
+  <meta property="og:image" content="https://tech-news.kaion-lab.com/og.png">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
   <link rel="icon" type="image/png" sizes="192x192" href="favicon.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">

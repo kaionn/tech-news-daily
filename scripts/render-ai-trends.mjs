@@ -304,8 +304,8 @@ function renderOgMeta(issue, fromIsLatest) {
     ogMetaTag('property', 'og:title', `${issue.theme.title} | AI プロダクト動向`),
     ogMetaTag('property', 'og:description', description),
     ogMetaTag('property', 'og:url', url),
-    ogMetaTag('property', 'og:image', `${SITE_URL}/apple-touch-icon.png`),
-    ogMetaTag('name', 'twitter:card', 'summary'),
+    ogMetaTag('property', 'og:image', `${SITE_URL}/og.png`),
+    ogMetaTag('name', 'twitter:card', 'summary_large_image'),
   ].join('\n');
 }
 
