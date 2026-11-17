@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tech News Daily — 2026-11-16</title>
-  <meta name="description" content="PostgreSQL 19 延期の原因は AI レビュー / 古い Bitly リンクが乗っ取られ / Cloudflare が AI 専用ブラウザ Kitesurf を公開">
+  <title>Tech News Daily — 2026-11-17</title>
+  <meta name="description" content="Optimizely Web 経由で 178 組織にマルウェア / M365 障害は 7 月の修正が原因 / Google が自律型エクスプロイト AI を観測">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Tech News Daily">
-  <meta property="og:title" content="Tech News Daily — 2026-11-16">
-  <meta property="og:description" content="PostgreSQL 19 延期の原因は AI レビュー / 古い Bitly リンクが乗っ取られ / Cloudflare が AI 専用ブラウザ Kitesurf を公開">
+  <meta property="og:title" content="Tech News Daily — 2026-11-17">
+  <meta property="og:description" content="Optimizely Web 経由で 178 組織にマルウェア / M365 障害は 7 月の修正が原因 / Google が自律型エクスプロイト AI を観測">
   <meta property="og:url" content="https://tech-news.kaion-lab.com/">
   <meta property="og:image" content="https://tech-news.kaion-lab.com/og.png">
   <meta name="twitter:card" content="summary_large_image">
@@ -22,7 +22,7 @@
   <div class="container">
     <header>
       <h1>Tech News Daily</h1>
-      <div class="date">2026-11-16 (Mon)</div>
+      <div class="date">2026-11-17 (Tue)</div>
       <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
       <nav class="site-nav">
         <a href="./" class="active">📰 日刊ダイジェスト</a>
@@ -33,9 +33,9 @@
     </header>
 
     <div class="stats-bar">
-      <span>📰 17 articles</span>
-      <span>🏷 8 categories</span>
-      <span>📡 13 sources</span>
+      <span>📰 20 articles</span>
+      <span>🏷 7 categories</span>
+      <span>📡 17 sources</span>
     </div>
 
     <nav class="toc">
@@ -48,253 +48,215 @@
 
     <div class="numbers-bar">
       <div class="number-item">
-        <span class="number-value">約 40 件</span>
-        <span class="number-label">PostgreSQL 19 の β 期間に AI レビューで出たバグ報告</span>
+        <span class="number-value">178</span>
+        <span class="number-label">Optimizely 経由で感染した組織</span>
       </div>
       <div class="number-item">
-        <span class="number-value">3〜7x</span>
-        <span class="number-label">Kitesurf の CPU・メモリ効率（Chromium 比、Cloudflare 公称）</span>
+        <span class="number-value">8.9ms</span>
+        <span class="number-label">Hyperlight-Unikraft の Python 起動（従来 199ms）</span>
       </div>
       <div class="number-item">
-        <span class="number-value">約 $5/月</span>
-        <span class="number-label">139GB の世界地図タイルを Bunny.net で配信する費用</span>
+        <span class="number-value">4,597</span>
+        <span class="number-label">富岳・理究の個人情報漏えい可能性（最大）</span>
       </div>
     </div>
 
-<div class="section" id="top-stories">
-<div class="section-title">🔥 Top Stories</div>
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
 <div class="card featured deep-dive">
   <div class="card-header">
-    <span class="tag tag-data">Data</span>
-    <span class="content-type">👀 注目</span>
-    <h3><a href="https://www.publickey1.jp/blog/26/postgresql_194ai.html">DEEP DIVE: PostgreSQL 19 のリリースが延期、β4 で多数の新機能が取り下げに。原因は AI によるコードレビューか</a></h3>
+    <span class="tag tag-security">Security</span>
+    <span class="content-type">🔒 セキュリティ</span>
+    <h3><a href="https://blog.report-uri.com/worlds-largest-brands-infected-with-malware-via-optimizely/">DEEP DIVE: Optimizely Web 経由で 178 組織にマルウェア配信、Zoom・GitLab・BBC も被害</a></h3>
   </div>
-  <div class="summary">PostgreSQL のメジャーリリースは例年 9 月か 10 月だが、19 は 11 月 12 日に RC2 が公開され、正式版は 11 月 19 日の予定になった。過去は 18 が 2025 年 9 月 25 日、17 が 2024 年 9 月 26 日で、今回は 1 か月半から 2 か月遅れる。β1（6 月）と β2（7 月）の時点では例年通りの予定で、β3（8 月）で Group By All が差し戻され、9 月下旬の β4 で一気に機能の取り下げが相次いだ。対象は目玉機能の SQL/PGQ（プロパティグラフクエリ）、データチェックサムのオンライン有効化・無効化、FOR PORTION OF 句による時間軸の更新・削除、ALTER TABLE の MERGE/SPLIT PARTITIONS、pg_get_role_ddl() などの DDL 取得関数、postmaster の LC_COLLATE を C に強制する変更など。コミッターの Peter Eisentraut 氏は、LLM 支援のコードレビューが高精度かつ効率的になって早期にバグが見つかるようになり、取り下げた機能にはβ期間中に直せないアーキテクチャ上の大きな欠陥があったと説明した。影響の小さいエッジケースも含め、約 40 件の不具合報告を目にしたという。Robert Haas 氏は 10 月 30 日付のブログで、LLM でバグを見つけたと報告する人が大量に現れ、コミッターが対応に追われていると述べている。取り下げた機能は将来のメジャーリリースで再投入される可能性がある。</div>
-  <div class="editorial">🧠 事実として確認できるのは、取り下げの理由として 2 人のコミッターが AI レビューによるバグ発見の増加を挙げていることだ。一方、「AI レビューが原因」という見出しの因果は Publickey 自身も「か」と留保しており、AI がなくても発見された欠陥だった可能性は検証されていない。それでも、検出コストが下がると、人間のレビュー速度がボトルネックになる局面が他の OSS にも波及するだろう。メンテナ側の受け入れ体制（報告の重複排除やトリアージ）が次の課題になるはずだ。</div>
+  <div class="summary">11月16日、実験プラットフォーム Optimizely Web の顧客プロジェクトの「Project JavaScript」欄に悪意あるコードが書き込まれ、信頼された Optimizely の CDN から各サイトの訪問者へ配信された。被害サイト側のサーバーやコードは侵害されていない。Report URI の調査では、確認できた 1,611 個のスニペットのうち 188 個（178 組織）が感染し、Zoom、BBC、CNN、Salesforce、GitLab、IKEA、HSBC、Equifax などが含まれた。ペイロードは当日 26 回作り直され、暗号資産アドレスのすり替え、フォームからのカード番号・CVV の窃取、Cookie とスクリーンショットの送信を行う。さらに iPhone 向けに Coruna と DarkSword のエクスプロイトチェーンを隠し iframe で読み込み、iOS 18.6 以前では 60 秒ごとにページを再読み込みした。攻撃者のウォレットへの着金は 19:25 UTC 時点で約 7,040 ドルで、当日中に取引所へ送金された。書き込み権限をどう得たかは未特定で、Optimizely から Report URI への応答もなかった。UTC 21:52 の時点で感染が残るスニペットは 1 個まで減った。</div>
+  <div class="editorial">🧠 サードパーティスクリプトの侵害が、自社の CI や本番を一切触らずに 178 組織へ届いた。この構造は特定ベンダーの問題ではなく、タグ配信全般に当てはまる。ただし著者は CSP 製品を販売する会社で、「製品なら検知できた」という記述は独立した検証ではない。侵入経路が未特定の間は、顧客側の認証情報流出か Optimizely 側の侵害かを区別できない点も留保すべきだ。</div>
   <div class="key-points">
     <ul>
-      <li>RC2 は 11 月 12 日、正式リリースは 11 月 19 日予定。例年（9 月 25 日〜10 月 13 日）より 1 か月半〜2 か月遅い</li>
-      <li>β4 で SQL/PGQ やオンラインチェックサム切替など 6 系統の機能が Revert / Remove された。理由は β 期間中に直せないアーキテクチャ上の欠陥</li>
-      <li>LLM 支援レビューで約 40 件の報告が出たと Eisentraut 氏。Haas 氏は報告の殺到でコミッターの負荷が増したと指摘</li>
+      <li>感染 188 スニペット / 178 組織。最多は金融 32、テクノロジー 23、小売 20</li>
+      <li>CSP を調べた 256 組織のうち、ペイロードを完全に遮断できたのは 24（15%）。許可ドメインの指定より厳格な script-src が効き、&#x27;strict-dynamic&#x27; と &#x27;unsafe-eval&#x27; が防御を崩した</li>
+      <li>iOS 18.7.3 以降 / 26.3 以降で更新済みなら Coruna・DarkSword の対象外</li>
     </ul>
   </div>
-  <div class="why-it-matters">💡 PostgreSQL 19 を本番導入する予定なら、SQL/PGQ やオンラインチェックサムは 19 に入らない前提で計画し、正式版の 11 月 19 日リリースノートで最終的な機能一覧を確認しておきたい。</div>
+  <div class="why-it-matters">💡 Optimizely Web を使う組織は Project JavaScript に 1688360.cc や atob( がないか確認し、ユーザー・API トークンをローテーションすること。11月16日に自社フォームへ入力されたカード情報は漏えい扱いが妥当。</div>
   <div class="meta">
-    <span>Publickey</span>
-    <span class="engagement">🔖 13</span>
-    <span>⏱ 5 min read</span>
+    <span>Report URI</span>
+    <span class="engagement">▲ 140</span>
+    <span>⏱ 8 min read</span>
     <span>2026-11-16</span>
   </div>
 </div>
 <div class="card featured">
   <div class="card-header">
-    <span class="tag tag-security">Security</span>
-    <span class="content-type">🔒 セキュリティ</span>
-    <h3><a href="https://ransomnews.com/burger-king-tweet-bitly-link-hijack-2026/">古い Bitly 短縮リンクが乗っ取られ、Burger King・McDonald's・Trump 氏の過去ツイートが無関係なページへ転送</a></h3>
-  </div>
-  <div class="summary">11 月 15 日、2011 年の Burger King と McDonald's のツイートにある bit.ly リンクが Wikipedia の無関係な記事へ転送され始めた。企業アカウントは侵害されておらず、失効した bit.ly の末尾文字列を第三者が再登録したことで、過去の投稿・メール・PDF・QR コードに残るリンクがすべて新しい宛先に向かう。Ransomnews が Trump 氏の 2009〜2013 年のツイートの 97 リンクを調べたところ、40 件は元のまま、49 件は再作成されたが元の趣旨に近い宛先、7 件が無関係な宛先、1 件が Bitly によりブロックされていた。Bitly は同日 19:13（UTC）に、古い非アクティブなリンクが再利用され得たことを X で認め、関与アカウントを停止し影響リンクを無効化すると表明した。</div>
-  <div class="key-points">
-    <ul>
-      <li>Burger King のリンクは 15 日 05:32、McDonald's は 05:14（UTC）に再作成されていた。Bitly の説明では再利用不可のはずで、作成日時がそれと矛盾する</li>
-      <li>Trump 氏のリンク 49 件は 2023 年 5 月 26 日の 17 分間に 48 件が再作成された。うち 2 件は暗号資産サービスを模したドメインを指していた</li>
-      <li>リンク先は bit.ly URL の末尾に「+」を付けると作成日時と宛先を確認できる。Bitly はアカウント数や手口をまだ公表していない</li>
-    </ul>
-  </div>
-  <div class="why-it-matters">💡 公式サイトやドキュメント、PDF に古い短縮リンクを埋め込んでいるなら、リンクの宛先を棚卸しして自社ドメインの URL に置き換える時期だ。</div>
-  <div class="meta">
-    <span>Ransomnews</span>
-    <span class="engagement">▲ 126</span>
-    <span>⏱ 6 min read</span>
-    <span>2026-11-15</span>
-  </div>
-</div>
-<div class="card featured">
-  <div class="card-header">
     <span class="tag tag-infra">Infra</span>
-    <span class="content-type">📦 リリース</span>
-    <h3><a href="https://www.publickey1.jp/blog/26/cloudflareaikitesurf.html">Cloudflare が AI 専用の軽量ヘッドレスブラウザ「Kitesurf」を OSS 公開、Chromium 比で CPU・メモリ効率 3〜7 倍</a></h3>
+    <span class="content-type">📜 解説</span>
+    <h3><a href="https://www.theregister.com/saas/2026/11/16/microsoft-blames-monster-email-outage-on-software-defect-introduced-in-july-fix/5310026">Microsoft、M365 大規模障害の原因は 7 月の修正に混入した不具合と説明</a></h3>
   </div>
-  <div class="summary">Cloudflare は 8 月に発表した AI エージェント向けブラウザ Kitesurf を Apache 2.0 で公開した。タブ、ブックマーク、テーマ、拡張機能、同期、スムーズスクロールを省き、多数のエージェントを同時に動かすことを優先している。Chromium も Node.js も使わず、主に Rust で書かれ WebAssembly にコンパイルされて Cloudflare Workers 上で動く。Wrangler でローカル実行もできる。Chrome DevTools Protocol に対応するため、Puppeteer 系のクライアントから接続できる。</div>
+  <div class="summary">Microsoft は Exchange Online / Outlook の障害について、7月に M365 のネットワークゲートウェイへ入れた変更が原因と説明した。変更には Windows 内部プロセスのロック競合があり、CPU とメモリを使い切る。負荷が低い間は潜伏し、Teams が Exchange を支えるプライマリゲートウェイへフェイルオーバーした際に顕在化した。同時にゲートウェイ容量の約 14% が停止しており、再ルーティングで障害が全体へ波及した。ロード試験はコア数の少ない弱いハードウェアを中心にしており、コア数が多いほど競合が悪化する点を見逃していた。</div>
   <div class="key-points">
     <ul>
-      <li>Chromium 比で CPU・メモリ効率が約 3〜7 倍（Cloudflare による数値で、第三者の検証は未確認）</li>
-      <li>HTML/DOM/レイアウトに Blitz、CSS に Stylo、JavaScript に Boa（WebAssembly 上）を採用し、既存ブラウザのエンジンを使わず部品を組み合わせた構成</li>
-      <li>ブラウザ上で試せる Playground あり。Workers へのデプロイも fork も可能</li>
+      <li>最悪時にサーバーの 80% 超が応答せず、初回サポートケースから緩和策適用まで約 15 時間</li>
+      <li>不具合は 3 か月前の変更で、単純なロールバックができず既知の正常状態へ戻すパッチを作成して順次適用</li>
+      <li>最終報告書は 11月20日に公開予定</li>
     </ul>
   </div>
-  <div class="why-it-matters">💡 エージェントに Web 閲覧をさせる基盤を自前で持つ場合、JavaScript エンジンが Boa のため、対象サイトの互換性を先に試す必要がある。</div>
+  <div class="why-it-matters">💡 自社の SLA 設計では、ロック競合のようなコア数依存の不具合が本番ハードウェアでしか出ない前提で試験構成を見直す価値がある。</div>
   <div class="meta">
-    <span>Publickey</span>
+    <span>The Register</span>
+    <span class="engagement">▲ 237</span>
     <span>⏱ 4 min read</span>
     <span>2026-11-16</span>
   </div>
 </div>
+<div class="card featured">
+  <div class="card-header">
+    <span class="tag tag-ai">AI</span>
+    <span class="content-type">🔬 研究</span>
+    <h3><a href="https://www.itmedia.co.jp/news/article/2611/16/2000003244/">Google、人間の関与なしに脆弱性を見つけて悪用する AI フレームワークを初観測</a></h3>
+  </div>
+  <div class="summary">Google Threat Intelligence Group は AI Threat Tracker 第 4 四半期版で、攻撃用サーバー上に置かれた「exploit_agent」を報告した。複数の LLM に対応し、広く使われる Web アプリのパッチ前後のソースを比較して脆弱性を見つけ、エクスプロイトを生成して人手なしで実行する。サーバーには窃取データや他の攻撃者の Webshell を削除するスクリプトも残っていた。北朝鮮関連の UNC6836 は、侵入後に社内リポジトリの Claude Code 設定ファイルを改ざんし、開発者がツールを起動するとバックドアが落ちる仕組みを作っていた。</div>
+  <div class="key-points">
+    <ul>
+      <li>ゼロデイ悪用は 2025 年の月平均 8 件から 2026 年は 11 件、8月は 22 件</li>
+      <li>2026 年 1〜8 月に公開された脆弱性とエクスプロイトは前年同期のほぼ 2 倍</li>
+      <li>LLMJacking では 1 日で 10 万ドル超、最大で累計 100 万ドルの不正請求</li>
+    </ul>
+  </div>
+  <div class="why-it-matters">💡 パッチ公開から攻撃までの猶予が縮むため、重要コンポーネントの更新を週次バッチに頼っている場合は短縮を検討したい。</div>
+  <div class="meta">
+    <span>ITmedia / GTIG</span>
+    <span class="engagement">🔖 50</span>
+    <span>⏱ 4 min read</span>
+    <span>2026-11-16</span>
+  </div>
 </div>
+    </div>
 
-<div class="section" id="dev-engineering">
-<div class="section-title">⚡ Dev &amp; Engineering</div>
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
 <div class="card">
   <div class="card-header">
     <span class="tag tag-dev">Dev</span>
     <span class="content-type">📦 リリース</span>
-    <h3><a href="https://www.publickey1.jp/blog/26/net_11cjitaot.html">.NET 11 正式リリース、C# 15 に共用型（Union Types）、非同期処理のランタイム化で高速化</a></h3>
+    <h3><a href="https://burntsushi.net/jiff/">Jiff 1.0 公開：Rust 向け日時ライブラリが API 安定化</a></h3>
   </div>
-  <div class="summary">Microsoft は .NET Conf 2026 で .NET 11 を発表した。C# 15 の共用型は、あらかじめ決めた複数の型のうち 1 つを保持でき、switch でコンパイラが網羅性を検査する。非同期処理はコンパイラによる分解をやめてランタイムがネイティブに実行する。奇数版のため STS で、サポートは 2 年。新規開発には LTS の .NET 10 が推奨される。</div>
+  <div class="summary">BurntSushi が Rust の日時ライブラリ Jiff の 1.0 を公開した。JavaScript の Temporal API に着想を得ており、IANA タイムゾーンを中心に据えて夏時間の重複・欠落を自動で扱う。1.0 の API を無期限に維持する方針で、他ライブラリの公開依存として使える安定性を狙う。</div>
   <div class="key-points">
     <ul>
-      <li>JIT が配列の境界チェックと一部のオーバーフローチェックを除去。AOT は複数インターフェース呼び出しを共有ディスパッチにして実行速度とサイズを改善</li>
-      <li>従来 1,024 論理プロセッサで初期化に失敗した上限を撤廃。Pentium 4 / Athlon 64 など古い CPU は非対応に。ツールチェーン管理の dotnetup を追加</li>
+      <li>uv、Cargo、Starship、fd、Nushell、mise、Jujutsu、uutils/coreutils が本番で採用</li>
+      <li>Span（暦単位保持）と SignedDuration（96 ビットのナノ秒）の 2 種の期間型。範囲は ±9999 年</li>
     </ul>
   </div>
   <div class="meta">
-    <span>Publickey</span>
+    <span>burntsushi.net</span>
+    <span class="engagement">▲ 323</span>
     <span>⏱ 5 min read</span>
-    <span>2026-11-11</span>
-  </div>
-</div>
-<div class="card">
-  <div class="card-header">
-    <span class="tag tag-ai">AI</span>
-    <span class="content-type">📦 リリース</span>
-    <h3><a href="https://www.publickey1.jp/blog/26/google_antigravityaiai.html">Google Antigravity に「リモートエージェント」、PC を閉じてもクラウド VM 上で AI エージェントが作業を継続</a></h3>
-  </div>
-  <div class="summary">Antigravity の新機能で、タスクは Google 管理の独立したクラウド VM で実行される。ユーザーの PC の電源を切っても作業は続き、スマートフォンから質問への回答や指示もできる。GitHub リポジトリ、Google Drive のファイル、端末のアップロードをコードの入力元にできる。</div>
-  <div class="key-points">
-    <ul>
-      <li>現在は個人 Google アカウントの Google AI Pro / Ultra プランが対象（Antigravity の投稿は「全有料コンシューマープラン」と表記）</li>
-      <li>11 月 6 日の週から順次提供。ローカル実行型と違い、環境は VM ごとに隔離される</li>
-    </ul>
-  </div>
-  <div class="meta">
-    <span>Publickey</span>
-    <span>⏱ 3 min read</span>
-    <span>2026-11-13</span>
-  </div>
-</div>
-<div class="card">
-  <div class="card-header">
-    <span class="tag tag-frontend">Frontend</span>
-    <span class="content-type">📜 解説</span>
-    <h3><a href="https://bruceroettgers.eu/blog/protomaps/">Protomaps で地図タイルを自前配信する費用は月 $5 程度、Mapbox 比で約 100 倍安い</a></h3>
-  </div>
-  <div class="summary">PMTiles は単一ファイル形式で、HTTP Range リクエストにより、タイルサーバーなしでバケットから直接配信できる。MapLibre GL と pmtiles パッケージで埋め込む。著者は Bunny.net に置いて運用した結果をまとめている。</div>
-  <div class="key-points">
-    <ul>
-      <li>世界地図は約 139GB。5 倍レプリケーションで保存しても月約 $5。Mapbox は無料枠超過後 1,000 ロードで $5、Bunny は著者試算で約 $0.05</li>
-      <li>大容量オブジェクト向け最適化の有効化、リファラー制限、10MB 超後に 10kB/s への速度制限で、全体ダウンロードや無断埋め込みを防ぐ</li>
-    </ul>
-  </div>
-  <div class="meta">
-    <span>bruceroettgers.eu</span>
-    <span class="engagement">▲ 132</span>
-    <span>⏱ 6 min read</span>
     <span>2026-11-15</span>
-  </div>
-</div>
-<div class="card">
-  <div class="card-header">
-    <span class="tag tag-infra">Infra</span>
-    <span class="content-type">📜 解説</span>
-    <h3><a href="https://www.itmedia.co.jp/pcuser/articles/2611/16/news045.html">Microsoft 365 障害はなぜ長引いたのか、タイムラインと SLA クレジットの請求方法</a></h3>
-  </div>
-  <div class="summary">日本時間 11 月 13 日に起きた Microsoft 365 の障害で、複数サービスが影響を受け、国内の利用者・企業にも大きな影響が出た。復旧は 1 時間超を要し、ステータスページは「Service degradation」から「Operational」に戻った。詳細な原因は事後報告（PIR）の公開待ちだ。</div>
-  <div class="key-points">
-    <ul>
-      <li>PIR は 48 時間以内に暫定版、5 営業日以内に最終版を公開する運用。記事執筆時点で最終版は未公開</li>
-      <li>SLA クレジットは通常 25%、場合により 50% で、自動付与ではなく顧客側の申請が必要。適用は翌期以降の請求</li>
-    </ul>
-  </div>
-  <div class="meta">
-    <span>ITmedia</span>
-    <span class="engagement">🔖 21</span>
-    <span>⏱ 5 min read</span>
-    <span>2026-11-16</span>
-  </div>
-</div>
-</div>
-
-<div class="section" id="jp-community">
-<div class="section-title">🇯🇵 日本語テックコミュニティ</div>
-<div class="card">
-  <div class="card-header">
-    <span class="tag tag-security">Security</span>
-    <span class="content-type">📜 解説</span>
-    <h3><a href="https://speakerdeck.com/atalie2m/goodbye-ssh-key-jisabakan-2026">さようなら SSH 鍵、こんにちはゼロトラスト ― AI フレンドリーな自宅鯖 SSH</a></h3>
-  </div>
-  <div class="summary">自宅サーバーの SSH を、サーバーごとの鍵管理から、セルフホストの Teleport による短命証明書へ移した事例。人間・エージェント・自動化（Ansible）でアカウントを分け、エージェントは非 root で運用する。</div>
-  <div class="key-points">
-    <ul>
-      <li>エージェントは tbot で有効 1 時間の証明書を 20 分ごとに更新。人間は MFA 後に tsh で取得</li>
-      <li>root 昇格は独自の承認ブローカーで、Slack 承認 3 分以内・開始 60 秒以内・実行権限は 1 回限り。Teleport 自体が単一障害点になる点は著者も留保</li>
-    </ul>
-  </div>
-  <div class="meta">
-    <span>Speaker Deck</span>
-    <span class="engagement">🔖 102</span>
-    <span>⏱ 8 min read</span>
-    <span>2026-11-15</span>
-  </div>
-</div>
-<div class="card">
-  <div class="card-header">
-    <span class="tag tag-ai">AI</span>
-    <span class="content-type">👀 注目</span>
-    <h3><a href="https://zenn.dev/canly/articles/e2bd67c9a4c18b">Claude Duet を Team プランで触ってみた（組織で使うときの注意点つき）</a></h3>
-  </div>
-  <div class="summary">10 月 21 日にリサーチプレビューとなった Claude Duet を Team プランで検証した記録。公式の対象は米国の Pro / Max / Ultra だが、組織設定の切替をオンにすると Team でも待機リストなしで使えた。管理面の抜けを具体的に列挙している。</div>
-  <div class="key-points">
-    <ul>
-      <li>管理設定は「組織で有効にする」の 1 つで、ユーザー・グループ単位の切替なし。利用量は Chat と同じ枠を消費し、モデルは Opus 5.5 固定</li>
-      <li>Team には監査ログがなく（Enterprise のみ）、Duet の活動は検索に出なかった。組織指示（3,000 字まで）はプロンプトベースで回避されうる</li>
-    </ul>
-  </div>
-  <div class="meta">
-    <span>Zenn</span>
-    <span>⏱ 7 min read</span>
-    <span>2026-11-13</span>
   </div>
 </div>
 <div class="card">
   <div class="card-header">
     <span class="tag tag-product">Product</span>
-    <span class="content-type">📜 解説</span>
-    <h3><a href="https://clivelab.jp/blogs/news/motherboard-rarely-fails">マザーボードは、ほぼ壊れない ― 組み立て 2,400 台とサポート 43,000 件で見えた PC の故障の順序</a></h3>
+    <span class="content-type">👀 注目</span>
+    <h3><a href="https://xusheng.dev/posts/windows-coding-agent-telemetry/">Windows 11 が使用中のコーディングエージェントを収集していると指摘</a></h3>
   </div>
-  <div class="summary">BTO ショップの著者が自社の 2,400 台・43,000 件のサポートから、故障しやすい順を「ファン・ポンプなどの可動部 → SSD → 電源 → グラボ → その他」と整理した。摩耗する機構がないマザーボードと CPU は単体では壊れにくい。メーカー統計ではなく自社サンプルである点に注意が必要だ。</div>
+  <div class="summary">Windows 11 の MissionControlAggregator.dll が、copilot.exe、claude.exe、codex.exe、cursor.exe などの起動有無をビットマップで記録し、診断データとして送る。ETW イベントと WSL の Exec イベントから実行ファイル名を照合する仕組みで、プロンプトやソースコードは含まれないと著者は確認した。</div>
   <div class="key-points">
     <ul>
-      <li>マザーボード死亡は VRM 過負荷の 2 件のみ。多くはホコリ・髪の毛・飲食物の付着による短絡で、交換で直った例も再装着の効果が混ざる</li>
-      <li>ファン軸受はスリーブで約 3〜4 万時間、ボールで 6〜7.5 万時間。電源のコンデンサは温度が 10℃下がると寿命が約 2 倍</li>
+      <li>テンプレートは ReportCohorts&lt;12,4,5&gt;（開発ツール 12 分類、CLI 4 枠、デスクトップ 5 枠）。約 1 日 1 回送信</li>
+      <li>検証した ARM64 VM では有効、公開ベース ISO では無効で、全環境で動くとは限らない</li>
     </ul>
   </div>
+  <div class="why-it-matters">💡 オプション診断データを送信しない設定（設定 → プライバシーとセキュリティ → 診断とフィードバック）で止められる。</div>
   <div class="meta">
-    <span>CLIVE LAB</span>
-    <span class="engagement">🔖 502</span>
-    <span>⏱ 8 min read</span>
-    <span>2026-11-14</span>
+    <span>xusheng.dev</span>
+    <span class="engagement">▲ 304</span>
+    <span>⏱ 6 min read</span>
+    <span>2026-11-16</span>
   </div>
 </div>
-</div>
-
-<div class="section" id="code-tools">
-<div class="section-title">🛠 Code &amp; Tools</div>
 <div class="card">
   <div class="card-header">
-    <span class="tag tag-oss">OSS</span>
-    <span class="content-type">🛠 ツール</span>
-    <h3><a href="https://ykiko.me/en/articles/2105384023094834022/">C/C++ 向け言語サーバー clice v1.0 が公開、C++20 モジュール対応とマルチプロセス構成で clangd の代替を狙う</a></h3>
+    <span class="tag tag-security">Security</span>
+    <span class="content-type">🔒 セキュリティ</span>
+    <h3><a href="https://iter.ca/post/ubo-uxss/">uBlock Origin のエレメントピッカーにワンクリック universal XSS</a></h3>
   </div>
-  <div class="summary">LLVM/Clang ベースで C++23 により書かれた言語サーバー兼コマンドラインツール。コンパイルをプロセスプールで実行し、ワーカーが落ちても他の機能は動き続ける。clangd はクラッシュでサーバー再起動が必要になる点との違いを示している。</div>
+  <div class="summary">悪意あるサイトが拡張機能のエレメントピッカーへメッセージを送り、任意の信頼済みフィルターを追加させられた。既定フィルターが起こす XHR を掛け取って拡張の UUID を読み、透明 iframe にピッカーを埋め込む。opt フィールドに改行と scriptlet フィルターを足せば、ユーザーのクリック 1 回で任意サイトに JavaScript を注入できる。</div>
   <div class="key-points">
     <ul>
-      <li>compile_commands.json から C++20 モジュールの補完・定義ジャンプを提供。PCH/PCM はディスクにキャッシュ。50 以上のツールチェーンを自動検出</li>
-      <li>index / lint / format / refactor / modularize など 8 サブコマンド。性能の優位は著者の主張で、ベンチマーク数値は記事に無い</li>
+      <li>影響は Firefox 向け MV2 版が主で、MV3 版 uBO Lite にも軽度の類似問題</li>
+      <li>修正はピッカー起動時に content script から渡す秘密パスワードの検証。アドバイザリは GHSA-cmqw-9r2w-6wv2</li>
     </ul>
   </div>
   <div class="meta">
-    <span>ykiko.me</span>
-    <span class="engagement">▲ 87</span>
-    <span>⏱ 10 min read</span>
+    <span>iter.ca</span>
+    <span class="engagement">● Lobsters 39</span>
+    <span>⏱ 5 min read</span>
+    <span>2026-11-15</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-infra">Infra</span>
+    <span class="content-type">📜 解説</span>
+    <h3><a href="https://www.publickey1.jp/blog/26/vmhyperlight-unikraft.html">軽量マイクロ VM「Hyperlight-Unikraft」、Python 起動が 199ms → 8.9ms</a></h3>
+  </div>
+  <div class="summary">CNCF が紹介した Hyperlight-Unikraft は、VM 管理ライブラリ Hyperlight と Unikernel ツールキット Unikraft を組み合わせ、Linux アプリを再コンパイルなしで隔離 VM 上で動かす。ウォームアップ済みランタイムのスナップショットから起動するため速い。</div>
+  <div class="key-points">
+    <ul>
+      <li>Python スクリプトの起動 199ms が 8.9ms（約 20 分の 1 以下）。1,000 個を 3GB 以内で稼働</li>
+      <li>Python、Node.js、.NET、Java、PHP、Go、Rust など 10 種の実行系に対応。数値は CNCF 発表ベースで未検証</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>Publickey</span>
+    <span class="engagement">🔖 40</span>
+    <span>⏱ 4 min read</span>
+    <span>2026-11-16</span>
+  </div>
+</div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-security">Security</span>
+    <span class="content-type">🔒 セキュリティ</span>
+    <h3><a href="https://piyolog.hatenadiary.jp/entry/2026/11/17/030254">スーパーコンピューター「富岳」への不正アクセスまとめ</a></h3>
+  </div>
+  <div class="summary">理研は11月16日、富岳の運用ネットワークへの不正アクセスを公表した。外部公開のステータス表示ダッシュボードを足がかりに内部サーバーへ侵入し、ユーザーの認証情報やホームディレクトリのファイルを窃取した可能性がある。侵入経路の詳細は調査中。</div>
+  <div class="key-points">
+    <ul>
+      <li>個人情報は最大 4,597 人（富岳 4,222 人、「理究」375 人）。SSH 秘密鍵や外部サービスのアクセスキーも対象</li>
+      <li>侵入は 11/10〜13、11/15 に全ジョブ停止と全ユーザーの公開鍵無効化</li>
+    </ul>
+  </div>
+  <div class="why-it-matters">💡 富岳に保存した認証情報を使う外部サービスでは、鍵の失効と再発行が必要。</div>
+  <div class="meta">
+    <span>piyolog</span>
+    <span class="engagement">🔖 66</span>
+    <span>⏱ 6 min read</span>
+    <span>2026-11-17</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-dev">Dev</span>
+    <span class="content-type">🛠 ツール</span>
+    <h3><a href="https://zenn.dev/kesin11/articles/20261114_github_issue_artifact">GitHub Issue に HTML / Markdown を Artifact として添付できるように</a></h3>
+  </div>
+  <div class="summary">Public Preview の Issue Artifacts は、Issue ページのパネルで HTML と Markdown を表示する。gh issue artifact create でエージェントが生成物を添付でき、ログを details に貼る運用の代わりになる。</div>
+  <div class="key-points">
+    <ul>
+      <li>JavaScript（onclick、canvas アニメーション）と相対パス画像は動かず、CSS アニメーション、SVG、base64 PNG は動く</li>
+      <li>パネル幅が固定のため、図は最大化ボタンで見る必要がある</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>Zenn</span>
+    <span class="engagement">🔖 73</span>
+    <span>⏱ 5 min read</span>
     <span>2026-11-15</span>
   </div>
 </div>
@@ -302,57 +264,119 @@
   <div class="card-header">
     <span class="tag tag-frontend">Frontend</span>
     <span class="content-type">📦 リリース</span>
-    <h3><a href="https://www.publickey1.jp/blog/26/playwrightbun.html">Playwright が Bun を正式サポート、v1.65.0 でテストランナーが Bun 上で動作</a></h3>
+    <h3><a href="https://www.publickey1.jp/blog/26/nodejsnpmwebopenvessel.html">Node.js と npm をブラウザ上で実行する「OpenVessel」、神戸ソフトが OSS 公開</a></h3>
   </div>
-  <div class="summary">従来 Node.js 専用だった Playwright のテストランナーが v1.65.0 で Bun に対応した。Bun が TypeScript のテストファイルを自前でトランスパイルするため、Babel とコンパイルキャッシュが不要になり構成が簡素化された。8 月公開の Rust 版 Bun 1.4 では非公式に動いていた。</div>
+  <div class="summary">ブラウザ内にメモリ上のファイルシステム、プロセス、シグナル、パイプ、シェルからなる最小限の OS 層を実装し、Node.js の JavaScript 部分を無改変で動かす。Astro も動作する。</div>
   <div class="key-points">
     <ul>
-      <li>Node.js 版との差は、Watch Mode なし、UI Mode の自動再実行なし、--only-changed に制限、--tsconfig が無効</li>
-      <li>CI で TypeScript のトランスパイル時間を短縮したい場合、Bun 上で試す価値はあるが上記の機能欠落を確認すること</li>
+      <li>Node.js 26 対応。ブラウザで実行可能な Node.js 自身のテスト 1,237 件が全て通過（神戸ソフト調べ）</li>
+      <li>ps、ls、npm などのコマンドを備え、ブラウザ内でパッケージをインストール可能</li>
     </ul>
   </div>
   <div class="meta">
     <span>Publickey</span>
+    <span class="engagement">🔖 54</span>
     <span>⏱ 3 min read</span>
-    <span>2026-11-12</span>
+    <span>2026-11-17</span>
   </div>
 </div>
-</div>
+    </div>
 
-<div class="section" id="quick-links">
-<div class="section-title">🔗 Quick Links</div>
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-ai">AI</span>
+    <span class="content-type">🛠 ツール</span>
+    <h3><a href="https://opencode.ai/product/browse">OpenCode Browse：実ブラウザをコーディングエージェントに貸す MCP サーバー</a></h3>
+  </div>
+  <div class="summary">Chromium 拡張と MCP サーバーの組で、ログイン済みのタブをエージェントに操作させる。API キー不要で、ログインや 2FA、決済の場面ではタブをユーザーへ返す。</div>
+  <div class="key-points">
+    <ul>
+      <li>Chrome、Edge、Brave、Arc、Vivaldi など Chromium 系に対応。OpenCode、Claude Code、Cursor、Codex、Zed から利用可</li>
+      <li>エージェントのタブを許可サイトに限定でき、背景タブで開く</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>opencode.ai</span>
+    <span class="engagement">▲ 144</span>
+    <span>⏱ 3 min read</span>
+    <span>2026-11-16</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-oss">OSS</span>
+    <span class="content-type">📦 リリース</span>
+    <h3><a href="https://aphyr.com/posts/428-announcing-hegel-clj">Hegel-clj 0.1.1：Clojure 向けプロパティベーステスト</a></h3>
+  </div>
+  <div class="summary">Aphyr が公開した、生成テストライブラリ Hegel の Clojure インターフェース。ジェネレーターを再実行して小さい値を作る内部縮小方式で、bind 系ジェネレーターの縮小が弱い test.check の問題を避ける。</div>
+  <div class="key-points">
+    <ul>
+      <li>記事の例で test.check は失敗ベクタを 39 要素までしか縮められず、Hegel-clj は最小の [42] に到達</li>
+      <li>clojure.test 連携の with マクロで deftest と同じ書き方が可能</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>aphyr.com</span>
+    <span class="engagement">● Lobsters 39</span>
+    <span>⏱ 4 min read</span>
+    <span>2026-11-15</span>
+  </div>
+</div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
 <div class="quick-link">
-  <span class="tag tag-product">Product</span>
-  <a href="https://www.spacex.com/launches/starship-flight-15">SpaceX が Starship Flight 15 の最後にスターシップを捕獲</a>
-  <span class="quick-summary">— HN で今日最多の 1,638 ポイント。</span>
-  <span class="meta">SpaceX</span>
+  <span class="tag tag-dev">Dev</span>
+  <a href="https://www.cs.cmu.edu/learn/">Carnegie Mellon が CS 講義を YouTube で無料公開</a>
+  <span class="quick-summary">— HN で 845 ポイントを集めた。</span>
+  <span class="meta">CMU</span>
 </div>
 <div class="quick-link">
-  <span class="tag tag-product">Product</span>
-  <a href="https://www.space.com/space-exploration/launches-spacecraft/ula-vulcan-centaur-return-to-flight-amazon-leo-internet-satellite-launch">Vulcan が復帰初打ち上げで失敗、Amazon の衛星 40 機を喪失</a>
-  <span class="quick-summary">— 見出しによる情報で、原因は未確認。</span>
-  <span class="meta">Space.com</span>
+  <span class="tag tag-infra">Infra</span>
+  <a href="https://apnews.com/article/bank-outage-chase-wells-fargo-truist-50fee2693c22f597fa6ca51a97ef2cda">JPMorgan Chase の技術障害で米銀のオンラインバンキングが遅延</a>
+  <span class="quick-summary">— 複数行に影響が出た（AP）。</span>
+  <span class="meta">AP News</span>
+</div>
+<div class="quick-link">
+  <span class="tag tag-dev">Dev</span>
+  <a href="https://blog.rust-lang.org/2026/11/16/enabling-parallel-frontend-on-nightly/">Rust nightly で並列フロントエンドを有効化</a>
+  <span class="quick-summary">— nightly 向けに並列フロントエンドが既定で有効になる告知。</span>
+  <span class="meta">Rust Blog</span>
 </div>
 <div class="quick-link">
   <span class="tag tag-oss">OSS</span>
-  <a href="https://jakub.jankiewicz.org/blog/ai-code-open-source/">「AI 生成コードはすべてオープンソースにすべき」</a>
-  <span class="quick-summary">— 学習元の OSS を無許可で使う「ライセンス洗浄」と、純 AI 生成物は著作権が及ばないという論拠。</span>
-  <span class="meta">jankiewicz.org</span>
-  <span class="engagement">▲ 1,060</span>
+  <a href="https://yorickpeterse.com/articles/migrating-from-github-to-codeberg/">GitHub から Codeberg への移行記</a>
+  <span class="quick-summary">— Lobsters で 67 点。</span>
+  <span class="meta">yorickpeterse.com</span>
 </div>
 <div class="quick-link">
-  <span class="tag tag-product">Product</span>
-  <a href="https://www.reuters.com/world/china/jensen-huang-discusses-comeback-nvidia-ceo-with-allies-ft-reports-2026-11-15/">Jensen Huang 氏が Nvidia CEO への復帰を支持者と協議、FT 報道</a>
-  <span class="quick-summary">— Reuters が FT の報道として伝えた。</span>
-  <span class="meta">Reuters</span>
+  <span class="tag tag-dev">Dev</span>
+  <a href="https://theconsensus.dev/p/2026/11/08/c-memory-management-survey.html">主要 40 の C プロジェクトにおけるメモリ管理の調査</a>
+  <span class="quick-summary">— 各プロジェクトの確保・解放の流儀を比較。</span>
+  <span class="meta">theconsensus.dev</span>
 </div>
 <div class="quick-link">
-  <span class="tag tag-product">Product</span>
-  <a href="https://macanorak.com/the-macbook-pros-oled-pwm-problem-when-a-better-display-becomes-worse-to-use/">MacBook Pro の OLED で PWM 調光が目に負担、画質向上が使い心地を下げる問題</a>
-  <span class="quick-summary">— HN で 406 ポイント。</span>
-  <span class="meta">macanorak.com</span>
+  <span class="tag tag-ai">AI</span>
+  <a href="https://www.harmonic.fun/news/aristotle-rust-verification/">Harmonic の Aristotle が Rust の形式検証に対応</a>
+  <span class="quick-summary">— HN 107 ポイント。</span>
+  <span class="meta">Harmonic</span>
 </div>
+<div class="quick-link">
+  <span class="tag tag-security">Security</span>
+  <a href="https://zenn.dev/yasuakiomokawa/articles/89f5c46e8effe9">実践パスキー認証設計</a>
+  <span class="quick-summary">— Zenn のトレンド入り記事。</span>
+  <span class="meta">Zenn</span>
 </div>
+<div class="quick-link">
+  <span class="tag tag-dev">Dev</span>
+  <a href="https://zenn.dev/linkedge/articles/claude-code-instead-of-reading-code">Claude Code が書いたコードを読む代わりにやっていること</a>
+  <span class="quick-summary">— AI 生成コードのレビュー代替手法を紹介する Zenn 記事。</span>
+  <span class="meta">Zenn</span>
+</div>
+    </div>
 
     <footer>
       <p>Generated by Claude Code routine</p>
