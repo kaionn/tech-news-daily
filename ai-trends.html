@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI プロダクト動向 | Tech News Daily</title>
-<meta name="description" content="エージェントの中には、文章を書かずに「選ぶだけ」の判断が多い。このクエリで Web 検索を走らせるか、どのモデルに回すか、ツールの出力にプロンプトインジェクションが紛れていないか。これまではこうした判断も生成型 LLM に JSON で答…">
+<meta name="description" content="サンドボックスはエージェントが動かすコードをホストから隔離する。それでも、API キーを環境変数で渡していれば、隔離された中で printenv を叩くだけで読めてしまう。プロンプトインジェクションで「この値を外部に送れ」と指示されたら、…">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Tech News Daily">
-<meta property="og:title" content="「選ぶだけ」の判断は生成モデルから外れ始めた — 選択肢を一度に採点する専用モデル、確率で決める閾値、ルーティングと検査への配置 | AI プロダクト動向">
-<meta property="og:description" content="エージェントの中には、文章を書かずに「選ぶだけ」の判断が多い。このクエリで Web 検索を走らせるか、どのモデルに回すか、ツールの出力にプロンプトインジェクションが紛れていないか。これまではこうした判断も生成型 LLM に JSON で答…">
+<meta property="og:title" content="エージェントに秘密を渡さない設計へ — 資格情報はサンドボックスの外で付ける、宛先に縛る、届かない経路は先に洗い出す | AI プロダクト動向">
+<meta property="og:description" content="サンドボックスはエージェントが動かすコードをホストから隔離する。それでも、API キーを環境変数で渡していれば、隔離された中で printenv を叩くだけで読めてしまう。プロンプトインジェクションで「この値を外部に送れ」と指示されたら、…">
 <meta property="og:url" content="https://tech-news.kaion-lab.com/ai-trends.html">
 <meta property="og:image" content="https://tech-news.kaion-lab.com/og.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -74,7 +74,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 <div class="container">
 <header>
   <h1>🧠 AI プロダクト動向</h1>
-  <p class="date">2026-11-14 発行（読了 10 分）</p>
+  <p class="date">2026-11-17 発行（読了 10 分）</p>
   <p class="tagline">実プロダクトのアーキテクチャ・使用例から AI 開発の現在地を週 3 回・1 号 1 テーマで深掘り</p>
   <nav class="site-nav">
     <a href="./">📰 日刊ダイジェスト</a>
@@ -85,86 +85,94 @@ footer a{color:var(--primary-500);text-decoration:none}
 </header>
 
 <div class="theme-hero">
-  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">DECISION-MODELS</span></span>
-  <h2>「選ぶだけ」の判断は生成モデルから外れ始めた — 選択肢を一度に採点する専用モデル、確率で決める閾値、ルーティングと検査への配置</h2>
-  <p class="lede">エージェントの中には、文章を書かずに「選ぶだけ」の判断が多い。このクエリで Web 検索を走らせるか、どのモデルに回すか、ツールの出力にプロンプトインジェクションが紛れていないか。これまではこうした判断も生成型 LLM に JSON で答えさせるのが普通で、出力トークンの課金、数百ミリ秒から数秒の待ち時間、表記揺れのパースを毎回払っていた。11 月 11 日に Google が Gemini Decisions API を、12 日に Perplexity が Decider v1.3 を公開し、9 月に Jev を出した TypeSafe AI を含め、3 社が「閉じた選択肢を採点して確率を返す」専用モデルを揃えた。今号は、判定を生成から切り離す設計がどの層で実装され、返ってきた確率をどう使い、パイプラインのどこに置かれているかを並べる。</p>
+  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">CREDENTIAL-ISOLATION</span></span>
+  <h2>エージェントに秘密を渡さない設計へ — 資格情報はサンドボックスの外で付ける、宛先に縛る、届かない経路は先に洗い出す</h2>
+  <p class="lede">サンドボックスはエージェントが動かすコードをホストから隔離する。それでも、API キーを環境変数で渡していれば、隔離された中で printenv を叩くだけで読めてしまう。プロンプトインジェクションで「この値を外部に送れ」と指示されたら、キーはそのまま外に出る。そこで 2026 年後半の実行基盤は、サンドボックスの中に本物の秘密を置かない構成に揃い始めた。11 月 12 日に Anthropic が private beta で公開した self-hosted Claude Managed Agents は、資格情報をサンドボックス外のプロキシで付与する構成をそのまま顧客環境に持ち込める。Docker Sandboxes（sbx）は 11 月の 2 回のリリースで、秘密の差し替え先を宛先ホストに限定する変更を入れた。今号は、秘密をどこで付けるか、どの宛先に縛るか、プロキシが届かない経路をどう扱うかを各社の実装で並べる。</p>
 </div>
 
 <div class="tldr">
   <div class="label">TL;DR — 3 行で</div>
   <ul>
-    <li>判定専用モデルは文章を生成せず、事前に与えた選択肢を採点して確率を返す。Gemini Decisions API は 1 リクエストで最大 1,000 問を共有入力に対して評価し、出力トークンは常に 0。Perplexity Decider は複数の質問を 1 回の forward pass で答える</li>
-    <li>確率が返る以上、どこで切るかはアプリ側の設計になる。Google のドキュメントは confidence が 0.7 未満なら人のレビューに回す例を示し、閾値は自分のトラフィックのラベル付きデータで決めるよう求めている。数値の多くはベンダー自身の評価で、自社データでの検証が前提</li>
-    <li>置き場所はモデルルーティング、ツール出力の安全検査、エージェントログの見直しに集まっている。Perplexity は 7,000 セッション分のログを 1 日で読ませてセキュリティルールの見落としを洗い出したが、ルール修正の承認は人が行う</li>
+    <li>本物の資格情報をサンドボックスの外のプロキシに持たせ、外向きリクエストに付与する構成が実行基盤の標準になりつつある。中のエージェントが見るのは proxy-managed のようなプレースホルダだけで、環境変数を読まれても漏れるのは偽の値になる</li>
+    <li>付与する宛先は秘密ごとに固定する。Docker sbx 0.51.0 は宛先ホストを持たないカスタムシークレットの差し替えを止め、Cloudflare Sandboxes は allowedHosts を設定すると既定拒否に切り替わる。宛先を縛らないプロキシは、どこへでも本物のキーを付けて送る中継器になる</li>
+    <li>プロキシで守れる範囲には限りがある。Anthropic は対象を MCP ツールと対応 API 呼び出しに限っていると明記し、それ以外のサービスは本番前に確認するよう求めている。Blaxel は、任意のコードはプロキシ設定の環境変数を無視できるため、直接接続を塞ぐネットワーク境界が別に要ると書いている</li>
   </ul>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 1: 判定を生成から切り離す — 選択肢を一度に採点する</div>
+  <div class="section-title">📐 パターン 1: 資格情報はサンドボックスの外で付ける</div>
   <div class="theme-section">
-    <p>判定専用モデルの入出力は、生成型 LLM の構造化出力とは形が違う。Gemini Decisions API（モデル <code>gemini-decision-1</code>）は、共有の <code>input</code> と、キーごとの <code>questions</code> を受け取る。質問の型は yes/no の <code>noul</code>、選択肢から選ぶ <code>choice</code>（2〜255 択）、順序付きルーブリックで採点する <code>score</code> の 3 つだ。応答は質問ごとに確率と <code>confidence</code> を返し、<code>usage</code> の <code>total_output_tokens</code> は常に 0 になる。モデルはトークンを 1 つずつデコードせず、選択肢をまとめて採点する。Perplexity の Decider v1.3 も同じ形をとる。各質問の末尾にマーカートークンを置き、そこから決定ヘッドが選択肢のスコアを読み出すので、同じ入力に対する複数の質問を 1 回の forward pass で答えられる。v1.3 では、共有された状態はすべての質問を参照し、各質問は状態と自分のトークンだけを参照する。質問どうしが直接影響し合わない構成にして、結果を安定させている。</p><p>この形に収束した理由は、判定の呼び出し回数が生成の呼び出し回数を大きく上回るからだ。1 つのユーザー入力に対して、検索の要否、モデルの選択、安全性、ツールの選択と、問いは複数並ぶ。生成型で答えれば、問いの数だけ出力を待ち、パースし、表記揺れを処理することになる。Google は共有入力を 1 リクエストにつき 1 回だけ課金し、質問 1〜100 問の範囲で遅延がほぼ一定（16K トークンまでの文脈で end-to-end 150〜250 ms）だとしている。出力の型が選択肢に閉じているので、パースの失敗もない。代わりに失うのは自由記述で、理由の説明や新しい選択肢の提案はできない。判定に理由が必要な場面では、生成モデルが引き続き担当する。</p>
+    <p>構成の要点は、エージェントのコードが動く場所と本物の秘密がある場所を分けることだ。サンドボックスの外向き通信はすべてホスト側か基盤側のプロキシを通る。プロキシは宛先を見て対応する資格情報を引き、<code>Authorization</code> などの認証ヘッダーを書き換えてから転送する。サンドボックスの中では、環境変数にもファイルにも本物の値はない。Docker sbx の場合、エージェントが見る値は <code>proxy-managed</code> という番兵文字列で、カスタムシークレットでは <code>sbx-cs-&lt;rand&gt;</code> 形式になる。OAuth もホスト側でサインインするため、トークンはサンドボックスに入らない。エージェントのコードやツールは、キーが入っている前提で普通に HTTP を呼べばよく、書き換えは要らない。</p><p>この形に収束したのは、プロンプトインジェクションへの対策を「モデルが騙されないこと」に頼れないからだ。エージェントは読んだ Web ページや Issue の文面に従ってシェルを叩くことがあり、サンドボックスはそのコードを止めない。止めるのはホストへの侵入であって、中にある値の持ち出しではない。秘密を最初から中に置かなければ、指示に従って <code>printenv</code> を実行されても、送り出されるのは偽の値で済む。環境変数で渡す方式は、秘密をモデルのコンテキストからは外せても、サンドボックス内のプロセスからは外せない。各社がプロキシ方式に寄せているのはこの差による。</p>
     <div class="example">
-      <div class="product">Google Gemini Decisions API（gemini-decision-1）</div>
-      <div class="approach">共有入力 1 つに最大 1,000 問を投げ、yes/no・多肢選択・ルーブリック採点を確率付きで返す。出力トークンは課金されない</div>
-      <div class="detail">公式ドキュメントによると、入力は最大 262,144 トークンをテキスト・画像・音声・動画・PDF で共有でき、質問はその文脈枠の範囲で 1〜1,000 問を指定できる。価格は入力 100 万トークンあたり $0.10、出力は $0。Google は Gemini 3.5 Flash-Lite を Interactions API で使う場合と比べて、同じベンチマーク群でほぼ 5 分の 1 のコストだとしている。遅延と較正誤差の数値は Google 自身の評価</div>
-      <a href="https://aistudio.google.com/docs/decisions-api">📄 一次ソース</a>
+      <div class="product">Claude Managed Agents（self-hosted、private beta）</div>
+      <div class="approach">エージェントループ・セッション履歴・vault の秘密をサンドボックスの外に置き、MCP ツールと対応 API 呼び出しには外部プロキシが資格情報を付ける。self-hosted では顧客自身のシークレットマネージャーに秘密を置ける</div>
+      <div class="detail">11 月 12 日の公式記事によると、ハーネス（モデルを呼ぶ側）とサンドボックス（コードを実行する側）は設計上分離されており、サンドボックスはツールが必要になった時点で起動する。self-hosted 版では Managed Agents サーバー、セッション履歴を持つデータベース、シェルとファイル操作を実行するワーカーを顧客が自分のクラウドかオンプレミスで運用する。モデル本体は引き続き Anthropic 側（または Bedrock などのクラウド、顧客のゲートウェイ経由）で動く</div>
+      <a href="https://claude.com/resources/articles/self-hosted-claude-managed-agents">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">Perplexity Decider v1.3 / Decider Flash v1.3</div>
-      <div class="approach">Qwen3.8-27B ベースの判定モデルと、Qwen3.5-4B に蒸留した Flash 版を Apache ライセンスの重みで公開。複数の質問を 1 回の forward pass で答える</div>
-      <div class="detail">11 月 12 日の公式ブログによると、v1.3 は分類に加えて、固有表現や PII の位置を文字オフセットで返す locate を追加した。実運用 100 万リクエストの試算では、Decider v1.3 が $26.47、Flash が $13.24、Jev 1.14 が $68.10、DeepSeek V4.1 Flash が $349.48。ただし Decider はローカル実行で、ハードウェアコストの計上方法は明示されておらず、遅延をそろえた比較でもないと本文自身が断っている</div>
-      <a href="https://www.perplexity.ai/hub/blog/perplexity-decider">📄 一次ソース</a>
+      <div class="product">Docker Sandboxes（sbx）</div>
+      <div class="approach">ホスト側の HTTP/HTTPS プロキシが外向きリクエストを横取りし、宛先に対応する資格情報を OS のキーチェーンから引いて認証ヘッダーを上書きする</div>
+      <div class="detail">公式ドキュメントによると、秘密は macOS Keychain・Windows Credential Manager・Linux Secret Service に保存され、1Password や AWS Secrets Manager を参照する設定もできる。参照先の値はホスト側で解決し、既定で 55 分キャッシュする。Git 操作には SSH エージェント転送を使い、秘密鍵はホストに残る。ただし kit が passthrough: true を指定すると本物の OAuth トークンがサンドボックスに入り、隔離が弱まることもドキュメント自身が明記している</div>
+      <a href="https://docs.docker.com/ai/sandboxes/configuration/credentials/">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> エージェントのコードの中で「LLM に JSON で enum を返させている箇所」を洗い出すと、判定専用モデルに置き換えられる候補がそのまま一覧になる。同じ入力に対して複数の判定をしているなら、1 リクエストにまとめられるかを先に確認する。理由の説明が要る判定は、生成モデルに残す。</div>
+    <div class="takeaway"><strong>示唆:</strong> エージェント実行環境を棚卸しするときは、まずサンドボックス内で env を実行し、本物の API キーが見えるかを確かめる。見えるなら、隔離の強さに関係なく、プロンプトインジェクション一回で持ち出される状態にある。プロキシ方式への移行は、アプリのコードを変えずに環境変数の値を番兵に置き換えるところから始められる。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 2: 確率が返るなら、閾値と逃がし先は自分で決める</div>
+  <div class="section-title">📐 パターン 2: 秘密は宛先ホストに縛る</div>
   <div class="theme-section">
-    <p>判定モデルの出力は「答え」ではなく「確率分布」なので、どこで切るかはアプリ側の仕事になる。Gemini Decisions API の <code>confidence</code> は「最上位の答えが正しい確率の推定値」で、yes/no では <code>max(noul, 1 - noul)</code> に等しい。ドキュメントの例では、<code>confidence</code> が 0.7 未満なら <code>"human_review"</code> に回す。閾値は自分のトラフィックからラベル付きの例を集め、偽陽性と偽陰性のコストを比べて決めるよう書かれている。選択肢の設計にも注意書きがある。<code>choice</code> は必ず選択肢のどれかに確率を配るので、範囲外の入力には <code>"other"</code> のような受け皿を用意するか、先に yes/no で対象かどうかを確かめる。選択肢はアルファベット順に並べ替えられるため、<code>"none_of_the_above"</code> のように位置に意味を持たせたキーは避ける。</p><p>ここに設計が集まるのは、判定モデルの価値が確率の信頼性にかかっているからだ。生成型 LLM に「自信度」を数字で書かせても、その数字が正答率と対応する保証はない。TypeSafe AI は Jev を Reinforcement Learning for Calibrated Decisions（RLCD）で訓練し、確信度が高いほど正答率も高くなるよう較正したと主張する。Perplexity は、選択肢の並べ替え・ラベルの付け替え・ラベル名の変更をしても意味上の答えが変わった割合を測り、Decider v1.3 が 0.27%、Jev 1.14 が 2.69〜4.84% だったと報告した。ただし、どの数値もベンダー自身の評価だ。Perplexity も閾値は固定値を仮定せず、小さく代表的なラベル付き開発セットで調整するよう勧めている。各社とも、確率をそのまま信じてよいとは書いていない。</p>
+    <p>プロキシに秘密を預けただけでは足りない。どの宛先へのリクエストにその秘密を付けるかを決めていなければ、プロキシは攻撃者のサーバーへのリクエストにも本物のキーを付けて送ってしまう。そこで各社とも、秘密と宛先ホストを一対一か一対多で結び付けて登録させる。Docker sbx は組み込みの 11 サービス（<code>anthropic</code>、<code>github</code>、<code>openai</code> など）ごとに注入先ドメインを固定し、それ以外のドメインには付けない。たとえば組み込みの <code>github</code> は <code>npm.pkg.github.com</code> には付かないので、GitHub Packages から private パッケージを取るには、そのホスト用のカスタムシークレットを別に登録する。Cloudflare Sandboxes では <code>outboundByHost</code> にホストごとのハンドラを書き、その中でヘッダーを付ける。<code>ctx.containerId</code> を使えばインスタンスごとに違う資格情報を割り当てられる。</p><p>宛先を縛る仕組みは、外向き通信の許可リストと同じ層に置かれるようになった。Cloudflare では <code>allowedHosts</code> を設定した時点で既定拒否になる。<code>setOutboundHandler()</code> を使えば、再起動なしでインスタンスごとに方針を切り替えられる。<code>npm install</code> の間だけ通信を開け、その後は 403 を返すハンドラに替える使い方も例示されている。Docker sbx は 11 月 3 日の 0.51.0 で、宛先ホストを持たないカスタムシークレットの差し替えを止めた。既存の設定は宛先ホストを明示すれば直る。「どこに付けるか」を書かない秘密は使えない、という既定への変更だ。資格情報の管理と通信の許可を別の設定ファイルで持つと、片方だけ緩む隙間ができる。両者を同じ宛先リストで管理する方向に寄っているのはそのためだと考えられる。</p>
     <div class="example">
-      <div class="product">TypeSafe AI Jev（System One Models）</div>
-      <div class="approach">自由記述を生成せず、事前に定義した型の値を較正済みの確率付きで返す判定モデル。出力は無料、入力は 100 万トークンあたり $0.042</div>
-      <div class="detail">公式ブログは end-to-end 70〜500 ms、System One 型の問いで最先端 LLM より 40〜200 倍速いと主張する。速度測定は創業者の西海岸のノート PC から行ったものだと明記し、評価の参照解答に他社の最先端モデル 2 つの平均を使ったため OpenAI と Anthropic のモデルに有利な偏りがありうると認めている。Perplexity は Decider をこの Jev に着想を得たと書いており、この設計パターンの起点にあたる</div>
-      <a href="https://typesafe.ai/blog/introducing-system-one-models-and-jev">📄 一次ソース</a>
+      <div class="product">Cloudflare Sandboxes（Outbound Workers）</div>
+      <div class="approach">外向き通信を Workers ランタイム上のハンドラで処理し、ホスト単位で資格情報を付ける。allowedHosts / deniedHosts と実行時のハンドラ差し替えで、インスタンスごとの通信方針を持つ</div>
+      <div class="detail">公式の changelog によると、ハンドラはサンドボックスの外の Workers ランタイムで動くため、サンドボックスからは見えない秘密を保持できる。Worker 環境の秘密をローテーションすると次のリクエストから反映される。HTTPS を中継するため、インスタンスごとに使い捨ての CA を用意し、その秘密鍵はコンテナランタイムのサイドカープロセスの外に出さない。インスタンス間で鍵は共有しない</div>
+      <a href="https://developers.cloudflare.com/changelog/post/2026-04-13-sandbox-outbound-workers-tls-auth/">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> 判定モデルを入れるときは、モデルより先に「本番トラフィックから抜いた数百件のラベル付きデータ」を用意する。閾値・範囲外入力の受け皿・低確信度のときの逃がし先（人のレビュー、上位モデル、既定値）の 3 点を決めずに導入すると、確率が返ってきても結局 argmax を使うだけになる。</div>
+    <div class="example">
+      <div class="product">Docker Sandboxes 0.51.0 / 0.53.0</div>
+      <div class="approach">宛先ホストを持たないカスタムシークレットは差し替えない既定に変更（11 月 3 日）。11 月 11 日の 0.53.0 では Claude Code の Remote Control でも環境とセッションの資格情報をホストに残す</div>
+      <div class="detail">リリースノートによると、0.51.0 では標準入力から秘密を読む --value-stdin も追加され、値がコマンド引数やシェル履歴に残らなくなった。ポリシー一覧では暗黙の既定拒否を明示的な拒否ルールと区別して表示するようになった。sbx policy は空の --sandbox 指定を拒否し、全サンドボックスへ誤って適用されるのを防ぐ。10 月 26 日の 0.50.0 では、MCP の OAuth リクエストで別オリジンへの資格情報リダイレクトを遮断している</div>
+      <a href="https://docs.docker.com/ai/sandboxes/release-notes/">📄 一次ソース</a>
+    </div>
+    <div class="takeaway"><strong>示唆:</strong> 秘密を登録するときは、値と一緒に「付けてよい宛先ホスト」を必ず書く。宛先が空でも動く設定は、プロキシを経由した持ち出し経路になる。外向き通信の許可リストと資格情報の宛先リストは別々に管理せず、同じ一覧から両方を作るほうが、片方だけ緩む事故を防ぎやすい。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 3: 判定モデルを置く場所 — ルーティング、ツール出力の検査、ログの見直し</div>
+  <div class="section-title">📐 パターン 3: プロキシが届かない経路を先に洗い出す</div>
   <div class="theme-section">
-    <p>公開された事例は、置き場所がおおむね 3 つに分かれる。1 つめはモデルルーティングで、Gemini Notebook は Decisions API でクエリを適切なモデル階層と思考レベルに振り分け、日常的なクエリの遅延を最大 40% 下げたと Google は発表している。Perplexity は埋め込みモデルの上に複数の分類ヘッドを載せ、そのうち 1 つでクエリが Web 検索を必要とするかを決める。2 つめはツール出力の検査で、Google 検索は MCP ツール向けの安全レイヤーにこの API を使い、Perplexity もツール出力に含まれるフィッシングやプロンプトインジェクションの検出を用途に挙げる。3 つめはオフラインの見直しだ。Perplexity はエージェントのログをルールベースのチェックで監視し、Decider に「フラグが立たなかった記録にルールの見落としはないか」「立ったアラームは誤検知ではないか」を判定させた。</p><p>3 つに共通するのは、エージェントの本体ではなく、本体の前後や外側に置かれていることだ。どれも 1 回あたりの判断は単純だが件数が多く、生成型 LLM で回すとコストと遅延が積み上がる。Perplexity の例では、Decider は 1 日で 7,000 セッション・10 億トークンのログを読み、14 件のルール修正につながる欠陥を見つけ、うち 6 件が 2 日以内に承認・反映された。1 週間分のログで再生すると、最も件数の多いルールの発報量は 52% 減った。ただし、修正案を作るのは別のエージェントで、反映にはセキュリティチームのメンバーの承認が要る。判定モデルは大量に読んで候補を絞る役で、ルールを書き換える権限は持っていない。</p>
+    <p>プロキシ方式は、通信がプロキシを通ることを前提にしている。多くの実装は <code>HTTPS_PROXY</code> などの環境変数でクライアントを向けるが、エージェントが書いた任意のコードはそれを無視して直接接続できる。Blaxel はこの点を明記し、プロキシ経由の通信に対するドメインフィルタとは別に、直接接続を塞ぐネットワーク境界が要るとしている。差し替えの範囲にも限りがある。Docker sbx のカスタムシークレットは HTTP ヘッダーだけを置き換え、リクエストボディ内のプレースホルダは置き換えない。Linux でキーチェーンがない環境では、秘密は権限 <code>0700</code> のファイルに保存される。そのファイルを読めるユーザーやプロセスからは取り出せる、とドキュメント自身が書いている。</p><p>各社がこうした制限を製品ページで先に開示しているのは、プロキシ方式が「入れれば全部守られる」仕組みではないからだ。Anthropic の self-hosted 版の記事も、プロキシで守るのは MCP ツールと対応 API 呼び出しだけだと書いている。エージェントが使う他のサービスは本番投入前に確認するよう求め、許可リストの設定と運用は顧客のファイアウォール側の責任だとしている。秘密の置き場所もプロキシ自体も、実行基盤から切り出して独立に運用できるようになった。Infisical の Agent Proxy は CLI に同梱されてローカルで動くほか、Docker コンテナとして別ホストに置き、ネットワーク上の複数エージェントに共有させる構成も選べる。移行の際は、守られる経路の一覧より先に、守られない経路の一覧を作るほうが確かだ。</p>
     <div class="example">
-      <div class="product">Perplexity（Decider によるセキュリティルールの見直し）</div>
-      <div class="approach">ルールベースの監視が出した結果と出さなかった結果の両方を Decider に読ませ、見落としと誤検知を洗い出す。修正の承認は人が行う</div>
-      <div class="detail">公式ブログによると、ルールが外れた記録はトリアージ用のエージェントに渡り、そこでルール修正案を作り、セキュリティチームのメンバーが承認する。社内では他に、クエリ分類（63 タスクで本番の分類器より平均 6.54 ポイント高い正解率）、検索結果の再ランキング、クロールしたページの品質フィルタ、強化学習のロールアウト監視にも使っている。精度の比較はいずれも自社のテストスイートによる</div>
-      <a href="https://www.perplexity.ai/hub/blog/perplexity-decider">📄 一次ソース</a>
+      <div class="product">Blaxel（サンドボックス）</div>
+      <div class="approach">{{SECRET:name}} で参照する秘密をプロキシのルーティングルールの destinations に結び付けて注入する。秘密は暗号化保存の書き込み専用で、API レスポンスで返さない</div>
+      <div class="detail">10 月 7 日の公式ブログによると、Stripe 用の鍵は OpenAI へのリクエストには付かないよう、スコープをルール単位で持つ。一方で、ドメインフィルタはプロキシ経由の通信にしか効かず、プロキシの環境変数を守るツールが前提だと認めている。任意のコードはその変数を無視できるため、完全に強制するには直接接続を遮断する別のネットワーク境界が要るとしている</div>
+      <a href="https://blaxel.ai/blog/prompt-injection-defense-credential-separation">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">Google（Gemini Notebook のルーティング / 検索の MCP ツール安全レイヤー）</div>
-      <div class="approach">同じ判定 API を、前段のモデル選択と、MCP ツールを通る入出力の安全検査の両方に使う</div>
-      <div class="detail">11 月 11 日の発表によると、Gemini Notebook はクエリをモデル階層と思考レベルに振り分けて日常的なクエリの遅延を最大 40% 下げ、Google 検索は MCP ツールの敵対的な挙動やコンテンツの検出に使っている。LangChain・LiteLLM・Vercel・Pydantic AI・Pipecat・LiveKit などとの連携も順次提供中で、Google Cloud 上の Gemini での提供は「近日」とされている</div>
-      <a href="https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/">📄 一次ソース</a>
+      <div class="product">Infisical Agent Proxy</div>
+      <div class="approach">エージェントとプロキシに別々のマシン ID を割り当て、プロキシ対象サービスごとにホスト名・認証方式・付与する秘密を定義する独立した資格情報ブローカー</div>
+      <div class="detail">公式ブログによると、Infisical CLI に同梱されるほか Docker コンテナとしても配布され、サイドカーや共有プライベートネットワーク上など、エージェントに近い別ホストに置く構成を推奨している。静的な秘密に加えて動的シークレットも扱え、監査ログ・RBAC・ローテーションは Infisical 本体の機能を引き継ぐ。前身はオープンソースの Agent Vault</div>
+      <a href="https://infisical.com/blog/agent-proxy">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> 判定モデルは、件数が多く、1 回の誤りが致命的でない判断から入れる。ルーティングとツール出力の一次スクリーニングが最初の候補になる。権限の付与やルールの変更のように、誤りの影響が大きい判断では、判定モデルを候補を絞る役に限り、最終決定は人か別の検証段に残す。</div>
+    <div class="takeaway"><strong>示唆:</strong> プロキシ方式を入れる前に、エージェントが通信する先を全部書き出し、それぞれ「プロキシ経由で付与」「付与なしで許可」「遮断」のどれにするかを決める。どれにも入らない経路があれば、直接接続を塞ぐネットワーク境界が揃うまで、その経路の資格情報は環境変数で渡さない。</div>
   </div>
   <div class="editorial">
     <span class="label">✍️ 編集後記</span>
-    判定専用モデルの登場で目立つのは、速さや安さより「LLM に何を書かせないか」が設計の対象になったことだ。選ぶだけの判断を生成から外すと、残った生成の呼び出しは理由の説明や文章の作成といった、本当に文章が要る仕事に絞られる。ただし、確率が返ってきても閾値を引くのはこちら側で、そのためのラベル付きデータを用意するのは、どのベンダーも代わりにやってくれない。
+    サンドボックスの議論は長く「どれだけ強く閉じ込めるか」だったが、今号の各社の実装が扱っているのは「閉じ込めた中に何を置かないか」だ。隔離の強さを上げても中に本物のキーがあれば意味は薄く、逆にキーを外に出せば、隔離が多少弱くても一度の注入で失うものは小さくなる。次に問われるのは、プロキシを経由して正当に付与された権限そのものをどこまで狭く切れるかだろう。
   </div>
 </div>
 
 <div class="section">
   <div class="section-title">🔗 今号の動向ピックアップ</div>
-  <div class="quick-link"><a href="https://docs.litellm.ai/docs/adaptive_router">LiteLLM、ユーザーの反応から学習するモデルルーター「Adaptive Router」をベータ提供</a><span class="quick-summary">リクエストを 7 種類に分類し、種類ごと・モデルごとの品質推定を、ユーザーの「ありがとう」や言い直しといった反応で更新する。分類も反応の検出も正規表現ベースで LLM の判定器は使っておらず、判定専用モデルを使うルーティングとは逆に、判定のコストを極限まで削った設計の例になる。</span></div>
-  <div class="quick-link"><a href="https://zenn.dev/aws_japan/articles/ac9ae548d57323">LiteLLM Adaptive Router を検証する（前編）：モデル選択と学習の仕組み</a><span class="quick-summary">v1.106.2 のソースを読み、分類が英語の正規表現 16 個による先勝ちで、日本語だけのプロンプトはすべて general に落ちることを確かめた検証記事。ルーティングの判定を安価な仕組みで済ませると多言語で何が起きるかの具体例で、判定専用モデルの多言語評価を自社データで確かめる理由にもなる。</span></div>
+  <div class="quick-link"><a href="https://www.cncf.io/blog/2026/11/09/run-linux-applications-in-hypervisor-isolated-micro-vms-with-hyperlight/">hyperlight-unikraft：Linux プログラムを無改変でハイパーバイザー隔離の micro-VM に載せる</a><span class="quick-summary">CNCF ブログ（11 月 9 日）によると、ゲストはホストが公開した関数しか呼べず、ネットワークとファイルアクセスは既定で無効、numpy などを読み込む Python はスナップショットから 45 ms で起動する。隔離側も「既定で何も渡さない」に寄っており、今号の資格情報を中に置かない設計と同じ方向を向いている。</span></div>
+  <div class="quick-link"><a href="https://opencode.ai/product/browse">OpenCode Browse：ログイン済みの実ブラウザをエージェントに貸す MCP サーバー</a><span class="quick-summary">MCP サーバーと Chromium 拡張で、ユーザーのタブ・ログイン状態・拡張機能をそのままエージェントに使わせ、セッションごとの許可リストで触れるサイトを絞る。Cookie というかたちで資格情報をエージェントの手元に渡す逆向きの設計で、今号のプロキシ方式が扱えない経路をどう縛るかの一例になる。</span></div>
+  <div class="quick-link"><a href="https://blog.cloudflare.com/sandbox-ga/">Cloudflare Sandboxes GA：外向きプロキシで資格情報を注入</a><span class="quick-summary">4 月の GA 発表で、プログラム可能な外向きプロキシがネットワーク層で資格情報を注入し、サンドボックス内のエージェントは資格情報に一切触れないと説明した。本号第 2 節のホスト単位ハンドラの出発点にあたる発表だ。</span></div>
 </div>
 
 <div class="section">
   <div class="section-title">📚 過去号</div>
+  <div class="archive-item"><span class="week">2026-11-14</span><div class="body"><a href="ai-trends/2026-11-14.html">「選ぶだけ」の判断は生成モデルから外れ始めた — 選択肢を一度に採点する専用モデル、確率で決める閾値、ルーティングと検査への配置</a><span class="sub">判定専用モデルは文章を生成せず、事前に与えた選択肢を採点して確率を返す。Gemini Decisions API は 1 リクエストで最大 1,000 問を共有入力に対して評価し、出力トークンは常に 0。Perplexity Decider は複数の質問を 1 回の forward pass で答える</span></div></div>
   <div class="archive-item"><span class="week">2026-11-12</span><div class="body"><a href="ai-trends/2026-11-12.html">エージェントは「終わるまで待つ」をやめ始めた — 窓口と作業者を分ける、ツール結果は後から返す、走っている作業に指示を足す</a><span class="sub">会話の窓口と長い作業を別のループに分ける構成が標準になりつつある。LangChain Deep Agents は起動した瞬間にタスク ID を返す 5 つのツールを持ち、Claude Code はサブエージェントを既定でバックグラウンドで走らせる</span></div></div>
   <div class="archive-item"><span class="week">2026-11-10</span><div class="body"><a href="ai-trends/2026-11-10.html">エージェントの記憶は「溜める」から「手入れする」へ — 読む時に根拠を確かめる、棚卸しはセッションの外で、共有ファイルは PR で直す</a><span class="sub">記憶の正しさは書いた時点では決まらない。GitHub はメモリにコード位置の引用を付け、読み出す時にエージェントが根拠を確かめる方式を採った</span></div></div>
   <div class="archive-item"><span class="week">2026-11-07</span><div class="body"><a href="ai-trends/2026-11-07.html">AI の脆弱性発見は「見つけた数」から「再現と修正を添えて渡す」へ — 動かない仮説は捨てる、受け手の処理量に合わせる、攻撃能力は範囲で縛って配る</a><span class="sub">Mozilla のハーネスは、モデルに再現用のテストケースを作らせて実際に走らせ、再現しない推測を捨ててから報告する。PHP2Shell では、2024 年の監査で悪用可能性を示せずに放置されたバグが、AI を使った調査で動作する RCE の PoC になり、PHP 側が再現を確認してから修正が進んだ</span></div></div>
@@ -215,7 +223,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 </div>
 
 <footer>
-  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="data/ai-trends/2026-11-14.json">data/ai-trends/2026-11-14.json</a>（このページは JSON からの生成物）</p>
+  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="data/ai-trends/2026-11-17.json">data/ai-trends/2026-11-17.json</a>（このページは JSON からの生成物）</p>
   <p style="margin-top:.5rem"><a href="./">📰 日刊ダイジェストに戻る</a></p>
 </footer>
 </div>
