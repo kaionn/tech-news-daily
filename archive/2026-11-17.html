@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-11-17</title>
+  <meta name="description" content="Optimizely Web 経由で 178 組織にマルウェア / M365 障害は 7 月の修正が原因 / Google が自律型エクスプロイト AI を観測">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech News Daily">
+  <meta property="og:title" content="Tech News Daily — 2026-11-17">
+  <meta property="og:description" content="Optimizely Web 経由で 178 組織にマルウェア / M365 障害は 7 月の修正が原因 / Google が自律型エクスプロイト AI を観測">
+  <meta property="og:url" content="https://tech-news.kaion-lab.com/archive/2026-11-17.html">
+  <meta property="og:image" content="https://tech-news.kaion-lab.com/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="../feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-11-17 (Tue)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+      <nav class="site-nav">
+        <a href="../" class="active">📰 日刊ダイジェスト</a>
+        <a href="../trends.html">🔌 週次プラグイントレンド</a>
+        <a href="../ai-trends.html">🧠 AI プロダクト動向</a>
+        <a href="./">🗂 アーカイブ</a>
+      </nav>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 20 articles</span>
+      <span>🏷 7 categories</span>
+      <span>📡 17 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item">
+        <span class="number-value">178</span>
+        <span class="number-label">Optimizely 経由で感染した組織</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">8.9ms</span>
+        <span class="number-label">Hyperlight-Unikraft の Python 起動（従来 199ms）</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">4,597</span>
+        <span class="number-label">富岳・理究の個人情報漏えい可能性（最大）</span>
+      </div>
+    </div>
+
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
+<div class="card featured deep-dive">
+  <div class="card-header">
+    <span class="tag tag-security">Security</span>
+    <span class="content-type">🔒 セキュリティ</span>
+    <h3><a href="https://blog.report-uri.com/worlds-largest-brands-infected-with-malware-via-optimizely/">DEEP DIVE: Optimizely Web 経由で 178 組織にマルウェア配信、Zoom・GitLab・BBC も被害</a></h3>
+  </div>
+  <div class="summary">11月16日、実験プラットフォーム Optimizely Web の顧客プロジェクトの「Project JavaScript」欄に悪意あるコードが書き込まれ、信頼された Optimizely の CDN から各サイトの訪問者へ配信された。被害サイト側のサーバーやコードは侵害されていない。Report URI の調査では、確認できた 1,611 個のスニペットのうち 188 個（178 組織）が感染し、Zoom、BBC、CNN、Salesforce、GitLab、IKEA、HSBC、Equifax などが含まれた。ペイロードは当日 26 回作り直され、暗号資産アドレスのすり替え、フォームからのカード番号・CVV の窃取、Cookie とスクリーンショットの送信を行う。さらに iPhone 向けに Coruna と DarkSword のエクスプロイトチェーンを隠し iframe で読み込み、iOS 18.6 以前では 60 秒ごとにページを再読み込みした。攻撃者のウォレットへの着金は 19:25 UTC 時点で約 7,040 ドルで、当日中に取引所へ送金された。書き込み権限をどう得たかは未特定で、Optimizely から Report URI への応答もなかった。UTC 21:52 の時点で感染が残るスニペットは 1 個まで減った。</div>
+  <div class="editorial">🧠 サードパーティスクリプトの侵害が、自社の CI や本番を一切触らずに 178 組織へ届いた。この構造は特定ベンダーの問題ではなく、タグ配信全般に当てはまる。ただし著者は CSP 製品を販売する会社で、「製品なら検知できた」という記述は独立した検証ではない。侵入経路が未特定の間は、顧客側の認証情報流出か Optimizely 側の侵害かを区別できない点も留保すべきだ。</div>
+  <div class="key-points">
+    <ul>
+      <li>感染 188 スニペット / 178 組織。最多は金融 32、テクノロジー 23、小売 20</li>
+      <li>CSP を調べた 256 組織のうち、ペイロードを完全に遮断できたのは 24（15%）。許可ドメインの指定より厳格な script-src が効き、&#x27;strict-dynamic&#x27; と &#x27;unsafe-eval&#x27; が防御を崩した</li>
+      <li>iOS 18.7.3 以降 / 26.3 以降で更新済みなら Coruna・DarkSword の対象外</li>
+    </ul>
+  </div>
+  <div class="why-it-matters">💡 Optimizely Web を使う組織は Project JavaScript に 1688360.cc や atob( がないか確認し、ユーザー・API トークンをローテーションすること。11月16日に自社フォームへ入力されたカード情報は漏えい扱いが妥当。</div>
+  <div class="meta">
+    <span>Report URI</span>
+    <span class="engagement">▲ 140</span>
+    <span>⏱ 8 min read</span>
+    <span>2026-11-16</span>
+  </div>
+</div>
+<div class="card featured">
+  <div class="card-header">
+    <span class="tag tag-infra">Infra</span>
+    <span class="content-type">📜 解説</span>
+    <h3><a href="https://www.theregister.com/saas/2026/11/16/microsoft-blames-monster-email-outage-on-software-defect-introduced-in-july-fix/5310026">Microsoft、M365 大規模障害の原因は 7 月の修正に混入した不具合と説明</a></h3>
+  </div>
+  <div class="summary">Microsoft は Exchange Online / Outlook の障害について、7月に M365 のネットワークゲートウェイへ入れた変更が原因と説明した。変更には Windows 内部プロセスのロック競合があり、CPU とメモリを使い切る。負荷が低い間は潜伏し、Teams が Exchange を支えるプライマリゲートウェイへフェイルオーバーした際に顕在化した。同時にゲートウェイ容量の約 14% が停止しており、再ルーティングで障害が全体へ波及した。ロード試験はコア数の少ない弱いハードウェアを中心にしており、コア数が多いほど競合が悪化する点を見逃していた。</div>
+  <div class="key-points">
+    <ul>
+      <li>最悪時にサーバーの 80% 超が応答せず、初回サポートケースから緩和策適用まで約 15 時間</li>
+      <li>不具合は 3 か月前の変更で、単純なロールバックができず既知の正常状態へ戻すパッチを作成して順次適用</li>
+      <li>最終報告書は 11月20日に公開予定</li>
+    </ul>
+  </div>
+  <div class="why-it-matters">💡 自社の SLA 設計では、ロック競合のようなコア数依存の不具合が本番ハードウェアでしか出ない前提で試験構成を見直す価値がある。</div>
+  <div class="meta">
+    <span>The Register</span>
+    <span class="engagement">▲ 237</span>
+    <span>⏱ 4 min read</span>
+    <span>2026-11-16</span>
+  </div>
+</div>
+<div class="card featured">
+  <div class="card-header">
+    <span class="tag tag-ai">AI</span>
+    <span class="content-type">🔬 研究</span>
+    <h3><a href="https://www.itmedia.co.jp/news/article/2611/16/2000003244/">Google、人間の関与なしに脆弱性を見つけて悪用する AI フレームワークを初観測</a></h3>
+  </div>
+  <div class="summary">Google Threat Intelligence Group は AI Threat Tracker 第 4 四半期版で、攻撃用サーバー上に置かれた「exploit_agent」を報告した。複数の LLM に対応し、広く使われる Web アプリのパッチ前後のソースを比較して脆弱性を見つけ、エクスプロイトを生成して人手なしで実行する。サーバーには窃取データや他の攻撃者の Webshell を削除するスクリプトも残っていた。北朝鮮関連の UNC6836 は、侵入後に社内リポジトリの Claude Code 設定ファイルを改ざんし、開発者がツールを起動するとバックドアが落ちる仕組みを作っていた。</div>
+  <div class="key-points">
+    <ul>
+      <li>ゼロデイ悪用は 2025 年の月平均 8 件から 2026 年は 11 件、8月は 22 件</li>
+      <li>2026 年 1〜8 月に公開された脆弱性とエクスプロイトは前年同期のほぼ 2 倍</li>
+      <li>LLMJacking では 1 日で 10 万ドル超、最大で累計 100 万ドルの不正請求</li>
+    </ul>
+  </div>
+  <div class="why-it-matters">💡 パッチ公開から攻撃までの猶予が縮むため、重要コンポーネントの更新を週次バッチに頼っている場合は短縮を検討したい。</div>
+  <div class="meta">
+    <span>ITmedia / GTIG</span>
+    <span class="engagement">🔖 50</span>
+    <span>⏱ 4 min read</span>
+    <span>2026-11-16</span>
+  </div>
+</div>
+    </div>
+
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-dev">Dev</span>
+    <span class="content-type">📦 リリース</span>
+    <h3><a href="https://burntsushi.net/jiff/">Jiff 1.0 公開：Rust 向け日時ライブラリが API 安定化</a></h3>
+  </div>
+  <div class="summary">BurntSushi が Rust の日時ライブラリ Jiff の 1.0 を公開した。JavaScript の Temporal API に着想を得ており、IANA タイムゾーンを中心に据えて夏時間の重複・欠落を自動で扱う。1.0 の API を無期限に維持する方針で、他ライブラリの公開依存として使える安定性を狙う。</div>
+  <div class="key-points">
+    <ul>
+      <li>uv、Cargo、Starship、fd、Nushell、mise、Jujutsu、uutils/coreutils が本番で採用</li>
+      <li>Span（暦単位保持）と SignedDuration（96 ビットのナノ秒）の 2 種の期間型。範囲は ±9999 年</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>burntsushi.net</span>
+    <span class="engagement">▲ 323</span>
+    <span>⏱ 5 min read</span>
+    <span>2026-11-15</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-product">Product</span>
+    <span class="content-type">👀 注目</span>
+    <h3><a href="https://xusheng.dev/posts/windows-coding-agent-telemetry/">Windows 11 が使用中のコーディングエージェントを収集していると指摘</a></h3>
+  </div>
+  <div class="summary">Windows 11 の MissionControlAggregator.dll が、copilot.exe、claude.exe、codex.exe、cursor.exe などの起動有無をビットマップで記録し、診断データとして送る。ETW イベントと WSL の Exec イベントから実行ファイル名を照合する仕組みで、プロンプトやソースコードは含まれないと著者は確認した。</div>
+  <div class="key-points">
+    <ul>
+      <li>テンプレートは ReportCohorts&lt;12,4,5&gt;（開発ツール 12 分類、CLI 4 枠、デスクトップ 5 枠）。約 1 日 1 回送信</li>
+      <li>検証した ARM64 VM では有効、公開ベース ISO では無効で、全環境で動くとは限らない</li>
+    </ul>
+  </div>
+  <div class="why-it-matters">💡 オプション診断データを送信しない設定（設定 → プライバシーとセキュリティ → 診断とフィードバック）で止められる。</div>
+  <div class="meta">
+    <span>xusheng.dev</span>
+    <span class="engagement">▲ 304</span>
+    <span>⏱ 6 min read</span>
+    <span>2026-11-16</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-security">Security</span>
+    <span class="content-type">🔒 セキュリティ</span>
+    <h3><a href="https://iter.ca/post/ubo-uxss/">uBlock Origin のエレメントピッカーにワンクリック universal XSS</a></h3>
+  </div>
+  <div class="summary">悪意あるサイトが拡張機能のエレメントピッカーへメッセージを送り、任意の信頼済みフィルターを追加させられた。既定フィルターが起こす XHR を掛け取って拡張の UUID を読み、透明 iframe にピッカーを埋め込む。opt フィールドに改行と scriptlet フィルターを足せば、ユーザーのクリック 1 回で任意サイトに JavaScript を注入できる。</div>
+  <div class="key-points">
+    <ul>
+      <li>影響は Firefox 向け MV2 版が主で、MV3 版 uBO Lite にも軽度の類似問題</li>
+      <li>修正はピッカー起動時に content script から渡す秘密パスワードの検証。アドバイザリは GHSA-cmqw-9r2w-6wv2</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>iter.ca</span>
+    <span class="engagement">● Lobsters 39</span>
+    <span>⏱ 5 min read</span>
+    <span>2026-11-15</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-infra">Infra</span>
+    <span class="content-type">📜 解説</span>
+    <h3><a href="https://www.publickey1.jp/blog/26/vmhyperlight-unikraft.html">軽量マイクロ VM「Hyperlight-Unikraft」、Python 起動が 199ms → 8.9ms</a></h3>
+  </div>
+  <div class="summary">CNCF が紹介した Hyperlight-Unikraft は、VM 管理ライブラリ Hyperlight と Unikernel ツールキット Unikraft を組み合わせ、Linux アプリを再コンパイルなしで隔離 VM 上で動かす。ウォームアップ済みランタイムのスナップショットから起動するため速い。</div>
+  <div class="key-points">
+    <ul>
+      <li>Python スクリプトの起動 199ms が 8.9ms（約 20 分の 1 以下）。1,000 個を 3GB 以内で稼働</li>
+      <li>Python、Node.js、.NET、Java、PHP、Go、Rust など 10 種の実行系に対応。数値は CNCF 発表ベースで未検証</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>Publickey</span>
+    <span class="engagement">🔖 40</span>
+    <span>⏱ 4 min read</span>
+    <span>2026-11-16</span>
+  </div>
+</div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-security">Security</span>
+    <span class="content-type">🔒 セキュリティ</span>
+    <h3><a href="https://piyolog.hatenadiary.jp/entry/2026/11/17/030254">スーパーコンピューター「富岳」への不正アクセスまとめ</a></h3>
+  </div>
+  <div class="summary">理研は11月16日、富岳の運用ネットワークへの不正アクセスを公表した。外部公開のステータス表示ダッシュボードを足がかりに内部サーバーへ侵入し、ユーザーの認証情報やホームディレクトリのファイルを窃取した可能性がある。侵入経路の詳細は調査中。</div>
+  <div class="key-points">
+    <ul>
+      <li>個人情報は最大 4,597 人（富岳 4,222 人、「理究」375 人）。SSH 秘密鍵や外部サービスのアクセスキーも対象</li>
+      <li>侵入は 11/10〜13、11/15 に全ジョブ停止と全ユーザーの公開鍵無効化</li>
+    </ul>
+  </div>
+  <div class="why-it-matters">💡 富岳に保存した認証情報を使う外部サービスでは、鍵の失効と再発行が必要。</div>
+  <div class="meta">
+    <span>piyolog</span>
+    <span class="engagement">🔖 66</span>
+    <span>⏱ 6 min read</span>
+    <span>2026-11-17</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-dev">Dev</span>
+    <span class="content-type">🛠 ツール</span>
+    <h3><a href="https://zenn.dev/kesin11/articles/20261114_github_issue_artifact">GitHub Issue に HTML / Markdown を Artifact として添付できるように</a></h3>
+  </div>
+  <div class="summary">Public Preview の Issue Artifacts は、Issue ページのパネルで HTML と Markdown を表示する。gh issue artifact create でエージェントが生成物を添付でき、ログを details に貼る運用の代わりになる。</div>
+  <div class="key-points">
+    <ul>
+      <li>JavaScript（onclick、canvas アニメーション）と相対パス画像は動かず、CSS アニメーション、SVG、base64 PNG は動く</li>
+      <li>パネル幅が固定のため、図は最大化ボタンで見る必要がある</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>Zenn</span>
+    <span class="engagement">🔖 73</span>
+    <span>⏱ 5 min read</span>
+    <span>2026-11-15</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-frontend">Frontend</span>
+    <span class="content-type">📦 リリース</span>
+    <h3><a href="https://www.publickey1.jp/blog/26/nodejsnpmwebopenvessel.html">Node.js と npm をブラウザ上で実行する「OpenVessel」、神戸ソフトが OSS 公開</a></h3>
+  </div>
+  <div class="summary">ブラウザ内にメモリ上のファイルシステム、プロセス、シグナル、パイプ、シェルからなる最小限の OS 層を実装し、Node.js の JavaScript 部分を無改変で動かす。Astro も動作する。</div>
+  <div class="key-points">
+    <ul>
+      <li>Node.js 26 対応。ブラウザで実行可能な Node.js 自身のテスト 1,237 件が全て通過（神戸ソフト調べ）</li>
+      <li>ps、ls、npm などのコマンドを備え、ブラウザ内でパッケージをインストール可能</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>Publickey</span>
+    <span class="engagement">🔖 54</span>
+    <span>⏱ 3 min read</span>
+    <span>2026-11-17</span>
+  </div>
+</div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-ai">AI</span>
+    <span class="content-type">🛠 ツール</span>
+    <h3><a href="https://opencode.ai/product/browse">OpenCode Browse：実ブラウザをコーディングエージェントに貸す MCP サーバー</a></h3>
+  </div>
+  <div class="summary">Chromium 拡張と MCP サーバーの組で、ログイン済みのタブをエージェントに操作させる。API キー不要で、ログインや 2FA、決済の場面ではタブをユーザーへ返す。</div>
+  <div class="key-points">
+    <ul>
+      <li>Chrome、Edge、Brave、Arc、Vivaldi など Chromium 系に対応。OpenCode、Claude Code、Cursor、Codex、Zed から利用可</li>
+      <li>エージェントのタブを許可サイトに限定でき、背景タブで開く</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>opencode.ai</span>
+    <span class="engagement">▲ 144</span>
+    <span>⏱ 3 min read</span>
+    <span>2026-11-16</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-oss">OSS</span>
+    <span class="content-type">📦 リリース</span>
+    <h3><a href="https://aphyr.com/posts/428-announcing-hegel-clj">Hegel-clj 0.1.1：Clojure 向けプロパティベーステスト</a></h3>
+  </div>
+  <div class="summary">Aphyr が公開した、生成テストライブラリ Hegel の Clojure インターフェース。ジェネレーターを再実行して小さい値を作る内部縮小方式で、bind 系ジェネレーターの縮小が弱い test.check の問題を避ける。</div>
+  <div class="key-points">
+    <ul>
+      <li>記事の例で test.check は失敗ベクタを 39 要素までしか縮められず、Hegel-clj は最小の [42] に到達</li>
+      <li>clojure.test 連携の with マクロで deftest と同じ書き方が可能</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>aphyr.com</span>
+    <span class="engagement">● Lobsters 39</span>
+    <span>⏱ 4 min read</span>
+    <span>2026-11-15</span>
+  </div>
+</div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
+<div class="quick-link">
+  <span class="tag tag-dev">Dev</span>
+  <a href="https://www.cs.cmu.edu/learn/">Carnegie Mellon が CS 講義を YouTube で無料公開</a>
+  <span class="quick-summary">— HN で 845 ポイントを集めた。</span>
+  <span class="meta">CMU</span>
+</div>
+<div class="quick-link">
+  <span class="tag tag-infra">Infra</span>
+  <a href="https://apnews.com/article/bank-outage-chase-wells-fargo-truist-50fee2693c22f597fa6ca51a97ef2cda">JPMorgan Chase の技術障害で米銀のオンラインバンキングが遅延</a>
+  <span class="quick-summary">— 複数行に影響が出た（AP）。</span>
+  <span class="meta">AP News</span>
+</div>
+<div class="quick-link">
+  <span class="tag tag-dev">Dev</span>
+  <a href="https://blog.rust-lang.org/2026/11/16/enabling-parallel-frontend-on-nightly/">Rust nightly で並列フロントエンドを有効化</a>
+  <span class="quick-summary">— nightly 向けに並列フロントエンドが既定で有効になる告知。</span>
+  <span class="meta">Rust Blog</span>
+</div>
+<div class="quick-link">
+  <span class="tag tag-oss">OSS</span>
+  <a href="https://yorickpeterse.com/articles/migrating-from-github-to-codeberg/">GitHub から Codeberg への移行記</a>
+  <span class="quick-summary">— Lobsters で 67 点。</span>
+  <span class="meta">yorickpeterse.com</span>
+</div>
+<div class="quick-link">
+  <span class="tag tag-dev">Dev</span>
+  <a href="https://theconsensus.dev/p/2026/11/08/c-memory-management-survey.html">主要 40 の C プロジェクトにおけるメモリ管理の調査</a>
+  <span class="quick-summary">— 各プロジェクトの確保・解放の流儀を比較。</span>
+  <span class="meta">theconsensus.dev</span>
+</div>
+<div class="quick-link">
+  <span class="tag tag-ai">AI</span>
+  <a href="https://www.harmonic.fun/news/aristotle-rust-verification/">Harmonic の Aristotle が Rust の形式検証に対応</a>
+  <span class="quick-summary">— HN 107 ポイント。</span>
+  <span class="meta">Harmonic</span>
+</div>
+<div class="quick-link">
+  <span class="tag tag-security">Security</span>
+  <a href="https://zenn.dev/yasuakiomokawa/articles/89f5c46e8effe9">実践パスキー認証設計</a>
+  <span class="quick-summary">— Zenn のトレンド入り記事。</span>
+  <span class="meta">Zenn</span>
+</div>
+<div class="quick-link">
+  <span class="tag tag-dev">Dev</span>
+  <a href="https://zenn.dev/linkedge/articles/claude-code-instead-of-reading-code">Claude Code が書いたコードを読む代わりにやっていること</a>
+  <span class="quick-summary">— AI 生成コードのレビュー代替手法を紹介する Zenn 記事。</span>
+  <span class="meta">Zenn</span>
+</div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="./" class="archive-link">🗂 過去のダイジェスト</a>
+    </footer>
+  </div>
+</body>
+</html>
