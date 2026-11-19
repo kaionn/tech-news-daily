@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI プロダクト動向 | Tech News Daily</title>
-<meta name="description" content="サンドボックスはエージェントが動かすコードをホストから隔離する。それでも、API キーを環境変数で渡していれば、隔離された中で printenv を叩くだけで読めてしまう。プロンプトインジェクションで「この値を外部に送れ」と指示されたら、…">
+<meta name="description" content="社内で動いているエージェントの一覧を正確に出せる組織はほとんどない。Copilot Studio や Agentforce で作られた業務エージェントは管理画面に残る。一方、開発者が手元で起動する Claude Code や GitHub…">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Tech News Daily">
-<meta property="og:title" content="エージェントに秘密を渡さない設計へ — 資格情報はサンドボックスの外で付ける、宛先に縛る、届かない経路は先に洗い出す | AI プロダクト動向">
-<meta property="og:description" content="サンドボックスはエージェントが動かすコードをホストから隔離する。それでも、API キーを環境変数で渡していれば、隔離された中で printenv を叩くだけで読めてしまう。プロンプトインジェクションで「この値を外部に送れ」と指示されたら、…">
+<meta property="og:title" content="エージェントの台帳は「届け出」から「見つけて載せる」へ — 端末から検出する、他社基盤は同期で集める、ツール側から逆引きする | AI プロダクト動向">
+<meta property="og:description" content="社内で動いているエージェントの一覧を正確に出せる組織はほとんどない。Copilot Studio や Agentforce で作られた業務エージェントは管理画面に残る。一方、開発者が手元で起動する Claude Code や GitHub…">
 <meta property="og:url" content="https://tech-news.kaion-lab.com/ai-trends.html">
 <meta property="og:image" content="https://tech-news.kaion-lab.com/og.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -74,7 +74,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 <div class="container">
 <header>
   <h1>🧠 AI プロダクト動向</h1>
-  <p class="date">2026-11-17 発行（読了 10 分）</p>
+  <p class="date">2026-11-19 発行（読了 9 分）</p>
   <p class="tagline">実プロダクトのアーキテクチャ・使用例から AI 開発の現在地を週 3 回・1 号 1 テーマで深掘り</p>
   <nav class="site-nav">
     <a href="./">📰 日刊ダイジェスト</a>
@@ -85,93 +85,82 @@ footer a{color:var(--primary-500);text-decoration:none}
 </header>
 
 <div class="theme-hero">
-  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">CREDENTIAL-ISOLATION</span></span>
-  <h2>エージェントに秘密を渡さない設計へ — 資格情報はサンドボックスの外で付ける、宛先に縛る、届かない経路は先に洗い出す</h2>
-  <p class="lede">サンドボックスはエージェントが動かすコードをホストから隔離する。それでも、API キーを環境変数で渡していれば、隔離された中で printenv を叩くだけで読めてしまう。プロンプトインジェクションで「この値を外部に送れ」と指示されたら、キーはそのまま外に出る。そこで 2026 年後半の実行基盤は、サンドボックスの中に本物の秘密を置かない構成に揃い始めた。11 月 12 日に Anthropic が private beta で公開した self-hosted Claude Managed Agents は、資格情報をサンドボックス外のプロキシで付与する構成をそのまま顧客環境に持ち込める。Docker Sandboxes（sbx）は 11 月の 2 回のリリースで、秘密の差し替え先を宛先ホストに限定する変更を入れた。今号は、秘密をどこで付けるか、どの宛先に縛るか、プロキシが届かない経路をどう扱うかを各社の実装で並べる。</p>
+  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">AGENT-INVENTORY</span></span>
+  <h2>エージェントの台帳は「届け出」から「見つけて載せる」へ — 端末から検出する、他社基盤は同期で集める、ツール側から逆引きする</h2>
+  <p class="lede">社内で動いているエージェントの一覧を正確に出せる組織はほとんどない。Copilot Studio や Agentforce で作られた業務エージェントは管理画面に残る。一方、開発者が手元で起動する Claude Code や GitHub Copilot CLI、各チームが AWS や Google Cloud で個別に立てたエージェントは、誰も届け出ないまま増えていく。11 月 17 日の Microsoft Ignite 2026 で Agent 365 は、端末上のローカルエージェント検出を GA にし、他社基盤のエージェントを同期で取り込む機能をプレビューで広げた。前日の 16 日には Okta が、CrowdStrike Falcon のセンサー経由で端末上のエージェントと MCP サーバーを見つける機能を説明している。同じ 17 日に GitHub は、Copilot のセッションの監査データを Agent 365 に流せるようにした。今号は、台帳への入口をどこに置くか、他社基盤のエージェントをどう集めるか、ツールから何を逆引きするかを各社の実装で並べる。</p>
 </div>
 
 <div class="tldr">
   <div class="label">TL;DR — 3 行で</div>
   <ul>
-    <li>本物の資格情報をサンドボックスの外のプロキシに持たせ、外向きリクエストに付与する構成が実行基盤の標準になりつつある。中のエージェントが見るのは proxy-managed のようなプレースホルダだけで、環境変数を読まれても漏れるのは偽の値になる</li>
-    <li>付与する宛先は秘密ごとに固定する。Docker sbx 0.51.0 は宛先ホストを持たないカスタムシークレットの差し替えを止め、Cloudflare Sandboxes は allowedHosts を設定すると既定拒否に切り替わる。宛先を縛らないプロキシは、どこへでも本物のキーを付けて送る中継器になる</li>
-    <li>プロキシで守れる範囲には限りがある。Anthropic は対象を MCP ツールと対応 API 呼び出しに限っていると明記し、それ以外のサービスは本番前に確認するよう求めている。Blaxel は、任意のコードはプロキシ設定の環境変数を無視できるため、直接接続を塞ぐネットワーク境界が別に要ると書いている</li>
+    <li>台帳に載せる入口が、開発者や部門の届け出から、端末と通信の検出に移っている。Microsoft Defender は Claude Code や Copilot CLI を含む 60 種以上のローカルエージェントを検出し、端末と利用者に紐付ける（GA）。Okta は既存の CrowdStrike センサーを使い、OAuth 同意には現れないエージェントと MCP サーバーを拾う</li>
+    <li>他社基盤のエージェントは、各基盤の管理画面を見て回るのではなく、一つの台帳への同期で集める。Agent 365 は対応基盤を一度接続すれば、エージェントのコードを変えずに登録簿へ同期する（プレビュー）。Okta も AWS Bedrock や Agentforce からの取り込みに対応した</li>
+    <li>台帳はエージェントの一覧で終わらない。Agent 365 の tools registry（GA）は、エージェントが使うツールと MCP サーバーを集約し、遮断する前に依存しているエージェントを確認できる。GitHub は Copilot のプロンプト・応答・ツール呼び出しを監査ストリームとして台帳側へ送れるようにした</li>
   </ul>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 1: 資格情報はサンドボックスの外で付ける</div>
+  <div class="section-title">📐 パターン 1: 台帳への入口を届け出から検出に移す</div>
   <div class="theme-section">
-    <p>構成の要点は、エージェントのコードが動く場所と本物の秘密がある場所を分けることだ。サンドボックスの外向き通信はすべてホスト側か基盤側のプロキシを通る。プロキシは宛先を見て対応する資格情報を引き、<code>Authorization</code> などの認証ヘッダーを書き換えてから転送する。サンドボックスの中では、環境変数にもファイルにも本物の値はない。Docker sbx の場合、エージェントが見る値は <code>proxy-managed</code> という番兵文字列で、カスタムシークレットでは <code>sbx-cs-&lt;rand&gt;</code> 形式になる。OAuth もホスト側でサインインするため、トークンはサンドボックスに入らない。エージェントのコードやツールは、キーが入っている前提で普通に HTTP を呼べばよく、書き換えは要らない。</p><p>この形に収束したのは、プロンプトインジェクションへの対策を「モデルが騙されないこと」に頼れないからだ。エージェントは読んだ Web ページや Issue の文面に従ってシェルを叩くことがあり、サンドボックスはそのコードを止めない。止めるのはホストへの侵入であって、中にある値の持ち出しではない。秘密を最初から中に置かなければ、指示に従って <code>printenv</code> を実行されても、送り出されるのは偽の値で済む。環境変数で渡す方式は、秘密をモデルのコンテキストからは外せても、サンドボックス内のプロセスからは外せない。各社がプロキシ方式に寄せているのはこの差による。</p>
+    <p>これまでのエージェント管理は、管理者が作成を許可した場所、つまり Copilot Studio のようなノーコード基盤の管理画面に記録が残る前提で組まれていた。開発者が端末で <code>claude</code> や <code>copilot</code> を起動する場合、その前提は成り立たない。新しい構成では、すでに配備されている EDR やネットワーク経路からエージェントを見つける。Microsoft は Defender で管理下の Windows と macOS の端末を走査し、見つけたエージェントを端末と利用者に結び付けて登録簿に入れる。Global Secure Access は通信の側から、各エージェントが接続する宛先や MCP サーバーを見る。Okta は CrowdStrike Falcon のセンサーを情報源にし、専用の常駐ソフトを追加せずに端末上のエージェントと接続先の MCP サーバーを検出する。</p><p>入口が検出に移ったのは、ローカルエージェントの多くが、従来の SaaS 管理で使ってきた OAuth 同意の記録に現れないからだ。Okta は、ブラウザの外で動くエージェントは OAuth の同意からは見えないと書いている。CLI エージェントは開発者の資格情報でそのまま動くため、認可サーバーには利用者本人の操作としか記録されない。届け出制では、登録の手間をかけない人ほど台帳から漏れる。検出は、まず存在を把握してから所有者や制御を後付けする順番に入れ替える。Microsoft は 5 月の GA 時点では検出対象を OpenClaw から始め、Copilot CLI と Claude Code を予定としていた。11 月にはその 2 つを含む 60 種以上まで対象を広げている。</p>
     <div class="example">
-      <div class="product">Claude Managed Agents（self-hosted、private beta）</div>
-      <div class="approach">エージェントループ・セッション履歴・vault の秘密をサンドボックスの外に置き、MCP ツールと対応 API 呼び出しには外部プロキシが資格情報を付ける。self-hosted では顧客自身のシークレットマネージャーに秘密を置ける</div>
-      <div class="detail">11 月 12 日の公式記事によると、ハーネス（モデルを呼ぶ側）とサンドボックス（コードを実行する側）は設計上分離されており、サンドボックスはツールが必要になった時点で起動する。self-hosted 版では Managed Agents サーバー、セッション履歴を持つデータベース、シェルとファイル操作を実行するワーカーを顧客が自分のクラウドかオンプレミスで運用する。モデル本体は引き続き Anthropic 側（または Bedrock などのクラウド、顧客のゲートウェイ経由）で動く</div>
-      <a href="https://claude.com/resources/articles/self-hosted-claude-managed-agents">📄 一次ソース</a>
+      <div class="product">Microsoft Agent 365 + Defender / Global Secure Access</div>
+      <div class="approach">Defender が管理端末上のローカルエージェントを検出して端末・利用者と紐付け（GA）、Global Secure Access が宛先・MCP サーバーへの通信を可視化し、シャドー AI として登録簿に追加する（いずれもプレビュー）</div>
+      <div class="detail">Ignite 2026 の公式記事は、Defender と Global Secure Access が Claude Code や GitHub Copilot CLI を含む 60 種以上のローカル AI エージェントを検出すると明記している。検出後の制御も同じ記事で示されており、Windows 上ではエージェントループを検査して悪意ある指示を遮断するランタイム保護が GA、Intune によるファイル・ネットワーク境界の設定はプレビューとなっている。検出から制御までを一つの製品群で扱う構成の代表例だ。</div>
+      <a href="https://techcommunity.microsoft.com/blog/agent-365-blog/whats-new-in-microsoft-agent-365-ignite-2026/4571753">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">Docker Sandboxes（sbx）</div>
-      <div class="approach">ホスト側の HTTP/HTTPS プロキシが外向きリクエストを横取りし、宛先に対応する資格情報を OS のキーチェーンから引いて認証ヘッダーを上書きする</div>
-      <div class="detail">公式ドキュメントによると、秘密は macOS Keychain・Windows Credential Manager・Linux Secret Service に保存され、1Password や AWS Secrets Manager を参照する設定もできる。参照先の値はホスト側で解決し、既定で 55 分キャッシュする。Git 操作には SSH エージェント転送を使い、秘密鍵はホストに残る。ただし kit が passthrough: true を指定すると本物の OAuth トークンがサンドボックスに入り、隔離が弱まることもドキュメント自身が明記している</div>
-      <a href="https://docs.docker.com/ai/sandboxes/configuration/credentials/">📄 一次ソース</a>
+      <div class="product">Okta for AI Agents（Shadow AI Agent Discovery for Endpoints）</div>
+      <div class="approach">既存の CrowdStrike Falcon センサーを情報源にして端末上のエージェントと MCP サーバーを検出し、Universal Directory に固有の ID で登録、認証済みの人間アカウントを所有者として紐付ける</div>
+      <div class="detail">11 月 16 日の公式ブログは、ブラウザの外で動くエージェントは OAuth の同意からは見えない、という理由で端末側の検出を足したと説明している。登録後は Agent Gateway がツール呼び出しごとにポリシーを適用し、異常があればキルスイッチで接続先へのアクセスを止める。所有者が異動・退職した場合やサブエージェントが生成された場合も、所有関係を追跡し続けるとしている。次の情報源として Okta Verify と他社 EDR を挙げており、現時点で検出元は CrowdStrike に限られる。</div>
+      <a href="https://www.okta.com/blog/ai/shadow-ai-agent-discovery/">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> エージェント実行環境を棚卸しするときは、まずサンドボックス内で env を実行し、本物の API キーが見えるかを確かめる。見えるなら、隔離の強さに関係なく、プロンプトインジェクション一回で持ち出される状態にある。プロキシ方式への移行は、アプリのコードを変えずに環境変数の値を番兵に置き換えるところから始められる。</div>
+    <div class="takeaway"><strong>示唆:</strong> 台帳づくりを利用申請フォームから始めない。まず EDR とプロキシのログから、どの端末で何のエージェントが動き、どこへ接続しているかを出す。届け出は、検出したエージェントに所有者を確定させる手続きとして後から付ける。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 2: 秘密は宛先ホストに縛る</div>
+  <div class="section-title">📐 パターン 2: 他社基盤のエージェントは同期で一つの台帳に集める</div>
   <div class="theme-section">
-    <p>プロキシに秘密を預けただけでは足りない。どの宛先へのリクエストにその秘密を付けるかを決めていなければ、プロキシは攻撃者のサーバーへのリクエストにも本物のキーを付けて送ってしまう。そこで各社とも、秘密と宛先ホストを一対一か一対多で結び付けて登録させる。Docker sbx は組み込みの 11 サービス（<code>anthropic</code>、<code>github</code>、<code>openai</code> など）ごとに注入先ドメインを固定し、それ以外のドメインには付けない。たとえば組み込みの <code>github</code> は <code>npm.pkg.github.com</code> には付かないので、GitHub Packages から private パッケージを取るには、そのホスト用のカスタムシークレットを別に登録する。Cloudflare Sandboxes では <code>outboundByHost</code> にホストごとのハンドラを書き、その中でヘッダーを付ける。<code>ctx.containerId</code> を使えばインスタンスごとに違う資格情報を割り当てられる。</p><p>宛先を縛る仕組みは、外向き通信の許可リストと同じ層に置かれるようになった。Cloudflare では <code>allowedHosts</code> を設定した時点で既定拒否になる。<code>setOutboundHandler()</code> を使えば、再起動なしでインスタンスごとに方針を切り替えられる。<code>npm install</code> の間だけ通信を開け、その後は 403 を返すハンドラに替える使い方も例示されている。Docker sbx は 11 月 3 日の 0.51.0 で、宛先ホストを持たないカスタムシークレットの差し替えを止めた。既存の設定は宛先ホストを明示すれば直る。「どこに付けるか」を書かない秘密は使えない、という既定への変更だ。資格情報の管理と通信の許可を別の設定ファイルで持つと、片方だけ緩む隙間ができる。両者を同じ宛先リストで管理する方向に寄っているのはそのためだと考えられる。</p>
+    <p>二つ目の流れは、他社基盤のエージェントを台帳へ同期することだ。エージェントは一つのクラウドに収まらない。営業部門は Agentforce、データ基盤チームは Databricks や Snowflake、開発チームは Bedrock や Vertex AI で作る。Agent 365 の connected platforms は、対応基盤を一度接続すれば、そこで作られたエージェントをエージェント側のコード変更なしに登録簿へ同期する。同期したエージェントには Microsoft Entra の Agent ID を発行し、他の ID と同じ条件付きアクセスやリスク評価の対象にする。接続時の認証にはワークロード ID フェデレーションを使い、長期間有効なシークレットを保存しない。</p><p>エージェントのコードに SDK を入れて自己申告させる方式を取らないのは、台帳の網羅性を各チームの実装に依存させないためだ。基盤側の API から一覧を取れば、登録を忘れたエージェントも、退職者が残していったエージェントも同じように拾える。Okta も Bedrock や Agentforce からの取り込みに対応しており、ID 管理側と生産性スイート側の双方が、自社を他社基盤の上位に置く集約点を狙っている。ただし同期できる情報は基盤によって差がある。Microsoft 自身も、機能は基盤ごとに異なり、Entra Agent ID の対応完了は 12 月だとしている。導入前には、どの基盤から何の属性が取れるかを確かめる必要がある。</p>
     <div class="example">
-      <div class="product">Cloudflare Sandboxes（Outbound Workers）</div>
-      <div class="approach">外向き通信を Workers ランタイム上のハンドラで処理し、ホスト単位で資格情報を付ける。allowedHosts / deniedHosts と実行時のハンドラ差し替えで、インスタンスごとの通信方針を持つ</div>
-      <div class="detail">公式の changelog によると、ハンドラはサンドボックスの外の Workers ランタイムで動くため、サンドボックスからは見えない秘密を保持できる。Worker 環境の秘密をローテーションすると次のリクエストから反映される。HTTPS を中継するため、インスタンスごとに使い捨ての CA を用意し、その秘密鍵はコンテナランタイムのサイドカープロセスの外に出さない。インスタンス間で鍵は共有しない</div>
-      <a href="https://developers.cloudflare.com/changelog/post/2026-04-13-sandbox-outbound-workers-tls-auth/">📄 一次ソース</a>
+      <div class="product">Microsoft Agent 365（connected platforms / Entra Agent ID）</div>
+      <div class="approach">対応基盤を一度接続するとエージェントをコード変更なしで登録簿に同期し、Entra Agent ID を付与する。Salesforce Agentforce・Amazon AgentCore・Google Vertex AI への ID 対応を 12 月に完了予定（プレビュー）</div>
+      <div class="detail">5 月の GA 時点では、Bedrock と Google Cloud との同期は一覧の作成までで、起動・停止・削除といったライフサイクル操作は今後の予定とされていた。Ignite では同期対象を広げたうえで、非アクティブなエージェントや所有者のいないエージェントを洗い出す Action center を 12 月にプレビューで出すと発表した。一覧を作るだけでなく、棚卸しの作業まで台帳側で扱う方向に進んでいる。</div>
+      <a href="https://techcommunity.microsoft.com/blog/agent-365-blog/whats-new-in-microsoft-agent-365-ignite-2026/4571753">📄 一次ソース</a>
     </div>
-    <div class="example">
-      <div class="product">Docker Sandboxes 0.51.0 / 0.53.0</div>
-      <div class="approach">宛先ホストを持たないカスタムシークレットは差し替えない既定に変更（11 月 3 日）。11 月 11 日の 0.53.0 では Claude Code の Remote Control でも環境とセッションの資格情報をホストに残す</div>
-      <div class="detail">リリースノートによると、0.51.0 では標準入力から秘密を読む --value-stdin も追加され、値がコマンド引数やシェル履歴に残らなくなった。ポリシー一覧では暗黙の既定拒否を明示的な拒否ルールと区別して表示するようになった。sbx policy は空の --sandbox 指定を拒否し、全サンドボックスへ誤って適用されるのを防ぐ。10 月 26 日の 0.50.0 では、MCP の OAuth リクエストで別オリジンへの資格情報リダイレクトを遮断している</div>
-      <a href="https://docs.docker.com/ai/sandboxes/release-notes/">📄 一次ソース</a>
-    </div>
-    <div class="takeaway"><strong>示唆:</strong> 秘密を登録するときは、値と一緒に「付けてよい宛先ホスト」を必ず書く。宛先が空でも動く設定は、プロキシを経由した持ち出し経路になる。外向き通信の許可リストと資格情報の宛先リストは別々に管理せず、同じ一覧から両方を作るほうが、片方だけ緩む事故を防ぎやすい。</div>
+    <div class="takeaway"><strong>示唆:</strong> エージェント基盤を選ぶ際は、エージェントの一覧と所有者を API で外部に出せるかを確認項目に加える。管理画面でしか一覧を見られない基盤は、全社の台帳に入れられず、棚卸しのたびに人手で突き合わせることになる。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 3: プロキシが届かない経路を先に洗い出す</div>
+  <div class="section-title">📐 パターン 3: ツールと活動記録から逆引きする</div>
   <div class="theme-section">
-    <p>プロキシ方式は、通信がプロキシを通ることを前提にしている。多くの実装は <code>HTTPS_PROXY</code> などの環境変数でクライアントを向けるが、エージェントが書いた任意のコードはそれを無視して直接接続できる。Blaxel はこの点を明記し、プロキシ経由の通信に対するドメインフィルタとは別に、直接接続を塞ぐネットワーク境界が要るとしている。差し替えの範囲にも限りがある。Docker sbx のカスタムシークレットは HTTP ヘッダーだけを置き換え、リクエストボディ内のプレースホルダは置き換えない。Linux でキーチェーンがない環境では、秘密は権限 <code>0700</code> のファイルに保存される。そのファイルを読めるユーザーやプロセスからは取り出せる、とドキュメント自身が書いている。</p><p>各社がこうした制限を製品ページで先に開示しているのは、プロキシ方式が「入れれば全部守られる」仕組みではないからだ。Anthropic の self-hosted 版の記事も、プロキシで守るのは MCP ツールと対応 API 呼び出しだけだと書いている。エージェントが使う他のサービスは本番投入前に確認するよう求め、許可リストの設定と運用は顧客のファイアウォール側の責任だとしている。秘密の置き場所もプロキシ自体も、実行基盤から切り出して独立に運用できるようになった。Infisical の Agent Proxy は CLI に同梱されてローカルで動くほか、Docker コンテナとして別ホストに置き、ネットワーク上の複数エージェントに共有させる構成も選べる。移行の際は、守られる経路の一覧より先に、守られない経路の一覧を作るほうが確かだ。</p>
+    <p>三つ目は、台帳の軸をエージェントだけでなくツールと活動記録にも広げる動きだ。Agent 365 の tools registry（GA）は、エージェントが使っているツールを一か所に集め、よく使われるものとリスクの高いものを示す。Azure AI Gateway や LiteLLM 経由の MCP サーバーも同じ画面で扱い（プレビュー）、管理者は MCP サーバーを遮断する前に、それに依存するエージェントやプラグインを確認できる。活動記録も台帳側に寄せられている。GitHub は 11 月 17 日から、Copilot のクラウドエージェント・CLI・VS Code・JetBrains などのクライアントの監査データを Agent 365 に流せるようにした。対象はセッションのプロンプト、応答、ツール呼び出しで、Enterprise Managed Users 構成の GitHub Enterprise Cloud に限られる。</p><p>逆引きが必要なのは、エージェントの危険度が、エージェントそのものより、どのツールにどの権限でつながっているかで決まるからだ。問題のある MCP サーバーが見つかったとき、エージェント単位の一覧しかなければ、影響を受けるエージェントを一つずつ調べることになる。ツール側から引ければ、遮断の影響範囲を先に把握できる。活動記録の集約も同じ理屈による。Microsoft の Dynamic agent risk（プレビュー）は、実行時のシグナルと接続範囲を合わせて、エージェントごとに一つのリスク水準を出す。製品の外にあるセッション記録が入ってこなければ、この評価は管理画面の設定値でしか計算できない。</p>
     <div class="example">
-      <div class="product">Blaxel（サンドボックス）</div>
-      <div class="approach">{{SECRET:name}} で参照する秘密をプロキシのルーティングルールの destinations に結び付けて注入する。秘密は暗号化保存の書き込み専用で、API レスポンスで返さない</div>
-      <div class="detail">10 月 7 日の公式ブログによると、Stripe 用の鍵は OpenAI へのリクエストには付かないよう、スコープをルール単位で持つ。一方で、ドメインフィルタはプロキシ経由の通信にしか効かず、プロキシの環境変数を守るツールが前提だと認めている。任意のコードはその変数を無視できるため、完全に強制するには直接接続を遮断する別のネットワーク境界が要るとしている</div>
-      <a href="https://blaxel.ai/blog/prompt-injection-defense-credential-separation">📄 一次ソース</a>
+      <div class="product">GitHub Copilot → Microsoft Agent 365（監査ストリーミング）</div>
+      <div class="approach">Copilot の各クライアントでのセッション（プロンプト・応答・ツール呼び出し）を enterprise の監査ログストリーミングで Agent 365 に送り、Purview と Defender で調査に使う</div>
+      <div class="detail">11 月 17 日の GitHub Changelog によると、対象はクラウドエージェント、Copilot CLI、VS Code、Visual Studio、JetBrains や Eclipse などのパートナー IDE にまたがる。コーディングエージェントの提供元が、自社の管理画面に記録を閉じず、顧客の選んだ統制基盤へ活動記録を出している点が重要だ。仕組みは既存の監査ログストリーミングを使っており、新しい連携プロトコルを作っていない。</div>
+      <a href="https://github.blog/changelog/2026-11-17-monitor-github-copilot-activity-through-microsoft-agent-365/">📄 一次ソース</a>
     </div>
-    <div class="example">
-      <div class="product">Infisical Agent Proxy</div>
-      <div class="approach">エージェントとプロキシに別々のマシン ID を割り当て、プロキシ対象サービスごとにホスト名・認証方式・付与する秘密を定義する独立した資格情報ブローカー</div>
-      <div class="detail">公式ブログによると、Infisical CLI に同梱されるほか Docker コンテナとしても配布され、サイドカーや共有プライベートネットワーク上など、エージェントに近い別ホストに置く構成を推奨している。静的な秘密に加えて動的シークレットも扱え、監査ログ・RBAC・ローテーションは Infisical 本体の機能を引き継ぐ。前身はオープンソースの Agent Vault</div>
-      <a href="https://infisical.com/blog/agent-proxy">📄 一次ソース</a>
-    </div>
-    <div class="takeaway"><strong>示唆:</strong> プロキシ方式を入れる前に、エージェントが通信する先を全部書き出し、それぞれ「プロキシ経由で付与」「付与なしで許可」「遮断」のどれにするかを決める。どれにも入らない経路があれば、直接接続を塞ぐネットワーク境界が揃うまで、その経路の資格情報は環境変数で渡さない。</div>
+    <div class="takeaway"><strong>示唆:</strong> 社内で MCP サーバーやツールを提供する側は、どのエージェントから呼ばれたかを記録しておく。台帳がエージェント側の一覧しか持たないと、ツールに問題が見つかったときに遮断の影響を事前に見積もれない。</div>
   </div>
   <div class="editorial">
     <span class="label">✍️ 編集後記</span>
-    サンドボックスの議論は長く「どれだけ強く閉じ込めるか」だったが、今号の各社の実装が扱っているのは「閉じ込めた中に何を置かないか」だ。隔離の強さを上げても中に本物のキーがあれば意味は薄く、逆にキーを外に出せば、隔離が多少弱くても一度の注入で失うものは小さくなる。次に問われるのは、プロキシを経由して正当に付与された権限そのものをどこまで狭く切れるかだろう。
+    エージェントの統制というと、何を許可するかを決めるポリシーの話になりやすい。今週の発表で各社が先に整えたのは、何が動いているかを数える仕組みだった。数えられないものには、ポリシーを書いても適用先がない。届け出を待たずに見つけ、所有者は後から確定させる。この順番に切り替えたことが、今回の変化の中心にある。
   </div>
 </div>
 
 <div class="section">
   <div class="section-title">🔗 今号の動向ピックアップ</div>
-  <div class="quick-link"><a href="https://www.cncf.io/blog/2026/11/09/run-linux-applications-in-hypervisor-isolated-micro-vms-with-hyperlight/">hyperlight-unikraft：Linux プログラムを無改変でハイパーバイザー隔離の micro-VM に載せる</a><span class="quick-summary">CNCF ブログ（11 月 9 日）によると、ゲストはホストが公開した関数しか呼べず、ネットワークとファイルアクセスは既定で無効、numpy などを読み込む Python はスナップショットから 45 ms で起動する。隔離側も「既定で何も渡さない」に寄っており、今号の資格情報を中に置かない設計と同じ方向を向いている。</span></div>
-  <div class="quick-link"><a href="https://opencode.ai/product/browse">OpenCode Browse：ログイン済みの実ブラウザをエージェントに貸す MCP サーバー</a><span class="quick-summary">MCP サーバーと Chromium 拡張で、ユーザーのタブ・ログイン状態・拡張機能をそのままエージェントに使わせ、セッションごとの許可リストで触れるサイトを絞る。Cookie というかたちで資格情報をエージェントの手元に渡す逆向きの設計で、今号のプロキシ方式が扱えない経路をどう縛るかの一例になる。</span></div>
-  <div class="quick-link"><a href="https://blog.cloudflare.com/sandbox-ga/">Cloudflare Sandboxes GA：外向きプロキシで資格情報を注入</a><span class="quick-summary">4 月の GA 発表で、プログラム可能な外向きプロキシがネットワーク層で資格情報を注入し、サンドボックス内のエージェントは資格情報に一切触れないと説明した。本号第 2 節のホスト単位ハンドラの出発点にあたる発表だ。</span></div>
+  <div class="quick-link"><a href="https://www.microsoft.com/en-us/security/blog/2026/05/01/microsoft-agent-365-now-generally-available-expands-capabilities-and-integrations/">Microsoft Agent 365 が GA、ローカルエージェント検出と Bedrock / Google Cloud 同期を予告（5 月）</a><span class="quick-summary">Agent 365 の GA 時の発表で、ローカルエージェントの検出を OpenClaw から始め、Bedrock と Google Cloud の登録簿同期をプレビューで提供するとした。今号で紹介した 11 月の拡張と比べると、半年で検出対象と同期先がどこまで広がったかが分かる。</span></div>
+  <div class="quick-link"><a href="https://www.okta.com/newsroom/press-releases/ai-innovations-oktane-2026/">Okta、Oktane 2026 で Agent Gateway と端末のシャドーエージェント検出を発表（9 月）</a><span class="quick-summary">ツール呼び出しの経路に入る Agent Gateway と、Bedrock や Agentforce からのエージェント取り込みを発表した。11 月の端末検出の記事の前提になった発表で、ID 管理側が台帳と実行時制御を一続きにしようとしていることが分かる。</span></div>
+  <div class="quick-link"><a href="https://github.blog/changelog/2026-11-16-github-copilot-weekly-releases-november-9/">VS Code の Agents ウィンドウに、全ワークスペースのセッションをまとめる Inbox mode</a><span class="quick-summary">GitHub Copilot の週次リリースで、全ワークスペースのエージェントセッションを一画面に並べ、対応が必要なものを先頭に出す実験的機能が入った。組織の台帳と同じく、開発者個人の手元でも、並行して動くエージェントを一か所で把握する必要が出てきている。</span></div>
 </div>
 
 <div class="section">
   <div class="section-title">📚 過去号</div>
+  <div class="archive-item"><span class="week">2026-11-17</span><div class="body"><a href="ai-trends/2026-11-17.html">エージェントに秘密を渡さない設計へ — 資格情報はサンドボックスの外で付ける、宛先に縛る、届かない経路は先に洗い出す</a><span class="sub">本物の資格情報をサンドボックスの外のプロキシに持たせ、外向きリクエストに付与する構成が実行基盤の標準になりつつある。中のエージェントが見るのは proxy-managed のようなプレースホルダだけで、環境変数を読まれても漏れるのは偽の値になる</span></div></div>
   <div class="archive-item"><span class="week">2026-11-14</span><div class="body"><a href="ai-trends/2026-11-14.html">「選ぶだけ」の判断は生成モデルから外れ始めた — 選択肢を一度に採点する専用モデル、確率で決める閾値、ルーティングと検査への配置</a><span class="sub">判定専用モデルは文章を生成せず、事前に与えた選択肢を採点して確率を返す。Gemini Decisions API は 1 リクエストで最大 1,000 問を共有入力に対して評価し、出力トークンは常に 0。Perplexity Decider は複数の質問を 1 回の forward pass で答える</span></div></div>
   <div class="archive-item"><span class="week">2026-11-12</span><div class="body"><a href="ai-trends/2026-11-12.html">エージェントは「終わるまで待つ」をやめ始めた — 窓口と作業者を分ける、ツール結果は後から返す、走っている作業に指示を足す</a><span class="sub">会話の窓口と長い作業を別のループに分ける構成が標準になりつつある。LangChain Deep Agents は起動した瞬間にタスク ID を返す 5 つのツールを持ち、Claude Code はサブエージェントを既定でバックグラウンドで走らせる</span></div></div>
   <div class="archive-item"><span class="week">2026-11-10</span><div class="body"><a href="ai-trends/2026-11-10.html">エージェントの記憶は「溜める」から「手入れする」へ — 読む時に根拠を確かめる、棚卸しはセッションの外で、共有ファイルは PR で直す</a><span class="sub">記憶の正しさは書いた時点では決まらない。GitHub はメモリにコード位置の引用を付け、読み出す時にエージェントが根拠を確かめる方式を採った</span></div></div>
@@ -223,7 +212,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 </div>
 
 <footer>
-  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="data/ai-trends/2026-11-17.json">data/ai-trends/2026-11-17.json</a>（このページは JSON からの生成物）</p>
+  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="data/ai-trends/2026-11-19.json">data/ai-trends/2026-11-19.json</a>（このページは JSON からの生成物）</p>
   <p style="margin-top:.5rem"><a href="./">📰 日刊ダイジェストに戻る</a></p>
 </footer>
 </div>
