@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-11-18</title>
+  <meta name="description" content="Java4Shell: OpenJDK の Base64 に RCE / 楽天証券で最大447万口座の情報漏えいか / MAI Code 2 発表">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech News Daily">
+  <meta property="og:title" content="Tech News Daily — 2026-11-18">
+  <meta property="og:description" content="Java4Shell: OpenJDK の Base64 に RCE / 楽天証券で最大447万口座の情報漏えいか / MAI Code 2 発表">
+  <meta property="og:url" content="https://tech-news.kaion-lab.com/archive/2026-11-18.html">
+  <meta property="og:image" content="https://tech-news.kaion-lab.com/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="../feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-11-18 (Wed)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+      <nav class="site-nav">
+        <a href="../" class="active">📰 日刊ダイジェスト</a>
+        <a href="../trends.html">🔌 週次プラグイントレンド</a>
+        <a href="../ai-trends.html">🧠 AI プロダクト動向</a>
+        <a href="./">🗂 アーカイブ</a>
+      </nav>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 17 articles</span>
+      <span>🏷 7 categories</span>
+      <span>📡 14 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item">
+        <span class="number-value">447万</span>
+        <span class="number-label">楽天証券で漏えいの恐れがある口座数（最大）</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">62 bytes</span>
+        <span class="number-label">Java4Shell で配列末尾を越えて書かれる量</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">98×</span>
+        <span class="number-label">tsrs の typescript-eslint 比の最大速度</span>
+      </div>
+    </div>
+
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
+    <div class="card featured deep-dive">
+      <div class="card-header">
+        <span class="tag tag-security">Security</span>
+        <span class="content-type">🔒 セキュリティ</span>
+        <h3><a href="https://calif.io/java4shell/">DEEP DIVE: Java4Shell（CVE-2026-114938）: OpenJDK の Base64 デコーダに認証不要の RCE</a></h3>
+      </div>
+      <div class="summary">OpenJDK の x86-64 向け Base64 intrinsic に、ヒープ領域外書き込みの脆弱性が見つかった。calif.io が公開し、Oracle が 11/17 にパッチを出している。HotSpot は AVX-512 VBMI 命令で Base64 を一括デコードするが、入力末尾にパディング（=）が付くと、出力長が 0 のときでも output_len を減算してしまい、-1 または -2 にアンダーフローする。bzhiq(-1, output_len) は output_len が 64 以上だと全ビットが立ったままになるため、ストア用マスクが 0xFFFFFFFFFFFFFFFF となり、確保された出力配列を超えて 64 バイトがそのまま書き込まれる。再現例では 65 バイトの入力に対し出力配列は 50 バイトで、オフセット 48 から 64 バイトを書くため配列末尾を 62 バイト越える。先頭 1 バイトは攻撃者が完全に制御でき、2 バイト目は 4 ビットだけ制御できる。著者らは、配列長を書き換えて任意範囲を読み書きする「writer / reader」手法を示し、デフォルト設定の Keycloak・Jira・Confluence・Artifactory・Jenkins・PingFederate で認証前 RCE が成立すると報告している。JIT コンパイル後の経路でだけ発動するため、PoC はデコードを 20 万回ウォームアップしてから攻撃入力を渡す。</div>
+      <div class="editorial">🧠 Heartbleed 型の情報漏えいと RCE を 1 つのバグで両方出せる点は、Java 製の認証基盤が多い現場には重い。実測で示されているのは主要 OSS/製品の既定構成での成立までで、製品別の攻撃チェーンは後日公開と予告されており、悪用が広がる速度は未知数だ。一方、条件が AVX-512 VBMI 搭載 CPU に限られるため、クラウドのインスタンスタイプ次第で影響範囲は大きく変わる。まず自社の JVM が動くホストの CPU 世代を棚卸しすべきだろう。</div>
+      <div class="key-points">
+        <ul>
+          <li>CVSS 4.0 で 9.2（Critical）。OpenJDK 17.0.6 以降と Corretto・Temurin・Zulu など主要ディストリビューション、Oracle Java SE が対象</li>
+          <li>条件は AVX-512 VBMI を持つ x86-64 CPU（Ice Lake 以降の Xeon、Zen 4 以降の EPYC/Ryzen）。ARM64 は影響を受けない</li>
+          <li>暫定回避は <code>-XX:-UseBASE64Intrinsics</code> または <code>-XX:UseAVX=2</code>（後者は x86-64 ホスト専用で、ARM の JVM は起動に失敗する）</li>
+        </ul>
+      </div>
+      <div class="why-it-matters">💡 Java を x86-64 の最近のサーバで動かしているなら、ベンダー提供の修正ビルドへ更新するのが先決で、更新できない間は intrinsic の無効化で当面の被害面を塞げる。</div>
+      <div class="meta">
+        <span>calif.io</span>
+        <span class="engagement">▲ 560</span>
+        <span>⏱ 6 min read</span>
+        <span>2026-11-17</span>
+      </div>
+    </div>
+
+    <div class="card featured">
+      <div class="card-header">
+        <span class="tag tag-security">Security</span>
+        <span class="content-type">🔒 セキュリティ</span>
+        <h3><a href="https://www.rakuten-sec.co.jp/web/info/info20261117-02.html">楽天証券、最大約447万口座分の顧客情報が漏えいした可能性</a></h3>
+      </div>
+      <div class="summary">楽天証券は 11/16 に一部システムへの不正アクセスの可能性を検知し、アクセス遮断と修正を実施した。調査の結果、11/11 にテスト環境で管理していた情報が外部へ漏れた恐れがあると判明した。ログインパスワードや暗証番号の漏えいは確認されておらず、本件に起因する不正取引も現時点では確認されていない。</div>
+      <div class="key-points">
+        <ul>
+          <li>最大約447万口座（退会者含む）で氏名・生年月日・住所・電話・メール・出金先口座・申告年収などが対象。別に最大約1,125万口座はログイン ID などが対象</li>
+          <li>テスト環境に本番相当の個人情報が置かれていたことが被害の起点で、原因と経緯は調査中</li>
+        </ul>
+      </div>
+      <div class="why-it-matters">💡 楽天証券の口座があるなら、フィッシングに注意しつつパスキーを設定し、ログイン後の設定画面で取引・出金の一時停止を使える。開発側にとっては、テスト環境へ本番データを置かない運用の見直し材料になる。</div>
+      <div class="meta">
+        <span>楽天証券</span>
+        <span class="engagement">🔖 845</span>
+        <span>⏱ 3 min read</span>
+        <span>2026-11-17</span>
+      </div>
+    </div>
+
+    <div class="card featured">
+      <div class="card-header">
+        <span class="tag tag-ai">AI</span>
+        <span class="content-type">📦 リリース</span>
+        <h3><a href="https://www.publickey1.jp/blog/26/aimai_code_2mai_code_2_flash.html">マイクロソフト、コーディング特化モデル「MAI Code 2」「MAI Code 2 Flash」を発表</a></h3>
+      </div>
+      <div class="summary">Microsoft Ignite 2026 で、フラッグシップの MAI Code 2 と低価格版の Flash が発表された。MAI Code 2 は本番品質のコード生成、難しいデバッグ、リポジトリ全体の推論、ダッシュボードなどの UI 実装を狙う。Flash はコード説明、局所的な編集、定型的な修正が用途。数値はいずれも Microsoft 自身の主張で、第三者検証はまだない。</div>
+      <div class="key-points">
+        <ul>
+          <li>GitHub Copilot のタスクを模した 4 つのベンチマークで、GPT 6.1 Sol の 98%、Claude Opus 5.5 の 96% の性能。コストは GPT 6.1 Sol の 40%、Opus 5.5 の約 5%</li>
+          <li>Flash は GPT-6 Luna・Claude Haiku 5.5 と同等の性能で、コストは Luna の約 65%、Haiku 5.5 の約 20%</li>
+        </ul>
+      </div>
+      <div class="why-it-matters">💡 Copilot などで使えるモデルが増えれば単価を下げられる可能性があるが、公開されたのは相対価格だけで提供時期も未記載のため、自分のタスクでの実測を待つのが妥当だ。</div>
+      <div class="meta">
+        <span>Publickey</span>
+        <span class="engagement">🔖 19</span>
+        <span>⏱ 3 min read</span>
+        <span>2026-11-18</span>
+      </div>
+    </div>
+    </div>
+
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+    <div class="card">
+      <div class="card-header">
+        <span class="tag tag-security">Security</span>
+        <span class="content-type">🔒 セキュリティ</span>
+        <h3><a href="https://thehackernews.com/2026/11/critical-red-hat-quay-flaw-lets.html">Red Hat Quay の重大な脆弱性 2 件、全プライベートイメージの読み書きが可能に</a></h3>
+      </div>
+      <div class="summary">Quay のキーサーバは鍵の入れ替え要求に付いたトークンの署名・audience・issuer を確認するが、鍵ローテーション用に発行されたかを確認しない。/v2/auth の匿名トークンでも通り、audience は呼び出し側が選べるため、攻撃者が期限なしの鍵を登録して任意リポジトリのトークンを発行できる。</div>
+      <div class="key-points">
+        <ul>
+          <li>CVE-2026-123710（CVSS 9.8）。Quay 3 と 5 の全バージョンが対象で、匿名アクセスが無効でも有効なアカウントがあれば悪用可能</li>
+          <li>CVE-2026-110697（CVSS 9.9）は robot アカウント一覧の LIKE 検索で _ がワイルドカード扱いになり、他テナントの robot トークンが取得できる。名前空間を作れれば足りる</li>
+        </ul>
+      </div>
+      <div class="meta">
+        <span>The Hacker News</span>
+        <span class="engagement">Lobsters 8</span>
+        <span>⏱ 4 min read</span>
+        <span>2026-11</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="tag tag-dev">Dev</span>
+        <span class="content-type">📜 解説</span>
+        <h3><a href="https://daniel.haxx.se/blog/2026/11/17/actual-curl-rewrites-in-rust/">Daniel Stenberg、curl の Rust 書き直しに「実装言語は価値の本体ではない」と反論</a></h3>
+      </div>
+      <div class="summary">urlx と kov/curl という 2 つの Rust 版 curl に対する Stenberg 氏の応答。エージェントが約 18.5 万行の C を約 34 万行の Rust に変換したと数え、その約 3 週間に本家 curl は 300 以上のコミットをマージしたと指摘する。強みは言語でなく保守体制、ABI/API の長期安定、テスト資産だという立場だ。</div>
+      <div class="key-points">
+        <ul>
+          <li>2026 年に確定した脆弱性 81 件のうち、メモリ安全な言語で防げた可能性が高いのは 14 件（17.3%）で、Rust 版でも 67 件は残る</li>
+          <li>本家は 1 日平均約 11 コミットで、約 3 週間に 200 件超のバグ修正を含む 300 以上のコミット</li>
+        </ul>
+      </div>
+      <div class="meta">
+        <span>daniel.haxx.se</span>
+        <span class="engagement">Lobsters 78</span>
+        <span>⏱ 5 min read</span>
+        <span>2026-11-17</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="tag tag-frontend">Frontend</span>
+        <span class="content-type">📦 リリース</span>
+        <h3><a href="https://oxc.rs/blog/2026-11-17-faster-type-aware-linting-with-tsrs">Oxlint の型認識 lint 用バックエンド「tsrs」、TypeScript の Rust 移植で最大 5 倍高速</a></h3>
+      </div>
+      <div class="summary">tsrs は TypeScript の Rust 移植で、Oxlint が tsgolint の代替バックエンドとして使える。既存の CLI と設定のまま差し替えられ、Cloudflare・Owner.com・OpenAI が既に利用している。</div>
+      <div class="key-points">
+        <ul>
+          <li>tsgolint v7.0.2007 比で最大 5 倍の速度、メモリ約 70% 減。typescript-eslint 比では最大 98 倍速く、ピークメモリは最大 82% 減</li>
+          <li>tsgolint の 61 ルールをすべて実装。<code>pnpm i -D oxlint tsrs</code> のあと <code>oxlint --type-aware</code> で使える</li>
+        </ul>
+      </div>
+      <div class="meta">
+        <span>Oxc</span>
+        
+        <span>⏱ 3 min read</span>
+        <span>2026-11-17</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="tag tag-infra">Infra</span>
+        <span class="content-type">📜 解説</span>
+        <h3><a href="https://blog.cloudflare.com/quad9-withdrawal-from-france/">Quad9 がフランスから撤退、公開 DNS リゾルバへのブロック命令が広がる</a></h3>
+      </div>
+      <div class="summary">スイスの非営利 Quad9 は、著作権侵害ドメインのブロックを怠ったとして日次の罰金を課す仏裁判所命令を受け、フランスでの無料リゾルバ提供をやめると発表した。Cloudflare はこれを受けた解説で、公開リゾルバへの規制が広がる流れに警鐘を鳴らしている。</div>
+      <div class="key-points">
+        <ul>
+          <li>Cisco はすでに OpenDNS を仏・葡・白から撤退。ベルギーの裁判所は Cloudflare・Google・Cisco に 2027 年 1 月初めまでのブロックを命じ、3 社は控訴中</li>
+          <li>ドイツの裁判所は Cloudflare と Quad9 に有利な判断で、DNS ブロック要求を退けた</li>
+        </ul>
+      </div>
+      <div class="meta">
+        <span>Cloudflare Blog</span>
+        <span class="engagement">▲ 323</span>
+        <span>⏱ 5 min read</span>
+        <span>2026-11-17</span>
+      </div>
+    </div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+    <div class="card">
+      <div class="card-header">
+        <span class="tag tag-dev">Dev</span>
+        <span class="content-type">🛠 ツール</span>
+        <h3><a href="https://zenn.dev/mizchi/articles/mutation-test-quality">おい、Mutation Test をやれ。テスト品質を、測るために</a></h3>
+      </div>
+      <div class="summary">分岐カバレッジは 85% 前後で費用対効果が頭打ちになるという前提から、演算子を書き換えた「ミュータント」をテストが検出できるかを測るミューテーションテストを勧める記事。Vitest 向けの @mizchi/mutator を紹介している。</div>
+      <div class="key-points">
+        <ul>
+          <li>型チェックを通らないミュータントを事前除外し、変更のない実装・テストの結果をキャッシュ再利用する。cookie-es での初回全体実行は 12.2 秒、<code>--since HEAD</code> の差分実行は 0.71 秒（M3 Pro / Node.js 24）</li>
+          <li>ミリ秒単位のユニットテスト向けで、CI 常時実行より日次の裏実行やリファクタリング指標に向く。Node.js 24 以上と Vitest 5 が必要</li>
+        </ul>
+      </div>
+      <div class="meta">
+        <span>Zenn</span>
+        <span class="engagement">🔖 349</span>
+        <span>⏱ 6 min read</span>
+        <span>2026-11-17</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="tag tag-data">Data</span>
+        <span class="content-type">📦 リリース</span>
+        <h3><a href="https://www.publickey1.jp/blog/26/postgresqlazure_horizondb.html">PostgreSQL 互換の「Azure HorizonDB」が正式リリース</a></h3>
+      </div>
+      <div class="summary">Ignite 2026 で、PostgreSQL 互換のミッションクリティカル向けデータベースが GA となった。サーバレスで OLTP と OLAP の両方を扱う Fabric HorizonDB はパブリックプレビューに入った。</div>
+      <div class="key-points">
+        <ul>
+          <li>最大 3072 vCPU、ストレージは最大 128TB まで自動拡張。通常の PostgreSQL 比で最大 8 倍のトランザクション性能と Microsoft は説明</li>
+          <li>複数 AZ 構成でコミット遅延はミリ秒以下、フェイルオーバーは 5 秒以下とうたう。PgVector と DiskANN インデックスに対応</li>
+        </ul>
+      </div>
+      <div class="meta">
+        <span>Publickey</span>
+        <span>⏱ 3 min read</span>
+        <span>2026-11-18</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="tag tag-infra">Infra</span>
+        <span class="content-type">📦 リリース</span>
+        <h3><a href="https://www.publickey1.jp/blog/26/awsawsaws_1.html">AWS 公式の「AWS エミュレータ」が正式リリース</a></h3>
+      </div>
+      <div class="summary">AWS のサービスをローカルでエミュレートし、オフラインでアプリの開発・テストができる公式ツール。無料で、AWS アカウントは不要とされる。</div>
+      <div class="key-points">
+        <ul>
+          <li>ネットワーク接続なしで AWS 依存のコードを検証できる</li>
+          <li>無料で、AWS アカウントは不要</li>
+        </ul>
+      </div>
+      <div class="meta">
+        <span>Publickey</span>
+        <span>⏱ 3 min read</span>
+        <span>2026-11-12</span>
+      </div>
+    </div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+    <div class="card">
+      <div class="card-header">
+        <span class="tag tag-frontend">Frontend</span>
+        <span class="content-type">📦 リリース</span>
+        <h3><a href="https://github.com/jquery/jquery/releases/tag/4.1.0">jQuery 4.1.0 リリース、ReDoS 修正と querySelectorAll への一本化</a></h3>
+      </div>
+      <div class="summary">4.1.0 は 3.8.0 と同時に公開された。コア内の要素取得を getElementsByTagName/ClassName から querySelectorAll に寄せ、セレクタの識別子マッチにあった ReDoS を修正した。</div>
+      <div class="key-points">
+        <ul>
+          <li>jQuery.uniqueSort の重複除去を最適化し、Safari 27 の正規表現インタプリタのバグを回避</li>
+          <li>jqXHR に responseURL を追加。フォーム関連カスタム要素のシリアライズにも対応</li>
+        </ul>
+      </div>
+      <div class="meta">
+        <span>GitHub</span>
+        <span class="engagement">▲ 258</span>
+        <span>⏱ 3 min read</span>
+        <span>2026-11-17</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="tag tag-oss">OSS</span>
+        <span class="content-type">👀 注目</span>
+        <h3><a href="https://redict.io/posts/2026-11-17-redict-deprecated/">Redict が非推奨に、7.3.6 が最終リリース</a></h3>
+      </div>
+      <div class="summary">Drew DeVault 氏が Redict の終了を発表した。理由は、Valkey が成功し Redis がコピーレフトのライセンスに戻ったことで、持続可能なコミュニティを作れなかったためだとする。</div>
+      <div class="key-points">
+        <ul>
+          <li>移行先は Valkey を推奨。パッケージ版は設定ファイルを /etc/redict.conf から /etc/valkey.conf へ移す</li>
+          <li>Redis への回帰は、CLA によりライセンスが再び変わるリスクがあるとして勧めていない</li>
+        </ul>
+      </div>
+      <div class="meta">
+        <span>Redict</span>
+        <span class="engagement">Lobsters 68</span>
+        <span>⏱ 2 min read</span>
+        <span>2026-11-17</span>
+      </div>
+    </div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://phrack.org/issues/73/introduction_md">Phrack 73 公開</a>
+        <span class="quick-summary">— ハッカー向け老舗 e-zine の最新号が出た（HN 288 pts）。</span>
+        <span class="meta">Phrack</span>
+      </div>
+      <div class="quick-link">
+        <span class="tag tag-frontend">Frontend</span>
+        <a href="https://www.solidjs.com/blog/solid-2-0-the-long-hold/">Solid 2.0</a>
+        <span class="quick-summary">— SolidJS の 2.0 が公開された（HN 237 pts）。</span>
+        <span class="meta">SolidJS</span>
+      </div>
+      <div class="quick-link">
+        <span class="tag tag-oss">OSS</span>
+        <a href="https://yorickpeterse.com/articles/migrating-from-github-to-codeberg/">Migrating from GitHub to Codeberg</a>
+        <span class="quick-summary">— 個人開発者が GitHub から Codeberg へ移行した体験記（Lobsters 76）。</span>
+        <span class="meta">yorickpeterse.com</span>
+      </div>
+      <div class="quick-link">
+        <span class="tag tag-data">Data</span>
+        <a href="https://www.publickey1.jp/blog/26/azure_sql_databaseazure_sql_database_local_development_container.html">Azure SQL Database local development container</a>
+        <span class="quick-summary">— Azure SQL Database をローカルで動かすコンテナがパブリックプレビューに。</span>
+        <span class="meta">Publickey</span>
+      </div>
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://claude.dev/blog/how-the-claude-code-team-thinks-about-verification/">How the Claude Code team thinks about verification</a>
+        <span class="quick-summary">— Claude Code チームが成果物の検証をどう考えるかを紹介（HN 267 pts）。</span>
+        <span class="meta">claude.dev</span>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="./" class="archive-link">🗂 過去のダイジェスト</a>
+    </footer>
+  </div>
+</body>
+</html>
