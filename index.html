@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tech News Daily — 2026-11-19</title>
-  <meta name="description" content="nginx HTTP/2 に認証不要 RCE 2 件 / Gemini 4 Neon 発表 / Anthropic が IPO 価格決定">
+  <title>Tech News Daily — 2026-11-20</title>
+  <meta name="description" content="Claude が物理の未解決問題2件を解決 / Ruby2Shell 素のRailsで認証前RCE / MAI Code 2">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Tech News Daily">
-  <meta property="og:title" content="Tech News Daily — 2026-11-19">
-  <meta property="og:description" content="nginx HTTP/2 に認証不要 RCE 2 件 / Gemini 4 Neon 発表 / Anthropic が IPO 価格決定">
+  <meta property="og:title" content="Tech News Daily — 2026-11-20">
+  <meta property="og:description" content="Claude が物理の未解決問題2件を解決 / Ruby2Shell 素のRailsで認証前RCE / MAI Code 2">
   <meta property="og:url" content="https://tech-news.kaion-lab.com/">
   <meta property="og:image" content="https://tech-news.kaion-lab.com/og.png">
   <meta name="twitter:card" content="summary_large_image">
@@ -22,7 +22,7 @@
   <div class="container">
     <header>
       <h1>Tech News Daily</h1>
-      <div class="date">2026-11-19 (Thu)</div>
+      <div class="date">2026-11-20 (Fri)</div>
       <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
       <nav class="site-nav">
         <a href="./" class="active">📰 日刊ダイジェスト</a>
@@ -33,9 +33,9 @@
     </header>
 
     <div class="stats-bar">
-      <span>📰 18 articles</span>
-      <span>🏷 6 categories</span>
-      <span>📡 15 sources</span>
+      <span>📰 20 articles</span>
+      <span>🏷 7 categories</span>
+      <span>📡 18 sources</span>
     </div>
 
     <nav class="toc">
@@ -47,335 +47,361 @@
     </nav>
 
     <div class="numbers-bar">
-      <div class="number-item">
-        <span class="number-value">9.2</span>
-        <span class="number-label">nginx HTTP/2 脆弱性 2 件の CVSS 4.0</span>
+      <div class="number-item"><span class="number-value">6 週間</span><span class="number-label">Claude が自律で物理問題に取り組んだ期間</span></div>
+      <div class="number-item"><span class="number-value">5%</span><span class="number-label">MAI Code 2 のコスト（Claude Opus 5.5 比）</span></div>
+      <div class="number-item"><span class="number-value">2x</span><span class="number-label">PostgreSQL 19 のバルク INSERT 高速化</span></div>
+    </div>
+
+    <div class="weekly-keywords">
+      <div class="section-title">📊 今週のキーワード</div>
+      <div class="keyword-chips">
+        <span class="keyword-chip">認証前 RCE</span>
+        <span class="keyword-chip">AI コーディングモデル</span>
+        <span class="keyword-chip">Anthropic 上場</span>
       </div>
-      <div class="number-item">
-        <span class="number-value">$83</span>
-        <span class="number-label">Anthropic IPO の公開価格（1 株）</span>
-      </div>
-      <div class="number-item">
-        <span class="number-value">50x</span>
-        <span class="number-label">ESLint → oxlint の lint 高速化（3,091 ファイル）</span>
-      </div>
+      <div class="keyword-summary">nginx、Ruby、PHP、OpenJDK と、認証前に成立するメモリ破壊系の脆弱性の公表が今週続いた。一方で Microsoft の MAI Code 2 や Gemini 4 Neon など、モデルの価格性能競争も進み、Anthropic は Nasdaq に上場した。</div>
     </div>
 
     <div class="section" id="top-stories">
       <div class="section-title">🔥 Top Stories</div>
-
-      <div class="card featured deep-dive">
-        <div class="card-header">
-          <span class="tag tag-security">Security</span>
-          <span class="content-type">🔒 セキュリティ</span>
-          <h3><a href="https://www.wiz.io/blog/nginx-http2-rce-vulnerabilities">DEEP DIVE: nginx の HTTP/2 実装に認証不要の RCE 脆弱性 2 件、1.31.8 までが影響</a></h3>
-        </div>
-        <div class="summary">Wiz Research は nginx の HTTP/2 処理に CVE-2026-123633 と CVE-2026-123007 の 2 件の重大な脆弱性を公開した。いずれも CVSS 4.0 で 9.2 である。前者は、リクエストを処理していない HTTP/2 接続が「再利用可能」リストに載ったまま、新しいリクエスト開始時にリストから外されないことで生じる use-after-free だ。空きコネクションスロットが逼迫すると、nginx が実行中のリクエストを抱えた接続を閉じ、リクエストがまだ使っているメモリを解放してしまう。後者は、キャンセルされたストリームが送信ウィンドウの余剰分を返す際にプロトコル上限を確認せず、境界チェックで値がラップして負の長さになり、TLS 送信経路で範囲外メモリコピーに至る整数アンダーフローである。影響範囲は 123633 が 1.19.7〜1.31.8、123007 が 1.9.5〜1.31.8 と広く、後者は HTTP/2 を有効にした既定構成、つまり静的ファイル配信だけの構成でも成立する。Wiz は公式ビルド 1.31.7 と 1.31.8 で、64 ビット環境の HTTP/2 over TLS 経由で ASLR を回避した RCE を実機検証済みとしている。修正版は stable の 1.30.7 と mainline の 1.31.9 で、Wiz は PoC を公開していない。現時点で実環境での悪用は報告されていない。</div>
-        <div class="editorial">🧠 nginx は CDN の背後からロードバランサ、リバースプロキシまで置かれる場所が広く、HTTP/2 を既定で有効にしている環境も多い。その点で、静的配信だけの構成も対象になる 123007 は棚卸しの優先度が高い。ただし ALB の既定ターゲットグループや gRPC なしの CloudFront のように、nginx まで HTTP/1.1 でしか届かない経路では到達性が下がる（DevelopersIO の整理による）。パッチが出た直後の「PoC 非公開」は、リバースエンジニアリングで再現されるまでの猶予にすぎないため、実環境での悪用が確認されていない今のうちに更新するのが妥当だろう。</div>
-        <div class="key-points">
-          <ul>
-            <li>CVE-2026-123007: キャンセル済みストリームの送信ウィンドウ返却で整数アンダーフロー。HTTP/2 有効なら既定構成でも到達可能（1.9.5〜1.31.8）</li>
-            <li>CVE-2026-123633: HTTP/2 接続の再利用リスト管理ミスによる use-after-free。HTTP/2 リバースプロキシで接続スロットが逼迫したときに発現（1.19.7〜1.31.8）</li>
-            <li>修正は OSS 1.30.7 / 1.31.9、NGINX Plus は 37.0.7.1 / 37.2.0.1 ほか。更新できない場合は `http2 off;`（1.25.1 以降）で回避</li>
-          </ul>
-        </div>
-        <div class="why-it-matters">💡 nginx で HTTP/2 を有効にしているなら、まず 1.30.7 / 1.31.9 へ更新し、更新できない間は http2 off で暫定回避すること。</div>
-        <div class="meta">
-          <span>Wiz Research</span>
-          <span class="engagement">▲ 1148</span>
-          <span>⏱ 8 min read</span>
-          <span>2026-11-18</span>
-        </div>
-      </div>
-
-      <div class="card featured">
-        <div class="card-header">
-          <span class="tag tag-ai">AI</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-neon/">Google が Gemini 4 Neon を発表、入力 $3 / 出力 $15 で 100 万トークン</a></h3>
-        </div>
-        <div class="summary">Google は Gemini 4 ファミリーの中位モデル「Neon」を発表した。最難関の長期プロジェクト向け Carbon と、日常の高速実行向け Hydrogen の間に位置し、複雑なコーディング、分析的推論、企業ワークフローを低コストで処理する位置づけだ。Google 報告値では Artificial Analysis Intelligence Index が 61 で総合 3 位、Coding Agent Index は 58.6 で 1 位となっている。コンテキスト長は 100 万トークンで、API は Google AI Studio と Android Studio の有料枠から使える。</div>
-        <div class="key-points">
-          <ul>
-            <li>料金は入力 $3 / 出力 $15（100 万トークンあたり）、キャッシュ入力は $0.15 で 95% 割引</li>
-            <li>Terminal-Bench 4.1 で 65.2%、SEC-bench Pro で 90.5%、FrontierCode 2.0 で 46.2%（いずれも Google 報告値）</li>
-            <li>提供先は Gemini API、Gemini for business、Antigravity（AI Pro / Ultra）、Gemini アプリ（Pro / Ultra）</li>
-          </ul>
-        </div>
-        <div class="why-it-matters">💡 ベンチマークはすべて Google 自身の報告値なので、コーディングエージェントに採用するなら自社タスクで実測してから切り替えるべきだ。</div>
-        <div class="meta">
-          <span>Google</span>
-          <span class="engagement">▲ 459</span>
-          <span>⏱ 6 min read</span>
-          <span>2026-11-18</span>
-        </div>
-      </div>
-
-      <div class="card featured">
-        <div class="card-header">
-          <span class="tag tag-product">Product</span>
-          <span class="content-type">💰 ビジネス</span>
-          <h3><a href="https://www.anthropic.com/news/anthropic-prices-initial-public-offering">Anthropic が IPO の公開価格を $83 に決定、Nasdaq「ANT」で 19 日取引開始へ</a></h3>
-        </div>
-        <div class="summary">Anthropic は Class A 普通株の新規株式公開で、公開価格を 1 株 $83 に決定したと発表した。売出総数は 9 億 8,000 万株で、うち 9 億 5,635 万 1,354 株を Anthropic が、2,364 万 8,646 株を既存株主が売却する。上場先は Nasdaq Global Select Market でティッカーは ANT、取引開始は 2026 年 11 月 19 日、クローズは 11 月 20 日の予定である。引受人には最大 1 億 4,700 万株を 30 日間で追加購入できる権利も付く。発表文に想定時価総額と調達額の記載はない。</div>
-        <div class="key-points">
-          <ul>
-            <li>公開価格 $83、総数 9.8 億株（会社売出 9.56 億株 + 既存株主 2,365 万株）</li>
-            <li>上場は Nasdaq Global Select、ティッカー ANT。取引開始 11/19、クローズ 11/20 予定</li>
-            <li>追加購入オプションは最大 1.47 億株。既存株主売却分の収入は Anthropic には入らない</li>
-          </ul>
-        </div>
-        <div class="why-it-matters">💡 Claude API を事業の基盤にしているなら、上場後は開示資料から料金やコミットメントの方針を追えるようになるため、調達先の継続性評価に使える。</div>
-        <div class="meta">
-          <span>Anthropic</span>
-          <span class="engagement">▲ 54</span>
-          <span>⏱ 3 min read</span>
-          <span>2026-11-18</span>
-        </div>
-      </div>
+<div class="card featured deep-dive">
+  <div class="card-header">
+    <span class="tag tag-ai">AI</span>
+    <span class="content-type">🔬 研究</span>
+    <h3><a href="https://www.anthropic.com/research/claude-black-hole-physics">DEEP DIVE: Claude が物理学の未解決問題 2 件を解決、Anthropic が発表</a></h3>
+  </div>
+  <div class="summary">Anthropic は、Claude のエージェント群が約 6 週間自律的に作業し、ブラックホール物理に関する 2 つの未解決問題を解いたと発表した。1 つ目は N=4 超対称ヤン・ミルズ理論の弱結合領域で、熱的に重力子ガスからブラックホールへ切り替わる Hawking-Page 転移が急激か緩やかかという問題である。2003 年に始まった計算は未完のままで、決定的な数値は 3 ループ先に現れ、数千のダイアグラムが絡む。Claude は自分自身の複数コピーを走らせ、ほぼ全ての部分を二重に計算して既知の結果と照合し、転移は急激だと結論した。これは強結合での Hawking と Page の結果と一致する。ただし全結合で急激なままだというのは自然な解釈にとどまり、証明されていない。2 つ目は 3 次元重力のモジュラー・ブートストラップで、最軽量ブラックホールの質量 M₁ の上限 c/Λ を扱う。従来の上限は c/6（2009 年）、c/8.5（解析的）、約 c/9.1（数値的）だった。Claude は数値データのパターンに気づき、スペクトル曲線を使って Λ ≈ 9.1266 を厳密に導き、この手法ではこの上限が最適だと示した。成果は Lean で検証され、物理学者が主要結果を確認している。</div>
+  <div class="editorial">🧠 事実として検証手段（Lean と人間の確認）が明示されており、「AI が研究した」という主張の中では信頼しやすい部類だ。ただし著者自身が、結果は現実の宇宙に対応せず実用用途もないと断っている。未検証なのは、同じ手法が検証ルートの乏しい分野でも機能するかどうかで、そこが次の焦点になる。</div>
+  <div class="key-points">
+    <ul>
+      <li>Hawking-Page 転移は弱結合でも急激と判明（3 ループ・数千のダイアグラムを二重計算で検証）</li>
+      <li>3D 重力の M₁ 上限は c/6 → c/8.5 → 約 c/9.1 と進んだ後、Λ ≈ 9.1266 の厳密値に到達</li>
+      <li>約 6 週間の自律作業、証明は Lean で機械検証し物理学者が主要結果を確認</li>
+    </ul>
+  </div>
+  <div class="why-it-matters">💡 AI エージェントに長期の数式計算を任せる際は、二重計算と形式検証の組み合わせが検証コストを下げる実例になる。</div>
+  <div class="meta">
+    <span>Anthropic</span>
+    <span class="engagement">▲ 387</span>
+    <span>⏱ 6 min read</span>
+    <span>2026-11-19</span>
+  </div>
+</div>
+<div class="card featured">
+  <div class="card-header">
+    <span class="tag tag-security">Security</span>
+    <span class="content-type">🔒 セキュリティ</span>
+    <h3><a href="https://verialabs.com/ruby2shell/">Ruby2Shell: 素の Rails で認証前 RCE、PoC は 11/25 以降に公開予定</a></h3>
+  </div>
+  <div class="summary">Ruby の文字列大文字化処理に 1 バイトのヒープオーバーフロー（CVE-2026-132825）がある。ß は多くの単一バイトエンコーディングに大文字がなく、upcase すると 2 バイトの「SS」になるが、ループは 1 バイト分しか境界を確認しない。出力バッファは入力長 + 20 バイトなので、ß を 21 個入れると 1 バイト溢れる。Rails とクラシックスタイルの Sinatra がデフォルト設定で影響を受ける。Veria Labs は 11 月 25 日以降に RCE の PoC を公開する予定で、主要ベンダーの修正が遅れれば延期する。</div>
+  <div class="key-points">
+    <ul>
+      <li>修正版は Ruby 3.3.14 / 3.4.13 / 4.0.10。3.2 以前は EOL のため修正なし</li>
+      <li>GitLab・GitHub Enterprise Server・Chatwoot は未修正、Mastodon・OpenProject は修正版あり</li>
+      <li>UTF-8 文字列は別経路のため対象外。影響は upcase / swapcase / downcase(:fold) / casecmp?</li>
+    </ul>
+  </div>
+  <div class="why-it-matters">💡 Ruby 3.2 以前の Rails を動かしているなら、PoC 公開前にアップグレードか前段での遮断が必要。自己ホストの GitLab は修正版待ちの間、公開範囲を絞る。</div>
+  <div class="meta">
+    <span>Veria Labs</span>
+    <span class="engagement">▲ 385</span>
+    <span>⏱ 5 min read</span>
+    <span>2026-11-19</span>
+  </div>
+</div>
+<div class="card featured">
+  <div class="card-header">
+    <span class="tag tag-ai">AI</span>
+    <span class="content-type">💰 ビジネス</span>
+    <h3><a href="https://www.publickey1.jp/blog/26/aimai_code_2mai_code_2_flash.html">Microsoft、コーディング特化モデル「MAI Code 2」「MAI Code 2 Flash」を発表</a></h3>
+  </div>
+  <div class="summary">Microsoft が Ignite 2026 でコーディング用 AI モデル 2 種を発表した。MAI Code 2 は GitHub Copilot の日常タスク由来の 4 ベンチマーク平均で、GPT 6.1 Sol の 98%、Claude Opus 5.5 の 96% の性能とされる。MAI Code 2 Flash は定型作業向けで、3 ベンチマークで GPT-6 Luna、Claude Haiku 5.5 と同等という。</div>
+  <div class="key-points">
+    <ul>
+      <li>MAI Code 2 のコストは GPT 6.1 Sol の 40%、Claude Opus 5.5 の 5%</li>
+      <li>Flash のコストは GPT-6 Luna の約 65%、Claude Haiku 5.5 の約 20%</li>
+      <li>絶対価格・提供開始日・利用方法は記事では未記載</li>
+    </ul>
+  </div>
+  <div class="why-it-matters">💡 数値は Microsoft 自身の発表値で第三者検証はない。Copilot 利用者は、自社タスクで品質とコストを再測定してから切り替えを判断したい。</div>
+  <div class="meta">
+    <span>Publickey</span>
+    <span>⏱ 3 min read</span>
+    <span>2026-11-19</span>
+  </div>
+</div>
     </div>
 
     <div class="section" id="dev-engineering">
       <div class="section-title">⚡ Dev &amp; Engineering</div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-security">Security</span>
-          <span class="content-type">🔒 セキュリティ</span>
-          <h3><a href="https://www.ruby-lang.org/en/news/2026/11/18/multiple-vulnerabilities-in-regexp-and-string/">Ruby の Regexp と String 大文字小文字変換に 7 件の脆弱性、4.0.10 / 3.4.13 / 3.3.14 で修正</a></h3>
-        </div>
-        <div class="summary">Ruby の正規表現エンジンと文字列の大文字小文字変換に、ヒープバッファオーバーフローや double free を含む 7 件の脆弱性が見つかった。CVE は未採番で、GHSA ID で公開されている。うち複数は RCE の可能性があり、PoC が存在する。攻撃者が制御するパターンをコンパイルするアプリケーションは特に影響が大きい。</div>
-        <div class="key-points">
-          <ul>
-            <li>影響は Ruby 3.3.13 以前、3.4.0〜3.4.12、4.0.0〜4.0.9。修正版は 4.0.10 / 3.4.13 / 3.3.14</li>
-            <li>Ruby 3.2 以前は EOL のため修正が出ない。ユーザー入力を Regexp.new に渡す箇所の確認が必要</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>ruby-lang.org</span>
-          <span class="engagement">▲ 71</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-11-18</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-infra">Infra</span>
-          <span class="content-type">👀 注目</span>
-          <h3><a href="https://techstackups.com/articles/quad9-leaves-france-dns-blocking/">Quad9 が 11 月 24 日にフランスから撤退、DNS ブロック命令への罰金が引き金</a></h3>
-        </div>
-        <div class="summary">スイスの非営利 DNS リゾルバ Quad9 は、パリの裁判所から海賊版スポーツ配信ドメインのブロックを拒んだとして罰金を科され、11 月 24 日にフランスから撤退する。ブロック対象は当初 6 ドメインだったが、Arcom の通知で 58 に増えた。Quad9 は「フランスのユーザー」を法的に定義できないと主張している。</div>
-        <div class="key-points">
-          <ul>
-            <li>10 月 21 日の判決で日額 €1,000 の罰金。beIN は 1 ドメインあたり日額 €10,000 を求めていた</li>
-            <li>Cisco は 2024 年 6 月に OpenDNS をフランスから撤退。Mullvad も 11 月 2 日に公開 DNS を停止</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>TechStackups</span>
-          <span class="engagement">▲ 602</span>
-          <span>⏱ 7 min read</span>
-          <span>2026-11-18</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-security">Security</span>
-          <span class="content-type">🔒 セキュリティ</span>
-          <h3><a href="https://forest.watch.impress.co.jp/docs/news/2157690.html">PHP に再び Critical 脆弱性、日本時間 11 月 19 日夜にセキュリティリリース</a></h3>
-        </div>
-        <div class="summary">PHP セキュリティチームは、サポート対象の全バージョンに影響する Critical の脆弱性を 11 月 19 日 14:00〜14:30 UTC（日本時間 23:00〜23:30）にリリースすると予告した。4 週間ごとの定例リリースの一部で、非既定または特殊な構成にのみ影響するとされる。詳細は公開時まで開示されていない。</div>
-        <div class="key-points">
-          <ul>
-            <li>10 月にも Critical 2 件「PHP2Shell」が修正されたばかりで、2 か月連続の Critical となる</li>
-            <li>修正バージョン番号と CVE は未公表。リリース直後にパッチ適用を行える体制を整えておく</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>窓の杜</span>
-          <span class="engagement">🔖 160</span>
-          <span>⏱ 2 min read</span>
-          <span>2026-11-18</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-product">Product</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://www.publickey1.jp/blog/26/aicopilot_managed_runtime.html">マイクロソフト、AI 生成アプリを社内で安全に動かす「Copilot Managed Runtime」を正式リリース</a></h3>
-        </div>
-        <div class="summary">Microsoft Ignite 2026 で正式リリースされたマネージドサービスで、AI が生成したアプリを Microsoft 365 と同じテナント内にデプロイして実行する。ホスティング、スケーリング、可用性は Microsoft が運用する。Entra ID 認証、アクセス制御、ポリシー適用、監査ログが使え、情報システム部門はアプリ一覧と状態を確認できる。</div>
-        <div class="key-points">
-          <ul>
-            <li>1,500 種類以上のデータソースへのコネクタ、Microsoft Graph、Work IQ を利用可能</li>
-            <li>生成元は Copilot Code / Cowork / Studio、GitHub Copilot、VS Code。SDK でサードパーティ基盤からも作成できる</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Publickey</span>
-          <span>⏱ 3 min read</span>
-          <span>2026-11-18</span>
-        </div>
-      </div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-data">Data</span>
+    <span class="content-type">📦 リリース</span>
+    <h3><a href="https://www.postgresql.org/about/news/postgresql-19-released-3449/">PostgreSQL 19 リリース、REPACK (CONCURRENTLY) や plan advice を追加</a></h3>
+  </div>
+  <div class="summary">PostgreSQL 19 では、読み書きをブロックせずにテーブルの肥大を解消する REPACK (CONCURRENTLY) が入り、VACUUM FULL と CLUSTER の代替になる。pg_plan_advice / pg_stash_advice により、アプリを変更せずクエリ ID 単位で実行計画を固定できる。JIT はコスト見積もりが不安定なためデフォルト無効になった。</div>
+  <div class="key-points">
+    <ul>
+      <li>外部キー検査の改善で、バルク INSERT がテスト上ほぼ 2 倍高速化</li>
+      <li>INSERT ... ON CONFLICT DO SELECT、COPY の JSON 出力、IGNORE NULLS を追加</li>
+      <li>md5 認証は警告対象に、RADIUS 認証は削除。SCRAM への移行が推奨</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>PostgreSQL.org</span>
+    <span class="engagement">▲ 58</span>
+    <span>⏱ 6 min read</span>
+    <span>2026-11-19</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-dev">Dev</span>
+    <span class="content-type">📦 リリース</span>
+    <h3><a href="https://www.php.net/releases/8.6/en.php">PHP 8.6 リリース、部分関数適用・Duration クラス・Poll API</a></h3>
+  </div>
+  <div class="summary">PHP 8.6 は `?` プレースホルダーによる部分関数適用、タイムゾーン非依存の \Time\Duration、clamp() 関数を追加した。Io\Poll は epoll / kqueue などで多数のストリームを監視し、stream_select() の約 1024 接続の制限を避けられ、ReactPHP や AMPHP の基盤になる。</div>
+  <div class="key-points">
+    <ul>
+      <li>Duration は 250 年超をナノ秒精度で表現し、min() で直接比較可能</li>
+      <li>session.use_strict_mode と cookie_httponly がデフォルト有効、SameSite は Lax</li>
+      <li>Sodium に ML-KEM-768 と X-Wing のポスト量子鍵カプセル化を追加</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>php.net</span>
+    <span class="engagement">▲ 276</span>
+    <span>⏱ 5 min read</span>
+    <span>2026-11-19</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-security">Security</span>
+    <span class="content-type">🔒 セキュリティ</span>
+    <h3><a href="https://github.com/openjdk/jdk/pull/32781">OpenJDK の AVX-512 Base64 デコーダにヒープ破壊バグ、報告は 9 月</a></h3>
+  </div>
+  <div class="summary">HotSpot の x86_64 AVX-512 (VBMI) Base64 デコード stub が、1〜63 バイトの末尾端数を誤処理する。不正な入力（例: &#x27;A&#x27; を 64 個 + &#x27;=&#x27;）で output_size が負になり、論理出力長を超えて書き込んでヒープを壊す。PR は 9 月 9 日に出されたが 11 月 4 日に閉じられ、作者は「master では解消済み」と述べている。</div>
+  <div class="key-points">
+    <ul>
+      <li>有効な Base64 は長さが 4 の倍数のため、不正入力でのみ発動</li>
+      <li>RCE として悪用可能かは PR からは確認できない（コメントで java4shell との関連が推測されている）</li>
+      <li>影響バージョンと置き換え修正の所在は未確認</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>GitHub (OpenJDK)</span>
+    <span class="engagement">▲ 370</span>
+    <span>⏱ 4 min read</span>
+    <span>2026-11-19</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-security">Security</span>
+    <span class="content-type">👀 注目</span>
+    <h3><a href="https://xusheng.dev/posts/windows-coding-agent-telemetry/">Windows 11 が使用中のコーディングエージェントや開発ツールを記録</a></h3>
+  </div>
+  <div class="summary">Windows 11 の MissionControlAggregator.dll が、Copilot / Claude / Codex などの CLI・デスクトップエージェントや GCC、Python、Node.js、.NET の使用有無をビットマップとして記録し、任意診断データとして送信する。作者は cmd.exe を codex.exe に改名して検知されることを確認した。</div>
+  <div class="key-points">
+    <ul>
+      <li>実行名の一致のみで、プロンプトやソースコードは含まれない</li>
+      <li>クリーンな Windows 11 Home ARM64 では「任意データの送信」が既定で有効だった</li>
+      <li>無効化は設定 → プライバシーとセキュリティ → 診断とフィードバック</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>xusheng.dev</span>
+    <span>⏱ 5 min read</span>
+    <span>2026-11-19</span>
+  </div>
+</div>
     </div>
 
     <div class="section" id="jp-community">
       <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-frontend">Frontend</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://zenn.dev/rimo/articles/12d6a7b1c58fcd">ESLint から oxlint へ。lint が 50 倍速くなるまでの移行の記録</a></h3>
-        </div>
-        <div class="summary">Rimo のフロントエンドチームによる移行記録。3,091 ファイルの lint が ESLint の 271.5 秒から oxlint の 5.4 秒になった。最初は Claude Code の PostToolUse フックの lint だけを oxlint に置き換えて効果を確認し、ルール同期の手間が増えた段階で oxlint を主役にした。</div>
-        <div class="key-points">
-          <ul>
-            <li>CI の lint ステップは中央値 146 秒から 32 秒へ。暫定 off ルールは 161 行から 48 行に削減</li>
-            <li>`--type-aware` を付けないと型情報ルールが違反を出さずスキップされる。`ignorePatterns` は extends で継承されない</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Zenn</span>
-          <span>⏱ 8 min read</span>
-          <span>2026-11-18</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-infra">Infra</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://dev.classmethod.jp/articles/nginx-http2-rce-aws-mitigation/">nginx2root の HTTP/2 脆弱性 2 件を AWS 構成ごとに整理してみた</a></h3>
-        </div>
-        <div class="summary">本日の Top Story の脆弱性を、AWS の構成別に影響の有無で整理した記事。nginx まで HTTP/1.1 でしか届かない構成と、HTTP/2 や gRPC がそのまま届く構成を分けて判断できる。Amazon Linux 2023 のリポジトリは 1.30.6 のままで、記事時点では両 CVE とも修正待ちだった。</div>
-        <div class="key-points">
-          <ul>
-            <li>ALB の既定ターゲットグループ（HTTP1）と gRPC なし CloudFront は影響を受けにくい。HTTP2 / GRPC のターゲットグループは更新が必要</li>
-            <li>NLB / CLB の TCP リスナーは暗号化通信をそのまま中継するため、HTTP/2 を手前で止められない</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>DevelopersIO</span>
-          <span class="engagement">🔖 79</span>
-          <span>⏱ 6 min read</span>
-          <span>2026-11-18</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-ai">AI</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://www.publickey1.jp/blog/26/aiaimicrosoft_perception.html">マイクロソフト、AI のサイバー攻撃に AI エージェントで対抗する「Microsoft Perception」提供開始</a></h3>
-        </div>
-        <div class="summary">Microsoft Ignite 2026 で一般提供が発表された。レッド（攻撃者視点で脆弱性発見）、ブルー（検知・調査・対応）、グリーン（修復・リスク低減）の 3 つの AI エージェントチームが、プレイブックに従って自律的に動く。</div>
-        <div class="key-points">
-          <ul>
-            <li>グリーンチームのプレイブックは Microsoft に加え AWS と Google Cloud も対象</li>
-            <li>重要な判断が必要な段階では人間が判断する設計。記事に価格や検知率の記載はない</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Publickey</span>
-          <span class="engagement">🔖 53</span>
-          <span>⏱ 3 min read</span>
-          <span>2026-11-18</span>
-        </div>
-      </div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-security">Security</span>
+    <span class="content-type">📜 解説</span>
+    <h3><a href="https://zenn.dev/kusuke/articles/98e178e6824cac">相次ぐ OSS 脆弱性に、クラウド WAF と Rootless コンテナで備える</a></h3>
+  </div>
+  <div class="summary">PHP・Java・nginx で認証前に成立するメモリ破壊系の脆弱性が続くなか、毎回の緊急パッチ頼みから抜ける 2 層の備えを解説する。エッジで HTTP/2・HTTP/3 を終端して不正フレームを除き、仮想パッチで未適用の入口を塞ぎつつ、前段 nginx を非 root・read_only で動かす。</div>
+  <div class="key-points">
+    <ul>
+      <li>Cloudflare は無料〜月 $250、AWS は例として月 $17 程度（ALB 別）が目安</li>
+      <li>cap_drop: ALL、no-new-privileges、tmpfs の noexec と、nginx からの外向き通信の制限で RCE 後の動きを封じる</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>Zenn</span>
+    <span class="engagement">🔖 164</span>
+    <span>⏱ 6 min read</span>
+    <span>2026-11-19</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-security">Security</span>
+    <span class="content-type">🔒 セキュリティ</span>
+    <h3><a href="https://www.itmedia.co.jp/news/article/2611/19/2000003351/">NIKKE 経由でマルウェア感染、北海道の 2 自治体で委託先が認める</a></h3>
+  </div>
+  <div class="summary">ゲーム「NIKKE」経由のマルウェア感染が北海道の 2 自治体で起き、委託先が認めたと ITmedia が報じた。業務端末での私的ソフト利用の管理が問われる事案である。</div>
+  <div class="key-points">
+    <ul>
+      <li>はてブ 207 件で、国内セキュリティ話題の上位</li>
+      <li>対象は北海道の 2 自治体、感染経路は委託先の端末</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>ITmedia</span>
+    <span class="engagement">🔖 207</span>
+    <span>⏱ 3 min read</span>
+    <span>2026-11-19</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-ai">AI</span>
+    <span class="content-type">👀 注目</span>
+    <h3><a href="https://ascii.jp/elem/000/004/452/4452982/">「ほぼ全人類が永久に失業する」Anthropic 研究者が AI の未来を予測</a></h3>
+  </div>
+  <div class="summary">ASCII.jp が、Anthropic の研究者による AI の将来予測を取り上げた。見出しの強い表現で、はてブ 429 件とこの日の IT ホットエントリの首位になった。</div>
+  <div class="key-points">
+    <ul>
+      <li>はてブ 429 件で IT ホットエントリ 1 位</li>
+      <li>発言は研究者個人の予測であり、確定した見通しではない</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>ASCII.jp</span>
+    <span class="engagement">🔖 429</span>
+    <span>⏱ 4 min read</span>
+    <span>2026-11-19</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-data">Data</span>
+    <span class="content-type">📦 リリース</span>
+    <h3><a href="https://www.publickey1.jp/blog/26/database_hubai.html">Microsoft、データベース一元管理の「Database Hub」を正式リリース</a></h3>
+  </div>
+  <div class="summary">クラウドとオンプレミスのデータベースを一元管理する Microsoft の Database Hub が正式リリースされた。AI エージェントによる運用監視の自動化も含むと Publickey が伝えている。</div>
+  <div class="key-points">
+    <ul>
+      <li>管理対象はクラウドとオンプレミス双方のデータベース</li>
+      <li>AI エージェントが運用監視を自動化</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>Publickey</span>
+    <span>⏱ 3 min read</span>
+    <span>2026-11-19</span>
+  </div>
+</div>
     </div>
 
     <div class="section" id="code-tools">
       <div class="section-title">🛠 Code &amp; Tools</div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
-          <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://engineering.fb.com/2026/11/13/android/cuttlefish-on-mac/">Meta、Android の仮想デバイス Cuttlefish を Apple Silicon Mac で動かす</a></h3>
-        </div>
-        <div class="summary">Meta の Reality Labs は、Linux 専用だった AOSP の仮想デバイスフレームワーク Cuttlefish を Apple Silicon Mac に移植した。これで Goldfish と Cuttlefish の 2 系統を保守する必要がなくなり、開発者の手元と CI で同じ仮想デバイスを使える。</div>
-        <div class="key-points">
-          <ul>
-            <li>crosvm の代わりに QEMU を VMM に使い、KVM の代わりに Hypervisor.framework を利用。vhost-user のビルド制限を macOS 向けに緩和</li>
-            <li>WebRTC から QEMU の Cocoa 表示へ移行。Meta の qemu-wearables フォークとパッチセットが必要で、定量ベンチマークは記載なし</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Engineering at Meta</span>
-          <span class="engagement">▲ 43</span>
-          <span>⏱ 7 min read</span>
-          <span>2026-11-13</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
-          <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://zenn.dev/mizchi/articles/mutation-test-quality">おい、Mutation Test をやれ。テスト品質を、測るために</a></h3>
-        </div>
-        <div class="summary">mizchi 氏が、StrykerJS の代替として差分実行とキャッシュで高速化した @mizchi/mutator を紹介する記事。実装の演算子を書き換え、テストが落ちるかでテストの質を測る。カバレッジは約 85% から費用対効果が落ちるという作者の経験を前提に、CI で常時全件実行はせず、リファクタリング用の指標として使うことを勧めている。</div>
-        <div class="key-points">
-          <ul>
-            <li>cookie-es（M3 Pro / Node.js 24）で全体初回 12.2 秒、1 箇所変更後の `--since HEAD` は 0.71 秒</li>
-            <li>Node.js 24 以上と Vitest 5 が前提。`pnpm exec mutator --since main` で main からの差分だけを検査</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Zenn</span>
-          <span>⏱ 10 min read</span>
-          <span>2026-11-17</span>
-        </div>
-      </div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-frontend">Frontend</span>
+    <span class="content-type">📜 解説</span>
+    <h3><a href="https://zenn.dev/toiroakr/articles/typescript-content-mapper-codegen">TypeScript 7.1 の Content Mapper で型生成コマンドを不要に</a></h3>
+  </div>
+  <div class="summary">TypeScript 7.1 の Content Mapper を使い、型生成のための別コマンドを省く方法を紹介した Zenn 記事。コード生成ステップを開発フローから外せるかが論点になる。</div>
+  <div class="key-points">
+    <ul>
+      <li>型生成コマンドの実行が不要になる</li>
+      <li>TypeScript 7.1 が前提</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>Zenn</span>
+    <span>⏱ 5 min read</span>
+    <span>2026-11-19</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-ai">AI</span>
+    <span class="content-type">🛠 ツール</span>
+    <h3><a href="https://gigazine.net/news/20261119-speech-cpp/">音声文字起こしと読み上げができる「speech.cpp」</a></h3>
+  </div>
+  <div class="summary">録音の文字起こし、リアルタイム文字起こし、テキストの音声読み上げができるツール speech.cpp を GIGAZINE が紹介した。名前の通り C++ 実装のローカル実行系とみられる。</div>
+  <div class="key-points">
+    <ul>
+      <li>文字起こしと音声読み上げを 1 つのツールで提供</li>
+      <li>リアルタイム文字起こしに対応</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>GIGAZINE</span>
+    <span>⏱ 3 min read</span>
+    <span>2026-11-19</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-ai">AI</span>
+    <span class="content-type">📦 リリース</span>
+    <h3><a href="https://blog.google/innovation-and-ai/models-and-research/google-deepmind/genie-4-now-available-project-genie/">Google DeepMind、Genie 4 を Project Genie で提供開始</a></h3>
+  </div>
+  <div class="summary">Google DeepMind が Genie 4 を Project Genie 経由で利用可能にしたと発表した。世界モデル系の最新版で、利用範囲の詳細は公式ブログを参照。</div>
+  <div class="key-points">
+    <ul>
+      <li>Genie 4 が利用可能に</li>
+      <li>提供経路は Project Genie</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>Google</span>
+    <span class="engagement">🔖 31</span>
+    <span>⏱ 3 min read</span>
+    <span>2026-11-19</span>
+  </div>
+</div>
     </div>
 
     <div class="section" id="quick-links">
       <div class="section-title">🔗 Quick Links</div>
-
-      <div class="quick-link">
-        <span class="tag tag-frontend">Frontend</span>
-        <a href="https://www.solidjs.com/blog/solid-2-0-the-long-hold">Solid 2.0 リリース</a>
-        <span class="quick-summary">— SolidJS 公式ブログが「The Long Hold」として 2.0 を告知。</span>
-        <span class="meta">SolidJS</span>
-      </div>
-      <div class="quick-link">
-        <span class="tag tag-ai">AI</span>
-        <a href="https://openai.com/index/advancing-chip-design-with-our-models/">Advancing chip design with OpenAI models</a>
-        <span class="quick-summary">— OpenAI がチップ設計に自社モデルを適用した取り組みを公開。</span>
-        <span class="meta">OpenAI</span>
-        <span class="engagement">▲ 163</span>
-      </div>
-      <div class="quick-link">
-        <span class="tag tag-ai">AI</span>
-        <a href="https://blog.google/innovation-and-ai/models-and-research/google-deepmind/genie-4-now-available-project-genie/">Genie 4 が利用可能に</a>
-        <span class="quick-summary">— Google DeepMind が Project Genie 経由で Genie 4 の提供を開始。</span>
-        <span class="meta">Google DeepMind</span>
-        <span class="engagement">▲ 190</span>
-      </div>
-      <div class="quick-link">
-        <span class="tag tag-security">Security</span>
-        <a href="https://phrack.org/issues/73/introduction_md.html">Phrack 73</a>
-        <span class="quick-summary">— ハッカー向け老舗 e-zine の第 73 号が公開。</span>
-        <span class="meta">Phrack</span>
-        <span class="engagement">▲ 64</span>
-      </div>
-      <div class="quick-link">
-        <span class="tag tag-infra">Infra</span>
-        <a href="https://social.anoxinon.de/@Codeberg/117636454915265360">Codeberg のドメインがアカウントから突然消え、サイトに到達不能に</a>
-        <span class="quick-summary">— Codeberg が Mastodon で状況を報告。</span>
-        <span class="meta">Codeberg</span>
-        <span class="engagement">▲ 185</span>
-      </div>
-      <div class="quick-link">
-        <span class="tag tag-infra">Infra</span>
-        <a href="https://www.publickey1.jp/blog/26/windows_server_2028microsoft_foundryai.html">Windows Server 2028 がパブリックプレビュー</a>
-        <span class="quick-summary">— Microsoft Foundry など AI 推論の実行基盤へ拡張。</span>
-        <span class="meta">Publickey</span>
-      </div>
+<div class="quick-link">
+  <span class="tag tag-ai">AI</span>
+  <a href="https://www.reuters.com/business/finance/anthropics-historic-debut-put-ais-promise-peril-wall-st-test-2026-11-19/">Anthropic の Nasdaq 上場を Reuters が報道</a>
+  <span class="quick-summary">— 上場初日の市場の反応を報じ、HN で 911 ポイント。</span>
+  <span class="meta">Reuters</span>
+</div>
+<div class="quick-link">
+  <span class="tag tag-oss">OSS</span>
+  <a href="https://social.anoxinon.de/@Codeberg/117636454915265360">Codeberg のドメインがアカウントから消失、サイトに到達不能に</a>
+  <span class="quick-summary">— Lobsters スコア 220 で、ホスティング側の運用リスクが話題。</span>
+  <span class="meta">Codeberg</span>
+</div>
+<div class="quick-link">
+  <span class="tag tag-security">Security</span>
+  <a href="https://www.synology.com/en-uk/security/advisory/Synology_SA_26_21">Synology がセキュリティアドバイザリ SA_26_21 を公開</a>
+  <span class="quick-summary">— NAS 利用者は対象製品とバージョンを確認したい。</span>
+  <span class="meta">Synology</span>
+</div>
+<div class="quick-link">
+  <span class="tag tag-security">Security</span>
+  <a href="https://macanorak.com/uk-government-forced-to-admit-it-issued-apple-a-secret-encryption-order/">英国政府、Apple への秘密の暗号化命令を発出していたと認める</a>
+  <span class="quick-summary">— HN で 508 ポイント。</span>
+  <span class="meta">MacAnorak</span>
+</div>
+<div class="quick-link">
+  <span class="tag tag-infra">Infra</span>
+  <a href="https://element.io/blog/how-the-european-commission-rolled-out-matrix-to-more-than-40-000-staff/">欧州委員会が 4 万人超の職員に Matrix を展開した経緯</a>
+  <span class="quick-summary">— 大規模な自己ホスト型チャット導入事例。HN で 662 ポイント。</span>
+  <span class="meta">Element</span>
+</div>
+<div class="quick-link">
+  <span class="tag tag-security">Security</span>
+  <a href="https://forest.watch.impress.co.jp/docs/news/2157865.html">約 2,500 万人のデータで Firefox の指紋対策を強化</a>
+  <span class="quick-summary">— ブラウザのフィンガープリンティング対策の更新。</span>
+  <span class="meta">窓の杜</span>
+</div>
     </div>
 
     <footer>
