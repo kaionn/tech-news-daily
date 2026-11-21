@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tech News Daily — 2026-11-20</title>
-  <meta name="description" content="Claude が物理の未解決問題2件を解決 / Ruby2Shell 素のRailsで認証前RCE / MAI Code 2">
+  <title>Tech News Daily — 2026-11-21</title>
+  <meta name="description" content="Anthropic モデルが GRH 証明を生成 / Signal が OS の AI エージェントに要求 / PLAID KARTE 侵害の調査結果">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Tech News Daily">
-  <meta property="og:title" content="Tech News Daily — 2026-11-20">
-  <meta property="og:description" content="Claude が物理の未解決問題2件を解決 / Ruby2Shell 素のRailsで認証前RCE / MAI Code 2">
+  <meta property="og:title" content="Tech News Daily — 2026-11-21">
+  <meta property="og:description" content="Anthropic モデルが GRH 証明を生成 / Signal が OS の AI エージェントに要求 / PLAID KARTE 侵害の調査結果">
   <meta property="og:url" content="https://tech-news.kaion-lab.com/">
   <meta property="og:image" content="https://tech-news.kaion-lab.com/og.png">
   <meta name="twitter:card" content="summary_large_image">
@@ -22,7 +22,7 @@
   <div class="container">
     <header>
       <h1>Tech News Daily</h1>
-      <div class="date">2026-11-20 (Fri)</div>
+      <div class="date">2026-11-21 (Sat)</div>
       <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
       <nav class="site-nav">
         <a href="./" class="active">📰 日刊ダイジェスト</a>
@@ -35,7 +35,7 @@
     <div class="stats-bar">
       <span>📰 20 articles</span>
       <span>🏷 7 categories</span>
-      <span>📡 18 sources</span>
+      <span>📡 19 sources</span>
     </div>
 
     <nav class="toc">
@@ -47,19 +47,9 @@
     </nav>
 
     <div class="numbers-bar">
-      <div class="number-item"><span class="number-value">6 週間</span><span class="number-label">Claude が自律で物理問題に取り組んだ期間</span></div>
-      <div class="number-item"><span class="number-value">5%</span><span class="number-label">MAI Code 2 のコスト（Claude Opus 5.5 比）</span></div>
-      <div class="number-item"><span class="number-value">2x</span><span class="number-label">PostgreSQL 19 のバルク INSERT 高速化</span></div>
-    </div>
-
-    <div class="weekly-keywords">
-      <div class="section-title">📊 今週のキーワード</div>
-      <div class="keyword-chips">
-        <span class="keyword-chip">認証前 RCE</span>
-        <span class="keyword-chip">AI コーディングモデル</span>
-        <span class="keyword-chip">Anthropic 上場</span>
-      </div>
-      <div class="keyword-summary">nginx、Ruby、PHP、OpenJDK と、認証前に成立するメモリ破壊系の脆弱性の公表が今週続いた。一方で Microsoft の MAI Code 2 や Gemini 4 Neon など、モデルの価格性能競争も進み、Anthropic は Nasdaq に上場した。</div>
+      <div class="number-item"><span class="number-value">1740 万行</span><span class="number-label">GRH 証明の Lean コード量</span></div>
+      <div class="number-item"><span class="number-value">754 社</span><span class="number-label">KARTE 侵害で連携認証情報が対象の企業数</span></div>
+      <div class="number-item"><span class="number-value">4.59x</span><span class="number-label">Frostbite の電力あたり性能（自社報告）</span></div>
     </div>
 
     <div class="section" id="top-stories">
@@ -68,66 +58,65 @@
   <div class="card-header">
     <span class="tag tag-ai">AI</span>
     <span class="content-type">🔬 研究</span>
-    <h3><a href="https://www.anthropic.com/research/claude-black-hole-physics">DEEP DIVE: Claude が物理学の未解決問題 2 件を解決、Anthropic が発表</a></h3>
+    <h3><a href="https://alpo.ge/remark.pdf">DEEP DIVE: Levent Alpöge 氏が一般化リーマン予想（GRH）の証明を主張、Anthropic のモデルが Lean で生成</a></h3>
   </div>
-  <div class="summary">Anthropic は、Claude のエージェント群が約 6 週間自律的に作業し、ブラックホール物理に関する 2 つの未解決問題を解いたと発表した。1 つ目は N=4 超対称ヤン・ミルズ理論の弱結合領域で、熱的に重力子ガスからブラックホールへ切り替わる Hawking-Page 転移が急激か緩やかかという問題である。2003 年に始まった計算は未完のままで、決定的な数値は 3 ループ先に現れ、数千のダイアグラムが絡む。Claude は自分自身の複数コピーを走らせ、ほぼ全ての部分を二重に計算して既知の結果と照合し、転移は急激だと結論した。これは強結合での Hawking と Page の結果と一致する。ただし全結合で急激なままだというのは自然な解釈にとどまり、証明されていない。2 つ目は 3 次元重力のモジュラー・ブートストラップで、最軽量ブラックホールの質量 M₁ の上限 c/Λ を扱う。従来の上限は c/6（2009 年）、c/8.5（解析的）、約 c/9.1（数値的）だった。Claude は数値データのパターンに気づき、スペクトル曲線を使って Λ ≈ 9.1266 を厳密に導き、この手法ではこの上限が最適だと示した。成果は Lean で検証され、物理学者が主要結果を確認している。</div>
-  <div class="editorial">🧠 事実として検証手段（Lean と人間の確認）が明示されており、「AI が研究した」という主張の中では信頼しやすい部類だ。ただし著者自身が、結果は現実の宇宙に対応せず実用用途もないと断っている。未検証なのは、同じ手法が検証ルートの乏しい分野でも機能するかどうかで、そこが次の焦点になる。</div>
+  <div class="summary">数論研究者の Levent Alpöge 氏が、一般化リーマン予想（GRH）の証明をまとめた PDF を公開した。Scott Aaronson 氏のブログによると、証明は Anthropic のモデルが生成したもので、形式証明言語 Lean で 1740 万行に及ぶ。GRH はリーマン予想を L 関数全般へ拡張した命題で、素数分布の誤差評価をはじめ、数論の多くの条件付き結果の前提になってきた。Lean の証明は、カーネルと呼ばれる小さな検証器が全推論ステップを機械的に確認する。そのため人間が証明の筋を読み切れなくても、カーネルが受理すれば論理的整合性は保証される。Aaronson 氏は過去に Lean カーネルのバグや型理論の健全性に不確実性があったことを認めたうえで、Lean 証明書付きの AI 成果がこれまで撤回された例はないと述べ、この証明も残ると予想している。一方で、独立した数学者による検証はまだ済んでおらず、アイデアの理解には数年かかるという。コメント欄では、人間の数学者が重要な方針を AI に与えたとの指摘や、Alessandro Masullo 氏による 940 ページの人間執筆の GRH 草稿に関する話も出ているが、いずれも未確認の情報である。Hacker News では 2000 ポイント超を集め、同日に Navier–Stokes 方程式の有限時間爆発に関する投稿も並んだ。</div>
+  <div class="editorial">🧠 Lean が受理した事実は強い根拠だが、定理の「記述」が本当に GRH と同じ命題かを人間が確認する工程は残る。1740 万行を人が読むことは現実的でなく、確認すべきは最終的な定理文と公理の使い方の 2 点に絞られるだろう。ただ、数学界がこの証明をどう理解して再利用できるかは未知数だ。</div>
   <div class="key-points">
     <ul>
-      <li>Hawking-Page 転移は弱結合でも急激と判明（3 ループ・数千のダイアグラムを二重計算で検証）</li>
-      <li>3D 重力の M₁ 上限は c/6 → c/8.5 → 約 c/9.1 と進んだ後、Λ ≈ 9.1266 の厳密値に到達</li>
-      <li>約 6 週間の自律作業、証明は Lean で機械検証し物理学者が主要結果を確認</li>
+      <li>証明は Lean で約 1740 万行。カーネルが全ステップを機械検査する形式証明</li>
+      <li>独立した数学者による検証は未完了。Aaronson 氏は「理解に数年かかる」と見る</li>
+      <li>HN で 2360 ポイント。同日に Terence Tao 氏も関連記事を公開</li>
     </ul>
   </div>
-  <div class="why-it-matters">💡 AI エージェントに長期の数式計算を任せる際は、二重計算と形式検証の組み合わせが検証コストを下げる実例になる。</div>
+  <div class="why-it-matters">💡 AI が生成した形式証明は「読めないがカーネルが保証する」成果物になりつつあり、ソフトウェアの形式検証でも同じ検証フローが現実味を帯びる。</div>
   <div class="meta">
-    <span>Anthropic</span>
-    <span class="engagement">▲ 387</span>
-    <span>⏱ 6 min read</span>
-    <span>2026-11-19</span>
+    <span>alpo.ge / Scott Aaronson</span>
+    <span class="engagement">▲ 2360</span>
+    <span>⏱ 8 min read</span>
+    <span>2026-11-20</span>
   </div>
 </div>
 <div class="card featured">
   <div class="card-header">
     <span class="tag tag-security">Security</span>
     <span class="content-type">🔒 セキュリティ</span>
-    <h3><a href="https://verialabs.com/ruby2shell/">Ruby2Shell: 素の Rails で認証前 RCE、PoC は 11/25 以降に公開予定</a></h3>
+    <h3><a href="https://signal.org/blog/protecting-your-privacy/">Signal が Apple・Google・Microsoft に「OS 組み込み AI エージェントからの確実なオプトアウト」を要求</a></h3>
   </div>
-  <div class="summary">Ruby の文字列大文字化処理に 1 バイトのヒープオーバーフロー（CVE-2026-132825）がある。ß は多くの単一バイトエンコーディングに大文字がなく、upcase すると 2 バイトの「SS」になるが、ループは 1 バイト分しか境界を確認しない。出力バッファは入力長 + 20 バイトなので、ß を 21 個入れると 1 バイト溢れる。Rails とクラシックスタイルの Sinatra がデフォルト設定で影響を受ける。Veria Labs は 11 月 25 日以降に RCE の PoC を公開する予定で、主要ベンダーの修正が遅れれば延期する。</div>
+  <div class="summary">Signal は、OS 組み込みの AI エージェントが画面・ファイル・通知・API を通してアプリのデータを読む問題を指摘し、OS ベンダーに 2 点を求めた。1 つは画面読み取りやファイルシステムなどを対象に、アプリ機能を損なわず使える開発者向けオプトアウト、もう 1 つはエージェントが扱うデータの正確な技術文書である。Meta の Muse などサードパーティ製エージェントがアクセシビリティ権限を使う点にも警告している。</div>
   <div class="key-points">
     <ul>
-      <li>修正版は Ruby 3.3.14 / 3.4.13 / 4.0.10。3.2 以前は EOL のため修正なし</li>
-      <li>GitLab・GitHub Enterprise Server・Chatwoot は未修正、Mastodon・OpenProject は修正版あり</li>
-      <li>UTF-8 文字列は別経路のため対象外。影響は upcase / swapcase / downcase(:fold) / casecmp?</li>
+      <li>Windows 11 では Recall 対策としてスクリーンショットをデフォルトで禁止。iOS 27 には「Block Siri AI」設定を用意</li>
+      <li>macOS 27 は適切な API がなく遮断できないため、システム設定の Siri「除外アプリ」への追加を推奨</li>
     </ul>
   </div>
-  <div class="why-it-matters">💡 Ruby 3.2 以前の Rails を動かしているなら、PoC 公開前にアップグレードか前段での遮断が必要。自己ホストの GitLab は修正版待ちの間、公開範囲を絞る。</div>
+  <div class="why-it-matters">💡 メッセージアプリなど機密性の高いアプリを作る場合、スクリーンショット遮断だけではファイルシステム経由の読み取りを防げない点を前提に設計する必要がある。</div>
   <div class="meta">
-    <span>Veria Labs</span>
-    <span class="engagement">▲ 385</span>
-    <span>⏱ 5 min read</span>
-    <span>2026-11-19</span>
+    <span>Signal</span>
+    <span class="engagement">▲ 509</span>
+    <span>⏱ 6 min read</span>
+    <span>2026-11-20</span>
   </div>
 </div>
 <div class="card featured">
   <div class="card-header">
-    <span class="tag tag-ai">AI</span>
-    <span class="content-type">💰 ビジネス</span>
-    <h3><a href="https://www.publickey1.jp/blog/26/aimai_code_2mai_code_2_flash.html">Microsoft、コーディング特化モデル「MAI Code 2」「MAI Code 2 Flash」を発表</a></h3>
+    <span class="tag tag-security">Security</span>
+    <span class="content-type">🔒 セキュリティ</span>
+    <h3><a href="https://plaid.co.jp/news/20261120/">PLAID が KARTE 不正アクセスの調査結果を公表、最大 754 社の連携認証情報が対象</a></h3>
   </div>
-  <div class="summary">Microsoft が Ignite 2026 でコーディング用 AI モデル 2 種を発表した。MAI Code 2 は GitHub Copilot の日常タスク由来の 4 ベンチマーク平均で、GPT 6.1 Sol の 98%、Claude Opus 5.5 の 96% の性能とされる。MAI Code 2 Flash は定型作業向けで、3 ベンチマークで GPT-6 Luna、Claude Haiku 5.5 と同等という。</div>
+  <div class="summary">PLAID は、11 月 13 日に第三者が複数経路へ攻撃を繰り返し、公開経路の内部処理の脆弱性から一部データを取得、その認証情報で KARTE 管理画面へ侵入したと発表した。全 KARTE サービスは 13 日から停止中で、段階的な再開は 2027 年 1 月中旬を目標とする。キャッシュデータは漏えい分と非漏えい分を分離できず、対象期間の全件を漏えい扱いにしている。</div>
   <div class="key-points">
     <ul>
-      <li>MAI Code 2 のコストは GPT 6.1 Sol の 40%、Claude Opus 5.5 の 5%</li>
-      <li>Flash のコストは GPT-6 Luna の約 65%、Claude Haiku 5.5 の約 20%</li>
-      <li>絶対価格・提供開始日・利用方法は記事では未記載</li>
+      <li>顧客企業の連携データ 570 社、行動・分析データ 487 社、キャッシュ最大 409 社、外部連携の認証情報 754 社が対象</li>
+      <li>PLAID 自社の KARTE アカウント用メール 7 万 9249 件と営業・サポート連絡先 4 万 5816 件も対象</li>
     </ul>
   </div>
-  <div class="why-it-matters">💡 数値は Microsoft 自身の発表値で第三者検証はない。Copilot 利用者は、自社タスクで品質とコストを再測定してから切り替えを判断したい。</div>
+  <div class="why-it-matters">💡 KARTE を使うサイトの運営者は、外部サービス連携の認証情報（API キー等）を早急にローテーションし、11 月 24 日開始の詳細データ引き渡しを確認すべき。</div>
   <div class="meta">
-    <span>Publickey</span>
-    <span>⏱ 3 min read</span>
-    <span>2026-11-19</span>
+    <span>PLAID</span>
+    <span class="engagement">🔖 54</span>
+    <span>⏱ 5 min read</span>
+    <span>2026-11-20</span>
   </div>
 </div>
     </div>
@@ -136,85 +125,82 @@
       <div class="section-title">⚡ Dev &amp; Engineering</div>
 <div class="card">
   <div class="card-header">
-    <span class="tag tag-data">Data</span>
+    <span class="tag tag-ai">AI</span>
     <span class="content-type">📦 リリース</span>
-    <h3><a href="https://www.postgresql.org/about/news/postgresql-19-released-3449/">PostgreSQL 19 リリース、REPACK (CONCURRENTLY) や plan advice を追加</a></h3>
+    <h3><a href="https://thinkingmachines.ai/news/inkling-2-mini/">Thinking Machines が Inkling 2 Mini を公開、26.4B の MoE をローカルで動かせるオープンウェイト</a></h3>
   </div>
-  <div class="summary">PostgreSQL 19 では、読み書きをブロックせずにテーブルの肥大を解消する REPACK (CONCURRENTLY) が入り、VACUUM FULL と CLUSTER の代替になる。pg_plan_advice / pg_stash_advice により、アプリを変更せずクエリ ID 単位で実行計画を固定できる。JIT はコスト見積もりが不安定なためデフォルト無効になった。</div>
+  <div class="summary">Thinking Machines Lab がオープンウェイトの Inkling 2 Mini を公開した。総パラメータ 26.4B のうち 1 トークンあたり 3.4B が有効になる MoE で、中間 2 ブロックを 3 回繰り返す looped 設計により、保存する 24 層から 48 層分の計算を行う。メモリは約 20GB で、Ollama や llama.cpp でローカル実行できる。</div>
   <div class="key-points">
     <ul>
-      <li>外部キー検査の改善で、バルク INSERT がテスト上ほぼ 2 倍高速化</li>
-      <li>INSERT ... ON CONFLICT DO SELECT、COPY の JSON 出力、IGNORE NULLS を追加</li>
-      <li>md5 認証は警告対象に、RADIUS 認証は削除。SCRAM への移行が推奨</li>
+      <li>DeepSWE v1.1 で 48.2%、SWE-bench Verified で 79.2%（いずれもベンダー報告）。HLE-Diamond は 15.2% にとどまる</li>
+      <li>主に NVFP4 で学習・配信。Mac は 32GB 以上の RAM で Ollama 実行可</li>
     </ul>
   </div>
   <div class="meta">
-    <span>PostgreSQL.org</span>
-    <span class="engagement">▲ 58</span>
+    <span>Thinking Machines</span>
+    <span class="engagement">▲ 677</span>
     <span>⏱ 6 min read</span>
-    <span>2026-11-19</span>
+    <span>2026-11-20</span>
   </div>
 </div>
 <div class="card">
   <div class="card-header">
     <span class="tag tag-dev">Dev</span>
+    <span class="content-type">🔬 研究</span>
+    <h3><a href="https://architectlabs.com/blog/frostbite">Architect Labs が AI だけで設計・検証した CPU「Frostbite」を発表、interaction nets ベースの新 ISA</a></h3>
+  </div>
+  <div class="summary">Architect Labs は、コンパイラ・ISA・RTL・検証・GDS までほぼ AI が担当した実験的 CPU を公開した。計算を局所的なノード対の書き換えで表す interaction nets ベースの命令セットを採用している。ただし比較対象は非公開の dual-issue in-order コア 1 つで、結果は自社報告かつシリコン未実装の見積りである。</div>
+  <div class="key-points">
+    <ul>
+      <li>7nm で最終 GDS は 500MHz。電力あたり性能は 25 ワークロードの幾何平均で 4.59 倍、面積あたり 8.77 倍</li>
+      <li>ISA・RTL・検証を ASL（Lean へ変換される仕様言語）に一本化。58 案のうち 37 案を採用</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>Architect Labs</span>
+    <span class="engagement">▲ 626</span>
+    <span>⏱ 10 min read</span>
+    <span>2026-11-20</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-infra">Infra</span>
     <span class="content-type">📦 リリース</span>
-    <h3><a href="https://www.php.net/releases/8.6/en.php">PHP 8.6 リリース、部分関数適用・Duration クラス・Poll API</a></h3>
+    <h3><a href="https://dev.classmethod.jp/articles/aws-sts-get-scoped-credentials/">AWS STS に GetScopedCredentials が追加、現セッションより狭い権限・短い期限の認証情報を発行</a></h3>
   </div>
-  <div class="summary">PHP 8.6 は `?` プレースホルダーによる部分関数適用、タイムゾーン非依存の \Time\Duration、clamp() 関数を追加した。Io\Poll は epoll / kqueue などで多数のストリームを監視し、stream_select() の約 1024 接続の制限を避けられ、ReactPHP や AMPHP の基盤になる。</div>
+  <div class="summary">11 月 19 日に追加された STS API で、AssumeRole せず現在の一時認証情報から権限と期限を絞った認証情報を発行する。同一アイデンティティのまま使えるため、AI エージェントへ最小権限を渡す用途に向く。AssumeRole のセッションポリシーと違い、前回の絞り込みに上乗せして最大 3 層まで重ねられる。</div>
   <div class="key-points">
     <ul>
-      <li>Duration は 250 年超をナノ秒精度で表現し、min() で直接比較可能</li>
-      <li>session.use_strict_mode と cookie_httponly がデフォルト有効、SameSite は Lax</li>
-      <li>Sodium に ML-KEM-768 と X-Wing のポスト量子鍵カプセル化を追加</li>
+      <li>リージョナルエンドポイント必須。グローバルエンドポイントは InvalidAction になる</li>
+      <li>期限は呼び出し元の残り時間が上限。4 層目は ValidationError、元の権限の復元は不可</li>
     </ul>
   </div>
   <div class="meta">
-    <span>php.net</span>
-    <span class="engagement">▲ 276</span>
-    <span>⏱ 5 min read</span>
-    <span>2026-11-19</span>
+    <span>DevelopersIO</span>
+    <span class="engagement">🔖 10</span>
+    <span>⏱ 7 min read</span>
+    <span>2026-11-20</span>
   </div>
 </div>
 <div class="card">
   <div class="card-header">
-    <span class="tag tag-security">Security</span>
-    <span class="content-type">🔒 セキュリティ</span>
-    <h3><a href="https://github.com/openjdk/jdk/pull/32781">OpenJDK の AVX-512 Base64 デコーダにヒープ破壊バグ、報告は 9 月</a></h3>
+    <span class="tag tag-infra">Infra</span>
+    <span class="content-type">📜 解説</span>
+    <h3><a href="https://forest.watch.impress.co.jp/docs/news/2158261.html">Windows Server 2028 で WSUS・SMB 1.0・VBScript・WMIC を削除、PowerShell 5.1 と WDS は非推奨</a></h3>
   </div>
-  <div class="summary">HotSpot の x86_64 AVX-512 (VBMI) Base64 デコード stub が、1〜63 バイトの末尾端数を誤処理する。不正な入力（例: &#x27;A&#x27; を 64 個 + &#x27;=&#x27;）で output_size が負になり、論理出力長を超えて書き込んでヒープを壊す。PR は 9 月 9 日に出されたが 11 月 4 日に閉じられ、作者は「master では解消済み」と述べている。</div>
+  <div class="summary">Windows Server 2028（パブリックプレビュー中）の削除・非推奨機能が Microsoft の文書で明らかになった。BIOS ブートが廃止され UEFI が必須になり、Hyper-V ゲストは Generation 2 が必要になる。プレビュー段階のため、計画は変わる可能性がある。</div>
   <div class="key-points">
     <ul>
-      <li>有効な Base64 は長さが 4 の倍数のため、不正入力でのみ発動</li>
-      <li>RCE として悪用可能かは PR からは確認できない（コメントで java4shell との関連が推測されている）</li>
-      <li>影響バージョンと置き換え修正の所在は未確認</li>
+      <li>削除は WINS、DirectAccess、PPTP/L2TP、SMB 1.0、VBScript、WMIC、WSUS、MultiPoint など</li>
+      <li>非推奨は BranchCache、WDS、Windows PowerShell 5.1、Windows Sockets Direct。PowerShell 7 への移行を推奨</li>
     </ul>
   </div>
   <div class="meta">
-    <span>GitHub (OpenJDK)</span>
-    <span class="engagement">▲ 370</span>
-    <span>⏱ 4 min read</span>
-    <span>2026-11-19</span>
-  </div>
-</div>
-<div class="card">
-  <div class="card-header">
-    <span class="tag tag-security">Security</span>
-    <span class="content-type">👀 注目</span>
-    <h3><a href="https://xusheng.dev/posts/windows-coding-agent-telemetry/">Windows 11 が使用中のコーディングエージェントや開発ツールを記録</a></h3>
-  </div>
-  <div class="summary">Windows 11 の MissionControlAggregator.dll が、Copilot / Claude / Codex などの CLI・デスクトップエージェントや GCC、Python、Node.js、.NET の使用有無をビットマップとして記録し、任意診断データとして送信する。作者は cmd.exe を codex.exe に改名して検知されることを確認した。</div>
-  <div class="key-points">
-    <ul>
-      <li>実行名の一致のみで、プロンプトやソースコードは含まれない</li>
-      <li>クリーンな Windows 11 Home ARM64 では「任意データの送信」が既定で有効だった</li>
-      <li>無効化は設定 → プライバシーとセキュリティ → 診断とフィードバック</li>
-    </ul>
-  </div>
-  <div class="meta">
-    <span>xusheng.dev</span>
+    <span>Impress Forest Watch</span>
+    <span class="engagement">🔖 40</span>
     <span>⏱ 5 min read</span>
-    <span>2026-11-19</span>
+    <span>2026-11-20</span>
   </div>
 </div>
     </div>
@@ -223,81 +209,79 @@
       <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
 <div class="card">
   <div class="card-header">
-    <span class="tag tag-security">Security</span>
-    <span class="content-type">📜 解説</span>
-    <h3><a href="https://zenn.dev/kusuke/articles/98e178e6824cac">相次ぐ OSS 脆弱性に、クラウド WAF と Rootless コンテナで備える</a></h3>
+    <span class="tag tag-data">Data</span>
+    <span class="content-type">📦 リリース</span>
+    <h3><a href="https://www.publickey1.jp/blog/26/database_hubai.html">Microsoft、DB 一元管理の「Database Hub」を正式リリース、AI エージェントが運用監視を自動化</a></h3>
   </div>
-  <div class="summary">PHP・Java・nginx で認証前に成立するメモリ破壊系の脆弱性が続くなか、毎回の緊急パッチ頼みから抜ける 2 層の備えを解説する。エッジで HTTP/2・HTTP/3 を終端して不正フレームを除き、仮想パッチで未適用の入口を塞ぎつつ、前段 nginx を非 root・read_only で動かす。</div>
+  <div class="summary">Microsoft は、クラウドとオンプレミスのデータベースを一元管理するサービス「Database Hub」を正式リリースした。AI エージェントによる運用監視の自動化機能も備える。同社は今週、Azure HorizonDB や Fabric HorizonDB など DB 関連の発表を続けている。</div>
   <div class="key-points">
     <ul>
-      <li>Cloudflare は無料〜月 $250、AWS は例として月 $17 程度（ALB 別）が目安</li>
-      <li>cap_drop: ALL、no-new-privileges、tmpfs の noexec と、nginx からの外向き通信の制限で RCE 後の動きを封じる</li>
+      <li>クラウドとオンプレミスの DB を単一の管理面で扱える</li>
+      <li>AI エージェントによる運用監視の自動化を搭載</li>
     </ul>
   </div>
   <div class="meta">
-    <span>Zenn</span>
-    <span class="engagement">🔖 164</span>
-    <span>⏱ 6 min read</span>
-    <span>2026-11-19</span>
-  </div>
-</div>
-<div class="card">
-  <div class="card-header">
-    <span class="tag tag-security">Security</span>
-    <span class="content-type">🔒 セキュリティ</span>
-    <h3><a href="https://www.itmedia.co.jp/news/article/2611/19/2000003351/">NIKKE 経由でマルウェア感染、北海道の 2 自治体で委託先が認める</a></h3>
-  </div>
-  <div class="summary">ゲーム「NIKKE」経由のマルウェア感染が北海道の 2 自治体で起き、委託先が認めたと ITmedia が報じた。業務端末での私的ソフト利用の管理が問われる事案である。</div>
-  <div class="key-points">
-    <ul>
-      <li>はてブ 207 件で、国内セキュリティ話題の上位</li>
-      <li>対象は北海道の 2 自治体、感染経路は委託先の端末</li>
-    </ul>
-  </div>
-  <div class="meta">
-    <span>ITmedia</span>
-    <span class="engagement">🔖 207</span>
-    <span>⏱ 3 min read</span>
-    <span>2026-11-19</span>
-  </div>
-</div>
-<div class="card">
-  <div class="card-header">
-    <span class="tag tag-ai">AI</span>
-    <span class="content-type">👀 注目</span>
-    <h3><a href="https://ascii.jp/elem/000/004/452/4452982/">「ほぼ全人類が永久に失業する」Anthropic 研究者が AI の未来を予測</a></h3>
-  </div>
-  <div class="summary">ASCII.jp が、Anthropic の研究者による AI の将来予測を取り上げた。見出しの強い表現で、はてブ 429 件とこの日の IT ホットエントリの首位になった。</div>
-  <div class="key-points">
-    <ul>
-      <li>はてブ 429 件で IT ホットエントリ 1 位</li>
-      <li>発言は研究者個人の予測であり、確定した見通しではない</li>
-    </ul>
-  </div>
-  <div class="meta">
-    <span>ASCII.jp</span>
-    <span class="engagement">🔖 429</span>
+    <span>Publickey</span>
     <span>⏱ 4 min read</span>
     <span>2026-11-19</span>
   </div>
 </div>
 <div class="card">
   <div class="card-header">
-    <span class="tag tag-data">Data</span>
-    <span class="content-type">📦 リリース</span>
-    <h3><a href="https://www.publickey1.jp/blog/26/database_hubai.html">Microsoft、データベース一元管理の「Database Hub」を正式リリース</a></h3>
+    <span class="tag tag-infra">Infra</span>
+    <span class="content-type">📜 解説</span>
+    <h3><a href="https://zenn.dev/levtech/articles/14befd8e727f32">CDK から Terraform へ、所有権移譲で本番インフラを無停止で IaC 移行</a></h3>
   </div>
-  <div class="summary">クラウドとオンプレミスのデータベースを一元管理する Microsoft の Database Hub が正式リリースされた。AI エージェントによる運用監視の自動化も含むと Publickey が伝えている。</div>
+  <div class="summary">レバテックのエンジニアが、AWS CDK で管理していた本番インフラを Terraform へ移した手順をまとめた。リソースを作り直さず所有権を移す方法で、本番を止めずに移行している。</div>
   <div class="key-points">
     <ul>
-      <li>管理対象はクラウドとオンプレミス双方のデータベース</li>
-      <li>AI エージェントが運用監視を自動化</li>
+      <li>作り直しではなく所有権の移譲で移行し、本番無停止を維持</li>
+      <li>IaC ツール変更時の手順と注意点を実例で解説</li>
     </ul>
   </div>
   <div class="meta">
-    <span>Publickey</span>
-    <span>⏱ 3 min read</span>
-    <span>2026-11-19</span>
+    <span>Zenn</span>
+    <span>⏱ 8 min read</span>
+    <span>2026-11-20</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-ai">AI</span>
+    <span class="content-type">🛠 ツール</span>
+    <h3><a href="https://zenn.dev/hma2moto/articles/turtle-agent-rules-pros-cons">CLAUDE.md・SKILL.md のルールを Turtle で書き、lint で矛盾や書き間違いを検査</a></h3>
+  </div>
+  <div class="summary">エージェント向けルールファイル（CLAUDE.md や SKILL.md）の内容を RDF の Turtle 記法で記述し、lint で書き間違いや矛盾を機械検査する試みの記事。長くなるルールファイルの整合性管理への一案で、メリットとデメリットの両方を扱っている。</div>
+  <div class="key-points">
+    <ul>
+      <li>ルールを構造化データにして矛盾を lint で検出</li>
+      <li>Turtle 化の利点と欠点を比較</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>Zenn</span>
+    <span>⏱ 6 min read</span>
+    <span>2026-11-20</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span class="tag tag-security">Security</span>
+    <span class="content-type">👀 注目</span>
+    <h3><a href="https://www.47news.jp/15262461.html">三重の Mie Bank、顧客情報最大約 1400 万件の漏えいを報告</a></h3>
+  </div>
+  <div class="summary">三重県の Mie Bank が、顧客情報が最大で約 1400 万件漏えいしたと報じられた。速報段階で、原因や対象範囲の詳細は今後の発表を待つ必要がある。</div>
+  <div class="key-points">
+    <ul>
+      <li>漏えい規模は最大約 1400 万件</li>
+      <li>速報のため原因・範囲は未確定</li>
+    </ul>
+  </div>
+  <div class="meta">
+    <span>47NEWS</span>
+    <span class="engagement">🔖 287</span>
+    <span>⏱ 2 min read</span>
+    <span>2026-11-20</span>
   </div>
 </div>
     </div>
@@ -306,60 +290,41 @@
       <div class="section-title">🛠 Code &amp; Tools</div>
 <div class="card">
   <div class="card-header">
-    <span class="tag tag-frontend">Frontend</span>
-    <span class="content-type">📜 解説</span>
-    <h3><a href="https://zenn.dev/toiroakr/articles/typescript-content-mapper-codegen">TypeScript 7.1 の Content Mapper で型生成コマンドを不要に</a></h3>
-  </div>
-  <div class="summary">TypeScript 7.1 の Content Mapper を使い、型生成のための別コマンドを省く方法を紹介した Zenn 記事。コード生成ステップを開発フローから外せるかが論点になる。</div>
-  <div class="key-points">
-    <ul>
-      <li>型生成コマンドの実行が不要になる</li>
-      <li>TypeScript 7.1 が前提</li>
-    </ul>
-  </div>
-  <div class="meta">
-    <span>Zenn</span>
-    <span>⏱ 5 min read</span>
-    <span>2026-11-19</span>
-  </div>
-</div>
-<div class="card">
-  <div class="card-header">
-    <span class="tag tag-ai">AI</span>
+    <span class="tag tag-oss">OSS</span>
     <span class="content-type">🛠 ツール</span>
-    <h3><a href="https://gigazine.net/news/20261119-speech-cpp/">音声文字起こしと読み上げができる「speech.cpp」</a></h3>
+    <h3><a href="https://www.masteringemacs.org/article/announcing-dreamcoder">Mastering Emacs 著者が AI コーディング用ハーネス兼 IDE「DreamCoder」を公開</a></h3>
   </div>
-  <div class="summary">録音の文字起こし、リアルタイム文字起こし、テキストの音声読み上げができるツール speech.cpp を GIGAZINE が紹介した。名前の通り C++ 実装のローカル実行系とみられる。</div>
+  <div class="summary">Mickey Petersen 氏が、ブラウザ上で動くタイリングウィンドウマネージャ型の AI コーディングハーネスを公開した。チャットとターミナルを並べて使え、サブエージェント、MCP サーバー、スキル、フックに対応する。</div>
   <div class="key-points">
     <ul>
-      <li>文字起こしと音声読み上げを 1 つのツールで提供</li>
-      <li>リアルタイム文字起こしに対応</li>
+      <li>Qwen・Gemma・DeepSeek・GLM などオープンウェイトモデルに対応し、Pi・OpenCode・Codex の設定をインポート可能</li>
+      <li>macOS・Windows・Linux・Docker で動作。ライセンスは記事では未記載</li>
     </ul>
   </div>
   <div class="meta">
-    <span>GIGAZINE</span>
-    <span>⏱ 3 min read</span>
-    <span>2026-11-19</span>
+    <span>Mastering Emacs</span>
+    <span class="engagement">▲ 105</span>
+    <span>⏱ 6 min read</span>
+    <span>2026-11-20</span>
   </div>
 </div>
 <div class="card">
   <div class="card-header">
-    <span class="tag tag-ai">AI</span>
-    <span class="content-type">📦 リリース</span>
-    <h3><a href="https://blog.google/innovation-and-ai/models-and-research/google-deepmind/genie-4-now-available-project-genie/">Google DeepMind、Genie 4 を Project Genie で提供開始</a></h3>
+    <span class="tag tag-oss">OSS</span>
+    <span class="content-type">🛠 ツール</span>
+    <h3><a href="https://www.serpentine.com/posts/2026/announcing-jj-musubi/">jj-musubi：Jujutsu リポジトリを複数マシン間でライブ同期</a></h3>
   </div>
-  <div class="summary">Google DeepMind が Genie 4 を Project Genie 経由で利用可能にしたと発表した。世界モデル系の最新版で、利用範囲の詳細は公式ブログを参照。</div>
+  <div class="summary">Bryan O'Sullivan 氏の jj-musubi は、jj が作業コピーをスナップショットするたびに、他のマシンへ変更を同期する。ハブ 1 台と各マシンのデーモンが SSH で履歴を交換し、作業コピーのファイルは書き換えない。</div>
   <div class="key-points">
     <ul>
-      <li>Genie 4 が利用可能に</li>
-      <li>提供経路は Project Genie</li>
+      <li>一時コミットやブランチ push なしで別マシンへ作業を引き継げる。オフライン中の変更は再接続時に同期</li>
+      <li>Linux・macOS・Windows 向けバイナリあり。ネットワークプロトコルの主要性質を Lean で証明。セキュリティモデルはなく個人利用向け</li>
     </ul>
   </div>
   <div class="meta">
-    <span>Google</span>
-    <span class="engagement">🔖 31</span>
-    <span>⏱ 3 min read</span>
-    <span>2026-11-19</span>
+    <span>serpentine.com</span>
+    <span>⏱ 5 min read</span>
+    <span>2026-11-20</span>
   </div>
 </div>
     </div>
@@ -367,40 +332,46 @@
     <div class="section" id="quick-links">
       <div class="section-title">🔗 Quick Links</div>
 <div class="quick-link">
+  <span class="tag tag-product">Product</span>
+  <a href="https://www.marketscreener.com/news/us-sec-s-nvidia-probe-is-examining-potential-accounting-issues-sources-say-ce785ed3dd8ff627">米 SEC の Nvidia 調査、会計上の問題が対象と関係者</a>
+  <span class="quick-summary">— 情報筋の話として報じられた。</span>
+  <span class="meta">MarketScreener</span>
+</div>
+<div class="quick-link">
   <span class="tag tag-ai">AI</span>
-  <a href="https://www.reuters.com/business/finance/anthropics-historic-debut-put-ais-promise-peril-wall-st-test-2026-11-19/">Anthropic の Nasdaq 上場を Reuters が報道</a>
-  <span class="quick-summary">— 上場初日の市場の反応を報じ、HN で 911 ポイント。</span>
-  <span class="meta">Reuters</span>
-</div>
-<div class="quick-link">
-  <span class="tag tag-oss">OSS</span>
-  <a href="https://social.anoxinon.de/@Codeberg/117636454915265360">Codeberg のドメインがアカウントから消失、サイトに到達不能に</a>
-  <span class="quick-summary">— Lobsters スコア 220 で、ホスティング側の運用リスクが話題。</span>
-  <span class="meta">Codeberg</span>
-</div>
-<div class="quick-link">
-  <span class="tag tag-security">Security</span>
-  <a href="https://www.synology.com/en-uk/security/advisory/Synology_SA_26_21">Synology がセキュリティアドバイザリ SA_26_21 を公開</a>
-  <span class="quick-summary">— NAS 利用者は対象製品とバージョンを確認したい。</span>
-  <span class="meta">Synology</span>
-</div>
-<div class="quick-link">
-  <span class="tag tag-security">Security</span>
-  <a href="https://macanorak.com/uk-government-forced-to-admit-it-issued-apple-a-secret-encryption-order/">英国政府、Apple への秘密の暗号化命令を発出していたと認める</a>
-  <span class="quick-summary">— HN で 508 ポイント。</span>
-  <span class="meta">MacAnorak</span>
+  <a href="https://arxiv.org/abs/2611.21885">Language Models Can Rewrite Their Own Weights</a>
+  <span class="quick-summary">— 言語モデルが自身の重みを書き換えられるとする論文。HN で 340 ポイント。</span>
+  <span class="meta">arXiv</span>
 </div>
 <div class="quick-link">
   <span class="tag tag-infra">Infra</span>
-  <a href="https://element.io/blog/how-the-european-commission-rolled-out-matrix-to-more-than-40-000-staff/">欧州委員会が 4 万人超の職員に Matrix を展開した経緯</a>
-  <span class="quick-summary">— 大規模な自己ホスト型チャット導入事例。HN で 662 ポイント。</span>
-  <span class="meta">Element</span>
+  <a href="https://kapteko.com/15-million-webservers/">15 million web servers on one VM</a>
+  <span class="quick-summary">— smoltcp・DPDK・AF_XDP で 1 台の VM に 1500 万の Web サーバーを載せた実験。</span>
+  <span class="meta">kapteko.com</span>
+</div>
+<div class="quick-link">
+  <span class="tag tag-oss">OSS</span>
+  <a href="https://vim-classic.org/news/vim-8.3.1-released.html">Vim Classic 8.3.1 リリース</a>
+  <span class="quick-summary">— Vim 8.3 系を継続する Vim Classic の新版。</span>
+  <span class="meta">vim-classic.org</span>
+</div>
+<div class="quick-link">
+  <span class="tag tag-dev">Dev</span>
+  <a href="https://bertptrs.nl/2026/11/16/mutex-poisoning-is-not-for-everyone.html">Mutex poisoning is not for everyone</a>
+  <span class="quick-summary">— Rust の Mutex poisoning が全てのコードに向くわけではないという考察。</span>
+  <span class="meta">bertptrs.nl</span>
+</div>
+<div class="quick-link">
+  <span class="tag tag-infra">Infra</span>
+  <a href="https://gigazine.net/news/20261120-ssd-prices-outlook/">SSD 価格は 2027 年後半から下落に転じる可能性</a>
+  <span class="quick-summary">— 市場見通しの解説記事。はてブ 72。</span>
+  <span class="meta">GIGAZINE</span>
 </div>
 <div class="quick-link">
   <span class="tag tag-security">Security</span>
-  <a href="https://forest.watch.impress.co.jp/docs/news/2157865.html">約 2,500 万人のデータで Firefox の指紋対策を強化</a>
-  <span class="quick-summary">— ブラウザのフィンガープリンティング対策の更新。</span>
-  <span class="meta">窓の杜</span>
+  <a href="https://news.yahoo.co.jp/articles/1739163b2e1fd496107c05cb8b455d37d52be5d9">ZOZO、KARTE 経由で約 1518 万人分の情報漏えい</a>
+  <span class="quick-summary">— ZOZOTOWN 会員約 1518 万人と WEAR by ZOZO 約 1393 万人が対象。</span>
+  <span class="meta">Yahoo!ニュース</span>
 </div>
     </div>
 
