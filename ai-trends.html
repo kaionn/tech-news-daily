@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI プロダクト動向 | Tech News Daily</title>
-<meta name="description" content="社内で動いているエージェントの一覧を正確に出せる組織はほとんどない。Copilot Studio や Agentforce で作られた業務エージェントは管理画面に残る。一方、開発者が手元で起動する Claude Code や GitHub…">
+<meta name="description" content="11 月 17 日、Replit は Missions を、Cognition は Devin Bots を同じ日に発表した。Microsoft の Autopilot も同日から Frontier 顧客への展開が始まっている。三つとも数…">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Tech News Daily">
-<meta property="og:title" content="エージェントの台帳は「届け出」から「見つけて載せる」へ — 端末から検出する、他社基盤は同期で集める、ツール側から逆引きする | AI プロダクト動向">
-<meta property="og:description" content="社内で動いているエージェントの一覧を正確に出せる組織はほとんどない。Copilot Studio や Agentforce で作られた業務エージェントは管理画面に残る。一方、開発者が手元で起動する Claude Code や GitHub…">
+<meta property="og:title" content="長く走るエージェントには「タスク」ではなく「目標と合格条件」を渡す — 成功の定義と予算を先に決める、完了の判定は作業者の外に置く、人が見るのは判断だけに絞る | AI プロダクト動向">
+<meta property="og:description" content="11 月 17 日、Replit は Missions を、Cognition は Devin Bots を同じ日に発表した。Microsoft の Autopilot も同日から Frontier 顧客への展開が始まっている。三つとも数…">
 <meta property="og:url" content="https://tech-news.kaion-lab.com/ai-trends.html">
 <meta property="og:image" content="https://tech-news.kaion-lab.com/og.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -74,7 +74,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 <div class="container">
 <header>
   <h1>🧠 AI プロダクト動向</h1>
-  <p class="date">2026-11-19 発行（読了 9 分）</p>
+  <p class="date">2026-11-21 発行（読了 8 分）</p>
   <p class="tagline">実プロダクトのアーキテクチャ・使用例から AI 開発の現在地を週 3 回・1 号 1 テーマで深掘り</p>
   <nav class="site-nav">
     <a href="./">📰 日刊ダイジェスト</a>
@@ -85,81 +85,82 @@ footer a{color:var(--primary-500);text-decoration:none}
 </header>
 
 <div class="theme-hero">
-  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">AGENT-INVENTORY</span></span>
-  <h2>エージェントの台帳は「届け出」から「見つけて載せる」へ — 端末から検出する、他社基盤は同期で集める、ツール側から逆引きする</h2>
-  <p class="lede">社内で動いているエージェントの一覧を正確に出せる組織はほとんどない。Copilot Studio や Agentforce で作られた業務エージェントは管理画面に残る。一方、開発者が手元で起動する Claude Code や GitHub Copilot CLI、各チームが AWS や Google Cloud で個別に立てたエージェントは、誰も届け出ないまま増えていく。11 月 17 日の Microsoft Ignite 2026 で Agent 365 は、端末上のローカルエージェント検出を GA にし、他社基盤のエージェントを同期で取り込む機能をプレビューで広げた。前日の 16 日には Okta が、CrowdStrike Falcon のセンサー経由で端末上のエージェントと MCP サーバーを見つける機能を説明している。同じ 17 日に GitHub は、Copilot のセッションの監査データを Agent 365 に流せるようにした。今号は、台帳への入口をどこに置くか、他社基盤のエージェントをどう集めるか、ツールから何を逆引きするかを各社の実装で並べる。</p>
+  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">GOAL-DIRECTED-AGENTS</span></span>
+  <h2>長く走るエージェントには「タスク」ではなく「目標と合格条件」を渡す — 成功の定義と予算を先に決める、完了の判定は作業者の外に置く、人が見るのは判断だけに絞る</h2>
+  <p class="lede">11 月 17 日、Replit は Missions を、Cognition は Devin Bots を同じ日に発表した。Microsoft の Autopilot も同日から Frontier 顧客への展開が始まっている。三つとも数時間から数週間動き続け、人が切り出したタスクではなく目標を受け取って、自分で計画し作業を割り振る。依頼の単位がここまで大きくなると、プロンプトの書き方より、何をもって完了とするか、いくらまで使うか、どの行為の前に人へ確認するかという取り決めが重くなる。今号はこの 3 点を、19 日に公開ベータになった Databricks Genie ZeroOps も加えて各社の実装で比べる。</p>
 </div>
 
 <div class="tldr">
   <div class="label">TL;DR — 3 行で</div>
   <ul>
-    <li>台帳に載せる入口が、開発者や部門の届け出から、端末と通信の検出に移っている。Microsoft Defender は Claude Code や Copilot CLI を含む 60 種以上のローカルエージェントを検出し、端末と利用者に紐付ける（GA）。Okta は既存の CrowdStrike センサーを使い、OAuth 同意には現れないエージェントと MCP サーバーを拾う</li>
-    <li>他社基盤のエージェントは、各基盤の管理画面を見て回るのではなく、一つの台帳への同期で集める。Agent 365 は対応基盤を一度接続すれば、エージェントのコードを変えずに登録簿へ同期する（プレビュー）。Okta も AWS Bedrock や Agentforce からの取り込みに対応した</li>
-    <li>台帳はエージェントの一覧で終わらない。Agent 365 の tools registry（GA）は、エージェントが使うツールと MCP サーバーを集約し、遮断する前に依存しているエージェントを確認できる。GitHub は Copilot のプロンプト・応答・ツール呼び出しを監査ストリームとして台帳側へ送れるようにした</li>
+    <li>依頼の単位が「タスク」から「目標＋成功条件＋予算＋境界」の取り決めに変わった。Replit Missions は開始時の質問で成功の定義を詰め、上限金額と許容するトレードオフを合意してから動き、予算が尽きたら未達のまま止まる。Devin Bots は「変更を指示するタスク」ではなく「結果を受け持つ責任」を渡すよう求める</li>
+    <li>完了の判定を作業するエージェント自身に任せない。Missions は合意済みの基準で結果を確かめる独立した AI judge を置き、Devin Bots は CI と Devin Review を通った PR だけをマージする。Genie ZeroOps は修正案をユニットテストとサンドボックスでの dry run で確かめてから PR にする</li>
+    <li>人への確認は、毎ステップの承認ではなく「判断が要る箇所」に集める。Devin Bots は人の判断が必要な案件を Needs You の受信箱に回す。Microsoft Autopilot は送信・共有・削除・変更の前に別の AI モデルが依頼内容と照合し、合致しない行為だけを人の承認に回す。支払いは常に人の承認が要る</li>
   </ul>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 1: 台帳への入口を届け出から検出に移す</div>
+  <div class="section-title">📐 パターン 1: 依頼の単位を「目標・成功条件・予算・境界」の取り決めにする</div>
   <div class="theme-section">
-    <p>これまでのエージェント管理は、管理者が作成を許可した場所、つまり Copilot Studio のようなノーコード基盤の管理画面に記録が残る前提で組まれていた。開発者が端末で <code>claude</code> や <code>copilot</code> を起動する場合、その前提は成り立たない。新しい構成では、すでに配備されている EDR やネットワーク経路からエージェントを見つける。Microsoft は Defender で管理下の Windows と macOS の端末を走査し、見つけたエージェントを端末と利用者に結び付けて登録簿に入れる。Global Secure Access は通信の側から、各エージェントが接続する宛先や MCP サーバーを見る。Okta は CrowdStrike Falcon のセンサーを情報源にし、専用の常駐ソフトを追加せずに端末上のエージェントと接続先の MCP サーバーを検出する。</p><p>入口が検出に移ったのは、ローカルエージェントの多くが、従来の SaaS 管理で使ってきた OAuth 同意の記録に現れないからだ。Okta は、ブラウザの外で動くエージェントは OAuth の同意からは見えないと書いている。CLI エージェントは開発者の資格情報でそのまま動くため、認可サーバーには利用者本人の操作としか記録されない。届け出制では、登録の手間をかけない人ほど台帳から漏れる。検出は、まず存在を把握してから所有者や制御を後付けする順番に入れ替える。Microsoft は 5 月の GA 時点では検出対象を OpenClaw から始め、Copilot CLI と Claude Code を予定としていた。11 月にはその 2 つを含む 60 種以上まで対象を広げている。</p>
+    <p>これまでのコーディングエージェントでは、人が仕事を分解し、「この画面を Android に移植する」のようなタスクを一つずつ渡してきた。Missions と Devin Bots は、分解そのものをエージェントに渡す。そのかわり、開始前に取り決めを作る。Replit Missions は目標を受け取ると、成功の定義を詰める質問を返す。営業の例では「何をエンタープライズ顧客と数えるか」「有償 PoC を目標の件数に含めるか」を確かめる。そのうえで上限金額（記事の例では 1,000 ドル）と、年契約の割引を出してよいかといった許容範囲を合意する。予算を使い切った時点で、目標が未達でも作業は止まる。Devin Bots では、エンジニアがスコープの成功条件、守るべき CI チェック、計算資源への追加支出を認めるかどうか、Bot が触れてよいシステムと変更してよい範囲を決める。</p><p>こうした取り決めが必要になったのは、作業時間が延びるほど最初の依頼の曖昧さが大きく響くからだ。数分で終わるタスクなら、結果を見て言い直せば済む。数日走るエージェントが「完了」の定義を取り違えると、その間の作業と費用がまるごと無駄になる。Cognition の記事は、Android の移植例で「機能を Android に移植する」と「Android を iOS と同等に保つ」を対比し、前者をタスク、後者を責任と呼んでいる。責任の形で渡すと、終わりのない継続業務も同じ枠組みで扱える。予算を取り決めに含めるのも同じ理由による。Fortune の取材で Cognition は、Bot ごとに予算を持たせ、出した成果と突き合わせると説明した。並列に走るエージェントの数は費用にそのまま効くので、上限がなければ止める根拠もない。</p>
     <div class="example">
-      <div class="product">Microsoft Agent 365 + Defender / Global Secure Access</div>
-      <div class="approach">Defender が管理端末上のローカルエージェントを検出して端末・利用者と紐付け（GA）、Global Secure Access が宛先・MCP サーバーへの通信を可視化し、シャドー AI として登録簿に追加する（いずれもプレビュー）</div>
-      <div class="detail">Ignite 2026 の公式記事は、Defender と Global Secure Access が Claude Code や GitHub Copilot CLI を含む 60 種以上のローカル AI エージェントを検出すると明記している。検出後の制御も同じ記事で示されており、Windows 上ではエージェントループを検査して悪意ある指示を遮断するランタイム保護が GA、Intune によるファイル・ネットワーク境界の設定はプレビューとなっている。検出から制御までを一つの製品群で扱う構成の代表例だ。</div>
-      <a href="https://techcommunity.microsoft.com/blog/agent-365-blog/whats-new-in-microsoft-agent-365-ignite-2026/4571753">📄 一次ソース</a>
+      <div class="product">Replit Missions</div>
+      <div class="approach">開始時の質問で成功の定義を詰め、上限金額・許容するトレードオフ・承認ゲートを「Missions agreement」として合意する。予算が先に尽きたら目標未達のまま停止する</div>
+      <div class="detail">11 月 17 日の公式ブログは、見込み客への連絡、提案書の共有、顧客向け資料の変更、製品仕様の約束を承認ゲートの例に挙げ、進め方が変わってもこの制限は維持されると書いている。社内で作った監視基盤 DataCat は、3,000 ドルの上限内で 2 日で構築したという。数値は Replit 自身の検証で、元のサービスや本番環境での性能を示すものではないと記事中で断っている。</div>
+      <a href="https://replit.com/blog/introducing-replit-missions">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">Okta for AI Agents（Shadow AI Agent Discovery for Endpoints）</div>
-      <div class="approach">既存の CrowdStrike Falcon センサーを情報源にして端末上のエージェントと MCP サーバーを検出し、Universal Directory に固有の ID で登録、認証済みの人間アカウントを所有者として紐付ける</div>
-      <div class="detail">11 月 16 日の公式ブログは、ブラウザの外で動くエージェントは OAuth の同意からは見えない、という理由で端末側の検出を足したと説明している。登録後は Agent Gateway がツール呼び出しごとにポリシーを適用し、異常があればキルスイッチで接続先へのアクセスを止める。所有者が異動・退職した場合やサブエージェントが生成された場合も、所有関係を追跡し続けるとしている。次の情報源として Okta Verify と他社 EDR を挙げており、現時点で検出元は CrowdStrike に限られる。</div>
-      <a href="https://www.okta.com/blog/ai/shadow-ai-agent-discovery/">📄 一次ソース</a>
+      <div class="product">Cognition Devin Bots</div>
+      <div class="approach">Bot には「バックログではなく目標」を渡す。Bot は調査し、作業ごとに Devin セッションを立てて委任し、結果を評価して次に何をやるかを決める。成功条件・守るべき CI・支出とリリースの承認要否は人が設定する</div>
+      <div class="detail">Android Bot は 44 日間で 1,134 件の PR をマージし、1,217 件のチケットを閉じた。その間に担当エンジニアが送ったメッセージは 183 件で、44 日のうち 22 日は 1 件も送っていない（いずれも Cognition の発表値）。目標を渡す方式で、人の関与がどこまで減るかを具体的な数字で示した事例だ。</div>
+      <a href="https://devin.ai/blog/introducing-devin-bots">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> 台帳づくりを利用申請フォームから始めない。まず EDR とプロキシのログから、どの端末で何のエージェントが動き、どこへ接続しているかを出す。届け出は、検出したエージェントに所有者を確定させる手続きとして後から付ける。</div>
+    <div class="takeaway"><strong>示唆:</strong> 長時間エージェントを導入するなら、最初に書くのはプロンプトではなく取り決めだ。成功条件、上限金額、変更してよい範囲、承認が要る行為の 4 項目を埋められない仕事は、まだ目標として渡せる段階にない。人がタスクに分解して渡すほうが安全だ。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 2: 他社基盤のエージェントは同期で一つの台帳に集める</div>
+  <div class="section-title">📐 パターン 2: 完了の判定を作業者の外に置く</div>
   <div class="theme-section">
-    <p>二つ目の流れは、他社基盤のエージェントを台帳へ同期することだ。エージェントは一つのクラウドに収まらない。営業部門は Agentforce、データ基盤チームは Databricks や Snowflake、開発チームは Bedrock や Vertex AI で作る。Agent 365 の connected platforms は、対応基盤を一度接続すれば、そこで作られたエージェントをエージェント側のコード変更なしに登録簿へ同期する。同期したエージェントには Microsoft Entra の Agent ID を発行し、他の ID と同じ条件付きアクセスやリスク評価の対象にする。接続時の認証にはワークロード ID フェデレーションを使い、長期間有効なシークレットを保存しない。</p><p>エージェントのコードに SDK を入れて自己申告させる方式を取らないのは、台帳の網羅性を各チームの実装に依存させないためだ。基盤側の API から一覧を取れば、登録を忘れたエージェントも、退職者が残していったエージェントも同じように拾える。Okta も Bedrock や Agentforce からの取り込みに対応しており、ID 管理側と生産性スイート側の双方が、自社を他社基盤の上位に置く集約点を狙っている。ただし同期できる情報は基盤によって差がある。Microsoft 自身も、機能は基盤ごとに異なり、Entra Agent ID の対応完了は 12 月だとしている。導入前には、どの基盤から何の属性が取れるかを確かめる必要がある。</p>
+    <p>二つ目の共通点は、作業したエージェントに「終わった」と言わせないことだ。Replit Missions では、合意した成功基準に照らして結果を確かめる独立した AI judge が別にいる。作業側のエージェントは judge のフィードバックを受けて作業をやり直し、基準を満たしたときだけ Mission が完了になる。Devin Bots は、人が書いたコードと同じ CI と、コードレビュー用の Devin Review を通った PR だけをマージする。画面録画や変更前後の動画も添える。Layout Bot はチェックが落ちると、まず再実行してタイミング由来の揺らぎではないことを確かめ、それから原因の PR を突き止める。Databricks Genie ZeroOps は、修正案をユニットテストとサンドボックスでの dry run で検証してから、新しいブランチに PR として出す。</p><p>判定を外に出すのは、長く走るエージェントほど自分の作業を甘く評価する機会が増えるからだ。数日分の作業を一つのエージェントが自己申告で完了させると、人はその申告と成果物の両方を一から確かめ直すことになる。基準を事前に合意し、別の評価者かテストに判定させれば、人が見るのは判定が通ったものだけで済む。ただし判定役が機械である以上、評価者自身の誤りは残る。Microsoft も Autopilot の文書で、承認や進捗のメッセージを完了の証拠と見なさず、出力先で実際の結果を確かめるよう求めている。Cognition の記事も、テスト、ベンチマーク、ユーザーフローの実行、本番の挙動といったフィードバックの仕組みはエンジニアが用意するものだと位置付けている。</p>
     <div class="example">
-      <div class="product">Microsoft Agent 365（connected platforms / Entra Agent ID）</div>
-      <div class="approach">対応基盤を一度接続するとエージェントをコード変更なしで登録簿に同期し、Entra Agent ID を付与する。Salesforce Agentforce・Amazon AgentCore・Google Vertex AI への ID 対応を 12 月に完了予定（プレビュー）</div>
-      <div class="detail">5 月の GA 時点では、Bedrock と Google Cloud との同期は一覧の作成までで、起動・停止・削除といったライフサイクル操作は今後の予定とされていた。Ignite では同期対象を広げたうえで、非アクティブなエージェントや所有者のいないエージェントを洗い出す Action center を 12 月にプレビューで出すと発表した。一覧を作るだけでなく、棚卸しの作業まで台帳側で扱う方向に進んでいる。</div>
-      <a href="https://techcommunity.microsoft.com/blog/agent-365-blog/whats-new-in-microsoft-agent-365-ignite-2026/4571753">📄 一次ソース</a>
+      <div class="product">Databricks Genie ZeroOps（公開ベータ）</div>
+      <div class="approach">ジョブ・パイプライン・テーブルの障害を検知して原因を調べ、修正案をユニットテストとサンドボックスでの dry run で確かめてから、新しいブランチに PR として出す。本番のコードとデータは人のレビューなしに変更しない</div>
+      <div class="detail">11 月 19 日の公式ブログによると、非公開プレビューでは数百社・8 万件超のパイプライン障害を観測し、その半分以上は修正に企業固有の知識が必要だった。これを受けて、既知の不安定なデータソースや好みの修正方針を書けるカスタム指示を加えた。検証の場をサンドボックスに置き、出力を PR に限っているので、判定と適用が別々の段階に分かれている。</div>
+      <a href="https://www.databricks.com/blog/genie-zeroops-now-public-beta-autonomous-agent-fixes-data-pipelines-lessons-80000-customer">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> エージェント基盤を選ぶ際は、エージェントの一覧と所有者を API で外部に出せるかを確認項目に加える。管理画面でしか一覧を見られない基盤は、全社の台帳に入れられず、棚卸しのたびに人手で突き合わせることになる。</div>
+    <div class="takeaway"><strong>示唆:</strong> エージェントに目標を渡す前に、完了を判定するテストか評価基準を用意する。用意できない仕事は判定を人が抱えることになり、長時間走らせても人の確認作業が減らない。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 3: ツールと活動記録から逆引きする</div>
+  <div class="section-title">📐 パターン 3: 人の確認は「判断が要る箇所」に集める</div>
   <div class="theme-section">
-    <p>三つ目は、台帳の軸をエージェントだけでなくツールと活動記録にも広げる動きだ。Agent 365 の tools registry（GA）は、エージェントが使っているツールを一か所に集め、よく使われるものとリスクの高いものを示す。Azure AI Gateway や LiteLLM 経由の MCP サーバーも同じ画面で扱い（プレビュー）、管理者は MCP サーバーを遮断する前に、それに依存するエージェントやプラグインを確認できる。活動記録も台帳側に寄せられている。GitHub は 11 月 17 日から、Copilot のクラウドエージェント・CLI・VS Code・JetBrains などのクライアントの監査データを Agent 365 に流せるようにした。対象はセッションのプロンプト、応答、ツール呼び出しで、Enterprise Managed Users 構成の GitHub Enterprise Cloud に限られる。</p><p>逆引きが必要なのは、エージェントの危険度が、エージェントそのものより、どのツールにどの権限でつながっているかで決まるからだ。問題のある MCP サーバーが見つかったとき、エージェント単位の一覧しかなければ、影響を受けるエージェントを一つずつ調べることになる。ツール側から引ければ、遮断の影響範囲を先に把握できる。活動記録の集約も同じ理屈による。Microsoft の Dynamic agent risk（プレビュー）は、実行時のシグナルと接続範囲を合わせて、エージェントごとに一つのリスク水準を出す。製品の外にあるセッション記録が入ってこなければ、この評価は管理画面の設定値でしか計算できない。</p>
+    <p>三つ目は、人への確認の出し方だ。毎ステップ承認を求めると、数日走るエージェントの利点が消える。各社は、人に回す案件を選別して一か所に集める。Devin Bots は人の判断が必要な案件を Needs You の受信箱に回し、日次レポートと録画を Slack に流す。約 20 の Bot と 1 人の人間で運営するゲームスタジオの例では、取りまとめ役の Bot が 1 日 4 回、判断事項を一つの Slack スレッドにまとめる。Microsoft Autopilot は、読む・検索する・下書きする操作は止めずに実行し、一部を抜き取りで確認する。送信・共有・削除・変更と、自動化の作成・変更については、別の AI モデルが実行前に依頼内容と照合し、合致すれば実行し、合致しなければ Teams の承認カードで人に確認する。支払いと機微なブラウザ操作は常に人の承認が要る。Replit Missions は、受け取る通知の種類（ブロッカー・進捗・状況）と頻度（即時・日次・週次）を利用者が選ぶ。</p><p>確認の基準は行為の種類で切るのが共通している。どこまで任せるかは事前の取り決めで決まっているので、実行時に人へ回るのは、取り決めの範囲外か、取り返しのつかない行為だけになる。Autopilot は、承認の根拠になるのは所有者本人の依頼だけで、メールや文書、Web ページの中の指示は承認にならないと明記している。照合役のモデルは、外部の文章に紛れ込んだ指示による行為も止める位置にある。一方で、この照合の仕組みは今回のリリースでは管理者も利用者も設定を変えられない。Fortune の取材で Cognition は、低リスクの変更はチームが自動承認にできると説明しており、閾値をどこまで利用者に開くかは各社で分かれている。</p>
     <div class="example">
-      <div class="product">GitHub Copilot → Microsoft Agent 365（監査ストリーミング）</div>
-      <div class="approach">Copilot の各クライアントでのセッション（プロンプト・応答・ツール呼び出し）を enterprise の監査ログストリーミングで Agent 365 に送り、Purview と Defender で調査に使う</div>
-      <div class="detail">11 月 17 日の GitHub Changelog によると、対象はクラウドエージェント、Copilot CLI、VS Code、Visual Studio、JetBrains や Eclipse などのパートナー IDE にまたがる。コーディングエージェントの提供元が、自社の管理画面に記録を閉じず、顧客の選んだ統制基盤へ活動記録を出している点が重要だ。仕組みは既存の監査ログストリーミングを使っており、新しい連携プロトコルを作っていない。</div>
-      <a href="https://github.blog/changelog/2026-11-17-monitor-github-copilot-activity-through-microsoft-agent-365/">📄 一次ソース</a>
+      <div class="product">Microsoft Autopilot（Frontier プレビュー）</div>
+      <div class="approach">送信・共有・削除・変更と自動化の作成・変更は、第二の AI モデルが依頼内容と照合し、合致すれば実行、しなければ承認待ちにする。支払いと機微なブラウザ操作は常に承認が要る</div>
+      <div class="detail">管理者向け文書は、Autopilot が依頼を意図より広く解釈しうると書き、「古いプロジェクトファイルの整理」が想定より多くの内容に及ぶ例を挙げている。既定では無効で、Frontier 登録・支出ポリシー・エージェントの有効化の 3 つがそろわないと使えない。支出ポリシーの上限に達すると、自動化と監視の処理を止め、新しい依頼にも応じなくなる。このとき利用者には理由が表示されない、と注意書きがある。</div>
+      <a href="https://learn.microsoft.com/en-us/copilot/autopilot/admin-configure">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> 社内で MCP サーバーやツールを提供する側は、どのエージェントから呼ばれたかを記録しておく。台帳がエージェント側の一覧しか持たないと、ツールに問題が見つかったときに遮断の影響を事前に見積もれない。</div>
+    <div class="takeaway"><strong>示唆:</strong> 承認ポリシーは「読む・下書き」「依頼と照合して自動実行」「常に人が承認」の 3 段で設計する。境界は行為の種類で決め、外部の文章に含まれる指示を承認の根拠にしない。予算切れで止まったことを利用者に通知する経路も、別に用意しておく。</div>
   </div>
   <div class="editorial">
     <span class="label">✍️ 編集後記</span>
-    エージェントの統制というと、何を許可するかを決めるポリシーの話になりやすい。今週の発表で各社が先に整えたのは、何が動いているかを数える仕組みだった。数えられないものには、ポリシーを書いても適用先がない。届け出を待たずに見つけ、所有者は後から確定させる。この順番に切り替えたことが、今回の変化の中心にある。
+    エージェントの作業時間が延びると、人の仕事はタスクの指示から、契約の締結と検収に近づく。今週の各社の発表は、エージェントの能力よりも、成功条件・予算・承認境界という取り決めの書式をそろえることに力を割いていた。どの製品を選ぶかより先に、自分たちの仕事で「合格」を機械が判定できる形に書けるかを確かめておきたい。
   </div>
 </div>
 
 <div class="section">
   <div class="section-title">🔗 今号の動向ピックアップ</div>
-  <div class="quick-link"><a href="https://www.microsoft.com/en-us/security/blog/2026/05/01/microsoft-agent-365-now-generally-available-expands-capabilities-and-integrations/">Microsoft Agent 365 が GA、ローカルエージェント検出と Bedrock / Google Cloud 同期を予告（5 月）</a><span class="quick-summary">Agent 365 の GA 時の発表で、ローカルエージェントの検出を OpenClaw から始め、Bedrock と Google Cloud の登録簿同期をプレビューで提供するとした。今号で紹介した 11 月の拡張と比べると、半年で検出対象と同期先がどこまで広がったかが分かる。</span></div>
-  <div class="quick-link"><a href="https://www.okta.com/newsroom/press-releases/ai-innovations-oktane-2026/">Okta、Oktane 2026 で Agent Gateway と端末のシャドーエージェント検出を発表（9 月）</a><span class="quick-summary">ツール呼び出しの経路に入る Agent Gateway と、Bedrock や Agentforce からのエージェント取り込みを発表した。11 月の端末検出の記事の前提になった発表で、ID 管理側が台帳と実行時制御を一続きにしようとしていることが分かる。</span></div>
-  <div class="quick-link"><a href="https://github.blog/changelog/2026-11-16-github-copilot-weekly-releases-november-9/">VS Code の Agents ウィンドウに、全ワークスペースのセッションをまとめる Inbox mode</a><span class="quick-summary">GitHub Copilot の週次リリースで、全ワークスペースのエージェントセッションを一画面に並べ、対応が必要なものを先頭に出す実験的機能が入った。組織の台帳と同じく、開発者個人の手元でも、並行して動くエージェントを一か所で把握する必要が出てきている。</span></div>
+  <div class="quick-link"><a href="https://www.microsoft.com/en-us/copilot/blog/2026/11/17/copilot-at-microsoft-ignite-expanding-whats-possible-with-intelligence-built-for-work/">Microsoft、Ignite で Autopilot を Frontier 顧客に展開開始 — 専用の Entra Agent ID と「管理者」を持つ常時稼働エージェント</a><span class="quick-summary">Autopilot は Teams や Outlook に常駐して、繰り返しの業務や案件の追跡を指示なしで進め、作業の確定前には利用者に確認する。各 Autopilot に Entra Agent ID と名前付きの管理者を割り当てる点は、長く走るエージェントの責任者を最初から決めておく設計で、本号のテーマと重なる。</span></div>
+  <div class="quick-link"><a href="https://fortune.com/2026/11/17/exclusive-cognition-bets-on-devin-bots-coding-agents-in-challenge-to-anthropics-duet-and-openais-dots/">Cognition CEO、Devin Bots の安全策は「モデルの賢さ」ではなく会社が決めて監視するルールに頼ると説明（Fortune 独占取材）</a><span class="quick-summary">Bot は開発者の端末とは別のクラウド環境で動き、アクセスできるリポジトリとツールは管理者が決め、低リスクの変更はチームが自動承認にできる。Bot ごとに予算を持たせて成果と突き合わせる方針も語られており、本号で扱った予算と承認境界の取り決めを経営側から説明した内容になっている。</span></div>
+  <div class="quick-link"><a href="https://learn.microsoft.com/en-us/copilot/autopilot/overview">Microsoft Autopilot の概要文書 — 「承認や進捗メッセージを完了の証拠と見なさない」</a><span class="quick-summary">利用者は達成したい結果、使う情報源、行為の制限を伝え、Autopilot は各ステップで確認を求めずに計画・実行する。承認後も出力先で実際の結果を確かめるよう明記しており、本号の「完了の判定を作業者の外に置く」話を利用者側から裏付けている。</span></div>
 </div>
 
 <div class="section">
   <div class="section-title">📚 過去号</div>
+  <div class="archive-item"><span class="week">2026-11-19</span><div class="body"><a href="ai-trends/2026-11-19.html">エージェントの台帳は「届け出」から「見つけて載せる」へ — 端末から検出する、他社基盤は同期で集める、ツール側から逆引きする</a><span class="sub">台帳に載せる入口が、開発者や部門の届け出から、端末と通信の検出に移っている。Microsoft Defender は Claude Code や Copilot CLI を含む 60 種以上のローカルエージェントを検出し、端末と利用者に紐付ける（GA）。Okta は既存の CrowdStrike センサーを使い、OAuth 同意には現れないエージェントと MCP サーバーを拾う</span></div></div>
   <div class="archive-item"><span class="week">2026-11-17</span><div class="body"><a href="ai-trends/2026-11-17.html">エージェントに秘密を渡さない設計へ — 資格情報はサンドボックスの外で付ける、宛先に縛る、届かない経路は先に洗い出す</a><span class="sub">本物の資格情報をサンドボックスの外のプロキシに持たせ、外向きリクエストに付与する構成が実行基盤の標準になりつつある。中のエージェントが見るのは proxy-managed のようなプレースホルダだけで、環境変数を読まれても漏れるのは偽の値になる</span></div></div>
   <div class="archive-item"><span class="week">2026-11-14</span><div class="body"><a href="ai-trends/2026-11-14.html">「選ぶだけ」の判断は生成モデルから外れ始めた — 選択肢を一度に採点する専用モデル、確率で決める閾値、ルーティングと検査への配置</a><span class="sub">判定専用モデルは文章を生成せず、事前に与えた選択肢を採点して確率を返す。Gemini Decisions API は 1 リクエストで最大 1,000 問を共有入力に対して評価し、出力トークンは常に 0。Perplexity Decider は複数の質問を 1 回の forward pass で答える</span></div></div>
   <div class="archive-item"><span class="week">2026-11-12</span><div class="body"><a href="ai-trends/2026-11-12.html">エージェントは「終わるまで待つ」をやめ始めた — 窓口と作業者を分ける、ツール結果は後から返す、走っている作業に指示を足す</a><span class="sub">会話の窓口と長い作業を別のループに分ける構成が標準になりつつある。LangChain Deep Agents は起動した瞬間にタスク ID を返す 5 つのツールを持ち、Claude Code はサブエージェントを既定でバックグラウンドで走らせる</span></div></div>
@@ -212,7 +213,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 </div>
 
 <footer>
-  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="data/ai-trends/2026-11-19.json">data/ai-trends/2026-11-19.json</a>（このページは JSON からの生成物）</p>
+  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="data/ai-trends/2026-11-21.json">data/ai-trends/2026-11-21.json</a>（このページは JSON からの生成物）</p>
   <p style="margin-top:.5rem"><a href="./">📰 日刊ダイジェストに戻る</a></p>
 </footer>
 </div>
