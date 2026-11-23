@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tech News Daily — 2026-11-22</title>
-  <meta name="description" content="GPGME に二重解放の脆弱性 / Ghostscript Upload2Shell / Lean コミュニティが RH 証明の形式検証を認定">
+  <title>Tech News Daily — 2026-11-23</title>
+  <meta name="description" content="OpenAI が社内コードの perplexity を公開 / GL.iNet のクラウド管理経由でルーターにマルウェア / O'Reilly 氏が Silicon Valley の変質を論じる">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Tech News Daily">
-  <meta property="og:title" content="Tech News Daily — 2026-11-22">
-  <meta property="og:description" content="GPGME に二重解放の脆弱性 / Ghostscript Upload2Shell / Lean コミュニティが RH 証明の形式検証を認定">
+  <meta property="og:title" content="Tech News Daily — 2026-11-23">
+  <meta property="og:description" content="OpenAI が社内コードの perplexity を公開 / GL.iNet のクラウド管理経由でルーターにマルウェア / O'Reilly 氏が Silicon Valley の変質を論じる">
   <meta property="og:url" content="https://tech-news.kaion-lab.com/">
   <meta property="og:image" content="https://tech-news.kaion-lab.com/og.png">
   <meta name="twitter:card" content="summary_large_image">
@@ -22,7 +22,7 @@
   <div class="container">
     <header>
       <h1>Tech News Daily</h1>
-      <div class="date">2026-11-22 (Sun)</div>
+      <div class="date">2026-11-23 (Mon)</div>
       <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
       <nav class="site-nav">
         <a href="./" class="active">📰 日刊ダイジェスト</a>
@@ -33,9 +33,9 @@
     </header>
 
     <div class="stats-bar">
-      <span>📰 18 articles</span>
-      <span>🏷 7 categories</span>
-      <span>📡 12 sources</span>
+      <span>📰 17 articles</span>
+      <span>🏷 6 categories</span>
+      <span>📡 17 sources</span>
     </div>
 
     <nav class="toc">
@@ -47,9 +47,18 @@
     </nav>
 
     <div class="numbers-bar">
-      <div class="number-item"><span class="number-value">約 1700 万行</span><span class="number-label">Lean 版 RH 証明ライブラリの規模</span></div>
-      <div class="number-item"><span class="number-value">22x</span><span class="number-label">Hyperlight-Unikraft の Python 起動高速化（199 ms → 8.9 ms）</span></div>
-      <div class="number-item"><span class="number-value">92.5%</span><span class="number-label">C++26 再出荷投票の賛成率</span></div>
+      <div class="number-item">
+        <span class="number-value">0.76</span>
+        <span class="number-label">OpenAI が公表した最新モデルの対数 perplexity（GPT-3.5 は約 0.99）</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">1,003ms</span>
+        <span class="number-label">Lambda Web Functions 上の Next.js で最初の Suspense 内容が届くまで</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">150行</span>
+        <span class="number-label">Python 標準ライブラリだけで書いたエージェントハーネス</span>
+      </div>
     </div>
 
     <div class="section" id="top-stories">
@@ -57,71 +66,70 @@
 
       <div class="card featured deep-dive">
         <div class="card-header">
-          <span class="tag tag-security">Security</span>
-          <span class="content-type">🔒 セキュリティ</span>
-          <h3><a href="https://lists.gnupg.org/pipermail/gnupg-announce/2026q4/000517.html">DEEP DIVE: GPGME に二重解放の脆弱性（CVE-2026-129975）、メーラーや Samba まで影響</a></h3>
-        </div>
-        <div class="summary">GnuPG プロジェクトは 2026-11-20、暗号ライブラリ GPGME の double free 脆弱性 CVE-2026-129975 を公表し、修正版 2.3.1（11-19 リリース）への更新を促した。GPGME は gpg コマンドを呼び出して鍵一覧や署名検証を行うラッパーで、Gpg4win、GnuPG Desktop、多くのメールクライアント、XMPP クライアント、Samba、Flatpak などが利用している。問題は、gpg の出力するステータス行や鍵一覧を読む 2 つの内部関数にある。これらは 1024 バイトのバッファを確保し、必要に応じて realloc で拡張する。ところが読み取りエラーなどで早期 return すると、コンテキストが解放済みポインタを保持したままになり、後続の処理で同じ領域を再度 free してしまう。トリガーは、極端に長いユーザー ID を持つ細工された OpenPGP 鍵である。署名付きデータや公開鍵を受け取る側が鍵をインポートするだけで到達しうる。開発元は、アプリからのデータ窃取（署名データ経由など）に悪用できると明言し、リモートコード実行も「排除できない」としている。発見者は Johan Carlsson。GitLab からの報告は 11-12 で、公開は当初 11-25 の予定だったが、GitLab が別のバグ対応で先に更新したため前倒しされた。</div>
-        <div class="editorial">🧠 GPGME は「gpg を呼ぶだけの薄い層」と見なされがちだが、信頼されていない鍵を機械的にパースする入口でもある。メール受信のように外部入力を自動処理する構成では、ユーザー操作なしで到達する可能性が高く、深刻度は CVSS 表記以上に実環境依存だ。ただし公開時点で実証コードや悪用報告は確認できておらず、RCE は「可能性を否定できない」段階にとどまる。2.3.0 が未公開という事情もあり、ディストリビューションの追従状況を自分で確認するのが先決だ。</div>
-        <div class="key-points">
-          <ul>
-            <li>2.3.0 より前の全 GPGME（共有・静的リンク問わず）が対象で、修正版は 2.3.1。古い版向けにはパッチも提供</li>
-            <li>1024 バイトバッファの realloc 後、早期 return で古いポインタが残り二重解放に至る</li>
-            <li>GitLab 報告（11-12）から公開（11-20）まで 8 日。予定の 11-25 から 5 日前倒し</li>
-          </ul>
-        </div>
-        <div class="why-it-matters">💡 Gpg4win やメールクライアント、GPGME 静的リンクのバイナリを配布・運用しているなら、2.3.1 以降への更新とベンダーの再ビルド有無を今日中に確認してほしい。</div>
-        <div class="meta">
-          <span>GnuPG announce</span>
-          <span class="engagement">▲ 228</span>
-          <span>⏱ 3 min read</span>
-          <span>2026-11-20</span>
-        </div>
-      </div>
-
-      <div class="card featured">
-        <div class="card-header">
-          <span class="tag tag-security">Security</span>
-          <span class="content-type">🔒 セキュリティ</span>
-          <h3><a href="https://pwn.ai/upload2shell">Upload2Shell: Ghostscript の Type 1 フォント UAF（CVE-2026-125396）で CUPS や WordPress プラグインが RCE に</a></h3>
-        </div>
-        <div class="summary">Ghostscript の Type 1 フォントローダーにある use-after-free により、細工した文書が -dSAFER サンドボックスを抜け、レンダリングプロセスの権限で任意コマンドを実行できる。PostScript/PDF/画像の変換を内部で Ghostscript に任せる製品が連鎖的に影響を受け、Debian 13 の CUPS、Roundcube、Plesk、WordPress プラグイン（Forminator、Essential Addons for Elementor）、MediaWiki、DokuWiki などで再現が確認された。匿名アップロードや公開フォームだけで攻撃できる構成もある。上流は 10.08.0 で修正済みで、Debian と Ubuntu はバックポートを提供している。</div>
-        <div class="key-points">
-          <ul>
-            <li>検証は Ghostscript 10.05.1 で実施。修正は上流 10.08.0、Debian 13 は 10.05.1~dfsg-1+deb13u3</li>
-            <li>実行権限は CUPS で lp、Web アプリ系で www-data。WordPress Core は別 CVE-2026-65640（7.0.0〜7.0.3、6.9.0〜6.9.6）</li>
-            <li>Roundcube は画像処理経路を CVE-2026-114727 で修正</li>
-          </ul>
-        </div>
-        <div class="why-it-matters">💡 アップロードされた PDF や画像を ImageMagick 経由などで処理しているサービスは、Ghostscript が間接依存に入っていないかを <code>gs --version</code> と依存ツリーで確認すること。</div>
-        <div class="meta">
-          <span>pwn.ai</span>
-          <span class="engagement">▲ 73</span>
-          <span>⏱ 6 min read</span>
-          <span>2026-11-21</span>
-        </div>
-      </div>
-
-      <div class="card featured">
-        <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
+          <span class="tag tag-ai">AI</span>
           <span class="content-type">🔬 研究</span>
-          <h3><a href="https://leanprover-community.github.io/blog/posts/riemann-hypothesis/">Lean コミュニティが Alpöge 氏のリーマン予想証明を形式検証の観点で認定</a></h3>
+          <h3><a href="https://openai.com/index/perplexity-and-intelligence/">DEEP DIVE: OpenAI のチーフサイエンティストが「perplexity で AI の進歩を共通計測しよう」と提案</a></h3>
         </div>
-        <div class="summary">昨日報じたリーマン予想（RH）証明の主張に続報。Lean FRO と Mathlib Initiative が支持する Lean コミュニティは、Levent Alpöge 氏が 11-20 に公開した約 1700 万行の Lean ライブラリについて、定理の記述と証明の双方が正しいとする共同声明を出した。依存は Mathlib のみで、記述は Mathlib 既存の RiemannHypothesis 定義を使う。数十人がコンパイルを再現し、同一のエクスポートファイルを得ている。</div>
+        <div class="summary">OpenAI の Jakub Pachocki 氏は 11 月 22 日、大規模コーパスで学習した予測器（圧縮器）の性能が AI の能力を決める土台だと論じ、その進捗指標として perplexity（交差エントロピー損失）を各社の共通尺度にすることを提案した。プロンプト、ファインチューニング、強化学習は、事前学習で得た能力を引き出す工程にすぎないという整理だ。OpenAI は社内コードベースの固定スナップショットに対する対数 perplexity を公開し、GPT-3.5 が約 0.99、GPT-4 が約 0.91、直近のモデルが約 0.76 と示した。0.8 を下回った段階でサイバーセキュリティと数学に「変革的な能力」が現れたという。次の 0.68〜0.7 の領域で何が起きるかは未知としている。注目すべきは、事前学習のアルゴリズム研究そのものに AI が貢献し始めている点で、同氏は 2027 年にも事前学習の改良が雪崩的に進む可能性に言及する。提案は、各社が共通の透明性基準を持ち、CoT 監視の後継技術のような具体的なマイルストーンに到達するまで特定の perplexity 水準を超えない、という共通の上限を設けることだ。</div>
+        <div class="editorial">🧠 データセットとデータ配合が各社で違うため、perplexity を社間で直接比べる指標としては今のところ成立しない。この点は記事自身も認めている。一方、数値を公開して先に動いたこと自体は、他社に同種の開示を迫る圧力になる。CoT は perplexity を下げずに能力を引き上げるため、この指標だけで能力上限を管理する案は未検証で、実効性は他社が応じるかにかかっている。</div>
         <div class="key-points">
           <ul>
-            <li>comparator と con-leche --compare の 2 ツールが、証明された定理が Mathlib の記述と一致することを確認</li>
-            <li>Lean カーネル、con-leche、con-ron、他言語製の第三者チェッカーが不活性なエクスポートを検査し、Lean ソース内の悪意あるコードの干渉を排除</li>
-            <li>検証されたのは形式的正しさのみ。数学的アイデアの新規性や意義の評価は含まない</li>
+            <li>対数 perplexity は GPT-3.5 約 0.99、GPT-4 約 0.91、最新モデル約 0.76 と低下し、0.8 未満で数学・セキュリティの能力が出現</li>
+            <li>2026 年に損失曲線の低下が急加速。主因は長期の研究と計算資源投資で、自動化の寄与は一部</li>
+            <li>限界も明記: 社間のデータ差、タスクへの対応の弱さ、CoT など事後学習の利得を反映しない点</li>
           </ul>
         </div>
-        <div class="why-it-matters">💡 AI 生成コードの検証手法として、巨大成果物を複数の独立チェッカーで検査する運用は参考になる。ただし数学界の査読は別途これからだ。</div>
+        <div class="why-it-matters">💡 モデル選定でベンチマーク飽和に悩む開発者にとって、今後は事前学習の損失値が各社の能力予測の材料になりうる。ただし単独で能力を保証する値ではない。</div>
         <div class="meta">
-          <span>Lean community blog</span>
-          <span class="engagement">▲ 802</span>
-          <span>⏱ 5 min read</span>
+          <span>OpenAI</span>
+          <span class="engagement">▲ 470</span>
+          <span>⏱ 10 min read</span>
+          <span>2026-11-22</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://www.gl-inet.com/en-us/blogs/blog/glinet-security-notice-2026-11-20">GL.iNet、クラウド管理サービスの欠陥でルーターと KVM にマルウェアが仕込まれたと告知</a></h3>
+        </div>
+        <div class="summary">GL.iNet は 11 月 20 日付のセキュリティ告知で、クラウドのリモート管理サービスの欠陥により、第三者が一部のルーターと KVM デバイスにマルウェアを導入できたと明らかにした。欠陥は修正済みで侵入経路も遮断したが、すでに感染した機器のマルウェアは除去されない。CVE 番号と深刻度は告知に記載がなく、被害規模は調査中だ。</div>
+        <div class="key-points">
+          <ul>
+            <li>感染の目印は、プロセス一覧に <code>crond -i /tmp/.log</code> を含むものがあること。ルーターは LuCI の Status → Processes か SSH の <code>ps | grep tmp</code> で確認</li>
+            <li>KVM はベータファームウェア 1.10.2 以上（RM10 / RM10RC / RM1 / RM1V2 / RM1PE / RM4PE）、RMQ1 は 1.8.6 以上で修正。安定版は 11 月 22 日公開予定</li>
+            <li>感染機器は工場出荷状態へのリセットを推奨。接続先 PC に不審なプログラムや拡張機能がないかの確認も必要</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 GL.iNet のルーターや KVM を使っているなら、まず上記プロセスの有無を確認し、見つかれば機器をリセットする。クラウド管理機能を使わない設定でも、安定版ファームウェアへの更新は行うべきだ。</div>
+        <div class="meta">
+          <span>GL.iNet</span>
+          <span class="engagement">▲ 61</span>
+          <span>⏱ 4 min read</span>
           <span>2026-11-21</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-product">Product</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://www.oreilly.com/radar/what-happened-to-silicon-valley/">Tim O'Reilly 氏「Silicon Valley は価値創造から価値抽出へ変わった」</a></h3>
+        </div>
+        <div class="summary">O'Reilly Media 創業者の Tim O'Reilly 氏が、10 月に行った講演を基にしたエッセイで、シリコンバレーの変質を論じた。初期の Web は共有と価値創造が中心だったが、成長が鈍ると、プラットフォームは市場支配力で「ロバー・バロン型」の地代を集める側に回ったと指摘する。原因は個人の資質ではなく、株主価値を最優先する仕組みにあるという立場だ。AI は価値創造の「若年期」を飛ばし、著作物を含む共有資源からの抽出の上に作られたと批判し、解決策としてオープンソースとオープンプロトコルを挙げる。</div>
+        <div class="key-points">
+          <ul>
+            <li>Google の検索結果ページで広告などの収益化対象は約 6%、Amazon の検索結果ページは広告 16 件に対し自然な結果 4 件</li>
+            <li>IPO の 75〜80% は無利益企業。Tesla は利益 1 ドルあたり時価総額約 600 ドルで、Amazon の約 67 ドル、Google の約 34 ドルを大きく上回る</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 プラットフォームの API や無料枠に事業を載せるなら、成長が鈍った時に条件が悪化する前提で、乗り換え先とデータの持ち出し経路を確保しておきたい。</div>
+        <div class="meta">
+          <span>O'Reilly Radar</span>
+          <span class="engagement">▲ 393</span>
+          <span>⏱ 15 min read</span>
+          <span>2026-11-20</span>
         </div>
       </div>
     </div>
@@ -133,61 +141,62 @@
         <div class="card-header">
           <span class="tag tag-dev">Dev</span>
           <span class="content-type">📜 解説</span>
-          <h3><a href="https://herbsutter.com/2026/11/21/c26-is-done-again-trip-report-november-2026-iso-c-standards-meeting-buzios-brazil/">C++26 が再び完成: ブジオス会合で contracts を維持したまま再出荷を可決</a></h3>
+          <h3><a href="https://bernsteinbear.com/blog/inside-pypy-first-contact-with-rpython/">Inside PyPy: RPython に初めて触れる</a></h3>
         </div>
-        <div class="summary">ISO C++ 委員会は 3 月に C++26 の技術作業を終えたが、最初の DIS 投票で 5 カ国が contracts（pre / post / contract_assert）を理由に反対し、全会一致にならなかった。11 月のブジオス会合では contracts 削除要求を退け、修正を加えて再出荷する案を可決した。同じ変更は C++29 ドラフトにも入る。</div>
+        <div class="summary">Max Bernstein 氏が PyPy の実装言語 RPython で小さなプログラムを書き、C へコンパイルするまでを記録した。RPython は型を解析して関数を単相化し、C を生成する。文字列と整数の両方を渡すと UnionError になり、<code>@specialize.argtype(0)</code> で型ごとのコピーを作らせて解消する。Deegen や Truffle との比較も載る。</div>
         <div class="key-points">
           <ul>
-            <li>再出荷投票は賛成 111・反対 9・棄権 8（92.5%）。3 月は 114 / 12 / 3（90.5%）</li>
-            <li>契約を常時強制できる拡張 P4451R2 や、std::execution のメモリ割り当て制御 P4453R1 などを採用</li>
+            <li>例題の変換に約 18.0 秒。うち database_c が 10.6 秒を占め、変更のたびに 30 秒以上かかると VM 開発では苦しいと指摘</li>
+            <li>RPython は PyPy の実装詳細で、エラーメッセージや高速コンパイルなど他の VM ツールキットと比べた課題を列挙</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Herb Sutter</span>
-          <span class="engagement">▲ 16</span>
-          <span>⏱ 8 min read</span>
+          <span>Max Bernstein</span>
+          <span class="engagement">▲ 61</span>
+          <span>⏱ 12 min read</span>
+          <span>2026-11-19</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://alperenkeles.com/posts/vocab-for-testing/">テストのためのより良い語彙: unit / integration をやめて 4 軸で分類する</a></h3>
+        </div>
+        <div class="summary">「unit」「integration」という分類は曖昧で、何をすべきかの指針にならないと論じる記事。テストを対象範囲、検証する仮説、オラクル、入力の与え方の 4 軸で分けると、手元のリソースに応じて組み合わせを選べると提案する。筆者はランダムテストが専門で、記事も偏りを認めている。</div>
+        <div class="key-points">
+          <ul>
+            <li>オラクルは人の判断、具体例、スナップショット、インライン表明、プロパティに分類。往復変換や等価な実装同士の比較がプロパティの例</li>
+            <li>入力の与え方は静的解析、列挙、ファジング、プロパティテスト、障害注入つきの決定論的シミュレーションまで整理</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Alperen Keleş</span>
+          <span class="engagement">▲ 111</span>
+          <span>⏱ 10 min read</span>
           <span>2026-11-21</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-data">Data</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://valkey.io/blog/from-skiplist-to-b+tree/">Valkey 9.2: Sorted Set の skiplist を B+ 木に置換し、メンバーあたり最大 43% 省メモリ</a></h3>
-        </div>
-        <div class="summary">Valkey 9.2（RC 段階）は Sorted Set の順序インデックスを skiplist から高ファンアウト B+ 木「fbtree」に置き換える。skiplist はノードごとに約 37 バイトのオーバーヘッドと 1 回のヒープ確保が要るが、fbtree は 512 バイトのリーフに 61 メンバーを詰め込み、ポインタ追跡を減らす。</div>
-        <div class="key-points">
-          <ul>
-            <li>500 万メンバーで 1 メンバー 50.3B → 28.5B（連番挿入、43% 減）、ランダム挿入は 32.0B（36% 減）</li>
-            <li>Graviton3 64 コアで ZADD +105%、ZREM +76%、ZCOUNT +27%。PR ブランチでの計測で、マージ後の再計測ではない</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Valkey blog</span>
-          <span class="engagement">▲ 6</span>
-          <span>⏱ 7 min read</span>
-          <span>2026-11-20</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
           <span class="tag tag-infra">Infra</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://www.publickey1.jp/blog/26/vmhyperlight-unikraft.html">Hyperlight-Unikraft 登場: 無改造の Linux アプリをマイクロ VM で 22 倍速く起動</a></h3>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://www.jeffgeerling.com/blog/2026/i-joined-the-ntp-pool/">Jeff Geerling 氏、NTP Pool に参加。Stratum 1 を隠して Stratum 2 を公開する構成</a></h3>
         </div>
-        <div class="summary">CNCF が発表した Hyperlight-Unikraft は、軽量 VM 管理ライブラリ Hyperlight と、必要な OS 機能だけを含む Unikraft を組み合わせる。アプリの再コンパイルや SDK 変更は不要で、ウォームアップ後のランタイム状態をスナップショットとして VM に同梱し、そこから起動する。</div>
+        <div class="summary">Geerling 氏は、GNSS で時刻を取る自宅の Stratum 1 サーバーを公開せず、VPS 上の Stratum 2 サーバーを WireGuard 経由でそこに同期させて NTP Pool に参加した。過去に自宅 IP へ約 1 カ月の DDoS を受けた経験が構成の動機だ。</div>
         <div class="key-points">
           <ul>
-            <li>通常 199 ms かかる Python スクリプトが 8.9 ms で起動。3 GB のメモリで Python スクリプト 1,000 本を同時実行</li>
-            <li>KVM / MSHV / Windows Hypervisor Platform / Apple silicon の Hypervisor.framework に対応。ビルドは hluk コマンド</li>
+            <li>Raspberry Pi の NIC の PTP ハードウェアクロックを GNSS の PPS で調整し、ts2phc で UTC から数十ナノ秒以内に収め、システム時計は約 1 マイクロ秒の精度</li>
+            <li>11 月 16 日夜、無人アップグレードで入った新カーネルの再起動で VPS が停止。Pool は復帰後 6〜12 時間かかるため、再起動は手動に変更</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Publickey</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-11-16</span>
+          <span>Jeff Geerling</span>
+          <span class="engagement">▲ 125</span>
+          <span>⏱ 9 min read</span>
+          <span>2026-11-22</span>
         </div>
       </div>
 
@@ -195,20 +204,20 @@
         <div class="card-header">
           <span class="tag tag-product">Product</span>
           <span class="content-type">👀 注目</span>
-          <h3><a href="https://blog.mozilla.org/en/mozilla/internet-policy/apple-ios-browser-engine-rules/">Mozilla: iOS に非 WebKit ブラウザが 1 本も出ない理由は Apple の条件にある</a></h3>
+          <h3><a href="https://osw-alliance.net/en/">Open Social Web Alliance: 分散型ソーシャルの基盤を共同運営する連合が発足へ</a></h3>
         </div>
-        <div class="summary">EU の DMA 施行から約 3 年、日本の新ルールから約 1 年が経つが、iOS で WebKit 以外のエンジンを使うブラウザは 1 本も公開されていない。Mozilla は、Gecko 版を出すには既存の Firefox とは別アプリが必要で、ブックマークやパスワードの移行をユーザーに強いるため離脱が避けられないと主張する。</div>
+        <div class="summary">Fediverse と ATmosphere を含む分散型の Open Social Web について、中核インフラの構築・運営、ガバナンスの共有、公的・民間資金の確保を目指す連合の告知ページ。市民団体、研究、企業、メディアなど幅広い関係者を想定するが、具体的な参加者名は記載がない。</div>
         <div class="key-points">
           <ul>
-            <li>DMA の選択画面で Firefox を選ぶ人が増え、iOS での日次利用は倍増したと Mozilla は説明</li>
-            <li>Apple の条件には、非公開情報の開示を制限する項目も含まれる。Mozilla の水面下の改善交渉は「ほぼ失敗」</li>
+            <li>Fediverse は約 1,300 万アクティブユーザー・4.2 万超のインスタンス、ATmosphere は約 4,300 万の登録アカウント。2028 年までに 1 億ユーザー超が目標</li>
+            <li>2026 年秋に設立サミットで憲章を採択し、2027 年春までに初回の資金調達を狙う計画</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Mozilla Blog</span>
-          <span class="engagement">▲ 471</span>
-          <span>⏱ 5 min read</span>
-          <span>2026-11-20</span>
+          <span>Open Social Web Alliance</span>
+          <span class="engagement">▲ 218</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-11-22</span>
         </div>
       </div>
     </div>
@@ -219,60 +228,62 @@
       <div class="card">
         <div class="card-header">
           <span class="tag tag-ai">AI</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://www.publickey1.jp/blog/26/google_antigravityaiai.html">Google Antigravity にリモートエージェント、PC を閉じてもクラウド VM で作業継続</a></h3>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://qiita.com/yamamoto_a_genee/items/76562c5c80032ad9e962">約 150 行の Python で作る Agent Harness: Agent = LLM + Harness を実装で理解する</a></h3>
         </div>
-        <div class="summary">Google の AI エージェント開発環境 Antigravity に「リモートエージェント」が追加された。タスクは Google 管理の独立したクラウド VM で動くため、手元の PC を落としても続き、スマートフォンから進捗確認や権限承認ができる。</div>
+        <div class="summary">LLM の出力を実際の操作に変える実行・制御層を「ハーネス」と定義し、ツール、コンテキスト管理、状態、実行環境、計画、ガードレール、可観測性の 7 要素に整理した記事。標準ライブラリだけの最小実装が付く。許可リストはセキュリティ境界ではなく、信頼できないコードは隔離環境で動かすべきだと注意している。</div>
         <div class="key-points">
           <ul>
-            <li>入力は GitHub リポジトリ、Google Drive のファイル、端末からのアップロード</li>
-            <li>記事は Google AI Pro / Ultra の個人アカウントが対象とするが、Google の発表（11-06）は「全有料コンシューマープラン」と記載しており食い違う</li>
+            <li>ツールは read_file / write_file / run_command の 3 つ。出力は 4,000 文字で切り、エラーは末尾に出やすいので末尾を残す。1 回の実行は最大 15 ステップ、コマンドは 60 秒でタイムアウト</li>
+            <li>API キー不要の偽クライアントで動く単体テスト 12 本つき</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Publickey</span>
-          <span>⏱ 3 min read</span>
-          <span>2026-11-13</span>
+          <span>Qiita</span>
+          <span class="engagement">🔖 74</span>
+          <span>⏱ 8 min read</span>
+          <span>2026-11-22</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://zenn.dev/mizchi/articles/mutation-test-quality">おい、Mutation Test をやれ。テスト品質を、測るために</a></h3>
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://dev.classmethod.jp/articles/new-aws-signup/">AWS のアカウント登録が新方式に。IAM ユーザーも root もない「プロジェクト」型</a></h3>
         </div>
-        <div class="summary">mizchi 氏が、カバレッジではテスト品質を測れないとして、ミューテーションテストの導入を勧める記事。ソースの <code>&gt;</code> を <code>&gt;=</code> に書き換えるなどの変異を入れ、テストが落ちれば Killed、通れば Survived と判定する。</div>
+        <div class="summary">新しい AWS サインアップでは AWS Builder ID が自動で作られ、アカウントではなくプロジェクト単位で使う形になる。従来のアカウントが必要なら「advanced features」を選ぶ。リージョンは連絡先の国から us-east-2、eu-north-1、ap-southeast-2 のいずれかに自動で決まる。筆者は個人や小規模な試用向けで、企業利用には向かないと結論する。</div>
         <div class="key-points">
           <ul>
-            <li>ブランチカバレッジの伸びは 85% 付近で飽和し、95% 超は「テストのためのテスト」になりやすい</li>
-            <li>cookie-es のベンチマークで全体実行 12.2 秒、変更分のみ（--since HEAD）は 0.71 秒（M3 Pro、Node.js 24、2 回平均）</li>
+            <li>IAM ユーザーにコンソールアクセスを付けられず、メンバーは Builder ID の招待で追加。root に MFA はなく、MFA は Builder ID 側で設定</li>
+            <li>GuardDuty など多くのサービスが使えず、IAM role manager が自動作成するロールが CloudFormation を妨げる場合がある</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>DevelopersIO</span>
+          <span class="engagement">🔖 24</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-11-22</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-frontend">Frontend</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/ryota_09/articles/nextjs-suspense-streaming-lambda-web-functions">Next.js のストリーミングは Lambda Web Functions で動くか</a></h3>
+        </div>
+        <div class="summary">Next.js の Suspense ストリーミングが Lambda Web Functions で動くかを実測した記事。全条件で段階的に表示され、失敗は 0 件だった。Vercel とのタイミング差はほぼなく、差が出たのはコールドスタートだ。</div>
+        <div class="key-points">
+          <ul>
+            <li>東京の EC2 からのウォーム時、最初の Suspense 内容は約 1,003ms、2 つ目は約 3,004ms（Vercel は 1,021ms / 3,021ms）。CloudFront 経由 2,160 回でも TTFB の増加は約 10〜40ms</li>
+            <li>要設定: <code>output: "standalone"</code>、AWS_LAMBDA_HTTP_ENDPOINT を HOSTNAME / PORT に変換する index.js、CloudFront の AllViewerExceptHostHeader（Host 転送は 404 になる）。コールドスタートの TTFB 中央値は約 1,234ms</li>
           </ul>
         </div>
         <div class="meta">
           <span>Zenn</span>
-          <span>⏱ 8 min read</span>
-          <span>2026-11-17</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-data">Data</span>
-          <span class="content-type">📦 リリース</span>
-          <h3><a href="https://www.publickey1.jp/blog/26/database_hubai.html">Microsoft「Database Hub」正式リリース、クラウド・オンプレの DB を一元管理</a></h3>
-        </div>
-        <div class="summary">Microsoft Fabric の Database Hub が一般提供になった。Azure、オンプレミス、他社クラウドにある管理対象のデータベースを 1 画面で一覧し、AI エージェントが運用監視を自動化する。</div>
-        <div class="key-points">
-          <ul>
-            <li>管理対象は Azure に限らず、オンプレミスと他クラウドの DB を横断</li>
-            <li>AI エージェントによる監視の自動化を同梱</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Publickey</span>
-          <span>⏱ 3 min read</span>
-          <span>2026-11-19</span>
+          <span>⏱ 7 min read</span>
+          <span>2026-11-22</span>
         </div>
       </div>
     </div>
@@ -282,42 +293,44 @@
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-data">Data</span>
+          <span class="tag tag-dev">Dev</span>
           <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://progrium.xyz/articles/2026/single-binary-postgres">miniPG: 本物の Postgres を単一バイナリに埋め込み、sqlite3 のように使う</a></h3>
+          <h3><a href="https://github.com/gulivan/worker755">Worker 755: 自分が LLM マネージャーの「サブエージェント」になるブラウザゲーム</a></h3>
         </div>
-        <div class="summary">Mac・Windows・Linux で動く単一実行ファイルに Postgres サーバーを内蔵し、ディレクトリを指定してクエリを実行できる。PGlite は同時接続 1 本の制約でトランザクション中の 2 本目の接続がデッドロックし、v86 VM は起動に約 7 秒かかったため、最終的に Plan 9 実行ファイルをほぼネイティブ速度で動かす Hyper9 を採用した。</div>
+        <div class="summary">AI マネージャーがプレイヤーを自分のサブエージェントと信じ込み、90 秒の制限つきでターミナル経由のタスクを割り振る MIT ライセンスのゲーム。結果を確認して修正指示や事故報告を出し、最後に勤務評価を書く。エージェントを受ける側の視点を体験できる。</div>
         <div class="key-points">
           <ul>
-            <li>起動は v86 の約 7 秒から 800 ms に短縮（M3 MacBook）</li>
-            <li><code>minipg serve ./mydb -p 5432</code> で通常の Postgres サーバーとしても動作。用途はローカル単一ユーザーで、レプリカや多重接続は対象外</li>
+            <li>マネージャー役に Claude / GPT / Gemini / DeepSeek / GLM / Kimi を使え、OpenRouter などの自前キーや Ollama・llama.cpp 接続にも対応</li>
+            <li>Node 24 以上か Docker で動作。評価はリンクで共有可能</li>
           </ul>
         </div>
         <div class="meta">
-          <span>progrium.xyz</span>
-          <span class="engagement">▲ 10</span>
-          <span>⏱ 6 min read</span>
-          <span>2026-11-21</span>
+          <span>GitHub</span>
+          <span class="engagement">▲ 267</span>
+          <span class="engagement">⭐ 127</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-11-22</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-oss">OSS</span>
+          <span class="tag tag-ai">AI</span>
           <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://www.publickey1.jp/blog/26/cloudflareaikitesurf.html">Cloudflare、AI エージェント専用の軽量ヘッドレスブラウザ「Kitesurf」を OSS 化</a></h3>
+          <h3><a href="https://www.gpupartner.com/blog/beginners-guide-local-ai-inkling-qwen-unsloth">Inkling・Qwen・Unsloth で始めるローカル AI の入門ガイド</a></h3>
         </div>
-        <div class="summary">タブ、テーマ、拡張、同期などを省いた Rust 製ブラウザで、Chromium も Node.js も使わず WebAssembly にコンパイルして Cloudflare Workers 上で動く。Chrome DevTools Protocol に対応し、Puppeteer 系のクライアントから接続できる。</div>
+        <div class="summary">Unsloth Desktop で自宅 PC に家族向けのローカル AI チャットを立てる手順と、VRAM 別のモデル選びをまとめた英語ガイド。設定は 10〜15 分で、LAN アクセス機能を使えば同じネットワークの他端末からも使える。</div>
         <div class="key-points">
           <ul>
-            <li>Cloudflare は CPU・メモリ効率が Chromium の 3〜7 倍と主張（自社計測）。ライセンスは Apache 2.0</li>
-            <li>構成は Blitz（DOM・レイアウト）、Stylo（CSS）、Boa（JavaScript）、Krilla（PDF）。Wrangler でローカル実行も可能</li>
+            <li>Inkling 2 Mini は 26.4B パラメータの MoE（アクティブ 5.4B）、Apache 2.0、100 万トークン文脈。4bit 版の GGUF は 17.6GB で、24GB 以上の VRAM が目安</li>
+            <li>MoE は必要な部分だけ GPU に載せ残りをシステム RAM に置けるため、16GB の RTX 5060 Ti で Qwen3.6-35B が約 47 tokens/s</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Publickey</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-11-15</span>
+          <span>GPUPartner</span>
+          <span class="engagement">▲ 179</span>
+          <span>⏱ 9 min read</span>
+          <span>2026-11-22</span>
         </div>
       </div>
     </div>
@@ -326,48 +339,42 @@
       <div class="section-title">🔗 Quick Links</div>
 
       <div class="quick-link">
-        <span class="tag tag-infra">Infra</span>
-        <a href="https://www.publickey1.jp/blog/26/awsawsaws_1.html">AWS 公式「AWS エミュレータ」が正式リリース</a>
-        <span class="quick-summary">— AWS API をローカルで再現し、アカウント不要でオフラインのテストができる。</span>
-        <span class="meta">Publickey</span>
+        <span class="tag tag-product">Product</span>
+        <a href="https://smhn.info/202611-microsoft-link-to-windows-extend-display-android-second-screen">Microsoft の新機能で Android を Windows PC のセカンドスクリーンに</a>
+        <span class="quick-summary">— Link to Windows の拡張として、Android 端末を追加ディスプレイとして使える。</span>
+        <span class="meta">smhn.info</span>
+        <span class="engagement">🔖 45</span>
       </div>
 
       <div class="quick-link">
-        <span class="tag tag-frontend">Frontend</span>
-        <a href="https://www.publickey1.jp/blog/26/nodejsnpmwebopenvessel.html">神戸ソフト、ブラウザ上で Node.js と npm を動かす「OpenVessel」を公開</a>
-        <span class="quick-summary">— Astro など Node.js ベースのフレームワークもブラウザ内で実行できる。</span>
-        <span class="meta">Publickey</span>
+        <span class="tag tag-product">Product</span>
+        <a href="https://posfie.com/@petaritape/p/tgzVdbL">Adobe Express Photos が同意なく PC にインストールされるとの報告</a>
+        <span class="quick-summary">— Win+Shift+S のスクリーンショット動作を置き換える問題と回避策がまとまっている。</span>
+        <span class="meta">Posfie</span>
+        <span class="engagement">🔖 97</span>
       </div>
 
       <div class="quick-link">
-        <span class="tag tag-data">Data</span>
-        <a href="https://www.publickey1.jp/blog/26/postgresqlazure_horizondb.html">PostgreSQL 互換「Azure HorizonDB」が正式リリース</a>
-        <span class="quick-summary">— ミッションクリティカル向けで、高可用性と性能を売りにする。</span>
-        <span class="meta">Publickey</span>
+        <span class="tag tag-ai">AI</span>
+        <a href="https://note.com/yamac_/n/n198bdc344c64">Docker Sandboxes で Claude Code を自律的かつ安全に動かす</a>
+        <span class="quick-summary">— コンテナで隔離した環境でエージェントを自律実行させる方法の解説。</span>
+        <span class="meta">note</span>
+        <span class="engagement">🔖 47</span>
       </div>
 
       <div class="quick-link">
-        <span class="tag tag-oss">OSS</span>
-        <a href="https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/receita-federal-publica-primeiro-codigo-fonte-aberto-no-github-e-amplia-transparencia-da-reforma-tributaria">ブラジル国税庁が税計算ツールを MIT ライセンスで GitHub 公開</a>
-        <span class="quick-summary">— 税制改革の透明性向上を目的に、同庁初のオープンソースとなる。</span>
-        <span class="meta">gov.br</span>
-        <span class="engagement">▲ 729</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-frontend">Frontend</span>
-        <a href="https://linebender.org/blog/next-100-guis/">Advice for the next 100 Rust GUIs</a>
-        <span class="quick-summary">— Linebender が Rust GUI ツールキット開発者向けに設計上の助言をまとめた。</span>
-        <span class="meta">Linebender</span>
-        <span class="engagement">▲ 65</span>
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://zenn.dev/karamage/articles/73027ee36796dc">【TLA+】AI にテストケースを書かせるな。ルールを書け</a>
+        <span class="quick-summary">— テストを列挙させず、仕様のルールを TLA+ で記述させる方針を説く。</span>
+        <span class="meta">Zenn</span>
       </div>
 
       <div class="quick-link">
         <span class="tag tag-infra">Infra</span>
-        <a href="https://blog.tymscar.com/posts/studiodisplayethernet/">モニターの内蔵 Ethernet が下りの速度を 75% 落としていた</a>
-        <span class="quick-summary">— Studio Display 経由の有線接続で起きた速度低下の原因調査記録。</span>
-        <span class="meta">tymscar.com</span>
-        <span class="engagement">▲ 468</span>
+        <a href="https://www.nytimes.com/2026/11/22/us/delta-flight-delays-system-outage.html">アトランタ経由のデルタ航空便が自動システムの不具合で全便遅延</a>
+        <span class="quick-summary">— 運航を支える自動システムの障害が、ハブ空港の全便に波及した。</span>
+        <span class="meta">The New York Times</span>
+        <span class="engagement">▲ 94</span>
       </div>
     </div>
 
