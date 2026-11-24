@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-11-23</title>
+  <meta name="description" content="OpenAI が社内コードの perplexity を公開 / GL.iNet のクラウド管理経由でルーターにマルウェア / O'Reilly 氏が Silicon Valley の変質を論じる">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech News Daily">
+  <meta property="og:title" content="Tech News Daily — 2026-11-23">
+  <meta property="og:description" content="OpenAI が社内コードの perplexity を公開 / GL.iNet のクラウド管理経由でルーターにマルウェア / O'Reilly 氏が Silicon Valley の変質を論じる">
+  <meta property="og:url" content="https://tech-news.kaion-lab.com/archive/2026-11-23.html">
+  <meta property="og:image" content="https://tech-news.kaion-lab.com/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="../feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-11-23 (Mon)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+      <nav class="site-nav">
+        <a href="../" class="active">📰 日刊ダイジェスト</a>
+        <a href="../trends.html">🔌 週次プラグイントレンド</a>
+        <a href="../ai-trends.html">🧠 AI プロダクト動向</a>
+        <a href="./">🗂 アーカイブ</a>
+      </nav>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 17 articles</span>
+      <span>🏷 6 categories</span>
+      <span>📡 17 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item">
+        <span class="number-value">0.76</span>
+        <span class="number-label">OpenAI が公表した最新モデルの対数 perplexity（GPT-3.5 は約 0.99）</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">1,003ms</span>
+        <span class="number-label">Lambda Web Functions 上の Next.js で最初の Suspense 内容が届くまで</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">150行</span>
+        <span class="number-label">Python 標準ライブラリだけで書いたエージェントハーネス</span>
+      </div>
+    </div>
+
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
+
+      <div class="card featured deep-dive">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://openai.com/index/perplexity-and-intelligence/">DEEP DIVE: OpenAI のチーフサイエンティストが「perplexity で AI の進歩を共通計測しよう」と提案</a></h3>
+        </div>
+        <div class="summary">OpenAI の Jakub Pachocki 氏は 11 月 22 日、大規模コーパスで学習した予測器（圧縮器）の性能が AI の能力を決める土台だと論じ、その進捗指標として perplexity（交差エントロピー損失）を各社の共通尺度にすることを提案した。プロンプト、ファインチューニング、強化学習は、事前学習で得た能力を引き出す工程にすぎないという整理だ。OpenAI は社内コードベースの固定スナップショットに対する対数 perplexity を公開し、GPT-3.5 が約 0.99、GPT-4 が約 0.91、直近のモデルが約 0.76 と示した。0.8 を下回った段階でサイバーセキュリティと数学に「変革的な能力」が現れたという。次の 0.68〜0.7 の領域で何が起きるかは未知としている。注目すべきは、事前学習のアルゴリズム研究そのものに AI が貢献し始めている点で、同氏は 2027 年にも事前学習の改良が雪崩的に進む可能性に言及する。提案は、各社が共通の透明性基準を持ち、CoT 監視の後継技術のような具体的なマイルストーンに到達するまで特定の perplexity 水準を超えない、という共通の上限を設けることだ。</div>
+        <div class="editorial">🧠 データセットとデータ配合が各社で違うため、perplexity を社間で直接比べる指標としては今のところ成立しない。この点は記事自身も認めている。一方、数値を公開して先に動いたこと自体は、他社に同種の開示を迫る圧力になる。CoT は perplexity を下げずに能力を引き上げるため、この指標だけで能力上限を管理する案は未検証で、実効性は他社が応じるかにかかっている。</div>
+        <div class="key-points">
+          <ul>
+            <li>対数 perplexity は GPT-3.5 約 0.99、GPT-4 約 0.91、最新モデル約 0.76 と低下し、0.8 未満で数学・セキュリティの能力が出現</li>
+            <li>2026 年に損失曲線の低下が急加速。主因は長期の研究と計算資源投資で、自動化の寄与は一部</li>
+            <li>限界も明記: 社間のデータ差、タスクへの対応の弱さ、CoT など事後学習の利得を反映しない点</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 モデル選定でベンチマーク飽和に悩む開発者にとって、今後は事前学習の損失値が各社の能力予測の材料になりうる。ただし単独で能力を保証する値ではない。</div>
+        <div class="meta">
+          <span>OpenAI</span>
+          <span class="engagement">▲ 470</span>
+          <span>⏱ 10 min read</span>
+          <span>2026-11-22</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://www.gl-inet.com/en-us/blogs/blog/glinet-security-notice-2026-11-20">GL.iNet、クラウド管理サービスの欠陥でルーターと KVM にマルウェアが仕込まれたと告知</a></h3>
+        </div>
+        <div class="summary">GL.iNet は 11 月 20 日付のセキュリティ告知で、クラウドのリモート管理サービスの欠陥により、第三者が一部のルーターと KVM デバイスにマルウェアを導入できたと明らかにした。欠陥は修正済みで侵入経路も遮断したが、すでに感染した機器のマルウェアは除去されない。CVE 番号と深刻度は告知に記載がなく、被害規模は調査中だ。</div>
+        <div class="key-points">
+          <ul>
+            <li>感染の目印は、プロセス一覧に <code>crond -i /tmp/.log</code> を含むものがあること。ルーターは LuCI の Status → Processes か SSH の <code>ps | grep tmp</code> で確認</li>
+            <li>KVM はベータファームウェア 1.10.2 以上（RM10 / RM10RC / RM1 / RM1V2 / RM1PE / RM4PE）、RMQ1 は 1.8.6 以上で修正。安定版は 11 月 22 日公開予定</li>
+            <li>感染機器は工場出荷状態へのリセットを推奨。接続先 PC に不審なプログラムや拡張機能がないかの確認も必要</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 GL.iNet のルーターや KVM を使っているなら、まず上記プロセスの有無を確認し、見つかれば機器をリセットする。クラウド管理機能を使わない設定でも、安定版ファームウェアへの更新は行うべきだ。</div>
+        <div class="meta">
+          <span>GL.iNet</span>
+          <span class="engagement">▲ 61</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-11-21</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-product">Product</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://www.oreilly.com/radar/what-happened-to-silicon-valley/">Tim O'Reilly 氏「Silicon Valley は価値創造から価値抽出へ変わった」</a></h3>
+        </div>
+        <div class="summary">O'Reilly Media 創業者の Tim O'Reilly 氏が、10 月に行った講演を基にしたエッセイで、シリコンバレーの変質を論じた。初期の Web は共有と価値創造が中心だったが、成長が鈍ると、プラットフォームは市場支配力で「ロバー・バロン型」の地代を集める側に回ったと指摘する。原因は個人の資質ではなく、株主価値を最優先する仕組みにあるという立場だ。AI は価値創造の「若年期」を飛ばし、著作物を含む共有資源からの抽出の上に作られたと批判し、解決策としてオープンソースとオープンプロトコルを挙げる。</div>
+        <div class="key-points">
+          <ul>
+            <li>Google の検索結果ページで広告などの収益化対象は約 6%、Amazon の検索結果ページは広告 16 件に対し自然な結果 4 件</li>
+            <li>IPO の 75〜80% は無利益企業。Tesla は利益 1 ドルあたり時価総額約 600 ドルで、Amazon の約 67 ドル、Google の約 34 ドルを大きく上回る</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 プラットフォームの API や無料枠に事業を載せるなら、成長が鈍った時に条件が悪化する前提で、乗り換え先とデータの持ち出し経路を確保しておきたい。</div>
+        <div class="meta">
+          <span>O'Reilly Radar</span>
+          <span class="engagement">▲ 393</span>
+          <span>⏱ 15 min read</span>
+          <span>2026-11-20</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://bernsteinbear.com/blog/inside-pypy-first-contact-with-rpython/">Inside PyPy: RPython に初めて触れる</a></h3>
+        </div>
+        <div class="summary">Max Bernstein 氏が PyPy の実装言語 RPython で小さなプログラムを書き、C へコンパイルするまでを記録した。RPython は型を解析して関数を単相化し、C を生成する。文字列と整数の両方を渡すと UnionError になり、<code>@specialize.argtype(0)</code> で型ごとのコピーを作らせて解消する。Deegen や Truffle との比較も載る。</div>
+        <div class="key-points">
+          <ul>
+            <li>例題の変換に約 18.0 秒。うち database_c が 10.6 秒を占め、変更のたびに 30 秒以上かかると VM 開発では苦しいと指摘</li>
+            <li>RPython は PyPy の実装詳細で、エラーメッセージや高速コンパイルなど他の VM ツールキットと比べた課題を列挙</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Max Bernstein</span>
+          <span class="engagement">▲ 61</span>
+          <span>⏱ 12 min read</span>
+          <span>2026-11-19</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://alperenkeles.com/posts/vocab-for-testing/">テストのためのより良い語彙: unit / integration をやめて 4 軸で分類する</a></h3>
+        </div>
+        <div class="summary">「unit」「integration」という分類は曖昧で、何をすべきかの指針にならないと論じる記事。テストを対象範囲、検証する仮説、オラクル、入力の与え方の 4 軸で分けると、手元のリソースに応じて組み合わせを選べると提案する。筆者はランダムテストが専門で、記事も偏りを認めている。</div>
+        <div class="key-points">
+          <ul>
+            <li>オラクルは人の判断、具体例、スナップショット、インライン表明、プロパティに分類。往復変換や等価な実装同士の比較がプロパティの例</li>
+            <li>入力の与え方は静的解析、列挙、ファジング、プロパティテスト、障害注入つきの決定論的シミュレーションまで整理</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Alperen Keleş</span>
+          <span class="engagement">▲ 111</span>
+          <span>⏱ 10 min read</span>
+          <span>2026-11-21</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://www.jeffgeerling.com/blog/2026/i-joined-the-ntp-pool/">Jeff Geerling 氏、NTP Pool に参加。Stratum 1 を隠して Stratum 2 を公開する構成</a></h3>
+        </div>
+        <div class="summary">Geerling 氏は、GNSS で時刻を取る自宅の Stratum 1 サーバーを公開せず、VPS 上の Stratum 2 サーバーを WireGuard 経由でそこに同期させて NTP Pool に参加した。過去に自宅 IP へ約 1 カ月の DDoS を受けた経験が構成の動機だ。</div>
+        <div class="key-points">
+          <ul>
+            <li>Raspberry Pi の NIC の PTP ハードウェアクロックを GNSS の PPS で調整し、ts2phc で UTC から数十ナノ秒以内に収め、システム時計は約 1 マイクロ秒の精度</li>
+            <li>11 月 16 日夜、無人アップグレードで入った新カーネルの再起動で VPS が停止。Pool は復帰後 6〜12 時間かかるため、再起動は手動に変更</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Jeff Geerling</span>
+          <span class="engagement">▲ 125</span>
+          <span>⏱ 9 min read</span>
+          <span>2026-11-22</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-product">Product</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://osw-alliance.net/en/">Open Social Web Alliance: 分散型ソーシャルの基盤を共同運営する連合が発足へ</a></h3>
+        </div>
+        <div class="summary">Fediverse と ATmosphere を含む分散型の Open Social Web について、中核インフラの構築・運営、ガバナンスの共有、公的・民間資金の確保を目指す連合の告知ページ。市民団体、研究、企業、メディアなど幅広い関係者を想定するが、具体的な参加者名は記載がない。</div>
+        <div class="key-points">
+          <ul>
+            <li>Fediverse は約 1,300 万アクティブユーザー・4.2 万超のインスタンス、ATmosphere は約 4,300 万の登録アカウント。2028 年までに 1 億ユーザー超が目標</li>
+            <li>2026 年秋に設立サミットで憲章を採択し、2027 年春までに初回の資金調達を狙う計画</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Open Social Web Alliance</span>
+          <span class="engagement">▲ 218</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-11-22</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://qiita.com/yamamoto_a_genee/items/76562c5c80032ad9e962">約 150 行の Python で作る Agent Harness: Agent = LLM + Harness を実装で理解する</a></h3>
+        </div>
+        <div class="summary">LLM の出力を実際の操作に変える実行・制御層を「ハーネス」と定義し、ツール、コンテキスト管理、状態、実行環境、計画、ガードレール、可観測性の 7 要素に整理した記事。標準ライブラリだけの最小実装が付く。許可リストはセキュリティ境界ではなく、信頼できないコードは隔離環境で動かすべきだと注意している。</div>
+        <div class="key-points">
+          <ul>
+            <li>ツールは read_file / write_file / run_command の 3 つ。出力は 4,000 文字で切り、エラーは末尾に出やすいので末尾を残す。1 回の実行は最大 15 ステップ、コマンドは 60 秒でタイムアウト</li>
+            <li>API キー不要の偽クライアントで動く単体テスト 12 本つき</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Qiita</span>
+          <span class="engagement">🔖 74</span>
+          <span>⏱ 8 min read</span>
+          <span>2026-11-22</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://dev.classmethod.jp/articles/new-aws-signup/">AWS のアカウント登録が新方式に。IAM ユーザーも root もない「プロジェクト」型</a></h3>
+        </div>
+        <div class="summary">新しい AWS サインアップでは AWS Builder ID が自動で作られ、アカウントではなくプロジェクト単位で使う形になる。従来のアカウントが必要なら「advanced features」を選ぶ。リージョンは連絡先の国から us-east-2、eu-north-1、ap-southeast-2 のいずれかに自動で決まる。筆者は個人や小規模な試用向けで、企業利用には向かないと結論する。</div>
+        <div class="key-points">
+          <ul>
+            <li>IAM ユーザーにコンソールアクセスを付けられず、メンバーは Builder ID の招待で追加。root に MFA はなく、MFA は Builder ID 側で設定</li>
+            <li>GuardDuty など多くのサービスが使えず、IAM role manager が自動作成するロールが CloudFormation を妨げる場合がある</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>DevelopersIO</span>
+          <span class="engagement">🔖 24</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-11-22</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-frontend">Frontend</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/ryota_09/articles/nextjs-suspense-streaming-lambda-web-functions">Next.js のストリーミングは Lambda Web Functions で動くか</a></h3>
+        </div>
+        <div class="summary">Next.js の Suspense ストリーミングが Lambda Web Functions で動くかを実測した記事。全条件で段階的に表示され、失敗は 0 件だった。Vercel とのタイミング差はほぼなく、差が出たのはコールドスタートだ。</div>
+        <div class="key-points">
+          <ul>
+            <li>東京の EC2 からのウォーム時、最初の Suspense 内容は約 1,003ms、2 つ目は約 3,004ms（Vercel は 1,021ms / 3,021ms）。CloudFront 経由 2,160 回でも TTFB の増加は約 10〜40ms</li>
+            <li>要設定: <code>output: "standalone"</code>、AWS_LAMBDA_HTTP_ENDPOINT を HOSTNAME / PORT に変換する index.js、CloudFront の AllViewerExceptHostHeader（Host 転送は 404 になる）。コールドスタートの TTFB 中央値は約 1,234ms</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 7 min read</span>
+          <span>2026-11-22</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.com/gulivan/worker755">Worker 755: 自分が LLM マネージャーの「サブエージェント」になるブラウザゲーム</a></h3>
+        </div>
+        <div class="summary">AI マネージャーがプレイヤーを自分のサブエージェントと信じ込み、90 秒の制限つきでターミナル経由のタスクを割り振る MIT ライセンスのゲーム。結果を確認して修正指示や事故報告を出し、最後に勤務評価を書く。エージェントを受ける側の視点を体験できる。</div>
+        <div class="key-points">
+          <ul>
+            <li>マネージャー役に Claude / GPT / Gemini / DeepSeek / GLM / Kimi を使え、OpenRouter などの自前キーや Ollama・llama.cpp 接続にも対応</li>
+            <li>Node 24 以上か Docker で動作。評価はリンクで共有可能</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span class="engagement">▲ 267</span>
+          <span class="engagement">⭐ 127</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-11-22</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://www.gpupartner.com/blog/beginners-guide-local-ai-inkling-qwen-unsloth">Inkling・Qwen・Unsloth で始めるローカル AI の入門ガイド</a></h3>
+        </div>
+        <div class="summary">Unsloth Desktop で自宅 PC に家族向けのローカル AI チャットを立てる手順と、VRAM 別のモデル選びをまとめた英語ガイド。設定は 10〜15 分で、LAN アクセス機能を使えば同じネットワークの他端末からも使える。</div>
+        <div class="key-points">
+          <ul>
+            <li>Inkling 2 Mini は 26.4B パラメータの MoE（アクティブ 5.4B）、Apache 2.0、100 万トークン文脈。4bit 版の GGUF は 17.6GB で、24GB 以上の VRAM が目安</li>
+            <li>MoE は必要な部分だけ GPU に載せ残りをシステム RAM に置けるため、16GB の RTX 5060 Ti で Qwen3.6-35B が約 47 tokens/s</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GPUPartner</span>
+          <span class="engagement">▲ 179</span>
+          <span>⏱ 9 min read</span>
+          <span>2026-11-22</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
+
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://smhn.info/202611-microsoft-link-to-windows-extend-display-android-second-screen">Microsoft の新機能で Android を Windows PC のセカンドスクリーンに</a>
+        <span class="quick-summary">— Link to Windows の拡張として、Android 端末を追加ディスプレイとして使える。</span>
+        <span class="meta">smhn.info</span>
+        <span class="engagement">🔖 45</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://posfie.com/@petaritape/p/tgzVdbL">Adobe Express Photos が同意なく PC にインストールされるとの報告</a>
+        <span class="quick-summary">— Win+Shift+S のスクリーンショット動作を置き換える問題と回避策がまとまっている。</span>
+        <span class="meta">Posfie</span>
+        <span class="engagement">🔖 97</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://note.com/yamac_/n/n198bdc344c64">Docker Sandboxes で Claude Code を自律的かつ安全に動かす</a>
+        <span class="quick-summary">— コンテナで隔離した環境でエージェントを自律実行させる方法の解説。</span>
+        <span class="meta">note</span>
+        <span class="engagement">🔖 47</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://zenn.dev/karamage/articles/73027ee36796dc">【TLA+】AI にテストケースを書かせるな。ルールを書け</a>
+        <span class="quick-summary">— テストを列挙させず、仕様のルールを TLA+ で記述させる方針を説く。</span>
+        <span class="meta">Zenn</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-infra">Infra</span>
+        <a href="https://www.nytimes.com/2026/11/22/us/delta-flight-delays-system-outage.html">アトランタ経由のデルタ航空便が自動システムの不具合で全便遅延</a>
+        <span class="quick-summary">— 運航を支える自動システムの障害が、ハブ空港の全便に波及した。</span>
+        <span class="meta">The New York Times</span>
+        <span class="engagement">▲ 94</span>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="./" class="archive-link">🗂 過去のダイジェスト</a>
+    </footer>
+  </div>
+</body>
+</html>

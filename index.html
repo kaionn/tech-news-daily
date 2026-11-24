@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tech News Daily — 2026-11-23</title>
-  <meta name="description" content="OpenAI が社内コードの perplexity を公開 / GL.iNet のクラウド管理経由でルーターにマルウェア / O'Reilly 氏が Silicon Valley の変質を論じる">
+  <title>Tech News Daily — 2026-11-24</title>
+  <meta name="description" content="Nvidia が Jensen Huang を CEO に復帰 / Ladybird がアルファ版公開 / PostgreSQL 19 正式リリース">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Tech News Daily">
-  <meta property="og:title" content="Tech News Daily — 2026-11-23">
-  <meta property="og:description" content="OpenAI が社内コードの perplexity を公開 / GL.iNet のクラウド管理経由でルーターにマルウェア / O'Reilly 氏が Silicon Valley の変質を論じる">
+  <meta property="og:title" content="Tech News Daily — 2026-11-24">
+  <meta property="og:description" content="Nvidia が Jensen Huang を CEO に復帰 / Ladybird がアルファ版公開 / PostgreSQL 19 正式リリース">
   <meta property="og:url" content="https://tech-news.kaion-lab.com/">
   <meta property="og:image" content="https://tech-news.kaion-lab.com/og.png">
   <meta name="twitter:card" content="summary_large_image">
@@ -22,7 +22,7 @@
   <div class="container">
     <header>
       <h1>Tech News Daily</h1>
-      <div class="date">2026-11-23 (Mon)</div>
+      <div class="date">2026-11-24 (Tue)</div>
       <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
       <nav class="site-nav">
         <a href="./" class="active">📰 日刊ダイジェスト</a>
@@ -33,9 +33,9 @@
     </header>
 
     <div class="stats-bar">
-      <span>📰 17 articles</span>
-      <span>🏷 6 categories</span>
-      <span>📡 17 sources</span>
+      <span>📰 18 articles</span>
+      <span>🏷 7 categories</span>
+      <span>📡 15 sources</span>
     </div>
 
     <nav class="toc">
@@ -48,16 +48,16 @@
 
     <div class="numbers-bar">
       <div class="number-item">
-        <span class="number-value">0.76</span>
-        <span class="number-label">OpenAI が公表した最新モデルの対数 perplexity（GPT-3.5 は約 0.99）</span>
+        <span class="number-value">+31%</span>
+        <span class="number-label">Huang の CEO 復帰発表を受けた Nvidia 株の上昇率</span>
       </div>
       <div class="number-item">
-        <span class="number-value">1,003ms</span>
-        <span class="number-label">Lambda Web Functions 上の Next.js で最初の Suspense 内容が届くまで</span>
+        <span class="number-value">6.9x</span>
+        <span class="number-label">Stalwart の FoundationDB クライアントの点読み出しスループット向上（最大）</span>
       </div>
       <div class="number-item">
-        <span class="number-value">150行</span>
-        <span class="number-label">Python 標準ライブラリだけで書いたエージェントハーネス</span>
+        <span class="number-value">約9,400倍</span>
+        <span class="number-label">AI が高速化した箱入り娘ソルバーの改善幅</span>
       </div>
     </div>
 
@@ -66,70 +66,70 @@
 
       <div class="card featured deep-dive">
         <div class="card-header">
-          <span class="tag tag-ai">AI</span>
-          <span class="content-type">🔬 研究</span>
-          <h3><a href="https://openai.com/index/perplexity-and-intelligence/">DEEP DIVE: OpenAI のチーフサイエンティストが「perplexity で AI の進歩を共通計測しよう」と提案</a></h3>
-        </div>
-        <div class="summary">OpenAI の Jakub Pachocki 氏は 11 月 22 日、大規模コーパスで学習した予測器（圧縮器）の性能が AI の能力を決める土台だと論じ、その進捗指標として perplexity（交差エントロピー損失）を各社の共通尺度にすることを提案した。プロンプト、ファインチューニング、強化学習は、事前学習で得た能力を引き出す工程にすぎないという整理だ。OpenAI は社内コードベースの固定スナップショットに対する対数 perplexity を公開し、GPT-3.5 が約 0.99、GPT-4 が約 0.91、直近のモデルが約 0.76 と示した。0.8 を下回った段階でサイバーセキュリティと数学に「変革的な能力」が現れたという。次の 0.68〜0.7 の領域で何が起きるかは未知としている。注目すべきは、事前学習のアルゴリズム研究そのものに AI が貢献し始めている点で、同氏は 2027 年にも事前学習の改良が雪崩的に進む可能性に言及する。提案は、各社が共通の透明性基準を持ち、CoT 監視の後継技術のような具体的なマイルストーンに到達するまで特定の perplexity 水準を超えない、という共通の上限を設けることだ。</div>
-        <div class="editorial">🧠 データセットとデータ配合が各社で違うため、perplexity を社間で直接比べる指標としては今のところ成立しない。この点は記事自身も認めている。一方、数値を公開して先に動いたこと自体は、他社に同種の開示を迫る圧力になる。CoT は perplexity を下げずに能力を引き上げるため、この指標だけで能力上限を管理する案は未検証で、実効性は他社が応じるかにかかっている。</div>
-        <div class="key-points">
-          <ul>
-            <li>対数 perplexity は GPT-3.5 約 0.99、GPT-4 約 0.91、最新モデル約 0.76 と低下し、0.8 未満で数学・セキュリティの能力が出現</li>
-            <li>2026 年に損失曲線の低下が急加速。主因は長期の研究と計算資源投資で、自動化の寄与は一部</li>
-            <li>限界も明記: 社間のデータ差、タスクへの対応の弱さ、CoT など事後学習の利得を反映しない点</li>
-          </ul>
-        </div>
-        <div class="why-it-matters">💡 モデル選定でベンチマーク飽和に悩む開発者にとって、今後は事前学習の損失値が各社の能力予測の材料になりうる。ただし単独で能力を保証する値ではない。</div>
-        <div class="meta">
-          <span>OpenAI</span>
-          <span class="engagement">▲ 470</span>
-          <span>⏱ 10 min read</span>
-          <span>2026-11-22</span>
-        </div>
-      </div>
-
-      <div class="card featured">
-        <div class="card-header">
-          <span class="tag tag-security">Security</span>
-          <span class="content-type">🔒 セキュリティ</span>
-          <h3><a href="https://www.gl-inet.com/en-us/blogs/blog/glinet-security-notice-2026-11-20">GL.iNet、クラウド管理サービスの欠陥でルーターと KVM にマルウェアが仕込まれたと告知</a></h3>
-        </div>
-        <div class="summary">GL.iNet は 11 月 20 日付のセキュリティ告知で、クラウドのリモート管理サービスの欠陥により、第三者が一部のルーターと KVM デバイスにマルウェアを導入できたと明らかにした。欠陥は修正済みで侵入経路も遮断したが、すでに感染した機器のマルウェアは除去されない。CVE 番号と深刻度は告知に記載がなく、被害規模は調査中だ。</div>
-        <div class="key-points">
-          <ul>
-            <li>感染の目印は、プロセス一覧に <code>crond -i /tmp/.log</code> を含むものがあること。ルーターは LuCI の Status → Processes か SSH の <code>ps | grep tmp</code> で確認</li>
-            <li>KVM はベータファームウェア 1.10.2 以上（RM10 / RM10RC / RM1 / RM1V2 / RM1PE / RM4PE）、RMQ1 は 1.8.6 以上で修正。安定版は 11 月 22 日公開予定</li>
-            <li>感染機器は工場出荷状態へのリセットを推奨。接続先 PC に不審なプログラムや拡張機能がないかの確認も必要</li>
-          </ul>
-        </div>
-        <div class="why-it-matters">💡 GL.iNet のルーターや KVM を使っているなら、まず上記プロセスの有無を確認し、見つかれば機器をリセットする。クラウド管理機能を使わない設定でも、安定版ファームウェアへの更新は行うべきだ。</div>
-        <div class="meta">
-          <span>GL.iNet</span>
-          <span class="engagement">▲ 61</span>
-          <span>⏱ 4 min read</span>
-          <span>2026-11-21</span>
-        </div>
-      </div>
-
-      <div class="card featured">
-        <div class="card-header">
           <span class="tag tag-product">Product</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://www.oreilly.com/radar/what-happened-to-silicon-valley/">Tim O'Reilly 氏「Silicon Valley は価値創造から価値抽出へ変わった」</a></h3>
+          <span class="content-type">💰 ビジネス</span>
+          <h3><a href="https://www.cnbc.com/2026/11/23/nvidia-jensen-huang-ceo.html">DEEP DIVE: Nvidia が Jensen Huang 氏を CEO に復帰させる。株価は発表で 31% 上昇</a></h3>
         </div>
-        <div class="summary">O'Reilly Media 創業者の Tim O'Reilly 氏が、10 月に行った講演を基にしたエッセイで、シリコンバレーの変質を論じた。初期の Web は共有と価値創造が中心だったが、成長が鈍ると、プラットフォームは市場支配力で「ロバー・バロン型」の地代を集める側に回ったと指摘する。原因は個人の資質ではなく、株主価値を最優先する仕組みにあるという立場だ。AI は価値創造の「若年期」を飛ばし、著作物を含む共有資源からの抽出の上に作られたと批判し、解決策としてオープンソースとオープンプロトコルを挙げる。</div>
+        <div class="summary">Nvidia は 11 月 23 日、Jensen Huang 氏を即日 CEO に復帰させると発表した。同氏は 11 月 13 日、複数の不倫報道を受けて辞任していた。報道には中国のスパイとされる人物との関係も含まれ、ニューヨーク・タイムズが伝えた。取締役会は「一連の協議」を経て全会一致で復帰を決め、国家安全保障上のリスクはないとしている。暫定 CEO を務めた Colette Kress 氏は CFO に戻る。株価は 11 月 8 日に Huang 氏が不倫を認めてから約 33% 下落しており、今回の発表で 31% 上昇した。一方で、Wachtell, Lipton, Rosen &amp; Katz が支援する独立委員会は、社内機密や国家安全保障が損なわれたかどうかの調査を続けている。議会の追及も続く。Huang 氏は 12 月 1 日に下院外交委員会の非公開聴取を受け、12 月 2 日に法務顧問の Tim Teter 氏が出席し、12 月 3 日には上院銀行委員会の輸出規制に関する公聴会で唯一の証人として公開証言する。Elizabeth Warren 上院議員は、輸出規制の遵守について Nvidia はなお議会に答える必要があると述べた。</div>
+        <div class="editorial">🧠 株価が下落分をほぼ取り戻した事実は、市場が経営者個人より事業の継続性を重く見たことを示す。ただし調査の結論は出ておらず、12 月 3 日の公開証言で輸出規制の運用が問われれば、評価が再び動く余地が残る。GPU の調達計画を立てる側は、この 10 日間の振れを「人事リスク」ではなく規制リスクの先行指標として読むほうが実務的だ。</div>
         <div class="key-points">
           <ul>
-            <li>Google の検索結果ページで広告などの収益化対象は約 6%、Amazon の検索結果ページは広告 16 件に対し自然な結果 4 件</li>
-            <li>IPO の 75〜80% は無利益企業。Tesla は利益 1 ドルあたり時価総額約 600 ドルで、Amazon の約 67 ドル、Google の約 34 ドルを大きく上回る</li>
+            <li>Huang 氏は 11 月 13 日に辞任、11 月 23 日に取締役会の全会一致で復帰。暫定 CEO の Kress 氏は CFO に残留</li>
+            <li>株価は 11 月 8 日から約 33% 下落したのち、復帰発表で 31% 上昇（11 月 6 日の終値は 186.64 ドル）</li>
+            <li>12 月 1 日に下院外交委員会の聴取、12 月 3 日に上院銀行委員会で公開証言の予定</li>
           </ul>
         </div>
-        <div class="why-it-matters">💡 プラットフォームの API や無料枠に事業を載せるなら、成長が鈍った時に条件が悪化する前提で、乗り換え先とデータの持ち出し経路を確保しておきたい。</div>
+        <div class="why-it-matters">💡 Nvidia 製 GPU に依存する計画なら、12 月 3 日の公聴会で輸出規制への対応が示されるまで、調達や価格の前提を固定しすぎないほうがよい。</div>
         <div class="meta">
-          <span>O'Reilly Radar</span>
-          <span class="engagement">▲ 393</span>
-          <span>⏱ 15 min read</span>
-          <span>2026-11-20</span>
+          <span>CNBC</span>
+          <span class="engagement">▲ 2331</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-11-23</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://ladybird.org/posts/alpha/">ゼロから作るブラウザ Ladybird がアルファ版に到達。macOS と Linux 向けに配布開始</a></h3>
+        </div>
+        <div class="summary">Andreas Kling 氏は 11 月 23 日、独自エンジンで開発してきた Ladybird がアルファ段階に入ったと発表した。これまではソースからのビルドが必要だったが、今後は macOS と Linux 向けのバイナリをローリング形式で配布し、自動更新で追従できる。「動かないサイトがあり、時々クラッシュする」と明記しており、セキュリティについても現時点で約束はしないとしている。</div>
+        <div class="key-points">
+          <ul>
+            <li>配布は macOS と Linux。更新は自動のローリングチャンネルで、ビルド作業は不要になった</li>
+            <li>ブラウザ内から壊れたサイトを報告でき、クラッシュ後は送信前にレポート内容を確認できる</li>
+            <li>WebDriver と Firefox DevTools プロトコルに対応。脆弱性は SECURITY.md の窓口へ報告する</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 Web 互換性のテストに使うなら、日常のブラウザの代わりではなく検証用の追加ブラウザとして試すのが現実的だ。</div>
+        <div class="meta">
+          <span>Ladybird</span>
+          <span class="engagement">▲ 1598</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-11-23</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-data">Data</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/postgresql_19repackio.html">PostgreSQL 19 が正式リリース。Autovacuum の並列化と REPACK (CONCURRENTLY) を追加</a></h3>
+        </div>
+        <div class="summary">PostgreSQL 19 の正式版が公開された。9 月下旬のベータ 4 で多数のバグが見つかり新機能が取り下げられたため、リリースは延期されていた。Autovacuum は並列ワーカーで動き、新しいスコアリングで処理するテーブルの優先度も決める。稼働中でも使える REPACK (CONCURRENTLY) と、負荷に応じて増減する I/O ワーカーも入った。</div>
+        <div class="key-points">
+          <ul>
+            <li>REPACK (CONCURRENTLY) は他の処理をブロックせずにテーブルとインデックスを再編成する</li>
+            <li>外部キー検査の改善で、テストではバルクインサートが約 2 倍高速化</li>
+            <li>pg_plan_advice 拡張で、結合順序・結合方式・スキャン方法・並列実行をプランナーに指示できる</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 bloat 対策に pg_repack などの外部ツールを使っている場合、標準の REPACK への置き換えを検証する価値がある。ただし延期の経緯があるため、本番では初期のマイナーリリースを待つ判断もありうる。</div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-11-23</span>
         </div>
       </div>
     </div>
@@ -139,85 +139,85 @@
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://bernsteinbear.com/blog/inside-pypy-first-contact-with-rpython/">Inside PyPy: RPython に初めて触れる</a></h3>
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://stalw.art/blog/microsoft-exchange-replacement/">Stalwart 1.2.0、Microsoft Exchange のドロップイン代替を名乗り MAPI / EWS / ActiveSync に対応</a></h3>
         </div>
-        <div class="summary">Max Bernstein 氏が PyPy の実装言語 RPython で小さなプログラムを書き、C へコンパイルするまでを記録した。RPython は型を解析して関数を単相化し、C を生成する。文字列と整数の両方を渡すと UnionError になり、<code>@specialize.argtype(0)</code> で型ごとのコピーを作らせて解消する。Deegen や Truffle との比較も載る。</div>
+        <div class="summary">オープンソースのメールサーバー Stalwart 1.2.0 が、Exchange のクライアント向けプロトコルに対応した。Community 版（AGPL）に含まれ、Outlook、Apple Mail、Thunderbird などから接続できる。公開フォルダーやアーカイブメールボックスは非対応で、認証は NTLM や Kerberos ではなくパスワードか OAuth になる。</div>
         <div class="key-points">
           <ul>
-            <li>例題の変換に約 18.0 秒。うち database_c が 10.6 秒を占め、変更のたびに 30 秒以上かかると VM 開発では苦しいと指摘</li>
-            <li>RPython は PyPy の実装詳細で、エラーメッセージや高速コンパイルなど他の VM ツールキットと比べた課題を列挙</li>
+            <li>MAPI over HTTP、EWS（Exchange 2010 SP2〜2016）、ActiveSync 14.1 / 16.1、Autodiscover に対応。追加コードは約 20 万行で、Cargo の <code>exchange</code> フィーチャーで有効化</li>
+            <li>新しい非同期 FoundationDB クライアントは点読み出しスループットが従来の 4.5〜6.9 倍、中央値レイテンシは 5〜7 分の 1</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Max Bernstein</span>
-          <span class="engagement">▲ 61</span>
-          <span>⏱ 12 min read</span>
-          <span>2026-11-19</span>
+          <span>Stalwart</span>
+          <span class="engagement">▲ 321</span>
+          <span>⏱ 8 min read</span>
+          <span>2026-11-23</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://alperenkeles.com/posts/vocab-for-testing/">テストのためのより良い語彙: unit / integration をやめて 4 軸で分類する</a></h3>
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://yossarian.net/til/post/github-actions-accepts-invalid-yaml/">GitHub Actions は YAML 仕様に反する記述を受理する。zizmor 作者が報告</a></h3>
         </div>
-        <div class="summary">「unit」「integration」という分類は曖昧で、何をすべきかの指針にならないと論じる記事。テストを対象範囲、検証する仮説、オラクル、入力の与え方の 4 軸で分けると、手元のリソースに応じて組み合わせを選べると提案する。筆者はランダムテストが専門で、記事も偏りを認めている。</div>
+        <div class="summary">ブロックマッピング内の複数行フロー形式文字列で、閉じ行のインデントが親キーと同じ深さでも Actions は受理する。YAML 1.2.2 はフローノードを親より深くインデントするよう求めており、準拠パーサーはこのワークフローを拒否する。作者の zizmor もこれで失敗した。</div>
         <div class="key-points">
           <ul>
-            <li>オラクルは人の判断、具体例、スナップショット、インライン表明、プロパティに分類。往復変換や等価な実装同士の比較がプロパティの例</li>
-            <li>入力の与え方は静的解析、列挙、ファジング、プロパティテスト、障害注入つきの決定論的シミュレーションまで整理</li>
+            <li>GitHub のパーサーは YamlDotNet 5.3.0（2018 年）と推測され、最新の 18.1.0 にも同じバグがある。2020 年の修正は二重引用符のみで、単一引用符は守りから漏れた</li>
+            <li>tree-sitter-yaml 側の互換対応は誤りとして取り消された</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Alperen Keleş</span>
-          <span class="engagement">▲ 111</span>
-          <span>⏱ 10 min read</span>
-          <span>2026-11-21</span>
+          <span>yossarian.net</span>
+          <span class="engagement">▲ 81</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-11-22</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/dhhomarchy_457applewebms_office.html">DHH 氏の Linux 環境 Omarchy 4.5 が Apple Silicon とフローティングウィンドウに対応</a></h3>
+        </div>
+        <div class="summary">Omarchy 4.5 は、従来のタイル型に加えて通常のフローティング型マルチウィンドウを選べるようになった。M1〜M3 の Mac で macOS とのデュアルブートが可能になり、Nvidia N1X 搭載の ARM 機にも対応する。Web 版 Office を専用ウィンドウのアプリとして使える。</div>
+        <div class="key-points">
+          <ul>
+            <li>新しい F1 インストーラーは約 940 パッケージを個別に入れず、ビルド済みルートイメージを展開してインストール時間を約半分にした。AMD 搭載ノートで 7 秒の例もある</li>
+            <li>Claude、Codex、Copilot、Gemini、Grok など 23 種類の AI エージェントをスキルファイル経由で統合</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span class="engagement">🔖 81</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-11-23</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
           <span class="tag tag-infra">Infra</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://www.jeffgeerling.com/blog/2026/i-joined-the-ntp-pool/">Jeff Geerling 氏、NTP Pool に参加。Stratum 1 を隠して Stratum 2 を公開する構成</a></h3>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://aws.amazon.com/jp/blogs/news/test-your-applications-against-aws-locally-with-aws-emulator/">AWS Emulator で AWS 向けアプリをローカルでテストする</a></h3>
         </div>
-        <div class="summary">Geerling 氏は、GNSS で時刻を取る自宅の Stratum 1 サーバーを公開せず、VPS 上の Stratum 2 サーバーを WireGuard 経由でそこに同期させて NTP Pool に参加した。過去に自宅 IP へ約 1 カ月の DDoS を受けた経験が構成の動機だ。</div>
+        <div class="summary">AWS の公式ブログが、AWS Emulator を使って AWS 上で動かすアプリケーションをローカル環境に対してテストする手順を紹介している。クラウド環境を用意せずに動作確認できるため、開発ループの短縮に使える。</div>
         <div class="key-points">
           <ul>
-            <li>Raspberry Pi の NIC の PTP ハードウェアクロックを GNSS の PPS で調整し、ts2phc で UTC から数十ナノ秒以内に収め、システム時計は約 1 マイクロ秒の精度</li>
-            <li>11 月 16 日夜、無人アップグレードで入った新カーネルの再起動で VPS が停止。Pool は復帰後 6〜12 時間かかるため、再起動は手動に変更</li>
+            <li>テスト対象のアプリを、本物の AWS ではなくローカルのエミュレーターに向けて実行する</li>
+            <li>はてなブックマークでは 92 ブックマークを集めた</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Jeff Geerling</span>
-          <span class="engagement">▲ 125</span>
-          <span>⏱ 9 min read</span>
-          <span>2026-11-22</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-product">Product</span>
-          <span class="content-type">👀 注目</span>
-          <h3><a href="https://osw-alliance.net/en/">Open Social Web Alliance: 分散型ソーシャルの基盤を共同運営する連合が発足へ</a></h3>
-        </div>
-        <div class="summary">Fediverse と ATmosphere を含む分散型の Open Social Web について、中核インフラの構築・運営、ガバナンスの共有、公的・民間資金の確保を目指す連合の告知ページ。市民団体、研究、企業、メディアなど幅広い関係者を想定するが、具体的な参加者名は記載がない。</div>
-        <div class="key-points">
-          <ul>
-            <li>Fediverse は約 1,300 万アクティブユーザー・4.2 万超のインスタンス、ATmosphere は約 4,300 万の登録アカウント。2028 年までに 1 億ユーザー超が目標</li>
-            <li>2026 年秋に設立サミットで憲章を採択し、2027 年春までに初回の資金調達を狙う計画</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>Open Social Web Alliance</span>
-          <span class="engagement">▲ 218</span>
-          <span>⏱ 3 min read</span>
-          <span>2026-11-22</span>
+          <span>AWS</span>
+          <span class="engagement">🔖 92</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-11-13</span>
         </div>
       </div>
     </div>
@@ -227,63 +227,61 @@
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-ai">AI</span>
-          <span class="content-type">📜 解説</span>
-          <h3><a href="https://qiita.com/yamamoto_a_genee/items/76562c5c80032ad9e962">約 150 行の Python で作る Agent Harness: Agent = LLM + Harness を実装で理解する</a></h3>
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://zenn.dev/koukyosyumei/articles/31c8fcf4da45b7">著名な Rust 製 OSS を Lean 4 で形式検証してみたら、めちゃめちゃバグが見つかった話</a></h3>
         </div>
-        <div class="summary">LLM の出力を実際の操作に変える実行・制御層を「ハーネス」と定義し、ツール、コンテキスト管理、状態、実行環境、計画、ガードレール、可観測性の 7 要素に整理した記事。標準ライブラリだけの最小実装が付く。許可リストはセキュリティ境界ではなく、信頼できないコードは隔離環境で動かすべきだと注意している。</div>
+        <div class="summary">有名な Rust 製 OSS を Lean 4 で形式検証し、多数のバグが見つかったという Zenn の記事。コンパイルが通るだけでは確認できない仕様上の不整合を、証明の過程で洗い出している。</div>
         <div class="key-points">
           <ul>
-            <li>ツールは read_file / write_file / run_command の 3 つ。出力は 4,000 文字で切り、エラーは末尾に出やすいので末尾を残す。1 回の実行は最大 15 ステップ、コマンドは 60 秒でタイムアウト</li>
-            <li>API キー不要の偽クライアントで動く単体テスト 12 本つき</li>
+            <li>対象は Rust 製の著名な OSS で、検証言語に Lean 4 を使用</li>
+            <li>コンパイルが通るコードでも、形式仕様に照らすと不整合が出る</li>
           </ul>
         </div>
         <div class="meta">
-          <span>Qiita</span>
-          <span class="engagement">🔖 74</span>
+          <span>Zenn</span>
+          <span>⏱ 10 min read</span>
+          <span>2026-11-23</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://zenn.dev/kaorun343/articles/klotski-solver-optimization">箱入り娘ソルバーを約 9,400 倍高速化してもらった</a></h3>
+        </div>
+        <div class="summary">箱入り娘（スライディングパズル）のソルバーを、AI に最適化させて約 9,400 倍高速化した記録。人が書いたベースラインに対し、AI がどのような改善を重ねたかを追う。</div>
+        <div class="key-points">
+          <ul>
+            <li>最適化の結果、実行速度は約 9,400 倍</li>
+            <li>コーディングエージェントによる性能改善の実例</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
           <span>⏱ 8 min read</span>
-          <span>2026-11-22</span>
+          <span>2026-11-23</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
           <span class="tag tag-infra">Infra</span>
-          <span class="content-type">👀 注目</span>
-          <h3><a href="https://dev.classmethod.jp/articles/new-aws-signup/">AWS のアカウント登録が新方式に。IAM ユーザーも root もない「プロジェクト」型</a></h3>
-        </div>
-        <div class="summary">新しい AWS サインアップでは AWS Builder ID が自動で作られ、アカウントではなくプロジェクト単位で使う形になる。従来のアカウントが必要なら「advanced features」を選ぶ。リージョンは連絡先の国から us-east-2、eu-north-1、ap-southeast-2 のいずれかに自動で決まる。筆者は個人や小規模な試用向けで、企業利用には向かないと結論する。</div>
-        <div class="key-points">
-          <ul>
-            <li>IAM ユーザーにコンソールアクセスを付けられず、メンバーは Builder ID の招待で追加。root に MFA はなく、MFA は Builder ID 側で設定</li>
-            <li>GuardDuty など多くのサービスが使えず、IAM role manager が自動作成するロールが CloudFormation を妨げる場合がある</li>
-          </ul>
-        </div>
-        <div class="meta">
-          <span>DevelopersIO</span>
-          <span class="engagement">🔖 24</span>
-          <span>⏱ 6 min read</span>
-          <span>2026-11-22</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="tag tag-frontend">Frontend</span>
           <span class="content-type">📜 解説</span>
-          <h3><a href="https://zenn.dev/ryota_09/articles/nextjs-suspense-streaming-lambda-web-functions">Next.js のストリーミングは Lambda Web Functions で動くか</a></h3>
+          <h3><a href="https://zenn.dev/maruloop/articles/7ff108e29741b5">Google が実践する STAMP/STPA とは何か？ 私たちの SRE にも使えるのか</a></h3>
         </div>
-        <div class="summary">Next.js の Suspense ストリーミングが Lambda Web Functions で動くかを実測した記事。全条件で段階的に表示され、失敗は 0 件だった。Vercel とのタイミング差はほぼなく、差が出たのはコールドスタートだ。</div>
+        <div class="summary">Google の SRE が実践する安全性分析手法 STAMP/STPA を解説し、一般的な SRE の現場にも適用できるかを検討する記事。障害を部品の故障ではなくシステム全体の制御構造の問題として捉える。</div>
         <div class="key-points">
           <ul>
-            <li>東京の EC2 からのウォーム時、最初の Suspense 内容は約 1,003ms、2 つ目は約 3,004ms（Vercel は 1,021ms / 3,021ms）。CloudFront 経由 2,160 回でも TTFB の増加は約 10〜40ms</li>
-            <li>要設定: <code>output: "standalone"</code>、AWS_LAMBDA_HTTP_ENDPOINT を HOSTNAME / PORT に変換する index.js、CloudFront の AllViewerExceptHostHeader（Host 転送は 404 になる）。コールドスタートの TTFB 中央値は約 1,234ms</li>
+            <li>STAMP/STPA はシステムの相互作用から危険な状態を洗い出す手法</li>
+            <li>自社の SRE への適用可否を検討</li>
           </ul>
         </div>
         <div class="meta">
           <span>Zenn</span>
-          <span>⏱ 7 min read</span>
-          <span>2026-11-22</span>
+          <span>⏱ 8 min read</span>
+          <span>2026-11-23</span>
         </div>
       </div>
     </div>
@@ -293,44 +291,63 @@
 
       <div class="card">
         <div class="card-header">
-          <span class="tag tag-dev">Dev</span>
+          <span class="tag tag-oss">OSS</span>
           <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://github.com/gulivan/worker755">Worker 755: 自分が LLM マネージャーの「サブエージェント」になるブラウザゲーム</a></h3>
+          <h3><a href="https://github.com/zed-industries/gpui">Zed の GUI フレームワーク GPUI が独立リポジトリに</a></h3>
         </div>
-        <div class="summary">AI マネージャーがプレイヤーを自分のサブエージェントと信じ込み、90 秒の制限つきでターミナル経由のタスクを割り振る MIT ライセンスのゲーム。結果を確認して修正指示や事故報告を出し、最後に勤務評価を書く。エージェントを受ける側の視点を体験できる。</div>
+        <div class="summary">Zed Industries が、Zed エディターの UI 基盤である Rust 製フレームワーク GPUI を専用リポジトリとして切り出した。エディター本体と切り離され、単体で利用しやすくなる。</div>
         <div class="key-points">
           <ul>
-            <li>マネージャー役に Claude / GPT / Gemini / DeepSeek / GLM / Kimi を使え、OpenRouter などの自前キーや Ollama・llama.cpp 接続にも対応</li>
-            <li>Node 24 以上か Docker で動作。評価はリンクで共有可能</li>
+            <li>リポジトリは zed-industries/gpui</li>
+            <li>Hacker News で 192 ポイント</li>
           </ul>
         </div>
         <div class="meta">
           <span>GitHub</span>
-          <span class="engagement">▲ 267</span>
-          <span class="engagement">⭐ 127</span>
+          <span class="engagement">▲ 192</span>
           <span>⏱ 2 min read</span>
-          <span>2026-11-22</span>
+          <span>2026-11-23</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://community.nlnetlabs.nl/t/release-roto-v0-14-0/3511">Roto v0.14.0 リリース</a></h3>
+        </div>
+        <div class="summary">NLnet Labs が、Rust 向けの組み込みスクリプト言語 Roto の v0.14.0 を公開した。詳細は NLnet Labs コミュニティのリリース告知にまとまっている。</div>
+        <div class="key-points">
+          <ul>
+            <li>バージョンは v0.14.0</li>
+            <li>Lobsters で 9 ポイント</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>NLnet Labs</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-11-23</span>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
           <span class="tag tag-ai">AI</span>
-          <span class="content-type">🛠 ツール</span>
-          <h3><a href="https://www.gpupartner.com/blog/beginners-guide-local-ai-inkling-qwen-unsloth">Inkling・Qwen・Unsloth で始めるローカル AI の入門ガイド</a></h3>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://huggingface.co/nari-labs/Qwen3.8-27B-NariQ-GGUF">NariQ: BF16 相当の Qwen3.8-27B を 10 GB のファイルに</a></h3>
         </div>
-        <div class="summary">Unsloth Desktop で自宅 PC に家族向けのローカル AI チャットを立てる手順と、VRAM 別のモデル選びをまとめた英語ガイド。設定は 10〜15 分で、LAN アクセス機能を使えば同じネットワークの他端末からも使える。</div>
+        <div class="summary">nari-labs が、Qwen3.8-27B を BF16 並みの品質のまま約 10 GB の GGUF ファイルに量子化した NariQ を Hugging Face で公開した。ローカル推論の VRAM 要件を下げる用途に向く。</div>
         <div class="key-points">
           <ul>
-            <li>Inkling 2 Mini は 26.4B パラメータの MoE（アクティブ 5.4B）、Apache 2.0、100 万トークン文脈。4bit 版の GGUF は 17.6GB で、24GB 以上の VRAM が目安</li>
-            <li>MoE は必要な部分だけ GPU に載せ残りをシステム RAM に置けるため、16GB の RTX 5060 Ti で Qwen3.6-35B が約 47 tokens/s</li>
+            <li>27B モデルが約 10 GB の GGUF に収まる</li>
+            <li>Hacker News で 143 ポイント</li>
           </ul>
         </div>
         <div class="meta">
-          <span>GPUPartner</span>
-          <span class="engagement">▲ 179</span>
-          <span>⏱ 9 min read</span>
-          <span>2026-11-22</span>
+          <span>Hugging Face</span>
+          <span class="engagement">▲ 143</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-11-23</span>
         </div>
       </div>
     </div>
@@ -339,42 +356,42 @@
       <div class="section-title">🔗 Quick Links</div>
 
       <div class="quick-link">
-        <span class="tag tag-product">Product</span>
-        <a href="https://smhn.info/202611-microsoft-link-to-windows-extend-display-android-second-screen">Microsoft の新機能で Android を Windows PC のセカンドスクリーンに</a>
-        <span class="quick-summary">— Link to Windows の拡張として、Android 端末を追加ディスプレイとして使える。</span>
-        <span class="meta">smhn.info</span>
-        <span class="engagement">🔖 45</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-product">Product</span>
-        <a href="https://posfie.com/@petaritape/p/tgzVdbL">Adobe Express Photos が同意なく PC にインストールされるとの報告</a>
-        <span class="quick-summary">— Win+Shift+S のスクリーンショット動作を置き換える問題と回避策がまとまっている。</span>
-        <span class="meta">Posfie</span>
-        <span class="engagement">🔖 97</span>
-      </div>
-
-      <div class="quick-link">
         <span class="tag tag-ai">AI</span>
-        <a href="https://note.com/yamac_/n/n198bdc344c64">Docker Sandboxes で Claude Code を自律的かつ安全に動かす</a>
-        <span class="quick-summary">— コンテナで隔離した環境でエージェントを自律実行させる方法の解説。</span>
-        <span class="meta">note</span>
-        <span class="engagement">🔖 47</span>
+        <a href="https://z.ai/blog/glm-5.4">GLM-5.4: 初のループ型トランスフォーマーで汎用コーディングへ</a>
+        <span class="quick-summary">— Z.ai の新モデル発表。</span>
+        <span class="meta">Z.ai</span>
+        <span class="engagement">▲ 1087</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://blog.kagi.com/kagi-mail-public-beta">Kagi Mail がパブリックベータに</a>
+        <span class="quick-summary">— Kagi のメールサービスが公開ベータ段階へ。</span>
+        <span class="meta">Kagi</span>
+        <span class="engagement">▲ 385</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://arm.jonpalmisc.com/">Arm の要請により、このサイトは 2026 年 12 月 4 日に閉鎖される</a>
+        <span class="quick-summary">— Arm 関連の資料サイトが権利者の求めで閉鎖予告。</span>
+        <span class="meta">jonpalmisc.com</span>
+        <span class="engagement">▲ 944</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://signal.org/blog/protecting-your-privacy/">Signal is Serious About Protecting Your Privacy</a>
+        <span class="quick-summary">— Signal がプライバシー保護の方針を公式ブログで説明。</span>
+        <span class="meta">Signal</span>
       </div>
 
       <div class="quick-link">
         <span class="tag tag-dev">Dev</span>
-        <a href="https://zenn.dev/karamage/articles/73027ee36796dc">【TLA+】AI にテストケースを書かせるな。ルールを書け</a>
-        <span class="quick-summary">— テストを列挙させず、仕様のルールを TLA+ で記述させる方針を説く。</span>
-        <span class="meta">Zenn</span>
-      </div>
-
-      <div class="quick-link">
-        <span class="tag tag-infra">Infra</span>
-        <a href="https://www.nytimes.com/2026/11/22/us/delta-flight-delays-system-outage.html">アトランタ経由のデルタ航空便が自動システムの不具合で全便遅延</a>
-        <span class="quick-summary">— 運航を支える自動システムの障害が、ハブ空港の全便に波及した。</span>
-        <span class="meta">The New York Times</span>
-        <span class="engagement">▲ 94</span>
+        <a href="https://reiver.link/atproto/falsehoods-programmers-believe/">Falsehoods Programmers Believe About ATProto</a>
+        <span class="quick-summary">— ATProto 実装で陥りやすい思い込みの一覧。</span>
+        <span class="meta">reiver.link</span>
+        <span class="engagement">▲ 46</span>
       </div>
     </div>
 
