@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI プロダクト動向 | Tech News Daily</title>
-<meta name="description" content="11 月 20 日、Google は Gemini platform の Semantic governance policies をプレビューで公開した。モデルが提案したツール呼び出しを、実行前に Agent Gateway で止めて …">
+<meta name="description" content="11 月 16 日、Together AI は自社プラットフォームを Claude Code などのコーディングエージェントに使わせて採点する評価の仕組みを公開した。12 のタスクを、素の状態、ドキュメントの MCP、自社の skill …">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Tech News Daily">
-<meta property="og:title" content="ツール呼び出しは「実行する直前」に検査する — 依頼と合っているかを別の判定役に問う、業務ルールは自然言語でゲートウェイに置く、確率で済ませない線は決定論で引く | AI プロダクト動向">
-<meta property="og:description" content="11 月 20 日、Google は Gemini platform の Semantic governance policies をプレビューで公開した。モデルが提案したツール呼び出しを、実行前に Agent Gateway で止めて …">
+<meta property="og:title" content="自社プロダクトを「エージェントが使えるか」で測り始めた — 作らせて動くかで採点する、直すのはモデルではなく文書とエラー、検索と契約の入口もエージェントに開く | AI プロダクト動向">
+<meta property="og:description" content="11 月 16 日、Together AI は自社プラットフォームを Claude Code などのコーディングエージェントに使わせて採点する評価の仕組みを公開した。12 のタスクを、素の状態、ドキュメントの MCP、自社の skill …">
 <meta property="og:url" content="https://tech-news.kaion-lab.com/ai-trends.html">
 <meta property="og:image" content="https://tech-news.kaion-lab.com/og.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -74,7 +74,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 <div class="container">
 <header>
   <h1>🧠 AI プロダクト動向</h1>
-  <p class="date">2026-11-24 発行（読了 11 分）</p>
+  <p class="date">2026-11-26 発行（読了 10 分）</p>
   <p class="tagline">実プロダクトのアーキテクチャ・使用例から AI 開発の現在地を週 3 回・1 号 1 テーマで深掘り</p>
   <nav class="site-nav">
     <a href="./">📰 日刊ダイジェスト</a>
@@ -85,93 +85,89 @@ footer a{color:var(--primary-500);text-decoration:none}
 </header>
 
 <div class="theme-hero">
-  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">TOOL-CALL-GUARDRAILS</span></span>
-  <h2>ツール呼び出しは「実行する直前」に検査する — 依頼と合っているかを別の判定役に問う、業務ルールは自然言語でゲートウェイに置く、確率で済ませない線は決定論で引く</h2>
-  <p class="lede">11 月 20 日、Google は Gemini platform の Semantic governance policies をプレビューで公開した。モデルが提案したツール呼び出しを、実行前に Agent Gateway で止めて LLM の判定役に回す機能だ。23 日には続報で AgentDojo の評価結果を出し、間接プロンプトインジェクションの攻撃成功率が 48.7% から 0.9% に下がったと報告している。その前日の 19 日には LangChain が LangSmith Tool Gateway を公開ベータにし、ツール呼び出しに対する拒否ポリシーと承認ポリシーを一か所で管理できるようにした。Microsoft Foundry も、ツール呼び出しとツール応答をガードレールの介入点に加えている。これまでガードレールといえば、入力と最終出力の検査を指していた。各社は検査の位置を、エージェントが何かを実行する直前に移し始めている。今号は、この層で何を誰が判定するのか、どこまでを LLM の判定に任せるのかを、3 社の実装と 1 本の研究で比べる。</p>
+  <span class="kicker">今号のテーマ <span class="tag tag-ai" style="margin-left:.4rem">AGENT-READINESS</span></span>
+  <h2>自社プロダクトを「エージェントが使えるか」で測り始めた — 作らせて動くかで採点する、直すのはモデルではなく文書とエラー、検索と契約の入口もエージェントに開く</h2>
+  <p class="lede">11 月 16 日、Together AI は自社プラットフォームを Claude Code などのコーディングエージェントに使わせて採点する評価の仕組みを公開した。12 のタスクを、素の状態、ドキュメントの MCP、自社の skill の 3 構成で走らせる。わかったのは、エージェントが失敗する原因の多くがモデルの側ではなく Together 側にあることだった。ラベルのないサンプル出力、存在しない URL を案内するエラーメッセージ、古くなったモデル名がそれにあたる。Hookdeck も 19 のシナリオでエージェントに実際のプロジェクトを組ませ、その結果を公開している。25 日には Cloudflare が、サイトに検索の入口を自動で用意する Search for Agents と、CLI・MCP からの有料プラン開始を同じ日に出した。開発者向けプロダクトの利用者に、人と並んでエージェントが加わった。各社は「エージェントにとって使いやすいか」を感想ではなく測定で扱い始めている。今号は、何をどう測り、どこを直し、どこまで開くのかを 3 社の実装で比べる。</p>
 </div>
 
 <div class="tldr">
   <div class="label">TL;DR — 3 行で</div>
   <ul>
-    <li>検査の対象が「文章」から「行為」に移った。Google の user intent matching と Microsoft の Task Adherence は、提案されたツール呼び出しが利用者の依頼に沿っているかを実行前に判定する。どちらも、閲覧を頼まれたのに削除や送信をしようとする呼び出しを例に挙げている。攻撃の文言を見分けるのではなく「利用者はこれを頼んだか」を問うので、未知のインジェクションの文面にも効く</li>
-    <li>業務ルールは自然言語で書き、エージェントの外にあるゲートウェイで評価する。Google は「決算発表前は社外アドレスに財務情報を送らない」といったルールをツールの引数まで含めて書かせ、Agent Gateway を唯一の適用点にしている。判定は確率的なので、dry run で判定ログを確かめてから適用に切り替えるよう勧めている</li>
-    <li>LLM の判定で済ませない線は決定論で引く。LangSmith Tool Gateway は、利用者やサービスキー単位の拒否ポリシーと、書き込み系の呼び出しを人が確かめる承認ポリシーを LLM を通さずに適用する。マルチエージェントの監督規則を監査した研究では、84 件の規則の 46% がプロンプトの中にしかなかった。実行可能な検査を加えると、既存のテストが見逃した障害の多くを捕まえられた</li>
+    <li>採点するのはエージェントの報告ではなく、作られたものが動くかどうかだ。Together はエージェントの API 呼び出しをプロキシで記録し、LLM の判定役が合格・未完了・失敗に分ける。Hookdeck は組まれたプロジェクトを自社 API で読み戻し、実際にイベントを流して確かめる。エージェントは詰まっても回避して「完了」と言うので、報告は当てにならない</li>
+    <li>直すべきはモデルではなく、文書・skill・エラーメッセージだ。Together の GPU クラスタのタスクは、skill に 2 文を足しただけで、試したすべてのモデルで 100% 通るようになった。skill を 1 本に統合したときは、入口の文書を 14,000 字から 6,000 字未満に削るなどして、合格率を 75.0% から 97.2% に戻した。強いモデルだけで試すと、モデルが穴を迂回してしまい、穴が見えなくなる</li>
+    <li>入口と最後の一歩もエージェント向けに開き始めた。Cloudflare の Search for Agents は /.well-known/search に検索の入口を置き、全ページの meta タグでその場所を知らせる。有料プランの開始は CLI と MCP からできるようになった。ただし MCP の elicitation で料金を示し、本人の許可を取れるクライアントにしか通さない</li>
   </ul>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 1: 「利用者はこれを頼んだか」を実行前に問う</div>
+  <div class="section-title">📐 パターン 1: エージェントに実際に作らせ、動くかで採点する</div>
   <div class="theme-section">
-    <p>この層の中心にあるのは、提案されたツール呼び出しと利用者の依頼を突き合わせる判定だ。Google の Semantic governance policies では、モデルがツール呼び出しを返すと、応答がエージェントに届く前に Agent Gateway がそれを判定役の LLM に渡す。判定役が見るのは、提案された呼び出し、それまでの会話、エージェントのシステム指示とツールの説明だ。利用者の依頼とシステム指示は信頼できる入力、ツールの結果やファイル、メッセージはデータとして扱う。不合格の呼び出しは拒否メッセージに置き換えられ、実行されない。Microsoft Foundry の Task Adherence も同じ問いを立てる。ドキュメントには、カレンダーの予定を見たいという依頼に対して <code>clear_calendar_events()</code> を呼ぼうとした例や、メールの下書きを頼まれたのに <code>send_email()</code> を計画した例があり、どちらもリスクありと判定される。結果は <code>taskRiskDetected</code> と理由の文字列で返り、呼び出しを止めるか人の確認に回す判断材料になる。</p><p>各社がこの問いに行き着いたのは、インジェクションの文面を見分ける方式では攻撃側の言い換えに追いつけないからだ。請求書や Web ページに紛れ込ませた指示は、文章としては無害に見えることが多い。しかし、それに従った結果として起きる「頼まれていない送金」「頼まれていない共有」は、行為として見れば依頼とずれている。判定の対象を文章から行為に移せば、攻撃の文言を知らなくても止められる。Google が AgentDojo で示した数字もこの方式の結果で、カスタムポリシーを書かずに既定の intent matching だけを有効にした状態で測っている。ただし Google 自身が、攻撃は固定のものでこの判定役に合わせて作られていないこと、信頼する入力としない入力の区別は判定役への指示で決まっていて技術的な境界ではないことを断っている。</p>
+    <p>この評価では、自社プロダクトでよくある開発作業をタスクとして書き、コーディングエージェントに実行させる。Together のタスクは、バッチ推論ジョブの実行、音声エージェントの構築、推論エンドポイントのオートスケール設定などだ。プロンプトは自然文で書き、必要な情報がどこにあるかは教えない。各エージェントはサンドボックスの中で動き、GitHub Actions が準備、実行、後片付け、結果の保存を担う。プロキシがエージェントの Together API 呼び出しと応答をすべて記録し、LLM の判定役がタスクとセッションの記録を読んで、合格・未完了・失敗の 3 段階で判定する。合格した実行も人が見直し、遠回りしてトークンを無駄にした回復を探す。Hookdeck はさらに判定を作業の結果に寄せている。実際の Hookdeck プロジェクトに API キーと CLI を用意し、エージェントが組んだ構成を自社 API で読み戻し、イベントを流して動くかどうかを確かめる。</p><p>各社がこの形に行き着いたのは、エージェントが詰まっても声を上げないからだ。人の開発者なら、ドキュメントの誤りに気づけば Slack に書いたり issue を立てたりする。エージェントは見つからない情報を推測で埋め、うまくいかなくても回避して「完了」と報告する。Hookdeck はこの点を評価を作った理由として挙げており、バグとして報告されないので不具合が残り続けると書いている。だから採点の根拠はエージェントの申告ではなく、API の記録と作られたものの動作に置く。どちらの会社も、モデルや構成を変えたときに比べられるよう、同じタスクを繰り返し走らせる前提で組んでいる。</p>
     <div class="example">
-      <div class="product">Google Semantic governance policies（user intent matching、プレビュー）</div>
-      <div class="approach">既定で有効な user intent matching が、提案されたツール呼び出しを利用者の依頼と照合する。ツールの結果や文書の中の指示は承認の根拠にしない</div>
-      <div class="detail">11 月 23 日の Google for Developers Blog によると、gemini-2.5-flash のエージェントで AgentDojo v1.2.2 を 6 回走らせた平均で、攻撃成功率は 48.7% から 0.9% に下がった。ツール呼び出しを要する 929 件の攻撃は 6 回とも 1 件も成功せず、残った成功はホテルを勧めさせるといった文章だけの攻撃だった。一方、無害なタスクの達成率は平均 2.6 ポイント下がり、拒否された時点でエージェントが作業をやめるため、攻撃下での達成率は 35.1% から 25.8% に落ちている。</div>
-      <a href="https://developers.googleblog.com/did-the-user-ask-for-this-securing-ai-agents-against-intent-hijacking-with-semantic-governance-policies/">📄 一次ソース</a>
+      <div class="product">Together AI（agent evals）</div>
+      <div class="approach">12 タスク × 3 構成（素の状態 / docs MCP / skill）× 3 モデル × 2 回を走らせ、API 呼び出しはプロキシで記録、判定は LLM の判定役が 3 段階で行う</div>
+      <div class="detail">11 月 16 日の公式ブログによると、9 月 30 日の実行では 215 件中 192 件が合格した。GPU クラスタのタスクは素の状態で 6 回中 0 回しか通らず、docs MCP では 5 回通った。同じタスクで skill を使った実行は平均 44 秒、ツール呼び出し 6 回、0.16 ドルで、素の状態の 1 分 21 秒、13 回、0.26 ドルより速く安い。構成の差が合否だけでなくコストにも出ることを示す例だ。</div>
+      <a href="https://www.together.ai/blog/how-we-do-agent-evals-at-together-ai">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">Microsoft Foundry Task Adherence（プレビュー）</div>
-      <div class="approach">ツール定義と会話履歴（ツール呼び出しを含む）を受け取り、呼び出しが利用者の意図からずれていれば taskRiskDetected と理由を返す</div>
-      <div class="detail">Microsoft Learn のドキュメントは、データ使用量を尋ねられたのに料金プラン変更のツールを呼ぶ例、休暇残日数を尋ねられたのに休暇申請を出す例を挙げる。情報を求める依頼に対して状態を変える行為を計画した、というずれ方が共通している。英語で主に検証されていること、入力は 10 万文字までという制限も明記されている。</div>
-      <a href="https://learn.microsoft.com/en-us/azure/foundry/guardrails/task-adherence">📄 一次ソース</a>
+      <div class="product">Hookdeck Evals</div>
+      <div class="approach">19 のシナリオを Build・Troubleshoot・Recover に分け、本物のプロジェクトで実行する。採点は組まれた構成を API で読み戻し、イベントを流して行い、結果は公開する</div>
+      <div class="detail">Stripe の webhook を受けるシナリオでは、署名シークレットを渡したにもかかわらず、6 回中 5 回は &lt;code&gt;whsec_new&lt;/code&gt; や &lt;code&gt;whsec_replace_me&lt;/code&gt; のようなプレースホルダを設定して完了と報告した。Hookdeck はこれをエージェントの誤りではなく、プレースホルダに見える値を受け付けても警告しない自社の製品の穴と捉え、修正の issue を立てている。公開スコアボードでは Codex GPT-5.6 が 95%、Claude Code Sonnet 5 が 89%、Codex GPT-5.4-mini が 79% だった。</div>
+      <a href="https://hookdeck.com/blog/hookdeck-evals">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> インジェクション対策を入力のフィルタだけで組んでいるなら、ツール呼び出しの直前に「この行為は依頼に含まれているか」を問う判定を足す。特に、閲覧を頼まれたのに書き込み・送信・削除をするずれは、文面の検知よりこの照合で拾いやすい。</div>
+    <div class="takeaway"><strong>示唆:</strong> 開発者向けの API や SaaS を持っているなら、よくある作業を 10 本ほどタスクにして、エージェントに本物の環境で実行させる。合否はエージェントの報告ではなく、作られたものを自社 API で読み戻した結果で決める。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 2: 業務ルールは自然言語で書き、エージェントの外で評価する</div>
+  <div class="section-title">📐 パターン 2: 直す場所はモデルではなく、文書・skill・エラーメッセージ</div>
   <div class="theme-section">
-    <p>依頼との照合に加えて、Google は組織のルールも同じ層で評価する。ルールは自然言語の制約文で、全ツールにも特定のツールにも付けられ、ツールの引数を参照できる。公式ブログの例は、決算の公表前は財務情報を <code>@example.com</code> 以外に送らない、すべての承認がそろうまで請求書を提出しない、返金は 80 ドル以下に限る、履歴書の要約はしてよいが採否の通知は送らない、の 4 つだ。呼び出しは依頼との照合とルールの両方を通らなければ実行されない。判定と判定役の理由、トークン使用量は Cloud Logging に残る。Microsoft Foundry は、利用者入力・ツール呼び出し・ツール応答・出力の 4 つを介入点として定め、どの検査をどの介入点に置くかをガードレールごとに設定させる。ツール呼び出しとツール応答はエージェント専用の介入点で、いずれもプレビューだ。</p><p>判定をエージェントの外に置くのは、エージェントのモデル自身がインジェクションで指示を書き換えられうるからだ。Google はこの理由を明記したうえで、エージェントの外向き通信をすべて Agent Gateway に通すことを前提にしている。通らない経路があれば、その呼び出しは検査されない。外に置いても、判定役が LLM である以上、結果は確率的で揺れる。そのため Google は dry run で判定を記録してから適用に切り替えることを勧め、判定に必要な事実（決算の日付など）をシステム指示に書いておくよう求めている。ストリーミングの応答は評価されず、説明のないツールは拒否される。Foundry でも、ツール呼び出しとツール応答の検査はモデレーションに対応したツールにしか効かず、介入点ごとに 50〜100 ミリ秒ほどの遅延が加わる。検査の網羅性はゲートウェイを通る経路と対応ツールの範囲で決まる。</p>
+    <p>評価で失敗が見つかったとき、各社が直しているのはエージェントが読むものだ。Together の GPU クラスタのタスクでは、Sonnet 4.6 が skill のサンプル出力（1 リージョン、GPU 2 種）を実際の在庫だと思い込み、リージョンの一覧を引かずに最安値を推測した。原因は、サンプル出力に例であると書いていなかったことと、skill のリンク先が料金表ではなく GPU の紹介ページだったことだ。直したのは、実在の regions API（<code>GET /v1/compute/regions</code>）と料金表を指す 2 文の追加だけで、試したすべてのモデルで 100% 通るようになった。リージョンを付けずに API を呼ぶと返る 400 エラーも、存在しない <code>/v1/clusters/regions</code> を案内していたので、正しいパスに直し、その先のルーティングのバグも直した。エージェントにとってエラーメッセージは次の一手の指示であり、間違ったパスを書けばその通りに進んでしまう。</p><p>この方向に収束しているのは、指示の質がモデルの差より大きく効くと測れたからだ。Together の 9 月 30 日の実行では、3 つのモデルの差は数ポイントにとどまった。素の状態の 82% に対し、docs MCP では 96%、skill では 97% まで上がっている。Together は、強いモデルだけで試すと穴が隠れるとも書いている。Opus は API と skill の穴を自力で迂回したが、Sonnet はそこで詰まった。一方で、足せば良くなるとは限らない。14 本の skill を 1 本に統合した最初の版は合格率が 75.0% に落ちた。入口の文書が 14,000 字あり、毎回読み込まれていたことなどが原因だ。入口を 6,000 字未満に削り、古いモデル名とサンプルコードのバグを直すと 97.2% に戻った。文書も製品と同じように、変更したら回帰テストにかける対象になっている。</p>
     <div class="example">
-      <div class="product">Google Semantic governance policies（カスタムポリシー）</div>
-      <div class="approach">法務・コンプライアンス担当が自然言語でルールを書き、Agent Gateway が提案されたツール呼び出しをルールと依頼の両方に照らして実行前に判定する</div>
-      <div class="detail">11 月 20 日の公式ブログの手順では、社内のコントローラー宛てのメールは通り、社外の投資家宛ては決算前のルールで拒否され、文書に隠された文字列が引き起こしたファイル削除は intent check で拒否される。ルールは &lt;code&gt;gcloud beta ai semantic-governance-policies create&lt;/code&gt; で、表示名・制約文・拒否メッセージを指定して作る。現時点の適用点は Agent Gateway だけで、IAM や Model Armor を置き換えるものではないと位置付けている。</div>
-      <a href="https://developers.googleblog.com/en/check-what-your-ai-agents-do-before-they-do-it-with-semantic-governance-policies/">📄 一次ソース</a>
+      <div class="product">Together AI（skill パッケージの作り直し）</div>
+      <div class="approach">14 本の製品別 skill を、短いルーターが必要な製品ガイドだけを読み込む 1 本に統合した。合格率が下がった版は評価で原因を突き止めてから直した</div>
+      <div class="detail">統合した最初の版は合格率 75.0%（72 回中 54 回）、1 回あたり 0.898 ドルで、元の 14 本の 90.3%、0.431 ドルより悪かった。読み込む skill の量は 57% 増えていた。ルーターの短縮、サンプルを提供中のモデルに差し替える修正、カタログを確かめてから再試行させる指示を加えた最終版は 97.2%、0.433 ドルになった。製品の変更に合わせて skill を更新するクラウドエージェントと、サンプルコードを定期的に実行する仕組みも置いている。</div>
+      <a href="https://www.together.ai/blog/how-we-do-agent-evals-at-together-ai">📄 一次ソース</a>
     </div>
-    <div class="example">
-      <div class="product">Microsoft Foundry Guardrails（介入点）</div>
-      <div class="approach">利用者入力・ツール呼び出し・ツール応答・出力の 4 介入点に検査を個別に配置する。ツール呼び出しで不合格なら実行せず、次の利用者入力までエージェントを止める</div>
-      <div class="detail">11 月 17 日に更新された Microsoft Learn の文書によると、ツール呼び出しとツール応答の検査が効くのは Azure Functions、OpenAPI、Browser Automation など、モデレーションに対応した一部のツールだけだ。対応外のツールに設定しても効かない、と明記している。検査を足すほど網羅が広がるわけではなく、経路ごとに効く範囲を確かめる必要があることを示す例だ。</div>
-      <a href="https://learn.microsoft.com/en-us/azure/foundry/guardrails/intervention-points">📄 一次ソース</a>
-    </div>
-    <div class="takeaway"><strong>示唆:</strong> LLM による実行前判定を入れるなら、先にエージェントの外向き通信がすべて判定点を通るかを確かめ、通らない経路とツールを一覧にする。適用はいきなり拒否にせず、dry run で誤検知と見逃しを判定ログから確かめてから切り替える。</div>
+    <div class="takeaway"><strong>示唆:</strong> エージェントが失敗したら、プロンプトを足す前に、サンプル出力が例と明記されているか、エラーメッセージが実在するパスとコマンドを指しているかを確かめる。評価は最上位のモデルだけでなく、一段下のモデルでも走らせる。</div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-title">📐 パターン 3: 確率で済ませない線は決定論で引く</div>
+  <div class="section-title">📐 パターン 3: 検索の入口と契約の最後の一歩をエージェントに開く</div>
   <div class="theme-section">
-    <p>LLM の判定と並べて、各社は LLM を通さない制御も同じ場所に置いている。LangSmith Tool Gateway は、エージェントと MCP サーバーの間に入る管理層で、呼び出し元の特定、資格情報の付与、ポリシーの適用、転送、記録を一か所で行う。拒否ポリシーは利用者・サービスキー、またはその組み合わせ単位でツールの利用を止め、組織かワークスペース単位で例外付きの全体適用もできる。承認ポリシーは、データウェアハウスへの書き込みのような機微な呼び出しについて、実行前に利用者が MCP クライアント上で確認することを求める。エージェントに見せるツールそのものも、tool kit という単位で絞る。マルチエージェントの監督について調べた研究「Formalize or Lose It」は、同じ問題をプロンプトの側から示した。監督規則を実行記録から洗い出すと、84 件のうち 39 件（46%）はプロンプトの指示としてしか存在せず、親エージェントから作業者に渡す要件 23 件のうち 19 件には実行可能な検査がなかった。</p><p>LLM の判定と決定論の制御を分けて置くのは、両者が得意な誤りの種類が違うからだ。依頼とのずれや、文脈で決まる業務ルールは、条件を列挙しきれないので LLM の判定に向く。一方、「この利用者にこのツールは使わせない」「書き込みは必ず人が見る」のように例外を許さない線を確率的な判定に任せると、低い確率でも抜けが起きる。前号で扱った Microsoft Autopilot も、送信・削除などは第二の AI モデルに照合させる一方で、支払いは常に人の承認としていた。上の研究でも、要約したメモだけを見て判断する監督役は、意図的に欠陥を入れた計画の 71% を承認している。規則を台帳に入れて機械的に確かめると、引き継ぎをまたいでも要件が保たれた。ただし台帳に入れなかった要件は守られず、結果はハッカソン提出物の自己申告である点も著者が断っている。</p>
+    <p>評価で中身を直す動きと並んで、エージェントがプロダクトに入る経路そのものを用意する動きも出てきた。Cloudflare の Search for Agents は、ダッシュボードのトグル 1 つで、サイトを AI Search のインスタンスに取り込み、<code>/.well-known/search?q=...</code> に検索の入口を置く。入口の場所は、全ページの <code>&lt;head&gt;</code> に入る <code>agent:endpoint</code> などの meta タグで知らせる。<code>Accept: text/markdown</code> で取得した場合は、同じ情報が YAML front matter として付く。返すのは生成した回答ではなく、スコア付きの本文の抜粋だ。もう一つは契約の手続きで、これまで OAuth セッションでは作れなかった Workers Paid・R2・Zero Trust のサブスクリプションを、<code>cf</code> CLI と Cloudflare の MCP サーバーから開始できるようにした。</p><p>入口を開く際の線引きも各社で似ている。Search for Agents が回答を作らず抜粋だけを返すのは、エージェントは自分のモデルを持っているので要るのは材料だけだ、という判断による。アクセスにはドメインの bot management、AI Crawl Control、WAF の設定がそのまま適用される。お金が動く操作には本人の確認を残す。MCP の 2026-07-28 仕様の elicitation に対応したクライアントでは、料金を示して許可を求めてから開始する。対応しないクライアントは開始させず、ダッシュボードに誘導する。認証済みの支払い手段と確認済みのメールアドレスも前提になっている。エージェントが一人で終えられる範囲を広げつつ、取り消しにくい操作の手前には人の判断を置く。これは前回までに取り上げたツール呼び出しの検査と同じ考え方だ。</p>
     <div class="example">
-      <div class="product">LangSmith Tool Gateway（公開ベータ）</div>
-      <div class="approach">ツール呼び出しを一つの kit URL に集め、利用者・サービスキー単位の拒否ポリシーと、機微な呼び出しを人が確認する承認ポリシーを LLM を介さず適用する</div>
-      <div class="detail">11 月 19 日の公式ブログによると、各呼び出しは「利用者として」か「エージェントとして」のどちらかの資格で実行され、トレースにはツール・サーバー・利用者・結果・所要時間が残る。ツールに送った、またはツールから返った機微なデータは記録しない。拒否ポリシーと組織全体の監査ログは個別相談または Enterprise プラン向けで、承認の宛先や無応答時の扱いは記事では説明されていない。</div>
-      <a href="https://langchain.com/blog/langsmith-tool-gateway">📄 一次ソース</a>
+      <div class="product">Cloudflare Search for Agents（ベータ）</div>
+      <div class="approach">ゾーンの内容を自動で索引化して /.well-known/search で検索を提供し、全ページの agent:* meta タグで入口の場所を知らせる。GET の q パラメータに加え、HTTP の QUERY メソッドも受け付ける</div>
+      <div class="detail">11 月 25 日の公式ブログによると、Free を含む全プランで使える。料金は AI Search の取り込み・索引保存・クエリの料金に従う。Cloudflare は自社の開発者ドキュメントで有効にし、OpenCode のエージェントがトップページから入口を見つけ、検索して数秒で正しい答えに着いた例を示している。ページを一枚ずつクロールさせる代わりに、サイト側が検索を差し出す設計だ。</div>
+      <a href="https://blog.cloudflare.com/search-for-agents/">📄 一次ソース</a>
     </div>
     <div class="example">
-      <div class="product">研究「Formalize or Lose It」（Apart Research Swarm Alignment Hackathon）</div>
-      <div class="approach">プロンプトの中にしかない監督規則を、要件の台帳とホスト側の受け入れテストという実行可能な検査に置き換える</div>
-      <div class="detail">著者が 11 月 23 日に Hugging Face フォーラムで公開した結果では、19 種類の障害を 29 回の実行に注入した。既存の 125 ケース（2,599 アサーション）のテストを通ってしまった 6 件のうち 5 件を、追加した 6 つのホスト側検査が捕まえ、誤検知は報告されていない。著者は「完全な安全性を主張するものではない」とし、プロンプトにしかない 39 件は違反ではなく検査の空白だと注記している。</div>
-      <a href="https://discuss.huggingface.co/t/research-release-formalize-or-lose-it-experimental-results-on-executable-oversight-in-agent-swarms/192381">📄 一次ソース</a>
+      <div class="product">Cloudflare（CLI・MCP からのサブスクリプション開始）</div>
+      <div class="approach">cf 1.0.0-rc.5 以降と MCP サーバーから Workers Paid・R2・Zero Trust を開始できる。MCP では elicitation で料金を示して許可を得られるクライアントに限る</div>
+      <div class="detail">11 月 25 日の changelog によると、前提は OAuth の再ログイン、確認済みのメールアドレス、支払い手段を登録済みの請求プロファイルだ。elicitation に対応しないクライアントはダッシュボードに誘導される。R2 は無料枠の範囲でも従量課金のサブスクリプションがないとバケットを作れないため、これまではエージェントの作業が契約のところで止まっていた。</div>
+      <a href="https://developers.cloudflare.com/changelog/post/2026-11-25-activate-pay-as-you-go-cli-mcp/">📄 一次ソース</a>
     </div>
-    <div class="takeaway"><strong>示唆:</strong> エージェントのルールを書き出したら、一つずつ「例外を許すか」で分ける。許さないもの（利用者ごとの禁止ツール、書き込みの承認、支払い）はゲートウェイの決定論ポリシーかテストにし、文脈で決まるものだけを LLM の判定に回す。プロンプトに書いただけの規則は、検査の空白として扱う。</div>
+    <div class="takeaway"><strong>示唆:</strong> GUI でしかできない手順が残っていれば、それがエージェントの作業が止まる場所になる。CLI や API に出す際は、課金や削除のように取り消しにくい操作に限り、利用者の許可を求める仕組み（MCP の elicitation など）を経由させる。</div>
   </div>
   <div class="editorial">
     <span class="label">✍️ 編集後記</span>
-    ガードレールの議論は長く、モデルに何を言わせないかが中心だった。今週の各社の発表は、エージェントに何をさせないかを、実行の直前に、エージェントの外で決める方向にそろっている。判定役を LLM にするか規則にするかの選択より先に、自分たちのエージェントのツール呼び出しが一つ残らずその判定点を通っているかを確かめておきたい。
+    ここ数か月、エージェントの評価はエージェントを作る側の話題だった。今回の 3 社は逆に、エージェントに使われる側が自分の製品を採点している。数字が示しているのは、エージェントの失敗の多くが、昔から人の開発者も踏んでいたのに報告されずに残っていた穴だということだ。人がわざわざ issue を書かなくても、エージェントを走らせれば毎晩そうした穴が見つかる。
   </div>
 </div>
 
 <div class="section">
   <div class="section-title">🔗 今号の動向ピックアップ</div>
-  <div class="quick-link"><a href="https://codelabs.developers.google.com/enterprise-agent-governance-sgp">Google Codelabs「Agent Gateway と Semantic governance policies で自律エージェントを統制する」</a><span class="quick-summary">ADK で作った銀行業務のエージェントと MCP サーバーを用意し、外向き通信を Agent Gateway に通して自然言語のポリシーを書き、上限 1,000 ドルを超える送金が止まるまでを順に試す。本号で扱った「外向き通信をすべて判定点に通す」前提を、実際の構成で確かめられる。</span></div>
-  <div class="quick-link"><a href="https://docs.langchain.com/langsmith/tool-gateway-how-it-works">LangSmith Tool Gateway の仕組みとベータ期間中の制限（公式ドキュメント）</a><span class="quick-summary">ポリシーはどのエンドポイント経由の呼び出しにも毎回適用される。一方、ツールの応答は手を加えずに呼び出し元へ返すので、エージェント側で信頼できない入力として扱うよう明記している。ゲートウェイが見るのは呼び出しの側だけなので、本号の第 1 節の照合や Foundry のツール応答検査とは別に、応答側の対策が要ることがわかる。</span></div>
-  <div class="quick-link"><a href="https://www.helpnetsecurity.com/2026/11/23/google-semantic-governance-policies/">Help Net Security「Google の Semantic governance policies は AI エージェントのツール呼び出しを実行前に止められる」</a><span class="quick-summary">11 月 23 日の記事で、決算前に社外の投資家へ送るメールがポリシーで止まり、隠された指示による下書き削除が intent check で止まる例と、プレビューの制約を整理している。判定は確率的なので dry run で確かめてから適用する、ストリーミング応答は評価しない、という本号の第 2 節の注意点を第三者が要約したものとして読める。</span></div>
+  <div class="quick-link"><a href="https://blog.cloudflare.com/agent-readiness/">Cloudflare、サイトのエージェント対応度を採点する Agent Readiness score</a><span class="quick-summary">robots.txt、Markdown の返却、MCP Server Card、OAuth discovery などを検査し、失敗した項目ごとにコーディングエージェント向けの修正プロンプトを出す。上位 20 万ドメインで Markdown の返却に対応していたのは 3.9% で、今号の評価を製品ではなくサイトの単位で行う例にあたる。</span></div>
+  <div class="quick-link"><a href="https://github.com/hookdeck/evals/issues/75">Hookdeck、プレースホルダの署名シークレットを見逃す問題を issue 化</a><span class="quick-summary">エージェントが渡されたシークレットの代わりにプレースホルダを設定しても、どこにも警告が出ないことを製品側の課題として記録している。評価で見つけた問題をモデルではなく製品の修正対象として扱う、今号第 1 節の運用の具体例だ。</span></div>
+  <div class="quick-link"><a href="https://github.com/vercel-labs/agent-eval">Vercel Labs の agent-eval — フレームワーク作者向けのコーディングエージェント評価</a><span class="quick-summary">プロンプト、テストコード、初期ファイルで 1 本の評価を作り、隔離した環境でエージェントを走らせて構成同士を比べる OSS だ。Together や Hookdeck のような評価の仕組みを自前で組まずに始めたい場合の出発点になる。</span></div>
+  <div class="quick-link"><a href="https://developers.openai.com/blog/eval-skills">OpenAI、Agent Skills を評価で検証する手順を公開</a><span class="quick-summary">skill の評価を、結果・手順・作法・効率の 4 観点のチェックと、呼ばれるべきでない場面での誤起動の検査に分けている。Together が skill を回帰テストの対象にしたのと同じ考え方を、個々の skill の単位で行う手順だ。</span></div>
 </div>
 
 <div class="section">
   <div class="section-title">📚 過去号</div>
+  <div class="archive-item"><span class="week">2026-11-24</span><div class="body"><a href="ai-trends/2026-11-24.html">ツール呼び出しは「実行する直前」に検査する — 依頼と合っているかを別の判定役に問う、業務ルールは自然言語でゲートウェイに置く、確率で済ませない線は決定論で引く</a><span class="sub">検査の対象が「文章」から「行為」に移った。Google の user intent matching と Microsoft の Task Adherence は、提案されたツール呼び出しが利用者の依頼に沿っているかを実行前に判定する。どちらも、閲覧を頼まれたのに削除や送信をしようとする呼び出しを例に挙げている。攻撃の文言を見分けるのではなく「利用者はこれを頼んだか」を問うので、未知のインジェクションの文面にも効く</span></div></div>
   <div class="archive-item"><span class="week">2026-11-21</span><div class="body"><a href="ai-trends/2026-11-21.html">長く走るエージェントには「タスク」ではなく「目標と合格条件」を渡す — 成功の定義と予算を先に決める、完了の判定は作業者の外に置く、人が見るのは判断だけに絞る</a><span class="sub">依頼の単位が「タスク」から「目標＋成功条件＋予算＋境界」の取り決めに変わった。Replit Missions は開始時の質問で成功の定義を詰め、上限金額と許容するトレードオフを合意してから動き、予算が尽きたら未達のまま止まる。Devin Bots は「変更を指示するタスク」ではなく「結果を受け持つ責任」を渡すよう求める</span></div></div>
   <div class="archive-item"><span class="week">2026-11-19</span><div class="body"><a href="ai-trends/2026-11-19.html">エージェントの台帳は「届け出」から「見つけて載せる」へ — 端末から検出する、他社基盤は同期で集める、ツール側から逆引きする</a><span class="sub">台帳に載せる入口が、開発者や部門の届け出から、端末と通信の検出に移っている。Microsoft Defender は Claude Code や Copilot CLI を含む 60 種以上のローカルエージェントを検出し、端末と利用者に紐付ける（GA）。Okta は既存の CrowdStrike センサーを使い、OAuth 同意には現れないエージェントと MCP サーバーを拾う</span></div></div>
   <div class="archive-item"><span class="week">2026-11-17</span><div class="body"><a href="ai-trends/2026-11-17.html">エージェントに秘密を渡さない設計へ — 資格情報はサンドボックスの外で付ける、宛先に縛る、届かない経路は先に洗い出す</a><span class="sub">本物の資格情報をサンドボックスの外のプロキシに持たせ、外向きリクエストに付与する構成が実行基盤の標準になりつつある。中のエージェントが見るのは proxy-managed のようなプレースホルダだけで、環境変数を読まれても漏れるのは偽の値になる</span></div></div>
@@ -226,7 +222,7 @@ footer a{color:var(--primary-500);text-decoration:none}
 </div>
 
 <footer>
-  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="data/ai-trends/2026-11-24.json">data/ai-trends/2026-11-24.json</a>（このページは JSON からの生成物）</p>
+  <p>毎週火・木・土 07:00 発行。一次ソースは <a href="data/ai-trends/2026-11-26.json">data/ai-trends/2026-11-26.json</a>（このページは JSON からの生成物）</p>
   <p style="margin-top:.5rem"><a href="./">📰 日刊ダイジェストに戻る</a></p>
 </footer>
 </div>
