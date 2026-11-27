@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-11-26</title>
+  <meta name="description" content="1Password が従業員 GitHub 経由で侵害 / AI 支援の計算量理論の成果主張が相次ぐ / MCP に Skills over MCP">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech News Daily">
+  <meta property="og:title" content="Tech News Daily — 2026-11-26">
+  <meta property="og:description" content="1Password が従業員 GitHub 経由で侵害 / AI 支援の計算量理論の成果主張が相次ぐ / MCP に Skills over MCP">
+  <meta property="og:url" content="https://tech-news.kaion-lab.com/archive/2026-11-26.html">
+  <meta property="og:image" content="https://tech-news.kaion-lab.com/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="../feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-11-26 (Thu)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+      <nav class="site-nav">
+        <a href="../" class="active">📰 日刊ダイジェスト</a>
+        <a href="../trends.html">🔌 週次プラグイントレンド</a>
+        <a href="../ai-trends.html">🧠 AI プロダクト動向</a>
+        <a href="./">🗂 アーカイブ</a>
+      </nav>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 21 articles</span>
+      <span>🏷 6 categories</span>
+      <span>📡 17 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item">
+        <span class="number-value">$3</span>
+        <span class="number-label">米財務省サブドメイン 1 件あたりの乗っ取りコスト</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">9/4</span>
+        <span class="number-label">OpenAI が主張する行列積の指数 ω</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">0</span>
+        <span class="number-label">iOS で公開された非 WebKit ブラウザ数</span>
+      </div>
+    </div>
+
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
+      <div class="card featured deep-dive">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://1password.com/blog/update-on-nov-2026-security-incident">DEEP DIVE: 1Password、従業員の GitHub アカウント侵害からバックエンドに悪意あるコードを投入される</a></h3>
+        </div>
+        <div class="summary">1Password は 11 月 19 日、従業員の社内 GitHub アカウントが攻撃者に使われた形跡の調査を始めた。攻撃者はそのアカウントでソースコードに到達し、バックエンドサービスへ悪意あるコードを push した。このコードを経由して、一部顧客の管理データが取得された。取得されたのは連絡先、アカウント・ユーザー ID、作成日時と最終サインイン日時、公開鍵、SRP パラメータ、招待・プロビジョニング・アカウント復旧メールに含まれるトークンなどである。加えて、非公開リポジトリのソースコードが複製され、インフラの秘密情報を保持する CI/CD システムにもアクセスされた。1Password は可能性のある認証情報をすべてローテーションした。保管庫とその項目、保管庫の鍵、復旧キー、アプリ・ブラウザ拡張は影響を受けていないという。トークン単体ではアクセスできず、SSO サインインかメールで届く 6 桁コードとの組み合わせが要る。この点を踏まえ、コードを 6 桁数字から 10 桁英数字へ延長した。影響を受けた顧客数は公表されていない。</div>
+        <div class="editorial">🧠 保管庫が無傷という説明は、暗号設計の面では筋が通る。ただし今回の本質は製品の暗号ではなく、開発基盤の 1 アカウントから本番バックエンドに悪意あるコードが入った点にある。ブランチ保護や push 時のレビューがどこで破られたかは未公表で、再発防止の実効性はここが明かされるまで判断できない。顧客数が非公表なのも、現時点では評価を留保する材料だ。</div>
+        <div class="key-points">
+          <ul>
+            <li>攻撃経路は従業員の GitHub アカウント → 悪意あるコードの push → バックエンドによる管理データ取得。ソースコード、CI/CD 経由でインフラ秘密情報にも到達</li>
+            <li>メール認証コードを 6 桁数字から 10 桁英数字へ変更し、盗まれたトークンの悪用に必要な総当たり量を増やした</li>
+            <li>社内証拠では、露出したトークンによるアカウント乗っ取りは確認されていない。独立の専門家が封じ込めを検証中</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 GitHub 組織を運用しているなら、従業員アカウントの権限と CI/CD の秘密情報の分離を点検すること。顧客側は 1Password を装う不審なメール・電話に注意する。</div>
+        <div class="meta">
+          <span>1Password</span>
+          <span class="engagement">▲ 1208</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-11-26</span>
+        </div>
+      </div>
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://scottaaronson.blog/?p=10379">Scott Aaronson、AI 支援による計算量理論・数学の成果主張が相次ぐと報告</a></h3>
+        </div>
+        <div class="summary">Scott Aaronson は 11 月 25 日付のブログで、OpenAI や Anthropic などが数日のうちに計算量理論と数学の大きな結果を主張していると整理した。OpenAI は行列積の指数 ω = 9/4 と、10 月 6 日の公開済み上界に一致する下界を主張。高速フーリエ変換のゲート数についても N(log N)^(1/2+o(1)) と一致する下界を主張している。Aaronson 自身は多くを評価中で、検証済みではない旨を明記している。</div>
+        <div class="key-points">
+          <ul>
+            <li>OpenAI の論文（11 月 24 日付）は ω = 9/4 を主張。1960 年代末の Strassen の ω < 3 から続く問題</li>
+            <li>Riemann 予想の Lean 形式化は約 1,700 万行から約 30 万行へ圧縮されたと、コメント欄が報告（未検証）</li>
+            <li>Yupan Liu が AI 支援で QIP(2) = PSPACE を arXiv に投稿</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 暗号・アルゴリズムの前提を変える主張だが、査読前の情報が多い。Google の因数分解の報告は、Aaronson によれば実用的な暗号への影響はない。</div>
+        <div class="meta">
+          <span>Shtetl-Optimized</span>
+          <span class="engagement">▲ 998</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-11-26</span>
+        </div>
+      </div>
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/mcpskills_over_mcpmcp.html">MCP に「Skills over MCP」登場、使い方のスキルも MCP サーバーから配信</a></h3>
+        </div>
+        <div class="summary">MCP に、AI エージェントがツールの使い方を記したスキルを MCP サーバーから取得できる機能がベータとして加わった。これまでスキルは実行環境のローカルの SKILL.md として置かれ、ツール更新で古くなる問題と、多数のスキルを先読みして文脈を消費する問題があった。新機能ではツール提供側が最新のスキルを配り、エージェントは必要になった時点でだけ読み込む。Anthropic が対応を開始し、Claude と Claude Code の Pro・Max・Ultra プランで既定で有効になっている。</div>
+        <div class="key-points">
+          <ul>
+            <li>スキルを MCP 経由で取得するため、ローカルのスキルファイルとツールの実装がずれにくい</li>
+            <li>必要時のみ読み込む方式で、スキル先読みによる文脈の消費を抑える</li>
+            <li>Claude / Claude Code の Pro・Max・Ultra プランで既定有効</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 MCP サーバーを公開している開発者は、利用手順を SKILL.md として同梱し、利用側のスキル管理を省ける。</div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span class="engagement">🔖 59</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-11-26</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://lucumr.pocoo.org/2026/11/25/poisoning/">Armin Ronacher「Rust の Mutex の lock poisoning を廃止せよ」</a></h3>
+        </div>
+        <div class="summary">Rust 標準の Mutex は、ロック保持中にスレッドが panic すると poisoned になり、以降の lock() が PoisonError を返す。Ronacher はこの機能が役立った例を見たことがなく、害を見た例は多いと主張する。PoisonError がガードを保持するため、エラー変換だけでデッドロックになる例もある。</div>
+        <div class="key-points">
+          <ul>
+            <li>標準ライブラリ自身が 2015 年から標準 I/O などで poisoning を無視し、Tokio・Wasmtime・tracing-subscriber も無視か回避している</li>
+            <li>提案は std::sync::nonpoison を安定化して既定にし、必要な人向けに Poison&lt;T&gt; ラッパーを用意すること</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Armin Ronacher</span>
+          <span class="engagement">▲ 45</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-11-26</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://donsz.nl/blog/optimizing-rustcs-next-trait-solver">rustc の次世代 trait solver の最適化</a></h3>
+        </div>
+        <div class="summary">新しい trait solver の性能改善を解説する記事。キャッシュキーから opaque type を除くと、wg-grammar でヒット率が 73% から 79% に上がり、コンパイル時間が 28 秒から 14 秒に半減した。</div>
+        <div class="key-points">
+          <ul>
+            <li>CPU サイクルは約 2,000 億から約 70 億へ減少。標準ライブラリのコンパイルでは Sized の判定が約 80 万回発生する</li>
+            <li>unic-ucd は旧 solver の約 200 倍遅かった。N 回の巻き戻しが N 個のライフタイム変数をコピーする二乗コストが原因で、変更有無の真偽値 1 つで巻き戻しを省略した</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>donsz.nl</span>
+          <span class="engagement">▲ 45</span>
+          <span>⏱ 8 min read</span>
+          <span>2026-11-26</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-product">Product</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://blog.mozilla.org/en/mozilla/internet-policy/apple-ios-browser-engine-rules/">Mozilla「iOS にいまも非 WebKit ブラウザがない理由」</a></h3>
+        </div>
+        <div class="summary">Apple は iOS のブラウザに WebKit を要求している。EU は DMA で、日本も新ルールで代替エンジンを認めさせたが、Mozilla は Apple の条件を「できる限り苦痛」と評し、Gecko 版を出せていない。</div>
+        <div class="key-points">
+          <ul>
+            <li>EU の条件から約 3 年、日本から約 1 年が経つが、非 WebKit ブラウザを出した開発者は 0</li>
+            <li>Gecko 版は別アプリになり、ブックマークやパスワードの移行を利用者に強いる。条件には非公開情報の開示禁止も含まれる</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Mozilla</span>
+          <span class="engagement">▲ 80</span>
+          <span>⏱ 7 min read</span>
+          <span>2026-11-26</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://www.intruder.io/research/taking-over-us-treasury-subdomains-for-3-each">1 件 3 ドルで米財務省のサブドメインを乗っ取れた Elastic IP 再取得攻撃</a></h3>
+        </div>
+        <div class="summary">Intruder は、DNS の A レコードに残った解放済み AWS Elastic IP を再取得して乗っ取る手法を、48 時間で 28 件の実在ケースに適用した。約半数は政府機関で、うち 5 件は treasury.gov 配下だった。</div>
+        <div class="key-points">
+          <ul>
+            <li>リージョンごとに Elastic IP を 25 個確保し、一致しなければ解放して回すことで、約 45 万個の IP を毎時約 9,400 個の速度で試行</li>
+            <li>AWS は計画変更なしと回答。対策は dangling DNS レコードの削除</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Intruder</span>
+          <span class="engagement">▲ 25</span>
+          <span>⏱ 8 min read</span>
+          <span>2026-11-26</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://www.openwall.com/lists/oss-security/2026/11/25/9">Hanno Böck「Ubuntu のセキュリティ対応は遅い」</a></h3>
+        </div>
+        <div class="summary">Linux カーネルの TCP の遠隔メモリ破壊 NoisyTCP（CVE-2026-99288）は 11 月 16 日に公開されたが、9 日後も Ubuntu に修正がないという指摘。他ディストリビューションは公開時点で修正を用意していた。</div>
+        <div class="key-points">
+          <ul>
+            <li>AMD 仮想化の KVM ホスト脱出（CVE-2026-99312、11 月 18 日公開）にも、投稿時点で Ubuntu の修正はない</li>
+            <li>Ubuntu LTS の kernel 7.0.0-44 は古い版へのバックポート方式と見て、Debian stable のような longterm ベースを推奨</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>oss-security</span>
+          <span class="engagement">▲ 164</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-11-26</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/ruri/articles/distill-specs-after-implementation">spec は実装後に 8 割削除しよう</a></h3>
+        </div>
+        <div class="summary">実装済みの spec 7 本（約 33,000 文字）を分析し、リポジトリに残る spec が陳腐化し、エージェントが却下済みの選択肢を再実装し得る問題を指摘する。</div>
+        <div class="key-points">
+          <ul>
+            <li>内訳は破棄可 15%、テスト・型・コードへ移す 68%、ADR 9%、残すのは意図・境界・前提の約 8%</li>
+            <li>残した内容は src 隣の product/ に置き、コードと同じ PR で更新し、CODEOWNERS で人の承認を要求する</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-11-26</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/happy_elements/articles/27e14ff6754044">Claude Code のセキュリティ、2026年11月時点のベストプラクティス</a></h3>
+        </div>
+        <div class="summary">権限ルールだけでは止められない抜け道と OS レベルのサンドボックスを整理した記事。Bash の deny ルールは文字列照合なので、/usr/bin/curl や sh -c 経由を止められない。</div>
+        <div class="key-points">
+          <ul>
+            <li>サンドボックスは macOS が Seatbelt、Linux・WSL2 が bubblewrap。読み取りはほぼ無制限で、MCP サーバー・フックは対象外</li>
+            <li>v2.1.319 と v2.1.321 で権限まわりの不具合が修正されており、バージョン確認が重要</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 7 min read</span>
+          <span>2026-11-26</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://zenn.dev/nonejp/articles/3bbffb1db9c4ce">pure Go 製 JS エンジン 3 種を同じプラグインで比較</a></h3>
+        </div>
+        <div class="summary">moejs、Sobek、go-quickjs を 8 vCPU 環境で比較。正規表現を使う版では go-quickjs が最速で、使わない版では moejs が最速になる。</div>
+        <div class="key-points">
+          <ul>
+            <li>正規表現あり・小入力の呼び出しは moejs 135.0 µs、Sobek 317.1 µs、go-quickjs 105.2 µs</li>
+            <li>ランタイム 1 つあたりのヒープは moejs 5.9 KiB に対し go-quickjs 4,379 KiB。moejs は alpha 版</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-11-26</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.com/xoxorwr/pw-loudness-eq">pw-loudness-eq: Windows の Loudness Equalization を PipeWire へ移植</a></h3>
+        </div>
+        <div class="summary">WMALFXGFXDSP.dll を解析して作った PipeWire 向けモジュール。アプリごとの音量を FFT フレームで自動調整し、最大約 +20 dB まで持ち上げる。</div>
+        <div class="key-points">
+          <ul>
+            <li>25 の周波数帯でラウドネスを推定し、先読みリミッターでブーストによるクリップを防ぐ</li>
+            <li>PipeWire 1.4 以上が必要。JACK クライアントと 8 チャンネル超のストリームは非対応</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span class="engagement">⭐ 174</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-11-26</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/google_workspace_mcpgoogle_workspace_cli.html">Google Workspace MCP サーバーと CLI が正式版に</a></h3>
+        </div>
+        <div class="summary">Gmail、Drive、Docs、Sheets、Slides、Calendar、Chat、Tasks の 8 サービスに対応する。送信と共有には人による確認（HITL）が入る。</div>
+        <div class="key-points">
+          <ul>
+            <li>無料枠は製品ごとに 1 日 5,000 リクエスト。Personal モードで Enterprise プラン・課金カード不要</li>
+            <li>REST API で Workspace を使うエージェントは 2027 年 2 月までに MCP へ移行が必要</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span class="engagement">🔖 33</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-11-26</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
+      <div class="quick-link">
+        <span class="tag tag-frontend">Frontend</span>
+        <a href="https://buttons.joshwcomeau.com/">Button Sounds — tactile SFX for your UI</a>
+        <span class="quick-summary">— UI のボタン操作向けの触感的な効果音集。</span>
+        <span class="meta">Josh Comeau</span>
+      </div>
+      <div class="quick-link">
+        <span class="tag tag-oss">OSS</span>
+        <a href="https://servo.org/blog/2026/11/25/october-in-servo/">October in Servo: video captions and inert content</a>
+        <span class="quick-summary">— Servo の 10 月の進捗。ビデオ字幕と inert コンテンツ対応。</span>
+        <span class="meta">Servo</span>
+      </div>
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://opensec.in/blog/nfs2root-cve-2026-99362">Nfs2root: A 12-year-old pre-auth remote root in the Linux kernel's NFS server</a>
+        <span class="quick-summary">— Linux カーネルの NFS サーバーに 12 年間あった認証前のリモート root 脆弱性（CVE-2026-99362）。</span>
+        <span class="meta">opensec.in</span>
+      </div>
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://autoriteitpersoonsgegevens.nl/en/current/ap-advises-against-purchasing-ai-camera-glasses-serious-risks-for-users-and-bystanders">Dutch DPA advises against purchasing AI camera glasses</a>
+        <span class="quick-summary">— オランダのデータ保護当局が、利用者と周囲の人へのリスクを理由に AI カメラ付き眼鏡の購入を非推奨とした。</span>
+        <span class="meta">Autoriteit Persoonsgegevens</span>
+      </div>
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://www.theverge.com/ai-artificial-intelligence/1041227/the-new-york-times-warns-photographers-not-to-update-photoshop-over-ai-features">The New York Times warns photographers not to update Photoshop over AI features</a>
+        <span class="quick-summary">— NYT が写真家に、AI 機能を理由に Photoshop を更新しないよう警告。</span>
+        <span class="meta">The Verge</span>
+      </div>
+      <div class="quick-link">
+        <span class="tag tag-ai">AI</span>
+        <a href="https://bjin.github.io/go-codegolf-benchmark/#leaderboard">GPT-6.2 Astra is the first model to beat Googlers' code golf records</a>
+        <span class="quick-summary">— Go のコードゴルフベンチマークで、GPT-6.2 Astra が Google 社員の記録を初めて上回った。</span>
+        <span class="meta">bjin.github.io</span>
+      </div>
+      <div class="quick-link">
+        <span class="tag tag-security">Security</span>
+        <a href="https://github.com/google-research/google-research/tree/master/cogentic_research_papers">Google releases Cogentic papers on integer factorization, discrete logs and more</a>
+        <span class="quick-summary">— Google が整数因数分解・離散対数などの論文群を公開。</span>
+        <span class="meta">Google Research</span>
+      </div>
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://lvignoli.eu/posts/2026-11-16-typed-indexes-in-zig/">Typed indexes in Zig</a>
+        <span class="quick-summary">— Zig で添字を型で区別して取り違えを防ぐ手法。</span>
+        <span class="meta">lvignoli.eu</span>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="./" class="archive-link">🗂 過去のダイジェスト</a>
+    </footer>
+  </div>
+</body>
+</html>
