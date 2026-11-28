@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech News Daily — 2026-11-27</title>
+  <meta name="description" content="Google Workspace MCP 義務化 / OpenAI 6.2 のコスト最適化疑惑 / RansomwareHelp CTO 起訴">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tech News Daily">
+  <meta property="og:title" content="Tech News Daily — 2026-11-27">
+  <meta property="og:description" content="Google Workspace MCP 義務化 / OpenAI 6.2 のコスト最適化疑惑 / RansomwareHelp CTO 起訴">
+  <meta property="og:url" content="https://tech-news.kaion-lab.com/archive/2026-11-27.html">
+  <meta property="og:image" content="https://tech-news.kaion-lab.com/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/atom+xml" title="Tech News Daily" href="../feed.xml">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tech News Daily</h1>
+      <div class="date">2026-11-27 (Fri)</div>
+      <div class="tagline">AI が毎朝届けるテックニュースダイジェスト</div>
+      <nav class="site-nav">
+        <a href="../" class="active">📰 日刊ダイジェスト</a>
+        <a href="../trends.html">🔌 週次プラグイントレンド</a>
+        <a href="../ai-trends.html">🧠 AI プロダクト動向</a>
+        <a href="./">🗂 アーカイブ</a>
+      </nav>
+    </header>
+
+    <div class="stats-bar">
+      <span>📰 19 articles</span>
+      <span>🏷 7 categories</span>
+      <span>📡 19 sources</span>
+    </div>
+
+    <nav class="toc">
+      <a href="#top-stories">🔥 Top Stories</a>
+      <a href="#dev-engineering">⚡ Dev</a>
+      <a href="#jp-community">🇯🇵 日本語</a>
+      <a href="#code-tools">🛠 Tools</a>
+      <a href="#quick-links">🔗 Quick</a>
+    </nav>
+
+    <div class="numbers-bar">
+      <div class="number-item">
+        <span class="number-value">5,000</span>
+        <span class="number-label">Workspace MCP 無料枠（1 プロジェクト/日）</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">-32.8%</span>
+        <span class="number-label">型推論停止による Instantiations 削減</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value">+86%</span>
+        <span class="number-label">AMD 向け llama.cpp 改造の prefill 高速化</span>
+      </div>
+    </div>
+
+    <div class="weekly-keywords">
+      <div class="section-title">📊 今週のキーワード</div>
+      <div class="keyword-chips">
+        <span class="keyword-chip">MCP / Skills</span>
+        <span class="keyword-chip">開発基盤への侵害</span>
+        <span class="keyword-chip">AI 支援の数学</span>
+      </div>
+      <div class="keyword-summary">今週は MCP が「ツール接続」から「使い方の配信」「エージェントの通行ルール」へ広がった。Skills over MCP の登場に続き、Google は 2027 年 2 月から Workspace へのエージェント接続を MCP サーバー経由に限定する。一方で 1Password や Check Point など開発・管理基盤への侵害が続き、Scott Aaronson による AI 支援の数学成果の報告も話題を集めた。</div>
+    </div>
+
+    <div class="section" id="top-stories">
+      <div class="section-title">🔥 Top Stories</div>
+
+      <div class="card featured deep-dive">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://techstackups.com/articles/google-workspace-ai-agents-mcp/">DEEP DIVE: Google が Workspace の MCP サーバー 8 種を正式版にし、エージェントの REST 直叩きを規約で禁止へ</a></h3>
+        </div>
+        <div class="summary">Google は Workspace の MCP サーバー 8 種を一般提供（GA）にし、同時に API 規約へ新しい条項を加えた。2027 年 2 月 1 日以降、AI エージェントが動かすツールは Workspace へこれらの MCP サーバー経由でしか接続できず、REST API を直接呼ぶエージェントは標準枠のクォータ対象になり、規約違反ともなる。最も目立つ制約は Gmail だ。公開サーバーは検索・閲覧・下書き作成・ラベル管理までで、送信・返信・転送・既存下書きの編集はパートナー限定になっている。Anthropic の Google Workspace コネクタはこれらの操作を謳っており、独立系の開発者は同等の機能を作れない。クォータも厳しい。無料枠は 1 プロジェクトあたり 1 日 5,000 MCP リクエストで、Gmail の検索 1 回が 10 リクエストとして数えられる。Gmail・Calendar・Drive の従量課金（Scaled）は 2027 年 4 月 1 日に始まる。さらに追加条項により、埋め込みやメモリ索引を含む「Google Technical Information」の保持を 30 日に制限できる。Google はゲートウェイをプロンプトインジェクション対策と位置づけるが、批判側は自社製品と競合するエージェントを選別する手段と見ている。</div>
+        <div class="editorial">🧠 MCP サーバー経由に一本化すれば、認可・監査・レート制限を 1 か所にまとめられるため、安全面の説明には筋が通っている。ただし Gmail の送信系がパートナー限定のままなら、実質的には「誰がメールを送れるエージェントか」を Google が決める構図になる。送信権限の開放条件が公開されるかどうかは未知数で、2027 年 2 月までに REST 直叩きの既存実装を抱える事業者は移行計画が必要だ。</div>
+        <div class="key-points">
+          <ul>
+            <li>規約の適用は 2027 年 2 月 1 日から。MCP 以外で接続するエージェントは標準枠のクォータ扱いで、規約違反になる</li>
+            <li>無料枠は 1 プロジェクト 1 日 5,000 リクエスト。Gmail 検索 1 回で 10 リクエスト消費するため、実質 500 回の検索で上限に達する</li>
+            <li>Gmail 公開サーバーは送信・返信・転送・下書き編集が不可。Scaled 課金は Gmail・Calendar・Drive で 2027 年 4 月 1 日開始</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 Workspace 連携のエージェントを自作している場合は、REST 直叩きから MCP サーバーへの移行と、送信機能が使えない前提での設計見直しを 2027 年 2 月までに済ませたい。</div>
+        <div class="meta">
+          <span>techstackups.com</span>
+          <span class="engagement">▲ 262</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-11-26</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🔬 研究</span>
+          <h3><a href="https://micjm.com/blog/openai-is-in-cost-control-mode/">OpenAI の 6.2 系モデルは「コスト調整」されている、と対戦実験の著者が主張</a></h3>
+        </div>
+        <div class="summary">個人ブログの著者が、自作のモデル対戦基盤「Agent Duel」の投票データを使い、OpenAI の Astra 6.2 と Sol 6.2 が前世代より少ない出力・推論トークンで作業していると報告した。Astra 6 と Sol 6.1 は通常水準で推論していたのに対し、6.2 系は同じ対戦で他社モデルより推論量が少ない外れ値になった。出力トークンの減少は 100 票超の対象 18 モデルにまたがって確認され、評価が割れた 6.2 系の不評をコスト最適化で説明しようとする分析である。</div>
+        <div class="key-points">
+          <ul>
+            <li>出力トークン減少の p 値は Sol で 0.0055、Astra で 0.022。推論トークン減少は Sol で 0.00013、Astra で 0.0064</li>
+            <li>コスト比と Elo を 95% 信頼区間付きで比較しているが、本文に具体的なコスト金額は載っていない</li>
+            <li>データは著者自身の対戦基盤の投票に基づくため、一般の利用状況での再現は未検証</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 モデルの更新で「考える量」が静かに変わる可能性があるため、本番で使うなら同一タスクの評価セットでバージョンごとに出力品質とトークン量を測っておきたい。</div>
+        <div class="meta">
+          <span>micjm.com</span>
+          <span class="engagement">▲ 292</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-11-26</span>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://krebsonsecurity.com/2026/11/cto-of-ransomwarehelp-indicted-for-wire-fraud/">ランサム復旧業者 RansomwareHelp の CTO を通信詐欺で起訴、身代金を裏で支払い上乗せ請求</a></h3>
+        </div>
+        <div class="summary">フロリダの RansomwareHelp の共同創業者兼 CTO、Juan Ricardo Palacio Escobar 被告（52）が、ロードアイランド州で通信詐欺罪により起訴された。同社は Web サイトで「身代金を払うな」と訴え、データ復旧率 100%、成功率 99%、専門家 80 人を謳っていた。しかし FBI のおとり捜査で、攻撃者に復号鍵の代金を裏で支払い、上乗せして被害者に請求していたことが判明した。</div>
+        <div class="key-points">
+          <ul>
+            <li>架空のランサムグループが復号ツールに付けた価格は 0.2 BTC（約 13,000 ドル）。同社はおとり被害者に診断料 2,750 ドルを含む 16,010 ドルを請求した</li>
+            <li>2024 年の事案では会計事務所に 438,880 ドルを提示し、別会社経由で最終的にその約半額が支払われた</li>
+            <li>別の復旧業者 MonsterCloud の CEO も、ランサムグループへ 800 万ドルを支払いながら顧客に 1,900 万ドルを請求した疑いがある</li>
+          </ul>
+        </div>
+        <div class="why-it-matters">💡 被害時に外部の復旧業者へ依頼する場合は、身代金の交渉・支払いを代行しないか、実績の根拠を確認しておく。事前に契約先の復旧手順を検証しておくのが安全だ。</div>
+        <div class="meta">
+          <span>KrebsOnSecurity</span>
+          <span class="engagement">▲ 224</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-11-26</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="dev-engineering">
+      <div class="section-title">⚡ Dev &amp; Engineering</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://garagehq.deuxfleurs.fr/blog/2026-11-webadmin-release/">Garage v2.6.0 リリース、Web 管理 UI を追加し v1.x は EoL に</a></h3>
+        </div>
+        <div class="summary">自己ホスト型 S3 互換ストレージ Garage が v2.6.0 で Web 管理 UI を導入した。管理 API ポート（既定 3903）上で動作し、管理トークンが必要になる。同時に v1.x がサポート終了となり、利用者は v2.x への移行が求められる。</div>
+        <div class="key-points">
+          <ul>
+            <li>公式 Helm チャートのリポジトリを公開（チャート 0.10.7）。v1.x の最終版は 2026 年 1 月の v1.3.1</li>
+            <li>v3.0.0 beta 1 では SSB ハンドシェイクが Noise に置き換わる破壊的変更があり、Fjall v2 のメタデータは <code>garage node convert-db</code> で変換が必要</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Garage</span>
+          <span class="engagement">▲ 39</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-11-26</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-frontend">Frontend</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://patrickbrosset.com/articles/2026-11-25-the-beauty-of-css-mixins/">CSS mixins 入門: <code>@mixin</code> / <code>@apply</code> で複数宣言を再利用</a></h3>
+        </div>
+        <div class="summary">Microsoft Edge の Patrick Brosset 氏が、実験段階の CSS mixins を解説した。カスタムプロパティや関数と違い、mixin は複数の宣言やネストしたルール、メディアクエリをまとめて保持できる。</div>
+        <div class="key-points">
+          <ul>
+            <li><code>@mixin --name</code> で定義し <code>@apply</code> で適用。型付き・既定値付き引数、<code>@contents</code> でのスタイルブロック受け渡し、<code>@private</code> による非公開変数を備える</li>
+            <li>対応は Chromium 系のみで、about://flags の「Experimental Web Platform features」を有効にする必要がある</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>patrickbrosset.com</span>
+          <span class="engagement">▲ 31</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-11-25</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">👀 注目</span>
+          <h3><a href="https://zydra.sh/articles/ssh-is-a-gui-framework/">「SSH is a GUI framework」: microVM のデスクトップを SSH 越しに端末へ描画</a></h3>
+        </div>
+        <div class="summary">Hasan Madi 氏が、SSH だけで動くデスクトップ環境 zydra.sh を作った実装を解説した。Kitty などの端末で表示でき、端末プロトコルを SSH の上に重ねて GUI を成立させている。</div>
+        <div class="key-points">
+          <ul>
+            <li>Kitty graphics・OSC 99/777/9 通知・OSC 52/5522 クリップボード・マウス追跡・同期出力（ちらつき防止）を併用。変化したピクセルセルだけを送り、アルファチャンネルを落として帯域を約 25% 削減</li>
+            <li>旧端末は Sixel・iTerm2・ASCII にフォールバック。Termux 経由の Android 対応は弱く、音声は未対応</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>zydra.sh</span>
+          <span class="engagement">🔖 52</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-11-26</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="jp-community">
+      <div class="section-title">🇯🇵 日本語テックコミュニティ</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-infra">Infra</span>
+          <span class="content-type">📦 リリース</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/post_310.html">さくらのクラウド、新ネットワーク基盤・新データベースサービスを投入、東京に第三ゾーン</a></h3>
+        </div>
+        <div class="summary">さくらインターネットが 11 月 25・26 日の「SAKURA DEKIRU Conference 2026」で、さくらのクラウドの新機能を発表した。石狩・東京の両リージョンがそれぞれ 3 ゾーン構成になる。</div>
+        <div class="key-points">
+          <ul>
+            <li>ネットワークスイートはサブネット中心で論理ネットワークを設計でき、サーバー起動時に DHCP で IP を自動設定。11 月 26 日から利用可能</li>
+            <li>データベーススイートは当初 MySQL 対応で、PostgreSQL は翌年度の予定。証明書管理サービスは更新を自動化しロードバランサーへ自動設定する</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span class="engagement">🔖 68</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-11-26</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">💰 ビジネス</span>
+          <h3><a href="https://www.publickey1.jp/blog/26/aiai_1.html">さくらインターネット、AI を月額固定料金で提供する「シンプル AI」を発表</a></h3>
+        </div>
+        <div class="summary">従量課金の「さくらの AI Engine」と異なり、システムやサービスへの組み込みを主な用途とする月額固定の AI サービス。モデルの応答が変わる影響を避けるため、長期に安定したモデル提供を目指す。</div>
+        <div class="key-points">
+          <ul>
+            <li>提供開始は 2026 年 12 月 10 日の予定。ISMAP 登録を申請中で、国産 LLM の提供も想定している</li>
+            <li>料金プランと具体的な性能は記事時点で未公表</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Publickey</span>
+          <span class="engagement">🔖 68</span>
+          <span>⏱ 2 min read</span>
+          <span>2026-11-26</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-security">Security</span>
+          <span class="content-type">🔒 セキュリティ</span>
+          <h3><a href="https://zenn.dev/akagumi/articles/catch-all-phishing-invisible-chars">迷惑メール対策をしているのに、なぜ詐欺メールは届くのか</a></h3>
+        </div>
+        <div class="summary">キャッチオールで届く詐欺メールは、攻撃者が自前ドメインに正しく設定するため SPF・DKIM・DMARC をすべて通過することがある。DMARC は差出人アドレスのドメインしか見ないので、表示名での大手企業なりすましは防げない。</div>
+        <div class="key-points">
+          <ul>
+            <li>見えない文字の挿入、HTML 文字参照の多重符号化、RLO による文字列反転でキーワード検索をすり抜ける</li>
+            <li>対策は、不可視文字の検出・多重デコード・名乗るブランドとリンク先ドメインの照合を先に行い、認証チェックを最後に回す判定</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 6 min read</span>
+          <span>2026-11-26</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-dev">Dev</span>
+          <span class="content-type">📜 解説</span>
+          <h3><a href="https://zenn.dev/dress_code/articles/88b55221eea4e0">型チェックが重かったので、クエリの型推論を手放してみた</a></h3>
+        </div>
+        <div class="summary">50 超の join を持つ約 540 行の Kysely クエリで型推論を止め、型チェックの負荷を下げた事例。戻り値を手書きの行型に固定し、クエリ内部だけ <code>Kysely&lt;any&gt;</code> にする。</div>
+        <div class="key-points">
+          <ul>
+            <li>Instantiations は約 3,373 万回から約 2,268 万回（-32.8%）、Check time は 90.5 秒から 46.4 秒に短縮</li>
+            <li>メモリは 13.3GB から 12.5GB（-6.1%）にとどまり、きっかけのメモリ不足は十分に解消しなかった。型で守っていた部分は SQL テストと変更前後の SQL 比較で補う</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>Zenn</span>
+          <span>⏱ 5 min read</span>
+          <span>2026-11-26</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="code-tools">
+      <div class="section-title">🛠 Code &amp; Tools</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-oss">OSS</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://github.com/datadog-labs/ephyra">Datadog Labs「ephyra」: エージェント駆動のプロパティベーステストライブラリ</a></h3>
+        </div>
+        <div class="summary">Datadog Systems Research による実験的な MIT ライセンスの Rust 製ライブラリ。ジェネレータを書き、カバレッジを測り、新しいコードパスに届くようジェネレータを書き換える山登り最適化とプロパティテストを組み合わせる。</div>
+        <div class="key-points">
+          <ul>
+            <li>失敗ケースの縮小（shrinking）、<code>EPHYRA_REPLAY</code> によるシード再生、過去の失敗を先に再試行するリグレッションストア、結果ビューア付き CLI を備える</li>
+            <li>SQLite・PostgreSQL・Lean などでバグを発見したと報告。スターは 382</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>GitHub</span>
+          <span class="engagement">⭐ 382</span>
+          <span>⏱ 3 min read</span>
+          <span>2026-11-26</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="tag tag-ai">AI</span>
+          <span class="content-type">🛠 ツール</span>
+          <h3><a href="https://devnull.land/amd-specific-llama-cpp">AMD GPU 向け llama.cpp パッチ集「llama-cpp-rdna-boosts」</a></h3>
+        </div>
+        <div class="summary">固定した llama.cpp のコミットにパッチを当て、新版へ当て直す小さなパッチ集。ビルド済み Podman イメージで動くため、ローカルでの ROCm ビルドが不要になる。</div>
+        <div class="key-points">
+          <ul>
+            <li>著者環境（eGPU 接続の AMD R9700、Q6_K_L 量子化の 27B Qwen 系モデル、MTP 有効）で prefill は約 700 から約 1,300 tokens/s（約 86% 向上）</li>
+            <li>生成は約 35 から約 55 tokens/s（約 57% 向上）。単一環境の実測値で、他構成での再現は未確認</li>
+          </ul>
+        </div>
+        <div class="meta">
+          <span>devnull.land</span>
+          <span class="engagement">▲ 297</span>
+          <span>⏱ 4 min read</span>
+          <span>2026-11-26</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="quick-links">
+      <div class="section-title">🔗 Quick Links</div>
+
+      <div class="quick-link">
+        <span class="tag tag-product">Product</span>
+        <a href="https://nextcloud.com/blog/euro-office-comes-to-your-desktop-with-the-nextcloud-office-desktop-app/">Nextcloud Office のデスクトップアプリが登場</a>
+        <span class="quick-summary">— Euro Office をデスクトップで使える形で提供。</span>
+        <span class="meta">Nextcloud</span>
+        <span class="engagement">▲ 405</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-oss">OSS</span>
+        <a href="https://github.com/intel/intel-one-mono">Intel One Mono</a>
+        <span class="quick-summary">— Intel のコーディング向け等幅フォントが HN で再浮上。</span>
+        <span class="meta">GitHub</span>
+        <span class="engagement">▲ 479</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-oss">OSS</span>
+        <a href="https://github.com/eisenzopf/rvoip">Rvoip: Rust 製の VoIP スタック</a>
+        <span class="quick-summary">— Show HN で公開された Rust 実装の VoIP スタック。</span>
+        <span class="meta">GitHub</span>
+        <span class="engagement">▲ 98</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-data">Data</span>
+        <a href="https://clickhouse.com/blog/pg-plan-advice-postgresql-19">Hints and hazards: pg_plan_advice in PG19</a>
+        <span class="quick-summary">— PostgreSQL 19 のプラン助言機能を ClickHouse が解説。</span>
+        <span class="meta">ClickHouse</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-dev">Dev</span>
+        <a href="https://lvignoli.eu/posts/2026-11-16-typed-indexes-in-zig/">Typed indexes in Zig</a>
+        <span class="quick-summary">— Zig で添字を型で区別する手法の紹介。</span>
+        <span class="meta">lvignoli.eu</span>
+        <span class="engagement">▲ 31</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-frontend">Frontend</span>
+        <a href="https://aresluna.org/ui-style-guides/">UI style guides</a>
+        <span class="quick-summary">— UI スタイルガイドの作り方・考え方を論じた記事。</span>
+        <span class="meta">aresluna.org</span>
+        <span class="engagement">🔖 33</span>
+      </div>
+
+      <div class="quick-link">
+        <span class="tag tag-infra">Infra</span>
+        <a href="https://michidk.github.io/sidebyside/">Show HN: ブラウザタブ内で Linux VM を 3 台、それぞれ別ブラウザで動かす</a>
+        <span class="quick-summary">— ブラウザ内で動く Linux VM のデモ。</span>
+        <span class="meta">michidk.github.io</span>
+        <span class="engagement">▲ 118</span>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by Claude Code routine</p>
+      <a href="./" class="archive-link">🗂 過去のダイジェスト</a>
+    </footer>
+  </div>
+</body>
+</html>
